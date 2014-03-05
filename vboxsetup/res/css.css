@@ -1,0 +1,156 @@
+
+/* los links se ven como links pero se imprimen como texto normal */
+@media screen                  {
+    a                          { text-decoration: underline; color: black; }
+    a:link                     { text-decoration: underline; }
+    a:visited                  { text-decoration: underline; }
+    a:hover                    { background-color: #ffffcc; text-decoration : underline; }
+    .agendaHeader ul li a      { display: block; }
+    .textColumn                { max-width: 44em; } 
+}
+
+@media all {
+    body                       { margin: 0px; margin-left: 8px; font-family: Trebuchet MS, Helvetica, sans-serif; font-size: 100%;
+                                 background-color: #fffff8; }
+    /* tag external links with the ejected arrow */ 
+    a[href^="http:"]           { background: url(external_link.gif) no-repeat right top; padding-right: 16px; }
+    a[href^="https:"]          { background: url(external_link.gif) no-repeat right top; padding-left: 16px; }
+    /* a[href^="http://sol."]  { background-image: none; padding-right: 0px; } */
+    /* - - - - - - - - - - - - - - - - - - - */
+
+    html,body                  { height: 100%; }
+    p                          { margin-top: 6px; margin-bottom: 0px; padding-top: 1px; }
+    ul, ol                     { margin-top: 4px; margin-bottom: 8px; margin-left: 0.2em; padding-left: 1em; }
+    li                         { margin-left: 8px; margin-top: 2px; margin-bottom: 4px; }
+    dd                         { margin-left: 2em; } 
+    table                      { border-collapse: collapse; empty-cells: show; }
+    th                         { font-size: 70%; background-color: #f4f4f4; }
+    td                         { vertical-align: top; padding-left: 2px; padding-right: 2px; padding-top: 1px; 
+                                 padding-bottom: 1px; }
+    h1                         { font-size: 175%; }
+    h2                         { font-size: 150%; font-style: italic; }
+    h3                         { font-size: 125%; }
+    h4                         { font-size: 100%; font-style: italic; text-decoration: none; }
+    h5                         { font-size: 90%; text-decoration: underline; }
+    h6                         { font-size: 95%; font-style: italic; }
+    h1, h2, h3, h4, h5, h6     { margin-top: .7em; margin-bottom: .3em; padding-top: 1px; text-shadow: 0.1em 0.1em 0.2em #cccccc; }
+    blockquote                 { margin-top: 4px; margin-bottom: 2px; }
+    img                        { border-width: 0px 0px 0px 0px; }
+    hr                         { color: #808080; background-color: #808080; height: 1px; width: 100%; border: 0px; }
+    pre                        { font-family: monospace; font-size: 100%; } 
+    code                       { font-size: 90%; } 
+
+    /* common format classes */
+     .compactList ul           {  }
+     .compactList ol           {  }
+     .compactList li           { margin-top: 0px; margin-bottom: 1px; }
+    .extLink                   { color: blue; }
+    .imgL                      { float: left; margin-right: 2em; }
+    .imgR                      { float: right; margin-left: 2em; }
+    .word                      { color: #4040a0; font-size: 80%; }
+    .word a                    { color: #4040c0; }
+    .doneItem                  { color: #c0c0c0; }
+    .printNoLinks              { }
+    .small80                   { font-size: 80%; } 
+    .small80 th                { font-size: 90%; }
+    .small70                   { font-size: 70%; }
+    .small70 th                { font-size: 90%; }
+    .prex                      { border: 1px solid; padding: 4px; background-color: #fffff0; }
+    .prexSmall                 { border: 1px solid; padding: 4px; background-color: #fffff0; font-size: 70%; }
+    .prex2em                   { border: 1px solid; padding: 4px; background-color: #fffff0; margin-left: 2em; }
+    .dateSaved                 { font-size: 70%; color: #4040ff; }
+    .msgToSelf                 { border: 1px solid gray; background-color: #ffff80; padding-left: 2px; padding-right: 2px; }
+    .msgToSelf                 { opacity: .70; }
+    .item                      { border: 1px solid silver; margin-bottom: 1ex; padding-left: 1ex; }
+    .borderTable table         { border: 1px solid silver; }
+    .borderTable td            { border: 1px solid silver; }
+    .borderTable th            { border: 1px solid silver; }
+    .toc                       { color: #4040c0; font-size: 80%; margin-left: 12em; }
+    .toc a                     { color: #404080; }
+    .toc ul                    { margin-left: 0em; padding-left: 0em; list-style: none; }
+    .toc li                    { margin-left: 2em; padding-left: 0em; margin-top: 0px; margin-bottom: 1px; line-height: 95%; }
+
+    /* initial menu */
+    .linksList                 { width: 33em; margin-left: 10%; margin-top: 2em; }
+    .linksList a               { display: block; text-decoration: none; font-size: 1.20em; color: #404040; font-weight: 400;
+                                 padding: .3em 2.5em .3em .8em; border: 1px solid #f4f4f4; }
+    .linksList a:hover         { background-color: #f8f8f8; border: 1px solid #f0f0f0; color: #000000; 
+                                 background-image: url(menuRightArrow.png); background-repeat: no-repeat; 
+                                 background-position: right center; }
+    .linksList td              { border: 1px solid #f0f0f0; background-color: #f4f4f4; margin: 0px; padding: 0px; }
+    .linksList table           { border-collapse: collapse; }
+
+
+    /* requirements descriptions */
+    .REQ                       { max-width: 50em; margin-left: 1em; }
+    .REQ .deferred             { color: #b0b0b0; } 
+    .REQ > h5                    { margin-top: .7em; margin-bottom: .3em; padding-top: 1px; margin-left: 4em;  } 
+    .REQ > h4                    { margin-top: 1.0em; margin-bottom: .4em; padding-top: 1px; margin-left: 4em;  } 
+    .REQ > h3                    { margin-top: 1.2em; margin-bottom: .4em; padding-top: 1px; margin-left: 2em; } 
+    .REQ > h2                    { margin-top: 1.2em; margin-bottom: .5em; padding-top: 1px; } 
+    .REQ > h1                    { margin-top: 1.2em; margin-bottom: .5em; padding-top: 1px; } 
+    .REQ > p                     { margin-left: 4em; } 
+    .REQ > ol                    { margin-left: 4em; } 
+    .REQ > ul                    { margin-left: 4em; } 
+    .REQ > pre                   { margin-left: 4em; } 
+    .REQ > table                 { margin-left: 4em; } 
+
+    /* a use case */
+    .UC                        { max-width: 50em; }
+    .UC table                  { border-bottom: 1px dotted #e0e0e0; }
+    .UCItem                    { border: 1px dotted #e0e0e0; }
+    .UCItemGroup               { border: 0px dotted #0000ff; }
+    .UCItemName                { font-weight: bold; font-size: 80%; width: 12em; text-align: right;
+                                 padding-right: 0.5em; vertical-align: top; padding-top: 0.4ex; }
+    .UCItemContent             { margin-left: 2em; margin-top: 1px; margin-bottom: 6px; }
+
+    .UCList                    { margin: 1.5em 1.5em 1.0em 1.5em; }
+    .UCList .UCName            { color: #404040; font-weight: 700; line-height: 170%; } 
+    .UCList a                  { display: block; text-decoration: none; color: #404040; padding: 0.4em 3.0em 0.3em 1em; }
+    .UCList td                 { border: 1px solid #f0f0f0; margin: 0; background-color: #f4f4f4; margin: 0px; 
+                                 padding: 0px; }
+    .UCList a:hover            { background-color: #f8f8f8; color: #000000; 
+                                 background-image: url(menuRightArrow.png); background-repeat: no-repeat; 
+                                 background-position: right center; }
+    .UCList a:hover .UCName    { color: #000000; }
+
+    /* data model */
+    .DATA td                   { padding: .1em .5em .1em .5em; } 
+    .DATA .DATATableTitle      { font-size: 110%; background-color: #f4f4f4; font-weight: bold; color: #404040; 
+                                 border-bottom: 1px solid #e0e0e0; margin: 0; } 
+    .DATA th                   { padding: .1em .5em .1em .8em; font-size: 80%; font-weight: normal; text-align: left;
+                                 background-color: #f4f4f4; color: #606060; opacity: 1.0; } 
+    .DATAColumnName            { font-family: monospace; }
+    .DATA tbody                { margin-top: 1.2em; }
+    .DATA .deferred            { color: #b0b0b0; }
+
+   /* object model */
+    .OBJ                       { max-width: 50em; }
+    .OBJ table                 { border-bottom: 1px dotted #e0e0e0; }
+    .OBJItem                   { border: 1px dotted #e0e0e0; }
+    .OBJItemGroup              { border: 0px dotted #0000ff; }
+    .OBJItemName               { font-size: 90%; font-family: Lucida Console, monospace; padding-right: 0.3em; 
+                                 vertical-align: top; padding-top: 0.2ex; }
+    .OBJItemType               { font-size: 90%; font-family: Lucida Console, monospace; padding-right: 0.3em; 
+                                 vertical-align: top; padding-top: 0.2ex; }
+    .OBJItemContent            { margin-left: 2em; margin-top: 1px; margin-bottom: 6px; }
+    .OBJList                   { list-style-type: none; }
+    .OBJList a                 { display: block; text-decoration: none; }
+
+} /* end of @media all */
+
+@media print                   {
+
+    .REQ                       { max-width: 100%; }
+    a                          { text-decoration: none; color: black; }
+    a:link                     { text-decoration: none; color: black; }
+    a:visited                  { text-decoration: none; color: black; }
+    a:hover                    { text-decoration: none; color: black; }
+    /* tag external links with the out-of-here arrow */ 
+    a[href^="http:"]           { padding-left: inherit; }
+    a[href^="https:"]          { padding-left: inherit; }
+    /* print links href except for class "printNoLinks" */
+    a:after                    { content: " [" attr(href) "]"; font-size: 75%; }
+    .printNoLinks a:after      { content: ""; } 
+} /* end of @media print */
+

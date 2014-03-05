@@ -1,0 +1,333 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en">
+  <title>notes - Web UI</title>
+  <link rel="stylesheet" href="res/agenda.css" type="text/css">
+  <script type="text/javascript" src="res/jquery.js">
+ </script>
+  <script type="text/javascript" src="res/agenda.js">
+ </script>
+  <script type="text/javascript" src="res/tocBuilder.js">
+ </script>
+  <link href="res/tocBuilder.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+      $(document).ready(function () {
+      });
+  </script>
+</head>
+
+<body>
+
+<div id="agendaHeader">
+
+<div class="fixedHeader">
+<h1 style="display: inline; ">Web UI -notes</h1>
+</div>
+
+<div id="agendaLinks">
+
+<div id="tocContainer" class="tocContainer">
+
+<div class="toc">
+</div>
+</div>
+
+<p> </p>
+
+<p><a href="res/web-ui">Old Track - Web UI</a> </p>
+<hr>
+</div>
+</div>
+
+<div id="agendaBody">
+<p></p>
+<ul>
+  <li><a href="plan.html">Planification</a> </li>
+  <li><a href="">Notes</a> 
+    <ul>
+      <li><a href="examLevel3.html">Taking: Examen Web UI - Nivel 3</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+<ul>
+  <li><a
+    href="https://support.google.com/sites/topic/4564411?hl=en&amp;ref_topic=4564359">"Manage
+    Site" (App Scripts)</a> </li>
+  <li><a
+    href="http://stackoverflow.com/questions/10874147/how-to-add-custom-javascript-to-google-sites">How
+    to add custom javascript to google sites?</a> (HTML box in the Insert menu
+    when editing) </li>
+  <li>In addition to Google Gadgets, you can also try <a
+    href="https://developers.google.com/apps-script/">Google Apps Scripts</a>:
+    <ol>
+      <li>Based on JavaScript. Easy To learn.</li>
+      <li>Under the hood, Google Apps Script uses the <a
+        title="Google Web Toolkit" href="/wiki/Google_Web_Toolkit">Google Web
+        Toolkit</a> (GWT) to create and display user interface elements.<sup
+        class="reference" id="cite_ref-4"><a
+        href="#cite_note-4"><span>[</span>4<span>]</span></a></sup> GWT is easy
+        to learn, and completely abstracts the complexity of AJAX/HTML from the
+        developer.</li>
+      <li>Cloud based debugger for debugging App Scripts in the web
+      browser.</li>
+      <li>It can be used to create simple tools for an organization's internal
+        consumption.</li>
+      <li>It can be used to perform simple system administration tasks.</li>
+      <li>Community-based support model. <a
+        href="http://stackoverflow.com/questions/tagged/google-apps-script"
+        class="external autonumber" rel="nofollow">[3]</a></li>
+    </ol>
+  </li>
+  <li><a href="http://googleappsdeveloper.blogspot.com.ar/">Google Apps
+    Developer Blog</a> </li>
+  <li><a href="http://ctrlq.org/code/19506-google-drive-hosting">Google Drive
+    Hosting with Apps Script</a> </li>
+</ul>
+<hr>
+
+<h3>Taking: Examen Web UI - Nivel 3</h3>
+<ul>
+  <li>The questions should be numbered, in order to be able to provide precise
+    references </li>
+  <li>There are many questions, but all belong to a small set of types, which
+    makes the answers rather obvious</li>
+  <li>Which sign does jQuery use as a shortcut for jQuery? 
+    <ul>
+      <li>Should be radio buttons instead of checkboxes: a single answer is
+        expected according to the question</li>
+      <li>The word "sign" is not good English, should be "character" or
+        "symbol". </li>
+    </ul>
+  </li>
+  <li>With jQuery, look at the following selector: $("div"). What does it
+    select? 
+    <p>Should be radios</p>
+  </li>
+  <li>Is jQuery a library for client scripting or server scripting? 
+    <p>Should be radios</p>
+  </li>
+  <li>What is the correct jQuery code to set the background color of all p
+    elements to blue? 
+    <p>... radios</p>
+  </li>
+  <li>With jQuery, look at the following selector: $("div.intro"). What does it
+    select? 
+    <p>... radios</p>
+  </li>
+  <li>Which jQuery method is used to hide selected elements? 
+    <p>... radios</p>
+  </li>
+  <li>Which jQuery method is used to set one or more style properties for
+    selected elements? 
+    <p>... radios</p>
+  </li>
+  <li>Which jQuery method is used to perform an asynchronous HTTP request? 
+    <p>... radios</p>
+  </li>
+  <li>What is the correct jQuery code for making all div elements 100 pixels
+    high? 
+    <p>... radios</p>
+  </li>
+  <li>What scripting language is jQuery written in? 
+    <p>... radios</p>
+  </li>
+  <li>Which jQuery function is used to prevent code from running, before the
+    document is finished loading? 
+    <ul>
+      <li>... radios</li>
+      <li>The question is confusing, it should ask "... used to run code as
+        soon as document has finished loading? </li>
+    </ul>
+  </li>
+  <li>Which jQuery method should be used to deal with name conflicts? 
+    <p>... radios</p>
+  </li>
+  <li>Which jQuery method is used to switch between adding/removing one or more
+    classes (for CSS) from selected elements? 
+    <ul>
+      <li>... radios</li>
+      <li>The Q is confussing 'cause it's not good English</li>
+    </ul>
+  </li>
+  <li>Look at the following jQuery selector: $("div#intro .head"). What does it
+    select? 
+    <p>... radios</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var person = { name: "James Bond", age: 42, status: "dead" }
+    console.log(typeof person);</p>
+    <ul>
+      <li>For this question and all following, the word "examples" should not
+        be pluralized, actually it would be better if ommited</li>
+      <li>Actually, it writes "SyntaxError: missing ; before statement" because
+        of a missing ";" between "}" and "before" 
+        <p>Maybe when the code was tested it was written in two lines, but
+        ommiting those semicolons is discouraged because it brings up errors,
+        like for example this one</p>
+      </li>
+    </ul>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var hat = { size: "large", color: "red" } console.log(hat.size);</p>
+    <p>Missing ";" </p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var ted_bear = { texture: "fluffy" }
+    console.log(ted_bear["texture"]);</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var jhon_joe = { crew: "Terror Squad" } jhon_joe.crew = "something";
+    console.log(jhon_joe.crew);</p>
+    <ul>
+      <li>... same</li>
+      <li>jhon looks like john badly written</li>
+    </ul>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var true_blood = { topic: "vampire kingdom" }
+    console.log(true_blood["main_character"]);</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var bottle = { contents: function () { return "Coca cola" }, color:
+    "dark" } console.log(bottle.contents());</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var player = { occupation: "soccer", introduction: function () { return
+    "My name is Falcao and I play " + this.occupation } }
+    player.introduction();</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var me = { first_name: "Dark", last_name: "Vader", full_name: function
+    () { return this.first_name + " " + this.last_name + "!"; } }
+    console.log(me.full_name());</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var cup = { capacity: "10 fluid ounces", customer_message: function
+    (desired_size) { if (desired_size &gt; 10) { return "This cup is not large
+    enough for you" }; } } console.log(customer_message(13));</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>function global_function () { return "I'm Neo" }; var an_obj = {
+    something: global_function } console.log(an_obj.something());</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var person = { age: 32, address: { city: "Miami", state: "Florida" } }
+    console.log(person.address.city);</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>var tennis = { type: "sport", clubs: { high_end: "Jin made", low_end:
+    "rusty basement clubs" } } tennis.clubs.high_end = "Jordan";
+    console.log(tennis.clubs.high_end);</p>
+    <p>... same</p>
+  </li>
+  <li>What does the following examples code print to the console? 
+    <p>function test() { this.area = "history"; this.result = function (number)
+    { return "I need a " + number + " for pass the " + this.area + "'s exam" };
+    } var read = new test(); console.log(read.result(3));</p>
+    <p>"I need a 3 for pass the history's exam" is not good English, has three
+    issues, should be "I need a 3 to pass the History exam". </p>
+  </li>
+  <li>Viewport dimensions at which we decide to alter the page design, are
+    known as 
+    <p>... radios</p>
+  </li>
+  <li>The Viewport Meta Tag informs the browser 
+    <p>... radios (not quite sure)</p>
+  </li>
+  <li>What does img {max-width: 100%} do? 
+    <ul>
+      <li>... radios</li>
+      <li>It confines images to the dimensions of their parent container (while
+        the container is narrower than the image)</li>
+    </ul>
+  </li>
+  <li>What's the largest screen resolution you can take into account, when
+    designing responsively? 
+    <p>... radios</p>
+  </li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<div>
+<p></p>
+</div>
+
+<p> </p>
+
+<p> </p>
+
+<p></p>
+<hr>
+
+<h3>Track - web UI / Feb 25, 2014</h3>
+
+<h4>Web UI - Nivel 1</h4>
+
+<p>Lectura: Refrescando y profundizando conocimientos de HTML4/CSS2 y
+HTML5/CSS3</p>
+<ul>
+  <li><a
+    href="http://learn.shayhowe.com/html-css/">http://learn.shayhowe.com/html-css/</a>
+  </li>
+  <li><a
+    href="http://diveintohtml5.info/semantics.html">http://diveintohtml5.info/semantics.html</a>
+  </li>
+  <li><a
+    href="http://reference.sitepoint.com/css/boxmodel">http://reference.sitepoint.com/css/boxmodel</a>
+  </li>
+  <li><a
+    href="http://coding.smashingmagazine.com/2007/07/27/css-specificity-things-you-should-know/">http://coding.smashingmagazine.com/2007/07/27/css-specificity-things-you-should-know/</a>
+  </li>
+  <li><a
+    href="http://slides.html5rocks.com/#landing-slide">http://slides.html5rocks.com/#landing-slide</a>
+  </li>
+  <li><a
+    href="http://playground.html5rocks.com/#localstorage">http://playground.html5rocks.com/#localstorage</a>
+  </li>
+  <li><a
+    href="http://html5doctor.com/native-drag-and-drop/">http://html5doctor.com/native-drag-and-drop/</a></li>
+</ul>
+
+<p>Los ítems son de variados niveles de calidad. </p>
+
+<p>Falta un elemento que le sirva al estudiante para "conectar los puntos".
+Esto es un factor fundamental para la retención del conocimiento. Para los que
+conocemos los temas esto <em>es obvio</em>, mientras que el que está empezando
+necesita hacer ese <em>click</em> y es mejor si lo hace en clase, es la
+diferencia por la cual va a percibir el curso como "bueno". </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>

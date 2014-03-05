@@ -1,0 +1,366 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en">
+  <title>moodle notes - Web UI</title>
+  <link rel="stylesheet" href="res/agenda.css" type="text/css">
+  <script type="text/javascript" src="res/jquery.js">
+ </script>
+  <script type="text/javascript" src="res/agenda.js">
+ </script>
+  <script type="text/javascript" src="res/tocBuilder.js">
+ </script>
+  <link href="res/tocBuilder.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+      $(document).ready(function () {
+      });
+  </script>
+</head>
+
+<body>
+
+<div id="agendaHeader">
+
+<div class="fixedHeader">
+<h1 style="display: inline; ">Web UI - Moodle notes</h1>
+</div>
+
+<div id="agendaLinks">
+<hr>
+</div>
+</div>
+
+<div id="agendaBody">
+<p>The server might be up and running here: <a
+href="http://glb-d1984.globant.com/">http://glb-d1984.globant.com/</a> </p>
+
+<p></p>
+
+<p><a href="http://www.youtube.com/watch?v=6ih0d-pEI_s">Getting Started: A
+Brief Overview of Moodle 2.0</a> </p>
+
+<p><a href="http://coolcourses.moodle.org/">The Cool Course Competition
+Site</a> </p>
+
+<p></p>
+
+<div>
+<hr>
+
+<h3>Moodle</h3>
+
+<p>"Modular Object-Oriented Dynamic Learning Environment"</p>
+<ul>
+  <li><a href="http://www.youtube.com/watch?v=WvCIv5KCbeE">Presentation
+    video</a> (2:46) </li>
+  <li><a href="http://docs.moodle.org/dev/Roadmap">Roadmap</a> </li>
+  <li><a
+    href="https://novoed.com/education/blog_posts/5337?data_type=report">Evaluation
+    of 3 Learning Environments</a> (NovoEd) </li>
+  <li><a href="http://docs.moodle.org/">Documentation</a> <a
+    href="http://docs.moodle.org/en/Category:FAQ">FAQ</a> </li>
+  <li><a href="http://tracker.moodle.org/">Bug tracker</a> </li>
+  <li><a href="http://learn.moodle.net/">Learn moodle</a> (learn.moodle.net)
+  </li>
+  <li><a href="http://moodle.com/partners/application/">Apply to be a Moodle
+    Partner</a> </li>
+  <li><a href="https://moodle.org/">Moodle community</a> (moodle.org) </li>
+  <li><a href="http://download.moodle.org/">Download</a> </li>
+  <li>License: <a href="http://docs.moodle.org/dev/License">GPL</a> This
+    program is free software; you can redistribute it and/or modify it under
+    the terms of the GNU General Public License as published by the Free
+    Software Foundation; either <a rel="nofollow" class="external text"
+    href="http://www.gnu.org/licenses/gpl-2.0.txt">version 2 of the License</a>
+    (for Moodle 1.x), <a rel="nofollow" class="external text"
+    href="http://www.gnu.org/licenses/gpl-3.0.txt">version 3 of the License</a>
+    (for Moodle 2.x) or (at your option) any later version. </li>
+  <li><a href="https://moodle.org/course/view.php?id=5">Welcome to Moodle in
+    English!</a> (course) </li>
+</ul>
+
+<p> </p>
+
+<p>docs.moodle.org (version 2.6): </p>
+<ul>
+  <li><a href="http://docs.moodle.org/26/en/About_Moodle">About Moodle</a> </li>
+  <li><a href="http://docs.moodle.org/26/en/Installing_Moodle">Installing
+    Moodle</a> <a
+    href="http://docs.moodle.org/26/en/Complete_install_packages_for_Windows"></a> 
+    <ul>
+      <li><a
+        href="http://docs.moodle.org/26/en/Complete_install_packages_for_Windows">Complete
+        install packages for Windows</a> 
+        <p>The complete install packages allow Moodle to be installed, along
+        with the prerequisites that includes a web server, Apache, database,
+        MySQL, scripting language, PHP, an administration tool, phpMyAdmin and
+        Moodle all wrapped in the Xampp-lite shell.</p>
+      </li>
+      <li><a href="http://download.moodle.org/">Standard install
+      packages</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p></p>
+
+<p>learn.moodle.net: </p>
+<ul>
+  <li><a href="http://learn.moodle.net/mod/page/view.php?id=50">Why a Moodle
+    MOOC?</a> </li>
+</ul>
+
+<p></p>
+
+<p>install &amp; test</p>
+<ul>
+  <li>What you enter in the "Web Address" field depends on what you intend to
+    use the new Moodle installation for. 
+    <p>If you are just going to use it for local testing, then use
+    'http://localhost'. </p>
+    <p>If you are going to test the new installation on a LAN, and will be
+    accessing it from other machines on that LAN, then put the private IP
+    address or network name of the serving machine, followed by a forward slash
+    and moodle: Web Address -
+    <strong>http://GLB-D1984.globant.com/moodle</strong> </p>
+    <p>If you are going to test the installation on the internet, then you will
+    need to put the public ip address followed by a forward slash and moodle:
+    http://your_ip_address/moodle or you can put your domain name here instead.
+    </p>
+  </li>
+  <li>Under 
+    <pre>&lt;IfModule alias_module&gt;</pre>
+    <p>add the following: </p>
+    <pre>    Alias /doc C:/w/doc
+    &lt;Directory C:/w/doc&gt;
+        Options -FollowSymLinks -SymLinksIfOwnerMatch -Indexes
+        Order deny,allow
+        deny from all
+        allow from all
+    &lt;/Directory&gt;</pre>
+  </li>
+  <li>Can't reach the server as GLB-D1984.globant.com 
+    <p>It says: incorrect access detected, this server may be accessed only
+    through "http://localhost" address, sorry. Please notify server
+    administrator. </p>
+    <p>Change line #21 of file C:\moodle\server\moodle\config.php</p>
+    <pre>// was: $CFG-&gt;dbhost    = 'localhost';
+$CFG-&gt;wwwroot   = 'http://10.200.8.70';</pre>
+    <p>Now open http://10.200.8.70 </p>
+    <p>Check if accesible from the network. The full file is: </p>
+    <pre>&lt;?php  // Moodle configuration file
+
+unset($CFG);
+global $CFG;
+$CFG = new stdClass();
+
+$CFG-&gt;dbtype    = 'mysqli';
+$CFG-&gt;dblibrary = 'native';
+$CFG-&gt;dbhost    = 'localhost';
+$CFG-&gt;dbname    = 'moodle';
+$CFG-&gt;dbuser    = 'root';
+$CFG-&gt;dbpass    = 'GlbStaffing';
+$CFG-&gt;prefix    = 'mdl_';
+$CFG-&gt;dboptions = array (
+  'dbpersist' =&gt; 0,
+  'dbport' =&gt; '',
+  'dbsocket' =&gt; '',
+);
+
+// was: $CFG-&gt;dbhost    = 'localhost';
+$CFG-&gt;wwwroot   = 'http://10.200.8.70';
+$CFG-&gt;dataroot  = 'C:\\w\\moodledata';
+$CFG-&gt;admin     = 'admin';
+
+$CFG-&gt;directorypermissions = 0777;
+
+$CFG-&gt;passwordsaltmain = 'au-u1h;3IV&amp;}fyiU{2Qor)!OQ';
+
+require_once(dirname(__FILE__) . '/lib/setup.php');
+
+// There is no php closing tag in this file,
+// it is intentional because it prevents trailing whitespace problems!</pre>
+  </li>
+</ul>
+
+<p></p>
+
+<p></p>
+<hr>
+
+<h3>Staffing courses plan (abandoned)</h3>
+<ol>
+  <li>Research Moodle, install a test server in a PC in the LAN</li>
+  <li>Find a document about creating courses, blend with Globant requirements,
+    publish</li>
+  <li id="pilot">Do a pilot test with a small proportion of the material
+    (migrate existing courses, build new courses) and test with users</li>
+  <li>Implement feedback from <a name="previous" id="previous">previous test
+    step</a> </li>
+  <li>Design an internal application, to be run as a Moodle extension, for
+    automating Globant staffing specific tasks, and agree on its design and
+    scope 
+    <ul>
+      <li>Manage dependencies: to enroll in a course the student has to fulfill
+        all the pre-requisite courses</li>
+      <li>Blaze trail: allow Staffing to see a Glober's state and define their
+        next steps by pre-enrolling the Glober in a coherent sequence of
+      courses</li>
+      <li>Give feedback to the Glober: an interactive report, tree-shaped, of
+        his current state, the current enrollment, and the expected next
+      steps</li>
+      <li>Allow the globers to give feedback on the courses system (like
+        StackExchange's "meta")</li>
+      <li>Measure glober's learn velocity </li>
+    </ul>
+  </li>
+  <li>Install Moodle in a server in the WAN for identified users, globers or
+    enabled non-globers</li>
+  <li>Migrate all remaining material </li>
+</ol>
+
+<p> </p>
+
+<p></p>
+
+<p></p>
+<hr>
+
+<h3>Moodle setup</h3>
+
+<p>Steps to set the test moodle server in my Windows7 PC "GLB-D1984":</p>
+
+<h4>Installation</h4>
+<ol>
+  <li>Download a Windows package, including the whole XAMPP stack (not
+    recommended for production servers), latest was <a
+    href="https://download.moodle.org/download.php/windows/MoodleWindowsInstaller-latest-26.zip">version
+    2.6.1+ stable</a>. </li>
+  <li>Open the <a
+    href="http://docs.moodle.org/26/en/Complete_install_packages_for_Windows">Complete
+    install packages for Windows</a> page with datailed instructions</li>
+  <li>I expanded the downloaded tarball in C:\moodle </li>
+  <li>My C:\moodle directory contains 2 exe files, to start and stop it all. I
+    created links to these in the desktop. </li>
+  <li>Run a browser and point it to localhost or http://127.0.0.1, it will
+    start asking questions. </li>
+  <li>Leave the default language "en" for English, and continue: the server
+    runs a series of tests checking that the full stack is available. </li>
+  <li>In the locations page, <strong>don't set the server address to
+    "localhost"</strong>, use your computer's name, thus: glb-d1984.globant.com
+    (with the right number instead of "1984"). If you leave "localhost" the
+    server can only be accessed fom your PC. </li>
+  <li>In the database page, set a password, I set <code>GlbStaffing</code>.
+  </li>
+  <li>The server runs a number of tests andafter it gets back to the questions
+    thing with the administrator data. I set the password
+    <code>GlbStaffing-2014</code> because it requires characters from all
+    different classes. 
+    <p>I also entered the Buenos Aires location data. </p>
+  </li>
+  <li>Next are the "front page" settings. The "front page" is what a user sees
+    upon entering moodle. 
+    <p>The "full site name" is used in the browser tabs. </p>
+    <p>The "short name" appears at the top of all pages. </p>
+    <p>The "front page description" is shown as a block at the right of the
+    front page. It was "<em>Knowledge for globers by globers. This is what
+    makes us stand out: we are not afraid of learning"</em>"</p>
+  </li>
+  <li>After this page you are in moodle. </li>
+</ol>
+
+<p>It there was trouble the install page recommends <a
+href="http://bitnami.org/stack/moodle">the Amazon version</a>. </p>
+
+<h4>Configuration</h4>
+
+<p>The configuration is horrible, the purpose of this document is to document
+it in detail. </p>
+
+<p></p>
+
+<h5>email</h5>
+
+<p>I created a gmail account for testing purposes:
+training.staffing@gmail.com</p>
+
+<p>The email configuration is in ADMINISTRATION → Site administration →
+Plugins → Message outputs → Email (as you could have easily guessed)</p>
+<dl style="margin-left:2em;">
+  <dt>SMTP hosts</dt>
+    <dd>smtp.gmail.com:465</dd>
+  <dt>SMTP security</dt>
+    <dd>SSL</dd>
+  <dt>SMTP username</dt>
+    <dd>training.staffing</dd>
+  <dt>SMTP password</dt>
+    <dd>GlbStaffing-2014</dd>
+  <dt>SMTP session limit</dt>
+    <dd>4</dd>
+  <dt>No-reply address</dt>
+    <dd>training.staffing@gmail.com (this is not quite right, but it's the only
+      email available so far)</dd>
+  <dt>Character set</dt>
+    <dd>UTF-8</dd>
+  <dt>Allow user to select character set</dt>
+    <dd>no</dd>
+  <dt>Allow attachments</dt>
+    <dd>yes</dd>
+  <dt>Newline characters in mail</dt>
+    <dd>CLF (because this is Windows, it sounds more natural)</dd>
+</dl>
+
+<h5>Users</h5>
+
+<p>I enabled the self-registration feature and "self-registered" two new users
+without admin permissions: <code>tester</code> and <code>tester2</code>. </p>
+
+<p>The email registration confirmation didn't work (no email configuration was
+set) so I confirmed them as admin in ADMINISTRATION → Site administration →
+Users → Accounts → Browse list of users → (small cog icon) </p>
+
+<p>In ADMINISTRATION → Site administration → Plugins → Authentication →
+Manage authentication the item "Email-based self-registration" has to be
+enabled, that is, it has to show a non-slashed eye icon. "Email-based" means
+that the email address is used to identify the user, rather than a user id;
+this precludes the creation of two or more users with the same email. </p>
+
+<p>Below this, under "Common settings", the "Self registration" option has to
+be set to "Email-based self-registration". </p>
+
+<p>After all this, the home page shows a registration option. </p>
+
+<p>Ideally all globers should be pre-registered and allowed access by being
+logged into the Globant domain or by entering the Globant domain password. </p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+</div>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>

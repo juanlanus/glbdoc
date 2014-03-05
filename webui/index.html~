@@ -1,0 +1,355 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en">
+  <title>Web UI</title>
+  <link href="res/favicon.ico" type="image/x-icon" rel="shortcut icon">
+  <link rel="stylesheet" href="res\agenda.css" type="text/css">
+  <script type="text/javascript" src="res\jquery.js">
+ </script>
+  <script type="text/javascript" src="res\agenda.js">
+ </script>
+  <script type="text/javascript" src="res\tocBuilder.js">
+ </script>
+  <link href="res\tocBuilder.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+      $(document).ready(function () {
+      });
+  </script>
+</head>
+
+<body>
+
+<div id="agendaHeader">
+
+<div class="fixedHeader">
+<h1 style="display: inline; ">Web UI </h1>
+</div>
+
+<div id="agendaLinks">
+
+<div id="tocContainer" class="tocContainer">
+
+<div class="toc">
+</div>
+</div>
+
+<p> </p>
+
+<p><a href="res\web-ui">Old Track - Web UI</a> </p>
+<hr>
+</div>
+</div>
+
+<div id="agendaBody">
+<p></p>
+<ul>
+  <li><a href="plan.html">Work planning</a> </li>
+  <li><a href="notes.html">Notes</a> </li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<div>
+
+<div id="sites-canvas">
+
+<div id="goog-ws-editor-toolbar-container">
+</div>
+
+<div style="" id="title-crumbs">
+<a href="https://sites.google.com//a/globant.com/trainings-beta/training"
+dir="ltr">Training &amp; Courses</a>‎ &gt; ‎ </div>
+
+<h3 align="left" style="" id="sites-page-title-header" dir="ltr"><span
+id="sites-page-title">Track - Web UI</span></h3>
+
+<div class="sites-canvas-main" id="sites-canvas-main">
+
+<div id="sites-canvas-main-content">
+
+<table cellspacing="0" class="sites-layout-name-one-column sites-layout-hbox">
+  <tbody>
+    <tr>
+      <td class="sites-layout-tile sites-tile-name-content-1">
+        <div dir="ltr">
+        <p style="line-height:1.15;margin-top:0pt;margin-bottom:0pt"
+        dir="ltr"><span
+        style="font-size:15px;font-family:Arial;color:#000000;background-color:transparent;font-weight:normal;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline">La
+        capacitación está orientada a gente autodidacta y con ganas de
+        aprender o profundizar sus conocimientos sobre Web UI. Esta iniciativa
+        busca generar conocimiento sobre Web UI dentro de Globant y no ser una
+        certificación de conocimiento.<br>
+        </span></p>
+
+        <div>
+
+        <div class="goog-toc sites-sidebar-nav"
+        style="display:block; margin:5px auto 5px 0; text-align:left; width:250px;"
+        id="sites-toc-undefined">
+        <h4 class="">Contenidos</h4>
+
+        <div style="text-align: left;" onclick="JOT_SUBPAGE_click(event)"
+        class="nav-toc-content">
+        <ul>
+          <li class="topLevel nav-first">
+            <div style="padding-left: 19px;" dir="ltr">
+            <a class="sites-navigation-link topLevel"
+            href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/auto-examen-de-nivel">Auto-examen
+            inicial</a> </div>
+          </li>
+          <li class="topLevel parent">
+            <div style="padding-left: 0px;" dir="ltr">
+
+            <div class="expander">
+            </div>
+            <a class="sites-navigation-link topLevel"
+            href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1">Web
+            UI - Nivel 1</a> </div>
+            <ul>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1/modulo-1">Módulo
+                1</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1/modulo-2">Módulo
+                2</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1/modulo-3">Módulo
+                3</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1/modulo-4">Módulo
+                4</a> </div>
+              </li>
+            </ul>
+          </li>
+          <li class="topLevel parent">
+            <div style="padding-left: 0px;" dir="ltr">
+
+            <div class="expander">
+            </div>
+            <a class="sites-navigation-link topLevel"
+            href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel">Web
+            UI - Nivel 2</a> </div>
+            <ul>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel/modulo-1">Módulo
+                1</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel/modulo-2">Módulo
+                2</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel/modulo-3">Módulo
+                3</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel/modulo-4">Módulo
+                4</a> </div>
+              </li>
+            </ul>
+          </li>
+          <li class="topLevel parent">
+            <div style="padding-left: 0px;" dir="ltr">
+
+            <div class="expander">
+            </div>
+            <a class="sites-navigation-link topLevel"
+            href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-3">Web
+            UI - Nivel 3</a> </div>
+            <ul>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-3/modulo-1">Módulo
+                1</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-3/modulo-2">Módulo
+                2</a> </div>
+              </li>
+              <li class="">
+                <div style="padding-left: 38px;" dir="ltr">
+                <a class="sites-navigation-link"
+                href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-3/modulo-3">Módulo
+                3</a> </div>
+              </li>
+            </ul>
+          </li>
+          <li class="topLevel">
+            <div style="padding-left: 19px;" dir="ltr">
+            <a class="sites-navigation-link topLevel"
+            href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-4">Web
+            UI - Nivel 4</a> </div>
+          </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        <br>
+
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><b><font size="3">Exámenes Online</font></b></p>
+
+        <p><br>
+        </p>
+
+        <p><a
+        href="https://docs.google.com/a/globant.com/forms/d/17-LJ-LfIj3EFlZV-UcyH4JkMSAbMqt5hxunlBBAGnfs/viewform">Nivel
+        1</a></p>
+
+        <p><a
+        href="https://docs.google.com/a/globant.com/forms/d/1bpwm4spoDqGd5WXBoaHQR9QI8fWlN7pY9Eus9-0fOmI/viewform">Nivel
+        2</a></p>
+
+        <p><a
+        href="https://docs.google.com/a/globant.com/forms/d/1zAKD6kzGbD8txyt_YsECNO5tkNQgpUXKyxBah4ir_98/viewform">Nivel
+        3</a></p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+
+        <p><br>
+        </p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div id="sites-canvas-bottom-panel">
+
+<div style="" class="sites-canvas-bottom-panel-wrapper" id="COMP_page-subpages">
+
+<div class="sites-subpages">
+Subpages <span id="subpages-total-number">(5):</span> <span><a dir="ltr"
+href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/auto-examen-de-nivel">Auto-examen
+inicial</a> </span> <span><a dir="ltr"
+href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-1">Web
+UI - Nivel 1</a> </span> <span><a dir="ltr"
+href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel">Web
+UI - Nivel 2</a> </span> <span><a dir="ltr"
+href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-3">Web
+UI - Nivel 3</a> </span> <span><a dir="ltr"
+href="https://sites.google.com//a/globant.com/trainings-beta/training/web-ui/web-ui---nivel-4">Web
+UI - Nivel 4</a> </span> </div>
+</div>
+</div>
+</div>
+</div>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<div>
+<p></p>
+</div>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>

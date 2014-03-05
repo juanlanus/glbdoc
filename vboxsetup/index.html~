@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <title>Virtual Box setup</title>
+  <link rel="stylesheet" href="./res/mftraining.css" type="text/css">
+  <script type="text/javascript" language="javascript" src="./res/jquery.js"></script>
+  <script type="text/javascript" language="javascript" src="./res/readingTools.js"></script>
+  <script type="text/javascript">
+        window.onload = function() {
+            buildPageTOC();
+            addToggleVisibilityButtons();  
+        }
+  </script>
+  <style>
+    .menu_1er_nivel li        { list-style-type: none; padding-top: .2em; }
+        .rt_TOC_H2 { display: none; }
+  </style>
+</head>
+
+<body>
+
+<div id="agendaBody">
+<h2>Creación de una máquina virtual equipada con herramientas MF</h2>
+
+<p>Instrucciones detalladas para instalar una máquina virtual en una PC usando Virtual Box con los productos MF para pruebas. </p>
+
+<p>Frecuentemente aparece la nomenclatura "host system" y "guest system". "Host" se refiere al sistema operativo "dueño de casa", el que corre en la PC donve se va a instalar la Virtual Box. "Guest" se refiere al sistema operativo "visitante", el de la máquina virtual. </p>
+
+<p>En este ejemplo el <em>host</em> es un sistema Windows XP, y el <em>guest</em> también. </p>
+
+<p>  </p>
+
+<div class="rt_TOCLabel">
+TOC</div>
+
+<div id="rt_pageTOC" class="rt_TOC">
+</div>
+
+<p>  </p>
+
+<div class="framed">
+<h3 class="rt_showHide">Instalación del sistema "Virtual Box"</h3>
+
+<h4>Descargar el software de Virtual Box</h4>
+
+<p>En la página <a href="http://www.virtualbox.org/wiki/Downloads">Download VirtualBox</a> descargar el instalador "<strong>VirtualBox 3.2.8 for Windows hosts </strong><a href="http://download.virtualbox.org/virtualbox/3.2.8/VirtualBox-3.2.8-64453-Win.exe"><strong><img alt="link externo" src="res/extlink.gif" width="13" height="7"></strong> x86/amd64</a>" (o la versión que sea en el momento de la descarga). </p>
+
+<p>La versión que se usa es la "PUEL" (Personal Use and Evaluation License) que tiene unas caractarísticas adicionales que son necesarias. La licencia permite uso comercial para individuos. </p>
+
+<p>En la misma página de descarga hay un <a href="http://www.virtualbox.org/manual/UserManual.html">manual online</a>. </p>
+
+<h4>Instalar el software de Virtual Box</h4>
+
+<p><img alt="VBox en el desktop" src="res/VMIconDeskTop.png" class="imgR"></p>
+
+<p>Se instala solo una vez, antes de crear la primera Virtual Box. Si ya está instalado este paso se saltea. En una instalación de Virtual Box se puede correr más de una máquina virtual.</p>
+
+<p>Para instalar este programa es necesario ser administrador de la PC. </p>
+
+<p>Es <a href="http://www.virtualbox.org/manual/ch01.html#id2643909">una instalación normal de Windows</a> que no requiere nada especial. </p>
+
+<p>Al comienzo ofrece opciones como "USB Support", "Networking": hay que aceptar todas. </p>
+
+<p>Windows puede mostrar advertencias sobre software que no está validado con el logo de Windows, siempre continuar. </p>
+
+<p>Al finalizar la instalación ofrece iniciar el programa Virtual Box. Chequear la opción, o iniciarlo desde el menú inicio o el ícono en el escritorio si existe. </p>
+
+<p>Si todo funcionó correctamente, el programa Virtual Box muestra la interfase de usuario del programa Virtual Box, sin ninguna VBox definida, y solamente el ícono "New" habilitado. </p>
+
+<p><img alt="inicio de definiciones de nueva VBox" src="./imag/NewVM01.png" width="593" height="358"></p>
+
+<p>Picando en el ícono "New" se inicia la secuencia de pasos para definir una nueva VBox. </p>
+</div>
+
+<div class="framed">
+<h3 class="rt_showHide">Definición de la Virtual Box</h3>
+
+<h4>Inicio</h4>
+
+<p><img alt="Start wizard" src="./imag/NewVM02.png" width="625" height="379"></p>
+
+<p>Simplemente picar en el botón "Next". </p>
+
+<h4>Nombre y sistema operativo</h4>
+
+<p><img alt="nombre y OS" src="./imag/NewVM03.png" width="625" height="379"></p>
+
+<p>Se recomienda usar un nombre significativo. Es posible que más adelante haya varias VBoxes y en esas circunstacias tener buenos nombres ayuda mucho. </p>
+
+<p>En este formulario se elige también el sistema operativo y la versión que va a correr la VBox, en este caso Windoes XP. Las opciones de Windows van desde lla versión 3.1 hasta Windows 7. Además de Windows ofrece otros OSs como UNIX, Linux, Mac OS X, BSD, IBM OS/2. </p>
+
+<h4>Memoria RAM</h4>
+
+<p><img alt="RAM" src="./imag/NewVM04.png" width="625" height="379"></p>
+
+<p>La cantidad de memoria RAM que se va a separar de lo que hay disponible en la máquina real para la VBox. </p>
+
+<p>El número tiene que ser razonable, no tan alto como para dejar sin memoria a la máquina host, y pero suficiente como para que la VBox pueda arrancar y correr el software que va a correr sin problemas. </p>
+
+<p>La cantidad de memoria se puede modificar posteriormente desde la UI del programa VBox. La VBox afectada debe estar "apagada" (dice "Powered Off"). Se la selecciona en la lista de VBoxes y picando en el ícono "Settings" se despliega el formulario de configuración, la cantidad de RAM está en la pestaña "System". </p>
+
+<h4>Disco duro</h4>
+
+<p>En este paso se configura el disco duro de la nueva VBox, en tres pasos. En el primer paso se elige la creación de un nuevo disco duro. </p>
+
+<p><img alt="HD 1" src="./imag/NewVM05.png" width="625" height="379"></p>
+
+<p>El paso siguiente es el tipo de disco duro. En el sistema VBox los discos duros virtuales se implementan como un archivo único, con dos estrategias. "dynamically expanding" o "fixed size". </p>
+
+<p>Elegimos la primera. "dynamically expanding". Esto produce un archivo que inicialmente ocupa muy poco espacio, y va creciendo a medida que se agregan archivos en la VBox. La otra opción produce un archivo que inicialmente ocupa el tamaño máxino definido, aunque no contenga nada. </p>
+
+<p><img alt="HD 2" src="./imag/NewVM06.png" width="617" height="368"></p>
+
+<p>El tercer paso es la ubicación y el tamaño del archivo. Propone como nombre del archivo de disco virtual, el mismo nombre de la VBox, que es una buena sugerencia. </p>
+
+<p>También ofrece asignar un tamaño de 10GB, que es adecuado. Es necesario que haya espacio disponible en el disco duro de la PC host para la creación de la imagen del disco virtual. </p>
+
+<p><img alt="HD 3" src="./imag/NewVM07.png" width="617" height="368"></p>
+
+<h4>Resúmen del disco virtual</h4>
+
+<p><img alt="resumen" src="./imag/NewVM08.png" width="617" height="368"></p>
+
+<p>Antes de crear el disco virtual muestra las opciones elegidas, para confirmación. En esta pantalla se ve la ubicación del archivo, bajo "Documents and Settings" del usuario del host. </p>
+
+<p>Picando en el botón Finish se crea el archivo. </p>
+
+<h4>Resúmen de VBox</h4>
+
+<p><img alt="resumen de VBox" src="./imag/NewVM09.png" width="625" height="379"></p>
+
+<p>Esta pantalla, kuy parecida a la anterior, es un resúmen de las opciones elegidas para la creación de la nueva VBox. </p>
+
+<p>Picando en el botón "Finish" se crea la VBox y se termina el wizard. </p>
+
+<h4>Confirmación de la creación de la nueva VBox</h4>
+
+<p>Esta pantalla muestra la UI del programa Virtual Box, que inicialmente no tenía ninguna VBox definida, y ahora tiene una llamada "MF Training". En el panel de la derecha se muestran las propiedades de MF Training, las que fueron elegidas en el wiard, y algunas agragadas por el programa Virtual Box por defecto. </p>
+
+<p><img alt="nueva VBox creada" src="./imag/NewVM10.png" width="593" height="677"></p>
+
+<p></p>
+</div>
+
+<div class="framed">
+<h3 class="rt_showHide">Instalación de "Guest Additions" para Windows</h3>
+
+<p>Se llama así a un conjunto de drivers de VBox que se instalan dentro del sistema operativo guest para mejorar la usabilidad de la VBox. </p>
+
+<p>Para iniciar la instalación hay un ítem en el menú "Devices" de la ventana de la VBox:</p>
+
+<p><img alt="install Guest Additions" src="./imag/NewVM60b.png"></p>
+
+<p>Es una instalación normal de Windows, presentada como un wizard:</p>
+
+<p><img alt="GA Wizard" src="./imag/NewVM61b.png"></p>
+
+<p>Al momento de la cración de este instructivo el soporte Direct 3D era experimental, y de todos modos no es necesario para las aplicaciones mainframe, así que no elegimos esa opción. La otral chequeada por defecto, incluye todas las demás extensions. </p>
+
+<p><img alt="options" src="./imag/NewVM62b.png"></p>
+
+<p>El driver gráfico no tiene la bendición de Microsoft: ni importa. Picar en "Continue ...". </p>
+
+<p><img alt="not tested by MS" src="imag/NewVM63.png" width="395" height="316"></p>
+
+<p>Siguiendo una tradición de los sistemas Windows, luego de instalar esto hay que reiniciar la VBox: </p>
+
+<p><img alt="reboot" src="./imag/NewVM64b.png"></p>
+
+<p>Una vez que la VBox reinició, ya está. </p>
+
+<p>La utilidad de las Guest Extensions es:</p>
+<ul>
+  <li>Mouse pointer integration: reemplazan la "captura" del mouse y la necesidad de tocar la "Host Key" para liberarlo, por una interacción más normal que interpreta los clicks dentro de la ventana de la VBox como dirigidos al guest y los clicks afuera, dirigidos al host. </li>
+  <li>Better video support: se puede cambiar la resolución de la "pantalla" de la VBox cambiando el tamaño de la ventana. </li>
+  <li>Time synchronization: sincroniza el reloj del guest con el del host. </li>
+  <li>Shared folders: esto es lo más importante, permite compartir carpetas entre el host y el guest. Es la manera preferida para intercambiar datos entre las dos máquinas, el paso siguiente es la configuración de una carpeta compartida. </li>
+  <li>Seamless windows: libera las ventanas de las aplicaciones de la máquina guest para que aparezcan como ventanas del sistema host, en vez de tenerlas confinadas en la ventana del guest. </li>
+  <li>Shared clipboard: para compartir el clipboard entre ambos sistemas. Tiene opciones (Disabled, Host to Guest, Guest to Host, Bidirectional) y por default selecciona Bidirectional. Se puede cambiar en desde la UI de Virtual Box en Settings &rarr; General &rarr; Advanced. </li>
+  <li>Automated logons (credentials passing): organiza logons sincronizados, de modo que el host le pasa las credenciales al guest. </li>
+</ul>
+</div>
+
+<div class="framed">
+<h3 class="rt_showHide">Definición de una carpeta compartida</h3>
+
+<p>El primer paso es crear una carpeta en el filesystem del host, por ejemplo la carpeta sugestivamente llamada "vBoxShared" que contiene dos subdirectorios:</p>
+
+<p><img alt="carpeta para compartir" src="imag/NewVM71.png" width="660" height="388"></p>
+
+<p>La carpeta en cuestión debe ser una carpeta compartida de Windows:</p>
+
+<p><img alt="sharing the folder" src="imag/NewVM72.png" width="368" height="476"></p>
+
+<p>Una vez que la carpeta está disponible en el host se la puede referenciar en el guest. Se usa el menú Devices &rarr; Shared Folders ...</p>
+
+<p><img alt="shared folder" src="imag/NewVM66b.png" width="700" height="375"></p>
+
+<p>... para abrir el diálogo "Shared Folders" que inicialmente no tiene ninguna carpeta compartida. </p>
+
+<p>Se pica en el botón "Add Shared Folder" <img alt=" " src="./imag/NewVM67b.png" style="vertical-align: baseline; "> para abrir el diálofo "Add Share". </p>
+
+<p><img alt="shared folders dialog" src="imag/NewVM67.png" width="458" height="329"></p>
+
+<p>En el diálogo "Add Share" se despliega "Folder Path" y se elige "Other", esa acción despliega el diálogo de selección de carpeta normal de Windows. </p>
+
+<p><img alt="Add Share" src="imag/NewVM68.png" width="300" height="218"> alt="Add Share"</p>
+
+<p>Luego de navegar hasta la carpeta para compartir y seleccionarla, el path muestra en "Folder Path" y en "Folder Name" el nombre tomado del path, que dejamos así por que es un nombre adecuado: "vBoxShared". Este último es el nombre que la carpeta va a tener en el guest. </p>
+
+<p>Podemos en ese mismo dialogo hacer que la carpeta sea read only en el guest, y que sea permanente. Elegimos la segunda opción. </p>
+
+<p>Picando OK la carpeta compartida está disponible en el sistema guest. </p>
+
+<p><img alt="My Computer - guest y la shared folder" src="imag/NewVM73.png" width="527" height="477"></p>
+
+<p>Para verla en una ubicación más conveniente se la puede conectar a una drive letter, siguiendo el procedimiento normal de Windows:</p>
+
+<p><img alt="map network drive" src="imag/NewVM74.png" width="700" height="310"></p>
+
+<p>Mapeando el share al drive X: se despliega junto con el disco C: de la VBox:</p>
+
+<p><img alt="mapped to X:" src="imag/NewVM75.png" width="527" height="477"></p>
+
+<p>Para tener consistencia,también se puede mapear la carpeta original a la X: en el host. Se hace seleccionando la carpeta en el explorador de Windows y luego menú Tools &rarr; Map Network Drive... . </p>
+
+<p>El contenido de la carpeta compartida no se actualiza automáticamente en la máquina guest. Luego de modificar el contenido de la carpeta en en host, los archivos nuevos o cambiados no se ven en el guest. Para verlos hay que hacer un refresh de la vista en el guest, por ejemplo tocando F5.  </p>
+</div>
+
+<div class="framed">
+<h3 class="rt_showHide">Preparación del software MF a instalar (CD o DVD)</h3>
+
+<p>Muchas PCs no tienen lectora de DVDs, y algunas ni siquiera tienen lectora de CDs. Pero en cambio la VBox tiene la posibilidad de leer imágenes ISO de discos. </p>
+
+<p>Entonces el promer paso es obtener una imagen ISO de un disco con el software MF. </p>
+
+<p>La imagen ISO se puede hacer con un programa de grabaci[on de CDs. Usando Nero, por ejemplo, se elige el menu Recorder &gt; Choose Recorder ... y en el diálogo "Choose Recorder" se elige "Image Recorder". La grabación produce un archivo con extensión .iso que se puede montar en la lectira virtual de la VBox. </p>
+
+<p>Se pica en el ícono <img alt="IDE controller" src="imag/NewVM91.png" width="21" height="16"> del drive virtual de CD/DVD con el botón derecho y se elige "More CD/DVD images ...". </p>
+
+<p><img alt="virtual disk reader" src="imag/NewVM90.png" width="700" height="357"></p>
+
+<p>Se abre el diálogo "Virtual Media Manager". Picando en el botón "Add" aparece el browser de archivos normal de Windows. Hay que navegar hasta el archico con la imagen del software a instalar y seleccionarla. Hecho esto la lectora de CDs de la VBox, posiboemente D:, mostrará el contenido del disco que se usó para grabar la imagen ISO. </p>
+
+<p>En el ejemplo es el archivo "mf_nx60_cd.iso" que aparece seleccionado. </p>
+
+<p>Si el sistema host tuviera una lectora (el del ejemplo tiene tres: D:, E: y F:) entonces se pone el disco en la lectora y se la selecciona en el menú. El disco montado es el que tiene la tilde a la izquierda. </p>
+
+<p>Como está el ejemplo, los programas a instalar se ven en el disco D: del sistema guest. </p>
+</div>
+
+<div class="framed">
+<p></p>
+</div>
+
+<p></p>
+
+<p></p>
+
+<p style="display: none; ">En la nueva VBox el administrador tiene pw MFTraining</p>
+
+<p></p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>
