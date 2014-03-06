@@ -1,0 +1,579 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Internet concepts</title>
+  <style>
+  .imgR { float:right; margin-left:2em; }</style>
+  <link rel="stylesheet" href="res\agenda.css" type="text/css">
+  <script type="text/javascript" src="res\jquery.js">
+ </script>
+  <script type="text/javascript" src="res\agenda.js">
+ </script>
+  <script type="text/javascript" src="res\tocBuilder.js">
+ </script>
+  <link href="res\tocBuilder.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+    });
+  </script>
+  <style>
+    .section { width:100%; }
+    .imgContainer { margin:1em auto; }
+    /* .onePage { border:4px solid blue; } */
+  </style>
+</head>
+
+<body>
+
+<div id="agendaHeader">
+
+<div class="fixedHeader" style="overflow-x:hidden;">
+
+<div
+style="float:right; color:rgb(40,40,155); font-size:50%; padding-right:1em; ">
+© Juan Lanus</div>
+
+<h1 style="display:inline; line-height:1em; clear:none;"
+id="L41">Internet concepts</h1>
+
+<p></p>
+</div>
+
+<div id="agendaBody">
+
+<div id="tocContainer" class="tocContainer">
+
+<div class="toc" id="docTOC">
+<ul>
+  <li><a href="#L49">La Internet</a> 
+    <ul>
+      <li><a href="#L100">La red ("net")</a></li>
+      <li><a href="#L117">El browser</a></li>
+      <li><a href="#L149">El server</a></li>
+      <li><a href="#L183">¿Cómo funciona?</a></li>
+      <li><a href="#L982">Resumiendo</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+</div>
+<hr>
+</div>
+
+<div class="section">
+<h2 id="L491">La Internet</h2>
+
+<p>Esta es una introducción a las tecnologías que soportan la Internet. Se
+explica como funciona la Internet sin entrar demasiado en el detalle de las
+tecnologías subyacentes, aunque sin que sea una explicacíon trivial. </p>
+
+<h3 id="L100">La red ("net")</h3>
+
+<div class="imgR" style="padding-left:1em;">
+<img alt="cloud = nube" src="imag\cloud.png" style="width:222px;"></div>
+
+<div class="imgR" style="padding-left:1em;">
+<p></p>
+</div>
+
+<p>La "internet" es una "red" (en inglés "net") que nos provee servicio de
+conexiones de datos. No es la única red que nos provee servicios, existen la
+red eléctrica que conecta una usina donde se genera la electricidad con las
+casas de la gente, la red telefónica que conecta a las personas a través de
+una central y les permite comunicarse a distancia. Agua y gas son otros
+ejemplos, en los lugares donde están disponibles. También la televisión, por
+cable o de aire. </p>
+
+<div class="imgR" style="padding-left:1em; clear:both;">
+<img alt="producción de energía: generadores eólicos"
+src="imag\320px-GreenMountainWindFarm_Fluvanna_2004.jpg"
+style="width:320px;"></div>
+
+<p>En el caso de la red eléctrica existe una fuente de energía electrica, en
+cualquiera de sus formas: usina, represa hidroeléctrica, generadores eólicos,
+planta atómica. </p>
+
+<div style="clear:both;">
+
+<div class="imgR" style="padding-left:1em; clear:both;">
+<img alt="línea de transmisión de energía"
+src="imag\electricPowerNetwork.jpg" style="width:320px;"> </div>
+
+<p style="">También hay una línea de transmisión que lleve la energía de la
+usina donde se la produce hasta el lugar donde se usa, generalmente una ciudad.
+</p>
+</div>
+
+<p style="clear:both;">Y finalmente existen los lugares donde la energía
+eléctrica se consume, por ejemplo nuestras casas, donde la usamos para hacer
+funcionar las computadoras y algunos artefactos más. </p>
+
+<p>La Internet tiene una configuración similar. Existen los "web servers" de
+donde provienen los datos que son análogos a las usinas, la red de
+transmisión que es lo que llamamos "Internet", y nuestra computadora donde
+usamos los datos. </p>
+
+<div class="imgR" style="padding-left:1em;">
+<img alt="wi-fi logo" src="imag\wifiLogo.jpg" style="width:200px;"></div>
+
+<p>Visualizamos la red como una nube: no vemos lo que tiene adentro
+(normalmente no nos interesa), y en cualquier parte donde nos conectemos da
+igual. Ultimamente ni siquiera es necesario un cable para hacer conexión: en
+muchos lugares la Internet <em>está en el aire</em>. </p>
+
+<p>En las redes de energía eléctrica, agua, gas, televisión, hay un lugar
+donde se produce el contenido del servicio y otro lugar (nuestra casa, por
+ejemplo) donde se lo consume. Lo que esas redes llevan circula exclusivamente
+desde la fuente hacia el consumidor. La Internet es diferente: cualquier
+computadora que esté conectada puede ser a la vez proveedor y consumidor. El
+ejemplo más claro es el protocolo P2P de <a
+href="http://en.wikipedia.org/wiki/BitTorrent">BitTorrent</a> donde todos los
+que están conectados bajando un archivo a la vez también están oficiando de
+servers hacia sus pares. </p>
+
+<h3 id="L117">El browser</h3>
+
+<div class="imgR" style="padding-left:1em;">
+<img alt="browser logos" src="imag\browsers.png" width="443" height="192"></div>
+
+<p>Es el programa de la PC o smartphone que usamos para "navegar" la Internet.
+Hay varios, los más conocidos son</p>
+<ol>
+  <li>Google Chrome </li>
+  <li>Mozilla Firefox </li>
+  <li>Opera </li>
+  <li>Microsoft Internet Explorer </li>
+  <li>Safari </li>
+</ol>
+
+<p>Idealmente todos hacen lo mismo, muestran las "páginas" exactamente de la
+misma manera. En la realidad hay pequeñas diferencias que se van reduciendo
+paulatinamente.</p>
+
+<p>Hay una institucion llamada "<a href="http://www.w3.org/">World Wide Web
+Consortium</a>" o "W3C" ( "w" 3 veces y una "c") que trabaja definiendo
+"standards", normas detalladas de cómo debe aparecer cada elemento en la
+pantalla (en el curso iremos viendo qué elementos). Hay además un liderazgo
+de los developers de Mozilla tendiente a que todos los browsers se ajusten
+rigurosamente a las normas del W3C.</p>
+
+<p>Es solo recientemente que se están alineando los planetas: todos los
+browsers tienden a funcionar de la misma manera, respetando las normas. Eso no
+fué así en los primeros años de la WWW. No había normas tan claras como las
+que existen ahora, y a la vez Microsoft intentaba diferenciar el Internet
+Explorer introduciéndole caracteríasticas incompatibles de manera de obligar
+a la gente a usarlo en vez de los otros.</p>
+
+<p>Esas caracteríasticas diferentes, sumadas a los defectos de programación
+(bugs) que introducían sin proponérselo, hacían que fuera necesario un
+esfuerzo adicional de desarrollo muy significativo para que las páginas
+funcionaran en Internet Explorer. La imagen de abajo, del año 2006, lo explica
+claramente: </p>
+
+<div>
+<img alt="time breakdown alloting lots of time to make a page work in IE"
+style="width:100%; max-width:550px; margin:auto;"
+src="imag/ModernWebDevelopmentTimeBreakdown.png"></div>
+
+<p></p>
+
+<p>En particular, el IE6 fué en máximo exponente de estas dificultades, al
+punto que desde hace años hay <a href="http://www.modern.ie/ie6countdown">una
+página dedicada a observar la declinción del uso del IE6 en el mundo</a>,
+esperando a que llegue a un porcentaje tan bajo (&lt; 1%) que no sea necesario
+tenerlo en cuenta.</p>
+
+<p>Microsoft comenzó a tratar de hacer sus browsers compliant con las normas
+del W3C a partir del IE7; en 2014 el IE10 ya se puede decir que está bien. </p>
+
+<p>Las páginas web son "archivos de texto", es decir, contienen solamente
+letras, números y símbolos (lo que hay en el teclado de una PC), y se pueden
+editar con editores de texto como Notepad o <a
+href="http://www.vim.org/">vim</a>. El browser interpreta ese texto según las
+normas del W3C, lo combina con imágenes, videos y otros tipos de material y lo
+despliega en la pantalla.</p>
+
+<h3 id="L149">El server</h3>
+
+<div class="imgR" style="padding-left:1em;">
+<img alt="server in cloud" src="imag\cloud-server.png"
+style="width:222px;"></div>
+
+<p>El server es una computadora que "está en la Internet". Lo que hace que sea
+un "web server" y no simplemente otra computadora más es que ejecuta
+permanentemente un programa que también se llama "web server". </p>
+
+<p>La función del web server es recibir de los browsers los pedidos de
+páginas ("requests") y en respuesta, despachar las páginas que correspondan
+("responses"). </p>
+
+<p>Los requests de los browsers tienen un formato especial (también definido
+por el W3C) y se llaman "<a href="http://www.w3.org/TR/url/">URL</a>s". Por
+ejemplo el URL de la página de búsqueda en Google es:</p>
+<pre>https://www.google.com/</pre>
+
+<p>Todo lo que hay en la Internet tiene su URL particular, <em>absolutamente
+todo</em>: cada página, cada imagen, ... No hay dos URLs iguales. </p>
+
+<p>El web server de Google recibe ese request y envía la respuesta o
+"response", que en firefox se vé más o menos así (todos conocemos esta
+página): </p>
+
+<p><img alt="google search start page" src="imag\googleSearch.png"
+style="width:100%; height:auto; max-width:700px;"></p>
+
+<p>Lo que el web server envía es una cantidad de texto en lenguaje HTML, que
+se puede ver picando la página con el botón derecho del mouse y seleccionando
+"View Page Source" o algo similar dependiendo del browser que se está
+usando.</p>
+
+<p>Por ejemplo la parte de ese texto de la página de Google que define el
+espacio donde uno escribe las palabras que quiere buscar es así: </p>
+<pre>&lt;input id=gbqfq class=gbqfif name=q type=text autocomplete=off value=""&gt;</pre>
+
+<p>El browser interpreta ese texto y otros, los combina, y muestra en la
+página el input donde se escribe el texto para la búsqueda: </p>
+
+<p style="text-align:center;margin-left:auto;margin-right:auto;"><img
+alt="search input box" src="imag\googleSearchInput.png"></p>
+
+<h3 id="L183">¿Cómo funciona?</h3>
+
+<p>El browser y el web server se comunican a través de la Internet usando unos
+"protocolos" que se llaman <a href="http://www.w3.org/Protocols/">HTTP</a> o
+HTTPS y <a
+href="http://en.wikipedia.org/wiki/Internet_protocol_suite">TCP/IP</a>. Un
+protocolo es una serie de reglas detalladas sobre qué hacer en todas y cada
+una de las situaciones de una relación entre personas, países, o
+computadoras.</p>
+
+<p>En la imagen se vé el protocolo "https" especificado al comienzo del URL:
+</p>
+
+<p style="text-align:center;margin-left:auto;margin-right:auto;"><img
+alt="https protocol in URL" src="imag\httpsProtocol.png" width="513"
+height="108"></p>
+
+<p>El protocolo HTTP es para comunicaciones normales, y el HTTPS para
+comunicaciones encriptadas, en código, casi imposibles de descifrar. El
+protocolo TCP/IP es para que las diversas computadoras puedan hablar HTTP entre
+sí y se usa tanto para HTTP como para otros protocolos asociados a diferentes
+tipos de comunicaciones. </p>
+
+<p>Los protocolos TCP/IP son los que hacen la magia de conectar vía Internet
+un browser de un lugar con un server que puede estar en el otro lado del mundo.
+</p>
+
+<div class="imgR" style="padding-left:1em;">
+<img alt="Ichikawa radio logo" src="imag\logo-ichikawafm.gif"></div>
+
+<p>Por ejemplo <a
+href="http://www.ichikawafm.co.jp/">http://www.ichikawafm.co.jp</a> es la radio
+de <a href="http://en.wikipedia.org/wiki/Ichikawa,_Chiba">Ichikawa</a>, una
+localidad cualquiera de Japón en el otro lado del mundo. El URL termina con
+".jp" en vez de ".ar" como los de Agentina.</p>
+
+<p>Si ponemos el URL de la home page de la radio, la página aparece en el
+browser! ¿Cómo es posible, cómo funciona, si hay millones y millones de
+servidores web en la Internet, cómo hace para ir justo al que contiene la
+página que uno quiere?</p>
+
+<p>No es magia. Vamos a ver una explicación un simplificada. </p>
+
+<p>Nosotros, los humanos, entendemos nombres de servidores web como por ejemplo
+el de Google (google.com) o el de facebook (facebook.com).</p>
+
+<p>Estos nombres de servidores se llaman "domains" (dominios). Los humanos
+hablamos entre nosotros usando los "domain names", por ejemplo decimos "entré
+a facebook". </p>
+
+<p>Los programas de computadora usan en vez las direcciones "IP" de los
+servidores, que son unos números. Una computadora diría "entré a
+173.252.110.27" (una IP de facebook). </p>
+
+<p>La dirección IP del server de la radio de Ichikawa es
+<code>211.127.173.50</code>. Esto se puede comprobar consultando la <a
+href="res\tools#ipInformation|type=ipv4&amp;&amp;value=211.127.173.50">información
+sobre la IP 211.127.173.50</a>. </p>
+
+<p>El browser averigua la IP de la radio consultando un servidor "DNS", un
+diccionario gigante que dice cuál es la IP de cada DNS. Entonces cuando el
+browser manda el request lo dirige a la dirección IP, no al domain name. Cada
+persona o empresa que publica una página tiene su domain name registrado en la
+red mundial de servidores DNS. </p>
+
+<p>Nosotros podemos averiguar fácilmente la IP de un dominio usando el comando
+ping. Por ejemplo la IP de la radio de Ichikawa: </p>
+
+<p><img alt="ping Ichikawa" src="imag\pingIchikawa.png"
+style="width:100%; max-width:677px;"></p>
+
+<p>Hay <a href="http://en.wikipedia.org/wiki/Routing_table">otro diccionario,
+una especie de mapa de la red, que dice qué IPs están conectadas con cuales
+otras</a>. La implementación del protocolo TCP/IP que se está ocupando de
+hacer progresar el request consulta ese diccionario de conexiones o rutas y va
+de "hop" en "hop" (un "hop" es un salto) saltando de un "router" a otro y
+aproximándose así a su destino final. Podríamos pensar que primero averigua
+cuál router le conviene para una IP que comienza con 211 y salta a ese router.
+Una vez ahí averigua cuál router le conviene para IPs 211.127... y así
+sucesivamente. Un <a
+href="http://en.wikipedia.org/wiki/Router_(computing)">router</a> es otra
+computadora, con programación especializada para "rutear" mensajes en la red.
+</p>
+
+<h4>Ejemplo de la ruta de un request</h4>
+
+<p>La ruta desde el servicio Network-Tools.com (206.123.64.46) hasta la radio
+de Ichikawa pasa por una cantidad de routers, como se puede apreciar en el
+siguiente <a
+href="res\default.asp?prog=trace&amp;host=211.127.173.50">"traceroute"
+(rastreo)</a> de 16 hops: </p>
+
+<div style="font-size:80%; margin:0 auto;" class="framed">
+211.127.173.50 is from Japan(JP) in region Southern and Eastern Asia <br>
+<br>
+<strong>TraceRoute from Network-Tools.com to 211.127.173.50
+[dns.ichikawafm.co.jp]</strong> <br>
+
+
+<table>
+  <tbody>
+    <tr>
+      <th>Hop</th>
+      <th>(ms)</th>
+      <th>(ms)</th>
+      <th>(ms)</th>
+      <th>IP Address</th>
+      <th>Host name</th>
+    </tr>
+    <tr>
+      <td align="right">1</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td>206.123.64.46</td>
+      <td>- </td>
+    </tr>
+    <tr>
+      <td align="right">2</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td>64.124.196.225</td>
+      <td>xe-4-2-0.er2.dfw2.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">3</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td align="right">0</td>
+      <td>64.125.27.81</td>
+      <td>ae2.cr2.dfw2.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">4</td>
+      <td align="right">8</td>
+      <td align="right">8</td>
+      <td align="right">8</td>
+      <td>64.125.21.138</td>
+      <td>ae3.cr2.iah1.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">5</td>
+      <td align="right">43</td>
+      <td align="right">43</td>
+      <td align="right">43</td>
+      <td>64.125.25.53</td>
+      <td>ae2.cr2.lax112.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">6</td>
+      <td align="right">66</td>
+      <td align="right">93</td>
+      <td align="right">66</td>
+      <td>64.125.31.233</td>
+      <td>ae1.cr2.sjc2.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">7</td>
+      <td align="right">73</td>
+      <td align="right">48</td>
+      <td align="right">49</td>
+      <td>64.125.25.118</td>
+      <td>xe-3-2-1.mpr2.pao1.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">8</td>
+      <td align="right">52</td>
+      <td align="right">51</td>
+      <td align="right">51</td>
+      <td>64.125.31.61</td>
+      <td>xe-1-0-0.mpr1.pao1.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">9</td>
+      <td align="right">49</td>
+      <td align="right">49</td>
+      <td align="right">49</td>
+      <td>64.125.13.74</td>
+      <td>above-jptelecom.pao1.us.above.net </td>
+    </tr>
+    <tr>
+      <td align="right">10</td>
+      <td align="right">162</td>
+      <td align="right">162</td>
+      <td align="right">162</td>
+      <td>210.142.163.205</td>
+      <td>stoac-02-te0-2-0-3.gw.odn.ad.jp </td>
+    </tr>
+    <tr>
+      <td align="right">11</td>
+      <td align="right">160</td>
+      <td align="right">160</td>
+      <td align="right">160</td>
+      <td>143.90.33.202</td>
+      <td>cbcrk-05g3-0-0.nw.odn.ad.jp </td>
+    </tr>
+    <tr>
+      <td align="right">12</td>
+      <td align="right">149</td>
+      <td align="right">149</td>
+      <td align="right">149</td>
+      <td>143.90.192.218</td>
+      <td>cbcrw-01g1-1.nw.odn.ad.jp </td>
+    </tr>
+    <tr>
+      <td align="right">13</td>
+      <td align="right">147</td>
+      <td align="right">147</td>
+      <td align="right">146</td>
+      <td>211.127.123.133</td>
+      <td>fnafr-01a.nw.odn.ad.jp </td>
+    </tr>
+    <tr>
+      <td align="right">14</td>
+      <td align="right">176</td>
+      <td align="right">162</td>
+      <td align="right">162</td>
+      <td>211.127.123.55</td>
+      <td>fnafx-05.nw.odn.ad.jp </td>
+    </tr>
+    <tr>
+      <td align="right">15</td>
+      <td align="right">149</td>
+      <td align="right">149</td>
+      <td align="right">149</td>
+      <td>211.127.173.49</td>
+      <td>- </td>
+    </tr>
+    <tr>
+      <td align="right">16</td>
+      <td align="right">165</td>
+      <td align="right">165</td>
+      <td align="right">165</td>
+      <td>211.127.173.50</td>
+      <td>dns.ichikawafm.co.jp </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Empieza desde la IP de Network-Tools.com 206.123.64.46 en St Louis, USA. Se
+vé que en menos de 50 milisegundos pasa por 8 routers del dominio
+<code>us.above.net</code> también en USA (teniendo la IP podemos averiguar que
+todos están cerca de New York) antes de llegar al Pacífico (se nota por las
+las IPs "143" y "211"). Una vez allí pasa por 6 routers de Australia y Japón
+antes de llegar a la radio de Ichikawa. </p>
+
+<p>De la <a
+href="res\tools#ipInformation|type=ipv4&amp;&amp;value=211.127.173.50">consulta
+sobre la IP</a> surge que todos los números de IP desde 211.120.0.0 hasta
+211.127.255.255 están en Japón. También surge que este rango de 520280
+direcciones IP es uno de los 3026 rangos que tiene Japón para sus 127 millones
+de habitantes.</p>
+
+<p>Hay solamente 4000 millones de direcciones IP, o sea muy pocas. Están
+asignadas por bloques de números consecutivos, como las 211.12x.xxx.xxx que
+corresponden a Japón. Suponiendo que todos los bloques de asignaciones fueran
+como este, de medio millón de direcciones, entonces para el total de 4000
+millones de IPs habría unos 8000 bloques de medio millón de IPs cada uno y se
+necesitaría un índice de 8000 direcciones para saber dónde se encuentra cada
+bloque, un tamaño que para una computadora no es ni remotamente impresionante.
+</p>
+
+<h3 id="L982">Resumiendo</h3>
+
+<p>Aquí terminó la información técnica inicial sobre la Internet, algunos
+conceptos básicos necesarios para entender lo que viene. Sin esa información,
+la Internet es pura magia  :-)</p>
+
+<p>Ahora sí pasamos a ver cómo son las páginas. </p>
+
+<h3>Actividades</h3>
+<ol>
+  <li>Averiguar la dirección IP del sitio www.taringa.net &lt;&lt;&lt;
+    BLOCKED!!!!</li>
+  <li>Averiguar la dirección IP del sitio taringa.net</li>
+  <li>Usando http://www.dnsstuff.com/tools: 
+    <ul>
+      <li>averiguar el límite inferior del rango de IPs del bloque al que
+        pertenece la IP 201.212.0.6 (IP Range - Start) </li>
+      <li>Averiguar el límite superior del rango de IPs del bloque al que
+        pertenece la IP 201.212.0.6 (IP Range - End) </li>
+      <li>Averiguar a qué país está asociada la IP 201.212.0.6 </li>
+    </ul>
+  </li>
+</ol>
+
+<p>IP Range - Start 201.212.0.0 - IP Range - End 201.212.127.255</p>
+
+<p></p>
+
+<p></p>
+</div>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+<ul>
+  <li>AJAX</li>
+  <li>caniuse </li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>
