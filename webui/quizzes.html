@@ -65,38 +65,28 @@ href="https://docs.google.com/a/globant.com/forms/d/1zAKD6kzGbD8txyt_YsECNO5tkNQ
 <style>
   .q_singleChoice { background:rgb(248,248,248); padding:8px 20px; border:1px solid rgb(248,248,248); border-radius:6px; }
   .q_singleChoice li { list-style-type:none; }
-  .q_singleChoice .q_questionTitle { font-weight:bold; }
-</style>
+  .q_singleChoice .q_questionTitle { font-weight:bold; }</style>
 
 <p>In order to better assess the glober's knowledge we need good quality exams,
 made up of a variety of formats like the ones enumeated below. </p>
 <ol>
-  <li>One answer out of several (radios)<div id="q_001_001" class="q_singleChoice">
-  <p class="q_questionTitle" >Which of the following is true?</p>
-  <ul aria-label="Which of the following is true?" role="radiogroup" >
-    <li >
-      <label>
-        <input type="radio" aria-label="jQuery is a JavaScript Library"  role="radio" id="q_001_001_1" value="1" name="q_001_001">
-        jQuery is a JavaScript Library
-      </label>
-    </li> 
-    <li >
-      <label>
-        <input type="radio" aria-label="jQuery is a JSON Library" role="radio" id="q_001_001_2" value="2" name="q_001_001">
-        jQuery is a JSON Library</span>
-      </label>
-    </li> 
-    <li >
-      <label>
-        <input type="radio" aria-label="jQuery is a CSS Library" role="radio" id="q_001_001_3" value="3" name="q_001_001"> 
-        jQuery is a CSS Library 
-      </label>
-    </li>
-  </ul>
-</div>
+  <li>One answer out of several (radios) 
+
+    <div id="q_001_001" class="q_singleChoice">
+    <p class="q_questionTitle">Which of the following is true?</p>
+    <ul>
+      <li><label><input type="radio" name="q_001_001" id="q_001_001_1"
+        value="1"> jQuery is a JavaScript Library </label> </li>
+      <li><label><input type="radio" name="q_001_001" id="q_001_001_2"
+        value="2"> jQuery is a JSON Library</label> </li>
+      <li><label><input type="radio" name="q_001_001" id="q_001_001_3"
+        value="3"> jQuery is a CSS Library </label> </li>
+    </ul>
+    </div>
   </li>
   <li>Zero or more true statements, out of set (checkboxes)</li>
-  <li>Match enumerated answers with their corresponding questions (DnD?) </li>
+  <li>Match enumerated answers with their corresponding questions with DnD or
+    selecting the question and then clicking the answer. </li>
   <li>Enter a (rather) exact text (possibly more then one), with some
     elasticity 
     <ol>
@@ -104,6 +94,7 @@ made up of a variety of formats like the ones enumeated below. </p>
       <li>normalize blank space</li>
       <li>case-insensitive (optional)</li>
       <li>strip accents </li>
+      <li>match a regular expression</li>
     </ol>
     <p>This can be achieved by massaging the text and/or providing a set of
     valid answers.</p>
@@ -116,9 +107,9 @@ made up of a variety of formats like the ones enumeated below. </p>
     <p>Allow for checking if the values are numeric and doing some calculations
     on then in order to check the correctness. </p>
   </li>
-  <li>Allow entering some JavaScript or Java code and to run it, somehow
-    sandboxed, and use the output as the result to be checked, maybe the
-    console log, or the content of a specific variable. </li>
+  <li>Allow entering some JavaScript or Java code and to run it for example in
+    Node.js, somehow sandboxed, and use the output as the result to be checked,
+    maybe the console log, or the content of a specific variable. </li>
 </ol>
 
 <p> </p>

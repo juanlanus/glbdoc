@@ -103,9 +103,8 @@ planta atómica. </p>
 <img alt="línea de transmisión de energía"
 src="imag\electricPowerNetwork.jpg" style="width:320px;"> </div>
 
-<p>También hay una línea de transmisión que lleve la energía de la
-usina donde se la produce hasta el lugar donde se usa, generalmente una ciudad.
-</p>
+<p>También hay una línea de transmisión que lleve la energía de la usina
+donde se la produce hasta el lugar donde se usa, generalmente una ciudad. </p>
 </div>
 
 <p style="clear:both;">Y finalmente existen los lugares donde la energía
@@ -133,7 +132,29 @@ computadora que esté conectada puede ser a la vez proveedor y consumidor. El
 ejemplo más claro es el protocolo P2P de <a
 href="http://en.wikipedia.org/wiki/BitTorrent">BitTorrent</a> donde todos los
 que están conectados bajando un archivo a la vez también están oficiando de
-servers hacia sus pares. </p>
+servers hacia sus pares.</p>
+
+<h3>Variedad de servicios vía Internet</h3>
+
+<p>La Internet es un canal de comunicación versátil que transmite una
+variedad de servicios. El más conocido es la "Web" o WWW por "World Wide Web",
+pero no es el único. </p>
+
+<p>Hay otros servicios que usan la Internet como canal de comunicaciones: </p>
+<ul>
+  <li>email, el correo electrónico</li>
+  <li>instant messaging</li>
+  <li>telefonía, especialmente en empresas</li>
+  <li>juegos en línea</li>
+  <li>varias formas de transferencia de archivos, incluído bit torrents</li>
+  <li>VPN Virtual Private Networks, comunicaciones privadas a través de la red
+    pública</li>
+  <li>operación remota de computadoras usando SSH o Telnet. </li>
+</ul>
+
+<p>Este cursito se refiere exclusivamente a la WWW por que es el servicio más
+usado, el que todos conocen, tanto que cuendo hablamos de buscar algo en la
+Internet en realidad nos referimos a la WWW. </p>
 
 <h3 id="L117">El browser</h3>
 
@@ -183,7 +204,7 @@ src="imag/ModernWebDevelopmentTimeBreakdown.png"></div>
 
 <p>En particular, el IE6 fué en máximo exponente de estas dificultades, al
 punto que desde hace años hay <a href="http://www.modern.ie/ie6countdown">una
-página dedicada a observar la declinción del uso del IE6 en el mundo</a>,
+página dedicada a observar la declinación del uso del IE6 en el mundo</a>,
 esperando a que llegue a un porcentaje tan bajo (&lt; 1%) que no sea necesario
 tenerlo en cuenta.</p>
 
@@ -209,15 +230,16 @@ permanentemente un programa que también se llama "web server". </p>
 
 <p>La función del web server es recibir de los browsers los pedidos de
 páginas ("requests") y en respuesta, despachar las páginas que correspondan
-("responses"). </p>
+("responses").</p>
+
+<h3>URL</h3>
+
+<p></p>
 
 <p>Los requests de los browsers tienen un formato especial (también definido
 por el W3C) y se llaman "<a href="http://www.w3.org/TR/url/">URL</a>s". Por
 ejemplo el URL de la página de búsqueda en Google es:</p>
 <pre>https://www.google.com/</pre>
-
-<p>Todo lo que hay en la Internet tiene su URL particular, <em>absolutamente
-todo</em>: cada página, cada imagen, ... No hay dos URLs iguales. </p>
 
 <p>El web server de Google recibe ese request y envía la respuesta o
 "response", que en firefox se vé más o menos así (todos conocemos esta
@@ -226,13 +248,42 @@ página): </p>
 <p><img alt="google search start page" src="imag\googleSearch.png"
 style="width:100%; height:auto; max-width:700px;"></p>
 
+<p>Todo lo que hay en la Internet tiene su URL particular, <em>absolutamente
+todo</em>: cada página, cada imagen, ... No hay dos URLs iguales.</p>
+
+<p>Además del URL, un request contiene "headers" que aportan información
+adicional.Hay headers para distintos datos, por ejemplo el formato de datos que
+espera el browser, el idioma, la codificación del texto (ej. Latin-1, UTF-8,
+...), las cookies, el "referer", el "User-Agent" que identifica el browser, y
+más.</p>
+
+<p>El header "referer" frecuentemente aparece como "Referer [sic]" por que
+tiene una falta de ortografía (la palabra correcta es "referrer" con doble
+"r"). Es la dirección (URL) de la página web anterior, donde se encuentra el
+link actual.</p>
+
+<h3>Query</h3>
+
+<p>En inglés, "query" significa "consulta". Un URL puede tener información
+adicional, llamada "query string", que comienza con un signo de interrogación.
+Por ejemplo para buscar "http request query" en Google el URL con query puede
+ser así: </p>
+<pre>https://www.google.com.ar/search<strong>?hl=en&amp;noj=1&amp;q=http+request+query</strong></pre>
+
+<p>Lo que está antes del "?" es la dirección de la página o del servicio que
+debe procesar el request, lo que está a continuación es información
+adicional que se provee a esa página o servicio para especificar el resultado
+esperado. </p>
+
+<h3>Response</h3>
+
 <p>Lo que el web server envía es una cantidad de texto en lenguaje HTML, que
 se puede ver picando la página con el botón derecho del mouse y seleccionando
-"View Page Source" o algo similar dependiendo del browser que se está
+"View Page Source" o algo similar, dependiendo del browser que se está
 usando.</p>
 
-<p>Por ejemplo la parte de ese texto de la página de Google que define el
-espacio donde uno escribe las palabras que quiere buscar es así: </p>
+<p>Por ejemplo la parte de ese texto de la página de busqueda de Google que
+define el espacio donde uno escribe el texto de la consulta es así: </p>
 <pre>&lt;input id=gbqfq class=gbqfif name=q type=text autocomplete=off value=""&gt;</pre>
 
 <p>El browser interpreta ese texto y otros, los combina, y muestra en la
