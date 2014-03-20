@@ -87,6 +87,8 @@ made up of a variety of formats like the ones enumeated below. </p>
   <li>Zero or more true statements, out of set (checkboxes)</li>
   <li>Match enumerated answers with their corresponding questions with DnD or
     selecting the question and then clicking the answer. </li>
+  <li>Enter words or phrases, taken from a list, no repetition. Like: "Name the
+    Scandinavian countries". Compare plain or using regexps. </li>
   <li>Enter a (rather) exact text (possibly more then one), with some
     elasticity 
     <ol>
@@ -113,6 +115,38 @@ made up of a variety of formats like the ones enumeated below. </p>
 </ol>
 
 <p> </p>
+<hr>
+
+<h3>The exams system</h3>
+
+<p></p>
+
+<p>There is a <em>question</em>s repository. Each <em>question</em> has its own
+<em>answer</em>(s). The questions are tagged with <em>subjects</em>. </p>
+
+<p>An <em>exam</em> is made up of one or more <em>question sets</em>, each
+question set is made up of questions taken from a <em>subject</em>. As a
+question can belong to more than one subject it may appear twice in the same
+exam. </p>
+
+<p>From each subject, an exam includes a fixed number of questions or points
+(its size). Some of the questions are fixed and some randomly chosen to
+complete the exam size. </p>
+
+<p>The questions are numbered, the question number is its key in the database
+and its id in the exam page (prefixed with a "q"). </p>
+
+<p>The answers of a question are stored with the question, numbered from 1 on,
+and an answer's number never changes. It's possible for the sequence to have
+holes, no problem. </p>
+
+<p>In the page que answers have an id made up of the question id concatenated
+with a hyphen "-" and the answer number, no left zeros. For example answer 7 of
+question 1234 has <code>id="q1234-7"</code>. The
+<code>name=""</code> attribute is equal to the id when possible. The
+<code>value=""</code> of the answers is equal to the answer number. </p>
+
+<p></p>
 
 <p></p>
 </div>

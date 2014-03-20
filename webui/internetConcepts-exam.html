@@ -6,22 +6,108 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>exam - Internet concepts</title>
   <link href="res/favicon.ico" type="image/x-icon" rel="shortcut icon">
-  <style>
-  .imgR { float:right; margin-left:2em; }</style>
   <link rel="stylesheet" href="res/agenda.css" type="text/css">
   <script type="text/javascript" src="res/jquery.js"></script>
-  <script type="text/javascript" src="res/agenda.js"></script>
-  <script type="text/javascript" src="res/tocBuilder.js"></script>
-  <link href="res/tocBuilder.css" rel="stylesheet" type="text/css">
+  <!-- <script type="text/javascript" src="res/agenda.js"></script> -->
+  <!-- <script type="text/javascript" src="res/tocBuilder.js"></script>
+  <link href="res/tocBuilder.css" rel="stylesheet" type="text/css"> -->
+  <!-- <script type="text/javascript" src="res/form2js.js"></script> -->
+  <script type="text/javascript" src="res/jquery.serializeJSON.js"></script>
+
   <script type="text/javascript">
     $(document).ready(function () {
+
+      /* simple way, more work to handle result
+      $( "form" ).submit(function( event ) {
+        var qString = $( this ).serializeArray(); 
+        $('#queryOutput pre').text( JSON.stringify( qString ).replace( '},', '},\n', 'g' ));
+        console.log( qString );
+        event.preventDefault();
+      });  */
+
+      /* $( "form" ).submit(function( event ) {
+        event.preventDefault();
+        var formData = form2js( 'agendaBody', '-', false ); // container element, name pert separator, omit empty
+        $('#queryOutput pre').text( JSON.stringify( formData, '-', '\t' ));
+      }); */
+
+      /* another try
+      $( "form" ).submit(function( event ) {
+        event.preventDefault();
+        var formData = $('#examData').serializeJSON(); 
+        $('#queryOutput pre').text( JSON.stringify( formData, null, '\t' ));
+      }); */
+
+      // build an object with the answers and send to the server for review
+      // <p> <button>guardar borrador</button>  <button id="examen-submit">(SUBMIT)</button></p>
+      $( "#examen-submit" ).on('click', function( event ) {
+        event.preventDefault();
+        var results = {};
+        // header-level data
+        // TODO: try to add geolocation, LAN IP address, ...
+        results.name = document.getElementById('exam-name').value;
+        results.student = document.getElementById('student').value;
+        results.date = new Date().toString();
+        // questions answers
+        $('.question').each( function( i ) {
+          var 
+            $this = $(this),
+            dataFormat = $this.attr('data-format'),
+            a = {};
+          // handle each question format: checkboxes text-many radios text-one
+          // TODO: define the format of additional information, like comments
+          results.answers = {};
+          switch (dataFormat) {
+          case 'checkboxes':
+            // output like q1234: {1:on, 2:off, 4:on}
+            $('input[type=checkbox]', this).each( function(j) {
+              debugger;
+              var aaa = this.name;
+              var bbb = this.value;
+              a.aaa = bbb;
+            });
+            break;
+          case 'radios':
+            // output like q1234: 4
+            break;
+          case 'text-many':
+            // output like q1234: ['aaa', 'bbb', 'ccc']
+            break;
+          case 'text-one':
+            // output like q1234: 'abcd'
+            break;
+          };
+        });
+
+/*
+<li id="q5114" class="question" data-format="radios">La función de los DNS Servers, en un request, es: 
+  <ul class="choices">
+    <li><label><input type="radio" name="1" value="1">Traducir un número de IP a un nombre de dominio</label></li>
+    <li><label><input type="radio" name="2" value="2">Definir cuál es la ruta que debe seguir el request para llegar al server destino</label></li>
+    <li><label><input type="radio" name="3" value="3">Traducir los nombres de dominio a números IP</label></li>
+    <li><label><input type="radio" name="5" value="5">Comunicar al server destino que tiene un request pendiente</label></li>
+  </ul>
+</li> */
+
     });
   </script>
+
+  <style> /* DELETE */
+    .imgR { float:right; margin-left:2em; }
+  </style>
   <style>
     .section { width:100%; }
     .imgContainer { margin:1em auto; }
     /* .onePage { border:4px solid blue; } */
-  </style>
+    #examen {  border:1px solid rgb(192,192,192); border-radius:8px; margin:6px 6px 6px 0; width:95%; margin:auto; }
+    #examen .choices label { display:block; }
+    #examen .choices label:hover { background-color:rgb(248,248,240); }
+    #examen .choices input { margin-right:1.5em; }
+    #examen > ol > li { margin-top:2em; margin-bottom:1em; }
+    #examen ul.choices { list-style-type:none; padding:0; }
+    #examen ul input[type=text] { border:1px solid silver; border-radius:4px; padding:2px 8px; }
+    #examen textarea { border:1px solid silver; border-radius:4px; padding:2px 8px; }
+  </style> 
 </head>
 
 <body>
@@ -33,333 +119,207 @@
     </div>
 
     <div id="agendaBody"> 
-      <div class="toc">
-        <ul>
-          <li><a href="#L491">La Internet</a> 
-            <ul>
-              <li><a href="#L117">El browser</a></li>
-              <li><a href="#L149">El server</a></li>
-              <li><a href="#L183">¿Cómo funciona?</a> 
-                <ul>
-                  <li><a href="#L801">Ejemplo de la ruta de un request</a></li>
+      <form id="examData" action="evalExam">
+        <!-- this hidden inputs tell the evaluator which is the exam to evaluate and who is the student -->
+        <input id="name" type="hidden" value="internetConcepts">
+        <input id="student" type="hidden" value="juan.lanus@globant.com">
+
+        <div class="toc" style="display:none;">
+          <ul><li>(empty TOC)</li></ul>
+        </div>
+        <hr>
+
+
+
+
+
+        <div class="section">
+          <h2 id="L491">Conocimiento general sobre la Internet</h2> 
+          <p>El objetivo de este examen es determinar el nivel de familiaridad con los conceptos básicos de la Internet, en un nivel levemente técnico. </p> 
+          <div id="examen">
+            <!-- questions: 
+            Each question and each answer has its unique id in the db, this way we can choose
+            any questions, in any order, for an exam, and diplay its answers in random order.
+            The questions don't belong to the exam, but to categories or tags, and a question
+            may show in different unrelated exams. 
+            -->
+            <ol>
+              <li id="q777" class="question" data-format="checkboxes">Indicar cuáles de los servicios enumerados abajo se transmiten vía Internet: 
+                <ul class="choices">
+                  <li><label><input type="checkbox" name="1">World Wide Web</label></li>
+                  <li><label><input type="checkbox" name="2">e-mail - Correo electrónico</label></li>
+                  <li><label><input type="checkbox" name="3">Mensajes de WhatsApp</label></li>
+                  <li><label><input type="checkbox" name="4">Mensajes de texto del teléfono celular</label></li>
+                  <li><label><input type="checkbox" name="5">Download de archivos vía torrent</label></li>
+                  <li><label><input type="checkbox" name="6">World of Warcraft</label></li>
                 </ul>
               </li>
-              <li><a href="#L982">Resumiendo</a></li>
-              <li><a href="#L1178">Actividades</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <hr>
+              <li id="q473" class="question" data-format="text-many">Escribir tres o más nombres de web browsers:
+                <ul class="choices">
+                  <li><input type="text" name="1"></li>
+                  <li><input type="text" name="2"></li>
+                  <li><input type="text" name="3"></li>
+                  <li><input type="text" name="4"></li>
+                  <li><input type="text" name="5"></li>
+                  <li><input type="text" name="6"></li>
+                  <li><input type="text" name="7"></li>
+                </ul>
+              </li>
+              <li id="q1112" class="question" data-format="radios">Cómo se llama la entidad que regula las tecnologías de la WWW, a través de sus normas: 
+                <ul class="choices">
+                  <li><label><input type="radio" name="q1112" value="1">IANA - Internet Assigned Numbers Authority</label></li>
+                  <li><label><input type="radio" name="q1112" value="2">ICANN - Internet Corporation for Assigned Names and Numbers </label></li>
+                  <li><label><input type="radio" name="q1112" value="3">DNS - Domain Name System</label></li>
+                  <li><label><input type="radio" name="q1112" value="4">W3C - World Wide Web Consortium</label></li>
+                  <li><label><input type="radio" name="q1112" value="5">DARPA - Defense Advanced Research Projects Agency</label></li>
+                  <li><label><input type="radio" name="q1112" value="6">CERN - European Organization for Nuclear Research</label></li>
+                  <li><label><input type="radio" name="q1112" value="9">IETF - Internet Engineering Task Force</label></li>
+                </ul>
+              </li>
+              <li id="q5112" class="question" data-format="checkboxes">Indicar cuáles son protocolos de comunicación usados en la Internet: 
+                <ul class="choices">
+                  <li><label><input type="checkbox" name="1">TCP/IP -Transmission Control Protocol / Internet Protocol </label></li>
+                  <li><label><input type="checkbox" name="2">DHCP - Dynamic Host Configuration Protocol</label></li>
+                  <li><label><input type="checkbox" name="3">DNS - Domain Name System</label></li>
+                  <li><label><input type="checkbox" name="4">HTTP - HyperText Transfer Protocol</label></li>
+                  <li><label><input type="checkbox" name="5">IRC - Internet Relay Chat </label></li>
+                  <li><label><input type="checkbox" name="6">FTP - File Transfer Protocol</label></li>
+                  <li><label><input type="checkbox" name="7">POP - Post Office Protocol</label></li>
+                  <li><label><input type="checkbox" name="8">UDP - User Datagram Protocol </label></li>
+                  <li><label><input type="checkbox" name="9">RSVP - Resource Reservation Protocol</label></li>
+                  <li><label><input type="checkbox" name="10">LDAP - Lightweight Directory Access Protocol</label></li>
+                </ul>
+              </li>
+              <li id="q5114" class="question" data-format="radios">La función de los DNS Servers, en un request, es: 
+                <ul class="choices">
+                  <li><label><input type="radio" name="1" value="1">Traducir un número de IP a un nombre de dominio</label></li>
+                  <li><label><input type="radio" name="2" value="2">Definir cuál es la ruta que debe seguir el request para llegar al server destino</label></li>
+                  <li><label><input type="radio" name="3" value="3">Traducir los nombres de dominio a números IP</label></li>
+                  <li><label><input type="radio" name="5" value="5">Comunicar al server destino que tiene un request pendiente</label></li>
+                </ul>
+              </li>
+              <li id="q5116" class="question" data-format="checkboxes">Un URL puede ser: 
+                <ul class="choices">
+                  <li><label><input type="checkbox" name="1">La dirección de un servidor web en la Internet</label></li>
+                  <li><label><input type="checkbox" name="2">La dirección de una página web</label></li>
+                  <li><label><input type="checkbox" name="3">La dirección de un fragmento en una página web</label></li>
+                  <li><label><input type="checkbox" name="4">La dirección de una imagen en la Internet</label></li>
+                  <li><label><input type="checkbox" name="5">La dirección de un archivo de audio en la Internet</label></li>
+                  <li><label><input type="checkbox" name="6">La dirección de un script que se ejecuta en el browser</label></li>
+                  <li><label><input type="checkbox" name="7">La dirección de unos datos de una base de datos</label></li>
+                </ul>
+              </li>
+              <li id="q5120" class="question" data-format="checkboxes">La velocidad de un servicio doméstico de Internet, por ejemplo "6 MEGA", se refiere a: 
+                <ul class="choices">
+                  <li><label><input type="checkbox" name="1">La cantidad de bytes por minuto </label></li>
+                  <li><label><input type="checkbox" name="2">La cantidad de bytes por segundo </label></li>
+                  <li><label><input type="checkbox" name="3">La cantidad de bits por segundo </label></li>
+                  <li><label><input type="checkbox" name="4">La cantidad de bits por segundo </label></li>
+                  <li><label><input type="checkbox" name="5">La cantidad de megabytes por minuto </label></li>
+                  <li><label><input type="checkbox" name="6">Seis helados, grandes</label></li>
+                </ul>
+              </li>
+              <li id="q5130" class="question" data-format="text-one">Averiguar a qué empresa está asignada la IP 129.42.38.1 
+                <ul class="choices">
+                  <li><input type="text" name="q5130"></li>
+                </ul>
+                <p>Explicar brevemente el método utilizado:<br>
+                <textarea name="q5130-A" style="width:80%; margin:auto;" rows="4" cols="20"></textarea></p>
+              </li>
+              <li id="q5131" class="question" data-format="text-one">Averiguar la dirección IP del sitio wikipedia.org 
+                <ul class="choices">
+                  <li><input type="text" name="q5131"></li>
+                </ul>
+              </li>
+              <li id="q5132" class="question" data-format="text-one">Averiguar la dirección IP del sitio es.wikipedia.org 
+                <ul class="choices">
+                  <li><input type="text" name="q5132"></li>
+                </ul>
+              </li>
+              <li id="q5133" class="question" data-format="text-one">Usando <a href="http://www.freednsinfo.com">http://www.freednsinfo.com</a> o <a href="http://whois.arin.net/">http://whois.arin.net/</a> averiguar el
+                límite inferior del rango de IPs (NetRange) del bloque al que pertenece la IP de wikipedia.org 
+                <ul class="choices">
+                  <li><input type="text" name="q5133"></li>
+                </ul>
+              </li>
+              <li id="q5134" class="question" data-format="text-one">Usando <a href="http://www.freednsinfo.com">http://www.freednsinfo.com</a> o <a href="http://whois.arin.net/">http://whois.arin.net/</a> averiguar la
+                dirección (número y calle) de wikipedia.org 
+                <ul class="choices">
+                  <li><input type="text" name="q5134"></li>
+                </ul>
+              </li>
+            </ol>
+
+            <p></p>
+            <!-- the [save draft] button build a JSON string out of the answers and sends it
+            to the server in an AJAX request. 
+            The [(SUBMIT)] button (needs a better name) does like [save...] and gets back the
+            result achieved. It also locks the exam for this student, waiting for another event 
+            to unlock it. 
+            The [submit] button complains if there are unanswered questions. 
+            -->
+            <p> <button>guardar borrador</button>  <button id="examen-submit">(SUBMIT)</button></p>
+          </div> 
+        </div> 
+      </form>
     </div>
 
-    <div class="section">
-      <h2 id="L491">Conocimiento general sobre la Internet</h2> 
-      <p>El objetivo de este examen es determinar el nivel de familiaridad con los conceptos básicos de la Internet, en un nivel levemente técnico. </p> 
-      <style>
-        #examen > ol > li { margin-top:2em; margin-bottom:1em; }
-      </style> 
-      <div id="examen" class="framed">
-        <ol>
-          <li>Indicar cuáles de los servicios enumerados abajo se transmiten vía Internet: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>World Wide Web</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>e-mail - Correo electrónico</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Mensajes instantáneos vía WhatsApp</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Mensajes instantáneos del teléfono celular</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Download de archivos vía torrent</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>World of Warcraft</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Escribir todos los nombres de browsers conocidos (mínimo 3): 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Cómo se llama la entidad que regula las tecnologías de la WWW, a través de sus normas: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>IANA - Internet Assigned Numbers Authority</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>ICANN - Internet Corporation for Assigned Names and Numbers </td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>DNS - Domain Name System</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>W3C - World Wide Web Consortium</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>DARPA - Defense Advanced Research Projects Agency</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>CERN - European Organization for Nuclear Research</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>IETF - Internet Engineering Task Force</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Indicar cuáles son protocolos de comunicación usados en la Internet: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>TCP/IP -Transmission Control Protocol / Internet Protocol </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>DHCP - Dynamic Host Configuration Protocol</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>DNS - Domain Name System</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>HTTP - HyperText Transfer Protocol</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>IRC - Internet Relay Chat </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>FTP - File Transfer Protocol</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>POP - Post Office Protocol</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>UDP - User Datagram Protocol </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>RSVP - Resource Reservation Protocol</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>LDAP - Lightweight Directory Access Protocol</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>La función de los DNS Servers, en un request, es: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>Traducir un número de IP a un nombre de dominio</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>Definir cuál es la ruta que debe seguir el request para llegar
-                    al server destino </td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>Traducir los nombres de dominio a números IP</td>
-                </tr>
-                <tr>
-                  <td><input type="radio" name="radio"></td>
-                  <td>Comunicar al server destino que tiene un request pendiente</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Un URL puede ser: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de un servidor web en la Internet</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de una página web</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de un fragmento en una página web</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de una imagen en la Internet</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de un archivo de audio en la Internet</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de un script que se ejecuta en el browser</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="radio"></td>
-                  <td>La dirección de unos datos de una base de datos</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>La velocidad de un servicio doméstico de Internet, por ejemplo "6 MEGA", se refiere a: 
-            <table border="1">
-              <col>
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>La cantidad de bytes por minuto </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>La cantidad de bytes por segundo </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>La cantidad de bits por segundo </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>La cantidad de bits por segundo </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>La cantidad de megabytes por minuto </td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Seis helados, grandes</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Averiguar qué empresa tiene asignada la IP 129.42.38.1 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-            <p>Explicar brevemente el método utilizado:<br>
-            <textarea style="width:80%; margin:auto;" rows="4" cols="20"></textarea></p>
-          </li>
-          <li>Averiguar la dirección IP del sitio wikipedia.org 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Averiguar la dirección IP del sitio es.wikipedia.org 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Usando <a href="http://www.freednsinfo.com">http://www.freednsinfo.com</a> o <a href="http://whois.arin.net/">http://whois.arin.net/</a> averiguar el
-            límite inferior del rango de IPs (NetRange) del bloque al que pertenece la IP de wikipedia.org 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-          <li>Usando <a href="http://www.freednsinfo.com">http://www.freednsinfo.com</a> o <a href="http://whois.arin.net/">http://whois.arin.net/</a> averiguar la
-            dirección (número y calle) de wikipedia.org 
-            <table border="1">
-              <col>
-              <tbody>
-                <tr>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-        </ol>
-        <p></p>
-        <p> <button>guardar borrador</button>  <button>(SUBMIT)</button></p>
-      </div> 
-      <p></p> 
-      <p></p> 
-      <p></p>
-    </div> 
+
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <div id="queryOutput">
+      <pre />
+    </div>
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
+    <p></p> 
     <p></p> 
     <p></p> 
     <p></p> 
