@@ -1,121 +1,144 @@
-test: {
-  id: "internetConcepts",
-  title: "Conocimiento general sobre la Internet",
-  description: "El objetivo de este examen es determinar el nivel de familiaridad con los conceptos básicos de la Internet, en un nivel levemente técnico.",
-  questions: [ "q777", "q473", "q1112", "q5112", "q5114", "q5116", "q5120", "q5130", "q5131", "q5132", "q5133", "q5134" ]
-},
+Still missing: 
+  * tags
+  * evaluation method
 
-"questions": [
-{ "id":"q777", "format":"checkboxes", "text":"Indicar cuáles de los servicios enumerados abajo se transmiten vía Internet:",
-  "choices": {
-     "1": { value="true", "text":"World Wide Web</label" },
-     "2": { value="true", "text":"e-mail - Correo electrónico</label" },
-     "3": { value="true", "text":"Mensajes de WhatsApp</label" },
-     "4": { value="false", "text":"Mensajes de texto del teléfono celular</label" },
-     "5": { value="true", "text":"Download de archivos vía torrent</label" },
-     "6": { value="true", "text":"World of Warcraft</label" }
+[
+  { "_id":"q777", "format":"checkboxes", "text":"Indicar cuáles de los servicios enumerados abajo se transmiten vía Internet:",
+    "choices": {
+       "1": { "value":"true", "text":"World Wide Web" },
+       "2": { "value":"true", "text":"e-mail - Correo electrónico" },
+       "3": { "value":"true", "text":"Mensajes de WhatsApp" },
+       "4": { "value":"false", "text":"Mensajes de texto del teléfono celular" },
+       "5": { "value":"true", "text":"Download de archivos vía torrent" },
+       "6": { "value":"true", "text":"World of Warcraft" }
+    }
   },
 
-{ "id":"q473", "format":"text-many", "text":"Escribir tres o más nombres de web browsers:",
-"choices": { 
-  "names": ["1", "2", "3", "4", "5", "6", "7"], 
-  "values":[
-    "/ *internet *explorer */i",
-    " *chrome *\| *google chrome */i",
-    " *\(mozilla\)* firefox */i",
-    " *opera */i",
-    " *safari *",
-    " *lynx *",
-    " *netscape *\(navigator\)* *",
-    " *amaya *",
-    " *konqueror *",
-    " *camino *",
-    " *\(NCSA\)* Mosaic *"
-  ]
-},
+  { "_id":"q473", "format":"text-many", "text":"Escribir tres o más nombres de web browsers:",
+    "choices": { 
+      "names": ["1", "2", "3", "4", "5", "6", "7"], 
+      "values":[
+        "/ *internet *explorer */i",
+        "/ *chrome *\\| *google chrome */i",
+        "/ *\\(mozilla\\)* firefox */i",
+        "/ *opera */i",
+        "/ *safari */i",
+        "/ *lynx */i",
+        "/ *netscape *\\(navigator\\)* */i",
+        "/ *amaya */i",
+        "/ *konqueror */i",
+        "/ *camino */i",
+        "/ *\\(NCSA\\)* Mosaic */i"
+      ]
+    }
+  },
 
-{ "id":"q1112"  "format":"radios" "text": "Cómo se llama la entidad que regula las tecnologías de la WWW, a través de sus normas: ",
-"choices": {
-  "1": { "value":false, "text": "IANA - Internet Assigned Numbers Authority" },
-  "2": { "value":false, "text": "ICANN - Internet Corporation for Assigned Names and Numbers" },
-  "3": { "value":false, "text": "DNS - Domain Name System" },
-  "4": { "value":false, "text": "W3C - World Wide Web Consortium" },
-  "5": { "value":false, "text": "DARPA - Defense Advanced Research Projects Agency" },
-  "6": { "value":false, "text": "CERN - European Organization for Nuclear Research" },
-  "9": { "value":false, "text": "IETF - Internet Engineering Task Force" }
+  { "_id":"q1112", "format":"radios", "text": "Cómo se llama la entidad que regula las tecnologías de la WWW, a través de sus normas: ",
+    "choices": {
+      "1": { "value":false, "text": "IANA - Internet Assigned Numbers Authority" },
+      "2": { "value":false, "text": "ICANN - Internet Corporation for Assigned Names and Numbers" },
+      "3": { "value":false, "text": "DNS - Domain Name System" },
+      "4": { "value":false, "text": "W3C - World Wide Web Consortium" },
+      "5": { "value":false, "text": "DARPA - Defense Advanced Research Projects Agency" },
+      "6": { "value":false, "text": "CERN - European Organization for Nuclear Research" },
+      "9": { "value":false, "text": "IETF - Internet Engineering Task Force" }
+    }
+  },
+
+  { "_id":"q5112",  "format":"checkboxes", "text": "Indicar cuáles son protocolos de comunicación usados en la Internet: ",
+    "choices": {
+      "1": { "text": "TCP/IP -Transmission Control Protocol / Internet Protocol" },
+      "2": { "text": "DHCP - Dynamic Host Configuration Protocol" },
+      "3": { "text": "DNS - Domain Name System" },
+      "4": { "text": "HTTP - HyperText Transfer Protocol" },
+      "5": { "text": "IRC - Internet Relay Chat" },
+      "6": { "text": "FTP - File Transfer Protocol" },
+      "7": { "text": "POP - Post Office Protocol" },
+      "8": { "text": "UDP - User Datagram Protocol" },
+      "9": { "text": "RSVP - Resource Reservation Protocol" },
+      "10": { "text": "LDAP - Lightweight Directory Access Protocol" }
+    }
+  },
+
+  { "_id":"q5114",  "format":"radios", "text": "La función de los DNS Servers, en un request, es: ",
+    "choices": {
+      "1": { "value":"false", "text":"Traducir un número de IP a un nombre de dominio" },
+      "2": { "value":"false", "text":"Definir cuál es la ruta que debe seguir el request para llegar al server destino" },
+      "3": { "value":"true", "text":"Traducir los nombres de dominio a números IP" },
+      "5": { "value":"false", "text":"Comunicar al server destino que tiene un request pendiente" }
+    }
+  },
+
+  { "_id":"q5116",  "format":"checkboxes", "text": "Un URL puede ser: ",
+  "choices": {
+       "1": { "value":"true", "text": "La dirección de un servidor web en la Internet" },
+       "2": { "value":"true", "text": "La dirección de una página web" },
+       "3": { "value":"true", "text": "La dirección de un fragmento en una página web" },
+       "4": { "value":"true", "text": "La dirección de una imagen en la Internet" },
+       "5": { "value":"true", "text": "La dirección de un archivo de audio en la Internet" },
+       "6": { "value":"true", "text": "La dirección de un script que se ejecuta en el browser" },
+       "7": { "value":"true", "text": "La dirección de unos datos de una base de datos" }
+    }
+  },
+
+  { "_id":"q5120",  "format":"checkboxes", "text": "La velocidad de un servicio doméstico de Internet, por ejemplo \"6 MEGA\", se refiere a: ",
+  "choices": {
+       "1": { "value":"true", "text": "La cantidad de bytes por minuto" },
+       "2": { "value":"true", "text": "La cantidad de bytes por segundo" },
+       "3": { "value":"true", "text": "La cantidad de bits por segundo" },
+       "4": { "value":"true", "text": "La cantidad de bits por segundo" },
+       "5": { "value":"true", "text": "La cantidad de megabytes por minuto" },
+       "6": { "value":"true", "text": "Seis helados, grandes" }
+    }
+  },
+
+  { "_id":"q5130",  "format":"text-one", "text": "Averiguar a qué empresa está asignada la IP 129.42.38.1 ",
+    "choices": {
+      "names": ["1"], 
+      "values":[ "/ *\\<ibm\\>.*/i" ]
+    },
+    "comments": { "text":"Explicar brevemente el método utilizado:" }
+  },
+
+  { "_id":"q5131",  "format":"text-one", "text": "Averiguar la dirección IP del sitio wikipedia.org ",
+    "choices": {
+      "names": ["1"], 
+      "values":[ "/ *208\\.0*80\\.154\\.224 */" ]
+    },
+    "comments": { "text":"Explicar brevemente el método utilizado:" }
+  },
+
+  { "_id":"q5132",  "format":"text-one", "text": "Averiguar la dirección IP del sitio es.wikipedia.org ",
+    "choices": {
+      "names": ["1"], 
+      "values":[ "/ *208\\.0*80\\.154\\.224 */" ]
+    }
+  },
+
+  { "_id":"q5133",  "format":"text-one", "html": "Usando <a href=\"http://www.freednsinfo.com\">http://www.freednsinfo.com</a> o <a href=\"http://whois.arin.net/\">http://whois.arin.net/</a> averiguar el límite inferior del rango de IPs (NetRange) del bloque de direcciones IP al que pertenece la IP de wikipedia.org ",
+    "choices": {
+      "names": ["1"], 
+      "values":[ " *208\\.0*80\\.152\\.0*0 *" ]
+    },
+    "comments": { "text":"Explicar brevemente el método utilizado:" }
+  },
+
+  { "_id":"q5134",  "format":"text-one", "html": "Usando <a href=\"http://www.freednsinfo.com\">http://www.freednsinfo.com</a> o <a href=\"http://whois.arin.net/\">http://whois.arin.net/</a> averiguar la dirección (número y calle) de wikipedia.org",
+    "choices": {
+      "names": ["1"], 
+      "values":[ "/.*149 *New *Montgomery *Street.*/i" ]
+    }
+  }
+]
+
+
+
+This is a separate collection: Exams
+
+{
+  "_id": "internetConcepts",
+  "title": "Conocimiento general sobre la Internet",
+  "description": "El objetivo de este examen es determinar el nivel de familiaridad con los conceptos básicos de la Internet, en un nivel levemente técnico.",
+  "questions": [ "q777", "q473", "q1112", "q5112", "q5114", "q5116", "q5120", "q5130", "q5131", "q5132", "q5133", "q5134" ]
 }
 
-{ "id":"q5112"  "format":"checkboxes" "text": "Indicar cuáles son protocolos de comunicación usados en la Internet: ",
-  "choices": {
-    "1": { "text": "TCP/IP -Transmission Control Protocol / Internet Protocol" },
-    "2": { "text": "DHCP - Dynamic Host Configuration Protocol" },
-    "3": { "text": "DNS - Domain Name System" },
-    "4": { "text": "HTTP - HyperText Transfer Protocol" },
-    "5": { "text": "IRC - Internet Relay Chat" },
-    "6": { "text": "FTP - File Transfer Protocol" },
-    "7": { "text": "POP - Post Office Protocol" },
-    "8": { "text": "UDP - User Datagram Protocol" },
-    "9": { "text": "RSVP - Resource Reservation Protocol" },
-    "10": { "text": "LDAP - Lightweight Directory Access Protocol" },
-  }
-},
-
-{ "id":"q5114"  "format":"radios" "text": "La función de los DNS Servers, en un request, es: ",
-  "choices": {
-    "1": { "value":"false", "text":"Traducir un número de IP a un nombre de dominio" },
-    "2": { "value":"false", "text":"Definir cuál es la ruta que debe seguir el request para llegar al server destino" },
-    "3": { "value":"true", "text":"Traducir los nombres de dominio a números IP" },
-    "5": { "value":"false", "text":"Comunicar al server destino que tiene un request pendiente" }
-  }
-},
-
-{ "id":"q5116"  "format":"checkboxes" "text": "Un URL puede ser: ",
-"choices": {
-     {"name": "1", "text": "La dirección de un servidor web en la Internet" },
-     {"name": "2", "text": "La dirección de una página web" },
-     {"name": "3", "text": "La dirección de un fragmento en una página web" },
-     {"name": "4", "text": "La dirección de una imagen en la Internet" },
-     {"name": "5", "text": "La dirección de un archivo de audio en la Internet" },
-     {"name": "6", "text": "La dirección de un script que se ejecuta en el browser" },
-     {"name": "7", "text": "La dirección de unos datos de una base de datos" },
-  }
-},
-
-{ "id":"q5120"  "format":"checkboxes" "text": "La velocidad de un servicio doméstico de Internet, por ejemplo "6 MEGA", se refiere a: ",
-"choices": {
-     {"name": "1", "text": "La cantidad de bytes por minuto" },
-     {"name": "2", "text": "La cantidad de bytes por segundo" },
-     {"name": "3", "text": "La cantidad de bits por segundo" },
-     {"name": "4", "text": "La cantidad de bits por segundo" },
-     {"name": "5", "text": "La cantidad de megabytes por minuto" },
-     {"name": "6", "text": "Seis helados, grandes" },
-  }
-},
-
-{ "id":"q5130"  "format":"text-one" "text": "Averiguar a qué empresa está asignada la IP 129.42.38.1 ",
-"choices": {
-    <li><input type="text" name="q5130"></li>
-  </ul>
-  <p>Explicar brevemente el método utilizado:<br>
-  <textarea name="comment" style="width:80%; margin:auto;" rows="4" cols="20"></textarea></p>
-</li>
-{ "id":"q5131"  "format":"text-one" "text": "Averiguar la dirección IP del sitio wikipedia.org ",
-"choices": {
-    <li><input type="text" name="q5131"></li>
-  </ul>
-</li>
-{ "id":"q5132"  "format":"text-one" "text": "Averiguar la dirección IP del sitio es.wikipedia.org ",
-"choices": {
-    <li><input type="text" name="q5132"></li>
-  </ul>
-</li>
-{ "id":"q5133"  "format":"text-one" "text": "Usando <a href="http://www.freednsinfo.com">http://www.freednsinfo.com</a> o <a href="http://whois.arin.net/">http://whois.arin.net/</a> averiguar el límite inferior del rango de IPs (NetRange) del bloque al que pertenece la IP de wikipedia.org ",
-"choices": {
-    <li><input type="text" name="q5133"></li>
-  </ul>
-</li>
-"choices": {
-    <li><input type="text" name="q5134"></li>
-  </ul>
-</li>
-]

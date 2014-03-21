@@ -39,9 +39,9 @@
  */
 
       // build an object with the answers and send to the server for review
-      // <p> <button>guardar borrador</button>  <button id="examen-submit">(SUBMIT)</button></p>
       $( "#examen-submit" ).on('click', function( event ) {
         event.preventDefault();
+        // build the results object with the student answers
         var results = {};
         // header-level data
         // TODO: try to add geolocation, LAN IP address, ...
@@ -102,7 +102,27 @@
 </li> */
 
         });
+
+        // send the results to the server and get the grading back
         console.log( JSON.stringify( results ));
+        // the AJAX trip is synchronous, and the page is disabled & locked while it lasts
+        debugger;
+        $( 'input, textarea, select, button' ).prop( 'disabled', 'true' );
+        var theXHR = $.ajax(
+          'grade',
+          {
+            async: false,
+            contentType: 'application/json',
+            data: JSON.stringify( results ),
+            dataType: 'json',
+            error: function() { alert('the grading failed'); },
+            success: function() { alert('grading worked!'); },
+            complete: function() { $( 'input, textarea, select, button' ).removeProp( 'disabled' ),
+            timeout: 25000,
+            type: 'POST'
+          }
+        );
+        // $(...).removeProp('disabled');
 
 
 /*
@@ -281,7 +301,7 @@
             to unlock it. 
             The [submit] button complains if there are unanswered questions. 
             -->
-            <p> <button>guardar borrador</button>  <button id="examen-submit">(SUBMIT)</button></p>
+            <p style="text-align:right; margin-right:1.2em; margin-bottom:1em;"> <button style="display:none;">guardar borrador</button>  <button id="examen-submit">calificar</button></p>
           </div> 
         </div> 
       </form>
@@ -291,9 +311,6 @@
     <p></p> 
     <p></p> 
     <p></p> 
-    <div id="queryOutput">
-      <pre />
-    </div>
     <p></p> 
     <p></p> 
     <p></p> 
