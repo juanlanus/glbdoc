@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="Content-Language" content="en">
-  <title>Web UI</title>
+  <title>courses @ Staffing</title>
   <link href="res/favicon.ico" type="image/x-icon" rel="shortcut icon">
   <link rel="stylesheet" href="res/agenda.css" type="text/css">
   <script type="text/javascript" src="res/jquery.js">
@@ -24,7 +24,7 @@
 <div id="agendaHeader">
 
 <div class="fixedHeader">
-<h1 style="display: inline; ">Web UI </h1>
+<h1 style="display: inline; ">Courses @ Staffing </h1>
 </div>
 
 <div id="agendaLinks">
@@ -43,13 +43,99 @@
 
 <div id="agendaBody">
 <p></p>
+
+<div style="font-size:50%; color:blue;">
 <ul>
-  <li><a href="plan.html">Work planning</a> </li>
-  <li><a href="notes.html">Notes</a> </li>
-  <li><a href="moodleNotes.html">Moodle</a> </li>
   <li><a href="quizzes.html">Quizzes</a> </li>
   <li><a href="scouting.html">Scouting</a> </li>
+  <li><a href="notes.html">Notes</a> </li>
+  <li><a href="plan.html">Work planning</a> </li>
+  <li><a href="moodleNotes.html">Moodle</a> </li>
 </ul>
+</div>
+
+<p>Esto es un análisis genérico sobre la capacitación para los globers del
+bench, y sugerencias a implementar para obtener mejores resultados con gasto
+mínimo. </p>
+
+<p><em>Analizado de nuevo, el sistema de exámenes ahora me parece más
+adecuado para Career que para Staffing, por que el objetivo de Staffing es
+rotar la gente rápidamente, mientras que Career maneja educación a largo
+plazo, como por ejemplo un tester que quiere ser developer. </em></p>
+
+<p>Sin embargo algunas de las ideas pueden ser aplicables. </p>
+
+<p> </p>
+
+<h3>Visión</h3>
+
+<h4>Handbook</h4>
+
+<p>Cuando un glober entra al bench, a primera hora del primer día recibe un
+email con un link a un documento "<a href="benchHandbook.html">Bench
+Handbook</a>" con instrucciones detalladas, que está obligado a leer y
+conocer. </p>
+
+<p>El Handbook le comunica sus obligaciones y le informa sobre la visibilidad
+de la actividad que desarrolle mientras no está asignado. </p>
+
+<p>En el caso normal el Handbook lo instruye para que comience a rendir
+exámenes. </p>
+
+<p>Staffing mantiene el Handbook actualizado. Contiene links a los recursos que
+el glober necesita, para que pierda la menor cantidad de tiempo inicial. Puede
+ser gente que viene de trabajar intensamente en la terminación exitosa de un
+proyecto, y no queremos que pierda la velocidad que trae. </p>
+
+<h4>Exámenes</h4>
+
+<p>Instruído por el Handbook el glober entra al <a
+href="examsSystem.html">Sistema de Exámenes</a>. El objetivo de este sistema
+es registrar el conocimiento de los globers desasignados para poder venderlo.
+</p>
+
+<p>Los exámenes son independientes de los cursos: no nos importa cómo
+adquieren el conocimiento, nos importa si lo tienen o no. </p>
+
+<p>Los exámenes están organizados por temas: Web UI, Web Backend, Testing,
+Java programming, whatever. </p>
+
+<p>Cada tema es un arbol con branches y levels. Por ejemplo Web Backend tiene
+branches Java, .NET, Node.js. </p>
+
+<p>El sistema registra el avance del glober; un glober que vuelve al bench al
+final de un proyecto vé el mismo estado de la última vez que estuvo en el
+sistema. </p>
+
+<p>Los globers pueden seguir aprobando exámenes aunque no estén en el bench.
+</p>
+
+<p>La construcción de un set de exámenes para verificar la cantidad y
+variedad de conocimientos de la actualidad es un trabajo enorme, que no tiene
+fin por la volatilidad de las tecnologías. </p>
+
+<h4>Cursos</h4>
+
+<p></p>
+
+<h4>Time tracker</h4>
+
+<p>Los globers del bench deben completar el Time Tracker. </p>
+
+<p>Esto es para que perciban que ese tiempo le importa a Globant. </p>
+
+<p><img alt="time tracker example" src="imag/timeTracker.png" width="489"
+height="322"></p>
+
+<p>En "notes" deben anotar el curso que están haciendo y el avance, por
+ejemplo "Selenium intro - day 4". </p>
+
+<p>Al comienzo de cada capacitación reciben el texto que deben cargar cada
+día. </p>
+
+<p></p>
+
+<p></p>
 
 <p></p>
 
@@ -62,7 +148,7 @@
 <div>
 <a
 href="https://sites.google.com//a/globant.com/trainings-beta/training">Training
-&amp; Courses</a> &gt; </div>
+&amp; Courses</a> </div>
 
 <div>
 
@@ -303,38 +389,6 @@ href="https://docs.google.com/a/globant.com/forms/d/1zAKD6kzGbD8txyt_YsECNO5tkNQ
 
 <p><br>
 </p>
-
-<h4>Quizz types</h4>
-
-<p>In order to better assess the glober's knowledge we need good quality exams,
-made up of a variety of formats like the ones enumeated below. </p>
-<ol>
-  <li>One answer out of several (radios)</li>
-  <li>Zero or more true statements, out of set (checkboxes)</li>
-  <li>Match enumerated answers with their corresponding questions (DnD?) </li>
-  <li>Enter a (rather) exact text (possibly more then one), with some
-    elasticity 
-    <ol>
-      <li>with or without quotes</li>
-      <li>normalize blank space</li>
-      <li>case-insensitive (optional)</li>
-      <li>strip accents </li>
-    </ol>
-    <p>This can be achieved by massaging the text and/or providing a set of
-    valid answers.</p>
-    <p><img alt="quizzTextAnswers" src="./imag/quizzTextAnswers.png"
-    width="100%"></p>
-    <p>It should be possible to set a "never mind" answer for a particular
-    question that accepts any answer. </p>
-    <p>Also, consider symbolic answers, like values from system variables or
-    collected from previous quizzes.</p>
-    <p>Allow for checking if the values are numeric and doing some calculations
-    on then in order to check the correctness. </p>
-  </li>
-  <li>Allow entering some JavaScript or Java code and to run it, somehow
-    sandboxed, and use the output as the result to be checked, maybe the
-    console log, or the content of a specific variable. </li>
-</ol>
 
 <p> </p>
 

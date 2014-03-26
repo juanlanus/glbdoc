@@ -1,0 +1,153 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en">
+  <title>exams system</title>
+  <link href="res/favicon.ico" type="image/x-icon" rel="shortcut icon">
+  <link rel="stylesheet" href="res/agenda.css" type="text/css">
+  <script type="text/javascript" src="res/jquery.js">
+ </script>
+  <script type="text/javascript" src="res/agenda.js">
+ </script>
+  <script type="text/javascript" src="res/tocBuilder.js">
+ </script>
+  <link href="res/tocBuilder.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+      $(document).ready(function () {
+      });
+  </script>
+</head>
+
+<body>
+
+<div id="agendaHeader">
+
+<div class="fixedHeader">
+<h1 style="display: inline; ">Staffing: The Exams System</h1>
+</div>
+
+<div id="agendaLinks">
+
+<div id="tocContainer" class="tocContainer">
+
+<div class="toc">
+<p>empty TOC</p>
+</div>
+</div>
+
+<p> </p>
+<hr>
+</div>
+</div>
+
+<div id="agendaBody">
+<h2>Vision</h2>
+
+<p>The purpose is to keep a record of the exams approved by each glober,
+enforcing them to take the tests in the right sequence. This way the system
+collects faithful information about the glober's knowledge. </p>
+
+<p>From the standpoint of the globers (whether in the bench or not) the system
+provides a means to assess a given knowledge level on a specific subject. </p>
+
+<p>From the standpoint of the Staffing staff, the system provides a soft
+association between globers and skills, through the tags attached to each exam.
+</p>
+
+<p>From the standpoint of the exams builders, the system provides a friendly UI
+for creating and mantaining exams. </p>
+
+<h3>Exams and courses</h3>
+
+<p>An exam is associated with a given knowlede body, not a course. The globers
+that take the exam are not forced to take the course. For example
+high-seniority globers can take and approve several exams in a row out of the
+knowledge they already have. </p>
+
+<p>It doesn't seem possible to build exams to evaluate high-seniority globers.
+When such globers land in the bench they should be assigned the task of
+developing and tagging exam questions, sourcing them from <a
+href="http://stackoverflow.com/">StackOverflow</a> or any other source,
+including themselves. </p>
+
+<p></p>
+
+<p></p>
+
+<h2>Notes</h2>
+<ul>
+  <li>The system must know whether a glober is in the bench or not. </li>
+  <li>The system's main input is a glober's answers to the questions of an
+    exam. </li>
+  <li>The exammed glober gets the mark immediately. </li>
+  <li>The answers of every exam are stored in the glober's data, together with
+    the mark and the date. </li>
+  <li>The glober can't review the answers of an exam, only the califications
+    and dates. </li>
+  <li>An exam can't be taken twice in a row: there must be a week or so between
+    attempts. </li>
+  <li>The exams have a "landing page" with the link to the exam proper, and
+    links to studying material, be it made in Globant or available in the
+    Internet. </li>
+  <li>The exam launch page prompts the globers to check their identity and to
+    abide by the honor code. </li>
+  <li>The exams builders can find inspiration in the questions and answers in
+    <a href="http://stackoverflow.com/">StackOverflow</a>.</li>
+  <li>The questions are tagged by subject and by level. </li>
+  <li>An exam is a unique set of randomly chosen questions that bear specific
+    tags, according to a set of rules like "30 questions tagged jQuery and easy
+    plus 30 tagged JavaScript and easy". </li>
+  <li>There is a "questions database". A question has a title (the question
+    itself), and a set of possible answers. It might also contain a detailed
+    explanation. </li>
+  <li>There are question formats, like choosing the right one from a set of
+    answers (radio buttons), checking the true answers from a set of slightly
+    confussing alternatives (checkboxes), matching each left-hand part with its
+    corresponding right-hand part, entering textual answers (scrutinized with
+    regexps), etc. The format is part of the quetion design. </li>
+  <li>In addition to the format, a question has an evaluation method. </li>
+  <li>The answers of a question might be partially correct, like for example in
+    multiple choice formats, each good choice may have a value (then each wrong
+    answer should carry a negative value). Some answers should have zero value.
+  </li>
+</ul>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<div>
+<p></p>
+</div>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+</div>
+</body>
+</html>
