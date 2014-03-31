@@ -1,7 +1,3 @@
-Still missing: 
-  * tags
-  * evaluation method
-
 [
   { "_id":"q777", "format":"checkboxes", "text":"Indicar cuáles de los servicios enumerados abajo se transmiten vía Internet:",
     "choices": {
@@ -130,15 +126,3 @@ Still missing:
     }
   }
 ]
-
-
-
-This is a separate collection: Exams
-
-{
-  "_id": "internetConcepts",
-  "title": "Conocimiento general sobre la Internet",
-  "description": "El objetivo de este examen es determinar el nivel de familiaridad con los conceptos básicos de la Internet, en un nivel levemente técnico.",
-  "questions": [ "q777", "q473", "q1112", "q5112", "q5114", "q5116", "q5120", "q5130", "q5131", "q5132", "q5133", "q5134" ]
-}
-

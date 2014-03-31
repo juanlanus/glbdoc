@@ -17,8 +17,22 @@
   <script type="text/javascript">
     $(document).ready(function () {
 
+      // load answers automatically, for debuging
+      $( 'input[type="checkbox"]' ).attr( 'checked', true );
+      $( 'input[type="text"][name="1"]' ).attr( 'value', 'internet explorer' );
+      $( 'input[type="text"][name="2"]' ).attr( 'value', 'firefox' );
+      $( 'input[type="text"][name="3"]' ).attr( 'value', 'chrome' );
+      $( 'input[type="text"][name="4"]' ).attr( 'value', 'opera' );
+      $( 'input[type="radio"][value="4"]', $('#q1112') ).attr( 'checked', 'true' );
+      $( 'input[type="text"][name="q5130"]' ).attr( 'value', 'IBM' );
+      $( 'input[type="radio"][value="3"]', $('#q5114') ).attr( 'checked', 'true' );
+      $( 'textarea[name="comment"]' ).attr( 'value', 'ping in MS/DOS window' );
+      $( 'input[type="text"][name="q5131"]' ).attr( 'value', '208.80.154.224' );
+      $( 'input[type="text"][name="q5132"]' ).attr( 'value', '208.80.154.224' );
+      $( 'input[type="text"][name="q5133"]' ).attr( 'value', '208.80.152.0' );
+      $( 'input[type="text"][name="q5134"]' ).attr( 'value', '149 New Montgomery Street' );
+
 /* {
-{
 "name":"internetConcepts",
 "student":"juan.lanus@globant.com",
 "date":"Thu Mar 20 2014 16:17:21 GMT-0300 (Argentina Standard Time)",
@@ -48,7 +62,7 @@
         results.name = document.getElementById('name').value;
         results.student = document.getElementById('student').value;
         results.date = new Date().toString();
-        // questions answers
+        // answers to exam questions
         results.answers = {};
         $('.question').each( function( i ) {
           var 
@@ -65,11 +79,11 @@
             });
             break;
           case 'radios':
-            // output like q1234: 4
+            // output like q1234: '4'
             a = null;
             $('input[type=radio]', this).each( function(j) {
               if( this.checked ) {
-                a = this.name;
+                a = this.value;
               };
             });
             break;
@@ -105,21 +119,23 @@
 
         // send the results to the server and get the grading back
         console.log( JSON.stringify( results ));
-        // the AJAX trip is synchronous, and the page is disabled & locked while it lasts
-        debugger;
+        // the AJAX trip is synchronous, and the page is disabled & locked during the trip
         $( 'input, textarea, select, button' ).prop( 'disabled', 'true' );
         var theXHR = $.ajax(
-          'grade',
+          '/grade',
           {
+            type: 'POST',
             async: false,
             contentType: 'application/json',
             data: JSON.stringify( results ),
             dataType: 'json',
+            success: function( gradedData, textStatus, jqXHR ) { 
+              alert( 'grading worked!' + JSON.stringify( gradedData ));
+              debugger;
+            },
             error: function() { alert('the grading failed'); },
-            success: function() { alert('grading worked!'); },
-            complete: function() { $( 'input, textarea, select, button' ).removeProp( 'disabled' ),
-            timeout: 25000,
-            type: 'POST'
+            complete: function() { $( 'input, textarea, select, button' ).removeProp( 'disabled' ) },
+            timeout: 25000
           }
         );
         // $(...).removeProp('disabled');
@@ -210,13 +226,13 @@
               </li>
               <li id="q1112" class="question" data-format="radios">Cómo se llama la entidad que regula las tecnologías de la WWW, a través de sus normas: 
                 <ul class="choices">
-                  <li><label><input type="radio" name="1">IANA - Internet Assigned Numbers Authority</label></li>
-                  <li><label><input type="radio" name="2">ICANN - Internet Corporation for Assigned Names and Numbers </label></li>
-                  <li><label><input type="radio" name="3">DNS - Domain Name System</label></li>
-                  <li><label><input type="radio" name="4">W3C - World Wide Web Consortium</label></li>
-                  <li><label><input type="radio" name="5">DARPA - Defense Advanced Research Projects Agency</label></li>
-                  <li><label><input type="radio" name="6">CERN - European Organization for Nuclear Research</label></li>
-                  <li><label><input type="radio" name="9">IETF - Internet Engineering Task Force</label></li>
+                  <li><label><input type="radio" name="q1112" value="1">IANA - Internet Assigned Numbers Authority</label></li>
+                  <li><label><input type="radio" name="q1112" value="2">ICANN - Internet Corporation for Assigned Names and Numbers </label></li>
+                  <li><label><input type="radio" name="q1112" value="3">DNS - Domain Name System</label></li>
+                  <li><label><input type="radio" name="q1112" value="4">W3C - World Wide Web Consortium</label></li>
+                  <li><label><input type="radio" name="q1112" value="5">DARPA - Defense Advanced Research Projects Agency</label></li>
+                  <li><label><input type="radio" name="q1112" value="6">CERN - European Organization for Nuclear Research</label></li>
+                  <li><label><input type="radio" name="q1112" value="9">IETF - Internet Engineering Task Force</label></li>
                 </ul>
               </li>
               <li id="q5112" class="question" data-format="checkboxes">Indicar cuáles son protocolos de comunicación usados en la Internet: 
@@ -235,10 +251,10 @@
               </li>
               <li id="q5114" class="question" data-format="radios">La función de los DNS Servers, en un request, es: 
                 <ul class="choices">
-                  <li><label><input type="radio" name="1" value="1">Traducir un número de IP a un nombre de dominio</label></li>
-                  <li><label><input type="radio" name="2" value="2">Definir cuál es la ruta que debe seguir el request para llegar al server destino</label></li>
-                  <li><label><input type="radio" name="3" value="3">Traducir los nombres de dominio a números IP</label></li>
-                  <li><label><input type="radio" name="5" value="5">Comunicar al server destino que tiene un request pendiente</label></li>
+                  <li><label><input type="radio" name="q5114" value="1">Traducir un número de IP a un nombre de dominio</label></li>
+                  <li><label><input type="radio" name="q5114" value="2">Definir cuál es la ruta que debe seguir el request para llegar al server destino</label></li>
+                  <li><label><input type="radio" name="q5114" value="3">Traducir los nombres de dominio a números IP</label></li>
+                  <li><label><input type="radio" name="q5114" value="5">Comunicar al server destino que tiene un request pendiente</label></li>
                 </ul>
               </li>
               <li id="q5116" class="question" data-format="checkboxes">Un URL puede ser: 
