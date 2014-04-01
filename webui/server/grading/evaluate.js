@@ -1,5 +1,5 @@
 /*
- * GET users listing.
+ * Calculate an exam's grading
  */
 
 exports.list = function(req, res){
