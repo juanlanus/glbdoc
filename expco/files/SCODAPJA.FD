@@ -1,0 +1,16 @@
+      *SCODAPJA.FD.v.01.0001
+      **************************************************************
+      * ARCHIVO QUE MANTIENE LOS SCORES POR IDENTIFICACION POR MES
+      * DE UNA AÑO COMPLETO.
+      **************************************************************
+       FD SCODAPJA.
+       01 REG-SCODAPJA.
+          02 LLAVE-SCODAPJA.
+             03 TIPIDE-SCODAPJA     PIC 9.
+             03 NUMIDE-SCODAPJA     PIC 9(11).
+          02 INORMACION-SCODAPJA.
+             03 FECHA-SCODAPJA         PIC X(08).
+             03 SCORE-SCODAPJA         PIC 9(03).
+             03 EXCLUSION-SCODAPJA     PIC 9(02).
+             03 SEGMENTO-SCODAPJA      PIC 9(01).
+             03 FILLER-SCODAPJA        PIC 9(12).

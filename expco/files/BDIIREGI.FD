@@ -1,0 +1,62 @@
+      * BDIIREGI.v.03.0005
+      *=================================================================
+      * ESTRUCTURA DEL ARCHIVO ENTREGADO POR LA REGISTRADURIA NACIONAL
+      *=================================================================
+REMARK* GJC0002   * BLQTUT * CAMPO PARA MARCAR LAS IDENDIFICACIONES
+REMARK* G.JIMENEZ * QUE HAN SIDO BLOQUEADAS POR TUTELAS PERDIDAS
+REMARK* SEPT.18/03* 
+REMARK******************************************************************
+REMARK* FAC0003   * FECMOD * FECHA DE CREACION Y DE MODIFICACION DE LAS
+REMARK* F.CUADROS * IDENTIFICACIONES. ADEMAS INCLUSION DE INDICADOR CON
+REMARK* SEPT.16/05* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK*           * REGISTRADURIA, S-SOLICITUD INTERNA CAS.
+REMARK******************************************************************
+REMARK* GJC0004   * INDMOD * SE CREA CAMPO PARA DEJAR INDICADOR DE MOFI-  
+REMARK* F.CUADROS * FICACIONES, QUEDA IGUAL QUE EN EL OTRO INDICADOR   
+REMARK* ENERO/2007* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK*           * REGISTRADURIA, S-SOLICITUD INTERNA CAS T-TERCERO.
+REMARK******************************************************************
+REMARK* CAV0005   *CONSUL * SE ADICIONAN LOS CAMPOS PARA IDENTIFICAR
+REMARK* C.VELASCO *QUE LA CEDULA CORRESPONDE A UN CONSULADO Y EL CODIGO
+REMARK* ABRIL/2007*DEL CONSULADO ,ARCHIVO CONSULADOS.DAT, PAIS Y CIUDAD
+REMARK******************************************************************
+       FD  BDIIREGI.
+       01  REG-BDIIREGI.
+           03  LLAVE-BDIIREGI          PIC 9(12).
+           03  LLAVE-BDIIREGI-R        REDEFINES LLAVE-BDIIREGI.
+               05  TIPO-ID-BDIIREGI    PIC 9.
+               05  CEDULA-BDIIREGI     PIC 9(11).
+           03  DES-NOMBRE1-BDIIREGI    PIC X(12).
+           03  DES-NOMBRE2-BDIIREGI    PIC X(12).
+           03  APELLIDO1-BDIIREGI      PIC X(16).
+           03  APELLIDO2-BDIIREGI      PIC X(16).
+           03  ESTADO-CIVIL-BDIIREGI   PIC 9.
+           03  FECHA-EXPEDI-BDIIREGI.
+               05  SIGLO-EXP-BDIIREGI  PIC 9(2).
+               05  FECHA-EXP-BDIIREGI  PIC 9(6).
+           03  INF-NUMERICA-BDIIREGI   PIC 9(7).
+           03  INF-NUMERICA-BDIIREGI-R REDEFINES INF-NUMERICA-BDIIREGI.
+               05 DEP-EXP-BDIIREGI     PIC 99.
+               05 MUNIC-EXP-BDIIREGI   PIC 999.
+               05 ESTADO-VIG-BDIIREGI  PIC 99.
+           03  FECHA-NACIMNTO-BDIIREGI.
+               05  SIGLO-NAC-BDIIREGI  PIC 9(2).
+               05  FECHA-NAC-BDIIREGI  PIC 9(6).
+           03  FECHA-EDICTO-BDIIREGI.
+               05  SIGLO-EDI-BDIIREGI  PIC 9(2).
+               05  FECHA-EDI-BDIIREGI  PIC 9(6).
+           03  IND-SEXO-BDIIREGI       PIC X.
+           03  IND-ESTADO-BDIIREGI     PIC 9.
+           03  NUM-RESOLUC-BDIIREGI    PIC 9(4).
+           03  ANO-RESOLUC-BDIIREGI    PIC 9(2).
+BLQTUT     03  BLOQUEO-TUTELA-BDIIREGI PIC X(1).                        GJC0002 
+FECMOD     03  FECHA-CREAC-BDIIREGI    PIC 9(8).                        FAC0003 
+FECMOD     03  FECHA-MODIF-BDIIREGI    PIC 9(8).                        FAC0003 
+FECMOD     03  IND-MODIF-BDIIREGI      PIC X(1).                        FAC0003 
+INDMOD     03  IND-CREACION-BDIIREGI REDEFINES                          GJC0004
+INDMOD              IND-MODIF-BDIIREGI PIC X(1).                        GJC0004 
+INDMOD     03  IND-CAMBIO-BDIIREGI     PIC X(1).                        GJC0004 
+CONSUL     03  IND-CONSULADO-BDIIREGI  PIC 9(1).                        CAV0005 
+CONSUL     03  COD-CONSULADO-BDIIREGI  PIC 9(3).                        CAV0005 
+CONSUL     03  FILLER-BDIIREGI         PIC X(29).                       CAV0005 
+      *----------------------------------------------------------------*
