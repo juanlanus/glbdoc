@@ -20,7 +20,7 @@ REMARK******************************************************************
       * ARCHIVO CON UNA IDENTIFICACION DE PJ A POR REGISTRO
       *******************************************************************
            SELECT IDSPJA
-                  ASSIGN TO DISK TITLE-IDSPJA
+????              ASSIGN TO DISK TITLE-IDSPJA
                   ORGANIZATION IS SEQUENTIAL
                   ACCESS MODE IS SEQUENTIAL
                   FILE STATUS IS COD-RETORNO-IDSPJA.
@@ -97,8 +97,9 @@ REMARK***************
 REMARK*** CONTADORES
 REMARK***************
        01  W-LEIDOS-IDSPJA             PIC 9(12) VALUE ZERO.
-       01  W-LEIDOS-SCPDAPJA           PIC 9(12) VALUE ZERO.      
-       01  W-LEIDOS-SCPDAPJA-IK        PIC 9(12) VALUE ZERO.      
+       01  W-LEIDOS-SCODAPJA           PIC 9(12) VALUE ZERO.      
+       01  W-LEIDOS-SCODAPJA-IK        PIC 9(12) VALUE ZERO.      
+       01  W-EDIT-CONTADOR             PIC ZZZ,ZZZ,ZZZ,ZZZ.
              
 REMARK*** ARREGLOS   
 REMARK*************
@@ -108,7 +109,6 @@ REMARK**********
       ******************************************************************
       *             COPY AREA DE LOG PARA CONTROL DE TIEMPOS           *
       ******************************************************************
-      *
         COPY PE-TIME.WS.
 
       ******************************************************************
@@ -130,10 +130,6 @@ REMARK******************************************************************
            DISPLAY "************************************************"
            DISPLAY "                                                "
            PERFORM 10-CONTROL-TIEMPO
-      *
-           DISPLAY " Fecha Inicio Proceso : " FECHA-PG
-           DISPLAY " Hora  Inicio Proceso : " HORA-PG.
-      *           
            PERFORM 1000-ABRIR-ARCHIVOS
            PERFORM 1001-PROCESO-REGISTRO-IDSPJA
            UNTIL COD-RETORNO-IDSPJA NOT EQUAL "00"
@@ -156,10 +152,14 @@ REMARK******************************************************************
            MOVE ANIO-S                      TO ANIO-P
            MOVE MESE-S                      TO MESE-P
            MOVE DIAS-S                      TO DIAS-P.           
+      *
+           DISPLAY " Fecha Inicio Proceso : " FECHA-PG
+           DISPLAY " Hora  Inicio Proceso : " HORA-PG.
+      *           
           
       ******************************************************************        
       *1000-ABRIR-ARCHIVOS.                           
-      *SE ABREN LOS ARCHIVOS QUE SE UTILIZAN EN EL PROGRAMA        
+      * APERTURA DE LOS ARCHIVOS DEL PROGRAMA        
       ****************************************************************** 
        1000-ABRIR-ARCHIVOS.                 
            OPEN INPUT IDSPJA
@@ -179,7 +179,7 @@ REMARK******************************************************************
       ******************************************************************        
       *1001-PROCESO-REGISTRO-IDSPJA.                 
       * Lee un registro de IDSPJA con un ID, usa ese ID para leer un
-      * registro de SCPDAPJA y mostrarlo
+      * registro de SCODAPJA y mostrarlo
       ****************************************************************** 
        1001-PROCESO-REGISTRO-IDSPJA.                 
            READ IDSPJA
@@ -204,7 +204,7 @@ REMARK******************************************************************
       ******************************************************************
        1002-PROCESO-SCODAPJA.
 
-           MOVE REG-IDSPJA TO LLAVE-SCODAPJA
+????       MOVE REG-IDSPJA TO LLAVE-SCODAPJA
            READ SCODAPJA
            EVALUATE COD-RETORNO-SCODAPJA
            WHEN "00"
@@ -225,21 +225,19 @@ REMARK******************************************************************
       *MOSTRAR CONTADORES DEL PROCESO 
       ****************************************************************
        1003-MOSTRAR-CONTADORES.
-           MOVE W-ACTUALIZADOS                TO W-EDITCON 
-           DISPLAY "Reg. ACTUALIZADOS........ "  W-EDITCON
-           MOVE W-NO-ACTUALIZADOS             TO W-EDITCON 
-           DISPLAY "Reg. No ACTUALIZADOS..... "  W-EDITCON.                      
+           MOVE W-LEIDOS-IDSPJA TO W-EDIT-CONTADOR
+           DISPLAY "IDs leidos .............. "  W-EDIT-CONTADOR
+           MOVE W-LEIDOS-SCODAPJA TO W-EDIT-CONTADOR
+           DISPLAY "SCODAPJA leídos ......... "  W-EDIT-CONTADOR                      
+           MOVE W-LEIDOS-SCODAPJA-IK TO W-EDIT-CONTADOR
+           DISPLAY "SCODAPJA claves inválidas "  W-EDIT-CONTADOR.
            
       ******************************************************************
       *1004-CERRAR-ARCHIVOS.                           
       *SE CIERRAN LOS ARCHIVOS QUE SE UTILIZAN EN EL PROGRAMA        
       ******************************************************************
-       1004-CERRAR-ARCHIVOS. 
-
+       1004-CERRAR-ARCHIVOS.  
            PERFORM 10-CONTROL-TIEMPO
-      *
            DISPLAY " Fecha Fin    Proceso : " FECHA-PG
            DISPLAY " Hora  Fin    Proceso : " HORA-PG.
-      *                            
- 
            CLOSE IDSPJA SCODAPJA.

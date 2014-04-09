@@ -1,0 +1,55 @@
+LINE    MESSAGES FOR LEESCO.bnd
+------  --------------------------------------------------------------------
+        SQL0061W  The binder is in progress.
+        SQL0031C  File "/d/iccol/desarrollo/binds/LEESCO.bnd" could not be opened.
+        SQL0082C  An error has occurred which has terminated processing.
+        SQL0092N  No package was created because of previous errors.
+        SQL0091N  Binding was ended with "3" errors and "0" warnings.
+DB20000I  The QUIT command completed successfully.
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 9.7.7
+ SQL authorization ID   = LSTXCLDE
+ Local database alias   = LIST_DL1
+
+
+LINE    MESSAGES FOR LEESCO.bnd
+------  --------------------------------------------------------------------
+        SQL0061W  The binder is in progress.
+        SQL0031C  File "/d/iccol/desarrollo/binds/LEESCO.bnd" could not be opened.
+        SQL0082C  An error has occurred which has terminated processing.
+        SQL0092N  No package was created because of previous errors.
+        SQL0091N  Binding was ended with "3" errors and "0" warnings.
+DB20000I  The QUIT command completed successfully.
+================= [ LECTURA  BASE  DATOSSCORE    DESARROLLO  ] =================
+=========================== [        SCORE         ] ===========================
+TIPID          NUMIDFECHA          SCOREEXCLUSION           SEGMENTO
+================================================================================
+- REGISTROS EN LA TABLA DE SCORE
+Error: cannot prepare LIST_DL1       00000805COBOLAPP.LEESCORE 0X56426E684C4A456
+Error: cannot open vc LIST_DL1       00000805COBOLAPP.LEESCORE 0X56426E684C4A456
+Error: cannot fetch   LIST_DL1       00000501
+Error: cannot clos vc LIST_DL1       00000501
+================= [ LECTURA  BASE  DATOSSCORE    DESARROLLO  ] =================
+
+
+
+
+
+
+
+
+
+
+
+* Rejected - OPT
+   424     end-exec.
+* 801-S************                                                    (   0)**
+**    External Compiler Module message
+**    DB0100 SQL4946N  The cursor or statement name "VCURS" is not defined.
+   447        end-exec
+* 801-S***************                                                 (   8)**
+**    External Compiler Module message
+**    DB0100 SQL4946N  The cursor or statement name "VCURS" is not defined.
+cob32: error(s) in compilation: /d/iccol/desarrollo/fuentes/LEESCORE.CBL
