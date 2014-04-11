@@ -1,0 +1,23 @@
+      *BDSCORES.FD.v.01.0001
+      **************************************************************
+      * ARCHIVO QUE MANTIENE LOS SCORES POR IDENTIFICACION POR MES
+      * DE UNA AÑO COMPLETO.
+      **************************************************************
+       FD BDSCORES.
+       01 REG-BDSCORES.
+          02 LLAVE-BDSCORES.
+             03 TIPIDE-BDSCORES     PIC 9.
+             03 NUMIDE-BDSCORES     PIC 9(11).
+          02 VECMES-BDSCORES OCCURS 12 TIMES.
+             03 ACIERTA-BDSCORES       PIC 9(03).
+             03 BASICO-BDSCORES        PIC 9(03).
+             03 ACIERTAPLUS-BDSCORES   PIC 9(03).
+             03 FILLER-BDSCORES        PIC 9(09).
+REMARK*REGISTRO DE CONTROL SOBRE ACTUALIZACION DE CADA SCORE HISTORICO
+       01 REG-CONTROL-BDSCORES REDEFINES REG-BDSCORES.
+          02 LLAVE-CONTROL-BDSCORES    PIC 9(12). *> ALL 9
+          02 VECMES-CONTROL-BDSCORES OCCURS 12 TIMES.
+             03 ACIERTA-CONTROL-BDSCORES       PIC 9(03). *> 1 =ACTUALIZADO
+             03 BASICO-CONTROL-BDSCORES        PIC 9(03). *> 1 =ACTUALIZADO
+             03 ACIERTAPLUS-CONTROL-BDSCORES   PIC 9(03). *> 1 =ACTUALIZADO
+             03 FILLER-CONTROL-BDSCORES        PIC 9(09).

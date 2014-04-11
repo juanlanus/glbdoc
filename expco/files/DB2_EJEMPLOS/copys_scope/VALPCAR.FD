@@ -1,0 +1,14 @@
+******* VALPCAR-fd.v03.0001
+   **** VALPCAR.v03.001
+REMARK*Parametros de campos del maestro resumido ampliado
+REMARK*Cartera. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPCAR.
+       01  REG-VALPCAR.
+           03 NUM-CAMPO-VALPCAR                PIC 9(2).
+           03 NUM-CALIF-VALPCAR                PIC 9(2).
+           03 POR-PESO-VALPCAR                 PIC 99V99.
+           03 NUM-GRUPO-VALPCAR                PIC 9.
+           03 IND-ACTUALIZA-VALPCAR            PIC 9.
+           03 IND-VALIDO-VALPCAR               PIC 9.
+           03 FILLER-VALPCAR                   PIC X(30).

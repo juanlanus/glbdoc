@@ -1,0 +1,80 @@
+      * ICBCHK.-FD.v.0009
+      * MAESTRO QUE ALMACENA LAS CUENTAS CORRIENTES Y CUENTAS DE AHORRO
+      * REPORTADAS POR LOS DIFERENTES SUSCRIPTORES
+022400*----------------------------------------------------------------*
+REMARK******************************************************************
+REMARK* VHF0005     * DATCIU - SE REDEFINE  EL CAMPO ART15 CON EL      *
+REMARK* VICTOR HUGO *          NOMBRE IND-MODIFICACION YA QUE SERA     *
+REMARK* FORERO      *          UTILIZADO PARA INDICAR EL ESTADO DE UNA *
+REMARK* MAY.26/2003 *          MODIFICACION A LA CUENTA. TAMBIEN SE    *
+REMARK* F.CUADROS C.*          REDEFINE EL CAMPO RECLAMO PARA UTILIZAR *
+REMARK*             *          SU PRIMER DIGITO IND-RECLAMO COMO       *
+REMARK*             *          INDICADOR DEL ESTADO DE UN RECLAMO A LA *
+REMARK*             *          CUENTA. EL ESPACIO RESTANTE SE DEJA     *
+REMARK*             *          DISPONIBLE PARA OTROS DOS INDICADORES   *
+REMARK******************************************************************
+REMARK* FAC0006     * REGLOC - SE ABRE EL CAMPO FILLER-RECLAMO-ABD06 EN*
+REMARK* F.CUADROS C.*          DOS CAMPOS: REG-LOCK-ABD06 PARA INDICAR *
+REMARK*             *          SI EL REGISTRO ESTA CERRADO POR NOVEDAT *
+REMARK* ENE.31/2006 *          (1-SI 0-NO), Y FILLER-RECLAMO-ABD06 QUE *
+REMARK*             *          SE DEJA DISPONIBLE PARA USO FUTURO      *
+REMARK******************************************************************
+REMARK* CAV0007     * NHC001 - CREACION DE NUEVOS CAMPOS RELACIONADOS  *
+REMARK* C. VELASCO  *          CON LA LEY Y CON LA NUEVA HISTORIA DE   *
+REMARK* 04/MAY/2009 *          CREDITO.                                *
+REMARK******************************************************************
+REMARK* CAV0008     * NHC002 - SE CAMBIA FECHA DE NOVEDAD ANTERIOR POR *
+REMARK* C. VELASCO  *          FECHA DE ACTUALIZACION DE VALORES       *
+REMARK* 04/ENE/2010 *                                                  *
+REMARK******************************************************************
+REMARK* GJC0009     * RZN001 - SE CAMBIA FILLER POR RAZON DE BLOQUEO   *
+REMARK* G. JIMENEZ  *          DEBIDO A QUE LOS TIPOS DE BLOQUEO YA    *
+REMARK* OCTUBRE/2010*          SON MÁS DE 10                           *
+REMARK******************************************************************
+
+022500 FD  MAESTRO-CHECK.
+022600*    MASTER FILE OF CHECKING ACCOUNTS, TYPE = 2
+022700 01  COMPLETO-ABD06.
+022800     03  LLAVE-MAES-CHECK.
+022810         05  LLAVE-MAES-CHECK-PRI.
+022900             07  TIPO-ID-ABD06     PIC 9.
+023000             07  NUM-ID-ABD06      PIC 9(11).
+023100         05  LLAVE-MAES-CHECK-ALT.
+023200             07  COD-SUS-ABD06     PIC 9(6).
+023300             07  COD-CTA-ABD06     PIC 99.
+023400             07  NUM-CTA-ABD06     PIC X(18).
+023500     03  IND-BLOQUEO-ABD06         PIC 9     COMP-3.
+023600     03  FECHA-APERT-ABD06         PIC 9(4)  COMP-3.
+023700     03  CALIFIC-ABD06             PIC 9     COMP-3.
+023800     03  TIP-CALIFIC-ABD06         PIC 9     COMP-3.
+023900     03  NOV-REPORT-ABD06          PIC 99    COMP-3.
+024000     03  FEC-NOVEDAD-ABD06         PIC 9(4)  COMP-3.
+024100     03  NUM-EMBARGO-ABD06         PIC 99    COMP-3.
+024200     03  FEC-ULT-EMB-ABD06         PIC 9(4)  COMP-3.
+024300     03  ADJETIVO-ABD06            PIC 9     COMP-3.
+024400     03  FEC-ADJETIVO-ABD06        PIC 9(4)  COMP-3.
+024500     03  ART15-ABD06               PIC 9     COMP-3.
+DATCIU     03  IND-MODIFICACION-ABD06    PIC 9     COMP-3               VHF0005
+DATCIU         REDEFINES                 ART15-ABD06.                   VHF0005
+024600     03  RECLAMO-ABD06             PIC 9(5)  COMP-3.
+DATCIU     03  RECLAMO-ABD06-RR          REDEFINES RECLAMO-ABD06        FAC0005
+DATCIU                                   PIC 9(3).                      FAC0005
+DATCIU     03  RECLAMO-ABD06-R           REDEFINES RECLAMO-ABD06.       VHF0005
+DATCIU         05 IND-RECLAMO-ABD06      PIC 9(01).                     VHF0005
+REGLOC         05 REG-LOCK-ABD06         PIC 9(01).                     FAC0006
+REGLOC         05 FILLER-RECLAMO-ABD06   PIC 9(01).                     FAC0006
+
+           03  CONSECUTIVO-ABD06         PIC 99    COMP-3.              VMATCH
+      *    03  FILLER-ABD06              PIC X(8).                      AMPLIA
+           03  OFICINA-ABD06             PIC X(15).                     AMPINF5
+           03  CIUDAD-ABD06              PIC X(6).                      AMPINF5
+********   03  FILLER-ABD06              PIC X(9).                      FAC0004
+           03  FEC-NOVANT-ABD06          PIC 9(4) COMP-3.               FAC0004
+NHC002     03  FECHA-ACTUALIZ-VALOR-ABD06  PIC 9(4) COMP-3              CAV0008
+NHC002         REDEFINES FEC-NOVANT-ABD06.                              CAV0008
+           03  NOVANT-ABD06              PIC 9(2) COMP-3.               FAC0004
+NHC001*    03  FILLER-ABD06              PIC X(4).                      CAV0007
+NHC001     03  IND-SOBREGIRO-ABD06       PIC 9(1).                      CAV0007
+NHC001     03  COD-EST-TITUL-ABD06       PIC 9(1).                      CAV0007
+NHC001     03  CALIFICACION-ABD06        PIC 9(1).                      CAV0007
+RZN001     03  RAZON-BLOQUEO-ABD06       PIC X(1).                      GJC0009

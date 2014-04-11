@@ -1,0 +1,20 @@
+******* ACTPCAR-fd.v.0001
+   **** EST056.v.01.001
+REMARK*Parametros matriz de estados vs. novedades para cartera
+REMARK*Proceso de validacion y actualizacion
+REMARK*El campo num-mora-corr contiene numero a asignar en corrimientos
+REMARK*El campo ind-hist indica si el estado aplica a historico
+REMARK*El campo ind-camb indica si el registro cambia si llega el mismo
+REMARK*estado
+REMARK*El campo ind-valr indica si el estado aplica para valores
+036300*----------------------------------------------------------------*
+       FD  ACTPCAR.
+       01  REG-ACTPCAR.
+           03 NUM-NOVEDAD-ACTPCAR OCCURS 30 PIC X(2).
+           03 CALIFIC-ACTPCAR               PIC X.
+           03 NUM-MORA-CORR-ACTPCAR         PIC X.
+           03 IND-HIST-ACTPCAR              PIC X.
+           03 IND-CAMB-ACTPCAR              PIC X.
+           03 IND-VALR-ACTPCAR              PIC X.
+           03 FILLER                        PIC X(2).
+           03 DES-ESTADO-ACTPCAR            PIC X(14).

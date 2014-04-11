@@ -1,0 +1,754 @@
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   1
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL
+* Options: int("TESTPGM.int") anim csi verbose nolist sourceasm endp
+*          list("TESTPGM.lst")
+     1$set mf
+     2$SET LIST SETTING
+* Setting: NOACCEPTREFRESH NOADV ALIGN"8" ALPHASTART"1" NOALTER NOAMODE ANIM
+*          NOANIMPREP ANS85 NOAPOST NOAREACHECK ARITHMETIC"MF" ASSIGN"DYNAMIC"
+*          NOASSIGN-PRINTER NOAUTOLOCK NOBELL NOBOUND NOBRIEF NOBS2000 BWZSTAR
+*          NOBYTEMODEMOVE CALLFH"EXTFH" NOCALLMCS NOCALLRECOVERY CALLSORT
+*          "EXTSM" CANCEL CANCELLBR NOCHANGEMESSAGE CHARSET"ASCII" CHECKDIV
+*          "ANSI" NOCHECKREFMOD NOCICS CICS-CPY NOCICSOPTIMIZE NOCMPR2
+*          NOCOBFSTATCONV NOCOBIDY NOCOBOL370 COBOLDIR COMP COMP-5"2" COMP-6
+*          "2" NOCOMS85 CONFIRM NOCONVERTRET CONVSPACE COPYEXT",cbl,cpy"
+*          NOCOPYLBR COPYLIST COPYLISTCOMMENT"1" CSI CURRENCY-SIGN"36"
+*          CURRENT-DATE"MMDDYY" NODATA DATACOMPRESS"0" NODATA-CONTEXT DATE
+*          DBCHECK DBCS"3" NODBCSSOSI DBSPACE DE-EDIT"2" DEFAULTBYTE"32"
+*          NODEFAULTCALLS DETECTLOCK NODG DIALECT"MF" NODIRECTIVES-IN-COMMENTS
+*          NODOSVS NODPCINSUBSCRIPT DYNAM NOEARLY-RELEASE ECHO NOECHOALL
+*          NOEDITOR ENSUITE"0" NOENTCOBOL ERRFORMAT"1" ERRLIST"EMBED" NOERRQ
+*          FASTSORT FCD3 NOFCDREG NOFDCLEAR NOFILESHARE FILETYPE"0" NOFLAG
+*          NOFLAGAS NOFLAGCD NOFLAGEUC NOFLAGMIG NOFLAGQ FLAGSINEDIT NOFLAGSTD
+*          NOFOLDCALLNAME NOFOLDCOPYNAME FORM"60" NOFP-ROUNDING
+*          NOHOSTARITHMETIC NOHOSTCONTZERO NOHOST-NUMCOMPARE NOHOST-NUMMOVE
+*          NOHOSTFD NOHOSTRW NOIBM-MS NOIBMCOMP IDXFORMAT"0" NOILGEN
+*          IMPLICITSCOPE NOINDD INFORETURN"0" NOINITCALL INITPTR INT
+*          "TESTPGM.int" INTDATE"ANSI" INTLEVEL"5" IOCONV NOISO2002 NOIXNLSKEY
+*          NOIXNUMKEY KEEP-INT KEYCHECK KEYCOMPRESS"0" NOLIBRARIAN
+*          NOLINE-COUNT LIST LISTPATH"" LISTWIDTH"80" LITVAL-SIZE"4" LOCKTYPE
+*          "0" NOMAPNAME NOMAXERROR METHODDEFAULT"REFERENCE" MF"15" MFCOMMENT
+*          NOMOVELENCHECK NOMS NOMVS NATIVE"ASCII" NONATIVEFLOATINGPOINT
+*          NONCHAR NONEWBASENAME NONLS NSYMBOL"DBCS" NOODOOSVS NOODOSLIDE
+*          NOOLDBLANKLINE NOOLDCOPY NOOLDINDEX NOOLDNEXTSENTENCE NOOLDREADINTO
+*          NOOLDSTRMIX OOCTRL"-C-E-G-P+Q+R-S+W" OPTIONAL-FILE NOOS390 OSEXT""
+*          NOOSVS NOOUTDD P64 NOPANVALET PERFORM-TYPE"MF" NOPREPLIST
+*          NOPREPROCESS NOPRINT-EXT NOPROFILE NOPROGID-COMMENT
+*          NOPROGID-INT-NAME NOPROTECT-LINKAGE PROTOTYPE"RELAXED" QUAL
+*          QUALPROC NOQUERY QUOTE NORAWLIST NORDW RECMODE"F" NOREENTRANT NOREF
+*          NOREFNO REMAINDER"1" REPORT-LINE"256" RESEQ NORETRYLOCK REWRITE-LS
+*          NORM RTNCODE-SIZE"8" NORWHARDPAGE NOSAA SEG NOSEQCHK SEQUENTIAL
+*          "RECORD" NOSERIAL SETTING"LINE" NOSHAREOUTDD NOSHOW-DIR SIGN"ASCII"
+*          NOSIGNDISCARD NOSIGNFIXUP SORTTYPE"DFSORT" SOURCEFORMAT"FIXED"
+*          SOURCETABSTOP"8" NOSPZERO NOSSRANGE STDERR NOSTICKY-LINKAGE
+*          NOSTICKY-PERFORM SUPFF SWITCHTYPE"1" SYMBSTART"1" SYSPUNCH"132"
+*          TERMPAGE TIME NOTRACE TRUNC NOTRUNCCALLNAME NOTRUNCCOPY TRUNCINC
+*          "10" UNICODE"NATIVE" VERBOSE NOVSC2 WARNING"1" NOWB NOWB2 NOWB3
+*          WEBSERVER"CGI" NOWRITELOCK NOWRITETHRU NOXOPEN NOXREF
+*          NOZEROLENGTHFALSE NOZEROSEQ NOZWB
+     3*TESTPGM.01.0001
+     4 IDENTIFICATION DIVISION.
+     5 PROGRAM-ID.    TESTPGM.
+     6******************************************************************
+     7* Programa de prueba: lee un archivo con IDs (tipo y numero), y
+     8* con cada ID lee el registro relacionado del archivo SCODAPJA
+     9******************************************************************
+    10******************************************************************
+    11 AUTHOR. GLOBANT.
+    12 DATE-WRITTEN.
+    13 DATE-COMPILED. 10-Apr-14 11:16.
+    14 CONFIGURATION SECTION.
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   2
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL
+    15 SOURCE-COMPUTER. MICROFOCUS.
+    16 OBJECT-COMPUTER. MICROFOCUS.
+    17 INPUT-OUTPUT SECTION.
+    18 FILE-CONTROL.
+    19
+    20*******************************************************************
+    21* ARCHIVO CON UNA IDENTIFICACION DE PJ A POR REGISTRO
+    22*******************************************************************
+    23     SELECT IDSPJA
+    24            ASSIGN TO DISK TITLE-IDSPJA
+    25*           ASSIGN TO DISK "Z:\DATACREDITO\DB2\idspja.txt"
+    26            ORGANIZATION IS LINE SEQUENTIAL
+    27            ACCESS MODE IS SEQUENTIAL
+    28            FILE STATUS IS COD-RETORNO-IDSPJA.
+    29
+    30*******************************************************************
+    31*    COPY SCODAPJA.FS.
+    32            SELECT SCODAPJA
+    33                   ASSIGN TO DISK TITLE-SCODAPJA
+    34*                  ASSIGN TO DISK "Z:\DATACREDITO\DB2\SCODAPJA"
+    35                   ORGANIZATION IS INDEXED
+    36                   ACCESS MODE IS DYNAMIC
+    37                   RECORD KEY IS LLAVE-SCODAPJA
+    38                   FILE STATUS IS COD-RETORNO-SCODAPJA.
+    39            SELECT SECUENCIAL-SALIDA
+    40                   ASSIGN TO DISK  SEC-SAL-TITLE
+    41*                  ASSIGN TO DISK "Z:\DATACREDITO\DB2\salscore.txt"
+    42                   ORGANIZATION IS LINE SEQUENTIAL
+    43                   ACCESS MODE IS SEQUENTIAL
+    44                   FILE STATUS IS COD-RETORNO-SALIDA
+    45                   LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+    46
+    47 DATA DIVISION.
+    48 FILE SECTION.
+    49
+    50**************************************************************
+    51* Lista de las identificaciones de los registros de SCODAPJA
+    52* que debe leer este programa
+    53**************************************************************
+    54 FD IDSPJA.
+    55 01 REG-IDSPJA.
+    56    02 TIP-ID-IDSPJA              PIC 9(01).
+    57    02 NUM-ID-IDSPJA              PIC 9(11).
+    58
+*   59     COPY SCODAPJA.FD.
+    60*SCODAPJA.FD.v.01.0001
+    61**************************************************************
+    62* ARCHIVO QUE MANTIENE LOS SCORES POR IDENTIFICACION POR MES
+    63* DE UNA A—O COMPLETO.
+    64**************************************************************
+    65 FD SCODAPJA.
+    66 01 REG-SCODAPJA.
+    67    02 LLAVE-SCODAPJA.
+    68       03 TIPIDE-SCODAPJA     PIC 9.
+    69       03 NUMIDE-SCODAPJA     PIC 9(11).
+    70    02 INORMACION-SCODAPJA.
+    71       03 FECHA-SCODAPJA         PIC X(08).
+    72       03 SCORE-SCODAPJA         PIC 9(03).
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   3
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/SCODAPJA.FD
+    73       03 EXCLUSION-SCODAPJA     PIC 9(02).
+    74       03 SEGMENTO-SCODAPJA      PIC 9(01).
+    75       03 FILLER-SCODAPJA        PIC 9(12).
+    76
+    77     FD SECUENCIAL-SALIDA.
+    78     01 REG-SEC-SAL.
+    79        02 SAL-TIP-ID         PIC X(01).
+    80        02 SAL-NUM-ID         PIC X(11).
+    81        02 SAL-FECHA          PIC X(08).
+    82        02 SAL-SCORE          PIC X(03).
+    83        02 SAL-EXCLUSION      PIC X(02).
+    84        02 SAL-SEGMENTO       PIC X(01).
+    85
+    86 WORKING-STORAGE SECTION.
+    87
+    88*** PARAMETROS
+    89***************
+    90*** DE ENTRADA
+    91
+    92*** VARIABLES GENERALES
+    93***********************
+    94 01 COD-RETORNO-IDSPJA           PIC XX VALUE SPACE.
+    95 01 COD-RETORNO-SCODAPJA         PIC XX VALUE SPACE.
+    96 01 COD-RETORNO-SALIDA           PIC XX VALUE SPACE.
+    97 01 IND-IDSPJA                   PIC 9(01) VALUE ZEROS.
+    98 01 IND-SCODAPJA                 PIC 9(01) VALUE ZEROS.
+    99 01 TITLE-IDSPJA                 PIC X(80)
+   100                                 VALUE "$TEMPORALES/SCOREENT".
+   101 01 SEC-SAL-TITLE                PIC X(80)
+   102                                 VALUE "$TEMPORALES/SCORESAL".
+   103
+   104*** VARIABLES TIPO REGISTRO
+   105****************************
+   106
+   107*** FECHAS
+   108***********
+   109
+   110*** INDICADORAS
+   111****************
+   112
+   113*** CONSTANTES
+   114***************
+   115
+   116*** CONTADORES
+   117***************
+   118 01  W-LEIDOS-IDSPJA             PIC 9(12) VALUE ZERO.
+   119 01  W-LEIDOS-SCODAPJA           PIC 9(12) VALUE ZERO.
+   120 01  W-LEIDOS-SCODAPJA-IK        PIC 9(12) VALUE ZERO.
+   121 01  W-GRABADOS                  PIC 9(12) VALUE ZERO.
+   122 01  W-EDIT-CONTADOR             PIC ZZZ,ZZZ,ZZZ,ZZZ.
+   123
+   124*** ARREGLOS
+   125*************
+   126
+   127*** COPYS
+   128**********
+*  129  COPY ICFILE.WS.
+   130* ICFILE-WS.v.0042.
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   4
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   131* COPY PARA DIRECCIONAR LOS ARCHIVOS.
+   132*****************************************************************
+   133* RMB0008     * SE ADICIONA NOMBRE DE ARCHIVO DE BASE DE DATOS
+   134*R.MARTINEZ   * UNIVERSAL.
+   135******************************************************************
+   136* VHF0009     * SE ADICIONA TABLA DE CIIUS                       *
+   137* VICTOR HUGO *                                                  *
+   138* FORERO      *                                                  *
+   139* DIC.01/2000 *                                                  *
+   140******************************************************************
+   141* VHF0010     * SE ADICIONAN COPYS PARA MANEJOS DE NOMBRES DE :  *
+   142* VICTOR HUGO * NOMCCB - CAMARA DE COMERCIO DE BOGOTA            *
+   143* FORERO      * NOMREG - REGISTRADURIA                           *
+   144* SEP.10/2001 * NOMDAS - DAS                                     *
+   145*             * NMDIAN - DIAN                                    *
+   146******************************************************************
+   147* VHF0011     * SE ADICIONAN NOMBRES DE ARCHIVO DE NOMBRES DE    *
+   148* VICTOR HUGO * BYINGTON                                         *
+   149* FORERO      *                                                  *
+   150* FEB.18/2002 *                                                  *
+   151******************************************************************
+   152* FAC0012     * BDIEND - SE ADICIONAN RUTAS DE ARCHIVOS PARA     *
+   153* F.CUADROS   * MANEJO DE ENDEUDAMIENTO GLOBAL                   *
+   154* SEP.04/2002 *                                                  *
+   155* GJC0012     * DTCLOG - SE ADICIONA NOMBRE DEL ARCHIVO DE LOG DE*
+   156* G.JIMENEZ   * MODIFIFICACIONES EN LINEA Y DATACIUDADANOS       *
+   157* OCT.29/2002 *                                                  *
+   158******************************************************************
+   159* VHF0013     * ARCHIVOS ASOCIADOS CON SISTEMA DATACIUDADANOS    *
+   160* VICTOR HUGO * DTCING - ARCHIVO DE INGRESOS FALLIDOS            *
+   161* FORERO      * DTCFAL - MUESTRA LA ULTIMA TRANSACCION ANTES DE  *
+   162* ENE.16/2003 *          LAS BAJADAS DEL SISTEMA NORMAL O ANORMAL*
+   163*             * DTCMDF - CONTIENE CONSECUTIVOS DE RADICACION Y   *
+   164*             *          ENTRADA-ENTIDAD                         *
+   165*             * DTCTRA - LOG DE INSTRUCCIONES SQL FALLIDAS       *
+   166* GJC0013     * BDL001 - NOMBRE DE ARCHIVO DE CLIENTES DE DIREC- *
+   167*             *          CIONES Y TELEFONOS                      *
+   168*             * DTCABD - NOMBRE DE ARCHIVO DE MANEJO DE CAMBIOS  *
+   169*             *          EN REGISTROS DE CARTERA Y CUENTAS CO-   *
+   170*             *          RRIENTES CON RECLAMOS VIGENTES          *
+   171******************************************************************
+   172* GJC0014     * DTCAB1 - NOMBRE DE ARCHIVO DE MANEJO DE CAMBIOS  *
+   173* G.JIMENEZ   *          EN REGISTROS DE CARTERA Y CUENTAS CO-   *
+   174* ENE.16/2003 *          RRIENTES CON RECLAMOS VIGENTES AJUSTE EN*
+   175*             *          NOMBRE                                  *
+   176******************************************************************
+   177* FAC0015     * WEB001 - INCLUSION DE NOMBRES DE ARCHIVOS PARA   *
+   178* F.CUADROS C.*          MANEJO DE CLAVES WEB                    *
+   179* FEB.14/2003 *                                                  *
+   180******************************************************************
+   181* FAC0016     * MODBDI - INCLUSION DE NOMBRES DE ESTRUCTURAS DE  *
+   182* F.CUADROS C.*          BDII: BASES DE DATOS DE IDENTIFICACION, *
+   183* MAR.03/2003 *          CON NUEVOS DISENOS.                     *
+   184******************************************************************
+   185* GJC0017     * DTCCOM - CREACION DEL ARCHIVO DE COMENTARIOS DEL *
+   186* G.JIMENEZ   *          SISTEMA DE DATACIUDADANOS.              *
+   187* JUN.05/2003 *                                                  *
+   188* VHF0017     * DTCNHB - DIRECCIONA ARCHIVO DE DIAS NO HABILES   *
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   5
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   189* VICTOR HUGO * ICDACT - SE ADICIONA NOMBRE DE ARCHIVO DE        *
+   190* FORERO      *          ESTADISTICAS DE SUSCRIPTORES ICDACT     *
+   191******************************************************************
+   192* FAC0018     * MODDIR-  INCLUSION DE NOMBRES DE ESTRUCTURAS DE  *
+   193* F.CUADROS C.*          ACTALOG Y VALVEST EN NUEVA RUTA         *
+   194* JUL.09/2003 *          en $TRABAJO/logs                        *
+   195******************************************************************
+   196* GJC0019     * CONRAZ-  INCLUSION DE NOMBRE DE ESTRUCTURA CONRAZ*
+   197* G.JIMENEZ  .*                                                  *
+   198* SEP.11/2003 *                                                  *
+   199******************************************************************
+   200* GJC0020     * FRAUDE - INCLUSION DE MANEJO DE ARCHIVO FRALOG   *
+   201* G.JIMENEZ  .*                                                  *
+   202* OCT.14/2004 *                                                  *
+   203******************************************************************
+   204* GJC0021     * PRODUC - SE INCLUYE MANEJO DE ARCHIVO DE         *
+   205* G.JIMENEZ   *          PRODUCTOS                               *
+   206* ABR/2005    *                                                  *
+   207******************************************************************
+   208* FAC0022     * FRAUD2 - SE INCLUYE MANEJO DE ARCHIVO DE         *
+   209* F.CUADROS   *          FRAINQ.DAT                              *
+   210* JUN.23/2005 *                                                  *
+   211******************************************************************
+   212* FAC0023     * REPMIC - SE INCLUYE TITULO DE ARCHIVO            *
+   213* F.CUADROS   *          HISTORICO PARA MICROCREDITO             *
+   214* SEP.02/2005 *                                                  *
+   215******************************************************************
+   216* FAC0023     * SUPT08 - INCLUSION DE TITULO DE MAESTRO DE       *
+   217* F.CUADROS   *          LA SUPERBANCARIA POR CAMBIO A FORMATO   *
+   218* OCT.28/2005 *          TIPO 8                                  *
+   219*             *                                                  *
+   220******************************************************************
+   221* FAC0024     * LOGCAL - INCLUSION DE RUTA DE ARCHIVO DE LOGS    *
+   222* F.CUADROS   *          PARA PROCESOS DEL AREA DE CALIDAD.      *
+   223* OCT.17/2006 *                                                  *
+   224******************************************************************
+   225* CAV0025     * NVAPRE - INCLUSION DE RUTA DE ARCHIVO DE         *
+   226* F.CUADROS   *          PREGUNTAS GRUPALES PARA FRAINQGR        *
+   227* SEP.11/2007 *                                                  *
+   228******************************************************************
+   229* FLT0026     * BDSCOR - INCLUSION DE RUTA DE ARCHIVO DE         *
+   230* F.LOZANO T. *          SCORES MENSUALES.                       *
+   231* OCT.31/2007 *                                                  *
+   232******************************************************************
+   233* CAV0027     * LOGCAL - INCLUSION DE RUTA DE ARCHIVO DE LOG     *
+   234* C.VELASCO   *          DE LOS PROCESOS DE CALIDAD EJECUTADOS   *
+   235* MAR.05/2009 * LOGDRP - RUTA ARCHIVO PARA ACTUALIZAR DRP        *
+   236******************************************************************
+   237* EAL0028     * ICMVLR - INCLUSION DE RUTA DE ARCHIVOS ICMVLR    *
+   238* E.ALVAREZ   *          PARA PROCESAR 48 MESES DEL ARCHIVO      *
+   239* JUN.19/2009 *                                                  *
+   240******************************************************************
+   241* RGH0029     * MOD029 - MODIFICAR LONGUITUD DE VARIABLES        *
+   242* R.GALVIS    *          MAES-DIRECTORY ARCHIVOS ICMVLR          *
+   243* JUL.09/2009 *          DE 17 A 16 POSICIONES                   *
+   244*             * CHEQ01 - SE INCLUYE DEFINICION DE MAESTRO DE     *
+   245*             *          CHEQUES                                 *
+   246******************************************************************
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   6
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   247* VHF0030     * ICMCLN - INCLUSION DE RUTA DE NUEVO ARCHIVO DE   *
+   248* V.FORERO    *          CLIENTES                                *
+   249* SEP.28/2009 *                                                  *
+   250******************************************************************
+   251* CAV0031     * NHC002 - INCLUSION DE RUTA DE NUEVO ARCHIVO DE   *
+   252* C.VELASCO   *          MARCAS PRIVADAS PARA TARJETAS           *
+   253* OCT.09/2009 *                                                  *
+   254******************************************************************
+   255* RGH0032       * MOD032 - INCLUIR ARCHIVOS DE RECONOCER +       *
+   256* R. GALVIS H.  *          BDLDIRACE                             *
+   257* ENE. 01/2010  *          BDLMAIEXC                             *
+   258* INTERSCHEMES. *          BDLTELEXC                             *
+   259******************************************************************
+   260* LAG0033       * SCOPRE - INCLUIR ARCHIVO SCOREPREC             *
+   261* AGO. 02/2010  *          BDLMAIEXC                             *
+   262* G.DESARROLLO  *          BDLTELEXC                             *
+   263* GJC0033       * FRZMYR - SE INCLUYE MANEJO DE ARCHIVO DE DES-  *
+   264* G.JIMENEZ     *          PLAZADOS Y SECUESTRADOS - FUERZA MA-  *
+   265* OCT./2010     *          YOR                                   *
+   266******************************************************************
+   267* GJC0034       * BDANOM - SE INCLUYE MANEJO DE ARCHIVO DE POR-  *
+   268* G.JIMENEZ     *          CENTAJE DE NOMBRES Y APELLIDOS BDANOM *
+   269* FEB./2011     *                                                *
+   270******************************************************************
+   271* CAV0035       * AJDANE - SE INCLUYE MANEJO DE ARCHIVO DANE DE  *
+   272* C.VELASCO     *          CIUDADES,DEPARTEAMENTOS Y CABECERAS O *
+   273* ABR./2011     *          CENTROS POBLADOS (DVPDANE)            *
+   274******************************************************************
+   275* CAV0036       * CARIND - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+   276* C.VELASCO     *          CARACTERISTICAS USA PRECALCULADAS     *
+   277* MAY./2011     *          TITLE-CARACT-IND                      *
+   278******************************************************************
+   279* FARF037       * FRABDU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+   280* F.RODRIGUEZ   *          DE DATOS UNIVERSAL DE PREGUNTAS       *
+   281* JUN.22/2011   *                                                *
+   282******************************************************************
+   283* CAV0038       * AJCIIU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+   284* C.VELASCO.    *          HISTORICA DE CODIGOS CIIU Y ACTIVIDAD *
+   285* SEP.21/2011   *          ECONOMICA                             *
+   286******************************************************************
+   287* CAV0039       * MCREHI - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+   288* C.VELASCO     *          ICMCREH QUE CONTIENE EL HISTORICO     *
+   289* JUN./2011     *          DE REGISTRO CERRADOS > 5 A—OS         *
+   290******************************************************************
+   291* CAV0040       * NUECMP - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+   292* C.VELASCO     *          ICMCONTTRJ  CONTIENE LA RELACION DE   *
+   293* 09/ABR./2013  *          CONTRATO-TARJETA PARA TIPO CTA = 02.  *
+   294******************************************************************
+   295* GJC0041       * VALOR1 - REQUERIMIENTO 15452 CREACION PRODUCTO *
+   296* G.JIMENEZ     *          VALORA. DEFINICION DE ARCHIVO QUE MA- *
+   297* 20/SEP./2013  *          NEJA LOS COBROS EN 2 MOMENTOS, UN     *
+   298*               *          QUE COBRA Y LOS OTROS NO
+   299******************************************************************
+   300* GLB0042       * EVID03 - MEJORAS SISTEMA EVIDENTE              *
+   301* GLOBANT       *          PROD00006585                          *
+   302* NOV-2013      * SPRINT3                                        *
+   303******************************************************************
+   304* JJM0043       * SCORPJ - SE INCLUYE UN NUEVO TITLE PARA EL     *
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   7
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   305* J. MELGAREJO  *          SCORE PJ.                             *
+   306* MAR-2014      *                                                *
+   307******************************************************************
+   308*
+   309 01  FILE-TITLES.
+   310     05  BDUUNI-TITLE        PIC X(80) VALUE "$BDU/BDUUNI".       RMB0008
+   311     05  NOMB-APEL-TITLE     PIC X(80) VALUE "$DATABASE/ICBNAP".
+   312     05  CLAVE-TITLE         PIC X(80) VALUE "$DATABASE/ICBCLA".
+   313     05  TERM-TITLE          PIC X(80) VALUE "$DATABASE/ICBTER".
+   314     05  MAES-PERSON-TITLE   PIC X(80) VALUE "$DATABASE/ICMPER".
+   315     05  MAES-CHECK-TITLE    PIC X(80) VALUE "$DATABASE/ICMCHK".
+   316     05  MAES-CREDIT-TITLE   PIC X(80) VALUE "$DATABASE/ICMCRE".
+   317     05  MAES-MICROC-TITLE   PIC X(80) VALUE "$DATABASE/ICMMCR".  DLM0001
+   318     05  MAES-ICMCHQ-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHQ".  GJC0029
+   319     05  INDEXADO-TITLE      PIC X(80) VALUE "$DATABASE/ICBCON".
+   320     05  SECUENCIAL-TITLE    PIC X(80) VALUE "$DATABASE/ICBTCO".
+   321     05  SUSCRIPTOR-TITLE    PIC X(80) VALUE "$DATABASE/ICBSUS".
+   322     05  ARCHNITS-TITLE      PIC X(80) VALUE "ICDIAN".
+   323     05  ARCHIVO-CLIENTE     PIC X(80) VALUE "$DATABASE/ICMCLI".
+   324     05  MAES-ICMCLN-TITLE   PIC X(80) VALUE "$DATABASE/ICMCLN".  VHF0030
+   325     05  ARCHIVO-PREPAGOS    PIC X(80) VALUE "$DATABASE/ICMPRE".
+   326     05  ARCHIVO-USUARIOS    PIC X(80) VALUE "$DATABASE/ICMUSU".
+   327     05  TITLE-SCODTB        PIC X(80) VALUE "$DATABASE/SCODTB".
+   328     05  TITLE-BDIRMAE1      PIC X(80) VALUE "$DATABASE/BDIRMAE1".
+   329     05  TITLE-BDIRMAE2      PIC X(80) VALUE "$DATABASE/BDIRMAE2".
+   330     05  TITLE-BDIRMAE3      PIC X(80) VALUE "$DATABASE/BDIRMAE3".
+   331     05  TITLE-BDIRMAE4      PIC X(80) VALUE "$DATABASE/BDIRMAE4".
+   332     05  TITLE-BDIRCTR       PIC X(80) VALUE "$DATABASE/BDIRCTR".
+   333     05  TITLE-BDIMHIS       PIC X(80) VALUE "$DATABASE/BDIMHIS". FAC0023
+   334     05  BDAPRVTR-TITLE      PIC X(80) VALUE "$DATABASE/BDAPRVTR".CAV0031
+   335     05  TITLE-DTCABD.
+   336         07 FILLER           PIC X(13) VALUE "$DATOS/DTCABD".     GJC0014
+   337         07 ANOMESDIA-DTCABD PIC 9(08) VALUE ZEROS.               GJC0014
+   338     05  BDLCLI-TITLE        PIC X(80) VALUE "$DATABASE/BDLCLI".  GJC0013
+   339     05  SCOREPREC-TITLE     PIC X(80) VALUE "$DATOS/SCOREPREC".  LAG0033
+   340     05  ARCHIVO-LOGS        PIC X(80) VALUE
+   341         "/ic/datacred/desarrollo/logs/ICL325".
+   342     05  ARCHIVO-TEMPORAL    PIC X(80) VALUE
+   343                                 "$TEMPORALES/TEMPORAL".
+   344     05  ESTAD-CADUC         PIC X(80) VALUE
+   345                                 "$TEMPORALES/ESTCAD.DAT".
+   346     05  MATRIZ-CADUC        PIC X(80) VALUE
+   347                                 "$DATABASE/ICTCAD".
+   348     05  ETQ-CIN             PIC X(80) VALUE
+   349                                 "$TEMPORALES/ICINCO.DAT".
+   350     05  RECLACOM-TITLE      PIC X(80) VALUE "$DATABASE/ICMRCM".
+   351     05  RECLAMOS-TITLE      PIC X(80) VALUE "$DATABASE/ICMRCL".
+   352     05 MAESTRO-FACUCLI      PIC X(80) VALUE "$DATABASE/FACUCLI".
+   353     05 TITLE-FACUCLP        PIC X(80) VALUE "$DATABASE/FACUCLP".
+   354     05 TITLE-FACUAUT        PIC X(80) VALUE "$DATABASE/FACUAUT".
+   355     05 TITLE-FACULOG        PIC X(80) VALUE "$DATABASE/FACULOG".
+   356     05 TITLE-FACUPAR        PIC X(80) VALUE
+   357                                 "$DATABASE/FACUPAR.DAT".
+   358     05 MAES-ICMCREH-TITLE   PIC X(80) VALUE "$DATABASE/ICMCREH". CAV0039
+   359     05 MAES-ICMCHKH-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHKH". CAV0039
+   360     05 MAES-ICMCHQH-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHQH". CAV0039
+   361
+   362     05 TITLE-CIIU          PIC X(80) VALUE "$DATABASE/ICTCIIU".  VHF0009
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   8
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   363     05 TITLE-BDINCCB       PIC X(80) VALUE "$ICREGIS/BDINCCB".   VHF0010
+   364     05 TITLE-BDINREG       PIC X(80) VALUE "$ICREGIS/BDINREG".   VHF0010
+   365     05 TITLE-BDINDAS       PIC X(80) VALUE "$ICREGIS/BDINDAS".   VHF0010
+   366     05 TITLE-BDINDIAN      PIC X(80) VALUE "$ICREGIS/BDINDIAN".  VHF0010
+   367     05 TITLE-CONRAZ        PIC X(80)                             GJC0019
+   368                            VALUE "$DATABASE/CONRAZ.DAT".         GJC0019
+   369     05 TITLE-FRALOG        PIC x(80) VALUE "$DATABASE/FRALOG".   GJC0020
+   370     05 TITLE-FRAINQ        PIC X(80) VALUE                       FAC0022
+   371                            "$DATABASE/FRAINQ.DAT".               FAC0022
+   372     05 TITLE-FRAINQGR      PIC X(80) VALUE                       CAV0025
+   373                            "$DATABASE/FRAINQGR.DAT".             CAV0025
+   374     05 TITLE-BDSCORES.                                           FLT0026
+   375        07 FILLER           PIC X(15) VALUE "$SCORES/BDSCORE".    FLT0026
+   376        07 T-FECHA-PROC     PIC 9(04).                            FLT0026
+   377     05 TITLE-ICBPRO        PIC x(80) VALUE "$DATABASE/ICBPRO".   GJC0021
+   378     05 TITLE-DTRLLA        PIC x(80) VALUE "$DATABASE/DTRLLA".
+   379     05 TITLE-DTCLOG        PIC X(80) VALUE "$DATABASE/DTCLOG".   GJC0012
+   380     05 TITLE-DTCCOM        PIC X(80) VALUE "$DATABASE/DTCCOM".   GJC0017
+   381     05 TITLE-DTCING        PIC X(80) VALUE "$DATABASE/DTCING".   VHF0013
+   382     05 TITLE-DTCFAL        PIC X(80) VALUE "$DATABASE/DTCFAL".   VHF0013
+   383     05 TITLE-DTCMDF        PIC X(80) VALUE "$DATABASE/DTCMDF".   VHF0013
+   384     05 TITLE-DTCTRA        PIC X(80) VALUE "$DATABASE/DTCTRA".   VHF0013
+   385     05 TITLE-BDINBYN       PIC X(80) VALUE "$ICREGIS/BDINBYN".   VHF0011
+   386     05 SI-BDIEMSUP         PIC X(80) VALUE "$DBSUPER/BDIEMSUP".  FAC0012
+   387     05 TITLE-BDIEMSUP      PIC X(80) VALUE "$DBSUPER/BDIESU".    FAC0023
+   388     05 TITLE-UTLESTACT     PIC X(80) VALUE "$DATABASE/UTLESTACT".GLB0042
+   389     05 SI-BDIEENTI         PIC X(80) VALUE "$DBSUPER/BDIEENTI".  FAC0012
+   390     05 SI-BDIEMPER         PIC X(80) VALUE "$DBSUPER/BDIEMPER".  FAC0012
+   391     05 SI-BDIETEMA         PIC X(80) VALUE "$DBSUPER/BDIETEMA".  FAC0012
+   392     05 SI-BDIEAPER         PIC X(80) VALUE "$DBSUPER/BDIEAPER".  FAC0012
+   393     05 SI-BDIEMENT         PIC X(80) VALUE "$DBSUPER/BDIEMENT".  FAC0012
+   394     05 SI-BDIEMOVI         PIC X(80) VALUE "$DBSUPER/BDIEMOVI".  FAC0012
+   395     05 SI-BDIEHSUP         PIC X(80) VALUE "$DBSUPER/BDIEHSUP".  FAC0012
+   396     05 SI-BDIERECL         PIC X(80) VALUE "$DBSUPER/BDIERECL".  FAC0012
+   397     05 SI-BDIEMTOT         PIC X(80) VALUE "$DBSUPER/BDIEMTOT".  FAC0012
+   398     05 NOMBRE-WEB-SAL.                                           FAC0015
+   399        07 NOM-DUE-WEB-SAL PIC X(15) VALUE "$DATOS/WEB-SAL.".     FAC0015
+   400        07 FECHA-WEB-SAL   PIC 9(8).                              FAC0015
+   401     05 NOMBRE-RAS-SAL.                                           FAC0015
+   402        07 NOM-DUE-WEB-SAL PIC X(15) VALUE "$DATOS/RAS-SAL.".     FAC0015
+   403        07 FECHA-RAS-SAL   PIC 9(8).                              FAC0015
+   404     05 NOMBRE-CLAVE-WEB.                                         FAC0015
+   405        07 NOMBRE-WEB-W    PIC X(80) VALUE "$DATABASE/ARCH-WEB".  FAC0015
+   406     05 NOMBRE-RAS-LOG.                                           FAC0015
+   407        07 NOM-RAS-LOG     PIC X(19) VALUE                        FAC0015
+   408                           "$DATOS/WEB-RAS.LOG.".                 FAC0015
+   409        07 FECHA-RAS-LOG   PIC 9(8).                              FAC0015
+   410     05 TITLE-BDIIDIAN     PIC X(80)  VALUE "$DATABASE/BDIIDIAN". FAC0016
+   411     05 TITLE-BDIIREGI     PIC X(80)  VALUE "$ICREGIS/BDIIRE".    FAC0016
+   412     05 TITLE-BDIIDAS      PIC X(80)  VALUE "$DATABASE/BDIIDAS".  FAC0016
+   413     05 TITLE-DTCNHAB      PIC X(80)  VALUE "$DATABASE/DTCNHAB".  VHF0017
+   414     05 TITLE-ICDACT       PIC X(80)  VALUE                       VHF0017
+   415                           "$TEMPORALES/ICDACT.DAT".              VHF0017
+   416     05 NOMBRE-ACTALOG     PIC X(80)  VALUE                       FAC0018
+   417                           "$TRABAJO/logs/ACTALOG".               FAC0018
+   418     05 NOMBRE-VALVEST     PIC X(80)  VALUE                       FAC0018
+   419                           "$TRABAJO/logs/VALVEST.DAT".           FAC0018
+   420     05 NOMBRE-CALIDLOG.                                          CAV0027
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page   9
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/ICFILE.WS)D
+   421        07 NOM-CALIDLOG    PIC X(23)  VALUE                       CAV0027
+   422                           "$TRABAJO/logs/CALIDLOG-".             CAV0027
+   423        07 FCH-CALIDLOG    PIC 9(8).                              CAV0027
+   424     05 NOMBRE-CALIDDRP.                                          CAV0027
+   425        07 NOM-CALIDDRP    PIC X(24) VALUE                        CAV0027
+   426                           "$TEMPORALES/CALIDAD-DRP.".            CAV0027
+   427        07 FCH-CALIDDRP    PIC 9(8).                              CAV0027
+   428     05  MAES-ICMVLR-TITLE.                                       EAL0028
+   429         07 MAES-DIRECTORY1          PIC X(16) VALUE              RGH0029
+   430                                              "$VALORES/ICMVLR-". EAL0028
+   431         07 MAES-FILE1               PIC X(63).                   EAL0028
+   432                                                                  EAL0028
+   433     05  MAES-ICMVLR-TITLE2.                                      EAL0028
+   434         07 MAES-DIRECTORY2          PIC X(16) VALUE              RGH0029
+   435                                              "$VALORES/ICMVLR-". EAL0028
+   436         07 MAES-FILE2               PIC X(63).                   EAL0028
+   437                                                                  EAL0028
+   438     05  MAES-ICMVLR-TITLE3.                                      EAL0028
+   439         07 MAES-DIRECTORY3          PIC X(16) VALUE              RGH0029
+   440                                              "$VALORES/ICMVLR-". EAL0028
+   441         07 MAES-FILE3               PIC X(63).                   EAL0028
+   442                                                                  EAL0028
+   443     05  MAES-ICMVLR-TITLE4.                                      EAL0028
+   444         07 MAES-DIRECTORY4          PIC X(16) VALUE              RGH0029
+   445                                              "$VALORES/ICMVLR-". EAL0028
+   446         07 MAES-FILE4               PIC X(63).                   EAL0028
+   447                                                                  EAL0028
+   448     05  MAES-ICMVLR-TITLE5.                                      EAL0028
+   449         07 MAES-DIRECTORY5          PIC X(16) VALUE              RGH0029
+   450                                              "$VALORES/ICMVLR-". EAL0028
+   451         07 MAES-FILE5               PIC X(63).                   EAL0028
+   452                                                                  EAL0028
+   453     05  MAES-ICMVLR-TITLE6.                                      EAL0028
+   454         07 MAES-DIRECTORY6          PIC X(16) VALUE              RGH0029
+   455                                              "$VALORES/ICMVLR-". EAL0028
+   456         07 MAES-FILE6               PIC X(63).                   EAL0028
+   457     05 TITLE-BDLDIRACE  PIC X(80) VALUE "$DATABASE/BDLDIRACE".   RGH0032
+   458     05 TITLE-BDLMAIEXC  PIC X(80) VALUE "$DATABASE/BDLMAIEXC".   RGH0032
+   459     05 TITLE-BDLTELEXC  PIC X(80) VALUE "$DATABASE/BDLTELEXC".   RGH0032
+   460     05 TITLE-BDANOM     PIC X(80) VALUE "$DATABASE/BDANOM".      GJC0034
+   461     05 TITLE-FRZMYR     PIC X(80) VALUE "$DATABASE/FRZMYR".      GJC0033
+   462     05 TITLE-DVPDANE    PIC X(80) VALUE "$DATABASE/DVPDANE.DAT". CAV0035
+   463     05 TITLE-CARACT-IND PIC X(80) VALUE                          CAV0036
+   464                                   "$DATABASE/CARACTUSA-INDCL".   CAV0036
+   465     05 FRABDU-TITLE     PIC X(25) VALUE                          FARF037
+   466                                 "$VALORES/frabduact/FRABDU".     FARF037
+   467     05 FRABDV-TITLE     PIC X(29) VALUE                          FARF037
+   468                                 "$VALORES/frabduact/FRABDU.NEW". FARF037
+   469     05 MAES-ICMHCIIU-TITLE PIC X(80) VALUE "$DATABASE/ICMHCIIU". CAV0038
+   470     05 MAES-ICMCONTTRJ-TITLE PIC X(80) VALUE                     CAV0040
+   471                                    "$DATABASE/ICMCONTTRJ".       CAV0040
+   472     05 TITLE-ICBCOB     PIC X(16) VALUE "$DATABASE/ICBCOB".      GJC0041
+   473     05 TITLE-SCODAPJA   PIC X(37) VALUE "$DATABASE/SCODAPJA".
+   474******************************************************************
+   475*             COPY AREA DE LOG PARA CONTROL DE TIEMPOS           *
+   476******************************************************************
+*  477  COPY PE-TIME.WS.
+   478*PE-TIME.WS.v.01.0001.
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page  10
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL (/d/iccol/desarrollo/copys/PE-TIME.WS)
+   479*----------------------------------------------------------------*
+   480*
+   481*    COPY  WORKING  PROCESOS ESPECIALES VERSION OCT/2004
+   482*
+   483*----------------------------------------------------------------*
+   484*    COPY AREA DE LOG PARA CONTROL DE TIEMPOS
+   485*----------------------------------------------------------------*
+   486
+   487*-----------------------------------------------------------*
+   488*      VARIABLES DE   LOG  DE EJECUCION
+   489*-----------------------------------------------------------*
+   490 01  W-RETORNO-LOG.
+   491     03 W-STATUS-LOG            PIC  9(02) VALUE ZEROS.
+   492     03 W-ARCHIVO-LOG.
+   493        05 W-ENTIDAD-LOG        PIC  X(03) VALUE SPACES.
+   494        05 W-FILLER-LOG         PIC  X(27) VALUE SPACES.
+   495     03 W-PROGRAMA              PIC  X(20) VALUE SPACES.
+   496     03 W-FECHA-HORA-INI.
+   497        05 W-FECHA-INI          PIC  X(10) VALUE SPACES.
+   498        05 W-HORA-INI           PIC  X(08) VALUE SPACES.
+   499     03 W-FECHA-HORA-FIN.
+   500        05 W-FECHA-FIN          PIC  X(10) VALUE SPACES.
+   501        05 W-HORA-FIN           PIC  X(08) VALUE SPACES.
+   502     03 W-USER-UNIX             PIC  9(06) VALUE ZEROS.
+   503*-----------------------------------------------------------*
+   504*      VARIABLES DE TIEMPO DE EJECUCION
+   505*-----------------------------------------------------------*
+   506 01  FECHAS-LOG.
+   507     03  HORA-SIS               PIC  9(08).
+   508     03  HORA-SIS-R  REDEFINES  HORA-SIS.
+   509         05  HORA-S             PIC  9(02).
+   510         05  MINU-S             PIC  9(02).
+   511         05  SEGU-S             PIC  9(02).
+   512         05  DESE-S             PIC  9(02).
+   513     03  FECHA-S                PIC  9(08).
+   514     03  FECHA-CURRENT-DATE  REDEFINES  FECHA-S.
+   515         05  FECHA-SISTEMA      PIC  X(8).
+   516     03  FECHA-S-R           REDEFINES  FECHA-S.
+   517         05 ANIO-S             PIC  9(04).
+   518         05 ANIO-S-R         REDEFINES  ANIO-S.
+   519            07  ANIO-SIG1      PIC  9(02).
+   520            07  ANIO-SIG2      PIC  9(02).
+   521         05 MESE-S             PIC  9(02).
+   522         05 DIAS-S             PIC  9(02).
+   523     03 FECHA-PG.
+   524        05 ANIO-P              PIC  9(04)     VALUE ZEROS.
+   525        05 SLASH-1             PIC  X(01)     VALUE "/".
+   526        05 MESE-P              PIC  9(02)     VALUE ZEROS.
+   527        05 SLASH-2             PIC  X(01)     VALUE "/".
+   528        05 DIAS-P              PIC  9(02)     VALUE ZEROS.
+   529     03 HORA-PG.
+   530        05 HORA-P              PIC  9(02)     VALUE ZERO.
+   531        05 DOSPUNTO-1          PIC  X(01)     VALUE ":".
+   532        05 MINU-P              PIC  9(02)     VALUE ZERO.
+   533        05 DOSPUNTO-2          PIC  X(01)     VALUE ":".
+   534        05 SEGU-P              PIC  9(02)     VALUE ZEROS.
+   535
+   536******************************************************************
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page  11
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL                          s/PE-TIME.WS)
+   537 PROCEDURE DIVISION.
+   538******************************************************************
+   539 0000-PROGRAMA-PRINCIPAL.
+   540******************************************************************
+   541*0000-PROGRAMA-PRINCIPAL.                                        *
+   542******************************************************************
+   543*
+   544     DISPLAY "                                                "
+   545     DISPLAY "************************************************"
+   546     DISPLAY "* PROGRAMA PRUEBA DE TIEMPO DE LECTURA DE      *"
+   547     DISPLAY "* REGISTROS DEL ARCHIVO SCODAPJA               *"
+   548     DISPLAY "************************************************"
+   549     DISPLAY "*                                              *"
+   550     DISPLAY "*           PROGRAMA : TESTPGM.CBL             *"
+   551     DISPLAY "*                                              *"
+   552     DISPLAY "************************************************"
+   553     DISPLAY "                                                "
+   554     PERFORM 10-CONTROL-TIEMPO
+   555     PERFORM 1000-ABRIR-ARCHIVOS
+   556     MOVE ZEROS             TO IND-IDSPJA
+   557     PERFORM 1001-PROCESO-REGISTRO-IDSPJA
+   558     UNTIL IND-IDSPJA = 1
+   559     PERFORM 1003-MOSTRAR-CONTADORES
+   560     PERFORM 1004-CERRAR-ARCHIVOS
+   561     STOP RUN.
+   562
+   563***************************************************************
+   564*10-CONTROL-TIEMPO
+   565*RUTINA PARA TOMAR LA FECHA DEL SISTEMA
+   566****************************************************************
+   567 10-CONTROL-TIEMPO.
+   568*
+   569     ACCEPT FECHA-S                   FROM DATE
+   570     ACCEPT HORA-SIS                  FROM TIME
+   571     MOVE HORA-S                      TO HORA-P
+   572     MOVE MINU-S                      TO MINU-P
+   573     MOVE SEGU-S                      TO SEGU-P
+   574     MOVE 20                          TO ANIO-SIG1
+   575     MOVE ANIO-S                      TO ANIO-P
+   576     MOVE MESE-S                      TO MESE-P
+   577     MOVE DIAS-S                      TO DIAS-P.
+   578*
+   579     DISPLAY " Fecha Inicio Proceso : " FECHA-PG
+   580     DISPLAY " Hora  Inicio Proceso : " HORA-PG.
+   581*
+   582
+   583******************************************************************
+   584*1000-ABRIR-ARCHIVOS.
+   585* APERTURA DE LOS ARCHIVOS DEL PROGRAMA
+   586******************************************************************
+   587 1000-ABRIR-ARCHIVOS.
+   588     OPEN INPUT IDSPJA
+   589     IF COD-RETORNO-IDSPJA <> "00"
+   590         DISPLAY "Error Abriendo el Archivo IDSPJA "
+   591         COD-RETORNO-IDSPJA
+   592         STOP RUN
+   593     END-IF.
+   594
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page  12
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL                          s/PE-TIME.WS)
+   595     OPEN INPUT SCODAPJA
+   596     IF COD-RETORNO-SCODAPJA <> "00"
+   597         DISPLAY "Error Abriendo el Archivo SCODAPJA "
+   598         COD-RETORNO-SCODAPJA
+   599         STOP RUN
+   600     END-IF.
+   601
+   602     OPEN OUTPUT SECUENCIAL-SALIDA
+   603     IF COD-RETORNO-SALIDA NOT = "00"
+   604        DISPLAY "Error Abriendo el Archivo SECUENCIAL SALIDA"
+   605        COD-RETORNO-SALIDA
+   606        STOP RUN
+   607     END-IF.
+   608
+   609
+   610******************************************************************
+   611*1001-PROCESO-REGISTRO-IDSPJA.
+   612* Lee un registro de IDSPJA con un ID, usa ese ID para leer un
+   613* registro de SCODAPJA y mostrarlo
+   614******************************************************************
+   615 1001-PROCESO-REGISTRO-IDSPJA.
+   616     READ IDSPJA NEXT RECORD
+   617         AT END MOVE 1              TO IND-IDSPJA
+   618     END-READ.
+   619     IF IND-IDSPJA NOT = 1
+   620        ADD 1 TO W-LEIDOS-IDSPJA
+   621        PERFORM 1002-PROCESO-SCODAPJA
+   622     END-IF.
+   623
+   624******************************************************************
+   625*1002-PROCESO-SCODAPJA
+   626* Hay un ID leido en el archivo IDSPJA, hay que leer el registro
+   627* que le corresponde del archivo SCOSAPJA y mostrarlo
+   628******************************************************************
+   629 1002-PROCESO-SCODAPJA.
+   630
+   631     MOVE ZEROS      TO IND-SCODAPJA
+   632     MOVE TIP-ID-IDSPJA    TO TIPIDE-SCODAPJA
+   633     MOVE NUM-ID-IDSPJA    TO NUMIDE-SCODAPJA
+   634     READ SCODAPJA INVALID KEY
+   635          ADD 1 TO    W-LEIDOS-SCODAPJA-IK
+   636          MOVE 1 TO   IND-SCODAPJA
+   637     END-READ
+   638
+   639     IF IND-SCODAPJA NOT = 1
+   640        ADD 1 TO W-LEIDOS-SCODAPJA
+   641        PERFORM 5000-GRABAR-SALIDA
+   642     END-IF.
+   643
+   644
+   645******************************************************************
+   646*5000-GRABAR-SALIDA.
+   647*GRABAR ARCHIVO SECUENCIAL SALIDA CON REGISTROS ENCONTRADOS EN BD
+   648******************************************************************
+   649 5000-GRABAR-SALIDA.
+   650     INITIALIZE REG-SEC-SAL
+   651     MOVE REG-SCODAPJA              TO REG-SEC-SAL
+   652     ADD 1                          TO W-GRABADOS
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:16 Page  13
+* /d/iccol/desarrollo/fuentes/TESTPGM.CBL                          s/PE-TIME.WS)
+   653     WRITE REG-SEC-SAL
+   654     END-WRITE.
+   655
+   656****************************************************************
+   657*1003-MOSTRAR-CONTADORES.
+   658*MOSTRAR CONTADORES DEL PROCESO
+   659****************************************************************
+   660 1003-MOSTRAR-CONTADORES.
+   661     MOVE W-LEIDOS-IDSPJA      TO W-EDIT-CONTADOR
+   662     DISPLAY "IDs leidos .............. "   W-EDIT-CONTADOR
+   663     MOVE W-LEIDOS-SCODAPJA    TO W-EDIT-CONTADOR
+   664     DISPLAY "SCODAPJA le√≠dos ......... "  W-EDIT-CONTADOR
+   665     MOVE W-LEIDOS-SCODAPJA-IK TO W-EDIT-CONTADOR
+   666     DISPLAY "SCODAPJA claves inv√°lidas "  W-EDIT-CONTADOR.
+   667     MOVE W-GRABADOS           TO W-EDIT-CONTADOR
+   668     DISPLAY "SALIDA grabados "   W-EDIT-CONTADOR.
+   669
+   670
+   671******************************************************************
+   672*1004-CERRAR-ARCHIVOS.
+   673*SE CIERRAN LOS ARCHIVOS QUE SE UTILIZAN EN EL PROGRAMA
+   674******************************************************************
+   675 1004-CERRAR-ARCHIVOS.
+   676     PERFORM 10-CONTROL-TIEMPO
+   677     DISPLAY " Fecha Fin    Proceso : " FECHA-PG
+   678     DISPLAY " Hora  Fin    Proceso : " HORA-PG.
+   679     CLOSE IDSPJA SCODAPJA SECUENCIAL-SALIDA.
+* Micro Focus Server Express         V5.1 revision 000 Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+*                                                        REF GNR-015065005AF
+* Total Messages:     0
+* Data:       10200     Code:        2112

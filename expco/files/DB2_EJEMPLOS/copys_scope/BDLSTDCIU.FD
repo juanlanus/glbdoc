@@ -1,0 +1,20 @@
+      * BDLSTDCIU-FD.v.0002
+REMARK******************************************************************
+REMARK* ESTRUCTURA DE ARCHIVO DE ACEPCIONES DE CIUDADES.               *
+REMARK******************************************************************
+      ******************************************************************
+      * RGH0002       * MOD002 - INCLUIR CAMPOS EN EL FILLER           *
+      * R. GALVIS H.  *          ACTIVO                                *
+      * ENE. 01/2010  *          ULTFEC                                *
+      * INTERSCHEMES. *          ULTUSR                                *
+      ******************************************************************
+       FD BDLSTDCIU.
+       01 REG-BDLSTDCIU.
+          02 LLAVE-BDLSTDCIU   PIC X(30).
+          02 CIUDAD-BDLSTDCIU  PIC X(30).
+          02 CODIGO-BDLSTDCIU  PIC 9(08).
+MOD002*   02 FILLER            PIC X(30).                               RGH0002
+MOD002    02 ACTIVO-BDLSTDCIU  PIC X(01).                               RGH0002
+MOD002    02 ULTFEC-BDLSTDCIU  PIC X(08).                               RGH0002
+MOD002    02 ULTUSR-BDLSTDCIU  PIC X(08).                               RGH0002
+MOD002    02 FILLER            PIC X(13).                               RGH0002

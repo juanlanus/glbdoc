@@ -1,0 +1,1042 @@
+REMARK* FRARED.PROC.v.0005
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* LAS TABLAS NECESARIAS PARA MANEJAR LA RED NEURONAL DE SCORES   
+REMARK******************************************************************
+REMARK* VHF0002     * NVAGEN - SE MODIFICA EL PROGRAMA PARA NUEVA RED  *
+REMARK* VICTOR HUGO *          GENERICA DE MAS AMPLIO ALCANCE          *
+REMARK* FORERO      *                                                  *
+REMARK* FEB.20/2008 *                                                  *
+REMARK******************************************************************
+REMARK* VHF0003     * RED004 - SE IMPLEMENTA VERSION 4 DE LA RED       *
+REMARK* VICTOR HUGO *          NEURONAL DE MAS AMPLIO ALCANCE          *
+REMARK* FORERO      *                                                  *
+REMARK* MAY.15/2008 *                                                  *
+REMARK******************************************************************
+REMARK* ABB0004     * REDOP3 - SE CAMBIA CALCULO DE SCORE UTILIZANDO   *ABB0004
+REMARK* ALBEIRO     *          TRES REDES NEURONALES SIN ALGORITMO     *ABB0004
+REMARK* BERNAL      *          DESLIZANTE Y UTILIZANDO TABLA SEGUN     *ABB0004
+REMARK* FEB.27/2009 *          NUMERO DE PREGUNTAS                     *ABB0004
+REMARK******************************************************************ABB0004
+REMARK* ABB0005     * REDOP4 - SE ADICIONA MANEJO DE RED TIGO I        *ABB0005
+REMARK* ALBEIRO     *                                                  *ABB0005
+REMARK* BERNAL      *                                                  *ABB0005
+REMARK* OCT 31/2010 *                                                  *ABB0005
+REMARK******************************************************************ABB0005
+
+       1000-U-CARGAR-ARCHIVOS-FRARED.    
+REMARK******************************************************************
+REMARK*1000-CARGAR-ARCHIVOS-FRARED.    
+REMARK* RUTINA QUE LEE EL ARCHIVO PLANO CON TODOS LOS VALORES DE LA
+REMARK* RED NEURONAL Y CARGA LOS VALORES EN MEMORIA PARA FACILITAR
+REMARK* LAS BUSQUEDAS POSTERIORES. LEE TODOS LOS VALORES COMO STRINGS
+REMARK* SEPARADOS POR ";" Y DEPENDIENDO DE SU CONFORMACION LOS CONVIERTE
+REMARK* A VARIABLES ENTERAS,ALFABETICAS O DECIMALES
+REMARK*    INPUT      ARCHIVO FRARED                                  
+REMARK*    OUTPUT     M-CONTROL-FRARED(100) MAXIMO 100 TABLAS         
+REMARK*               M-DATOS-FRARED(10000) MAXIMO 10000 REGISTROS      
+REMARK******************************************************************
+           INITIALIZE MATRICES-FRARED.
+           MOVE 1 TO I-FRARED INI-FRARED .
+           OPEN INPUT FRARED.
+           READ FRARED AT END MOVE 1 TO FIN-FRARED.
+           PERFORM UNTIL FIN-FRARED = 1
+              MOVE SPACES TO STRING1-FRARED STRING2-FRARED
+              UNSTRING REG-FRARED DELIMITED BY ALL ";" INTO
+                       STRING1-FRARED STRING2-FRARED
+              IF STRING2-FRARED (1:4) = "TAB " OR "VEC " 
+                 MOVE STRING1-FRARED TO V-CONDES1-FRARED(I-FRARED)
+                 MOVE STRING2-FRARED TO V-CONDES2-FRARED(I-FRARED)
+                 MOVE INI-FRARED     TO V-CONINI-FRARED(I-FRARED)
+                                        V-CONFIN-FRARED(I-FRARED)
+                 SUBTRACT 1 FROM        V-CONFIN-FRARED(I-FRARED) 
+                 ADD 1 TO I-FRARED         
+              ELSE
+                 IF STRING1-FRARED ALPHABETIC 
+                    MOVE STRING1-FRARED TO 
+                                 V-DATALF1-FRARED(INI-FRARED) *>ALFABETICO
+                 ELSE
+                    MOVE 0 TO AUX-FRARED 
+                    INSPECT STRING1-FRARED TALLYING AUX-FRARED
+                            FOR ALL "." 
+                    IF AUX-FRARED > 0 
+                       MOVE STRING1-FRARED TO STRING-INPUT-FRARED
+                       PERFORM 1100-STRING-A-NUMDEC-FRARED  
+                       MOVE NUMDEC-OUTPUT-FRARED TO 
+                                  V-DATDEC1-FRARED(INI-FRARED) *>DECIMAL   
+                    ELSE
+                       MOVE STRING1-FRARED TO STRING-INPUT-FRARED
+                       PERFORM 1100-STRING-A-NUMENT-FRARED  
+                       MOVE NUMENT-OUTPUT-FRARED TO 
+                                  V-DATENT1-FRARED(INI-FRARED) *>ENTERO
+                    END-IF
+                 END-IF
+                 MOVE STRING2-FRARED TO STRING-INPUT-FRARED
+                 PERFORM 1100-STRING-A-NUMDEC-FRARED  
+                 MOVE NUMDEC-OUTPUT-FRARED TO 
+                                  V-DATVAL2-FRARED(INI-FRARED) *>DECIMAL
+                 ADD 1 TO  V-CONFIN-FRARED(I-FRARED - 1)       *>(SIEMPRE)
+                 ADD 1 TO INI-FRARED 
+              END-IF
+              READ FRARED AT END MOVE 1 TO FIN-FRARED
+              END-READ
+           END-PERFORM.  
+           CLOSE FRARED.
+REMARK* SE BUSCAN LAS COSTANTES DE "NO HAY" PARA NO CALCULARA CADA VEZ
+           MOVE "CODPRGOK"          TO NOMTAB-INPUT-FRARED
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+           MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+           MOVE 999999999           TO ENTTAB-INPUT-FRARED
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-CODPRGOK999-FRARED
+           ELSE
+              DISPLAY "****CARGE RED NEURONAL *******************"
+              DISPLAY "ERROR FATAL,NO HAY REG 9999 EN CODPRGOK!!!"
+              DISPLAY "****PROCESO DETENIDO L *******************"
+              STOP RUN 
+           END-IF.
+REMARK* 
+           MOVE "CODPRGERR"         TO NOMTAB-INPUT-FRARED
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+           MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+           MOVE 999999999           TO ENTTAB-INPUT-FRARED
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-CODPRGERR999-FRARED
+           ELSE
+              DISPLAY "****CARGE RED NEURONAL *******************"
+              DISPLAY "ERROR FATAL,NO HAY REG 9999 EN CODPRGERR!!"
+              DISPLAY "****PROCESO DETENIDO L *******************"
+              STOP RUN 
+           END-IF.
+REMARK* 
+           MOVE "PRGSUSOK"          TO NOMTAB-INPUT-FRARED
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+           MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+           MOVE 999999              TO ENTTAB-INPUT-FRARED
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-PRGSUSOK999-FRARED
+           ELSE
+              DISPLAY "****CARGE RED NEURONAL *******************"
+              DISPLAY "ERROR FATAL,NO HAY REG 9999 EN PRGSUSOK!!!"
+              DISPLAY "****PROCESO DETENIDO L *******************"
+              STOP RUN 
+           END-IF.
+REMARK* 
+           MOVE "PRGSUSERR"         TO NOMTAB-INPUT-FRARED
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+           MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+           MOVE 999999              TO ENTTAB-INPUT-FRARED
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-PRGSUSERR999-FRARED
+           ELSE
+              DISPLAY "****CARGE RED NEURONAL *******************"
+              DISPLAY "ERROR FATAL,NO HAY REG 9999 EN PRGSUSERR!!"
+              DISPLAY "****PROCESO DETENIDO L *******************"
+              STOP RUN 
+           END-IF.
+REMARK*
+REMARK*    CARGA EN MAT02 RED02PRG
+           MOVE 1 TO II-FRARED
+           PERFORM UNTIL II-FRARED > 12 
+              MOVE "RED02PRG"          TO NOMTAB-INPUT-FRARED
+              MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+              MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+              MOVE II-FRARED           TO ENTTAB-INPUT-FRARED
+              PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+              IF BUSOK-OUTPUT-FRARED = 1
+                 MOVE VALTAB-OUTPUT-FRARED TO MAT02-FRARED(II-FRARED)   
+              ELSE
+                 DISPLAY "****CARGE RED NEURONAL *******************"
+                 DISPLAY "ERROR FATAL,NOHAY FILA EN RED02PRG     !!!"
+                 DISPLAY "****PROCESO DETENIDO L *******************"
+                 STOP RUN 
+              END-IF
+              ADD 1 TO II-FRARED
+           END-PERFORM.
+REMARK*
+REMARK*    CARGA EN MAT03 RED03PRG
+           MOVE 1 TO II-FRARED
+           PERFORM UNTIL II-FRARED > 16 
+              MOVE "RED03PRG"          TO NOMTAB-INPUT-FRARED
+              MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+              MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+              MOVE II-FRARED            TO ENTTAB-INPUT-FRARED
+              PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+              IF BUSOK-OUTPUT-FRARED = 1
+                 MOVE VALTAB-OUTPUT-FRARED TO MAT03-FRARED(II-FRARED)   
+              ELSE
+                 DISPLAY "****CARGE RED NEURONAL *******************"
+                 DISPLAY "ERROR FATAL,NOHAY FILA EN RED03PRG     !!!"
+                 DISPLAY "****PROCESO DETENIDO L *******************"
+                 STOP RUN 
+              END-IF
+              ADD 1 TO II-FRARED
+           END-PERFORM.
+       1100-STRING-A-NUMDEC-FRARED.
+REMARK******************************************************************
+REMARK*1100-STRING-A-NUMDEC-FRARED.
+REMARK* RUTINA QUE CONVIERTE UN STRING A DECIMAL DEPENDIENDO DE SU
+REMARK* CONFORMACION
+REMARK*    INPUT      STRING-INPUT-FRARED       MAXIMO 20 CARACTERES
+REMARK*    OUTPUT     NUMDEC-OUTPUT-FRARED      MAXIMO 9(5).9(13)
+REMARK******************************************************************
+           MOVE      0 TO NENTERO-FRARED NUMDEC-OUTPUT-FRARED.
+           MOVE SPACES TO ADECIMAL-FRARED
+           IF STRING-INPUT-FRARED(1:1) = "-" OR "+"
+              UNSTRING STRING-INPUT-FRARED(2:19) 
+                       DELIMITED BY ALL "." , " "  
+                       INTO NENTERO-FRARED,ADECIMAL-FRARED
+           ELSE
+              UNSTRING STRING-INPUT-FRARED
+                       DELIMITED BY ALL "." , " "  
+                       INTO NENTERO-FRARED,ADECIMAL-FRARED
+           END-IF.
+           INSPECT ADECIMAL-FRARED REPLACING ALL " " BY "0"
+           ADD NENTERO-FRARED TO NUMDEC-OUTPUT-FRARED
+           COMPUTE NUMDEC-OUTPUT-FRARED = NUMDEC-OUTPUT-FRARED +
+                   (NDECIMAL-FRARED / 100000000000000000)
+           IF STRING-INPUT-FRARED(1:1) = "-" 
+              MULTIPLY NUMDEC-OUTPUT-FRARED BY -1 GIVING 
+                       NUMDEC-OUTPUT-FRARED 
+           END-IF.
+       1100-STRING-A-NUMENT-FRARED.
+REMARK******************************************************************
+REMARK*1100-STRING-A-NUMENT-FRARED.
+REMARK* RUTINA QUE CONVIERTE UN STRING A ENTERO  DEPENDIENDO DE SU
+REMARK* CONFORMACION
+REMARK*    INPUT      STRING-INPUT-FRARED       MAXIMO 20 CARACTERES
+REMARK*    OUTPUT     NUMENT-OUTPUT-FRARED      MAXIMO 9(18)        
+REMARK******************************************************************
+           MOVE      0 TO NUMENT-OUTPUT-FRARED.
+           UNSTRING STRING-INPUT-FRARED
+                       DELIMITED BY ALL  " "  
+                       INTO NUMENT-OUTPUT-FRARED.               
+       2000-U-PROCESO-SCORE-FRARED.    
+REMARK******************************************************************
+REMARK*2000-RROCESO-SCORE-FRARED.    
+REMARK* SE TOMAN LOS CAMPOS DEL REGISTRO DEL FRALOG Y SE CONVIERTEN
+REMARK* LOS CAMPOS A LOS DIFERENTGES FACTORES A UTILIZAR EN LA RED
+REMARK*    INPUT   REG-FRALOG
+REMARK*    OUTPUT  SCORE-FRARED  (0-999)
+REMARK*            ERR-SCORE-FRARED  (0=ok,1=error)
+REMARK******************************************************************
+REMARK*    FASE1 DEL SCORES (ASIGNAR PESOS A VARIABLES)
+REMARK*
+           INITIALIZE VALORES-FRARED ERRORES-FRARED.
+           MOVE 0     TO ALGUNA-PRGOK-FRARED.
+           MOVE 99999 TO SCORE-FRARED.
+           MOVE 0     TO SCORE1-FRARED.
+           MOVE 0     TO ERR-SCORE-FRARED
+REMARK*    CALCULAR REACCESO    
+           MOVE REACCESO-FRALOG     TO VAL-REACCESO-FRARED.
+REMARK*    CALCULAR PORPRGOK
+           MOVE "PORPRGOK"          TO NOMTAB-INPUT-FRARED.
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED.
+           MOVE "APR"               TO TIPBUS-INPUT-FRARED.
+           MOVE PUNTAJE-PORC-FRALOG TO ENTTAB-INPUT-FRARED.
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-PORPRGOK-FRARED
+           ELSE
+              MOVE 1 TO ERR-PORPRGOK-FRARED
+           END-IF.
+REMARK*    CALCULAR PORPESOK
+           MOVE "PORPESOK"          TO NOMTAB-INPUT-FRARED.
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED.
+           MOVE "APR"               TO TIPBUS-INPUT-FRARED.
+           MOVE PUNTAJE-PESO-FRALOG TO ENTTAB-INPUT-FRARED.
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-PORPESOK-FRARED
+           ELSE
+              MOVE 1 TO ERR-PORPESOK-FRARED
+           END-IF.
+REMARK*    CALCULAR RIESGOCIUD  
+           MOVE "RIESGOCIUD"        TO NOMTAB-INPUT-FRARED.
+           MOVE "ENT"               TO TIPDAT-INPUT-FRARED.
+           MOVE "EXA"               TO TIPBUS-INPUT-FRARED.
+           MOVE RIESGO-FRALOG       TO ENTTAB-INPUT-FRARED.
+           PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.
+           IF BUSOK-OUTPUT-FRARED = 1
+              MOVE VALTAB-OUTPUT-FRARED TO VAL-RIESGOCIUD-FRARED
+           ELSE
+              MOVE 1 TO ERR-RIESGOCIUD-FRARED
+           END-IF.
+REMARK*    PROCESAR CADA PREGUNTA
+           MOVE 1 TO P-FRARED
+           PERFORM UNTIL PREGUN-FRALOG(P-FRARED) = SPACES OR 
+                                                   P-FRARED >= 30 
+             IF RESPOK-FRALOG(P-FRARED) = RESPUS-FRALOG(P-FRARED)
+                MOVE 1     TO ALGUNA-PRGOK-FRARED
+REMARK*         CALCULO  CODPRGOK 
+                MOVE "CODPRGOK"          TO NOMTAB-INPUT-FRARED
+                MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CODPRE-FRALOG(P-FRARED) TO CODPRE-AUX-FRARED 
+                MOVE CODPRE-AUX-FRARED   TO ENTTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-CODPRG-FRARED (P-FRARED)
+                ELSE
+                   MOVE VAL-CODPRGOK999-FRARED 
+                        TO VAL-CODPRG-FRARED (P-FRARED)
+                END-IF
+REMARK*         CALCULO DE PRGSUSOK
+                MOVE "PRGSUSOK"          TO NOMTAB-INPUT-FRARED
+                MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CODSUS-FRALOG(P-FRARED) TO ENTTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGSUS-FRARED (P-FRARED)
+                ELSE
+                   MOVE VAL-PRGSUSOK999-FRARED 
+                        TO VAL-PRGSUS-FRARED (P-FRARED)
+                END-IF
+REMARK*         CALCULAR PRGBLLTOK   
+                MOVE "PRGBLLTOK"         TO NOMTAB-INPUT-FRARED
+                MOVE "ALF"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE BILLETERA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGBLLT-FRARED (P-FRARED)
+                ELSE
+                   MOVE 1 TO ERR-PRGBLLTOK-FRARED 
+                END-IF
+REMARK*         CALCULAR PRGREALOK   
+                MOVE "PRGREALOK"         TO NOMTAB-INPUT-FRARED
+                MOVE "ALF"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CASCARA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGREAL-FRARED (P-FRARED)
+                ELSE
+                   MOVE 1 TO ERR-PRGREALOK-FRARED   
+                END-IF
+             ELSE
+REMARK*         CALCULO  CODPRGERR
+                MOVE "CODPRGERR"         TO NOMTAB-INPUT-FRARED
+                MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CODPRE-FRALOG(P-FRARED) TO CODPRE-AUX-FRARED 
+                MOVE CODPRE-AUX-FRARED   TO ENTTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-CODPRG-FRARED (P-FRARED)
+                ELSE
+                   MOVE VAL-CODPRGERR999-FRARED 
+                        TO VAL-CODPRG-FRARED (P-FRARED)
+                END-IF
+REMARK*         CALCULO DE PRGSUSERR
+                MOVE "PRGSUSERR"         TO NOMTAB-INPUT-FRARED
+                MOVE "ENT"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CODSUS-FRALOG(P-FRARED) TO ENTTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGSUS-FRARED (P-FRARED)
+                ELSE
+                   MOVE VAL-PRGSUSERR999-FRARED 
+                        TO VAL-PRGSUS-FRARED (P-FRARED)
+                END-IF
+REMARK*         CALCULAR PRGBLLTOK   
+                MOVE "PRGBLLTERR"        TO NOMTAB-INPUT-FRARED
+                MOVE "ALF"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE BILLETERA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGBLLT-FRARED (P-FRARED)
+                ELSE
+                   MOVE 1 TO ERR-PRGBLLTERR-FRARED 
+                END-IF
+REMARK*         CALCULAR PRGREALERR  
+                MOVE "PRGREALERR"        TO NOMTAB-INPUT-FRARED
+                MOVE "ALF"               TO TIPDAT-INPUT-FRARED
+                MOVE "EXA"               TO TIPBUS-INPUT-FRARED
+                MOVE CASCARA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED
+                PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+                IF BUSOK-OUTPUT-FRARED = 1
+                   MOVE VALTAB-OUTPUT-FRARED 
+                        TO VAL-PRGREAL-FRARED (P-FRARED)
+                ELSE
+                   MOVE 1 TO ERR-PRGREALERR-FRARED  
+                END-IF
+             END-IF
+             ADD 1 TO P-FRARED
+           END-PERFORM.
+           IF ERRORES-FRARED = ZEROS AND P-FRARED > 2
+              SUBTRACT 1 FROM P-FRARED GIVING TOTPRE-FRARED
+RED004        IF TOTPRE-FRARED = 2                                      VHF0003 
+RED004           PERFORM 2100-FASE2-SCORE-FRARED                        VHF0003 
+RED004        ELSE                                                      VHF0003 
+RED004           PERFORM 2050-FASE2-SCORE-FRARED-3PREG                  VHF0003 
+RED004        END-IF                                                    VHF0003 
+           ELSE
+              MOVE 0 TO SCORE-FRARED
+              MOVE 1 TO ERR-SCORE-FRARED
+           END-IF
+           IF SCORE-FRARED > 1000    
+              MOVE 1 TO ERR-SCORE-FRARED
+              MOVE 0 TO SCORE-FRARED
+           END-IF.
+           IF SCORE-FRARED > 0 
+              IF ALGUNA-PRGOK-FRARED = 0   
+                 MOVE 0 TO SCORE-FRARED
+              END-IF
+           END-IF.
+           
+REDOP3 2000-U-PROSEGM-SCORE-FRARED.                                     ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3*2000-U-RROSEGM-SCORE-FRARED.                                     ABB0004
+REDOP3* SE TOMAN LOS CAMPOS DEL REGISTRO DEL FRALOG Y SE CONVIERTEN     ABB0004
+REDOP3* LOS CAMPOS A LOS DIFERENTGES FACTORES A UTILIZAR EN LA RED      ABB0004
+REDOP3* DE *** BANCOS *** SOLO SE PROCESAN DE TRES A DIEZ PREGUNTAS     ABB0004
+REDOP3*    INPUT   REG-FRALOG                                           ABB0004
+REDOP3*    OUTPUT  SCORE-FRARED  (0-999)                                ABB0004
+REDOP3*            ERR-SCORE-FRARED  (0=ok,1=error)                     ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3*    FASE1 DEL SCORES (ASIGNAR PESOS A VARIABLES)                 ABB0004
+REDOP3     INITIALIZE VALORES-FRARED ERRORES-FRARED.                    ABB0004
+REDOP3     MOVE 0     TO ALGUNA-PRGOK-FRARED.                           ABB0004
+REDOP3     MOVE 99999 TO SCORE-FRARED.                                  ABB0004
+REDOP3     MOVE 0     TO SCORE1-FRARED.                                 ABB0004
+REDOP3     MOVE 0     TO ERR-SCORE-FRARED                               ABB0004
+REDOP3*    CALCULAR REACCESO                                            ABB0004
+REDOP3     MOVE REACCESO-FRALOG     TO VAL-REACCESO-FRARED.             ABB0004
+REDOP3*    CALCULAR PORPRGOK                                            ABB0004
+REDOP3     MOVE "PORPRGOKF"         TO NOMTAB-INPUT-FRARED              ABB0004
+REDOP3     MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED              ABB0004
+REDOP3     MOVE "ENT"               TO TIPDAT-INPUT-FRARED.             ABB0004
+REDOP3     MOVE "APR"               TO TIPBUS-INPUT-FRARED.             ABB0004
+REDOP3     MOVE PUNTAJE-PORC-FRALOG TO ENTTAB-INPUT-FRARED.             ABB0004
+REDOP3     PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.                         ABB0004
+REDOP3     IF BUSOK-OUTPUT-FRARED = 1                                   ABB0004
+REDOP3        MOVE VALTAB-OUTPUT-FRARED TO VAL-PORPRGOK-FRARED          ABB0004
+REDOP3     ELSE                                                         ABB0004
+REDOP3        MOVE 1 TO ERR-PORPRGOK-FRARED                             ABB0004
+REDOP3     END-IF.                                                      ABB0004
+REDOP3*    CALCULAR PORPESOK                                            ABB0004
+REDOP3     MOVE "PORPESOKF"         TO NOMTAB-INPUT-FRARED              ABB0004
+REDOP3     MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED              ABB0004
+REDOP3     MOVE "ENT"               TO TIPDAT-INPUT-FRARED.             ABB0004
+REDOP3     MOVE "APR"               TO TIPBUS-INPUT-FRARED.             ABB0004
+REDOP3     MOVE PUNTAJE-PESO-FRALOG TO ENTTAB-INPUT-FRARED.             ABB0004
+REDOP3     PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.                         ABB0004
+REDOP3     IF BUSOK-OUTPUT-FRARED = 1                                   ABB0004
+REDOP3        MOVE VALTAB-OUTPUT-FRARED TO VAL-PORPESOK-FRARED          ABB0004
+REDOP3     ELSE                                                         ABB0004
+REDOP3        MOVE 1 TO ERR-PORPESOK-FRARED                             ABB0004
+REDOP3     END-IF.                                                      ABB0004
+REMARK*    CALCULAR RIESGOCIUD                                          ABB0004
+REDOP3     MOVE "RIESGOCIF"         TO NOMTAB-INPUT-FRARED              ABB0004
+REDOP3     MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED              ABB0004
+REDOP3     MOVE "ENT"               TO TIPDAT-INPUT-FRARED.             ABB0004
+REDOP3     MOVE "EXA"               TO TIPBUS-INPUT-FRARED.             ABB0004
+REDOP3     MOVE RIESGO-FRALOG       TO ENTTAB-INPUT-FRARED.             ABB0004
+REDOP3     PERFORM 3000-BUSCAR-ARCHIVOS-FRARED.                         ABB0004
+REDOP3     IF BUSOK-OUTPUT-FRARED = 1                                   ABB0004
+REDOP3        MOVE VALTAB-OUTPUT-FRARED TO VAL-RIESGOCIUD-FRARED        ABB0004
+REDOP3     ELSE                                                         ABB0004
+REDOP3        MOVE 1 TO ERR-RIESGOCIUD-FRARED                           ABB0004
+REDOP3     END-IF.                                                      ABB0004 
+REDOP3*    PROCESAR CADA PREGUNTA                                       ABB0004
+REDOP3     MOVE 1 TO P-FRARED                                           ABB0004
+REDOP3     PERFORM UNTIL PREGUN-FRALOG(P-FRARED) = SPACES OR            ABB0004
+REDOP3                                             P-FRARED > 10        ABB0004
+REDOP3       IF RESPOK-FRALOG(P-FRARED) = RESPUS-FRALOG(P-FRARED)       ABB0004
+REDOP3          MOVE 1     TO ALGUNA-PRGOK-FRARED                       ABB0004
+REDOP3*         CALCULO  CODPRGOK                                       ABB0004
+REDOP3          MOVE "CODPRGOKF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ENT"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CODPRE-FRALOG(P-FRARED) TO CODPRE-AUX-FRARED       ABB0004
+REDOP3          MOVE CODPRE-AUX-FRARED   TO ENTTAB-INPUT-FRARED         ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-CODPRG-FRARED (P-FRARED)                 ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             INITIALIZE VAL-CODPRG9NN-FRARED                      ABB0004
+REDOP3             PERFORM 2010-PREGUNTA-NO-ENCONTRADA                  ABB0004
+REDOP3             MOVE VAL-CODPRG9NN-FRARED                            ABB0004
+REDOP3                  TO VAL-CODPRG-FRARED (P-FRARED)                 ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULO DE PRGSUSOK                                     ABB0004
+REDOP3          MOVE "PRGSUSOKF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ENT"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CODSUS-FRALOG(P-FRARED) TO ENTTAB-INPUT-FRARED     ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGSUS-FRARED (P-FRARED)                 ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             INITIALIZE VAL-PRGSUS9NN-FRARED                      ABB0004
+REDOP3             PERFORM 2020-SUSCRIPTOR-NO-ENCONTRADO                ABB0004
+REDOP3             MOVE VAL-PRGSUS9NN-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGSUS-FRARED (P-FRARED)                 ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULAR PRGBLLTOK                                      ABB0004
+REDOP3          MOVE "PRGBLLOKF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ALF"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE BILLETERA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED  ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGBLLT-FRARED (P-FRARED)                ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             MOVE 1 TO ERR-PRGBLLTOK-FRARED                       ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULAR PRGREALOK                                      ABB0004
+REDOP3          MOVE "PRGREAOKF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ALF"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CASCARA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED    ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGREAL-FRARED (P-FRARED)                ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             MOVE 1 TO ERR-PRGREALOK-FRARED                       ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3       ELSE                                                       ABB0004
+REDOP3*         CALCULO  CODPRGERR                                      ABB0004
+REDOP3          MOVE "CODPRGERF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ENT"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CODPRE-FRALOG(P-FRARED) TO CODPRE-AUX-FRARED       ABB0004
+REDOP3          MOVE CODPRE-AUX-FRARED   TO ENTTAB-INPUT-FRARED         ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-CODPRG-FRARED (P-FRARED)                 ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             INITIALIZE VAL-CODPRG9NN-FRARED                      ABB0004
+REDOP3             PERFORM 2010-PREGUNTA-NO-ENCONTRADA                  ABB0004
+REDOP3             MOVE VAL-CODPRG9NN-FRARED                            ABB0004
+REDOP3                  TO VAL-CODPRG-FRARED (P-FRARED)                 ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULO DE PRGSUSERR                                    ABB0004
+REDOP3          MOVE "PRGSUSERF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ENT"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CODSUS-FRALOG(P-FRARED) TO ENTTAB-INPUT-FRARED     ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGSUS-FRARED (P-FRARED)                 ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             INITIALIZE VAL-PRGSUS9NN-FRARED                      ABB0004
+REDOP3             PERFORM 2020-SUSCRIPTOR-NO-ENCONTRADO                ABB0004
+REDOP3             MOVE VAL-PRGSUS9NN-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGSUS-FRARED (P-FRARED)                 ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULAR PRGBLLTOK                                      ABB0004
+REDOP3          MOVE "PRGBLLERF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ALF"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE BILLETERA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED  ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGBLLT-FRARED (P-FRARED)                ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             MOVE 1 TO ERR-PRGBLLTERR-FRARED                      ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3*         CALCULAR PRGREALERR                                     ABB0004
+REDOP3          MOVE "PRGREAERF"         TO NOMTAB-INPUT-FRARED         ABB0004
+REDOP3          MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED         ABB0004
+REDOP3          MOVE "ALF"               TO TIPDAT-INPUT-FRARED         ABB0004
+REDOP3          MOVE "EXA"               TO TIPBUS-INPUT-FRARED         ABB0004
+REDOP3          MOVE CASCARA-FRALOG(P-FRARED) TO ALFTAB-INPUT-FRARED    ABB0004
+REDOP3          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                     ABB0004
+REDOP3          IF BUSOK-OUTPUT-FRARED = 1                              ABB0004
+REDOP3             MOVE VALTAB-OUTPUT-FRARED                            ABB0004
+REDOP3                  TO VAL-PRGREAL-FRARED (P-FRARED)                ABB0004
+REDOP3          ELSE                                                    ABB0004
+REDOP3             MOVE 1 TO ERR-PRGREALERR-FRARED                      ABB0004
+REDOP3          END-IF                                                  ABB0004
+REDOP3       END-IF                                                     ABB0004
+REDOP3       ADD 1 TO P-FRARED                                          ABB0004
+REDOP3     END-PERFORM.                                                 ABB0004
+REDOP3     IF ERRORES-FRARED = ZEROS AND P-FRARED > 3 AND P-FRARED < 12 ABB0004
+REDOP3        SUBTRACT 1 FROM P-FRARED GIVING TOTPRE-FRARED             ABB0004
+REDOP3        PERFORM 2030-FASE2-SCORE-FRARED-NPREG                     ABB0004
+REDOP3     ELSE                                                         ABB0004
+REDOP3        MOVE 0 TO SCORE-FRARED                                    ABB0004
+REDOP3        MOVE 1 TO ERR-SCORE-FRARED                                ABB0004
+REDOP3     END-IF                                                       ABB0004
+REDOP3     IF SCORE-FRARED > 1000                                       ABB0004
+REDOP3        MOVE 1 TO ERR-SCORE-FRARED                                ABB0004	
+REDOP3        MOVE 0 TO SCORE-FRARED                                    ABB0004
+REDOP3     END-IF.                                                      ABB0004
+REDOP3     IF SCORE-FRARED > 0                                          ABB0004
+REDOP3        IF ALGUNA-PRGOK-FRARED = 0                                ABB0004
+REDOP3           MOVE 0 TO SCORE-FRARED                                 ABB0004
+REDOP3        END-IF                                                    ABB0004
+REDOP3     END-IF.                                                      ABB0004
+REDOP3 2010-PREGUNTA-NO-ENCONTRADA.                                     ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3*2010-PREGUNTA-NO-ENCONTRADA                                      ABB0004
+REDOP3* SE BUSCA EN LAS TABLAS DE ACUERDO AL ORIGEN DE LA PREGUNTA      ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3    MOVE 999999999 TO ENTTAB-INPUT-FRARED                         ABB0004
+REDOP3    EVALUATE  ORIPRE-AUX-FRARED                                   ABB0004
+REDOP3       WHEN "001"                                                 ABB0004
+REDOP3*         PREGUNTAS REGISTRADURIA                                 ABB0004
+REDOP3          MOVE 999999901 TO ENTTAB-INPUT-FRARED                   ABB0004
+REDOP3       WHEN "004"                                                 ABB0004
+REDOP3*         PREGUNTAS CUENTAS AHORRO Y CORRIENTE                    ABB0004
+REDOP3          MOVE 999999904 TO ENTTAB-INPUT-FRARED                   ABB0004
+REDOP3       WHEN "005"                                                 ABB0004
+REDOP3*         PREGUNTAS CARTERA                                       ABB0004
+REDOP3          MOVE 999999905 TO ENTTAB-INPUT-FRARED                   ABB0004
+REDOP4       WHEN "006"                                                 ABB0005
+REDOP4*         PREGUNTAS RECLAMOS                                      ABB0005
+REDOP4          MOVE 999999906 TO ENTTAB-INPUT-FRARED                   ABB0005
+REDOP3       WHEN "008"                                                 ABB0004
+REDOP3*         PREGUNTAS CARTERA                                       ABB0004
+REDOP3          MOVE 999999908 TO ENTTAB-INPUT-FRARED                   ABB0004
+REDOP3       WHEN "009"                                                 ABB0004
+REDOP3*         PREGUNTAS DIRECCIONES                                   ABB0004
+REDOP3          MOVE 999999909 TO ENTTAB-INPUT-FRARED                   ABB0004
+REDOP4       WHEN "010"                                                 ABB0005
+REDOP4*         PREGUNTAS ALERTAS                                       ABB0005
+REDOP4          MOVE 999999910 TO ENTTAB-INPUT-FRARED                   ABB0005
+REDOP3    END-EVALUATE                                                  ABB0004
+REDOP3    PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                           ABB0004
+REDOP3    IF BUSOK-OUTPUT-FRARED = 1                                    ABB0004
+REDOP3       MOVE VALTAB-OUTPUT-FRARED TO VAL-CODPRG9NN-FRARED          ABB0004
+REDOP3    ELSE                                                          ABB0004
+REDOP3       MOVE 999999999 TO ENTTAB-INPUT-FRARED                      ABB0004
+REDOP3       PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                        ABB0004
+REDOP3       IF BUSOK-OUTPUT-FRARED = 1                                 ABB0004
+REDOP3          MOVE VALTAB-OUTPUT-FRARED TO VAL-CODPRG9NN-FRARED       ABB0004
+REDOP3       ELSE                                                       ABB0004
+REDOP3          MOVE 1 TO ERR-CODPRG-FRARED                             ABB0004
+REDOP3       END-IF                                                     ABB0004
+REDOP3    END-IF.                                                       ABB0004
+REDOP3 2020-SUSCRIPTOR-NO-ENCONTRADO.                                   ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3*2020-SUSCRIPTOR-NO-ENCONTRADO                                    ABB0004
+REDOP3* SE BUSCA EN LAS TABLAS CON CODIGO 999999                        ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3    MOVE 999999 TO ENTTAB-INPUT-FRARED                            ABB0004
+REDOP3    PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                           ABB0004
+REDOP3    IF BUSOK-OUTPUT-FRARED = 1                                    ABB0004
+REDOP3       MOVE VALTAB-OUTPUT-FRARED TO VAL-PRGSUS9NN-FRARED          ABB0004
+REDOP3    ELSE                                                          ABB0004
+REDOP3       MOVE 1 TO ERR-PRGSUS-FRARED                                ABB0004
+REDOP3    END-IF.                                                       ABB0004
+REDOP3 2030-FASE2-SCORE-FRARED-NPREG.                                   ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3*2030-FASE2-SCORE-FRARED-NPREG.                                   ABB0004
+REDOP3*    SE REALIZA LA MULTIPLICACION MATRICIAL SELECCIONANDO LA     *ABB0004
+REDOP3*    TABLA DE LA CAPA 2 DE ACUERDO AL NUMERO DE PREGUNTAS        *ABB0004
+REDOP3*    EL FACTOR "VALORPREGUNTA" VIENE EN LA PRIMER FILA(0) DE     *ABB0004
+REDOP3*    LA TABLA DE LA CAPA 2 Y SE USA EN LA EXPONENCIAL DE LA      *ABB0004
+REDOP3*    SALIDA DE LA CAPA 2                                         *ABB0004
+REDOP3******************************************************************ABB0004
+REDOP3    IF TOTPRE-FRARED > 10                                         ABB0004 
+REDOP3       MOVE 10 TO TOTPRE-FRARED   *>MAXIMO 10 PREGUNTAS           ABB0004 
+REDOP3    END-IF.                                                       ABB0004 
+REDOP3*******************BUSCA FACTOR VALORPREGUNTA*********************ABB0004
+REDOP3    MOVE TABLA-C2-FRARED(TOTPRE-FRARED) TO NOMTAB-INPUT-FRARED    ABB0004
+REDOP3    MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED               ABB0004
+REDOP3    MOVE "ENT"               TO TIPDAT-INPUT-FRARED               ABB0004
+REDOP3    MOVE "EXA"               TO TIPBUS-INPUT-FRARED               ABB0004
+REDOP3    MOVE 0                   TO ENTTAB-INPUT-FRARED               ABB0004
+REDOP3    PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                           ABB0004
+REDOP3    IF BUSOK-OUTPUT-FRARED = 1                                    ABB0004
+REDOP3       MOVE VALTAB-OUTPUT-FRARED TO VAL-VALORPREG-FRARED          ABB0004
+REDOP3       MOVE 1                    TO II-FRARED                     ABB0004
+REDOP3    ELSE                                                          ABB0004
+REDOP3       DISPLAY "********* RED NEURONAL BANCOS*************"       ABB0004
+REDOP3       DISPLAY "ERROR FALTA VALORPREGUNTA " NOMTAB-INPUT-FRARED   ABB0004
+REDOP3       DISPLAY "****PROCESO BANCOS NO GENERA SCORE********"       ABB0004
+REDOP3       MOVE 50     TO II-FRARED                                   ABB0004
+REDOP3    END-IF                                                        ABB0004
+REDOP3****MULTIPLICACION MATRICIAL SALIDA CAPA 1 POR CAPA 2*************ABB0004
+REDOP3    COMPUTE KK-FRARED = (TOTPRE-FRARED * 4) + 4                   ABB0004
+REDOP3    MOVE ZEROS TO VAL-FASE2-FRARED                                ABB0004
+REDOP3    PERFORM UNTIL II-FRARED > KK-FRARED OR > 44                   ABB0004
+REDOP3        MOVE TABLA-C2-FRARED(TOTPRE-FRARED)                       ABB0004
+REDOP3                                 TO NOMTAB-INPUT-FRARED           ABB0004
+REDOP3        MOVE PAR-SEGMTO          TO SEGMTO-INPUT-FRARED           ABB0004
+REDOP3        MOVE "ENT"               TO TIPDAT-INPUT-FRARED           ABB0004
+REDOP3        MOVE "EXA"               TO TIPBUS-INPUT-FRARED           ABB0004
+REDOP3        MOVE II-FRARED           TO ENTTAB-INPUT-FRARED           ABB0004
+REDOP3        PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                       ABB0004
+REDOP3        IF BUSOK-OUTPUT-FRARED = 1                                ABB0004
+REDOP3           COMPUTE VAL-FASE2-FRARED = VAL-FASE2-FRARED +          ABB0004
+REDOP3              VALTAB-OUTPUT-FRARED * V-CAPA1-FRARED(II-FRARED)    ABB0004
+REDOP3        ELSE                                                      ABB0004
+REDOP3           DISPLAY "**********RED NEURONAL BANCOS*************"   ABB0004
+REDOP3           DISPLAY "ERROR FALTA FILA EN " NOMTAB-INPUT-FRARED     ABB0004
+REDOP3           DISPLAY "****PROCESO BANCOS NO GENERA SCORE********"   ABB0004
+REDOP3           MOVE 50     TO II-FRARED                               ABB0004
+REDOP3        END-IF                                                    ABB0004
+REDOP3        ADD 1 TO II-FRARED                                        ABB0004
+REDOP3    END-PERFORM.                                                  ABB0004
+REDOP3    IF II-FRARED < 50                                             ABB0004
+REDOP3**************************** SALIDA CAPA 2************************ABB0004
+REDOP3       COMPUTE DECTAB-INPUT-FRARED = 2.71828182845904523 **       ABB0004
+REDOP3         (VAL-VALORPREG-FRARED + VAL-FASE2-FRARED) /              ABB0004
+REDOP3         (1 + 2.71828182845904523 **                              ABB0004
+REDOP3         (VAL-VALORPREG-FRARED + VAL-FASE2-FRARED))               ABB0004
+REDOP3**************************** SALIDA CAPA 3************************ABB0004
+REDOP3       MOVE "REDSCOREF"          TO NOMTAB-INPUT-FRARED           ABB0004
+REDOP3       MOVE PAR-SEGMTO           TO SEGMTO-INPUT-FRARED           ABB0004
+REDOP3       MOVE "DEC"                TO TIPDAT-INPUT-FRARED           ABB0004
+REDOP3       MOVE "APR"                TO TIPBUS-INPUT-FRARED           ABB0004
+REDOP3       PERFORM 3000-BUSCAR-ARCHIVOS-FRARED                        ABB0004
+REDOP3       MOVE VALTAB-OUTPUT-FRARED TO SCORE-FRARED                  ABB0004
+REDOP3    ELSE                                                          ABB0004
+REDOP3       MOVE 2000                 TO SCORE-FRARED                  ABB0004
+REDOP3    END-IF.                                                       ABB0004
+RED004 2050-FASE2-SCORE-FRARED-3PREG.                                   VHF0003 
+REMARK******************************************************************VHF0003
+REMARK*2050-FASE2-SCORE-FRARED-3PREG.                                  *VHF0003
+REMARK*    SE DIVIDEN LAS PREGUNTAS EN GRUPOS DE 3 Y SE REALIZAN LAS   *VHF0003
+REMARK*    MULTIPLICACIONES MATRICIALES                                *VHF0003
+REMARK******************************************************************VHF0003
+RED004    IF TOTPRE-FRARED > 30                                         VHF0003 
+RED004       MOVE 30 TO TOTPRE-FRARED   *>MAXIMO 30 PREGUNTAS           VHF0003 
+RED004    END-IF.                                                       VHF0003 
+RED004    COMPUTE INI3-FASE2-FRARED =                                   VHF0003 
+RED004                  MAT03-FRARED(1) * VAL-PORPRGOK-FRARED   +       VHF0003 
+RED004                  MAT03-FRARED(2) * VAL-PORPESOK-FRARED   +       VHF0003 
+RED004                  MAT03-FRARED(3) * VAL-RIESGOCIUD-FRARED +       VHF0003 
+RED004                  MAT03-FRARED(4) * VAL-REACCESO-FRARED  .        VHF0003 
+RED004    MOVE 1 TO KK-FRARED                                           VHF0003 
+RED004    MOVE 1 TO LL-FRARED                                           VHF0003 
+RED004    PERFORM UNTIL KK-FRARED > TOTPRE-FRARED                       VHF0003 
+RED004      MOVE INI3-FASE2-FRARED TO INI-FASE2-FRARED                  VHF0003 
+RED004      MOVE 16 TO LIMITE-FRARED                                    VHF0003 
+RED004      MOVE INI-FASE2-FRARED  TO VAL-FASE2-FRARED                  VHF0003 
+RED004      MOVE 5 TO JJ-FRARED                                         VHF0003 
+RED004      PERFORM UNTIL JJ-FRARED > LIMITE-FRARED                     VHF0003 
+RED004        COMPUTE VAL-FASE2-FRARED = VAL-FASE2-FRARED +             VHF0003 
+RED004        MAT03-FRARED(JJ-FRARED) * V-PRE-FRARED(LL-FRARED)         VHF0003 
+RED004        ADD 1 TO JJ-FRARED                                        VHF0003 
+RED004        ADD 1 TO LL-FRARED                                        VHF0003 
+RED004      END-PERFORM                                                 VHF0003 
+RED004      PERFORM 2110-CALCULA-SCORE-FRARED                           VHF0003 
+RED004      ADD 3 TO KK-FRARED                                          VHF0003 
+RED004      IF KK-FRARED <= TOTPRE-FRARED                               VHF0003 
+RED004         SUBTRACT 2 FROM KK-FRARED                                VHF0003 
+RED004         SUBTRACT 8 FROM  LL-FRARED                               VHF0003 
+RED004      END-IF                                                      VHF0003 
+RED004    END-PERFORM.                                                  VHF0003 
+
+       2100-FASE2-SCORE-FRARED.
+REMARK******************************************************************
+REMARK*2100-FASE2-SCORE-FRARED.
+REMARK* SE DIVIDEN LAS PREGUNTAS EN GRUPOS DE 2 Y 3 y SE REALIZAN LAS
+REMARK* MULTIPLICACIONES MATRICIALES   
+REMARK******************************************************************
+          IF TOTPRE-FRARED > 30 
+             MOVE 30 TO TOTPRE-FRARED   *>MAXIMO 30 PREGUNTAS
+          END-IF.
+          COMPUTE INI2-FASE2-FRARED =
+                        MAT02-FRARED(1) * VAL-PORPRGOK-FRARED   +
+                        MAT02-FRARED(2) * VAL-PORPESOK-FRARED   +
+                        MAT02-FRARED(3) * VAL-RIESGOCIUD-FRARED +
+                        MAT02-FRARED(4) * VAL-REACCESO-FRARED  .    
+          COMPUTE INI3-FASE2-FRARED =
+                        MAT03-FRARED(1) * VAL-PORPRGOK-FRARED   +
+                        MAT03-FRARED(2) * VAL-PORPESOK-FRARED   +
+                        MAT03-FRARED(3) * VAL-RIESGOCIUD-FRARED +
+                        MAT03-FRARED(4) * VAL-REACCESO-FRARED  .    
+          MOVE 1 TO LL-FRARED
+          MOVE 1 TO KK-FRARED
+          MOVE 1 TO II-FRARED.
+          PERFORM UNTIL KK-FRARED > TOTPRE-FRARED OR II-FRARED > 10         
+            IF COMBI-FRARED(TOTPRE-FRARED,II-FRARED) = 3
+               MOVE INI3-FASE2-FRARED TO INI-FASE2-FRARED
+               MOVE 16 TO LIMITE-FRARED
+            ELSE
+               MOVE INI2-FASE2-FRARED TO INI-FASE2-FRARED
+               MOVE 12 TO LIMITE-FRARED
+            END-IF
+            MOVE INI-FASE2-FRARED TO VAL-FASE2-FRARED
+            MOVE 5 TO JJ-FRARED
+            PERFORM UNTIL JJ-FRARED > LIMITE-FRARED
+              IF COMBI-FRARED(TOTPRE-FRARED,II-FRARED) = 3
+                 COMPUTE VAL-FASE2-FRARED = VAL-FASE2-FRARED + 
+                  MAT03-FRARED(JJ-FRARED) * V-PRE-FRARED(LL-FRARED)
+              ELSE
+                 COMPUTE VAL-FASE2-FRARED = VAL-FASE2-FRARED + 
+                  MAT02-FRARED(JJ-FRARED) * V-PRE-FRARED(LL-FRARED)
+              END-IF
+              ADD 1 TO JJ-FRARED
+              ADD 1 TO LL-FRARED
+            END-PERFORM
+            PERFORM 2110-CALCULA-SCORE-FRARED
+            ADD COMBI-FRARED(TOTPRE-FRARED,II-FRARED) TO KK-FRARED
+            ADD 1 TO II-FRARED
+          END-PERFORM.
+       2110-CALCULA-SCORE-FRARED.
+REMARK******************************************************************
+REMARK*2110-CALCULA-SCORE-FRARED.
+REMARK* SE APLICA LA FORMULA EXPONENCIAL PARA CALCULAR EL VALOR DECIMAL
+REMARK* QUE DETERMINA EL SCORES EL CUAL ES HALLADO EN LA TABLA REDSCORE      
+REMARK******************************************************************
+REMARK*** LA NUEVA RED GENERICA UTILIZA UNA UNICA FORMULA PARA          VHF0002
+REMARK*** CUESTIONARIOS DE 2 Y 3 PREGUNTAS                              VHF0002
+RED004*   COMPUTE DECTAB-INPUT-FRARED =                                 VHF0003 
+RED004*        2.71828182845904523 ** (0.3911 + VAL-FASE2-FRARED) /     VHF0003 
+RED004*       (1 + 2.71828182845904523 ** (0.3911 + VAL-FASE2-FRARED))  VHF0003 
+RED004    COMPUTE DECTAB-INPUT-FRARED =                                 VHF0003 
+RED004         2.71828182845904523 ** (0.8626 + VAL-FASE2-FRARED) /     VHF0003 
+RED004        (1 + 2.71828182845904523 ** (0.8626 + VAL-FASE2-FRARED))  VHF0003 
+REMARK*   CALCULAR PRGREALERR  
+REMARK*** PARA LA NUEVA RED GENERICA SE UTILIZAN TABLAS DIFERENTES      VHF0002
+REMARK*** PARA CUESTIONARIOS DE 2 Y 3 PREGUNTAS                         VHF0002
+RED004    IF TOTPRE-FRARED > 2                                          VHF0003 
+NVAGEN       MOVE "REDSCO03"       TO NOMTAB-INPUT-FRARED               VHF0002 
+NVAGEN    ELSE                                                          VHF0002 
+NVAGEN       MOVE "REDSCO02"       TO NOMTAB-INPUT-FRARED               VHF0002 
+NVAGEN    END-IF                                                        VHF0002 
+          MOVE "DEC"               TO TIPDAT-INPUT-FRARED
+          MOVE "APR"               TO TIPBUS-INPUT-FRARED
+          PERFORM 3000-BUSCAR-ARCHIVOS-FRARED
+          MOVE VALTAB-OUTPUT-FRARED TO SCORE1-FRARED.                
+          IF SCORE1-FRARED < SCORE-FRARED
+             MOVE SCORE1-FRARED TO SCORE-FRARED
+          END-IF.
+       3000-BUSCAR-ARCHIVOS-FRARED.    
+REMARK******************************************************************
+REMARK*3000-BUSCAR-ARCHIVOS-FRARED.    
+REMARK* RUTINA QUE PERMITE BUSCAR LOS VALORES EN LAS TABLAS Y RETORNAR
+REMARK* EL VALOR ASOCIADO A ESTO 
+REMARK*    INPUT  NOMTAB-INPUT-FRARED(NOMBRE DE LA TABLA DONDE BUSCAR)       
+REMARK*           TIPDAT-INPUT-FRARED(TIPO DATO BUSCADO"ALF","DEC","ENT")
+REMARK*           TIPBUS-INPUT-FRARED("APR","EXA" APROXIMADA,EXACTA)       
+REMARK*           ALFTAB-INPUT-FRARED(SI ES ALFABETICO)
+REMARK*           ENTTAB-INPUT-FRARED(SI ES ENTERO    )
+REMARK*           DECTAB-INPUT-FRARED(SI ES DECIMAL   )
+REMARK*   OUTPUT  VALTAB-OUTPUT-FRARED(SIEMPRE ES DECIMAL   )
+REMARK*           BUSOK-OUTPUT-FRARED ( "1=OK,0=NO ESTA")
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE 1 TO I-FRARED .
+           PERFORM UNTIL V-CONDES1-FRARED(I-FRARED) = SPACES OR 
+REDOP4                                    I-FRARED >= 150               ABB0005
+              IF V-CONDES1-FRARED(I-FRARED) = NOMTAB-INPUT-FRARED 
+                 EVALUATE TIPDAT-INPUT-FRARED 
+                    WHEN "ALF"
+                       PERFORM 3100-BUSCA-ALF-FRARED
+                    WHEN "ENT"
+                       PERFORM 3200-BUSCA-ENT-FRARED
+                    WHEN "DEC"
+                       PERFORM 3300-BUSCA-DEC-FRARED
+                 END-EVALUATE 
+              END-IF
+              ADD 1 TO I-FRARED
+           END-PERFORM.
+       3100-BUSCA-ALF-FRARED.
+REMARK******************************************************************
+REMARK*3100-BUSCA-ALF-FRARED.
+REMARK* BUSCA EL VALOR ALFABETICO EN LA TABLA Y RETORNA EL VALOR
+REMARK* ASOCIADO 
+REMARK*    INPUT      ALFTAB-INPUT-FRARED       PIC X(18).           
+REMARK*               TIPBUS-INPUT-FRARED("APR","EXA" APROXIMADA,EXACTA)       
+REMARK*    OUTPUT     VALTAB-OUTPUT-FRARED      PIC S9(5)V9(13)     
+REMARK*               BUSOK-OUTPUT-FRARED       PIC 9 "1=OK,0=NO ESTA"
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED.
+           PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) OR 
+                   BUSOK-OUTPUT-FRARED = 1 OR I-FRARED >= 10000
+              IF V-DATALF1-FRARED(J-FRARED) = ALFTAB-INPUT-FRARED
+                 MOVE V-DATVAL2-FRARED(J-FRARED) TO VALTAB-OUTPUT-FRARED
+                 MOVE 1 TO BUSOK-OUTPUT-FRARED
+              END-IF
+              ADD 1 TO J-FRARED
+           END-PERFORM.
+       3200-BUSCA-ENT-FRARED.
+REMARK******************************************************************
+REMARK*3200-BUSCA-ENT-FRARED.
+REMARK* BUSCA EL VALOR ENTERO     EN LA TABLA Y RETORNA EL VALOR
+REMARK* ASOCIADO 
+REMARK*    INPUT      ENTTAB-INPUT-FRARED       PIC 9(18).           
+REMARK*               TIPBUS-INPUT-FRARED("APR","EXA" APROXIMADA,EXACTA)       
+REMARK*    OUTPUT     VALTAB-OUTPUT-FRARED      PIC S9(5)V9(13)     
+REMARK******************************************************************
+           IF TIPBUS-INPUT-FRARED = "EXA"
+              PERFORM 3210-BUSCA-ENTEXA-FRARED
+           ELSE
+              PERFORM 3220-BUSCA-ENTAPR-FRARED
+           END-IF.
+       3210-BUSCA-ENTEXA-FRARED.
+REMARK******************************************************************
+REMARK*3210-BUSCA-ENTEXA-FRARED.
+REMARK* SE BUSCA EL VALOR EXACTO ENTERO EN LA TABLA
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED.
+           PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) OR
+              BUSOK-OUTPUT-FRARED > 0 OR J-FRARED >= 10000
+              IF V-DATENT1-FRARED(J-FRARED) = ENTTAB-INPUT-FRARED
+                 MOVE  V-DATVAL2-FRARED(J-FRARED) TO    
+                                              VALTAB-OUTPUT-FRARED
+                 MOVE 1 TO BUSOK-OUTPUT-FRARED
+              END-IF
+              ADD 1 TO J-FRARED
+           END-PERFORM.
+       3220-BUSCA-ENTAPR-FRARED.
+REMARK******************************************************************
+REMARK*3220-BUSCA-ENTAPR-FRARED.
+REMARK* SE BUSCA EL VALOR APROXIMADO  ENTERO EN LA TABLA
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED.
+           PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) OR
+              BUSOK-OUTPUT-FRARED > 0 OR J-FRARED >= 10000
+              IF V-DATENT1-FRARED(J-FRARED) >= ENTTAB-INPUT-FRARED
+                 MOVE 2 TO BUSOK-OUTPUT-FRARED
+                 COMPUTE DIF1-FRARED = V-DATENT1-FRARED(J-FRARED) -
+                                       ENTTAB-INPUT-FRARED   
+                 IF J-FRARED > V-CONINI-FRARED(I-FRARED)
+                    COMPUTE DIF2-FRARED = ENTTAB-INPUT-FRARED     - 
+                                       V-DATENT1-FRARED(J-FRARED - 1)  
+                 ELSE
+                   MOVE 0 TO DIF1-FRARED DIF2-FRARED
+                 END-IF
+                 IF DIF1-FRARED <= DIF2-FRARED 
+                    MOVE  V-DATVAL2-FRARED(J-FRARED) TO    
+                                                 VALTAB-OUTPUT-FRARED
+                 ELSE
+                    MOVE  V-DATVAL2-FRARED(J-FRARED - 1) TO    
+                                                 VALTAB-OUTPUT-FRARED
+                 END-IF
+                 MOVE 1 TO BUSOK-OUTPUT-FRARED
+              END-IF
+              ADD 1 TO J-FRARED
+           END-PERFORM.
+           IF BUSOK-OUTPUT-FRARED = 2
+              MOVE 0 TO BUSOK-OUTPUT-FRARED
+           ELSE
+              IF BUSOK-OUTPUT-FRARED = 0
+                 IF J-FRARED > V-CONFIN-FRARED(I-FRARED)
+                    MOVE  V-CONFIN-FRARED(I-FRARED) TO AUX-FRARED
+                    MOVE  V-DATVAL2-FRARED(AUX-FRARED) TO    
+                          VALTAB-OUTPUT-FRARED
+                    MOVE 1 TO BUSOK-OUTPUT-FRARED
+                 END-IF
+              END-IF
+           END-IF.
+       3300-BUSCA-DEC-FRARED.
+REMARK******************************************************************
+REMARK*3300-BUSCA-DEC-FRARED.
+REMARK* BUSCA EL VALOR DECIMAL    EN LA TABLA Y RETORNA EL VALOR
+REMARK* ASOCIADO 
+REMARK*    INPUT      DECTAB INPUT-FRARED       PIC X(18).           
+REMARK*               TIPBUS-INPUT-FRARED("APR","EXA" APROXIMADA,EXACTA)       
+REMARK*    OUTPUT     VALTAB-OUTPUT-FRARED      PIC S9(5)V9(13)     
+REMARK******************************************************************
+           IF TIPBUS-INPUT-FRARED = "EXA"
+              PERFORM 3310-BUSCA-DECEXA-FRARED
+           ELSE
+              PERFORM 3320-BUSCA-DECAPR-FRARED
+           END-IF.
+       3310-BUSCA-DECEXA-FRARED.
+REMARK******************************************************************
+REMARK*3310-BUSCA-DECEXA-FRARED.
+REMARK* SE BUSCA EL VALOR EXACTO DECIMAL     EN LA TABLA
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED.
+           PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) OR
+              BUSOK-OUTPUT-FRARED > 0 OR J-FRARED >= 10000
+              IF V-DATDEC1-FRARED(J-FRARED) = DECTAB-INPUT-FRARED
+                 MOVE  V-DATVAL2-FRARED(J-FRARED) TO    
+                                              VALTAB-OUTPUT-FRARED
+                 MOVE 1 TO BUSOK-OUTPUT-FRARED
+              END-IF
+              ADD 1 TO J-FRARED
+           END-PERFORM.
+       3320-BUSCA-DECAPR-FRARED.
+REMARK******************************************************************
+REMARK*3320-BUSCA-DECAPR-FRARED.
+REMARK* SE BUSCA EL VALOR APROXIMADO DECIMAL     EN LA TABLA
+REMARK******************************************************************
+           MOVE 0 TO BUSOK-OUTPUT-FRARED.
+           MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED.
+           PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) OR
+              BUSOK-OUTPUT-FRARED > 0 OR J-FRARED >= 10000
+              IF V-DATDEC1-FRARED(J-FRARED) >= DECTAB-INPUT-FRARED
+                 MOVE 2 TO BUSOK-OUTPUT-FRARED
+                 COMPUTE DIF1-FRARED = V-DATDEC1-FRARED(J-FRARED) -
+                                       DECTAB-INPUT-FRARED   
+                 IF J-FRARED > V-CONINI-FRARED(I-FRARED)
+                    COMPUTE DIF2-FRARED = DECTAB-INPUT-FRARED     - 
+                                       V-DATDEC1-FRARED(J-FRARED - 1)  
+                 ELSE
+                   MOVE 0 TO DIF1-FRARED DIF2-FRARED
+                 END-IF
+                 IF DIF1-FRARED <= DIF2-FRARED 
+                    MOVE  V-DATVAL2-FRARED(J-FRARED) TO    
+                                                 VALTAB-OUTPUT-FRARED
+                 ELSE
+                    MOVE  V-DATVAL2-FRARED(J-FRARED - 1) TO    
+                                                 VALTAB-OUTPUT-FRARED
+                 END-IF
+                 MOVE 1 TO BUSOK-OUTPUT-FRARED
+              END-IF
+              ADD 1 TO J-FRARED
+           END-PERFORM.
+           IF BUSOK-OUTPUT-FRARED = 2
+              MOVE 0 TO BUSOK-OUTPUT-FRARED
+           ELSE
+              IF BUSOK-OUTPUT-FRARED = 0
+                 IF J-FRARED > V-CONFIN-FRARED(I-FRARED)
+                    MOVE  V-CONFIN-FRARED(I-FRARED) TO AUX-FRARED
+                    MOVE  V-DATVAL2-FRARED(AUX-FRARED) TO    
+                          VALTAB-OUTPUT-FRARED
+                    MOVE 1 TO BUSOK-OUTPUT-FRARED
+                 END-IF
+              END-IF
+           END-IF.
+FRARED 9000-MOSTRAR-ARCHIVOS-FRARED.    
+REMARK******************************************************************
+REMARK*9000-MOSTRAR-ARCHIVOS-FRARED.    
+REMARK*  UTILITARIO QUE MUESTRA TODAS LAS TABLAS CARGADAS EN MEMORIA
+REMARK*    INPUT      M-CONTROL-FRARED(100) 
+REMARK*               M-DATOS-FRARED(10000) 
+REMARK*    OUTPUT     DISPLAY DE LAS FILAS 
+REMARK******************************************************************
+           MOVE 1 TO I-FRARED .
+           PERFORM UNTIL V-CONDES1-FRARED(I-FRARED) = SPACES OR 
+REDOP4                                    I-FRARED >= 150               ABB0005
+              DISPLAY "TAB=",M-CONTROL-FRARED(I-FRARED)
+              MOVE V-CONINI-FRARED(I-FRARED) TO J-FRARED 
+              PERFORM UNTIL J-FRARED > V-CONFIN-FRARED(I-FRARED) 
+                 DISPLAY "  ",V-DATENT1-FRARED(J-FRARED), " ",
+                              V-DATVAL2-FRARED(J-FRARED), " ",
+                 ADD 1 TO J-FRARED
+              END-PERFORM
+              ADD 1 TO I-FRARED
+           END-PERFORM.

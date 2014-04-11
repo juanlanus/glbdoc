@@ -1,0 +1,14 @@
+******* VALPCTE-fd.v03.0001
+   **** VALPCTE.v03.0001
+REMARK*Parametros de campos del maestro resumido ampliado
+REMARK* Cuenta corriente. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPCTE.
+       01  REG-VALPCTE.
+           03 NUM-CAMPO-VALPCTE                PIC 9(2).
+           03 NUM-CALIF-VALPCTE                PIC 9(2).
+           03 POR-PESO-VALPCTE                 PIC 99V99.
+           03 NUM-GRUPO-VALPCTE                PIC 9.
+           03 IND-ACTUALIZA-VALPCTE            PIC 9.
+           03 IND-VALIDO-VALPCTE               PIC 9.
+           03 FILLER-VALPCTE-VALPCTE           PIC X(30).

@@ -1,0 +1,21 @@
+REMARK*** ICTCIIU-FD.v.02.0002
+      *=====================================================================
+REMARK*** FD DEL ARCHIVO DE CIIU CAMARA DE COMERCIO Y DIAN
+      *=====================================================================
+REMARK* FAC0002     * CODIAN* INCLUSION DE SEGUNDO REGISTRO PARA MANEJAR LOS 
+REMARK* F.CUADROS   * CODIGOS CIIU ENVIADOS POR LA DIAN
+REMARK* JUL.18/2003 *
+      *=====================================================================
+CODIAN* TABLA DE ACTIVIDADES ECONOMICAS ENVIADAS POR LA DIAN (CIIU)     FAC0002
+      *=====================================================================
+       FD CIIU.
+       01 REG-CIIU.  
+          02 CODIGO-CIIU                  PIC X(7).      
+          02 DESCRIPCION-CIIU             PIC X(65) .
+          02 FILLER                       PIC X(200).
+      *=====================================================================
+CODIAN 01 REG-BDIICIIU.                                                 FAC0002
+CODIAN     03 COD-BDIICIIU                PIC 9(4).                     FAC0002
+CODIAN     03 FILLER-BDIICIIU             PIC X(3).                     FAC0002
+CODIAN     03 DES-BDIICIIU                PIC X(100).                   FAC0002
+CODIAN     03 FILLER                      PIC X(165).                   FAC0002

@@ -1,0 +1,11 @@
+      * DVPDANE.v.01.001
+      *  MAESTRO DE CIUDADES,DEPARTEAMENTOS Y
+      *  CABECERAS O CENTROS POBLADOS SEGUN EL DANE (CCPOB)
+      ******************************************************************
+       FD  DVPDANE.       
+       01  COMPLETO-DVPDANE.
+           03  COD-DEPTO-DVPDANE         PIC 9(2).
+           03  COD-MUNIC-DVPDANE         PIC X(3).
+           03  COD-CCPOB-DVPDANE         PIC X(3).
+           03  NOMB-CCPOB-DVPDANE        PIC X(60).
+           03  FILLER                    PIC X(100). 

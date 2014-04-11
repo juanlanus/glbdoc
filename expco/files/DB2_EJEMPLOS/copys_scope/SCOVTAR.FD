@@ -1,0 +1,40 @@
+REMARK* SCOVTAR.FD.v.0002
+REMARK******************************************************************
+REMARK* PROYECTO-VISA.
+REMARK* ARCHIVO DE TARJETAS SELECCIONADAS DE ACUERDO AL PUNTAJE DE SCORE
+REMARK******************************************************************
+REMARK* VHF0002     * TARDU2 - SE MODIFICA LA LLAVE DE CONTROL DE      *
+REMARK* VICTOR HUGO *          DUPLICADOS PARA QUE SOLO TOME 16 DIGITOS*
+REMARK* FORERO      *          DEL NUMERO REAL DE LA TARJETA Y NO LOS  *
+REMARK* JUN.18/2008 *          18 QUE MANEJA DATACREDITO               *
+REMARK******************************************************************
+       FD  SCOVTAR.
+       01  REG-SCOVTAR.
+           03 LLAVE-SCOVTAR. 
+              05 IDENT-SCOVTAR.
+                 07 TIPIDE-SCOVTAR      PIC 9(01).
+                 07 NUMIDE-SCOVTAR      PIC 9(11).
+              05 CODSUS-SCOVTAR         PIC 9(06).
+              05 CODCTA-SCOVTAR         PIC 9(02).
+              05 NUMCTA-SCOVTAR         PIC X(18).
+           03 VALINI-SCOVTAR            PIC 9(10).
+           03 VALDIS-SCOVTAR            PIC 9(10).
+           03 GARANT-SCOVTAR            PIC 9(02).
+           03 VALSCO-SCOVTAR            PIC 9(03).
+           03 TIPSCO-SCOVTAR            PIC 9(02).
+           03 CODEXT-SCOVTAR            PIC 9(02).
+           03 CODBIN-SCOVTAR            PIC 9(06).
+           03 CODMAR-SCOVTAR            PIC 9(02).
+           03 CODENT-SCOVTAR            PIC 9(03).
+           03 VALNAL-SCOVTAR            PIC 9(10).
+           03 VALINT-SCOVTAR            PIC 9(10).
+           03 CUONAL-SCOVTAR            PIC 9(03).
+           03 CUOINT-SCOVTAR            PIC 9(03).
+           03 AVANAL-SCOVTAR            PIC 9(10).
+           03 AVAINT-SCOVTAR            PIC 9(10).
+           03 PAGREC-SCOVTAR            PIC 9(10).
+           03 CUOREC-SCOVTAR            PIC 9(03).
+           03 CODCLA-SCOVTAR            PIC X(01).
+           03 INDPRO-SCOVTAR            PIC 9(01).
+TARDU2     03 NUMTAR-SCOVTAR            PIC X(16).                      VHF0002
+TARDU2     03 FILLER-SCOVTAR            PIC X(34).                      VHF0002

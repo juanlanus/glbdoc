@@ -1,0 +1,22 @@
+      * ICMCHQH.-FD.v.0001
+      * MAESTRO QUE ALMACENA  INFORMACION COMPLEMENTARIA DE 
+      * LAS CUENTAS CORRIENTES Y CUENTAS DE AHORRO EN HISTORICO
+REMARK******************************************************************
+       FD  ICMCHQH.
+       01  REGISTRO-ICMCHQH.
+           03 LLAVE-MAES-ICMCHQH.
+              07 TIPO-ID-ICMCHQH           PIC 9.
+              07 NUM-ID-ICMCHQH            PIC 9(11).
+              07 COD-SUS-ICMCHQH           PIC 9(6).
+              07 COD-CTA-ICMCHQH           PIC 99.
+              07 NUM-CTA-ICMCHQH           PIC X(18).
+           03 CLASE-CTA-ICMCHQH            PIC 9(1).
+           03 FECHA-APERT-ICMCHQH          PIC 9(8)  COMP-3.
+           03 FECHA-ADJET-ICMCHQH          PIC 9(8)  COMP-3.
+           03 FECHA-ESTAD-ICMCHQH          PIC 9(8)  COMP-3.
+           03 TIPO-MONEDA-ICMCHQH          PIC 9.
+           03 CUPO-SOBREG-AUT-ICMCHQH      PIC 9(11) COMP-3.
+           03 DIAS-SOBREG-AUT-ICMCHQH      PIC 9(3).
+           03 FCH-CUPODIAS-SOBREG-ICMCHQH  PIC 9(8)  COMP-3. 
+           03 FECHA-ACTUALIZ-VALOR-ICMCHQH PIC 9(8)  COMP-3.
+           03 FILLER                       PIC X(45).

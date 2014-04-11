@@ -1,0 +1,18 @@
+      *FRADSU.v01.001.
+BDU001******************************************************************ABB0001
+BDU001*ESTRUCTURA DE ARCHIVO DE DATOS SUSCRIPTOR PARA CARGUE EN FRABDU *ABB0001
+BDU001*ARCHIVO PLANO CON LOS CAMPOS SEPARADOS POR PIPE(|)              *ABB0001
+BDU001*EL PRIMER REGISTRO ES DE CONTROL Y DEBE TRAER:                  *ABB0001
+BDU001*NNNNNNNN|AAAAMMDD|AAAAMMDD|C|SSSSSSSSSSS|PPPPPPPPPP             *ABB0001
+BDU001*   +        +        +     + +           +++>PROGRAMA PROC ARCHI*ABB0001
+BDU001*   +        +        +     + +++++>NIT SUSCRIPTOR               *ABB0001
+BDU001*   +        +        +     +++++++>COMPARTE INFORMACION S/N     *ABB0001
+BDU001*   +        +        +++++++++++++>FECHA EXPIRACION DATOS       *ABB0001
+BDU001*   +        ++++++++++++++++++++++>FECHA DE ENVIO DATOS         *ABB0001
+BDU001*   +++++++++++++++++++++++++++++++>NUMERO DE REGISTROS          *ABB0001
+BDU001*LOS DEMAS REGISTROS CONTIENEN LOS DATOS DEFINIDOS POR SUSCRIPTOR*ABB0001
+BDU001*Y LA ESTRUCTURA SE DEFINE EN EL PROGRAMA QUE PROCESA EL ARCHIVO *ABB0001
+BDU001*                                                                *ABB0001
+BDU001******************************************************************ABB0001
+BDU001 FD  ARC-PLA.                                                     ABB0001
+BDU001 01  REG-ARC-PLA                    PIC X(512).                   ABB0001

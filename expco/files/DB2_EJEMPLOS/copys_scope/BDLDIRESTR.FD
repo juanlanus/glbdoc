@@ -1,0 +1,22 @@
+      * BDLDIRESTR.v.01.0000
+      *================================================================*
+      * ARCHIVO MAESTRO CON INFORMACION DE ESTRATO                     *
+      *================================================================*
+      * ARCHIVO INDEXADO DESTINADO PARA EL MANEJO DE ESTRATO           *
+      * SOCIOECONOMICO                                                 *
+      *================================================================*
+       FD BDLDIRESTR.
+       01 REG-BDLDIRESTR.
+         03 LLAVE-BDLDIRESTR.
+           05 CIUDAD-BDLDIRESTR                 PIC X(20).
+           05 DIRECC-BDLDIRESTR                 PIC X(60).
+           05 DANE-BDLDIRESTR                   PIC 9(08).
+         03 DATOS-BDLDIRESTR.
+           05 CODDANE-BDLDIRESTR                PIC X(08).
+           05 ESTR-BDLDIRESTR                   PIC X.
+           05 CUIEST-BDLDIRESTR                 PIC X(20).
+           05 DEPEST-BDLDIRESTR                 PIC X(20).
+           05 DIREST-BDLDIRESTR                 PIC X(60).
+           05 PRBENT-BDLDIRESTR                 PIC X(03).
+           05 IND-GST-BDLDIRESTR                PIC X(03).
+           05 IND-DIRENC-BDLDIRESTR             PIC X(03).

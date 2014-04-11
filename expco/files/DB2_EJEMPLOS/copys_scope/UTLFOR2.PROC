@@ -1,0 +1,240 @@
+REMARK* UTLFOR2.PROC.v.0001
+REMARK******************************************************************
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* DESMPAQUE DE LOS FORMULARIOS DINAMICOS PARA SCORES A LA MEDIDA
+REMARK* AL LLAMAR CUALQUIER RUTINA SE MANEJA UN CODIGO DE ERROR QUE DEBE
+REMARK* SER CHEQUEADO PARA ASEGURAR QUE TODO ESTA OK
+ERRDES******************************************************************
+ERRDES* C. GAONA   * MODIFICACION AL DESEMPAQUETAMIENTO,SE USAN LAS    *
+ERRDES* 11-08-2011 * SE AMPLIA EL NUMERO DE CARACTERES EN EL NOMBRE    *
+ERRDES* CIG0001    * DE LAS VARIABLES.                                 *
+REMARK******************************************************************
+REMARK*
+       0001-BUSCAR-NOMVAR-UTLFOR.
+REMARK******************************************************************
+REMARK*0001-BUSCAR-NOMVAR-UTLFOR.
+REMARK* ESTA RUTINA EXTRACTA DE UNA CADENA CON EL STANDARD[VAR=VALOR]....
+REMARK* EL VALOR DE LA VARIABLE QUE SE QUIERA BUSCAR.
+REMARK*      PARAMETROS DE ENTRADA:
+REMARK*         NOMBRE DE VARIABLE A BUSCR  INPUT-NOMVAR-UTLFOR
+REMARK*         NOMBRE DE VARIABLE A BUSCR  INPUT-CADENA-UTLFOR
+REMARK*      DATOS DE SALIDA:           
+REMARK*         VALOR DE LA VARIABLE ALFABE OUTPUT-VALORA-UTLFOR
+REMARK*         VALOR DE LA VARIABLE NUMERI OUTPUT-VALORN-UTLFOR
+REMARK*         ERROR EN DATOS(0,1)         OUTPUT-ERR-UTLFOR  
+REMARK******************************************************************
+           MOVE 0 TO OUTPUT-ERR-UTLFOR
+           INITIALIZE OUTPUT-VALORA-UTLFOR OUTPUT-VALORN-UTLFOR.
+           MOVE 1 TO I-UTLFOR.
+           PERFORM UNTIL I-UTLFOR > 60 OR
+                         INPUT-NOMVAR-UTLFOR(I-UTLFOR:1) = " "
+             ADD 1 TO I-UTLFOR
+           END-PERFORM.
+           IF I-UTLFOR = 1
+              MOVE 1 TO OUTPUT-ERR-UTLFOR
+           ELSE
+              SUBTRACT 1 FROM I-UTLFOR
+           END-IF
+           IF OUTPUT-ERR-UTLFOR = 0
+              STRING "[" DELIMITED BY SIZE ,
+               INPUT-NOMVAR-UTLFOR(1:I-UTLFOR) DELIMITED BY SIZE,
+               "=" DELIMITED BY SIZE INTO STR-BUS-UTLFOR
+              ADD 2 TO I-UTLFOR
+              MOVE SPACES TO FILLER-UTLFOR VALORA-UTLFOR
+                             STR-PARCIAL-UTLFOR
+              MOVE ZEROS TO VALORN-UTLFOR
+              UNSTRING INPUT-CADENA-UTLFOR DELIMITED BY ALL
+                       STR-BUS-UTLFOR(1:I-UTLFOR) INTO
+                       FILLER-UTLFOR,STR-PARCIAL-UTLFOR
+              UNSTRING STR-PARCIAL-UTLFOR DELIMITED BY ALL "]"
+                       INTO VALORN-UTLFOR,FILLER-UTLFOR
+              UNSTRING STR-PARCIAL-UTLFOR DELIMITED BY ALL "]"
+                       INTO VALORA-UTLFOR,FILLER-UTLFOR
+              IF VALORA-UTLFOR = SPACES
+                 MOVE 1 TO OUTPUT-ERR-UTLFOR
+              ELSE
+                 IF INPUT-NOMVAR-UTLFOR(1:1) = "N" OR "F"
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                    MOVE VALORN-UTLFOR TO OUTPUT-VALORN-UTLFOR
+                 ELSE
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                 END-IF
+              END-IF
+           END-IF.
+       0002-BUSCAR-CODVAR-UTLFOR.
+REMARK******************************************************************
+REMARK*0002-BUSCAR-CODVAR-UTLFOR.
+REMARK*      PARAMETROS DE ENTRADA:
+REMARK*         CODIGO DE VARIABLE A BUSCR  INPUT-CODVAR-UTLFOR
+REMARK*      DATOS DE SALIDA:           
+REMARK*         VALOR DE LA VARIABLE ALFABE OUTPUT-VALORA-UTLFOR
+REMARK*         VALOR DE LA VARIABLE NUMERI OUTPUT-VALORN-UTLFOR
+REMARK*         ERROR EN DATOS(0,1)         OUTPUT-ERR-UTLFOR  
+REMARK******************************************************************
+           MOVE 0 TO OUTPUT-ERR-UTLFOR
+           INITIALIZE OUTPUT-VALORA-UTLFOR 
+                      OUTPUT-VALORN-UTLFOR.
+           STRING  INPUT-CODVAR-UTLFOR                DELIMITED BY SIZE
+                   "="                                DELIMITED BY SIZE 
+                   INTO COD-BUS-UTLFOR
+           INITIALIZE FILLER-UTLFOR 
+                      VALORA-UTLFOR 
+                      STR-PARCIAL-UTLFOR
+                      VALORN-UTLFOR
+           UNSTRING M-UTLFOR DELIMITED  BY ALL COD-BUS-UTLFOR 
+                    INTO FILLER-UTLFOR, STR-PARCIAL-UTLFOR
+           UNSTRING STR-PARCIAL-UTLFOR  DELIMITED BY ALL "]"
+                    INTO VALORN-UTLFOR, FILLER-UTLFOR
+           UNSTRING STR-PARCIAL-UTLFOR  DELIMITED BY ALL "]"
+                    INTO VALORA-UTLFOR, FILLER-UTLFOR
+ERRDES*    IF VALORA-UTLFOR = SPACES                   
+ERRDES*       MOVE 1 TO OUTPUT-ERR-UTLFOR
+ERRDES*    ELSE
+              INITIALIZE POS-CODVAR-UTLFOR
+              INSPECT M-UTLFOR TALLYING POS-CODVAR-UTLFOR
+                      FOR CHARACTERS BEFORE COD-BUS-UTLFOR
+              IF POS-CODVAR-UTLFOR = 10000
+                 MOVE 1 TO OUTPUT-ERR-UTLFOR
+              ELSE
+                 IF M-UTLFOR (POS-CODVAR-UTLFOR:1) = "N" OR "F"
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                    MOVE VALORN-UTLFOR TO OUTPUT-VALORN-UTLFOR
+                 ELSE
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                 END-IF
+              END-IF
+ERRDES*    END-IF
+           .                                  
+       0003-SPLIT-INFO-UTLFOR.
+REMARK******************************************************************
+REMARK*0003-SPLIT-INFO-UTLFOR.                                         *
+REMARK*    ESTA RUTINA DESEMPAQUETA LA SOLICITUD DE FORMULARIO DINAMICO*
+REMARK*    EN UN ARREGLO DE 100 VARIABLES CON TAMANO 100 CARACTERES    *
+REMARK******************************************************************
+           INITIALIZE M-UTLFOR.
+           MOVE 0 TO OUTPUT-ERR-UTLFOR
+           UNSTRING INPUT-CADENA-UTLFOR DELIMITED BY ALL "["
+              INTO FILLER-UTLFOR
+                   V-UTLFOR(1),V-UTLFOR(2),V-UTLFOR(3),V-UTLFOR(4)
+                   V-UTLFOR(5),V-UTLFOR(6),V-UTLFOR(7),V-UTLFOR(8)
+                   V-UTLFOR(9),V-UTLFOR(10),V-UTLFOR(11),V-UTLFOR(12)
+                   V-UTLFOR(13),V-UTLFOR(14),V-UTLFOR(15),V-UTLFOR(16)
+                   V-UTLFOR(17),V-UTLFOR(18),V-UTLFOR(19),V-UTLFOR(20)
+                   V-UTLFOR(21),V-UTLFOR(22),V-UTLFOR(23),V-UTLFOR(24)
+                   V-UTLFOR(25),V-UTLFOR(26),V-UTLFOR(27),V-UTLFOR(28)
+                   V-UTLFOR(29),V-UTLFOR(30),V-UTLFOR(31),V-UTLFOR(32)
+                   V-UTLFOR(33),V-UTLFOR(34),V-UTLFOR(35),V-UTLFOR(36)
+                   V-UTLFOR(37),V-UTLFOR(38),V-UTLFOR(39),V-UTLFOR(40)
+                   V-UTLFOR(41),V-UTLFOR(42),V-UTLFOR(43),V-UTLFOR(44)
+                   V-UTLFOR(45),V-UTLFOR(46),V-UTLFOR(47),V-UTLFOR(48)
+                   V-UTLFOR(49),V-UTLFOR(50),V-UTLFOR(51),V-UTLFOR(52)
+                   V-UTLFOR(53),V-UTLFOR(54),V-UTLFOR(55),V-UTLFOR(56)
+                   V-UTLFOR(57),V-UTLFOR(58),V-UTLFOR(59),V-UTLFOR(60)
+                   V-UTLFOR(61),V-UTLFOR(62),V-UTLFOR(63),V-UTLFOR(64)
+                   V-UTLFOR(65),V-UTLFOR(66),V-UTLFOR(67),V-UTLFOR(68)
+                   V-UTLFOR(69),V-UTLFOR(70),V-UTLFOR(71),V-UTLFOR(72)
+                   V-UTLFOR(73),V-UTLFOR(74),V-UTLFOR(75),V-UTLFOR(76)
+                   V-UTLFOR(77),V-UTLFOR(78),V-UTLFOR(79),V-UTLFOR(80)
+                   V-UTLFOR(81),V-UTLFOR(82),V-UTLFOR(83),V-UTLFOR(84)
+                   V-UTLFOR(85),V-UTLFOR(86),V-UTLFOR(87),V-UTLFOR(88)
+                   V-UTLFOR(89),V-UTLFOR(90),V-UTLFOR(91),V-UTLFOR(92)
+                   V-UTLFOR(93),V-UTLFOR(94),V-UTLFOR(95),V-UTLFOR(96)
+                   V-UTLFOR(97),V-UTLFOR(98),V-UTLFOR(99),V-UTLFOR(100)
+           .
+       0005-BUSCAR-NOMVARVAL-UTLFOR.
+REMARK******************************************************************
+REMARK*0005-BUSCAR-NOMVARVAL-UTLFOR.
+REMARK* ESTA RUTINA EXTRACTA DE LA CADENA VAR=VALOR] EL NOMBRE DE LA
+REMARK* VARIABLE Y SU VALOR CORRESPONDIENTE,NORMALMENTE SE HA DESEMPACADO
+REMARK* ANTES EN EL VECTOR V-UTLFOR(X) Y ESTE ES EL VALOR QUE SE PASA
+REMARK*      PARAMETROS DE ENTRADA:
+REMARK*         CADENA EN LA QUE SE BUSCA   INPUT-CADENA-UTLFOR
+REMARK*      DATOS DE SALIDA:
+REMARK*         VALOR DE LA VARIABLE ALFABE OUTPUT-VALORA-UTLFOR
+REMARK*         VALOR DE LA VARIABLE NUMERI OUTPUT-VALORN-UTLFOR
+REMARK*         ERROR EN DATOS(0,1)         OUTPUT-ERR-UTLFOR
+REMARK*         NOMBRE DE LA VARIABLE       INPUT-NOMVAR-UTLFOR
+REMARK******************************************************************
+           MOVE 0 TO OUTPUT-ERR-UTLFOR
+           INITIALIZE OUTPUT-VALORA-UTLFOR
+                      OUTPUT-VALORN-UTLFOR.
+           MOVE 1 TO I-UTLFOR.
+           PERFORM UNTIL I-UTLFOR > 60 OR
+                         INPUT-CADENA-UTLFOR(I-UTLFOR:1) = "="
+             ADD 1 TO I-UTLFOR
+           END-PERFORM.
+           IF I-UTLFOR = 0
+              MOVE 1 TO OUTPUT-ERR-UTLFOR
+           END-IF
+           IF OUTPUT-ERR-UTLFOR = 0
+              MOVE INPUT-CADENA-UTLFOR(1:I-UTLFOR) TO STR-BUS-UTLFOR
+              MOVE INPUT-CADENA-UTLFOR(1:I-UTLFOR - 1) TO
+                                                   INPUT-NOMVAR-UTLFOR
+              INITIALIZE FILLER-UTLFOR
+                         VALORA-UTLFOR
+                         STR-PARCIAL-UTLFOR
+                         VALORN-UTLFOR
+              UNSTRING INPUT-CADENA-UTLFOR DELIMITED BY ALL
+                       STR-BUS-UTLFOR(1:I-UTLFOR) INTO
+                       FILLER-UTLFOR,STR-PARCIAL-UTLFOR
+              UNSTRING STR-PARCIAL-UTLFOR DELIMITED BY ALL "]"
+                       INTO VALORN-UTLFOR,FILLER-UTLFOR
+              UNSTRING STR-PARCIAL-UTLFOR DELIMITED BY ALL "]"
+                       INTO VALORA-UTLFOR,FILLER-UTLFOR
+              IF VALORA-UTLFOR = SPACES
+                 MOVE 1 TO OUTPUT-ERR-UTLFOR
+              ELSE
+                 MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                 MOVE VALORN-UTLFOR TO OUTPUT-VALORN-UTLFOR
+              END-IF
+           END-IF
+           .
+       002-BUSCAR-NOMVARVAL-UTLFOR.
+REMARK******************************************************************
+REMARK*002-BUSCAR-NOMVARVAL-UTLFOR.
+REMARK*      PARAMETROS DE ENTRADA:
+REMARK*         CODIGO DE VARIABLE A BUSCR  INPUT-NOMVAR-UTLFOR
+REMARK*      DATOS DE SALIDA:           
+REMARK*         VALOR DE LA VARIABLE ALFABE OUTPUT-VALORA-UTLFOR
+REMARK*         VALOR DE LA VARIABLE NUMERI OUTPUT-VALORN-UTLFOR
+REMARK*         ERROR EN DATOS(0,1)         OUTPUT-ERR-UTLFOR  
+REMARK******************************************************************
+           MOVE 0 TO OUTPUT-ERR-UTLFOR
+           INITIALIZE OUTPUT-VALORA-UTLFOR 
+                      OUTPUT-VALORN-UTLFOR
+                      STR-BUS-UTLFOR
+           STRING  INPUT-NOMVAR-UTLFOR                DELIMITED BY SPACE
+                   "="                                DELIMITED BY SIZE 
+                   INTO STR-BUS-UTLFOR
+           MOVE 1                            TO I-UTLFOR
+           PERFORM UNTIL I-UTLFOR > 60 OR
+                         STR-BUS-UTLFOR(I-UTLFOR:1) = " "
+             ADD 1 TO I-UTLFOR
+           END-PERFORM.
+           INITIALIZE FILLER-UTLFOR 
+                      VALORA-UTLFOR 
+                      STR-PARCIAL-UTLFOR
+                      VALORN-UTLFOR
+           UNSTRING M-UTLFOR DELIMITED  BY 
+                                      ALL STR-BUS-UTLFOR(1:I-UTLFOR - 1) 
+                    INTO FILLER-UTLFOR, STR-PARCIAL-UTLFOR
+           UNSTRING STR-PARCIAL-UTLFOR  DELIMITED BY ALL "]"
+                    INTO VALORN-UTLFOR, FILLER-UTLFOR
+           UNSTRING STR-PARCIAL-UTLFOR  DELIMITED BY ALL "]"
+                    INTO VALORA-UTLFOR, FILLER-UTLFOR
+
+              INITIALIZE POS-CODVAR-UTLFOR
+              INSPECT M-UTLFOR TALLYING POS-CODVAR-UTLFOR
+                      FOR CHARACTERS
+                                   BEFORE STR-BUS-UTLFOR(1:I-UTLFOR - 1)
+              IF POS-CODVAR-UTLFOR = 10000
+                 MOVE 1 TO OUTPUT-ERR-UTLFOR
+              ELSE
+                 IF M-UTLFOR (POS-CODVAR-UTLFOR:1) = "N" OR "F"
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                    MOVE VALORN-UTLFOR TO OUTPUT-VALORN-UTLFOR
+                 ELSE
+                    MOVE VALORA-UTLFOR TO OUTPUT-VALORA-UTLFOR
+                 END-IF
+              END-IF
+           .            

@@ -1,0 +1,13 @@
+******* VALPGRTR-FD.v01.0001
+REMARK* Parametros de campos del maestro resumido ampliado 
+REMARK* tarjeta credito. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPGRTR.
+       01  REG-VALPGRTR.
+           03 NUM-CAMPO-VALPGRTR               PIC 9(2).
+           03 NUM-CALIF-VALPGRTR               PIC 9(2).
+           03 POR-PESO-VALPGRTR                PIC 99V99.
+           03 NUM-GRUPO-VALPGRTR               PIC 9.
+           03 IND-ACTUALIZA-VALPGRTR           PIC 9.
+           03 IND-VALIDO-VALPGRTR              PIC 9.
+           03 FILLER-VALPGRTR                  PIC X(30).

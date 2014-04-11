@@ -1,0 +1,32 @@
+REMARK* DTCTRA-FD.v.0003
+REMARK******************************************************************
+REMARK* ARCHIVO QUE CONTIENE LOS INSTRUCCIONES SQL QUE NO SE PUDIERON  *
+REMARK* APLICAR A LA BASE DE DATOS DESDE COBOL. EL ESTADO-DTCTRA INDICA*
+REMARK* SI EN EL REPORICESO SE PUDO APLICAR O NO (0 NO SE HA APLICADO) *
+REMARK* (1 YA FUE APLICADA)                                            *
+REMARK******************************************************************
+REMARK* VHF0002     * SE INCLUYE PROGRAMA QUE GENERA EL REGISTRO       *
+REMARK* VICTOR HUGO *                                                  *
+REMARK* FORERO      *                                                  *
+REMARK* FEB.20/2003 *                                                  *
+REMARK******************************************************************
+REMARK* VHF0003     * ERRSQ2 - SE MODIFICA LA ESTRUCTURA DE ESTE       *
+REMARK* VICTOR HUGO *          ARCHIVO PARA PERMITIR GRABAR FECHA Y    *
+REMARK* FORERO      *          HORA DEL REGISTRO                       *
+REMARK* DIC.02/2003 *                                                  *
+REMARK******************************************************************
+       FD  DTCTRA.
+       01  REG-DTCTRA.
+           03 LLAVE-DTCTRA           PIC 9(08).
+           03 ESTADO-DTCTRA          PIC 9(01).
+           03 CODERR-DTCTRA          PIC X(06).
+           03 PROGRAMA-DTCTRA        PIC X(10).                         VHF0002
+ERRSQ2     03 DATOS-DTCTRA           PIC X(2000).                       VHF0003 
+ERRSQ2     03 DATOS-DTCTRA-R         REDEFINES DATOS-DTCTRA.            VHF0003 
+ERRSQ2        05 INSTRUCCION-DTCTRA  PIC X(1980).                       VHF0003 
+ERRSQ2        05 FECHA-DTCTRA        PIC 9(08).                         VHF0003 
+ERRSQ2        05 HORA-DTCTRA         PIC 9(06).                         VHF0003 
+ERRSQ2        05 FILLER              PIC X(06).                         VHF0003 
+           03 DESERR-DTCTRA          PIC X(256).
+
+

@@ -1,0 +1,485 @@
+REMARK*CARACTPER-026.PROC.v.00001
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 026
+REMARK*    PARA FERRETERIA AL DIA
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-026.
+
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM031000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX
+               MOVE  00DEM031000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM032000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX
+               MOVE  00DEM032000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM033000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX
+               MOVE  00DEM033000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM034000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX
+               MOVE  00DEM034000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999CO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999CO026) TO L-AUX
+               MOVE 01NUM999CO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM998CO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM998CO026) TO L-AUX
+               MOVE 01NUM998CO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO026) TO L-AUX
+               MOVE 01END999RO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998RO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998RO026) TO L-AUX
+               MOVE 01END998RO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO026) TO L-AUX
+               MOVE 02MOR999TO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999CC026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999CC026) TO L-AUX
+               MOVE 01MOR999CC026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR998CC026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR998CC026) TO L-AUX
+               MOVE 01MOR998CC026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR997CC026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR997CC026) TO L-AUX
+               MOVE 01MOR997CC026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ999TO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ999TO026) TO L-AUX
+               MOVE 01INQ999TO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ998TO026" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ998TO026) TO L-AUX
+               MOVE 01INQ998TO026(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX).
+               *>
+                                              
+       0000-INICIALIZAR-CARAC-EXT-26.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-26.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 26    *
+REMARK*     PARA FERRETERIA AL DIA                                     *
+REMARK*----------------------------------------------------------------*
+             PERFORM  9999-CARAC-GENERALES
+             MOVE ALL "  -1"      TO PER-26-NIVEL-01-NUM
+             MOVE ALL "         -1"   TO PER-26-NIVEL-01-END
+             MOVE 999  TO 02MOR999TO026
+             MOVE "  -1" TO 01MOR999CC026(1:4) 01MOR998CC026(1:4)
+                            01MOR997CC026(1:4)
+             MOVE ALL "  -1"      TO PER-26-NIVEL-01-INQ. 
+                                                                 
+       2249-PROCESE-CARCT-00NUM-EXT-26.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-26.
+REMARK*     CALCULO CARACTERISTICAS 00NUM, 01NUM PARA 
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+          MOVE ALL "  -1" TO PER-26-NIVEL-00-NUM
+REMARK*** 00NUM999CO026 *** # OBLIG VIGENTES FERRETARIA AL DIA CODEUDOR
+          IF COD-PORTAF-CARACT = "CO" AND 
+             NIT-SUSCRIP-S-ABD02 = 890208890
+             MOVE ZEROS TO 00NUM999CO026
+             IF REG-ABIERTO-CARACT = 1 
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      MOVE 1 TO 00NUM999CO026
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00NUM999CO026(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00NUM999CO026(1:4)
+             END-IF
+          END-IF
+REMARK*** 00NUM998CO026 *** # OBLIG VIG DIF FERRETARIA AL DIA CODEUDOR
+          IF COD-PORTAF-CARACT = "CO" AND
+             NIT-SUSCRIP-S-ABD02 <> 890208890
+             MOVE ZEROS TO 00NUM998CO026
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      MOVE 1 TO 00NUM998CO026
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00NUM998CO026(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00NUM998CO026(1:4)
+             END-IF
+          END-IF
+REMARK*** 01NUM999CO026 *** # OBLIG VIGENTES FERRETARIA AL DIA CODEUDOR
+          IF FUNCTION NUMVAL(00NUM999CO026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01NUM999CO026(1:4)) < 0
+                MOVE ZEROS TO 01NUM999CO026
+             END-IF
+             COMPUTE 01NUM999CO026 = 01NUM999CO026 + 00NUM999CO026
+          ELSE
+             IF FUNCTION NUMVAL(01NUM999CO026(1:4)) < 0
+                IF FUNCTION NUMVAL(00NUM999CO026(1:4)) <
+                   FUNCTION NUMVAL(01NUM999CO026(1:4))
+                   MOVE 00NUM999CO026(1:4) TO 01NUM999CO026(1:4)
+                END-IF
+             END-IF
+          END-IF
+REMARK*** 01NUM998CO026 *** # OBLIG VIG DIF FERRETARIA AL DIA CODEUDOR
+          IF FUNCTION NUMVAL(00NUM998CO026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01NUM998CO026(1:4)) < 0
+                MOVE ZEROS TO 01NUM998CO026
+             END-IF
+             COMPUTE 01NUM998CO026 = 01NUM998CO026 + 00NUM998CO026
+          ELSE
+             IF FUNCTION NUMVAL(01NUM998CO026(1:4)) < 0
+                IF FUNCTION NUMVAL(00NUM998CO026(1:4)) <
+                   FUNCTION NUMVAL(01NUM998CO026(1:4))
+                   MOVE 00NUM998CO026(1:4) TO 01NUM998CO026(1:4)
+                END-IF
+             END-IF
+          END-IF
+         END-IF.
+                         
+       2749-PROCESE-CARCT-00END-EXT-26.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-26.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00END Y 01END 
+REMARK******************************************************************
+          MOVE ALL "         -1" TO PER-26-NIVEL-00-END
+REMARK*** 00END999RO026 *** TOTAL SALDO EN TDC          
+          IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END999RO026
+             IF REG-ABIERTO-CARACT = 1 
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-SALDO-CARACT(I13) <> "          -" AND
+                          VEC-IND-SLD-CARACT(I13) = 0 )
+                         MOVE VEC-SALDO-CARACT(I13) TO 00END999RO026
+                      ELSE
+                         MOVE "        -88" TO 00END999RO026(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999RO026(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999RO026(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999RO026(1:11)
+             END-IF
+          END-IF
+REMARK*** 00END998RO026 *** TOTAL CUPO EN TDC          
+          IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END998RO026
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-INICIAL-CARACT(I13) <> "          -" AND
+                          VEC-IND-INI-CARACT(I13) = 0)
+                         MOVE VEC-INICIAL-CARACT(I13) TO 00END998RO026
+                      ELSE
+                         MOVE "        -88" TO 00END998RO026(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END998RO026(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END998RO026(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END998RO026(1:11)
+             END-IF
+          END-IF
+REMARK*
+REMARK*** 01END999RO026 *** TOTAL SALDO EN TDC          
+          IF FUNCTION NUMVAL(00END999RO026(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999RO026(1:11)) < 0
+                MOVE ZEROS TO 01END999RO026
+             END-IF
+             COMPUTE 01END999RO026 = 01END999RO026 + 00END999RO026
+          ELSE
+             IF FUNCTION NUMVAL(01END999RO026(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999RO026(1:11)) <
+                 FUNCTION NUMVAL(01END999RO026(1:11))
+                 MOVE 00END999RO026(1:11) TO 01END999RO026(1:11)
+              END-IF         
+             END-IF
+          END-IF
+REMARK*** 01END998RO026 *** TOTAL CUPO EN TDC          
+          IF FUNCTION NUMVAL(00END998RO026(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END998RO026(1:11)) < 0
+                MOVE ZEROS TO 01END998RO026
+             END-IF
+             COMPUTE 01END998RO026 = 01END998RO026 + 00END998RO026
+          ELSE
+             IF FUNCTION NUMVAL(01END998RO026(1:11)) < 0
+              IF FUNCTION NUMVAL(00END998RO026(1:11)) <
+                 FUNCTION NUMVAL(01END998RO026(1:11))
+                 MOVE 00END998RO026(1:11) TO 01END998RO026(1:11)
+              END-IF
+             END-IF
+          END-IF.
+
+       2249-PROCESE-CARCT-00MOR-EXT-26.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-26.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 00MOR,01MOR 
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-26-NIVEL-00-MOR
+REMARK*** 00MOR999TO026 *** EXPERIENCIA MINIMA MESES CON PAGO NORMAL
+          MOVE 0 TO P-CARACT Z-CARACT J-CARACT
+          IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                 "CC" OR "OT" OR "CO"
+             MOVE ZEROS TO 00MOR999TO026
+             IF FECHA-ESTADO-CARACT > ZEROS AND
+                ACT-DATE-CARACT > ZEROS
+               IF ((REG-ABIERTO-CARACT = 1 AND 
+                    MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND 
+                   MESES-DESAC-CARACT <= 48))
+                   IF MESES-DESAC-CARACT < 0
+                      MOVE 0 TO P-CARACT
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT
+                   END-IF
+                   COMPUTE Z-CARACT = (49 - P-CARACT )
+                   PERFORM VARYING J-CARACT FROM Z-CARACT BY -1 
+                     UNTIL J-CARACT = 0
+                        IF V-NOR-CARACT(J-CARACT:1) = 0
+                           ADD 1 TO 00MOR999TO026  
+                        ELSE
+                           MOVE 1 TO J-CARACT
+                        END-IF
+                   END-PERFORM
+               ELSE
+                 MOVE "  -4" TO 00MOR999TO026(1:4)
+               END-IF
+             ELSE
+                MOVE "  -3" TO 00MOR999TO026(1:4)
+             END-IF
+          END-IF
+REMARK*** 00MOR999CC026 *** MORAS ACTUALES 30 DIAS SERV PUBLIC Y COMUNIC
+          MOVE 0 TO P-CARACT I-CARACT J-CARACT
+          IF COD-CTA-ABD07 = 23 OR 24 OR 29
+           MOVE ZEROS TO 00MOR999CC026
+           IF REG-ABIERTO-CARACT = 1
+            IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+             IF MESES-DESAC-CARACT <= 3 
+               IF MESES-DESAC-CARACT < 0              
+                  MOVE 0 TO P-CARACT                  
+               ELSE                                   
+                  MOVE MESES-DESAC-CARACT TO P-CARACT 
+               END-IF                                 
+               COMPUTE I-CARACT = (49 - P-CARACT)
+               IF V-NOR-CARACT(I-CARACT:1) = 1
+                  MOVE 1 TO 00MOR999CC026
+               END-IF
+             ELSE
+                MOVE "  -4" TO 00MOR999CC026(1:4)
+             END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR999CC026(1:4)
+            END-IF
+           ELSE
+              MOVE "  -2" TO 00MOR999CC026(1:4)
+           END-IF
+          END-IF
+REMARK*** 00MOR998CC026 *** MORAS ACTUALES 60 DIAS SERV PUBLIC Y COMUNIC
+          MOVE 0 TO P-CARACT I-CARACT J-CARACT
+          IF COD-CTA-ABD07 = 23 OR 24 OR 29
+           MOVE ZEROS TO 00MOR998CC026
+           IF REG-ABIERTO-CARACT = 1
+            IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+             IF MESES-DESAC-CARACT <= 3
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT)
+               IF V-NOR-CARACT(I-CARACT:1) = 2
+                  MOVE 1 TO 00MOR998CC026
+               END-IF
+             ELSE
+                MOVE "  -4" TO 00MOR998CC026(1:4)
+             END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR998CC026(1:4)
+            END-IF
+           ELSE
+              MOVE "  -2" TO 00MOR998CC026(1:4)
+           END-IF
+          END-IF
+REMARK*** 00MOR997CC026 *** MORAS ACTUAL > 60 DIAS SERV PUBLIC Y COMUNIC
+          MOVE 0 TO P-CARACT I-CARACT J-CARACT
+          IF COD-CTA-ABD07 = 23 OR 24 OR 29
+           MOVE ZEROS TO 00MOR997CC026
+           IF REG-ABIERTO-CARACT = 1
+            IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+             IF MESES-DESAC-CARACT <= 3
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT)
+               IF V-NOR-CARACT(I-CARACT:1) > 2
+                  MOVE 1 TO 00MOR997CC026
+               END-IF
+             ELSE
+                MOVE "  -4" TO 00MOR997CC026(1:4)
+             END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR997CC026(1:4)
+            END-IF
+           ELSE
+              MOVE "  -2" TO 00MOR997CC026(1:4)
+           END-IF
+          END-IF
+REMARK*
+REMARK*** 02MOR999TO026 *** EXPERIENCIA MINIMA MESES CON PAGO NORMAL
+          IF FUNCTION NUMVAL(00MOR999TO026(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR999TO026(1:4)) < 0
+                MOVE 999 TO 02MOR999TO026
+             END-IF
+             IF 00MOR999TO026 < 02MOR999TO026
+                MOVE 00MOR999TO026 TO 02MOR999TO026
+             END-IF
+          ELSE
+             IF FUNCTION NUMVAL(02MOR999TO026(1:4)) < 0 OR = 999
+              IF FUNCTION NUMVAL(00MOR999TO026(1:4)) <
+                 FUNCTION NUMVAL(02MOR999TO026(1:4))
+                 MOVE 00MOR999TO026(1:4) TO 02MOR999TO026(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 01MOR999CC026 *** MORAS ACTUALES 30 DIAS SERV PUBLIC Y COMUNIC
+          IF FUNCTION NUMVAL(00MOR999CC026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01MOR999CC026(1:4)) < 0
+                MOVE ZEROS TO 01MOR999CC026
+             END-IF
+             COMPUTE 01MOR999CC026 = 01MOR999CC026 + 00MOR999CC026
+          ELSE
+             IF FUNCTION NUMVAL(01MOR999CC026(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR999CC026(1:4)) <
+                 FUNCTION NUMVAL(01MOR999CC026(1:4))
+                 MOVE 00MOR999CC026(1:4) TO 01MOR999CC026(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 01MOR998CC026 *** MORAS ACTUALES 60 DIAS SERV PUBLIC Y COMUNIC
+          IF FUNCTION NUMVAL(00MOR998CC026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01MOR998CC026(1:4)) < 0
+                MOVE ZEROS TO 01MOR998CC026
+             END-IF
+             COMPUTE 01MOR998CC026 = 01MOR998CC026 + 00MOR998CC026
+          ELSE
+             IF FUNCTION NUMVAL(01MOR998CC026(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR998CC026(1:4)) <
+                 FUNCTION NUMVAL(01MOR998CC026(1:4))
+                 MOVE 00MOR998CC026(1:4) TO 01MOR998CC026(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 01MOR997CC026 *** MORAS ACTUAL > 60 DIAS SERV PUBLIC Y COMUNIC
+          IF FUNCTION NUMVAL(00MOR997CC026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01MOR997CC026(1:4)) < 0
+                MOVE ZEROS TO 01MOR997CC026
+             END-IF
+             COMPUTE 01MOR997CC026 = 01MOR997CC026 + 00MOR997CC026
+          ELSE
+             IF FUNCTION NUMVAL(01MOR997CC026(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR997CC026(1:4)) <
+                 FUNCTION NUMVAL(01MOR997CC026(1:4))
+                 MOVE 00MOR997CC026(1:4) TO 01MOR997CC026(1:4)
+              END-IF
+             END-IF
+          END-IF.
+
+       4249-PROCESE-CARCT-00INQ-EXT-26.
+REMARK******************************************************************
+REMARK*4249-PROCESE-CARCT-00INQ-EXT-26.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 01INQ
+REMARK******************************************************************
+          MOVE ZEROS TO PER-26-NIVEL-00-INQ
+REMARK*** 00INQ999TO026*** # CONSULTAS ULTIMO MES FERRETERIA AL DIA
+          IF NIT-SUSCRIP-S-ABD02 = 890208890
+             MOVE ZEROS TO 00INQ999TO026
+             IF MESES-CONST-CARACT >= 0 AND <= 1
+                MOVE 1 TO 00INQ999TO026
+             END-IF
+          END-IF
+REMARK*** 00INQ998TO026*** # CONSULT ULTIMO 3 MES SIN FERRETERIA AL DIA
+          IF (COD-SUSCRIP-IND <> 990003 AND <> 990001 AND
+                    <> 990005) AND NIT-SUSCRIP-S-ABD02 <> 8902088906
+             MOVE ZEROS TO 00INQ998TO026
+             IF MESES-CONST-CARACT >= 0 AND <= 3
+                MOVE 1 TO 00INQ998TO026
+             END-IF
+          END-IF
+REMARK*** 01INQ999TO026*** # CONSULTAS ULTIMO MES FERRETERIA AL DIA
+          IF FUNCTION NUMVAL(00INQ999TO026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ999TO026(1:4)) < 0
+                MOVE ZEROS TO 01INQ999TO026
+             END-IF
+             COMPUTE 01INQ999TO026 = 01INQ999TO026 + 00INQ999TO026
+          ELSE
+             IF FUNCTION NUMVAL(01INQ999TO026(1:4)) < 0
+              IF FUNCTION NUMVAL(00INQ999TO026(1:4)) <
+                 FUNCTION NUMVAL(01INQ999TO026(1:4))
+                 MOVE 00INQ999TO026(1:4) TO 01INQ999TO026(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 01INQ998TO026*** # CONSULT ULTIMO 3 MES SIN FERRETERIA AL DIA
+          IF FUNCTION NUMVAL(00INQ998TO026(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ998TO026(1:4)) < 0
+                MOVE ZEROS TO 01INQ998TO026
+             END-IF
+             COMPUTE 01INQ998TO026 = 01INQ998TO026 + 00INQ998TO026
+          ELSE
+             IF FUNCTION NUMVAL(01INQ998TO026(1:4)) < 0
+              IF FUNCTION NUMVAL(00INQ998TO026(1:4)) <
+                 FUNCTION NUMVAL(01INQ998TO026(1:4))
+                 MOVE 00INQ998TO026(1:4) TO 01INQ998TO026(1:4)
+              END-IF
+             END-IF
+          END-IF.
+REMARK******************************************************************

@@ -1,0 +1,159 @@
+REMARK*BDALOCLA.v03.008.
+      *----------------------------------------------------------------*
+      *ESTRUCTURA DE LOG DE CLAVES UNIX GENERADAS EN ARCHIVO ICBCLA
+      *----------------------------------------------------------------*
+REMARK*GJC0002   * ENCRCL : SE REDEFINE CAMPO PARA MANEJAR LA CLAVE
+REMARK*G. JIMENEZ*  COMO UN TODO, PARA MANEJO DE ENCRIPCION DE ESTA
+REMARK******************************************************************
+      * FAC0003       * AMPLOG: SE AMPLIA LA ESTRUCTURA DEL ARCHIVO DE
+      * F.CUADROS C.  * LOGS DE CLAVES PARA GRABAR TODOS LOS CAMPOS QUE
+      * JUL.26/2006   * CONTIENE EL ARCHIVO DE CLAVES ICBCLA.
+      *               * SE INCLUYEN ADEMÁS EL NOMBRE DEL USUARIO Y EL
+      *               * INDICADOR DEL PROGRAMA ORIGEN: 1-ICJCLA, 2-BDAACLA,
+      *               * 3-ICGCON, 4-ICGMDF, 5-ICGSSO.
+      ******************************************************************
+      * FAC0004       * VECPRO: SE INCLUYE VECTOR DE PRODUCTOS ADICIO-
+      * F.CUADROS C.  * NALES.                                         
+      * OCT.12/2006   *                                          
+      ******************************************************************
+      * GJC0005       * CARAC2: SE INCLUYE CAMPO DE CARACTERISTICAS   
+      * G.JIMENEZ C.  *                                                
+      * ABRIL/2007    *                                          
+      ******************************************************************
+      * FLT0006       * LOGFEC: SE INCLUYE CAMPO DE FECHA DE ULTIMA   
+      * F.LOZANO TORRES MODIFICACION.                                  
+      * JUNIO/2007    *                                          
+      ******************************************************************
+      * ABB0007     * PROD01 - INCLUIR CAMPO DE CODIGO UNICO DE PRODUCTO*
+      * ALBEIRO B.  *                                                   *
+      * DIC/2009    *                                                   *
+      * GJC0007     * PRJUR2 - MANEJO DE AUTORIZACION DE CONSULTAR SOLO *
+      * G.JIMENEZ.  *          PERSONA NATURAL, SOLO JURÍDICA O LAS 2   *
+      * FEB./2010   *                                                   *
+      *******************************************************************
+      * CAV0008     * COMBO1 - INCLUIR CAMPO PARA MANEJO DE COMBOS      *
+      * C.VELASCO.  *          DE ACUERDO CON LOS PRODUCTOS DE CADA     *
+      * MARZO/2013  *          CLAVE.                                   *
+      * CAV0008     * PRO001 - SE ADAPTA EL PROGRAMA PARA MANEJAR
+      * C.VELASCO   *          PRODUCTOS EN FORMATO ALFANUMERICO
+      *******************************************************************
+       FD  CLAVE-LOG.
+       01  REG-CLAVE-LOG.
+           03 LLAVE-LOG.
+              05 NUM-CONSEC-LOG           PIC 9(5).
+AMPLOG     03 FILLER00-LOG                PIC X.                        FAC0003 
+AMPLOG     03 NOM-USUA-LOG                PIC X(24).                    FAC0003 
+AMPLOG     03 FILLER01-LOG                PIC X.                        FAC0003 
+           03 COD-SUSC-LOG                PIC 9(6).
+AMPLOG     03 FILLER02-LOG                PIC X.                        FAC0003 
+ENCRCL     03 CLAVE-TOT-LOG.                                            GJC0002 
+ENCRCL        05 COD-NUM-LOG              PIC 9(2).                     GJC0002 
+ENCRCL        05 COD-CLAV-LOG             PIC X(3).                     GJC0002 
+AMPLOG     03 FILLER1-LOG                 PIC X.                        FAC0003 
+           03 NOM-SUS-LOG                 PIC X(40).
+AMPLOG     03 FILLER2-LOG                 PIC X.                        FAC0003 
+           03 NOM-DUEN-LOG                PIC X(24).
+AMPLOG     03 FILLER3-LOG                 PIC X.                        FAC0003 
+           03 NOM-OFIC-LOG                PIC X(15).
+AMPLOG     03 FILLER4-LOG                 PIC X.                        FAC0003 
+           03 COD-CIUD-LOG                PIC 9(3).
+AMPLOG     03 FILLER5-LOG                 PIC X.                        FAC0003 
+           03 ZONA-FAC-LOG                PIC 9(3).
+AMPLOG     03 FILLER50-LOG                PIC X.                        FAC0003 
+           03 IND-BLOQ-LOG                PIC X.
+AMPLOG     03 FILLER6-LOG                 PIC X.                        FAC0003 
+           03 IND-PRIV-LOG                PIC X.
+AMPLOG     03 FILLER7-LOG                 PIC X.                        FAC0003 
+           03 FEC-CREA-LOG                PIC 9(8).
+AMPLOG     03 FILLER8-LOG                 PIC X.                        FAC0003 
+           03 FEC-VENC-LOG                PIC 9(8).
+AMPLOG     03 FILLER9-LOG                 PIC X.                        FAC0003 
+           03 TAB-SCOR-LOG                PIC 9(10).
+AMPLOG     03 FILLER0-LOG                 PIC X.                        FAC0003 
+           03 SUBPRIVIL-LOG               PIC X.
+AMPLOG     03 FILLER10-LOG                PIC X.                        FAC0003 
+           03 BDU-LOG                     PIC X.
+AMPLOG     03 FILLER11-LOG                PIC X.                        FAC0003 
+           03 TIP-ID-LOG                  PIC 9(01).
+AMPLOG     03 FILLER12-LOG                PIC X.                        FAC0003 
+           03 NUM-ID-LOG                  PIC 9(10).
+AMPLOG     03 FILLERA-LOG                 PIC X.                        FAC0003 
+           03 NOM-CIUDAD-LOG              PIC X(30).
+AMPLOG     03 FILLERB1-LOG                PIC X.                        FAC0003 
+           03 REGIONAL-LOG                PIC 9(3).
+AMPLOG     03 FILLERC1-LOG                PIC X.                        FAC0003 
+           03 FEC-BLOQUEO-LOG             PIC 9(8).
+AMPLOG     03 FILLERD1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-SISTEMA-LOG            PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERE1-LOG                PIC X.                        FAC0003 
+           03 PRODUC-LOG                  PIC 9(2).
+AMPLOG     03 FILLERF1-LOG                PIC X.                        FAC0003 
+           03 V-BDUS-LOG                  OCCURS 5 PIC X(3).
+AMPLOG     03 FILLERG1-LOG                PIC X.                        FAC0003 
+           03 FLAG-CONNOM-LOG             PIC X.
+AMPLOG     03 FILLERH1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FEC-ULT-UTIL-LOG            PIC 9(8).                     FAC0003 
+AMPLOG     03 FILLERI1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 IND-EST-UTIL-LOG            PIC X.                        FAC0003 
+AMPLOG     03 FILLERJ1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 CENTRO-COSTO-LOG            PIC 9(6).                     FAC0003 
+AMPLOG     03 FILLERK1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FORMATO-LOG                 PIC 9(4).                     FAC0003 
+AMPLOG     03 FILLERL1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 SEQ-COOKIE-LOG  OCCURS 4    PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERM1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 SCOR-EXTERNO-LOG            PIC X(6).                     FAC0003 
+AMPLOG     03 FILLERN1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 IND-HORARIO-LOG             PIC X(1).                     FAC0003 
+AMPLOG     03 FILLERO1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 IND-HAB-WEB-LOG   OCCURS 4  PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERP1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 COD-TER-LOG                 PIC 9(4).                     FAC0003 
+AMPLOG     03 FILLERQ1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-COOKIE-LOG             PIC X.                        FAC0003 
+AMPLOG     03 FILLERR1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-HUELLA-LOG             PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERS1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-VALAPE-LOG             PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERT1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-COBRAB-LOG             PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERU1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-SACAPE-LOG             PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERV1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 FLAG-FULTAL-LOG             PIC 9(1).                     FAC0003 
+AMPLOG     03 FILLERW1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 RAZON-CONSULTA-LOG          PIC 9(3).                     FAC0003 
+AMPLOG     03 FILLERX1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 DESCRIPCION-LOG             PIC X(40).                    FAC0003 
+AMPLOG     03 FILLERY1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 ULT-PROD-LOG                PIC 9(04).                    FAC0003 
+AMPLOG     03 FILLERZ1-LOG                PIC X.                        FAC0003 
+AMPLOG     03 ANALITICO-LOG               PIC 9(02).                    FAC0003 
+AMPLOG     03 FILLERA2-LOG                PIC X.                        FAC0003 
+AMPLOG     03 IND-PROGRAMA-LOG            PIC X(01).                    FAC0003 
+AMPLOG     03 FILLERB2-LOG                PIC X.                        FAC0003 
+PRO001*    03 PROD-ADIC-LOG  OCCURS 10    PIC 9(3).                     CAV0008
+PRO001     03 PRODUCTOS-ADIC-LOG OCCURS 10 TIMES.                       CAV0008
+PRO001        05 FILLER                   PIC X(01).                    CAV0008
+PRO001        05 PROD-ADIC-LOG            PIC 9(02).                    CAV0008
+PRO001        05 PROD-ADIC-LOG-R REDEFINES PROD-ADIC-LOG   PIC X(02).   CAV0008
+VECPRO     03 FILLERC2-LOG                PIC X.                        FAC0004 
+CARAC2     03 CARACTERISTICAS-LOG         PIC 9(02).                    GJC0005
+LOGFEC     03 FILLERD2-LOG                PIC X.                        FLT0006 
+LOGFEC     03 FEC-ULT-MODIF-LOG           PIC 9(08).                    FLT0006
+PROD01     03 FILLERE2-LOG                PIC X.                        ABB0007 
+PROD01     03 PRODUCTO-UNICO-LOG          PIC 9(02).                    ABB0007
+PRO001     03 PRODUCTO-UNICO-LOG-R REDEFINES                            CAV0008
+PRO001                             PRODUCTO-UNICO-LOG  PIC X(02).       CAV0008
+PROD01     03 FILLERF2-LOG                PIC X.                        ABB0007 
+PRJUR2     03 HC-PN-PJ-LOG                PIC 9(01).                    GJC0007
+COMBO1     03 FILLERCMB-LOG               PIC X.                        CAV0008
+COMBO1     03 COMBO-LOG                   PIC X(03).                    CAV0008
+COMBO1     03 FILLERZ2-LOG                PIC X(81).                    CAV0008
+REMARK*LAS ADICIONES A ESTE ARCHIVO HACERLAS ANTES DE ESTE PUNTO
+REMARK*PARA NO ALTERAR LOS DESCRIPTIVOS FINALES DEL ESTADO DEL REGISTRO
+           03 IND-REGI-LOG                PIC X.
+AMPLOG     03 FILLERB-LOG                 PIC X.                        FAC0003 
+           03 IND-EST-LOG                 PIC X.
+AMPLOG     03 FILLERC-LOG                 PIC X.                        FAC0003 
+           03 DES-EST-LOG                 PIC X(15).

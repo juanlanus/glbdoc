@@ -1,0 +1,21 @@
+******* VALPGRCR-FD.v01.0002
+REMARK*Parametros de campos del maestro resumido ampliado
+REMARK*Cartera. Proceso de validacion
+036300*----------------------------------------------------------------*
+REMARK******************************************************************
+      * CAV0002     * CAMPVL - SE ADICIONAN DOS INDICADORES DE CAMPOS  *
+      * C. VELASCO  *          VALIDOS PARA CARTERA ROTATIVA CBR       *
+      * 22/OCT/2009 *          Y CARTERA BANCARIA CAB, EL CAMPO IND-AC-*
+      *                        TUALIZA-VALPGRCR PARA LAS DEMAS CARTERAS*
+REMARK******************************************************************
+       FD  VALPGRCR.
+       01  REG-VALPGRCR.
+           03 NUM-CAMPO-VALPGRCR               PIC 9(2).
+           03 NUM-CALIF-VALPGRCR               PIC 9(2).
+           03 POR-PESO-VALPGRCR                PIC 99V99.
+           03 NUM-GRUPO-VALPGRCR               PIC 9.
+           03 IND-ACTUALIZA-VALPGRCR           PIC 9.
+           03 IND-VALIDO-VALPGRCR              PIC 9.
+CAMPVL     03 IND-ACTUALIZA-CBR-VALPGRCR       PIC 9.                   CAV0002
+CAMPVL     03 IND-ACTUALIZA-CAB-VALPGRCR       PIC 9.                   CAV0002
+CAMPVL     03 FILLER-VALPGRCR                  PIC X(28).               CAV0002

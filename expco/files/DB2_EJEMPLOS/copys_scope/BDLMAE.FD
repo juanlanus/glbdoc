@@ -1,0 +1,79 @@
+******* BDLMAE-FD.003
+******* BDLMAE.v.03.003
+009900********************************************************************
+******* MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR DE DIRECCIONES
+009900********************************************************************
+REMARK* FAC0002     * RCNCER*  INCLUSION DE CAMPOS PARA GUARDAR LA
+REMARK* F.CUADROS C.* INFORMACIÓN DE CALIFICACIÓN DE DATOS DE UBICACIÓN
+REMARK* JUL.06/2006 * RESIDENCIAL, LABORAL Y DE CORRESPONDENCIA
+************************************************************************
+REMARK* FAC0003     * FECREC*  INCLUSION DE CAMPO PARA ALMACENAR LA 
+REMARK* F.CUADROS C.* FECHA DE RECEPCIÓN DEL MAESTRO.
+REMARK* SEP.15/2006 * 
+************************************************************************
+BDLMAE FD  BDLMAE
+BDLMAE     BLOCK CONTAINS 40 RECORDS.
+BDLMAE 01  REGISTRO1-BDLMAE.
+BDLMAE     03  COD-SUSCRIPTOR-CEROS-BDLMAE PIC 9(18).
+BDLMAE     03  COD-SUSCRIPTOR-BDLMAE       PIC X(6).
+BDLMAE     03  COD-TIP-CUENTA-BDLMAE       PIC X(2).
+BDLMAE     03  FECHA-NOVEDADES-BDLMAE.
+BDLMAE         05 ANO-NOVEDADES-BDLMAE     PIC 9(4).
+BDLMAE         05 MES-NOVEDADES-BDLMAE     PIC 99.
+BDLMAE         05 DIA-NOVEDADES-BDLMAE     PIC 99.
+BDLMAE     03  NIT-BDLMAE                  PIC 9(11).                  
+BDLMAE     03  RESTO1-BDLMAE               PIC X(555).                
+BDLMAE     03  FILLER-BDLMAE-R REDEFINES RESTO1-BDLMAE.               
+FECREC         05  FILLER                  PIC X(462).                  FAC0003 
+FECREC         05  FECHA-RECEPCION-BDLMAE  PIC 9(8).                    FAC0003 
+RCNCER         05  CALIFIC-DIRRES-BDLMAE   PIC 999V99.                  FAC0002 
+RCNCER         05  CALIFIC-DIRLAB-BDLMAE   PIC 999V99.                  FAC0002 
+RCNCER         05  CALIFIC-DIRCOR-BDLMAE   PIC 999V99.                  FAC0002 
+RCNCER         05  CALIFIC-TOTDIR-BDLMAE   PIC 999V99.                  FAC0002 
+RCNCER         05  TOTAL-REGDIR-BDLMAE     PIC 9(8).                    FAC0002 
+BDLMAE         05  CALIFIC-FINAL-BDLMAE    PIC 999V99.            
+BDLMAE         05  CALIFIC-GRUPO1-BDLMAE   PIC 999V99.                
+BDLMAE         05  CALIFIC-GRUPO2-BDLMAE   PIC 999V99.                
+BDLMAE         05  CALIFIC-GRUPO3-BDLMAE   PIC 999V99.                
+BDLMAE         05  CALIFIC-TOTAL-BDLMAE    PIC 999V99.               
+BDLMAE         05  FECHA-CALIFIC-BDLMAE    PIC 9(8).                
+BDLMAE         05  NUM-SEGURIDAD-BDLMAE    PIC 9(4).                  
+BDLMAE         05  IND-PROG-CALIFIC-BDLMAE PIC X(02).               
+BDLMAE         05  FILLER                  PIC X(03).              
+BDLMAE         05  IND-VISOR-BDLMAE        PIC X(15).               
+BDLMAE 01  REGISTRO2-BDLMAE.
+BDLMAE     03  NUM-CTA-BDLMAE              PIC X(18).
+BDLMAE     03  FECHA-APERT-BDLMAE.
+BDLMAE         05 A-FAPE-BDLMAE            PIC 9(4).
+BDLMAE         05 M-FAPE-BDLMAE            PIC 9(2).
+BDLMAE         05 D-FAPE-BDLMAE            PIC 9(2).
+BDLMAE     03  NUM-ID-BDLMAE               PIC 9(11).
+BDLMAE     03  NOMBRE-COMP-BDLMAE          PIC X(45).
+BDLMAE     03  FECHA-NAC-BDLMAE.
+BDLMAE         05 A-FNAC-BDLMAE            PIC 9(4).
+BDLMAE         05 M-FNAC-BDLMAE            PIC 9(2).
+BDLMAE         05 D-FNAC-BDLMAE            PIC 9(2).
+BDLMAE     03  TIPO-IDEN-BDLMAE            PIC 9.
+BDLMAE     03  CIU-RES-BDLMAE              PIC X(20).              
+BDLMAE     03  DPT-RES-BDLMAE              PIC X(20).                 
+BDLMAE     03  DIR-RES-BDLMAE              PIC X(60).                 
+BDLMAE     03  TEL-RES-BDLMAE              PIC 9(10).                
+BDLMAE     03  CIU-LAB-BDLMAE              PIC X(20).               
+BDLMAE     03  DPT-LAB-BDLMAE              PIC X(20).                 
+BDLMAE     03  DIR-LAB-BDLMAE              PIC X(60).                   
+BDLMAE     03  TEL-LAB-BDLMAE              PIC 9(10).                   
+BDLMAE     03  CIU-COR-BDLMAE              PIC X(20).                  
+BDLMAE     03  DPT-COR-BDLMAE              PIC X(20).                 
+BDLMAE     03  DIR-COR-BDLMAE              PIC X(60).                   
+BDLMAE     03  E-MAIL-BDLMAE               PIC X(40).                  
+BDLMAE     03  TEL-CEL-BDLMAE              PIC 9(10).                  
+BDLMAE     03  RESTO2-BDLMAE               PIC X(139).                 
+BDLMAE 01  REGISTRO3-BDLMAE.                                           
+BDLMAE     03  IDENTIFICADOR-BDLMAE        PIC X(18).                  
+BDLMAE     03  FECHA-PROCESO-BDLMAE.                                   
+BDLMAE         05 ANO-PROCESO-BDLMAE       PIC 9(4).                   
+BDLMAE         05 MES-PROCESO-BDLMAE       PIC 9(2).                   
+BDLMAE         05 DIA-PROCESO-BDLMAE       PIC 9(2).                   
+BDLMAE     03  NUM-REGISTROS-BDLMAE        PIC 9(8).                   
+BDLMAE     03 RESTO3-BDLMAE                PIC X(566).
+BDLMAE******************************************************************

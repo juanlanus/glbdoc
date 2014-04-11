@@ -1,0 +1,552 @@
+REMARK* BDIIALE.PROC.v.0006
+REMARK******************************************************************
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINA QUE PERMITEN EXTRACTAR 
+REMARK* LAS ALERTAS DEL SISTEMA                        
+REMARK*     "I" : ALERTAS INTERNAS, SE CALCULAN CON BASE A LA INF DE BD
+REMARK*           01=No se usa
+REMARK*           02=Alertas sobre el ICMCRE
+REMARK*           03=Alertas sobre el ICMCHK
+REMARK*           04=Alertas sobre doble identidad
+REMARK*           04=Alertas sobre vigencia de registraduria en 12
+REMARK*     "F" : ALERTAS EXTERNAS FIJAS - LAS DETERMINA DATACREDITO SOLO
+REMARK*           REQUIEREN DEL REGISTRO 001 PARA SU DEFINICION. SE RECONOCEN
+REMARK*           POR TENER LA LETRA "S" EN EL CAMPO TEXTO-FIJO-BDIIALE
+REMARK*           01=el documento de identidad fue extraviado
+REMARK*           02=el documento de identidad fue robado
+REMARK*           03=actualmente reside fuera de colombia
+REMARK*           04=Ya ha sido victima de suplantaciones
+REMARK*     "E" : ALERTAS EXTERNAS VARIABLES : UNA ENTIDAD PUEDE COLOCAR 
+REMARK*           DIRECTAMENTE UNA ALERTA. EL SIGNIFICADO DE CADA UNA LAS    
+REMARK*           DEBE COLOCAR DATACREDITO. CONTIENE REGISTRO HEADER (1)    
+REMARK*           DATAHOST (2-10) Y TEXTO (11-XX)                            
+REMARK*           01=POR ASIGNAR                                
+REMARK*           02=POR ASIGNAR                                
+REMARK*           03=POR ASIGNAR                                
+REMARK*           04=POR ASIGNAR                                
+REMARK*
+REMARK******************************************************************       
+REMARK* RMB0002   * TIPALE: SE AMPLIA EL CONCEPTO DE ALERTAS, DE MODO QUE    
+REMARK* R.MARTINEZ* NO TENGAN QUE ESTAR EN EL ARCHIVO DE ALERTAS SINO QUE
+REMARK* ABRIL/2006* SE PUEDAN GENERAR A PARTIR DE OTROS ARCHIVOS DE LA BD
+REAMRK*           * SE DEFINEN LAS QUE APLICAN A UN PAÍS EN EL ICBSYS.INI
+REMARK******************************************************************       
+REMARK* RMB0003   * CIU001: SE HABILTAN EL MANEJO DE DATAHOST Y SE AFINA     
+REMARK* R.MARTINEZ*         EL CONCEPTO DEFINIENDO TIPO DE ALERTAS Y SU  
+REMARK* OCTUB/2006*         RESPECTIVAS SECUENCIAS                       
+REMARK*           *         SE CONTROLA LA PRESENTACION DE ALERTAS SOLO
+REAMRK*           *         SI ESTAN HABILITADAS SEGUN TIPO DE CONSULTAS
+REMARK******************************************************************       
+REMARK* RMB0004   * CIU002: AJUSTES NECESARIOS PARA CATALOGAR EN PRODUC-     
+REMARK* R.MARTINEZ*         CION EL CONCEPTO DE ALERTAS POR TENER INFOR- 
+REMARK* MARZO/2007*         MACION COMO CEDULA Y TAMBIÉN COMO NIT        
+REMARK******************************************************************       
+REMARK* RMB0005   * T7T501: MANEJO DE IDENTIFICACIONES QUE PASAN DE T7 A     
+REMARK* R.MARTINEZ*         T5 CUANDO QUEDA UNA HUELLA DE CONSULTA. SE  
+REMARK* AGOS./2007*         CREAN 2 ALERTAS: 6 -INDICA QUE NO HAY INFORMA
+REMARK*           *         CION EN BD DE VALIDACION Y 7-SI EL APELLIDO
+REMARK*           *         CON EL QUE SE VUELVE A CONSULTAR ES DIFERENTE
+REMARK******************************************************************       
+REMARK* ABB0006   * ICGCPL: SE ADICIONA MANEJO DEL NUEVO PRODUCTO HC+  *
+REMARK* A.BERNAL  *                                                    *
+REMARK* SEPT./2009*                                                    *
+REMARK******************************************************************       
+       7000-RECORRER-BDIIALE.        
+REMARK******************************************************************
+REMARK*7000-RECORRER-BDIIALE.
+REMARK* PARA UNA IDENTIFICACION EN PARTICULAR SE REVISAN UNO A UNO LOS  
+REMARK* DIFERENTES TIPOS DE ALERTA QUE PUEDE TENER Y DE TENERLOS LOS EN-
+REMARK* VIA A LA SECCION DE ALERTAS DEL INFORME. SOLO SE PRESENTAN LAS
+REMARK* ALERTAS HABILITADAS PARA EL PAIS
+REMARK******************************************************************
+           MOVE 1 TO ENVIE.        
+           MOVE 0 TO CONT-LINEAS-BDIIALE.        
+CIU001     IF (ALEWEB-SYS = "SI" AND MOD-TAB = 0) OR                    RMB0003 
+CIU001        (ALEDTH-SYS = "SI" AND MOD-TAB = 1 AND S-XML = 0) OR      RMB0003 
+CIU001        (ALEXML-SYS = "SI" AND MOD-TAB = 1 AND S-XML = 1)         RMB0003 
+CIU001        MOVE 1 TO I                                               RMB0003 
+CIU001     ELSE                                                         RMB0003 
+CIU001        MOVE 40 TO I                                              RMB0003 
+CIU001     END-IF                                                       RMB0003 
+CIU001     IF I = 1 AND MOD-TAB = 1 *> PARA DATHOST,XML,SERCEL ...      RMB0003 
+CIU002        AND  S-XML = 0                                            RMB0004 
+CIU001        MOVE SPACES TO INQ-COMANDO4                               RMB0003 
+CIU001        UNSTRING MSG-ORIGINAL DELIMITED BY  ALL "[ALERTAS="       RMB0003 
+CIU001        INTO  INQ-FILLER INQ-COMANDO4                             RMB0003 
+CIU001        IF INQ-COMANDO4(02:1) = "]"                               RMB0003 
+CIU001           IF INQ-COMANDO4(1:1) NOT = "1"                         RMB0003 
+CIU001              MOVE 40 TO I                                        RMB0003 
+CIU001           END-IF                                                 RMB0003 
+CIU001        ELSE                                                      RMB0003 
+CIU001           MOVE 40 TO I                                           RMB0003 
+CIU001        END-IF                                                    RMB0003 
+CIU001     END-IF.                                                      RMB0003 
+CIU001     MOVE 1 TO ENVIE.                                             RMB0003
+CIU001     MOVE 0 TO CONT-LINEAS-BDIIALE.                               RMB0003
+CIU001     PERFORM UNTIL I >= 40 OR V-ALERTA(I)=0                       RMB0003 
+CIU001        EVALUATE V-ALERTA(I)                                      RMB0003 
+TIPALE        WHEN 1                                                    RMB0002 
+TIPALE          PERFORM 7010-ALERTAS-BDIIALE                            RMB0002 
+TIPALE        WHEN 2                                                    RMB0002 
+TIPALE          PERFORM 7020-ALERTAS-ICMCRE                             RMB0002 
+TIPALE        WHEN 3                                                    RMB0002 
+TIPALE          PERFORM 7030-ALERTAS-ICMCHK                             RMB0002 
+TIPALE        WHEN 4                                                    RMB0002 
+TIPALE          PERFORM 7040-ALERTAS-DOBLE-IDENTIDAD                    RMB0002 
+TIPALE        WHEN 5                                                    RMB0002 
+TIPALE          PERFORM 7050-ALERTAS-VIGENCIA-CED                       RMB0002 
+T7T501        WHEN 6                                                    RMB0005 
+T7T501          IF FUE-UN-TIPO7 = 1                                     RMB0005 
+T7T501             PERFORM 7060-ALERTAS-NO-BDAIDE                       RMB0005 
+T7T501          END-IF                                                  RMB0005 
+T7T501        WHEN 7                                                    RMB0005 
+T7T501          IF FUE-UN-TIPO7 = 1                                     RMB0005 
+T7T501             PERFORM 7070-ALERTAS-APELLIDO                        RMB0005 
+T7T501          END-IF                                                  RMB0005 
+TIPALE        END-EVALUATE                                              RMB0002 
+TIPALE        ADD 1 TO I                                                RMB0002 
+TIPALE     END-PERFORM.                                                 RMB0002 
+TIPALE     IF CONT-LINEAS-BDIIALE > 0                                   RMB0002 
+TIPALE        MOVE 1 TO REC                                             RMB0002 
+TIPALE        MOVE SPACES         TO MOVIMIENTO-S                       RMB0002 
+TIPALE        PERFORM 6700-CONT-CTA                                     RMB0002 
+T7T501        MOVE 0 TO REC                                             RMB0005 
+TIPALE     END-IF.                                                      RMB0002 
+TIPALE     IF ENVIE = 0                                                 RMB0002 
+TIPALE        PERFORM 10900-ENVIA-CRCR                                  RMB0002 
+TIPALE     END-IF.                                                      RMB0002 
+
+TIPALE 7010-ALERTAS-BDIIALE.                                            RMB0002 
+REMARK*********************************************************************
+REMARK*7010-ALERTAS-BDIIALE.
+REMARK* SE RECORRE LAS POSIBLES ALERTAS PARA LA IDENTIFICACION BUSCADA,
+REMARK* EXTRACTANDO LA INFORMACION DE "ENCABEZADO" , "CUERPO" y UN POSI
+REMARK* DATAHOST QUE ESTA POR DEFINIR.
+REMARK*********************************************************************
+           IF ABIERTO-BDIIALE = 0        
+              OPEN INPUT  BDIIALE                                       
+              MOVE 1 TO ABIERTO-BDIIALE        
+           END-IF.        
+           MOVE TIP-IDE-AUX-BDIIALE TO TIP-IDE-BDIIALE.        
+           MOVE NUM-IDE-AUX-BDIIALE TO NUM-IDE-BDIIALE.        
+           MOVE ZEROS  TO FUENTE-BDIIALE        
+           MOVE SPACES TO LLASEC-BDIIALE.        
+           MOVE 0 TO FIN-BDIIALE.        
+TIPALE     MOVE 0 TO PROCESAR-BDIIALE.                                  RMB0002 
+           START BDIIALE KEY > LLAVE-BDIIALE         
+                 INVALID KEY         
+                    MOVE 1 TO FIN-BDIIALE        
+                 NOT INVALID KEY         
+                    READ BDIIALE   NEXT RECORD              
+                       AT END        
+                          MOVE 1 TO FIN-BDIIALE           
+                    END-READ        
+           END-START.        
+           PERFORM UNTIL FIN-BDIIALE = 1 OR NUM-IDE-BDIIALE NOT =         
+                                            NUM-IDE-AUX-BDIIALE OR        
+                                            TIP-IDE-BDIIALE NOT =         
+                                            TIP-IDE-AUX-BDIIALE         
+CIU001        MOVE 1 TO PROCESAR-BDIIALE                                RMB0003 
+CIU001        PERFORM 7100-PROCESE-HEADER-BDIIALE                       RMB0003 
+CIU001        IF PROCESAR-BDIIALE = 1                                   RMB0003 
+CIU001           MOVE "E"       TO TIPALE-AUX-BDIIALE                   RMB0003 
+CIU001           MOVE COD-ALERTA-BDIIALE TO CODALE-AUX-BDIIALE          RMB0003 
+CIU001           IF MOD-TAB = 0                                         RMB0003 
+CIU001              PERFORM 7500-PROCESE-TEXTO-BDIIALE                  RMB0003 
+CIU001           ELSE                                                   RMB0003 
+CIU001              PERFORM 7300-PROCESE-DATAHOST-BDIIALE               RMB0003 
+CIU001           END-IF                                                 RMB0003 
+CIU001        END-IF                                                    RMB0003 
+              READ BDIIALE   NEXT RECORD              
+              AT END        
+                 MOVE 1 TO FIN-BDIIALE           
+              END-READ        
+           END-PERFORM.        
+TIPALE 7020-ALERTAS-ICMCRE.                                             RMB0002 
+REMARK***********************************************************************
+REMARK*7020-ALERTAS-ICMCRE.
+REMARK* SE BUSCAN LAS ALERTAS QUE SE GENERAN SOBRE EL ARCHIVO DE CARTERA 
+REMARK* AL NO MOSTRAR UNA CUENTA MOROSA POR FALTA DE AUTORIZACIÓN
+REMARK***********************************************************************
+TIPALE     INITIALIZE LLAVE-MAES-CREDIT.                                RMB0002 
+TIPALE     MOVE TIP-ID     TO TIPO-ID-ABD07                             RMB0002 
+TIPALE     MOVE NUM-ID     TO NUM-ID-ABD07.                             RMB0002 
+TIPALE     MOVE 0 TO FIN-CREDIT.                                        RMB0002 
+TIPALE     START MAESTRO-CREDIT KEY > LLAVE-MAES-CREDIT                 RMB0002 
+TIPALE        INVALID KEY MOVE 1 TO FIN-CREDIT                          RMB0002 
+TIPALE        NOT INVALID KEY                                           RMB0002 
+TIPALE           READ MAESTRO-CREDIT NEXT RECORD AT END                 RMB0002 
+TIPALE                MOVE 1 TO FIN-CREDIT                              RMB0002 
+TIPALE           END-READ                                               RMB0002 
+TIPALE     END-START.                                                   RMB0002 
+TIPALE     PERFORM UNTIL TIP-ID NOT = TIPO-ID-ABD07                     RMB0002 
+TIPALE        OR NUM-ID NOT = NUM-ID-ABD07 OR FIN-CREDIT  = 1           RMB0002 
+TIPALE        IF IND-BLOQUEO-ABD07 = PAR-CODBLOALER AND                 RMB0002 
+TIPALE           (NOV-REPORT-ABD07 > 16 AND < 42    OR                  RMB0002 
+TIPALE            (NOV-REPORT-ABD07 = 45 OR 47))                        RMB0002 
+TIPALE           MOVE COD-SUS-ABD07 TO FUENTE-BDIIALE                   RMB0002 
+TIPALE           MOVE 0             TO BLOQUEO-BDIIALE                  RMB0002 
+TIPALE           MOVE 1             TO PROCESAR-BDIIALE                 RMB0002 
+CIU001           MOVE FUNCTION CURRENT-DATE(1:8) TO FEC-VEN-BDIIALE     RMB0003 
+TIPALE           MOVE FEC-NOVEDAD-ABD07 TO FECHA-AUX-SCO                RMB0002 
+TIPALE           MOVE FECHA-AUX-SCO(1:2) TO MES-NOV                     RMB0002 
+TIPALE           MOVE FECHA-AUX-SCO(3:2) TO ANO-NOV                     RMB0002 
+TIPALE           IF ANO-NOV < 50                                        RMB0002 
+TIPALE             MOVE 20          TO SIG-NOV                          RMB0002 
+TIPALE           ELSE                                                   RMB0002 
+TIPALE             MOVE 19          TO SIG-NOV                          RMB0002 
+TIPALE           END-IF                                                 RMB0002 
+CIU001           MOVE 00000001 TO FEC-NOV-BDIIALE                       RMB0003 
+CIU001                            FEC-REP-BDIIALE                       RMB0003 
+CIU001           MOVE FECHA-NOVEDAD07(1:6) TO FEC-NOV-BDIIALE(1:6)      RMB0003 
+CIU001           MOVE FECHA-NOVEDAD07(1:6) TO FEC-REP-BDIIALE(1:6)      RMB0003 
+CIU001           MOVE SPACES               TO INF-DATAHOST-BDIIALE      RMB0003 
+TIPALE           PERFORM 7100-PROCESE-HEADER-BDIIALE                    RMB0002 
+TIPALE           IF PROCESAR-BDIIALE = 1                                RMB0002 
+CIU001              MOVE PAR-MSGBLOALER TO TEXTO1-AUX-BDIIALE           RMB0003 
+CIU001              MOVE SPACES         TO TEXTO2-AUX-BDIIALE           RMB0003 
+CIU001              IF MOD-TAB = 0                                      RMB0003 
+CIU001                 PERFORM 7500-PROCESE-TEXTO-BDIIALE               RMB0003 
+CIU001              ELSE                                                RMB0003 
+CIU001                 MOVE "I" TO TIPALE-AUX-BDIIALE                   RMB0003 
+CIU001                 MOVE  2  TO CODALE-AUX-BDIIALE                   RMB0003 
+CIU001                 PERFORM 7300-PROCESE-DATAHOST-BDIIALE            RMB0003 
+CIU001              END-IF                                              RMB0003 
+TIPALE           END-IF                                                 RMB0002 
+TIPALE        END-IF                                                    RMB0002 
+TIPALE        READ MAESTRO-CREDIT  NEXT RECORD AT END                   RMB0002 
+TIPALE             MOVE 1 TO FIN-CREDIT                                 RMB0002 
+TIPALE        END-READ                                                  RMB0002 
+TIPALE     END-PERFORM.                                                 RMB0002 
+
+TIPALE 7030-ALERTAS-ICMCHK.                                             RMB0002 
+REMARK******************************************************************
+REMARK*7030-ALERTAS-ICMCHK.
+REMARK* SE BUSCAN LAS ALERTAS QUE SE GENERAN SOBRE EL ARCHIVO DE CUENTAS 
+REMARK* CORRIENTES CUANDO NO SE MUESTRAN CUENTAS POR FALTA DE AUTORIZACION
+REMARK******************************************************************
+TIPALE     INITIALIZE LLAVE-MAES-CHECK                                  RMB0002 
+TIPALE     MOVE TIP-ID     TO TIPO-ID-ABD06                             RMB0002 
+TIPALE     MOVE NUM-ID     TO NUM-ID-ABD06.                             RMB0002 
+TIPALE     MOVE 0 TO FIN-CHECK                                          RMB0002 
+TIPALE     START MAESTRO-CHECK  KEY > LLAVE-MAES-CHECK                  RMB0002 
+TIPALE        INVALID KEY MOVE 1 TO FIN-CHECK                           RMB0002 
+TIPALE        NOT INVALID KEY                                           RMB0002 
+TIPALE           READ MAESTRO-CHECK  NEXT RECORD AT END                 RMB0002 
+TIPALE                MOVE 1 TO FIN-CHECK                               RMB0002 
+TIPALE           END-READ                                               RMB0002 
+TIPALE     END-START.                                                   RMB0002 
+TIPALE     PERFORM UNTIL TIP-ID NOT = TIPO-ID-ABD06                     RMB0002 
+TIPALE        OR NUM-ID NOT = NUM-ID-ABD06 OR FIN-CHECK   = 1           RMB0002 
+TIPALE        IF IND-BLOQUEO-ABD06 = PAR-CODBLOALER                     RMB0002 
+TIPALE           MOVE COD-SUS-ABD06 TO FUENTE-BDIIALE                   RMB0002 
+TIPALE           MOVE 0             TO BLOQUEO-BDIIALE                  RMB0002 
+TIPALE           MOVE 1             TO PROCESAR-BDIIALE                 RMB0002 
+CIU001           MOVE FUNCTION CURRENT-DATE(1:8) TO FEC-VEN-BDIIALE     RMB0003 
+TIPALE           MOVE FEC-NOVEDAD-ABD06 TO FECHA-AUX-SCO                RMB0002 
+TIPALE           MOVE FECHA-AUX-SCO(1:2) TO MES-NOV                     RMB0002 
+TIPALE           MOVE FECHA-AUX-SCO(3:2) TO ANO-NOV                     RMB0002 
+TIPALE           IF ANO-NOV < 50                                        RMB0002 
+TIPALE             MOVE 20          TO SIG-NOV                          RMB0002 
+TIPALE           ELSE                                                   RMB0002 
+TIPALE             MOVE 19          TO SIG-NOV                          RMB0002 
+TIPALE           END-IF                                                 RMB0002 
+CIU001           MOVE 00000001 TO FEC-NOV-BDIIALE                       RMB0003 
+CIU001                            FEC-REP-BDIIALE                       RMB0003 
+CIU001           MOVE FECHA-NOVEDAD07(1:6) TO FEC-NOV-BDIIALE(1:6)      RMB0003 
+CIU001           MOVE FECHA-NOVEDAD07(1:6) TO FEC-REP-BDIIALE(1:6)      RMB0003 
+CIU001           MOVE SPACES               TO INF-DATAHOST-BDIIALE      RMB0003 
+TIPALE           PERFORM 7100-PROCESE-HEADER-BDIIALE                    RMB0002 
+TIPALE           IF PROCESAR-BDIIALE = 1                                RMB0002 
+CIU001              MOVE PAR-MSGBLOALER TO TEXTO1-AUX-BDIIALE           RMB0003 
+CIU001              MOVE SPACES         TO TEXTO2-AUX-BDIIALE           RMB0003 
+CIU001              IF MOD-TAB = 0                                      RMB0003 
+CIU001                 PERFORM 7500-PROCESE-TEXTO-BDIIALE               RMB0003 
+CIU001              ELSE                                                RMB0003 
+CIU001                 MOVE "I" TO TIPALE-AUX-BDIIALE                   RMB0003 
+CIU001                 MOVE  3  TO CODALE-AUX-BDIIALE                   RMB0003 
+CIU001                 PERFORM 7300-PROCESE-DATAHOST-BDIIALE            RMB0003 
+CIU001              END-IF                                              RMB0003 
+TIPALE           END-IF                                                 RMB0002 
+TIPALE        END-IF                                                    RMB0002 
+TIPALE        READ MAESTRO-CHECK   NEXT RECORD AT END                   RMB0002 
+TIPALE             MOVE 1 TO FIN-CHECK                                  RMB0002 
+TIPALE        END-READ                                                  RMB0002 
+TIPALE     END-PERFORM.                                                 RMB0002 
+
+TIPALE 7040-ALERTAS-DOBLE-IDENTIDAD.                                    RMB0002 
+REMARK******************************************************************
+REMARK*7040-ALERTAS-DOBLE-IDENTIDAD.
+REMARK* SE BUSCA SI SE DEBE GENERAR LA ALERTA INFORMANDO QUE TIENE INFOR-
+REMARK* MACION CONO CEDULA Y COMO NIT
+REMARK******************************************************************
+TIPALE     MOVE TIP-ID TO J                                             RMB0002 
+TIPALE     IF TIP-ID = 1                                                RMB0002 
+CIU002        MOVE                                                      RMB0004 
+CIU002         "LA CEDULA TIENE HISTORIA DE CREDITO COMO NIT" TO        RMB0004 
+CIU002*         TEXTO-LIN1-BDIIALE                                      RMB0004 
+CIU002          TEXTO1-AUX-BDIIALE                                      RMB0004 
+CIU002*         MOVE SPACES         TO TEXTO-LIN2-BDIIALE               RMB0004 
+CIU002          MOVE SPACES         TO TEXTO2-AUX-BDIIALE               RMB0004 
+TIPALE        MOVE 2 TO TIP-ID                                          RMB0002 
+TIPALE     ELSE                                                         RMB0002 
+TIPALE        IF TIP-ID = 2                                             RMB0002 
+TIPALE           MOVE                                                   RMB0002 
+CIU002           "EL NIT TIENE HISTORIA DE CREDITO COMO CEDULA" TO      RMB0004 
+CIU002*          TEXTO-LIN1-BDIIALE                                     RMB0004 
+CIU002           TEXTO1-AUX-BDIIALE                                     RMB0004 
+CIU002*          MOVE SPACES         TO TEXTO-LIN2-BDIIALE              RMB0004 
+CIU002           MOVE SPACES         TO TEXTO2-AUX-BDIIALE              RMB0004 
+TIPALE           MOVE 1 TO TIP-ID                                       RMB0002 
+CIU002        ELSE                                                      RMB0004 
+CIU002           MOVE 1 TO MENS-ERR                                     RMB0004 
+TIPALE        END-IF                                                    RMB0002 
+TIPALE     END-IF                                                       RMB0002 
+CIU002     IF MENS-ERR = 0                                              RMB0004 
+CIU002        PERFORM 2420-VERSITIENECTAS                               RMB0004 
+CIU002     END-IF                                                       RMB0004 
+CIU002     IF MENS-ERR = 0                                              RMB0004 
+CIU001        MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-NOV-AUX-BDIIALE  RMB0003 
+CIU002*       MOVE "B.D DATACREDITO" TO NOMFUE-LIN1-BDIIALE             RMB0004 
+CIU002        MOVE "DATACREDITO    " TO NOMFUE1-AUX-BDIIALE             RMB0004 
+CIU002*       MOVE SPACES            TO NOMFUE-LIN2-BDIIALE             RMB0004 
+CIU002        MOVE SPACES            TO NOMFUE2-AUX-BDIIALE             RMB0004 
+CIU002        MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-NOV-AUX-BDIIALE  RMB0004 
+CIU001        MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-VEN-AUX-BDIIALE  RMB0003 
+CIU001        MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-REP-AUX-BDIIALE  RMB0003 
+CIU001        MOVE 990001          TO FUENTE-AUX-BDIIALE                RMB0003 
+CIU001        MOVE SPACES          TO INF-DATAHOST-AUX-BDIIALE          RMB0003 
+CIU001        IF MOD-TAB = 0                                            RMB0003 
+CIU001           PERFORM 7500-PROCESE-TEXTO-BDIIALE                     RMB0003 
+CIU001        ELSE                                                      RMB0003 
+CIU001           MOVE "I" TO TIPALE-AUX-BDIIALE                         RMB0003 
+CIU001           MOVE  4  TO CODALE-AUX-BDIIALE                         RMB0003 
+CIU001           PERFORM 7300-PROCESE-DATAHOST-BDIIALE                  RMB0003 
+CIU001        END-IF                                                    RMB0003 
+TIPALE     END-IF.                                                      RMB0002 
+TIPALE     MOVE 0 TO MENS-ERR.                                          RMB0002 
+TIPALE     MOVE J TO TIP-ID.                                            RMB0002 
+
+       7050-ALERTAS-VIGENCIA-CED.
+REMARK******************************************************************
+REMARK*7050-ALERTAS-VIGENCIA-CED.
+REMARK* SE GENERA ALERTA SI EL ESTADO DE VIGENCIA DE LA CEDULA COLOMBIANA
+REAMRK* ES 12, LO QUE CORRESPONDE A LA PERDIDA DE DERECHOS POLITICOS
+REMARK******************************************************************
+TIPALE     IF TIP-ID = 1                                                RMB0002 
+TIPALE       IF ESTADO-VIG-BDIIREGI = 12                                RMB0002 
+CIU001         MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-NOV-AUX-BDIIALE RMB0003 
+CIU001         MOVE "B.D DATACREDITO" TO NOMFUE1-AUX-BDIIALE            RMB0003 
+CIU001         MOVE SPACES            TO NOMFUE2-AUX-BDIIALE            RMB0003 
+CIU001         MOVE "REVISE VIGENCIA EN REGISTRADURIA NACIONAL" TO      RMB0003 
+CIU001              TEXTO1-AUX-BDIIALE                                  RMB0003 
+CIU001         MOVE SPACES         TO TEXTO2-AUX-BDIIALE                RMB0003 
+CIU001         MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-VEN-AUX-BDIIALE RMB0003 
+CUI001         MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-REP-AUX-BDIIALE RMB0003 
+CIU001         MOVE 990001          TO FUENTE-AUX-BDIIALE               RMB0003 
+CIU001         MOVE SPACES               TO INF-DATAHOST-AUX-BDIIALE    RMB0003 
+CIU001         IF MOD-TAB = 0                                           RMB0003 
+CIU001            PERFORM 7500-PROCESE-TEXTO-BDIIALE                    RMB0003 
+CIU001         ELSE                                                     RMB0003 
+CIU001            MOVE "I" TO TIPALE-AUX-BDIIALE                        RMB0003 
+CIU001            MOVE  5  TO CODALE-AUX-BDIIALE                        RMB0003 
+CIU001            PERFORM 7300-PROCESE-DATAHOST-BDIIALE                 RMB0003 
+CIU001         END-IF                                                   RMB0003 
+TIPALE       END-IF                                                     RMB0002 
+TIPALE     END-IF.                                                      RMB0002 
+T7T501 7060-ALERTAS-NO-BDAIDE.                                          RMB0005 
+REMARK******************************************************************
+REMARK*7060-ALERTAS-NOREGISTRADURIA.
+REMARK* SE GENERA ALERTA SI ES UN TIPO 7 CON CONSULTAS                      
+REMARK******************************************************************
+T7T501     EVALUATE TIP-ID                                              RMB0005 
+T7T501       WHEN 1                                                     RMB0005 
+T7T501         MOVE "SIN INFORMACION EN ARCHIVO DE CEDULAS    " TO      RMB0005 
+T7T501              TEXTO1-AUX-BDIIALE                                  RMB0005 
+T7T501       WHEN 2                                                     RMB0005 
+T7T501         MOVE "SIN INFORMACION EN ARCHIVO DE NITS       " TO      RMB0005 
+T7T501              TEXTO1-AUX-BDIIALE                                  RMB0005 
+T7T501       WHEN 3                                                     RMB0005 
+T7T501         MOVE "SIN INFORMACION EN ARCHIVO DE NITS       " TO      RMB0005 
+T7T501              TEXTO1-AUX-BDIIALE                                  RMB0005 
+T7T501       WHEN 4                                                     RMB0005 
+T7T501         MOVE "SIN INFORMACION EN ARCHIVO DE EXTRANJEROS" TO      RMB0005 
+T7T501              TEXTO1-AUX-BDIIALE                                  RMB0005 
+T7T501     END-EVALUATE                                                 RMB0005 
+T7T501     MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-NOV-AUX-BDIIALE     RMB0005 
+T7T501     MOVE "B.D DATACREDITO" TO NOMFUE1-AUX-BDIIALE                RMB0005 
+T7T501     MOVE SPACES            TO NOMFUE2-AUX-BDIIALE                RMB0005 
+T7T501     MOVE SPACES         TO TEXTO2-AUX-BDIIALE                    RMB0005 
+T7T501     MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-VEN-AUX-BDIIALE     RMB0005 
+T7T501     MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-REP-AUX-BDIIALE     RMB0005 
+T7T501     MOVE 990001          TO FUENTE-AUX-BDIIALE                   RMB0005 
+T7T501     MOVE SPACES               TO INF-DATAHOST-AUX-BDIIALE        RMB0005 
+T7T501     IF MOD-TAB = 0                                               RMB0005 
+T7T501        PERFORM 7500-PROCESE-TEXTO-BDIIALE                        RMB0005 
+T7T501     ELSE                                                         RMB0005 
+T7T501        MOVE "I" TO TIPALE-AUX-BDIIALE                            RMB0005 
+T7T501        MOVE  6  TO CODALE-AUX-BDIIALE                            RMB0005 
+T7T501        PERFORM 7300-PROCESE-DATAHOST-BDIIALE                     RMB0005 
+T7T501     END-IF.                                                      RMB0005 
+T7T501 7070-ALERTAS-APELLIDO.                                           RMB0005 
+REMARK******************************************************************
+REMARK*7070-ALERTAS-APELLIDO.
+REMARK* SE GENERA ALERTA SI PARA TIPO 7 CON CONSULTAS EL APELLIDO ES     
+REAMRK* DIFERENTE                                                      
+REMARK******************************************************************
+T7T501     MOVE 1 TO J.                                                 RMB0005 
+T7T501     PERFORM UNTIL J > TOT-CON OR J > 100                         RMB0005 
+T7T501        MOVE V-CONSULTAS(J) TO REG-INDEX                          RMB0005 
+T7T501        IF NOMBRE-COMPLETO <> APELLIDO-IND AND                    RMB0005 
+T7T501           NOMBRE-COMPLETO <> SPACES AND APELLIDO-IND <> SPACES   RMB0005 
+T7T501         MOVE FEC-CONSUL-IND TO FECHA-RMB                         RMB0005 
+T7T501         MOVE DIA-RMB TO DIA-AUX                                  RMB0005 
+T7T501         MOVE MES-RMB TO MES-AUX                                  RMB0005 
+T7T501         MOVE ANO-RMB TO ANO-AUX                                  RMB0005 
+T7T501         IF ANO-RMB < 95                                          RMB0005 
+T7T501            ADD  2000 TO ANO-AUX                                  RMB0005 
+T7T501         ELSE                                                     RMB0005 
+T7T501            ADD  1900 TO ANO-AUX                                  RMB0005 
+T7T501         END-IF                                                   RMB0005 
+T7T501         MOVE FECHA-AUX  TO FECHA-NOV-AUX-BDIIALE                 RMB0005 
+T7T501         MOVE "B.D DATACREDITO" TO NOMFUE1-AUX-BDIIALE            RMB0005 
+T7T501         MOVE SPACES            TO NOMFUE2-AUX-BDIIALE            RMB0005 
+T7T501         MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-VEN-AUX-BDIIALE RMB0005 
+T7T501         MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-REP-AUX-BDIIALE RMB0005 
+T7T501         MOVE 990001               TO FUENTE-AUX-BDIIALE          RMB0005 
+T7T501         MOVE SPACES               TO INF-DATAHOST-AUX-BDIIALE    RMB0005 
+T7T501         MOVE COD-SUSCRIP-IND TO COD-SUSCRIP-ABD02                RMB0005 
+T7T501         READ SUSCRIPTOR IGNORE LOCK NOT INVALID KEY              RMB0005 
+T7T501            MOVE "CONSULTADO POR                           " TO   RMB0005 
+T7T501                 TEXTO1-AUX-BDIIALE                               RMB0005 
+T7T501            STRING NOM-COR1-ABD02 DELIMITED BY SIZE               RMB0005 
+T7T501                   " "            DELIMITED BY SIZE               RMB0005 
+T7T501                   NOM-COR2-ABD02 DELIMITED BY SIZE               RMB0005 
+T7T501            INTO TEXTO1-AUX-BDIIALE(18:32)                        RMB0005 
+T7T501            MOVE "CON APELLIDO DIFERENTE:  " TO                   RMB0005 
+T7T501                                             TEXTO2-AUX-BDIIALE   RMB0005 
+T7T501            MOVE APELLIDO-IND TO TEXTO2-AUX-BDIIALE(28:15)        RMB0005 
+T7T501            IF MOD-TAB = 0                                        RMB0005 
+T7T501               PERFORM 7500-PROCESE-TEXTO-BDIIALE                 RMB0005 
+T7T501            ELSE                                                  RMB0005 
+T7T501               MOVE "I" TO TIPALE-AUX-BDIIALE                     RMB0005 
+T7T501               MOVE  7  TO CODALE-AUX-BDIIALE                     RMB0005 
+T7T501               PERFORM 7300-PROCESE-DATAHOST-BDIIALE              RMB0005 
+T7T501            END-IF                                                RMB0005 
+T7T501         END-READ                                                 RMB0005 
+T7T501        END-IF                                                    RMB0005 
+T7T501        ADD 1 TO J                                                RMB0005 
+T7T501     END-PERFORM.                                                 RMB0005 
+       7100-PROCESE-HEADER-BDIIALE.        
+REMARK******************************************************************
+REMARK*7100-PROCESE-ENCABEZADO-BDIIALE.
+REMARK* SE EXTRACTA LA INFORMACION DEL ENCABEZADO PARA SER COLOCADO
+REMARK* EN LA SECCION DE ALERTAS.
+REMARK******************************************************************
+           MOVE FUENTE-BDIIALE TO COD-SUSCRIP-ABD02.        
+           READ SUSCRIPTOR IGNORE LOCK          
+                INVALID KEY        
+                   MOVE 0 TO PROCESAR-BDIIALE    
+                NOT INVALID KEY        
+                   IF ESTADO-ABD02 = 1        
+                      PERFORM 7110-VENCIMIENTOS-BDIIALE        
+                   ELSE        
+                      MOVE 0 TO PROCESAR-BDIIALE    
+                   END-IF        
+           END-READ.        
+       7110-VENCIMIENTOS-BDIIALE.        
+REMARK******************************************************************
+REMARK*7110-VENCIMIENTOS-BDIIALE.
+REMARK* SE VERIFICA SI YA ES UNA LA ALERTA QUE HA CADUCADO PARA NO SACARLA 
+REMARK* MAS. O SI ESTA BLOQUEADA NO MOSTRARLA
+REMARK******************************************************************
+CIU001     MOVE FUNCTION CURRENT-DATE(1:8) TO FECHA-AUX-BDIIALE         RMB0003 
+           IF FEC-VEN-BDIIALE <  FECHA-AUX-BDIIALE OR        
+CIU001                           BLOQUEO-BDIIALE > 0                    RMB0003 
+TIPALE        MOVE 0 TO PROCESAR-BDIIALE                                RMB0002 
+           ELSE        
+CIU001        MOVE FEC-NOV-BDIIALE TO FECHA-NOV-AUX-BDIIALE             RMB0003 
+CIU001        MOVE FEC-VEN-BDIIALE TO FECHA-VEN-AUX-BDIIALE             RMB0003 
+CIU001        MOVE FEC-REP-BDIIALE TO FECHA-REP-AUX-BDIIALE             RMB0003 
+CIU001        MOVE FUENTE-BDIIALE  TO FUENTE-AUX-BDIIALE                RMB0003 
+CIU001        MOVE NOM-COR1-ABD02  TO NOMFUE1-AUX-BDIIALE               RMB0003 
+CIU001        MOVE NOM-COR2-ABD02  TO NOMFUE2-AUX-BDIIALE               RMB0003 
+CIU001        MOVE LINEA1-BDIIALE  TO TEXTO1-AUX-BDIIALE                RMB0003 
+CIU001        MOVE LINEA2-BDIIALE  TO TEXTO2-AUX-BDIIALE                RMB0003 
+CIU001        MOVE INF-DATAHOST-BDIIALE TO INF-DATAHOST-AUX-BDIIALE     RMB0003 
+           END-IF.        
+       7300-PROCESE-DATAHOST-BDIIALE.              
+REMARK******************************************************************
+REMARK*7300-PROCESE-DATAHOST-BDIIALE.      
+REMARK*    EN ESTA RUTINA SE DEBE IR IMPLEMENTADO LOS DIFERENTES CASOS
+REMARK*    QUE SE PUEDAN UTILIZAR EN EL FORMATO DATAHOST        
+REMARK******************************************************************
+CIU001     IF S-XML = 0                                                 RMB0003 
+CIU001        MOVE TIPALE-AUX-BDIIALE   TO DTH12-TIP-ALERTA             RMB0003 
+CIU001        MOVE CODALE-AUX-BDIIALE   TO DTH12-COD-ALERTA             RMB0003 
+CIU001        MOVE NOMFUE1-AUX-BDIIALE  TO DTH12-FUENTE1                RMB0003 
+CIU001        MOVE NOMFUE2-AUX-BDIIALE  TO DTH12-FUENTE2                RMB0003 
+CIU001        MOVE FECHA-NOV-AUX-BDIIALE   TO DTH12-FECHA               RMB0003 
+CIU001        MOVE TEXTO1-AUX-BDIIALE    TO DTH12-LINEA1                RMB0003 
+CIU001        MOVE TEXTO2-AUX-BDIIALE    TO DTH12-LINEA2                RMB0003 
+CIU001        MOVE INF-DATAHOST-AUX-BDIIALE     TO DTH12-DATAHOST       RMB0003 
+CIU001        MOVE DTHOST-12(1:80)      TO MOVIMIENTO-S                 RMB0003 
+CIU001        MOVE 1 TO REC                                             RMB0003 
+CIU001        PERFORM 6700-CONT-CTA                                     RMB0003 
+CIU001        MOVE DTHOST-12(81:80)      TO MOVIMIENTO-S                RMB0003 
+CIU001     ELSE                                                         RMB0003 
+ICGCPL        IF INF-NHDC                                               ABB0006
+ICGCPL           PERFORM 7310-XML-18-NHDC                               ABB0006
+ICGCPL        ELSE                                                      ABB0006
+CIU001        MOVE LLAVE-BDIIALE        TO XDTH12-LLAVE                 RMB0003 
+CIU001        MOVE FUENTE-AUX-BDIIALE   TO XDTH12-COD-FUENTE            RMB0003 
+CIU001        MOVE NOMFUE1-AUX-BDIIALE  TO XDTH12-FUENTE1               RMB0003 
+CIU001        MOVE NOMFUE2-AUX-BDIIALE  TO XDTH12-FUENTE2               RMB0003 
+CIU001        MOVE 057                  TO XDTH12-PAIS                  RMB0003 
+CIU001        MOVE TIPALE-AUX-BDIIALE   TO XDTH12-TIP-ALERTA            RMB0003 
+CIU001        MOVE CODALE-AUX-BDIIALE   TO XDTH12-COD-ALERTA            RMB0003 
+CIU001        MOVE FECHA-NOV-AUX-BDIIALE   TO XDTH12-FECHA              RMB0003 
+CIU001        MOVE FECHA-VEN-AUX-BDIIALE   TO XDTH12-FECHA-VENC         RMB0003 
+CIU001        MOVE FECHA-REP-AUX-BDIIALE   TO XDTH12-FECHA-MODIF        RMB0003 
+CIU001        MOVE TEXTO1-AUX-BDIIALE      TO XDTH12-LINEA1             RMB0003 
+CIU001        MOVE TEXTO2-AUX-BDIIALE      TO XDTH12-LINEA2             RMB0003 
+CIU001        MOVE INF-DATAHOST-AUX-BDIIALE     TO XDTH12-DATAHOST      RMB0003 
+CIU001        MOVE 1 TO REC                                             RMB0003 
+CIU001        MOVE XDTHOST-12(1:80)  TO MOVIMIENTO-S                    RMB0003 
+CIU001        PERFORM 6700-CONT-CTA                                     RMB0003 
+CIU001        MOVE XDTHOST-12(81:80)  TO MOVIMIENTO-S                   RMB0003 
+CIU001        MOVE 1 TO REC                                             RMB0003 
+CIU001        PERFORM 6700-CONT-CTA                                     RMB0003 
+CIU001        MOVE XDTHOST-12(161:80)  TO MOVIMIENTO-S                  RMB0003 
+ICGCPL        END-IF                                                    ABB0006
+CIU001     END-IF.                                                      RMB0003 
+CIU001     MOVE 1 TO REC.                                               RMB0003 
+CIU001     PERFORM 6700-CONT-CTA                                        RMB0003 
+CIU001     MOVE 0 TO REC.                                               RMB0003 
+       7500-PROCESE-TEXTO-BDIIALE.                 
+REMARK******************************************************************
+REMARK*7500-PROCESE-TEXTO-BDIIALE.         
+REMARK*  SE EXTRAE LA INFORMACION DEL "CUERPO" DE LA ALERTA PARA SER 
+REMARK*  INTEGRADA EN ESTA SECCION. LA INFORMACION ESTA COLOCADA EN UN
+REMARK*  FORMATO LIBRE
+REMARK******************************************************************
+           ADD 1 TO CONT-LINEAS-BDIIALE         
+           IF CONT-LINEAS-BDIIALE = 1        
+              MOVE 4           TO IND-CTA        
+              MOVE TITULOS-BDIIALE    TO PANTALLA        
+              PERFORM 10900-ENVIA-CRCR        
+           END-IF.        
+CIU001     MOVE NOMFUE1-AUX-BDIIALE TO NOMFUE-LIN1-BDIIALE              RMB0003 
+CIU001     MOVE NOMFUE2-AUX-BDIIALE TO NOMFUE-LIN2-BDIIALE              RMB0003 
+CIU001     MOVE FECHA-NOV-AUX-BDIIALE TO FEC-NOV-LIN1-BDIIALE           RMB0003 
+CIU001     MOVE TEXTO1-AUX-BDIIALE TO TEXTO-LIN1-BDIIALE                RMB0003 
+CIU001     MOVE TEXTO2-AUX-BDIIALE TO TEXTO-LIN2-BDIIALE                RMB0003 
+CIU001     MOVE LINEA1-BDIIALE-TIT TO MOVIMIENTO-S                      RMB0003 
+           MOVE 1 TO REC.        
+           PERFORM 6700-CONT-CTA         
+CIU001     IF NOMFUE-LIN2-BDIIALE <> SPACES OR                          RMB0003 
+CIU001        TEXTO-LIN2-BDIIALE <> SPACES                              RMB0003 
+CIU001        MOVE 1 TO REC                                             RMB0003 
+CIU001        MOVE LINEA2-BDIIALE-TIT TO MOVIMIENTO-S                   RMB0003 
+CIU001        PERFORM 6700-CONT-CTA                                     RMB0003 
+CIU001     END-IF.                                                      RMB0003 
+           MOVE 0 TO REC.        

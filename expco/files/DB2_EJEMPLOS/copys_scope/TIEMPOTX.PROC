@@ -1,0 +1,53 @@
+REMARK* TIEMPOTX.PROC.v.0001
+REMARK* ESTE COPY CONTIENE LA RUTINA ENCARGADA DE HACER LA RECEPCION DEL
+REMARK* MENSAJA EN LOS PROGRAMAS SERVIDORES CUANDO SE EJECUTAR SERVER. 
+REMARK* ADICIONAR A RECIBIR CAPTURA LA FECHA DE INICIO Y LA FECHA DE FIN
+REMARK* DE LA TRANSACCION Y GENERA UN CORREO EN EL CASO DE QUE EL TIEMPO
+REMARK* TOTAL DE LA TRANSACCION SEA MAYOR A 5 SEGUNDOS
+REMARK******************************************************************
+REMARK*1000-CCI-RECEIVE-TIEMPOTX.
+REMARK* LA DESCRIPCION ES MA MISMA DEL COPY
+REMARK******************************************************************
+       1000-CCI-RECEIVE-TIEMPOTX.
+           MOVE FUNCTION CURRENT-DATE(1:14) TO TIMFIN-TIEMPOTX.   
+           IF IYYYYMMDD-TIEMPOTX = FYYYYMMDD-TIEMPOTX
+              COMPUTE SEGUNDOS-TIEMPOTX =
+                      (HORFIN-TIEMPOTX * 3600 +
+                       MINFIN-TIEMPOTX * 60   +
+                       SEGFIN-TIEMPOTX         )  -
+                      (HORINI-TIEMPOTX * 3600 +
+                       MININI-TIEMPOTX * 60   +
+                       SEGINI-TIEMPOTX         )  
+               IF SEGUNDOS-TIEMPOTX > 5 
+                  IF PUBLICNAME(1:3) <> "ICG" 
+                     MOVE "ICGCON " TO PROGRAMA-EMAIL      
+                  ELSE
+                     MOVE PUBLICNAME(1:6) TO PROGRAMA-EMAIL      
+                  END-IF
+                  STRING                                                   
+                     ANOINI-TIEMPOTX DELIMITED BY SIZE,
+                     "/"
+                     MESINI-TIEMPOTX DELIMITED BY SIZE,
+                     "/"
+                     DIAINI-TIEMPOTX DELIMITED BY SIZE,
+                     " "
+                     HORINI-TIEMPOTX DELIMITED BY SIZE,
+                     ":"
+                     MININI-TIEMPOTX DELIMITED BY SIZE,
+                     ":"
+                     SEGINI-TIEMPOTX DELIMITED BY SIZE,
+                     " TRX > 5 S,"       
+                     " T="
+                     SEGUNDOS-TIEMPOTX DELIMITED BY SIZE
+                  INTO REFERENCIA-EMAIL                             
+                  CALL "SYSTEM" USING COMANDO-EMAIL                
+                  CANCEL "SYSTEM"                                 
+               END-IF
+           END-IF
+           CALL CCI-RECEIVEALL USING SRVRHANDLE, SESSID,MENSAJE-CS
+                                     MAXLEN, RECVLEN, ASYNC, CCIEND
+           STRING
+                "TRX:"
+                AREA-INPUT (1:66)
+           INTO MENSAJE-EMAIL
+           MOVE FUNCTION CURRENT-DATE(1:14) TO TIMINI-TIEMPOTX.   

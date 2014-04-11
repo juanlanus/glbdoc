@@ -1,0 +1,51 @@
+      * BDACSV-FD.v.0003        
+      * ARCHIVO DE IDENTIFICACIONES NO ENCONTRADAS EN LAS BASES DE        
+      * DATOS OFICIALES DE REGIS, DIAN Y DAS        
+      ******************************************************************        
+      * RMB0002    * BLOQ01 - CAMPOS PARA BLOQUEO DEL REGISTRO        
+      * AGO-21-2011* TIP6Y7 - IDENTIFICA SI EL REGISTRO ENTRO POR T6 O 
+      * R.MARTINEZ *          POR T7
+      ******************************************************************        
+      * STT0003    * INCLUS - INCLUSION IDENTIFICACIONES CON INFORMACION
+      * OCT-12-2012*          DE REGISTRADURIA INCOMPLETA DE FUENTE    
+      * LUIS GOMEZ *          CONFIABLE
+      ******************************************************************        
+       FD  BDACSV.       
+       01  REG-BDACSV.       
+           03 LLAVE-BDACSV.         
+              05  TIPO-ID-BDACSV    PIC 9(01).
+              05  NUM-ID-BDACSV     PIC 9(15).          
+              05  COD-SUS-BDACSV    PIC 9(06).
+              05  COD-CTA-BDACSV    PIC 9(02).
+              05  NUM-CTA-BDACSV    PIC X(25).
+           03  NOMBRE-BDACSV        PIC X(45).            
+INCLUS     03  NOMBRE-R-BDACSV REDEFINES NOMBRE-BDACSV.                 STT0003
+INCLUS        05 APELLIDO1-BDACSV      PIC X(16).                       STT0003
+INCLUS        05 APELLIDO2-BDACSV      PIC X(16).                       STT0003
+INCLUS        05 DES-NOMBRE1-BDACSV    PIC X(12).                       STT0003
+INCLUS     05  IND-UNIFICADO-BDACSV    PIC 9(01).                       STT0003
+           03  FECHA-CREA-BDACSV       PIC 9(08).
+           03  NUM-PORTAF-BDACSV    PIC 9(02).
+           03  IND-NOMBRE-BDACSV    PIC 9(02).
+           03  MEJOR-PORTAF-BDACSV  PIC 9(02).
+           03  IND-ACTUALIZ-BDACSV  PIC 9(02).
+           03  FUENTE-REG-BDACSV    PIC 9(02).
+BLOQ01     03  IND-BLOQUEO-BDACSV   PIC X(01). *> B=BLOQUEADO           RMB0002
+TIP6Y7     03  TIPO7-6-BDACSV       PIC X(01). *> 5=T6,1=T7             RMB0002
+INCLUS*    03  FILLER               PIC X(50).                          STT0003
+INCLUS     03  CAMPOS-REGISTRADURIA-BDACSV.                             STT0003
+INCLUS         05  DES-NOMBRE2-BDACSV    PIC X(12).                     STT0003
+INCLUS         05  FECHA-EXPEDI-BDACSV   PIC 9(8).                      STT0003
+INCLUS         05  DEP-EXP-BDACSV        PIC 9(02).                     STT0003
+INCLUS         05  MUNIC-EXP-BDACSV      PIC 9(03).                     STT0003
+INCLUS         05  ESTADO-VIG-BDACSV     PIC 9(02).                     STT0003
+INCLUS         05  FECHA-NACIMNTO-BDACSV PIC 9(08).                     STT0003
+INCLUS         05  IND-SEXO-BDACSV       PIC X.                         STT0003
+INCLUS         05  IND-ESTADO-BDACSV     PIC 9.                         STT0003
+INCLUS         05  IND-CONSULADO-BDACSV  PIC 9(1).                      STT0003
+INCLUS         05  COD-CONSULADO-BDACSV  PIC 9(3).                      STT0003
+INCLUS     03  FILLER                    PIC X(07).                     STT0003
+BLOQ01*    03  FILLER               PIC X(48).
+
+
+

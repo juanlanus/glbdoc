@@ -1,0 +1,420 @@
+REMARK*VALNOM-PROC.v.0005
+REMARK******************************************************************
+REMARK* RUTINA CREADA PARA HACER LA VALIDACION DE NOMBRES CONTRA LOS 
+REMARK* ARCHIVOS DE LA REGISTRADURIA, DIAN Y DAS, DEPENDIENDO DEL TIPO
+REMARK* DE IDENTIFICACION RECIBIDA.    
+REMARK*    PARAMETROS                      
+REMARK*        BLOQUES-INPUT-VALNOM - NUMERO DE BLOQUES A VALIDAR
+REMARK*        NOMBRE-INPUT-VALNOM  - NOMBRE A VALIDAR
+REMARK*        NOMBOK-INPUT-VALNOM  - NOMBRE CORRECTO CON EL QUE SE 
+REMARK*                               DEBE COMPARAR NOMBRE-INPUT-VALNOM
+REMARK*        TIP-ID-INPUT-VALNOM  - TIPO DE IDENTIFICACION A VALIDAR
+REMARK*    SALIDAS:
+REMARK*        MATCH-OK-OUT-VALNOM  - 0-NO HUBO       1-HUBO      
+REMARK*******************************************************************
+REMARK* RMB0002   * VAL001: SE MEJORA LA VALIDACION DE NOMBRES EN PERSONAS
+REMARK* R.MARTINEZ* JURIDICAS                                             
+REMARK* DIC.2002  * 
+REMARK*******************************************************************
+REMARK* GJC0003    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
+REMARK* G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
+REMARK* MARZO/2003 * PARA CEDULAS, EL COMODIN QUE USUALMENTE CORRESPONDE A LA N
+REMARK*            * SOLO SE COMPARA CONTRA N O CONTRA BLANCOS
+REMARK*************************************************************************
+REMARK* GJC0004    * VALME1 :CON EL FIN DE AFINAR AUN MAS EL PROCESO DE VALIDA- 
+REMARK* R.MARTINEZ * CION DE NOMBRES, EN EL MATCH A PROXIMADO DE PERSONAS NATU- 
+REMARK* G.JIMENEZ  * RALES SE CAMBIA EL CALCULO FINAL PARA DETERMINAR SI UN BLO-
+REMARK* MARZO/2003 * QUE ES O NO VALIDO. PARA QUE UN NOMBRE QUE VENGA NUMERICO 
+REMARK*            * NO SE CONVIERTA EN COMODIN, EN LAS SUSTITUCIONES POR *
+REMARK*            * SE VALIDA QUE EL CONTENIDO NO SEA NUMERICO.
+REMARK*************************************************************************
+REMARK* GJC0005    * VLNM01: LOS PROGRAMAS ABORTAN CUANDO ALGUNO DE LOS       
+REMARK* G.JIMENEZ  *         PARAMETROS DE UN SUBSTRING QUEDA EN 0 O EN         
+REMARK* NOV/2005   *         UN NUMERO MENOR QUE 0. EJ: NOMBRE(I:J) DONDE I O  
+REMARK*            *         J ES 0.                                        
+REMARK*************************************************************************
+       10000-MATCH-NOMBRES-VALNOM.                 
+REMARK******************************************************************
+REMARK*10000-MATCH-NOMBRE-VALNOM.                   
+REMARK* SE BUSCA DETERMINAR SI EL NOMBRE DE LA PERSONA CONSULTADA HACE 
+REMARK*       CON EL NOMBRE ENVIADO EN LA CONSULTA. 
+REMARK******************************************************************
+           MOVE 0 TO MATCH-OK-OUT-VALNOM.
+           MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
+           IF TIP-ID-INPUT-VALNOM  = 2 
+               INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
+VAL001           " S.A. " BY "      ",                                  RMB0002 
+VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002 
+VAL001           " LIMITADA " BY "          ",                          RMB0002 
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002 
+VAL001           " INVERSIONES " BY "             ",                    RMB0002 
+VAL001           " EMPRESA " BY "         ",                            RMB0002 
+VAL001           " CORPORACION " BY "             ",                    RMB0002 
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002 
+VAL001           " S " BY "   ", " A " BY "   "                         RMB0002 
+VALMEJ           " Y " BY "   "                                         GJC0003 
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002 
+VAL001           " S.A. " BY "      ",                                  RMB0002 
+VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002 
+VAL001           " LIMITADA " BY "          ",                          RMB0002 
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002 
+VAL001           " INVERSIONES " BY "             ",                    RMB0002 
+VAL001           " EMPRESA " BY "         ",                            RMB0002 
+VAL001           " CORPORACION " BY "             ",                    RMB0002 
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002 
+VAL001           " S " BY "   ", " A " BY "   "                         RMB0002 
+VALMEJ           " Y " BY "   "                                         GJC0003 
+VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003 
+VALMEJ                "." BY " ","-" BY " ",                            GJC0003 
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003 
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003 
+VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003 
+VALMEJ                "." BY " ","-" BY " ",                            GJC0003 
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003 
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003 
+               MOVE NOMBRE-AUX-VALNOM TO NOMBRE-INPUT-VALNOM
+           ELSE   
+              INSPECT CADENA-VALNOM    REPLACING ALL 
+VALME1                 "." BY " ","-" BY " ", "," BY " ",
+                      "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
+                      "Y" BY "G","H" BY "G","I" BY "G",
+                      " DE " BY "    "," LA " BY "    ",
+                      " DEL " BY "     " 
+VAL001        INSPECT CADENA-VALNOM    REPLACING ALL                    RMB0002 
+VALME1                 "." BY " ","-" BY " ", "," BY " ", 
+VAL001                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      RMB0002 
+VAL001                "Y" BY "G","H" BY "G","I" BY "G",                 RMB0002 
+VAL001                " DE " BY "    "," LA " BY "    ",                RMB0002 
+VAL001                " DEL " BY "     "                                RMB0002 
+                      PERFORM VARYING I-VALNOM FROM 1 BY 1 
+                              UNTIL I-VALNOM >= 66
+                        IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC 
+VALME1                      AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
+                           MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+                        END-IF
+                      END-PERFORM
+           END-IF.
+           MOVE SPACES TO VECTOR-INPUT-VALNOM.
+           UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO 
+                        BASURA-VALNOM
+            VM-INPUT-VALNOM(1) VM-INPUT-VALNOM(2) VM-INPUT-VALNOM(3)
+            VM-INPUT-VALNOM(4) VM-INPUT-VALNOM(5) 
+            VM-INPUT-VALNOM(6) VM-INPUT-VALNOM(7) VM-INPUT-VALNOM(8)
+            VM-INPUT-VALNOM(9) VM-INPUT-VALNOM(10) 
+            VM-INPUT-VALNOM(11) VM-INPUT-VALNOM(12) VM-INPUT-VALNOM(13)
+            VM-INPUT-VALNOM(14)
+            VM-INPUT-VALNOM(15) 
+            VM-INPUT-VALNOM(16) VM-INPUT-VALNOM(17) VM-INPUT-VALNOM(18)
+            VM-INPUT-VALNOM(19)
+            VM-INPUT-VALNOM(20) 
+      ******************PREPARA EL NOMBRE CORRECTO DEL ARCHIVO *********
+           MOVE NOMBOK-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
+           IF TIP-ID-INPUT-VALNOM  NOT = 2  
+              INSPECT NOMBRE-AUX-VALNOM REPLACING ALL 
+VALME1                 "." BY " ","-" BY " ","," BY " ",
+                      "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
+                      "Y" BY "G","H" BY "G","I" BY "G"
+                      PERFORM VARYING I-VALNOM FROM 1 BY 1 
+                              UNTIL I-VALNOM >= 66
+                        IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC 
+VALME1                      AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
+                           MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+                        END-IF
+                      END-PERFORM
+           ELSE                            
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002 
+VAL001           " S.A. " BY "      ",                                  RMB0002 
+VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002 
+VAL001           " LIMITADA " BY "          ",                          RMB0002 
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002 
+VAL001           " INVERSIONES " BY "             ",                    RMB0002 
+VAL001           " EMPRESA " BY "         ",                            RMB0002 
+VAL001           " CORPORACION " BY "             ",                    RMB0002 
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002 
+VAL001           " S " BY "   ", " A " BY "   "                         RMB0002 
+VALMEJ           " Y " BY "   "                                         GJC0003 
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002 
+VAL001           " S.A. " BY "      ",                                  RMB0002 
+VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002 
+VAL001           " LIMITADA " BY "          ",                          RMB0002 
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002 
+VAL001           " INVERSIONES " BY "             ",                    RMB0002 
+VAL001           " EMPRESA " BY "         ",                            RMB0002 
+VAL001           " CORPORACION " BY "             ",                    RMB0002 
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002 
+VAL001           " S " BY "   ", " A " BY "   "                         RMB0002 
+VALMEJ           " Y " BY "   "                                         GJC0003 
+VALMEJ        INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                   GJC0003 
+VALMEJ                "." BY " ","-" BY " ",                            GJC0003 
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003 
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003 
+               MOVE NOMBRE-AUX-VALNOM TO NOMBOK-INPUT-VALNOM
+           END-IF.
+           MOVE SPACES TO VECTOR-OK-VALNOM.      
+           UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO 
+                        BASURA-VALNOM
+            VM-OK-VALNOM(1) VM-OK-VALNOM(2) VM-OK-VALNOM(3)
+            VM-OK-VALNOM(4) VM-OK-VALNOM(5) 
+            VM-OK-VALNOM(6) VM-OK-VALNOM(7) VM-OK-VALNOM(8)
+            VM-OK-VALNOM(9) VM-OK-VALNOM(10) 
+            VM-OK-VALNOM(11) VM-OK-VALNOM(12) VM-OK-VALNOM(13)
+            VM-OK-VALNOM(14) VM-OK-VALNOM(15) 
+            VM-OK-VALNOM(16) VM-OK-VALNOM(17) VM-OK-VALNOM(18)
+            VM-OK-VALNOM(19) VM-OK-VALNOM(20).
+REMARK***********HACE LA VALIDACION BLOQUE A BLOQUE********************
+           MOVE 1 TO I-VALNOM.
+           MOVE 0 TO BLOQOK-AUX-VALNOM.
+           PERFORM UNTIL VM-INPUT-VALNOM(I-VALNOM) = SPACES
+             MOVE 1 TO J-VALNOM 
+             PERFORM UNTIL J-VALNOM > 20 
+               IF VM-INPUT-VALNOM(I-VALNOM) = VM-OK-VALNOM(J-VALNOM)
+                  ADD 1 TO BLOQOK-AUX-VALNOM
+                  MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+                                 VM-INPUT-VALNOM(I-VALNOM)
+                  MOVE 21 TO J-VALNOM
+               ELSE
+                  MOVE 0 TO M-VALNOM
+                  INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOM
+                          FOR CHARACTERS BEFORE INITIAL "*"
+                  IF M-VALNOM >= 15
+                     MOVE 0 TO M-VALNOM
+                     INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOM
+                          FOR CHARACTERS BEFORE INITIAL "N"
+                  END-IF
+                  IF M-VALNOM > 0 AND < 15 AND I-VALNOM < 20
+VLNM01               AND (14 - M-VALNOM > 0)                            GJC0005 
+                     COMPUTE INI-VALNOM = M-VALNOM + 2  
+                     COMPUTE LON-VALNOM = 14 - M-VALNOM 
+                     MOVE VM-OK-VALNOM(J-VALNOM) TO PEDAZO-VALNOM
+                     IF PEDAZO-VALNOM(INI-VALNOM:LON-VALNOM) =
+                        VM-INPUT-VALNOM(I-VALNOM + 1 ) AND
+                        PEDAZO-VALNOM(1:M-VALNOM) = 
+                        VM-INPUT-VALNOM(I-VALNOM)
+                        ADD 1 TO BLOQOK-AUX-VALNOM
+                        MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+                                 VM-INPUT-VALNOM(I-VALNOM)
+                        MOVE 21 TO J-VALNOM
+                        ADD 1 TO I-VALNOM 
+                        MOVE SPACES TO VM-INPUT-VALNOM(I-VALNOM)
+                     END-IF
+                  END-IF 
+               END-IF
+               ADD 1 TO J-VALNOM
+             END-PERFORM
+             ADD 1 TO I-VALNOM
+             IF I-VALNOM = 21 
+                NEXT SENTENCE
+             END-IF
+           END-PERFORM.
+           IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOM
+              MOVE 1 TO MATCH-OK-OUT-VALNOM
+           ELSE
+              IF TIP-ID-INPUT-VALNOM <> 2
+                 PERFORM 10100-MATCH-APROXIMADO  
+              ELSE
+                 PERFORM 10100-MATCH-APROX-EMPRESAS  
+              END-IF
+              IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOM
+                 MOVE 1 TO MATCH-OK-OUT-VALNOM
+              END-IF
+           END-IF.
+REMARK**********************************************************************
+REMARK*10100-MATCH-APROXIMADO.
+REMARK*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOS
+REMARK*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CON     
+REMARK*     LOS TIPOS DE IDENTIFICACION 1, 3 Y 4.
+REMARK**********************************************************************
+       10100-MATCH-APROXIMADO.
+           IF BLOQOK-AUX-VALNOM > 0
+              MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOM
+           ELSE
+              MOVE 70 TO APROX-TOT-VALNOM APROX-INP-VALNOM
+           END-IF
+           MOVE 1 TO I-VALNOM.
+           PERFORM UNTIL I-VALNOM > 10                         
+             MOVE 1 TO J-VALNOM 
+             PERFORM UNTIL J-VALNOM > 10 
+               MOVE 0 TO LETRAS-OK-VALNOM LETRAS-OK2-VALNOM
+               MOVE 1 TO K-VALNOM
+               MOVE 1 TO L-VALNOM
+               IF VM-INPUT-VALNOM(I-VALNOM) NOT = SPACES AND
+                  VM-OK-VALNOM   (J-VALNOM) NOT = SPACES
+                  PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
+                    IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = 
+                       VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)
+VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003 
+VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003 
+VALMEJ                      OR = "N"))                                  GJC0003 
+                       IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACES
+                          ADD 1 TO LETRAS-OK-VALNOM    
+                          ADD 1 TO K-VALNOM
+                          ADD 1 TO L-VALNOM
+                       ELSE
+                          MOVE 19 TO K-VALNOM
+                       END-IF
+                    ELSE
+                       ADD 1   TO K-VALNOM
+                       IF K-VALNOM <= 15 AND L-VALNOM < 15
+                          IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM + 1) =
+                             VMM-OK-VALNOM(J-VALNOM,K-VALNOM )
+                             ADD 1 TO L-VALNOM
+                          END-IF
+                       END-IF
+                    END-IF
+                  END-PERFORM
+                  MOVE 1 TO K-VALNOM
+                  MOVE 1 TO L-VALNOM
+                  PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
+                    IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = 
+                       VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)
+VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003 
+VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003 
+VALMEJ                      OR = "N"))                                  GJC0003 
+                       IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT = SPACES
+                          ADD 1 TO LETRAS-OK2-VALNOM   
+                          ADD 1 TO K-VALNOM
+                          ADD 1 TO L-VALNOM
+                       ELSE
+                          MOVE 19 TO K-VALNOM
+                       END-IF
+                    ELSE
+                       ADD 1   TO L-VALNOM
+                       IF L-VALNOM <= 15 AND K-VALNOM < 15
+                          IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
+                             VMM-OK-VALNOM(J-VALNOM,K-VALNOM + 1)
+                             ADD 1 TO K-VALNOM
+                          END-IF
+                       END-IF
+                    END-IF
+                  END-PERFORM
+               END-IF
+               IF LETRAS-OK2-VALNOM > LETRAS-OK-VALNOM
+                  MOVE LETRAS-OK2-VALNOM TO LETRAS-OK-VALNOM
+               END-IF
+               IF LETRAS-OK-VALNOM > 0 
+                  MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOM
+                  INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYING
+                          TOTLET-INP-VALNOM
+                          FOR CHARACTERS BEFORE INITIAL " "
+                  INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYING 
+                          TOTLET-OK-VALNOM 
+                          FOR CHARACTERS BEFORE INITIAL " "
+                  MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOM
+                  IF TOTLET-OK-VALNOM >= 3               
+                     COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /
+                                             TOTLET-OK-VALNOM 
+                  END-IF
+                  IF TOTLET-INP-VALNOM >= 3
+                     COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /
+                                             TOTLET-INP-VALNOM
+                  END-IF
+                  IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOM
+                     COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /
+                                       TOTLET-OK-VALNOM
+                  ELSE
+                     COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /
+                                       TOTLET-INP-VALNOM
+                  END-IF
+VALME1            IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=
+VALME1                                  APROX-TOT-VALNOM) AND
+VALME1                 A-VALNOM >= 63
+VALME1****   display "%TOT=",POR-TOT-VALNOM, " %INP=", POR-INP-VALNOM,
+VALME1****           "A-VALNOM=", A-VALNOM
+VALME1*****       IF (POR-TOT-VALNOM >= APROX-TOT-VALNOM AND
+VALME1*****           POR-INP-VALNOM >= APROX-INP-VALNOM ) OR
+VALME1*****          ((POR-TOT-VALNOM >= APROX-TOT-VALNOM OR 
+VALME1*****            POR-INP-VALNOM >= APROX-INP-VALNOM ) AND
+VALME1*****            A-VALNOM >= 70)
+                     ADD 1 TO BLOQOK-AUX-VALNOM
+                     MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+                                 VM-INPUT-VALNOM(I-VALNOM)
+                  END-IF       
+               END-IF
+               ADD 1 TO J-VALNOM
+             END-PERFORM
+             ADD 1 TO I-VALNOM
+           END-PERFORM.
+REMARK**********************************************************************
+REMARK*10100-MATCH-APROX-EMPRESAS
+REMARK*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOS
+REMARK*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CON     
+REMARK*     LOS TIPOS DE IDENTIFICACION 2.        
+REMARK**********************************************************************
+       10100-MATCH-APROX-EMPRESAS.
+         MOVE ZEROS TO TOTLET-INP-VALNOM
+         MOVE ZEROS TO LETRAS-OK2-VALNOM
+VALMEJ    MOVE ZEROS TO A-VALNOM                                        GJC0003 
+         MOVE 1 TO K-VALNOM
+         PERFORM UNTIL K-VALNOM > 65
+           MOVE K-VALNOM  TO I-VALNOM
+           MOVE 1       TO J-VALNOM
+           MOVE ZEROS TO LETRAS-OK-VALNOM
+           PERFORM UNTIL J-VALNOM > 65 OR I-VALNOM > 65
+              IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES AND
+                 V-NOMBRE-VALNOM(I-VALNOM) <> "."
+                 IF V-NOMBRE-VALNOM(I-VALNOM) =
+                    V-NOMBOK-VALNOM(J-VALNOM)
+                    ADD 1 TO LETRAS-OK-VALNOM
+                    ADD 1 TO I-VALNOM
+                    ADD 1 TO J-VALNOM
+                 ELSE
+                    ADD 1 TO J-VALNOM
+                 END-IF
+              ELSE
+                 ADD 1 TO I-VALNOM
+              END-IF
+           END-PERFORM
+           IF LETRAS-OK-VALNOM > LETRAS-OK2-VALNOM
+              MOVE LETRAS-OK-VALNOM TO LETRAS-OK2-VALNOM
+           END-IF
+           ADD 1 TO K-VALNOM
+         END-PERFORM.
+         MOVE 1 TO I-VALNOM
+         PERFORM UNTIL I-VALNOM > 65
+           IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES AND
+              V-NOMBRE-VALNOM(I-VALNOM) <> "."
+              ADD 1 TO TOTLET-INP-VALNOM
+           END-IF
+           ADD 1 TO I-VALNOM
+         END-PERFORM.
+         COMPUTE A-VALNOM = LETRAS-OK2-VALNOM * 100 /
+                           TOTLET-INP-VALNOM.
+         IF A-VALNOM >= 75
+             ADD 1 TO BLOQOK-AUX-VALNOM
+         END-IF.
+VALMEJ    MOVE 0 TO K-VALNOM                                            GJC0003 
+VALMEJ   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOM                    GJC0003 
+VALMEJ      INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOM                GJC0003 
+VALMEJ      PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    GJC0003 
+VALMEJ               IF V-NOMBRE-VALNOM(J-VALNOM) <> " "                GJC0003 
+VALMEJ                 MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     GJC0003 
+VALMEJ                   TO I-VALNOM                                    GJC0003 
+VALMEJ                 ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)         GJC0003 
+VALMEJ              END-IF                                              GJC0003 
+VALMEJ               IF V-NOMBOK-VALNOM(J-VALNOM) <> " "                GJC0003 
+VALMEJ                 MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     GJC0003 
+VALMEJ                    TO I-VALNOM                                   GJC0003 
+VALMEJ                 ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)            GJC0003 
+VALMEJ              END-IF                                              GJC0003 
+VALMEJ      END-PERFORM                                                 GJC0003 
+VALMEJ      MOVE 0 TO I-VALNOM                                          GJC0003 
+VALMEJ       PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  GJC0003 
+VALMEJ         IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0                     GJC0003 
+VALMEJ            ADD 1 TO I-VALNOM                                     GJC0003 
+VALMEJ            IF CONT-LET-OK-VALNOM(J-VALNOM) <                     GJC0003 
+VALMEJ               CONT-LET-INPUT-VALNOM(J-VALNOM)                    GJC0003 
+VALMEJ               COMPUTE L-VALNOM = L-VALNOM + 100                  GJC0003 
+VALMEJ            ELSE                                                  GJC0003 
+VALMEJ               COMPUTE L-VALNOM = L-VALNOM +                      GJC0003 
+VALMEJ                                  (CONT-LET-INPUT-VALNOM(J-VALNOM)GJC0003 
+VALMEJ                           *  100 /CONT-LET-OK-VALNOM(J-VALNOM))  GJC0003 
+VALMEJ            END-IF                                                GJC0003 
+VALMEJ         END-IF                                                   GJC0003 
+VALMEJ      END-PERFORM                                                 GJC0003 
+VALMEJ      COMPUTE K-VALNOM = L-VALNOM/I-VALNOM                        GJC0003 
+VALMEJ       IF (A-VALNOM >= 40 AND K-VALNOM > 80) OR                   GJC0003 
+VALMEJ         ((A-VALNOM >= 35 AND A-VALNOM < 40) AND K-VALNOM > 85) ORGJC0003 
+VALMEJ         ((A-VALNOM >= 25 AND A-VALNOM < 35) AND K-VALNOM = 100)  GJC0003 
+VALMEJ         ADD 1 TO BLOQOK-AUX-VALNOM                               GJC0003 
+VALMEJ       END-IF                                                     GJC0003 
+VALMEJ   END-IF.                                                        GJC0003 

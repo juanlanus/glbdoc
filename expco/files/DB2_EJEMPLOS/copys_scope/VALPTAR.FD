@@ -1,0 +1,14 @@
+******* VALPTAR-fd.v03.0001
+   **** VALPTAR.v03.001
+REMARK*Parametros de campos del maestro resumido ampliado 
+REMARK*tarjeta credito. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPTAR.
+       01  REG-VALPTAR.
+           03 NUM-CAMPO-VALPTAR                PIC 9(2).
+           03 NUM-CALIF-VALPTAR                PIC 9(2).
+           03 POR-PESO-VALPTAR                 PIC 99V99.
+           03 NUM-GRUPO-VALPTAR                PIC 9.
+           03 IND-ACTUALIZA-VALPTAR            PIC 9.
+           03 IND-VALIDO-VALPTAR               PIC 9.
+           03 FILLER-VALPTAR                   PIC X(30).

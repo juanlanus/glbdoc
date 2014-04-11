@@ -1,0 +1,11 @@
+******* VALREPCT-FD.v01.0001
+REMARK* Parametros de campos a reportar por consecutivo definido
+REMARK* para maestro ampliado. Proceso de validacion Cuentas Corrientes
+036300*----------------------------------------------------------------*
+       FD  VALREPCT.
+       01  REG-VALREPCT.
+           03 LLAVE-VALREPCT.
+              05 NUM-CONSEC-VALREPCT           PIC 9(4).
+           03 IND-CAMPO-VALREPCT OCCURS 80     PIC 9.
+           03 FILLER-VALREPCT                  PIC X(30).
+

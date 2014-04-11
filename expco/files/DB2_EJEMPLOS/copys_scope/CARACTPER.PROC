@@ -1,0 +1,895 @@
+REMARK*CARACTPER.PROC.v.0050.
+REMARK************************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS                    
+REMARK*************************************************************************
+REMARK* RMB0002     *MOR001  - LA USA DETECTA DIFERENCIAS EN MOR99X y
+REMARK* AGO-23-2011 *          SE CORRIGE PROBLEMA DE VOLVER A NEGATIVO
+REMARK* R.MARTINEZ  *          CUANDO HAY UN CERO ANTES                 
+REMARK*************************************************************************
+REMARK* EHA0003     *RQ3218  - SE INCLUYE EL CALCULO DE CARACTERISTICAS
+REMARK* SEP-22-2011 *          PARA COLPATRIA TARJETAS BLACK
+REMARK*************************************************************************
+      * DLM0004    | CQ3078 - DEJAR DISPONIBLE LAS VARIABLES DE INSUMO *
+      * 26-SEP-2011|   PARA DECISOR DE CITI:  INCOME ESTIMATOR, CUSTOM *
+      * DARIO LASSO|   SCORE Y DEBT BOURDEN. REQ. 3078.                *
+      *            |   NUM-PERSO-CARACT=03 - Citibank.                 *
+      ******************************************************************
+REMARK* EHA0005     *RQ3237  - SE INCLUYE EL CALCULO DE CARACTERISTICAS
+REMARK* SEP-23-2011 *          PARA COLPATRIA VEHICULOS.
+REMARK*************************************************************************
+REMARK* CIG0006     | RQ3132 - SE INCLUYE CARACTERISTICAS PARA EL BBVA *
+REMARK* 09-29-2011  |          QUE LEEN EL ARCHIVO DE NO DESEADOS.     * 
+REMARK******************************************************************
+REMARK* DLM0007     | CQ3459 - INCLUSION DE CUATRO (4) VARIABLES EN    *
+REMARK* DARIO LASSO |   DECISOR + EN EL ARCHIVO $DATOS/citidat.prn.DAT *
+REMARK* 21-OCT-2011 |   REQ. CQ 3459.                                  *
+REMARK******************************************************************
+REMARK* EHA0008     | RQ3605 - SE INCLUYE CARACTERISTICAS PARA EL BANCO*
+REMARK* 08-NOV-2011 |          COLPATRIA REQ. 3605                     *
+REMARK******************************************************************
+REMARK* CAV0009     | RQ3449 - SE INCLUYE COPY PARA CALCULAR CARACTERIS*
+REMARK* 15-NOV-2011 |          TICAS DE CAJA SOCIAL BCSC.              *
+REMARK******************************************************************
+REMARK* EHA0010     | RQ3702 - SE INCLUYE COPY PARA CALCULAR CARACTERIS*
+REMARK* 15-NOV-2011 |          TICAS DE FINANCIERA INTERNACIONAL       *
+REMARK******************************************************************
+REMARK* STT0011     | RQCITI - SE INCLUYE COPY PARA CALCULAR CARACTERIS*
+REMARK* 23-NOV-2011 |          TICAS DE CITIBANK                       * 
+REMARK******************************************************************
+REMARK* CIG0012     | RQ3921 - SE INCLUYEN LOS COPYS PARA EL CALCULO   *
+REMARK* 28-NOV-2011 |   DE CARACTERISTICAS DE HASTA LA PERSONALIZACION *
+REMARK*             |   20.                                            *
+REMARK******************************************************************
+REMARK* EHA0013     | RQ3909 - SE INCLUYE COPY PARA CALCULAR CARACTERIS*
+REMARK* 03-DIC-2011 |          TICAS DE GIROS Y FINANZAS               *
+REMARK******************************************************************
+REMARK* EHA0014     | RQ3769 - SE INCLUYE COPY PARA CALCULAR CARACTERIS*
+REMARK* 12-DIC-2011 |          TICAS DE BANCO DE BOGOTA                *
+REMARK******************************************************************
+REMARK* EHA0015     | RQ4070 - SE INCLUYE ARCHIVO DE BANCO DE BOGOTA   *
+REMARK* 22-DIC-2011 |          REQ.4070                                *
+REMARK******************************************************************
+REMARK* CIG0016     | RQ3989 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 30-DIC-2011 |   DE CARACTERISTICAS DE BANCOLOMBIA              *
+REMARK******************************************************************
+      * DLM0017     | Banco Pichincha . CAST 172.                      *
+      * 02-ENE-2012 |    REQ. CQ. 3990.                                *
+      * DARIO LASSO | NUM-PERSO-CARACT=10                              *
+      ******************************************************************
+      * DLM0018    | CQ4341 - Renaware.                                *
+      * 11-ENE-2012|    REQ. CQ. 4341.                                 *
+      * DARIO LASSO|                                                   *
+      ******************************************************************
+REMARK* CAV0019     | RQ4198 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 07-ENE-2012 |   DE CARACTERISTICAS DE LA POLAR                 *
+REMARK******************************************************************
+REMARK* EHA0020     | RQ4523 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 21-FEB-2012 |   DE CARACTERISTICAS DE LAGOBO                   *
+REMARK******************************************************************
+REMARK* CAV0021     | RQ4202 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 10-MAR-2012 |   DE CARACTERISTICAS DE FINAMERICA               *
+REMARK******************************************************************
+REMARK* CAV0022     | RQ5522 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 10-ABR-2012 |   DE CARACTERISTICAS DE BANCO CAJA SOCIAL EXP    *
+REMARK******************************************************************
+      * IMS0023     | CQ5519 - Leasing Bolivar.                        *
+      * 16-ABR-2012 |    REQ. CQ. 5519.                                *
+      * M.SALAMANCA |                                                  *
+      ******************************************************************
+      * LAG0024     | JRCOOP - JURISCOOP                               *
+      * 25-ABR-2012 | REQ. CQ. 5245.                                   *
+      ******************************************************************
+REMARK* CAV0024     | RQ5464 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+REMARK* 24-ABR-2012 |   DE CARACTERISTICAS DE FINTRAVALORES            *
+REMARK******************************************************************
+      * CAV0025     | CQ5803 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+      * 25-ABR-2012 |          DE CARACTERISTICAS DE COONALRECAUDO     *
+      ******************************************************************
+      * IMS0026     | CQ5863 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+      * 15-AGO-2012 |          DE CARACTERISTICAS DE ETB. PERS. 21     *
+      ******************************************************************
+      * IMS0027     | CQ7065 - SE INCLUYE NUEVAS CARACTERISTICAS PARA  *
+      * 15-AGO-2012 |          JURISCOOP. PERS. 16.                    *
+      ******************************************************************
+      * IMS0028     | CQ6485 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+      * 12-JUL-2012 |          DE CARACTERISTICAS DE FINESA. PERSO 22  *
+      ******************************************************************
+      * IMS0029     | CQ7064 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+      * 17-AGO-2012 |          DE CARACTERISTICAS DE DAVIVIENDA PER-25 *
+      ******************************************************************
+      * CAV0030    | CQ7063 - SE INCLUYE EL CALCULO DE LAS CARACTERIST *
+      * 29-AGO-2012|          DE LA PERSONALIZACION 23 SUFI, CON       *
+      * C.VELASCO. |          LOS NOMBRES DE PERSONALIZACION 11.       *
+      ******************************************************************
+      * CAV0031     | CQ7816 - SE INCLUYE COPY PARA EL CALCULO DE      *
+      * 11-OCT-2012 |          CARACTERISTICAS DE GMAC PERSONALIZ 27   *
+      *             | CQ7817 - SE INCLUYE COPY PARA EL CALCULO DE      *
+      *             |          CARACTERISTICAS DE FERRETERIA AL DIA P26*
+      ******************************************************************
+      * CAV0032     | CQ8189 - SE INCLUYE ARCHIVO DE UVR Y TASAS PARA  *
+      * 26-OCT-2012 |          FONDO NACIONAL DEL AHORRO.              *
+      ******************************************************************
+      * CAV0033     | CQ8177 - SE INCLUYE CARACTERISTICAS DE GYF 009   *
+      * 23-NOV-2012 |          01NUM999IN009  A LA 01NUM990IN009.      *
+      ******************************************************************
+      * CAV0034    | CQ9101 - AGREGAR CARACTERISTICAS BANCO BOGOTA     *
+      * 02-DIC-2012|          01NUM999RO008 , 01END997RO008 Y          *
+      * C.VELASCO. |          01END996RO008.                           *
+      ******************************************************************
+      * IMS0035     | CQ9491 - SE INCLUYE LOS LLAMADOS PARA EL CALCULO *
+      * 21-DIC-2012 |          DE CARACTERISTICAS DE RIPLAY. PERSO 29  *
+      ******************************************************************
+      * IMS0036     | CQ9773 - SE AGREGAN COPYS EN BLANCO PARA LAS     *
+      * 22-ENE-2013 |          PERSONALIZACIONES 30 A 40.              *
+      ******************************************************************
+      * IMS0037     | CQ9966 - SE AGREGA LLAMADO PARA CALCULAR LAS     *
+      * 28-ENE-2013 |          CARACTERISTICAS DE RIPLEY.              *
+      ******************************************************************
+      * CAV0038     | CQ9692 - SE INCLUYEN CARACTERISTICAS PER 030     *
+      * 24-ENE-2013 |          PARA BANCO POPULAR.                     *
+      ******************************************************************
+      * IMS0039     | CQ9954 - SE AGREGA LA PERSONALIZACION 031        *
+      * 25-ENE-2013 |          PARA COPROSOL.                          *
+      * M.SALAMANCA | CQ9957 - SE AGREGA LA PERSONALIZACION 032        *
+      *             |          PARA COOPDESOL.                         *
+      *             | CQ9958 - SE AGREGA LA PERSONALIZACION 033        *
+      *             |          PARA J EMILIOS.                         *
+      ******************************************************************
+      * CAV0040     | CQ9566 - SE INCLUYE LLAMADO PARA CARECTERISTICAS *
+      * 19-FEB-2013 |          MOR DE DAVIVIENDA.               CQ9566 *
+      ******************************************************************
+      * CAV0041     | R10461 - SE INCLUYE LLAMADO PARA CARECTERISTICAS *
+      * 21-FEB-2013 |          CREDIFLORES   CQ-10461.                 *
+      ******************************************************************
+      * CAV0042     | R10472 - SE INCLUYE LLAMADO PARA CARECTERISTICAS *
+      * 21-FEB-2013 |          JAIRO PATIÑO  CQ-10472.                 *
+      *             | CQ9899 - SE INCLUYE LLAMADO PARA CARECTERISTICAS *
+      *             |          METROTEL      CQ-09899.                 *
+      ******************************************************************
+      * IMS0043     | R10272 - SE AGREGA LA PERSONALIZACION 035        *
+      * 06-MAR-2013 |          PARA COMULTRASAN.                       *
+      * M.SALAMANCA |                                          CQ10272 *
+      ******************************************************************
+      * STT0044     | R12051 - SE ADICIONAN LLAMADAS PARA EL CALCULO   *
+      * 06-MAY-2013 |          DE CARACTERISTICAS PARA 42 Y 43         *
+      * L.GOMEZ     |                                     REQ. CQ12051 *
+      ******************************************************************
+      * STT0045     | R11058 - SE ADICIONAN LLAMADOS PARA EL CALCULO   *
+      * 11-ABR-2013 |          DE CARACTERISTICAS PARA CREDITITULOS.   *
+      * L.GOMEZ     |                                     REQ. CQ11058 *
+      ******************************************************************
+      * IMS0046     | R11027 - SE ADICIONAN LLAMADOS PARA EL CALCULO   *
+      * 11-ABR-2013 |          DE CARACTERISTICAS PARA ALCA.           *
+      * M.SALAMANCA |                                     REQ. CQ11027 *
+      ******************************************************************
+      * STT0047     | R11022 - SE ADICIONAN LLAMADOS PARA EL CALCULO   *
+      * 30-ABR-2013 |          DE CARACTERISTICAS PARA COPROCENVA      *
+      * L.GOMEZ     |                                     REQ. CQ11022 *
+      ******************************************************************
+      * IMS0048     | R11508 - SE ADICIONAN LLAMADOS PARA EL CALCULO   *
+      * 08-ABR-2013 |          DE CARACTERISTICAS PARA SERFINANSA.     *
+      * M.SALAMANCA |                                     REQ. CQ11508 *
+      ******************************************************************
+      * IMS0049     | R12047 - SE AGREGAN LLAMADOS PARA EL CALCULO DE  *
+      * 17-MAY-2013 |          CARACTERISTICAS DE RIPLEY PER-29.       *
+      * M.SALAMANCA |                                   REQ. CQ. 12047.*
+      ******************************************************************
+      * IMS0050     | R12212 - SE AGREGAN LLAMADOS PARA EL CALCULO DE  *
+      * 06-JUN-2013 |          CARACTERISTICAS DE NATURA. PER45 .      *
+      * M.SALAMANCA |                                   REQ. CQ. 12212.*
+      ******************************************************************
+      
+      $SET CONSTANT WRITECARAC"NO"
+       0000-LLENAR-VEC-PERSONALIZADAS.
+           EVALUATE NUM-PERSO-CARACT
+             WHEN 01     *> HELM BANK
+RQ3921        PERFORM  0000-LLENAR-VEC-PERSONALIZ-001                   CIG0012
+             WHEN 02   *> SANTANDER
+RQ3921         PERFORM 0000-LLENAR-VEC-PERSONALIZ-002                   CIG0012
+CQ3078       WHEN 03     *> CITIBANK                                    DLM0004
+RQCITI         PERFORM 0000-LLENAR-VEC-PERSONALIZ-003                   STT0011
+RQ3218       WHEN 04     *> COLPATRIA                                   EHA0003
+RQ3921         PERFORM 0000-LLENAR-VEC-PERSONALIZ-004                   CIG0012
+RQ3132      WHEN 05     *> BBVA                                         CIG0006
+RQ3921        PERFORM 0000-LLENAR-VEC-PERSONALIZ-005                    CIG0012
+RQ3449       WHEN 06   *> BCSC                                          CAV0009
+RQ3449        PERFORM 0000-LLENAR-VEC-PERSONALIZ-006                    CAV0009
+RQ3702       WHEN 07   *> FINANCIERA INTERNACIONAL                      EHA0010
+RQ3702        PERFORM 0000-LLENAR-VEC-PERSONALIZ-007                    EHA0010
+RQ3702       WHEN 08   *> BANCO DE BOGOTA                               EHA0010
+RQ3702        PERFORM 0000-LLENAR-VEC-PERSONALIZ-008                    EHA0010
+RQ3909       WHEN 09   *> GIROS Y FINANZAS                              EHA0013
+RQ3909        PERFORM 0000-LLENAR-VEC-PERSONALIZ-009                    EHA0013
+CQ3990       WHEN 10   *> BANCO PICHINCHA                               DLM0017
+CQ3990        PERFORM 0000-LLENAR-VEC-PERSONALIZ-010                    DLM0017
+RQ3989       WHEN 11   *> BANCOLOMBIA
+              PERFORM 0000-LLENAR-VEC-PERSONALIZ-011
+RQ4198       WHEN 12   *> LA POLAR                                      CAV0019
+RQ4198        PERFORM 0000-LLENAR-VEC-PERSONALIZ-012                    CAV0019
+RQ4202       WHEN 13   *> FINAMERICA                                    CAV0021
+RQ4202        PERFORM 0000-LLENAR-VEC-PERSONALIZ-013                    CAV0021
+CQ4341       WHEN 14   *> RENAWARE                                      DLM0018
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-014                    DLM0018
+CQ4341       WHEN 15   *> PERSONALIZACION 15                            DLM0018
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-015                    DLM0018
+CQ4341       WHEN 16   *> PERSONALIZACION 16                            DLM0018
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-016                    DLM0018
+CQ5519       WHEN 17   *> LEASING BOLIVAR                               IMS0023
+CQ5519        PERFORM 0000-LLENAR-VEC-PERSONALIZ-017                    IMS0023
+CQ4341       WHEN 18   *> PERSONALIZACION 18                            DLM0018
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-018                    DLM0018
+CQ4341       WHEN 19   *> PERSONALIZACION 19                            DLM0018
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-019                    DLM0018
+CQ5803       WHEN 20   *> COONALRECAUDO                                 CAV0025
+CQ4341        PERFORM 0000-LLENAR-VEC-PERSONALIZ-020                    DLM0018
+CQ5863       WHEN 21   *> ETB                                           IMS0026
+CQ5863        PERFORM 0000-LLENAR-VEC-PERSONALIZ-021                    IMS0026
+CQ6485       WHEN 22   *> FINESA                                        IMS0028
+CQ6485        PERFORM 0000-LLENAR-VEC-PERSONALIZ-022                    IMS0028
+CQ7064       WHEN 25   *> DAVIVIENDA                                    IMS0029
+CQ7064        PERFORM 0000-LLENAR-VEC-PERSONALIZ-025                    IMS0029
+CQ7817       WHEN 26   *> FERRETERIA AL DIA                             CAV0031
+CQ7817        PERFORM 0000-LLENAR-VEC-PERSONALIZ-026                    CAV0031
+CQ7816       WHEN 27   *> GMAC                                          CAV0031
+CQ7816        PERFORM 0000-LLENAR-VEC-PERSONALIZ-027                    CAV0031
+CQ8189       WHEN 28   *> FNA                                           CAV0032
+CQ8189        PERFORM 0000-LLENAR-VEC-PERSONALIZ-028                    CAV0032
+CQ9491       WHEN 29   *> RIPLEY                                        IMS0035
+CQ9491        PERFORM 0000-LLENAR-VEC-PERSONALIZ-029                    IMS0035
+CQ9692       WHEN 30   *> BANCO POPULAR                                 CAV0038
+CQ9692        PERFORM 0000-LLENAR-VEC-PERSONALIZ-030                    CAV0038
+CQ9954       WHEN 31   *> COPROSOL                                      IMS0039
+CQ9954        PERFORM 0000-LLENAR-VEC-PERSONALIZ-031                    IMS0039
+CQ9957       WHEN 32   *> COOPDESOL                                     IMS0039
+CQ9957        PERFORM 0000-LLENAR-VEC-PERSONALIZ-032                    IMS0039
+CQ9958       WHEN 33   *> J EMILIOS                                     IMS0039
+CQ9958        PERFORM 0000-LLENAR-VEC-PERSONALIZ-033                    IMS0039
+CQ9899       WHEN 34   *> METROTEL                                      CAV0042
+CQ9899        PERFORM 0000-LLENAR-VEC-PERSONALIZ-034                    CAV0042
+R10272       WHEN 35   *> COMULTRASAN                                   IMS0043
+R10272        PERFORM 0000-LLENAR-VEC-PERSONALIZ-035                    IMS0043
+R10461       WHEN 36   *> CREDIFLORES                                   CAV0041
+R10461        PERFORM 0000-LLENAR-VEC-PERSONALIZ-036                    CAV0041
+R10472       WHEN 37   *> JAIRO PATIÑO                                  CAV0042
+R10472        PERFORM 0000-LLENAR-VEC-PERSONALIZ-037                    CAV0042
+R11022       WHEN 38   *> COPROCENVA                                    STT0047
+R11022        PERFORM 0000-LLENAR-VEC-PERSONALIZ-038                    STT0047
+R11027       WHEN 39   *> ALCA                                          IMS0046
+R11027        PERFORM 0000-LLENAR-VEC-PERSONALIZ-039                    IMS0046
+R11508       WHEN 40   *> SERFINANSA                                    IMS0048
+R11508        PERFORM 0000-LLENAR-VEC-PERSONALIZ-040                    IMS0048
+R11058       WHEN 41   *> CREDITITULOS                                  STT0045
+R11058        PERFORM 0000-LLENAR-VEC-PERSONALIZ-041                    STT0045
+R12051       WHEN 42   *> Best Buy                                      STT0044
+R12051        PERFORM 0000-LLENAR-VEC-PERSONALIZ-042                    STT0044
+R12051       WHEN 43   *> Inversiones HPH                               STT0044
+R12051        PERFORM 0000-LLENAR-VEC-PERSONALIZ-043                    STT0044
+R12212       WHEN 45   *> NATURA                                        IMS0050
+R12212        PERFORM 0000-LLENAR-VEC-PERSONALIZ-045                    IMS0050
+           END-EVALUATE.
+       1000-INI-VAR-CARACTPER.
+REMARK*****************************************************************
+REMARK*1000-INI-VAR-CARACTPER.
+REMARK*    SE INICIALIZAN LAS CARACTERISTICAS PROPIAS DE CADA
+REMARK*    PERSONALIZACION
+REMARK*****************************************************************
+           INITIALIZE VECTOR-VARIABLES-PER.
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 0000-INICIALIZAR-CARAC-EXT-01
+           END-IF
+           IF NUM-PERSO-CARACT           = 02
+              PERFORM 0000-INICIALIZAR-CARAC-EXT-02
+           END-IF
+RQCITI     IF NUM-PERSO-CARACT           = 03
+RQCITI        PERFORM 0000-INICIALIZAR-CARAC-EXT-03
+RQCITI     END-IF
+RQ3218     IF NUM-PERSO-CARACT           = 04 *> COLPATRIA              EHA0003
+RQ3218        PERFORM 0000-INICIALIZAR-CARAC-EXT-04                     EHA0003
+RQ3218     END-IF                                                       EHA0003
+RQ3132     IF NUM-PERSO-CARACT           = 05 *> BBVA                   CIG0006
+RQ3132        PERFORM 0000-INICIALIZAR-CARAC-EXT-05                     CIG0006
+RQ3132     END-IF                                                       CIG0006
+RQ3449     IF NUM-PERSO-CARACT           = 06                           CAV0009
+RQ3449        PERFORM 0000-INICIALIZAR-CARAC-EXT-06                     CAV0009
+RQ3449     END-IF                                                       CAV0009
+RQ3702     IF NUM-PERSO-CARACT           = 07                           EHA0010
+RQ3702        PERFORM 0000-INICIALIZAR-CARAC-EXT-07                     EHA0010
+RQ3702     END-IF                                                       EHA0010
+RQ3769     IF NUM-PERSO-CARACT           = 08                           EHA0013
+RQ3769        PERFORM 0000-INICIALIZAR-CARAC-EXT-08                     EHA0013
+RQ3769     END-IF                                                       EHA0013
+RQ3909     IF NUM-PERSO-CARACT           = 09                           EHA0013
+RQ3909        PERFORM 0000-INICIALIZAR-CARAC-EXT-09                     EHA0013
+RQ3909     END-IF                                                       EHA0013
+CQ3990     IF NUM-PERSO-CARACT = 10   *> BANCO PICHINCHA                DLM0017
+CQ3990        PERFORM 0000-INICIALIZAR-CARAC-EXT-10                     DLM0017
+CQ3990     END-IF                                                       DLM0017
+RQ3989     IF NUM-PERSO-CARACT           = 11
+RQ3989        PERFORM 0000-INICIALIZAR-CARAC-EXT-11
+RQ3989     END-IF
+RQ4198     IF NUM-PERSO-CARACT           = 12 *> LA POLAR               CAV0019
+RQ4198        PERFORM 0000-INICIALIZAR-CARAC-EXT-12                     CAV0019
+RQ4198     END-IF                                                       CAV0019
+RQ4202     IF NUM-PERSO-CARACT           = 13 *> FINAMERICA             CAV0021
+RQ4202        PERFORM 0000-INICIALIZAR-CARAC-EXT-13                     CAV0021
+RQ4202     END-IF                                                       CAV0021
+CQ4341     IF NUM-PERSO-CARACT = 14   *> RENAWARE                       DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-14                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ4341     IF NUM-PERSO-CARACT = 15                                     DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-15                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ4341     IF NUM-PERSO-CARACT = 16                                     DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-16                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ5519     IF NUM-PERSO-CARACT = 17   *> LEASING BOLIVAR                IMS0023
+CQ5519        PERFORM 0000-INICIALIZAR-CARAC-EXT-17                     IMS0023
+CQ4341     END-IF                                                       DLM0018
+CQ4341     IF NUM-PERSO-CARACT = 18                                     DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-18                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ4341     IF NUM-PERSO-CARACT = 19                                     DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-19                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ5803     IF NUM-PERSO-CARACT = 20                                     DLM0018
+CQ4341        PERFORM 0000-INICIALIZAR-CARAC-EXT-20                     DLM0018
+CQ4341     END-IF                                                       DLM0018
+CQ5863     IF NUM-PERSO-CARACT = 21                                     IMS0026
+CQ5863        PERFORM 0000-INICIALIZAR-CARAC-EXT-21                     IMS0026
+CQ5863     END-IF                                                       IMS0026
+CQ6485     IF NUM-PERSO-CARACT = 22                                     IMS0028
+CQ6485        PERFORM 0000-INICIALIZAR-CARAC-EXT-22                     IMS0028
+CQ6485     END-IF                                                       IMS0028
+CQ7064     IF NUM-PERSO-CARACT = 25                                     IMS0029
+CQ7064        PERFORM 0000-INICIALIZAR-CARAC-EXT-25                     IMS0029
+CQ7064     END-IF                                                       IMS0029
+CQ7817     IF NUM-PERSO-CARACT = 26                                     CAV0031
+CQ7817        PERFORM 0000-INICIALIZAR-CARAC-EXT-26                     CAV0031
+CQ7817     END-IF                                                       CAV0031
+CQ7816     IF NUM-PERSO-CARACT = 27                                     CAV0031
+CQ7816        PERFORM 0000-INICIALIZAR-CARAC-EXT-27                     CAV0031
+CQ7816     END-IF                                                       CAV0031
+CQ8189     IF NUM-PERSO-CARACT = 28                                     CAV0032
+CQ8189        PERFORM 0000-INICIALIZAR-CARAC-EXT-28                     CAV0032
+CQ8189     END-IF                                                       CAV0032
+CQ9491     IF NUM-PERSO-CARACT = 29                                     IMS0035
+CQ9491        PERFORM 0000-INICIALIZAR-CARAC-EXT-29                     IMS0035
+CQ9491     END-IF                                                       IMS0035
+CQ9692     IF NUM-PERSO-CARACT = 30                                     CAV0038
+CQ9692        PERFORM 0000-INICIALIZAR-CARAC-EXT-30                     CAV0038
+CQ9692     END-IF                                                       CAV0038
+CQ9954     IF NUM-PERSO-CARACT = 31                                     IMS0039
+CQ9954        PERFORM 0000-INICIALIZAR-CARAC-EXT-31                     IMS0039
+CQ9954     END-IF                                                       IMS0039
+CQ9957     IF NUM-PERSO-CARACT = 32                                     IMS0039
+CQ9957        PERFORM 0000-INICIALIZAR-CARAC-EXT-32                     IMS0039
+CQ9957     END-IF                                                       IMS0039
+CQ9958     IF NUM-PERSO-CARACT = 33                                     IMS0039
+CQ9958        PERFORM 0000-INICIALIZAR-CARAC-EXT-33                     IMS0039
+CQ9958     END-IF                                                       IMS0039
+CQ9899     IF NUM-PERSO-CARACT = 34                                     CAV0042
+CQ9899        PERFORM 0000-INICIALIZAR-CARAC-EXT-34                     CAV0042
+CQ9899     END-IF                                                       CAV0042
+R10272     IF NUM-PERSO-CARACT = 35                                     IMS0043
+R10272        PERFORM 0000-INICIALIZAR-CARAC-EXT-35                     IMS0043
+R10272     END-IF                                                       IMS0043
+R10461     IF NUM-PERSO-CARACT = 36                                     CAV0041
+R10461        PERFORM 0000-INICIALIZAR-CARAC-EXT-36                     CAV0041
+R10461     END-IF                                                       CAV0041
+R10472     IF NUM-PERSO-CARACT = 37                                     CAV0042
+R10472        PERFORM 0000-INICIALIZAR-CARAC-EXT-37                     CAV0042
+R10472     END-IF                                                       CAV0042
+R11022     IF NUM-PERSO-CARACT = 38                                     STT0047
+R11022        PERFORM 0000-INICIALIZAR-CARAC-EXT-38                     STT0047
+R11022     END-IF                                                       STT0047
+R11027     IF NUM-PERSO-CARACT = 39                                     IMS0046
+R11027        PERFORM 0000-INICIALIZAR-CARAC-EXT-39                     IMS0046
+R11027     END-IF                                                       IMS0046
+R11508     IF NUM-PERSO-CARACT = 40                                     IMS0044
+R11508        PERFORM 0000-INICIALIZAR-CARAC-EXT-40                     IMS0044
+R11508     END-IF                                                       IMS0044
+R11058     IF NUM-PERSO-CARACT = 41                                     STT0045
+R11058        PERFORM 0000-INICIALIZAR-CARAC-EXT-41                     STT0045
+R11058     END-IF                                                       STT0045
+R12051     IF NUM-PERSO-CARACT = 42                                     STT0044
+R12051        PERFORM 0000-INICIALIZAR-CARAC-EXT-42                     STT0044
+R12051     END-IF                                                       STT0044
+R12051     IF NUM-PERSO-CARACT = 43                                     STT0044
+R12051        PERFORM 0000-INICIALIZAR-CARAC-EXT-43                     STT0044
+R12051     END-IF                                                       STT0044
+R12212     IF NUM-PERSO-CARACT = 45                                     IMS0050
+R12212        PERFORM 0000-INICIALIZAR-CARAC-EXT-45                     IMS0050
+R12212     END-IF                                                       IMS0050
+           EXIT.
+       1000-PROCESE-00NUM-CARACTPER.
+***************************************************************************
+REMARK*1000-PROCESE-00NUM-CARACTPER.
+REMARK*    SE MIRA SI PARA ALGUNA PERSONALIZACION HAY QUE REALIZAR CALCULOS
+REMARK*    PARA LA TIPOLOGIA NUM.
+***************************************************************************
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 2249-PROCESE-CARCT-00NUM-EXT-01
+           END-IF
+RQCITI     IF NUM-PERSO-CARACT           = 03
+RQCITI        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-03
+RQCITI     END-IF
+RQ3218     IF NUM-PERSO-CARACT           = 04                           EHA0003
+RQ3218        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-04                   EHA0003
+RQ3218     END-IF                                                       EHA0003
+CQ9101     IF NUM-PERSO-CARACT = 08                                     CAV0034
+CQ9101        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-08                   CAV0034
+CQ9101     END-IF                                                       CAV0034
+CQ8177     IF NUM-PERSO-CARACT = 09                                     CAV0033
+CQ8177        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-09                   CAV0033
+CQ8177     END-IF                                                       CAV0033
+RQ3990     IF NUM-PERSO-CARACT  =  10   *> BANCO PICHINCHA              DLM0017
+CQ4341       IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                  DLM0018
+CQ4341           NRO-ID-CARACT   =  NUM-ID-ABD07                        DLM0018
+RQ3990        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-10                   DLM0017
+CQ4341       END-IF                                                     DLM0018
+RQ3990     END-IF                                                       DLM0017
+CQ7063     IF NUM-PERSO-CARACT  =  11   *> BANCOLOMBIA                  CAV0030
+CQ7063        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-11                   CAV0030
+CQ7063     END-IF                                                       CAV0030
+RQ4198     IF NUM-PERSO-CARACT  =  12   *> LA POLAR                     CAV0019
+RQ4198        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+RQ4523     IF NUM-PERSO-CARACT  =  15   *> LAGOBO                       EHA0020
+RQ4523        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-15                   EHA0020
+RQ4523     END-IF                                                       EHA0020
+JRCOOP     IF NUM-PERSO-CARACT  =  16   *> JURISCOOP                    LAG0024
+CQ7065       IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                  IMS0027
+CQ7065           NRO-ID-CARACT   =  NUM-ID-ABD07                        IMS0027
+JRCOOP        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-16                   LAG0024
+CQ7065       END-IF                                                     IMS0027
+JRCOOP     END-IF                                                       LAG0024
+RQ5464     IF NUM-PERSO-CARACT  =  18   *> FINTRAVALORES                CAV0024
+RQ5464        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-18                   CAV0024
+RQ5464     END-IF                                                       CAV0024
+CQ5803     IF NUM-PERSO-CARACT  =  20   *> COONALRECAUDO                CAV0025
+CQ5803        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-20                   CAV0025
+CQ5803     END-IF                                                       CAV0025
+CQ7817     IF NUM-PERSO-CARACT  =  26   *> FERRETERAI AL DIA            CAV0031
+CQ7817        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-26                   CAV0031
+CQ7817     END-IF                                                       CAV0031
+CQ7816     IF NUM-PERSO-CARACT  =  27   *> GMAC                         CAV0031
+CQ7816        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-27                   CAV0031
+CQ7816     END-IF                                                       CAV0031
+CQ9966     IF NUM-PERSO-CARACT  =  29   *> RIPLEY                       IMS0037
+CQ9966        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-29                   IMS0037
+CQ9966     END-IF                                                       IMS0037
+CQ9692     IF NUM-PERSO-CARACT  =  30   *> BANCO POPULAR                CAV0038
+CQ9692        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-30                   CAV0038
+CQ9692     END-IF                                                       CAV0038
+CQ9954     IF NUM-PERSO-CARACT  =  31   *> COPDESOL                     IMS0039
+CQ9954        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-31                   IMS0039
+CQ9954     END-IF                                                       IMS0039
+CQ9957     IF NUM-PERSO-CARACT  =  32   *> COOPDESOL                    IMS0039
+CQ9957        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-32                   IMS0039
+CQ9957     END-IF                                                       IMS0039
+CQ9958     IF NUM-PERSO-CARACT  =  33   *> J EMILIOS                    IMS0039
+CQ9958        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-33                   IMS0039
+CQ9958     END-IF                                                       IMS0039
+CQ9899     IF NUM-PERSO-CARACT  =  34   *> METROTEL                     CAV0042
+CQ9899        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-34                   CAV0042
+CQ9899     END-IF                                                       CAV0042
+R10461     IF NUM-PERSO-CARACT  =  36   *> CREDIFLORES                  CAV0041
+R10461        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-36                   CAV0041
+R10461     END-IF                                                       CAV0041
+R10472     IF NUM-PERSO-CARACT  =  37   *> JAIRO PATIÑO                 CAV0042
+R10472        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-37                   CAV0042
+R10472     END-IF                                                       CAV0042
+R11022     IF NUM-PERSO-CARACT  =  38   *> COPROCENVA                   STT0047
+R11022        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-38                   STT0047
+R11022     END-IF                                                       STT0047
+R11027     IF NUM-PERSO-CARACT  =  39   *> ALCA                         IMS0046
+R11027        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-39                   IMS0046
+R11027     END-IF                                                       IMS0046
+R11508     IF NUM-PERSO-CARACT  =  40   *> SERFINANSA                   IMS0048
+R11508        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-40                   IMS0048
+R11508     END-IF                                                       IMS0048
+R12051     IF NUM-PERSO-CARACT  =  42   *> Best Buy                     STT0044
+R12051        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-42                   STT0044
+R12051     END-IF                                                       STT0044
+R12051     IF NUM-PERSO-CARACT  =  43   *> Inversiones HPH              STT0044
+R12051        PERFORM 2249-PROCESE-CARCT-00NUM-EXT-43                   STT0044
+R12051     END-IF                                                       STT0044
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00NUM
+      $    END
+           EXIT.
+       1000-PROCESE-00MOR-CARACTPER.
+REMARK*****************************************************************
+REMARK*1000-PROCESE-00MOR-CARACTPER.
+REMARK*    SE MIRA SI PARA ALGUNA PERSONALIZACION HAY QUE REALIZAR CALCULOS
+REMARK*    PARA LA TIPOLOGIA MOR.
+REMARK*****************************************************************
+CQ3990     IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0017
+CQ3990         NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0017
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 2249-PROCESE-CARCT-00MOR-EXT-01
+           END-IF
+           IF NUM-PERSO-CARACT           = 02
+              PERFORM 2249-PROCESE-CARCT-00MOR-EXT-02
+           END-IF
+RQCITI     IF NUM-PERSO-CARACT           = 03
+RQCITI        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-03
+RQCITI     END-IF
+RQ3449     IF NUM-PERSO-CARACT           = 06                           CAV0009
+RQ3449        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-06                   CAV0009
+RQ3449     END-IF                                                       CAV0009
+RQ3909     IF NUM-PERSO-CARACT           = 09                           EHA0013
+RQ3909        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-09                   EHA0013
+RQ3909     END-IF                                                       EHA0013
+RQ3989     IF NUM-PERSO-CARACT           = 11
+              PERFORM 2749-PROCESE-CARCT-00MOR-EXT-11
+           END-IF
+RQ4198     IF NUM-PERSO-CARACT           = 12                           CAV0019
+RQ4198        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+RQ4202     IF NUM-PERSO-CARACT           = 13                           CAV0021
+RQ4202        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-13                   CAV0021
+RQ4202     END-IF                                                       CAV0021
+RQ4523     IF NUM-PERSO-CARACT           = 15 *> LAGOBO                 EHA0020
+RQ4523        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-15                   EHA0020
+RQ4523     END-IF                                                       EHA0020
+JRCOOP     IF NUM-PERSO-CARACT           = 16 *> JURISCOOP              LAG0024
+JRCOOP        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-16                   LAG0024
+JRCOOP     END-IF                                                       LAG0024
+RQ5464     IF NUM-PERSO-CARACT           = 18 *> FINTRAVALORES          CAV0024
+RQ5464        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-18                   CAV0024
+RQ5464     END-IF                                                       CAV0024
+CQ5803     IF NUM-PERSO-CARACT           = 20 *> COONALRECAUDO          CAV0025
+CQ5803        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-20                   CAV0025
+CQ5803     END-IF                                                       CAV0025
+CQ6485     IF NUM-PERSO-CARACT           = 22 *> FINESA                 IMS0028
+CQ6485        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-22                   IMS0028
+CQ6485     END-IF                                                       IMS0028
+CQ9566     IF NUM-PERSO-CARACT           = 25 *> DAVIVIENDA             CAV0040
+CQ9566        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-25                   CAV0040
+CQ9566     END-IF                                                       CAV0040
+CQ7817     IF NUM-PERSO-CARACT           = 26 *> FERRETERIA AL DIA      CAV0031
+CQ7817        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-26                   CAV0031
+CQ7817     END-IF                                                       CAV0031
+CQ7816     IF NUM-PERSO-CARACT           = 27 *> GMAC                   CAV0031
+CQ7816        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-27                   CAV0031
+CQ7816     END-IF                                                       CAV0031
+CQ9954     IF NUM-PERSO-CARACT           = 31 *> COPROSOL               IMS0039
+CQ9954        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-31                   IMS0039
+CQ9954     END-IF                                                       IMS0039
+CQ9957     IF NUM-PERSO-CARACT           = 32 *> COOPDESOL              IMS0039
+CQ9957        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-32                   IMS0039
+CQ9957     END-IF                                                       IMS0039
+CQ9958     IF NUM-PERSO-CARACT           = 33 *> J EMILIOS              IMS0039
+CQ9958        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-33                   IMS0039
+CQ9958     END-IF                                                       IMS0039
+CQ9899     IF NUM-PERSO-CARACT           = 34 *> METROTEL               CAV0042
+CQ9899        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-34                   CAV0042
+CQ9899     END-IF                                                       CAV0042
+R10461     IF NUM-PERSO-CARACT           = 36 *> CREDIFLORES            CAV0041
+R10461        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-36                   CAV0041
+R10461     END-IF                                                       CAV0041
+R10472     IF NUM-PERSO-CARACT           = 37 *> JAIRO PATIÑO           CAV0042
+R10472        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-37                   CAV0042
+R10472     END-IF                                                       CAV0042
+R11022     IF NUM-PERSO-CARACT           = 38 *> COPROCENVA             STT0047
+R11022        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-38                   STT0047
+R11022     END-IF                                                       STT0047
+R12051     IF NUM-PERSO-CARACT           = 42 *> Best Buy               STT0044
+R12051        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-42                   STT0044
+R12051     END-IF                                                       STT0044
+R12051     IF NUM-PERSO-CARACT           = 43 *> Inversiones HPH        STT0044
+R12051        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-43                   STT0044
+R12051     END-IF                                                       STT0044
+R12212     IF NUM-PERSO-CARACT           = 45 *> NATURA                 IMS0050
+R12212        PERFORM 2249-PROCESE-CARCT-00MOR-EXT-45                   IMS0050
+R12212     END-IF                                                       IMS0050
+RQ3990     END-IF.                                                      DLM0017
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00MOR
+      $    END
+           EXIT.
+       1000-PROCESE-00ACP-CARACTPER.
+REMARK*******************************************************************
+REMARK*1000-PROCESE-00ACP-CARACTPER.
+REMARK*    SE MIRA SI HAY ALGO PERSONALIZADO PARA TIPOLOGIA ACP
+REMARK*******************************************************************
+CQ3990     IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0017
+CQ3990         NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0017
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 2249-PROCESE-CARCT-00ACP-EXT-01
+           END-IF
+JRCOOP     IF NUM-PERSO-CARACT           = 16                           LAG0024
+JRCOOP        PERFORM 2249-PROCESE-CARCT-00ACP-EXT-16                   LAG0024
+JRCOOP     END-IF                                                       LAG0024
+RQ3990     END-IF.                                                      DLM0017
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00ACP
+      $    END
+           EXIT.
+       1000-PROCESE-00EXP-CARACTPER.
+REMARK****************************************************************
+REMARK*1000-PROCESE-00EXP-CARACTPER.
+REMARK*    SE MIRA SI HAY ALGO PERSONALIZADO PARA TIPOLOGIA EXP
+REMARK****************************************************************
+CQ3990     IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0017
+CQ3990         NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0017
+CQ5220*    IF NUM-PERSO-CARACT           = 03                           CAV0022
+CQ5220*       PERFORM 2249-PROCESE-CARCT-00EXP-EXT-03                   CAV0022
+CQ5220*    END-IF                                                       CAV0022
+RQ5522     IF NUM-PERSO-CARACT           = 06                           CAV0022
+RQ5522        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-06                   CAV0022
+RQ5522     END-IF                                                       CAV0022
+RQ3909     IF NUM-PERSO-CARACT           = 09                           EHA0013
+RQ3909        PERFORM 2249-PROCESE-CARCT-00EXT-EXT-09                   EHA0013
+RQ3909     END-IF                                                       EHA0013
+CQ7063     IF NUM-PERSO-CARACT           = 11                           CAV0030
+CQ7063        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-11                   CAV0030
+CQ7063     END-IF                                                       CAV0030
+RQ4198     IF NUM-PERSO-CARACT           = 12                           CAV0019
+RQ4198        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+RQ7816     IF NUM-PERSO-CARACT           = 27                           CAV0031
+RQ7816        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-27                   CAV0031
+RQ7816     END-IF                                                       CAV0031
+R12047     IF NUM-PERSO-CARACT           = 29                           IMS0049
+R12047        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-29                   IMS0049
+R12047     END-IF                                                       IMS0049
+R11508     IF NUM-PERSO-CARACT           = 40                           IMS0048
+R11508        PERFORM 2249-PROCESE-CARCT-00EXP-EXT-40                   IMS0048
+R11508     END-IF                                                       IMS0048
+RQ3990     END-IF.                                                      DLM0017
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00EXP
+      $    END
+           EXIT.
+       1000-PROCESE-02XXX-CARACTPER.
+REMARK****************************************************************
+REMARK*1000-PROCESE-02XXX-CARACTPER.
+REMARK*    SE MIRA SI HAY ALGO PERSONALIZADO PARA NIVEL 02      
+REMARK****************************************************************
+CQ4341*    IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0018
+CQ4341*        NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0018
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 2649-PROCESE-CARACT-02XX-EXT-01
+RQ3990     END-IF 
+           IF NUM-PERSO-CARACT           = 02
+              PERFORM 2649-PROCESE-CARACT-02XX-EXT-02
+RQ3990     END-IF 
+RQCITI     IF NUM-PERSO-CARACT           = 03
+RQCITI        PERFORM 2649-PROCESE-CARACT-02XX-EXT-03
+RQ3990     END-IF 
+RQ3218     IF NUM-PERSO-CARACT           = 04 *> COLPATRIA              EHA0003
+RQ3218        PERFORM 2649-PROCESE-CARACT-02XX-EXT-04                   EHA0003
+RQ3990     END-IF                                                       EHA0003
+RQ3132     IF NUM-PERSO-CARACT           = 05 *> BBVA                   CIG0006
+RQ3132        PERFORM 2649-PROCESE-CARACT-02XX-EXT-05                   CIG0006
+RQ3990     END-IF                                                       CIG0006
+RQ3449     IF NUM-PERSO-CARACT           = 06 *> BCSC                   CAV0009
+RQ3449        PERFORM 2649-PROCESE-CARACT-02XX-EXT-06                   CAV0009
+RQ3990     END-IF                                                       CAV0009
+RQ4070*                                                                 EHA0015
+RQ4070     IF NUM-PERSO-CARACT           = 08 *> BANCO DE BOGOTA        EHA0015
+RQ4070        PERFORM 2649-PROCESE-CARACT-02XX-EXT-08                   EHA0015
+RQ3990     END-IF                                                       EHA0015
+RQ4070*                                                                 EHA0015
+RQ3909     IF NUM-PERSO-CARACT           = 09 *> GIROS Y FINANZAS       EHA0013
+RQ3909        PERFORM 2649-PROCESE-CARACT-02XX-EXT-09                   EHA0013
+RQ3909        PERFORM 2249-PROCESE-CARCT-02MOR-EXT-09                   EHA0013
+RQ3990     END-IF                                                       EHA0013
+CQ7063     IF NUM-PERSO-CARACT           = 11 *> BANCOLOMBIA            CAV0030
+CQ7063        PERFORM 2649-PROCESE-CARACT-02XX-EXT-11                   CAV0030
+CQ7063     END-IF                                                       CAV0030
+RQ4198     IF NUM-PERSO-CARACT           = 12 *> LA POLAR               CAV0019
+RQ4198        PERFORM 2649-PROCESE-CARACT-02XX-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+JRCOOP     IF NUM-PERSO-CARACT           = 16 *> JURISCOOP              LAG0024
+JRCOOP        PERFORM 2649-PROCESE-CARACT-02XX-EXT-16                   LAG0024
+JRCOOP     END-IF                                                       LAG0024
+CQ5803     IF NUM-PERSO-CARACT           = 20 *> COONALRECAUDO          CAV0025
+CQ5803        PERFORM 2649-PROCESE-CARACT-02XX-EXT-20                   CAV0025
+CQ5803     END-IF                                                       CAV0025
+CQ5863     IF NUM-PERSO-CARACT           = 21 *> ETB                    IMS0026
+CQ5863        PERFORM 2649-PROCESE-CARACT-02XX-EXT-21                   IMS0026
+CQ5863     END-IF                                                       IMS0026
+CQ7064     IF NUM-PERSO-CARACT           = 25 *> DAVIVIENDA             IMS0029
+CQ7064        PERFORM 2649-PROCESE-CARACT-02XX-EXT-25                   IMS0029
+CQ7064     END-IF                                                       IMS0029
+CQ7816     IF NUM-PERSO-CARACT           = 27 *> GMAC                   CAV0031
+CQ7816        PERFORM 2649-PROCESE-CARACT-02XX-EXT-27                   CAV0031
+CQ7816     END-IF                                                       CAV0031
+CQ8189     IF NUM-PERSO-CARACT           = 28 *> FNA                    CAV0032
+CQ8189        PERFORM 2649-PROCESE-CARACT-02XX-EXT-28                   CAV0032
+CQ8189     END-IF                                                       CAV0032
+CQ9954     IF NUM-PERSO-CARACT           = 31 *> COPDESOL               IMS0039
+CQ9954        PERFORM 2649-PROCESE-CARACT-02XX-EXT-31                   IMS0039
+CQ9954     END-IF                                                       IMS0039
+CQ9957     IF NUM-PERSO-CARACT           = 32 *> COOPDESOL              IMS0039
+CQ9957        PERFORM 2649-PROCESE-CARACT-02XX-EXT-32                   IMS0039
+CQ9957     END-IF                                                       IMS0039
+CQ9958     IF NUM-PERSO-CARACT           = 33 *> J EMILIOS              IMS0039
+CQ9958        PERFORM 2649-PROCESE-CARACT-02XX-EXT-33                   IMS0039
+CQ9958     END-IF                                                       IMS0039
+R11508     IF NUM-PERSO-CARACT           = 40 *> SERFINANSA             IMS0048
+R11508        PERFORM 2649-PROCESE-CARACT-02XX-EXT-40                   IMS0048
+R11508     END-IF                                                       IMS0048
+R11058     IF NUM-PERSO-CARACT           = 41 *> CREDITITULOS           STT0045
+R11058        PERFORM 2649-PROCESE-CARACT-02XX-EXT-41                   STT0045
+R11058     END-IF                                                       STT0045
+CQ4341*    END-IF.                                                      DLM0018
+           EXIT.
+       1000-PROCESE-00END-CARACTPER.
+REMARK*****************************************************************
+REMARK*1000-PROCESE-00END-CARACTPER.
+REMARK*    SE MIRA SI HAY ALGO PARA TIPOLOGIA END DE PERSONALIZACION
+REMARK*****************************************************************
+CQ3990     IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0017
+CQ3990         NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0017
+RQ3218     IF NUM-PERSO-CARACT           = 04                           EHA0003
+RQ3218        PERFORM 2249-PROCESE-CARCT-00END-EXT-04                   EHA0003
+RQ3218     END-IF                                                       EHA0003
+RQCITI     IF NUM-PERSO-CARACT           = 03                           CAV0009
+RQCITI        PERFORM 2749-PROCESE-CARCT-00END-EXT-03                   CAV0009
+RQCITI     END-IF                                                       CAV0009
+RQ3449     IF NUM-PERSO-CARACT           = 06                           CAV0009
+RQ3449        PERFORM 2749-PROCESE-CARCT-00END-EXT-06                   CAV0009
+RQ3449     END-IF                                                       CAV0009
+RQ3702     IF NUM-PERSO-CARACT           = 07                           EHA0010
+RQ3702        PERFORM 2749-PROCESE-CARCT-00END-EXT-07                   EHA0010
+RQ3702     END-IF                                                       EHA0010
+RQ3769     IF NUM-PERSO-CARACT           = 08                           EHA0013
+RQ3769        PERFORM 2749-PROCESE-CARCT-00END-EXT-08                   EHA0013
+RQ3769     END-IF                                                       EHA0013
+           IF NUM-PERSO-CARACT           = 11
+              PERFORM 2749-PROCESE-CARCT-00END-EXT-11
+           END-IF
+RQ4198     IF NUM-PERSO-CARACT           = 12                           CAV0019
+RQ4198        PERFORM 2749-PROCESE-CARCT-00END-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+RQ4523     IF NUM-PERSO-CARACT           = 15 *> LAGOBO                 EHA0020
+RQ4523        PERFORM 2749-PROCESE-CARCT-00END-EXT-15                   EHA0020
+RQ4523     END-IF                                                       EHA0020
+CQ7065     IF NUM-PERSO-CARACT           = 16 *> JURISCOOP              IMS0027
+CQ7065        PERFORM 2249-PROCESE-CARCT-00END-EXT-16                   IMS0027
+CQ7065     END-IF                                                       IMS0027
+CQ6485     IF NUM-PERSO-CARACT           = 22 *> FINESA                 IMS0028
+CQ6485        PERFORM 2249-PROCESE-CARCT-00END-EXT-22                   IMS0028
+CQ6485     END-IF                                                       IMS0028
+CQ7064     IF NUM-PERSO-CARACT           = 25 *> DAVIVIENDA             IMS0029
+CQ7064        PERFORM 2749-PROCESE-CARCT-00END-EXT-25                   IMS0029
+CQ7064     END-IF                                                       IMS0029
+CQ7817     IF NUM-PERSO-CARACT           = 26 *> FERRETERIA AL DIA      CAV0031
+CQ7817        PERFORM 2749-PROCESE-CARCT-00END-EXT-26                   CAV0031
+CQ7817     END-IF                                                       CAV0031
+CQ7816     IF NUM-PERSO-CARACT           = 27 *> GMAC                   CAV0031
+CQ7816        PERFORM 2749-PROCESE-CARCT-00END-EXT-27                   CAV0031
+CQ7816     END-IF                                                       CAV0031
+R12047     IF NUM-PERSO-CARACT           = 29 *> RIPLEY                 IMS0049
+R12047        PERFORM 2749-PROCESE-CARCT-00END-EXT-29                   IMS0049
+R12047     END-IF                                                       IMS0049
+CQ9692     IF NUM-PERSO-CARACT           = 30 *> BANCO POPULAR          CAV0038
+CQ9692        PERFORM 2749-PROCESE-CARCT-00END-EXT-30                   CAV0038
+CQ9692     END-IF                                                       CAV0038
+CQ9899     IF NUM-PERSO-CARACT           = 34 *> METROTEL               CAV0042
+CQ9899        PERFORM 2749-PROCESE-CARCT-00END-EXT-34                   CAV0042
+CQ9899     END-IF                                                       CAV0042
+R10272     IF NUM-PERSO-CARACT           = 35 *> COMULTRASAN            IMS0043
+R10272        PERFORM 2749-PROCESE-CARCT-00END-EXT-35                   IMS0043
+R10272     END-IF                                                       IMS0043
+R10461     IF NUM-PERSO-CARACT           = 36 *> CREDIFLORES            CAV0041
+R10461        PERFORM 2749-PROCESE-CARCT-00END-EXT-36                   CAV0041
+R10461     END-IF                                                       CAV0041
+R11022     IF NUM-PERSO-CARACT           = 38 *> COPROCENVA             STT0047
+R11022        PERFORM 2749-PROCESE-CARCT-00END-EXT-38                   STT0047
+R11022     END-IF                                                       STT0047
+R11027     IF NUM-PERSO-CARACT           = 39 *> ALCA                   IMS0046
+R11027        PERFORM 2249-PROCESE-CARCT-00END-EXT-39                   IMS0046
+R11027     END-IF                                                       IMS0046
+R11508     IF NUM-PERSO-CARACT           = 40 *> SERFINANSA             IMS0048
+R11508        PERFORM 2249-PROCESE-CARCT-00END-EXT-40                   IMS0048
+R11508     END-IF                                                       IMS0048
+R12212     IF NUM-PERSO-CARACT           = 45 *> NATURA                 IMS0050
+R12212        PERFORM 2249-PROCESE-CARCT-00END-EXT-45                   IMS0050
+R12212     END-IF                                                       IMS0050
+RQ3990     END-IF.                                                      DLM0017
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00END
+      $    END
+           EXIT.
+RQ3218*                                                                 EHA0003
+       1000-PROCESE-00INQ-CARACTPER.
+REMARK*****************************************************************
+REMARK*1000-PROCESE-00INQ-CARACTPER.
+REMARK*    SE MIRA SI HAY ALGO PARA TIPOLOGIA END DE PERSONALIZACION
+REMARK*****************************************************************
+CQ4341*    IF  TIPO-ID-CARACT  =  TIPO-ID-ABD07  AND                    DLM0018
+CQ4341*        NRO-ID-CARACT   =  NUM-ID-ABD07                          DLM0018
+RQCITI     IF NUM-PERSO-CARACT           = 03
+RQCITI        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-03
+RQCITI     END-IF
+RQ3989     IF NUM-PERSO-CARACT           = 11
+RQ3989        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-11
+RQ3989     END-IF
+RQ4198     IF NUM-PERSO-CARACT           = 12                           CAV0019
+RQ4198        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-12                   CAV0019
+RQ4198     END-IF                                                       CAV0019
+CQ5803     IF NUM-PERSO-CARACT           = 20                           CAV0025
+CQ5803        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-20                   CAV0025
+CQ5803     END-IF                                                       CAV0025
+CQ6485     IF NUM-PERSO-CARACT           = 22                           IMS0028
+CQ6485        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-22                   IMS0028
+CQ6485     END-IF                                                       IMS0028
+CQ7817     IF NUM-PERSO-CARACT           = 26                           CAV0031
+CQ7817        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-26                   CAV0031
+CQ7817     END-IF                                                       CAV0031
+CQ7816     IF NUM-PERSO-CARACT           = 27                           CAV0031
+CQ7816        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-27                   CAV0031
+CQ7816     END-IF                                                       CAV0031
+CQ9954     IF NUM-PERSO-CARACT           = 31                           IMS0039
+CQ9954        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-31                   IMS0039
+CQ9954     END-IF                                                       IMS0039
+CQ9957     IF NUM-PERSO-CARACT           = 32                           IMS0039
+CQ9957        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-32                   IMS0039
+CQ9957     END-IF                                                       IMS0039
+CQ9958     IF NUM-PERSO-CARACT           = 33                           IMS0039
+CQ9958        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-33                   IMS0039
+CQ9958     END-IF                                                       IMS0039
+R10472     IF NUM-PERSO-CARACT           = 37                           CAV0042
+R10472        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-37                   CAV0042
+R10472     END-IF                                                       CAV0042
+R11027     IF NUM-PERSO-CARACT           = 39                           IMS0046
+R11027        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-39                   IMS0046
+R11027     END-IF                                                       IMS0046
+R12051     IF NUM-PERSO-CARACT           = 42                           STT0044
+R12051        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-42                   STT0044
+R12051     END-IF                                                       STT0044
+R12051     IF NUM-PERSO-CARACT           = 43                           STT0044
+R12051        PERFORM 4249-PROCESE-CARCT-00INQ-EXT-43                   STT0044
+R12051     END-IF                                                       STT0044
+CQ4341*    END-IF.                                                      DLM0018
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00INQ
+      $    END
+           EXIT.
+RQ3921 COPY CARACTPER-001.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-002.PROC.                                         CIG0012
+RQCITI COPY CARACTPER-003.PROC.
+RQ3921 COPY CARACTPER-004.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-005.PROC.                                         CIG0012
+RQ3449 COPY CARACTPER-006.PROC.                                         CAV0009
+RQ3702 COPY CARACTPER-007.PROC.                                         EHA0010
+RQ3921 COPY CARACTPER-008.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-009.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-010.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-011.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-012.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-013.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-014.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-015.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-016.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-017.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-018.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-019.PROC.                                         CIG0012
+RQ3921 COPY CARACTPER-020.PROC.                                         CIG0012
+CQ5863 COPY CARACTPER-021.PROC.                                         IMS0026
+CQ6485 COPY CARACTPER-022.PROC.                                         IMS0028
+CQ7064 COPY CARACTPER-025.PROC.                                         IMS0029
+CQ7817 COPY CARACTPER-026.PROC.                                         CAV0031
+CQ7816 COPY CARACTPER-027.PROC.                                         CAV0031
+CQ8189 COPY CARACTPER-028.PROC.                                         CAV0032
+CQ9491 COPY CARACTPER-029.PROC.                                         IMS0035
+CQ9773 COPY CARACTPER-030.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-031.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-032.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-033.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-034.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-035.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-036.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-037.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-038.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-039.PROC.                                         IMS0036
+CQ9773 COPY CARACTPER-040.PROC.                                         IMS0036
+R11058 COPY CARACTPER-041.PROC.                                         STT0045
+R12051 COPY CARACTPER-042.PROC.                                         STT0044
+R12051 COPY CARACTPER-043.PROC.                                         STT0044
+R12212 COPY CARACTPER-045.PROC.                                         IMS0050

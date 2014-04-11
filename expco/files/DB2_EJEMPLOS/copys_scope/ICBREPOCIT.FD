@@ -1,0 +1,22 @@
+      * ICBREPOCIT.FD.v.01.0001
+      ******************************************************************
+      * REPOSITORIO DE TRANSACCIONES CITIBANK EN FORMATO DATAHOST PARA *
+      * SER CONSULTADAS POSTERIORMENTE.                                *
+      ******************************************************************
+       FD  REPO-CITI.
+       01  REG-REPO-CITI.
+         03  REPCIT-LLAVE.
+           05  REPCIT-LLAVE-IDE.
+             07  REPCIT-TIP-ID         PIC  9(01).
+             07  REPCIT-NUM-ID         PIC  9(11).
+           05  REPCIT-LLAVE-RESTO.
+             07  REPCIT-FECHA          PIC  9(08).
+             07  REPCIT-CONSECUTIVO    PIC  9(08).
+         03  REPCIT-REGISTRO           PIC  X(80).
+         03                      REDEFINES  REPCIT-REGISTRO.
+           05  REPCIT-REG-TIPO         PIC  X(02).
+           05  REPCIT-REG-RESTO        PIC  X(78).
+           05  REPCIT-REG-99     REDEFINES  REPCIT-REG-RESTO.
+             07  REPCIT-RG99-RSPTA     PIC  9(02).
+             07  REPCIT-RG99-MSGORI    PIC  X(76).
+

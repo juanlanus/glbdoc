@@ -1,0 +1,350 @@
+REMARK*CARDES-PROC.0001.
+REMARK******************************************************************
+REMARK* RUTINA QUE CALCULA EL RECONOCER DE 3 MEJORES OPCIONES.
+REMARK* SE ENTREGA LA INFORMACION EN VARIABLES TIPO CARACTERISTICAS
+REMARK*    INPUT:
+REMARK*       TIPIDE-RECDES : TIPO DE IDENTIFICACION
+REMARK*       NUMIDE-RECDES : NUMERO DE IDENTIFICACION
+REMARK*    OUTPUT:
+REMARK*       02SCR013TO  SCORE 0,no hay ningun dato,77 hay algun dato
+REMARK*       OPCION 1    OPCION 2    OPCION3     DESCRIPCION
+REMARK*       00DEM035TO  00DEM046TO  00DEM057TO  DIRECCION
+REMARK*       00DEM036TO  00DEM047TO  00DEM058TO  ESTRATO DIRECCION
+REMARK*       00DEM037TO  00DEM048TO  00DEM059TO  TIPO DIRECCION
+REMARK*       00DEM038TO  00DEM049TO  00DEM060TO  CIUDAD DIRECCION
+REMARK*       00DEM039TO  00DEM050TO  00DEM061TO  DEPTO  DIRECCION
+REMARK*       00DEM040TO  00DEM051TO  00DEM062TO  CELULAR   
+REMARK*       00DEM041TO  00DEM052TO  00DEM063TO  E-MAIL         
+REMARK*       00DEM042TO  00DEM053TO  00DEM064TO  TELEFONO 
+REMARK*       00DEM043TO  00DEM054TO  00DEM065TO  TIPO TELEFONO
+REMARK*       00DEM044TO  00DEM055TO  00DEM066TO  CIUDAD       
+REMARK*       00DEM045TO  00DEM056TO  00DEM067TO  DEPARTAMENTO 
+REMARK******************************************************************
+       9999-CALCULAR-RECDES.            
+REMARK******************************************************************
+REMARK*9999-CALCULAR-RECDES.            
+REMARK*    SE RECORREN LAS ESTRUCTURAS DE LOS DATOS DE LOCALIZACION Y
+REMARK*    SE VA ALIMENTANDO LAS TABLAS DE ENTRADA AL ALGORITMO DE
+REMARK*    RECONOCER +
+REMARK******************************************************************
+           IF INICIO-RECDES    = 0
+              MOVE "$DIRECCIONES/ICBDIM" TO TITLE-ICBDIM
+              OPEN INPUT   ICBDIM
+              OPEN INPUT   BDLCLI
+              PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
+              MOVE 1 TO INICIO-RECDES    
+           END-IF.
+           MOVE 1 TO PRIVILEGIO-INPUT-BDLDIR .
+           INITIALIZE LLAVE-DIRECC.
+           MOVE 0 TO FIN-BUSCAR-RECDES.
+           MOVE TIPIDE-RECDES TO TIPO-ID-DIRECC.
+           MOVE NUMIDE-RECDES TO NUM-ID-DIRECC.
+           START MAESTRO-DIRECC KEY >= LLAVE-DIRECC
+                 INVALID KEY
+                    MOVE 1 TO FIN-BUSCAR-RECDES
+                 NOT INVALID KEY
+                    READ MAESTRO-DIRECC  NEXT RECORD AT END
+                         MOVE 1 TO FIN-BUSCAR-RECDES
+                    END-READ
+           END-START.
+           PERFORM 2010-U-INICIAR-TABLAS.
+           PERFORM UNTIL FIN-BUSCAR-RECDES = 1
+             IF NUMIDE-RECDES = NUM-ID-DIRECC AND
+                TIPIDE-RECDES = TIPO-ID-DIRECC
+                PERFORM 2000-U-VALIDAR-ACCDIR
+                IF VALIDACION-DIR-OUT-BDLDIR = 1
+                   PERFORM 2018-U-PASAR-REG-ICBDIR
+                END-IF
+                READ MAESTRO-DIRECC NEXT RECORD AT END
+                     MOVE 1 TO FIN-BUSCAR-RECDES
+                END-READ
+             ELSE
+                MOVE 1 TO FIN-BUSCAR-RECDES
+             END-IF
+           END-PERFORM.
+           MOVE TIPIDE-RECDES TO TIPO-IDEN-ICBDIM
+           MOVE NUMIDE-RECDES TO NUM-ID-ICBDIM
+           MOVE 1 TO ORIGEN-ICBDIM
+           START ICBDIM KEY >= LLAVE-ICBDIM INVALID CONTINUE
+           NOT INVALID
+              MOVE 0 TO FIN-ICBDIM-RECDES
+              READ ICBDIM NEXT RECORD AT END
+                 MOVE 1 TO FIN-ICBDIM-RECDES
+              END-READ
+              PERFORM UNTIL NUMIDE-RECDES NOT = NUM-ID-ICBDIM OR
+                      TIPIDE-RECDES NOT = TIPO-IDEN-ICBDIM OR 
+                                          FIN-ICBDIM-RECDES = 1
+                 PERFORM 2018-U-PASAR-REG-ICBDIM
+                 READ ICBDIM NEXT RECORD AT END
+                    MOVE 1 TO FIN-ICBDIM-RECDES
+                 END-READ
+              END-PERFORM
+           END-START
+           PERFORM 2000-UNIFICAR-INF-RECDES.
+       2000-UNIFICAR-INF-RECDES.
+REMARK******************************************************************
+REMARK*2000-UNIFICAR-INF-RECDES.
+REMARK*    SE CALCULA EL ALGORITMO DE RECONOCER + Y SE LLENAN LAS
+REMARK*    LOS DATOS EN LAS VARIABLES DEFINIDAS
+REMARK******************************************************************
+           PERFORM 2017-U-ELEGIR-DIRECCIONES.
+           PERFORM 2017-U-ELEGIR-TELEFONOS.
+           PERFORM 2017-U-ELEGIR-CELULARES
+           PERFORM 2017-U-ELEGIR-MAILS
+           PERFORM 6000-INICIALIZAR-CAR-RECDES.
+      *    DIRECCIONES
+           IF V-FECFIN-BDLDIR(1) <> 0
+             MOVE 77 TO 02SCR013TO
+             IF V-STAFIN-BDLDIR(1) <> SPACES       
+                MOVE V-STAFIN-BDLDIR(1) TO 00DEM035TO
+             END-IF
+             IF V-ESTFIN-BDLDIR(1) <> SPACES        
+                MOVE V-ESTFIN-BDLDIR(1) TO 00DEM036TO
+             END-IF
+             IF V-TIPFIN-BDLDIR(1) <> SPACES        
+                MOVE V-TIPFIN-BDLDIR(1) TO 00DEM037TO
+             END-IF
+             IF V-CIUFIN-BDLDIR(1) <> SPACES        
+                MOVE V-CIUFIN-BDLDIR(1) TO 00DEM038TO
+             END-IF
+             IF V-DEPFIN-BDLDIR(1) <> SPACES        
+                MOVE V-DEPFIN-BDLDIR(1) TO 00DEM039TO
+             END-IF
+           END-IF.
+
+           IF V-FECFIN-BDLDIR(2) <> 0
+             IF V-STAFIN-BDLDIR(2) <> SPACES       
+                MOVE V-STAFIN-BDLDIR(2) TO 00DEM046TO
+             END-IF
+             IF V-ESTFIN-BDLDIR(2) <> SPACES        
+                MOVE V-ESTFIN-BDLDIR(2) TO 00DEM047TO
+             END-IF
+             IF V-TIPFIN-BDLDIR(2) <> SPACES        
+                MOVE V-TIPFIN-BDLDIR(2) TO 00DEM048TO
+             END-IF
+             IF V-CIUFIN-BDLDIR(2) <> SPACES        
+                MOVE V-CIUFIN-BDLDIR(2) TO 00DEM049TO
+             END-IF
+             IF V-DEPFIN-BDLDIR(2) <> SPACES        
+                MOVE V-DEPFIN-BDLDIR(2) TO 00DEM050TO
+             END-IF
+           END-IF.
+
+           IF V-FECFIN-BDLDIR(3) <> 0
+             IF V-STAFIN-BDLDIR(3) <> SPACES       
+                MOVE V-STAFIN-BDLDIR(3) TO 00DEM057TO
+             END-IF
+             IF V-ESTFIN-BDLDIR(3) <> SPACES        
+                MOVE V-ESTFIN-BDLDIR(3) TO 00DEM058TO
+             END-IF
+             IF V-TIPFIN-BDLDIR(3) <> SPACES        
+                MOVE V-TIPFIN-BDLDIR(3) TO 00DEM059TO
+             END-IF
+             IF V-CIUFIN-BDLDIR(3) <> SPACES        
+                MOVE V-CIUFIN-BDLDIR(3) TO 00DEM060TO
+             END-IF
+             IF V-DEPFIN-BDLDIR(3) <> SPACES        
+                MOVE V-DEPFIN-BDLDIR(3) TO 00DEM061TO
+             END-IF
+           END-IF.
+*          TELEFONOS
+           IF V-FECTELFIN-BDLDIR(1) <> 0
+             MOVE 77 TO 02SCR013TO
+             IF V-TELFIN-BDLDIR(1) <> ZEROS         
+                MOVE V-TELFIN-BDLDIR(1)    TO 00DEM042TO
+             END-IF
+             IF V-TIPTELFIN-BDLDIR(1) <> SPACES        
+                MOVE V-TIPTELFIN-BDLDIR(1) TO 00DEM043TO
+             END-IF
+             IF V-CIUTELFIN-BDLDIR(1) <> SPACES        
+                MOVE V-CIUTELFIN-BDLDIR(1) TO 00DEM044TO
+             END-IF
+             IF V-DEPTELFIN-BDLDIR(1) <> SPACES        
+                MOVE V-DEPTELFIN-BDLDIR(1) TO 00DEM045TO
+             END-IF
+           END-IF.
+
+           IF V-FECTELFIN-BDLDIR(2) <> 0
+              MOVE 77 TO 02SCR013TO
+              IF V-TELFIN-BDLDIR(2) <> ZEROS         
+                 MOVE V-TELFIN-BDLDIR(2)    TO 00DEM053TO
+              END-IF
+              IF V-TIPTELFIN-BDLDIR(2) <> SPACES        
+                 MOVE V-TIPTELFIN-BDLDIR(2) TO 00DEM054TO
+              END-IF
+              IF V-CIUTELFIN-BDLDIR(2) <> SPACES        
+                 MOVE V-CIUTELFIN-BDLDIR(2) TO 00DEM055TO
+              END-IF
+              IF V-DEPTELFIN-BDLDIR(2) <> SPACES        
+                 MOVE V-DEPTELFIN-BDLDIR(2) TO 00DEM056TO
+              END-IF
+           END-IF.
+           IF V-FECTELFIN-BDLDIR(3) <> 0
+              MOVE 77 TO 02SCR013TO
+              IF V-TELFIN-BDLDIR(3) <> ZEROS         
+                 MOVE V-TELFIN-BDLDIR(3)    TO 00DEM064TO
+              END-IF
+              IF V-TIPTELFIN-BDLDIR(3) <> SPACES        
+                 MOVE V-TIPTELFIN-BDLDIR(3) TO 00DEM065TO
+              END-IF
+              IF V-CIUTELFIN-BDLDIR(3) <> SPACES        
+                 MOVE V-CIUTELFIN-BDLDIR(3) TO 00DEM066TO
+              END-IF
+              IF V-DEPTELFIN-BDLDIR(3) <> SPACES        
+                 MOVE V-DEPTELFIN-BDLDIR(3) TO 00DEM067TO
+              END-IF
+           END-IF.
+      *    CELULARES
+           IF V-FECCELFIN-BDLDIR(1) <> 0
+             MOVE 77 TO 02SCR013TO
+             MOVE V-CELFIN-BDLDIR(1) TO 00DEM040TO
+           END-IF.
+           IF V-FECCELFIN-BDLDIR(2) <> 0
+             MOVE V-CELFIN-BDLDIR(2) TO 00DEM051TO
+           END-IF.
+           IF V-FECCELFIN-BDLDIR(3) <> 0
+             MOVE V-CELFIN-BDLDIR(3) TO 00DEM062TO
+           END-IF.
+      *    E-MAILS
+           IF V-FECMAILFIN-BDLDIR(1) <> 0
+             MOVE 77 TO 02SCR013TO
+             MOVE V-MAILFIN-BDLDIR(1) TO 00DEM041TO
+           END-IF.
+           IF V-FECMAILFIN-BDLDIR(2) <> 0
+             MOVE V-MAILFIN-BDLDIR(2) TO 00DEM052TO
+           END-IF.
+           IF V-FECMAILFIN-BDLDIR(3) <> 0
+             MOVE V-MAILFIN-BDLDIR(3) TO 00DEM063TO
+           END-IF.
+       6000-INICIALIZAR-CAR-RECDES.
+           MOVE SPACES TO CAR-RECDES.
+           MOVE 0    TO 02SCR013TO.
+           MOVE "-1" TO 00DEM035TO(1:2).
+           MOVE "-1" TO 00DEM036TO(1:2).
+           MOVE "-1" TO 00DEM037TO(1:2).
+           MOVE "-1" TO 00DEM038TO(1:2).
+           MOVE "-1" TO 00DEM039TO(1:2).
+           MOVE "-1" TO 00DEM040TO(1:2).
+           MOVE "-1" TO 00DEM041TO(1:2).
+           MOVE "-1" TO 00DEM042TO(1:2).
+           MOVE "-1" TO 00DEM043TO(1:2).
+           MOVE "-1" TO 00DEM044TO(1:2).
+           MOVE "-1" TO 00DEM045TO(1:2).
+           MOVE "-1" TO 00DEM046TO(1:2).
+           MOVE "-1" TO 00DEM047TO(1:2).
+           MOVE "-1" TO 00DEM048TO(1:2).
+           MOVE "-1" TO 00DEM049TO(1:2).
+           MOVE "-1" TO 00DEM050TO(1:2).
+           MOVE "-1" TO 00DEM051TO(1:2).
+           MOVE "-1" TO 00DEM052TO(1:2).
+           MOVE "-1" TO 00DEM053TO(1:2).
+           MOVE "-1" TO 00DEM054TO(1:2).
+           MOVE "-1" TO 00DEM055TO(1:2).
+           MOVE "-1" TO 00DEM056TO(1:2).
+           MOVE "-1" TO 00DEM057TO(1:2).
+           MOVE "-1" TO 00DEM058TO(1:2).
+           MOVE "-1" TO 00DEM059TO(1:2).
+           MOVE "-1" TO 00DEM060TO(1:2).
+           MOVE "-1" TO 00DEM061TO(1:2).
+           MOVE "-1" TO 00DEM062TO(1:2).
+           MOVE "-1" TO 00DEM063TO(1:2).
+           MOVE "-1" TO 00DEM064TO(1:2).
+           MOVE "-1" TO 00DEM065TO(1:2).
+           MOVE "-1" TO 00DEM066TO(1:2).
+           MOVE "-1" TO 00DEM067TO(1:2).
+       9999-LLENAR-STRING-RECDES.
+REMARK******************************************************************
+REMARK*9999-LLENAR-STRING-RECDES.
+REMARK*    RUTINA QUE LLENA EN UN STRING LAS CARACTERISTICAS CALCULADAS
+REMARK*    CON EL FORMATO : [NOMBRECAR=VALOR]
+REMARK******************************************************************
+           MOVE 0 TO J-RECDES.
+           MOVE SPACES       TO STRING-RECDES.
+           MOVE 02SCR013TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM035TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM036TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM037TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM038TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM039TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM040TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM041TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM042TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM043TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM044TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM045TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM046TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM047TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM048TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM049TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM050TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM051TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM052TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM053TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM054TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM055TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM056TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM057TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM058TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM059TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM060TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM061TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM062TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM063TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM064TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM065TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM066TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+           MOVE 00DEM067TO   TO W-VALCAR-RECDES.
+           PERFORM 9999-INSERT-EN-STRING-RECDES.
+       9999-INSERT-EN-STRING-RECDES.
+REMARK******************************************************************
+REMARK*9999-INSERT-EN-STRING-RECDES.
+REMARK*    SE INSERTA CADA VARIABLE EN EL STRING-CARDES
+REMARK******************************************************************
+           ADD  1  TO J-RECDES.
+           MOVE 60 TO I-RECDES                                          
+           PERFORM UNTIL I-RECDES = 1 OR 
+                         W-VALCAR-RECDES(I-RECDES:1) <> SPACES        
+             SUBTRACT 1 FROM I-RECDES                                         
+           END-PERFORM.                                                
+*
+           STRING 
+              STRING-RECDES      DELIMITED BY "              " 
+                "["                           DELIMITED BY SIZE             
+                V-NOMCAR-RECDES(J-RECDES)     DELIMITED BY SIZE             
+                "="                           DELIMITED BY SIZE             
+                W-VALCAR-RECDES(1:I-RECDES)   DELIMITED BY SIZE 
+                "]"                           DELIMITED BY SIZE             
+           INTO STRING-RECDES.

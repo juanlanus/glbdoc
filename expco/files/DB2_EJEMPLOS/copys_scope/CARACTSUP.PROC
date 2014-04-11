@@ -1,0 +1,175 @@
+REMARK*CARACTSUP-PROC.0001
+REMARK**********************************************************************
+REMARK*DEFINICION DE RUTINAS PARA CALCULAR CARACTERISTICAS DE 
+REMARK*ENDEUDAMIENTO GLOBAL.             
+REMARK* EL PROGRAMA QUE QUIERA TENER ACCESO A LAS CARACTERISTICAS DE
+REMARK* NIVEL 0 DEBE COLOCAR $SET CONSTANT WRITECARACTSUP"SI"
+REMARK* Y DEFINIR EL LABEL 2849-PROCESE-CARCT-00SUP . EN ESTE LAS PROCESA
+REMARK**********************************************************************
+      $SET CONSTANT WRITECARACTSUP"NO"
+       1000-RECORRER-MSUP.
+REMARK*********************************************************************
+REMARK*1000-RECORRER-MSUP.
+REMARK*    SE RECORRE TODA LA ESTRUCTURA DE ENDEUDAMIENTO LEYENDO
+REMARK*    TODOS LOS REGISTROS Y PROCESANDO CADA UNO PARA CLACULAR LAS
+REMARK*    CARACTERISTICAS.
+REMARK*********************************************************************
+           PERFORM 1000-INICIALIZAR-VARSUP-CARACT.
+           MOVE 0 TO FINSUP-CARACT.
+           MOVE ALL "9"        TO  BDIEMSUP-LLAVE.
+           MOVE TIPO-ID-CARACT TO BDIEMSUP-TIP-ID.
+           MOVE NRO-ID-CARACT  TO BDIEMSUP-NUM-ID.
+           START BDIEMSUP KEY < BDIEMSUP-LLAVE
+                 INVALID KEY MOVE 1 TO FINSUP-CARACT
+             NOT INVALID KEY
+                 READ BDIEMSUP PREVIOUS RECORD IGNORE LOCK AT END
+                 MOVE 1 TO FINSUP-CARACT
+                 END-READ
+           END-START.
+           PERFORM UNTIL FINSUP-CARACT = 1 OR TIPO-ID-CARACT NOT =
+                   BDIEMSUP-TIP-ID OR
+                    NRO-ID-CARACT NOT = BDIEMSUP-NUM-ID
+             MOVE  BDIEMSUP-TIP-DEUDA TO TIPDEUDA-CARACT
+             MOVE  BDIEMSUP-CALIFICA  TO CALDEUDA-CARACT
+             IF (BDIEMSUP-VALOR > 0 OR BDIEMSUP-INTERES > 0 ) AND
+                (BDIEMSUP-IND-BLOQ NOT = 1 AND               
+                 BDIEMSUP-IND-BLOQ NOT = 5) AND TIPDEUDA-VALIDA-CARACT
+                                            AND CALDEUDA-VALIDA-CARACT
+                                            AND BDIEMSUP-FECHA > 0      
+                 PERFORM 1000-PROCESAR-VARSUP-CARACT
+      $IF WRITECARACTSUP = "SI"
+                 PERFORM 2849-PROCESE-CARCT-00SUP
+      $END                         
+             END-IF
+             READ BDIEMSUP PREVIOUS RECORD IGNORE LOCK AT END
+                MOVE 1 TO FINSUP-CARACT    
+             END-READ
+           END-PERFORM.
+           PERFORM 1000-CONSOLIDAR-VARSUP-CARACT.
+       1000-INICIALIZAR-VARSUP-CARACT.
+REMARK*********************************************************************
+REMARK*1000-INICIALIZAR-VARSUP-CARACT.
+REMARK*    SE INICIALIZAN TODAS LAS VARIABLES INVOLUCRADAS EN EL CALCULO
+REMARK*    DE LAS CARACTERISTICAS.
+REMARK*********************************************************************
+           MOVE 0 TO FECHA-SUP-CARACT.
+           MOVE 0 TO T-CARACT.
+           MOVE ALL "  -1" TO  ESTRUCTURA-SUP00-CARACT.   
+           MOVE ALL "  -1" TO  ESTRUCTURA-SUP01-CARACT.   
+           MOVE ALL "  -1" TO  ESTRUCTURA-SUP02-CARACT.   
+           INITIALIZE PORTAFOLIO-SUP00-CARACT.
+           INITIALIZE PORTAFOLIOS-SUP01-CARACT.
+       1000-PROCESAR-VARSUP-CARACT.
+REMARK*********************************************************************
+REMARK*1000-PROCESAR-VARSUP-CARACT.
+REMARK*    SE CALCULAN LAS VARIABLES DE NIVEL 00 Y DE NIVEL 01 
+REMARK*********************************************************************
+      * DETERMINAR INDICES DE LA TABLA ENDEUDAMIENTO GLOBAL
+           EVALUATE BDIEMSUP-TIP-DEUDA
+             WHEN "S"             *> CONSUMO
+               MOVE 1 TO D-CARACT
+               MOVE "SS" TO PORTAFOLIO-SUP00-CARACT
+                    V-PORTAFOLIO-SUP01-CARACT(D-CARACT)
+             WHEN "M"             *> COMERCIAL
+               MOVE 2 TO D-CARACT
+               MOVE "SM" TO PORTAFOLIO-SUP00-CARACT
+                    V-PORTAFOLIO-SUP01-CARACT(D-CARACT)
+             WHEN "H"             *> HIPOTECARIO
+               MOVE 3 TO D-CARACT
+               MOVE "SH" TO PORTAFOLIO-SUP00-CARACT
+                    V-PORTAFOLIO-SUP01-CARACT(D-CARACT)
+             WHEN "C"             *> MICROCREDITO
+               MOVE 4 TO D-CARACT
+               MOVE "SC" TO PORTAFOLIO-SUP00-CARACT
+                    V-PORTAFOLIO-SUP01-CARACT(D-CARACT)
+           END-EVALUATE.
+      
+           EVALUATE BDIEMSUP-CALIFICA 
+             WHEN "A"
+               MOVE 1 TO C-CARACT
+             WHEN "B"
+               MOVE 2 TO C-CARACT
+             WHEN "C"
+               MOVE 3 TO C-CARACT
+             WHEN "D"
+               MOVE 4 TO C-CARACT
+             WHEN "E"
+               MOVE 5 TO C-CARACT
+           END-EVALUATE.
+      *    DETERMINE TIMESTRE A EVALUAR
+           IF BDIEMSUP-FECHA <> FECHA-SUP-CARACT
+              MOVE BDIEMSUP-FECHA TO FECHA-SUP-CARACT
+              ADD  1 TO T-CARACT
+           END-IF.
+      
+      * CALCULAR NIVEL 00
+           MOVE ALL "  -1" TO  ESTRUCTURA-SUP00-CARACT.   
+           IF ANO-SUP-CARACT > 0 AND
+              MES-SUP-CARACT > 0 AND
+              MES-SUP-CARACT < 13  
+              MOVE ZEROS TO TIPCAR-SUP00-CARACT(D-CARACT)
+              MOVE 1 TO V-CAR-SUP00-CARACT(D-CARACT,C-CARACT)
+           ELSE
+              MOVE ALL "  -2" TO TIPCAR-SUP00-CARACT(D-CARACT)
+           END-IF.
+      * CALCULAR NIVEL 01
+           IF D-CARACT > 0 AND C-CARACT > 0 AND T-CARACT > 0 AND
+                                                T-CARACT < 4    
+            MOVE 1 TO C-CARACT
+            PERFORM UNTIL C-CARACT > 5
+              IF V-CAR-SUP00-CARACT(D-CARACT,C-CARACT) NUMERIC   
+                 IF V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) 
+                                                       NOT NUMERIC
+                    MOVE 0 TO 
+                    V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) 
+                 END-IF
+                 ADD V-CAR-SUP00-CARACT(D-CARACT,C-CARACT) TO
+                     V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) 
+              ELSE 
+                IF V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) 
+                                                       NOT NUMERIC
+                 IF V-CAR-SUP00-CARACT(D-CARACT,C-CARACT)(4:1) >
+                    V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT)(4:1)
+                    MOVE V-CAR-SUP00-CARACT(D-CARACT,C-CARACT)(1:4) TO
+                    V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT)(1:4)
+                 END-IF
+                END-IF
+              END-IF
+              ADD 1 TO C-CARACT
+            END-PERFORM
+           END-IF.
+       1000-CONSOLIDAR-VARSUP-CARACT.
+REMARK*********************************************************************
+REMARK*1000-CONSOLIDAR-VARSUP-CARACT.
+REMARK*    SE CALCULAN TODAS LAS VARIABLES DE NIVEL 02
+REMARK*********************************************************************
+           MOVE 1 TO D-CARACT.
+           PERFORM UNTIL D-CARACT > 4
+            MOVE 1 TO C-CARACT
+             PERFORM UNTIL C-CARACT > 5
+              MOVE 1 TO T-CARACT
+              PERFORM UNTIL T-CARACT > 3
+               IF V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) 
+                                                           NUMERIC
+                  IF V-CAR-SUP02-CARACT(C-CARACT,T-CARACT) NOT NUMERIC
+                     MOVE 0 TO V-CAR-SUP02-CARACT(C-CARACT,T-CARACT) 
+                  END-IF
+                  ADD V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT) TO
+                      V-CAR-SUP02-CARACT(C-CARACT,T-CARACT) 
+               ELSE
+                 IF V-CAR-SUP02-CARACT(C-CARACT,T-CARACT) NOT NUMERIC
+                  IF V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT)(4:1) 
+                                                                    >
+                     V-CAR-SUP02-CARACT(C-CARACT,T-CARACT)(4:1)
+                     MOVE 
+                     V-CAR-SUP01-CARACT(D-CARACT,C-CARACT,T-CARACT)(1:4)
+                         TO V-CAR-SUP02-CARACT(C-CARACT,T-CARACT)(1:4)
+                  END-IF
+                 END-IF
+               END-IF
+               ADD 1 TO T-CARACT
+              END-PERFORM
+              ADD 1 TO C-CARACT
+             END-PERFORM
+             ADD 1 TO D-CARACT
+           END-PERFORM.

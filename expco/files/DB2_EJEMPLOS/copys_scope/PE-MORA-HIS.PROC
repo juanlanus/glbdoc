@@ -1,0 +1,27 @@
+      *PE-MORA-HIS.PROC.v.01.0001.
+      *------------------------------------------------------------------*
+      *
+      *   COPY MORAS HISTORICAS STANDARD  VERSION  OCT/2004   
+      *
+      *------------------------------------------------------------------*
+      * COPY Verifica las MORAS HISTORICAS 
+      *------------------------------------------------------------------*
+
+           PERFORM VARYING W-IND FROM 1 BY 1 UNTIL W-IND > 12
+                IF w-moras-historicas (W-IND) = 1
+                   ADD 1 TO W-MORAS-30-HIS
+                ELSE
+                   IF w-moras-historicas (W-IND) = 2
+                      ADD 1 TO W-MORAS-60-HIS
+                   ELSE
+                      IF w-moras-historicas (W-IND) = 3
+                         ADD 1 TO W-MORAS-90-HIS
+                      ELSE
+                         IF w-moras-historicas (W-IND) = 4
+                            ADD 1 TO W-MORAS-120-HIS
+                         END-IF
+                      END-IF
+                   END-IF
+                END-IF
+           END-PERFORM.
+

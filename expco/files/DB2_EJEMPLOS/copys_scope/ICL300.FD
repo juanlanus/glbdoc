@@ -1,0 +1,127 @@
+      * ICL300.v.02.005
+      *   DEFINICION DE ARCHIVO DE LOG PARA SISTEMA DE MANTENIMIENTO
+      *   DE DOCUMENTOS DE IDENTIDAD. LOS PARAMETROS SON LOS SIGUIENTES:
+      *      - MRG-TIPO-REG: IDENTIFICA EL TIPO DE LOG ASI:     
+      *          - 1 DE OPERACION DEL SISTEMA (EJ. INGRESO)
+      *          - 2 DE MODIFICACIONES (INGRESO, ACTAULIZACION, ETC)
+      *          - 3 DE ALERTAS (DOCUMENTO A GRABAR YA EXISTE)
+      *      - MRG-CONSECUTIVO: SE USA EN TIPO-REG 2, SU OBJETIVO ES
+      *            DIFERENCIAR MODIFICACIONES SIMULTANEAS EN DOS ARCHIVOS
+      *            DISTINTOS (PERSONAS Y REGISTRADURIA).
+      *      - MRG-TIP-MOD: USA LOS SIGUIENTES CODIGOS: 
+      *          - 1 INGRESO
+      *          - 2 ACTUALIZACION
+      *          - 3 ELIMINACION
+      *          - 4 REVERSION
+      *      - MRG-ARC-AFE: IDENTIFICA EL ARCHIVO SOBRE EL CUAL SE REALIZO
+      *            UNA OPERACION ASI:
+      *          - 1 REGISTRADURIA
+      *          - 2 MAESTRO DE PERSONAS
+      *      - MRG-OPE-REG: INDICA LA OPERACION EFECTUADA SOBRE EL ARCHIVO
+      *            AFECTADO:
+      *          - 1 ADICION
+      *          - 2 MODIFICACION
+      *          - 3 BORRADO
+      *   DE ACUERDO AL TIPO-REG LOS CAMPOS MRG-DATOS-ANTERIORES Y  
+      *      MRG-DATOS-ACTUALES SE USAN PARA ALMACENAR DATOS ANTERIOES Y 
+      *      ACTUALES PARA LOS ARCHIVOS DE REGIS O PERSONAS. EN CASO DE OTRO
+      *      TIPO DE TIPO-REG SE USA MRG-DATOS-ANTERIORES REDEFINIDO COMO
+      *      MRG-DESCRIPCION.
+      ***********************************************************************
+      * FAC0003 * MODBDI * AMPLIACION DEL REGISTRO
+      * MAYO 23/2003     * 
+      * F.CUADROS        *
+      ***********************************************************************
+      * FAC0004 * FECMOD * AMPLIACION DEL REGISTRO CON CAMPOS QUE FALTABAN
+      * SEPT 20/2005     * POR NUEVA AMPLIACION DEL REGISTRO
+      * F.CUADROS C.     *
+      ***********************************************************************
+      * CAV0005 * CONSUL * INCLUSION DE CAMPOS DE CONSULADO
+      * MAYO 23/2007     *
+      * C.CVELASCO       *
+      ***********************************************************************
+       FD  MANREG.
+       01  REG-MANREG.
+           03 LLAVE-MANREG.
+              05 MRG-FECHA                     PIC 9(08).
+              05 MRG-HORA                      PIC 9(08).
+              05 MRG-USUARIO                   PIC X(05).
+              05 MRG-CONSECUTIVO               PIC 9(01).
+           03 MRG-TIPO-REG                     PIC 9(01).
+           03 MRG-PAQUETE                      PIC 9(08).
+           03 MRG-TIP-MOD                      PIC 9(01).
+           03 MRG-ARC-AFE                      PIC 9(01).
+           03 MRG-OPE-REG                      PIC 9(01).
+           03 LLAVE-MANREG-1.
+              05 MRG-TIPO-ID                   PIC 9(01).
+              05 MRG-NUM-ID                    PIC 9(11).
+           03 MRG-DATOS-ANTERIORES.
+              05 MRG-NOM-CIUDADANO-ANT         PIC X(62).
+              05 MRG-NOM-CIUDADANO-ANT-REG     REDEFINES
+                 MRG-NOM-CIUDADANO-ANT.
+                 07 MRG-APELLIDO-1-ANTERIOR    PIC X(16).
+                 07 MRG-APELLIDO-2-ANTERIOR    PIC X(16).
+                 07 MRG-NOMBRE-1-ANTERIOR      PIC X(15).
+                 07 MRG-NOMBRE-2-ANTERIOR      PIC X(15).
+              05 MRG-NOM-CIUDADANO-ANT-PER     REDEFINES
+                 MRG-NOM-CIUDADANO-ANT.
+                 07 MRG-PR-APELLIDO-ANTERIOR   PIC X(15).
+                 07 MRG-SG-APELLIDO-ANTERIOR   PIC X(15).
+                 07 MRG-NOMBRE-ANTERIOR        PIC X(15).
+                 07 MRG-F-NACIMIENTO-ANTERIOR  PIC 9(06).
+                 07 FILLER                     PIC X(11).
+              05 MRG-ESTADO-CIVIL-ANTERIOR     PIC 9(01).
+MODBDI        05 MRG-FEC-EXPEDICION-ANTERIOR   PIC 9(08).               FAC0003 
+              05 MRG-DEPARTAMENTO-ANTERIOR     PIC 9(02).
+              05 MRG-MUNICIPIO-ANTERIOR        PIC 9(03).
+              05 MRG-EST-VIGENCIA-ANTERIOR     PIC 9(02).
+MODBDI        05 MRG-FEC-NACIMIENTO-ANTERIOR   PIC 9(08).               FAC0003 
+MODBDI        05 MRG-FEC-EDICTO-ANTERIOR       PIC 9(08).               FAC0003 
+MODBDI        05 MRG-SEXO-ANTERIOR             PIC X(01).               FAC0003 
+MODBDI        05 MRG-ESTADO-ANTERIOR           PIC 9.                   FAC0003 
+FECMOD        05 MRG-NUM-RESOLUC-ANTERIOR      PIC 9(4).                FAC0004 
+FECMOD        05 MRG-ANO-RESOLUC-ANTERIOR      PIC 9(2).                FAC0004 
+FECMOD        05 MRG-BLOQUEO-TUTELA-ANTERIOR   PIC X(1).                FAC0004 
+FECMOD        05 MRG-FECHA-CREAC-ANTERIOR      PIC 9(8).                FAC0004 
+FECMOD        05 MRG-FECHA-MODIF-ANTERIOR      PIC 9(8).                FAC0004 
+FECMOD        05 MRG-IND-MODIF-ANTERIOR        PIC X.                   FAC0004 
+CONSUL        05 MRG-IND-CAMBIO-ANTERIOR       PIC X.                   CAV0005 
+CONSUL        05 MRG-IND-CONSULADO-ANTERIOR    PIC 9(01).               CAV0005 
+CONSUL        05 MRG-COD-CONSULADO-ANTERIOR    PIC 9(03).               CAV0005 
+CONSUL        05 FILLER                        PIC X(10).               CAV0005 
+           03 MRG-DESCRIPCION                  REDEFINES
+CONSUL        MRG-DATOS-ANTERIORES             PIC X(135).              CAV0005 
+           03 MRG-DATOS-ACTUALES.
+              05 MRG-NOM-CIUDADANO-ACT         PIC X(62).
+              05 MRG-NOM-CIUDADANO-ACT-REG     REDEFINES
+                 MRG-NOM-CIUDADANO-ACT.
+                 07 MRG-APELLIDO-1-ACTUAL      PIC X(16).
+                 07 MRG-APELLIDO-2-ACTUAL      PIC X(16).
+                 07 MRG-NOMBRE-1-ACTUAL        PIC X(15).
+                 07 MRG-NOMBRE-2-ACTUAL        PIC X(15).
+              05 MRG-NOM-CIUDADANO-ACT-PER     REDEFINES
+                 MRG-NOM-CIUDADANO-ACT.
+                 07 MRG-PR-APELLIDO-ACTUAL     PIC X(15).
+                 07 MRG-SG-APELLIDO-ACTUAL     PIC X(15).
+                 07 MRG-NOMBRE-ACTUAL          PIC X(15).
+                 07 MRG-F-NACIMIENTO-ACTUAL    PIC 9(06).
+                 07 FILLER                     PIC X(11).
+              05 MRG-ESTADO-CIVIL-ACTUAL       PIC 9(01).
+MODBDI        05 MRG-FEC-EXPEDICION-ACTUAL     PIC 9(08).               FAC0003 
+              05 MRG-DEPARTAMENTO-ACTUAL       PIC 9(02).
+              05 MRG-MUNICIPIO-ACTUAL          PIC 9(03).
+              05 MRG-EST-VIGENCIA-ACTUAL       PIC 9(02).
+MODBDI        05 MRG-FEC-NACIMIENTO-ACTUAL     PIC 9(08).               FAC0003 
+MODBDI        05 MRG-FEC-EDICTO-ACTUAL         PIC 9(08).               FAC0003 
+MODBDI        05 MRG-SEXO-ACTUAL               PIC X(01).               FAC0003 
+MODBDI        05 MRG-ESTADO-ACTUAL             PIC 9.                   FAC0003 
+FECMOD        05 MRG-NUM-RESOLUC-ACTUAL        PIC 9(4).                FAC0004 
+FECMOD        05 MRG-ANO-RESOLUC-ACTUAL        PIC 9(2).                FAC0004 
+FECMOD        05 MRG-BLOQUEO-TUTELA-ACTUAL     PIC X(1).                FAC0004 
+FECMOD        05 MRG-FECHA-CREAC-ACTUAL        PIC 9(8).                FAC0004 
+FECMOD        05 MRG-FECHA-MODIF-ACTUAL        PIC 9(8).                FAC0004 
+FECMOD        05 MRG-IND-MODIF-ACTUAL          PIC X(1).                FAC0004 
+CONSUL        05 MRG-IND-CAMBIO-ACTUAL         PIC X(1).                CAV0005 
+CONSUL        05 MRG-IND-CONSULADO-ACTUAL      PIC 9(01).               CAV0005 
+CONSUL        05 MRG-COD-CONSULADO-ACTUAL      PIC 9(03).               CAV0005 
+CONSUL        05 FILLER                        PIC X(10).               CAV0005 

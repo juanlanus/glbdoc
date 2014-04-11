@@ -1,0 +1,8 @@
+REMARK* DTCBDD-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE INDICA SI EL CLIENTE INTERBASE DE   *
+REMARK* NOVEDAT ESTA ACTIVO O FUERA DE LINEA. POSIBILIDADES SI / NO    *
+REMARK******************************************************************
+       FD  DTCBDD.
+       01  REG-DTCBDD.
+           03 BD-ACTIVA-DTCBDD       PIC X(02).

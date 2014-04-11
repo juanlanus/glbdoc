@@ -1,0 +1,9 @@
+REMARK* BDINDAS-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA ARCHIVO DE NOMBRES DE DAS                           *
+REMARK******************************************************************
+       FD BDINDAS.
+       01 REG-BDINDAS.
+          03 LLAVE-BDINDAS.                                 
+             05 TEXTO-BDINDAS            PIC X(15).
+             05 SEC-BDINDAS              PIC 9(10).

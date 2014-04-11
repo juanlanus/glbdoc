@@ -1,0 +1,45 @@
+REMARK*CARACT.PROC1.v.0004
+REMARK*************************************************************************
+REMARK* ESTE COPY PERMITE INTERCEPTAR LAS CARACTERÍSTICAS DE NIVEL 00 PARA
+REMARK* CREAR PROCESIMIENTOS ESPECÍFICOS CON ELLAS.
+REAMRK* LAS VARIABLES UTILIZADAS EN ESTOS PROCEDIMIENTOS SE DEBEN INICIALIZAR
+REAMRK* EN 0000-INICIALIZAR-CARAC-EXTERNAS
+REAMRK* ESTE COPY DEBE INCLUIRSE SIEMPRE QUE SE INCLUYA EL CARACT.PROC
+REMARK*************************************************************************
+REMARK* GJC0002     * MOD001 - SE INCLUYE LLAMADO A RUTINA PARA INICIALIZAR
+REMARK* G JIEMENEZ  * CARACTERISTICAS QUE AUN NO ESTEN DEFINIDAS OFICIALMENTE
+REAMRK* JULIO/2009  * EN LAS CARACTERISTICAS OFICIALES
+REMARK*************************************************************************
+REMARK* RMB0003     * DUDO01 - SE INCLUYE TEMPORALMENTE EL MANEJO DE LA    
+REMARK* R MARTINEZ  * CARACTERISTICA 02NUM020TO NUM DUDOSOS RECAUDOS USADA   
+REMARK* AGOST/2009  * EN PREDICTA HD . ESTO MIENTRAS SE PROGRAMA EN CARACT.PROC
+REMARK*************************************************************************
+REMARK* RMB0004     * CART01 - SE RESTRINGUE A CALCULAR LA CARACTERISTICA  
+REMARK* R MARTINEZ  * 02NUM020TO SOLO PARA EL PORTAFOLIO DE CARTERA
+REMARK* FEB-18-2010 * 
+REMARK*************************************************************************
+MOD001 0000-INICIALIZAR-CARAC-EXTERNAS.                                 GJC0002
+DUDO01     MOVE "  -1" TO 02NUM020TO(1:4).                              RMB0003 
+MOD001     EXIT.                                                        GJC0002
+       2249-PROCESE-CARCT-00NUM.
+CART01     IF (00NUMPTF NOT = "CT" AND 00NUMPTF NOT = "AH")
+CART01        IF 02NUM020TO(1:4) = "  -1"                               RMB0004 
+CART01           MOVE "0000" TO 02NUM020TO(1:4)                         RMB0004 
+CART01        END-IF                                                    RMB0004 
+CART01        IF NOV-REPORT-ABD07 = 47                                  RMB0004 
+CART01           ADD 1 TO 02NUM020TO                                    RMB0004 
+CART01        END-IF                                                    RMB0004 
+CART01     END-IF.                                                      RMB0004 
+           EXIT.
+       2349-PROCESE-CARCT-00MOR.
+           EXIT.
+       2449-PROCESE-CARCT-00ACP.
+           EXIT.
+       2549-PROCESE-CARCT-00EXP.
+           EXIT.
+       2649-PROCESE-CARACT-00DEM.
+           EXIT.
+       2749-PROCESE-CARCT-00END.
+           EXIT.
+       4249-PROCESE-CARCT-00INQ.
+           EXIT.

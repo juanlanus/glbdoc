@@ -1,0 +1,32 @@
+      * ICDACT-FD.v.0001
+      * ARCHIVO QUE CONTIENE ESTADISTICAS DE SUSCRIPTORES GENERADO POR EL
+      * PROGRAMA ICNEBF
+
+       FD  ICDACT.
+       01  REG1-ICDACT.
+           03 FECHA-PROC-ICDACT         PIC 9(6).
+           03 TOTAL-MAES-ICDACT         PIC 9(8).
+           03 TOTAL-PERS-ICDACT         PIC 9(8).
+           03 TOTAL-CTAS-ICDACT         PIC 9(8).
+           03 TOTAL-EMPR-ICDACT         PIC 9(8).
+           03 FILLER-1-ICDACT           PIC X(146).
+       01  REG2-ICDACT.
+           03 CODIGO-ICDACT             PIC 9(6).
+           03 SUSCRIP-ICDACT            PIC X(40).
+           03 FACT-SUS-ICDACT           PIC 9(4).
+           03 FING-SUS-ICDACT           PIC 9(4).
+           03 FEC-NUEACT-ICDACT         PIC 9(6).
+           03 BLOQ-SUS-ICDACT           PIC 9.
+           03 REGISTROS-ICDACT          PIC 9(8).
+           03 FACT-MAE-ICDACT           PIC 9(4).
+           03 BLOQ-MAE-ICDACT           PIC 9(8).
+           03 AMPL-MAE-ICDACT           PIC 9.
+           03 FVAL-SUS-ICDACT           PIC 9(4).
+           03 FRENADOS-DIA-ICDACT       PIC 9(8).
+           03 FRENADOS-MOR-ICDACT       PIC 9(8).
+           03 FRENADOS-NEG-ICDACT       PIC 9(8).
+           03 EST-TERMINAL-ICDACT       PIC 9(8).
+           03 NIT-SUS-ICDACT            PIC 9(11).
+           03 IND-ENTREGA-ICDACT        PIC 9.
+           03 COD-SECTOR-ICDACT         PIC 9(2).
+           03 COD-CUENTA-ICDACT         PIC 9(2).

@@ -1,0 +1,193 @@
+******* ICBSUS-FD.v.0036
+******* MAESTRO DE SUSCRIPTORES
+REMARK*******************************************************************
+REMARK* FAC0011   * AMPLI2: SE CREA CAMPO CON SENAL USO DE M O P POR 
+REMARK* F.CUADROS *         DATAHOST
+REMARK* FEB.2003  *
+REMARK*******************************************************************
+REMARK* FAC0012      * MOD012: SE AMPLIA EL CAMPO DE NOMBRE A 56 CARACTERES 
+REMARK* F.CUADROS    * Y EL CAMPO DIR-SUSCRIP PASA DE 45 A 29 CARACTERES.
+REMARK* JUL.29/2003  * SE UTILIZA ASI EL FILLER QUE TENIA DE 16 POSICIONES
+036300******************************************************************
+REMARK* GJC0013      * REPETI: SE ADICIONA CAMPO QUE PERMITE QUE EL         
+REMARK* G.JIMENEZ    * PROGRAMA FACULIS IDENTIFIQUE SI SE DEBEN ELIMINAR 
+REMARK* SEP.15/2003  * LAS CONSULTAS REPETIDAS O NO.                       
+036300******************************************************************
+REMARK* GJC0014      * NEWCAM: CREACION DE NUEVO CAMPO INDICADOR DE SI SE
+REMARK* G.JIMENEZ    * DEBE MOSTRAR EL ENDEUDAMIENTO GLOBAL A PARTIR DEL
+REMARK* ENE. 07/2004 * HABITO DE PAGO.                               
+036300******************************************************************
+REMARK* FAC0015      * FRAU01: INCLUSION DE INDICADOR PARA PREGUNTAS DE 
+REMARK* F.CUADROS C. * FRAUDE
+REMARK* JUN. 04/2004 * 
+036300******************************************************************
+REMARK* FAC0016      * SISSSO: INCLUSION DE INDICADOR PARA SUSCRIPTORES 
+REMARK* F.CUADROS C. * COMO CLIENTES PILOTO SISTEMA SUI.
+REMARK* DIC. 02/2004 * VALORES VALIDOS: 0-SISTEMA ACTUAL, 1-PASO MANUAL
+REMARK*              * A SUI, 2-PASO AUTOMATICO A SUI.
+036300******************************************************************
+REMARK* FAC0017      * PAIS01: INCLUSION DE FECHA DE ACTUALIZACION DE   
+REMARK* F.CUADROS C. * ENDEUDAMIENTO GLOBAL
+REMARK* MAR. 14/2005 * 
+036300******************************************************************
+REMARK* RMB0018      * OUTV01: INDICADOR QUE OBLIGA A USAR CONSULTAS SOLO
+REMARK* R.MARTINEZ   * A TRAVES DE DATA WEB                     
+REMARK* ABR. 21/2005 * 
+036300******************************************************************
+REMARK* GJC0019      * INFACT: SE INCLUYE FLAG PARA INDICAR SI EN LOS     
+REMARK* G.JIMENEZ    * INFORMES GENERADOS POR LA ACTUALIZACION SE GUAR-
+REMARK* JUNIO/2005   * DAN TITULOS -0-SI  -1-NO
+036300******************************************************************
+      * NDG0020      * SIRI01 : SE INCLUYE FLAG PARA EL MANEJO DE LA   *
+      * N.DUARTE     *          APLICACION EN FORMA DISTRIBUIDA EN LOS *
+      * 16/09/2005   *          BANCOS. 0 - EN DATACREDITO 1 - BANCOS. *
+      ******************************************************************
+      * GJC0021      * BLQCNS : SE INCLUYE INDICADOR PARA MANEJO DE    *
+      * G.JIMENEZ    *          BLOQUEO PARA CONSULTAS                 *
+      * NOV. 01/2005 *                                                 *
+      ******************************************************************
+REMARK* FAC0022      * INDALI: SE INCLUYE INDICADOR PARA ALINEACION DE *  
+REMARK* F.CUADROS C. * CUENTAS DE HABITO DE PAGO 0-NO ALINEA 1-DERECHA *
+REMARK* MAR.17/2006  * 
+036300******************************************************************
+REMARK* FAC0023      * INDCUP: SE INCLUYE INDICADOR PARA CUPO EXCLUSIVO*  
+REMARK* F.CUADROS C. * DE UNA ENTIDAD SOLO PARA TDC.                   *
+REMARK* JUN.13/2006  * VALORES IND-CUPO-EXCLSVO: 1(SI), 0(NO).         *
+036300******************************************************************
+REMARK* FAC0024      * RCNCER: SE INCLUYE LA FECHA DE ACTUALIZACIÓN DE *  
+REMARK* F.CUADROS C. * DIRECCIONES EN ARCHIVO ICBDIR.                  *
+REMARK* JUL.05/2006  *                                                 *
+036300******************************************************************
+REMARK* GJC0025      * ASIGNA: SE CREA CAMPO PARA IDENTIFICAR EL NUMERO*  
+REMARK* G.JIMENEZ C. * DE CONSULTAS DE HISTORIA DE CREDITO PERMITIDAS  *
+REMARK* JUL.27/2006  * ES PERMITIR N TRAMAS LARGAS POR UNA TRAMA CORTA *
+036300******************************************************************
+REMARK* GJC0026      * LOTPDF: CREACION DE INDICADOR QUE IDENTIFICA SI *  
+REMARK* G.JIMENEZ C. * LAS CONSULTAS EN LOTE SE DEBEN ENTREGAR EN FORMA*
+REMARK* ABR.28/2008  * TO PDF O TECTO COMO SIEMPRE SE HA HECHO         *
+036300******************************************************************
+REMARK* GJC0027      * RAZON1: SE CREA CAMPO PARA INDICAR SI AL SUSCRIP*  
+REMARK* G.JIMENEZ C. * TOR SE LE DEBEN ENTREGAR O NO LAS RAZONES ADVER-*
+REMARK* NOV.25/2008  * SAS DE LOS SCORES N- NO (DEFAULT) S-SI          *
+036300******************************************************************
+REMARK* GJC0028      * ART-13: CREACION DE CAMPO QUE PERMITE AL ICGCON *  
+REMARK* G.JIMENEZ C. * IDENTIFICAR SI DEBE APLICAR O NO EL ARTICULO 13 *
+REMARK* FEB.25/2009  * DE LA LEY. DOBLE DEL TIEMPO DE LA MORA N-NO     *  
+REMARK*              * S- SI -DEFAULT
+036300******************************************************************
+REMARK* GJC0029      * CBITMH: DEFINICION DE CAMPOS PARA SABER SI YA   *  
+REMARK* G.JIMENEZ C. *         SE ESTA ACTUALIZANDO CON EL NUEVO ACTUA-*
+REMARK* JULIO /2009  *         LIZADOR O NO.                           *  
+REMARK******************************************************************
+REMARK* GJC0030      * NWACT1: SE INCLUYE CAMPO PARA MANEJO DE CAMPO   *  
+REMARK* G.JIMENEZ C. *         QUE INDICA SI EL SUSCRIPTOR TIENE EL    *
+REMARK* OCTUBRE/2009 *         MAESTRO CERTIFICADO O NO ASÍ: 0-NO CERTI*
+REMARK*              *         FICADO, 1-CERTIFICADO CON DISENO DE 800 *
+REMARK*              * RAYAS1: SE CREA INDICADOR PARA IDENTIFICAR SI SE*
+REMARK*              *         DEBEN MOSTRAR GUIONES EN EL VECTOR DE   *
+REMARK*              *         COMPORTAMIENTO O ESPACIOS EN POSICIONES *
+REMARK*              *         ANTERIRORES A LA FECHA DE ENTRADA A DTC *
+REMARK******************************************************************
+REMARK* GJC0031      * PRJUR1: SE INCLUYE CAMPO PARA MANEJO DE COSNULTAS  
+REMARK* G.JIMENEZ C. *         DE PERSONAS JURIDICAS                   *
+REMARK* FEB/2010     *         CONSULTA PER.NATURAL=PER JURIDICA (MISMO*
+REMARK*              *         PRODUCTO) = 0
+REMARK*              *         CONSULTA CON CODIGO DIFERENTE DE PRODUCTO
+REMARK*              *          = 1
+REMARK*              * CSVPAR: SE INCLUYE CAMPO PARA MANEJO PARAMETRICO*
+REMARK*              *         DE LA INFORMACION DE CSV CUANDO SE HACE *
+REMARK*              *         CONSULTA DATAHOST O WEBSERVICE          *
+REMARK******************************************************************
+REMARK* GJC0032      * SEPRES: SE INCLUYE INDICADOR PARA MANEJAR LA SE-*  
+REMARK* G.JIMENEZ C. *         PARACION DE ERRORES E INCONSISTENCIAS EN*
+REMARK* SEP/2010     *         LA ACTUALIZACION: 1-CADA 65000 REGISTROS*
+REMARK*              *         2-CADA 1400000 Y 3-SIN SEPARACION       *
+REMARK******************************************************************
+REMARK* GJC0033      * FECMOD: SE INCLUYE FECHA DE ULTIMA MODIFICACION *  
+REMARK* G.JIMENEZ C. *         DEL REGISTRO PARA PODER CONSERVAR LA    *
+REMARK* AGOSTO/2012  *         HISTORIA DE LOS CAMBIOS                 *
+REMARK******************************************************************
+REMARK* RMB0035      * LOCAL1  SE ADICIONAN FLAGS PARA HABILITAR EL    *
+REMARK* R.martinez   *         USO DE LOS DATOS DE LOCALIZACION EN EL  *
+REMARK* Octubre/2012 *         MAESTRO DE DIRECCIONES ICBDIR           *
+REMARK*              *         S=HABILTA EL CAMPO,N=INHIBE EL CAMPO    *
+REMARK******************************************************************
+REMARK* CAV0036      * ENTREG: SE INCLUYE EL CAMPO PARA IDENTIFICAR    *  
+REMARK* C.VELASCO.   *         LA ENTIDAD REGULADORA DE CADA CODIGO    *
+REMARK* FEBRERO/2013 *         DE SUSCRIPTOR.                          *
+REMARK*              * CONTRJ: SE INCLUYE EL CAMPO PARA IDENTIFICAR SI *  
+REMARK*              *         LA ENTIDAD ENVIA NUMERO DE OBLIGACION  Y*
+REMARK*              *         NUMERO DE TARJETA.                      *
+REMARK*              *         S - SI ENVIA TARJETA, OTRO VALOR - NO   *
+REMARK******************************************************************
+036400 FD  SUSCRIPTOR.
+036500 01  REG-SUSCRIPTOR.
+036600     03  COD-SUSCRIP-ABD02       PIC 9(6).
+036700     03  LLAVE-SUSCRIP   REDEFINES COD-SUSCRIP-ABD02
+036710                                 PIC X(6).
+036800     03  COD-TIPCTA-ABD02        PIC 99    COMP-3.
+MOD012     03  NOM-SUSCRIP-ABD02       PIC X(56).                       FAC0012
+MOD012     03  DIR-SUSCRIP-ABD02       PIC X(29).                       FAC0012
+           03  FILLER REDEFINES DIR-SUSCRIP-ABD02.               
+MOD012*        04 FILLER               PIC X(16).                       FAC0012
+               04 NOM-COR1-ABD02       PIC X(14).
+               04 NOM-COR2-ABD02       PIC X(14).
+               04 IND-COR-ABD02        PIC 9.
+ACTUAL     03  FEC-NUEACT-ABD02        PIC 9(06) COMP-3.                VHF0009
+037200     03  FACT-FIJA-ABD02         PIC 9(7)  COMP-3.
+037300     03  IND-REGIST-ABD02        PIC 99    COMP-3.
+037400     03  ESTADO-ABD02            PIC 9     COMP-3.
+037500     03  FECHA-ING-ABD02         PIC 9(4)  COMP-3.
+037600     03  FECHA-RET-ABD02         PIC 9(4)  COMP-3.
+037700     03  F-ULT-ACT-ABD02         PIC 9(4)  COMP-3.
+037800     03  NIT-SUSCRIP-S-ABD02     PIC 9(11) COMP-3.
+           03  IND-AMPLIACION-ABD02    PIC 9.                           AMPINF5
+           03  IND-PREPAGOS-ABD02      PIC 9.                           PREPAG1
+037700     03  F-ACT-VAL-ABD02         PIC 9(6).                        AMPVAL1
+PAIS01     03  FEC-ACTEND-ABD02        PIC 9(06).                       FAC0017
+FRAU01     03  IND-PREG-FRAUDE-ABD02   PIC X(01).                       FAC0015
+           03  FECHA-CREA-ABD02        PIC 9(06) COMP-3.                FAC0008
+           03  IND-ENTREGA-INF-ABD02   PIC 9.                           FAC0008
+           03  IND-RAZON-BLQ-ABD02     PIC 9.                           FAC0008
+SECREA     03  F-ACT-SECREAL-ABD02     PIC 9(06) COMP-3.                VHF0009
+SECREA     03  MES-1-SECREAL-ABD02     PIC 9(01).                       VHF0009
+SECREA     03  MES-2-SECREAL-ABD02     PIC 9(01).                       VHF0009
+SECREA     03  MES-3-SECREAL-ABD02     PIC 9(01).                       VHF0009
+SECREA     03  MES-4-SECREAL-ABD02     PIC 9(01).                       VHF0009
+AMPLIA     03  IND-CUOTA-AFIL-ABD02    PIC 9(01).                       FAC0010
+AMPLI2     03  SENAL-DATAHOST-ABD02    PIC X(1).                        FAC0011
+REPETI     03  IND-REPETIDAS-ABD02     PIC X(1).                        GJC013  
+NEWCAM     03  IND-ENDEUD-ABD02        PIC 9.                           GJC0014
+SISSSO     03  IND-PILOTO-ABD02        PIC 9.                           FAC0016
+OUTV01     03  IND-SOLOWEB-ABD02       PIC 9.                           RMB0018
+INFACT     03  FLAG-INFOR-ACT          PIC 9.                           GJC0019 
+SIRI01     03  IND-REMOTO-ABD02        PIC 9.                           NDG0020 
+BLQCNS     03  BLQ-CONS-ABD02          PIC 9.                           GJC0021 
+INDALI     03  IND-ALINEA-CTA-ABD02    PIC 9(01).                       FAC0022 
+INDCUP     03  IND-CUPO-EXCLSVO-ABD02  PIC 9(01).                       FAC0023 
+RCNCER     03  FEC-ACTDIR-ABD02        PIC 9(06) COMP-3.                FAC0024 
+ASIGNA     03  NRO-ASIGNAS-ABD02       PIC 9(02).                       GJC0025 
+LOTPDF     03  PDF-ABD02               PIC X(01).  *> S OR N            GJC0026
+RAZON1     03  ENTREGA-RAZONES-ABD02   PIC X(01).  *> S O N             GJC0027
+ART-13     03  APLICA-ART13-ABD02      PIC X(01).  *> S o N             GJC0028
+CBITMH     03  FORM-NUEVO-ABD02        PIC X(01).  *> S o N             GJC0029
+CBITMH     03  FEC-NOV-FORM-NUEVO-ABD02 PIC 9(06) COMP-3.               GJC0029
+NWACT1     03  CERTIFICADO-ABD02       PIC 9(01).  *> 0-NO 1-SI DE 800  GJC0030
+RAYAS1     03  RAYAS-ABD02             PIC X(01).  *> N-NO S-SI         GJC0030
+CSVPAR     03  CSV-ABD02               PIC 9(01).  *> 0-NO 1-SI         GJC0031
+PRJUR1     03  OTRO-PROD-JUR-ABD02     PIC X(01).  *> N-NO S-SI         GJC0031
+SEPRES     03  IND-SEPARA-RES-ABD02    PIC 9(01).                       GJC0032
+FECMOD     03  FEC-MOD-REG-ABD02       PIC 9(08).                       GJC0033
+LOCAL1     03  DIRRES-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  TELRES-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  DIRLAB-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  TELLAB-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  DIRCOR-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  TELCEL-ABD02            PIC X(01).                       RMB0034
+LOCAL1     03  E-MAIL-ABD02            PIC X(01).                       RMB0034
+ENTREG     03  ENTID-REGULA-ABD02      PIC X(01).                       CAV0036
+CONTRJ     03  IND-CONTRAT-TARJ-ABD02  PIC X(01).                       CAV0036
+ENTREG     03  FILLER-ABD02-2          PIC X(05).                       CAV0036
+ENTREG*    03  FILLER-ABD02-2          PIC X(07).                       CAV0036
+LOCAL1*    03  FILLER-ABD02-2          PIC X(14).                       RMB0034
+FECMOD*     03  FILLER-ABD02-2          PIC X(22).                      GJC0033

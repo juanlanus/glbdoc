@@ -1,0 +1,152 @@
+      * ARB-SEGM.PROC.v.01.0001
+      ******************************************************************
+      * IMS0001    | R10085 - Arbol de segmentacion, modelo para       *
+      * M.SALAMANCA|          tipo 5, tipo 1 sin desempeño.            *
+      * 18-FEB-2013|                                         CQ10085.  *
+      ******************************************************************
+      
+       1500-ARBOL-SEGMENTACION-T5T1SD.
+
+           IF ((02EXP001TO  IS NUMERIC)     OR
+              (FUNCTION NUMVAL(02EXP001TO) < 0))  AND
+              FUNCTION NUMVAL(02EXP001TO)  < 0.01
+             IF ((00DEM016  IS NUMERIC)      OR
+                (FUNCTION NUMVAL(00DEM016) < 0)) AND
+                FUNCTION NUMVAL(00DEM016)  < 14
+               IF ((01INQ005  IS NUMERIC)      OR
+                  (FUNCTION NUMVAL(01INQ005) < 0))  AND
+                  FUNCTION NUMVAL(01INQ005)  < 1.5
+                  MOVE  20   TO   NODE-ARB-SEG
+               ELSE
+                 IF 01INQ005  IS NUMERIC  AND
+                    FUNCTION NUMVAL(01INQ005)  >= 1.5
+                    MOVE  21   TO   NODE-ARB-SEG
+                 ELSE
+                    MOVE  22   TO   NODE-ARB-SEG
+                 END-IF
+               END-IF
+             ELSE
+               IF 00DEM016  IS NUMERIC  AND
+                  FUNCTION NUMVAL(00DEM016)  >= 14
+                 IF 00DEM006(1:2)  = "-1"
+                   MOVE   27   TO   NODE-ARB-SEG
+                 ELSE
+                   IF FUNCTION NUMVAL(00DEM006) = 0
+                     MOVE  28    TO   NODE-ARB-SEG
+                   ELSE 
+                     IF FUNCTION NUMVAL(00DEM006) = 1
+                       MOVE   29   TO NODE-ARB-SEG
+                     ELSE
+                       MOVE   30   TO NODE-ARB-SEG
+                     END-IF
+                   END-IF
+                 END-IF
+               ELSE
+                 MOVE  19   TO NODE-ARB-SEG
+               END-IF
+             END-IF
+           ELSE 
+             IF  02EXP001TO IS NUMERIC  AND
+                 FUNCTION NUMVAL(02EXP001TO)  >= 0.01  AND
+                 FUNCTION NUMVAL(02EXP001TO)  <  23.5
+               IF  ((00DEM016 IS NUMERIC)       OR
+                   (FUNCTION NUMVAL(00DEM016) < 0))   AND
+                   FUNCTION NUMVAL(00DEM016)  < 14
+                 IF 00DEM006(1:2)  = "-1"
+                   MOVE   35   TO NODE-ARB-SEG
+                 ELSE 
+                   IF FUNCTION NUMVAL(00DEM006) = 0
+                     MOVE  36   TO  NODE-ARB-SEG
+                   ELSE
+                     IF FUNCTION NUMVAL(00DEM006) = 1
+                       MOVE  37   TO  NODE-ARB-SEG
+                     ELSE
+                       MOVE  38   TO  NODE-ARB-SEG
+                     END-IF
+                   END-IF
+                 END-IF
+               ELSE
+                 IF 00DEM016 IS NUMERIC  AND
+                    FUNCTION NUMVAL(00DEM016)  >= 14 AND
+                    FUNCTION NUMVAL(00DEM016)  <  16
+                   MOVE  32   TO  NODE-ARB-SEG
+                 ELSE
+                   IF 00DEM016 IS NUMERIC AND
+                      FUNCTION NUMVAL(00DEM016)  >= 16
+                     IF 00DEM006(1:2)  = "-1"
+                       MOVE  39   TO  NODE-ARB-SEG
+                     ELSE
+                       IF FUNCTION NUMVAL(00DEM006) = 0
+                         MOVE  40   TO  NODE-ARB-SEG
+                       ELSE
+                         IF FUNCTION NUMVAL(00DEM006) = 1
+                           MOVE  41  TO  NODE-ARB-SEG
+                         ELSE
+                           MOVE  42  TO  NODE-ARB-SEG
+                         END-IF
+                       END-IF
+                     END-IF
+                   ELSE
+                     MOVE  34   TO  NODE-ARB-SEG
+                   END-IF
+                 END-IF
+               END-IF
+             ELSE
+               IF 02EXP001TO IS NUMERIC AND
+                  FUNCTION NUMVAL(02EXP001TO) >= 23.5
+                 IF ((00DEM016 IS NUMERIC)       OR
+                    (FUNCTION NUMVAL(00DEM016) < 0)) AND
+                    FUNCTION NUMVAL(00DEM016) < 14
+                   IF ((01EXP004AH IS NUMERIC)       OR
+                      (FUNCTION NUMVAL(01EXP004AH) < 0))  AND
+                      FUNCTION NUMVAL(01EXP004AH) < 24.5
+                     MOVE  47   TO  NODE-ARB-SEG
+                   ELSE
+                     IF 01EXP004AH IS NUMERIC AND
+                        FUNCTION NUMVAL(01EXP004AH)  >= 24.5
+                       MOVE  48   TO  NODE-ARB-SEG
+                     ELSE
+                       MOVE  49   TO  NODE-ARB-SEG
+                     END-IF
+                   END-IF
+                 ELSE
+                   IF 00DEM016 IS NUMERIC AND
+                      FUNCTION NUMVAL(00DEM016)  >= 14 AND
+                      FUNCTION NUMVAL(00DEM016)  <  16
+                     IF ((01NUM003AH IS NUMERIC)       OR
+                        (FUNCTION NUMVAL(01NUM003AH) < 0))  AND
+                        FUNCTION NUMVAL(01NUM003AH) < 0.5
+                       MOVE  50   TO  NODE-ARB-SEG
+                     ELSE
+                       IF 01NUM003AH IS NUMERIC AND
+                          FUNCTION NUMVAL(01NUM003AH)  >= 0.5
+                         MOVE  51   TO  NODE-ARB-SEG
+                       ELSE
+                         MOVE  52   TO  NODE-ARB-SEG
+                       END-IF
+                     END-IF
+                   ELSE
+                     IF 00DEM016 IS NUMERIC AND
+                        FUNCTION NUMVAL(00DEM016) >= 16
+                       IF ((01NUM003AH IS NUMERIC)        OR
+                          (FUNCTION NUMVAL(01NUM003AH) < 0 )) AND
+                          FUNCTION NUMVAL(01NUM003AH) < 0.5
+                         MOVE  53   TO  NODE-ARB-SEG
+                       ELSE
+                         IF 01NUM003AH IS NUMERIC AND
+                            FUNCTION NUMVAL(01NUM003AH)  >= 0.5
+                           MOVE  54   TO  NODE-ARB-SEG
+                         ELSE
+                           MOVE  55   TO  NODE-ARB-SEG
+                         END-IF
+                       END-IF
+                     ELSE
+                       MOVE  46   TO  NODE-ARB-SEG
+                     END-IF
+                   END-IF
+                 END-IF
+               ELSE
+                 MOVE  16   TO  NODE-ARB-SEG
+               END-IF
+             END-IF
+           END-IF.

@@ -1,0 +1,16 @@
+REMARK* DTCING-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRCUTURA DEL ARCHIVO DE INGRESOS FALLIDOS                    *
+REMARK******************************************************************
+       FD  DTCING.
+       01  REG-DTCING.
+           03 LLAVE-DTCING           PIC 9(08).
+           03 NIT-ENTIDAD-DTCING     PIC 9(11).
+           03 CLAVE-DTCING           PIC X(05).
+           03 FECHA-DTCING           PIC 9(08).
+           03 HORA-DTCING            PIC 9(06).
+           03 CODNEG-DTCING          PIC X(03).
+           03 CEDUSU-DTCING          PIC 9(11).
+           03 PROGRAM-DTCING         PIC X(10).
+
+

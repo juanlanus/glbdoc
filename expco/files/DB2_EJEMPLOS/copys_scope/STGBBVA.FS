@@ -1,0 +1,10 @@
+      * STGBBVA.FS.v.0001
+      * MAESTRO QUE ALMACENA  INFORMACION COMPLEMENTARIA DE
+      * LOS NUMEROS DE TARJETAS DE CREDITO BBVA
+REMARK******************************************************************
+           SELECT MAESIND-TARJETAS  ASSIGN TO DISK "$DATABASE/STGBBVA"
+                  ORGANIZATION IS INDEXED
+                  ACCESS MODE  IS DYNAMIC
+                  RECORD KEY   IS LLAVE-TARJETAS
+                  LOCK MODE    IS MANUAL WITH LOCK ON RECORD.
+

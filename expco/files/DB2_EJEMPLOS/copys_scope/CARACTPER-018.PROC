@@ -1,0 +1,452 @@
+REMARK*CARACTPER-018.PROC.v.0002.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 018
+REMARK*    FINTRAVALORES      
+REMARK******************************************************************
+      * IMS0002    | CQ6439 - SE AGREGAN 5 NUEVAS CARACTERISTICAS      *
+      * 25-JUN-2012|    REQ. CQ. 6439.                                 *
+      * M.SALAMANCA|                                                   *
+      ******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-018.
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM999TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO018) TO L-AUX
+               MOVE 02NUM999TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>  
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM998TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM998TO018) TO L-AUX
+               MOVE 02NUM998TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO018) TO L-AUX
+               MOVE 02MOR999TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO018) TO L-AUX
+               MOVE 02MOR998TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997TO018) TO L-AUX
+               MOVE 02MOR997TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996TO018" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996TO018) TO L-AUX
+               MOVE 02MOR996TO018(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+CQ6439         *>                                                       IMS0002
+CQ6439         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ6439         MOVE "01NUM997CO018" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ6439         MOVE FUNCTION LENGTH(01NUM997CO018) TO L-AUX             IMS0002
+CQ6439         MOVE 01NUM997CO018(1:L-AUX)   TO                         IMS0002
+CQ6439                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ6439         *>                                                       IMS0002
+CQ6439         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ6439         MOVE "01MOR995CO018" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ6439         MOVE FUNCTION LENGTH(01MOR995CO018) TO L-AUX             IMS0002
+CQ6439         MOVE 01MOR995CO018(1:L-AUX)   TO                         IMS0002
+CQ6439                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ6439         *>                                                       IMS0002
+CQ6439         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ6439         MOVE "01MOR994CO018" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ6439         MOVE FUNCTION LENGTH(01MOR994CO018) TO L-AUX             IMS0002
+CQ6439         MOVE 01MOR994CO018(1:L-AUX)   TO                         IMS0002
+CQ6439                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ6439         *>                                                       IMS0002
+CQ6439         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ6439         MOVE "01MOR993CO018" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ6439         MOVE FUNCTION LENGTH(01MOR993CO018) TO L-AUX             IMS0002
+CQ6439         MOVE 01MOR993CO018(1:L-AUX)   TO                         IMS0002
+CQ6439                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ6439         *>                                                       IMS0002
+CQ6439         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ6439         MOVE "01MOR992CO018" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ6439         MOVE FUNCTION LENGTH(01MOR992CO018) TO L-AUX             IMS0002
+CQ6439         MOVE 01MOR992CO018(1:L-AUX)   TO                         IMS0002
+CQ6439                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+               .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-18.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-18.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 18    *
+REMARK*     PARA FINTRAVALORES      
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-18-NIVEL-02-NUM
+             MOVE ALL "  -1" TO PER-18-NIVEL-02-MOR.
+
+       2249-PROCESE-CARCT-00NUM-EXT-18.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-18.
+REMARK*     SE CALCULAN CARACTERISTICAS NIVEL 00NUM Y 02NUM FINTRAVALOR
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-18-NIVEL-00-NUM 
+
+REMARK*** 00NUM999TO018 *** CUENTAS EN ESTADO NEGATIVO               
+           IF COD-PORTAF-CARACT = "AH" OR "CT"
+              MOVE ZEROS TO 00NUM999TO018
+              IF FECHA-ESTADO-CARACT > ZEROS AND
+                 ACT-DATE-CARACT > ZEROS
+                 IF (REG-ABIERTO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12)
+                    IF NOV-REPORT-ABD06 = 02 OR 06
+                       MOVE 1 TO 00NUM999TO018
+                    END-IF
+                 ELSE
+                    MOVE "  -4" TO 00NUM999TO018(1:4)
+                 END-IF
+              ELSE
+                 MOVE "  -3" TO 00NUM999TO018(1:4)
+              END-IF
+           END-IF
+REMARK*** 00NUM998TO018 *** CUENTAS EN ESTADO DESCALIFICANTES        
+           IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                  "OT" OR "CC"
+             MOVE ZEROS TO 00NUM998TO018
+             IF FECHA-ESTADO-CARACT > ZEROS AND
+                ACT-DATE-CARACT > ZEROS
+                IF (REG-ABIERTO-CARACT = 1 AND
+                    MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12)
+                   IF NOV-REPORT-ABD07 = 03 OR 45 OR 46 OR 47
+                      MOVE 1 TO 00NUM998TO018
+                   END-IF
+                ELSE
+                   MOVE "  -4" TO 00NUM998TO018(1:4)
+                END-IF
+             ELSE
+                MOVE "  -3" TO 00NUM998TO018(1:4)
+             END-IF
+           END-IF
+CQ6439*** 00NUM997CO018 *** CUENTAS EN ESTADO DESCALIFICANTES CODEUDOR  IMS0002      
+CQ6439     IF COD-PORTAF-CARACT = "CO"                                  IMS0002
+CQ6439       MOVE ZEROS TO 00NUM997CO018                                IMS0002
+CQ6439       IF FECHA-ESTADO-CARACT > ZEROS AND                         IMS0002
+CQ6439          ACT-DATE-CARACT > ZEROS                                 IMS0002
+CQ6439          IF (REG-ABIERTO-CARACT = 1 AND                          IMS0002
+CQ6439              MESES-DESAC-CARACT <= 3) OR                         IMS0002
+CQ6439            (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12) IMS0002
+CQ6439             IF NOV-REPORT-ABD07 = 03 OR 45 OR 47                 IMS0002
+CQ6439                MOVE 1 TO 00NUM997CO018                           IMS0002
+CQ6439             END-IF                                               IMS0002
+CQ6439          ELSE                                                    IMS0002
+CQ6439             MOVE "  -4" TO 00NUM997CO018(1:4)                    IMS0002
+CQ6439          END-IF                                                  IMS0002
+CQ6439       ELSE                                                       IMS0002
+CQ6439          MOVE "  -3" TO 00NUM997CO018(1:4)                       IMS0002
+CQ6439       END-IF                                                     IMS0002
+CQ6439     END-IF                                                       IMS0002
+REMARK*** 02NUM999TO018 *** CUENTAS EN ESTADO NEGATIVO               
+          IF FUNCTION NUMVAL(00NUM999TO018(1:4)) >= 0
+             IF FUNCTION NUMVAL(02NUM999TO018(1:4)) < 0
+                MOVE ZEROS TO 02NUM999TO018
+             END-IF
+             COMPUTE 02NUM999TO018 = 02NUM999TO018 + 00NUM999TO018
+          ELSE
+             IF FUNCTION NUMVAL(02NUM999TO018(1:4)) < 0
+              IF FUNCTION NUMVAL(00NUM999TO018(1:4)) <
+                 FUNCTION NUMVAL(02NUM999TO018(1:4))
+                 MOVE 00NUM999TO018(1:4) TO 02NUM999TO018(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 02NUM998TO018 *** CUENTAS EN ESTADO DESCALIFICANTES        
+          IF FUNCTION NUMVAL(00NUM998TO018(1:4)) >= 0
+             IF FUNCTION NUMVAL(02NUM998TO018(1:4)) < 0
+                MOVE ZEROS TO 02NUM998TO018
+             END-IF
+             COMPUTE 02NUM998TO018 = 02NUM998TO018 + 00NUM998TO018
+          ELSE
+             IF FUNCTION NUMVAL(02NUM998TO018(1:4)) < 0
+              IF FUNCTION NUMVAL(00NUM998TO018(1:4)) <
+                 FUNCTION NUMVAL(02NUM998TO018(1:4))
+                 MOVE 00NUM998TO018(1:4) TO 02NUM998TO018(1:4)
+              END-IF
+             END-IF
+          END-IF.
+CQ6439*** 01NUM997CO018 *** CUENTAS EN ESTADO DESCALIFICANTES CODEUDOR  IMS0002       
+CQ6439    IF FUNCTION NUMVAL(00NUM997CO018(1:4)) >= 0                   IMS0002
+CQ6439       IF FUNCTION NUMVAL(01NUM997CO018(1:4)) < 0                 IMS0002
+CQ6439          MOVE ZEROS TO 01NUM997CO018                             IMS0002
+CQ6439       END-IF                                                     IMS0002
+CQ6439       COMPUTE 01NUM997CO018 = 01NUM997CO018 + 00NUM997CO018      IMS0002
+CQ6439    ELSE                                                          IMS0002
+CQ6439       IF FUNCTION NUMVAL(01NUM997CO018(1:4)) < 0                 IMS0002
+CQ6439        IF FUNCTION NUMVAL(00NUM997CO018(1:4)) <                  IMS0002
+CQ6439           FUNCTION NUMVAL(01NUM997CO018(1:4))                    IMS0002
+CQ6439           MOVE 00NUM997CO018(1:4) TO 01NUM997CO018(1:4)          IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439       END-IF                                                     IMS0002
+CQ6439    END-IF.                                                       IMS0002
+  
+       2249-PROCESE-CARCT-00MOR-EXT-18.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-18.
+REMARK*     SE CALCULAN CARACTERISTICAS NIVEL 00MOR Y 02MOR FINTRAVALOR
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-18-NIVEL-00-MOR 
+
+REMARK*** 00MOR999TO018 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+REMARK*** 00MOR996TO018 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+           MOVE 0 TO P-CARACT
+           IF (COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR 
+               "OT" ) AND NIT-SUSCRIP-S-ABD02 <> 802022016
+            MOVE ZEROS TO 00MOR999TO018 00MOR996TO018
+            IF FECHA-ESTADO-CARACT > ZEROS AND
+               ACT-DATE-CARACT > ZEROS
+               IF (REG-ABIERTO-CARACT = 1 AND
+                   MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12)
+                IF MESES-DESAC-CARACT < 0
+                   MOVE 0 TO P-CARACT
+                ELSE
+                   MOVE MESES-DESAC-CARACT TO P-CARACT
+                END-IF
+                COMPUTE I-CARACT = (48 - P-CARACT - 11 )
+                PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                        J-CARACT > ( 48 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 4
+                     COMPUTE 00MOR999TO018 = 00MOR999TO018 + 1
+                  END-IF
+                  IF V-NOR-CARACT(J-CARACT:1) = 1
+                     COMPUTE 00MOR996TO018 = 00MOR996TO018 + 1
+                  END-IF
+                END-PERFORM
+               ELSE
+                  MOVE "  -4" TO 00MOR999TO018(1:4)
+                  MOVE "  -4" TO 00MOR996TO018(1:4)
+               END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR999TO018(1:4)
+               MOVE "  -3" TO 00MOR996TO018(1:4)
+            END-IF
+           END-IF
+REMARK*** 00MOR998TO018 *** MORA HISTORICA DE  90 EN ULTIMOS 06 MESES
+REMARK*** 00MOR997TO018 *** MORA HISTORICA DE  60 EN ULTIMOS 06 MESES
+           MOVE 0 TO P-CARACT
+           IF (COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+               "OT" ) AND NIT-SUSCRIP-S-ABD02 <> 802022016
+            MOVE ZEROS TO 00MOR998TO018 00MOR997TO018
+            IF FECHA-ESTADO-CARACT > ZEROS AND
+               ACT-DATE-CARACT > ZEROS
+               IF (REG-ABIERTO-CARACT = 1 AND
+                   MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 6)
+                IF MESES-DESAC-CARACT < 0
+                   MOVE 0 TO P-CARACT
+                ELSE
+                   MOVE MESES-DESAC-CARACT TO P-CARACT
+                END-IF
+                COMPUTE I-CARACT = (48 - P-CARACT - 5 )
+                PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                        J-CARACT > ( 48 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 3
+                     COMPUTE 00MOR998TO018 = 00MOR998TO018 + 1
+                  END-IF
+                  IF V-NOR-CARACT(J-CARACT:1) = 2
+                     COMPUTE 00MOR997TO018 = 00MOR997TO018 + 1
+                  END-IF
+                END-PERFORM
+               ELSE
+                  MOVE "  -4" TO 00MOR998TO018(1:4)
+                  MOVE "  -4" TO 00MOR997TO018(1:4)
+               END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR998TO018(1:4)
+               MOVE "  -3" TO 00MOR997TO018(1:4)
+            END-IF
+           END-IF
+CQ6439*** 00MOR995CO018 ** MORA HISTORICA 120 ULTIMOS 12 MESES CODEUDOR IMS0002
+CQ6439*** 00MOR992CO018 *** MORA HISTORICA 30 ULTIMOS 12 MESES CODEUDOR IMS0002
+CQ6439     MOVE 0 TO P-CARACT                                           IMS0002
+CQ6439     IF COD-PORTAF-CARACT = "CO"                AND               IMS0002     
+CQ6439        NIT-SUSCRIP-S-ABD02 <> 802022016        AND               IMS0002
+CQ6439        COD-CTA-ABD07 <> 23 AND COD-CTA-ABD07 <> 24               IMS0002
+CQ6439      MOVE ZEROS TO 00MOR995CO018 00MOR992CO018                   IMS0002
+CQ6439      IF FECHA-ESTADO-CARACT > ZEROS AND                          IMS0002
+CQ6439         ACT-DATE-CARACT > ZEROS                                  IMS0002
+CQ6439         IF (REG-ABIERTO-CARACT = 1 AND                           IMS0002
+CQ6439             MESES-DESAC-CARACT <= 3) OR                          IMS0002
+CQ6439            (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12) IMS0002
+CQ6439          IF MESES-DESAC-CARACT < 0                               IMS0002
+CQ6439             MOVE 0 TO P-CARACT                                   IMS0002
+CQ6439          ELSE                                                    IMS0002
+CQ6439             MOVE MESES-DESAC-CARACT TO P-CARACT                  IMS0002
+CQ6439          END-IF                                                  IMS0002
+CQ6439          COMPUTE I-CARACT = (48 - P-CARACT - 11 )                IMS0002
+CQ6439          PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL       IMS0002
+CQ6439                  J-CARACT > ( 48 - P-CARACT )                    IMS0002
+CQ6439            IF V-NOR-CARACT(J-CARACT:1) = 4                       IMS0002
+CQ6439               COMPUTE 00MOR995CO018 = 00MOR995CO018 + 1          IMS0002
+CQ6439            END-IF                                                IMS0002
+CQ6439            IF V-NOR-CARACT(J-CARACT:1) = 1                       IMS0002
+CQ6439               COMPUTE 00MOR992CO018 = 00MOR992CO018 + 1          IMS0002
+CQ6439            END-IF                                                IMS0002
+CQ6439          END-PERFORM                                             IMS0002
+CQ6439         ELSE                                                     IMS0002
+CQ6439            MOVE "  -4" TO 00MOR995CO018(1:4)                     IMS0002
+CQ6439            MOVE "  -4" TO 00MOR992CO018(1:4)                     IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439      ELSE                                                        IMS0002
+CQ6439         MOVE "  -3" TO 00MOR995CO018(1:4)                        IMS0002
+CQ6439         MOVE "  -3" TO 00MOR992CO018(1:4)                        IMS0002
+CQ6439      END-IF                                                      IMS0002
+CQ6439     END-IF                                                       IMS0002
+CQ6439*** 00MOR994CO018 *** MORA HISTORICA 90 ULTIMOS 06 MESES CODEUDOR IMS0002
+CQ6439*** 00MOR993CO018 *** MORA HISTORICA 60 ULTIMOS 06 MESES CODEUDOR IMS0002
+CQ6439     MOVE 0 TO P-CARACT                                           IMS0002
+CQ6439     IF COD-PORTAF-CARACT = "CO"                AND               IMS0002
+CQ6439        NIT-SUSCRIP-S-ABD02 <> 802022016        AND               IMS0002
+CQ6439        COD-CTA-ABD07 <> 23 AND COD-CTA-ABD07 <> 24               IMS0002
+CQ6439       MOVE ZEROS TO 00MOR994CO018 00MOR993CO018                   IMS0002
+CQ6439      IF FECHA-ESTADO-CARACT > ZEROS AND                          IMS0002
+CQ6439         ACT-DATE-CARACT > ZEROS                                  IMS0002
+CQ6439         IF (REG-ABIERTO-CARACT = 1 AND                           IMS0002
+CQ6439             MESES-DESAC-CARACT <= 3) OR                          IMS0002
+CQ6439            (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 6)  IMS0002
+CQ6439          IF MESES-DESAC-CARACT < 0                               IMS0002
+CQ6439             MOVE 0 TO P-CARACT                                   IMS0002
+CQ6439          ELSE                                                    IMS0002
+CQ6439             MOVE MESES-DESAC-CARACT TO P-CARACT                  IMS0002
+CQ6439          END-IF                                                  IMS0002
+CQ6439          COMPUTE I-CARACT = (48 - P-CARACT - 5 )                 IMS0002
+CQ6439          PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL       IMS0002
+CQ6439                  J-CARACT > ( 48 - P-CARACT )                    IMS0002
+CQ6439            IF V-NOR-CARACT(J-CARACT:1) = 3                       IMS0002
+CQ6439               COMPUTE 00MOR994CO018 = 00MOR994CO018 + 1          IMS0002
+CQ6439            END-IF                                                IMS0002
+CQ6439            IF V-NOR-CARACT(J-CARACT:1) = 2                       IMS0002
+CQ6439               COMPUTE 00MOR993CO018 = 00MOR993CO018 + 1          IMS0002
+CQ6439            END-IF                                                IMS0002
+CQ6439          END-PERFORM                                             IMS0002
+CQ6439         ELSE                                                     IMS0002
+CQ6439            MOVE "  -4" TO 00MOR994CO018(1:4)                     IMS0002
+CQ6439            MOVE "  -4" TO 00MOR993CO018(1:4)                     IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439      ELSE                                                        IMS0002
+CQ6439         MOVE "  -3" TO 00MOR994CO018(1:4)                        IMS0002
+CQ6439         MOVE "  -3" TO 00MOR993CO018(1:4)                        IMS0002
+CQ6439      END-IF                                                      IMS0002
+CQ6439     END-IF                                                       IMS0002
+REMARK*** 02MOR999TO018 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR999TO018(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR999TO018(1:4)) < 0
+                 MOVE ZEROS TO 02MOR999TO018
+              END-IF
+              COMPUTE 02MOR999TO018 = 02MOR999TO018 + 00MOR999TO018
+           ELSE
+              IF FUNCTION NUMVAL(02MOR999TO018(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999TO018(1:4)) <
+                  FUNCTION NUMVAL(02MOR999TO018(1:4))
+                  MOVE 00MOR999TO018(1:4) TO 02MOR999TO018(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR998TO018 *** MORA HISTORICA DE  90 EN ULTIMOS 06 MESES
+           IF FUNCTION NUMVAL(00MOR998TO018(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO018(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO018
+              END-IF
+              COMPUTE 02MOR998TO018 = 02MOR998TO018 + 00MOR998TO018
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO018(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO018(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO018(1:4))
+                  MOVE 00MOR998TO018(1:4) TO 02MOR998TO018(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR997TO018 *** MORA HISTORICA DE  60 EN ULTIMOS 06 MESES
+           IF FUNCTION NUMVAL(00MOR997TO018(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR997TO018(1:4)) < 0
+                 MOVE ZEROS TO 02MOR997TO018
+              END-IF
+              COMPUTE 02MOR997TO018 = 02MOR997TO018 + 00MOR997TO018
+           ELSE
+              IF FUNCTION NUMVAL(02MOR997TO018(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997TO018(1:4)) <
+                  FUNCTION NUMVAL(02MOR997TO018(1:4))
+                  MOVE 00MOR997TO018(1:4) TO 02MOR997TO018(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR996TO018 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR996TO018(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR996TO018(1:4)) < 0
+                 MOVE ZEROS TO 02MOR996TO018
+              END-IF
+              COMPUTE 02MOR996TO018 = 02MOR996TO018 + 00MOR996TO018
+           ELSE
+              IF FUNCTION NUMVAL(02MOR996TO018(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR996TO018(1:4)) <
+                  FUNCTION NUMVAL(02MOR996TO018(1:4))
+                  MOVE 00MOR996TO018(1:4) TO 02MOR996TO018(1:4)
+               END-IF
+              END-IF
+           END-IF.
+CQ6439*** 01MOR995CO018 ** MORA HISTORICA 120 ULTIMOS 12 MESES CODEUDOR IMS0002
+CQ6439     IF FUNCTION NUMVAL(00MOR995CO018(1:4)) >= 0                  IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR995CO018(1:4)) < 0                IMS0002
+CQ6439           MOVE ZEROS TO 01MOR995CO018                            IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439        COMPUTE 01MOR995CO018 = 01MOR995CO018 + 00MOR995CO018     IMS0002
+CQ6439     ELSE                                                         IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR995CO018(1:4)) < 0                IMS0002
+CQ6439         IF FUNCTION NUMVAL(00MOR995CO018(1:4)) <                 IMS0002
+CQ6439            FUNCTION NUMVAL(01MOR995CO018(1:4))                   IMS0002
+CQ6439            MOVE 00MOR995CO018(1:4) TO 01MOR995CO018(1:4)         IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439     END-IF                                                       IMS0002
+CQ6439*** 01MOR994CO018 *** MORA HISTORICA 90 ULTIMOS 06 MESES CODEUDOR IMS0002
+CQ6439     IF FUNCTION NUMVAL(00MOR994CO018(1:4)) >= 0                  IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR994CO018(1:4)) < 0                IMS0002
+CQ6439           MOVE ZEROS TO 01MOR994CO018                            IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439        COMPUTE 01MOR994CO018 = 01MOR994CO018 + 00MOR994CO018     IMS0002
+CQ6439     ELSE                                                         IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR994CO018(1:4)) < 0                IMS0002
+CQ6439         IF FUNCTION NUMVAL(00MOR994CO018(1:4)) <                 IMS0002
+CQ6439            FUNCTION NUMVAL(01MOR994CO018(1:4))                   IMS0002
+CQ6439            MOVE 00MOR994CO018(1:4) TO 01MOR994CO018(1:4)         IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439     END-IF                                                       IMS0002
+CQ6439*** 01MOR993CO018 *** MORA HISTORICA 60 ULTIMOS 06 MESES CODEUDOR IMS0002
+CQ6439     IF FUNCTION NUMVAL(00MOR993CO018(1:4)) >= 0                  IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR993CO018(1:4)) < 0                IMS0002
+CQ6439           MOVE ZEROS TO 01MOR993CO018                            IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439        COMPUTE 01MOR993CO018 = 01MOR993CO018 + 00MOR993CO018     IMS0002
+CQ6439     ELSE                                                         IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR993CO018(1:4)) < 0                IMS0002
+CQ6439         IF FUNCTION NUMVAL(00MOR993CO018(1:4)) <                 IMS0002
+CQ6439            FUNCTION NUMVAL(01MOR993CO018(1:4))                   IMS0002
+CQ6439            MOVE 00MOR993CO018(1:4) TO 01MOR993CO018(1:4)         IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439     END-IF                                                       IMS0002
+CQ6439*** 01MOR992CO018 *** MORA HISTORICA 30 ULTIMOS 12 MESES CODEUDOR IMS0002
+CQ6439     IF FUNCTION NUMVAL(00MOR992CO018(1:4)) >= 0                  IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR992CO018(1:4)) < 0                IMS0002
+CQ6439           MOVE ZEROS TO 01MOR992CO018                            IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439        COMPUTE 01MOR992CO018 = 01MOR992CO018 + 00MOR992CO018     IMS0002
+CQ6439     ELSE                                                         IMS0002
+CQ6439        IF FUNCTION NUMVAL(01MOR992CO018(1:4)) < 0                IMS0002
+CQ6439         IF FUNCTION NUMVAL(00MOR992CO018(1:4)) <                 IMS0002
+CQ6439            FUNCTION NUMVAL(01MOR992CO018(1:4))                   IMS0002
+CQ6439            MOVE 00MOR992CO018(1:4) TO 01MOR992CO018(1:4)         IMS0002
+CQ6439         END-IF                                                   IMS0002
+CQ6439        END-IF                                                    IMS0002
+CQ6439     END-IF.                                                      IMS0002

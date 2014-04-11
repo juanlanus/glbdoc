@@ -1,0 +1,14 @@
+******* VALPERR-fd.v.0001
+   **** VALPERR.v03.001
+REMARK*Parametros de errores por cada campo del maestro reumido ampliado
+REMARK*Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPERR.
+       01  REG-VALPERR.
+           03 NUM-CAMPO-VALPERR                PIC 9(2).
+           03 COD-ERROR-VALPERR                PIC 9(2).
+           03 DES-ERROR-VALPERR                PIC X(60).
+           03 IND-ACTUALIZA-VALPERR            PIC X.
+      *    03 NUM-PRIORIDAD-VALPERR            PIC 9(2).
+           03 FILLER-VALPERR                   PIC X(15).
+

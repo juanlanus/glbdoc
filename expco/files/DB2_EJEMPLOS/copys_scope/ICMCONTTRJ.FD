@@ -1,0 +1,17 @@
+      * ICMCONTTRJ.-FD.v.0001
+      * MAESTRO QUE ALMACENA INFORMACION DE CONTRATO Y TARJETA PARA
+      * LAS ENTIDADES QUE REPORTAN TIPO DE CUENTA 02
+REMARK******************************************************************
+       FD  ICMCONTTRJ.
+       01  REGISTRO-ICMCONTTRJ.
+           03 LLAVE-MAES-ICMCONTTRJ.
+              07 TIPO-ID-ICMCONTTRJ       PIC 9.
+              07 NUM-ID-ICMCONTTRJ        PIC 9(11).
+              07 COD-SUS-ICMCONTTRJ       PIC 9(6).
+              07 COD-CTA-ICMCONTTRJ       PIC 99.
+              07 NUM-CTA-ICMCONTTRJ       PIC X(18).
+           03 NUM-TARJETA-ICMCONTTRJ      PIC 9(18).
+           03 FECHA-CREA-ICMCONTTRJ       PIC 9(8).
+           03 FECHA-ULT-ACT-ICMCONTTRJ    PIC 9(8).
+           03 PROG-ACTULIZ-ICMCONTTRJ     PIC 9(1).
+           03 FILLER                      PIC X(27).

@@ -1,0 +1,95 @@
+REMARK* BDIRMAE-FD.v.0001
+REMARK* MAESTRO DE SECTOR REAL
+
+REMARK**** MAESTRO "N" DEL MES ACTUAL
+       FD  BDIRMAE1.
+       01  REG-BDIRMAE1.
+           03  LLAVE-BDIRMAE1.
+               05  IDEN-BDIRMAE1.
+                   07  TIPIDE-BDIRMAE1  PIC 9(01).
+                   07  NUMIDE-BDIRMAE1  PIC 9(11).
+               05  FECHA-BDIRMAE1       PIC 9(06).
+               05  MORA-BDIRMAE1        PIC 9(01).
+               05  SUSCRIPTOR-BDIRMAE1  PIC 9(06).
+               05  PLAZO-BDIRMAE1       PIC 9(01).
+           03  SECACT-BDIRMAE1          PIC 9(01).
+           03  TIPCTA-BDIRMAE1          PIC 9(02).
+           03  FEC-VINCULADO-BDIRMAE1   PIC 9(08)  COMP-3.
+           03  FEC-DESVIN-BDIRMAE1      PIC 9(08)  COMP-3.
+           03  CANTIDAD-BDIRMAE1        PIC 9(05)  COMP-3.
+           03  VALOR-BDIRMAE1           PIC 9(12)  COMP-3.
+           03  BLOQUEO-BDIRMAE1         PIC 9(01).
+           03  CODRECL-BDIRMAE1         PIC 9(02).
+           03  NUMRECL-BDIRMAE1         PIC 9(14)  COMP-3.
+           03  FECRECL-BDIRMAE1         PIC 9(08)  COMP-3.
+           03  IND-MODIF-BDIRMAE1       PIC 9(01).
+           03  FILLER                   PIC X(30).
+REMARK**** MAESTRO "N-1" DEL MES ANTERIOR
+       FD  BDIRMAE2.
+       01  REG-BDIRMAE2.
+           03  LLAVE-BDIRMAE2.
+               05  IDEN-BDIRMAE2.
+                   07  TIPIDE-BDIRMAE2  PIC 9(01).
+                   07  NUMIDE-BDIRMAE2  PIC 9(11).
+               05  FECHA-BDIRMAE2       PIC 9(06).
+               05  MORA-BDIRMAE2        PIC 9(01).
+               05  SUSCRIPTOR-BDIRMAE2  PIC 9(06).
+               05  PLAZO-BDIRMAE2       PIC 9(01).
+           03  SECACT-BDIRMAE2          PIC 9(01).
+           03  TIPCTA-BDIRMAE2          PIC 9(02).
+           03  FEC-VINCULADO-BDIRMAE2   PIC 9(08)  COMP-3.
+           03  FEC-DESVIN-BDIRMAE2      PIC 9(08)  COMP-3.
+           03  CANTIDAD-BDIRMAE2        PIC 9(05)  COMP-3.
+           03  VALOR-BDIRMAE2           PIC 9(12)  COMP-3.
+           03  BLOQUEO-BDIRMAE2         PIC 9(01).
+           03  CODRECL-BDIRMAE2         PIC 9(02).
+           03  NUMRECL-BDIRMAE2         PIC 9(14)  COMP-3.
+           03  FECRECL-BDIRMAE2         PIC 9(08)  COMP-3.
+           03  IND-MODIF-BDIRMAE2       PIC 9(01).
+           03  FILLER                   PIC X(30).
+REMARK**** MAESTRO "N-2" DEL MES MAS ANTIGUO DE LOS TRES
+       FD  BDIRMAE3.
+       01  REG-BDIRMAE3.
+           03  LLAVE-BDIRMAE3.
+               05  IDEN-BDIRMAE3.
+                   07  TIPIDE-BDIRMAE3  PIC 9(01).
+                   07  NUMIDE-BDIRMAE3  PIC 9(11).
+               05  FECHA-BDIRMAE3       PIC 9(06).
+               05  MORA-BDIRMAE3        PIC 9(01).
+               05  SUSCRIPTOR-BDIRMAE3  PIC 9(06).
+               05  PLAZO-BDIRMAE3       PIC 9(01).
+           03  SECACT-BDIRMAE3          PIC 9(01).
+           03  TIPCTA-BDIRMAE3          PIC 9(02).
+           03  FEC-VINCULADO-BDIRMAE3   PIC 9(08)  COMP-3.
+           03  FEC-DESVIN-BDIRMAE3      PIC 9(08)  COMP-3.
+           03  CANTIDAD-BDIRMAE3        PIC 9(05)  COMP-3.
+           03  VALOR-BDIRMAE3           PIC 9(12)  COMP-3.
+           03  BLOQUEO-BDIRMAE3         PIC 9(01).
+           03  CODRECL-BDIRMAE3         PIC 9(02).
+           03  NUMRECL-BDIRMAE3         PIC 9(14)  COMP-3.
+           03  FECRECL-BDIRMAE3         PIC 9(08)  COMP-3.
+           03  IND-MODIF-BDIRMAE3       PIC 9(01).
+           03  FILLER                   PIC X(30).
+REMARK**** ARCHIVO "N+1" TEMPORAL DE ACTUALIZACION
+       FD  BDIRMAE4.
+       01  REG-BDIRMAE4.
+           03  LLAVE-BDIRMAE4.
+               05  IDEN-BDIRMAE4.
+                   07  TIPIDE-BDIRMAE4  PIC 9(01).
+                   07  NUMIDE-BDIRMAE4  PIC 9(11).
+               05  FECHA-BDIRMAE4       PIC 9(06).
+               05  MORA-BDIRMAE4        PIC 9(01).
+               05  SUSCRIPTOR-BDIRMAE4  PIC 9(06).
+               05  PLAZO-BDIRMAE4       PIC 9(01).
+           03  SECACT-BDIRMAE4          PIC 9(01).
+           03  TIPCTA-BDIRMAE4          PIC 9(02).
+           03  FEC-VINCULADO-BDIRMAE4   PIC 9(08)  COMP-3.
+           03  FEC-DESVIN-BDIRMAE4      PIC 9(08)  COMP-3.
+           03  CANTIDAD-BDIRMAE4        PIC 9(05)  COMP-3.
+           03  VALOR-BDIRMAE4           PIC 9(12)  COMP-3.
+           03  BLOQUEO-BDIRMAE4         PIC 9(01).
+           03  CODRECL-BDIRMAE4         PIC 9(02).
+           03  NUMRECL-BDIRMAE4         PIC 9(14)  COMP-3.
+           03  FECRECL-BDIRMAE4         PIC 9(08)  COMP-3.
+           03  IND-MODIF-BDIRMAE4       PIC 9(01).
+           03  FILLER                   PIC X(30).

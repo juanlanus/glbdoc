@@ -1,0 +1,12 @@
+REMARK* MDFLOG-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO DE LOG DEL PROGRAMA ICGMDF              *
+REMARK******************************************************************
+       FD  MDFLOG.
+       01  REG-MDFLOG.   
+           03 MODO-MDFLOG             PIC X(05).
+           03 DATOS-MDFLOG            PIC X(1440).
+           03 FECHA-MDFLOG            PIC 9(08).
+           03 HORING-MDFLOG           PIC 9(05).
+           03 HORENT-MDFLOG           PIC 9(05).
+           03 HORSAL-MDFLOG           PIC 9(05).

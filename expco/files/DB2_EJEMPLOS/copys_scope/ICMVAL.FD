@@ -1,0 +1,36 @@
+      *ICMVAL-FD.v.01.0001
+      ******************************************************************        
+      * ARCHIVO HISTORICO DE VALORES DE CUENTAS DE CARTERA. ALMACENA 49         
+      * MESES EL ACTUAL Y 48 MAS CORRESPONDIENTES A 4 AÑOS ATRAS        
+REMARK******************************************************************
+REMARK*INDICADORES:                                                    *
+REMARK*    0 : VALORES REPORTADOS.                                     *
+REMARK*    1 : VALORES NO REPORTADOS O INICIALIZADO.                   *
+REMARK*    2 : CADUCIDAD.                                              *
+REMARK*    3 : INHIBIDO
+REMARK*    9 : SALTO DE INFORMACION.                                   *
+REMARK******************************************************************
+       FD  ICMVAL.                 
+       01  REG-ICMVAL.             
+         03  LLAVE-ICMVAL.                 
+           07  TIPO-ID-ICMVAL             PIC  9.        
+           07  NUM-ID-ICMVAL              PIC  9(11).        
+           07  COD-SUS-ICMVAL             PIC  9(06).        
+           07  COD-CTA-ICMVAL             PIC  99.        
+           07  NUM-CTA-ICMVAL             PIC  X(18).        
+         03  FEC-NOVEDAD-ICMVAL           PIC  9(06)  COMP-3.        
+         03  VALORES-ICMVAL            OCCURS  49  TIMES.                       
+           05  CUOTA-ICMVAL               PIC  9(11)  COMP-3.        
+           05  SALDO-ICMVAL               PIC  9(11)  COMP-3.        
+           05  SALDO-MORA-ICMVAL          PIC  9(11)  COMP-3.        
+           05  VAL-INICIAL-ICMVAL         PIC  9(11)  COMP-3.        
+           05  SALDO-DISP-ICMVAL          PIC  9(11)  COMP-3.
+           05  VEC-VALORES-ICMVAL         PIC  9 OCCURS  5  TIMES.        
+           05  VEC-VALORES-ICMVAL-R REDEFINES  VEC-VALORES-ICMVAL.        
+             07  V-IND-CUOTA-ICMVAL       PIC  9.        
+             07  V-IND-SALDO-ICMVAL       PIC  9.        
+             07  V-IND-SALDO-MORA-ICMVAL  PIC  9.        
+             07  V-IND-VAL-INIC-ICMVAL    PIC  9.        
+             07  V-IND-SALDO-DISP-ICMVAL  PIC  9.        
+         03  FILLER                       PIC  X(53).
+              

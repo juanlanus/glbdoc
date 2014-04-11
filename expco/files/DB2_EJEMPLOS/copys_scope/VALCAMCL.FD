@@ -1,0 +1,8 @@
+REMARK* VALCAMCL-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA TABLA PARAMETROS CAMPOS DEL MAESTRO DE CLIENTES     *
+REMARK******************************************************************
+       FD  VALCAMCL.
+       01  REG-VALCAMCL.
+           03 COD-CAMPO-VALCAMCL                PIC 9(2).
+           03 DES-CAMPO-VALCAMCL                PIC X(35).

@@ -1,0 +1,529 @@
+REMARK*CARACTPER-038.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 038 *
+REMARK*    PARA COPROCENVA                                             *
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-038.
+               ADD   1                 TO  I-VAR-PER
+               MOVE "02NUM999TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO038)  TO L-AUX
+               MOVE 02NUM999TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END999TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END999TO038)  TO L-AUX
+               MOVE 02END999TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END998TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END998TO038)  TO L-AUX
+               MOVE 02END998TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END997TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END997TO038)  TO L-AUX
+               MOVE 02END997TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO038)  TO L-AUX
+               MOVE 02MOR999TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO038)  TO L-AUX
+               MOVE 02MOR998TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997TO038)  TO L-AUX
+               MOVE 02MOR997TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996TO038)  TO L-AUX
+               MOVE 02MOR996TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR995TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR995TO038)  TO L-AUX
+               MOVE 02MOR995TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR994TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR994TO038)  TO L-AUX
+               MOVE 02MOR994TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR993TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR993TO038)  TO L-AUX
+               MOVE 02MOR993TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR992TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR992TO038)  TO L-AUX
+               MOVE 02MOR992TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR991TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR991TO038)  TO L-AUX
+               MOVE 02MOR991TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR990TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR990TO038)  TO L-AUX
+               MOVE 02MOR990TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR989TO038"  TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR989TO038)  TO L-AUX
+               MOVE 02MOR989TO038(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            .                         
+
+       0000-INICIALIZAR-CARAC-EXT-38. 
+            MOVE "         -1" TO 02END999TO038(1:11)
+                                  02END998TO038(1:11)        
+                                  02END997TO038(1:11)
+            MOVE " -1"  TO 02NUM999TO038(1:3) 02MOR999TO038(1:3)
+                           02MOR998TO038(1:3) 02MOR997TO038(1:3)
+                           02MOR996TO038(1:3) 02MOR995TO038(1:3) 
+                           02MOR994TO038(1:3) 02MOR993TO038(1:3) 
+                           02MOR992TO038(1:3) 02MOR991TO038(1:3) 
+                           02MOR990TO038(1:3) 02MOR989TO038(1:3) 
+            .                         
+
+
+       2249-PROCESE-CARCT-00NUM-EXT-38.                                 CAV0002
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-38.
+REMARK*     CALCULO CARACTERISTICAS 00NUM, 02NUM PARA COPROCENVA      
+REMARK******************************************************************
+           MOVE NIT-SUSCRIP-S-ABD02     TO  WS-NIT-SUSCRIPTOR
+           MOVE ALL " -1" TO PER-38-NIVEL-00-NUM
+           IF COPROCENVA                               
+REMARK*** 00NUM999TO038 *** NUMERO CRDITOS VIGENTES CON COPROCENVA
+            IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0       
+               IF FECHA-ESTADO-CARACT > ZEROS AND                     
+                  ACT-DATE-CARACT > ZEROS
+                  IF MESES-DESAC-CARACT <= 3 
+                     MOVE 1 TO 00NUM999TO038
+                  ELSE
+                     MOVE " -4"  TO 00NUM999TO038(1:3)
+                  END-IF
+               ELSE
+                  MOVE " -3"  TO 00NUM999TO038(1:3)
+               END-IF
+            ELSE
+               MOVE " -2"  TO 00NUM999TO038(1:3)
+            END-IF
+           END-IF
+                                                                       
+REMARK*** 02NUM999TO038 *** NUMERO CRDITOS VIGENTES COPROCENVA   
+           IF FUNCTION NUMVAL(00NUM999TO038(1:3)) >= 0                 
+              IF FUNCTION NUMVAL(02NUM999TO038(1:3)) < 0               
+                 MOVE ZEROS TO 02NUM999TO038                           
+              END-IF                                                   
+              COMPUTE 02NUM999TO038 = 02NUM999TO038 + 00NUM999TO038    
+           ELSE                                                        
+              IF FUNCTION NUMVAL(02NUM999TO038(1:4)) < 0               
+               IF FUNCTION NUMVAL(00NUM999TO038(1:3)) <                
+                  FUNCTION NUMVAL(02NUM999TO038(1:3))                  
+                  MOVE 00NUM999TO038(1:3) TO 02NUM999TO038(1:3)        
+               END-IF                                                  
+              END-IF                                                   
+           END-IF                                                      
+           .
+
+      *
+       2749-PROCESE-CARCT-00END-EXT-38.
+           MOVE NIT-SUSCRIP-S-ABD02     TO  WS-NIT-SUSCRIPTOR
+           MOVE ALL "         -1"            TO PER-38-NIVEL-00-END
+      *    SUMA DE CUOTAS COMO DEUDOR PRINCIPAL
+           IF COPROCENVA                  
+             IF REG-ABIERTO-CARACT = 1  AND GARANTE-ABD07 = ZERO
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3                 
+                      IF VEC-CUOTA-CARACT(I13) >  ZEROS AND
+                         VEC-IND-CUO-CARACT(I13) = 0
+                         MOVE  VEC-CUOTA-CARACT(I13) TO
+                                                    00END999TO038      
+                      ELSE
+                         MOVE "        -88"  TO 00END999TO038(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4"   TO 00END999TO038(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3"      TO 00END999TO038(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2"         TO 00END999TO038(1:11)
+             END-IF
+      *    SUMA DE SALDOS COMO DEUDOR PRINCIPAL
+             IF REG-ABIERTO-CARACT = 1  AND GARANTE-ABD07 = ZERO
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3                 
+                      IF VEC-SALDO-CARACT(I13) >  ZEROS AND
+                         VEC-IND-SLD-CARACT(I13) = 0
+                         MOVE  VEC-SALDO-CARACT(I13) TO
+                                                    00END998TO038      
+                      ELSE
+                         MOVE "        -88"  TO 00END998TO038(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4"   TO 00END998TO038(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3"      TO 00END998TO038(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2"         TO 00END998TO038(1:11)
+             END-IF
+      *    SUMA DE CUPOS  COMO DEUDOR PRINCIPAL
+             IF REG-ABIERTO-CARACT = 1  AND GARANTE-ABD07 = ZERO
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3                 
+                      IF VEC-INICIAL-CARACT(I13) >  ZEROS AND
+                         VEC-IND-INI-CARACT(I13) = 0
+                         MOVE  VEC-INICIAL-CARACT(I13) TO
+                                                    00END997TO038      
+                      ELSE
+                         MOVE "        -88"  TO 00END997TO038(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4"   TO 00END997TO038(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3"      TO 00END997TO038(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2"         TO 00END997TO038(1:11)
+             END-IF
+           END-IF
+
+           IF FUNCTION NUMVAL(00END999TO038(1:11)) >= 0
+             IF FUNCTION NUMVAL(02END999TO038(1:11)) < ZEROS
+                MOVE ZEROS                        TO 02END999TO038  
+             END-IF
+             COMPUTE 02END999TO038   = 02END999TO038   +
+                                       00END999TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02END999TO038(1:11)) < 0
+                IF FUNCTION NUMVAL(00END999TO038(1:11)) <
+                   FUNCTION NUMVAL(02END999TO038(1:11))
+                   MOVE 00END999TO038  TO  02END999TO038(1:11)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00END998TO038(1:11)) >= 0
+             IF FUNCTION NUMVAL(02END998TO038(1:11)) < ZEROS
+                MOVE ZEROS                        TO 02END998TO038  
+             END-IF
+             COMPUTE 02END998TO038   = 02END998TO038   +
+                                       00END998TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02END998TO038(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998TO038(1:11)) <
+                   FUNCTION NUMVAL(02END998TO038(1:11))
+                   MOVE 00END998TO038  TO  02END998TO038(1:11)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00END997TO038(1:11)) >= 0
+             IF FUNCTION NUMVAL(02END997TO038(1:11)) < ZEROS
+                MOVE ZEROS                        TO 02END997TO038  
+             END-IF
+             COMPUTE 02END997TO038   = 02END997TO038   +
+                                       00END997TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02END997TO038(1:11)) < 0
+                IF FUNCTION NUMVAL(00END997TO038(1:11)) <
+                   FUNCTION NUMVAL(02END997TO038(1:11))
+                   MOVE 00END997TO038  TO  02END997TO038(1:11)
+                END-IF
+             END-IF
+           END-IF
+           .
+
+       2249-PROCESE-CARCT-00MOR-EXT-38.
+           MOVE NIT-SUSCRIP-S-ABD02     TO  WS-NIT-SUSCRIPTOR
+           MOVE ALL " -1" TO PER-38-NIVEL-00-MOR-1
+      *    NUMERO DE MORAS VIGENTES COMO DEUDOR PRINCIPAL
+           IF COPROCENVA                  
+             IF REG-ABIERTO-CARACT = 1  AND GARANTE-ABD07 = ZERO
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3                 
+                      MOVE ZEROS TO PER-38-NIVEL-00-MOR-1
+                      IF V-NOR-CARACT(I49:1)   =  1         
+                         MOVE  1           TO       00MOR999TO038
+                      END-IF
+                      IF V-NOR-CARACT(I49:1)   =  2         
+                         MOVE  1           TO       00MOR998TO038
+                      END-IF
+                      IF V-NOR-CARACT(I49:1)   =  3         
+                         MOVE  1           TO       00MOR997TO038
+                      END-IF
+                      IF V-NOR-CARACT(I49:1)  >=  4         
+                         MOVE  1           TO       00MOR996TO038
+                      END-IF
+                   ELSE
+                      MOVE " -4"   TO 00MOR999TO038(1:3)
+                                      00MOR998TO038(1:3)
+                                      00MOR997TO038(1:3)
+                                      00MOR996TO038(1:3)
+                   END-IF
+                ELSE
+                   MOVE " -3"      TO 00MOR999TO038(1:3)
+                                      00MOR998TO038(1:3)
+                                      00MOR997TO038(1:3)
+                                      00MOR996TO038(1:3)
+                END-IF
+             ELSE
+                MOVE " -2"         TO 00MOR999TO038(1:3)
+                                      00MOR998TO038(1:3)
+                                      00MOR997TO038(1:3)
+                                      00MOR996TO038(1:3)
+             END-IF
+           END-IF
+
+           IF FUNCTION NUMVAL(00MOR999TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR999TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR999TO038  
+             END-IF
+             COMPUTE 02MOR999TO038   = 02MOR999TO038   +
+                                       00MOR999TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR999TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR999TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR999TO038(1:3))
+                   MOVE 00MOR999TO038(1:3)  TO  02MOR999TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR998TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR998TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR998TO038  
+             END-IF
+             COMPUTE 02MOR998TO038   = 02MOR998TO038   +
+                                       00MOR998TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR998TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR998TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR998TO038(1:3))
+                   MOVE 00MOR998TO038(1:3)  TO  02MOR998TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR997TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR997TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR997TO038  
+             END-IF
+             COMPUTE 02MOR997TO038   = 02MOR997TO038   +
+                                       00MOR997TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR997TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR997TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR997TO038(1:3))
+                   MOVE 00MOR997TO038(1:3)  TO  02MOR997TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR996TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR996TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR996TO038  
+             END-IF
+             COMPUTE 02MOR996TO038   = 02MOR996TO038   +
+                                       00MOR996TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR996TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR996TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR996TO038(1:3))
+                   MOVE 00MOR996TO038(1:3)  TO  02MOR996TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+      *    NUMERO DE MORAS HISTORICAS COMO DEUDOR PRINCIPAL
+           MOVE ALL " -1" TO PER-38-NIVEL-00-MOR-2
+           IF COPROCENVA                  
+             IF  GARANTE-ABD07 = ZERO
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF (REG-ABIERTO-CARACT = 1 AND
+                                         MESES-DESAC-CARACT <= 3)      
+                   OR (REG-CERRADO-CARACT = 1 AND
+                                         MESES-DESAC-CARACT <= 12)
+                      MOVE ZEROS TO PER-38-NIVEL-00-MOR-2
+                      COMPUTE WS-FIN-38 = I49 - 1
+                      COMPUTE WS-INICIO-38 = I49 - 12
+                      PERFORM VARYING WS-NN-38 FROM WS-INICIO-38 BY 1
+                            UNTIL WS-NN-38 > WS-FIN-38
+                         IF V-NOR-CARACT(WS-NN-38:1)   =  1         
+                            MOVE  1           TO       00MOR995TO038
+                         END-IF
+                         IF V-NOR-CARACT(WS-NN-38:1)   =  2         
+                            MOVE  1           TO       00MOR994TO038
+                         END-IF
+                         IF V-NOR-CARACT(WS-NN-38:1)   =  3         
+                            MOVE  1           TO       00MOR993TO038
+                         END-IF
+                         IF V-NOR-CARACT(WS-NN-38:1)  >=  4         
+                            MOVE  1           TO       00MOR992TO038
+                         END-IF
+                      END-PERFORM
+                   ELSE
+                      MOVE " -4"   TO 00MOR995TO038(1:3)
+                                      00MOR994TO038(1:3)
+                                      00MOR993TO038(1:3)
+                                      00MOR992TO038(1:3)
+                   END-IF
+                ELSE
+                   MOVE " -3"      TO 00MOR995TO038(1:3)
+                                      00MOR994TO038(1:3)
+                                      00MOR993TO038(1:3)
+                                      00MOR992TO038(1:3)
+                END-IF
+             ELSE
+                MOVE " -2"         TO 00MOR995TO038(1:3)
+                                      00MOR994TO038(1:3)
+                                      00MOR993TO038(1:3)
+                                      00MOR992TO038(1:3)
+             END-IF
+           END-IF
+
+           IF FUNCTION NUMVAL(00MOR995TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR995TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR995TO038  
+             END-IF
+             COMPUTE 02MOR995TO038   = 02MOR995TO038   +
+                                       00MOR995TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR995TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR995TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR995TO038(1:3))
+                   MOVE 00MOR995TO038(1:3)  TO  02MOR995TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR994TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR994TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR994TO038  
+             END-IF
+             COMPUTE 02MOR994TO038   = 02MOR994TO038   +
+                                       00MOR994TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR994TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR994TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR994TO038(1:3))
+                   MOVE 00MOR994TO038(1:3)  TO  02MOR994TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR993TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR993TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR993TO038  
+             END-IF
+             COMPUTE 02MOR993TO038   = 02MOR993TO038   +
+                                       00MOR993TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR993TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR993TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR993TO038(1:3))
+                   MOVE 00MOR993TO038(1:3)  TO  02MOR993TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR992TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR992TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR992TO038  
+             END-IF
+             COMPUTE 02MOR992TO038   = 02MOR992TO038   +
+                                       00MOR992TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR992TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR992TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR992TO038(1:3))
+                   MOVE 00MOR992TO038(1:3)  TO  02MOR992TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+      *    NUMERO DE DE PRODUCTOS CASTIGADOS CON COPROCENVA
+           MOVE  " -1" TO 00MOR991TO038(1:3) 
+           IF COPROCENVA                  
+              MOVE ZEROS       TO  00MOR991TO038
+              IF NOV-REPORT-ABD07 = 45
+                 MOVE 1        TO  00MOR991TO038
+              END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR991TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR991TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR991TO038  
+             END-IF
+             COMPUTE 02MOR991TO038   = 02MOR991TO038   +
+                                       00MOR991TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR991TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR991TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR991TO038(1:3))
+                   MOVE 00MOR991TO038(1:3)  TO  02MOR991TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+      *    NUMERO DE DE PRODUCTOS RECUPERADOS CON COPROCENVA
+           MOVE  " -1" TO 00MOR990TO038(1:3) 
+           IF COPROCENVA                  
+              MOVE ZEROS       TO  00MOR990TO038
+              IF FECHA-ESTADO-CARACT > ZEROS AND
+                 ACT-DATE-CARACT > ZEROS
+                 IF MESES-DESAC-CARACT <= 24    
+                      IF NOV-REPORT-ABD07 = 46
+                         MOVE 1        TO  00MOR990TO038
+                      END-IF
+                 ELSE
+                    MOVE " -4"         TO  00MOR990TO038(1:3)
+                 END-IF
+              ELSE
+                 MOVE " -3"            TO  00MOR990TO038(1:3)
+              END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR990TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR990TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR990TO038  
+             END-IF
+             COMPUTE 02MOR990TO038   = 02MOR990TO038   +
+                                       00MOR990TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR990TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR990TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR990TO038(1:3))
+                   MOVE 00MOR990TO038(1:3)  TO  02MOR990TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+      *    NUMERO DE PRODUCTOS EN DUDOSO RECAUDO CON COPROCENVA
+           MOVE  " -1" TO 00MOR989TO038(1:3) 
+           IF COPROCENVA                  
+              MOVE ZEROS       TO  00MOR989TO038
+              IF NOV-REPORT-ABD07 = 47
+                 MOVE 1        TO  00MOR989TO038
+              END-IF
+           END-IF
+           IF FUNCTION NUMVAL(00MOR989TO038(1:3)) >= 0
+             IF FUNCTION NUMVAL(02MOR989TO038(1:3)) < ZEROS
+                MOVE ZEROS                        TO 02MOR989TO038  
+             END-IF
+             COMPUTE 02MOR989TO038   = 02MOR989TO038   +
+                                       00MOR989TO038      
+           ELSE
+             IF FUNCTION NUMVAL(02MOR989TO038(1:3)) < 0
+                IF FUNCTION NUMVAL(00MOR989TO038(1:3)) <
+                   FUNCTION NUMVAL(02MOR989TO038(1:3))
+                   MOVE 00MOR989TO038(1:3)  TO  02MOR989TO038(1:3)
+                END-IF
+             END-IF
+           END-IF
+            .

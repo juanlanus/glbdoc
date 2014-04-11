@@ -1,0 +1,23 @@
+******* CONRAZ-FD.0002    
+REMARK*ARCHIVO DE RAZONES DE CONSULTAS. A CONTINUACION SE DETALLA EL
+REMARK*OBJETIVO DE CADA UNO DE LOS CAMPOS.    
+REMARK* RAZCON-CONRAZ: CODIGO DE LA RAZON DE LA CONSULTA               
+REMARK* DESCRIPCION-CONRAZ: DESCRIPCION DE LA RAZON. LA MISMA QUE APARECE EN
+REMARK*                     WEB
+REMARK* POLITICA-CONZAR: CODIGO DE LA POLITICA QUE DEBE APLICARSE CON LA 
+REMARK*                  RAZON
+REMARK* EN-WEB-CONRAZ: S O N INDICA SI DEBE PRESENTARSE ESTA RAZON EN WEB
+REMARK*                O NO.
+036300*----------------------------------------------------------------*
+      *********************************************************************
+      * RMB0002     * RAZ001 - COLOCAR SOLO LOS 3 TIPOS DE RAZONES VALIDOS *
+      * AGO.14/2006 *          PARA EL CAMPO EN EL DATHOST INTERNO Y EXTER *
+      *********************************************************************
+       FD  CONRAZ.  
+       01  REG-CONRAZ.   
+           03 RAZON-CONRAZ                  PIC 9(3).
+           03 DESCRIPCION-CONRAZ            PIC X(28).
+           03 POLITICA-CONRAZ               PIC 9(3).
+           03 EN-WEB-CONRAZ                 PIC X.
+RAZ001     03 RAZON-DTHOST-CONRAZ           PIC 9(03).                  RMB0002 
+           03 FILLER                        PIC X(10).

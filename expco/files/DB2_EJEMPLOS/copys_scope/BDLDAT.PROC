@@ -1,0 +1,595 @@
+REMARK* BDLDAT.PROC.v.0004
+REMARK******************************************************************
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+AMPDIR* DIRECCIONES EN EL ASPECTO DE CREACION Y ACTUALIZACION.          FAC0002 
+AMPDIR* UTILIZADO UNICAMENTE PARA MAESTROS DEL CLUB DE DATACLIENTES     FAC0002 
+REMARK******************************************************************
+REMARK* FAC0002     * AMPDIR * AMPLIACIÓN DE LA ESTRUCTURA DE ARCHIVOS*
+REMARK* F.CUADROS C.* ICBDIR Y BDUHDIR. SE AMPLIAN LOS TAMAÑOS DE LOS *
+REMARK* FEB.21/2006 * CAMPOS: TELÉFONOS, DIRECCIONES, CIUDADES, DPTOS.*
+***********************************************************************
+REMARK* FAC0003     * RCNCER * INCLUSIÓN DE CAMPOS QUE FALTABAN EN LA *
+REMARK* F.CUADROS C.* ACTUALIZACIÓN DE DIRECCIONES.                   *
+REMARK* JUN.13/2006 *                                                 *
+REMARK*             * SE PERMITE MODIFICACIÓN DE REGISTROS CON        *
+REMARK*            .* FECHA >= QUE LA FECHA ACTUAL SIEMPRE QUE LA     *
+REMARK* JUL.13/2006 * FECHA FEC-ACTDIR-ABD02 DEL ICBSUS, SEA MENOR QUE*
+REMARK*             * LA FECHA DEL MAESTRO QUE SE ESTÁ ACTUALIZANDO.  *
+REMARK*             * AL CAMBIAR UNA DIRECCIÓN SE INICIALIZAN FLAGS   *
+REMARK*             * PARA CERTIFICACIÓN Y CAMPOS GEORREFERENCIACIÓN  *
+***********************************************************************
+REMARK* VHF0004      * FASEII - MODIFICAR RUTINAS PARA MANEJO DE FECHAS*
+REMARK* VICTOR HUGO  *          INDEPENDIENTES PARA CADA TIPO DE DATOS *
+REMARK* FORERO       *          DE LOCALIZACION                        *
+REMARK* JUL.25/2008  *                                                 *
+REMARK******************************************************************
+DIRECC 0002-ACTUALIZA-DIRECC.               
+REMARK******************************************************************
+REMARK*0002-ACTUALIZA-DIRECC.                                           
+REMARK* SE EXAMINA LA INFORMACION DEL MAESTRO, SI HAY UN "BUEN DATO" DE 
+REMARK* LOCALIZACION SE BUSCA YA SEA PARA CREARLO O ACTUALIZARLO        
+REMARK******************************************************************
+           MOVE 0 TO ERROR-DIRECC.
+FASEII     IF ((T-LOCALIZACION(1) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,7) = 1) AND                       VHF0004
+FASEII          ((T-LOCALIZACION(2) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,9) = 1) OR                      VHF0004
+FASEII           (T-LOCALIZACION(3) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,10) = 1))) OR                   VHF0004
+FASEII        ((T-LOCALIZACION(5) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,11) = 1) AND                      VHF0004
+FASEII          ((T-LOCALIZACION(6) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,13) = 1) OR                     VHF0004
+FASEII           (T-LOCALIZACION(7) = 0) AND                            VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,14) = 1)) OR                    VHF0004
+FASEII        (T-LOCALIZACION(9) = 0 AND                                VHF0004
+FASEII         IND-CAMPO-VALPREP-W(K,15) = 1 AND                        VHF0004
+FASEII         T-LOCALIZACION(10) = 0 AND                               VHF0004
+FASEII         IND-CAMPO-VALPREP-W(K,17) = 1)                           VHF0004
+REMARK***      SOLO SE PROCESAN REGISTROS QUE TENGAN LA CIUDAD Y ALGUN  VHF0004
+REMARK***      OTRO DATOS COMO DIRECCION Y/O TELEFONO, YA SEA           VHF0004
+REMARK***      RESIDENCIAL, LABORAL O DE CORRESPONDENCIA SIEMPRE Y      VHF0004
+REMARK***      CUANDO TENGA ACTIVO EL INDICADOR DE REPORTE DEL CAMPO    VHF0004
+REMARK***      RESPECTIVO (BDLPCAM). SI SOLO LLEGA MAIL Y/O CELULAR     VHF0004
+REMARK***      NO SE PROCESA                                            VHF0004
+               MOVE TIPO-IDEN-BDLMAE     TO TIPO-ID-DIRECC 
+               MOVE NUM-ID-BDLMAE        TO NUM-ID-DIRECC 
+               MOVE COD-SUS-H            TO COD-SUS-DIRECC 
+               MOVE COD-TIP-CTA-H        TO COD-CTA-DIRECC 
+               MOVE NUM-CTA-BDLMAE       TO NUM-CTA-DIRECC 
+               READ MAESTRO-DIRECC INVALID KEY 
+                    MOVE 1 TO IND-DIRECC
+                  NOT INVALID KEY 
+                    MOVE 0 TO IND-DIRECC
+               END-READ 
+               IF IND-DIRECC = 0
+                  MOVE FECHA-S TO FECHA6-DIRECC
+RCNCER            IF FECHA6-DIRECC >= FECACT-DIRECC                     FAC0003 
+                     PERFORM 0004-VER-CAMBIO-DIRECC
+                  ELSE ADD 1 TO MENOSACTUAL-DIRECC
+                  END-IF
+               ELSE PERFORM 0003-CREAR-DIRECC
+               END-IF
+           ELSE
+               ADD 1 TO CAMPOSVACIOS-DIRECC
+               MOVE 1 TO ERROR-DIRECC
+           END-IF.                            
+
+DIRECC 0003-CREAR-DIRECC.
+REMARK******************************************************************
+REMARK*0003-CREAR-DIRECC.                                               
+REMARK* SE CREA UN REGISTRO DE DIRECCION DE LA CUENTA ASOCIADA.SE COLOCA
+REMARK* LA FECHA DE APERTURA DE LA CUENTA, DE ACTUALIZACION DEL MAESTRO 
+REMARK* DE CREACION DEL REGISTRO QUE EN ESTE CASO ES IGUAL A LA ACTUALIZ
+REMARK******************************************************************
+            INITIALIZE REG-DIRECC
+AMPDIR      MOVE FECHA-S           TO FECHA6-DIRECC.                    FAC0002 
+            MOVE TIPO-IDEN-BDLMAE  TO TIPO-ID-DIRECC.
+            MOVE NUM-ID-BDLMAE     TO NUM-ID-DIRECC.
+            MOVE COD-SUS-H         TO COD-SUS-DIRECC.
+            MOVE COD-TIP-CTA-H     TO COD-CTA-DIRECC.
+            MOVE NUM-CTA-BDLMAE    TO NUM-CTA-DIRECC.
+            IF  T-LOCALIZACION(1) = 0 AND T-LOCALIZACION(2) = 0 AND
+                IND-CAMPO-VALPREP-W(K,7) = 1 AND
+                IND-CAMPO-VALPREP-W(K,9) = 1
+                MOVE CIU-RES-BDLMAE TO CIURES-DIRECC  
+                MOVE DIR-RES-BDLMAE TO DIRRES-DIRECC   
+RCNCER          IF T-LOCALIZACION(4) = 0 AND                            FAC0003 
+RCNCER             IND-CAMPO-VALPREP-W(K,8) = 1                         FAC0003 
+RCNCER             MOVE DPT-RES-BDLMAE TO DPTRES-DIRECC                 FAC0003 
+RCNCER          END-IF                                                  FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECDRES-DIRECC                   VHF0004
+            END-IF.
+            IF  T-LOCALIZACION(1) = 0 AND T-LOCALIZACION(3) = 0 AND
+                IND-CAMPO-VALPREP-W(K,7) = 1 AND
+                IND-CAMPO-VALPREP-W(K,10) = 1 
+                MOVE CIU-RES-BDLMAE TO CIURES-DIRECC  
+                MOVE TEL-RES-BDLMAE TO TELRES-DIRECC  
+RCNCER          IF T-LOCALIZACION(4) = 0 AND                            FAC0003 
+RCNCER             IND-CAMPO-VALPREP-W(K,8) = 1                         FAC0003 
+RCNCER             MOVE DPT-RES-BDLMAE TO DPTRES-DIRECC                 FAC0003 
+RCNCER          END-IF                                                  FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECTRES-DIRECC                   VHF0004
+            END-IF.
+AMPDIR      IF  T-LOCALIZACION(5) = 0 AND T-LOCALIZACION(6) = 0 AND     FAC0002 
+AMPDIR          IND-CAMPO-VALPREP-W(K,11) = 1 AND                       FAC0002 
+AMPDIR          IND-CAMPO-VALPREP-W(K,13) = 1                           FAC0002 
+AMPDIR          MOVE CIU-LAB-BDLMAE TO CIULAB-DIRECC                    FAC0002 
+AMPDIR          MOVE DIR-LAB-BDLMAE TO DIRLAB-DIRECC                    FAC0002 
+RCNCER          IF T-LOCALIZACION(8) = 0 AND                            FAC0003 
+RCNCER             IND-CAMPO-VALPREP-W(K,12) = 1                        FAC0003 
+RCNCER             MOVE DPT-LAB-BDLMAE TO DPTLAB-DIRECC                 FAC0003 
+RCNCER          END-IF                                                  FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECDLAB-DIRECC                   VHF0004
+AMPDIR      END-IF.                                                     FAC0002 
+            IF  T-LOCALIZACION(5) = 0 AND T-LOCALIZACION(7) = 0 AND
+                IND-CAMPO-VALPREP-W(K,11) = 1 AND
+                IND-CAMPO-VALPREP-W(K,14) = 1 
+                MOVE CIU-LAB-BDLMAE TO CIULAB-DIRECC  
+                MOVE TEL-LAB-BDLMAE TO TELLAB-DIRECC  
+RCNCER          IF T-LOCALIZACION(8) = 0 AND                            FAC0003 
+RCNCER             IND-CAMPO-VALPREP-W(K,12) = 1                        FAC0003 
+RCNCER             MOVE DPT-LAB-BDLMAE TO DPTLAB-DIRECC                 FAC0003 
+RCNCER          END-IF                                                  FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC                   VHF0004
+            END-IF.
+            IF  T-LOCALIZACION(9) = 0 AND T-LOCALIZACION(10) = 0 AND
+                IND-CAMPO-VALPREP-W(K,15) = 1 AND
+                IND-CAMPO-VALPREP-W(K,17) = 1 
+                MOVE CIU-COR-BDLMAE TO CIUCOR-DIRECC  
+                MOVE DIR-COR-BDLMAE TO DIRCOR-DIRECC  
+RCNCER          MOVE 0 TO CERCOR-DIRECC ADICOR-DIRECC                   FAC0003 
+RCNCER          IF T-LOCALIZACION(11) = 0 AND                           FAC0003 
+RCNCER             IND-CAMPO-VALPREP-W(K,16) = 1                        FAC0003 
+RCNCER             MOVE DPT-COR-BDLMAE TO DPTCOR-DIRECC                 FAC0003 
+RCNCER          END-IF                                                  FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECDCOR-DIRECC                   VHF0004
+            END-IF.
+AMPDIR      IF  T-LOCALIZACION(12) = 0 AND                              FAC0002 
+AMPDIR          IND-CAMPO-VALPREP-W(K,19) = 1                           FAC0002 
+AMPDIR          MOVE TEL-CEL-BDLMAE TO TELCEL-DIRECC                    FAC0002 
+FASEII          MOVE FECHA6-DIRECC  TO FECCEL-DIRECC                    VHF0004
+AMPDIR      END-IF.                                                     FAC0002 
+AMPDIR      IF  T-LOCALIZACION(13) = 0 AND                              FAC0002 
+AMPDIR          IND-CAMPO-VALPREP-W(K,18) = 1                           FAC0002 
+AMPDIR          MOVE E-MAIL-BDLMAE  TO E-MAIL-DIRECC                    FAC0002 
+FASEII          MOVE FECHA6-DIRECC  TO FECMAIL-DIRECC                   VHF0004
+AMPDIR      END-IF.                                                     FAC0002 
+            MOVE FECHA-S              TO FECHA6-DIRECC.
+            MOVE FECHA6-DIRECC        TO FECACT-DIRECC FECCRE-DIRECC
+AMPDIR                                   FECULT-DIRECC                  FAC0002 
+            MOVE FECHA-APERT-BDLMAE   TO FECHA-W6-R
+            MOVE FECHA-W6             TO FECAPE-DIRECC
+            IF OPCION-W = "A"
+               WRITE REG-DIRECC INVALID KEY 
+                 MOVE 2 TO ERROR-DIRECC
+                 ADD 1 TO ERRORES-DIRECC
+               NOT INVALID KEY
+                 ADD 1 TO CREACIONES-DIRECC
+               END-WRITE
+            ELSE ADD 1 TO CREACIONES-DIRECC
+            END-IF.
+
+DIRECC 0004-VER-CAMBIO-DIRECC.
+REMARK******************************************************************
+REMARK*0004-VER-CAMBIO-DIRECC.                                          
+REMARK* SE VERIFICA SI ALGUN CAMPO SE HA ACTUALIZADO, SI ES ASI SE PROCE
+REMARK* DE A ACTUALIZARLO Y SE CAMBIA LA FECHA DE ULTIMA ACTUALIZACION. 
+REMARK******************************************************************
+            MOVE 0 TO CAMBIO-DIRECC.
+            IF OPCION-W = "A"
+               PERFORM 0005-MOVER-CAMPOS-HISTORICO   
+            END-IF
+REMARK*********************CAMBIO DE CIUDAD O DEPARTAMENTO RESIDENCIA** VHF0004
+FASEII      IF  (T-LOCALIZACION(1) = 0 AND                              VHF0004
+FASEII           IND-CAMPO-VALPREP-W(K,7) = 1) AND                      VHF0004
+FASEII          ((T-LOCALIZACION(2) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,9) = 1) OR                      VHF0004
+FASEII           (T-LOCALIZACION(3) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,10) = 1))                       VHF0004
+FASEII          IF CIURES-DIRECC NOT = CIU-RES-BDLMAE                   VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE CIU-RES-BDLMAE TO CIURES-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII          IF T-LOCALIZACION(4) = 0 AND                            VHF0004
+FASEII             IND-CAMPO-VALPREP-W(K,8) = 1 AND                     VHF0004
+FASEII             DPT-RES-BDLMAE <> DPTRES-DIRECC                      VHF0004
+FASEII             MOVE DPT-RES-BDLMAE TO DPTRES-DIRECC                 VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE DIRECCION RESIDENCIA ************* VHF0004
+FASEII      IF  T-LOCALIZACION(1) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,7) = 1 AND                        VHF0004
+FASEII          T-LOCALIZACION(2) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,9) = 1                            VHF0004
+FASEII          IF DIRRES-DIRECC NOT = DIR-RES-BDLMAE                   VHF0004
+FASEII             MOVE DIRRES-DIRECC  TO DIR-ACTUAL                    VHF0004
+FASEII             MOVE DIR-RES-BDLMAE TO DIR-NUEVA                     VHF0004
+FASEII             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                VHF0004
+FASEII             IF SW-HACER-CAMBIO = 1                               VHF0004
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0004
+FASEII                MOVE FECHA6-DIRECC  TO FECDRES-DIRECC             VHF0004
+FASEII             ELSE                                                 VHF0004
+FASEII                IF CAMBIO-DIRECC <> 1                             VHF0004
+REMARK***                EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA       VHF0004
+REMARK***                ACTUALIZACION DE FECHA                         VHF0004
+FASEII                   MOVE 9 TO CAMBIO-DIRECC                        VHF0004
+FASEII                END-IF                                            VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE DIR-RES-BDLMAE TO DIRRES-DIRECC                 VHF0004
+FASEII             MOVE 0 TO CERRES-DIRECC ADIRES-DIRECC                VHF0004
+FASEII             MOVE CIU-RES-BDLMAE TO CIURES-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE TELEFONO  RESIDENCIA ************* VHF0004
+FASEII      INITIALIZE VARIABLES-TRAB-DIRECC                            VHF0004
+FASEII      IF  T-LOCALIZACION(1) = 0 AND                               VHF0004
+FASAII          IND-CAMPO-VALPREP-W(K,7) = 1 AND                        VHF0004
+FASEII          T-LOCALIZACION(3) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,10) = 1                           VHF0004
+FASEII          IF TELRES-DIRECC NOT = TEL-RES-BDLMAE                   VHF0004
+FASEII             MOVE TELRES-DIRECC TO TEL-W1                         VHF0004
+REMARK***          SE UBICA EL PRIMER DIGITO DIFERENTE DE CERO PARA     VHF0004
+REMARK***          TOMAR EL NUMERO DE TELEFONO ACTUAL DEL ARCHIVO       VHF0004
+FASEII             MOVE 1 TO NUM-CAR-W                                  VHF0004
+FASEII             PERFORM UNTIL TEL-W1 (NUM-CAR-W:1) <> 0 OR           VHF0004
+FASEII                           NUM-CAR-W > 12                         VHF0004
+FASEII                ADD 1 TO NUM-CAR-W                                VHF0004
+FASEII             END-PERFORM                                          VHF0004
+FASEII             IF NUM-CAR-W > 12                                    VHF0004
+REMARK***             EL TELEFONO ACTUAL ESTA EN CEROS. HAY QUE         VHF0004
+REMARK***             ACTUALIZAR EL NUEVO CON SU FECHA                  VHF0004
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0004
+FASEII                MOVE FECHA6-DIRECC  TO FECTRES-DIRECC             VHF0004
+FASEII             ELSE                                                 VHF0004
+REMARK***             SE TOMA EL DIGITO HALLADO                         VHF0004
+FASEII                MOVE TEL-W1 (NUM-CAR-W:1) TO CAR-W                VHF0004
+REMARK***             SE TOMA EL TELEFONO ACTUAL DESDE EL DIGITO HALLADOVHF0004
+FASEII                INITIALIZE TEL-W2                                 VHF0004
+FASEII                MOVE TEL-W1 (NUM-CAR-W:) TO TEL-W2                VHF0004
+FASEII                INSPECT TEL-W2 REPLACING ALL " " BY "0"           VHF0004
+FASEII                MOVE TEL-RES-BDLMAE TO TEL-W1                     VHF0004
+REMARK***             SE BUSCA EL PRIMER DIGITO DEL TELEFONO ACTUAL EN  VHF0004
+REMARK***             EL NUEVO PARA TOMARLO                             VHF0004
+FASEII                INITIALIZE NUM-CAR-W                              VHF0004
+FASEII                INSPECT TEL-W1 TALLYING NUM-CAR-W                 VHF0004
+FASEII                        FOR CHARACTERS BEFORE INITIAL CAR-W       VHF0004
+FASEII                IF NUM-CAR-W = 12                                 VHF0004
+REMARK***                NO SE ENCUENTRA EL DIGITO DEL TELEFONO ACTUAL  VHF0004
+REMARK***                EN EL NUEVO. HAY QUE ACTUALIZAR EL NUEVO Y SU  VHF0004
+REMARK***                FECHA                                          VHF0004
+FASEII                   MOVE 1 TO CAMBIO-DIRECC                        VHF0004
+FASEII                   MOVE FECHA6-DIRECC  TO FECTRES-DIRECC          VHF0004
+FASEII                ELSE                                              VHF0004
+REMARK***                SE TOMA EL NUMERO DEL TELEFONO NUEVO DESDE LA  VHF0004
+REMARK***                POSICION ENCONTRADA                            VHF0004
+FASEII                   ADD 1 TO NUM-CAR-W                             VHF0004
+FASEII                   MOVE TEL-W1 (NUM-CAR-W:) TO TEL-WW2            VHF0004
+FASEII                   INSPECT TEL-WW2 REPLACING ALL " " BY "0"       VHF0004
+FASEII                   IF TEL-W2 NOT = TEL-WW2                        VHF0004
+REMARK***                   SI LOS DOS TELEFONOS SON DIFERENTES SE      VHF0004
+REMARK***                   ACTUALIZA EL NUEVO Y LA FECHA RESPECTIVA    VHF0004
+FASEII                      MOVE 1 TO CAMBIO-DIRECC                     VHF0004
+FASEII                      MOVE FECHA6-DIRECC  TO FECTRES-DIRECC       VHF0004
+FASEII                   ELSE                                           VHF0004
+REMARK***                   SI LAS PARTES COMPARADAS DE LOS TELEFONOS   VHF0004
+REMARK***                   SON IGUALES SE ACTUALIZA EL TELEFONO PERO   VHF0004
+REMARK***                   NO LA DIRECCION YA QUE NO SE CONSIDERA UN   VHF0004
+REMARK***                   CAMBIO DE TELEFONO                          VHF0004
+FASEII                      IF CAMBIO-DIRECC <> 1                       VHF0004
+REMARK***                      EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA VHF0004
+REMARK***                      ACTUALIZACION DE FECHA                   VHF0004
+FASEII                         MOVE 9 TO CAMBIO-DIRECC                  VHF0004
+FASEII                      END-IF                                      VHF0004
+FASEII                   END-IF                                         VHF0004
+FASEII                END-IF                                            VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE TEL-RES-BDLMAE TO TELRES-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE CIUDAD O DEPARTAMENTO LABORAL******VHF0004
+FASEII      IF  (T-LOCALIZACION(5) = 0 AND                              VHF0004
+FASEII           IND-CAMPO-VALPREP-W(K,11) = 1) AND                     VHF0004
+FASEII          ((T-LOCALIZACION(6) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,13) = 1) OR                     VHF0004
+FASEII           (T-LOCALIZACION(7) = 0 AND                             VHF0004
+FASEII            IND-CAMPO-VALPREP-W(K,14) = 1))                       VHF0004
+FASEII          IF CIULAB-DIRECC NOT = CIU-LAB-BDLMAE                   VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE CIU-LAB-BDLMAE TO CIULAB-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII          IF T-LOCALIZACION(8) = 0 AND                            VHF0004
+FASEII             IND-CAMPO-VALPREP-W(K,12) = 1 AND                    VHF0004
+FASEII             DPT-LAB-BDLMAE <> DPTLAB-DIRECC                      VHF0004
+FASEII             MOVE DPT-LAB-BDLMAE TO DPTLAB-DIRECC                 VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE DIRECCION LABORAL    ************* VHF0004
+FASEII      INITIALIZE VARIABLES-TRAB-DIRECC                            VHF0004
+FASEII      IF  T-LOCALIZACION(5) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,11) = 1 AND                       VHF0004
+FASEII          T-LOCALIZACION(6) = 0 AND IND-CAMPO-VALPREP-W(K,13) = 1 VHF0004
+FASEII          IF DIRLAB-DIRECC NOT = DIR-LAB-BDLMAE                   VHF0004
+FASEII             MOVE DIRLAB-DIRECC  TO DIR-ACTUAL                    VHF0004
+FASEII             MOVE DIR-LAB-BDLMAE TO DIR-NUEVA                     VHF0004
+FASEII             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                VHF0004
+FASEII             IF SW-HACER-CAMBIO = 1                               VHF0004
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0004
+FASEII                MOVE FECHA6-DIRECC  TO FECDLAB-DIRECC             VHF0004
+FASEII             ELSE                                                 VHF0004
+FASEII                IF CAMBIO-DIRECC <> 1                             VHF0004
+REMARK***                EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA       VHF0004
+REMARK***                ACTUALIZACION DE FECHA                         VHF0004
+FASEII                   MOVE 9 TO CAMBIO-DIRECC                        VHF0004
+FASEII                END-IF                                            VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE DIR-LAB-BDLMAE TO DIRLAB-DIRECC                 VHF0004
+FASEII             MOVE 0 TO CERLAB-DIRECC ADILAB-DIRECC                VHF0004
+FASEII             MOVE CIU-LAB-BDLMAE TO CIULAB-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+RCNCER      END-IF.                                                     FAC0003 
+REMARK*********************CAMBIO DE TELEFONO  LABORAL    ************* VHF0004
+FASEII      IF  T-LOCALIZACION(5) = 0 AND                               VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,11) = 1 AND                       VHF0004
+FASEII          T-LOCALIZACION(7) = 0 AND IND-CAMPO-VALPREP-W(K,14) = 1 VHF0004
+FASEII          IF TELLAB-DIRECC NOT = TEL-LAB-BDLMAE                   VHF0004
+FASEII             MOVE TELLAB-DIRECC TO TEL-W1                         VHF0004
+REMARK***          SE UBICA EL PRIMER DIGITO DIFERENTE DE CERO PARA     VHF0004
+REMARK***          TOMAR EL NUMERO DE TELEFONO ACTUAL DEL ARCHIVO       VHF0004
+FASEII             MOVE 1 TO NUM-CAR-W                                  VHF0004
+FASEII             PERFORM UNTIL TEL-W1 (NUM-CAR-W:1) <> 0 OR           VHF0004
+FASEII                           NUM-CAR-W > 12                         VHF0004
+FASEII                ADD 1 TO NUM-CAR-W                                VHF0004
+FASEII             END-PERFORM                                          VHF0004
+FASEII             IF NUM-CAR-W > 12                                    VHF0004
+REMARK***             EL TELEFONO ACTUAL ESTA EN CEROS. HAY QUE         VHF0004
+REMARK***             ACTUALIZAR EL NUEVO CON SU FECHA                  VHF0004
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0004
+FASEII                MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC             VHF0004
+FASEII             ELSE                                                 VHF0004
+REMARK***             SE TOMA EL DIGITO HALLADO                         VHF0004
+FASEII                MOVE TEL-W1 (NUM-CAR-W:1) TO CAR-W                VHF0004
+REMARK***             SE TOMA EL TELEFONO ACTUAL DESDE EL DIGITO HALLADOVHF0004
+FASEII                INITIALIZE TEL-W2                                 VHF0004
+FASEII                MOVE TEL-W1 (NUM-CAR-W:) TO TEL-W2                VHF0004
+FASEII                INSPECT TEL-W2 REPLACING ALL " " BY "0"           VHF0004
+FASEII                MOVE TEL-LAB-BDLMAE TO TEL-W1                     VHF0004
+REMARK***             SE BUSCA EL PRIMER DIGITO DEL TELEFONO ACTUAL EN  VHF0004
+REMARK***             EL NUEVO PARA TOMARLO                             VHF0004
+FASEII                INITIALIZE NUM-CAR-W                              VHF0004
+FASEII                INSPECT TEL-W1 TALLYING NUM-CAR-W                 VHF0004
+FASEII                        FOR CHARACTERS BEFORE INITIAL CAR-W       VHF0004
+FASEII                IF NUM-CAR-W = 12                                 VHF0004
+REMARK***                NO SE ENCUENTRA EL DIGITO DEL TELEFONO ACTUAL  VHF0004
+REMARK***                EN EL NUEVO. HAY QUE ACTUALIZAR EL NUEVO Y SU  VHF0004
+REMARK***                FECHA                                          VHF0004
+FASEII                   MOVE 1 TO CAMBIO-DIRECC                        VHF0004
+FASEII                   MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC          VHF0004
+FASEII                ELSE                                              VHF0004
+REMARK***                SE TOMA EL NUMERO DEL TELEFONO NUEVO DESDE LA  VHF0004
+REMARK***                POSICION ENCONTRADA                            VHF0004
+FASEII                   ADD 1 TO NUM-CAR-W                             VHF0004
+FASEII                   MOVE TEL-W1 (NUM-CAR-W:) TO TEL-WW2            VHF0004
+FASEII                   INSPECT TEL-WW2 REPLACING ALL " " BY "0"       VHF0004
+FASEII                   IF TEL-W2 NOT = TEL-WW2                        VHF0004
+REMARK***                   SI LOS DOS TELEFONOS SON DIFERENTES SE      VHF0004
+REMARK***                   ACTUALIZA EL NUEVO Y LA FECHA RESPECTIVA    VHF0004
+FASEII                      MOVE 1 TO CAMBIO-DIRECC                     VHF0004
+FASEII                      MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC       VHF0004
+FASEII                   ELSE                                           VHF0004
+REMARK***                   SI LAS PARTES COMPARADAS DE LOS TELEFONOS   VHF0004
+REMARK***                   SON IGUALES SE ACTUALIZA EL TELEFONO PERO   VHF0004
+REMARK***                   NO LA DIRECCION YA QUE NO SE CONSIDERA UN   VHF0004
+REMARK***                   CAMBIO DE TELEFONO                          VHF0004
+FASEII                      IF CAMBIO-DIRECC <> 1                       VHF0004
+REMARK***                      EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA VHF0004
+REMARK***                      ACTUALIZACION DE FECHA                   VHF0004
+FASEII                         MOVE 9 TO CAMBIO-DIRECC                  VHF0004
+FASEII                      END-IF                                      VHF0004
+FASEII                   END-IF                                         VHF0004
+FASEII                END-IF                                            VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE CIU-LAB-BDLMAE TO CIULAB-DIRECC                 VHF0004
+FASEII             MOVE TEL-LAB-BDLMAE TO TELLAB-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*************CAMBIO DE CIUDAD O DEPARTAMENTO CORRESPONDENCIA******VHF0004
+FASEII      IF  T-LOCALIZACION(9)  = 0 AND                              VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,15) = 1 AND                       VHF0004
+FASEII          T-LOCALIZACION(10) = 0 AND                              VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,17) = 1                           VHF0004
+FASEII          IF CIUCOR-DIRECC NOT = CIU-COR-BDLMAE                   VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE CIU-COR-BDLMAE TO CIUCOR-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII          IF T-LOCALIZACION(11) = 0 AND                           VHF0004
+FASEII             IND-CAMPO-VALPREP-W(K,16) = 1 AND                    VHF0004
+FASEII             DPT-COR-BDLMAE <> DPTCOR-DIRECC                      VHF0004
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0004
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0004
+REMARK***             ACTUALIZACION DE FECHA                            VHF0004
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE DPT-COR-BDLMAE TO DPTCOR-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE DIRECCION CORRESPONDENCIA ******** VHF0004
+FASEII      INITIALIZE VARIABLES-TRAB-DIRECC                            VHF0004
+FASEII      IF  T-LOCALIZACION(9)  = 0 AND                              VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,15) = 1 AND                       VHF0004
+FASEII          T-LOCALIZACION(10) = 0 AND                              VHF0004
+FASEII          IND-CAMPO-VALPREP-W(K,17) = 1                           VHF0004
+FASEII          IF DIRCOR-DIRECC NOT = DIR-COR-BDLMAE                   VHF0004
+FASEII             MOVE DIRCOR-DIRECC  TO DIR-ACTUAL                    VHF0004
+FASEII             MOVE DIR-COR-BDLMAE TO DIR-NUEVA                     VHF0004
+FASEII             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                VHF0004
+FASEII             IF SW-HACER-CAMBIO = 1                               VHF0004
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0004
+FASEII                MOVE FECHA6-DIRECC  TO FECDCOR-DIRECC             VHF0004
+FASEII             ELSE                                                 VHF0004
+FASEII                IF CAMBIO-DIRECC <> 1                             VHF0004
+REMARK***                EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA       VHF0004
+REMARK***                ACTUALIZACION DE FECHA                         VHF0004
+FASEII                   MOVE 9 TO CAMBIO-DIRECC                        VHF0004
+FASEII                END-IF                                            VHF0004
+FASEII             END-IF                                               VHF0004
+FASEII             MOVE DIR-COR-BDLMAE TO DIRCOR-DIRECC                 VHF0004
+FASEII             MOVE 0 TO CERCOR-DIRECC ADICOR-DIRECC                VHF0004
+FASEII             MOVE CIU-COR-BDLMAE TO CIUCOR-DIRECC                 VHF0004
+FASEII          END-IF                                                  VHF0004
+RCNCER      END-IF.                                                     VHF0004
+REMARK*********************CAMBIO DE TELEFONO CELULAR ***************** VHF0004
+RCNCER      IF  T-LOCALIZACION(12) = 0 AND                              FAC0003 
+FASEII          IND-CAMPO-VALPREP-W(K,19) = 1 AND                       VHF0004
+RCNCER          TEL-CEL-BDLMAE <> TELCEL-DIRECC                         FAC0003 
+RCNCER          MOVE 1 TO CAMBIO-DIRECC                                 FAC0003 
+RCNCER          MOVE TEL-CEL-BDLMAE TO TELCEL-DIRECC                    FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECCEL-DIRECC                    VHF0004
+RCNCER      END-IF.                                                     FAC0003 
+REMARK*********************CAMBIO DE E-MAIL    ************************ VHF0004
+RCNCER      IF  T-LOCALIZACION(13) = 0 AND                              FAC0003 
+FASEII          IND-CAMPO-VALPREP-W(K,18) = 1 AND                       VHF0004
+RCNCER          E-MAIL-BDLMAE <> E-MAIL-DIRECC                          FAC0003 
+RCNCER          MOVE 1 TO CAMBIO-DIRECC                                 FAC0003 
+RCNCER          MOVE E-MAIL-BDLMAE  TO E-MAIL-DIRECC                    FAC0003 
+FASEII          MOVE FECHA6-DIRECC  TO FECMAIL-DIRECC                   VHF0004
+RCNCER      END-IF.                                                     FAC0003 
+            IF CAMBIO-DIRECC > 0                                        
+               IF CAMBIO-DIRECC = 1                                     
+AMPDIR            MOVE FECHA6-DIRECC TO FECACT-DIRECC FECULT-DIRECC     FAC0002 
+                  MOVE FECHA-APERT-BDLMAE TO FECHA-W6-R
+                  MOVE FECHA-W6 TO FECAPE-DIRECC
+               END-IF                                                   
+            ELSE
+               ADD 1 TO SINCAMBIOS-DIRECC
+RCNCER         IF FECHA6-DIRECC <> FECULT-DIRECC                        FAC0003 
+RCNCER            MOVE FECHA6-DIRECC TO FECULT-DIRECC                   FAC0003 
+RCNCER            MOVE 3 TO CAMBIO-DIRECC                               FAC0003 
+RCNCER         END-IF                                                   FAC0003 
+            END-IF.
+AMPDIR      IF CAMBIO-DIRECC > 0                                        FAC0002 
+AMPDIR         IF OPCION-W = "A"                                        FAC0002 
+AMPDIR            REWRITE REG-DIRECC INVALID KEY                        FAC0002 
+AMPDIR            MOVE 3 TO ERROR-DIRECC                                FAC0002 
+AMPDIR            ADD 1 TO ERRORES-DIRECC                               FAC0002 
+AMPDIR            NOT INVALID KEY                                       FAC0002 
+AMPDIR              IF CAMBIO-DIRECC <> 3                               FAC0002 
+AMPDIR                 ADD 1 TO CAMBIOS-DIRECC                          FAC0002 
+AMPDIR              END-IF                                              FAC0002 
+AMPDIR            END-REWRITE                                           FAC0002 
+AMPDIR         ELSE                                                     FAC0002 
+AMPDIR            IF CAMBIO-DIRECC <> 3                                 FAC0002 
+AMPDIR               ADD 1 TO CAMBIOS-DIRECC                            FAC0002 
+AMPDIR            END-IF                                                FAC0002 
+AMPDIR         END-IF                                                   FAC0002 
+AMPDIR      END-IF.                                                     FAC0002
+
+FASEII 0004-1-MIRAR-CAMBIO-DIRECCION.                                   VHF0004
+REMARK******************************************************************VHF0004
+REMARK*0004-1-MIRAR-CAMBIO-DIRECCION.                                  *VHF0004
+REMARK*    SE EXAMINA SI EFECTIVAMENTE CAMBIO LA PARTE NUMERICA DE LA  *VHF0004
+REMARK*    DIRECCION                                                   *VHF0004
+REMARK******************************************************************VHF0004
+FASEII     MOVE 0 TO SW-HACER-CAMBIO.                                   VHF0004
+FASEII     MOVE DIR-ACTUAL TO T-CARDIR-BDLDIR.                          VHF0004
+FASEII     PERFORM 2020-X-BUSCAR-NUMEROS.                               VHF0004
+FASEII     MOVE T-CARTOT-BDLDIR TO T-CARTOT-AUX.                        VHF0004
+FASEII     MOVE DIR-NUEVA  TO T-CARDIR-BDLDIR.                          VHF0004
+FASEII     PERFORM 2020-X-BUSCAR-NUMEROS.                               VHF0004
+FASEII     IF T-CARTOT-AUX <> T-CARTOT-BDLDIR                           VHF0004
+FASEII        MOVE 1 TO SW-HACER-CAMBIO                                 VHF0004
+FASEII     END-IF.                                                      VHF0004
+
+FASEII 2020-X-BUSCAR-NUMEROS.                                           VHF0004
+FASEII     MOVE 1 TO I-BDLXXX.                                          VHF0004
+FASEII     MOVE 0 TO J-BDLXXX.                                          VHF0004
+FASEII     MOVE " " TO CAR-ANT-BDLDIR.                                  VHF0004
+FASEII     INITIALIZE T-CARTOT-BDLDIR.                                  VHF0004
+FASEII     PERFORM UNTIL I-BDLXXX > 60                                  VHF0004
+FASEII       IF V-CARDIR-BDLDIR(I-BDLXXX) NUMERIC                       VHF0004
+FASEII          MOVE V-CARDIR-BDLDIR(I-BDLXXX) TO CAR-ACT-BDLDIR        VHF0004
+FASEII          IF CAR-ANT-BDLDIR NUMERIC                               VHF0004
+FASEII             COMPUTE V-CARTOT-BDLDIR(J-BDLXXX)                    VHF0004
+FASEII                     = V-CARTOT-BDLDIR(J-BDLXXX)                  VHF0004
+FASEII                     * 10 + CAR-ACT-BDLDIR                        VHF0004
+FASEII          ELSE                                                    VHF0004
+FASEII             ADD 1 TO J-BDLXXX                                    VHF0004
+FASEII             MOVE V-CARDIR-BDLDIR(I-BDLXXX)                       VHF0004
+FASEII                  TO V-CARTOT-BDLDIR(J-BDLXXX)                    VHF0004
+FASEII          END-IF                                                  VHF0004
+FASEII       END-IF                                                     VHF0004
+FASEII       MOVE V-CARDIR-BDLDIR(I-BDLXXX) TO CAR-ANT-BDLDIR           VHF0004
+FASEII       ADD 1 TO I-BDLXXX                                          VHF0004
+FASEII     END-PERFORM.                                                 VHF0004
+FASEII     SORT V-CARTOT-BDLDIR DESCENDING.                             VHF0004
+       0005-MOVER-CAMPOS-HISTORICO.                                     
+REMARK******************************************************************
+      *0005-MOVER-CAMPOS-HISTORICO.                                     
+      *Mueve los datos del registro de ICBDIR al registro de BDUHDIR    
+      *como estaban antes de modificar el registro de ICBDIR            
+REMARK******************************************************************
+           INITIALIZE REG-BDUHDIR-WS                                    
+           MOVE TIPO-ID-DIRECC TO TIPO-ID-BDUHDIR-WS                    
+           MOVE NUM-ID-DIRECC  TO NUM-ID-BDUHDIR-WS                     
+           MOVE COD-CTA-DIRECC TO COD-CTA-BDUHDIR-WS                    
+           MOVE COD-SUS-DIRECC TO COD-SUS-BDUHDIR-WS                    
+           MOVE NUM-CTA-DIRECC TO NUM-CTA-BDUHDIR-WS                    
+           MOVE ZEROS TO  NUM-CONSEC-BDUHDIR-WS                         
+           MOVE CIURES-DIRECC TO CIURES-BDUHDIR-WS                      
+           MOVE DIRRES-DIRECC TO DIRRES-BDUHDIR-WS                      
+           MOVE TELRES-DIRECC TO TELRES-BDUHDIR-WS                      
+AMPDIR     MOVE DPTRES-DIRECC TO DPTRES-BDUHDIR-WS                      FAC0002 
+FASEII*    MOVE FECRES-DIRECC TO FECRES-BDUHDIR-WS                      VHF0004
+FASEII     MOVE FECDRES-DIRECC TO FECDRES-BDUHDIR-WS                    VHF0004
+           MOVE CIULAB-DIRECC TO CIULAB-BDUHDIR-WS                      
+FASEII     MOVE DIRLAB-DIRECC TO DIRLAB-BDUHDIR-WS                      VHF0004
+           MOVE TELLAB-DIRECC TO TELLAB-BDUHDIR-WS                      
+AMPDIR     MOVE DPTLAB-DIRECC TO DPTLAB-BDUHDIR-WS                      FAC0002 
+FASEII*    MOVE FECLAB-DIRECC TO FECLAB-BDUHDIR-WS                      VHF0004
+FASEII     MOVE FECDLAB-DIRECC TO FECDLAB-BDUHDIR-WS                    VHF0004
+           MOVE CIUCOR-DIRECC TO CIUCOR-BDUHDIR-WS                      
+           MOVE DIRCOR-DIRECC TO DIRCOR-BDUHDIR-WS                      
+AMPDIR     MOVE DPTCOR-DIRECC TO DPTCOR-BDUHDIR-WS                      FAC0002 
+FASEII*    MOVE FECCOR-DIRECC TO FECCOR-BDUHDIR-WS                      VHF0004
+FASEII     MOVE FECDCOR-DIRECC TO FECDCOR-BDUHDIR-WS                    VHF0004
+           MOVE FECACT-DIRECC TO FECACT-BDUHDIR-WS                      
+           MOVE FECAPE-DIRECC TO FECAPE-BDUHDIR-WS                      
+           MOVE FECCRE-DIRECC TO FECCRE-BDUHDIR-WS                      
+           MOVE FECHA-SIST(1:6) TO FECSIS-BDUHDIR-WS                    
+AMPDIR     MOVE E-MAIL-DIRECC TO E-MAIL-BDUHDIR-WS                      FAC0002 
+AMPDIR     MOVE TELCEL-DIRECC TO TELCEL-BDUHDIR-WS                      FAC0002 
+FASEII*    MOVE FECOTR-DIRECC TO FECOTR-BDUHDIR-WS                      VHF0004
+FASEII     MOVE FECCEL-DIRECC TO FECCEL-BDUHDIR-WS                      VHF0004
+AMPDIR     MOVE FECULT-DIRECC TO FECULT-BDUHDIR-WS                      FAC0002 
+RCNCER     MOVE FECHA6-DIRECC TO FECSUS-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE CERRES-DIRECC TO CERRES-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE ADIRES-DIRECC TO ADIRES-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE CERLAB-DIRECC TO CERLAB-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE ADILAB-DIRECC TO ADILAB-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE CERCOR-DIRECC TO CERCOR-BDUHDIR-WS                      FAC0003 
+RCNCER     MOVE ADICOR-DIRECC TO ADICOR-BDUHDIR-WS.                     FAC0003 
+FASEII     MOVE FECTRES-DIRECC TO FECTRES-BDUHDIR-WS.                   VHF0004
+FASEII     MOVE FECTLAB-DIRECC TO FECTLAB-BDUHDIR-WS.                   VHF0004
+FASEII     MOVE FECMAIL-DIRECC TO FECMAIL-BDUHDIR-WS.                   VHF0004

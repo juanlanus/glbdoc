@@ -1,0 +1,59 @@
+      *PE-VALORES.PROC.v.01.0001.
+      *------------------------------------------------*
+      *
+      *   COPY  VERSION  SEPTIMBRE 2004
+      *
+      *------------------------------------------------*
+      * COPY Verifica valores para mostrar en informe  *
+      *------------------------------------------------*
+
+           INITIALIZE  VAL-VARIABLES
+           MOVE    1   TO   T
+           OPEN INPUT  BDACUE
+           PERFORM  UNTIL SW-LOAD-TBL = 9   
+                    READ BDACUE 
+                         AT  END
+                             MOVE   9 TO SW-LOAD-TBL
+                         NOT AT END
+                             IF T > 100
+                                MOVE   9 TO SW-LOAD-TBL
+                             ELSE
+                                MOVE  TAB-IND-VAL-BDACUE  TO
+                                      TABLA-VAL-TIP-CTA (T)
+                                ADD   1   TO   T
+                             END-IF                                                
+                    END-READ 
+           END-PERFORM
+           CLOSE BDACUE
+           COMPUTE TOPE-T = T - 1.
+      *    DISPLAY " Cuentas cargadas (BDACUE) : "   TOPE-T.
+
+      *----------------------------------------------------------------*
+       33000-PROCESAR-BDACUE.
+      *----------------------------------------------------------------*
+      *  --->    VALOR INICIAL
+      *----------------------------------------------------------------*
+           IF VEC-VALOR-BDACUE (W-CTA-BDCUE,2) = 0
+              MOVE  ZEROS  TO  VEC-VALOR-VALVLR (2)
+           END-IF
+
+      *----------------------------------------------------------------*
+      *  --->    VALOR SALDO  
+      *----------------------------------------------------------------*
+           IF VEC-VALOR-BDACUE (W-CTA-BDCUE,3) = 0
+              MOVE  ZEROS  TO  VEC-VALOR-VALVLR (3)
+           END-IF
+                                            
+      *----------------------------------------------------------------*
+      *  --->    VALOR MORA   
+      *----------------------------------------------------------------*
+           IF VEC-VALOR-BDACUE (W-CTA-BDCUE,5) = 0
+              MOVE  ZEROS TO   VEC-VALOR-VALVLR (5)
+           END-IF
+      *----------------------------------------------------------------*
+      *  --->    VALOR CUOTA  
+      *----------------------------------------------------------------*
+           IF VEC-VALOR-BDACUE (W-CTA-BDCUE,1) = 0
+              MOVE  ZEROS TO   VEC-VALOR-VALVLR (1)
+           END-IF.
+

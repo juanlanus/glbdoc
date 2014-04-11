@@ -1,0 +1,7 @@
+      * ICSALMIN.FD.v.01.001
+      * MAESTRO DE SALARIOS MINIMOS LEGALES  FECHA(YYYY)              
+      ******************************************************************
+       FD  ICSALMIN.
+       01  COMPLETO-ICSALMIN.
+           03  FECHA-ICSALMIN        PIC 9(4).
+           03  VALOR-ICSALMIN        PIC 9(8).

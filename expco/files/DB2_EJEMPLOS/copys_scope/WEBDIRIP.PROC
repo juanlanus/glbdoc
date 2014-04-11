@@ -1,0 +1,61 @@
+REMARK*   WEBDIRIP-PROC.v.0001
+REMARK******************************************************************
+REMARK*   RUTINA QUE TIENE DOS FUNCIONES BASICAS:                      *
+REMARK*   1. CARGAR ARCHIVO DE DIRECCIONES IP A MEMORIA                *
+REMARK*   2. BUSCAR UNA DIRECCION-NIT EN LA TABLA DE DIRECCIONES IP    *
+REMARK******************************************************************
+
+       50000-CARGAR-TABLA-WEBDIRIP.
+REMARK******************************************************************
+REMARK*50000-CARGAR-TABLA-WEBDIRIP.                                    *
+REMARK*    SE CARGA A MEMORIA LA TABLA DE DIRECCIONES IP POR NIT DEL   *
+REMARK*    ARCHIVO RESPECTIVO                                          *
+REMARK******************************************************************
+           MOVE 0 TO FDA-WEBDIRIP
+           MOVE 0 TO IDX-WEBDIRIP 
+           OPEN INPUT WEBDIRIP
+           READ WEBDIRIP
+              AT END
+                 MOVE 1 TO FDA-WEBDIRIP
+           END-READ
+           PERFORM UNTIL FDA-WEBDIRIP = 1
+              INITIALIZE REG-AUX-WEBDIRIP
+              UNSTRING REG-WEBDIRIP DELIMITED BY " " INTO
+                   FIL-AUX-WEBDIRIP  IND-AUX-WEBDIRIP  DES-AUX-WEBDIRIP
+                   IP-AUX-WEBDIRIP   NIT-WEBDIRIP (01) NIT-WEBDIRIP (02) 
+                   NIT-WEBDIRIP (03) NIT-WEBDIRIP (04) NIT-WEBDIRIP (05) 
+                   NIT-WEBDIRIP (06) NIT-WEBDIRIP (07) NIT-WEBDIRIP (08) 
+                   NIT-WEBDIRIP (09) NIT-WEBDIRIP (10) NIT-WEBDIRIP (11) 
+                   NIT-WEBDIRIP (12) NIT-WEBDIRIP (13) NIT-WEBDIRIP (14) 
+                   NIT-WEBDIRIP (15) NIT-WEBDIRIP (16) NIT-WEBDIRIP (17) 
+                   NIT-WEBDIRIP (18) NIT-WEBDIRIP (19) NIT-WEBDIRIP (20) 
+              MOVE 1 TO CON-WEBDIRIP
+              PERFORM UNTIL CON-WEBDIRIP > 20 OR 
+                            NIT-WEBDIRIP (CON-WEBDIRIP) = 0
+                 ADD 1 TO IDX-WEBDIRIP 
+                 MOVE IND-AUX-WEBDIRIP 
+                      TO IND-DIR-WEBDIRIP (IDX-WEBDIRIP)
+                 MOVE IP-AUX-WEBDIRIP  TO IP-DIR-WEBDIRIP (IDX-WEBDIRIP)
+                 MOVE NIT-WEBDIRIP (CON-WEBDIRIP) 
+                      TO NIT-DIR-WEBDIRIP (IDX-WEBDIRIP)
+                 ADD 1 TO CON-WEBDIRIP 
+              END-PERFORM
+              READ WEBDIRIP
+                 AT END
+                    MOVE 1 TO FDA-WEBDIRIP
+              END-READ
+           END-PERFORM
+           SORT DIR-WEBDIRIP ASCENDING LLAVE-DIR-WEBDIRIP
+           CLOSE WEBDIRIP.
+
+       51000-BUSCAR-WEBDIRIP.
+REMARK******************************************************************
+REMARK*51000-BUSCAR-WEBDIRIP.                                          *
+REMARK*    SE BUSCA DIRECCION IP - NIT EN TABLA WEBDIRIP               *
+REMARK******************************************************************
+           SEARCH ALL DIR-WEBDIRIP
+              AT END
+                 MOVE 0 TO ENC-WEBDIRIP
+              WHEN LLAVE-DIR-WEBDIRIP (I-WEBDIRIP) = LLAVE-TMP-WEBDIRIP
+                 SET  ENC-WEBDIRIP TO I-WEBDIRIP
+           END-SEARCH.

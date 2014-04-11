@@ -1,0 +1,8 @@
+      * ICSANATA.FD.v.01.001
+      * MAESTRO DE SANATAS Y FECHA DE RECOGIDAS 
+      ******************************************************************
+       FD  ICSANATA.
+       01  COMPLETO-ICSANATA.
+           03  FECHA-ICSANATA        PIC 9(06).
+           03  FILLER                PIC X(01).
+           03  DIREC-ICSANATA        PIC X(60).

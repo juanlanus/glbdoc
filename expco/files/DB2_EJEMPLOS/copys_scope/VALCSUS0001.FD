@@ -1,0 +1,43 @@
+******* VALCSUS-fd.v03.0002
+******* VALCSUS.v03.002
+******* ARCHIVO ESTADISTICO GENERADO POR EL PROGRAMA CALIFICADOR VALCCAL
+******* DURANTE EL PROCESO DE VALIDACION
+******* La ocurrencia 31 para novedades, contiene el total de adjetivo 60
+******* La ocurrencia 32 para novedades, contiene el total de adjetivo 61
+******* La ocurrencia 33 para novedades, contiene el total de nov. erradas
+******* La ocurrencia 34 para novedades, contiene total adjetivos errados
+******* La ocurrencia 41 para campos, contiene el total de registros
+      *----------------------------------------------------------------*
+      * FAC0002     * PAG024 * AMPLIACION DE LA ESTRUCTURA PARA ALMACENAR
+      * F.CUADROS C.* LOS RESULTADOS POR TIPO DE PROCESO (TOTAL/PARCIAL).
+      * OCT.05/2004 * SE DEFINEN DOS OCURRENCIAS PARA TOTALIZAR CAMPOS:
+      *             * 1-PROCESO TOTAL 2-PROCESO PARCIAL
+      *----------------------------------------------------------------*
+       FD  VALCSUS.  
+       01  REG-VALCSUS.
+           03  LLAVE-VALCSUS.
+               05  COD-SUSCRIP-VALCSUS       PIC 9(6).
+           03  NUM-CONSEC-VALCSUS            PIC 9(4).
+           03  RESTO-REG-VALCSUS.
+               05  IND-MILES-VALCSUS         PIC X.
+               05  TOT-NOVEDAD-MESACT-VALCSUS-R.
+PAG024             07 TOT-NOV-MESACT-VALCSUS OCCURS 2.                  FAC0002
+PAG024                09 TOT-NOVEDAD-MESACT-VALCSUS  OCCURS 34          FAC0002
+                                             PIC 9(8) COMP-3.
+               05  TOT-CAMPO-MESACT-VALCSUS-R.
+PAG024             07 TOT-CAM-MESACT-VALCSUS OCCURS 2.                  FAC0002
+PAG024                09 TOT-CAMPO-MESACT-VALCSUS  OCCURS 41            FAC0002
+                                             PIC 9(8) COMP-3.
+PAG024         05  FECHA-MESACT-VALCSUS      OCCURS 2                   FAC0002
+PAG024                                       PIC 9(6)  COMP-3.          FAC0002
+               05  TOT-NOVEDAD-MESANT-VALCSUS-R.
+PAG024             07 TOT-NOV-MESANT-VALCSUS OCCURS 2.                  FAC0002
+                      09 TOT-NOVEDAD-MESANT-VALCSUS  OCCURS 34 
+                                             PIC 9(8) COMP-3.
+               05  TOT-CAMPO-MESANT-VALCSUS-R.
+PAG024             07 TOT-CAM-MESANT-VALCSUS OCCURS 2.                  FAC0002
+PAG024                09 TOT-CAMPO-MESANT-VALCSUS  OCCURS 41            FAC0002
+                                             PIC 9(8) COMP-3.
+PAG024         05  FECHA-MESANT-VALCSUS      OCCURS 2                   FAC0002
+PAG024                                       PIC 9(6)  COMP-3.          FAC0002
+               05  FILLER-VALCSUS            PIC X(20).

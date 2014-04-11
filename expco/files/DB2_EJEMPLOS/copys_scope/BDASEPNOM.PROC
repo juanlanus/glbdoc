@@ -1,0 +1,790 @@
+REMARK*BDASEPNOM-WS.v.0002.
+REMARK********************************************************************
+REMARK* COPY QUE CONTIENE LA LOGICA REQUERIDA PARA LA  SEPARACION DE UN
+REMARK* NOMBRE COMPLETO EN CADA UNO DE LOS 2 POSIBLES NOMBRES Y 2 POSIBLES
+REMARK* APELLIDOS
+REMARK*    RUTINAS PARA LA SEPARACION DE LOS NOMBRES Y APELLIDOS        RMB0003
+REMARK*    DE UNA CADENA DE ENTRADA                                     RMB0003
+REMARK*       INPUT   NOMBRE-INPUT-BDASEPNOM          
+REMARK*       OUTPUT  NOMBRE1-OUTPUT-BDASEPNOM       
+REMARK*               NOMBRE2-OUTPUT-BDASEPNOM      
+REMARK*               NOMBRES-OUTPUT-BDASEPNOM (AGRUPA NOM1 Y NOM2) 
+REMARK*               PRIAPEL-OUTPUT-BDASEPNOM                     
+REMARK*               SEGAPEL-OUTPUT-BDASEPNOM                    
+REMARK*               EXC-OUTPUT-BDASEPNOM (EXCLUSION = 1 , 0 SEPARADOS) 
+REMARK*       RUTINA A INVOCAR    1100-ANALIZAR-BDASEPNOM        
+REMARK********************************************************************
+REMARK* RMB0002     * ENES01 - SE RECONSTRUYEN NOMBRES CON "Ñ" DONDE   *
+REMARK* AGOSTO/2012 *          SE ENVIO ESPACIO                        *
+REMARK* R.MARTINES  *                                                  *
+REMARK********************************************************************
+       1100-ANALIZAR-BDASEPNOM.        
+REMARK******************************************************************        
+REMARK*1100-ANALIZAR-BDASEPNOM.       
+REMARK******************************************************************        
+           IF OPEN-BDANOM-BDASEPNOM = 0 
+              MOVE 1 TO OPEN-BDANOM-BDASEPNOM                                   
+              OPEN INPUT BDANOM                                                 
+           END-IF.                                                              
+           MOVE FUNCTION UPPER-CASE(NOMBRE-INPUT-BDASEPNOM) TO
+                NOMBRE-INPUT-BDASEPNOM
+           PERFORM 1110-SEPARAR-BDASEPNOM.         
+           PERFORM 1120-AGRUPAR-BDASEPNOM.        
+           PERFORM 1130-BUSCAR-EN-TABLAS-BDASEPNOM.  
+           PERFORM 1140-EXCLUSIONES-BDASEPNOM.      
+           IF EXC-OUTPUT-BDASEPNOM = 0             
+              PERFORM 1150-SEGMENTACION-BDASEPNOM 
+              PERFORM 1160-ARMADO-BDASEPNOM      
+           END-IF.                                                              
+
+       1110-SEPARAR-BDASEPNOM.                  
+REMARK******************************************************************        
+REMARK*    SE SEPARAN CADA UNO DE LOS COMPONENTES DE LA CADENA                 
+REMARK******************************************************************        
+           INITIALIZE NOMBRE1-OUTPUT-BDASEPNOM.
+           INITIALIZE NOMBRE2-OUTPUT-BDASEPNOM.
+           INITIALIZE NOMBRES-OUTPUT-BDASEPNOM.
+           INITIALIZE PRIAPEL-OUTPUT-BDASEPNOM.
+           INITIALIZE SEGAPEL-OUTPUT-BDASEPNOM.
+           INITIALIZE V-A-BDASEPNOM.          
+           UNSTRING NOMBRE-BDASEPNOM DELIMITED BY ALL " " INTO                  
+             BASURA-BDASEPNOM      
+             A-BDASEPNOM(1) A-BDASEPNOM(2) A-BDASEPNOM(3) 
+             A-BDASEPNOM(4) A-BDASEPNOM(5) A-BDASEPNOM(6) 
+             A-BDASEPNOM(7)  A-BDASEPNOM(8) A-BDASEPNOM(9)
+             A-BDASEPNOM(10) A-BDASEPNOM(11) A-BDASEPNOM(12) . 
+             MOVE 1 TO I-BDASEPNOM                            
+             PERFORM UNTIL A-BDASEPNOM(I-BDASEPNOM) = SPACES 
+               INSPECT A-BDASEPNOM(I-BDASEPNOM)             
+                      TALLYING  LONG-BDASEPNOM(I-BDASEPNOM)
+                      FOR CHARACTERS BEFORE INITIAL " "                         
+               ADD 1 TO I-BDASEPNOM    
+             END-PERFORM.                                                       
+ENES01       PERFORM 1111-RECUPERAR-EÑES.                               RMB0002
+ENES01 1111-RECUPERAR-EÑES.                                             RMB0002
+REMARK**********************************************************************
+REMARK*1111-RECUPERAR-EÑES.
+REMARK*    SE DETERMINAN APELLIDOS QUE DEBERIAN TENER "Ñ" PERO EL 
+REMARK*    SUSCRIPTOR MANDO ESPACIO : QUI ONES,LONDO O,NI O ETC.....
+REMARK*    SE UNEN LAS PARTICULAR Y SE RECONSTRUYE LA "Ñ"            
+REMARK**********************************************************************
+ENES01       MOVE 1 TO I-BDASEPNOM                                      RMB0002
+ENES01       PERFORM UNTIL A-BDASEPNOM(I-BDASEPNOM) = SPACES            RMB0002
+ENES01         MOVE LONG-BDASEPNOM(I-BDASEPNOM) TO J-BDASEPNOM          RMB0002
+ENES01         IF A-BDASEPNOM(I-BDASEPNOM)(J-BDASEPNOM:1) =             RMB0002
+ENES01            "A" OR "E" OR "I" OR "O" OR "U"                       RMB0002
+ENES01            IF A-BDASEPNOM(I-BDASEPNOM + 1)(1:1) =                RMB0002
+ENES01               "A" OR "E" OR "I" OR "O" OR "U"                    RMB0002
+ENES01               MOVE SPACES TO LLAVE-BDANOM                        RMB0002
+ENES01               STRING A-BDASEPNOM(I-BDASEPNOM)                    RMB0002
+ENES01                                         DELIMITED BY "  ",       RMB0002
+ENES01                      "Ñ"                DELIMITED BY SIZE,       RMB0002
+ENES01                      A-BDASEPNOM(I-BDASEPNOM + 1)                RMB0002
+ENES01                                         DELIMITED BY "  "        RMB0002
+ENES01               INTO LLAVE-BDANOM                                  RMB0002
+ENES01               READ BDANOM                                        RMB0002
+ENES01                 NOT INVALID KEY                                  RMB0002
+ENES01                     MOVE LLAVE-BDANOM TO A-BDASEPNOM(I-BDASEPNOM)RMB0002
+ENES01                     COMPUTE LONG-BDASEPNOM(I-BDASEPNOM)  =       RMB0002
+ENES01                             LONG-BDASEPNOM(I-BDASEPNOM)      +   RMB0002
+ENES01                             LONG-BDASEPNOM(I-BDASEPNOM + 1)  +  1RMB0002
+ENES01                     MOVE "X" TO A-BDASEPNOM(I-BDASEPNOM + 1)     RMB0002
+ENES01                     MOVE 1   TO LONG-BDASEPNOM(I-BDASEPNOM + 1)  RMB0002
+ENES01               END-READ                                           RMB0002
+ENES01            END-IF                                                RMB0002
+ENES01         END-IF                                                   RMB0002
+ENES01         ADD 1 TO I-BDASEPNOM                                     RMB0002
+ENES01       END-PERFORM.                                               RMB0002
+       1120-AGRUPAR-BDASEPNOM.        
+      ******************************************************************        
+      *    SE SEPARAN LAS PARTICULAS QUITANDO "EL" "LA" "LOS" "DEL" ETC         
+      *    PARA DEJAR ESTAS "PURAS". SE VALIDA UNA LONGITUD MINIMA Y            
+      *    MAXIMA                                                               
+      ******************************************************************        
+           INITIALIZE V-FINAL-BDASEPNOM.  
+           MOVE 1 TO I-BDASEPNOM.        
+           MOVE 0 TO J-BDASEPNOM.       
+           PERFORM UNTIL A-BDASEPNOM(I-BDASEPNOM) = SPACES   
+             COMPUTE K1-BDASEPNOM = I-BDASEPNOM + 1      
+             COMPUTE K2-BDASEPNOM = I-BDASEPNOM + 2     
+             IF A-BDASEPNOM(I-BDASEPNOM) = 
+                    "VIUDA" OR "VDA" OR "DE" OR "DEL" OR "LA"          
+                    OR "DELA" OR "EL" OR "VAN" OR "Y" OR "LOS" OR "LAS"         
+                    OR "MC" OR "MAC" OR "VON"                                   
+                IF A-BDASEPNOM(I-BDASEPNOM) = ("VIUDA" OR "VDA")  
+                   PERFORM 1120-CASO-VIUDA-BDASEPNOM   
+                ELSE                                                            
+                   IF A-BDASEPNOM(I-BDASEPNOM) = "DE"            
+                      PERFORM 1120-CASO-DE-BDASEPNOM  
+                   ELSE                                                         
+                      PERFORM 1120-CASO-OTROS-BDASEPNOM 
+                   END-IF                                                       
+                END-IF                                                          
+             ELSE                                                               
+                IF LONG-BDASEPNOM(I-BDASEPNOM) >= 3 AND <= 16   
+                   ADD 1 TO J-BDASEPNOM                
+                   MOVE A-BDASEPNOM(I-BDASEPNOM) TO 
+                        PARTICULA-BDASEPNOM(J-BDASEPNOM)                        
+                END-IF                                                          
+             END-IF                                                             
+             ADD 1 TO I-BDASEPNOM                     
+           END-PERFORM.                                                         
+           MOVE J-BDASEPNOM    TO NUM-PARTES-BDASEPNOM.                                       
+       1120-CASO-VIUDA-BDASEPNOM.                    
+      ******************************************************************        
+      *1120-CASO-VIUDA-BDASEPNOM.                   
+      *    SE EXAMINAN LOS CASOS PARA CUANDO EXISTE "VIUDA" EN LA CADENA        
+      ******************************************************************        
+           IF A-BDASEPNOM(K1-BDASEPNOM) = "DE" AND 
+              A-BDASEPNOM(K2-BDASEPNOM) = "LA"                         
+              MOVE "VIUDA DE LA" TO ADJETIVO-AUX-BDASEPNOM   
+              ADD 3 TO I-BDASEPNOM                          
+           ELSE                                                                 
+              IF A-BDASEPNOM(K1-BDASEPNOM) = "DE" AND 
+                 (A-BDASEPNOM(K2-BDASEPNOM) = "EL" OR "LOS" OR "DEL" )
+                 IF A-BDASEPNOM(K2-BDASEPNOM) = "EL"    
+                    MOVE "VIUDA DE EL" TO ADJETIVO-AUX-BDASEPNOM 
+                 END-IF                                                         
+                 IF A-BDASEPNOM(K2-BDASEPNOM) = "LOS"  
+                    MOVE "VIUDA DE LOS" TO ADJETIVO-AUX-BDASEPNOM 
+                 END-IF                                                         
+                 IF A-BDASEPNOM(K2-BDASEPNOM) = "EL"  
+                    MOVE "VIUDA DE DEL" TO ADJETIVO-AUX-BDASEPNOM 
+                 END-IF                                                         
+                 ADD 3 TO I-BDASEPNOM                            
+              ELSE                                                              
+                 IF A-BDASEPNOM(K1-BDASEPNOM) = "DEL"                         
+                    MOVE "VIUDA DEL" TO ADJETIVO-AUX-BDASEPNOM 
+                    ADD 2 TO I-BDASEPNOM                      
+                 ELSE                                                           
+                    IF A-BDASEPNOM(K1-BDASEPNOM) = "DE"                                       
+                       MOVE "VIUDA DE" TO ADJETIVO-AUX-BDASEPNOM 
+                       ADD 2 TO I-BDASEPNOM                     
+                    ELSE                                                        
+                       MOVE "VIUDA " TO ADJETIVO-AUX-BDASEPNOM 
+                       ADD 1 TO I-BDASEPNOM                   
+                    END-IF                                                      
+                 END-IF                                                         
+              END-IF                                                            
+           END-IF.                                                              
+           PERFORM 1121-LLENAR-COMPLEX-BDASEPNOM.    
+
+       1120-CASO-DE-BDASEPNOM.                     
+      ******************************************************************        
+      *1120-CASO-DE-BDASEPNOM.                    
+      *    SE EXAMINAN LOS CASOS PARA CUANDO EXISTE EL "DE" EN LA CADENA        
+      ******************************************************************        
+           IF A-BDASEPNOM(K1-BDASEPNOM) = "LA"       
+              MOVE "DE LA" TO ADJETIVO-AUX-BDASEPNOM 
+              ADD 2 TO I-BDASEPNOM                  
+           ELSE                                                                 
+              IF A-BDASEPNOM(K1-BDASEPNOM) = "LOS"  
+                 MOVE "DE LOS" TO ADJETIVO-AUX-BDASEPNOM  
+                 ADD 2 TO I-BDASEPNOM                    
+              ELSE                                                              
+                 IF A-BDASEPNOM(K1-BDASEPNOM) = "LAS"  
+                    MOVE "DE LAS" TO ADJETIVO-AUX-BDASEPNOM 
+                    ADD 2 TO I-BDASEPNOM                   
+                 ELSE                                                           
+                    MOVE "DE" TO ADJETIVO-AUX-BDASEPNOM  
+                    ADD 1 TO I-BDASEPNOM                 
+                 END-IF                                                         
+              END-IF                                                            
+           END-IF.                                                              
+           PERFORM 1121-LLENAR-COMPLEX-BDASEPNOM.       
+ 
+       1120-CASO-OTROS-BDASEPNOM.                      
+      ******************************************************************        
+      *1120-CASO-OTROS-BDASEPNOM.                                                      
+      *    SE PROCEDE A LLENAR LA TABLA DE GRUPOS DE PARTICULAS EXCLUYEN        
+      *    ALGUNAS POR SU LONGITUD "RARA"                                       
+      ******************************************************************        
+           MOVE A-BDASEPNOM(I-BDASEPNOM) TO ADJETIVO-AUX-BDASEPNOM. 
+           ADD 1 TO I-BDASEPNOM                      
+           PERFORM 1121-LLENAR-COMPLEX-BDASEPNOM.   
+
+       1121-LLENAR-COMPLEX-BDASEPNOM.              
+      ******************************************************************        
+      *1121-LLENAR-COMPLEX-BDASEPNOM.             
+      *    SE PROCEDE A LLENAR LA TABLA DE GRUPOS DE PARTICULAS EXCLUYEN        
+      *    ALGUNAS POR SU LONGITUD "RARA"                                       
+      ******************************************************************        
+           IF LONG-BDASEPNOM(I-BDASEPNOM) >= 3 AND <= 16 
+                                            *> PARTE DESPUES DE ARTICULOS
+              ADD 1 TO J-BDASEPNOM               
+              MOVE ADJETIVO-AUX-BDASEPNOM TO 
+                   ADJETIVO-BDASEPNOM(J-BDASEPNOM)
+              MOVE A-BDASEPNOM(I-BDASEPNOM) TO 
+                   PARTICULA-BDASEPNOM(J-BDASEPNOM)          
+           END-IF.                                                              
+
+       1130-BUSCAR-EN-TABLAS-BDASEPNOM.                     
+      ******************************************************************        
+      *1130-BUSCAR-EN-TABLAS-BDASEPNOM.                    
+      *    SE PROCEDE A BUSCAR EN LA TABLA INDEXADA BDANOM LAS PARTICULA        
+      *    PARA HALLAR SU PROBABILIDAD DE SER UN NOMBRE                         
+      ******************************************************************        
+           MOVE 1 TO I-BDASEPNOM.                         
+           PERFORM UNTIL PARTICULA-BDASEPNOM(I-BDASEPNOM) = SPACES 
+              INITIALIZE LLAVE-BDANOM                                           
+              MOVE 0 TO EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM)      
+              IF ADJETIVO-BDASEPNOM(I-BDASEPNOM) <> SPACES       
+                 STRING ADJETIVO-BDASEPNOM(I-BDASEPNOM) 
+                         DELIMITED BY "  ",                   
+                        " "                DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(I-BDASEPNOM) 
+                         DELIMITED BY "  "                    
+                 INTO LLAVE-BDANOM                                              
+                 READ BDANOM                                                    
+                   INVALID KEY                                                  
+                      MOVE 0 TO EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM)
+                   NOT INVALID KEY                                              
+                   COMPUTE TOTAL-PARTICULAS-BDASEPNOM =  
+                     (NOMBRES-BDANOM + APELLIDOS-BDANOM)                        
+                      IF TOTAL-PARTICULAS-BDASEPNOM > 5000 *> OJO   
+                         MOVE 1 TO EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM)
+                      END-IF                                                    
+                 END-READ                                                       
+              END-IF                                               
+              IF EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM) = 0         
+                 MOVE PARTICULA-BDASEPNOM(I-BDASEPNOM) TO LLAVE-BDANOM
+                 READ BDANOM                                                    
+                   INVALID KEY                                                  
+                      MOVE 0 TO EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM) 
+                   NOT INVALID KEY                                              
+                      MOVE 1 TO EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM)
+                  END-READ                                                      
+               END-IF                                                           
+               IF EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM) = 1         
+                  COMPUTE POR-NOM-BDASEPNOM(I-BDASEPNOM) = 
+                          NOMBRES-BDANOM /                   
+                    (NOMBRES-BDANOM + APELLIDOS-BDANOM)                         
+               ELSE                                                             
+                  MOVE 0.3 TO POR-NOM-BDASEPNOM(I-BDASEPNOM)  *> OJO  
+               END-IF                                                           
+               ADD 1 TO I-BDASEPNOM                                  
+           END-PERFORM.                                                         
+
+       1140-EXCLUSIONES-BDASEPNOM.                                  
+      ******************************************************************        
+      *1140-EXCLUSIONES-BDASEPNOM.                                 
+      *    SE PROCEDE A EXAMINAR PARA APLICAR EXCLUSIONES Y FILTRAR             
+      *    NOMBRES "NO TAN NOMBRES" DE LA CADENA DE ENTRADA                     
+      ******************************************************************        
+           MOVE 0 TO EXC-OUTPUT-BDASEPNOM.                        
+           *> SI TIENE UNA SOLA PARTICILA O MAS DE 7  ????????                  
+           IF NUM-PARTES-BDASEPNOM <= 1 OR NUM-PARTES-BDASEPNOM >= 7 
+              MOVE 1 TO EXC-OUTPUT-BDASEPNOM                        
+           END-IF.                                                              
+           *> SI TIENE MENOR DEL 50% DE EXISTENCIA EN LA TABLA ?????            
+           IF EXC-OUTPUT-BDASEPNOM = 0                               
+              MOVE 1 TO I-BDASEPNOM                                 
+              MOVE 0 TO TOT-EXI-BDASEPNOM                          
+              PERFORM UNTIL I-BDASEPNOM > NUM-PARTES-BDASEPNOM    
+                 IF EXISTE-EN-TAB-BDASEPNOM(I-BDASEPNOM) = 1     
+                    ADD 1 TO TOT-EXI-BDASEPNOM                   
+                 END-IF                                                         
+                 ADD 1 TO I-BDASEPNOM                           
+              END-PERFORM                                                       
+              COMPUTE POR-EXI-BDASEPNOM = 
+                      TOT-EXI-BDASEPNOM / NUM-PARTES-BDASEPNOM 
+              IF POR-EXI-BDASEPNOM < 0.5     *> 50% DE EXISTENCIA ????? 
+                 MOVE 1 TO EXC-OUTPUT-BDASEPNOM                        
+              END-IF                                                            
+           END-IF.                                                              
+
+       1150-SEGMENTACION-BDASEPNOM.                          
+      ******************************************************************        
+      *1150-SEGMENTACION-BDASEPNOM.                         
+      *    SE PROCEDE A SEGMENTAR EL PROBLEMA CON BASE AL NUMERO DE             
+      *    PARTICULAS QUE COMPONEN EL NOMBRES                                   
+      ******************************************************************        
+           MOVE 0 TO NODO-BDASEPNOM.                      
+           EVALUATE NUM-PARTES-BDASEPNOM                
+             WHEN 2                                                             
+               PERFORM 1152-SEGMENTO2-BDASEPNOM        
+             WHEN 3                                   
+               PERFORM 1153-SEGMENTO3-BDASEPNOM      
+             WHEN 4                                                             
+               PERFORM 1154-SEGMENTO4-BDASEPNOM     
+             WHEN 5                                                             
+               PERFORM 1155-SEGMENTO5-BDASEPNOM    
+             WHEN ANY                                                           
+               PERFORM 1159-SEGMENTO6-BDASEPNOM   
+           END-EVALUATE.                                                        
+
+       1152-SEGMENTO2-BDASEPNOM.                                
+      ******************************************************************        
+      *1152-SEGMENTO2-BDASEPNOM.                 
+      *    PARA 2 PARTICULAS SE COMPARA LOS EXTREMOS Y                          
+      *    SE MIRAN SUS POSIBILIDADES                                           
+      ******************************************************************        
+           IF POR-NOM-BDASEPNOM(1) > POR-NOM-BDASEPNOM(2)    *>NA 
+              MOVE 1 TO NODO-BDASEPNOM          
+              STRING ADJETIVO-BDASEPNOM(1)  DELIMITED BY "  "    
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(1) DELIMITED BY "  "   
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM                                     
+              STRING ADJETIVO-BDASEPNOM(2)  DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2) DELIMITED BY "  " 
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM   
+           ELSE                                            *>AN                 
+              MOVE 2 TO NODO-BDASEPNOM         
+              STRING ADJETIVO-BDASEPNOM(1)  DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(1) DELIMITED BY "  "
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM    
+              STRING ADJETIVO-BDASEPNOM(2)  DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2) DELIMITED BY "  " 
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM  
+           END-IF.                                                              
+
+       1153-SEGMENTO3-BDASEPNOM.                             
+      ******************************************************************        
+      *1153-SEGMENTO3-BDASEPNOM.                            
+      *    PARA 3 PARTICULAS SE COMPARA SI LOS EXTREMOS SON NOMBRES Y           
+      *    SE MIRAN SUS POSIBILIDADES, DE LO CONTRARIO PARA ESTE CASO           
+      *    SE MIRNA TAMBIEN LAS POSIBILIDADES                                   
+      ******************************************************************        
+      *    AMBOS SON NOMBRES AL PRINCIPIO Y AL FINAL                            
+      *    IF POR-NOM-BDASEPNOM(1) > 0.9 AND POR-NOM-BDASEPNOM(3) > 0.9
+           IF POR-NOM-BDASEPNOM(1) > 0.5 AND 
+              POR-NOM-BDASEPNOM(3) > 0.5
+              PERFORM 1153-SEGMENT3-NANONAA-BDASEPNOM 
+           ELSE                                                                 
+              PERFORM 1153-SEGMENTO3-XNX-BDASEPNOM     
+           END-IF.                                                              
+
+       1153-SEGMENT3-NANONAA-BDASEPNOM. 
+      ******************************************************************        
+      *1153-SEGMENT3-NANoNAA-BDASEPNOM.
+      *    PARA 3 PARTICULAS DONDE LOS EXTREMOS SON NOMBRES SE PROCEDE A        
+      *    EXAMINAR LAS POSIBILIDADES                                           
+      ******************************************************************        
+      *    IF POR-NOM-BDASEPNOM(2) > 0.9  
+           IF POR-NOM-BDASEPNOM(2) > 0.5 
+              MOVE 1 TO NODO-BDASEPNOM                             *> NNA
+              STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "  
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                  INTO NOMBRE1-OUTPUT-BDASEPNOM                        
+              STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                  INTO NOMBRE2-OUTPUT-BDASEPNOM                       
+              STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  " 
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(3)   DELIMITED BY "  "
+                  INTO PRIAPEL-OUTPUT-BDASEPNOM                      
+           ELSE                                             *> NAA              
+              MOVE 2 TO NODO-BDASEPNOM                              
+              STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "
+                  INTO NOMBRE1-OUTPUT-BDASEPNOM                    
+              STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "  
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                  INTO PRIAPEL-OUTPUT-BDASEPNOM              
+              STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "
+                  " "             DELIMITED BY SIZE,                            
+                  PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                  INTO SEGAPEL-OUTPUT-BDASEPNOM                  
+           END-IF.                                                              
+
+       1153-SEGMENTO3-XNX-BDASEPNOM.                            
+      ******************************************************************        
+      *1153-SEGMENTO3-XNX-BDASEPNOM.                           
+      *    PARA 3 PARTICULAS DONDE LOS EXTREMOS ALGUNO NO ES NOMBRE             
+      *     SE PROCEDE A EXAMINAR LAS POSIBILIDADES                             
+      ******************************************************************        
+      *    IF POR-NOM-BDASEPNOM(2) > 0.9                         
+           IF POR-NOM-BDASEPNOM(2) > 0.5                        
+              IF POR-NOM-BDASEPNOM(1) > POR-NOM-BDASEPNOM(3) *>NNA 
+                 MOVE 3 TO NODO-BDASEPNOM                     
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,          
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM           
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                     INTO NOMBRE2-OUTPUT-BDASEPNOM          
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM         
+              ELSE                                          *> ANN              
+                 MOVE 4 TO NODO-BDASEPNOM                 
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM       
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM      
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                     INTO NOMBRE2-OUTPUT-BDASEPNOM     
+              END-IF                                                            
+           ELSE                                                *>NAA            
+              IF POR-NOM-BDASEPNOM(1) > POR-NOM-BDASEPNOM(3)   
+                 MOVE 5 TO NODO-BDASEPNOM             
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM   
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2)   DELIMITED BY "  "
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM  
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                     INTO SEGAPEL-OUTPUT-BDASEPNOM 
+              ELSE                                             *>AAN            
+                 MOVE 6 TO NODO-BDASEPNOM         
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "  
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM 
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2)   DELIMITED BY "  "
+                     INTO SEGAPEL-OUTPUT-BDASEPNOM
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM    
+              END-IF                                                            
+           END-IF.                                                              
+
+       1154-SEGMENTO4-BDASEPNOM.                     
+      ******************************************************************        
+      *1154-SEGMENTO4-BDASEPNOM.                    
+      *    PARA 4 PARTICULAS SE COMPARA LA MULTIPLICACION DE LAS DOS            
+      *    PRIMERAS CON LAS DE LAS DOS  ULTIMAS Y DE ACUERDO A ESTO             
+      *    SE BUSCAN LAS DIFERENTES POSIBILIDADES                               
+      ******************************************************************        
+           IF POR-NOM-BDASEPNOM(1) * POR-NOM-BDASEPNOM(2) >    
+              POR-NOM-BDASEPNOM(3) * POR-NOM-BDASEPNOM(4)     
+              MOVE 1 TO NODO-BDASEPNOM                             *> NNAA 
+              STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "   
+                  INTO NOMBRE1-OUTPUT-BDASEPNOM                           
+              STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                  INTO NOMBRE2-OUTPUT-BDASEPNOM                          
+              STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "    
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(3)   DELIMITED BY "  "   
+                  INTO PRIAPEL-OUTPUT-BDASEPNOM                         
+              STRING ADJETIVO-BDASEPNOM(4) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(4)   DELIMITED BY "  " 
+                  INTO SEGAPEL-OUTPUT-BDASEPNOM             
+           ELSE                                                                 
+              MOVE 2 TO NODO-BDASEPNOM                             *> AANN             
+              STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "  
+                  INTO PRIAPEL-OUTPUT-BDASEPNOM              
+              STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(2)   DELIMITED BY "  "  
+                  INTO SEGAPEL-OUTPUT-BDASEPNOM              
+              STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                  INTO NOMBRE1-OUTPUT-BDASEPNOM             
+              STRING ADJETIVO-BDASEPNOM(4) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(4)   DELIMITED BY "  "
+                  INTO NOMBRE2-OUTPUT-BDASEPNOM         
+           END-IF.                                                              
+
+       1155-A-ENCADENAR-BDASEPNOM.                      
+      **************************************************************            
+      *1155-A-ENCADENAR-BDASEPNOM.                         
+      *    RUTINA QUE ENCADENA DOS PARTICULAS EN UN SOLO ELEMENTO               
+      **************************************************************            
+           IF ADJETIVO-BDASEPNOM(J-BDASEPNOM) <> SPACES   
+              STRING ADJETIVO-BDASEPNOM(I-BDASEPNOM) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(I-BDASEPNOM)   DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                  ADJETIVO-BDASEPNOM(J-BDASEPNOM) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(J-BDASEPNOM)   DELIMITED BY "  "
+                  INTO NOMBRE-AUX-BDASEPNOM            
+           ELSE                                                                 
+              STRING ADJETIVO-BDASEPNOM(I-BDASEPNOM) DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(I-BDASEPNOM)   DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                  PARTICULA-BDASEPNOM(J-BDASEPNOM)   DELIMITED BY "  "
+                  INTO NOMBRE-AUX-BDASEPNOM           
+           END-IF.                                                              
+
+       1155-SEGMENTO5-BDASEPNOM.                     
+      ******************************************************************        
+      *1155-SEGMENTO5-BDASEPNOM.                                                       
+      *    PARA 5 PARTICULAS SE COMPARA LA MULTIPLICACION DE LAS TRES           
+      *    PRIMERAS CON LAS DE LAS DOS  ULTIMAS Y DE ACUERDO A ESTO             
+      *    SE BUSCAN LAS DIFERENTES POSIBILIDADES                               
+      ******************************************************************        
+           IF POR-NOM-BDASEPNOM(1) * POR-NOM-BDASEPNOM(2)  >         
+              POR-NOM-BDASEPNOM(4) * POR-NOM-BDASEPNOM(5)           
+              IF POR-NOM-BDASEPNOM(3) > 0.5                    *>NNNA        
+                 MOVE 1 TO NODO-BDASEPNOM           
+                 MOVE 1 TO I-BDASEPNOM             
+                 MOVE 2 TO J-BDASEPNOM            
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM  
+                 MOVE NOMBRE-AUX-BDASEPNOM TO NOMBRE1-OUTPUT-BDASEPNOM
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "   
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  "  
+                     INTO NOMBRE2-OUTPUT-BDASEPNOM                   
+                 STRING ADJETIVO-BDASEPNOM(4) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,     
+                     PARTICULA-BDASEPNOM(4)   DELIMITED BY "  " 
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM                  
+                 STRING ADJETIVO-BDASEPNOM(5) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(5)   DELIMITED BY "  "   
+                     INTO SEGAPEL-OUTPUT-BDASEPNOM                 
+              ELSE                                                 *>NNA        
+                 MOVE 2 TO NODO-BDASEPNOM                         
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "  
+                       INTO NOMBRE1-OUTPUT-BDASEPNOM             
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(2)   DELIMITED BY "  "
+                       INTO NOMBRE2-OUTPUT-BDASEPNOM            
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM             
+                 MOVE 4 TO I-BDASEPNOM                        
+                 MOVE 5 TO J-BDASEPNOM                       
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM         
+                 MOVE NOMBRE-AUX-BDASEPNOM TO SEGAPEL-OUTPUT-BDASEPNOM
+              END-IF                                                            
+           ELSE                                                                 
+              IF POR-NOM-BDASEPNOM(3) > 0.5                    *>AANNN         
+                 MOVE 3 TO NODO-BDASEPNOM                            
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM                  
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(2)   DELIMITED BY "  "
+                     INTO SEGAPEL-OUTPUT-BDASEPNOM                 
+                 STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(3)   DELIMITED BY "  "
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM                
+                 MOVE 4 TO I-BDASEPNOM                           
+                 MOVE 5 TO J-BDASEPNOM                          
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM            
+                 MOVE NOMBRE-AUX-BDASEPNOM TO NOMBRE2-OUTPUT-BDASEPNOM
+              ELSE                                           *>AAANN            
+                 MOVE 4 TO NODO-BDASEPNOM                     
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(1)   DELIMITED BY "  "  
+                     INTO PRIAPEL-OUTPUT-BDASEPNOM                   
+                 MOVE 2 TO I-BDASEPNOM                              
+                 MOVE 3 TO J-BDASEPNOM                             
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM               
+                 MOVE NOMBRE-AUX-BDASEPNOM TO SEGAPEL-OUTPUT-BDASEPNOM
+                 STRING ADJETIVO-BDASEPNOM(4) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(4)   DELIMITED BY "  "
+                     INTO NOMBRE1-OUTPUT-BDASEPNOM                   
+                 STRING ADJETIVO-BDASEPNOM(5) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(5)   DELIMITED BY "  " 
+                     INTO NOMBRE2-OUTPUT-BDASEPNOM                  
+              END-IF                                                            
+           END-IF.                                                              
+
+       1159-SEGMENTO6-BDASEPNOM.                                   
+      ******************************************************************        
+      *1159-SEGMENTO6-BDASEPNOM.                                  
+      *    PARA SEIS PARTICULAS SE COMAPARAn LA PROBABILIDAD DE NOMBRE D        
+      *    LAS DOS PRIMERAS CON LAS DOS ULTIMAS. DE ACUERDO A ESTO SE VA        
+      *    COLOCANDO LAS DIFERENTES POSIBILIDADES                               
+      ******************************************************************        
+           IF POR-NOM-BDASEPNOM(1) * POR-NOM-BDASEPNOM(2)  >   
+              POR-NOM-BDASEPNOM(5) * POR-NOM-BDASEPNOM(6)     
+              IF POR-NOM-BDASEPNOM(3) > 0.5                  
+                 IF POR-NOM-BDASEPNOM(4) > 0.5                *>NNNNAA         
+                    MOVE 1 TO NODO-BDASEPNOM                     
+                    MOVE 1 TO I-BDASEPNOM                       
+                    MOVE 2 TO J-BDASEPNOM                      
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM        
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE1-OUTPUT-BDASEPNOM 
+                    MOVE 3 TO I-BDASEPNOM  
+                    MOVE 4 TO J-BDASEPNOM 
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM  
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE2-OUTPUT-BDASEPNOM                     
+                    STRING ADJETIVO-BDASEPNOM(5) DELIMITED BY "  "  
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(5)   DELIMITED BY "  " 
+                        INTO PRIAPEL-OUTPUT-BDASEPNOM     
+                    STRING ADJETIVO-BDASEPNOM(6) DELIMITED BY "  "
+                        " "             DELIMITED BY SIZE,                      
+                        PARTICULA-BDASEPNOM(6)   DELIMITED BY "  "
+                        INTO SEGAPEL-OUTPUT-BDASEPNOM    
+                 ELSE                                         *>NNNAAA        
+                    MOVE 2 TO NODO-BDASEPNOM            
+                    MOVE 1 TO I-BDASEPNOM              
+                    MOVE 2 TO J-BDASEPNOM             
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE1-OUTPUT-BDASEPNOM                     
+                    STRING ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "  
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(3)   DELIMITED BY "  " 
+                        INTO NOMBRE2-OUTPUT-BDASEPNOM  
+                    STRING ADJETIVO-BDASEPNOM(4) DELIMITED BY "  " 
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(4)   DELIMITED BY "  " 
+                        INTO PRIAPEL-OUTPUT-BDASEPNOM 
+                    MOVE 5 TO I-BDASEPNOM            
+                    MOVE 6 TO J-BDASEPNOM           
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM 
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         SEGAPEL-OUTPUT-BDASEPNOM                     
+                 END-IF                                                         
+              ELSE                                                 *>NNA        
+                 MOVE 3 TO NODO-BDASEPNOM 
+                 STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                       INTO NOMBRE1-OUTPUT-BDASEPNOM     
+                 STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  "   
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                       INTO NOMBRE2-OUTPUT-BDASEPNOM    
+                       MOVE 3 TO I-BDASEPNOM           
+                       MOVE 4 TO J-BDASEPNOM          
+                       PERFORM 1155-A-ENCADENAR-BDASEPNOM 
+                       MOVE NOMBRE-AUX-BDASEPNOM TO 
+                            PRIAPEL-OUTPUT-BDASEPNOM                  
+                 STRING ADJETIVO-BDASEPNOM(5) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                     PARTICULA-BDASEPNOM(5)   DELIMITED BY "  " 
+                     ADJETIVO-BDASEPNOM(6) DELIMITED BY "  "   
+                        " "             DELIMITED BY SIZE,                      
+                     PARTICULA-BDASEPNOM(6)   DELIMITED BY "  " 
+                     INTO SEGAPEL-OUTPUT-BDASEPNOM 
+              END-IF                                                            
+           ELSE                                                                 
+              IF POR-NOM-BDASEPNOM(3) > 0.5                    
+                 IF POR-NOM-BDASEPNOM(4) > 0.5                  *>AANNNN         
+                    MOVE 4 TO NODO-BDASEPNOM      
+                    STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                        INTO PRIAPEL-OUTPUT-BDASEPNOM   
+                    STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                        PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                        INTO SEGAPEL-OUTPUT-BDASEPNOM  
+                    MOVE 3 TO I-BDASEPNOM             
+                    MOVE 4 TO J-BDASEPNOM            
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM 
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE1-OUTPUT-BDASEPNOM                     
+                    MOVE 5 TO I-BDASEPNOM   
+                    MOVE 6 TO J-BDASEPNOM  
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM 
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE2-OUTPUT-BDASEPNOM                     
+                 ELSE                                           *>AAANNN        
+                    MOVE 5 TO NODO-BDASEPNOM    
+                    STRING ADJETIVO-BDASEPNOM(1) DELIMITED BY "  " 
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(1)   DELIMITED BY "  " 
+                        INTO PRIAPEL-OUTPUT-BDASEPNOM    
+                    STRING ADJETIVO-BDASEPNOM(2) DELIMITED BY "  " 
+                        " "             DELIMITED BY SIZE,                      
+                        PARTICULA-BDASEPNOM(2)   DELIMITED BY "  " 
+                        ADJETIVO-BDASEPNOM(3) DELIMITED BY "  "   
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(3)   DELIMITED BY "  "
+                        INTO SEGAPEL-OUTPUT-BDASEPNOM   
+                    MOVE 4 TO I-BDASEPNOM              
+                    MOVE 5 TO J-BDASEPNOM             
+                    PERFORM 1155-A-ENCADENAR-BDASEPNOM 
+                    MOVE NOMBRE-AUX-BDASEPNOM TO 
+                         NOMBRE1-OUTPUT-BDASEPNOM                     
+                    STRING ADJETIVO-BDASEPNOM(6) DELIMITED BY "  "
+                           " "             DELIMITED BY SIZE,                   
+                        PARTICULA-BDASEPNOM(6)   DELIMITED BY "  "
+                        INTO NOMBRE2-OUTPUT-BDASEPNOM     
+                 END-IF                                                         
+              ELSE                                                 *>AAA        
+                 MOVE 6 TO NODO-BDASEPNOM                
+                 MOVE 1 TO I-BDASEPNOM                  
+                 MOVE 2 TO J-BDASEPNOM                 
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM   
+                 MOVE NOMBRE-AUX-BDASEPNOM TO PRIAPEL-OUTPUT-BDASEPNOM
+                 MOVE 3 TO I-BDASEPNOM                               
+                 MOVE 4 TO J-BDASEPNOM                              
+                 PERFORM 1155-A-ENCADENAR-BDASEPNOM                
+                 MOVE NOMBRE-AUX-BDASEPNOM TO SEGAPEL-OUTPUT-BDASEPNOM
+                 STRING ADJETIVO-BDASEPNOM(5) DELIMITED BY "  "  
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(5)   DELIMITED BY "  "
+                       INTO NOMBRE1-OUTPUT-BDASEPNOM                 
+                 STRING ADJETIVO-BDASEPNOM(6) DELIMITED BY "  " 
+                     " "             DELIMITED BY SIZE,                         
+                       PARTICULA-BDASEPNOM(6)   DELIMITED BY "  "
+                       INTO NOMBRE2-OUTPUT-BDASEPNOM                
+              END-IF                                                            
+           END-IF.                                                              
+
+       1160-ARMADO-BDASEPNOM.                                   
+      ******************************************************************        
+      *1160-ARMADO-BDASEPNOM.                                  
+      *    SE ELIMINA EL PRIMER CARACTER EN BLANCO EN CASO DE QUE ESTE          
+      *    EXISTA, SE CONCATENAN LOS DOS NOMBRES EN UNO SOLO                    
+      ******************************************************************        
+           IF NOMBRE1-OUTPUT-BDASEPNOM <> SPACES AND               
+              NOMBRE1-OUTPUT-BDASEPNOM(1:1) = " "          
+              MOVE NOMBRE1-OUTPUT-BDASEPNOM TO NOMBRE-AUX-BDASEPNOM
+              MOVE NOMBRE-AUX-BDASEPNOM(2:) TO NOMBRE1-OUTPUT-BDASEPNOM  
+           END-IF                                                               
+           IF NOMBRE2-OUTPUT-BDASEPNOM <> SPACES AND             
+              NOMBRE2-OUTPUT-BDASEPNOM(1:1) = " "           
+              MOVE NOMBRE2-OUTPUT-BDASEPNOM TO NOMBRE-AUX-BDASEPNOM
+              MOVE NOMBRE-AUX-BDASEPNOM(2:) TO NOMBRE2-OUTPUT-BDASEPNOM  
+           END-IF                                                               
+           IF PRIAPEL-OUTPUT-BDASEPNOM <> SPACES AND             
+              PRIAPEL-OUTPUT-BDASEPNOM(1:1) = " "            
+              MOVE PRIAPEL-OUTPUT-BDASEPNOM TO NOMBRE-AUX-BDASEPNOM
+              MOVE NOMBRE-AUX-BDASEPNOM(2:) TO PRIAPEL-OUTPUT-BDASEPNOM  
+           END-IF                                                               
+           IF SEGAPEL-OUTPUT-BDASEPNOM <> SPACES AND             
+              SEGAPEL-OUTPUT-BDASEPNOM(1:1) = " "             
+              MOVE SEGAPEL-OUTPUT-BDASEPNOM TO NOMBRE-AUX-BDASEPNOM 
+              MOVE NOMBRE-AUX-BDASEPNOM(2:) TO SEGAPEL-OUTPUT-BDASEPNOM   
+           END-IF.                                                              
+           STRING NOMBRE1-OUTPUT-BDASEPNOM DELIMITED BY "  ",     
+                  " "               DELIMITED BY SIZE,                          
+                  NOMBRE2-OUTPUT-BDASEPNOM DELIMITED BY "  "     
+               INTO NOMBRES-OUTPUT-BDASEPNOM.                                          

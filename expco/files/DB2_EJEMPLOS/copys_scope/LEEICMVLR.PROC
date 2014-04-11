@@ -1,0 +1,1769 @@
+      * LEEICMVLR.PROC.v.0008
+REMARK****************************************************************
+REMARK* ********************************************************************
+REMARK* RUTINA CREADA PARA EXTRAER INFORMACION COMPLEMENTARIA DE LOS ARCHIVOS
+REMARK* ICMVLR A PARTIR DE LA LLAVE DEL ICMCRE O EL ICMCHK SEGUN CORRESPONDA
+REMARK* CAMPOS DE ENTRADA ---> IND-ARCHIVO-LEEICMVLR
+REMARK*                        1 ICMCRE
+REMARK*                        2 ICMCHK
+REMARK* CAMPOS DE SALIDA  ---> VEC-VAL-NV-LEEICMVLR VEC-VAL-VN-LEEICMVLR
+REMARK******************************************************************
+REMARK*                       LOG DE MODIFICACIONES                    *
+REMARK******************************************************************
+REMARK* EAL002      * ICMVLR - MODIFICACION PARA VERIFICACION DE       *
+REMARK* E. ALVAREZ  *          EXISTENCIA DE ARCHIVOS ICMVLR PREVIO A  *
+REMARK* AUG./2009   *          DEFINIR EL TIPO DE APERTURA             *
+REMARK* INTERSCHEMES*                                                  *
+REMARK******************************************************************
+REMARK* GJC003      * FECNV1 - CUANDO HAY NOVEDAD 45 O 47 SE VALIDA QUE*
+REMARK* G.JIMENEZ   *          LA FACHA DE VALORES Y/O DE SITUACION SEA*
+REMARK* SEPT/2009   *          MAYOR QUE CEROS. EN OTRO CASO TOMA LA DE*
+REMARK*             *          NOVEDAD PARA LEER ARCHIVO ICMVLR        *
+REMARK******************************************************************
+REMARK* EHA004      * CAMCHK - SE REALIZAN MODIFICACIONES PARA QUE     *
+REMARK* E. ALVAREZ  *          LAS POSICIONES CARGADAS DEL ICMVLR SEAN *
+REMARK* JAN/2010    *          IGUALES A LAS INFORMADAS EN EL ICMCRE   *
+REMARK*             *        - SE MODIFICA LA FECHA EN LAS CUENTAS     *
+REMARK*             *          INACTIVAS DEL ICMCHK.                   *
+REMARK******************************************************************
+REMARK* EHA0005     * CAMOPT - SE REALIZAN MODIFICACIONES PARA SACAR   *
+REMARK* E. ALVAREZ  *          LA LOGICA INCLUIDA EN LOS READ DE LOS   *
+REMARK* FEB/2010    *          ARCHIVOS DE VALORES.                    *
+REMARK******************************************************************
+REMARK* EHA0006     * CAMPAR - SE REALIZAN MODIFICACIONES PARA RECIBIR *
+REMARK* E. ALVAREZ  *          POR PARAMETRO EL NUMERO DE MESES A LEER *
+REMARK* MAR/2010    * EHAXXX - SE MODIFICAN LAS CONDICIONES PARA       *
+REMARK*             *         OBLIGACIONES CON NOVEDAD 45 Y 47 (DD)(CC)*
+REMARK******************************************************************
+REMARK* EHA0007     * MODPER - SE REALIZAN MODIFICACIONES PARA CALCULO *
+REMARK* E. ALVAREZ  *          DE PERDONES EN VECTORES.                *
+REMARK* SEP/2010    *        - SE ELIMINAN PARRAFOS COMENTARIADOS      *
+REMARK******************************************************************
+REMARK* CAV0008     * INFHIS - SE REDEFINEN CAMPOS DE CTAS CTES PARA   *
+REMARK* C. VELASCO. *          GUARDAR INFORMACION HISTORICA DE CARTERA*
+REMARK* 10/OCT/2011.*          Y SE ADICIONA VECTOR DE CALIFICACIONES. *
+REMARK*             *          SE PUEDE DAR POR PARAMETRO FECHA SIST.  *
+REMARK*             *          EN FECHA-SIS-LEEICMVLR (AAAAMMDD).      *
+REMARK******************************************************************
+
+       1000-LEE-VALORES-LEEICMVLR.
+           MOVE 0 TO SW-LECTURA-LEEICMVLR
+           INITIALIZE VALORES-NV-LEEICMVLR
+                      VALORES-VN-LEEICMVLR
+INFHIS     IF IND-ARCHIVO-LEEICMVLR = 2                                 CAV0008
+INFHIS        PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL       CAV0008
+INFHIS                IND-TMP-LEEICMVLR > 48                            CAV0008
+INFHIS           MOVE ZEROS TO                                          CAV0008
+INFHIS                VAL-CHEQ-PAGADOS-NV-LEEICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                IND-CHEQ-PAGADOS-NV-LEEICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                CANT-CHEQ-PAG-NV-LEEICMVLR(IND-TMP-LEEICMVLR)     CAV0008
+INFHIS                IND-CANT-CHE-PA-NV-LEEICMVLR(IND-TMP-LEEICMVLR)   CAV0008
+INFHIS                VAL-CHEQ-PAGADOS-VN-LEEICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                IND-CHEQ-PAGADOS-VN-LEEICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                CANT-CHEQ-PAG-VN-LEEICMVLR(IND-TMP-LEEICMVLR)     CAV0008
+INFHIS                IND-CANT-CHE-PA-VN-LEEICMVLR(IND-TMP-LEEICMVLR)   CAV0008
+INFHIS        END-PERFORM                                               CAV0008
+INFHIS     END-IF                                                       CAV0008
+INFHIS     DISPLAY VAR-AMBIENTE-LEEICMVLR UPON ENVIRONMENT-NAME         CAV0008
+INFHIS     ACCEPT VAR-AMBIENTE-LEEICMVLR FROM ENVIRONMENT-VALUE         CAV0008
+INFHIS     MOVE VAR-AMBIENTE-LEEICMVLR TO FECHA-CONT-LEEICMVLR          CAV0008
+INFHIS     IF FECHA-CONT-LEEICMVLR NUMERIC AND                          CAV0008
+INFHIS        FECHA-CONT-LEEICMVLR NOT = SPACES AND                     CAV0008
+INFHIS        FECHA-CONT-LEEICMVLR NOT = ZEROS                          CAV0008
+INFHIS         MOVE 1 TO SW-FCH-VAR-AMB-LEEICMVLR                       CAV0008
+INFHIS*        DISPLAY "!!!! SE TOMA LA FECHA DE VARIABLE DE AMBIENTE " CAV0008
+INFHIS*                "!!!!  " FECHA-CONT-LEEICMVLR                    CAV0008
+INFHIS     END-IF                                                       CAV0008
+INFHIS     IF SW-FCH-VAR-AMB-LEEICMVLR = 1                              CAV0008
+INFHIS         MOVE FECHA-CONT-LEEICMVLR TO FECHA-SIS-LEEICMVLR         CAV0008
+INFHIS     ELSE                                                         CAV0008
+INFHIS         MOVE FUNCTION CURRENT-DATE TO FECHA-SIS-LEEICMVLR        CAV0008
+INFHIS     END-IF                                                       CAV0008
+           MOVE "ICMVLR-" TO MAES-FILE-WS-LEEICMVLR(1:7)
+           MOVE ANO-SIS-LEEICMVLR   TO MAES-FILE-WS-LEEICMVLR(8:4)
+
+           IF ANO-SIS-LEEICMVLR > MAES-FILE1 AND
+              MAES-FILE1 = SPACES
+              MOVE MAES-FILE-WS-LEEICMVLR(8:4) TO MAES-FILE1
+              PERFORM 2000-REASIGNAR-FS-LEEICMVLR
+ICMVLR        PERFORM 2010-VERIFICAR-APERTURA                           EAL0002
+           ELSE IF ANO-SIS-LEEICMVLR > MAES-FILE1 AND
+                   MAES-FILE1 <> SPACES
+                   CLOSE ICMVLR  ICMVLR2 ICMVLR3 ICMVLR4 ICMVLR5 ICMVLR6
+                   MOVE MAES-FILE-WS-LEEICMVLR(8:4) TO MAES-FILE1
+                   PERFORM 2000-REASIGNAR-FS-LEEICMVLR
+ICMVLR             PERFORM 2010-VERIFICAR-APERTURA                      EAL0002
+                END-IF
+           END-IF
+           PERFORM 3000-LEER-ICMVLR-LEEICMVLR
+           .
+       2000-REASIGNAR-FS-LEEICMVLR.
+      *                       
+           COMPUTE ANO-SIS-LEEICMVLR = ANO-SIS-LEEICMVLR - 1
+              MOVE ANO-SIS-LEEICMVLR TO MAES-FILE2
+           COMPUTE ANO-SIS-LEEICMVLR = ANO-SIS-LEEICMVLR - 1
+              MOVE ANO-SIS-LEEICMVLR TO MAES-FILE3
+           COMPUTE ANO-SIS-LEEICMVLR = ANO-SIS-LEEICMVLR - 1
+              MOVE ANO-SIS-LEEICMVLR TO MAES-FILE4
+           COMPUTE ANO-SIS-LEEICMVLR = ANO-SIS-LEEICMVLR - 1
+              MOVE ANO-SIS-LEEICMVLR TO MAES-FILE5
+           COMPUTE ANO-SIS-LEEICMVLR = ANO-SIS-LEEICMVLR - 1
+              MOVE ANO-SIS-LEEICMVLR TO MAES-FILE6
+           MOVE 1 TO INDICADOR-REASIG-LEEICMVLR.
+      *
+       2010-VERIFICAR-APERTURA.
+ICMVLR******************************************************************EAL0002
+ICMVLR* VERIFICA LA EXISTENCIA DEL ARCHIVO PARA DECIDIR SI ABRIRLO COMO*EAL0002
+ICMVLR* I-O O COMO INPUT                                               *EAL0002
+ICMVLR******************************************************************EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE RES-FILE-DETAILS-ICMVLR    EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR                                        EAL0002
+ICMVLR           CLOSE ICMVLR                                           EAL0002
+ICMVLR           OPEN INPUT ICMVLR                                      EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR                                      EAL0002
+ICMVLR        END-IF                                                    EAL0002
+ICMVLR        INITIALIZE RES-FILE-DETAILS-ICMVLR FILE-RES-CODE-ICMVLR   EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE2 RES-FILE-DETAILS-ICMVLR   EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR2                                       EAL0002
+ICMVLR           CLOSE ICMVLR2                                          EAL0002
+ICMVLR           OPEN INPUT ICMVLR2                                     EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR2                                     EAL0002
+ICMVLR        END-IF                                                    EAL0002
+ICMVLR        INITIALIZE RES-FILE-DETAILS-ICMVLR FILE-RES-CODE-ICMVLR   EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE3 RES-FILE-DETAILS-ICMVLR   EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR3                                       EAL0002
+ICMVLR           CLOSE ICMVLR3                                          EAL0002
+ICMVLR           OPEN INPUT ICMVLR3                                     EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR3                                     EAL0002
+ICMVLR        END-IF                                                    EAL0002
+ICMVLR        INITIALIZE RES-FILE-DETAILS-ICMVLR FILE-RES-CODE-ICMVLR   EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE4 RES-FILE-DETAILS-ICMVLR   EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR4                                       EAL0002
+ICMVLR           CLOSE ICMVLR4                                          EAL0002
+ICMVLR           OPEN INPUT ICMVLR4                                     EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR4                                     EAL0002
+ICMVLR        END-IF                                                    EAL0002
+ICMVLR        INITIALIZE RES-FILE-DETAILS-ICMVLR FILE-RES-CODE-ICMVLR   EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE5 RES-FILE-DETAILS-ICMVLR   EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR5                                       EAL0002
+ICMVLR           CLOSE ICMVLR5                                          EAL0002
+ICMVLR           OPEN INPUT ICMVLR5                                     EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR5                                     EAL0002
+ICMVLR        END-IF                                                    EAL0002
+ICMVLR        INITIALIZE RES-FILE-DETAILS-ICMVLR FILE-RES-CODE-ICMVLR   EAL0002
+ICMVLR        CALL "CBL_CHECK_FILE_EXIST"                               EAL0002
+ICMVLR              USING  MAES-ICMVLR-TITLE6 RES-FILE-DETAILS-ICMVLR   EAL0002
+ICMVLR              GIVING FILE-RES-CODE-ICMVLR                         EAL0002
+ICMVLR        IF FILE-RES-CODE-ICMVLR NOT = 0                           EAL0002
+ICMVLR           OPEN I-O ICMVLR6                                       EAL0002
+ICMVLR           CLOSE ICMVLR6                                          EAL0002
+ICMVLR           OPEN INPUT ICMVLR6                                     EAL0002
+ICMVLR        ELSE                                                      EAL0002
+ICMVLR           OPEN INPUT ICMVLR6                                     EAL0002
+ICMVLR        END-IF.                                                   EAL0002
+ICMVLR*                                                                 EAL0002
+       3000-LEER-ICMVLR-LEEICMVLR.
+           IF IND-ARCHIVO-LEEICMVLR = 1
+CAMPAR        IF NUMMESES-LEEICMVLR = ZEROS                             EHA0006
+CAMPAR           MOVE 12 TO NUMMESES-LEEICMVLR   *>OJO                  EHA0006
+CAMPAR        END-IF                                                    EHA0006
+              MOVE LLAVE-MAES-CREDIT TO LLAVE-MAES-LEEICMVLR
+CAMCHK        PERFORM 3010-LEE-VECTORES-ICMCRE                          EAL0004
+CAMPAR        IF NUMMESES-LEEICMVLR < CONTADOR-POS-LEEICMVLR            EHA0006
+CAMPAR           MOVE NUMMESES-LEEICMVLR TO CONTADOR-POS-LEEICMVLR      EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR*       SE SUMA 1 AL NUMERO SOLICITADO DE VALORES PARA INCLUIR    EHA0006
+CAMPAR*       LOS CORRESPONDIENTES A LA NOVEDAD                         EHA0006
+CAMPAR        ADD 1 TO CONTADOR-POS-LEEICMVLR                           EHA0006
+CAMPAR*                                                                 EHA0006
+                 MOVE FEC-NOVEDAD-ABD07 TO
+                      FEC-NOVEDAD-TEXT-LEEICMVLR 
+                 MOVE FEC-NOVEDAD-TEXT-LEEICMVLR(1:2) TO
+                      FEC-NOVEDAD-R-AUX-LEEICMVLR(1:2)
+                 MOVE FEC-NOVEDAD-TEXT-LEEICMVLR(3:2) TO
+                      FEC-NOVEDAD-R-AUX-LEEICMVLR(5:2)
+                 IF FEC-NOVEDAD-R-AUX-LEEICMVLR(5:2) < 50
+                    MOVE 20          TO FEC-NOVEDAD-R-AUX-LEEICMVLR(3:2)
+                 ELSE
+                    MOVE 19          TO FEC-NOVEDAD-R-AUX-LEEICMVLR(3:2)
+                 END-IF
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR TO
+                      FEC-NOVEDAD-R-LEEICMVLR
+       
+                 MOVE FEC-NOVEDAD-R-LEEICMVLR(1:2) TO
+                      FEC-NOVEDAD-LEEICMVLR(5:2)
+                 MOVE FEC-NOVEDAD-R-LEEICMVLR(3:4) TO
+                      FEC-NOVEDAD-LEEICMVLR(1:4)
+                            
+FECNV1        IF (NOV-REPORT-ABD07 = 45 OR 47) AND                      GJC0003
+FECNV1           (FECHA-ACTUALIZ-VALOR-ABD07 > 0 OR                     GJC0003
+FECNV1            FECHA-SITUACION-ABD07 > 0)                            GJC0003
+                    MOVE FECHA-ACTUALIZ-VALOR-ABD07 TO
+                         FEC-SITUACION-TEXT-LEEICMVLR
+EHAXXX              MOVE NUMMESES-LEEICMVLR TO CONTADOR-POS-LEEICMVLR   EHA0006
+EHAXXX              ADD 1 TO CONTADOR-POS-LEEICMVLR                     EHA0006
+                 MOVE FEC-SITUACION-TEXT-LEEICMVLR TO
+                      FEC-NOVEDAD-R-AUX-LEEICMVLR
+EHAXXX*                                                                 EHA0006
+EHAXXX           MOVE  FEC-NOVEDAD-ABD07         TO  W-F-MMAA-LEEICMVLR EHA0006
+EHAXXX           MOVE  W-F-MMAA-LEEICMVLR(1:2)   TO  W-MES-AUX-LEEICMVLREHA0006
+EHAXXX           MOVE  W-F-MMAA-LEEICMVLR(3:2)   TO  W-ANO-AUX-LEEICMVLREHA0006
+EHAXXX           IF  W-ANO-AUX-LEEICMVLR  <  50                         EHA0006
+EHAXXX             ADD   2000                TO  W-ANO-AUX-LEEICMVLR    EHA0006
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX             ADD   1900                TO  W-ANO-AUX-LEEICMVLR    EHA0006
+EHAXXX           END-IF                                                 EHA0006
+EHAXXX           COMPUTE  W-MESES-NOVEDAD-LEEICMVLR =                   EHA0006
+EHAXXX                (W-ANO-AUX-LEEICMVLR * 12) + W-MES-AUX-LEEICMVLR  EHA0006
+EHAXXX*                                                                 EHA0006
+EHAXXX           COMPUTE  W-MESES-VALORES-LEEICMVLR =                   EHA0006
+EHAXXX                (ANO-NOVEDAD-R-AUX-LEEICMVLR * 12) +              EHA0006
+EHAXXX                                  MES-NOVEDAD-R-AUX-LEEICMVLR     EHA0006
+EHAXXX                                                                  EHA0006
+EHAXXX           COMPUTE  MESES-MIGRADO-LEEICMVLR =                     EHA0006
+EHAXXX           W-MESES-VALORES-LEEICMVLR - W-MESES-NOVEDAD-LEEICMVLR  EHA0006
+EHAXXX           IF MESES-MIGRADO-LEEICMVLR > NUMMESES-LEEICMVLR        EHA0006
+EHAXXX              MOVE NUMMESES-LEEICMVLR TO MESES-MIGRADO-LEEICMVLR  EHA0006
+EHAXXX           END-IF                                                 EHA0006
+EHAXXX           ADD 1 TO MESES-MIGRADO-LEEICMVLR                       EHA0006
+EHAXXX*                                                                 EHA0006
+       
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR TO
+                      FEC-SITUACION-R-LEEICMVLR
+       
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR(3:4) TO
+                      FEC-SITUACION-LEEICMVLR(1:4)
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR(1:2) TO
+                      FEC-SITUACION-LEEICMVLR(5:2)
+                 MOVE 1 TO INDICADOR-VN-LEEICMVLR
+                 MOVE FEC-SITUACION-LEEICMVLR TO FEC-NOVEDAD-LEEICMVLR
+              ELSE
+                 MOVE 0 TO INDICADOR-VN-LEEICMVLR
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR(3:4) TO
+                      FEC-SITUACION-R-LEEICMVLR(1:4)
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR(1:2) TO
+                      FEC-SITUACION-R-LEEICMVLR(5:2)
+                 MOVE FEC-NOVEDAD-LEEICMVLR TO
+                      FEC-SITUACION-LEEICMVLR
+              END-IF
+      *
+              PERFORM 000000-BUSCAR-ARCHIVO-LEEICMVLR
+      *
+                 PERFORM 000000-FIND-MORA-PER-LEEICMVLR
+           ELSE
+              IF IND-ARCHIVO-LEEICMVLR = 2
+                 MOVE LLAVE-MAES-CHECK  TO LLAVE-MAES-LEEICMVLR
+                 
+
+CAMCHK           IF NOV-REPORT-ABD06 <> 9                               EAL0004
+                    MOVE FEC-NOVEDAD-ABD06 TO FEC-NOVEDAD-TEXT-LEEICMVLR
+CAMCHK           ELSE                                                   EAL0004
+CAMCHK              MOVE FECHA-ACTUALIZ-VALOR-ABD06 TO                  EAL0004
+CAMCHK                                        FEC-NOVEDAD-TEXT-LEEICMVLREAL0004
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE FEC-NOVEDAD-TEXT-LEEICMVLR(1:2) TO
+                      FEC-NOVEDAD-R-AUX-LEEICMVLR(1:2)
+                 MOVE FEC-NOVEDAD-TEXT-LEEICMVLR(3:2) TO
+                      FEC-NOVEDAD-R-AUX-LEEICMVLR(5:2)
+                 IF FEC-NOVEDAD-R-AUX-LEEICMVLR(5:2) < 50
+                    MOVE 20          TO FEC-NOVEDAD-R-AUX-LEEICMVLR(3:2)
+                 ELSE
+                    MOVE 19          TO FEC-NOVEDAD-R-AUX-LEEICMVLR(3:2)
+                 END-IF
+                 MOVE FEC-NOVEDAD-R-AUX-LEEICMVLR TO
+                      FEC-NOVEDAD-R-LEEICMVLR
+      *
+                 MOVE FEC-NOVEDAD-R-LEEICMVLR(1:2) TO
+                      FEC-NOVEDAD-LEEICMVLR(5:2)
+                 MOVE FEC-NOVEDAD-R-LEEICMVLR(3:4) TO
+                      FEC-NOVEDAD-LEEICMVLR(1:4)
+      *
+                 PERFORM 000000-BUSCAR-ARCHIVO-LEEICMVLR
+      *
+              END-IF
+           END-IF.
+      *
+CAMCHK 3010-LEE-VECTORES-ICMCRE.                                        EAL0004
+CAMCHK      MOVE 1  TO VALOR-VECTOR-LEEICMVLR                           EAL0004
+CAMCHK      MOVE 12 TO IND-CRE-LEEICMVLR                                EAL0004
+CAMCHK      MOVE ZEROS TO CONTADOR-POS-LEEICMVLR                        EAL0004
+CAMCHK                                                                  EAL0004
+CAMCHK      MOVE VECTOR-HIS-1-ABD07 TO VECTOR-W1-LEEICMVLR              EAL0004
+CAMCHK      MOVE VECTOR-HIS-2-ABD07 TO VECTOR-W2-LEEICMVLR              EAL0004
+CAMCHK      MOVE VECTOR-HIS-3-ABD07 TO VECTOR-W3-LEEICMVLR              EAL0004
+CAMCHK      MOVE VECTOR-HIS-4-ABD07 TO VECTOR-W4-LEEICMVLR              EAL0004
+CAMCHK*                                                                 EAL0004
+CAMCHK      PERFORM UNTIL IND-CRE-LEEICMVLR < 1                         EAL0004
+CAMCHK                 OR VALOR-VECTOR-LEEICMVLR = 0                    EAL0004
+CAMCHK        IF VECTOR-W1-R-LEEICMVLR(IND-CRE-LEEICMVLR) <> 0          EAL0004
+CAMCHK           ADD 1 TO CONTADOR-POS-LEEICMVLR                        EAL0004
+CAMCHK        END-IF                                                    EAL0004
+CAMCHK        MOVE VECTOR-W1-R-LEEICMVLR(IND-CRE-LEEICMVLR)             EAL0004
+CAMCHK             TO VALOR-VECTOR-LEEICMVLR                            EAL0004
+CAMCHK        SUBTRACT 1 FROM IND-CRE-LEEICMVLR                         EAL0004
+CAMCHK      END-PERFORM                                                 EAL0004
+CAMCHK      IF VALOR-VECTOR-LEEICMVLR <> 0                              EAL0004
+CAMCHK         MOVE 12 TO IND-CRE-LEEICMVLR                             EAL0004
+CAMCHK         PERFORM UNTIL IND-CRE-LEEICMVLR < 1                      EAL0004
+CAMCHK                 OR VALOR-VECTOR-LEEICMVLR = 0                    EAL0004
+CAMCHK            IF VECTOR-W2-R-LEEICMVLR(IND-CRE-LEEICMVLR) <> 0      EAL0004
+CAMCHK               ADD 1 TO CONTADOR-POS-LEEICMVLR                    EAL0004
+CAMCHK            END-IF                                                EAL0004
+CAMCHK            MOVE VECTOR-W2-R-LEEICMVLR(IND-CRE-LEEICMVLR)         EAL0004
+CAMCHK                 TO VALOR-VECTOR-LEEICMVLR                        EAL0004
+CAMCHK           SUBTRACT 1 FROM IND-CRE-LEEICMVLR                      EAL0004
+CAMCHK         END-PERFORM                                              EAL0004
+CAMCHK      END-IF                                                      EAL0004
+CAMCHK      IF VALOR-VECTOR-LEEICMVLR <> 0                              EAL0004
+CAMCHK         MOVE 12 TO IND-CRE-LEEICMVLR                             EAL0004
+CAMCHK         PERFORM UNTIL IND-CRE-LEEICMVLR < 1                      EAL0004
+CAMCHK                 OR VALOR-VECTOR-LEEICMVLR = 0                    EAL0004
+CAMCHK           IF VECTOR-W3-R-LEEICMVLR(IND-CRE-LEEICMVLR) <> 0       EAL0004
+CAMCHK              ADD 1 TO CONTADOR-POS-LEEICMVLR                     EAL0004
+CAMCHK           END-IF                                                 EAL0004
+CAMCHK           MOVE VECTOR-W3-R-LEEICMVLR(IND-CRE-LEEICMVLR)          EAL0004
+CAMCHK                TO VALOR-VECTOR-LEEICMVLR                         EAL0004
+CAMCHK           SUBTRACT 1 FROM IND-CRE-LEEICMVLR                      EAL0004
+CAMCHK         END-PERFORM                                              EAL0004
+CAMCHK      END-IF                                                      EAL0004
+CAMCHK      IF VALOR-VECTOR-LEEICMVLR <> 0                              EAL0004
+CAMCHK         MOVE 12 TO IND-CRE-LEEICMVLR                             EAL0004
+CAMCHK         PERFORM UNTIL IND-CRE-LEEICMVLR < 1                      EAL0004
+CAMCHK                 OR VALOR-VECTOR-LEEICMVLR = 0                    EAL0004
+CAMCHK           IF VECTOR-W4-R-LEEICMVLR(IND-CRE-LEEICMVLR) <> 0       EAL0004
+CAMCHK              ADD 1 TO CONTADOR-POS-LEEICMVLR                     EAL0004
+CAMCHK           END-IF                                                 EAL0004
+CAMCHK           MOVE VECTOR-W4-R-LEEICMVLR(IND-CRE-LEEICMVLR)          EAL0004
+CAMCHK                TO VALOR-VECTOR-LEEICMVLR                         EAL0004
+CAMCHK           SUBTRACT 1 FROM IND-CRE-LEEICMVLR                      EAL0004
+CAMCHK         END-PERFORM                                              EAL0004
+CAMCHK      END-IF.                                                     EAL0004
+      *
+       000000-BUSCAR-ARCHIVO-LEEICMVLR.
+CAMOPT        MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                        EHA0005
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE1
+                 INITIALIZE REG-ICMVLR 
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR 
+                 READ ICMVLR  IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR  TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR   TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR  TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR  TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR  TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMPOT                                WS-OFICINA-RADICACION-LEEICMVLR
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO1-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR = 1 AND                 EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK           MOVE ZEROS TO CUOTA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)       EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)   EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR                           CAV0008
+INFHIS                                   (MES-NOVEDAD-R-AUX-LEEICMVLR)  CAV0008
+INFHIS                  CALIFICACION-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*             VAL-CHEQ-PAGADOS-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*                CANT-CHEQ-PAG-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK         MOVE 1 TO V-IND-CUOTA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK              V-IND-SALDO-MORA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                V-IND-VAL-INIC-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-SALDO-DISP-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-MOROSIDAD-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS              V-IND-FECHA-PAGO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS              V-IND-FECHA-LIM-PAGO-ICMVLR                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS            V-IND-CALIFICACION-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*           V-IND-CHEQ-PAGADOS-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CANT-CHEQ-PAG-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             TO VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             TO VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK              ELSE                                                EAL0004
+CAMXXX                 IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK           MOVE ZEROS TO CUOTA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)       EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)   EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR                           CAV0008
+INFHIS                                   (MES-NOVEDAD-R-AUX-LEEICMVLR)  CAV0008
+INFHIS                  CALIFICACION-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS            V-IND-CALIFICACION-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+CAMXXX                 END-IF
+CAMCHK              END-IF                                              EAL0004
+                     MOVE VALORES-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS               MOVE VECTOR-CALIFIC-ICMVLR                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                   VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)CAV0008
+                     MOVE VALORES-ICMVLR(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS               MOVE VECTOR-CALIFIC-ICMVLR                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                   VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+                 
+                 PERFORM 000000-LEER-ARCHIVO2-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO3-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO4-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO5-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO6-LEEICMVLR
+              ELSE
+      *SE COMPARA LA FECHA DE NOVEDAD CON EL SEGUNDO AÑO
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE2
+                 INITIALIZE REG-ICMVLR2              
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR2
+                 READ ICMVLR2 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR2 TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR2  TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR2 TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR2 TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR2 TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR2         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR2   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR2  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMOPT                                WS-OFICINA-RADICACION-LEEICMVLR   EHA0005
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO2-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR2 = 1 AND                EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR2                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR2                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR2                            CAV0008
+INFHIS                               (MES-NOVEDAD-R-AUX-LEEICMVLR) TO   CAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR2                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR2                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR2                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                    MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR2                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                    MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR2                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+                 
+                 PERFORM 000000-LEER-ARCHIVO3-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO4-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO5-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO6-LEEICMVLR
+              ELSE
+      *SE COMPARA LA FECHA DE NOVEDAD CON EL TERCER AÑO
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE3
+                 INITIALIZE REG-ICMVLR3              
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR3
+                 READ ICMVLR3 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR3 TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR3  TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR3 TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR3 TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR3 TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR3         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR3   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR3  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMOPT                                WS-OFICINA-RADICACION-LEEICMVLR   EHA0005
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO3-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR3 = 1 AND                EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR3                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR3                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR3                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR3                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR3                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*              CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR3                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                    MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR3                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                    MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR3                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+                 
+                 PERFORM 000000-LEER-ARCHIVO4-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO5-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO6-LEEICMVLR
+              ELSE
+      *SE COMPARA LA FECHA DE NOVEDAD CON EL CUARTO AÑO
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE4
+                 INITIALIZE REG-ICMVLR4
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR4
+                 READ ICMVLR4 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR4 TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR4  TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR4 TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR4 TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR4 TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR4         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR4   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR4  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMOPT                                WS-OFICINA-RADICACION-LEEICMVLR   EHA0005
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO4-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR4 = 1 AND                EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR4                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK            V-IND-SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR4                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR4                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR4                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR4                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*              CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR4                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                    MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR4                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                    MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR4                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+                 
+                 PERFORM 000000-LEER-ARCHIVO5-LEEICMVLR
+                 
+                 PERFORM 000000-LEER-ARCHIVO6-LEEICMVLR
+              ELSE
+      *SE COMPARA LA FECHA DE NOVEDAD CON EL QUINTO AÑO
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE5
+                 INITIALIZE REG-ICMVLR5
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR5
+                 READ ICMVLR5 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR5 TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR5  TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR5 TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR5 TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR5 TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR5         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR5   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR5  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMOPT                                WS-OFICINA-RADICACION-LEEICMVLR   EHA0005
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO5-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR5 = 1 AND                EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR5                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR5                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR5                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR5                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR5                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR5                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                    MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR5                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                    MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR5                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+                 
+                 PERFORM 000000-LEER-ARCHIVO6-LEEICMVLR
+              ELSE
+      *SE COMPARA LA FECHA DE NOVEDAD CON EL SEXTO AÑO
+              IF ANO-NOVEDAD-R-AUX-LEEICMVLR = MAES-FILE6
+                 INITIALIZE REG-ICMVLR6
+                 MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR6
+                 READ ICMVLR6 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+                 MOVE 1 TO POSICION-NV-LEEICMVLR
+                 MOVE 48 TO POSICION-VN-LEEICMVLR
+                 MOVE TIPO-ID-ICMVLR6 TO TIPO-ID-LEEICMVLR
+CAMOPT                                   WS-TIPO-ID-LEEICMVLR           EHA0005
+                 MOVE NUM-ID-ICMVLR6  TO NUM-ID-LEEICMVLR
+CAMOPT                                   WS-NUM-ID-LEEICMVLR            EHA0005
+                 MOVE COD-SUS-ICMVLR6 TO COD-SUS-LEEICMVLR
+CAMOPT                                   WS-COD-SUS-LEEICMVLR           EHA0005
+                 MOVE COD-CTA-ICMVLR6 TO COD-CTA-LEEICMVLR
+CAMOPT                                   WS-COD-CTA-LEEICMVLR           EHA0005
+                 MOVE NUM-CTA-ICMVLR6 TO NUM-CTA-LEEICMVLR
+CAMOPT                                   WS-NUM-CTA-LEEICMVLR           EHA0005
+                 MOVE CODIGO-DANE-ICMVLR6         TO
+                                                CODIGO-DANE-LEEICMVLR
+CAMOPT                                       WS-CODIGO-DANE-LEEICMVLR   EHA0005
+                 MOVE CIUDAD-RADICACION-ICMVLR6   TO
+                                          CIUDAD-RADICACION-LEEICMVLR
+CAMOPT                                 WS-CIUDAD-RADICACION-LEEICMVLR   EHA0005
+                 MOVE OFICINA-RADICACION-ICMVLR6  TO
+                                         OFICINA-RADICACION-LEEICMVLR
+CAMOPT                                WS-OFICINA-RADICACION-LEEICMVLR   EHA0005
+CAMOPT           IF WS-MUEVE-CEROS-LEEICMVLR = 1                        EHA0005
+CAMOPT              PERFORM 000000-MOVE-CERO-ANO6-LEEICMVLR             EHA0005
+CAMOPT              MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                  EHA0005
+EHAXXX           ELSE                                                   EHA0006
+EHAXXX              IF MIGRADO-UNIFICADO-ICMVLR6 = 1 AND                EHA0006
+EHAXXX                 (NOV-REPORT-ABD07 = 45 OR 47)                    EHA0006
+EHAXXX                 MOVE MESES-MIGRADO-LEEICMVLR TO                  EHA0006
+EHAXXX                      CONTADOR-POS-LEEICMVLR                      EHA0006
+EHAXXX              END-IF                                              EHA0006
+CAMOPT           END-IF                                                 EHA0005
+CAMCHK           IF (IND-ARCHIVO-LEEICMVLR = 1 AND                      EAL0004
+CAMCHK           CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR    EAL0004
+CAMCHK           IND-ARCHIVO-LEEICMVLR = 2                              EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR6                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR6                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                 MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR6                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                 MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS           MOVE VECTOR-CALIFIC-ICMVLR6                            CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                 COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                         MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                 ADD 1 TO POSICION-NV-LEEICMVLR
+                 SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                               POSICION-NV-LEEICMVLR > 48
+CAMCHK              IF (IND-ARCHIVO-LEEICMVLR = 1 AND                   EAL0004
+CAMCHK              CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR EAL0004
+CAMCHK              IND-ARCHIVO-LEEICMVLR = 2                           EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR6                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-VAL-INIC-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR6                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                    MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR6                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                    MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                      VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS              MOVE VECTOR-CALIFIC-ICMVLR6                         CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                      COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                              MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                      ADD 1 TO POSICION-NV-LEEICMVLR
+                      SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+                 END-PERFORM
+              END-IF
+              END-IF
+              END-IF
+              END-IF
+              END-IF
+              END-IF.
+      *
+       000000-MOVE-CERO-ANO1-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR.              EHA0005
+INFHIS* Se inicializan campos redefinidos y el vector de Calificacion   CAV0008
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR(IND-TMP-LEEICMVLR)     CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR(IND-TMP-LEEICMVLR)   CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-MOVE-CERO-ANO2-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR2.             EHA0005
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR2(IND-TMP-LEEICMVLR) CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR2(IND-TMP-LEEICMVLR)    CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR2(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR2(IND-TMP-LEEICMVLR) CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-MOVE-CERO-ANO3-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR3.             EHA0005
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR3(IND-TMP-LEEICMVLR) CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR3(IND-TMP-LEEICMVLR)    CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR3(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR3(IND-TMP-LEEICMVLR) CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-MOVE-CERO-ANO4-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR4.             EHA0005
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR4(IND-TMP-LEEICMVLR) CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR4(IND-TMP-LEEICMVLR)    CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR4(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR4(IND-TMP-LEEICMVLR) CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-MOVE-CERO-ANO5-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR5.             EHA0005
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR5(IND-TMP-LEEICMVLR) CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR5(IND-TMP-LEEICMVLR)    CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR5(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR5(IND-TMP-LEEICMVLR) CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-MOVE-CERO-ANO6-LEEICMVLR.
+CAMOPT        MOVE WS-VALORES-N01-LEEICMVLR TO REG-ICMVLR6.             EHA0005
+INFHIS        IF IND-ARCHIVO-LEEICMVLR = 2                              CAV0008
+INFHIS          PERFORM VARYING IND-TMP-LEEICMVLR FROM 1 BY 1 UNTIL     CAV0008
+INFHIS                  IND-TMP-LEEICMVLR > 12                          CAV0008
+INFHIS             MOVE ZEROS TO                                        CAV0008
+INFHIS                      VAL-CHEQ-PAGADOS-ICMVLR6(IND-TMP-LEEICMVLR) CAV0008
+INFHIS                      CANT-CHEQ-PAG-ICMVLR6(IND-TMP-LEEICMVLR)    CAV0008
+INFHIS             MOVE 1 TO                                            CAV0008
+INFHIS                   V-IND-CHEQ-PAGADOS-ICMVLR6(IND-TMP-LEEICMVLR)  CAV0008
+INFHIS                   V-IND-CANT-CHEQ-PAG-ICMVLR6(IND-TMP-LEEICMVLR) CAV0008
+INFHIS          END-PERFORM                                             CAV0008
+INFHIS        END-IF.                                                   CAV0008
+      *
+       000000-LEER-ARCHIVO2-LEEICMVLR.
+              INITIALIZE REG-ICMVLR2
+              MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR2
+CAMPAR        IF IND-ARCHIVO-LEEICMVLR = 1                              EHA0006
+CAMPAR           IF (POSICION-NV-LEEICMVLR > CONTADOR-POS-LEEICMVLR)    EHA0006
+CAMPAR               MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           ELSE                                                   EHA0006
+CAMPAR               MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           END-IF                                                 EHA0006
+CAMPAR        ELSE                                                      EHA0006
+CAMPAR           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR        IF WS-MUEVE-CEROS-LEEICMVLR = 0                           EHA0006
+                 READ ICMVLR2 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                          MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+CAMPAR        END-IF                                                    EHA0006
+CAMOPT        IF WS-MUEVE-CEROS-LEEICMVLR = 1                           EHA0005
+CAMOPT           PERFORM 000000-MOVE-CERO-ANO2-LEEICMVLR                EHA0005
+CAMOPT           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0005
+CAMOPT        END-IF                                                    EHA0005
+              MOVE 12 TO MES-NOVEDAD-R-AUX-LEEICMVLR
+              PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                            POSICION-NV-LEEICMVLR > 48
+CAMCHK             IF (IND-ARCHIVO-LEEICMVLR = 1 AND                    EAL0004
+CAMCHK             CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR  EAL0004
+CAMCHK             IND-ARCHIVO-LEEICMVLR = 2                            EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR2                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR2                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                   MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR2                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                   MOVE VALORES-ICMVLR2(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR2                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                   COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                           MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                   ADD 1 TO POSICION-NV-LEEICMVLR
+                   SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+              END-PERFORM.
+
+       000000-LEER-ARCHIVO3-LEEICMVLR.
+              INITIALIZE REG-ICMVLR3
+              MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR3
+CAMPAR        IF IND-ARCHIVO-LEEICMVLR = 1                              EHA0006
+CAMPAR           IF (POSICION-NV-LEEICMVLR > CONTADOR-POS-LEEICMVLR)    EHA0006
+CAMPAR               MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           ELSE                                                   EHA0006
+CAMPAR               MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           END-IF                                                 EHA0006
+CAMPAR        ELSE                                                      EHA0006
+CAMPAR           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR        IF WS-MUEVE-CEROS-LEEICMVLR = 0                           EHA0006
+                 READ ICMVLR3 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+CAMPAR        END-IF                                                    EHA0006
+CAMOPT        IF WS-MUEVE-CEROS-LEEICMVLR = 1                           EHA0005
+CAMOPT           PERFORM 000000-MOVE-CERO-ANO3-LEEICMVLR                EHA0005
+CAMOPT           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0005
+CAMOPT        END-IF                                                    EHA0005
+              MOVE 12 TO MES-NOVEDAD-R-AUX-LEEICMVLR
+              PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                            POSICION-NV-LEEICMVLR > 48
+CAMCHK             IF (IND-ARCHIVO-LEEICMVLR = 1 AND                    EAL0004
+CAMCHK             CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR  EAL0004
+CAMCHK             IND-ARCHIVO-LEEICMVLR = 2                            EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR3                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR3                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                   MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR3                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                   MOVE VALORES-ICMVLR3(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR3                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                   COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                           MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                   ADD 1 TO POSICION-NV-LEEICMVLR
+                   SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+              END-PERFORM.
+
+       000000-LEER-ARCHIVO4-LEEICMVLR.
+              INITIALIZE REG-ICMVLR4
+              MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR4
+CAMPAR        IF IND-ARCHIVO-LEEICMVLR = 1                              EHA0006
+CAMPAR           IF (POSICION-NV-LEEICMVLR > CONTADOR-POS-LEEICMVLR)    EHA0006
+CAMPAR               MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           ELSE                                                   EHA0006
+CAMPAR               MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           END-IF                                                 EHA0006
+CAMPAR        ELSE                                                      EHA0006
+CAMPAR           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR        IF WS-MUEVE-CEROS-LEEICMVLR = 0                           EHA0006
+                 READ ICMVLR4 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+CAMPAR        END-IF                                                    EHA0006
+CAMOPT        IF WS-MUEVE-CEROS-LEEICMVLR = 1                           EHA0005
+CAMOPT           PERFORM 000000-MOVE-CERO-ANO4-LEEICMVLR                EHA0005
+CAMOPT           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0005
+CAMOPT        END-IF                                                    EHA0005
+              MOVE 12 TO MES-NOVEDAD-R-AUX-LEEICMVLR
+              PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                            POSICION-NV-LEEICMVLR > 48
+CAMCHK             IF (IND-ARCHIVO-LEEICMVLR = 1 AND                    EAL0004
+CAMCHK             CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR  EAL0004
+CAMCHK             IND-ARCHIVO-LEEICMVLR = 2                            EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR4                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR4                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                   MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR4                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                   MOVE VALORES-ICMVLR4(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR4                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                   COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                           MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                   ADD 1 TO POSICION-NV-LEEICMVLR
+                   SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+              END-PERFORM.
+
+       000000-LEER-ARCHIVO5-LEEICMVLR.
+              INITIALIZE REG-ICMVLR5
+              MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR5
+CAMPAR        IF IND-ARCHIVO-LEEICMVLR = 1                              EHA0006
+CAMPAR           IF (POSICION-NV-LEEICMVLR > CONTADOR-POS-LEEICMVLR)    EHA0006
+CAMPAR               MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           ELSE                                                   EHA0006
+CAMPAR               MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           END-IF                                                 EHA0006
+CAMPAR        ELSE                                                      EHA0006
+CAMPAR           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR        IF WS-MUEVE-CEROS-LEEICMVLR = 0                           EHA0006
+                 READ ICMVLR5 IGNORE LOCK INVALID KEY
+CAMOPT                MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+CAMPAR        END-IF                                                    EHA0006
+CAMOPT        IF WS-MUEVE-CEROS-LEEICMVLR = 1                           EHA0005
+CAMOPT           PERFORM 000000-MOVE-CERO-ANO5-LEEICMVLR                EHA0005
+CAMOPT           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0005
+CAMOPT        END-IF                                                    EHA0005
+              MOVE 12 TO MES-NOVEDAD-R-AUX-LEEICMVLR
+              PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                            POSICION-NV-LEEICMVLR > 48
+CAMCHK             IF (IND-ARCHIVO-LEEICMVLR = 1 AND                    EAL0004
+CAMCHK             CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR  EAL0004
+CAMCHK             IND-ARCHIVO-LEEICMVLR = 2                            EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR5                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR5                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                   MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR5                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                   MOVE VALORES-ICMVLR5(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR5                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                   COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR =
+                           MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                   ADD 1 TO POSICION-NV-LEEICMVLR
+                   SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+              END-PERFORM.
+
+       000000-LEER-ARCHIVO6-LEEICMVLR.
+              INITIALIZE REG-ICMVLR6
+              MOVE LLAVE-MAES-LEEICMVLR TO LLAVE-ICMVLR6
+CAMPAR        IF IND-ARCHIVO-LEEICMVLR = 1                              EHA0006
+CAMPAR           IF (POSICION-NV-LEEICMVLR > CONTADOR-POS-LEEICMVLR)    EHA0006
+CAMPAR               MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           ELSE                                                   EHA0006
+CAMPAR               MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                 EHA0006
+CAMPAR           END-IF                                                 EHA0006
+CAMPAR        ELSE                                                      EHA0006
+CAMPAR           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0006
+CAMPAR        END-IF                                                    EHA0006
+CAMPAR        IF WS-MUEVE-CEROS-LEEICMVLR = 0                           EHA0006
+                 READ ICMVLR6 IGNORE LOCK INVALID KEY
+CAMOPT                   MOVE 1 TO WS-MUEVE-CEROS-LEEICMVLR             EHA0005
+                      NOT INVALID KEY
+                         MOVE 1 TO SW-LECTURA-LEEICMVLR
+                 END-READ
+CAMPAR        END-IF                                                    EHA0006
+CAMOPT        IF WS-MUEVE-CEROS-LEEICMVLR = 1                           EHA0005
+CAMOPT           PERFORM 000000-MOVE-CERO-ANO6-LEEICMVLR                EHA0005
+CAMOPT           MOVE 0 TO WS-MUEVE-CEROS-LEEICMVLR                     EHA0005
+CAMOPT        END-IF                                                    EHA0005
+              MOVE 12 TO MES-NOVEDAD-R-AUX-LEEICMVLR
+              PERFORM UNTIL MES-NOVEDAD-R-AUX-LEEICMVLR < 1 OR
+                            POSICION-NV-LEEICMVLR > 48
+CAMCHK             IF (IND-ARCHIVO-LEEICMVLR = 1 AND                    EAL0004
+CAMCHK             CONTADOR-POS-LEEICMVLR >= POSICION-NV-LEEICMVLR) OR  EAL0004
+CAMCHK             IND-ARCHIVO-LEEICMVLR = 2                            EAL0004
+CAMCHK              CONTINUE                                            EAL0004
+CAMCHK           ELSE                                                   EAL0004
+CAMXXX              IF WS-MUEVE-CEROS-LEEICMVLR = 0
+CAMCHK          MOVE ZEROS TO CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)      EAL0004
+CAMCHK                  SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  VAL-INICIAL-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                  SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK                  MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)  EAL0004
+INFHIS                  FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                  FECHA-LIM-PAGO-ICMVLR6                          CAV0008
+INFHIS                                    (MES-NOVEDAD-R-AUX-LEEICMVLR) CAV0008
+INFHIS                 CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*            VAL-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*               CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMCHK*                                                                 EAL0004
+CAMCHK        MOVE 1 TO V-IND-CUOTA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK                 V-IND-SALDO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) EAL0004
+CAMCHK             V-IND-SALDO-MORA-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK               V-IND-VAL-INIC-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK             V-IND-SALDO-DISP-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+CAMCHK              V-IND-MOROSIDAD-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)EAL0004
+INFHIS             V-IND-FECHA-PAGO-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS             V-IND-FECHA-LIM-PAGO-ICMVLR6                         CAV0008
+INFHIS                                     (MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS           V-IND-CALIFICACION-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*          V-IND-CHEQ-PAGADOS-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+INFHIS*         V-IND-CANT-CHEQ-PAG-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR)CAV0008
+CAMXXX              END-IF
+CAMCHK           END-IF                                                 EAL0004
+                   MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR6                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-NV-LEEICMVLR(POSICION-NV-LEEICMVLR)   CAV0008
+                   MOVE VALORES-ICMVLR6(MES-NOVEDAD-R-AUX-LEEICMVLR) TO
+                   VEC-VAL-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)
+INFHIS             MOVE VECTOR-CALIFIC-ICMVLR6                          CAV0008
+INFHIS                                  (MES-NOVEDAD-R-AUX-LEEICMVLR) TOCAV0008
+INFHIS                VEC-CALIFIC-VN-LEEICMVLR(POSICION-VN-LEEICMVLR)   CAV0008
+                   COMPUTE MES-NOVEDAD-R-AUX-LEEICMVLR = 
+                           MES-NOVEDAD-R-AUX-LEEICMVLR - 1
+                   ADD 1 TO POSICION-NV-LEEICMVLR
+                   SUBTRACT 1 FROM POSICION-VN-LEEICMVLR
+              END-PERFORM.
+*******************************************************************************
+       000000-FIND-MORA-PER-LEEICMVLR.
+              MOVE VECTOR-HIS-1-ABD07 TO VECTOR-W1-VN-LEEICMVLR
+              MOVE VECTOR-HIS-2-ABD07 TO VECTOR-W2-VN-LEEICMVLR
+              MOVE VECTOR-HIS-3-ABD07 TO VECTOR-W3-VN-LEEICMVLR
+              MOVE VECTOR-HIS-4-ABD07 TO VECTOR-W4-VN-LEEICMVLR
+*******************************************************************************
+***************************INVERTIR VECTOR*************************************
+*******************************************************************************
+              MOVE 1 TO IND-VEC-VN-LEEICMVLR
+              MOVE 48 TO IND-VEC-NV-LEEICMVLR
+              PERFORM UNTIL IND-VEC-VN-LEEICMVLR > 48 OR
+                            IND-VEC-NV-LEEICMVLR < 1
+                 MOVE VECTOR-W-R-VN-LEEICMVLR(IND-VEC-VN-LEEICMVLR) TO
+                           VECTOR-W-R-NV-LEEICMVLR(IND-VEC-NV-LEEICMVLR)
+                 ADD 1 TO IND-VEC-VN-LEEICMVLR
+                 SUBTRACT 1 FROM IND-VEC-NV-LEEICMVLR
+              END-PERFORM
+*******************************************************************************
+************************CALCULAR CORRIMIENTO PARA NV***************************
+*******************************************************************************
+
+              COMPUTE FEC-SITUACION-MESES-LEEICMVLR =
+                      ((ANO-SITUACION-R-LEEICMVLR * 12) +
+                                            (MES-SITUACION-R-LEEICMVLR))
+
+              COMPUTE FEC-NOVEDAD-MESES-LEEICMVLR   =
+            ((ANO-NOVEDAD-R-LEEICMVLR * 12) + (MES-NOVEDAD-R-LEEICMVLR))
+MODPER        IF NOV-REPORT-ABD07 = 45 OR 47                            EHA0007
+                 COMPUTE POS-ICMCRE-LEEICMVLR =
+                         FEC-SITUACION-MESES-LEEICMVLR -
+                         FEC-NOVEDAD-MESES-LEEICMVLR
+MODPER        ELSE                                                      EHA0007
+MODPER           MOVE ZEROS TO POS-ICMCRE-LEEICMVLR                     EHA0007
+MODPER        END-IF                                                    EHA0007
+              IF POS-ICMCRE-LEEICMVLR = 0
+MODPER*          MOVE 1 TO POS-ICMCRE-LEEICMVLR                         EHA0007
+MODPER           MOVE 2 TO POS-ICMCRE-LEEICMVLR                         EHA0007
+MODPER*          MOVE 2 TO IND-VEC-NV-LEEICMVLR                         EHA0007
+MODPER           MOVE 1 TO IND-VEC-NV-LEEICMVLR                         EHA0007
+              ELSE
+                 IF POS-ICMCRE-LEEICMVLR > 0
+MODPER* SE MUEVE 2 POCISIONES MAS CORRESPONDIENTE A LA NOVEDAD REPORTADAEHA0007
+MODPER              ADD 2 TO POS-ICMCRE-LEEICMVLR                       EHA0007
+                    MOVE 1 TO IND-VEC-NV-LEEICMVLR
+                 END-IF
+              END-IF
+****************************VERIFICA VECTOR NV**************************
+              PERFORM UNTIL POS-ICMCRE-LEEICMVLR > 48 OR
+                            IND-VEC-NV-LEEICMVLR > 48
+MODPER*          IF VECTOR-W-R-NV-LEEICMVLR(POS-ICMCRE-LEEICMVLR) = 8   EHA0007
+MODPER           IF VECTOR-W-R-NV-LEEICMVLR(IND-VEC-NV-LEEICMVLR) = 8   EHA0007
+                    MOVE ZEROS TO
+MODPER*                    SALDO-MORA-NV-LEEICMVLR(IND-VEC-NV-LEEICMVLR)EHA0007
+MODPER                     SALDO-MORA-NV-LEEICMVLR(POS-ICMCRE-LEEICMVLR)EHA0007
+                    MOVE 2    TO
+MODPER*                IND-SALDO-MORA-NV-LEEICMVLR(IND-VEC-NV-LEEICMVLR)EHA0007
+MODPER                 IND-SALDO-MORA-NV-LEEICMVLR(POS-ICMCRE-LEEICMVLR)EHA0007
+MODPER              IF (49 - POS-ICMCRE-LEEICMVLR) > ZEROS              EHA0007
+MODPER                 MOVE ZEROS TO                                    EHA0007
+MODPER                SALDO-MORA-VN-LEEICMVLR(49 - POS-ICMCRE-LEEICMVLR)EHA0007
+MODPER                 MOVE 2    TO                                     EHA0007
+MODPER            IND-SALDO-MORA-VN-LEEICMVLR(49 - POS-ICMCRE-LEEICMVLR)EHA0007
+MODPER              END-IF                                              EHA0007
+                 END-IF
+                 ADD 1 TO POS-ICMCRE-LEEICMVLR
+                          IND-VEC-NV-LEEICMVLR
+              END-PERFORM
+      *
+MODPER*       MOVE 1 TO POS-ICMCRE-LEEICMVLR                            EHA0007
+MODPER*       MOVE 1 TO IND-VEC-VN-LEEICMVLR                            EHA0007
+***************************VERIFICA VECTOR VN***************************
+MODPER        MOVE 1 TO POS-ICMCRE-LEEICMVLR                            EHA0007
+MODPER        IND-VEC-NV-LEEICMVLR.                                     EHA0007
+MODPER*        PERFORM UNTIL POS-ICMCRE-LEEICMVLR > 48 OR               EHA0007
+MODPER*                      IND-VEC-VN-LEEICMVLR > 48                  EHA0007
+MODPER*           IF VECTOR-W-R-VN-LEEICMVLR(POS-ICMCRE-LEEICMVLR) = 8  EHA0007
+MODPER*              MOVE ZEROS TO                                      EHA0007
+MODPER*                     SALDO-MORA-VN-LEEICMVLR(IND-VEC-VN-LEEICMVLREHA0007
+MODPER*              MOVE 2    TO                                       EHA0007
+MODPER*                 IND-SALDO-MORA-VN-LEEICMVLR(IND-VEC-VN-LEEICMVLREHA0007
+MODPER*           END-IF                                                EHA0007
+MODPER*           ADD 1 TO POS-ICMCRE-LEEICMVLR                         EHA0007
+MODPER*                    IND-VEC-VN-LEEICMVLR                         EHA0007
+MODPER*        END-PERFORM.                                             EHA0007

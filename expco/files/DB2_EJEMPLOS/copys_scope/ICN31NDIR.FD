@@ -1,0 +1,112 @@
+******* ICN31NDIR-FD.v.02.002
+******* MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR EN PARTICULAR
+******* SE LE APLIAN LOS CAMPOS DE DIRECCIONES A 60 CARACTERES
+******* PERO ES UNA COPIA DEL COPY ICN31N.FD
+******* Y SOLO SE UTILIZA POR LOS PROGRAMAS QUE ACTUALIZAN DIRECCIONES
+************************************************************************
+REMARK* CAV0002     * CALDYT - SE CAMBIA EL DISEÑO DEL ARCHIVO PARA    *
+REMARK* 18-SEP-2012 *          QUE SOLO SE MANEJE INFORMACION DE DIRECC*
+REMARK* C.VELASCO   *          Y TELEFONOS, EMAIL Y CELULAR            *
+REMARK******************************************************************
+       FD  ACTUAL1
+           BLOCK CONTAINS 40 RECORDS.
+       01  REG-LARGO-CIC06                 PIC X(500).                         
+       01  REGISTRO1-CIC06.
+           03  COD-SUSCRIPTOR-CEROS-CIC06  PIC 9(18).
+           03  COD-SUSCRIPTOR-CIC06        PIC X(6).
+           03  COD-TIP-CUENTA-CIC06        PIC X(2).
+           03  FECHA-NOVEDADES-CIC06.
+CALDYT         05 DIA-NOVEDADES-CIC06      PIC 99.                      CAV0002
+               05 MES-NOVEDADES-CIC06      PIC 99.
+               05 SIG-NOVEDADES-CIC06      PIC 99.
+               05 ANO-NOVEDADES-CIC06      PIC 99.
+           03  FECHA-NOVEDADES-CIC06-M  REDEFINES FECHA-NOVEDADES-CIC06.
+               05 SIG-NOVEDADES-CIC06-M    PIC 99.
+               05 ANO-NOVEDADES-CIC06-M    PIC 99.
+               05 MES-NOVEDADES-CIC06-M    PIC 99.
+CALDYT         05 DIA-NOVEDADES-CIC06-M    PIC 99.                      CAV0002
+           03  IND-MILENIO-CIC06           PIC X.                              
+           03  IND-VALORES-MIL-CIC06       PIC X.                              
+           03  IND-TIPO-ENTREGA-CIC06      PIC X.                              
+           03  FEC-INI-REPOR-CIC06         PIC 9(8).                           
+           03  FEC-INI-REPOR-CIC06-R REDEFINES FEC-INI-REPOR-CIC06.            
+               05 SIG-INI-REP-CIC06        PIC 99.                             
+               05 ANO-INI-REP-CIC06        PIC 99.                             
+               05 MES-INI-REP-CIC06        PIC 99.                             
+               05 DIA-INI-REP-CIC06        PIC 99.                             
+           03  FEC-FIN-REPOR-CIC06         PIC 9(8).                           
+           03  FEC-FIN-REPOR-CIC06-R REDEFINES FEC-FIN-REPOR-CIC06.            
+               05 SIG-FIN-REP-CIC06        PIC 99.                             
+               05 ANO-FIN-REP-CIC06        PIC 99.                             
+               05 MES-FIN-REP-CIC06        PIC 99.                             
+               05 DIA-FIN-REP-CIC06        PIC 99.                             
+CALDYT     03  IND-PARTIR-CIC06            PIC X.                       CAV0002
+CALDYT     03  IND-SOLO-LEY-CIC06          PIC X(03).                   CAV0002
+CALDYT     03  RESTO-REG1                  PIC X(443).                  CAV0002
+           03  FILLER-CIC06-R REDEFINES RESTO-REG1.                            
+CALDYT         05  FILLER-CIC06-R1         PIC X(340).                  CAV0002
+CALDYT         05  TOTAL-REGISTROS-CIC06   PIC 9(10).                   CAV0002
+               05  FECHA-RECEPCION-CIC06   PIC 9(8).                            
+               05  CALIFIC-DIRRES-CIC06    PIC 999V99.                          
+               05  CALIFIC-DIRLAB-CIC06    PIC 999V99.                          
+               05  CALIFIC-DIRCOR-CIC06    PIC 999V99.                          
+               05  CALIFIC-TOTDIR-CIC06    PIC 999V99.                          
+               05  TOTAL-REGDIR-CIC06      PIC 9(8).                            
+               05  CALIFIC-FINAL-CIC06     PIC 999V99.                         
+               05  CALIFIC-GRUPO1-CIC06    PIC 999V99.                         
+               05  CALIFIC-GRUPO2-CIC06    PIC 999V99.                         
+               05  CALIFIC-GRUPO3-CIC06    PIC 999V99.                         
+               05  CALIFIC-TOTAL-CIC06     PIC 999V99.                         
+               05  FECHA-CALIFIC-CIC06     PIC 9(8).                           
+               05  NUM-SEGURIDAD-CIC06     PIC 9(4).                           
+               05  IND-PROG-CALIFIC-CIC06  PIC X(02).                          
+               05  IND-CONVERSION-CIC06    PIC X(01).                          
+               05  FILLER-CIC06            PIC X(02).                          
+               05  IND-VISOR-CIC06         PIC X(15).                          
+       01  REGISTRO2-CIC06.
+CALDYT     03  TIPO-IDEN-CIC06             PIC 9.                       CAV0002
+CALDYT     03  NUM-ID-CIC06                PIC 9(11).                   CAV0002
+           03  NUM-CTA-CIC06               PIC X(18).
+           03  NUM-CTA16-CIC06    REDEFINES NUM-CTA-CIC06.                     
+               05 NUM-CTA-VEN-CIC06        PIC 9(16).                          
+               05 GARANTE-VEN-CIC06        PIC 99.                             
+           03  NOMBRE-COMP-CIC06           PIC X(45).
+           03  FECHA-APERT-CIC06.
+               05 M-FAPE                   PIC 9(2).
+               05 S-FAPE                   PIC 9(2).
+               05 A-FAPE                   PIC 9(2).
+           03  FECHA-APERT-CIC06-M  REDEFINES FECHA-APERT-CIC06.
+               05 S-FAPE-M                 PIC 9(2).
+               05 A-FAPE-M                 PIC 9(2).
+               05 M-FAPE-M                 PIC 9(2).
+      *    INFORMACION DIRECCIONES Y TELEFONOS          
+CALDYT     03  CIUDAD-RESIDENCIA-CIC06     PIC X(20).                   CAV0002
+CALDYT     03  DIREC-RESIDENCIA-CIC06      PIC X(60).                   CAV0002
+CALDYT     03  TELEF-RESIDENCIA-CIC06      PIC 9(12).                   CAV0002
+CALDYT     03  CIUDAD-LABORAL-CIC06        PIC X(20).                   CAV0002
+CALDYT     03  DIREC-LABORAL-CIC06         PIC X(60).                   CAV0002
+CALDYT     03  TELEF-LABORAL-CIC06         PIC 9(12).                   CAV0002
+CALDYT     03  CIUDAD-CORRESP-CIC06        PIC X(20).                   CAV0002
+CALDYT     03  DIREC-CORRESP-CIC06         PIC X(60).                   CAV0002
+CALDYT     03  CORREO-ELECTRONICO-CIC06    PIC X(60).                   CAV0002
+CALDYT     03  CELULAR-CIC06               PIC 9(12).                   CAV0002
+CALDYT     03  RESTO-REG2                  PIC X(83).                   CAV0002
+       01  REGISTRO3-CIC06.                                                    
+           03  IDENTIFICADOR-CIC06         PIC X(18).                          
+           03  FECHA-PROCESO-CIC06.                                            
+               05 DIA-PROCESO-CIC06        PIC 9(2).                           
+               05 MES-PROCESO-CIC06        PIC 9(2).                           
+               05 SIG-PROCESO-CIC06        PIC 9(2).                           
+               05 ANO-PROCESO-CIC06        PIC 9(2).                           
+           03  FECHA-PROCESO-CIC06-M  REDEFINES FECHA-PROCESO-CIC06.           
+               05 SIG-PROCESO-CIC06-M      PIC 9(2).                           
+               05 ANO-PROCESO-CIC06-M      PIC 9(2).                           
+               05 MES-PROCESO-CIC06-M      PIC 9(2).                           
+               05 DIA-PROCESO-CIC06-M      PIC 9(2).                           
+           03  NUM-REGISTROS-CIC06         PIC 9(8).                           
+           03  SUMA-NOVEDADES-CIC06        PIC 9(8).                           
+CALDYT     03  RESTO-REG3                  PIC X(458).                  CAV0002
+       01  REGISTRO4-CIC06.
+           03  DATOS-REPORTADOS-ACTUAL     PIC X(107).
+CALDYT     03  FILLER                      PIC X(393).                  CAV0002
+      ******************************************************************

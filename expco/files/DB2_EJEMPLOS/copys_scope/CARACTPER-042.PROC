@@ -1,0 +1,282 @@
+REMARK*CARACTPER-042.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 042
+REMARK*    Best Buy           
+REMARK******************************************************************
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-042.
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM999TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO042) TO L-AUX
+               MOVE 02NUM999TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO042) TO L-AUX
+               MOVE 02MOR999TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO042) TO L-AUX
+               MOVE 02MOR998TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997TO042) TO L-AUX
+               MOVE 02MOR997TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996TO042) TO L-AUX
+               MOVE 02MOR996TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR995TO042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR995TO042) TO L-AUX
+               MOVE 02MOR995TO042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ999_042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ999_042) TO L-AUX
+               MOVE 01INQ999_042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ998_042" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ998_042) TO L-AUX
+               MOVE 01INQ998_042(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-42.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-42.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 42    *
+REMARK*     PARA Best Buy                                              *
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-42-NIVEL-02-NUM
+             MOVE ALL "  -1" TO PER-42-NIVEL-02-MOR
+             MOVE ALL "  -1" TO PER-42-NIVEL-01-INQ
+             PERFORM  9999-CARAC-GENERALES.
+
+       2249-PROCESE-CARCT-00NUM-EXT-42.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-42.                                *
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00NUM Y 01NUM     *
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+            MOVE ALL "  -1" TO PER-42-NIVEL-00-NUM
+REMARK*** 00NUM999TO042 *** # OBLIGACIONES VIGENTES CON Best Buy     
+R12051      IF NIT-SUSCRIP-S-ABD02 = 13455324 OR 900462508 OR 807009126        
+               MOVE ZEROS TO 00NUM999TO042
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        MOVE 1 TO 00NUM999TO042
+                     ELSE
+                        MOVE "  -4" TO 00NUM999TO042(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM999TO042(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM999TO042(1:4)
+               END-IF
+            END-IF
+REMARK*** 02NUM999TO042 *** # OBLIGACIONES VIGENTES CON Best Buy     
+           IF FUNCTION NUMVAL(00NUM999TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM999TO042(1:4)) < 0
+                 MOVE ZEROS TO 02NUM999TO042
+              END-IF
+              COMPUTE 02NUM999TO042 = 02NUM999TO042 + 00NUM999TO042
+           ELSE
+              IF FUNCTION NUMVAL(02NUM999TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999TO042(1:4)) <
+                  FUNCTION NUMVAL(02NUM999TO042(1:4))
+                  MOVE 00NUM999TO042(1:4) TO 02NUM999TO042(1:4)
+               END-IF
+              END-IF
+           END-IF
+         END-IF.
+
+       2249-PROCESE-CARCT-00MOR-EXT-42.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-42.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 00MOR,02MOR 
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-42-NIVEL-00-MOR
+REMARK*** 00MOR999TO042 *** # OBLIG VIG MOR 030 ACTUAL CON Best Buy     
+REMARK*** 00MOR998TO042 *** # OBLIG VIG MOR 060 ACTUAL CON Best Buy     
+REMARK*** 00MOR997TO042 *** # OBLIG VIG MOR 090 ACTUAL CON Best Buy     
+REMARK*** 00MOR996TO042 *** # OBLIG VIG MOR 120 ACTUAL CON Best Buy     
+          MOVE 0 TO P-CARACT
+R12051    IF NIT-SUSCRIP-S-ABD02 = 13455324 OR 900462508 OR 807009126        
+             MOVE ZEROS TO 00MOR999TO042 00MOR998TO042
+                           00MOR997TO042 00MOR996TO042
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF MESES-DESAC-CARACT < 0
+                         MOVE 0 TO P-CARACT
+                      ELSE
+                         MOVE MESES-DESAC-CARACT TO P-CARACT
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 1
+                          MOVE 1 TO 00MOR999TO042
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 2
+                          MOVE 1 TO 00MOR998TO042
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 3
+                          MOVE 1 TO 00MOR997TO042
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 4
+                          MOVE 1 TO 00MOR996TO042
+                      END-IF
+                   ELSE
+                      MOVE "  -4" TO 00MOR999TO042(1:4)
+                      MOVE "  -4" TO 00MOR998TO042(1:4)
+                      MOVE "  -4" TO 00MOR997TO042(1:4)
+                      MOVE "  -4" TO 00MOR996TO042(1:4)
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00MOR999TO042(1:4)
+                   MOVE "  -3" TO 00MOR998TO042(1:4)
+                   MOVE "  -3" TO 00MOR997TO042(1:4)
+                   MOVE "  -3" TO 00MOR996TO042(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR999TO042(1:4)
+                MOVE "  -2" TO 00MOR998TO042(1:4)
+                MOVE "  -2" TO 00MOR997TO042(1:4)
+                MOVE "  -2" TO 00MOR996TO042(1:4)
+             END-IF
+          END-IF
+REMARK*** 00MOR995TO042 *** # OBLIG VIG CASTIG DUD REC CON Best Buy     
+R12051    IF NIT-SUSCRIP-S-ABD02 = 13455324 OR 900462508 OR 807009126        
+             MOVE ZEROS TO 00MOR995TO042
+             IF GARANTE-ABD07 = 0
+                IF NOV-REPORT-ABD07 = 45 OR 47
+                   ADD 1 TO 00MOR995TO042
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR995TO042(1:4)
+             END-IF
+          END-IF
+REMARK*** 02MOR999TO042 *** # OBLIG VIG MOR 030 ACTUAL CON Best Buy     
+           IF FUNCTION NUMVAL(00MOR999TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR999TO042(1:4)) < 0
+                 MOVE ZEROS TO 02MOR999TO042
+              END-IF
+              COMPUTE 02MOR999TO042 = 02MOR999TO042 + 00MOR999TO042
+           ELSE
+              IF FUNCTION NUMVAL(02MOR999TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999TO042(1:4)) <
+                  FUNCTION NUMVAL(02MOR999TO042(1:4))
+                  MOVE 00MOR999TO042(1:4) TO 02MOR999TO042(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR998TO042 *** # OBLIG VIG MOR 060 ACTUAL CON Best Buy     
+           IF FUNCTION NUMVAL(00MOR998TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO042(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO042
+              END-IF
+              COMPUTE 02MOR998TO042 = 02MOR998TO042 + 00MOR998TO042
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO042(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO042(1:4))
+                  MOVE 00MOR998TO042(1:4) TO 02MOR998TO042(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR997TO042 *** # OBLIG VIG MOR 090 ACTUAL CON Best Buy     
+           IF FUNCTION NUMVAL(00MOR997TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR997TO042(1:4)) < 0
+                 MOVE ZEROS TO 02MOR997TO042
+              END-IF
+              COMPUTE 02MOR997TO042 = 02MOR997TO042 + 00MOR997TO042
+           ELSE
+              IF FUNCTION NUMVAL(02MOR997TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997TO042(1:4)) <
+                  FUNCTION NUMVAL(02MOR997TO042(1:4))
+                  MOVE 00MOR997TO042(1:4) TO 02MOR997TO042(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR996TO042 *** # OBLIG VIG MOR 120 ACTUAL CON Best Buy     
+           IF FUNCTION NUMVAL(00MOR996TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR996TO042(1:4)) < 0
+                 MOVE ZEROS TO 02MOR996TO042
+              END-IF
+              COMPUTE 02MOR996TO042 = 02MOR996TO042 + 00MOR996TO042
+           ELSE
+              IF FUNCTION NUMVAL(02MOR996TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR996TO042(1:4)) <
+                  FUNCTION NUMVAL(02MOR996TO042(1:4))
+                  MOVE 00MOR996TO042(1:4) TO 02MOR996TO042(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR995TO042 *** # OBLIG VIG CASTIG DUD REC CON Best Buy     
+           IF FUNCTION NUMVAL(00MOR995TO042(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR995TO042(1:4)) < 0
+                 MOVE ZEROS TO 02MOR995TO042
+              END-IF
+              COMPUTE 02MOR995TO042 = 02MOR995TO042 + 00MOR995TO042
+           ELSE
+              IF FUNCTION NUMVAL(02MOR995TO042(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR995TO042(1:4)) <
+                  FUNCTION NUMVAL(02MOR995TO042(1:4))
+                  MOVE 00MOR995TO042(1:4) TO 02MOR995TO042(1:4)
+               END-IF
+              END-IF
+           END-IF.
+
+       4249-PROCESE-CARCT-00INQ-EXT-42.
+REMARK******************************************************************
+REMARK*4249-PROCESE-CARCT-00INQ-EXT-42.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 01INQ
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-42-NIVEL-00-INQ
+REMARK*** 00INQ999_042 *** # CONSULTAS ULT 60 DIAS CON Best Buy     
+R12051    IF NIT-SUSCRIP-S-ABD02 = 13455324 OR 900462508 OR 807009126        
+             MOVE ZEROS TO 00INQ999_042
+             IF MESES-CONST-CARACT >= 0 AND <= 2
+                MOVE 1 TO 00INQ999_042
+             END-IF
+          END-IF
+REMARK*** 00INQ998_042 *** # CONSULTAS ULT 90 DIAS SIN Best Buy     
+R12051    IF NIT-SUSCRIP-S-ABD02 <> 13455324 AND
+R12051       NIT-SUSCRIP-S-ABD02 <> 900462508 AND
+R12051       NIT-SUSCRIP-S-ABD02 <> 807009126
+             MOVE ZEROS TO 00INQ998_042
+             IF (COD-SUSCRIP-IND <> 990003 AND <> 990001 AND
+                       <> 990005) AND MESES-CONST-CARACT >= 0 AND <= 3
+                MOVE 1 TO 00INQ998_042
+             END-IF
+          END-IF
+REMARK*** 01INQ999_042 *** # CONSULTAS ULT 60 DIAS CON Best Buy     
+          IF FUNCTION NUMVAL(00INQ999_042(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ999_042(1:4)) < 0
+                MOVE ZEROS TO 01INQ999_042
+             END-IF
+             COMPUTE 01INQ999_042 = 01INQ999_042 + 00INQ999_042
+          END-IF
+REMARK*** 01INQ998_042 *** # CONSULTAS ULT 90 DIAS SIN Best Buy     
+          IF FUNCTION NUMVAL(00INQ998_042(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ998_042(1:4)) < 0
+                MOVE ZEROS TO 01INQ998_042
+             END-IF
+             COMPUTE 01INQ998_042 = 01INQ998_042 + 00INQ998_042
+          END-IF.

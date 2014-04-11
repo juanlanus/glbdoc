@@ -1,0 +1,37 @@
+      * DTRLLA.v.01.003
+      * ARCHIVO DE CUENTAS RENUMERADAS QUE SIRVE DE DTRLLA PARA ENCONTRAR       
+      * LAS NUEVAS CUENTAS QUE TUVIERON RECLAMOS
+024800*----------------------------------------------------------------*
+REMARK* FAC0002     * DATCIU * REFINICION DE CAMPOS RECLAMO Y ART15
+REMARK* F.CUADROS   * PARA NUEVO SISTEMA DE NOVEDAT
+REMARK* JUL.01/2003 * 
+024800*----------------------------------------------------------------*
+REMARK* FAC0003     * REGLOC * INCLUSION DE CAMPO REG-LOCK-DTRLLA PARA
+REMARK* F.CUADROS   * CONTROLAR REGISTROS CERRADOS POR NOVEDAT
+REMARK* FEB.01/2006 * (VALORES: 1-SI 0-NO)
+024800*----------------------------------------------------------------*
+024900 FD  DTRLLA.        
+025000 01  REG-DTRLLA.           
+025900     03  LLAVE-ANT-DTRLLA.           
+025300         07  TIPO-ID-ANT-DTRLLA    PIC 9(01).
+025400         07  NUM-ID-ANT-DTRLLA     PIC 9(11).
+025600         07  COD-SUS-ANT-DTRLLA    PIC 9(06).
+025700         07  COD-CTA-ANT-DTRLLA    PIC 9(02).
+025800         07  NUM-CTA-ANT-DTRLLA    PIC X(18).
+025200     03  LLAVE-ACT-DTRLLA.               
+025300         07  TIPO-ID-ACT-DTRLLA    PIC 9(01).
+025400         07  NUM-ID-ACT-DTRLLA     PIC 9(11).
+025600         07  COD-SUS-ACT-DTRLLA    PIC 9(06).
+025700         07  COD-CTA-ACT-DTRLLA    PIC 9(02).
+025800         07  NUM-CTA-ACT-DTRLLA    PIC X(18).
+025900     03  ART15-DTRLLA              PIC 9(01).           
+DATCIU     03  IND-MODIFICACION-DTRLLA   REDEFINES ART15-DTRLLA         FAC0002
+DATCIU                                   PIC 9(01).                     FAC0002
+025900     03  RECLAMO-DTRLLA            PIC 9(05) .           
+DATCIU     03  RECLAMO-DTRLLA-R REDEFINES RECLAMO-DTRLLA.               FAC0002
+DATCIU         05 IND-RECLAMO-DTRLLA     PIC 9(1).                      FAC0002
+REGLOC         05 REG-LOCK-DTRLLA        PIC 9(1).                      FAC0003 
+REGLOC         05 FILLER-RECLAMO-DTRLLA  PIC 9(3).                      FAC0003 
+025900     03  AAAAMMDD-REN-DTRLLA       PIC 9(08).           
+025900     03  AAAAMMDD-CIEREC-DTRLLA    PIC 9(08).          
+025900     03  PROGRAMA-DTRLLA           PIC X(08).           

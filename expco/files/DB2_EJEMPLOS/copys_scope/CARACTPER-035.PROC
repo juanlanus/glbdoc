@@ -1,0 +1,504 @@
+REMARK*CARACTPER-035.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 035 *
+REMARK*    PARA COMULTRASAN                                            *
+REMARK******************************************************************
+      * IMS0001    |   R10272 - VERSION INICIAL CARACTERISTICAS        *
+      * 06-MAR-2013|            PERSONALIZADAS COMULTRASAN.            *
+      * M.SALAMANCA|                                     REQ. CQ-10272 *
+      ******************************************************************
+
+       0000-LLENAR-VEC-PERSONALIZ-035.
+
+      * 1
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999OT035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999OT035) TO L-AUX
+               MOVE  01END999OT035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 2
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999VE035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999VE035) TO L-AUX
+               MOVE  01END999VE035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 3
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999HP035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999HP035) TO L-AUX
+               MOVE  01END999HP035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 4
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999IN035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999IN035) TO L-AUX
+               MOVE  01END999IN035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 5
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999RO035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999RO035) TO L-AUX
+               MOVE  01END999RO035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 6
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END999CC035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END999CC035) TO L-AUX
+               MOVE  01END999CC035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 7
+               ADD   1                 TO  I-VAR-PER
+               MOVE "01END998RO035"    TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(01END998RO035) TO L-AUX
+               MOVE  01END998RO035(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               .
+
+       0000-INICIALIZAR-CARAC-EXT-35.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-35.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 35  *
+REMARK******************************************************************
+
+           MOVE ALL "         -1" TO PER-35-NIVEL-01-END
+           MOVE ZEROS             TO PER-35-NIVEL-01-END-AUX
+               .
+
+       2749-PROCESE-CARCT-00END-EXT-35.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-35.                                *
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01END             *
+REMARK******************************************************************
+
+           MOVE ALL "         -1" TO PER-35-NIVEL-00-END
+           MOVE ZEROS             TO PER-35-NIVEL-00-END-AUX
+
+      *** 00END999OT035 *** CUOTA MENSUAL PORTAFOLIO "OT"
+           IF COD-PORTAF-CARACT = "OT" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999OT035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999OT035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999OT035-AUX ROUNDED =
+                              00END999OT035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999OT035-AUX ROUNDED =
+                                 00END999OT035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999OT035-AUX ROUNDED =
+                                    00END999OT035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999OT035-AUX  TO  00END999OT035
+                        ELSE
+                         MOVE ZEROS              TO  00END999OT035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999OT035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999OT035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999OT035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999OT035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END999VE035 *** CUOTA MENSUAL PORTAFOLIO "VE"
+           IF COD-PORTAF-CARACT = "VE" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999VE035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999VE035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999VE035-AUX ROUNDED =
+                              00END999VE035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999VE035-AUX ROUNDED =
+                                 00END999VE035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999VE035-AUX ROUNDED =
+                                    00END999VE035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999VE035-AUX  TO  00END999VE035
+                        ELSE
+                         MOVE ZEROS              TO  00END999VE035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999VE035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999VE035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999VE035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999VE035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END999HP035 *** CUOTA MENSUAL PORTAFOLIO "HP"
+           IF COD-PORTAF-CARACT = "HP" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999HP035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999HP035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999HP035-AUX ROUNDED =
+                              00END999HP035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999HP035-AUX ROUNDED =
+                                 00END999HP035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999HP035-AUX ROUNDED =
+                                    00END999HP035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999HP035-AUX  TO  00END999HP035
+                        ELSE
+                         MOVE ZEROS              TO  00END999HP035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999HP035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999HP035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999HP035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999HP035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END999IN035 *** CUOTA MENSUAL PORTAFOLIO "IN"
+           IF COD-PORTAF-CARACT = "IN" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999IN035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999IN035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999IN035-AUX ROUNDED =
+                              00END999IN035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999IN035-AUX ROUNDED =
+                                 00END999IN035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999IN035-AUX ROUNDED =
+                                    00END999IN035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999IN035-AUX  TO  00END999IN035
+                        ELSE
+                         MOVE ZEROS              TO  00END999IN035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999IN035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999IN035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999IN035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999IN035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END999RO035 *** CUOTA MENSUAL PORTAFOLIO "RO"
+           IF COD-PORTAF-CARACT = "RO" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999RO035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999RO035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999RO035-AUX ROUNDED =
+                              00END999RO035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999RO035-AUX ROUNDED =
+                                 00END999RO035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999RO035-AUX ROUNDED =
+                                    00END999RO035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999RO035-AUX  TO  00END999RO035
+                        ELSE
+                         MOVE ZEROS              TO  00END999RO035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999RO035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999RO035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999RO035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999RO035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END999CC035 *** CUOTA MENSUAL PORTAFOLIO "CC"
+           IF COD-PORTAF-CARACT = "CC" AND COD-CTA-ABD07 <> 02
+             MOVE ZEROS TO 00END999CC035
+             IF REG-ABIERTO-CARACT = 1
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13)   > 0 AND
+                          VEC-IND-CUO-CARACT(I13) = 0 )
+                          COMPUTE 00END999CC035-AUX ROUNDED =
+                            VEC-CUOTA-CARACT(I13) /
+                            VEC-SMLMV-CARACT(I13)
+                        IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3 OR
+                                                     4 OR 5
+                         IF PERIODICIDAD-PAGO-ABD07 = 1 OR 2 OR 3
+                            COMPUTE 00END999CC035-AUX ROUNDED =
+                              00END999CC035-AUX  /
+                              PERIODICIDAD-PAGO-ABD07
+                         ELSE
+                            IF PERIODICIDAD-PAGO-ABD07 = 4
+                               COMPUTE 00END999CC035-AUX ROUNDED =
+                                 00END999CC035-AUX  /  6
+                            ELSE
+                               IF PERIODICIDAD-PAGO-ABD07 = 5
+                                  COMPUTE 00END999CC035-AUX ROUNDED =
+                                    00END999CC035-AUX  /  12
+                               END-IF
+                            END-IF
+                         END-IF
+                         MOVE 00END999CC035-AUX  TO  00END999CC035
+                        ELSE
+                         MOVE ZEROS              TO  00END999CC035-AUX
+                        END-IF
+                      ELSE
+                         MOVE "        -88" TO 00END999CC035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999CC035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999CC035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999CC035(1:11)
+             END-IF
+           END-IF
+
+      *** 00END998RO035 *** CUOTA MENSUAL TDC
+           IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END998RO035
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-SALDO-CARACT(I13)   > 0 AND
+                          VEC-IND-SLD-CARACT(I13) = 0 )
+                         COMPUTE 00END998RO035-AUX ROUNDED =
+                          (VEC-SALDO-CARACT(I13) *
+                          (( 0.0267 * ((1 + 0.0267) ** 24)) /
+                          (((1 + 0.0267) ** 24) - 1)))
+                         MOVE 00END998RO035-AUX  TO  00END998RO035
+                      ELSE
+                         MOVE "        -88" TO 00END998RO035(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END998RO035(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END998RO035(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END998RO035(1:11)
+             END-IF
+           END-IF
+
+      *** 01END999OT035 *** CUOTA MENSUAL PORTAFOLIO "OT"
+           IF FUNCTION NUMVAL(00END999OT035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999OT035(1:11)) < 0
+                MOVE ZEROS TO 01END999OT035
+             END-IF
+              COMPUTE 01END999OT035-AUX =
+                      01END999OT035-AUX + 00END999OT035-AUX
+              MOVE 01END999OT035-AUX  TO  01END999OT035
+           ELSE
+             IF FUNCTION NUMVAL(01END999OT035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999OT035(1:11)) <
+                 FUNCTION NUMVAL(01END999OT035(1:11))
+                 MOVE 00END999OT035(1:11) TO 01END999OT035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END999VE035 *** CUOTA MENSUAL PORTAFOLIO "VE"
+           IF FUNCTION NUMVAL(00END999VE035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999VE035(1:11)) < 0
+                MOVE ZEROS TO 01END999VE035
+             END-IF
+              COMPUTE 01END999VE035-AUX =
+                      01END999VE035-AUX + 00END999VE035-AUX
+              MOVE 01END999VE035-AUX  TO  01END999VE035
+           ELSE
+             IF FUNCTION NUMVAL(01END999VE035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999VE035(1:11)) <
+                 FUNCTION NUMVAL(01END999VE035(1:11))
+                 MOVE 00END999VE035(1:11) TO 01END999VE035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END999HP035 *** CUOTA MENSUAL PORTAFOLIO "HP"
+           IF FUNCTION NUMVAL(00END999HP035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999HP035(1:11)) < 0
+                MOVE ZEROS TO 01END999HP035
+             END-IF
+              COMPUTE 01END999HP035-AUX =
+                      01END999HP035-AUX + 00END999HP035-AUX
+              MOVE 01END999HP035-AUX  TO  01END999HP035
+           ELSE
+             IF FUNCTION NUMVAL(01END999HP035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999HP035(1:11)) <
+                 FUNCTION NUMVAL(01END999HP035(1:11))
+                 MOVE 00END999HP035(1:11) TO 01END999HP035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END999IN035 *** CUOTA MENSUAL PORTAFOLIO "IN"
+           IF FUNCTION NUMVAL(00END999IN035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999IN035(1:11)) < 0
+                MOVE ZEROS TO 01END999IN035
+             END-IF
+              COMPUTE 01END999IN035-AUX =
+                      01END999IN035-AUX + 00END999IN035-AUX
+              MOVE 01END999IN035-AUX  TO  01END999IN035
+           ELSE
+             IF FUNCTION NUMVAL(01END999IN035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999IN035(1:11)) <
+                 FUNCTION NUMVAL(01END999IN035(1:11))
+                 MOVE 00END999IN035(1:11) TO 01END999IN035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END999RO035 *** CUOTA MENSUAL PORTAFOLIO "RO"
+           IF FUNCTION NUMVAL(00END999RO035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999RO035(1:11)) < 0
+                MOVE ZEROS TO 01END999RO035
+             END-IF
+              COMPUTE 01END999RO035-AUX =
+                      01END999RO035-AUX + 00END999RO035-AUX
+              MOVE 01END999RO035-AUX  TO  01END999RO035
+           ELSE
+             IF FUNCTION NUMVAL(01END999RO035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999RO035(1:11)) <
+                 FUNCTION NUMVAL(01END999RO035(1:11))
+                 MOVE 00END999RO035(1:11) TO 01END999RO035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END999CC035 *** CUOTA MENSUAL PORTAFOLIO "CC"
+           IF FUNCTION NUMVAL(00END999CC035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999CC035(1:11)) < 0
+                MOVE ZEROS TO 01END999CC035
+             END-IF
+              COMPUTE 01END999CC035-AUX =
+                      01END999CC035-AUX + 00END999CC035-AUX
+              MOVE 01END999CC035-AUX  TO  01END999CC035
+           ELSE
+             IF FUNCTION NUMVAL(01END999CC035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999CC035(1:11)) <
+                 FUNCTION NUMVAL(01END999CC035(1:11))
+                 MOVE 00END999CC035(1:11) TO 01END999CC035(1:11)
+              END-IF
+             END-IF
+           END-IF
+
+      *** 01END998RO035 *** CUOTA MENSUAL TDC
+           IF FUNCTION NUMVAL(00END998RO035(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END998RO035(1:11)) < 0
+                MOVE ZEROS TO 01END998RO035
+             END-IF
+              COMPUTE 01END998RO035-AUX =
+                      01END998RO035-AUX + 00END998RO035-AUX
+              MOVE 01END998RO035-AUX  TO  01END998RO035
+           ELSE
+             IF FUNCTION NUMVAL(01END998RO035(1:11)) < 0
+              IF FUNCTION NUMVAL(00END998RO035(1:11)) <
+                 FUNCTION NUMVAL(01END998RO035(1:11))
+                 MOVE 00END998RO035(1:11) TO 01END998RO035(1:11)
+              END-IF
+             END-IF
+           END-IF
+               .

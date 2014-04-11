@@ -1,0 +1,175 @@
+      * ICBCRE-FD.v.02.0013
+      * MAESTRO OBLIGACIONES DE CARTERA Y TARJETAS DE CREDITO REPORTADAS        
+      * POR LOS DIFERENTES SUSCRIPTORES
+024800*----------------------------------------------------------------*
+REMARK******************************************************************
+REMARK* VHF0008     * DATCIU - SE REDEFINE  EL CAMPO ART15 CON EL      *
+REMARK* VICTOR HUGO *          NOMBRE IND-MODIFICACION YA QUE SERA     *
+REMARK* FORERO      *          UTILIZADO PARA INDICAR EL ESTADO DE UNA *
+REMARK* MAY.26/2003 *          MODIFICACION A LA CUENTA. TAMBIEN SE    *
+REMARK* F.CUADROS C.*          REDEFINE EL CAMPO RECLAMO PARA UTILIZAR *
+REMARK*             *          SU PRIMER DIGITO IND-RECLAMO COMO       *
+REMARK*             *          INDICADOR DEL ESTADO DE UN RECLAMO A LA *
+REMARK*             *          CUENTA. EL ESPACIO RESTANTE SE DEJA     *
+REMARK*             *          DISPONIBLE PARA OTROS DOS INDICADORES   *
+REMARK******************************************************************
+REMARK* FAC0009     * REGLOC - SE ABRE EL CAMPO FILLER-RECLAMO-ABD07 EN*
+REMARK* F.CUADROS C.*          DOS CAMPOS: REG-LOCK-ABD07 PARA INDICAR *
+REMARK*             *          SI EL REGISTRO ESTA CERRADO POR NOVEDAT *
+REMARK* ENE.31/2006 *          (1-SI 0-NO), Y FILLER-RECLAMO-ABD07 QUE *
+REMARK*             *          SE DEJA DISPONIBLE PARA USO FUTURO      *
+      ******************************************************************
+      * JGR0010     * REGVEC - SE REUTILIZAN CAMPOS PARA PODER GRABAR  *
+      * JAIRO GOMEZ.*          LOS VECTORES HISTORICOS DEL TERCERO Y   *
+      *             *          CUARTO AÑO DE HISTORIA CREDITICIA       *
+      * 09/AGO/2007 *                                                  *
+      ******************************************************************
+      * GJC0011     * NHC001 - CREACION DE NUEVOS CAMPOS RELACIONADOS  *
+      * G. JIMENEZ  *          CON LA LEY Y CON LA NUEVA HISTORIA DE   *
+      * 09/AGO/2007 *          CREDITO. REDEFINEN LOS CAMPOS CREADOS   *
+      *             *          PARA EL MANEJO DE LOS 4 TRIMESTRES DE   *
+      *             *          ENDEUDAMIENTO                           *
+      ******************************************************************
+      * GJC0012     * RZN001 - SE CAMBIA FILLER POR RAZON DE BLOQUEO   *
+      * G. JIMENEZ  *          DEBIDO A QUE LOS TIPOS DE BLOQUEO YA    *
+      * OCTUBRE/2010*          SON MÁS DE 10                           *
+      ******************************************************************
+      * CAV0013     * MICROC - SE REDEFINE  CAMPO IND-BLOQUEO-R-ABD07  *
+      * C. VELASCO. *          DE PIC 9 A PIC X PARA ALMACENAR MAS DE  *
+      * 19/SEP/2011.*          10 POSIBLES VALORES PARA TIPO GARANTIA. *
+      ******************************************************************
+024900 FD  MAESTRO-CREDIT.
+025000 01  COMPLETO-ABD07.
+025200     03  LLAVE-MAES-CREDIT.
+025210         05  LLAVE-MAES-CREDIT-PRI.
+025300             07  TIPO-ID-ABD07     PIC 9.
+025400             07  NUM-ID-ABD07      PIC 9(11).
+025500         05  LLAVE-MAES-CREDIT-ALT.
+025600             07  COD-SUS-ABD07     PIC 9(6).
+025700             07  COD-CTA-ABD07     PIC 99.
+025800             07  NUM-CTA-ABD07     PIC X(18).
+                   07  NUM-CTA-VEN16-ABD07 REDEFINES NUM-CTA-ABD07.      AMPLIA
+                       09  NUM-CTA-VEN-ABD07 PIC 9(16).                  AMPLIA
+                       09  GARANTE-VEN-ABD07 PIC 99.                     AMPLIA
+025900     03  IND-BLOQUEO-ABD07         PIC 9     COMP-3.
+026000     03  FECHA-APERT-ABD07         PIC 9(4)  COMP-3.
+026100     03  FECHA-VENC-ABD07          PIC 9(4)  COMP-3.
+026200     03  CUANTIA-ABD07             PIC 9(5)  COMP-3.
+026300     03  CALIFIC-ABD07             PIC 9     COMP-3.
+026400     03  TIP-CALIFIC-ABD07         PIC 9     COMP-3.
+026500     03  NOV-REPORT-ABD07          PIC 99    COMP-3.
+026600     03  FEC-NOVEDAD-ABD07         PIC 9(4)  COMP-3.
+026700     03  NUM-MORAS30-ABD07         PIC 99    COMP-3.
+026800     03  ESTADO-MES-ABD07          PIC 9(12) COMP-3.
+REGVEC     03  VECTOR-HIS-1-ABD07        PIC 9(12) COMP-3     *> AÑO 1   JGR0010
+REGVEC         REDEFINES                 ESTADO-MES-ABD07.               JGR0010
+026900     03  MORA-MAXIMA-ABD07         PIC 9     COMP-3.
+027000     03  ADJETIVO1-ABD07           PIC 9     COMP-3.
+027100     03  FEC-MEN-ADJ-ABD07         PIC 9(4)  COMP-3.
+027200     03  ADJETIVO2-ABD07           PIC 9     COMP-3.
+027300     03  FEC-MAY-ADJ-ABD07         PIC 9(4)  COMP-3.
+027400     03  ADJETIVO3-ABD07           PIC 9     COMP-3.
+027500     03  ART15-ABD07               PIC 9     COMP-3.
+DATCIU     03  IND-MODIFICACION-ABD07    PIC 9     COMP-3               VHF0008
+DATCIU         REDEFINES                 ART15-ABD07.                   VHF0008
+027600     03  RECLAMO-ABD07             PIC 9(5)  COMP-3.
+DATCIU     03  RECLAMO-ABD07-RR          REDEFINES RECLAMO-ABD07        FAC0008
+DATCIU                                   PIC 9(3).                      FAC0008
+DATCIU     03  RECLAMO-ABD07-R           REDEFINES RECLAMO-ABD07.       VHF0008
+DATCIU         05 IND-RECLAMO-ABD07      PIC 9(01).                     VHF0008
+REGLOC         05 REG-LOCK-ABD07         PIC 9(01).                     FAC0009 
+REGLOC         05 FILLER-RECLAMO-ABD07   PIC 9(01).                     FAC0009 
+NHC001         05 TARJ-ESTADO-PLAST-ABD07    PIC 9(1)  REDEFINES        GJC0011
+NHC001            FILLER-RECLAMO-ABD07.                                 GJC0011
+NHC001         05 REAL-TERMINO-CONTRATO-ABD07 PIC 9(1) *> 1-DEFINIDO    GJC0011
+NHC001            REDEFINES FILLER-RECLAMO-ABD07.      *> 2-INDEF       GJC0011
+NHC001         05 IND-SUBSIDIO-HIPOTEC-ABD07 PIC 9(1)  *> 0-NO          GJC0011
+NHC001            REDEFINES FILLER-RECLAMO-ABD07.      *> 1-SI          GJC0011
+MICROC*    03  IND-BLOQUEO-R-ABD07       PIC 9     COMP-3.              CAV0013
+MICROC     03  IND-BLOQUEO-R-ABD07       PIC X.                         CAV0013
+MICROC     03  TIPO-GAR-DETALLE-ABD07    PIC X   REDEFINES *> TIPO DE   CAV0013
+MICROC         IND-BLOQUEO-R-ABD07.     *> GARANTIA DETALLADO           CAV0013
+           03  CALIFIC-R-ABD07           PIC 9     COMP-3.
+           03  TIP-CALIFIC-R-ABD07       PIC 9     COMP-3.
+           03  IND-MAPA-BITS-VLR-ABD07 REDEFINES TIP-CALIFIC-R-ABD07    FAC0007
+                                         PIC 9     COMP-3.
+           03  NOV-REPORT-R-ABD07        PIC 99    COMP-3.
+           03  FEC-NOVEDAD-R-ABD07       PIC 9(4)  COMP-3.
+           03  NUM-MORAS30-R-ABD07       PIC 99    COMP-3.
+           03  MAPA-BITS-VLR-ABD07 REDEFINES NUM-MORAS30-R-ABD07        FAC0007
+                                         PIC X(02).                     FAC0007
+           03  ESTADO-MES-R-ABD07        PIC 9(12) COMP-3.
+REGVEC     03  VECTOR-HIS-3-ABD07        PIC 9(12) COMP-3     *> AÑO 3   JGR0010
+REGVEC         REDEFINES                 ESTADO-MES-R-ABD07.             JGR0010
+           03  MORA-MAXIMA-R-ABD07       PIC 9     COMP-3.
+           03  VALOR-INICIAL-ABD07       PIC 9(7)  COMP-3.               AMPLIA
+NHC001*     03  CAMPOS-ENDEUDAMIENTO. *> SE ELIMINAN PARA CREAR NUEVOS  GJC0011
+NHC001*                              *> CAMPOS                          GJC0011
+NHC001*     05  VALOR-SALDO-DEUDA-ABD07-R           OCCURS 4 TIMES.     GJC0011
+NHC001*         07  VALOR-SALDO-DEUDA-ABD07   PIC  9(7) COMP-3.         GJC0011
+NHC001*     05  VALOR-DISPONIBLE-ABD07-R            OCCURS 4 TIMES.     GJC0011
+NHC001*         07  VALOR-DISPONIBLE-ABD07    PIC  9(7) COMP-3.         GJC0011
+NHC001*     05  VALOR-SALDO-MORA-ABD07-R            OCCURS 4 TIMES.     GJC0011
+NHC001*         07  VALOR-SALDO-MORA-ABD07    PIC  9(7) COMP-3.         GJC0011
+NHC001*     05  CALIFICACION-ABD07-R                OCCURS 4 TIMES.     GJC0011
+NHC001*         07  CALIFICACION-ABD07        PIC  9    COMP-3.         GJC0011
+NHC001     03  NUEVOS-CAMPOS-HISTORIA-CREDITO.                          GJC0011
+NHC001* CAMPOS DE FECHAS QUE EXISTIAN PERO AHORA SON COMPLETAS          GJC0011
+NHC001        05  FECHA-APERTURA-ABD07       PIC 9(8)  COMP-3.          GJC0011
+NHC001        05  FECHA-VENCIMIENTO-ABD07    PIC 9(8)  COMP-3.          GJC0011
+NHC001        05  FECHA-ADJETIVO1-ABD07      PIC 9(8)  COMP-3.          GJC0011
+NHC001        05  FECHA-ADJETIVO2-ABD07      PIC 9(8) COMP-3.           GJC0011
+NHC001        05  FECHA-ADJETIVO3-ABD07      PIC 9(8)  COMP-3.          GJC0011
+NHC001* DEFINICIONES DE NUEVOS CAMPOS                                   GJC0011
+NHC001         05  ESTADO-OBLIG-ABD07         PIC 9(2)  COMP-3.         GJC0011
+NHC001         05  FECHA-ESTADO-OBLIG-ABD07   PIC 9(8)  COMP-3.         GJC0011
+NHC001         05  FECHA-ESTADO-ORIGEN-ABD07  PIC 9(8)  COMP-3.         GJC0011
+NHC001         05  FECHA-LIMITE-PAGO-ABD07    PIC 9(8)  COMP-3.         GJC0011
+NHC001         05  TARJ-FEC-ESTADO-PLAST-ABD07 PIC 9(8) COMP-3.         GJC0011
+NHC001         05  REAL-FEC-CLAUS-PERM-ABD07  PIC 9(8) COMP-3           GJC0011
+NHC001             REDEFINES TARJ-FEC-ESTADO-PLAST-ABD07.               GJC0011
+NHC001         05  FEC-SUBSIDIO-HIPOTEC-ABD07 PIC 9(8) COMP-3           GJC0011
+NHC001             REDEFINES TARJ-FEC-ESTADO-PLAST-ABD07.               GJC0011
+NHC001         05  TARJ-CLASE-ABD07           PIC 9(1)  COMP-3.         GJC0011
+NHC001         05  TARJ-FRANQUICIA-ABD07      PIC 9(1)  COMP-3.         GJC0011
+NHC001         05  PROBAB-INCUMP-ABD07        PIC 9(3)  COMP-3.         GJC0011
+RZN001*        05  FILLER                     PIC 9(1)  COMP-3.         GJC0012
+RZN001         05  RAZON-BLOQUEO-ABD07        PIC X(1).                 GJC0012
+NHC001* CONTINUAN LOS CAMPOS QUE YA EXISTIAN ANTES                      GJC0011
+           03  VALOR-SALDO-DEUDAM-ABD07   PIC 9(7)  COMP-3.              AMPLIA
+           03  VALOR-DISPONIBLEM-ABD07    PIC 9(7)  COMP-3.              AMPLIA
+           03  VALOR-SALDO-MORAM-ABD07    PIC 9(7)  COMP-3.              AMPLIA
+           03  CALIFICACIONM-ABD07        PIC 9     COMP-3.              AMPLIA
+           03  TIPO-MONEDA-ABD07          PIC 9     COMP-3.              AMPLIA
+           03  TIPO-OBLIGACION-ABD07      PIC 9     COMP-3.              AMPLIA
+           03  TIPO-GARANTIA-ABD07        PIC 9     COMP-3.              AMPLIA
+           03  CUOTAS-CANCELADAS-ABD07    PIC 9(3)  COMP-3.              AMPLIA
+           03  FECHA-DE-PAGO-ABD07        PIC 9(8)  COMP-3.              AMPLIA
+           03  TOTAL-CUOTAS-ABD07         PIC 9(3)  COMP-3.              AMPLIA
+           03  CUOTAS-EN-MORA-ABD07       PIC 9(3)  COMP-3.              AMPLIA
+           03  SITUACION-ABD07            PIC X.                         AMPLIA
+           03  FECHA-ACT-END-ABD07        PIC 9(6)  COMP-3.              AMPLIA
+NHC001     03  CAMPOS-NUEVOS-NHC-ABD07 REDEFINES FECHA-ACT-END-ABD07.   GJC0011
+NHC001         05  ESTADO-ORIGEN-ABD07        PIC 9(1)  COMP-3.         GJC0011
+NHC001         05  CAMPOS-TARJETA-ABD07.                                GJC0011
+NHC001             07 TARJ-MARCA-PRIV-ABD07   PIC 9(3)  COMP-3.         GJC0011
+NHC001             07 REAL-CLAUS-PERM-ABD07   PIC 9(3) COMP-3           GJC0011
+NHC001                REDEFINES TARJ-MARCA-PRIV-ABD07. *> MESES CLAUSULAGJC0011
+RZN001         05 SITUACION-TITULAR-ABD07 PIC 9(1)  COMP-3.*> EJ.LIQ    GJC0012
+           03  CONSECUTIVO-ABD07          PIC 99    COMP-3.              VMATCH
+           03  FECHA-MORA-MAXIMA-ABD07    PIC 9(6)  COMP-3.              AMPLIA
+           03  FECHA-ACTUALIZ-VALOR-ABD07 PIC 9(6)  COMP-3.              AMPLIA
+      *    03  FECHA-CARTERA-CASTIG-ABD07 PIC 9(6)  COMP-3.              AMPLIA
+           03  FECHA-SITUACION-ABD07      PIC 9(6)  COMP-3.              AMPINF7
+           03  VECTOR-2-ABD07             PIC 9(12) COMP-3.              AMPLIA
+REGVEC     03  VECTOR-HIS-2-ABD07         PIC 9(12) COMP-3               JGR0010
+REGVEC         REDEFINES                  VECTOR-2-ABD07.     *> AÑO 2   JGR0010
+           03  PERIODICIDAD-PAGO-ABD07    PIC 9     COMP-3.              AMPINF5
+           03  GARANTE-ABD07              PIC 9(2)  COMP-3.              AMPINF5
+           03  FORMA-PAGO-TOTAL-ABD07     PIC 9     COMP-3.              AMPINF5
+           03  MOROSIDAD-ABD07            PIC 9(3)  COMP-3.              AMPINF5
+           03  NOV-REPORT2-ABD07          PIC 9(2).                      AMPINF7
+           03  VECTOR-2-R-ABD07           PIC 9(12) COMP-3.              GJC0002
+REGVEC     03  VECTOR-HIS-4-ABD07         PIC 9(12) COMP-3    *> AÑO 4   JGR0010
+REGVEC         REDEFINES                  VECTOR-2-R-ABD07.              JGR0010
+

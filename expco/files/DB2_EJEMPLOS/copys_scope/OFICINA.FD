@@ -1,0 +1,24 @@
+REMARK* OFICINA-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE CONTIENE OFICINAS Y CIUDADES        *
+REMARK* ASOCIADAS A CADA CUENTA                                        *
+REMARK******************************************************************
+       FD  OFICINA.
+       01  REG-OFICINA.
+           03 LLAVE-OFICINA.
+              05 TIPIDE-OFICINA              PIC 9(01).
+              05 NUMIDE-OFICINA              PIC 9(11).
+              05 CODSUS-OFICINA              PIC 9(06).
+              05 CODCTA-OFICINA              PIC 9(02).
+              05 NUMCTA-OFICINA              PIC X(18).
+REMARK*    CODIGO OFICINA
+           03 CODOFI-OFICINA                 PIC X(10).
+REMARK*    NOMBRE OFICINA
+           03 NOMOFI-OFICINA                 PIC X(30).
+REMARK*    CODIGO CIUDAD ASOCIADA A LA OFICINA
+           03 CODCIU-OFICINA                 PIC 9(08) COMP-3.
+REMARK*    NOMBRE CIUDAD ASOCIADA A LA OFICINA
+           03 NOMCIU-OFICINA                 PIC X(30).
+REMARK*    FECHA DE ACTUALIZACION DEL REGISTRO
+           03 FECACT-OFICINA                 PIC 9(08) COMP-3.
+           03 FILLER                         PIC X(50).

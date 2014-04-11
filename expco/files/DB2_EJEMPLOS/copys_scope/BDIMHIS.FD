@@ -1,0 +1,18 @@
+      *BDIMHIS.V01.0001.
+      *****************************************************************
+      *MAESTRO HISTORICO DE MICROCREDITO. ALMACENA LOS TOTALES DE LOS
+      *UTLIMOS DOCE MESES POR CADA REGISTRO LLAVE.
+      *****************************************************************
+       FD  BDIMHIS.                                                     
+       01  REG-BDIMHIS.                                                 
+           03  LLAVE-BDIMHIS.                                           
+               05  IDEN-BDIMHIS.                                        
+                   07  TIPIDE-BDIMHIS   PIC 9(01).                      
+                   07  NUMIDE-BDIMHIS   PIC 9(11).                      
+               05  FECHA-BDIMHIS        PIC 9(06).                      
+               05  MORA-BDIMHIS         PIC 9(01).                      
+               05  PLAZO-BDIMHIS        PIC 9(01).                      
+           03  SECACT-BDIMHIS           PIC 9(01).                      
+           03  CANTIDAD-BDIMHIS         PIC 9(05)  COMP-3.              
+           03  VALOR-BDIMHIS            PIC 9(12)  COMP-3.              
+           03  FILLER                   PIC X(50).

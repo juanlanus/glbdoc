@@ -1,0 +1,8 @@
+******* ICBSUS-FS.v.0003
+           SELECT BDIEREES
+                  ASSIGN TO DISK NOM-BDIEREES
+                  ORGANIZATION IS INDEXED
+                  ACCESS MODE IS DYNAMIC
+                  RECORD KEY IS BDIEREES-LLAVE
+                  LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+

@@ -1,0 +1,147 @@
+      *CARACTPER-028.PROC.v.0002.
+      ******************************************************************
+      *    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 028
+      *    PARA FONDO NACIONAL DEL AHORRO.
+      ******************************************************************
+      ******************************************************************
+      * CAV0001    | CQ8189 - PRIMER VERSION CARACTOERISTICAS          *
+      * 26-OCT-2012|          FONDO NACIONAL DEL AHORRO.               *
+      * C.VELASCO. |                                                   *
+      ******************************************************************
+      * IMS0002    | CQ8984 - SE AJUSTA PARA QUE CUANDO NO ENCUENTRE   *
+      * 20-NOV-2012|          LA TASA CORRESPONDIENTE AL DIA, TRAIGA   *
+      * M.SALAMANCA|          LA DE LA ANTERIOR FECHA ENCONTRADA.      *
+      ******************************************************************
+
+       0000-LLENAR-VEC-PERSONALIZ-028.                 
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              
+               MOVE  00DEM031000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+               *>
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              
+               MOVE  00DEM032000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD   1                 TO  I-VAR-PER                          
+               MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)          
+               MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX                    
+               MOVE  00DEM033000(1:L-AUX)  TO                                 
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                                               
+               *>
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              
+               MOVE  00DEM034000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+               *>
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01DEM999TO028"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01DEM999TO028) TO L-AUX              
+               MOVE  01DEM999TO028(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+               *>
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01DEM998TO028"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01DEM998TO028) TO L-AUX              
+               MOVE  01DEM998TO028(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+               *>
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01DEM997TO028"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01DEM997TO028) TO L-AUX              
+               MOVE  01DEM997TO028(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+            .
+       0000-INICIALIZAR-CARAC-EXT-28.                                   
+      *----------------------------------------------------------------*
+      *0000-INICIALIZAR-CARAC-EXT-28.                                  *
+      *       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 28  *
+      *----------------------------------------------------------------*   
+           PERFORM  9999-CARAC-GENERALES
+           MOVE ALL "        -1" TO PER-28-NIVEL-01-DEM
+           . 
+
+       2649-PROCESE-CARACT-02XX-EXT-28.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-28.
+REMARK*     CALULO CARACTERISTICAS DESPUES DE LEER TODOS LOS REGISTOS
+REMARK******************************************************************
+           INITIALIZE REG-FNAUVRTASA SW-EXIT-FNAUVRTASA
+           MOVE ANO-CURRENT-DATE-CARACT TO AAAA-FNAUVRTASA
+           MOVE MES-CURRENT-DATE-CARACT TO MES-FNAUVRTASA
+           MOVE DIA-CURRENT-DATE-CARACT TO DIA-FNAUVRTASA
+           READ FNAUVRTASA IGNORE LOCK  INVALID KEY                      
+                  IF W-STATUS-9-FNA  =  9                           
+                    DISPLAY "*ERR* ARCHIVO FNAUVRTASA  9.."                 
+                                    W-STATUS-X-FNA                      
+                  ELSE                                                  
+                     IF W-STATUS-FNAUVRTASA  NOT =  23                     
+                       DISPLAY "*ERR* ARCHIVO  FNAUVRTASA "  
+                                      W-STATUS-FNAUVRTASA
+CQ8984               ELSE                                               IMS0002
+CQ8984                MOVE 0 TO SW-ERROR-FNA                            IMS0002
+CQ8984                START FNAUVRTASA KEY <= LLAVE-FNAUVRTASA          IMS0002
+CQ8984                 INVALID KEY                                      IMS0002
+CQ8984                   DISPLAY " FNAUVRTASA: ERROR EN START  "        IMS0002
+CQ8984                             LLAVE-FNAUVRTASA                     IMS0002
+CQ8984                   MOVE 1 TO SW-ERROR-FNA                         IMS0002
+CQ8984                END-START                                         IMS0002
+CQ8984                IF SW-ERROR-FNA = 0                               IMS0002
+CQ8984                 READ FNAUVRTASA PREVIOUS RECORD                  IMS0002
+CQ8984                    AT END                                        IMS0002
+CQ8984                       DISPLAY "*** NO SE ENCONTRO TASA ***"      IMS0002
+CQ8984                    NOT AT END                                    IMS0002
+CQ8984                       MOVE 1  TO  SW-EXIT-FNAUVRTASA             IMS0002
+CQ8984                 END-READ                                         IMS0002
+CQ8984                END-IF                                            IMS0002
+                     END-IF
+                  END-IF                                                
+              NOT INVALID KEY                                           
+                  MOVE 1  TO  SW-EXIT-FNAUVRTASA                  
+           END-READ 
+           IF SW-EXIT-FNAUVRTASA = 1
+              MOVE ZEROS TO 01DEM999TO028 01DEM997TO028
+              MOVE VLR-UVR-FNAUVRTASA TO 01DEM999TO028
+              MOVE VLR-TAS-FNAUVRTASA TO 01DEM997TO028
+           END-IF  
+           INITIALIZE REG-FNAUVRTASA SW-EXIT-FNAUVRTASA
+           COMPUTE AAAA-FNAUVRTASA = ANO-CURRENT-DATE-CARACT - 1
+           MOVE MES-CURRENT-DATE-CARACT TO MES-FNAUVRTASA
+           MOVE DIA-CURRENT-DATE-CARACT TO DIA-FNAUVRTASA
+           READ FNAUVRTASA IGNORE LOCK  INVALID KEY
+                  IF W-STATUS-9-FNA  =  9
+                    DISPLAY "*ERR* ARCHIVO FNAUVRTASA  9.."
+                                    W-STATUS-X-FNA
+                  ELSE
+                     IF W-STATUS-FNAUVRTASA  NOT =  23
+                       DISPLAY "*ERR* ARCHIVO  FNAUVRTASA "
+                                      W-STATUS-FNAUVRTASA
+CQ8984               ELSE                                               IMS0002
+CQ8984                MOVE 0 TO SW-ERROR-FNA                            IMS0002
+CQ8984                START FNAUVRTASA KEY <= LLAVE-FNAUVRTASA          IMS0002
+CQ8984                 INVALID KEY                                      IMS0002
+CQ8984                   DISPLAY " FNAUVRTASA: ERROR EN START  "        IMS0002
+CQ8984                             LLAVE-FNAUVRTASA                     IMS0002
+CQ8984                   MOVE 1 TO SW-ERROR-FNA                         IMS0002
+CQ8984                END-START                                         IMS0002
+CQ8984                IF SW-ERROR-FNA = 0                               IMS0002
+CQ8984                 READ FNAUVRTASA PREVIOUS RECORD                  IMS0002
+CQ8984                    AT END                                        IMS0002
+CQ8984                       DISPLAY "*** NO SE ENCONTRO TASA ***"      IMS0002
+CQ8984                    NOT AT END                                    IMS0002
+CQ8984                       MOVE 1  TO  SW-EXIT-FNAUVRTASA             IMS0002
+CQ8984                 END-READ                                         IMS0002
+CQ8984                END-IF                                            IMS0002
+                     END-IF
+                  END-IF
+              NOT INVALID KEY
+                  MOVE 1  TO  SW-EXIT-FNAUVRTASA
+           END-READ
+           IF SW-EXIT-FNAUVRTASA = 1
+              MOVE ZEROS TO 01DEM998TO028 
+              MOVE VLR-UVR-FNAUVRTASA TO 01DEM998TO028
+           END-IF.         

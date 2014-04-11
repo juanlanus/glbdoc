@@ -1,0 +1,9 @@
+******* VALCAMCT-FD.v.0001
+REMARK*Parametros de campos del maestro resumido ampliado 
+REMARK*con su descripcion para Cuenta Corriente
+036300*----------------------------------------------------------------*
+       FD  VALCAMCT.
+       01  REG-VALCAMCT.
+           03 NUM-CAMPO-VALCAMCT               PIC 9(2).
+           03 DES-CAMPO-VALCAMCT               PIC X(45).
+           03 FILLER-VALCAMCT                  PIC X(30).

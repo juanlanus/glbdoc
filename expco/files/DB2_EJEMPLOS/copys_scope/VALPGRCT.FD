@@ -1,0 +1,13 @@
+******* VALPGRCT-FD.v01.0001
+REMARK* Parametros de campos del maestro resumido ampliado
+REMARK* Cuenta corriente. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPGRCT.
+       01  REG-VALPGRCT.
+           03 NUM-CAMPO-VALPGRCT               PIC 9(2).
+           03 NUM-CALIF-VALPGRCT               PIC 9(2).
+           03 POR-PESO-VALPGRCT                PIC 99V99.
+           03 NUM-GRUPO-VALPGRCT               PIC 9.
+           03 IND-ACTUALIZA-VALPGRCT           PIC 9.
+           03 IND-VALIDO-VALPGRCT              PIC 9.
+           03 FILLER-VALPGRCT                  PIC X(30).

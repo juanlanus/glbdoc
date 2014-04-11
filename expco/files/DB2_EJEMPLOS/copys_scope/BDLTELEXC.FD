@@ -1,0 +1,19 @@
+REMARK*BDLTELEXC-FD.v.0001
+REMARK******************************************************************
+REMARK* ARCHIVO DE EXCLUSIONES DE TELEFONOS                            *
+REMARK******************************************************************
+      *
+      ******************************************************************
+REMARK******************************************************************
+REMARK* RGH0001       * MOD001 - ESTANDARIZACION NOMBRE DE VARIABLES   *
+REMARK* R. GALVIS H.  *          CON SUFIJO                            *
+REMARK* ENE. 01/2010  *                                                *
+REMARK* INTERSCHEMES. *                                                *
+REMARK******************************************************************
+
+       FD  BDLTELEXC.
+       01  REG-BDLTELEXC.
+           03  LLAVE-BDLTELEXC.
+MOD001*        05  TEL-EXCLU              PIC X(12).                    RGH0001
+               05  TEL-EXCLU-BDLTELEXC    PIC X(12).
+

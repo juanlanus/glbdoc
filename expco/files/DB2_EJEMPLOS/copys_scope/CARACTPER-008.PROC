@@ -1,0 +1,550 @@
+REMARK*CARACTPER-008.PROC.v.0004.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 008
+REMARK*    BANCO DE BOGOTA         
+REMARK******************************************************************
+REMARK* EHA0002     | RQ4070 - SE INCLUYE ARCHIVO DE BANCO DE BOGOTA   *
+REMARK* 22-DIC-2011 |          REQ.4070                                *
+REMARK******************************************************************
+      * CAV0003     | CQ9101 - AGREGAR CARACTERISTICAS BANCO BOGOTA    *
+      * 02-DIC-2012 |          01NUM999RO008 , 01END997RO008 Y         *
+      * C.VELASCO.  |          01END996RO008.                          *
+      ******************************************************************
+      * IMS0004     | R10743 - AGREGAR CARACTERISTICAS BANCO BOGOTA    *
+      * 13-MAR-2013 |          01END997R1008 , 01END997R2008 Y         *
+      * M.SALAMANCA.|          02END996TO008.                  CQ10743 *
+      ******************************************************************
+REMARK 0000-INICIALIZAR-CARAC-EXT-08.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-08.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 08    *
+REMARK*     PARA BANCO DE BOGOTA         
+REMARK******************************************************************
+             MOVE ALL "         -1" TO PER-08-NIVEL-01-END
+             MOVE ZEROS             TO PER-08-NIVEL-01-ENDV
+CQ9101       MOVE ALL "  -1"        TO PER-08-NIVEL-01-NUM              CAV0003
+             .
+REMARK*
+       0000-LLENAR-VEC-PERSONALIZ-008.
+REMARK******************************************************************
+REMARK*0000-LLENAR-VEC-PERSONALIZ-008.                                 *
+REMARK*     SE LLENA EL VECTOR CON LAS PERSONALIZACIONES SOLICITADAS   *
+REMARK******************************************************************
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END999RO01008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END999RO01008) TO L-AUX           
+               MOVE 01END999RO01008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END998RO01008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END998RO01008) TO L-AUX           
+               MOVE 01END998RO01008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END999R201008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END999R201008) TO L-AUX           
+               MOVE 01END999R201008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END998R201008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END998R201008) TO L-AUX           
+               MOVE 01END998R201008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END998I101008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END998I101008) TO L-AUX           
+               MOVE 01END998I101008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      *                                                                 
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END998VE01008" TO NOMBRE-VAR-PER(I-VAR-PER)      
+               MOVE FUNCTION LENGTH(01END998VE01008) TO L-AUX           
+               MOVE 01END998VE01008(1:L-AUX)      TO                    
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+RQ4070*                                                                 EHA0002
+RQ4070         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4070         MOVE "NODESEADOSBCOBO" TO NOMBRE-VAR-PER(I-VAR-PER)      EHA0002
+RQ4070         MOVE FUNCTION LENGTH(01DEM99908     ) TO L-AUX           EHA0002
+RQ4070         MOVE 01DEM99908(1:L-AUX)           TO                    EHA0002
+RQ4070                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      EHA0002
+RQ4070*                                                                 EHA0002
+CQ9101*                                                                 CAV0003
+CQ9101         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ9101         MOVE "01NUM999RO008" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ9101         MOVE FUNCTION LENGTH(01NUM999RO008) TO L-AUX             CAV0003
+CQ9101         MOVE 01NUM999RO008(1:L-AUX)           TO                 CAV0003
+CQ9101                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      CAV0003
+CQ9101*                                                                 CAV0003
+CQ9101         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ9101         MOVE "01END997RO008" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ9101         MOVE FUNCTION LENGTH(01END997RO008) TO L-AUX             CAV0003
+CQ9101         MOVE 01END997RO008(1:L-AUX)           TO                 CAV0003
+CQ9101                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      CAV0003
+CQ9101*                                                                 CAV0003
+CQ9101         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ9101         MOVE "01END996RO008" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ9101         MOVE FUNCTION LENGTH(01END996RO008) TO L-AUX             CAV0003
+CQ9101         MOVE 01END996RO008(1:L-AUX)           TO                 CAV0003
+CQ9101                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      CAV0003
+R10743         ADD 1 TO I-VAR-PER                                       IMS0004
+R10743         MOVE "01END997R1008" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0004
+R10743         MOVE FUNCTION LENGTH(01END997R1008) TO L-AUX             IMS0004
+R10743         MOVE 01END997R1008(1:L-AUX)           TO                 IMS0004
+R10743                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+R10743         ADD 1 TO I-VAR-PER                                       IMS0004
+R10743         MOVE "01END997R2008" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0004
+R10743         MOVE FUNCTION LENGTH(01END997R2008) TO L-AUX             IMS0004
+R10743         MOVE 01END997R2008(1:L-AUX)           TO                 IMS0004
+R10743                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+R10743         ADD 1 TO I-VAR-PER                                       IMS0004
+R10743         MOVE "02END996TO008" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0004
+R10743         MOVE FUNCTION LENGTH(02END996TO008) TO L-AUX             IMS0004
+R10743         MOVE 02END996TO008(1:L-AUX)           TO                 IMS0004
+R10743                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+               .
+      *                                                                 
+       2749-PROCESE-CARCT-00END-EXT-08.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-08.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00END Y 01END PARA
+REMARK*     BANCO DE BOGOTA                                        
+REMARK******************************************************************
+           MOVE ALL "         -1" TO PER-08-NIVEL-00-END
+           MOVE ALL "         -1" TO PER-08-NIVEL-00-END-TMP
+           MOVE ZEROS             TO PER-08-NIVEL-00-ENDV-TMP
+R10743     MOVE COD-SUS-ABD07     TO PER-08-COD-SUS-BBTA                IMS0004
+REMARK***  INSUMO: VECTOR NORMALIZADO DE VALORES USA
+      *
+XXXXXX*    DISPLAY LLAVE-MAES-CREDIT " " COD-PORTAF-CARACT " "
+XXXXXX*            NOV-REPORT-ABD08 " "FECHA-ESTADO-CARACT " "
+XXXXXX*            VEC-CUOTA-CARACT(I13) " " 
+XXXXXX*            VEC-INICIAL-CARACT(I13) " "
+XXXXXX*            VEC-SALDO-CARACT(I13) " " 
+              IF REG-ABIERTO-CARACT = 1
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS                            
+                    IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0
+      * VECTOR CUOTA POSICION 13
+                       IF VEC-CUOTA-CARACT(I13) >= ZEROS AND           
+                          VEC-IND-CUO-CARACT(I13) = 0                  
+                          MOVE VEC-CUOTA-CARACT(I13) TO 00ENDVCUOTA008
+                                                   00ENDCUOTA008(1:11)
+                       ELSE
+                         IF VEC-CUOTA-CARACT(I13) NOT NUMERIC          
+                          MOVE "        -88" TO 00ENDCUOTA008(1:11)
+                         END-IF
+                       END-IF
+      * VECTOR CUPOS POSICION 13
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND         
+                          VEC-IND-INI-CARACT(I13) = 0                  
+                         MOVE VEC-INICIAL-CARACT(I13) TO 00ENDVCUPOS008
+                                                    00ENDCUPOS008(1:11)
+                       ELSE
+                         IF VEC-INICIAL-CARACT(I13) NOT NUMERIC        
+                          MOVE "        -88" TO 00ENDCUPOS008(1:11)
+                         END-IF
+                       END-IF
+      * VECTOR SALDOS POSICION 13
+                       IF VEC-SALDO-CARACT(I13) >= ZEROS AND
+                          VEC-IND-SLD-CARACT(I13) = 0
+                          MOVE VEC-SALDO-CARACT(I13) TO 00ENDVSALDO008
+                                                   00ENDSALDO008(1:11)
+                       ELSE
+                         IF VEC-SALDO-CARACT(I13) NOT NUMERIC
+                          MOVE "        -88" TO 00ENDSALDO008(1:11)
+                         END-IF
+                       END-IF
+      * VECTOR SALDO MORA POSICION 13
+                       IF VEC-SALDOMOR-CARACT(I13) >= ZEROS AND
+                          VEC-IND-SLDM-CARACT(I13) = 0
+                          MOVE VEC-SALDOMOR-CARACT(I13) TO 
+                                                        00ENDVSMORO008
+                                                   00ENDSMORO008(1:11)
+                       ELSE
+                         IF VEC-SALDO-CARACT(I13) NOT NUMERIC
+                          MOVE "        -88" TO 00ENDSMORO008(1:11)
+                         END-IF
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00ENDCUOTA008(1:11)
+                       MOVE "         -4" TO 00ENDCUPOS008(1:11)
+                       MOVE "         -4" TO 00ENDSALDO008(1:11)
+                       MOVE "         -4" TO 00ENDSMORO008(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00ENDCUOTA008(1:11)
+                    MOVE "         -3" TO 00ENDCUPOS008(1:11)
+                    MOVE "         -3" TO 00ENDSALDO008(1:11)
+                    MOVE "         -3" TO 00ENDSMORO008(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00ENDCUOTA008(1:11)
+                 MOVE "         -2" TO 00ENDCUPOS008(1:11)
+                 MOVE "         -2" TO 00ENDSALDO008(1:11)
+                 MOVE "         -2" TO 00ENDSMORO008(1:11)
+              END-IF
+REMARK***  00END997RO008 *** MAXIMO CUPO EN DTC BANCO DE BOGOTA
+CQ9101     IF COD-CTA-ABD07 = 02                                        CAV0003
+CQ9101        MOVE ZEROS TO 00END997RO008                               CAV0003
+CQ9101        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND       CAV0003
+CQ9101           NIT-SUSCRIP-S-ABD02 = 860002964                        CAV0003
+CQ9101           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0003
+CQ9101              ACT-DATE-CARACT     > ZEROS                         CAV0003
+CQ9101              IF MESES-DESAC-CARACT <= 3                          CAV0003
+CQ9101                 IF (VEC-INICIAL-CARACT(I13) >= 0 AND             CAV0003
+CQ9101                     VEC-IND-INI-CARACT(I13) = 0 )                CAV0003
+CQ9101                     MOVE VEC-INICIAL-CARACT(I13) TO              CAV0003
+CQ9101                          00END997RO008                           CAV0003
+CQ9101                 ELSE                                             CAV0003
+CQ9101                    MOVE "        -88" TO 00END997RO008(1:11)     CAV0003
+CQ9101                 END-IF                                           CAV0003
+CQ9101              ELSE                                                CAV0003
+CQ9101                 MOVE "         -4" TO 00END997RO008(1:11)        CAV0003
+CQ9101              END-IF                                              CAV0003
+CQ9101           ELSE                                                   CAV0003
+CQ9101              MOVE "         -3" TO 00END997RO008(1:11)           CAV0003
+CQ9101           END-IF                                                 CAV0003
+CQ9101        ELSE                                                      CAV0003
+CQ9101           MOVE "         -2" TO 00END997RO008(1:11)              CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     END-IF                                                       CAV0003
+REMARK***  00END996RO008 *** MAXIMO CUPO TDC SIN BANCO BOGOTA
+CQ9101     IF COD-CTA-ABD07 = 02                                        CAV0003
+CQ9101        MOVE ZEROS TO 00END996RO008                               CAV0003
+CQ9101        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND       CAV0003
+CQ9101           NIT-SUSCRIP-S-ABD02 <> 860002964                       CAV0003
+CQ9101           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0003
+CQ9101              ACT-DATE-CARACT     > ZEROS                         CAV0003
+CQ9101              IF MESES-DESAC-CARACT <= 3                          CAV0003
+CQ9101                 IF (VEC-INICIAL-CARACT(I13) >= 0 AND             CAV0003
+CQ9101                     VEC-IND-INI-CARACT(I13) = 0 )                CAV0003
+CQ9101                     MOVE VEC-INICIAL-CARACT(I13) TO              CAV0003
+CQ9101                          00END996RO008                           CAV0003
+CQ9101                 ELSE                                             CAV0003
+CQ9101                    MOVE "        -88" TO 00END996RO008(1:11)     CAV0003
+CQ9101                 END-IF                                           CAV0003
+CQ9101              ELSE                                                CAV0003
+CQ9101                 MOVE "         -4" TO 00END996RO008(1:11)        CAV0003
+CQ9101              END-IF                                              CAV0003
+CQ9101           ELSE                                                   CAV0003
+CQ9101              MOVE "         -3" TO 00END996RO008(1:11)           CAV0003
+CQ9101           END-IF                                                 CAV0003
+CQ9101        ELSE                                                      CAV0003
+CQ9101           MOVE "         -2" TO 00END996RO008(1:11)              CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     END-IF                                                       CAV0003
+REMARK***  00END997R1008 *** CUPO TOTAL BANCO BOGOTA TDC
+R10743*    IF COD-CTA-ABD07 = 02  AND  NIT-SUSCRIP-S-ABD02 = 860002964  IMS0004
+R10743     IF COD-CTA-ABD07 = 02  AND  COD-SUS-BBTA                     IMS0004
+R10743        MOVE ZEROS TO 00END997R1008                               IMS0004
+R10743        IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0         IMS0004
+R10743           IF FECHA-ESTADO-CARACT > ZEROS AND                     IMS0004
+R10743              ACT-DATE-CARACT     > ZEROS                         IMS0004
+R10743              IF MESES-DESAC-CARACT <= 3                          IMS0004
+R10743                 IF (VEC-INICIAL-CARACT(I13) >= 0 AND             IMS0004
+R10743                     VEC-IND-INI-CARACT(I13) = 0 )                IMS0004
+R10743                     MOVE VEC-INICIAL-CARACT(I13) TO              IMS0004
+R10743                          00END997R1008                           IMS0004
+R10743                 ELSE                                             IMS0004
+R10743                    MOVE "        -88" TO 00END997R1008(1:11)     IMS0004
+R10743                 END-IF                                           IMS0004
+R10743              ELSE                                                IMS0004
+R10743                 MOVE "         -4" TO 00END997R1008(1:11)        IMS0004
+R10743              END-IF                                              IMS0004
+R10743           ELSE                                                   IMS0004
+R10743              MOVE "         -3" TO 00END997R1008(1:11)           IMS0004
+R10743           END-IF                                                 IMS0004
+R10743        ELSE                                                      IMS0004
+R10743           MOVE "         -2" TO 00END997R1008(1:11)              IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+REMARK***  00END997R2008 *** CUPO TOTAL BANCO BOGOTA CBR
+R10743*    IF COD-CTA-ABD07 = 03  AND  NIT-SUSCRIP-S-ABD02 = 860002964  IMS0004
+R10743     IF COD-CTA-ABD07 = 03  AND  COD-SUS-BBTA                     IMS0004
+R10743        MOVE ZEROS TO 00END997R2008                               IMS0004
+R10743        IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0         IMS0004
+R10743           IF FECHA-ESTADO-CARACT > ZEROS AND                     IMS0004
+R10743              ACT-DATE-CARACT     > ZEROS                         IMS0004
+R10743              IF MESES-DESAC-CARACT <= 3                          IMS0004
+R10743                 IF (VEC-INICIAL-CARACT(I13) >= 0 AND             IMS0004
+R10743                     VEC-IND-INI-CARACT(I13) = 0 )                IMS0004
+R10743                     MOVE VEC-INICIAL-CARACT(I13) TO              IMS0004
+R10743                          00END997R2008                           IMS0004
+R10743                 ELSE                                             IMS0004
+R10743                    MOVE "        -88" TO 00END997R2008(1:11)     IMS0004
+R10743                 END-IF                                           IMS0004
+R10743              ELSE                                                IMS0004
+R10743                 MOVE "         -4" TO 00END997R2008(1:11)        IMS0004
+R10743              END-IF                                              IMS0004
+R10743           ELSE                                                   IMS0004
+R10743              MOVE "         -3" TO 00END997R2008(1:11)           IMS0004
+R10743           END-IF                                                 IMS0004
+R10743        ELSE                                                      IMS0004
+R10743           MOVE "         -2" TO 00END997R2008(1:11)              IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+REMARK***  00END996TO008 *** SALDO TOTAL SIN BANCO BOGOTA TDC Y CBR
+R10743     IF ((COD-CTA-ABD07 = 02 OR 03)  AND  NOT COD-SUS-BBTA) OR    IMS0004
+R10743        (COD-CTA-ABD07 <> 02 AND 03)                              IMS0004
+R10743        MOVE ZEROS TO 00END996TO008                               IMS0004
+R10743        IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0         IMS0004
+R10743           IF FECHA-ESTADO-CARACT > ZEROS AND                     IMS0004
+R10743              ACT-DATE-CARACT     > ZEROS                         IMS0004
+R10743              IF MESES-DESAC-CARACT <= 3                          IMS0004
+R10743                 IF (VEC-SALDO-CARACT(I13) >= 0 AND               IMS0004
+R10743                     VEC-IND-SLD-CARACT(I13) = 0 )                IMS0004
+R10743                     MOVE VEC-SALDO-CARACT(I13) TO                IMS0004
+R10743                          00END996TO008                           IMS0004
+R10743                 ELSE                                             IMS0004
+R10743                    MOVE "        -88" TO 00END996TO008(1:11)     IMS0004
+R10743                 END-IF                                           IMS0004
+R10743              ELSE                                                IMS0004
+R10743                 MOVE "         -4" TO 00END996TO008(1:11)        IMS0004
+R10743              END-IF                                              IMS0004
+R10743           ELSE                                                   IMS0004
+R10743              MOVE "         -3" TO 00END996TO008(1:11)           IMS0004
+R10743           END-IF                                                 IMS0004
+R10743        ELSE                                                      IMS0004
+R10743           MOVE "         -2" TO 00END996TO008(1:11)              IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+REMARK***  01END999RO_01008 *** CUPOS A LA FECHA BANCO DE BOGOTA RO-01
+           IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END999RO01008
+             MOVE 00ENDCUPOS008(1:11) TO 00END999RO01008(1:11)
+             IF FUNCTION NUMVAL(00END999RO01008(1:11)) >= 0
+                COMPUTE 01ENDV999RO01008 = 01ENDV999RO01008 + 
+                                            00ENDVCUPOS008
+                MOVE 01ENDV999RO01008 TO 01END999RO01008
+             ELSE
+              IF FUNCTION NUMVAL(01END999RO01008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END999RO01008(1:11)) <
+                   FUNCTION NUMVAL(01END999RO01008(1:11))
+                   MOVE 00END999RO01008(1:11) TO 01END999RO01008(1:11)
+                END-IF
+              END-IF
+             END-IF
+           END-IF
+REMARK***  01END999R201008 *** CUPOS A LA FECHA BANCO DE BOGOTA R2-01
+           IF COD-CTA-ABD07 = 03
+             MOVE ZEROS TO 00END999R201008
+             MOVE 00ENDCUPOS008(1:11) TO 00END999R201008(1:11)
+             IF FUNCTION NUMVAL(00END999R201008(1:11)) >= 0
+                COMPUTE 01ENDV999R201008 = 01ENDV999R201008 + 
+                                            00ENDVCUPOS008
+                MOVE 01ENDV999R201008 TO 01END999R201008
+             ELSE
+              IF FUNCTION NUMVAL(01END999R201008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END999R201008(1:11)) <
+                   FUNCTION NUMVAL(01END999R201008(1:11))
+                   MOVE 00END999R201008(1:11) TO 01END999R201008(1:11)
+                END-IF
+              END-IF
+             END-IF
+           END-IF
+REMARK***  01END998RO-01008 *** SALDOS A LA FECHA BANCO DE BOGOTA RO-01
+           IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END998RO01008
+             MOVE 00ENDSALDO008(1:11) TO 00END998RO01008(1:11)
+             IF FUNCTION NUMVAL(00END998RO01008(1:11)) >= 0
+                COMPUTE 01ENDV998RO01008 = 01ENDV998RO01008 + 
+                                            00ENDVSALDO008
+                MOVE 01ENDV998RO01008 TO 01END998RO01008
+             ELSE
+              IF FUNCTION NUMVAL(01END998RO01008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998RO01008(1:11)) <
+                   FUNCTION NUMVAL(01END998RO01008(1:11))
+                   MOVE 00END998RO01008(1:11) TO 01END998RO01008(1:11)
+                END-IF
+              END-IF
+             END-IF
+           END-IF
+REMARK***  01END998R2_01008 *** SALDOS A LA FECHA BANCO DE BOGOTA R2-01
+           IF COD-CTA-ABD07 = 03
+             MOVE ZEROS TO 00END998R201008
+             MOVE 00ENDSALDO008(1:11) TO 00END998R201008(1:11)
+             IF FUNCTION NUMVAL(00END998R201008(1:11)) >= 0
+                COMPUTE 01ENDV998R201008 = 01ENDV998R201008 + 
+                                            00ENDVSALDO008
+                MOVE 01ENDV998R201008 TO 01END998R201008
+             ELSE
+              IF FUNCTION NUMVAL(01END998R201008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998R201008(1:11)) <
+                   FUNCTION NUMVAL(01END998R201008(1:11))
+                   MOVE 00END998R201008(1:11) TO 01END998R201008(1:11)
+                END-IF
+              END-IF
+             END-IF
+           END-IF                                                   
+REMARK***  01END998I1_01008 *** SALDOS A LA FECHA BANCO DE BOGOTA I1-01   
+           IF COD-CTA-ABD07 = 05
+             MOVE ZEROS TO 00END998I101008
+             MOVE 00ENDSALDO008(1:11) TO 00END998I101008(1:11)
+             IF FUNCTION NUMVAL(00END998I101008(1:11)) >= 0
+                COMPUTE 01ENDV998I101008 = 01ENDV998I101008 + 
+                                            00ENDVSALDO008
+                MOVE 01ENDV998I101008 TO 01END998I101008
+             ELSE
+              IF FUNCTION NUMVAL(01END998I101008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998I101008(1:11)) <
+                   FUNCTION NUMVAL(01END998I101008(1:11))
+                   MOVE 00END998I101008(1:11) TO 01END998I101008(1:11)
+                END-IF
+              END-IF
+             END-IF                                                  
+           END-IF
+REMARK***  01END998VE_01008 *** SALDOS A LA FECHA BANCO DE BOGOTA VE-01
+           IF COD-CTA-ABD07 = 04 OR COD-CTA-ABD07 = 45
+             MOVE ZEROS TO 00END998VE01008
+             MOVE 00ENDSALDO008(1:11) TO 00END998VE01008(1:11)
+             IF FUNCTION NUMVAL(00END998VE01008(1:11)) >= 0
+                COMPUTE 01ENDV998VE01008 = 01ENDV998VE01008 + 
+                                            00ENDVSALDO008
+                MOVE 01ENDV998VE01008 TO 01END998VE01008
+             ELSE
+              IF FUNCTION NUMVAL(01END998VE01008(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998VE01008(1:11)) <
+                   FUNCTION NUMVAL(01END998VE01008(1:11))
+                   MOVE 00END998VE01008(1:11) TO 01END998VE01008(1:11)
+                END-IF
+              END-IF
+             END-IF
+           END-IF
+REMARK***  01END997RO008 *** MAXIMO CUPO TDC BANCO BOGOTA
+CQ9101     IF FUNCTION NUMVAL(00END997RO008(1:11)) >= 0                 CAV0003
+CQ9101        IF FUNCTION NUMVAL(01END997RO008(1:11)) < 0               CAV0003
+CQ9101           MOVE ZEROS TO 01END997RO008                            CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101        IF 00END997RO008 > 01END997RO008                          CAV0003
+CQ9101          MOVE 00END997RO008 TO 01END997RO008                     CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     ELSE                                                         CAV0003
+CQ9101        IF FUNCTION NUMVAL(01END997RO008(1:11)) < 0               CAV0003
+CQ9101         IF FUNCTION NUMVAL(00END997RO008(1:11)) <                CAV0003
+CQ9101            FUNCTION NUMVAL(01END997RO008(1:11))                  CAV0003
+CQ9101            MOVE 00END997RO008(1:11) TO 01END997RO008(1:11)       CAV0003
+CQ9101         END-IF                                                   CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     END-IF                                                       CAV0003
+REMARK***  01END996RO008 *** MAXIMO CUPO TDC SIN BANCO BOGOTA
+CQ9101     IF FUNCTION NUMVAL(00END996RO008(1:11)) >= 0                 CAV0003
+CQ9101        IF FUNCTION NUMVAL(01END996RO008(1:11)) < 0               CAV0003
+CQ9101           MOVE ZEROS TO 01END996RO008                            CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101        IF 00END996RO008 > 01END996RO008                          CAV0003
+CQ9101          MOVE 00END996RO008 TO 01END996RO008                     CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     ELSE                                                         CAV0003
+CQ9101        IF FUNCTION NUMVAL(01END996RO008(1:11)) < 0               CAV0003
+CQ9101         IF FUNCTION NUMVAL(00END996RO008(1:11)) <                CAV0003
+CQ9101            FUNCTION NUMVAL(01END996RO008(1:11))                  CAV0003
+CQ9101            MOVE 00END996RO008(1:11) TO 01END996RO008(1:11)       CAV0003
+CQ9101         END-IF                                                   CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     END-IF                                                       CAV0003
+REMARK***  01END997R1008 *** CUPO TOTAL BANCO BOGOTA TDC
+R10743     IF FUNCTION NUMVAL(00END997R1008(1:11)) >= 0                 IMS0004
+R10743        IF FUNCTION NUMVAL(01END997R1008(1:11)) < 0               IMS0004
+R10743           MOVE ZEROS TO 01END997R1008                            IMS0004
+R10743        END-IF                                                    IMS0004
+R10743        COMPUTE 01END997R1008 =                                   IMS0004
+R10743                FUNCTION NUMVAL(01END997R1008) +                  IMS0004
+R10743                FUNCTION NUMVAL(00END997R1008)                    IMS0004
+R10743     ELSE                                                         IMS0004
+R10743        IF FUNCTION NUMVAL(01END997R1008(1:11)) < 0               IMS0004
+R10743         IF FUNCTION NUMVAL(00END997R1008(1:11)) <                IMS0004
+R10743            FUNCTION NUMVAL(01END997R1008(1:11))                  IMS0004
+R10743            MOVE 00END997R1008(1:11) TO 01END997R1008(1:11)       IMS0004
+R10743         END-IF                                                   IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+REMARK***  01END997R2008 *** CUPO TOTAL BANCO BOGOTA CBR
+R10743     IF FUNCTION NUMVAL(00END997R2008(1:11)) >= 0                 IMS0004
+R10743        IF FUNCTION NUMVAL(01END997R2008(1:11)) < 0               IMS0004
+R10743           MOVE ZEROS TO 01END997R2008                            IMS0004
+R10743        END-IF                                                    IMS0004
+R10743        COMPUTE 01END997R2008 =                                   IMS0004
+R10743                FUNCTION NUMVAL(01END997R2008) +                  IMS0004
+R10743                FUNCTION NUMVAL(00END997R2008)                    IMS0004
+R10743     ELSE                                                         IMS0004
+R10743        IF FUNCTION NUMVAL(01END997R2008(1:11)) < 0               IMS0004
+R10743         IF FUNCTION NUMVAL(00END997R2008(1:11)) <                IMS0004
+R10743            FUNCTION NUMVAL(01END997R2008(1:11))                  IMS0004
+R10743            MOVE 00END997R2008(1:11) TO 01END997R2008(1:11)       IMS0004
+R10743         END-IF                                                   IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+REMARK***  02END996TO008 *** SALDO TOTAL SIN BANCO BOGOTA TDC Y CBR
+R10743     IF FUNCTION NUMVAL(00END996TO008(1:11)) >= 0                 IMS0004
+R10743        IF FUNCTION NUMVAL(02END996TO008(1:11)) < 0               IMS0004
+R10743           MOVE ZEROS TO 02END996TO008                            IMS0004
+R10743        END-IF                                                    IMS0004
+R10743        COMPUTE 02END996TO008 =                                   IMS0004
+R10743                FUNCTION NUMVAL(02END996TO008) +                  IMS0004
+R10743                FUNCTION NUMVAL(00END996TO008)                    IMS0004
+R10743     ELSE                                                         IMS0004
+R10743        IF FUNCTION NUMVAL(02END996TO008(1:11)) < 0               IMS0004
+R10743         IF FUNCTION NUMVAL(00END996TO008(1:11)) <                IMS0004
+R10743            FUNCTION NUMVAL(02END996TO008(1:11))                  IMS0004
+R10743            MOVE 00END996TO008(1:11) TO 02END996TO008(1:11)       IMS0004
+R10743         END-IF                                                   IMS0004
+R10743        END-IF                                                    IMS0004
+R10743     END-IF                                                       IMS0004
+           .
+
+CQ9101 2249-PROCESE-CARCT-00NUM-EXT-08.                                 CAV0003
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-08.
+REMARK*     CALCULO CARACTERISTICAS 00NUM, 01NUM PARA BANCO BOGOTA     
+REMARK******************************************************************
+REMARK*** 00NUM999RO008 *** CANTIDAD TDC DE BANCO BOGOTA
+CQ9101    MOVE "  -1" TO 00NUM999RO008(1:4)                             CAV0003
+CQ9101    IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")                    CAV0003
+CQ9101     IF COD-CTA-ABD07 = 02                                        CAV0003
+CQ9101        MOVE ZEROS TO 00NUM999RO008                               CAV0003
+CQ9101        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0003
+CQ9101           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0003
+CQ9101              ACT-DATE-CARACT     > ZEROS                         CAV0003
+CQ9101              IF MESES-DESAC-CARACT <= 3                          CAV0003
+CQ9101                 IF NIT-SUSCRIP-S-ABD02 = 860002964               CAV0003
+CQ9101                    MOVE 1 TO 00NUM999RO008                       CAV0003
+CQ9101                 END-IF                                           CAV0003
+CQ9101              ELSE                                                CAV0003
+CQ9101                 MOVE "  -4" TO 00NUM999RO008(1:4)                CAV0003
+CQ9101              END-IF                                              CAV0003
+CQ9101           ELSE                                                   CAV0003
+CQ9101              MOVE "  -3" TO 00NUM999RO008(1:4)                   CAV0003
+CQ9101           END-IF                                                 CAV0003
+CQ9101        ELSE                                                      CAV0003
+CQ9101           MOVE "  -2" TO 00NUM999RO008(1:4)                      CAV0003
+CQ9101        END-IF                                                    CAV0003
+CQ9101     END-IF                                                       CAV0003
+CQ9101    END-IF                                                        CAV0003
+REMARK*** 01NUM999RO008 *** CANTIDAD TDC DE BANCO BOGOTA
+CQ9101    IF FUNCTION NUMVAL(00NUM999RO008(1:4)) >= 0                   CAV0003
+CQ9101       IF FUNCTION NUMVAL(01NUM999RO008(1:4)) < 0                 CAV0003
+CQ9101          MOVE ZEROS TO 01NUM999RO008                             CAV0003
+CQ9101       END-IF                                                     CAV0003
+CQ9101       COMPUTE 01NUM999RO008 = 01NUM999RO008 + 00NUM999RO008      CAV0003
+CQ9101    ELSE                                                          CAV0003
+CQ9101       IF FUNCTION NUMVAL(01NUM999RO008(1:4)) < 0                 CAV0003
+CQ9101          IF FUNCTION NUMVAL(00NUM999RO008(1:4)) <                CAV0003
+CQ9101             FUNCTION NUMVAL(01NUM999RO008(1:4))                  CAV0003
+CQ9101             MOVE 00NUM999RO008(1:4) TO 01NUM999RO008(1:4)        CAV0003
+CQ9101          END-IF                                                  CAV0003
+CQ9101       END-IF                                                     CAV0003
+CQ9101    END-IF                                                        CAV0003
+CQ9101    .                                                             CAV0003
+
+RQ4070*----------------------------------------------------------------*EHA0002
+RQ4070* SE PROCESAN LAS CARACTERISTICAS NIVEL 02                       *EHA0002
+RQ4070*----------------------------------------------------------------*EHA0002
+RQ4070 2649-PROCESE-CARACT-02XX-EXT-08.                                 EHA0002
+RQ4070     PERFORM 5200-LEA-INDEX-CLIENTBCOBOG                          EHA0002
+RQ4070     .                                                            EHA0002
+

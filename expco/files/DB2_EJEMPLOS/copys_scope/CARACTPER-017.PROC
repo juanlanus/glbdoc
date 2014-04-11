@@ -1,0 +1,50 @@
+      *CARACTPER-017.PROC.v.0001.
+      ******************************************************************
+      *    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 017
+      *    PARA LEASING BOLIVAR.      
+      ******************************************************************
+      ******************************************************************
+      * IMS0001    | CQ5519 - Leasing Bolivar.                         *
+      * 15-ABR-2012|    REQ. CQ. 5519.                                 *
+      * M.SALAMANCA|                                                   *
+      ******************************************************************
+      ** Caracteristicas: SE TOMA DEFINICION Y CALCULO DEL CARACTPER-014
+      *   Tipología DEM : Nivel 00                                      
+      * CO00DEM031000 = AÑO DE CONSULTA     9999                        
+      * CO00DEM032000 = MES DE CONSULTA     99
+      * CO00DEM033000 = DIA DE CONSULTA     99
+      * CO00DEM034000 = SALARIO MINIMO      99999.999                   
+      *                                                                 
+       0000-LLENAR-VEC-PERSONALIZ-017.                 
+      * 1                                                               
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              
+               MOVE  00DEM031000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+      * 2                                                               
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              
+               MOVE  00DEM032000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 3                                                                     
+               ADD   1                 TO  I-VAR-PER                          
+               MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)          
+               MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX                    
+               MOVE  00DEM033000(1:L-AUX)  TO                                 
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                                               
+      * 4                                                               
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              
+               MOVE  00DEM034000(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+            .
+       0000-INICIALIZAR-CARAC-EXT-17.                                   
+      *----------------------------------------------------------------*
+      *0000-INICIALIZAR-CARAC-EXT-17.                                  *
+      *       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 17  *
+      *----------------------------------------------------------------*   
+           PERFORM  9999-CARAC-GENERALES
+           .                                                           

@@ -1,0 +1,74 @@
+      * BDUHDIR0001-FD.V01.005.
+      * MAESTRO HISTORICO DE DIRECCIONES POR CADA DIRECCION MODIFICADA
+      * POR LOS DIFERENTES SUSCRIPTORES. ALMACENA EL REGISTRO COMO ESTABA
+      * ANTES DE LA MODIFICACION
+REMARK******************************************************************
+REMARK* FAC0002      * AMPDIR: SE REORGANIZA Y AMPLIA LA ESTRUCTURA DEL
+REMARK* F.CUADROS C. * MAESTRO DE DIRECCIONES POR ENTRADA DE MAESTROS DE
+REMARK* FEC.16/2006  * DATACLIENTES.
+      *----------------------------------------------------------------*
+REMARK* FAC0003      * RCNCER: OPTIMIZACIÓN DEL PRODUCTO RECONOCER     
+REMARK* F.CUADROS C. * 
+REMARK* JUL.18/2006  *
+      *----------------------------------------------------------------*
+REMARK* CAV0004      * BDACSV - INCLUIR INDICADOR PARA DETERMINAR SI   *
+REMARK* C VELASCO    *          EL REGISTRO CORRESPONDE A UNA CUENTA   *
+REMARK* AGO/27/2007  *          SIN VALIDAR IDENTIFICACION             *
+REMARK******************************************************************
+REMARK* VHF0005     * FASEII - DENTRO DE LA OPTIMIZACION DE RECONOCER *
+REMARK* VICTOR HUGO  *          SE ADICIONAN FECHAS INDEPENDIENTES PARA*
+REMARK* FORERO       *          CADA TIPO DE DATOS DE LOCALIZACION     *
+REMARK* JUL.25/2008  *                                                 *
+REMARK******************************************************************
+       FD  MAESTRO-BDUHDIR.
+       01  REG-BDUHDIR.           
+           03  LLAVE-BDUHDIR.               
+               05  LLAVE-PRI-BDUHDIR.
+                   07  TIPO-ID-BDUHDIR    PIC 9(01).
+AMPDIR             07  NUM-ID-BDUHDIR     PIC 9(13).                    FAC0002 
+               05  LLAVE-ALT-BDUHDIR.
+                   07  COD-SUS-BDUHDIR    PIC 9(06).
+                   07  COD-CTA-BDUHDIR    PIC 9(02).
+                   07  NUM-CTA-BDUHDIR    PIC X(18).
+               05  LLAVE-CONSEC-BDUHDIR.
+                   07  NUM-CONSEC-BDUHDIR PIC 9(3).
+AMPDIR     03  FECAPE-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+AMPDIR     03  FECCRE-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+AMPDIR     03  FECACT-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+AMPDIR     03  CIURES-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DPTRES-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DIRRES-BDUHDIR             PIC X(60).                    FAC0002 
+AMPDIR     03  TELRES-BDUHDIR             PIC 9(12) COMP-3.             FAC0002 
+AMPDIR     03  FECRES-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+FASEII     03  FECDRES-BDUHDIR REDEFINES FECRES-BDUHDIR PIC 9(6) COMP-3.VHF0005
+AMPDIR     03  CIULAB-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DPTLAB-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DIRLAB-BDUHDIR             PIC X(60).                    FAC0002 
+AMPDIR     03  TELLAB-BDUHDIR             PIC 9(12) COMP-3.             FAC0002 
+AMPDIR     03  FECLAB-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+FASEII     03  FECDLAB-BDUHDIR REDEFINES FECLAB-BDUHDIR PIC 9(6) COMP-3.VHF0005
+AMPDIR     03  CIUCOR-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DPTCOR-BDUHDIR             PIC X(20).                    FAC0002 
+AMPDIR     03  DIRCOR-BDUHDIR             PIC X(60).                    FAC0002 
+AMPDIR     03  FECCOR-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+FASEII     03  FECDCOR-BDUHDIR                                          VHF0005.
+FASEII         REDEFINES FECCOR-BDUHDIR PIC 9(06) COMP-3.               VHF0005
+AMPDIR     03  E-MAIL-BDUHDIR             PIC X(40).                    FAC0002 
+AMPDIR     03  TELCEL-BDUHDIR             PIC 9(12) COMP-3.             FAC0002 
+AMPDIR     03  FECOTR-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+FASEII     03  FECCEL-BDUHDIR REDEFINES FECOTR-BDUHDIR PIC 9(6) COMP-3. VHF0005
+           03  FECSIS-BDUHDIR             PIC 9(06) COMP-3.
+AMPDIR     03  FECSUS-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+AMPDIR     03  FECULT-BDUHDIR             PIC 9(06) COMP-3.             FAC0002 
+RCNCER     03  CERRES-BDUHDIR             PIC 9(01).                    FAC0003 
+RCNCER     03  ADIRES-BDUHDIR             PIC 9(02).                    FAC0003 
+RCNCER     03  CERLAB-BDUHDIR             PIC 9(01).                    FAC0003 
+RCNCER     03  ADILAB-BDUHDIR             PIC 9(02).                    FAC0003 
+RCNCER     03  CERCOR-BDUHDIR             PIC 9(01).                    FAC0003 
+RCNCER     03  ADICOR-BDUHDIR             PIC 9(02).                    FAC0003 
+BDACSV     03  INDCSV-BDUHDIR             PIC 9(01).                    CAV0004 
+FASEII     03  FECTRES-BDUHDIR            PIC 9(06) COMP-3.             VHF0005
+FASEII     03  FECTLAB-BDUHDIR            PIC 9(06) COMP-3.             VHF0005
+FASEII     03  FECMAIL-BDUHDIR            PIC 9(06) COMP-3.             VHF0005
+FASEII*    03  FILLER-BDUHDIR             PIC X(40).                    VHF0005
+FASEII     03  FILLER-BDUHDIR             PIC X(28).                    VHF0005

@@ -1,0 +1,1094 @@
+      *AMNISTIA21.PROC.v.0012 
+REMARK* OJO CAMBIO PARA QUE APLIQUE CON 2n y no 2n+1 y solo hasta que
+REMARK* FISICAMENTE SE HAYA RECIBIDO LA INFORMACIÓN
+REMARK****************************************************************
+
+      * 21/01/2009 
+      ******************************************************************
+      *  Interpretación técnica de la Aplicación la ley de habeas data
+      *  para Datacredito según la discusión del documento
+      *  "Amnistía - temas por definir" y la aplicación de las
+      *  definiciones dadas.
+      *
+      *  La aplicación de la amnistía a cuentas para un individuo
+      *  se otorgará solo bajo las siguiente condiciones:
+      *
+      *  Para cualquier fecha de consulta al individuo después de
+      *  la aprobación o vigencia de la ley
+      *
+      * -> Sí el individuo está al día en todas sus obligaciones
+      *   (sin importar fecha de actualización)
+      *
+      * ->	Sí el individuo tiene cuentas canceladas que hayan
+      *    tenido mora y llevan un año o más de cancelación
+      *
+      * -> Sí la fecha de la consulta está dentro del
+      *    periodo de gracia
+      *
+      *    = Se deben amnistiar dichas cuentas canceladas
+      *
+      * -> Sí la fecha de la consulta es posterior al
+      *    periodo de gracia
+      *
+      *    -> Sí no existe ninguna mora después del
+      *       periodo de gracia
+      *
+      *       = Se deben amnistiar dichas cuentas canceladas
+      ******************************************************************
+      *  Colorarios:
+      *
+      * - Solo se amnistían las cuentas canceladas que tuvieron mora
+      *
+      * - El derecho a la amnistía de obligaciones se pierde si incurre
+      *   en mora el individuo después del periodo de gracia
+      *
+      * - Solo se tiene el derecho a la amnistía de cuentas si el
+      *   individuo está con todas sus obligaciones al día
+      *
+      ******************************************************************
+      * DLM0002    | HISTOR - PERMITIR EJECUCION HISTORICA DE LA AMNIS-*
+      * 29-JUL-2008|    TIA. LA VARIABLE WS-FECHA-HISTORICA DESDE EL   *
+      * DARIO LASSO|    PROGRAMA DEBE COLOCARSE CON LA FECHA DESEADA.  *
+      *            | AJUST1 - AJUSTES A LAS RUTINA DE CALCULO DE AMNIS-*
+      *            |          TIA CON 48 POSICIONES                    *
+      ******************************************************************
+      * CAV0003    | MORVEC - NO ASUMIR EL ESTADO DEL VECTOR PARA EL   *
+      * 19-DIC-2008|    MES EN QUE SE HACE LA CONSULTA. SE CAMBIA LA   *
+      * C. VELASCO |    CONDICION DE PRIMERA MORA DEL VECTOR DE MENOR  *
+      *            |    A 12 MESES PARA NO AMNISTIAR A MENOR IGUAL A 12*
+      ******************************************************************
+      * GJC0004    | LEY002 - POR SOLICITUD DE JURIDICO SE DEBE APLICAR*
+      * 21-ENE-2009|    AMNISTIA A CARTERAS RECUPERADAS Y CANCELADAS   *
+      * G. JIMENEZ |    POR MAL MANEJO AUNQUE NO TENGAN MORA MAXIMA >  *
+      *            |    QUE 0. O VECTOR SIN HISTORIA                   *
+      ******************************************************************
+      * GJC0005    | LEY003 - SE DEJA EL PERDON DE LAS CARTERAS RECUPE-*
+      * 19-MAR-2009|    RADAS Y CANCELADAS POR MAL MANEJO CON IGUAL    *
+      * G. JIMENEZ |    MANEJO QUE CUALQUIER OTRA CUENTA QUE HAYA TENI-*
+      *            |    DO MORA.                                       *
+      ******************************************************************
+      * GJC0006    | LEY004 - APLICACION DE ARTICULO 13 DE LA LEY 1266 *
+      * 28-ENE-2009|    CORRESPONDIENTE A LA APLICACION DE CADUCIDADES *
+      * G. JIMENEZ |    EN UN TIEMPO CORRESPONDIENTE AL DOBLE DE LA    *
+      *            |    MORA                                           *
+      ******************************************************************
+      * GJC0007    | LEY005 - AJUSTE A RECALCULO DE NOVEDAD PARA QUE SI*
+      * 05-JUN-2009|    HAY CARTERA RECUPERADA O CANCELADA POR MAL MANE*
+      * G. JIMENEZ |    JO SIN MORAS SOLO SE PERDONE EL ESTADO SI LA   *
+      *            |    CUENTA TUVO PERDON DE OTRA FORMA NO            *
+      ******************************************************************
+      * GJC0008    | LEY006 - AJUSTE PARA QUE CUANDO EN EL MES QUE SE  *
+      * 09-JUN-2009|   CUMPLE EL TIEMPO DEL PERDON HAY MORA PARA LA    *
+      * G. JIMENEZ |   IDENTIFICACION Y HAY QUE HACER DESPLAZAMIENTO SE*
+      *            |   APLIQUE EL PERDON ADECUADAMENTE                 *
+      *            |   SE TOMA LA FECHA DEL CURRENT DATE POR CADA TRAN-*
+      *            |   SACCION QUE ENTRA A LA RUTINA
+      ******************************************************************
+      * GJC0009    | LEY007 - SE CAMBIA LA APLICACION DE ARTICULO 13 DE*
+      * 26-JUN-2009|   POR PERSONA A POR CUENTA                        *
+      * G. JIMENEZ |                                                   *
+      ******************************************************************
+      * GJC0010    | BBVA01 - SE CREA LOGICA PARA QUE EN LA REVISION DE*
+      * AGOSTO-2009|   LA AMNISTIA CUANDO SE MIRA AL CLIENTE SE ELIMINE*
+      * G. JIMENEZ |   LA REVISION DE CUENTAS DEL BBVA                 *
+      ******************************************************************
+      * GJC0011    | DBLMOR - SE CONTEMPLA EL CASO EN QUE EL TIEMPO EN *
+      * AGOSTO-2011|   MORA HAYA SIDO MAYOR DE 24 MESES Y EL DOBLE DE  *
+      * G. JIMENEZ |   ESTAS MORAS SIEMPRE DEBE SER 48                 *
+      *            | PRSCRP - CUANDO UNA CUENTA TIENE PRESCIPCION NO SE*
+      *            |   PUEDE APLICAR ARTÍCULO 21 PORQUE FINALMENTE NO  *
+      *            |   PAGO Y SIEMPRE SE APLICA ARTICULO 13 A MENOS QUE*
+      *            |   EL VECTOR SOLO TENGA MORAS DE 120 Y CEROS       *
+      ******************************************************************
+      * GJC0012    | CADUC1 - SE HACEN LOS CAMBIOS NECESARIOS PARA     *
+      * G. JIMENEZ |          HACER CADUCIDAD SOBRE EL VECTOR ANTES DE *
+      * 23-ENE-2009|          INICIAR APLICACION DE ARTICULO 13        *
+      *            | ESTA48 - SI SE APLICÓ ARTICULO 13 O CADUCIDAD 
+      ******************************************************************
+      
+      
+      *200700-AMNISTIA-CLIENTES.                                       *
+      * RUTINA QUE LEE EL ARCHIVO DE CARTERA PARA                      *
+      * DETERMINAR SI EL CLIENTE ES OBJETO DE BENEFICIO DE AMNISTIA    *
+      ******************************************************************
+       200700-AMNISTIA-CLIENTES.
+LEY007*    PERFORM 200711-CALCULE-FECHA-HOY.                            GJC0009
+           IF SW-FCHGRACIA-LEEMSTRS = ZEROS
+              IF FECHA-INI-AMNIST21 = ZEROS
+                 PERFORM 200710-VALIDAR-FECHA-INI-AMNI
+              END-IF
+              COMPUTE MES-GRACIA-AMNIST21 = MES-INI-AMNIST21 + 
+                                       MESES-GRACIA-AMNIST21
+              MOVE  ANO-INI-AMNIST21  TO  ANO-GRACIA-AMNIST21
+              IF MES-GRACIA-AMNIST21 > 12
+                 COMPUTE MES-GRACIA-AMNIST21 = MES-GRACIA-AMNIST21 - 12
+                 ADD   1         TO  ANO-GRACIA-AMNIST21
+              END-IF
+              MOVE 1 TO SW-FCHGRACIA-LEEMSTRS
+           END-IF
+LEY007     PERFORM 200711-CALCULE-FECHA-HOY.                            GJC0009
+           IF FECHA-SYS-AMNIST21 >= FECHA-INI-AMNIST21
+              IF TIPO-ID-ABD07 <> TIPO-ID-INI-AMNIST21  OR
+                 NUM-ID-ABD07  <> NUME-ID-INI-AMNIST21
+                 MOVE TIPO-ID-ABD07 TO TIPO-ID-INI-AMNIST21
+                 MOVE NUM-ID-ABD07  TO NUME-ID-INI-AMNIST21
+                 PERFORM 5000-EXAMINAR-AMINISTIA-PERSONA
+              END-IF
+           END-IF.
+ 
+      ******************************************************************
+       200710-VALIDAR-FECHA-INI-AMNI.
+      ******************************************************************
+           DISPLAY VAR-AMBIENTE-AMNIST21 UPON ENVIRONMENT-NAME    
+           ACCEPT VAR-AMBIENTE-AMNIST21 FROM ENVIRONMENT-VALUE  
+           IF VAR-AMBIENTE-AMNIST21 = "FECHA_AMNI"
+              DISPLAY 
+               "NO SE HA FIJADO LA VARIABLE DE AMBIENTE DE AMNISTIA"
+              STOP RUN
+           ELSE
+              IF VAR-AMBIENTE-AMNIST21 = SPACES
+                 MOVE 208001 TO FECHA-INI-AMNIST21
+                 MOVE 1 TO VERSION-AMNIST21
+                 DISPLAY "EJECUCION SIN TOMAR AMNISTIA "
+                          FECHA-INI-AMNIST21
+              ELSE
+                 MOVE VAR-AMBIENTE-AMNIST21(1:6) TO FECHA-INI-AMNIST21
+                 IF ANO-INI-AMNIST21 > 2007 AND < 2030 AND
+                    MES-INI-AMNIST21 > 0 AND < 13
+                    DISPLAY 
+                    "EJECUCION DE PROG CON AMNISTIA INICIADO EN "
+                     FECHA-INI-AMNIST21
+                    MOVE VAR-AMBIENTE-AMNIST21(7:1) TO VERSION-AMNIST21
+                    IF VERSION-AMNIST21 > 0 AND < 3
+                       DISPLAY
+                      "EJECUCION DE PROG CON AMNISTIA CON RUTINA  "
+                       VERSION-AMNIST21    
+                    ELSE
+                       DISPLAY
+                      "LA VERSION DE RUTINA DE AMNISTIA ES INVALIDA "
+                       VERSION-AMNIST21
+                       STOP RUN
+                    END-IF
+                 ELSE
+                    DISPLAY 
+                    "FECHA DE EJECUCION DE AMNISTIA INVALIDA "
+                     FECHA-INI-AMNIST21
+                    STOP RUN
+                 END-IF
+              END-IF
+           END-IF.
+LEY006     PERFORM 200711-CALCULE-FECHA-HOY.                            GJC0008
+LEY007 200711-CALCULE-FECHA-HOY.                                        GJC0009
+REMARK******************************************************************
+REMARK* 200711-CALCULE-FECHA-HOY.
+REMARK* SE ASIGNA LA FECHA DEL DÍA PARA PODER REALIZAR EL MANEJO DE PROCESOS
+REMARK* HISTORICOS
+REMARK******************************************************************
+LEY007        MOVE  FUNCTION CURRENT-DATE TO  FECHA-HOY-AMNIST21        GJC0009
+LEY007        DISPLAY VAR-AMB-HOY-AMNIST21 UPON ENVIRONMENT-NAME        GJC0009
+LEY007        ACCEPT VAR-AMB-HOY-AMNIST21 FROM ENVIRONMENT-VALUE        GJC0009
+LEY007        IF VAR-AMB-HOY-AMNIST21(1:9) = "FECHA_HOY"                GJC0009
+LEY007           MOVE  FUNCTION CURRENT-DATE TO  FECHA-HOY-AMNIST21     GJC0009
+LEY007        ELSE                                                      GJC0009
+LEY007           IF VAR-AMB-HOY-AMNIST21 = SPACES                       GJC0009
+LEY007              MOVE  FUNCTION CURRENT-DATE TO  FECHA-HOY-AMNIST21  GJC0009
+LEY007           ELSE                                                   GJC0009
+LEY007              MOVE VAR-AMB-HOY-AMNIST21 TO VAR-FEC-AMB-AMNIST21   GJC0009
+LEY007              IF (ANO-VAR-FEC-AMB-AMNIST21 < 2000 OR > 2030) OR   GJC0009
+LEY007                 (MES-VAR-FEC-AMB-AMNIST21 < 1 AND > 12) OR       GJC0009
+LEY007                 (DIA-VAR-FEC-AMB-AMNIST21 < 1 AND > 31)          GJC0009
+LEY007                 DISPLAY "FECHA DE VARIABLE DE AMBIENTE FECHA-HOY"GJC0009
+LEY007                 DISPLAY "ES INVALIDA, SE TOMA FECHA DEL DIA DE"  GJC0009
+LEY007                 DISPLAY "HOY"                                    GJC0009
+LEY007              ELSE                                                GJC0009
+LEY007                 MOVE VAR-FEC-AMB-AMNIST21 TO FECHA-HOY-AMNIST21  GJC0009
+LEY007              END-IF                                              GJC0009
+LEY007           END-IF                                                 GJC0009
+LEY007        END-IF                                                    GJC0009
+LEY007     IF SW-FCHGRACIA-LEEMSTRS = 0                                 GJC0009
+LEY007     DISPLAY                                                      GJC0009
+LEY007     "PARA APLICACION DE ARTICULO 13 SE TOMA COMO FECHA DEL DIA " GJC0009
+LEY007     FECHA-HOY-AMNIST21                                           GJC0009
+LEY007     END-IF.                                                      GJC0009
+         
+      ******************************************************************
+       5000-EXAMINAR-AMINISTIA-PERSONA.
+      ******************************************************************
+           MOVE  0     TO SW-AMNIST21
+AJUST1     INITIALIZE   WORK-CLIENTE-AMNIST21                           CAV0002
+LEY004     MOVE  LLAVE-MAES-CREDIT TO  LLAVE-INI-AMNIST21               GJC0006
+LEY004     MOVE  TIPO-ID-ABD07     TO  TIPO-ID-MAES-AMNIST21            GJC0006
+LEY004     MOVE  NUM-ID-ABD07      TO  NUM-ID-MAES-AMNIST21             GJC0006
+LEY004     MOVE  REG-SUSCRIPTOR    TO  REG-SUSCRIPTOR-AMNISTIA21        GJC0006
+LEY004     INITIALIZE VECTOR-MORAS-IDE-13-AMNIST21 REPLACING            GJC0006
+LEY004             ALPHANUMERIC DATA BY CINCOS-AMNIST21                 GJC0006
+LEY004     MOVE   0   TO  SW-AMNIST21                                   GJC0006
+LEY004     MOVE 999 TO MESES-FALTAN-AMNIST21                            GJC0006
+LEY004     PERFORM 200710-READ-ICMCRE-AMNISTIA                          GJC0006
+LEY004     IF MORAS-ACTUAL-AMNIST21 = ZEROS                             GJC0006
+LEY004        IF VERSION-AMNIST21 = 1                                   GJC0006
+LEY004           IF CTAS-MAY12-AMNIST21 = 1                             GJC0006
+LEY004              MOVE 1 TO SW-AMNIST21                               GJC0006
+LEY004           END-IF                                                 GJC0006
+LEY004        ELSE                                                      GJC0006
+LEY004           IF CTAS-MAY12-AMNIST21 = 1 AND                         GJC0006
+LEY004              CTAS-MEN12-AMNIST21 = 0                             GJC0006
+LEY004              MOVE 1 TO SW-AMNIST21                               GJC0006
+LEY004           END-IF                                                 GJC0006
+LEY004        END-IF                                                    GJC0006
+LEY004     END-IF                                                       GJC0006
+LEY004     PERFORM 200800-RESTAURAR-REGISTROS.                          GJC0006
+LEY004*    END-IF.                                                      GJC0006
+
+      ******************************************************************
+      *200710-READ-ICMCRE-AMNISTIA.                                    *
+      * RUTINA ENCARGADA DE LEER EL MAESTRO DE CARTERA  ICMCRE         *
+      ******************************************************************
+       200710-READ-ICMCRE-AMNISTIA.
+           INITIALIZE        LLAVE-MAES-CREDIT
+           MOVE  TIPO-ID-MAES-AMNIST21  TO  TIPO-ID-ABD07
+           MOVE  NUM-ID-MAES-AMNIST21   TO  NUM-ID-ABD07
+           START MAESTRO-CREDIT  KEY NOT < LLAVE-MAES-CREDIT
+                 INVALID KEY
+                         MOVE 9 TO TIPO-ID-ABD07
+                 NOT INVALID KEY
+                         READ MAESTRO-CREDIT NEXT
+                                  AT  END
+                                      MOVE 9 TO TIPO-ID-ABD07
+                         END-READ
+           END-START
+           PERFORM UNTIL TIPO-ID-ABD07 NOT = TIPO-ID-MAES-AMNIST21 OR
+LEY004                   NUM-ID-ABD07  NOT = NUM-ID-MAES-AMNIST21       GJC0006
+LEY004*                         MORAS-ACTUAL-AMNIST21 > ZEROS           GJC0006
+BBVA01           IF COD-SUS-ABD07 = 020050 OR 030050 OR 050050 OR       GJC0010
+BBVA01                              130050                              GJC0010
+BBVA01              MOVE 4 TO IND-BLOQUEO-ABD07                         GJC0010
+BBVA01           END-IF                                                 GJC0010
+                 IF NOV-REPORT-ABD07 > 0 AND NOV-REPORT-ABD07 < 51
+                    PERFORM 8000-U-VER-CTAABD07-BDAMATCH
+                    IF IND-BLOQUEO-ABD07 = 0
+                       MOVE COD-SUS-ABD07 TO COD-SUSCRIP-ABD02
+                       READ SUSCRIPTOR  IGNORE LOCK
+                         INVALID KEY MOVE 0 TO ESTADO-ABD02
+                       END-READ
+                       IF ESTADO-ABD02 = 1 
+LEY004                    IF MORAS-ACTUAL-AMNIST21 = 0                  GJC0006
+LEY004                       PERFORM 200720-AMNIST-OBLIGACIONES         GJC0006
+LEY004                    END-IF                                        GJC0006
+LEY007* SE DEBE HABILITAR ESTE LLAMADO SI SE QUIERE PERDON POR PERSONA  GJC0009
+LEY007* Y NO POR CUENTA                                                 GJC0009
+LEY007*PER                PERFORM 200760-LLENAR-VEC-MORAS-PERS          GJC0009
+                       END-IF
+                    END-IF
+                 END-IF
+                 READ MAESTRO-CREDIT NEXT
+                      AT  END
+                          MOVE 9 TO TIPO-ID-ABD07
+                 END-READ
+           END-PERFORM.
+
+      ******************************************************************
+      *200720-AMNIST-OBLIGACIONES.                                     *
+      * DETERMINA SI EXISTEN MORAS ACTUALES Y LOS REGISTROS CON MORA   *
+      * CANCELADOS QUE CULPLIERON EL TIEMPO ESTIPULA EN LA LEY (1 AÑO) *
+      ******************************************************************
+       200720-AMNIST-OBLIGACIONES.
+           IF NOV-CART-CODINT-AMNIST21(NOV-REPORT-ABD07) = 12 OR 13
+                                                           OR 14 OR 15
+                                                           OR 09 OR 11
+              ADD 1 TO MORAS-ACTUAL-AMNIST21
+           END-IF
+PRSCRP     IF ESTADO-OBLIG-ABD07 = 10                                   GJC0011
+PRSCRP        ADD 1 TO MORAS-ACTUAL-AMNIST21                            GJC0011
+PRSCRP     END-IF                                                       GJC0011
+           IF MORAS-ACTUAL-AMNIST21 = ZEROS AND
+LEY002       ((MORA-MAXIMA-ABD07 > ZEROS OR MORA-MAXIMA-R-ABD07 > ZEROS)GJC0004
+LEY002        OR (NOV-REPORT-ABD07 = 03 OR 46))                         GJC0004
+              PERFORM 200740-VER-ANTIGUEDAD-MORAS
+           END-IF.
+
+      ******************************************************************
+      *200740-VER-ANTIGUEDAD-MORAS.                                    *
+      * DETERMINA SI HAY MORAS MAYORES O MENORES A UN AÑO              *
+      ******************************************************************
+       200740-VER-ANTIGUEDAD-MORAS.
+           MOVE ZEROS TO MESES-VEC-AMNIST21 VECT1-AMNIST21 
+                         VECTOR-TOT-AMNIST21 MESES-GRC-AMNIST21
+                         VECT2-AMNIST21 VECT3-AMNIST21 VECT4-AMNIST21
+LEY004     PERFORM 200745-CALCULAR-MESES-A-HOY                          GJC0006
+           IF MESES-NOV-AMNIST21 >= 12
+              MOVE ZEROS TO MESES-VEC-AMNIST21
+           ELSE
+              COMPUTE MESES-VEC-AMNIST21 = MESES-CANCELAC-AMNIST21 -
+                      MESES-NOV-AMNIST21
+           END-IF
+           IF FEC-NOVEDAD-AMNIST21 > FECHA-GRACIA-AMNIST21
+              COMPUTE MESES-GRC-AMNIST21 =
+                   (ANO-NOV-AMNIST21 * 12 + MES-NOV-AMNIST21) -
+                   (ANO-GRACIA-AMNIST21 * 12 + MES-GRACIA-AMNIST21)
+           ELSE
+              MOVE ZEROS TO MESES-GRC-AMNIST21
+           END-IF
+              MOVE VECTOR-HIS-1-ABD07  TO VECT1-AMNIST21
+              MOVE VECTOR-HIS-2-ABD07  TO VECT2-AMNIST21
+              MOVE VECTOR-HIS-3-ABD07  TO VECT3-AMNIST21
+              MOVE VECTOR-HIS-4-ABD07  TO VECT4-AMNIST21
+              MOVE  1 TO K-AMNIST21
+              MOVE 12 TO L-AMNIST21
+              PERFORM UNTIL L-AMNIST21 = 0
+                MOVE VECT1-AMNIST21 (L-AMNIST21:1) TO
+                     VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                ADD 1 TO K-AMNIST21
+                SUBTRACT 1 FROM L-AMNIST21
+              END-PERFORM
+              MOVE 12 TO L-AMNIST21
+              PERFORM UNTIL L-AMNIST21 = 0
+                MOVE VECT2-AMNIST21 (L-AMNIST21:1) TO
+                     VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                ADD 1 TO K-AMNIST21
+                SUBTRACT 1 FROM L-AMNIST21
+              END-PERFORM
+              MOVE 12 TO L-AMNIST21
+              PERFORM UNTIL L-AMNIST21 = 0
+                MOVE VECT3-AMNIST21 (L-AMNIST21:1) TO
+                     VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                ADD 1 TO K-AMNIST21
+                SUBTRACT 1 FROM L-AMNIST21
+              END-PERFORM
+              MOVE 12 TO L-AMNIST21
+              PERFORM UNTIL L-AMNIST21 = 0
+                MOVE VECT4-AMNIST21 (L-AMNIST21:1) TO
+                     VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                ADD 1 TO K-AMNIST21
+                SUBTRACT 1 FROM L-AMNIST21
+              END-PERFORM
+              MOVE ZEROS TO SW-SALIR-VECT
+              PERFORM VARYING X-AMNIST21 FROM 1 BY 1 UNTIL
+                      X-AMNIST21 >  48 OR
+                      MORAS-ACTUAL-AMNIST21 > ZEROS OR
+                      SW-SALIR-VECT > ZEROS
+               IF V-VEC-AMNIST21(X-AMNIST21) = "1" OR "2" OR "3" OR "4"
+                   IF FECHA-SYS-AMNIST21 > FECHA-GRACIA-AMNIST21
+                      IF X-AMNIST21 < MESES-GRC-AMNIST21
+                         ADD  1  TO  MORAS-ACTUAL-AMNIST21
+                      END-IF
+                   END-IF
+                   IF MORAS-ACTUAL-AMNIST21 = ZEROS
+MORVEC                IF  X-AMNIST21 <= MESES-VEC-AMNIST21              CAV0003
+                          MOVE 1 TO CTAS-MEN12-AMNIST21
+                          MOVE 1 TO SW-SALIR-VECT
+                      ELSE
+                          MOVE 1 TO CTAS-MAY12-AMNIST21
+                          MOVE 1 TO SW-SALIR-VECT
+                      END-IF
+                   END-IF
+               END-IF
+              END-PERFORM 
+              IF X-AMNIST21 > 48 *> CASOS DE NO HAY MORA EN EL VECTOR  
+                 MOVE 1 TO CTAS-MAY12-AMNIST21
+LEY003        END-IF.                                                   GJC0005
+REMARK*****************************************************************
+REMARK*200745-CALCULAR-MESES-A-HOY.                             *
+REMARK*SE REALIZA EL CALCULO PARA DETERMINAR CUANTOS MESES DE DESACTUA-*
+REMARK*LIZACION O CIERRE TIENE LA CUENTA RESPECTO AL DIA DE HOY        *
+REMARK****************************************************************** 
+LEY004 200745-CALCULAR-MESES-A-HOY.                                     GJC0006
+LEY004     MOVE ZEROS              TO  FECHA-AUX-AMNIST21               GJC0006
+LEY004     MOVE FEC-NOVEDAD-ABD07  TO  FECHA-AUX-AMNIST21               GJC0006
+LEY004     PERFORM 200950-CONVIERTE-FECHA                               GJC0006
+LEY004     MOVE    ZEROS           TO  MESES-NOV-AMNIST21               GJC0006
+LEY004     COMPUTE MESES-NOV-AMNIST21 =                                 GJC0006
+LEY004          (ANO-HOY-AMNIST21 * 12 + MES-HOY-AMNIST21) -            GJC0006
+LEY004          (ANO-NOV-AMNIST21 * 12 + MES-NOV-AMNIST21).             GJC0006
+REMARK*****************************************************************
+REMARK*200760-LLENAR-VEC-MORAS-PERS.                             *
+REMARK*DE CADA CUENTA QUE SE VA LEYENDO SE TOMAN LAS MORAS Y SE VA LLE-*
+REMARK* NANDO EL VECTOR DE MORAS DE TODA LA PERSONA                    *
+REMARK******************************************************************
+LEY004 200760-LLENAR-VEC-MORAS-PERS.                                    GJC0006
+LEY004     MOVE 0 TO K-AMNIST21                                         GJC0006
+LEY004     IF MORA-MAXIMA-ABD07 > 0 OR MORA-MAXIMA-R-ABD07 > 0          GJC0006
+LEY004        MOVE VECTOR-HIS-1-ABD07 TO VECTOR-1-CTA-AMNIST21          GJC0006
+LEY004        MOVE VECTOR-HIS-2-ABD07 TO VECTOR-2-CTA-AMNIST21          GJC0006
+LEY004        MOVE VECTOR-HIS-3-ABD07 TO VECTOR-3-CTA-AMNIST21          GJC0006
+LEY004        MOVE VECTOR-HIS-4-ABD07 TO VECTOR-4-CTA-AMNIST21          GJC0006
+LEY004        MOVE NOV-CART-MORA-AMNIST21(NOV-REPORT-ABD07) TO          GJC0006
+LEY004             MOR-EST-CTA-AMNIST21                                 GJC0006
+LEY004        PERFORM 200745-CALCULAR-MESES-A-HOY                       GJC0006
+LEY004        IF MESES-NOV-AMNIST21 < 100                               GJC0006
+LEY004           COMPUTE K-AMNIST21 = 100 - MESES-NOV-AMNIST21          GJC0006
+LEY004        ELSE                                                      GJC0006
+LEY004           MOVE 0 TO K-AMNIST21                                   GJC0006
+LEY004        END-IF                                                    GJC0006
+LEY004        MOVE 49 TO L-AMNIST21                                     GJC0006
+LEY004        PERFORM UNTIL K-AMNIST21 = 0 OR L-AMNIST21 = 0            GJC0006
+LEY004          IF VEC-MOR-IDE-13-AMNIST21(K-AMNIST21) = 5              GJC0006
+LEY004             IF VEC-TOT-CTA-AMNIST21(L-AMNIST21) > 0 AND < 5      GJC0006
+LEY004                MOVE  1 TO VEC-MOR-IDE-13-AMNIST21(K-AMNIST21)    GJC0006
+LEY004             END-IF                                               GJC0006
+LEY004          END-IF                                                  GJC0006
+LEY004          COMPUTE K-AMNIST21 = K-AMNIST21 - 1                     GJC0006
+LEY004          COMPUTE L-AMNIST21 = L-AMNIST21 - 1                     GJC0006
+LEY004        END-PERFORM                                               GJC0006
+LEY004        IF MOR-EST-CTA-AMNIST21 <> 5                              GJC0006
+LEY004           MOVE 100 TO L-AMNIST21                                 GJC0006
+LEY004           PERFORM VARYING K-AMNIST21 FROM 1 BY 1 UNTIL           GJC0006
+LEY004               K-AMNIST21 > MESES-NOV-AMNIST21 OR L-AMNIST21 = 0  GJC0006
+LEY004              MOVE 1 TO VEC-MOR-IDE-13-AMNIST21(L-AMNIST21)       GJC0006
+LEY004              COMPUTE L-AMNIST21 = L-AMNIST21 - 1                 GJC0006
+LEY004           END-PERFORM                                            GJC0006
+LEY004        END-IF                                                    GJC0006
+LEY004     END-IF.                                                      GJC0006
+      ******************************************************************
+      *200800-RESTAURAR-REGISTROS.                                      *
+      * RUTINA ENCARGADA DE LEER EL REGISTRO ORIGINAL PARA AMNISTIAR   *
+      ******************************************************************
+       200800-RESTAURAR-REGISTROS.
+           MOVE LLAVE-INI-AMNIST21 TO LLAVE-MAES-CREDIT
+           READ MAESTRO-CREDIT INVALID KEY
+                 DISPLAY " ERROR READ ICMCRE "
+           END-READ
+           IF REG-SUSCRIPTOR-AMNISTIA21 <> REG-SUSCRIPTOR
+              MOVE REG-SUSCRIPTOR-AMNISTIA21 TO REG-SUSCRIPTOR
+           END-IF.
+
+       200850-AMNISTIA-REGISTROS.
+      ******************************************************************
+      *200850-AMNISTIA-REGISTROS.                                      *
+      * RUTINA ENCARGADA DE VALIDAR SI APLICA O NO AMNISTIA AL RESGISTR*
+      ******************************************************************
+             MOVE ZEROS TO MESES-VEC-AMNIST21 MESES-GRC-AMNIST21
+                           VECT1-AMNIST21 VECT2-AMNIST21 VECT3-AMNIST21
+                           VECT4-AMNIST21 VECTOR-TOT-AMNIST21
+             MOVE  REG-SUSCRIPTOR    TO  REG-SUSCRIPTOR-AMNISTIA21
+             MOVE COD-SUS-ABD07 TO COD-SUSCRIP-ABD02
+             READ SUSCRIPTOR  IGNORE LOCK
+                  INVALID KEY MOVE 0 TO ESTADO-ABD02
+             END-READ
+             IF ESTADO-ABD02 = 1
+              IF TAB-VIG-CART-AMNIST21(NOV-REPORT-ABD07) = 0 OR 
+AJUST1           ((NOV-REPORT-ABD07 = 13 OR 14 OR 15 OR 16) OR          CAV0002
+AJUST1            (NOV-REPORT-R-ABD07 = 13 OR 14 OR 15 OR 16))          CAV0002
+LEY002          IF ((MORA-MAXIMA-ABD07 > ZEROS OR                       GJC0004
+LEY002              MORA-MAXIMA-R-ABD07 > ZEROS) OR                     GJC0004
+LEY002               (NOV-REPORT-ABD07 = 03 OR 46)) AND                 GJC0004
+AJUST1              IND-BLOQUEO-ABD07 = 0                               CAV0002
+                 MOVE  ZEROS              TO  FECHA-AUX-AMNIST21
+                 MOVE  FEC-NOVEDAD-ABD07  TO  FECHA-AUX-AMNIST21
+                 PERFORM 200950-CONVIERTE-FECHA
+                 MOVE    ZEROS            TO  MESES-NOV-AMNIST21
+                 COMPUTE MESES-NOV-AMNIST21 =
+                         (ANO-HOY-AMNIST21 * 12 + MES-HOY-AMNIST21) -
+                         (ANO-NOV-AMNIST21 * 12 + MES-NOV-AMNIST21)
+                 IF MESES-NOV-AMNIST21 >= 12
+                    MOVE ZEROS TO MESES-VEC-AMNIST21
+                 ELSE
+                 COMPUTE MESES-VEC-AMNIST21 = MESES-CANCELAC-AMNIST21 -
+                         MESES-NOV-AMNIST21
+                 END-IF
+                 IF FEC-NOVEDAD-AMNIST21 > FECHA-GRACIA-AMNIST21
+                    COMPUTE MESES-GRC-AMNIST21 =
+                       (ANO-NOV-AMNIST21 * 12 + MES-NOV-AMNIST21) -
+                       (ANO-GRACIA-AMNIST21 * 12 + MES-GRACIA-AMNIST21)
+                 ELSE
+                    MOVE ZEROS TO MESES-GRC-AMNIST21
+                 END-IF
+                 MOVE VECTOR-HIS-1-ABD07  TO VECT1-AMNIST21
+                 MOVE VECTOR-HIS-2-ABD07  TO VECT2-AMNIST21
+                 MOVE VECTOR-HIS-3-ABD07  TO VECT3-AMNIST21
+                 MOVE VECTOR-HIS-4-ABD07  TO VECT4-AMNIST21
+                 MOVE  1 TO K-AMNIST21
+                 MOVE 12 TO L-AMNIST21
+                 PERFORM UNTIL L-AMNIST21 = 0
+                   MOVE VECT1-AMNIST21 (L-AMNIST21:1) TO
+                        VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                   ADD 1 TO K-AMNIST21
+                   SUBTRACT 1 FROM L-AMNIST21
+                 END-PERFORM
+                 MOVE 12 TO L-AMNIST21
+                 PERFORM UNTIL L-AMNIST21 = 0
+                   MOVE VECT2-AMNIST21 (L-AMNIST21:1) TO
+                        VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                   ADD 1 TO K-AMNIST21
+                   SUBTRACT 1 FROM L-AMNIST21
+                 END-PERFORM
+                 MOVE 12 TO L-AMNIST21
+                 PERFORM UNTIL L-AMNIST21 = 0
+                   MOVE VECT3-AMNIST21 (L-AMNIST21:1) TO
+                        VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                   ADD 1 TO K-AMNIST21
+                   SUBTRACT 1 FROM L-AMNIST21
+                 END-PERFORM
+                 MOVE 12 TO L-AMNIST21
+                 PERFORM UNTIL L-AMNIST21 = 0
+                   MOVE VECT4-AMNIST21 (L-AMNIST21:1) TO
+                        VECTOR-TOT-AMNIST21 (K-AMNIST21:1)
+                   ADD 1 TO K-AMNIST21
+                   SUBTRACT 1 FROM L-AMNIST21
+                 END-PERFORM
+                 MOVE ZEROS TO SW-SALIR-VECT
+                 PERFORM VARYING X-AMNIST21 FROM 1 BY 1 UNTIL
+                         X-AMNIST21 >  48 OR
+                         SW-SALIR-VECT > ZEROS
+                   IF V-VEC-AMNIST21(X-AMNIST21) = "1" OR "2" OR 
+                                                   "3" OR "4"
+MORVEC                   IF X-AMNIST21 <= MESES-VEC-AMNIST21            CAV0003
+                            MOVE 1 TO SW-SALIR-VECT
+                         ELSE 
+LEY004                        PERFORM 200870-APLICA-AMNISTIA            GJC0006
+LEY002                        MOVE 1 TO SW-SALIR-VECT                   GJC0004
+                         END-IF
+                   END-IF
+                 END-PERFORM
+                 IF X-AMNIST21 > 48    *> CASOS EN QUE NO HAY MORA EN
+LEY004              PERFORM 200870-APLICA-AMNISTIA *>  EL VECTOR        GJC0006
+                 END-IF
+                END-IF
+              END-IF
+             END-IF
+             MOVE  REG-SUSCRIPTOR-AMNISTIA21 TO REG-SUSCRIPTOR.
+
+      ******************************************************************
+REMARK*200870-APLICA-AMNISTIA.                                         *
+      * RUTINA ENCARGADA DE APLICAR LA AMNISTIA AL REGISTRO            *
+      ******************************************************************
+LEY004 200870-APLICA-AMNISTIA.                                          GJC0006
+           INITIALIZE VECTOR1-AMNIST21 VECTOR2-AMNIST21
+           MOVE 0 TO NUM-MORAS30-ABD07
+           MOVE 0 TO MORA-MAXIMA-ABD07
+           MOVE 0 TO FECHA-MORA-MAXIMA-ABD07
+           IF ADJETIVO1-ABD07 > 1
+              MOVE 0        TO ADJETIVO1-ABD07
+           END-IF        
+           IF ADJETIVO2-ABD07 > 1
+                  MOVE 0        TO ADJETIVO2-ABD07
+           END-IF
+           IF ADJETIVO3-ABD07 > 1
+                  MOVE 0        TO ADJETIVO3-ABD07
+           END-IF
+           IF NOV-REPORT-ABD07 = 46
+              IF COD-CTA-ABD07 = 02 
+                 MOVE 06 TO NOV-REPORT-ABD07 NOV-REPORT-R-ABD07
+              ELSE
+                 MOVE 08 TO NOV-REPORT-ABD07 NOV-REPORT-R-ABD07
+              END-IF
+           ELSE
+              IF NOV-REPORT-ABD07 = 03
+                 MOVE 06 TO NOV-REPORT-ABD07 NOV-REPORT-R-ABD07
+              ELSE
+                 IF NOV-REPORT-ABD07 = 09 OR 10 OR 11 OR 12
+                    MOVE 08 TO NOV-REPORT-ABD07 NOV-REPORT-R-ABD07
+                 ELSE
+                    IF NOV-REPORT-ABD07 = 13 OR 14 OR 15 OR 16
+                       MOVE 01 TO NOV-REPORT-ABD07 NOV-REPORT-R-ABD07
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           MOVE ESTADO-MES-ABD07   TO VECTOR1-AMNIST21
+           MOVE VECTOR-2-ABD07     TO VECTOR2-AMNIST21
+           MOVE VECTOR-HIS-3-ABD07 TO VECTOR3-AMNIST21
+           MOVE VECTOR-HIS-4-ABD07 TO VECTOR4-AMNIST21
+           INSPECT VECTOR1-AMNIST21 REPLACING ALL "1" BY "8"
+           INSPECT VECTOR1-AMNIST21 REPLACING ALL "2" BY "8"
+           INSPECT VECTOR1-AMNIST21 REPLACING ALL "3" BY "8"
+           INSPECT VECTOR1-AMNIST21 REPLACING ALL "4" BY "8"
+           INSPECT VECTOR2-AMNIST21 REPLACING ALL "1" BY "8"
+           INSPECT VECTOR2-AMNIST21 REPLACING ALL "2" BY "8"
+           INSPECT VECTOR2-AMNIST21 REPLACING ALL "3" BY "8"
+           INSPECT VECTOR2-AMNIST21 REPLACING ALL "4" BY "8"
+           INSPECT VECTOR3-AMNIST21 REPLACING ALL "1" BY "8"
+           INSPECT VECTOR3-AMNIST21 REPLACING ALL "2" BY "8"
+           INSPECT VECTOR3-AMNIST21 REPLACING ALL "3" BY "8"
+           INSPECT VECTOR3-AMNIST21 REPLACING ALL "4" BY "8"
+           INSPECT VECTOR4-AMNIST21 REPLACING ALL "1" BY "8"
+           INSPECT VECTOR4-AMNIST21 REPLACING ALL "2" BY "8"
+           INSPECT VECTOR4-AMNIST21 REPLACING ALL "3" BY "8"
+           INSPECT VECTOR4-AMNIST21 REPLACING ALL "4" BY "8"
+           MOVE VECTOR1-AMNIST21 TO ESTADO-MES-ABD07
+           MOVE VECTOR2-AMNIST21 TO VECTOR-2-ABD07.
+           MOVE VECTOR3-AMNIST21 TO VECTOR-HIS-3-ABD07
+           MOVE VECTOR4-AMNIST21 TO VECTOR-HIS-4-ABD07.
+REMARK*****************************************************************
+REMARK*200900-APLICAR-ART13-REGISTRO.                                         *
+REMARK* RUTINA ENCARGADA DE APLICAR PERDON CON 8 AL DOBLE DEL TIEMPO DE*
+REMARK* LA MORA (ARTICULO 13 DE LA LEY). PARA PERDONAR SE APOYA EN EL
+REMARK* VECTOR DE MORAS DE TODA LA PERSONA
+REMARK******************************************************************
+LEY004 200900-APLICAR-ART13-REGISTRO.                                   GJC0006
+LEY004     MOVE 0 TO CTA-PERDONADA-AMNIST21                             GJC0006
+LEY004     MOVE  REG-SUSCRIPTOR    TO  REG-SUSCRIPTOR-AMNISTIA21        GJC0006
+LEY004     MOVE COD-SUS-ABD07 TO COD-SUSCRIP-ABD02                      GJC0006
+LEY004     IF IND-BLOQUEO-ABD07 = 0                                     GJC0006
+LEY004        READ SUSCRIPTOR  IGNORE LOCK                              GJC0006
+LEY004           INVALID KEY MOVE 0 TO ESTADO-ABD02                     GJC0006
+LEY004       END-READ                                                   GJC0006
+LEY004       IF ESTADO-ABD02 = 1                                        GJC0006
+LEY004* PRIMERO SE REVISA SI ES DUDOSO RECAUDO O CAN MM CON MORA EN 0   GJC0006
+LEY004* SE CAMBIA EL ESTADO SIN MÁS ANALISIS                            GJC0006
+LEY004          IF (NOV-REPORT-ABD07 = 46 OR NOV-REPORT-ABD07 = 03) AND GJC0006
+LEY004             (MORA-MAXIMA-ABD07 = 0 AND MORA-MAXIMA-R-ABD07 = 0)  GJC0006
+LEY004            IF NOV-REPORT-ABD07 = 03                              GJC0006
+LEY004               MOVE 06 TO NOV-REPORT-ABD07                        GJC0006
+LEY004                         NOV-REPORT-R-ABD07                       GJC0006
+LEY004            ELSE                                                  GJC0006
+LEY004              IF COD-CTA-ABD07 = 02                               GJC0006
+LEY004                 MOVE 06 TO NOV-REPORT-ABD07                      GJC0006
+LEY004                            NOV-REPORT-R-ABD07                    GJC0006
+LEY004              ELSE                                                GJC0006
+LEY004                 MOVE 08 TO NOV-REPORT-ABD07                      GJC0006
+LEY004                            NOV-REPORT-R-ABD07                    GJC0006
+LEY004              END-IF                                              GJC0006
+LEY004          ELSE                                                    GJC0006
+LEY004             IF MORA-MAXIMA-ABD07 = 0 AND MORA-MAXIMA-R-ABD07 = 0 GJC0006
+LEY004                MOVE 1 TO X-AMNIST21                              GJC0006
+LEY004             ELSE                                                 GJC0006
+PRSCRP                IF ESTADO-OBLIG-ABD07 <> 10                       GJC0011
+PRSCRP                   PERFORM 200930-ART13-CTA-CON-MORA              GJC0011
+PRSCRP                ELSE                                              GJC0011
+PRSCRP                   MOVE VECTOR-HIS-1-ABD07  TO VECT1-AMNIST21     GJC0011
+PRSCRP                   MOVE VECTOR-HIS-2-ABD07  TO VECT2-AMNIST21     GJC0011
+PRSCRP                   MOVE VECTOR-HIS-3-ABD07  TO VECT3-AMNIST21     GJC0011
+PRSCRP                   MOVE VECTOR-HIS-4-ABD07  TO VECT4-AMNIST21     GJC0011
+PRSCRP                   PERFORM VARYING L-AMNIST21 FROM 1 BY 1         GJC0011
+PRSCRP                        UNTIL L-AMNIST21 >12                      GJC0011
+PRSCRP                     IF (VECT1-AMNIST21(L-AMNIST21:1) <>          GJC0011
+PRSCRP                                               4 AND <> 0) OR     GJC0011
+PRSCRP                        (VECT2-AMNIST21(L-AMNIST21:1) <>          GJC0011
+PRSCRP                                               4 AND <> 0) OR     GJC0011
+PRSCRP                        (VECT3-AMNIST21(L-AMNIST21:1) <>          GJC0011
+PRSCRP                                               4 AND <> 0) OR     GJC0011
+PRSCRP                        (VECT4-AMNIST21(L-AMNIST21:1) <>          GJC0011
+PRSCRP                                               4 AND <> 0)        GJC0011
+PRSCRP                        MOVE 100 TO L-AMNIST21                    GJC0011
+PRSCRP                    END-IF                                        GJC0011
+PRSCRP                   END-PERFORM                                    GJC0011
+PRSCRP                   IF L-AMNIST21 >= 100                           GJC0011
+PRSCRP                      PERFORM 200930-ART13-CTA-CON-MORA           GJC0011
+PRSCRP                   END-IF                                         GJC0011
+PRSCRP                END-IF                                            GJC0011
+LEY004             END-IF                                               GJC0006
+LEY004          END-IF                                                  GJC0006
+LEY004     END-IF                                                       GJC0006
+LEY004* SE RECUPERA EL REGISTRO DE SUSCRIPTOR QUE ESTABA LEIDO          GJC0006
+LEY004     MOVE  REG-SUSCRIPTOR-AMNISTIA21 TO REG-SUSCRIPTOR.           GJC0006
+REMARK*****************************************************************
+REMARK*200930-APLICAR-ART13-CTA-CON-MORA.                               *         *
+REMARK* A ESTA RUTINA SOLO LLEGAN CUENTAS QUE HAYAN TENIDO MORA.SU OBJE-*
+REMARK* TIVO ES VERIFICAR QUE LAPSOS DE MORA SE PUEDEN PERDONAR Y QUE   *
+REMARK* LAPSOS NO                          
+REMARK******************************************************************
+LEY004 200930-ART13-CTA-CON-MORA.                                       GJC0006
+LEY004     MOVE 0 TO CTA-PERDONADA-AMNIST21                             GJC0006
+LEY004     INITIALIZE K-AMNIST21 L-AMNIST21 Z-AMNIST21 X-AMNIST21       GJC0006
+LEY004                 M-AMNIST21                                       GJC0006
+CADUC1                 IND-APLICO-CAD-AMNIST21                          GJC0012
+*******SE MUEVE EL VECTOR CON CINCOS A ARREGLO DE 100 NORMALIZADO
+LEY004     INITIALIZE VECTOR-100-CTA-AMNIST21 REPLACING                 GJC0006
+LEY004             ALPHANUMERIC DATA BY CINCOS-AMNIST21(1:100)          GJC0006
+LEY004     PERFORM 200745-CALCULAR-MESES-A-HOY                          GJC0006
+LEY004     MOVE VECTOR-HIS-1-ABD07 TO VECTOR-1-CTA-AMNIST21             GJC0006
+LEY004     MOVE VECTOR-HIS-2-ABD07 TO VECTOR-2-CTA-AMNIST21             GJC0006
+LEY004     MOVE VECTOR-HIS-3-ABD07 TO VECTOR-3-CTA-AMNIST21             GJC0006
+LEY004     MOVE VECTOR-HIS-4-ABD07 TO VECTOR-4-CTA-AMNIST21             GJC0006
+LEY004     MOVE NOV-CART-MORA-AMNIST21(NOV-REPORT-ABD07) TO             GJC0006
+LEY004          MOR-EST-CTA-AMNIST21                                    GJC0006
+LEY004*    PRIMERO SE LLENA EL VECTOR DE LA CUENTA EN 100 POSICIONES    GJC0006
+LEY004     IF MESES-NOV-AMNIST21 < 52                                   GJC0006
+LEY004        COMPUTE POSICION-INI-AMNIST21 = 52 - MESES-NOV-AMNIST21   GJC0006
+LEY004        MOVE POSICION-INI-AMNIST21 TO K-AMNIST21                  GJC0006
+LEY004        MOVE VECTOR-TOT-CTA-AMNIST21 TO                           GJC0006
+LEY004             VECTOR-100-CTA-AMNIST21(K-AMNIST21:49)               GJC0006
+LEY004             COMPUTE Z-AMNIST21 = K-AMNIST21 + 49                 GJC0006
+LEY004     ELSE                                                         GJC0006
+CADUC1        PERFORM 200933-CADUCAR-MORAS                              GJC0012
+LEY004        MOVE  1 TO POSICION-INI-AMNIST21                          GJC0006
+LEY004        IF MESES-NOV-AMNIST21 <  100    *> <=                     GJC0006
+LEY004           COMPUTE L-AMNIST21 = 100 - MESES-NOV-AMNIST21          GJC0006
+LEY004              COMPUTE K-AMNIST21 = 50 - L-AMNIST21    *>49        GJC0006
+LEY004            MOVE VECTOR-TOT-CTA-AMNIST21(K-AMNIST21:L-AMNIST21) TOGJC0006
+LEY004                VECTOR-100-CTA-AMNIST21(1:L-AMNIST21)             GJC0006
+LEY004              COMPUTE Z-AMNIST21 = L-AMNIST21 + 1                 GJC0006
+LEY004        ELSE                                                      GJC0006
+LEY004           MOVE 1 TO Z-AMNIST21 K-AMNIST21                        GJC0006
+LEY004        END-IF                                                    GJC0006
+LEY004     END-IF                                                       GJC0006
+LEY007* SI EL ESTADO ACTUAL DE LA CUENTA ES MOROSO SE RELLENA DE MORAS  GJC0009
+LEY007* HASTA LA POSICION 100                                           GJC0009
+LEY007     IF (NOV-REPORT-ABD07 > 12 AND < 46) OR                       GJC0009
+LEY007        NOV-REPORT-ABD07 = 47                                     GJC0009
+LEY004        PERFORM UNTIL Z-AMNIST21 > 100                            GJC0006
+LEY006           IF NOV-CART-MORA-AMNIST21(NOV-REPORT-ABD07) <> 5       GJC0008
+LEY007              MOVE 1 TO VEC-100-CTA-AMNIST21(Z-AMNIST21)          GJC0009
+LEY006           ELSE                                                   GJC0008
+LEY006             MOVE 2 TO VEC-100-CTA-AMNIST21(Z-AMNIST21)           GJC0008
+LEY006           END-IF                                                 GJC0008
+LEY004          ADD 1 TO Z-AMNIST21                                     GJC0006
+LEY004        END-PERFORM                                               GJC0006
+           ELSE
+              MOVE 1 TO  VEC-100-CTA-AMNIST21(100)
+LEY004     END-IF                                                       GJC0006
+LEY007* SE REEEMPLAZAN EN EL VECTOR LAS POSICONES QUE NO SON MORA POR   GJC0009
+LEY007* AL DIA                                                          GJC0009
+LEY004     MOVE 1 TO VEC-100-CTA-AMNIST21(101)                          GJC0006
+LEY004     INSPECT VECTOR-100-CTA-AMNIST21 REPLACING  ALL "0" BY "5"    GJC0006
+LEY004     INSPECT VECTOR-100-CTA-AMNIST21 REPLACING  ALL "6" BY "5"    GJC0006
+LEY004     INSPECT VECTOR-100-CTA-AMNIST21 REPLACING  ALL "7" BY "5"    GJC0006
+LEY004     INSPECT VECTOR-100-CTA-AMNIST21 REPLACING  ALL "8" BY "5"    GJC0006
+LEY004     INSPECT VECTOR-100-CTA-AMNIST21 REPLACING  ALL "9" BY "5"    GJC0006
+LEY004* SE INICIA EL RECORRIDO PARA HALLAR LOS LAPOS DE MORA Y LA MORA  GJC0006
+LEY004* CORRIDA                                                         GJC0006
+LEY004     MOVE 0 TO LAPSO-AMNIST21                                     GJC0006
+LEY004     MOVE 0 TO MAYOR-LAPSO-AMNIST21 SALIR-AMNIST21                GJC0006
+LEY004               ESTOY-MOROSO-AMNIST21 MESES-MORAS-AMNIST21         GJC0006
+LEY004     PERFORM VARYING Z-AMNIST21 FROM 1 BY 1 UNTIL Z-AMNIST21 > 30 GJC0006
+LEY004             MOVE ZEROS TO VECTOR-LAPSOS(Z-AMNIST21)              GJC0006
+LEY004     END-PERFORM                                                  GJC0006
+LEY004     PERFORM UNTIL K-AMNIST21 > 101 OR SALIR-AMNIST21 = 1         GJC0006
+LEY004        IF ESTOY-MOROSO-AMNIST21 = 1                              GJC0006
+LEY004           IF VEC-100-CTA-AMNIST21(K-AMNIST21) <> 5               GJC0006
+LEY004              ADD 1 TO MESES-MORAS-AMNIST21                       GJC0006
+LEY004           ELSE                                                   GJC0006
+LEY004              MOVE 0 TO ESTOY-MOROSO-AMNIST21                     GJC0006
+LEY004             MOVE K-AMNIST21 TO L-AMNIST21                        GJC0006
+LEY004           END-IF                                                 GJC0006
+LEY004        ELSE                                                      GJC0006
+LEY004           IF VEC-100-CTA-AMNIST21(K-AMNIST21) > 0 AND < 5        GJC0006
+LEY004              IF MESES-MORAS-AMNIST21 > 0                         GJC0006
+LEY004                 MOVE MESES-MORAS-AMNIST21 TO                     GJC0006
+LEY004                 LONG-GRUPO-AMNIST21(LAPSO-AMNIST21)              GJC0006
+LEY004                 PERFORM 200935-VER-SI-DOBLE-MORA                 GJC0006
+LEY004              END-IF                                              GJC0006
+LEY004              ADD 1 TO LAPSO-AMNIST21                             GJC0006
+LEY004              MOVE 1 TO MESES-MORAS-AMNIST21                      GJC0006
+LEY004              MOVE 1 TO ESTOY-MOROSO-AMNIST21                     GJC0006
+LEY004              MOVE K-AMNIST21 TO                                  GJC0006
+LEY004                   INI-GRUPO-AMNIST21(LAPSO-AMNIST21)             GJC0006
+LEY004              MOVE 0 TO PERDON-GRUPO-AMNIST21(LAPSO-AMNIST21)     GJC0006
+LEY004           END-IF                                                 GJC0006
+LEY004        END-IF                                                    GJC0006
+LEY004        ADD 1 TO K-AMNIST21                                       GJC0006
+LEY004     END-PERFORM                                                  GJC0006
+LEY004     COMPUTE L-AMNIST21 = LAPSO-AMNIST21 + 1                      GJC0006
+CADUC1     IF CTA-PERDONADA-AMNIST21 = 1 OR IND-APLICO-CAD-AMNIST21 = 1 GJC0012
+LEY004        PERFORM 200940-PERDONAR-VECTOR-CTA                        GJC0006
+LEY004        MOVE VECTOR-4-CTA-AMNIST21 TO VECTOR-HIS-4-ABD07          GJC0006
+LEY004        MOVE VECTOR-3-CTA-AMNIST21 TO VECTOR-HIS-3-ABD07          GJC0006
+LEY004        MOVE VECTOR-2-CTA-AMNIST21 TO VECTOR-HIS-2-ABD07          GJC0006
+LEY004        MOVE VECTOR-1-CTA-AMNIST21 TO VECTOR-HIS-1-ABD07          GJC0006
+LEY004        PERFORM 500000-RECONSTRUCCION-HISTORIA                    GJC0006
+LEY005        PERFORM 555000-MANEJO-RECUP-Y-MM                          GJC0007
+LEY004     END-IF.                                                      GJC0006
+
+REMARK******************************************************************
+REMARK*200933-CADUCAR-MORAS                                            *
+REMARK* A LAS CUENTAS CUYO VECTOR DE COMPORTAMIENTO NO CABE EN LAS 100 
+REMARK* POSICIONES DEL VECTOR EN QUE SE CALCULA LA APLICACION DEL AR-  *
+REMARK* TICULO 13 SE APLICA LA CADUCIDAD SOBRE LO QUE LLEVA MAS DE 
+REAMRK* 48 MESES
+REMARK******************************************************************
+CADUC1 200933-CADUCAR-MORAS.                                            GJC0012
+CADUC1     IF NOV-REPORT-ABD07 < 13 OR  = 46                            GJC0012
+CADUC1      PERFORM VARYING L-AMNIST21 FROM 1 BY 1 UNTIL L-AMNIST21 > 48GJC0012
+CADUC1       IF VEC-TOT-CTA-AMNIST21(L-AMNIST21) > 0 AND < 5            GJC0012
+CADUC1          MOVE 8 TO VEC-TOT-CTA-AMNIST21(L-AMNIST21)              GJC0012
+CADUC1          IF IND-APLICO-CAD-AMNIST21 = 0                          GJC0012
+CADUC1             MOVE 1 TO IND-APLICO-CAD-AMNIST21                    GJC0012
+CADUC1          END-IF                                                  GJC0012
+CADUC1       END-IF                                                     GJC0012
+CADUC1      END-PERFORM                                                 GJC0012
+CADUC1     END-IF.                                                      GJC0012
+
+REMARK******************************************************************
+REMARK*200935-VER-SI-DOBLE-MORA                                          *
+REMARK* VALIDA SI SE PUEDE PERDONAR O NO EL PERIODO DE GRACIA QUE SE 
+REMARK*ESTÁ ANALIZANDO*
+REMARK******************************************************************
+LEY004 200935-VER-SI-DOBLE-MORA.                                        GJC0006
+LEY004     IF MESES-MORAS-AMNIST21 >  MAYOR-LAPSO-AMNIST21              GJC0006
+LEY004        COMPUTE X-AMNIST21 = (MESES-MORAS-AMNIST21 * 2) *> OJO + 1GJC0006
+LEY004     ELSE                                                         GJC0006
+LEY004        COMPUTE X-AMNIST21 = (MAYOR-LAPSO-AMNIST21 * 2) *> OJO + 1GJC0006
+LEY004     END-IF                                                       GJC0006
+DBLMOR     IF X-AMNIST21 > 48                                           GJC0011
+DBLMOR       MOVE 48 TO X-AMNIST21                                      GJC0011
+DBLMOR     END-IF                                                       GJC0011
+LEY004     IF X-AMNIST21 <= 101 - L-AMNIST21                            GJC0006
+LEY004        MOVE 0 TO M-AMNIST21                                      GJC0006
+LEY004        INSPECT VECTOR-100-CTA-AMNIST21(L-AMNIST21:X-AMNIST21)    GJC0006
+LEY004             TALLYING M-AMNIST21 FOR ALL                          GJC0006
+LEY004                      CINCOS-AMNIST21(1:X-AMNIST21)               GJC0006
+LEY004        IF M-AMNIST21 > 0                                         GJC0006
+LEY007* LAS 2 SIGUIENTES INSTRUCCIONES Y EL ELSE DEL IF SE DEBEN DESCO- GJC0009
+LEY007* MENTAREAR SI SE DECIDE APLICAR ARTICULO 13 POR PERSONA CUENTA   GJC0009
+LEY007*PER       COMPUTE MESES-AMNIST21 = L-AMNIST21 + X-AMNIST21 - 1   GJC0009
+LEY007*PER       IF VEC-MOR-IDE-13-AMNIST21(MESES-AMNIST21) = 5         GJC0009
+LEY004              MOVE 1 TO PERDON-GRUPO-AMNIST21(LAPSO-AMNIST21)     GJC0006
+LEY004              MOVE 1 TO CTA-PERDONADA-AMNIST21                    GJC0006
+LEY004              IF LAPSO-AMNIST21 > 1                               GJC0006
+LEY004                 COMPUTE Z-AMNIST21 = LAPSO-AMNIST21 - 1          GJC0006
+LEY004                 PERFORM UNTIL Z-AMNIST21 = 0                     GJC0006
+LEY004                    IF PERDON-GRUPO-AMNIST21(Z-AMNIST21) = 0      GJC0006
+LEY004                       MOVE 1 TO                                  GJC0006
+LEY004                         PERDON-GRUPO-AMNIST21(Z-AMNIST21)        GJC0006
+LEY004                       COMPUTE Z-AMNIST21 = Z-AMNIST21 - 1        GJC0006
+LEY004                    ELSE                                          GJC0006
+LEY004                       MOVE 0 TO Z-AMNIST21                       GJC0006
+LEY004                    END-IF                                        GJC0006
+LEY004                 END-PERFORM                                      GJC0006
+LEY004                 MOVE 0 TO MAYOR-LAPSO-AMNIST21                   GJC0006
+LEY004              END-IF                                              GJC0006
+LEY007*PER       ELSE                                                   GJC0009
+LEY007*PER          COMPUTE X-AMNIST21 =  X-AMNIST21 + L-AMNIST21       GJC0009
+LEY007*PER          ADD 1 TO  MESES-AMNIST21                            GJC0009
+LEY007*PER          PERFORM UNTIL X-AMNIST21 > 100 OR                   GJC0009
+LEY007*PER               PERDON-GRUPO-AMNIST21(LAPSO-AMNIST21)= 1       GJC0009
+LEY007*PER             IF VEC-100-CTA-AMNIST21(X-AMNIST21) = "5" OR "2" GJC0009
+LEY007*PER                IF VEC-MOR-IDE-13-AMNIST21(MESES-AMNIST21)    GJC0009
+LEY007*PER                      = "5"                                   GJC0009
+LEY007*PER                   MOVE 1 TO                                  GJC0009
+LEY007*PER                         PERDON-GRUPO-AMNIST21(LAPSO-AMNIST21)GJC0009
+LEY007*PER                   MOVE 1 TO CTA-PERDONADA-AMNIST21           GJC0009
+LEY007*PER                   IF LAPSO-AMNIST21 > 1                      GJC0009
+LEY007*PER                      MOVE LAPSO-AMNIST21 TO Z-AMNIST21       GJC0009
+LEY007*PER                      PERFORM UNTIL Z-AMNIST21 = 0            GJC0009
+LEY007*PER                         MOVE 1 TO                            GJC0009
+LEY007*PER                         PERDON-GRUPO-AMNIST21(Z-AMNIST21)    GJC0009
+LEY007*PER                         COMPUTE Z-AMNIST21 = Z-AMNIST21 - 1  GJC0009
+LEY007*PER                      END-PERFORM                             GJC0009
+LEY007*PER                      MOVE 0 TO MAYOR-LAPSO-AMNIST21          GJC0009
+LEY007*PER                   END-IF                                     GJC0009
+LEY007*PER                END-IF                                        GJC0009
+LEY007*PER             ELSE                                             GJC0009
+LEY007*PER               MOVE 105 TO X-AMNIST21                         GJC0009
+LEY007*PER             END-IF                                           GJC0009
+LEY007*PER             ADD 1 TO X-AMNIST21                              GJC0009
+LEY007*PER             ADD 1 TO MESES-AMNIST21                          GJC0009
+LEY007*PER          END-PERFORM                                         GJC0009
+LEY007*PER       END-IF                                                 GJC0009
+LEY004        ELSE                                                      GJC0006
+LEY004          IF MAYOR-LAPSO-AMNIST21 <                               GJC0006
+LEY004             LONG-GRUPO-AMNIST21(LAPSO-AMNIST21)                  GJC0006
+LEY004              MOVE LONG-GRUPO-AMNIST21(LAPSO-AMNIST21) TO         GJC0006
+LEY004                                    MAYOR-LAPSO-AMNIST21          GJC0006
+LEY004          END-IF                                                  GJC0006
+LEY004        END-IF                                                    GJC0006
+LYE003     ELSE
+LEY004        MOVE 1 TO SALIR-AMNIST21                                  GJC0006
+LEY004     END-IF.                                                      GJC0006
+
+REMARK******************************************************************
+REMARK*200940-PERDONAR-VECTOR-CTA.                                     *
+REMARK* SE HACE EL PERDOS SOBRE CADA UNO DE LOS LAPSOS DE MORA SOBRE   *
+REMARK* LOS QUE LA CUENTA TIENE DERECHO A PERDON
+REMARK******************************************************************
+LEY004 200940-PERDONAR-VECTOR-CTA.                                      GJC0006
+LEY004     PERFORM VARYING LAPSO-AMNIST21 FROM 1 BY 1 UNTIL             GJC0006
+LEY004        LAPSO-AMNIST21 > 30                                       GJC0006
+LEY004       IF PERDON-GRUPO-AMNIST21(LAPSO-AMNIST21) = 1               GJC0006
+LEY004          COMPUTE Z-AMNIST21 = INI-GRUPO-AMNIST21(LAPSO-AMNIST21) GJC0006
+LEY004                             - POSICION-INI-AMNIST21 + 1          GJC0006
+LEY004          MOVE 0 TO K-AMNIST21                                    GJC0006
+LEY004          PERFORM VARYING L-AMNIST21 FROM                         GJC0006
+LEY004            Z-AMNIST21 BY 1 UNTIL                                 GJC0006
+LEY004                K-AMNIST21 = LONG-GRUPO-AMNIST21(LAPSO-AMNIST21)  GJC0006
+LEY004            IF VEC-TOT-CTA-AMNIST21(L-AMNIST21) > 0 AND < 5       GJC0006
+LEY004               MOVE 8 TO VEC-TOT-CTA-AMNIST21(L-AMNIST21)         GJC0006
+LEY004            END-IF                                                GJC0006
+LEY004            ADD 1 TO K-AMNIST21                                   GJC0006
+LEY004          END-PERFORM                                             GJC0006
+LEY004       ELSE                                                       GJC0006
+LEY004          MOVE 51 TO LAPSO-AMNIST21                               GJC0006
+LEY004       END-IF                                                     GJC0006
+LEY004     END-PERFORM.                                                 GJC0006
+
+REMARK******************************************************************
+REMARK*50000-RECONSTRUCCION-HISTORIA.         
+REMARK*VOLTEA LOS VECTORES Y LLAMA A LAS RUTINAS QUE RECALCULAN EL ESTADO
+REMARK*DEJANDO FINALMENTE LOS VECTORES COMO DEBEN QUEDAR              
+REMARK******************************************************************
+LEY004 500000-RECONSTRUCCION-HISTORIA.                                  GJC0006
+LEY004     MOVE 0 TO MES-MORA-MAX-AMNIST21  MES-MORA-MAX-48-AMNIST21.   GJC0006
+LEY004     INITIALIZE FEC-MORMAX-AMNIST21 FEC-MORMAX-48-AMNIST21.       GJC0006                       GJC0006
+LEY004     MOVE NOV-REPORT-ABD07 TO ESTADO-AMNIST21 ESTADO-FIN-AMNIST21 GJC0006
+LEY004     MOVE FEC-NOVEDAD-ABD07 TO  FEC-MM-AA-AMNIST21                GJC0006
+LEY004     IF FEC-MM-AA-AMNIST21 (3:2) > 60                             GJC0006
+LEY004        MOVE 19 TO SIGLO-AMNIST21                                 GJC0006
+LEY004     ELSE                                                         GJC0006
+LEY004        MOVE 20 TO SIGLO-AMNIST21                                 GJC0006
+LEY004     END-IF                                                       GJC0006
+LEY004     MOVE FEC-MM-AA-AMNIST21 (1:2)  TO MES-AMNIST21               GJC0006
+LEY004     MOVE FEC-MM-AA-AMNIST21 (3:2)  TO ANO-AMNIST21               GJC0006
+LEY004     MOVE FECHA-AMNIST21  TO FEC-INI-MOR-AMNIST21.                GJC0006
+LEY004     PERFORM 500500-NUEVA-NOVEDAD                                 GJC0006
+LEY004     PERFORM 500600-CALCULO-FECHAMX                               GJC0006
+LEY005*    IF (ESTADO-FIN-AMNIST21 = 46 OR ESTADO-FIN-AMNIST21 = 03) ANDGJC0007
+LEY005*       (MORMAX-AMNIST21 = 0 AND MORMAX48-AMNIST21 = 0)           GJC0007
+LEY005*       IF ESTADO-FIN-AMNIST21 = 03                               GJC0007
+LEY005*          MOVE 06 TO NOV-REPORT-ABD07                            GJC0007
+LEY005*                     NOV-REPORT-R-ABD07                          GJC0007
+LEY005*       ELSE                                                      GJC0007
+LEY005*          IF COD-CTA-ABD07 = 02                                  GJC0007
+LEY005*             MOVE 06 TO NOV-REPORT-ABD07                         GJC0007
+LEY005*                     NOV-REPORT-R-ABD07                          GJC0007
+LEY005*          ELSE                                                   GJC0007
+LEY005*             MOVE 08 TO NOV-REPORT-ABD07                         GJC0007
+LEY005*                        NOV-REPORT-R-ABD07                       GJC0007
+LEY005*          END-IF                                                 GJC0007
+LEY005*     ELSE *> LINEAS CONVERTIDAS EN RUT 555000-MANEJO-RECUP-Y-MM  GJC0007
+ESTA48*       MOVE ESTADO-FIN-AMNIST21 TO NOV-REPORT-ABD07              GJC0012
+LEY004        MOVE ESTADO-FIN48-AMNIST21 TO NOV-REPORT-R-ABD07          GJC0006
+ESTA48                                      NOV-REPORT-ABD07            GJC0012
+LEY005*     END-IF                                                      GJC0007
+LEY004*    MOVE FEC-MORMAX-AMNIST21 TO FECHA-MORA-MAXIMA-ABD07          GJC0006
+LEY004*    MOVE NUM-MOR30-AMNIST21 TO NUM-MORAS30-ABD07                 GJC0006
+LEY004     MOVE FEC-MORMAX-48-AMNIST21 TO FECHA-MORA-MAXIMA-ABD07       GJC0006
+LEY004*    MOVE MORMAX-AMNIST21 TO MORA-MAXIMA-ABD07.                   GJC0006
+LEY004     MOVE MORMAX48-AMNIST21 TO MORA-MAXIMA-R-ABD07                GJC0006
+LEY004                               MORA-MAXIMA-ABD07.                 GJC0006
+LEY004     MOVE NUM-MOR30-48-AMNIST21 TO NUM-MORAS30-ABD07.             GJC0006
+        500500-NUEVA-NOVEDAD.
+REMARK******************************************************************
+REMARK* 50500-NUEVA-NOVEDAD.
+REMARK* CON EL VECTOR DE COMPORTAMIENTO PERDONADO Y SEGÚN LA NOVEDAD   
+REMARK* ACTUAL, CALCULA CON LA MATRIZ DE RECONSTRUCCIÓN HISTÓRICA
+REMARK* LA NUEVA NOVEDAD DE LA OBLIGACIÓN
+REMARK******************************************************************
+LEY004     MOVE 0 TO NUM-MOR30-AMNIST21  NUM-MOR30-48-AMNIST21          GJC0006
+LEY004     MOVE 0 TO MORMAX-AMNIST21 MORMAX48-AMNIST21                  GJC0006
+LEY004     MOVE 0 TO FEC-MORMAX-AMNIST21   FEC-MORMAX-48-AMNIST21       GJC0006
+LEY004     MOVE 01 TO ESTADO-INI-AMNIST21 ESTADO-INI48-AMNIST21         GJC0006
+LEY004     PERFORM VARYING L-AMNIST21 FROM 1 BY 1 UNTIL L-AMNIST21 > 49 GJC0006
+LEY004      MOVE VEC-TOT-CTA-AMNIST21(L-AMNIST21) TO K-AMNIST21         GJC0006
+LEY004      IF K-AMNIST21 < 5 AND K-AMNIST21 > MORMAX48-AMNIST21        GJC0006
+LEY004      COMPUTE MES-MORA-MAX-48-AMNIST21 = (49 - L-AMNIST21) + 1    GJC0006
+LEY004         MOVE K-AMNIST21 TO MORMAX48-AMNIST21                     GJC0006
+LEY004      END-IF                                                      GJC0006
+LEY004      IF K-AMNIST21 = 1                                           GJC0006
+LEY004         ADD 1 TO NUM-MOR30-48-AMNIST21                           GJC0006
+LEY004      END-IF                                                      GJC0006
+LEY004      IF L-AMNIST21 > 24                                          GJC0006
+LEY004       IF K-AMNIST21 = 1                                          GJC0006
+LEY004          ADD 1 TO NUM-MOR30-AMNIST21                             GJC0006
+LEY004       END-IF                                                     GJC0006
+LEY004       IF K-AMNIST21 < 5 AND K-AMNIST21 > MORMAX-AMNIST21         GJC0006
+LEY004          COMPUTE  MES-MORA-MAX-AMNIST21 = (49 - L-AMNIST21) + 1  GJC0006
+LEY004          MOVE K-AMNIST21 TO MORMAX-AMNIST21                      GJC0006
+LEY004       END-IF                                                     GJC0006
+LEY004      END-IF                                                      GJC0006
+LEY004       IF L-AMNIST21 = 49                                         GJC0006
+LEY004          IF (ESTADO-AMNIST21 > 12 AND < 42) OR                   GJC0006
+LEY004             ESTADO-AMNIST21 = 01                                 GJC0006
+LEY004             MOVE NOV-CART-MORA-AMNIST21(ESTADO-AMNIST21) TO      GJC0006
+LEY004             ESTADO-FIN-AMNIST21                                  GJC0006
+LEY004             MOVE                                                 GJC0006
+LEY004             NOV-CRUCES-AMNIST21(ESTADO-INI-AMNIST21,             GJC0006
+LEY004                             ESTADO-FIN-AMNIST21)                 GJC0006
+LEY004                           TO ESTADO-FIN-AMNIST21                 GJC0006
+LEY004             MOVE NOV-CART-MORA-AMNIST21(ESTADO-AMNIST21) TO      GJC0006
+LEY004                  ESTADO-FIN48-AMNIST21                           GJC0006
+LEY004             MOVE NOV-CRUCES-AMNIST21(ESTADO-INI48-AMNIST21,      GJC0006
+LEY004                  ESTADO-FIN48-AMNIST21) TO ESTADO-FIN48-AMNIST21 GJC0006
+LEY004          ELSE                                                    GJC0006
+LEY004             IF ESTADO-AMNIST21 > 07 AND < 13                     GJC0006
+LEY004                COMPUTE ESTADO-FIN-AMNIST21 =                     GJC0006
+LEY004                        08 + MORMAX-AMNIST21                      GJC0006
+LEY004                COMPUTE ESTADO-FIN48-AMNIST21 =                   GJC0006
+LEY004                        08 + MORMAX48-AMNIST21                    GJC0006
+LEY004             ELSE                                                 GJC0006
+LEY004                MOVE ESTADO-AMNIST21 TO ESTADO-FIN-AMNIST21       GJC0006
+LEY004                MOVE ESTADO-AMNIST21 TO ESTADO-FIN48-AMNIST21     GJC0006
+LEY004             END-IF                                               GJC0006
+LEY004          END-IF                                                  GJC0006
+LEY004       ELSE                                                       GJC0006
+LEY004         IF K-AMNIST21 = 7 OR 8                                   GJC0006
+LEY004            MOVE 5 TO K-AMNIST21                                  GJC0006
+LEY004         END-IF                                                   GJC0006
+LEY004         IF K-AMNIST21 > 0 AND K-AMNIST21 < 6                     GJC0006
+LEY004            MOVE NOV-CRUCES-AMNIST21(ESTADO-INI48-AMNIST21,       GJC0006
+LEY004                                       K-AMNIST21) TO             GJC0006
+LEY004                 ESTADO-INI48-AMNIST21                            GJC0006
+LEY004         END-IF                                                   GJC0006
+LEY004         IF L-AMNIST21 > 24                                       GJC0006
+LEY004          IF K-AMNIST21 > 0 AND K-AMNIST21 < 6                    GJC0006
+LEY004             MOVE NOV-CRUCES-AMNIST21(ESTADO-INI-AMNIST21,        GJC0006
+LEY004                 K-AMNIST21) TO ESTADO-INI-AMNIST21               GJC0006
+LEY004          END-IF                                                  GJC0006
+LEY004         END-IF                                                   GJC0006
+LEY004       END-IF                                                     GJC0006
+LEY004     END-PERFORM.                                                 GJC0006
+
+REMARK******************************************************************
+REMARK*500600-CALCULO-FECHAMX.
+REMARK* CON EL VECTOR YA PERDONADO, CALCULA LA NUEVA FECHA DE MORA 
+REMARK* MÁXIMA
+REMARK******************************************************************
+LEY004 500600-CALCULO-FECHAMX.                                          GJC0006
+LEY004     IF MES-MORA-MAX-AMNIST21 > 0                                 GJC0006
+LEY004        MOVE FEC-INI-MOR-AMNIST21 TO FECHA-AMNIST21               GJC0006
+LEY004        MOVE 1 TO L-AMNIST21                                      GJC0006
+LEY004        PERFORM 510000-ADDUNOTOI UNTIL L-AMNIST21=                GJC0006
+LEY004                MES-MORA-MAX-AMNIST21                             GJC0006
+LEY004**SE DEBE CONTROLAR SI L-AMNIST21SE PASA de 25  ******************GJC0006
+LEY004        MOVE ANO-T-AMNIST21 TO FEC-MM-AAAA-AMNIST21 (3:4)         GJC0006
+LEY004        MOVE MES-AMNIST21   TO FEC-MM-AAAA-AMNIST21 (1:2)         GJC0006
+LEY004        MOVE FEC-MM-AAAA-AMNIST21  TO FEC-MORMAX-AMNIST21         GJC0006
+LEY004     END-IF.                                                      GJC0006
+LEY004     IF MES-MORA-MAX-48-AMNIST21 > 0                              GJC0006 
+BBVA01        MOVE FEC-INI-MOR-AMNIST21 TO FECHA-AMNIST21               GJC0010
+LEY004        MOVE 1 TO L-AMNIST21                                      GJC0006
+LEY004        PERFORM 510000-ADDUNOTOI UNTIL L-AMNIST21 =               GJC0006
+LEY004                                          MES-MORA-MAX-48-AMNIST21GJC0006
+LEY004        MOVE ANO-T-AMNIST21 TO FEC-MM-AAAA-AMNIST21 (3:4)         GJC0006
+LEY004        MOVE MES-AMNIST21  TO FEC-MM-AAAA-AMNIST21 (1:2)          GJC0006
+LEY004        MOVE FEC-MM-AAAA-AMNIST21 TO FEC-MORMAX-48-AMNIST21       GJC0006
+LEY004     END-IF.                                                      GJC0006
+LEY005 555000-MANEJO-RECUP-Y-MM.                                        GJC0007
+REAMRK******************************************************************
+REMARK*555000-MANEJO-RECUP-Y-MM
+REMARK* SOLO SE DEBE INVOCAR CUANDO UNA CUANTA ES PERDONADA Y SIRVE PARA
+REMARK* DEJAR UNA CUENTA QUE FUE RECUPERADA O CANCELADA POR MAL MANEJO
+REMARK* EN PAGO VOLUNTARIO O CANCELADA VOL SI NO QUEDARON MORAS
+REMARK******************************************************************
+LEY005     IF (ESTADO-FIN-AMNIST21 = 46 OR ESTADO-FIN-AMNIST21 = 03) ANDGJC0007
+LEY005        (MORMAX-AMNIST21 = 0 AND MORMAX48-AMNIST21 = 0)           GJC0007
+LEY005        IF ESTADO-FIN-AMNIST21 = 03                               GJC0007
+LEY005           MOVE 06 TO NOV-REPORT-ABD07                            GJC0007
+LEY005                      NOV-REPORT-R-ABD07                          GJC0007
+LEY005        ELSE                                                      GJC0007
+LEY005           IF COD-CTA-ABD07 = 02                                  GJC0007
+LEY005              MOVE 06 TO NOV-REPORT-ABD07                         GJC0007
+LEY005                      NOV-REPORT-R-ABD07                          GJC0007
+LEY005           ELSE                                                   GJC0007
+LEY005              MOVE 08 TO NOV-REPORT-ABD07                         GJC0007
+LEY005                         NOV-REPORT-R-ABD07                       GJC0007
+LEY005           END-IF                                                 GJC0007
+LEY005        END-IF                                                    GJC0007
+LEY005     END-IF.                                                      GJC0007
+REMARK********************************************************************
+REMARK*510000-ADDUNOTOI.
+REMARK* RETROCEDE UN MES EN EL TIEMPO TENIENDO EN CUENTA EL CAMBIO DE AÑO
+REMARK* Y SI LA INFORMACIÓN VALIDA DEL VECTOR HA TERMINADO, FINALIZA LA
+REMARK* REVISIÓN DE CADUCIDAD SOBRE EL VECTOR
+REMARK********************************************************************
+LEY004 510000-ADDUNOTOI.                                                GJC0006
+LEY004     ADD 1 TO L-AMNIST21                                          GJC0006
+LEY004     SUBTRACT 1 FROM MES-AMNIST21                                 GJC0006
+LEY004     IF MES-AMNIST21 = 0                                          GJC0006
+LEY004        MOVE 12 TO MES-AMNIST21                                   GJC0006
+LEY004        SUBTRACT 1 FROM ANO-T-AMNIST21                            GJC0006
+LEY004     END-IF.                                                      GJC0006
+
+      ******************************************************************
+      *200950-CONVIERTE-FECHA                                          *
+      * CONVIERTE FECHA DE FORMATO MMYY A YYYYMM                       *
+      ******************************************************************
+       200950-CONVIERTE-FECHA.
+           MOVE  MES-AUX-AMNIST21   TO  FMILENIO-MES-AMNIST21
+           MOVE  ANO-AUX-AMNIST21   TO  FMILENIO-ANIO-AMNIST21
+           IF ANO-AUX-AMNIST21   > 60
+              MOVE 19               TO  FMILENIO-SIGLO-AMNIST21
+           ELSE
+              MOVE 20               TO  FMILENIO-SIGLO-AMNIST21
+           END-IF
+           MOVE  FECHA-MILENIO-AMNIST21  TO  FEC-NOVEDAD-AMNIST21.

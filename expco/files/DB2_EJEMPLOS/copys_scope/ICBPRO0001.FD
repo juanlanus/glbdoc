@@ -1,0 +1,60 @@
+      * ICBPRO.v.02.010
+      * TABLA DE PRODUCTOS UTILIZADOS EN EL ICGCON
+REAMRK* *****************************************************************
+REMARK* GJC0003    * AMPLIA: SE AMPLIA EL TAMAÑO DE LA ESTRUCTURA PARA
+REMARK* G.JIMENEZ  * POSTERIORMENTE UNIFICAR EL LAS ESTRUCTURAS ICBPRO E
+REMARK* NOV.28/2002* ICBPRO.NEW
+022400*----------------------------------------------------------------*
+REMARK* GJC0004    * NVAINF: SE ADICIONA NUEVA INFORMACION EN LOS REGISTROS
+REMARK* G.JIMENEZ  * LA QUE SERA UTILIZADA PARA PROGRAMAS FACULIS E     
+REMARK* ABRIL/2005 * ICGEST. SE CREA COPY ICBPRO0001.FD
+022400*----------------------------------------------------------------*
+REMARK* RMB0005    * HIPE01: SE CREA CAMPO PARA USAR O NO LA OPCION DE      
+REMARK* R.MARTINEZ * HIPERVINCULOS EN LAS BDUs                           
+REMARK* MAY-10-2005*                                           
+022400*----------------------------------------------------------------*
+REMARK* RMB0006    * ESTA01: SE CREA CAMPO PARA SABER QUE PRODUCTOS SE      
+REMARK* R.MARTINEZ * DESPLIEGAN EN EL MENU DE TRANSACCIONES REALIZADAS   
+REMARK* AGO-28-2006*                                           
+022400*----------------------------------------------------------------*
+REMARK* FAC0007    * VECPRO: SE INCLUYE NUEVO INDICADOR PARA HABILITAR EL
+REMARK* F.CUADROS C. PRODUCTO A ASIGNAR EN LA CLAVE (ARCHIVO ICBCLA)
+REMARK* OCT.11/2006*
+022400*----------------------------------------------------------------*
+REMARK* GJC0008    * PROEX1: MANEJO DE PRODUCTOS EXTERNOS AL ICGCON      
+REMARK* G.JIMENEZ C* 
+REMARK* DIC./2007  *
+022400*----------------------------------------------------------------*
+REMARK* VHF0009    * PROD01: INDICADOR DE PRODUCTOS DE LA SERIE PLUS (+) 
+REMARK* V.FORERO   *
+REMARK* AGO./2010  *
+022400*----------------------------------------------------------------*
+REMARK* RMB0010    * PRO001: MANEJO DE PRODUCTO ALFANUMERICAMENTES. SE   
+REMARK* R.MARTINEZ *         REDEFINEN CAMPOS A PIC X
+REMARK* ABR./2013  *
+022400*----------------------------------------------------------------*
+NVAINF FD  ICBPRO.                                                      GJC0004 
+022600*    MAESTRO DE PRODUCTOS OFRECIDOS            
+NVAINF 01  COMPLETO-ICBPRO.                                             GJC0004
+NVAINF     03  SEC-PRODUCTO-ICBPRO        PIC 9(2).                     GJC0004 
+PRO001     03  SEC-PRODUCTO-ICBPRO-R                                    RMB0010
+PRO001         REDEFINES SEC-PRODUCTO-ICBPRO PIC X(2).                  RMB0010
+NVAINF     03  DES-CORTA-ICBPRO           PIC X(3).                     GJC0004 
+NVAINF     03  DES-LARGA-ICBPRO           PIC X(20).                    GJC0004 
+NVAINF     03  HUELLA-ICBPRO              PIC 9.                        GJC0004 
+NVAINF*    03  FILLER                    PIC X(100).                    GJC0004 
+NVAINF     03  FAC-NEW-ICBPRO             PIC 9.                        GJC0004 
+NVAINF     03  NOM-CLA-ICBPRO             PIC X(03).                    GJC0004 
+NVAINF* LAS RESPUESTA POSIBLES SON: 1=EFECTIVAS,2=SIN INF 3=ERRORES     GJC0004 
+NVAINF     03  TIP-RES-ICBPRO.                                          GJC0004 
+NVAINF         04 VTIP-RES-ICBPRO OCCURS 7 TIMES PIC 9.                 GJC0004 
+NVAINF     03  REP-PERIODICO-ICBPRO       PIC 9.                        GJC0004 
+NVAINF     03  NUM-CLA-ICBPRO             PIC 99.                       GJC0004 
+NVAINF     03  HABILITADO-ICBPRO          PIC 9.                        GJC0004 
+HIPE01     03  HIPERVIN-ICBPRO            PIC 9.                        RMB0005
+ESTA01     03  MENU-ESTADIS-ICBPRO        PIC 9.                        RMB0006 
+VECPRO     03  HABILITADO-ADICIO-ICBPRO   PIC 9.                        FAC0007
+PROEX1     03  PRO-EXTERNO-ICBPRO         PIC X. *> "E=Externo"         GJC0008
+PROD01     03  IND-PRODPLUS-ICBPRO        PIC 9.                        VHF0009
+PROD01* 0=PRODUCTO NO HABILITADO, 1=PRODUCTO NORMAL, 2=PRODUCTO SERIE+  VHF0009
+PROD01     03  FILLER                     PIC X(98).                    VHF0009

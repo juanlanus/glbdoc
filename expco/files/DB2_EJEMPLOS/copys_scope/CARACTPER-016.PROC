@@ -1,0 +1,2148 @@
+REMARK*CARACTPER-016.PROC.v.0002.
+REMARK* set de Características Personalizadas 
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 016
+REMARK*    JURISCOOP          
+REMARK******************************************************************
+REMARK* IMS0002    | CQ7065 - SE AGREGAN NUEVAS CARACTERISTICAS        *
+REMARK* SEP.13.2012|                                                   *
+REMARK* M.SALAMANCA|                                                   *
+REMARK******************************************************************
+
+       0000-LLENAR-VEC-PERSONALIZ-016.
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999RO016) TO L-AUX
+               MOVE 01MOR999RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999MX016) TO L-AUX
+               MOVE 01MOR999MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR998RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR998RO016) TO L-AUX
+               MOVE 01MOR998RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR998MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR998MX016) TO L-AUX
+               MOVE 01MOR998MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR997RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR997RO016) TO L-AUX
+               MOVE 01MOR997RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR997MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR997MX016) TO L-AUX
+               MOVE 01MOR997MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR996RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR996RO016) TO L-AUX
+               MOVE 01MOR996RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR996MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR996MX016) TO L-AUX
+               MOVE 01MOR996MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR995RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR995RO016) TO L-AUX
+               MOVE 01MOR995RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR995MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR995MX016) TO L-AUX
+               MOVE 01MOR995MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR994RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR994RO016) TO L-AUX
+               MOVE 01MOR994RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR994MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR994MX016) TO L-AUX
+               MOVE 01MOR994MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR993RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR993RO016) TO L-AUX
+               MOVE 01MOR993RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR993MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR993MX016) TO L-AUX
+               MOVE 01MOR993MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR992RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR992RO016) TO L-AUX
+               MOVE 01MOR992RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR992MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR992MX016) TO L-AUX
+               MOVE 01MOR992MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR991RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR991RO016) TO L-AUX
+               MOVE 01MOR991RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR991MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR991MX016) TO L-AUX
+               MOVE 01MOR991MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR990RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR990RO016) TO L-AUX
+               MOVE 01MOR990RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR990MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR990MX016) TO L-AUX
+               MOVE 01MOR990MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR989RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR989RO016) TO L-AUX
+               MOVE 01MOR989RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR989MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR989MX016) TO L-AUX
+               MOVE 01MOR989MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR988RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR988RO016) TO L-AUX
+               MOVE 01MOR988RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR988MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR988MX016) TO L-AUX
+               MOVE 01MOR988MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR987RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR987RO016) TO L-AUX
+               MOVE 01MOR987RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR987MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR987MX016) TO L-AUX
+               MOVE 01MOR987MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR986RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR986RO016) TO L-AUX
+               MOVE 01MOR986RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR986MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR986MX016) TO L-AUX
+               MOVE 01MOR986MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR985RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR985RO016) TO L-AUX
+               MOVE 01MOR985RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR985MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR985MX016) TO L-AUX
+               MOVE 01MOR985MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR984RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR984RO016) TO L-AUX
+               MOVE 01MOR984RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR984MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR984MX016) TO L-AUX
+               MOVE 01MOR984MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR983RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR983RO016) TO L-AUX
+               MOVE 01MOR983RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR983MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR983MX016) TO L-AUX
+               MOVE 01MOR983MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR982RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR982RO016) TO L-AUX
+               MOVE 01MOR982RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR982MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR982MX016) TO L-AUX
+               MOVE 01MOR982MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR981RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR981RO016) TO L-AUX
+               MOVE 01MOR981RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR981MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR981MX016) TO L-AUX
+               MOVE 01MOR981MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999RO016) TO L-AUX
+               MOVE 01NUM999RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999MX016) TO L-AUX
+               MOVE 01NUM999MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM998RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM998RO016) TO L-AUX
+               MOVE 01NUM998RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM998MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM998MX016) TO L-AUX
+               MOVE 01NUM998MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM997RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM997RO016) TO L-AUX
+               MOVE 01NUM997RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM997MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM997MX016) TO L-AUX
+               MOVE 01NUM997MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM996RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM996RO016) TO L-AUX
+               MOVE 01NUM996RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM996MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM996MX016) TO L-AUX
+               MOVE 01NUM996MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM995RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM995RO016) TO L-AUX
+               MOVE 01NUM995RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM995MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM995MX016) TO L-AUX
+               MOVE 01NUM995MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+CQ7065*                                                                 IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01NUM994RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01NUM994RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01NUM994RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01NUM993RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01NUM993RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01NUM993RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01NUM992RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01NUM992RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01NUM992RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065*                                                                 IMS0002
+               ADD 1 TO I-VAR-PER
+               MOVE "01ACP999RO016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01ACP999RO016) TO L-AUX
+               MOVE 01ACP999RO016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01ACP999MX016" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01ACP999MX016) TO L-AUX
+               MOVE 01ACP999MX016(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+CQ7065*                                                                 IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END999RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END999RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END999RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END998RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END998RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END998RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END997RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END997RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END997RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END996RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END996RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END996RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END995RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END995RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END995RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END994RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END994RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END994RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END993RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END993RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END993RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END992RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END992RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END992RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065         ADD 1 TO I-VAR-PER                                       IMS0002
+CQ7065         MOVE "01END991RO016" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0002
+CQ7065         MOVE FUNCTION LENGTH(01END991RO016) TO L-AUX             IMS0002
+CQ7065         MOVE 01END991RO016(1:L-AUX)   TO                         IMS0002
+CQ7065                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0002
+CQ7065                                                                  IMS0002
+CQ7065         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ7065         MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ7065         MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              IMS0002
+CQ7065         MOVE  00DEM031000(1:L-AUX)  TO                           IMS0002
+CQ7065                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ7065         MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ7065         MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              IMS0002
+CQ7065         MOVE  00DEM032000(1:L-AUX)  TO                           IMS0002
+CQ7065                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ7065         MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ7065         MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX              IMS0002
+CQ7065         MOVE  00DEM033000(1:L-AUX)  TO                           IMS0002
+CQ7065                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ7065         MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ7065         MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              IMS0002
+CQ7065         MOVE  00DEM034000(1:L-AUX)  TO                           IMS0002
+CQ7065                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ7065*                                                                 IMS0002
+               .
+               *>
+REMARK 0000-INICIALIZAR-CARAC-EXT-16.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-16.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 16    *
+REMARK*     PARA JURISCOOP         
+REMARK******************************************************************
+
+             MOVE ZEROS TO 01MOR999MX016  01MOR998MX016  01MOR997MX016
+                           01MOR996MX016  01MOR995MX016  01MOR994MX016
+                           01MOR993MX016  01MOR992MX016  01MOR991MX016
+                           01MOR990MX016  01MOR989MX016  01MOR988MX016
+                           01MOR987MX016  01MOR986MX016  01MOR985MX016
+                           01MOR984MX016  01MOR983MX016  01MOR982MX016
+                           01MOR981MX016
+
+             MOVE ZEROS TO 01MOR999RO016  01MOR998RO016  01MOR997RO016
+                           01MOR996RO016  01MOR995RO016  01MOR994RO016
+                           01MOR993RO016  01MOR992RO016  01MOR991RO016
+                           01MOR990RO016  01MOR989RO016  01MOR988RO016
+                           01MOR987RO016  01MOR986RO016  01MOR985RO016
+                           01MOR984RO016  01MOR983RO016  01MOR982RO016
+                           01MOR981RO016
+
+             MOVE ZEROS TO 01NUM999MX016  01NUM998MX016  01NUM997MX016
+                           01NUM996MX016  01NUM995MX016  
+
+             MOVE ZEROS TO 01NUM999RO016  01NUM998RO016  01NUM997RO016
+                           01NUM996RO016  01NUM995RO016  
+CQ7065                     01NUM994RO016  01NUM993RO016  01NUM992RO016  IMS0002
+
+             MOVE ZEROS TO 01ACP999RO016  01ACP999MX016  
+
+CQ7065       MOVE ZEROS TO 01END999RO016                 01END997RO016  IMS0002
+CQ7065                     01END996RO016  01END995RO016  01END994RO016  IMS0002
+CQ7065                     01END993RO016  01END992RO016  01END991RO016  IMS0002
+CQ7065       MOVE 99999999999  TO         01END998RO016                 IMS0002
+             
+             INITIALIZE VARIABLES-PER-016
+CQ7065       PERFORM 9999-CARAC-GENERALES                               IMS0002
+             .
+
+REMARK* *-------------------------------------------------------------*
+       0100-ESTABLECER-PARAMS-PORTF-16.
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* AL COMIENZO DE ESTABLECER:
+REMARK*    PORTAFOLIO (RO-02, MX-05, MX-06)
+REMARK*    EN 00NUMPTF ESTA EL CODIGO DEL PORTAFOLIO ESTANDARD
+CQ7065     IF COD-PORTAF-CARACT  = "AH" OR "CT"                         IMS0002
+              MOVE "MX-06"  TO COD-CTA-PORTAF-016
+CQ7065     ELSE                                                         IMS0002
+              IF COD-CTA-ABD07 = 06 OR 27
+                 MOVE "RO-02" TO COD-CTA-PORTAF-016
+              ELSE
+                 IF COD-CTA-ABD07 = 02 OR 03 OR 05 OR 07 OR 13
+                           OR 14 OR 17 OR 18 OR 20 OR 48 OR 49
+                    MOVE "MX-05" TO COD-CTA-PORTAF-016
+                 ELSE
+                    MOVE "OTROS" TO COD-CTA-PORTAF-016
+                 END-IF
+              END-IF
+CQ7065     END-IF                                                       IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065     MOVE "  " TO ENT-JURISCOOP                                   IMS0002
+CQ7065     IF SW-SUSCR-JURI = 0                                         IMS0002
+CQ7065        OPEN INPUT TABSUSCR-JUR                                   IMS0002
+CQ7065        MOVE 0 TO I-IND-JUR                                       IMS0002
+CQ7065        PERFORM  UNTIL SW-SUSCR-JURI = 1                          IMS0002
+CQ7065           READ TABSUSCR-JUR AT END MOVE 1 TO SW-SUSCR-JURI       IMS0002
+CQ7065           END-READ                                               IMS0002
+CQ7065           IF SW-SUSCR-JURI NOT = 1                               IMS0002
+CQ7065              MOVE REG-TABSUSCR-JUR TO  W-SUSC-JURI               IMS0002
+CQ7065              IF W-SUS-JURI-T = 1                                 IMS0002
+CQ7065                 ADD 1 TO I-IND-JUR                               IMS0002
+CQ7065                 MOVE W-SUS-JURI-S TO SUS-JURI (I-IND-JUR)        IMS0002
+CQ7065              END-IF                                              IMS0002
+                 END-IF
+              END-PERFORM
+              PERFORM UNTIL I-IND-JUR  >   39
+                 ADD 1 TO I-IND-JUR
+                 MOVE ALL "9" TO SUS-JURI (I-IND-JUR)
+              END-PERFORM
+CQ7065        SORT TB-SUSC-CITI ASCENDING KEY                           IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065     SET I-JUR TO 1                                               IMS0002
+CQ7065     SEARCH ALL TB-SUSC-JURI                                      IMS0002
+CQ7065         AT END                                                   IMS0002
+CQ7065            MOVE "NO" TO ENT-JURISCOOP                            IMS0002
+CQ7065         WHEN SUS-JURI (I-JUR) = COD-SUS-ABD07                    IMS0002
+cq7065            MOVE "SI" TO ENT-JURISCOOP                            IMS0002
+CQ7065     END-SEARCH                                                   IMS0002
+CQ7065*                                                                 IMS0002
+           .
+      *
+              
+              
+
+
+REMARK*                                                                
+       2249-PROCESE-CARCT-00MOR-EXT-16.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-16.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01MOR Y 02MOR PARA
+REMARK*     JURISCOOP                  
+REMARK******************************************************************
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-16
+REMARK* *-------------------------------------------------------------*
+REMARK* 8 Tipología MOR . Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01MOR999RO016 . Numero de productos al dia en fin y coop  
+           IF COD-CTA-PORTAF-016    = "RO-02" 
+              MOVE 1 TO ROFLAG-016
+              IF REG-ABIERTO-CARACT   = 1
+                 MOVE 1 TO ROOFLAG-016
+                 IF FECHA-APERT-CARACT > ZEROS AND 
+                    FECHA-ESTADO-CARACT > ZEROS
+                    MOVE 1 TO RODFLAG-016
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE 1 TO ROVFLAG-016
+                       IF V-NOR-CARACT(I49:1) = 0
+                          COMPUTE ROVALUE-016-0 = ROVALUE-016-0 + 1
+                       END-IF
+                    END-IF
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF
+REMARK* CO01MOR999MX016 . Numero de productos al dia en fin y coop  
+           IF COD-CTA-PORTAF-016 = "MX-05"
+              MOVE 1 TO MXFLAG-016
+              IF REG-ABIERTO-CARACT   = 1
+                 MOVE 1 TO MXOFLAG-016
+                 IF FECHA-APERT-CARACT > ZEROS AND 
+                    FECHA-ESTADO-CARACT > ZEROS
+                    MOVE 1 TO MXDFLAG-016
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE 1 TO MXVFLAG-016
+                       IF V-NOR-CARACT(I49:1) = 0
+                          COMPUTE MXVALUE-016-0 = MXVALUE-016-0 + 1
+                       END-IF
+                    END-IF
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF                                                     
+REMARK* CO01MOR998XX016 . Numero de productos con moras actuales 30 a 
+REMARK* CO01MOR993XX016   Cartera castigada                         
+           IF COD-CTA-PORTAF-016    = "RO-02" 
+              MOVE 1 TO ROFLAG-016
+              IF REG-ABIERTO-CARACT   = 1
+                 MOVE 1 TO ROOFLAG-016
+                 IF FECHA-APERT-CARACT > ZEROS AND 
+                    FECHA-ESTADO-CARACT > ZEROS
+                    MOVE 1 TO RODFLAG-016-MOR
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE 1 TO ROVFLAG-016-MOR
+                       IF VEC-SALDOMOR-CARACT(I13)(11:1) <> "-" AND (          
+                          VEC-SALDOMOR-CARACT(I13) = 0 OR
+                          VEC-SALDOMOR-CARACT(I13) >= 100)
+                             MOVE 1 TO ROGFLAG-016
+                             EVALUATE V-NOR-CARACT(I49:1)
+                                WHEN 1 ADD 1 TO ROVALUE-016-1
+                                WHEN 2 ADD 1 TO ROVALUE-016-2
+                                WHEN 3 ADD 1 TO ROVALUE-016-3
+                                WHEN 4 ADD 1 TO ROVALUE-016-4
+                                WHEN 6 ADD 1 TO ROVALUE-016-6
+                                       ADD 1 TO ROVALUE-016-4
+                                WHEN 7 ADD 1 TO ROVALUE-016-7
+                                       ADD 1 TO ROVALUE-016-4
+                             END-EVALUATE
+                       END-IF
+                    END-IF
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF
+           IF COD-CTA-PORTAF-016 = "MX-05"
+              MOVE 1 TO MXFLAG-016
+              IF REG-ABIERTO-CARACT   = 1
+                 MOVE 1 TO MXOFLAG-016
+                 IF FECHA-APERT-CARACT > ZEROS AND 
+                    FECHA-ESTADO-CARACT > ZEROS
+                    MOVE 1 TO MXDFLAG-016-MOR
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE 1 TO MXVFLAG-016-MOR
+                       IF VEC-SALDOMOR-CARACT(I13)(11:1) <> "-" AND (
+                          VEC-SALDOMOR-CARACT(I13) = 0 OR
+                          VEC-SALDOMOR-CARACT(I13) >= 100)
+                             MOVE 1 TO MXGFLAG-016
+                             EVALUATE V-NOR-CARACT(I49:1)
+                                WHEN 1 ADD 1 TO MXVALUE-016-1
+                                WHEN 2 ADD 1 TO MXVALUE-016-2
+                                WHEN 3 ADD 1 TO MXVALUE-016-3
+                                WHEN 4 ADD 1 TO MXVALUE-016-4
+                                WHEN 6 ADD 1 TO MXVALUE-016-6
+                                       ADD 1 TO MXVALUE-016-4
+                                WHEN 7 ADD 1 TO MXVALUE-016-7
+                                       ADD 1 TO MXVALUE-016-4
+                             END-EVALUATE
+                       END-IF
+                    END-IF
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF                                                  
+REMARK* CO01MOR992RO016 . Numero de 30, 60, 90 y 120 dias ult. 3 meses
+REMARK* CO01MOR989RO016
+           IF COD-CTA-PORTAF-016    = "RO-02" 
+              MOVE 1 TO ROFLAG-016
+              IF FECHA-APERT-CARACT > ZEROS AND 
+                 FECHA-ESTADO-CARACT > ZEROS
+                 MOVE 1 TO RODFLAG-016-MOR
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 3)
+                     MOVE 1 TO ROVFLAG-016-3
+                     PERFORM VARYING WS-NN FROM 46 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO ROVALUE-3M-1
+                           WHEN 2 ADD 1 TO ROVALUE-3M-2
+                           WHEN 3 ADD 1 TO ROVALUE-3M-3
+                           WHEN > 3 ADD 1 TO ROVALUE-3M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+REMARK* CO01MOR988RO016 . Numero de 30, 60, 90 y 120 dias ult. 6 meses
+REMARK* CO01MOR985RO016
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 6)
+                     MOVE 1 TO ROVFLAG-016-6
+                     PERFORM VARYING WS-NN FROM 43 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO ROVALUE-6M-1
+                           WHEN 2 ADD 1 TO ROVALUE-6M-2
+                           WHEN 3 ADD 1 TO ROVALUE-6M-3
+                           WHEN > 3 ADD 1 TO ROVALUE-6M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+REMARK* CO01MOR984RO016 . Numero de 30, 60, 90 y 120 dias ult. 12 meses
+REMARK* CO01MOR981RO016
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 12)
+                     MOVE 1 TO ROVFLAG-016-12
+                     PERFORM VARYING WS-NN FROM 37 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO ROVALUE-12M-1
+                           WHEN 2 ADD 1 TO ROVALUE-12M-2
+                           WHEN 3 ADD 1 TO ROVALUE-12M-3
+                           WHEN > 3 ADD 1 TO ROVALUE-12M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF
+REMARK* CO01MOR992MX016 . Numero de 30, 60, 90 y 120 dias ult. 3 meses
+REMARK* CO01MOR989MX016
+           IF COD-CTA-PORTAF-016    = "MX-05" 
+              MOVE 1 TO MXFLAG-016
+              IF FECHA-APERT-CARACT > ZEROS AND 
+                 FECHA-ESTADO-CARACT > ZEROS
+                 MOVE 1 TO MXDFLAG-016-MOR
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 3)
+                     MOVE 1 TO MXVFLAG-016-3
+                     PERFORM VARYING WS-NN FROM 46 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO MXVALUE-3M-1
+                           WHEN 2 ADD 1 TO MXVALUE-3M-2
+                           WHEN 3 ADD 1 TO MXVALUE-3M-3
+                           WHEN > 3 ADD 1 TO MXVALUE-3M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+REMARK* CO01MOR988MX016 . Numero de 30, 60, 90 y 120 dias ult. 6 meses
+REMARK* CO01MOR985MX016
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 6)
+                     MOVE 1 TO MXVFLAG-016-6
+                     PERFORM VARYING WS-NN FROM 43 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO MXVALUE-6M-1
+                           WHEN 2 ADD 1 TO MXVALUE-6M-2
+                           WHEN 3 ADD 1 TO MXVALUE-6M-3
+                           WHEN > 3 ADD 1 TO MXVALUE-6M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+REMARK* CO01MOR984MX016 . Numero de 30, 60, 90 y 120 dias ult. 12 meses
+REMARK* CO01MOR981MX016
+                 IF (REG-ABIERTO-CARACT   = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                    (REG-CERRADO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 12)
+                     MOVE 1 TO MXVFLAG-016-12
+                     PERFORM VARYING WS-NN FROM 37 BY 1
+                          UNTIL WS-NN > 48         
+                        EVALUATE V-NOR-CARACT(WS-NN:1)
+                           WHEN 1 ADD 1 TO MXVALUE-12M-1
+                           WHEN 2 ADD 1 TO MXVALUE-12M-2
+                           WHEN 3 ADD 1 TO MXVALUE-12M-3
+                           WHEN > 3 ADD 1 TO MXVALUE-12M-4
+                        END-EVALUATE
+                     END-PERFORM
+                 END-IF                                                  
+              END-IF                                                  
+           END-IF
+           .
+REMARK*                                                                
+
+
+       2249-PROCESE-CARCT-00NUM-EXT-16.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-16.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01NUM Y 02NUM PARA
+REMARK*     JURISCOOP                  
+REMARK******************************************************************
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-16
+REMARK* CO01NUM999XX016 . Numero de productos reestructurados       
+           IF COD-CTA-PORTAF-016    = "RO-02" 
+              MOVE 1 TO ROFLAG-016
+              IF FECHA-APERT-CARACT > ZEROS AND 
+                 FECHA-ESTADO-CARACT > ZEROS
+                 MOVE 1 TO RODFLAG-016-NUM
+                 IF MESES-DESAC-CARACT <= 3
+                    MOVE 1 TO ROVFLAG-016-NUM
+                    IF ESTADO-ORIGEN-ABD07 = 1
+                       EVALUATE CALIFICACIONM-ABD07
+                          WHEN 1   ADD 1 TO ROVALUE-A
+                          WHEN 2   ADD 1 TO ROVALUE-B
+                          WHEN 3   ADD 1 TO ROVALUE-C
+                          WHEN 4   ADD 1 TO ROVALUE-D
+                          WHEN 5   ADD 1 TO ROVALUE-E
+                          WHEN 6   ADD 1 TO ROVALUE-A
+                          WHEN 7   ADD 1 TO ROVALUE-B
+                          WHEN 8   ADD 1 TO ROVALUE-C
+                          WHEN 9   ADD 1 TO ROVALUE-E
+                       END-EVALUATE
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           IF COD-CTA-PORTAF-016    = "MX-05" 
+              MOVE 1 TO MXFLAG-016
+              IF FECHA-APERT-CARACT > ZEROS AND 
+                 FECHA-ESTADO-CARACT > ZEROS
+                 MOVE 1 TO MXDFLAG-016-NUM
+                 IF MESES-DESAC-CARACT <= 3
+                    MOVE 1 TO MXVFLAG-016-NUM
+                    IF ESTADO-ORIGEN-ABD07 = 1
+                       EVALUATE CALIFICACIONM-ABD07
+                          WHEN 1   ADD 1 TO MXVALUE-A
+                          WHEN 2   ADD 1 TO MXVALUE-B
+                          WHEN 3   ADD 1 TO MXVALUE-C
+                          WHEN 4   ADD 1 TO MXVALUE-D
+                          WHEN 5   ADD 1 TO MXVALUE-E
+                          WHEN 6   ADD 1 TO MXVALUE-A
+                          WHEN 7   ADD 1 TO MXVALUE-B
+                          WHEN 8   ADD 1 TO MXVALUE-C
+                          WHEN 9   ADD 1 TO MXVALUE-E
+                       END-EVALUATE
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+CQ7065*     TDC   COD-CTA = 02                                          IMS0002
+CQ7065*     01NUM994RO016: TDC NO JURISCOOP - AL FINAL EVALUA RO-01FLAG IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           IMS0002
+CQ7065           ADD 1 TO 01NUM994RO016                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065*     01NUM993RO016: TDC CON JURISCOOP - AL FINAL EVALUA RO-01FLAGIMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "SI"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-J                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           IMS0002
+CQ7065           ADD 1 TO 01NUM993RO016                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065*     01NUM992RO016: TDC NO JURISCOOP ABIERTAS ULTIMO AÑO         IMS0002
+CQ7065*       AL FINAL SE EVALOUAN LOS FLAGS                            IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-N                            IMS0002
+CQ7065           IF RUN-DATE-CARACT > 0 AND FECHA-APERT-CARACT > 0      IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N                          IMS0002
+CQ7065              IF MESES-MADUR-CARACT <= 12                         IMS0002
+CQ7065                 ADD 1 TO 01NUM992RO016                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065*                                                                 IMS0002
+           .
+
+
+
+       2249-PROCESE-CARCT-00ACP-EXT-16.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00ACP-EXT-16.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01ACP Y 02ACP PARA
+REMARK*     JURISCOOP                  
+REMARK******************************************************************
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-16
+REMARK* CO01ACP999XX016 . Numero de cancelaciones negativas         
+           IF COD-CTA-PORTAF-016    = "RO-02" 
+              MOVE 1 TO ROFLAG-016-C
+              IF REG-CERRADO-CARACT   = 1
+                 IF FECHA-ESTADO-CARACT > ZEROS    
+                    MOVE 1 TO RODFLAG-016-C
+                    IF MESES-DESAC-CARACT >= 0
+                       MOVE 1 TO ROVFLAG-016-C
+                       IF MESES-DESAC-CARACT <= 12 
+                       AND REG-NEGATIVO-CARACT = 1
+                           ADD 1 TO ROVALUE-016-N
+                       END-IF
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           IF COD-CTA-PORTAF-016    = "MX-05" OR "MX-06"
+              MOVE 1 TO MXFLAG-016-C
+              IF REG-CERRADO-CARACT   = 1
+                 IF FECHA-ESTADO-CARACT > ZEROS    
+                    MOVE 1 TO MXDFLAG-016-C
+                    IF MESES-DESAC-CARACT >= 0
+                       MOVE 1 TO MXVFLAG-016-C
+                       IF MESES-DESAC-CARACT <= 12 
+                       AND REG-NEGATIVO-CARACT = 1
+                           ADD 1 TO MXVALUE-016-N
+                       END-IF
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           .
+                       
+
+CQ7065 2249-PROCESE-CARCT-00END-EXT-16.                                 IMS0002
+CQ7065******************************************************************IMS0002
+CQ7065*2249-PROCESE-CARCT-00END-EXT-16.                                 IMS0002
+CQ7065*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01END PARA         IMS0002
+CQ7065*     JURISCOOP                                                   IMS0002
+CQ7065******************************************************************IMS0002
+CQ7065     PERFORM 0100-ESTABLECER-PARAMS-PORTF-16                      IMS0002
+CQ7065* CO01END999XX016 . Cupo TDC Mayor Mercado diferentes a Juriscoop IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-NE                           IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-INICIAL-CARACT(I13) IS NUMERIC            IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-INI-N                IMS0002
+CQ7065                    IF VEC-INICIAL-CARACT(I13) > 01END999RO016    IMS0002
+CQ7065                       MOVE VEC-INICIAL-CARACT(I13) TO            IMS0002
+CQ7065                                                 01END999RO016    IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END998XX016 . Cupo TDC Menor Mercado diferentes a Juriscoop IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-NE                           IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-INICIAL-CARACT(I13) IS NUMERIC            IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-INI-N                IMS0002
+CQ7065                    IF VEC-INICIAL-CARACT(I13) < 01END998RO016    IMS0002
+CQ7065                       MOVE VEC-INICIAL-CARACT(I13) TO            IMS0002
+CQ7065                                                 01END998RO016    IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END997XX016 . Suma saldos TDC diferentes a Juriscoop        IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-NE                           IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-SALDO-CARACT(I13) IS NUMERIC              IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-SDO-N                IMS0002
+CQ7065                    IF VEC-SALDO-CARACT(I13)   >= 0               IMS0002
+CQ7065                       COMPUTE 01END997RO016 = 01END997RO016 +    IMS0002
+CQ7065                                VEC-SALDO-CARACT(I13)             IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END996XX016 . Suma cupos  TDC diferentes a Juriscoop        IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-NE                           IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-INICIAL-CARACT(I13) IS NUMERIC            IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-INI-N                IMS0002
+CQ7065                    IF VEC-INICIAL-CARACT(I13) >= 0               IMS0002
+CQ7065                       COMPUTE 01END996RO016 = 01END996RO016 +    IMS0002
+CQ7065                                VEC-INICIAL-CARACT(I13)           IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END995XX016 . Suma cuotas TDC diferentes a Juriscoop        IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-NE                           IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-CUOTA-CARACT(I13) IS NUMERIC              IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-CUO-N                IMS0002
+CQ7065                    IF VEC-CUOTA-CARACT(I13)   >= 0               IMS0002
+CQ7065                       COMPUTE 01END995RO016 = 01END995RO016 +    IMS0002
+CQ7065                                VEC-CUOTA-CARACT(I13)             IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END994XX016 . Suma saldos TDC  Juriscoop                    IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "SI"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-J                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-J                            IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-J-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-J-END                   IMS0002
+CQ7065                 IF VEC-IND-SLD-CARACT(I13) = 0                   IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-SDO-J                IMS0002
+CQ7065                    IF VEC-SALDO-CARACT(I13)   >= 0               IMS0002
+CQ7065                       COMPUTE 01END994RO016 = 01END994RO016 +    IMS0002
+CQ7065                                VEC-SALDO-CARACT(I13)             IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END993XX016 . Suma cupos  TDC  Juriscoop                    IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "SI"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-J                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-J                            IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-J-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-J-END                   IMS0002
+CQ7065                 IF VEC-IND-INI-CARACT(I13) = 0                   IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-INI-J                IMS0002
+CQ7065                    IF VEC-INICIAL-CARACT(I13) >= 0               IMS0002
+CQ7065                       COMPUTE 01END993RO016 = 01END993RO016 +    IMS0002
+CQ7065                                VEC-INICIAL-CARACT(I13)           IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END992XX016 . Suma cuotas TDC  Juriscoop                    IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "SI"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-J                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1                                 IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-J                            IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-J-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-J-END                   IMS0002
+CQ7065                 IF VEC-IND-CUO-CARACT(I13) = 0                   IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-CUO-J                IMS0002
+CQ7065                    IF VEC-CUOTA-CARACT(I13)   >= 0               IMS0002
+CQ7065                       COMPUTE 01END992RO016 = 01END992RO016 +    IMS0002
+CQ7065                                VEC-CUOTA-CARACT(I13)             IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065* CO01END991XX016 . Numero de TDC dif. Juriscoop con utiliz>90%   IMS0002
+CQ7065     IF COD-CTA-ABD07 = 02 AND ENT-JURISCOOP = "NO"               IMS0002
+CQ7065        MOVE 1 TO RO-01FLAG-016-N                                 IMS0002
+CQ7065        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           IMS0002
+CQ7065           MOVE 1 TO RO-01OPFLAG-016-N                            IMS0002
+CQ7065           IF RUN-DATE-CARACT    > ZEROS AND                      IMS0002
+CQ7065              FECHA-ESTADO-CARACT > ZEROS                         IMS0002
+CQ7065              MOVE 1 TO RO-01DFLAG-016-N-END                      IMS0002
+CQ7065              IF MESES-DESAC-CARACT <= 3                          IMS0002
+CQ7065                 MOVE 1 TO RO-01VFLAG-016-N-END                   IMS0002
+CQ7065                 IF VEC-INICIAL-CARACT(I13) >  0 AND              IMS0002
+CQ7065                    VEC-SALDO-CARACT(I13) IS NUMERIC              IMS0002
+CQ7065                    MOVE 1 TO RO-01FFLAG-016-991-N                IMS0002
+CQ7065                    IF VEC-INICIAL-CARACT(I13) >  0 AND           IMS0002
+CQ7065                       VEC-SALDO-CARACT(I13) >= 0                 IMS0002
+CQ7065                       COMPUTE UTILIZ-JURISC =                    IMS0002
+CQ7065                          VEC-SALDO-CARACT(I13) /                 IMS0002
+CQ7065                               VEC-INICIAL-CARACT(I13)            IMS0002
+CQ7065                       IF UTILIZ-JURISC > 0.9                     IMS0002
+CQ7065                          ADD 1 TO 01END991RO016                  IMS0002
+CQ7065                       END-IF                                     IMS0002
+CQ7065                    END-IF                                        IMS0002
+CQ7065                 END-IF                                           IMS0002
+CQ7065              END-IF                                              IMS0002
+CQ7065           END-IF                                                 IMS0002
+CQ7065        END-IF                                                    IMS0002
+CQ7065     END-IF                                                       IMS0002
+CQ7065     .                                                            IMS0002
+
+
+
+
+       2649-PROCESE-CARACT-02XX-EXT-16.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-16.
+REMARK*    SE ESTABLECEN LAS CARACTERISTICAS DEFINITIVAS AL FINAL DEL
+REMARK*    PROCESO DE LAS CUENTAS DE CADA CEDULA
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01MOR999RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR999RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR999RO016
+               ELSE
+                  IF RODFLAG-016 = 0
+                     MOVE " -3" TO 01MOR999RO016
+                  ELSE
+                     IF ROVFLAG-016 = 0
+                        MOVE " -4" TO 01MOR999RO016
+                     ELSE
+                        MOVE ROVALUE-016-0 TO 01MOR999RO016
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR999MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR999MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR999MX016
+               ELSE
+                  IF MXDFLAG-016 = 0
+                     MOVE " -3" TO 01MOR999MX016
+                  ELSE
+                     IF MXVFLAG-016 = 0
+                        MOVE " -4" TO 01MOR999MX016
+                     ELSE
+                        MOVE MXVALUE-016-0 TO 01MOR999MX016
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR998RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR998RO016
+            ELSE
+               IF ROOFLAG-016 = 0   *>  Verificar no abiertos
+                  MOVE " -2" TO 01MOR998RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR998RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR998RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR998RO016
+                        ELSE
+                           MOVE ROVALUE-016-1 TO 01MOR998RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR998MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR998MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR998MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR998MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR998MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR998MX016
+                        ELSE
+                           MOVE MXVALUE-016-1 TO 01MOR998MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR997RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR997RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR997RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR997RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR997RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR997RO016
+                        ELSE
+                           MOVE ROVALUE-016-2 TO 01MOR997RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR997MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR997MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR997MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR997MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR997MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88"  TO 01MOR997MX016
+                        ELSE
+                           MOVE MXVALUE-016-2 TO 01MOR997MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR996RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR996RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR996RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR996RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR996RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR996RO016
+                        ELSE
+                           MOVE ROVALUE-016-3 TO 01MOR996RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR996MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR996MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR996MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR996MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR996MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR996MX016
+                        ELSE
+                           MOVE MXVALUE-016-3 TO 01MOR996MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR995RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR995RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR995RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR995RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR995RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR995RO016
+                        ELSE
+                           MOVE ROVALUE-016-4 TO 01MOR995RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR995MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR995MX016
+            ELSE
+               IF MXOFLAG-016     = 0
+                  MOVE " -2" TO 01MOR995MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR995MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR995MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR995MX016
+                        ELSE
+                           MOVE MXVALUE-016-4 TO 01MOR995MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR994RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR994RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR994RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR994RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR994RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR994RO016
+                        ELSE
+                           MOVE ROVALUE-016-7 TO 01MOR994RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR994MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR994MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR994MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR994MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR994MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR994MX016
+                        ELSE
+                           MOVE MXVALUE-016-7 TO 01MOR994MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR993RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR993RO016
+            ELSE
+               IF ROOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR993RO016
+               ELSE
+                  IF RODFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR993RO016
+                  ELSE
+                     IF ROVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR993RO016
+                     ELSE
+                        IF ROGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR993RO016
+                        ELSE
+                           MOVE ROVALUE-016-6 TO 01MOR993RO016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+               
+REMARK* CO01MOR993MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR993MX016
+            ELSE
+               IF MXOFLAG-016 = 0
+                  MOVE " -2" TO 01MOR993MX016
+               ELSE
+                  IF MXDFLAG-016-MOR = 0
+                     MOVE " -3" TO 01MOR993MX016
+                  ELSE
+                     IF MXVFLAG-016-MOR = 0
+                        MOVE " -4" TO 01MOR993MX016
+                     ELSE
+                        IF MXGFLAG-016 = 0
+                           MOVE "-88" TO 01MOR993MX016
+                        ELSE
+                           MOVE MXVALUE-016-6 TO 01MOR993MX016
+                        END-IF
+                     END-IF
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR992RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR992RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR992RO016
+               ELSE
+                  IF ROVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR992RO016
+                  ELSE
+                     MOVE ROVALUE-3M-1  TO 01MOR992RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR992MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR992MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR992MX016
+               ELSE
+                  IF MXVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR992MX016
+                  ELSE
+                     MOVE MXVALUE-3M-1  TO 01MOR992MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR991RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR991RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR991RO016
+               ELSE
+                  IF ROVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR991RO016
+                  ELSE
+                     MOVE ROVALUE-3M-2  TO 01MOR991RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR991MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR991MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR991MX016
+               ELSE
+                  IF MXVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR991MX016
+                  ELSE
+                     MOVE MXVALUE-3M-2  TO 01MOR991MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR990RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR990RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR990RO016
+               ELSE
+                  IF ROVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR990RO016
+                  ELSE
+                     MOVE ROVALUE-3M-3  TO 01MOR990RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR990MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR990MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR990MX016
+               ELSE
+                  IF MXVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR990MX016
+                  ELSE
+                     MOVE MXVALUE-3M-3  TO 01MOR990MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR989RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR989RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR989RO016
+               ELSE
+                  IF ROVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR989RO016
+                  ELSE
+                     MOVE ROVALUE-3M-4  TO 01MOR989RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR989MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR989MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR989MX016
+               ELSE
+                  IF MXVFLAG-016-3 = 0
+                     MOVE " -4" TO 01MOR989MX016
+                  ELSE
+                     MOVE MXVALUE-3M-4  TO 01MOR989MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR988RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR988RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR988RO016
+               ELSE
+                  IF ROVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR988RO016
+                  ELSE
+                     MOVE ROVALUE-6M-1  TO 01MOR988RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR988MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR988MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR988MX016
+               ELSE
+                  IF MXVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR988MX016
+                  ELSE
+                     MOVE MXVALUE-6M-1  TO 01MOR988MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR987RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR987RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR987RO016
+               ELSE
+                  IF ROVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR987RO016
+                  ELSE
+                     MOVE ROVALUE-6M-2  TO 01MOR987RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR987MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR987MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR987MX016
+               ELSE
+                  IF MXVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR987MX016
+                  ELSE
+                     MOVE MXVALUE-6M-2  TO 01MOR987MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR986RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR986RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR986RO016
+               ELSE
+                  IF ROVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR986RO016
+                  ELSE
+                     MOVE ROVALUE-6M-3  TO 01MOR986RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR986MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR986MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR986MX016
+               ELSE
+                  IF MXVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR986MX016
+                  ELSE
+                     MOVE MXVALUE-6M-3 TO 01MOR986MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR985RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR985RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR985RO016
+               ELSE
+                  IF ROVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR985RO016
+                  ELSE
+                     MOVE ROVALUE-6M-4  TO 01MOR985RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR985MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR985MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR985MX016
+               ELSE
+                  IF MXVFLAG-016-6 = 0
+                     MOVE " -4" TO 01MOR985MX016
+                  ELSE
+                     MOVE MXVALUE-6M-4 TO 01MOR985MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR984RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR984RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR984RO016
+               ELSE
+                  IF ROVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR984RO016
+                  ELSE
+                     MOVE ROVALUE-12M-1  TO 01MOR984RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR984MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR984MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR984MX016
+               ELSE
+                  IF MXVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR984MX016
+                  ELSE
+                     MOVE MXVALUE-12M-1 TO 01MOR984MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR983RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR983RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR983RO016
+               ELSE
+                  IF ROVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR983RO016
+                  ELSE
+                     MOVE ROVALUE-12M-2  TO 01MOR983RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR983MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR983MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR983MX016
+               ELSE
+                  IF MXVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR983MX016
+                  ELSE
+                     MOVE MXVALUE-12M-2 TO 01MOR983MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR982RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR982RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR982RO016
+               ELSE
+                  IF ROVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR982RO016
+                  ELSE
+                     MOVE ROVALUE-12M-3  TO 01MOR982RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR982MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR982MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR982MX016
+               ELSE
+                  IF MXVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR982MX016
+                  ELSE
+                     MOVE MXVALUE-12M-3 TO 01MOR982MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR981RO016. 
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE " -1" TO 01MOR981RO016
+            ELSE
+               IF RODFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR981RO016
+               ELSE
+                  IF ROVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR981RO016
+                  ELSE
+                     MOVE ROVALUE-12M-4  TO 01MOR981RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01MOR981MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE " -1" TO 01MOR981MX016
+            ELSE
+               IF MXDFLAG-016-MOR = 0
+                  MOVE " -3" TO 01MOR981MX016
+               ELSE
+                  IF MXVFLAG-016-12 = 0
+                     MOVE " -4" TO 01MOR981MX016
+                  ELSE
+                     MOVE MXVALUE-12M-4 TO 01MOR981MX016
+                  END-IF
+               END-IF
+            END-IF
+               
+               
+
+REMARK* CO01NUM999RO016
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE "  -1" TO 01NUM999RO016
+            ELSE
+               IF RODFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM999RO016
+               ELSE
+                  IF ROVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM999RO016
+                  ELSE
+                     MOVE ROVALUE-A      TO 01NUM999RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM999MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE "  -1" TO 01NUM999MX016
+            ELSE
+               IF MXDFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM999MX016
+               ELSE
+                  IF MXVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM999MX016
+                  ELSE
+                     MOVE MXVALUE-A      TO 01NUM999MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM998RO016
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE "  -1" TO 01NUM998RO016
+            ELSE
+               IF RODFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM998RO016
+               ELSE
+                  IF ROVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM998RO016
+                  ELSE
+                     MOVE ROVALUE-B      TO 01NUM998RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM998MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE "  -1" TO 01NUM998MX016
+            ELSE
+               IF MXDFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM998MX016
+               ELSE
+                  IF MXVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM998MX016
+                  ELSE
+                     MOVE MXVALUE-B      TO 01NUM998MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM997RO016
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE "  -1" TO 01NUM997RO016
+            ELSE
+               IF RODFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM997RO016
+               ELSE
+                  IF ROVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM997RO016
+                  ELSE
+                     MOVE ROVALUE-C      TO 01NUM997RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM997MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE "  -1" TO 01NUM997MX016
+            ELSE
+               IF MXDFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM997MX016
+               ELSE
+                  IF MXVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM997MX016
+                  ELSE
+                     MOVE MXVALUE-C      TO 01NUM997MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM996RO016
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE "  -1" TO 01NUM996RO016
+            ELSE
+               IF RODFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM996RO016
+               ELSE
+                  IF ROVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM996RO016
+                  ELSE
+                     MOVE ROVALUE-D      TO 01NUM996RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM996MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE "  -1" TO 01NUM996MX016
+            ELSE
+               IF MXDFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM996MX016
+               ELSE
+                  IF MXVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM996MX016
+                  ELSE
+                     MOVE MXVALUE-D      TO 01NUM996MX016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM995RO016
+REMARK*
+            IF ROFLAG-016 = 0
+               MOVE "  -1" TO 01NUM995RO016
+            ELSE
+               IF RODFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM995RO016
+               ELSE
+                  IF ROVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM995RO016
+                  ELSE
+                     MOVE ROVALUE-E      TO 01NUM995RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01NUM995MX016. 
+REMARK*
+            IF MXFLAG-016 = 0
+               MOVE "  -1" TO 01NUM995MX016
+            ELSE
+               IF MXDFLAG-016-NUM = 0
+                  MOVE "  -3" TO 01NUM995MX016
+               ELSE
+                  IF MXVFLAG-016-NUM = 0
+                     MOVE "  -4" TO 01NUM995MX016
+                  ELSE
+                     MOVE MXVALUE-E      TO 01NUM995MX016
+                  END-IF
+               END-IF
+            END-IF
+
+CQ7065* CO01NUM994XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE " -1" TO 01NUM994XX016                              IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01NUM993XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-J = 0                                      IMS0002
+CQ7065         MOVE " -1" TO 01NUM993XX016                              IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01NUM992XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE " -1" TO 01NUM992XX016                              IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-N = 0                                 IMS0002
+CQ7065            MOVE " -2" TO 01NUM992XX016                           IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N = 0                               IMS0002
+CQ7065               MOVE " -3" TO 01NUM992XX016                        IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END999XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END999XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-NE    = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END999XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END999XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END999XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-INI-N = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END999XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END998XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END998XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-NE    = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END998XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END998XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END998XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-INI-N = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END998XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END997XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END997XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-NE    = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END997XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END997XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END997XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-SDO-N = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END997XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END996XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END996XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-NE    = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END996XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END996XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END996XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-INI-N = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END996XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END995XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END995XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-NE    = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END995XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END995XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END995XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-CUO-N = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END995XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END994XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-J = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END994XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-J     = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END994XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-J-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END994XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-J-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END994XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-SDO-J = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END994XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END993XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-J = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END993XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-J     = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END993XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-J-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END993XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-J-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END993XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-INI-J = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END993XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END992XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-J = 0                                      IMS0002
+CQ7065         MOVE "         -1" TO 01END992XX016                      IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-J     = 0                             IMS0002
+CQ7065            MOVE "         -2" TO 01END992XX016                   IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-J-END = 0                           IMS0002
+CQ7065               MOVE "         -3" TO 01END992XX016                IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-J-END = 0                        IMS0002
+CQ7065                  MOVE "         -4" TO 01END992XX016             IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-CUO-J = 0                     IMS0002
+CQ7065                     MOVE "        -88" TO 01END992XX016          IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+CQ7065                                                                  IMS0002
+CQ7065* CO01END991XX016.                                                IMS0002
+CQ7065*                                                                 IMS0002
+CQ7065      IF RO-01FLAG-016-N = 0                                      IMS0002
+CQ7065         MOVE " -1" TO 01END991XX016                              IMS0002
+CQ7065      ELSE                                                        IMS0002
+CQ7065         IF RO-01OPFLAG-016-N     = 0                             IMS0002
+CQ7065            MOVE " -2" TO 01END991XX016                           IMS0002
+CQ7065         ELSE                                                     IMS0002
+CQ7065            IF RO-01DFLAG-016-N-END = 0                           IMS0002
+CQ7065               MOVE " -3" TO 01END991XX016                        IMS0002
+CQ7065            ELSE                                                  IMS0002
+CQ7065               IF RO-01VFLAG-016-N-END = 0                        IMS0002
+CQ7065                  MOVE " -4" TO 01END991XX016                     IMS0002
+CQ7065               ELSE                                               IMS0002
+CQ7065                  IF RO-01FFLAG-016-991-N = 0                     IMS0002
+CQ7065                     MOVE "-88" TO 01END991XX016                  IMS0002
+CQ7065                  END-IF                                          IMS0002
+CQ7065               END-IF                                             IMS0002
+CQ7065            END-IF                                                IMS0002
+CQ7065         END-IF                                                   IMS0002
+CQ7065      END-IF                                                      IMS0002
+
+
+REMARK* CO01ACP999RO016
+REMARK*
+            IF ROFLAG-016-C = 0
+               MOVE " -1" TO 01ACP999RO016
+            ELSE
+               IF RODFLAG-016-C = 0
+                  MOVE " -3" TO 01ACP999RO016
+               ELSE
+                  IF ROVFLAG-016-C = 0
+                     MOVE " -4" TO 01ACP999RO016
+                  ELSE
+                     MOVE ROVALUE-016-N  TO 01ACP999RO016
+                  END-IF
+               END-IF
+            END-IF
+
+REMARK* CO01ACP999MX016. 
+REMARK*
+            IF MXFLAG-016-C = 0
+               MOVE " -1" TO 01ACP999MX016
+            ELSE
+               IF MXDFLAG-016-C = 0
+                  MOVE " -3" TO 01ACP999MX016
+               ELSE
+                  IF MXVFLAG-016-C = 0
+                     MOVE " -4" TO 01ACP999MX016
+                  ELSE
+                     MOVE MXVALUE-016-N  TO 01ACP999MX016
+                  END-IF
+               END-IF
+            END-IF
+            .

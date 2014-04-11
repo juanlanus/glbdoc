@@ -1,0 +1,108 @@
+REMARK* BDSCORES.PROC.v.0001
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* DEL ARCHVO HISTORICO DE SCORES                                
+REMARK* SI HAY SCORE ACTUALIZADO EN EL HISTORICO,SE UTILIZA, SINO SE INVOCAN
+REMARK* LAS RUTINAS NORMALES DE SCORES
+REMARK* ESTA RUTINA SOLO SE DEBE USAR CUANDO SE QUIERE LEER LOS SCORES
+REMARK* DE UNA SOLA FECHA DETERMINADA,MULTIPLES BUSQUEDAS A FECHAS DIFERENTES
+REMARK* SIMULTANEAMENTE NO ES ADMITIDO.
+UTLBIT 5000-TRU-SCORING-BDSCORES.
+REMARK******************************************************************
+REMARK*5000-TRU-SCORING-BDSCORES.
+REMARK*    VARIABLES DE ENTRADA:
+REMARK*        USAR-HIS-INPUT-BDSCORES  1=usarlo,0=no lo use
+REMARK*        FECHA-RUN-DATE           AAAAMM
+REMARK*    VARIABLES DE SALIDA
+REMARK*        USAHIS-OUTPUT-BDSCORES  0=no usa,1=si usa
+REMARK*        HAYHIS-OUTPUT-BDSCORES  0=no hay,1=sihay 
+REMARK******************************************************************
+           MOVE 0 TO USAHIS-OUTPUT-BDSCORES.
+           MOVE 0 TO HAYHIS-OUTPUT-BDSCORES.
+           IF USAR-HIS-INPUT-BDSCORES = 0 
+              PERFORM 5000-TRU-SCORING-TOTAL
+           ELSE
+              IF V-EXISTE-BDSCORES(TIP-SCO-GENERICO) = 0
+                 PERFORM 5000-VERIFIQUE-BDSCORES
+              END-IF
+              IF V-EXISTE-BDSCORES(TIP-SCO-GENERICO) = 1
+                 PERFORM 5000-LEER-BDSCORES
+              ELSE
+                 PERFORM 5000-TRU-SCORING-TOTAL
+              END-IF
+           END-IF.
+       5000-VERIFIQUE-BDSCORES.
+REMARK********************************************************************
+REMARK*5000-VERIFIQUE-BDSCORES.
+REMARK* SE VERIFICA QUE EL ARCHVO HISTORICO EXISTA Y QUE EL MES PEDIDO
+REMARK* ESTE ACTUALIZADO, DE OTRA FORMA SE EJECUTAN LAS RUTINAS NORMALES
+REMARK* PARA EL CALCULO DEL SCORE
+REMARK********************************************************************
+           MOVE 9 TO V-EXISTE-BDSCORES(TIP-SCO-GENERICO). *> NO EXISTE SCO
+           IF OPEN-BDSCORES = 0                    
+              MOVE SIG-ANO-RUN TO T-FECHA-PROC    
+              OPEN INPUT BDSCORES                      
+              IF COD-RETORNO-BDSCORES = "00" 
+                 MOVE 0 TO ERR-BDSCORES
+              ELSE
+                 MOVE 1 TO ERR-BDSCORES
+              END-IF
+              MOVE 1 TO OPEN-BDSCORES                           
+           END-IF.
+           IF ERR-BDSCORES = 0
+              MOVE 999999999999 TO LLAVE-CONTROL-BDSCORES
+              READ BDSCORES 
+                   INVALID KEY 
+                      MOVE 1 TO ERR-BDSCORES
+              END-READ
+           END-IF.
+           IF ERR-BDSCORES = 0
+              EVALUATE TIP-SCO-GENERICO
+                WHEN 4 
+                  IF ACIERTA-CONTROL-BDSCORES(MES-RUN) = 1              
+                     MOVE 1 TO V-EXISTE-BDSCORES(TIP-SCO-GENERICO)
+                  END-IF
+                WHEN 6 
+                   IF BASICO-CONTROL-BDSCORES(MES-RUN) = 1                 
+                     MOVE 1 TO V-EXISTE-BDSCORES(TIP-SCO-GENERICO)
+                  END-IF
+                WHEN 8 
+                   IF ACIERTAPLUS-CONTROL-BDSCORES(MES-RUN) = 1               
+                     MOVE 1 TO V-EXISTE-BDSCORES(TIP-SCO-GENERICO)
+                  END-IF
+              END-EVALUATE
+           END-IF.
+           IF V-EXISTE-BDSCORES(TIP-SCO-GENERICO) = 9 
+              DISPLAY "SIN ACCESO A HISTORICO,",FECHA-RUN-DATE
+                      " PARA SCORE=",TIP-SCO-GENERICO
+           ELSE
+              DISPLAY "CON ACCESO A HISTORICO,",FECHA-RUN-DATE
+                      " PARA SCORE=",TIP-SCO-GENERICO
+           END-IF.
+       5000-LEER-BDSCORES.
+REMARK********************************************************************
+REMARK*5000-LEER-BDSCORES.
+REMARK* SE BUSCA LA IDENTIFICACION EN EL HISTORICO CORRESPONDIENTE,SE LLENA
+REMARK* LAS VARIABLES "SCO" CON LO LEIDO DEL HISTORICO.
+REMARK********************************************************************
+           MOVE 0 TO A-SCORE M-SCORE P-SCORE.
+           MOVE 1 TO USAHIS-OUTPUT-BDSCORES.
+           MOVE TIP-ID-ALE TO TIPIDE-BDSCORES.
+           MOVE NUM-ID-ALE TO NUMIDE-BDSCORES.
+           MOVE 0 TO ERR-BDSCORES.
+           READ BDSCORES 
+                INVALID KEY 
+                   MOVE 1 TO ERR-BDSCORES
+           END-READ.
+           IF ERR-BDSCORES = 0
+              EVALUATE TIP-SCO-GENERICO
+                WHEN 4 
+                   MOVE 1 TO HAYHIS-OUTPUT-BDSCORES
+                   MOVE ACIERTA-BDSCORES(MES-RUN)     TO A-SCORE
+                WHEN 6 
+                   MOVE 1 TO HAYHIS-OUTPUT-BDSCORES
+                   MOVE BASICO-BDSCORES(MES-RUN)      TO M-SCORE
+                WHEN 8 
+                   MOVE 1 TO HAYHIS-OUTPUT-BDSCORES
+                   MOVE ACIERTAPLUS-BDSCORES(MES-RUN) TO P-SCORE
+              END-EVALUATE
+           END-IF.

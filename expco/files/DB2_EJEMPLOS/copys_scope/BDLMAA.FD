@@ -1,0 +1,65 @@
+******* BDLMAA-FD.001
+******* BDLMAA-FD.v.03.001
+009900********************************************************************
+******* MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR DE DIRECCIONES
+009900********************************************************************
+BDLMAA FD  BDLMAA
+BDLMAA     BLOCK CONTAINS 40 RECORDS.
+BDLMAA 01  REGISTRO1-BDLMAA.
+BDLMAA     03  COD-SUSCRIPTOR-CEROS-BDLMAA PIC 9(18).
+BDLMAA     03  COD-SUSCRIPTOR-BDLMAA       PIC X(6).
+BDLMAA     03  COD-TIP-CUENTA-BDLMAA       PIC X(2).
+BDLMAA     03  FECHA-NOVEDADES-BDLMAA.
+BDLMAA         05 ANO-NOVEDADES-BDLMAA     PIC 9(4).
+BDLMAA         05 MES-NOVEDADES-BDLMAA     PIC 99.
+BDLMAA         05 DIA-NOVEDADES-BDLMAA     PIC 99.
+BDLMAA     03  NIT-BDLMAA                  PIC 9(11).                  
+BDLMAA     03  RESTO1-BDLMAA               PIC X(555).                
+BDLMAA     03  FILLER-BDLMAA-R REDEFINES RESTO1-BDLMAA.               
+BDLMAA         05  FILLER                  PIC X(498).             
+BDLMAA         05  CALIFIC-FINAL-BDLMAA    PIC 999V99.            
+BDLMAA         05  CALIFIC-GRUPO1-BDLMAA   PIC 999V99.                
+BDLMAA         05  CALIFIC-GRUPO2-BDLMAA   PIC 999V99.                
+BDLMAA         05  CALIFIC-GRUPO3-BDLMAA   PIC 999V99.                
+BDLMAA         05  CALIFIC-TOTAL-BDLMAA    PIC 999V99.               
+BDLMAA         05  FECHA-CALIFIC-BDLMAA    PIC 9(8).                
+BDLMAA         05  NUM-SEGURIDAD-BDLMAA    PIC 9(4).                  
+BDLMAA         05  IND-PROG-CALIFIC-BDLMAA PIC X(02).               
+BDLMAA         05  FILLER                  PIC X(03).              
+BDLMAA         05  IND-VISOR-BDLMAA        PIC X(15).               
+BDLMAA 01  REGISTRO2-BDLMAA.
+BDLMAA     03  NUM-CTA-BDLMAA              PIC X(18).
+BDLMAA     03  FECHA-APERT-BDLMAA.
+BDLMAA         05 A-FAPE-BDLMAA            PIC 9(4).
+BDLMAA         05 M-FAPE-BDLMAA            PIC 9(2).
+BDLMAA         05 D-FAPE-BDLMAA            PIC 9(2).
+BDLMAA     03  NUM-ID-BDLMAA               PIC 9(11).
+BDLMAA     03  NOMBRE-COMP-BDLMAA          PIC X(45).
+BDLMAA     03  FECHA-NAC-BDLMAA.
+BDLMAA         05 A-FNAC-BDLMAA            PIC 9(4).
+BDLMAA         05 M-FNAC-BDLMAA            PIC 9(2).
+BDLMAA         05 D-FNAC-BDLMAA            PIC 9(2).
+BDLMAA     03  TIPO-IDEN-BDLMAA            PIC 9.
+BDLMAA     03  CIU-RES-BDLMAA              PIC X(20).              
+BDLMAA     03  DPT-RES-BDLMAA              PIC X(20).                 
+BDLMAA     03  DIR-RES-BDLMAA              PIC X(60).                 
+BDLMAA     03  TEL-RES-BDLMAA              PIC 9(10).                
+BDLMAA     03  CIU-LAB-BDLMAA              PIC X(20).               
+BDLMAA     03  DPT-LAB-BDLMAA              PIC X(20).                 
+BDLMAA     03  DIR-LAB-BDLMAA              PIC X(60).                   
+BDLMAA     03  TEL-LAB-BDLMAA              PIC 9(10).                   
+BDLMAA     03  CIU-COR-BDLMAA              PIC X(20).                  
+BDLMAA     03  DPT-COR-BDLMAA              PIC X(20).                 
+BDLMAA     03  DIR-COR-BDLMAA              PIC X(60).                   
+BDLMAA     03  E-MAIL-BDLMAA               PIC X(40).                  
+BDLMAA     03  TEL-CEL-BDLMAA              PIC 9(10).                  
+BDLMAA     03  RESTO2-BDLMAA               PIC X(139).                 
+BDLMAA 01  REGISTRO3-BDLMAA.                                           
+BDLMAA     03  IDENTIFICADOR-BDLMAA        PIC X(18).                  
+BDLMAA     03  FECHA-PROCESO-BDLMAA.                                   
+BDLMAA         05 ANO-PROCESO-BDLMAA       PIC 9(4).                   
+BDLMAA         05 MES-PROCESO-BDLMAA       PIC 9(2).                   
+BDLMAA         05 DIA-PROCESO-BDLMAA       PIC 9(2).                   
+BDLMAA     03  NUM-REGISTROS-BDLMAA        PIC 9(8).                   
+BDLMAA     03 RESTO3-BDLMAA                PIC X(566).
+BDLMAA******************************************************************

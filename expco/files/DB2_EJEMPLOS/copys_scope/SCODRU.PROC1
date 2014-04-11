@@ -1,0 +1,110 @@
+REMARK*   SCODRU-PROC1.v.0005
+REMARK******************************************************************
+REMARK*VHF0002    * TIPO6  - SE MODIFICA SCODRU.PROC1 PARA DETERMINAR  *
+REMARK*VICTOR HUGO*          TIPO6 EN VALIDACION DE PROGRAMAS QUE NO   *
+REMARK*FORERO     *          TIENEN VALIDACION PROPIA. SE ELIMINA DE   *
+REMARK*JUL.10/2001*          SCODRU.PROC LA RECLASIFICACION PARA TIPO 6*
+REMARK*           *          YA QUE SE ESTABA GENERANDO INCONSISTENCIA *
+REMARK*           *          SE INCLUYE COMO PARAMETRO EL PRIVILEGIO DE*
+REMARK*           *          VALIDAR APELLIDO DE LA CLAVE PARA USARLO  *
+REMARK*           *          EN LA VALIDACION MENCIONADA.              *
+REMARK******************************************************************
+REMARK*FAC0003    * MODBDI - CAMBIO DE COPYS ESTRUCTURAS BDI: DAS, DIAN*
+REMARK*F.CUADROS  *          REGIS. AMPLIACION DE ESTRUCTURAS.         *
+REMARK*ABR/25/02  *          ARCHIVO REGISTRADURIA SE DEFINE TIPO 8    *
+REMARK******************************************************************
+REMARK*FAC0004    * NUIP01 - INCLUSION DE RUTINA BDIIVIDE PARA VALIDAR *
+REMARK*F.CUADROS  *          LA IDENTIFICACION. COPYS RUTINA VALNOM.   *
+REMARK*JUN/02/04  *                                                    *
+REMARK******************************************************************
+REMARK*VHF0005    * VALCSV - SE ADICIONA A LA VALIDACION EL CONCEPTO DE*
+REMARK*VICTOR HUGO*          CUENTAS SIN VALIDAR                       *
+REMARK*FORERO     *                                                    *
+REMARK*DIC.15/2011*                                                    *
+REMARK******************************************************************
+VALCSV$SET CONSTANT HACERMATCH"NO"                                      VHF0005
+VALCSV$IF HACERMATCH = "SI"                                             VHF0005
+VALCSV$DISPLAY "........COMPILANDO SCODRU.PROC1 CON MATCH **********    VHF0005
+VALCSV$ELSE                                                             VHF0005
+VALCSV$DISPLAY "........COMPILANDO SCODRU.PROC1 SIN MATCH **********    VHF0005
+VALCSV$END                                                              VHF0005
+       6000-VALIDAR-IDENTIDAD-SCODRU.
+REMARK******************************************************************
+REMARK*6000-VALIDAR-IDENTIDAD-SCODRU.                                  *
+REMARK*    VALIDAR IDENTIDAD, SE REQUIERE CUANDO EL PROGRAMA QUE       *
+REMARK*    UTILIZA SCORE NO TIENE IMPLEMENTADAS RUTINAS DE VALIDACION  *
+REMARK*    PARA IDENTIDAD                                              *
+REMARK******************************************************************
+REMARK**** SE PROCESA DE ACUERDO AL TIPO DE IDENTIDAD
+NUIP01     MOVE WS-TIDCIU-SCODRU TO TIP-IDE-BDIIVIDE                    FAC0004
+NUIP01     MOVE WS-NIDCIU-SCODRU TO NUM-IDE-BDIIVIDE                    FAC0004
+NUIP01     MOVE 1 TO SW-VALTIPID-BDIIVIDE                               FAC0004
+NUIP01     PERFORM 80100-VALIDAR-IDENTIFICACION                         FAC0004
+NUIP01     IF WS-TIDCIU-SCODRU = 1                                      FAC0004
+VALCSV******* SI SE ENCONTRO SE COLOCA CONSULTA TIPO-5 POR DEFECTO,     VHF0005
+VALCSV******* SE TOMA EL ESTADO DE VIGENCIA PARA VALIDAR FALLECIDO Y    VHF0005
+VALCSV******* SE TOMA EL APELLIDO PARA VERIFICAR TIPO-6                 VHF0005
+VALCSV        IF SW-ID-BDIIVIDE = 0                                     VHF0005
+VALCSV           MOVE 5 TO WS-RESCON-SCODRU                             VHF0005
+VALCSV           MOVE ESTADO-VIG-BDIIREGI TO WS-VIGCED-SCODRU           VHF0005
+VALCSV           MOVE APELLIDO1-BDIIREGI  TO WS-APRCIU-SCODRU           VHF0005
+VALCSV           IF WS-VALAPE-SCODRU = WS-SI-SCODRU                     VHF0005
+VALCSV              MOVE 1 TO BLOQUES-INPUT-VALNOM                      VHF0005
+VALCSV              MOVE WS-APECIU-SCODRU TO NOMBRE-INPUT-VALNOM        VHF0005
+VALCSV              MOVE WS-APRCIU-SCODRU TO NOMBOK-INPUT-VALNOM        VHF0005
+VALCSV              MOVE 1                TO TIP-ID-INPUT-VALNOM        VHF0005
+VALCSV              PERFORM 10000-MATCH-NOMBRES-VALNOM                  VHF0005
+VALCSV              IF MATCH-OK-OUT-VALNOM = 0                          VHF0005
+VALCSV                 MOVE 6 TO WS-RESCON-SCODRU                       VHF0005
+VALCSV              END-IF                                              VHF0005
+VALCSV           END-IF                                                 VHF0005
+VALCSV        ELSE                                                      VHF0005
+VALCSV$          IF HACERMATCH = "NO"                                   VHF0005
+VALCSV              MOVE 7 TO WS-RESCON-SCODRU                          VHF0005
+VALCSV$          ELSE                                                   VHF0005
+VALCSV              MOVE 0 TO IDE-TIPO-BDAMATCH                         VHF0005
+VALCSV              MOVE WS-TIDCIU-SCODRU TO TIP-IDE-INPUT-BDAMATCH     VHF0005
+VALCSV              MOVE WS-NIDCIU-SCODRU TO NUM-IDE-INPUT-BDAMATCH     VHF0005
+VALCSV              PERFORM 1000-U-RECORRER-CSV-BDAMATCH                VHF0005
+VALCSV              IF IDE-TIPO-BDAMATCH = 1                            VHF0005
+VALCSV                 MOVE 5  TO WS-RESCON-SCODRU                      VHF0005
+VALCSV                 MOVE 00 TO WS-VIGCED-SCODRU                      VHF0005
+VALCSV                 MOVE NOM-OUTPUT-BDAMATCH TO WS-APRCIU-SCODRU     VHF0005
+VALCSV                 IF WS-VALAPE-SCODRU = WS-SI-SCODRU               VHF0005
+VALCSV                    MOVE 1 TO BLOQUES-INPUT-VALNOM                VHF0005
+VALCSV                    MOVE WS-APECIU-SCODRU TO NOMBRE-INPUT-VALNOM  VHF0005
+VALCSV                    MOVE NOM-OUTPUT-BDAMATCH                      VHF0005
+VALCSV                         TO NOMBOK-INPUT-VALNOM                   VHF0005
+VALCSV                    MOVE 1  TO TIP-ID-INPUT-VALNOM                VHF0005
+VALCSV                    PERFORM 10000-MATCH-NOMBRES-VALNOM            VHF0005
+VALCSV                    IF MATCH-OK-OUT-VALNOM = 0                    VHF0005
+VALCSV                        MOVE 6 TO WS-RESCON-SCODRU                VHF0005
+VALCSV                    END-IF                                        VHF0005
+VALCSV                 END-IF                                           VHF0005
+VALCSV              ELSE                                                VHF0005
+VALCSV                 MOVE 7 TO WS-RESCON-SCODRU                       VHF0005
+VALCSV              END-IF                                              VHF0005
+VALCSV$          END-IF                                                 VHF0005
+VALCSV        END-IF                                                    VHF0005
+NUIP0V     ELSE                                                         FAC0004
+VALCSV        MOVE WS-SI-SCODRU TO WS-ENCNIT-SCODRU                     VHF0005
+VALCSV        IF SW-ID-BDIIVIDE = 1                                     VHF0005
+VALCSV           MOVE WS-NO-SCODRU TO WS-ENCNIT-SCODRU                  VHF0005
+VALCSV        END-IF                                                    VHF0005
+VALCSV        IF WS-ENCNIT-SCODRU = WS-SI-SCODRU                        VHF0005
+VALCSV           MOVE 5 TO WS-RESCON-SCODRU                             VHF0005
+VALCSV        ELSE                                                      VHF0005
+VALCSV$          IF HACERMATCH = "NO"                                   VHF0005
+VALCSV              MOVE 7 TO WS-RESCON-SCODRU                          VHF0005
+VALCSV$          ELSE                                                   VHF0005
+VALCSV              MOVE 0 TO IDE-TIPO-BDAMATCH                         VHF0005
+VALCSV              MOVE WS-TIDCIU-SCODRU TO TIP-IDE-INPUT-BDAMATCH     VHF0005
+VALCSV              MOVE WS-NIDCIU-SCODRU TO NUM-IDE-INPUT-BDAMATCH     VHF0005
+VALCSV              PERFORM 1000-U-RECORRER-CSV-BDAMATCH                VHF0005
+VALCSV              IF IDE-TIPO-BDAMATCH = 1                            VHF0005
+VALCSV                 MOVE 5  TO WS-RESCON-SCODRU                      VHF0005
+VALCSV              ELSE                                                VHF0005
+VALCSV                 MOVE 7 TO WS-RESCON-SCODRU                       VHF0005
+VALCSV              END-IF                                              VHF0005
+VALCSV$          END-IF                                                 VHF0005
+NUIP01     END-IF.                                                      FAC0004

@@ -1,0 +1,384 @@
+REMARK*BDAGCLA.PROC.v.03.0010.
+REMARK******************************************************************
+REMARK*RUTINA PARA CREAR CLAVES UNIX Y CLAVES WEB DESDE PROGRAMA ICGMDF
+REMARK******************************************************************
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0002* GENSE2 * SE DEJA GENERACION DE LA SEMILLA DESDE LA       
+REMARK*F.CUADROS C.    * POSICION 14 DE LA HORA ALMACENADA         
+REMARK*MAR.18/2003     * CONTROL A STATUS DE ARCHIVO TEMP SI <> "00"
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0003* MODBDI * CAMBIO DE COPYS PARA BASES DE DATOS DE INFORMACION
+REMARK*F.CUADROS C.    * DAS, DIAN Y REGIS. AMPLIACION DE LAS ESTRUCTURAS
+REMARK*ABR.14/2003     * ARCHIVO REGISTRADURIA PASA A TIPO 8
+REMARK*                * CAMBIO DE RUTINAS PARA BUSQUEDA DE IDENTIFICAC.
+REMARK*----------------------------------------------------------------*
+REMARK* VHF0004     * CIEARC - SE MODIFICA RUTINA PARA QUE EL CIERRE DE*
+REMARK* VICTOR HUGO *          ARCHIVOS SE HAGA EN OTRO PUNTO DEL      *
+REMARK* FORERO      *          CODIGO                                  *
+REMARK* JUN.26/2003 *                                                  *
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0005      * LLAALT * CREACION DE LLAVE ALTERNA POR CODIGO DE
+REMARK*F.CUADROS C. * LA CLAVE PARA OPTIMIZAR TIEMPOS DE RESPUESTA
+REMARK*JUL.31/2003  * CON SISTEMA NOVEDAD. ELIMINACION DE ARCH. TEMPORAL
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0006      * LLAAL1 * MODIFICACION PARA MANEJO DE LLAVE ALTERNA
+REMARK*F.CUADROS C. * EN LA GENERACION DE CLAVES                  
+REMARK*SEP.03/2003  *                                                   
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0007      * DATCIU * MANEJO DE CODIGO DE RETORNO SI NOMBRE O 
+REMARK*F.CUADROS C. * IDENTIFICACION INVALIDA
+REMARK*SEP.08/2003  *                                                   
+REMARK*----------------------------------------------------------------*
+REMARK*GJC0008      * ENCRCL: LA CLAVE DE WEB QUE SE GENERA SE GUARDA          
+REMARK*G.JIMENEZ C. * ENCRIPTADA EN EL ARCHIVO QUE SE ENVIA A SISTEMAS
+REMARK*FEB. de 2004 * INTERNOS.                                         
+REMARK*             * DESBLQ: CUANDO SE VA A CREAR CLAVE DE WEB Y ESTA
+REMARK*             * EXISTE, SE VERIFICA QUE NO ESTE BLOQUEADA Y SI LO
+REMARK*             * ESTA, SE DESBLOQUEA.
+REMARK*             * CTRCTO: SE ADIDIONA EL LLANADO DEL CENTRO DE COSTO
+REMARK*             *         EN EL ARCHIVO DE CLAVES
+REMARK*----------------------------------------------------------------*
+REMARK*FAC0009      * AMPLOG * INCLUSIÓN DE CAMPO PARA IDENTIFICAR EL  
+REMARK*F.CUADROS C. * PROGRAMA QUE ACTUALIZÓ EL ARCHIVO ICBCLA ASÍ:
+REMARK*JUL.26/2006  * 1-ICJCLA, 2-BDAACLA, 3-ICGCON, 4-ICGMDF, 5-ICGSSO 
+REMARK*----------------------------------------------------------------*
+REMARK* GJC0010       * CLVRND - SE CAMBA EL COPY DE GENERACION ALEATORIA
+REMARK* G.JIMENEZ     *          DE CLAVES PORQUE AL LLEGAR A UN LIMITE
+REMARK* NOVIEMBRE/2011*          LA RUTINA QUEDA EN LOOP. CON EL CAMBIO
+REMARK*               *          SE PUEDEN GENERAR HASTA APROX 1.300.000
+REMARK*               *          CLAVES
+REMARK******************************************************************
+
+        80000-GENERAR-CLAVES.
+REMARK*----------------------------------------------------------------*
+REMARK*80000-GENERAR-CLAVES.
+REMARK* CREA ARCHIVO TEMPORAL CON CLAVES EXISTENTES
+REMARK*----------------------------------------------------------------*
+MODBDI     OPEN INPUT BDIIREGI BDIIDAS BDIIDIAN ABD14                   FAC0003 
+           MOVE FUNCTION CURRENT-DATE TO FECHA-SIST-BDAGCLA
+           MOVE FECHA-SIST-BDAGCLA TO FECHA-WEB-SAL
+           INITIALIZE TABLA-CIUDADES-BDAGCLA PARAMETROS-SALIDA-BDAGCLA
+                      VARIABLES-BDAGCLA
+           MOVE ALL "0" TO VECTOR-ERRORES-BDAGCLA VECTOR-ERROR-BDAGCLA
+           PERFORM 80110-LEER-CIUDADES VARYING K-BDAGCLA FROM 1 BY 1 
+                                                 UNTIL K-BDAGCLA > 999
+           CLOSE ABD14
+           OPEN INPUT SUSCRIPTOR
+           OPEN EXTEND CLAVES-WEB-SAL 
+           OPEN I-O CLAVES-WEB 
+           IF COD-RET-BDAGCLA = "00"
+              MOVE 0 TO SW-LECTURA-BDAGCLA
+              OPEN INPUT CLAVE
+              IF COD-RETORNO-ICBCLA <> "00"
+                 MOVE "01" TO COD-RET-BDAGCLA   
+              ELSE
+                 MOVE 0 TO SW-LECTURA-BDAGCLA
+                 CLOSE CLAVE
+                 OPEN I-O CLAVE
+                 PERFORM 80300-PROCESO
+CIEARC        END-IF                                                    VHF0004 
+CIEARC     END-IF                                                       VHF0004 
+LLAALT     CLOSE SUSCRIPTOR CLAVE CLAVES-WEB CLAVES-WEB-SAL             FAC0005 
+LLAALT     CLOSE BDIIREGI BDIIDAS BDIIDIAN.                             FAC0005 
+
+       80110-LEER-CIUDADES.
+REMARK*===================================*
+REMARK*80110-LEER-CIUDADES.
+REMARK*Lee la tabla de ciudades y la deja en tabla de memoria
+REMARK*===================================*
+          IF SW-LECTURA-BDAGCLA = 0
+             READ ABD14 AT END
+               MOVE 1 TO SW-LECTURA-BDAGCLA
+              NOT AT END
+               MOVE COMPLETO-ABD14 TO TAB-CIU-W-BDAGCLA(K-BDAGCLA)
+             END-READ
+          END-IF.
+          IF SW-LECTURA-BDAGCLA = 1 AND K-BDAGCLA <= 999
+             MOVE 999 TO SEC-CIUDAD-W-BDAGCLA(K-BDAGCLA)
+          END-IF.
+
+       80300-PROCESO.
+      *----------------------------------------------------------------*
+REMARK*80300-PROCESO.
+      *----------------------------------------------------------------*
+          MOVE COD-SUS-BDAGCLA TO COD-SUSCRIP-ABD02
+          READ SUSCRIPTOR IGNORE LOCK INVALID KEY
+            MOVE 1 TO SW-LECTURA-BDAGCLA COD-RET-BDAGCLA 
+                      ERROR-W-BDAGCLA(1) SW-INVALIDO-BDAGCLA
+            NOT INVALID KEY MOVE 0 TO SW-LECTURA-BDAGCLA
+          END-READ
+          IF SW-LECTURA-BDAGCLA = 0
+LLAAL1       INITIALIZE TOT-GEN-BDAGCLA                                 FAC0006 
+LLAAL1       PERFORM 80310-GENERACION-CLAVES UNTIL                      FAC0006 
+LLAAL1               SW-LECTURA-BDAGCLA = 1 OR 2                        FAC0006 
+GENSE2          IF SW-LECTURA-BDAGCLA = 1                               FAC0002
+LLAAL1             PERFORM 80100-MOVER-VALIDAR-REGISTRO                 FAC0006 
+LLAAL1            IF SW-INVALIDO-BDAGCLA = 0                            FAC0006 
+                   MOVE 0 TO SW-LECTURA-BDAGCLA SW-GRABAR-BDAGCLA
+                   WRITE REG-CLAVE INVALID KEY
+                    MOVE 1 TO SW-GRABAR-BDAGCLA COD-RET-BDAGCLA
+                    NOT INVALID KEY MOVE 0 TO SW-GRABAR-BDAGCLA 
+                                COD-RET-BDAGCLA
+                        MOVE CLAVE-TOT-ABD09 TO TOT-CLA-BDAGCLA
+                   END-WRITE
+LLAAL1            ELSE MOVE 1 TO SW-GRABAR-BDAGCLA                      FAC0006 
+LLAAL1                MOVE VECTOR-ERRORES-BDAGCLA TO                    FAC0006 
+GENSE2                    VECTOR-ERROR-BDAGCLA                          FAC0002
+LLAAL1            END-IF                                                FAC0006 
+GENSE2          END-IF                                                  FAC0002
+LLAAL1    ELSE MOVE 1 TO SW-GRABAR-BDAGCLA COD-RET-BDAGCLA              FAC0006 
+LLAAL1         MOVE VECTOR-ERRORES-BDAGCLA TO VECTOR-ERROR-BDAGCLA      FAC0006 
+LLAAL1    END-IF.                                                       FAC0006 
+          IF SW-GRABAR-BDAGCLA = 0 AND SW-INVALIDO-BDAGCLA = 0
+             INITIALIZE REG-CLAVE-WEB-SAL
+             MOVE TIP-ID-ABD09 TO TIP-ID-WEB
+             MOVE NUM-ID-ABD09 TO NUM-ID-WEB
+             MOVE 0 TO SW-LECTURA-BDAGCLA
+             READ CLAVES-WEB IGNORE LOCK INVALID KEY 
+               MOVE 1 TO SW-LECTURA-BDAGCLA
+             END-READ
+             IF SW-LECTURA-BDAGCLA = 1
+                MOVE FECHA-SIST-BDAGCLA TO FECHA-WEB
+                MOVE 0 TO ESTADO-WEB
+                PERFORM 80501-GENERAR-CLAVE-WEB 
+                WRITE REG-CLAVE-WEB INVALID KEY 
+                 MOVE 1 TO SW-GRABAR-BDAGCLA
+                 DISPLAY " ERROR WRITE WEB ", LLAVE-CLAVE-WEB
+                 NOT INVALID KEY MOVE 2 TO SW-GRABAR-BDAGCLA
+                END-WRITE
+                IF SW-GRABAR-BDAGCLA = 2
+                   PERFORM 82020-MOVER-SALIDAS
+                END-IF
+DESBLQ       ELSE                                                       GJC0008 
+DESBLQ          MOVE CLAVE-WEB TO CLAVE-WEB-BDAGCLA                     GJC0008 
+DESBLQ          IF ESTADO-WEB <> 0                                      GJC0008 
+DESBLQ             MOVE 0 TO ESTADO-WEB                                 GJC0008 
+DESBLQ             REWRITE REG-CLAVE-WEB INVALID KEY                    GJC0008 
+DESBLQ                MOVE 1 TO SW-GRABAR-BDAGCLA                       GJC0008 
+DESBLQ                DISPLAY " ERROR REWRITE WEB ", LLAVE-CLAVE-WEB    GJC0008 
+DESBLQ             END-REWRITE                                          GJC0008 
+DESBLQ          END-IF                                                  GJC0008 
+DESBLQ          IF SW-GRABAR-BDAGCLA <> 1                               GJC0008 
+DESBLQ             PERFORM 82020-MOVER-SALIDAS                          GJC0008 
+DESBLQ          END-IF                                                  GJC0008 
+             END-IF.
+
+       80310-GENERACION-CLAVES.
+REMARK*===================================*
+REMARK*80310-GENERACION-CLAVES
+REMARK*RUTINA PARA GENERACION RANDOMICA DE CLAVES
+REMARK*===================================*
+CLVRND     IF J-BDAGCLA = 0 *> SE CALCULA LA SEMILLA UNA VEZ POR EJEC   GJC0010
+CLVRND        MOVE FUNCTION CURRENT-DATE TO FECHA-HORA-BDAGCLA          GJC0010
+CLVRND        MOVE FECHA-HORA-BDAGCLA(12:5) TO SEMILLA-CLV-BDAGCLA      GJC0010
+CLVRND* SE COMPARA CONTRA 32767 QUE ES LA MAXIMA SEMILLA COBOL          GJC0010
+CLVRND        PERFORM UNTIL SEMILLA-CLV-BDAGCLA <= 32767                GJC0010
+CLVRND          COMPUTE SEMILLA-CLV-BDAGCLA =                           GJC0010
+CLVRND                        SEMILLA-CLV-BDAGCLA - 32767               GJC0010
+CLVRND        END-PERFORM                                               GJC0010
+CLVRND        MOVE FUNCTION RANDOM(SEMILLA-CLV-BDAGCLA) TO              GJC0010
+CLVRND                       SEMILLA-CLV-BDAGCLA                        GJC0010
+CLVRND        ADD 1 TO J-BDAGCLA                                        GJC0010
+CLVRND     END-IF                                                       GJC0010
+CLVRND     COMPUTE NUM-RANDOM-BDAGCLA =                                 GJC0010
+CLVRND     FUNCTION INTEGER((FUNCTION RANDOM() * (99999999))) + 1.      GJC0010
+CLVRND     MOVE NUM2-RANDOM-BDAGCLA TO COD-CLAVE-ABD09                  GJC0010
+CLVRND                                                                  GJC0010
+CLVRND     PERFORM VARYING I1-BDAGCLA FROM 1 BY 1 UNTIL I1-BDAGCLA > 3  GJC0010
+CLVRND        DIVIDE NUM3-RANDOM-BDAGCLA(I1-BDAGCLA) BY 26 GIVING       GJC0010
+CLVRND            SEMILLA-CLV-BDAGCLA REMAINDER RESIDUO-RANDOM-BDAGCLA  GJC0010
+CLVRND        ADD 1 TO RESIDUO-RANDOM-BDAGCLA                           GJC0010
+CLVRND        MOVE TAB-LET-BDAGCLA(RESIDUO-RANDOM-BDAGCLA) TO           GJC0010
+CLVRND             CLAVE-AUT-ABD09(I1-BDAGCLA:1)                        GJC0010
+CLVRND     END-PERFORM.                                                 GJC0010
+
+CLVRND*    ADD 1 TO J-BDAGCLA                                           GJC0010
+CLVRND*    IF J-BDAGCLA > 25  OR J-BDAGCLA = 1                          GJC0010
+CLVRND*       MOVE FUNCTION CUR-BDAGCLAE TO FECHA-HORA-BDAGCLA          GJC0010
+CLVRND*       MOVE FECHA-HORA-BDAGCLA(14:3) TO NUM-1-BDAGCLA            GJC0010
+CLVRND*       MOVE FUNCTION RANDOM(NUM-1-BDAGCLA) TO NUM-2-BDAGCLA      GJC0010
+CLVRND*       MOVE 1 TO J-BDAGCLA                                       GJC0010
+CLVRND*    END-IF                                                       GJC0010
+CLVRND*    COMPUTE NUM-2-BDAGCLA =                                      GJC0010
+CLVRND*    FUNCTION INTEGER((FUNCTION RANDOM() * (99))) + 1             GJC0010
+CLVRND*    MOVE NUM-2-BDAGCLA TO NUM-I-BDAGCLA                          GJC0010
+CLVRND*    MOVE NUM-I-BDAGCLA TO COD-CLAVE-ABD09                        GJC0010
+CLVRND*    INITIALIZE VECTOR-LETRAS-BDAGCLA                             GJC0010
+CLVRND*    PERFORM VARYING I1-BDAGCLA FROM 1 BY 1 UNTIL I1-BDAGCLA > 3  GJC0010
+CLVRND*     PERFORM UNTIL ((LET-BDAGCLA(I1-BDAGCLA) >= 65 AND <= 90)    GJC0010
+CLVRND*      OR  (LET-BDAGCLA(I1-BDAGCLA) >= 97 AND <= 122))            GJC0010
+CLVRND*      COMPUTE LET-BDAGCLA(I1-BDAGCLA) =                          GJC0010
+CLVRND*      FUNCTION INTEGER((FUNCTION RANDOM() * (122))) + 1          GJC0010
+CLVRND*      MOVE LET-BDAGCLA(I1-BDAGCLA) TO LET-I-BDAGCLA              GJC0010
+CLVRND*      IF (LET-I-BDAGCLA >= 65 AND <= 90)                         GJC0010
+CLVRND*      OR (LET-I-BDAGCLA >= 97 AND <= 122)                        GJC0010
+CLVRND*         MOVE LET-BDAGCLA(I1-BDAGCLA) TO LET-N-BDAGCLA           GJC0010
+CLVRND*         PERFORM 80710-UBICAR-VECTOR                             GJC0010
+CLVRND*      END-IF                                                     GJC0010
+CLVRND*     END-PERFORM                                                 GJC0010
+CLVRND*    END-PERFORM.                                                 GJC0010
+          MOVE 0 TO SW-LECTURA-BDAGCLA
+LLAALT    READ CLAVE KEY IS LLAVE-ALTERNA2-ABD09                        FAC0005 
+LLAALT     INVALID KEY MOVE 1 TO SW-LECTURA-BDAGCLA                     FAC0005 
+LLAALT      SUBTRACT 1 FROM J-BDAGCLA K-BDAGCLA                         FAC0005 
+LLAALT     NOT INVALID KEY MOVE 0 TO SW-LECTURA-BDAGCLA                 FAC0005 
+LLAALT      ADD 1 TO TOT-GEN-BDAGCLA                                    FAC0005 
+LLAALT    END-READ.                                                     FAC0005 
+GENSE2    IF TOT-GEN-BDAGCLA >= 100                                     FAC0002
+GENSE2       MOVE 03 TO COD-RET-BDAGCLA                                 FAC0002
+GENSE2       MOVE 2 TO SW-LECTURA-BDAGCLA                               FAC0002
+GENSE2    END-IF.                                                       FAC0002
+
+       80501-GENERAR-CLAVE-WEB.
+REMARK*===================================*
+REMARK*80501-GENERAR-CLAVE-WEB.
+REMARK*GENERA AUTOMATICAMENTE CLAVE DE WEB
+REMARK*===================================*
+          MOVE NUM-IDE-BDAGCLA TO CED-INPUT-UTLPWD
+          ADD 1 TO CED-INPUT-UTLPWD
+          PERFORM 0001-GENERA01-UTLPWD
+          MOVE PWD-OUTPUT-UTLPWD TO CLAVE-WEB
+          MOVE NUM-IDE-BDAGCLA TO NUM-ID-WEB      
+          MOVE TIP-IDE-BDAGCLA TO TIP-ID-WEB
+          ADD 236542 TO CED-INPUT-UTLPWD.
+
+       80710-UBICAR-VECTOR.
+REMARK*===================================*
+REMARK*80710-UBICAR-VECTOR.
+REMARK* Buscar letra en vector de equivalencias
+REMARK* que simula el ASCII de mayusculas y minusculas
+REMARK*===================================*
+          IF LET-N-BDAGCLA >= 65 AND <= 90
+             PERFORM VARYING N-BDAGCLA FROM 1 BY 1 UNTIL N-BDAGCLA > 26
+             IF LET-N-BDAGCLA = TAB-EQUI-BDAGCLA(N-BDAGCLA)
+                MOVE TAB-LET-BDAGCLA(N-BDAGCLA) TO 
+                     CLAVE-AUT-ABD09(I1-BDAGCLA:1)
+                MOVE 50 TO N-BDAGCLA
+             END-IF
+             END-PERFORM
+          END-IF.
+          IF LET-N-BDAGCLA >= 97 AND <= 122
+             PERFORM VARYING N-BDAGCLA FROM 1 BY 1 UNTIL N-BDAGCLA > 26
+             IF LET-N-BDAGCLA = TAB-EQUI-2-BDAGCLA(N-BDAGCLA)
+                MOVE FUNCTION UPPER-CASE(TAB-LET-2-BDAGCLA(N-BDAGCLA))
+                     TO CLAVE-AUT-ABD09(I1-BDAGCLA:1)
+                MOVE 50 TO N-BDAGCLA
+             END-IF
+             END-PERFORM
+          END-IF.
+
+       80100-MOVER-VALIDAR-REGISTRO.
+REMARK*===================================*
+REMARK*80100-MOVER-VALIDAR-REGISTRO.
+REMARK* Valida todos los campos reportados, si son correctos,
+REMARK* mueve los campos desde archivo de entrada
+REMARK*al registro de salida
+REMARK*===================================*
+LLAAL1    INITIALIZE REGISTRO-ABD09                                     FAC0006 
+          INITIALIZE NOM-VAL-W-BDAGCLA SW-NOMBRES-BDAGCLA 
+                     NOMBOK-INPUT-VALNOM VARIABLES-VALNOM
+          MOVE ALL "0" TO VECTOR-ERRORES-BDAGCLA VECTOR-ERROR-BDAGCLA
+          MOVE FUNCTION CURRENT-DATE TO FECHA-SIST-BDAGCLA 
+          MOVE FECHA-SIST-BDAGCLA TO FEC-CREACION-ABD09 
+               FEC-ULT-UTIL-ABD09 FEC-VENCE-ABD09
+          MOVE FEC-VENCE-ABD09(1:4) TO ANO-VENCE-BDAGCLA
+          ADD 5 TO ANO-VENCE-BDAGCLA
+          MOVE ANO-VENCE-BDAGCLA TO FEC-VENCE-ABD09(1:4)
+          MOVE COD-SUS-BDAGCLA TO COD-SUSCR-ABD09
+CTRCTO                            CENTRO-COSTO-ABD09                    GJC0008 
+          IF NOM-DUE-BDAGCLA <> SPACES
+             MOVE FUNCTION UPPER-CASE(NOM-DUE-BDAGCLA) TO 
+                  NOM-DUE-BDAGCLA
+             MOVE NOM-DUE-BDAGCLA TO NOMBRE-INPUT-VALNOM
+          ELSE MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(2)
+          END-IF
+          IF NOM-OFI-BDAGCLA <> SPACES
+             MOVE FUNCTION UPPER-CASE(NOM-OFI-BDAGCLA) TO 
+             NOM-OFI-BDAGCLA
+             MOVE NOM-OFI-BDAGCLA TO OFICINA-CONS-ABD09 
+          ELSE MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(3)
+          END-IF
+          IF COD-CIU-BDAGCLA NOT NUMERIC
+             MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(4)
+          ELSE MOVE COD-CIU-BDAGCLA TO CIUDAD-CONS-ABD09
+               PERFORM 82010-BUSCAR-CIUDADES
+          END-IF
+          MOVE ZEROS TO ZONA-FAC-ABD09
+          MOVE 1 TO PRIVILEGIO-ABD09
+MODBDI    IF TIP-IDE-BDAGCLA <= 0 OR > 4                                FAC0003 
+             MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(19)
+          ELSE MOVE TIP-IDE-BDAGCLA TO TIP-ID-ABD09 
+          END-IF
+LLAALT    INSPECT NUM-IDE-BDAGCLA REPLACING ALL " " BY "0"              FAC0005 
+          IF NUM-IDE-BDAGCLA IS NUMERIC AND NUM-IDE-BDAGCLA > ZEROS
+MODBDI       MOVE NUM-IDE-BDAGCLA TO NUM-ID-ABD09 NUM-IDE-BDIIVIDE      FAC0003 
+MODBDI       MOVE TIP-IDE-BDAGCLA TO TIP-IDE-BDIIVIDE                   FAC0003 
+MODBDI       MOVE NOM-DUE-BDAGCLA TO NOMBRE-BDIIVIDE                    FAC0003 
+MODBDI       MOVE 1 TO SW-VERIFNOM-BDIIVIDE                             FAC0003
+MODBDI       PERFORM 80100-VALIDAR-IDENTIFICACION                       FAC0003 
+MODBDI    IF SW-ID-BDIIVIDE = 0                                         FAC0003 
+MODBDI       MOVE NOM-VAL-BDIIVIDE TO NOM-VAL-W-BDAGCLA                 FAC0003
+MODBDI       IF SW-NOMBRES-BDIIVIDE = 1                                 FAC0003 
+                MOVE 1 TO ERROR-W-BDAGCLA(2) SW-INVALIDO-BDAGCLA
+DATCIU                    COD-RET-BDAGCLA                               FAC0007
+             ELSE MOVE NOM-DUE-BDAGCLA TO NOMBRE-ABD09
+             END-IF
+          ELSE MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(20)
+DATCIU                   COD-RET-BDAGCLA                                FAC0007
+          END-IF
+LLAALT    END-IF                                                        FAC0005 
+          MOVE 2 TO FLAG-SISTEMA-ABD09
+          MOVE FUNCTION UPPER-CASE(IND-HOR-BDAGCLA) TO IND-HOR-BDAGCLA
+          IF IND-HOR-BDAGCLA = " " OR "A" OR "B" OR "C" OR "D" OR "E"
+             MOVE IND-HOR-BDAGCLA TO IND-HORARIO-ABD09
+          ELSE MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(23)
+          END-IF
+          MOVE COD-SUSCRIP-ABD02(1:4) TO CODIGO-TERMINAL-ABD09
+          MOVE FUNCTION UPPER-CASE(FLA-COK-BDAGCLA) TO FLA-COK-BDAGCLA
+          IF FLA-COK-BDAGCLA = " " 
+             MOVE "I" TO FLA-COK-BDAGCLA
+          ELSE IF FLA-COK-BDAGCLA = "P" OR "I" OR "D" OR "S" OR "A"
+                  MOVE FLA-COK-BDAGCLA TO FLAG-COOKIE-ABD09
+               ELSE MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(30)
+               END-IF
+          END-IF
+AMPLOG    MOVE "4" TO IND-PROGRAMA-ABD09                                FAC0009 
+          MOVE 0 TO IND-BLOQUEO-ABD09
+          MOVE "C" TO IND-EST-UTIL-ABD09.
+
+       82010-BUSCAR-CIUDADES.
+REMARK*===================================*
+REMARK*82010-BUSCAR-CIUDADES.
+REMARK* Busca en tabla de memoria de ciudades el nombre
+REMARK*===================================*
+           SET I-BDAGCLA TO 1.
+           SEARCH ALL TAB-CIU-W-BDAGCLA AT END
+               MOVE 1 TO SW-INVALIDO-BDAGCLA ERROR-W-BDAGCLA(4)
+               WHEN SEC-CIUDAD-W-BDAGCLA(I-BDAGCLA) = COD-CIU-BDAGCLA
+               MOVE 0 TO ERROR-W-BDAGCLA(4)
+           END-SEARCH.
+
+       82020-MOVER-SALIDAS.
+REMARK*===================================*
+REMARK*82020-MOVER-SALIDAS.
+REMARk*Mueve campos al archivo de salida y lo graba
+REMARK*===================================*
+          IF TIP-ID-WEB = 1
+             MOVE NUM-ID-WEB TO NUM-ID-WEB-SAL
+ENCRCL       move "724" TO SEMILLA3-UTLCRI                              GJC0008 
+ENCRCL       MOVE CLAVE-WEB TO CLAVE-WEB-BDAGCLA                        GJC0008 
+ENCRCL*      MOVE CLAVE-WEB TO CLAVE-WEB-SAL                            GJC0008 
+ENCRCL       MOVE CLAVE-WEB TO INPUT-UTLCRI                             GJC0008 
+ENCRCL       PERFORM 0001-ENCRIPX-TRIPLE-UTLCRI                         GJC0008 
+ENCRCL       MOVE OUTPUT-UTLCRI TO CLAVE-WEB-SAL                        GJC0008 
+             IF SW-LECTURA-BDAGCLA = 1
+                MOVE "N" TO ESTADO-WEB-SAL IND-WEB-BDAGCLA
+ENCRCL       ELSE                                                       GJC0008 
+ENCRCL          MOVE "M" TO ESTADO-WEB-SAL IND-WEB-BDAGCLA              GJC0008 
+             END-IF
+             MOVE NOMBRE-ABD09 TO NOM-CLAVE-WEB-SAL
+             MOVE OFICINA-CONS-ABD09 TO NOM-OFI-WEB-SAL
+             MOVE NOMBRE-W-BDAGCLA(I-BDAGCLA) TO NOM-CIU-WEB-SAL
+             MOVE NOM-SUSCRIP-ABD02 TO NOM-SUS-WEB-SAL
+             MOVE REGIONAL-W-BDAGCLA(I-BDAGCLA) TO COD-REG-WEB-SAL
+             WRITE REG-CLAVE-WEB-SAL.

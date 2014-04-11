@@ -1,0 +1,13 @@
+REMARK* PESCODV.FD.V.01.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO PARA LOS PROGRAMAS DE DAVIVIENDA:       *
+REMARK*                       ICGD49-ICGD22-ICGD12-ICGD40-ICGD25-ICGD60*
+REMARK******************************************************************
+       FD  PARAMDAVI.
+       01  REG-PARAMDAVI.
+           03  PAR-CAMPO-DV            PIC  9(02).
+           03  PAR-POSI-DV             PIC  9(02).
+           03  PAR-MODELO-DV           PIC  9(04).
+           03  PAR-VALOR-DAV              PIC  9(03)V9(02).
+           03                      REDEFINES  PAR-VALOR-DAV.
+             05  PAR-VALOR-DAV-INT        PIC  9(01)V9(04).

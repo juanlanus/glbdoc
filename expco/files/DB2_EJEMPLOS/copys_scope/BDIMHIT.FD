@@ -1,0 +1,28 @@
+      *BDIMHIT.V01.0001.
+      *****************************************************************
+      *MAESTRO HISTORICO TEMPORAL DE MICROCREDITO POR FECHA DE CORTE. 
+      *SE CREA CADA VEZ QUE CADUCA UN MES Y SE SACA DEL REPORTE 
+      *TRIMESTRAL
+      *****************************************************************
+       FD  BDIMHIT.                                                     
+       01  REG-BDIMHIT.                                                 
+           03  LLAVE-BDIMHIT.                                           
+               05  IDEN-BDIMHIT.                                        
+                   07  TIPIDE-BDIMHIT   PIC 9(01).                      
+                   07  NUMIDE-BDIMHIT   PIC 9(11).                      
+               05  FECHA-BDIMHIT        PIC 9(06).                      
+               05  MORA-BDIMHIT         PIC 9(01).                      
+               05  SUSCRIPTOR-BDIMHIT   PIC 9(06).                      
+               05  PLAZO-BDIMHIT        PIC 9(01).                      
+           03  SECACT-BDIMHIT           PIC 9(01).                      
+           03  TIPCTA-BDIMHIT           PIC 9(02).                      
+           03  FEC-VINCULADO-BDIMHIT    PIC 9(08)  COMP-3.              
+           03  FEC-DESVIN-BDIMHIT       PIC 9(08)  COMP-3.              
+           03  CANTIDAD-BDIMHIT         PIC 9(05)  COMP-3.              
+           03  VALOR-BDIMHIT            PIC 9(12)  COMP-3.              
+           03  BLOQUEO-BDIMHIT          PIC 9(01).                      
+           03  CODRECL-BDIMHIT          PIC 9(02).                      
+           03  NUMRECL-BDIMHIT          PIC 9(14)  COMP-3.              
+           03  FECRECL-BDIMHIT          PIC 9(08)  COMP-3.              
+           03  IND-MODIF-BDIMHIT        PIC 9(01).                      
+           03  FILLER                   PIC X(30).

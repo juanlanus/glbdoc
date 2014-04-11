@@ -1,0 +1,526 @@
+      *BDIMIC.PROC.V01.0002.
+REMARK******************************************************************
+REMARK*RUTINA UTILIZADA POR EL PROGRAMA ICGCON PARA PRODUCTO 4 
+REMARK*MICROCREDITO
+REMARK******************************************************************
+REMARK* FAC0002     * REPMI2 *SE ADICIONA RUTINA PARA CALCULO DE LOS 9 *
+REMARK* F.CUADROS C.*         MESES RESTANTES DE ACUERDO AL HISTORICO. *
+REMARK* SEP.07/2005 *         SE PRESENTA EL RESUMEN POR CADA MES.     *
+REMARK******************************************************************
+       2045-ROTACION-ARCH-MICRO.
+REMARK******************************************************************
+REMARK*2045-ROTACION-ARCH-MICRO.                                       *
+REMARK*     SE HACE EL INTERCAMBIO ENTRE ARCHIVOS DE MICROCREDITO PARA *
+REMARK*     COLOCAR EN PRODUCCION EL MAS RECIENTE Y PASAR EL MAS       *
+REMARK*     ANTIGUO A UN HISTORICO. SE MANEJA EL CONCEPTO DE RECEPCION *
+REMARK*     PARA PERMITIR DESHACER UN INTERCAMBIO POR ERROR            *
+REMARK******************************************************************
+            INITIALIZE LLAVE-BDIRMAE3
+                       FEC-REAL-3
+                       FEC-REAL-4
+            START BDIRMAE3 KEY >= LLAVE-BDIRMAE3
+               NOT INVALID KEY
+                  READ BDIRMAE3 NEXT RECORD
+                     NOT AT END
+                        MOVE FECHA-BDIRMAE3 TO FEC-REAL-3
+                  END-READ
+            END-START
+            MOVE FUNCTION CURRENT-DATE (1:6) TO FEC-REAL-4
+            START BDIRMAE4 KEY >= LLAVE-BDIRMAE4
+               NOT INVALID KEY
+                  READ BDIRMAE4 NEXT RECORD
+                     NOT AT END
+                        MOVE FECHA-BDIRMAE4 TO FEC-REAL-4
+                  END-READ
+            END-START
+            COPY BDIRCLM.PROC.
+            MOVE "$DATABASE/BDIRMAE1"     TO NOMARC-MAE1
+            MOVE "$DATABASE/BDIRMAE1.idx" TO NOMARC-MAE1-IDX
+            MOVE "$DATABASE/BDIRMAE2"     TO NOMARC-MAE2
+            MOVE "$DATABASE/BDIRMAE2.idx" TO NOMARC-MAE2-IDX
+            MOVE "$DATABASE/BDIRMAE3"     TO NOMARC-MAE3
+            MOVE "$DATABASE/BDIRMAE3.idx" TO NOMARC-MAE3-IDX
+            MOVE "$DATABASE/BDIRMAE4"     TO NOMARC-MAE4
+            MOVE "$DATABASE/BDIRMAE4.idx" TO NOMARC-MAE4-IDX
+            UNSTRING AREA-INPUT DELIMITED BY " "
+                     INTO ENCABEZA-WS IND-ARCH-MICRO
+            MOVE FUNCTION UPPER-CASE(IND-ARCH-MICRO) TO IND-ARCH-MICRO
+            IF IND-ARCH-MICRO <> "REV"
+               PERFORM 2047-INTERCAMBIAR-MICRO
+            ELSE
+               PERFORM 2049-REVERSAR-INTERCAM-MICRO
+            END-IF.
+
+       2047-INTERCAMBIAR-MICRO.
+REMARK******************************************************************
+      *2047-INTERCAMBIAR-MICRO.                                        *
+      *     SE HACE COPIA DE ARCHIVOS PARA HACER EL INTERCMABIO,       *
+      *     DEJANDO EL MAESTRO-4 INICIALIZADO Y EL MAESTRO-3 EN UNA    *
+      *     COPIA HISTORICA                                            *
+REMARK******************************************************************
+            IF FEC-REAL-3 <> 0
+               INITIALIZE NOMHIS-MAE3
+               STRING "$DATABASE/BDIRMAE."      DELIMITED BY SIZE,
+                      FEC-REAL-3                DELIMITED BY SIZE
+                      INTO NOMHIS-MAE3
+               CALL "CBL_COPY_FILE" USING NOMARC-MAE3
+                                          NOMHIS-MAE3
+                                    RETURNING COD-RET
+               INITIALIZE NOMHIS-MAE3-IDX
+               STRING "$DATABASE/BDIRMAE."      DELIMITED BY SIZE,
+                      FEC-REAL-3                DELIMITED BY SIZE,
+                      ".idx"                    DELIMITED BY SIZE
+                      INTO NOMHIS-MAE3-IDX
+               CALL "CBL_COPY_FILE" USING NOMARC-MAE3-IDX
+                                          NOMHIS-MAE3-IDX
+                                    RETURNING COD-RET
+            END-IF
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE2
+                                       NOMARC-MAE3
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE2-IDX
+                                       NOMARC-MAE3-IDX
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE1
+                                       NOMARC-MAE2
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE1-IDX
+                                       NOMARC-MAE2-IDX
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE4
+                                       NOMARC-MAE1
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE4-IDX
+                                       NOMARC-MAE1-IDX
+                                 RETURNING COD-RET
+            OPEN  OUTPUT BDIRMAE4
+            CLOSE BDIRMAE4
+            COPY BDIROINM.PROC.
+
+       2049-REVERSAR-INTERCAM-MICRO.
+REMARK******************************************************************
+      *2049-REVERSAR-INTERCAM-MICRO.                                   *
+      *     SE HACE COPIA DE ARCHIVOS PARA HACER LA REVERSION DEJANDO  *
+      *     EL MAESTRO-3 CON EL CONTENIDO DEL HISTORICO Y ELIMINANDO LA*
+      *     COPIA HISTORICA                                            *
+REMARK******************************************************************
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE1
+                                       NOMARC-MAE4
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE1-IDX
+                                       NOMARC-MAE4-IDX
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE2
+                                       NOMARC-MAE1
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE2-IDX
+                                       NOMARC-MAE1-IDX
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE3
+                                       NOMARC-MAE2
+                                 RETURNING COD-RET
+            CALL "CBL_COPY_FILE" USING NOMARC-MAE3-IDX
+                                       NOMARC-MAE2-IDX
+                                 RETURNING COD-RET
+            INITIALIZE COMANDO-SO
+            STRING "rm $TEMPORALES/BDIRTMP"         DELIMITED BY SIZE,
+                   X"00"                            DELIMITED BY SIZE
+                   INTO COMANDO-SO
+            CALL   "SYSTEM" USING COMANDO-SO
+            CANCEL "SYSTEM"
+            INITIALIZE COMANDO-SO
+            STRING "ls -t1 $DATABASE/BDIRMAE.*.idx" DELIMITED BY SIZE,
+                   " > $TEMPORALES/BDIRTMP"         DELIMITED BY SIZE,
+                   "| head -1"                      DELIMITED BY SIZE,
+                   X"00"                            DELIMITED BY SIZE
+                   INTO COMANDO-SO
+            CALL   "SYSTEM" USING COMANDO-SO
+            CANCEL "SYSTEM"
+            OPEN INPUT BDIRTMP
+            READ BDIRTMP
+               NOT AT END
+                  INITIALIZE POS-TEXTO
+                  INSPECT REG-BDIRTMP TALLYING POS-TEXTO
+                          FOR CHARACTERS BEFORE "BDIRMAE"
+                  ADD 1 TO POS-TEXTO
+                  INITIALIZE NOMHIS-MAE3-IDX
+                  STRING "$DATABASE/"              DELIMITED BY SIZE,
+                         REG-BDIRTMP (POS-TEXTO:)  DELIMITED BY " " 
+                         INTO NOMHIS-MAE3-IDX
+                  INITIALIZE NOMHIS-MAE3
+                  STRING "$DATABASE/"              DELIMITED BY SIZE,
+                         REG-BDIRTMP (POS-TEXTO:)  DELIMITED BY " " 
+                         INTO NOMHIS-MAE3
+                  INSPECT NOMHIS-MAE3 REPLACING ALL ".idx" BY "    "
+            END-READ
+            CLOSE BDIRTMP
+REPMI2      MOVE NOMHIS-MAE3 TO TITLE-BDIMHIT                           FAC0002
+REPMI2      OPEN INPUT BDIMHIT                                          FAC0002
+REPMI2      IF FILE-STATUS-BDIMHIT = "00"                               FAC0002
+REPMI2         CLOSE BDIMHIT                                            FAC0002
+               CALL "CBL_COPY_FILE" USING NOMHIS-MAE3
+                                          NOMARC-MAE3
+                                    RETURNING COD-RET
+               CALL "CBL_COPY_FILE" USING NOMHIS-MAE3-IDX
+                                          NOMARC-MAE3-IDX
+                                    RETURNING COD-RET
+            ELSE
+               OPEN  OUTPUT BDIRMAE3
+               CLOSE BDIRMAE3
+            END-IF
+            COPY BDIROINM.PROC.
+
+       80000-PROCESAR-MICROCREDITO.
+REMARK******************************************************************
+REMARK*80000-PROCESAR-MICROCREDITO.                                    *
+REMARK*    PROCESA LOS MAESTROS DE MICROCREDITO DEL MAS NUEVO AL MAS   *
+REMARK*    ANTIGUO. SE LEE EL REGISTRO Y SE ENVIA, ACUMULANDO LOS      *
+REMARK*    VALORES PARA TOTALES                                        *
+REMARK******************************************************************
+           MOVE 0 TO SUB-NUMFAC
+           MOVE 0 TO SUB-VALFAC
+           MOVE 0 TO ENCONTRO
+           INITIALIZE  RESUMEN-VALORES RESUMEN-FACTURAS
+           INITIALIZE  TABLA-MESES-MICRO
+           INITIALIZE CAR-ANTER SUSANT-MICROC
+REMARK**** SE LEE EL MAESTRO DE MICROCREDITO DEL MAS NUEVO AL MAS ANTIGUO
+REPMI2     PERFORM VARYING I FROM 12 BY -1 UNTIL I < 10                 FAC0002 
+              MOVE 1 TO ENVIE IND-CTA
+              MOVE 0 TO FIN-CUENTAS
+              PERFORM 80010-START-BDIRMAE
+              IF FIN-CUENTAS = 0
+                 PERFORM 80020-READ-BDIRMAE 
+                 IF FIN-CUENTAS = 0
+                    MOVE MORA-BDIRMAE TO CAR-ANTER
+                    MOVE 0 TO SUSANT-MICROC
+                 END-IF
+                 PERFORM UNTIL FIN-CUENTAS = 1 OR 
+                    TIPIDE-BDIRMAE <> TIP-ID OR NUMIDE-BDIRMAE <> NUM-ID
+                    IF SUSCRIPTOR-BDIRMAE <> SUSANT-MICROC
+                       MOVE SUSCRIPTOR-BDIRMAE TO COD-SUSCRIP-ABD02
+                       MOVE SUSCRIPTOR-BDIRMAE TO SUSANT-MICROC
+                       PERFORM 2424-LEER-SUSCRIPTOR
+                       MOVE F-ACT-SECREAL-ABD02 TO FEC-MMAAAA
+                       MOVE ANO-MMAAAA TO ANO-AUX-MICRO
+                       MOVE MES-MMAAAA TO MES-AUX-MICRO
+                       PERFORM VARYING J FROM 1 BY 1 UNTIL J > 4
+                          MOVE FECHA-AUX-MICRO TO T-FEC-MICROC (J)
+                          SUBTRACT 1 FROM MES-AUX-MICRO
+                          IF MES-AUX-MICRO = 0
+                             MOVE 12 TO MES-AUX-MICRO
+                             SUBTRACT 1 FROM ANO-AUX-MICRO
+                          END-IF
+                       END-PERFORM
+                    END-IF
+                    IF BLOQUEO-BDIRMAE = 0 AND ESTADO-ABD02 = 1
+                       EVALUATE FECHA-BDIRMAE
+                          WHEN T-FEC-MICROC (1)
+                             IF MES-4-SECREAL-ABD02 = SECACT-BDIRMAE
+                                PERFORM 80100-PROCESAR-REG-MICROC
+                             END-IF
+                          WHEN T-FEC-MICROC (2)
+                             IF MES-1-SECREAL-ABD02 = SECACT-BDIRMAE
+                                PERFORM 80100-PROCESAR-REG-MICROC
+                             END-IF
+                          WHEN T-FEC-MICROC (3)
+                             IF MES-2-SECREAL-ABD02 = SECACT-BDIRMAE
+                                PERFORM 80100-PROCESAR-REG-MICROC
+                             END-IF
+                          WHEN T-FEC-MICROC (4)
+                             IF MES-3-SECREAL-ABD02 = SECACT-BDIRMAE
+                                PERFORM 80100-PROCESAR-REG-MICROC
+                             END-IF
+                       END-EVALUATE
+                    END-IF
+                    MOVE MORA-BDIRMAE TO CAR-ANTER
+                    PERFORM 80020-READ-BDIRMAE 
+                    IF MORA-BDIRMAE <> CAR-ANTER OR FIN-CUENTAS = 1
+                       IF (SUB-NUMFAC > 0 OR SUB-VALFAC > 0) AND
+                          NOT INF-VIN-COM
+                          PERFORM 80040-SACAR-TOTAL-MICROC
+                       END-IF
+                    END-IF
+                 END-PERFORM
+                 IF ENVIE = 0 AND NOT INF-VIN-COM
+                    PERFORM 10900-ENVIA-CRCR
+                 END-IF 
+              END-IF
+           END-PERFORM
+           IF ENCONTRO = 1
+REPMI2        OPEN INPUT BDIMHIS                                        FAC0002 
+REPMI2        IF FILE-STATUS-BDIMHIS = "00"                             FAC0002 
+REPMI2           PERFORM 80060-CALCULAR-RESTO-MESES                     FAC0002 
+REPMI2           CLOSE BDIMHIS                                          FAC0002 
+REPMI2        END-IF                                                    FAC0002 
+              PERFORM 80050-SACAR-RESUMEN
+           END-IF
+           MOVE 0 TO REC.
+
+       80010-START-BDIRMAE.
+REMARK******************************************************************
+REMARK*80010-START-BDIRMAE.                                            *
+REMARK*    UBICA EL ARCHIVO MAESTRO SEGUN INDICE ACTUAL                *
+REMARK******************************************************************
+           INITIALIZE  LLAVE-BDIRMAE
+           MOVE TIP-ID TO TIPIDE-BDIRMAE
+           MOVE NUM-ID TO NUMIDE-BDIRMAE
+           EVALUATE I 
+REPMI2        WHEN 10                                                   FAC0002 
+                 MOVE LLAVE-BDIRMAE TO LLAVE-BDIRMAE3
+                 START BDIRMAE3 KEY >= LLAVE-BDIRMAE3
+                    INVALID KEY
+                       MOVE 1 TO FIN-CUENTAS
+                 END-START
+REPMI2        WHEN 11                                                   FAC0002 
+                 MOVE LLAVE-BDIRMAE TO LLAVE-BDIRMAE2
+                 START BDIRMAE2 KEY >= LLAVE-BDIRMAE2
+                    INVALID KEY
+                       MOVE 1 TO FIN-CUENTAS
+                 END-START
+REPMI2        WHEN 12                                                   FAC0002 
+                 MOVE LLAVE-BDIRMAE TO LLAVE-BDIRMAE1
+                 START BDIRMAE1 KEY >= LLAVE-BDIRMAE1
+                    INVALID KEY
+                       MOVE 1 TO FIN-CUENTAS
+                 END-START
+              WHEN ANY
+                 MOVE 1 TO FIN-CUENTAS
+           END-EVALUATE.
+
+       80020-READ-BDIRMAE.
+REMARK******************************************************************
+REMARK*80020-READ-BDIRMAE.                                             *
+REMARK*    LEE ARCHIVO MAESTRO DE MICROCREDITO SECUENCIAL               *
+REMARK******************************************************************
+           EVALUATE I 
+REPMI2        WHEN 10                                                   FAC0002 
+                 READ BDIRMAE3 NEXT RECORD INTO REG-BDIRMAE
+                    AT END              
+                       MOVE 1 TO FIN-CUENTAS
+                 END-READ 
+REPMI2        WHEN 11                                                   FAC0002 
+                 READ BDIRMAE2 NEXT RECORD INTO REG-BDIRMAE
+                    AT END              
+                       MOVE 1 TO FIN-CUENTAS
+                 END-READ 
+REPMI2        WHEN 12                                                   FAC0002 
+                 READ BDIRMAE1 NEXT RECORD INTO REG-BDIRMAE
+                    AT END              
+                       MOVE 1 TO FIN-CUENTAS
+                 END-READ 
+              WHEN ANY
+                 MOVE 1 TO FIN-CUENTAS
+           END-EVALUATE.
+
+       80030-SACAR-TITULO-MICROC.
+REMARK******************************************************************
+REMARK*80030-SACAR-TITULO-MICROC.                                     *
+REMARK*    MOSTRAR TITULOS DE MICROCREDITO EN INFORME                   *
+REMARK******************************************************************
+           MOVE 6 TO IND-CTA.
+           MOVE FECHA-BDIRMAE(1:4) TO ANO-AUX-MICRO.
+           MOVE FECHA-BDIRMAE(5:2) TO MES-AUX-MICRO.
+           MOVE FECHA-AUX-MICRO    TO F73-FECHA
+                                      TAB-MESES-MICRO(I).
+           IF NOT INF-VIN-COM
+              MOVE FORMATO-73      TO PANTALLA
+              PERFORM 10900-ENVIA-CRCR
+           END-IF.
+
+       80040-SACAR-TOTAL-MICROC.
+REMARK******************************************************************
+REMARK*80040-SACAR-TOTAL-MICROC.                                      *
+REMARK*    SE GENERAN LOS TOTALES DE MICROCREDITO                      *
+REMARK******************************************************************
+           MOVE 1 TO REC.
+           MOVE FORMATO-75         TO MOVIMIENTO-S.
+           PERFORM 6700-CONT-CTA.
+           MOVE SUB-NUMFAC         TO F74-SUBFAC.
+           MOVE SUB-VALFAC         TO F74-SUBVAL.
+           MOVE 1                  TO REC.
+           MOVE FORMATO-74         TO MOVIMIENTO-S.
+           PERFORM 6700-CONT-CTA.
+           IF FIN-CUENTAS = 0
+              MOVE SPACES TO MOVIMIENTO-S
+              PERFORM 6700-CONT-CTA
+           END-IF.
+           MOVE 0                  TO SUB-NUMFAC.
+           MOVE 0                  TO SUB-VALFAC.
+
+       80050-SACAR-RESUMEN.
+REMARK******************************************************************
+REMARK*80050-SACAR-RESUMEN.                                            *
+REMARK*    SE GENERA EL RESUMEN DE MICROCREDITO                        *
+REMARK******************************************************************
+           MOVE 6 TO IND-CTA.
+           MOVE FORMATO-76         TO PANTALLA.
+           PERFORM 10900-ENVIA-CRCR.
+REPMI2     PERFORM VARYING I FROM 12 BY -1 UNTIL I < 1                  FAC0002 
+              IF TAB-MESES-MICRO(I) > 0     
+                 MOVE TAB-MESES-MICRO(I)   TO F77-FECHA
+                 MOVE TOT-VALORES-COR(I)   TO F77-TOT-COR
+                 MOVE TOT-VALORES-MOR(I,1) TO F77-001-030
+                 MOVE TOT-VALORES-MOR(I,2) TO F77-031-060
+                 MOVE TOT-VALORES-MOR(I,3) TO F77-061-090
+                 MOVE TOT-VALORES-MOR(I,4) TO F77-091-119
+                 MOVE TOT-VALORES-MOR(I,5) TO F77-MAS-120
+                 MOVE TOT-VALORES-MOR(I,6) TO F77-CASTIGO
+                 MOVE TOT-VALORES-VEN(I)   TO F77-TOT-VEN
+                 MOVE 2 TO IND-CTA
+                 MOVE FORMATO-77       TO PANTALLA       
+                 PERFORM 10900-ENVIA-CRCR
+              END-IF
+           END-PERFORM.
+           MOVE 6 TO IND-CTA.
+           MOVE FORMATO-78         TO PANTALLA.
+           PERFORM 10900-ENVIA-CRCR.
+REPMI2     PERFORM VARYING I FROM 12 BY -1 UNTIL I < 1                  FAC0002 
+             IF TAB-MESES-MICRO(I) > 0
+               MOVE TAB-MESES-MICRO (I) TO F79-FECHA
+               MOVE CAN-FACTURAS-COR(I) TO F79-FAC-COR
+               MOVE VAL-FACTURAS-COR(I) TO F79-VAL-COR
+               MOVE CAN-FACTURAS-VEN(I) TO F79-FAC-VEN
+               MOVE VAL-FACTURAS-VEN(I) TO F79-VAL-VEN
+               MOVE 0 TO IND-FAC
+               PERFORM VARYING J FROM 6 BY -1 UNTIL J < 1 OR IND-FAC = 1
+                 IF CAN-FACTURAS-MOR(I, J) > 0
+                    MOVE CAN-FACTURAS-MOR(I, J) TO F79-FAC-MOR
+                    MOVE VAL-FACTURAS-MOR(I, J) TO F79-VAL-MOR
+                    MOVE TAB-DES-MICRO(J) TO F79-DES-MOR
+                    MOVE 1 TO IND-FAC
+                 END-IF
+               END-PERFORM
+               MOVE 2 TO IND-CTA
+               MOVE FORMATO-79 TO PANTALLA
+               PERFORM 10900-ENVIA-CRCR
+             END-IF
+           END-PERFORM.
+
+REPMI2 80060-CALCULAR-RESTO-MESES.                                      FAC0002 
+REMARK******************************************************************
+REMARK*80060-CALCULAR-RESTO-MESES.                                     *
+REMARK*SE RECORRE EL MAESTRO HISTORICO PARA CALCULAR LOS TOTALES DE LOS*
+REMARK*MESES RESTANTES HASTA UN ANO ATRAS PARA LA IDENTIFIC. EN PROCESO*
+REMARK******************************************************************
+REPMI2     IF TAB-MESES-MICRO(10) > ZEROS                               FAC0002 
+REPMI2        MOVE TAB-MESES-MICRO(10) TO FECHA-AUX-MICRO               FAC0002 
+REPMI2     ELSE                                                         FAC0002 
+REPMI2        MOVE ZEROS TO FECHA-AUX-MICRO                             FAC0002 
+REPMI2     END-IF.                                                      FAC0002 
+REPMI2     IF FECHA-AUX-MICRO > ZEROS                                   FAC0002 
+REPMI2        MOVE 9 TO MORA-BDIMHIS PLAZO-BDIMHIS                      FAC0002 
+REPMI2        INITIALIZE FDA-BDIMHIS                                    FAC0002 
+REPMI2        MOVE TIP-ID TO TIPIDE-BDIMHIS                             FAC0002 
+REPMI2        MOVE NUM-ID TO NUMIDE-BDIMHIS                             FAC0002 
+REPMI2        MOVE FECHA-AUX-MICRO TO FECHA-BDIMHIS                     FAC0002 
+REPMI2        START BDIMHIS KEY <= LLAVE-BDIMHIS                        FAC0002 
+REPMI2          INVALID KEY MOVE 1 TO FDA-BDIMHIS                       FAC0002 
+REPMI2          NOT INVALID KEY                                         FAC0002 
+REPMI2           READ BDIMHIS PREVIOUS AT END MOVE 1 TO FDA-BDIMHIS     FAC0002 
+REPMI2        END-START                                                 FAC0002 
+REPMI2        MOVE 10 TO I                                              FAC0002 
+REPMI2        PERFORM UNTIL TIP-ID <> TIPIDE-BDIMHIS OR                 FAC0002 
+REPMI2                      NUM-ID <> NUMIDE-BDIMHIS OR                 FAC0002 
+REPMI2                      FDA-BDIMHIS = 1                             FAC0002 
+REPMI2          IF FECHA-BDIMHIS < TAB-MESES-MICRO(10)                  FAC0002 
+REPMI2             IF FECHA-BDIMHIS <> FECHA-AUX-MICRO                  FAC0002 
+REPMI2                IF I > 1                                          FAC0002 
+REPMI2                   SUBTRACT 1 FROM I                              FAC0002 
+REPMI2                   MOVE FECHA-BDIMHIS TO TAB-MESES-MICRO(I)       FAC0002 
+REPMI2                ELSE                                              FAC0002 
+REPMI2                   MOVE 1 TO FDA-BDIMHIS                          FAC0002 
+REPMI2                END-IF                                            FAC0002 
+REPMI2             END-IF                                               FAC0002 
+REPMI2             IF FDA-BDIMHIS = 0                                   FAC0002 
+REPMI2                MOVE VALOR-BDIMHIS TO VALFAC-AUX                  FAC0002 
+REPMI2                IF MORA-BDIMHIS = 0                               FAC0002 
+REPMI2                   ADD VALFAC-AUX TO                              FAC0002 
+REPMI2                              TOT-VALORES-COR(I)                  FAC0002 
+REPMI2                              VAL-FACTURAS-COR(I)                 FAC0002 
+REPMI2                   ADD CANTIDAD-BDIMHIS TO                        FAC0002 
+REPMI2                              CAN-FACTURAS-COR(I)                 FAC0002 
+REPMI2                ELSE                                              FAC0002 
+REPMI2                   ADD VALFAC-AUX TO                              FAC0002 
+REPMI2                              TOT-VALORES-MOR(I, MORA-BDIMHIS)    FAC0002 
+REPMI2                              VAL-FACTURAS-MOR(I, MORA-BDIMHIS)   FAC0002 
+REPMI2                   ADD VALFAC-AUX TO                              FAC0002 
+REPMI2                              TOT-VALORES-VEN(I)                  FAC0002 
+REPMI2                              VAL-FACTURAS-VEN(I)                 FAC0002 
+REPMI2                   ADD CANTIDAD-BDIMHIS TO                        FAC0002 
+REPMI2                              CAN-FACTURAS-VEN(I)                 FAC0002 
+REPMI2                              CAN-FACTURAS-MOR(I, MORA-BDIMHIS)   FAC0002 
+REPMI2                END-IF                                            FAC0002 
+REPMI2             END-IF                                               FAC0002 
+REPMI2          END-IF                                                  FAC0002 
+REPMI2          IF FDA-BDIMHIS = 0                                      FAC0002 
+REPMI2             MOVE FECHA-BDIMHIS TO FECHA-AUX-MICRO                FAC0002 
+REPMI2             READ BDIMHIS PREVIOUS AT END                         FAC0002 
+REPMI2             MOVE 1 TO FDA-BDIMHIS                                FAC0002 
+REPMI2          END-IF                                                  FAC0002 
+REPMI2        END-PERFORM                                               FAC0002 
+REPMI2     END-IF.                                                      FAC0002 
+
+       80100-PROCESAR-REG-MICROC.
+REMARK******************************************************************
+REMARK*80100-PROCESAR-REG-MICROC.                                      *
+REMARK*    PROCESA CADA REGISTRO DE MICROCREDITO ENVIANDOLO FORMATEADO *
+REMARK*    PARA EL REPORTE                                             *
+REMARK******************************************************************
+           MOVE 1 TO ENCONTRO.
+           IF TAB-MESES-MICRO(I) = 0
+              PERFORM 80030-SACAR-TITULO-MICROC
+           END-IF.
+           MOVE VALOR-BDIRMAE       TO VALFAC-AUX.
+           ADD  VALFAC-AUX          TO SUB-VALFAC.
+           ADD  CANTIDAD-BDIRMAE    TO SUB-NUMFAC.
+           IF MORA-BDIRMAE = 0 
+REPMI2        ADD VALFAC-AUX        TO TOT-VALORES-COR(I)               FAC0002
+                                       VAL-FACTURAS-COR(I)
+REPMI2        ADD CANTIDAD-BDIRMAE  TO CAN-FACTURAS-COR(I)              FAC0002
+           ELSE
+REPMI2        ADD VALFAC-AUX        TO TOT-VALORES-MOR(I, MORA-BDIRMAE) FAC0002
+                                       VAL-FACTURAS-MOR(I, MORA-BDIRMAE)
+REPMI2        ADD VALFAC-AUX        TO TOT-VALORES-VEN(I)               FAC0002
+                                       VAL-FACTURAS-VEN(I)
+REPMI2        ADD CANTIDAD-BDIRMAE  TO CAN-FACTURAS-VEN(I)              FAC0002
+                                       CAN-FACTURAS-MOR(I, MORA-BDIRMAE)
+           END-IF.
+           IF NOT INF-VIN-COM
+              MOVE SPACES           TO SALIDA-72
+              MOVE TAB-CAR-MICRO (MORA-BDIRMAE + 1)
+                                    TO S72-CAR
+              IF IND-COR-ABD02 = 1 OR 2
+                 MOVE NOM-COR1-ABD02 TO NOM-COR-AUX
+              ELSE
+                 MOVE SPACES        TO NOM-COR-AUX
+                 MOVE COD-SUSCRIP-IND TO NOM-COR-AUXN
+              END-IF
+              MOVE NOM-COR-AUX      TO S72-SUS
+              MOVE CORTA-ABD01-AUX(COD-TIPCTA-ABD02) TO S72-TIP
+              MOVE CANTIDAD-BDIRMAE TO S72-FAC
+              MOVE VALFAC-AUX       TO S72-VAL
+              IF PLAZO-BDIRMAE >= 1 AND <= 4
+                 MOVE TAB-CAR-MICRO(PLAZO-BDIRMAE + 1)(9:12) TO S72-PLA
+              ELSE
+                 MOVE PLAZO-BDIRMAE TO S72-PLA
+              END-IF
+              MOVE 0 TO REC
+              MOVE 72               TO FORMATO
+              PERFORM 6700-CONT-CTA
+           END-IF.
+          
+       FORMATOS-72.
+REMARK******************************************************************
+REMARK*FORMATOS-72.                                                    *
+REMARK*    FORMATO PARA MICROCREDITO                                   *
+REMARK******************************************************************
+           IF MOD-TAB = 0
+              MOVE SPACES             TO FORMATO-72
+              MOVE S72-CAR            TO F72-CAR
+              MOVE S72-SUS            TO F72-SUS
+              MOVE S72-TIP            TO F72-TIP
+              MOVE S72-FAC            TO F72-FAC
+              MOVE S72-VAL            TO F72-VAL
+              MOVE S72-PLA            TO F72-PLA
+              MOVE FORMATO-72         TO V-47(IND-CTA)
+           END-IF.

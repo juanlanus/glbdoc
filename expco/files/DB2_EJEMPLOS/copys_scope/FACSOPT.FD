@@ -1,0 +1,39 @@
+******* FACSOPT-FD.v03.0002
+
+REMARK*ARCHIVO PLANO GENERADO POR EL FACULIS PARA FACTURACION 
+REMARK******************************************************************
+REMARK* CAV0002    * PRO001: MANEJO DE PRODUCTO ALFANUMERICAMENTES. SE
+REMARK* C.VELASCO. *         REDEFINEN CAMPOS A PIC X
+REMARK******************************************************************
+036300*----------------------------------------------------------------*
+       FD FACSOPT.                                 
+       01 REG-FACSOPT.                                
+         02  REG-FACSOPT-0.                                        
+             03 NIT-SUSCRIP-FACSOPT         PIC 9(11).        
+             03 TIP-ID-CNSLTNTE-FACSOPT     PIC 9(1).        
+             03 IDE-CNSLTNTE-FACSOPT        PIC 9(11).      
+         02  REG-FACSOPT-1.                             
+             03 COD-SUSCRIP-FACSOPT         PIC 9(6).     
+             03 NOM-SUSCRIP-FACSOPT         PIC X(42).   
+             03 ANO-FAC-FACSOPT             PIC 9(2).        
+             03 MES-FAC-FACSOPT             PIC 9(2).                   
+         02 PRODUCTO-FACSOPT                PIC 9(6).                  
+PRO001   02 PRODUCTO-FACSOPT-R REDEFINES PRODUCTO-FACSOPT PIC X(6).     CAV0002
+         02  REG-FACSOPT-2.                                        
+             03 CONSULTANTE-FACSOPT         PIC X(24).               
+             03 CIUDAD-FACSOPT              PIC X(15).              
+             03 OFICINA-FACSOPT             PIC X(15).             
+             03 FECHA-CON-FACSOPT           PIC 9(8).             
+             03 HORA-CON-FACSOPT            PIC 9(6).            
+             03 TIPO-ID-CON-FACSOPT         PIC X.              
+             03 IDENTIF-CON-FACSOPT         PIC 9(11).                 
+             03 TIPO-CON-FACSOPT            PIC 9.                    
+             03 CALIFIC-FACSOPT             PIC 9(3).                
+             03 TERMINAL-FACSOPT            PIC 9(4).               
+             03 CALIFI-DES-FACSOPT          PIC -9(3).99.          
+             03 RAZONES-DES-FACSOPT         PIC X(16).            
+         02  IND-CAMB-SUS-FACSOPT           PIC 9.               
+         02  IND-COBRABLE-FACSOPT           PIC 9.              
+         02  PROD-PADRE-FACSOPT             PIC 9(6).          
+PRO001   02  PROD-PADRE-FACSOPT-R REDEFINES PROD-PADRE-FACSOPT PIC X(6).CAV0002
+         02  CENTRO-COSTO-FACSOPT           PIC 9(6).         

@@ -1,0 +1,15 @@
+REMARK*BDALOWEB.v03.001.
+      *----------------------------------------------------------------*
+      *ESTRUCTURA DE LOG DE CLAVES WEB
+      *----------------------------------------------------------------*
+       FD  CLAVE-WEBLOG.
+       01  REG-WEBLOG.
+           03 TIP-ID-WEBLOG               PIC 9.
+           03 FILLER                      PIC X.
+           03 NUM-ID-WEBLOG               PIC 9(11).
+           03 FILLER                      PIC X.
+           03 CLAVE-WEB-WEBLOG            PIC X(10).
+           03 FILLER                      PIC X.
+           03 ESTADO-WEBLOG               PIC X(01).
+           03 FILLER                      PIC X.
+           03 FECHA-WEBLOG                PIC 9(08).

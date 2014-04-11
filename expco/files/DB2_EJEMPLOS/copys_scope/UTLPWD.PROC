@@ -1,0 +1,135 @@
+REMARK* UTLPWD.PROC.v.0002
+REMARK* ESTE COPY CONTIENE CADA UNA RUTINA QUE PERMITE GENERAR PASSWORDS
+REMARK* FONETICAMENTE ACEPTABLES                   
+REMARK******************************************************************RMB0002
+REMARK* RMB0002     * PWD001 - SE ADICIONA OTRO METODO DE PASSWORD MAS *RMB0002
+REMARK* R.MARTINEZ  *          SIMPLE.                                 *RMB0002
+REMARK* NOV.27/2001 *                                                  *RMB0002
+REMARK******************************************************************RMB0002
+UTLPWD 0001-GENERA-UTLPW.
+REMARK******************************************************************
+REMARK*0001-GENERA-PASSWORD.
+REMARK*   SINTAXIS FORMAL DE LA GENERACION:
+REMARK*    <CLAVE> := <CLAVE> + <CON> + <NUM>
+REMARK*    <NUM>   := <#> ! <#> + <#> ! <#> + <#> + <#>
+REMARK*    <CON>   := <VOC> + <LET> + <VOC> ! <LET> + <VOC> 
+REMARK*    <#>     := 0!1!2!3!4!5!6!7!8!9
+REMARK*    <LET>   := B!C!D!F!G!H!J!K!L!M!N!P!Q!R!S!T!V!W!X!Y!Z
+REMARK*    <VOC>   := A!E!I!O!U
+REMARK*    L<CLAVE> {  10 CARACTERES}
+REMARK*    L<CON>   { MAX 3 <CON> }
+REMARK*    L<NUM>   { MAX 3 <#>   }
+REMARK*   CADA PARTICULA DE LA SINTAXIS SE GENERA DE FORMA RANDOM PARA
+REMARK*   CONFORMAR EL PASSWORD TOTAL 
+REMARK*   PARAMETROS ENTRADA:
+REMARK*      NUMERO DE 11 DIGITOS     : CED-INPUT-UTLPWD
+REMARK*   SALIDA
+REMARK*      STRING DE 10 CON PASSWORD: PWD-OUTPUT-UTLPWD
+REMARK******************************************************************
+UTLPWD     MOVE SPACES TO PWD-OUTPUT-UTLPWD.
+UTLPWD     MOVE 1 TO I-UTLPWD.
+UTLPWD     MOVE 0 TO CON-UTLPWD NUM-UTLPWD.                      
+UTLPWD     PERFORM UNTIL I-UTLPWD > 10       
+UTLPWD        MOVE 2 TO MAXRAN-UTLPWD
+UTLPWD        PERFORM 0002-SEMILLA-UTLPWD
+UTLPWD        IF RAN-UTLPWD = 0 AND CON-UTLPWD > 1
+UTLPWD           MOVE 1 TO RAN-UTLPWD
+UTLPWD        ELSE
+UTLPWD           IF RAN-UTLPWD = 1 AND NUM-UTLPWD > 2
+UTLPWD              MOVE 0 TO RAN-UTLPWD
+UTLPWD           END-IF
+UTLPWD        END-IF
+UTLPWD        IF RAN-UTLPWD = 0 
+UTLPWD           PERFORM 0003-CONSONANTE-UTLPWD
+UTLPWD           ADD 1 TO CON-UTLPWD
+UTLPWD           MOVE 0 TO NUM-UTLPWD
+UTLPWD        ELSE
+UTLPWD           ADD 1 TO NUM-UTLPWD
+UTLPWD           MOVE 0 TO CON-UTLPWD
+UTLPWD           PERFORM 0004-NUMERO-UTLPWD 
+UTLPWD        END-IF
+UTLPWD     END-PERFORM.
+UTLPWD     MOVE SPACES TO PWD-OUTPUT-UTLPWD(11:5).
+UTLPWD 0001-GENERA01-UTLPWD.                                            RMB0002
+REMARK******************************************************************RMB0002
+REMARK*0001-GENERA01-UTLPWD.                                           *RMB0002
+REMARK* ESTA RUTINA GENERA UN PASSAWORD DE DIEZ DE ESTRUCTURA MAS SIMPL*RMB0002
+REMARK* SE COMPONE DE 3 SILABAS Y CUATRO NUMEROS, DONDE CADA SILABA ES *RMB0002
+REMARK* SIMPLEMENTE UNA LETRA Y UNA VOCAL EJ: PORETI3456               *RMB0002
+REMARK******************************************************************RMB0002
+PWD001     MOVE SPACES TO PWD-OUTPUT-UTLPWD.                            RMB0002
+PWD001     MOVE 1 TO I-UTLPWD.                                          RMB0002
+PWD001     MOVE 0 TO CON-UTLPWD NUM-UTLPWD.                             RMB0002
+PWD001     PERFORM 3 TIMES                                              RMB0002
+PWD001        PERFORM 0005-LETRA-UTLPWD                                 RMB0002
+PWD001        PERFORM 0006-VOCAL-UTLPWD                                 RMB0002
+PWD001     END-PERFORM.                                                 RMB0002
+PWD001     PERFORM 4 TIMES                                              RMB0002
+PWD001        PERFORM 0004-NUMERO-UTLPWD                                RMB0002
+PWD001     END-PERFORM.                                                 RMB0002
+ULTPWD*****************************************
+UTLPWD 0002-SEMILLA-UTLPWD.
+REMARK******************************************************************
+REMARK*0002-SEMILLA-UTLPWD.
+REMARK*   CON BASE AL PARAMETRO DE ENTRADA SE CALCULA UNA SEMILLA 
+REMARK*       CON LA HORA , SE COLOCA EN RANGO 0-32767 Y SE NORMALIZA
+REMARK*       LA FUNCION CON EL MAXIMO DE POSIBILIDADES PEDIDO
+REMARK*   SE REUTILIZA LA CEDULA CON UN CAMBIO MATEMATICO
+REMARK******************************************************************
+UTLPWD        MOVE FUNCTION CURRENT-DATE(13:4) TO UNO-UTLPWD.
+UTLPWD        COMPUTE AUX-UTLPWD = CED-INPUT-UTLPWD * 
+UTLPWD                             ( 7811 + UNO-UTLPWD )
+UTLPWD        MOVE FUNCTION MOD (AUX-UTLPWD 32768 ) TO SEM-UTLPWD.
+UTLPWD        MOVE FUNCTION RANDOM (SEM-UTLPWD) TO RANCOB-UTLPWD.
+UTLPWD        COMPUTE RAN-UTLPWD =  RANCOB-UTLPWD * MAXRAN-UTLPWD.
+UTLPWD        COMPUTE CED-INPUT-UTLPWD = 
+UTLPWD                         (135679 + CED-INPUT-UTLPWD) / 2.
+UTLPWD 0003-CONSONANTE-UTLPWD.
+REMARK******************************************************************
+REMARK*0003-CONSONANTE-UTLPWD.
+REMARK*   <CON> := SE ELIGE ALEATORIAMENTE SI ES UNA SILABA DE DE 2 O
+REMARK*       DE TRES LETRAS DE CAUERDO A LA SINTAXIS FORMAL           
+REMARK******************************************************************
+UTLPWD      MOVE 2 TO MAXRAN-UTLPWD
+UTLPWD      PERFORM 0002-SEMILLA-UTLPWD.
+UTLPWD      IF RAN-UTLPWD = 0 
+UTLPWD         PERFORM 0006-VOCAL-UTLPWD
+UTLPWD         PERFORM 0005-LETRA-UTLPWD 
+UTLPWD         PERFORM 0006-VOCAL-UTLPWD
+UTLPWD      ELSE
+UTLPWD         PERFORM 0005-LETRA-UTLPWD 
+UTLPWD         PERFORM 0006-VOCAL-UTLPWD
+UTLPWD      END-IF.   
+UTLPWD 0004-NUMERO-UTLPWD.
+REMARK******************************************************************
+REMARK*0004-NUMERO-UTLPWD.
+REMARK*   <#> := SE ELIGE ALEATORIAMENTE UN NUMERO                 
+REMARK******************************************************************
+UTLPWD      MOVE 20 TO MAXRAN-UTLPWD
+UTLPWD      PERFORM 0002-SEMILLA-UTLPWD.
+UTLPWD      ADD 1 TO RAN-UTLPWD .
+UTLPWD      MOVE V-NUMPWD(RAN-UTLPWD) TO 
+UTLPWD           PWD-OUTPUT-UTLPWD(I-UTLPWD:1)
+UTLPWD      ADD 1 TO I-UTLPWD.
+UTLPWD 0005-LETRA-UTLPWD.
+REMARK******************************************************************
+REMARK*0005-LETRA-UTLPWD.
+REMARK*   <LET> := SE ELIGE ALEATORIAMENTE UNA LETRA                 
+REMARK******************************************************************
+UTLPWD      MOVE 21 TO MAXRAN-UTLPWD
+UTLPWD      PERFORM 0002-SEMILLA-UTLPWD.
+UTLPWD      ADD 1 TO RAN-UTLPWD .
+UTLPWD      MOVE V-LETPWD(RAN-UTLPWD) TO 
+UTLPWD           PWD-OUTPUT-UTLPWD(I-UTLPWD:1)
+UTLPWD      ADD 1 TO I-UTLPWD.
+UTLPWD 0006-VOCAL-UTLPWD.
+REMARK******************************************************************
+REMARK*0006-VOCAL-UTLPWD.
+REMARK*   <VOC> := SE ELIGE ALEATORIAMENTE UNA VOCAL                 
+REMARK******************************************************************
+UTLPWD      MOVE 20 TO MAXRAN-UTLPWD
+UTLPWD      PERFORM 0002-SEMILLA-UTLPWD.
+UTLPWD      ADD 1 TO RAN-UTLPWD .
+UTLPWD      MOVE V-VOCPWD(RAN-UTLPWD) TO 
+UTLPWD           PWD-OUTPUT-UTLPWD(I-UTLPWD:1)
+UTLPWD      ADD 1 TO I-UTLPWD.

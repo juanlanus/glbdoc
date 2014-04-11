@@ -1,0 +1,42 @@
+******* BDUUNI-FD.v.0003
+******* DESCRIPCION DE CADA UNO DE LOS CAMPOS DEL ARCHIVO QUE CONTIENE LA 
+******* BASE DE DATOS UNIVERSAL BDUUNI
+**************************************************************************
+      * BDU001  * NOV-01-2000 SE COLOCA EL CAMPO ALTERNO EN LA LLAVE PARA*
+      *         * MANEJAR SITUACIONES COMO LA MATRICULA EN CCO Y SE DEJA *
+      *         * OTRO CAMPO PARA PODER DECIR QUE TIPO DE CONSULTA ES    *
+**************************************************************************
+      * BDU002  * NOV-20-2000 SE COLOCA EL CAMPO PARA DIFERENCIAR LOS TIP*
+      * RMB0002 * OS DE INFORMACION QUE UN MISMO PRODUCTO PUEDAN TENER.  *
+      * R.MARTIN* SE COLOCA UN CAMPO POR LINEA PARA MARCAR SU TIPO       *
+**************************************************************************
+REMARK* VHF0003     * AMPNOM - SE AMPLIA EL TAMANO DEL NOMBRE DE LA      *
+REMARK* VICTOR HUGO *          EMPRESA, YA QUE SE ESTABA PERDIENDO PARTE *
+REMARK* FORERO      *          IMPORTANTE DEL MISMO                      *
+REMARK* OCT.26/2001 * BDUAMP - SE AMPLIA NUMERO POTENCIAL DE LINEAS A    *
+REMARK*             *          PROCESAR DE 999 A 9999 PARA REPORTE       *
+REMARK********************************************************************
+       FD BDUUNI.
+       01 REG-BDUUNI.
+          02 LLAVE-BDUUNI.
+             03 TIP-IDE-BDUUNI      PIC 9.
+             03 NUM-IDE-BDUUNI      PIC 9(11).
+             03 PRODUCT-BDUUNI      PIC X(03).
+             03 SUSCRIP-BDUUNI      PIC 9(06).
+BDU001       03 ALTERNA-BDUUNI      PIC X(10).
+BDUAMP       03 CONSECU-BDUUNI      PIC 9(04).
+          02 RESTO-BDUUNI.
+             03 INFORMACION-BDUUNI.
+                04 INFORM1-BDUUNI         PIC X(19). 
+                04 INFORM2-BDUUNI         PIC X(20). 
+                04 INFORM3-BDUUNI         PIC X(20). 
+                04 INFORM4-BDUUNI         PIC X(19). 
+BDU002       03 TIP-LIN-BDUUNI            PIC 9(3) COMP-3.              RMB0002 
+          02 FILLER REDEFINES RESTO-BDUUNI.
+             03 BLOQUEO-BDUUNI         PIC 9.       
+             03 FEC-ACT-BDUUNI         PIC 9(8).    
+             03 BLOQUES-BDUUNI         PIC 9.
+AMPNOM       03 NOMBRE-BDUUNI          PIC X(65).
+BDU001       03 TIP-CON-BDUUNI         PIC 9.
+BDU002       03 TIP-REG-BDUUNI         PIC X.                           RMB0002 
+AMPNOM       03 FILLER2-BDUUNI         PIC X(03).                       RMB0002 

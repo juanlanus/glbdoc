@@ -1,0 +1,14 @@
+      *ICGAUD.FD.v.01.0001
+      ******************************************************************
+      * ICGAUD.FD : DISE#O DEL REGISTRO DE LAS TRANSACCIONES DE AUDITO-*
+      *   RIA DE LOS SCORES A LA MEDIDA, PARA CONTROL DE LA EJECUCION. *
+      ******************************************************************
+      *
+       FD  AUDITORIA.
+       01  REG-AUDITORIA.
+         03  AUDI-LLAVE.
+           05  AUDI-PROGRAMA           PIC  X(10).
+           05  AUDI-FECHA-HORA         PIC  X(16).
+           05  AUDI-FLAG               PIC  X(01).
+         03  AUDI-DATA                 PIC  X(80).
+      *

@@ -1,0 +1,2 @@
+REMARK*CARACTPER-017.WS.v.0001.
+        01 PERSONALIZACION-17                     PIC X(1000).

@@ -1,0 +1,17 @@
+******* BDLMAA-FS.0001
+******* BDLMAA.v.03.001
+BDLMAA************************************************************
+******* MAESTRO ENTREGADO POR UN SUSCRIPTOR DE DIRECCIONES 
+BDLMAA************************************************************
+BDLMAA$SET CONSTANT SW-STATUS-BDLMAA"NO"
+BDLMAA     SELECT BDLMAA  ASSIGN TO DISK TITLE-BDLMAA
+BDLMAA            ORGANIZATION IS LINE SEQUENTIAL
+BDLMAA            ACCESS MODE IS SEQUENTIAL
+BDLMAA$IF SW-STATUS-BDLMAA = "NO"
+BDLMAA$DISPLAY ".............COMPILANDO BDLMAA SIN STATUS.........."
+BDLMAA$ELSE
+BDLMAA$DISPLAY ".............COMPILANDO BDLMAA CON STATUS.........."
+BDLMAA            FILE STATUS IS COD-RETORNO-BDLMAA
+BDLMAA$END
+BDLMAA            LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+BDLMAA************************************************************

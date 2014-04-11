@@ -1,0 +1,283 @@
+REMARK*BDIIVIDE.PROC.v.03.0006
+REMARK******************************************************************
+REMARK*RUTINA DE VALIDACION DE IDENTIFICACIONES
+REMARK******************************************************************
+      * F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+      * JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+      *             * NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+      *             * INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+      * FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+REMARK******************************************************************
+      * F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON 
+      * JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO       
+      * FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+REMARK******************************************************************
+      * F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL  
+      * AGO.11/2004 * DIGITO DE CHEQUEO. 
+      * FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO 
+      *             * CORRESPONDE AL RANGO.
+REMARK******************************************************************
+      * F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+      * OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+      * FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+      *             * ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+REMARK******************************************************************
+      * F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN     
+      * OCT.19/2005 * RUTINA VALIDAR-TIPO-ID PARA NITS QUE SON NUIPS    
+      * FAC006C     * 
+REMARK******************************************************************
+       80100-VALIDAR-IDENTIFICACION.
+REMARK*===================================*
+REMARK*80100-VALIDAR-IDENTIFICACION.
+REMARK* Valida el numero de identificacion contra las bases de datos
+REMARK* de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+REMARK* y verifica la coincidencia del nombre reportado
+REMARK*===================================*
+          INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM 
+                     NOMBRES-AUX-W-BDIIVIDE
+          INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+NUIP01    IF SW-VERIFNOM-BDIIVIDE NOT NUMERIC                           FAC0002 
+NUIP01       MOVE ZEROS TO SW-VERIFNOM-BDIIVIDE                         FAC0002 
+NUIP01    END-IF                                                        FAC0002 
+NUIP01    IF SW-ASGTIPID-BDIIVIDE NOT NUMERIC                           FAC0002 
+NUIP01       MOVE ZEROS TO SW-ASGTIPID-BDIIVIDE                         FAC0002 
+NUIP01    END-IF                                                        FAC0002 
+NUIP01    IF SW-VALTIPID-BDIIVIDE NOT NUMERIC                           FAC0002 
+NUIP01       MOVE ZEROS TO SW-VALTIPID-BDIIVIDE                         FAC0002 
+NUIP01    END-IF                                                        FAC0002 
+NUIP02    IF SW-DIGCHEQUEO-BDIIVIDE NOT NUMERIC                         FAC0003 
+NUIP02       MOVE ZEROS TO SW-DIGCHEQUEO-BDIIVIDE                       FAC0003 
+NUIP02    END-IF                                                        FAC0003 
+          IF NUM-IDE-BDIIVIDE IS NUMERIC AND NUM-IDE-BDIIVIDE <> ZEROS
+NUIP01      IF SW-ASGTIPID-BDIIVIDE = 1                                 FAC0002 
+NUIP01         PERFORM 80300-ASIGNAR-TIPO-ID                            FAC0002 
+NUIP01      END-IF                                                      FAC0002 
+NUIP01      IF SW-VALTIPID-BDIIVIDE = 1                                 FAC0002 
+NUIP01         PERFORM 80400-VALIDAR-TIPO-ID                            FAC0002 
+NUIP01      END-IF                                                      FAC0002 
+NUIP03      IF SW-DIGCHEQUEO-BDIIVIDE = 1                               FAC0004 
+NUIP03         PERFORM 80500-ELIMINAR-DIGITO-CHEQUEO                    FAC0004 
+NUIP03      END-IF                                                      FAC0004 
+NUIP01      IF SW-VALTIPID-BDIIVIDE = 0 OR                              FAC0004 
+NUIP01         (SW-VALTIPID-BDIIVIDE = 1 AND SW-TID-BDIIVIDE = 0)       FAC0002 
+             PERFORM 80200-VALIDAR-ID
+             INITIALIZE NOM-VAL-BDIIVIDE
+             MOVE NOM-LEIDO-BDIIVIDE TO NOM-VAL-BDIIVIDE
+             IF SW-VERIFNOM-BDIIVIDE = 1 
+                MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOM
+                MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOM
+                MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOM
+                IF SW-ID-BDIIVIDE = 0
+                   IF NUM-BLOQUES-BDIIVIDE NUMERIC AND 
+                      NUM-BLOQUES-BDIIVIDE <> ZEROS
+                      MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
+                   ELSE	IF TIP-ID-INPUT-VALNOM = 1
+                           MOVE 2 TO BLOQUES-INPUT-VALNOM
+                        ELSE MOVE 1 TO BLOQUES-INPUT-VALNOM
+                        END-IF
+                   END-IF
+                   PERFORM 10000-MATCH-NOMBRES-VALNOM
+                   IF MATCH-OK-OUT-VALNOM = 0
+                      MOVE 1 TO SW-NOMBRES-BDIIVIDE
+                   END-IF
+                END-IF
+             END-IF
+NUIP01      ELSE IF SW-TID-BDIIVIDE = 1                                 FAC0002 
+NUIP01              MOVE 1 TO SW-ID-BDIIVIDE                            FAC0002 
+NUIP01           END-IF                                                 FAC0002 
+NUIP01      END-IF                                                      FAC0002 
+          ELSE MOVE 1 TO SW-ID-BDIIVIDE
+          END-IF.
+
+       80200-VALIDAR-ID.
+REMARK*===================================*
+REMARK*80200-VALIDAR-ID.
+REMARK*Validacion del numero de identificacion
+REMARK*con las BASES DE DATOS DE LA REGISTRADURIA, DAS, DIAN:
+REMARK*BDIAREGI, BDIADAS, BDIADIAN respectivamente
+REMARK*Dependiendo del tipo de identificacion
+REMARK*===================================*
+           EVALUATE TIP-IDE-BDIIVIDE        
+             WHEN 1                                                     
+               PERFORM 85010-UBICA-CEDULA
+             WHEN 2                                                     
+               PERFORM 85020-UBICA-NIT                                  
+             WHEN 3                                                     
+               PERFORM 85020-UBICA-NIT                                  
+             WHEN 4                                                     
+               PERFORM 85030-UBICA-EXT                                  
+             WHEN OTHER                                                 
+               MOVE 1 TO SW-ID-BDIIVIDE
+           END-EVALUATE.                                                
+
+NUIP01 80300-ASIGNAR-TIPO-ID.                                           FAC0002 
+REMARK*================================================================
+NUIP01*80300-ASIGNAR-TIPO-ID.                                           FAC0002 
+NUIP01*ASIGNACION DEL TIPO DE IDENTIFICACION. PARAMETRO DE ENTRADA      FAC0002 
+NUPI01*SW-ASGTIPID-BDIVIIDE = 1; RETORNA TIPID-VAL-BDIIVIDE
+REMARK*================================================================
+NUIP01    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE TIP-IDE-BDIIVIDE        FAC0002 
+NUIP01    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"             FAC0002 
+NUIP01      IF (NUM-IDE-BDIIVIDE-R >= 1 AND                             FAC0002 
+NUIP01         NUM-IDE-BDIIVIDE-R  <= 99999999) OR                      FAC0002 
+NUIP01         (NUM-IDE-BDIIVIDE-R >= 1000000000 AND                    FAC0002 
+NUIP02         NUM-IDE-BDIIVIDE-R  <  8000000000)                       FAC0003 
+NUIP01         MOVE 1 TO TIP-IDE-BDIIVIDE                               FAC0002 
+NUIP01      ELSE                                                        FAC0002 
+NUIP01        IF (NUM-IDE-BDIIVIDE-R >= 800000000 AND                   FAC0002 
+RANGO5           NUM-IDE-BDIIVIDE-R  <= 999999999) OR                   FAC0005 
+NUIP02           (NUM-IDE-BDIIVIDE-R >= 8000000000 AND                  FAC0003 
+RANGO5           NUM-IDE-BDIIVIDE-R  <= 9999999999)                     FAC0005 
+NUIP01           MOVE 2 TO TIP-IDE-BDIIVIDE                             FAC0002 
+NUIP03*          IF NUM-IDE-BDIIVIDE-R >= 8000000000                    FAC0004 
+NUIP03*             MOVE NUM-IDE-BDIIVIDE-R TO NUM-ID-W11-BDIIVIDE      FAC0004 
+NUIP03*             MOVE NUM-ID-W10-BDIIVIDE TO NUM-IDE-BDIIVIDE-R      FAC0004 
+NUIP03*          END-IF                                                 FAC0004 
+NUIP01        ELSE                                                      FAC0002 
+NUIP01          IF (NUM-IDE-BDIIVIDE-R >= 600000000 AND                 FAC0002 
+RANGO5             NUM-IDE-BDIIVIDE-R  <  800000000) OR                 FAC0005 
+NUIP01             (NUM-IDE-BDIIVIDE-R >= 6000000000 AND                FAC0002 
+RANGO5             NUM-IDE-BDIIVIDE-R  <  8000000000)                   FAC0005 
+NUIP01             MOVE 3 TO TIP-IDE-BDIIVIDE                           FAC0002 
+NUIP01          ELSE MOVE 4 TO TIP-IDE-BDIIVIDE                         FAC0002 
+NUIP01          END-IF.                                                 FAC0002 
+
+NUIP01 80400-VALIDAR-TIPO-ID.                                           FAC0002 
+REMARK*================================================================
+NUIP01*80400-VALIDAR-TIPO-ID.                                           FAC0002 
+NUIP01*VALIDACION DEL TIPO DE IDENTIFICACION DE ACUERDO AL RANGO        FAC0002 
+NUIP01*CONTENIDO EN EL NUMERO DE IDENTIFICACION. SE PREGUNTA AL REVES.  FAC0002 
+NUIP01*PARAMETRO DE ENTRADA SW-VALTIPID-BDIVIIDE = 1;                   FAC0002 
+NUIP01*RETORNA SW-TID-BDIIVIDE = 1 SI ESTA ERRADO.                      FAC0002 
+REMARK*================================================================
+NUIP01    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE                         FAC0002 
+NUIP01    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"             FAC0002 
+NUIP01    EVALUATE TIP-IDE-BDIIVIDE                                     FAC0002 
+NUIP01      WHEN 1                                                      FAC0002 
+NUIP01       IF NUM-IDE-BDIIVIDE-R > 9999999999                         FAC0002 
+NUIP01          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002 
+NUIP01       END-IF                                                     FAC0002 
+NUIP01      WHEN 2                                                      FAC0002 
+NUIP04       IF NUM-IDE-BDIIVIDE-R >  9999999999 OR                     FAC006C 
+RANGO5          (NUM-IDE-BDIIVIDE-R <= 800000000 AND >= 600000000)      FAC0005 
+NUIP01          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002 
+NUIP01       END-IF                                                     FAC0002 
+NUIP01      WHEN 3                                                      FAC0002 
+RANGO5       IF NUM-IDE-BDIIVIDE-R > 800000000 OR < 600000000           FAC0005 
+NUIP01          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002 
+NUIP01       END-IF                                                     FAC0002 
+NUIP01    END-EVALUATE.                                                 FAC0002 
+
+NUIP03 80500-ELIMINAR-DIGITO-CHEQUEO.                                   FAC0004 
+REMARK*================================================================
+NUIP03*80500-ELIMINAR-DIGITO-CHEQUEO.                                   FAC0004 
+REMARK*Elimina el digito de chequeo y cambia el tipo de identificacion
+REMARK*de acuerdo a los rangos para tipo id = 2 y 3
+REMARK*================================================================
+NUIP03      IF (NUM-IDE-BDIIVIDE-R >= 600000000 AND                     FAC0004 
+RANGO5         NUM-IDE-BDIIVIDE-R  <  800000000) OR                     FAC0005 
+NUIP03         (NUM-IDE-BDIIVIDE-R >= 6000000000 AND                    FAC0004 
+RANGO5          NUM-IDE-BDIIVIDE-R  < 8000000000)                       FAC0005 
+NUIP03          MOVE 3 TO TIP-IDE-BDIIVIDE                              FAC0004 
+NUIP03      END-IF                                                      FAC0004
+NUIP03      IF (NUM-IDE-BDIIVIDE-R >= 800000000 AND                     FAC0004 
+RANGO5         NUM-IDE-BDIIVIDE-R  <= 999999999) OR                     FAC0005 
+NUIP03         (NUM-IDE-BDIIVIDE-R >= 8000000000 AND                    FAC0004 
+RANGO5         NUM-IDE-BDIIVIDE-R  <= 9999999999)                       FAC0005 
+NUIP03          MOVE 2 TO TIP-IDE-BDIIVIDE                              FAC0004 
+NUIP03      END-IF                                                      FAC0004
+NUIP03      IF (TIP-IDE-BDIIVIDE = 2 AND                                FAC0004
+NUIP03         (NUM-IDE-BDIIVIDE-R >= 10000000000) OR                   FAC0004
+NUIP03         (NUM-IDE-BDIIVIDE-R >= 8000000000 AND                    FAC0004 
+RANGO5          NUM-IDE-BDIIVIDE-R <= 9999999999)) OR                   FAC0005 
+NUIP03         (TIP-IDE-BDIIVIDE = 3 AND                                FAC0004
+NUIP03         (NUM-IDE-BDIIVIDE-R >= 6000000000 AND                    FAC0004 
+RANGO5          NUM-IDE-BDIIVIDE-R <  8000000000))                      FAC0005 
+NUIP03          MOVE NUM-IDE-BDIIVIDE TO NUM-ID-W11-BDIIVIDE            FAC0004
+NUIP03          MOVE NUM-ID-W10-BDIIVIDE TO NUM-IDE-BDIIVIDE-R          FAC0004 
+NUIP03      END-IF                                                      FAC0004
+NUIP03      INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0".          FAC0004
+
+       85010-UBICA-CEDULA.
+REMARK*================================================================
+REMARK*85010-UBICA-CEDULA.
+REMARK*Ubica la identificacion dada la llave en BDIIREGI
+REMARK*Arma el nombre completo en una sola variable
+REMARK*================================================================
+           MOVE NUM-IDE-BDIIVIDE TO CEDULA-BDIIREGI
+           MOVE TIP-IDE-BDIIVIDE TO TIPO-ID-BDIIREGI
+           READ BDIIREGI INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+           END-READ
+           IF SW-ID-BDIIVIDE = 0
+              MOVE APELLIDO1-BDIIREGI TO PRIMER-APELLIDO-BDIIVIDE
+              MOVE APELLIDO2-BDIIREGI TO SEGUNDO-APELLIDO-BDIIVIDE
+              MOVE DES-NOMBRE2-BDIIREGI TO SEGUNDO-NOMBRE-BDIIVIDE
+              MOVE DES-NOMBRE1-BDIIREGI TO PRIMER-NOMBRE-BDIIVIDE
+              IF ESTADO-CIVIL-BDIIREGI = 0                         
+                  STRING  
+                   SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",   
+                   "*" DELIMITED BY SIZE ,                              
+                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",  
+                   "*" DELIMITED BY SIZE ,                              
+                   SEGUNDO-NOMBRE-BDIIVIDE   DELIMITED BY SIZE, 
+                   ";" DELIMITED BY SIZE ,                    
+                   INTO NOM-LEIDO-BDIIVIDE        
+               END-IF
+               IF ESTADO-CIVIL-BDIIREGI = 1                        
+                   STRING 
+                   "DE" DELIMITED BY SIZE,                              
+                   "*"  DELIMITED BY SIZE,                              
+                   SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ", 
+                   "*"  DELIMITED BY SIZE,
+                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",  
+                   "*"  DELIMITED BY SIZE,                        
+                   SEGUNDO-NOMBRE-BDIIVIDE   DELIMITED BY SIZE,   
+                   ";"  DELIMITED BY SIZE,                    
+                   INTO NOM-LEIDO-BDIIVIDE                       
+               END-IF
+               IF ESTADO-CIVIL-BDIIREGI = 2 
+                  STRING
+                   "VDA DE" DELIMITED BY SIZE,                          
+                   "*"      DELIMITED BY SIZE,                          
+                   SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ", 
+                   "*"      DELIMITED BY SIZE,                          
+                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",  
+                   "*"      DELIMITED BY SIZE,                          
+                   SEGUNDO-NOMBRE-BDIIVIDE DELIMITED BY SIZE,
+                   ";"      DELIMITED BY SIZE,             
+               INTO NOM-LEIDO-BDIIVIDE         
+               END-IF
+               STRING PRIMER-APELLIDO-BDIIVIDE DELIMITED BY "  ",
+                  "*"             DELIMITED BY SIZE,                    
+                  NOM-LEIDO-BDIIVIDE     DELIMITED BY SIZE, "*",
+                                DELIMITED BY SIZE,
+                  INTO NOM-VAL-BDIIVIDE
+
+               INSPECT NOM-VAL-BDIIVIDE REPLACING ALL "*" BY " "
+               INSPECT NOM-VAL-BDIIVIDE REPLACING ALL ";" BY " "
+               INITIALIZE NOM-LEIDO-BDIIVIDE
+               MOVE NOM-VAL-BDIIVIDE TO NOM-LEIDO-BDIIVIDE.
+
+       85020-UBICA-NIT.                                                 
+REMARK*================================================================
+REMARK*85020-UBICA-NIT.
+REMARK*Ubica NIT en archivo de la DIAN, BDIIDIAN
+REMARK*================================================================
+           MOVE NUM-IDE-BDIIVIDE TO NITS-R-BDIIDIAN
+           READ BDIIDIAN INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+           END-READ                                                 
+           IF SW-ID-BDIIVIDE = 0
+              MOVE DESCRIPCION-BDIIDIAN TO NOM-LEIDO-BDIIVIDE  
+           END-IF.                                                  
+ 
+       85030-UBICA-EXT.                                                 
+REMARK*================================================================
+REMARK*85030-UBICA-EXT.
+REMARK*Ubica cedula de extranjeria en archivo del DAS
+REMARK*================================================================
+           MOVE NUM-IDE-BDIIVIDE TO NUM-ID-BDIIDAS
+           MOVE TIP-IDE-BDIIVIDE TO TIPO-ID-BDIIDAS
+           READ BDIIDAS INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+           END-READ                                                     
+           IF SW-ID-BDIIVIDE = 0 
+              MOVE NOMBRE-BDIIDAS TO NOM-LEIDO-BDIIVIDE. 

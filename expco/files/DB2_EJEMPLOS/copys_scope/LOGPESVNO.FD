@@ -1,0 +1,28 @@
+      *LOGPESVNO.FD.v.00001
+      ************************************************************
+      *P.VARGAS   *CQ6271  LOG TRANSACCIONES PESVNO              *
+      *SEP/2012   *                                              *
+      ************************************************************
+       FD  LOGPESVNO.                 
+       01  REG-LOGPESVNO.
+           05 LLAVE1-LOGPESVNO.
+              07 ARCHI-LOGPESVNO             PIC   X(40).
+              07 TIPPRO-LOGPESVNO            PIC   X(01).
+           05 LLAVE2-LOGPESVNO.
+              07 NUMOP-LOGPESVNO             PIC   9(12).
+           05 LLAVE3-LOGPESVNO.
+              07 FECPRO-LOGPESVNO            PIC   9(08).
+              07 HORPRO-LOGPESVNO            PIC   9(04).
+           05 DATA-LOGPESVNO.
+              07 LEIDOS-LOGPESVNO            PIC   9(12).
+              07 TIPO5-LOGPESVNO             PIC   9(12).
+              07 TIPO6-LOGPESVNO             PIC   9(12).
+              07 TIPO7-LOGPESVNO             PIC   9(12).
+              07 TIPO5PJ-LOGPESVNO           PIC   9(12).
+              07 CONPRO-LOGPESVNO            PIC   9(05).
+              07 ESTADO-LOGPESVNO            PIC   X(01).
+              07 TARIFA-LOGPESVNO            PIC   9(12).
+              07 VALORPJ-LOGPESVNO           PIC   9(12).
+              07 PROGRAM-LOGPESVNO           PIC   X(30).
+              07 FILLER                      PIC   X(100).
+

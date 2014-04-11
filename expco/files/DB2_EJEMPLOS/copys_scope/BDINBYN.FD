@@ -1,0 +1,13 @@
+REMARK* BDINBYN-FD.v.0001
+REMARK* ARCHIVO DE NOMBRES DE BYINGTON
+REMARK******************************************************************
+       FD BDINBYN.
+       01 REG-BDINBYN.
+          03 LLAVE-BDINBYN.
+             05 TEXTO-BDINBYN            PIC X(15).
+             05 IDENTIDAD-BDINBYN.
+                07 TIP-IDE-BDINBYN       PIC 9(01).
+                07 NUM-IDE-BDINBYN       PIC 9(11).
+                07 ALTERNA-BDINBYN       PIC X(10).
+          03 NOMBRE-BDINBYN              PIC X(45).
+          03 FILLER                      PIC X(18).

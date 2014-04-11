@@ -1,0 +1,41 @@
+      * DTCCOM-FD.v.0002
+      * ARCHIVO DE COMENTARIOS DEL SISTEMA DE DATACIUDADANOS. CREADO EN
+      * JUNIO DE 2003   
+      * VALORES VALIDOS:       
+      *    TIPO-RECLAMO-DTCCOM: 01: SOLICITA APLICAR LA LEY
+      *                         02: SOLICITA RETIRAR INFORMACION.       
+      *                         03: SOLICITA CORREGIR INFORMACION
+      *                         04: SOLICITA ACTUALIZAR INFORMACION
+      *                         09: RECLAMO RATIFICADO
+      *    TIPO-COMENTARIO-DTCCOM: 1: COMENTARIO AL INFORME
+      *                            2: COMENTARIO DE TUTELA
+      *                            3: RECLAMO DE HABITO DE PAGO
+      *                            4: RECLAMO DE ENDEUDAMIENTO GLOBAL
+      *                            5: RECLAMO A INFORMACION DE IDENTIFICACION
+REMARK******************************************************************
+REMARK* VHF0002     * LEY002 - SE ADICIONA CODIGO DE LEYENDA ASOCIADO  *
+REMARK* VICTOR HUGO *          AL RECLAMO                              *
+REMARK* FORERO      *                                                  *
+REMARK* MAY.13/2008 *                                                  *
+REMARK******************************************************************
+
+       FD  DTCCOM.
+       01  REG-DTCCOM.
+           03 LLAVE-DTCCOM.
+              05 LLAVE-MAESTRO-DTCCOM.
+                 07 TIP-ID-DTCCOM           PIC 9.
+                 07 IDENTIFICACION-DTCCOM   PIC 9(11).
+                 07 COD-SUSCRIPTOR-DTCCOM   PIC 9(6).
+                 07 TIPO-CUENTA-DTCCOM      PIC 9(2).
+                 07 CUENTA-DTCCOM           PIC X(18).
+              05 TIPO-COMENTARIO-DTCCOM     PIC 9.
+           03 RESTO-DTCCOM.
+              05 TIPO-RECLAMO-DTCCOM        PIC 9(02).
+              05 FECHA-COLOCACION-DTCCOM    PIC 9(08).
+              05 FECHA-CIERRE-DTCCOM        PIC 9(08).
+              05 FECHA-CADUCIDAD-DTCCOM     PIC 9(08).
+              05 COMENTARIO-DTCCOM          PIC X(255).
+LEY002        05 TIPO-LEYENDA-DTCCOM        PIC 9. *> 1 - EN TRAMITE    VHF0002
+REMARK*                                            *> 2 - DISCUSION     VHF0002
+REMARK*                                                   JUDICIAL      VHF0002
+LEY002        05 FILLER                     PIC X(99).                  VHF0002

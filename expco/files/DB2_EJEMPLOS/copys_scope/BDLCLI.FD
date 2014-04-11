@@ -1,0 +1,31 @@
+      *BDLCLI-FD.v.00003
+      *ARCHIVO DE CLIENTES DE BASE DE DATOS LOCALIZACION CON INDICADOR Y
+      *PRIVILEGIO ACTUALIZADOS.               
+      *INDICADOR : 0 = NO AUTORIZADO    1 = SI AUTORIZADO
+      *PRIVILEGIO: 1 = LOS AUTORIZADOS  2 = TODAS LAS DIRECCIONES
+      ************************************************************
+      *NDG0002    * INF-CR  : INDICADOR SI EL SUSCRIPTOR ENTREGA *
+      *N.DUARTE   *           INFORMACION CREDITICIA             *
+      *FEB/2003   *             0 - NO ENTREGA INFORMACION       *
+      *           *             1 - SI ENTREGA INFORMACION       *
+      *           * VALDB   : INDICADOR PARA VALIDAR LA BASE DE  *
+      *           *           DATOS CUANDO GENERE EL REPORTE     *
+      *           *             S - SI VALIDA CONTRA BASE DATOS  *
+      *           *             N - NO VALIDA CONTRA BASE DATOS  *
+      *           *                                              *
+      ************************************************************
+      *RMB0003    * BLOQ01  : INDICADOR PARA BLOQUEAR LA INFORMA *
+      *R.MARTINEZ *           CION DE UN NIT                     *
+      *OCT-1-2011 *           "B" = INFORMACION BLOQUEADA        *
+      ************************************************************
+       FD  BDLCLI.
+       01  COMPLETO-BDLCLI.
+           03  LLAVE-BDLCLI.
+               05  NIT-ID-BDLCLI           PIC 9(11).
+           03  INDICADOR-BDLCLI            PIC 9(01).
+           03  PRIVILEGIO-BDLCLI           PIC 9(01).
+INF-CR     03  INF-CREDITICIA-BDLCLI       PIC 9(01).                    NDG0002
+VALDB      03  VALIDAR-DB-BDLCLI           PIC X(01).                    NDG0002
+BLOQ01     03  IND-BLOQUEO-INF-BDLCLI      PIC X(01).  *> B=BLOQUEADA    RMB0003
+BLOQ01*    03  FILLER                      PIC X(98).                    RMB0003
+BLOQ01     03  FILLER                      PIC X(97).                    RMB0003

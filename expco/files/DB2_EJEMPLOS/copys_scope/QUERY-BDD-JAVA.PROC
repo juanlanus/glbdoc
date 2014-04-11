@@ -1,0 +1,129 @@
+JAVA02******************************************************************ABB0001
+JAVA02 3450-LLAMAR-CONSULTA-BDD.                                        ABB0001
+JAVA02******************************************************************ABB0001
+JAVA02*    EN ESTA RUTINA SE LLAMA AL METODO DE CONSULTA-BDD.          *ABB0001
+JAVA02*    Y SE CARGA LAS CARACTERISTICAS EN UNA TABLA DE 10000 ITEMS  *ABB0001
+JAVA02******************************************************************ABB0001
+JAVA02     INITIALIZE     BDD-RETORNO-CONSULTA                          ABB0001
+JAVA02     INITIALIZE     BDD-CARCTRSTCAS-GRP                           ABB0001
+JAVA02     MOVE WSS-CLASE-CONSULTA-BDD TO BDD-CLASE-CONSULTA            ABB0001
+JAVA02     INVOKE CL-MOTOR-JR "consultaResultadosBDD"                   ABB0001
+JAVA02            USING     BDD-CLASE-CONSULTA                          ABB0001
+JAVA02            RETURNING BDD-RETORNO-CONSULTA.                       ABB0001
+JAVA02     MOVE 2 TO I-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO J-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO K-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO L-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO M-JAVA02                                           ABB0001
+JAVA02     IF BDD-RETORNO-CONSULTA(1 : 1) NOT = "["                     ABB0001
+JAVA02        MOVE 131000 TO I-JAVA02                                   ABB0001
+JAVA02     END-IF                                                       ABB0001
+JAVA02     PERFORM UNTIL I-JAVA02 > 130000                              ABB0001
+JAVA02        IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "="               ABB0001
+JAVA02           MOVE 2 TO M-JAVA02                                     ABB0001
+JAVA02           MOVE 1 TO L-JAVA02                                     ABB0001
+JAVA02        ELSE                                                      ABB0001
+JAVA02           IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "["            ABB0001
+JAVA02              IF J-JAVA02 < 10000                                 ABB0001
+JAVA02                 MOVE 1 TO M-JAVA02                               ABB0001
+JAVA02                 MOVE 1 TO K-JAVA02                               ABB0001
+JAVA02                 ADD  1 TO J-JAVA02                               ABB0001
+JAVA02              ELSE                                                ABB0001
+JAVA02                 MOVE 130000 TO I-JAVA02                          ABB0001
+JAVA02              END-IF                                              ABB0001
+JAVA02           ELSE                                                   ABB0001
+JAVA02              IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "]"         ABB0001
+JAVA02                 MOVE 3 TO M-JAVA02                               ABB0001
+JAVA02              ELSE                                                ABB0001
+JAVA02                 IF M-JAVA02 = 1                                  ABB0001
+JAVA02                    IF K-JAVA02 < 51                              ABB0001
+JAVA02                       MOVE BDD-RETORNO-CONSULTA(I-JAVA02 : 1)    ABB0001
+JAVA02                         TO BDD-CAR-NOM(J-JAVA02)(K-JAVA02:1)     ABB0001
+JAVA02                       ADD  1 TO K-JAVA02                         ABB0001
+JAVA02                    END-IF                                        ABB0001
+JAVA02                 ELSE                                             ABB0001
+JAVA02                    IF M-JAVA02 = 2                               ABB0001
+JAVA02                       IF L-JAVA02 < 51                           ABB0001
+JAVA02                          MOVE BDD-RETORNO-CONSULTA(I-JAVA02 : 1) ABB0001
+JAVA02                            TO BDD-CAR-VAL(J-JAVA02)(L-JAVA02:1)  ABB0001
+JAVA02                          ADD  1 TO L-JAVA02                      ABB0001
+JAVA02                       END-IF                                     ABB0001
+JAVA02                    ELSE                                          ABB0001
+JAVA02                       MOVE 130000 TO I-JAVA02                    ABB0001
+JAVA02                    END-IF                                        ABB0001
+JAVA02                 END-IF                                           ABB0001
+JAVA02              END-IF                                              ABB0001
+JAVA02           END-IF                                                 ABB0001
+JAVA02        END-IF                                                    ABB0001
+JAVA02        ADD  1 TO I-JAVA02                                        ABB0001
+JAVA02     END-PERFORM.                                                 ABB0001
+JAVA02******************************************************************ABB0001
+
+
+JAVA02******************************************************************ABB0001
+JAVA02 3450-LLAMAR-CONSULTA-BDD-ULTIMO.                                 ABB0001
+JAVA02******************************************************************ABB0001
+JAVA02*    EN ESTA RUTINA SE LLAMA AL METODO DE CONSULTA-BDD-ULTIMA    *ABB0001
+JAVA02*    Y SE CARGA LA ULTIMA TRANSACCION REALIZADA A LA CEDULA Y    *ABB0001
+JAVA02*    CON LA ESTRATEGIA Y LA ENTIDAD ENVIADA.                     *ABB0001
+JAVA02******************************************************************ABB0001
+JAVA02     INITIALIZE     BDD-RETORNO-CONSULTA                          ABB0001
+JAVA02     INITIALIZE     BDD-CARCTRSTCAS-GRP                           ABB0001
+JAVA02     STRING BDD-ESTRATEGIA-ULT DELIMITED BY "  ",                 ABB0001
+JAVA02            ","                DELIMITED BY SIZE,                 ABB0001
+JAVA02            BDD-IDECLIE-ULT    DELIMITED BY SIZE,                 ABB0001
+JAVA02            ","                DELIMITED BY SIZE,                 ABB0001
+JAVA02            BDD-NROIDEUSU-ULT  DELIMITED BY SIZE                  ABB0001
+JAVA02     INTO BDD-CLASE-CONSULTA                                      ABB0001
+JAVA02     INVOKE CL-MOTOR-JR "consultaUltResultXEstratCliUsuBDD"       ABB0001
+JAVA02            USING     BDD-CLASE-CONSULTA                          ABB0001
+JAVA02            RETURNING BDD-RETORNO-CONSULTA.                       ABB0001
+JAVA02     MOVE 2 TO I-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO J-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO K-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO L-JAVA02                                           ABB0001
+JAVA02     MOVE 1 TO M-JAVA02                                           ABB0001
+JAVA02     IF BDD-RETORNO-CONSULTA(1 : 1) NOT = "["                     ABB0001
+JAVA02        MOVE 131000 TO I-JAVA02                                   ABB0001
+JAVA02     END-IF                                                       ABB0001
+JAVA02     PERFORM UNTIL I-JAVA02 > 130000                              ABB0001
+JAVA02        IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "="               ABB0001
+JAVA02           MOVE 2 TO M-JAVA02                                     ABB0001
+JAVA02           MOVE 1 TO L-JAVA02                                     ABB0001
+JAVA02        ELSE                                                      ABB0001
+JAVA02           IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "["            ABB0001
+JAVA02              IF J-JAVA02 < 10000                                 ABB0001
+JAVA02                 MOVE 1 TO M-JAVA02                               ABB0001
+JAVA02                 MOVE 1 TO K-JAVA02                               ABB0001
+JAVA02                 ADD  1 TO J-JAVA02                               ABB0001
+JAVA02              ELSE                                                ABB0001
+JAVA02                 MOVE 130000 TO I-JAVA02                          ABB0001
+JAVA02              END-IF                                              ABB0001
+JAVA02           ELSE                                                   ABB0001
+JAVA02              IF BDD-RETORNO-CONSULTA(I-JAVA02 : 1) = "]"         ABB0001
+JAVA02                 MOVE 3 TO M-JAVA02                               ABB0001
+JAVA02              ELSE                                                ABB0001
+JAVA02                 IF M-JAVA02 = 1                                  ABB0001
+JAVA02                    IF K-JAVA02 < 51                              ABB0001
+JAVA02                       MOVE BDD-RETORNO-CONSULTA(I-JAVA02 : 1)    ABB0001
+JAVA02                         TO BDD-CAR-NOM(J-JAVA02)(K-JAVA02:1)     ABB0001
+JAVA02                       ADD  1 TO K-JAVA02                         ABB0001
+JAVA02                    END-IF                                        ABB0001
+JAVA02                 ELSE                                             ABB0001
+JAVA02                    IF M-JAVA02 = 2                               ABB0001
+JAVA02                       IF L-JAVA02 < 51                           ABB0001
+JAVA02                          MOVE BDD-RETORNO-CONSULTA(I-JAVA02 : 1) ABB0001
+JAVA02                            TO BDD-CAR-VAL(J-JAVA02)(L-JAVA02:1)  ABB0001
+JAVA02                          ADD  1 TO L-JAVA02                      ABB0001
+JAVA02                       END-IF                                     ABB0001
+JAVA02                    ELSE                                          ABB0001
+JAVA02                       MOVE 130000 TO I-JAVA02                    ABB0001
+JAVA02                    END-IF                                        ABB0001
+JAVA02                 END-IF                                           ABB0001
+JAVA02              END-IF                                              ABB0001
+JAVA02           END-IF                                                 ABB0001
+JAVA02        END-IF                                                    ABB0001
+JAVA02        ADD  1 TO I-JAVA02                                        ABB0001
+JAVA02     END-PERFORM.                                                 ABB0001
+JAVA02******************************************************************ABB0001
+

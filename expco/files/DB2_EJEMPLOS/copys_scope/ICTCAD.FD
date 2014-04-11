@@ -1,0 +1,22 @@
+      * EST041.V.02.003
+REMARK* TABLA QUE ALMACENA LOS ESTADOS DE CARTERA PARA LA APLICACION DE 
+REMARK* CADUCIDADES Y AMNISTIA. PERMITE LA RECONSTRUCION HISTORICA
+REMARK******************************************************************
+REMARK* GJC0003   * NEWICG:PpARA NUEVO REPORTE DE 2020 SE CREAN NUEVOS CAMPOS
+REMARK* FEB./2003 * 
+REMARK*********************************************************************
+022400*----------------------------------------------------------------*
+022500 FD  CADUCIDADES. 
+022600*    MAESTRO DE CADUCIDADES DE CARTERA         
+022700 01  REG-CADUCIDADES.
+022800     03  ESTADOS-CADU      OCCURS 5 TIMES PIC X(2).
+022810     03  FILLER-CADU                      PIC X.   
+022900     03  MORA-CADU                        PIC 9.
+           03  MORA-MAX-CADU                    PIC 9.
+           02  FILLER2-CADU                     PIC X(17).
+           02  NOMBRE-CADU                      PIC X(14).
+NEWICG     02  FILLER                           PIC X(1).               GJC0003
+NEWICG     02  VIGB07-CADU                      PIC X(1).               GJC0003
+NEWICG     02  ORDB07-CADU                      PIC 9(2).               GJC0003
+NEWICG     02  FILLER3-CADU                     PIC X(30).              GJC0003
+NEWICG     02  FILLER4-CADU                     PIC X(100).             GJC0003

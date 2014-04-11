@@ -1,0 +1,25 @@
+REMARK*SCOUSA-PROC.v.0004
+REMARK************************************************************************
+REMARK* COPY QUE AGRUPA TODOS LOS MODELOS DESARROLLADOS POR USA CON 
+REMARK* BASE AL NUEVO SET DE CARACTERISTICAS CARACT.PROC Y WS
+REMARK************************************************************************
+REMARK* RMB0002     * SCOUHD - SE ADICIONA EL COPY NECESARIO PARA         
+REMARK* R MARTINEZ  * EL MODELO DE PREDICTA HD
+REMARK* AGOST/2009  *
+REMARK*************************************************************************
+REMARK* RMB0003     * ACIEAA - SE ADICIONA EL COPY NECESARIO PARA         
+REMARK* R MARTINEZ  * EL MODELO DE ACIERTA A    
+REMARK* 01-JUN-2012 *
+REMARK*************************************************************************
+REMARK* RMB0004     * MICROC - SE ADICIONA EL COPY NECESARIO PARA         
+REMARK* R MARTINEZ  * EL MODELO DE MICROCREDITO 
+REMARK* 19-JUN-2013 *
+REMARK*************************************************************************
+      *PREDICTOR DE INGRESOS "QUANTO"
+       COPY SCOUSAPI.PROC.
+REMARK*SCORE PREDICTIVO "PREDICTA HD"                                   RMB0002 
+SCOUHD COPY SCOUSAHD.PROC.                                              RMB0002 
+ACIEAA*SCORE PREDICTIVO "ACIERTA  A"                                    RMB0003 
+ACIEAA COPY SCOUSAAA.PROC.                                              RMB0003 
+MICROC*SCORE PREDICTIVO "MICROCREDITO"                                  RMB0004 
+MICROC COPY SCODAMIC.PROC.                                              RMB0004 

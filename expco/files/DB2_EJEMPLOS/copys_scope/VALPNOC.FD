@@ -1,0 +1,13 @@
+******* VALPNOC-fd.v03.0002
+   **** VALPNOC.v03.002
+REMARK*Archivo novedades validas y adjetivos para cartera 
+036300*----------------------------------------------------------------*
+022500 FD  VALPNOC.
+022700 01  REG-VALPNOC.
+           03 NUM-NOVEDAD-VALPNOC            PIC 99.
+022810     03 DES-NOVEDAD-VALPNOC            PIC X(30).
+           03 IND-MORAMAX-VALPNOC            PIC 9(1).
+           03 IND-TIPO-VALPNOC               PIC X(1).
+           03 IND-ADJETIVO-VALPNOC           PIC X(1).
+           03 IND-VALR-VALPNOC               PIC 9(1).                  FAC0002
+           03 FILLER-VALPNOC                 PIC X(30).

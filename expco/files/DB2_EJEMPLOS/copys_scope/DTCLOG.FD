@@ -1,0 +1,27 @@
+      * DTCLOG-FD.v.0001
+      * LOG DE MODIFICACIONES EN LINEA Y DATA CIUDADANOS. CREADO EN
+      * OCTUBRE DE 2002
+REMARK******************************************************************
+       FD  DTCLOG.
+       01  REG-DTCLOG.
+           03 LLAVE-DTCLOG                  PIC 9(08).
+           03 RESTO-SEC.
+              05 PROGRAMA-DTCLOG            PIC X(10).
+              05 FECHA-DTCLOG               PIC 9(08).
+              05 HORA-DTCLOG                PIC 9(06).
+              05 ESTADO-TRANS-DTCLOG        PIC X(01).
+              05 IND-ORIGEN-DTCLOG          PIC X(02).
+              05 NIT-ENTIDAD-DTCLOG         PIC 9(11).
+              05 USUARIO-CED-DTCLOG         PIC 9(11).
+              05 CLAVE-UNIX-DTCLOG          PIC X(05).
+              05 NRO-APROBACION-DTCLOG      PIC 9(07).
+              05 CON-MODIFICACION-DTCLOG    PIC 9(10).
+              05 COD-COMENTARIO-DTCLOG      PIC X(03).
+              05 NUM-RADICACION-DTCLOG      PIC X(07).
+              05 FECHA-RADICACION-DTCLOG    PIC 9(08).
+              05 IND-OBSERV-DTCLOG          PIC 9(01).
+              05 TIPO-ARCHIVO-DTCLOG        PIC 9(02).
+              05 LLAVE-REGISTRO-DTCLOG      PIC X(50).
+              05 REG-ANTERIOR-DTCLOG        PIC X(400).
+              05 REG-NUEVO-DTCLOG           PIC X(400).
+              05 FILLER                     PIC X(100).

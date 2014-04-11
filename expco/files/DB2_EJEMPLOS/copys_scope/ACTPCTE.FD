@@ -1,0 +1,18 @@
+******* ACTPCTE-fd.v.0002
+   **** ACTPCTE.v.03.002
+REMARK*Parametros matriz de estados vs. novedades para cuenta corriente
+REMARK*la ocurrencia 12 contiene el valor del estado cuando hay embargo
+REMARK*Proceso de validacion y actualizacion
+036300*----------------------------------------------------------------*
+REMARK* VHF0002     * INDEST - SE ADICIONA UN INDICADOR PARA DETERMINAR*
+REMARK* VICTOR HUGO *          SI EL ESTADO CORRSPONDE A UNA CUENTA    *
+REMARK* FORERO      *          ABIERTA O CERRADA                       *
+REMARK* ABR.28/2004 *                                                  *
+REMARK******************************************************************
+       FD  ACTPCTE.
+       01  REG-ACTPCTE.
+           03 NUM-NOVEDAD-ACTPCTE OCCURS 12    PIC X(2).
+           03 CALIFIC-ACTPCTE                  PIC X.
+INDEST     03 IND-ESTADO-ACTPCTE               PIC 9(01).                VHF0002
+INDEST     03 FILLER                           PIC X(40).
+           03 DES-ESTADO-ACTPCTE               PIC X(14).

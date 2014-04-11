@@ -1,0 +1,13 @@
+REMARK* BDIEMPER-FD.v.0001
+      ********************************************
+      *  MAESTRO INICIAL DE PERSONAS SUPERBANCARIAS
+      ********************************************
+
+       FD BDIEMPER.
+       01 BDIEMPER-REGISTRO.
+          03 BDIEMPER-LLAVE.
+             05 BDIEMPER-TIP-ID           PIC 9(1).
+             05 BDIEMPER-NUM-ID           PIC 9(11).
+          03 BDIEMPER-DESCRIP             PIC X(45).
+          03 BDIEMPER-CIIU                PIC 9(4).
+

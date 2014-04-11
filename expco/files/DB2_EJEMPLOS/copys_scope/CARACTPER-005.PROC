@@ -1,0 +1,69 @@
+REMARK*CARACTPER-005.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 002
+REMARK*    PARA EL BANCO BBVA
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-005.
+            ADD 1 TO I-VAR-PER                                        
+            MOVE "ANTIGUEDAD-BBVA" TO NOMBRE-VAR-PER(I-VAR-PER)       
+            MOVE FUNCTION LENGTH(SW-SCR-WEB-ANTIG-BBVA ) TO L-AUX     
+            MOVE SW-SCR-WEB-ANTIG-BBVA(1:L-AUX)      TO               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+                                                                      
+            ADD 1 TO I-VAR-PER                                        
+            MOVE "DOMICILIA-BBVA" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(SW-SCR-WEB-DOMICILIA-BBVA ) TO L-AUX 
+            MOVE SW-SCR-WEB-DOMICILIA-BBVA(1:L-AUX)      TO           
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+                                                                      
+            ADD 1 TO I-VAR-PER                                        
+            MOVE "RECIPRO-BBVA-S" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(SW-RECIPROCIDAD-SIG-BBVA ) TO L-AUX  
+            MOVE SW-RECIPROCIDAD-SIG-BBVA(1:L-AUX)      TO            
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+                                                                      
+            ADD 1 TO I-VAR-PER                                        
+            MOVE "RECIPRO-BBVA-E" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(SW-RECIPROCIDAD-ENT-BBVA ) TO L-AUX  
+            MOVE SW-RECIPROCIDAD-ENT-BBVA(1:L-AUX)      TO            
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+                                                                      
+            ADD 1 TO I-VAR-PER                                        
+            MOVE "RECIPRO-BBVA-D" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(SW-RECIPROCIDAD-DEC-BBVA ) TO L-AUX  
+            MOVE SW-RECIPROCIDAD-DEC-BBVA(1:L-AUX)      TO            
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                   
+            .
+       0000-INICIALIZAR-CARAC-EXT-05.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-05.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 05  *
+REMARK*----------------------------------------------------------------*
+           MOVE ZEROS                   TO SW-NODESEADOS-BBVA           
+           MOVE ZEROS                   TO SW-SCR-WEB-ANTIG-BBVA        
+           MOVE "1"                     TO SW-RECIPROCIDAD-SIG-BBVA     
+           MOVE ZEROS                   TO SW-RECIPROCIDAD-ENT-BBVA     
+           MOVE ZEROS                   TO SW-RECIPROCIDAD-DEC-BBVA     
+           MOVE "N"                     TO SW-SCR-WEB-DOMICILIA-BBVA    
+           .                                                            
+       2649-PROCESE-CARACT-02XX-EXT-05.                                 
+REMARK*----------------------------------------------------------------*
+REMARK*2649-PROCESE-CARACT-02XX-EXT-05.                                *
+REMARK* CONSULTA DE CARACTERISTICAS EN EL ARCHIVO DE NO DESEADOS.      *
+REMARK*----------------------------------------------------------------*
+           PERFORM 5200-LEA-INDEX-CLIENTBBVA                            
+           IF SW-NODESEADOS-BBVA = 1                                    
+              MOVE NODESE-ANTIG-BBVA        TO SW-SCR-WEB-ANTIG-BBVA    
+              MOVE NODESE-DOMICILIA-BBVA    TO SW-SCR-WEB-DOMICILIA-BBVA
+              IF NODESE-SIGNO-BBVA = "-"                                
+                 MOVE "-1"                  TO SW-RECIPROCIDAD-SIG-BBVA 
+              ELSE                                                      
+                 MOVE "1"                   TO SW-RECIPROCIDAD-SIG-BBVA 
+              END-IF                                                    
+              STRING                                                    
+                   RECIPROCIDAD-ENT-BBVA              DELIMITED BY SIZE 
+                          INTO SW-RECIPROCIDAD-ENT-BBVA                 
+              END-STRING                                                
+              MOVE RECIPROCIDAD-DEC-BBVA    TO SW-RECIPROCIDAD-DEC-BBVA 
+           END-IF                                                       
+           .                                                            

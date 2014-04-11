@@ -1,0 +1,382 @@
+REMARK*CARACTPER-036.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 036
+REMARK*    CREDIFLORES        
+REMARK******************************************************************
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-036.
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM999TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO036) TO L-AUX
+               MOVE 02NUM999TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM998TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM998TO036) TO L-AUX
+               MOVE 02NUM998TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO036) TO L-AUX
+               MOVE 02MOR999TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO036) TO L-AUX
+               MOVE 02MOR998TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997TO036) TO L-AUX
+               MOVE 02MOR997TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996TO036) TO L-AUX
+               MOVE 02MOR996TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR995TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR995TO036) TO L-AUX
+               MOVE 02MOR995TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO036) TO L-AUX
+               MOVE 01END999RO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END999TO036" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END999TO036) TO L-AUX
+               MOVE 02END999TO036(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-36.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-36.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 36    *
+REMARK*     CREDIFLORES.                                               *
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-36-NIVEL-02-NUM
+             MOVE ALL "  -1" TO PER-36-NIVEL-02-MOR
+             MOVE ALL "         -1" TO PER-36-NIVEL-02-END
+             PERFORM  9999-CARAC-GENERALES.
+
+       2249-PROCESE-CARCT-00NUM-EXT-36.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-36.                                *
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00NUM Y 01NUM     *
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+            MOVE ALL "  -1" TO PER-36-NIVEL-00-NUM
+REMARK*** 00NUM999TO036 *** # OBLIGACIONES VIGENTES CON CREDIFLORES
+            IF NIT-SUSCRIP-S-ABD02 = 860056869
+               MOVE ZEROS TO 00NUM999TO036
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        MOVE 1 TO 00NUM999TO036
+                     ELSE
+                        MOVE "  -4" TO 00NUM999TO036(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM999TO036(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM999TO036(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM998TO036 *** # OBLIG VIGENTES CON CREDIFLORES COODEUD
+            IF NIT-SUSCRIP-S-ABD02 = 860056869
+               MOVE ZEROS TO 00NUM998TO036
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 <> 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        MOVE 1 TO 00NUM998TO036
+                     ELSE
+                        MOVE "  -4" TO 00NUM998TO036(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM998TO036(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM998TO036(1:4)
+               END-IF
+            END-IF
+REMARK*** 02NUM999TO036 *** # OBLIGACIONES VIGENTES CON CREDIFLORES
+           IF FUNCTION NUMVAL(00NUM999TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM999TO036(1:4)) < 0
+                 MOVE ZEROS TO 02NUM999TO036
+              END-IF
+              COMPUTE 02NUM999TO036 = 02NUM999TO036 + 00NUM999TO036
+           ELSE
+              IF FUNCTION NUMVAL(02NUM999TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999TO036(1:4)) <
+                  FUNCTION NUMVAL(02NUM999TO036(1:4))
+                  MOVE 00NUM999TO036(1:4) TO 02NUM999TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02NUM998TO036 *** # OBLIG VIGENTES CON CREDIFLORES COODEUD
+           IF FUNCTION NUMVAL(00NUM998TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM998TO036(1:4)) < 0
+                 MOVE ZEROS TO 02NUM998TO036
+              END-IF
+              COMPUTE 02NUM998TO036 = 02NUM998TO036 + 00NUM998TO036
+           ELSE
+              IF FUNCTION NUMVAL(02NUM998TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM998TO036(1:4)) <
+                  FUNCTION NUMVAL(02NUM998TO036(1:4))
+                  MOVE 00NUM998TO036(1:4) TO 02NUM998TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+         END-IF.
+
+       2249-PROCESE-CARCT-00MOR-EXT-36.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-36.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 00MOR,02MOR 
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-36-NIVEL-00-MOR
+REMARK*** 00MOR999TO036 *** # OBLIG VIG MOR 030 ACTUAL CON CREDIFLORES
+REMARK*** 00MOR998TO036 *** # OBLIG VIG MOR 060 ACTUAL CON CREDIFLORES
+REMARK*** 00MOR997TO036 *** # OBLIG VIG MOR 090 ACTUAL CON CREDIFLORES 
+REMARK*** 00MOR996TO036 *** # OBLIG VIG MOR 120 ACTUAL CON CREDIFLORES 
+          MOVE 0 TO P-CARACT
+          IF NIT-SUSCRIP-S-ABD02 = 860056869
+             MOVE ZEROS TO 00MOR999TO036 00MOR998TO036
+                           00MOR997TO036 00MOR996TO036
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF MESES-DESAC-CARACT < 0
+                         MOVE 0 TO P-CARACT
+                      ELSE
+                         MOVE MESES-DESAC-CARACT TO P-CARACT
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 1
+                          MOVE 1 TO 00MOR999TO036
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 2
+                          MOVE 1 TO 00MOR998TO036
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 3
+                          MOVE 1 TO 00MOR997TO036
+                      END-IF
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 4
+                          MOVE 1 TO 00MOR996TO036
+                      END-IF
+                   ELSE
+                      MOVE "  -4" TO 00MOR999TO036(1:4)
+                      MOVE "  -4" TO 00MOR998TO036(1:4)
+                      MOVE "  -4" TO 00MOR997TO036(1:4)
+                      MOVE "  -4" TO 00MOR996TO036(1:4)
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00MOR999TO036(1:4)
+                   MOVE "  -3" TO 00MOR998TO036(1:4)
+                   MOVE "  -3" TO 00MOR997TO036(1:4)
+                   MOVE "  -3" TO 00MOR996TO036(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR999TO036(1:4)
+                MOVE "  -2" TO 00MOR998TO036(1:4)
+                MOVE "  -2" TO 00MOR997TO036(1:4)
+                MOVE "  -2" TO 00MOR996TO036(1:4)
+             END-IF
+          END-IF
+REMARK*** 00MOR995TO036 *** # OBLIG VIG CASTIG DUD REC CON CREDIFLORES
+          IF NIT-SUSCRIP-S-ABD02 = 860056869
+             MOVE ZEROS TO 00MOR995TO036
+             IF GARANTE-ABD07 = 0
+                IF NOV-REPORT-ABD07 = 45 OR 47
+                   ADD 1 TO 00MOR995TO036
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR995TO036(1:4)
+             END-IF
+          END-IF
+REMARK*** 02MOR999TO036 *** # OBLIG VIG MOR 030 ACTUAL CON CREDIFLORES
+           IF FUNCTION NUMVAL(00MOR999TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR999TO036(1:4)) < 0
+                 MOVE ZEROS TO 02MOR999TO036
+              END-IF
+              COMPUTE 02MOR999TO036 = 02MOR999TO036 + 00MOR999TO036
+           ELSE
+              IF FUNCTION NUMVAL(02MOR999TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999TO036(1:4)) <
+                  FUNCTION NUMVAL(02MOR999TO036(1:4))
+                  MOVE 00MOR999TO036(1:4) TO 02MOR999TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR998TO036 *** # OBLIG VIG MOR 060 ACTUAL CON CREDIFLORES
+           IF FUNCTION NUMVAL(00MOR998TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO036(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO036
+              END-IF
+              COMPUTE 02MOR998TO036 = 02MOR998TO036 + 00MOR998TO036
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO036(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO036(1:4))
+                  MOVE 00MOR998TO036(1:4) TO 02MOR998TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR997TO036 *** # OBLIG VIG MOR 090 ACTUAL CON CREDIFLORES
+           IF FUNCTION NUMVAL(00MOR997TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR997TO036(1:4)) < 0
+                 MOVE ZEROS TO 02MOR997TO036
+              END-IF
+              COMPUTE 02MOR997TO036 = 02MOR997TO036 + 00MOR997TO036
+           ELSE
+              IF FUNCTION NUMVAL(02MOR997TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997TO036(1:4)) <
+                  FUNCTION NUMVAL(02MOR997TO036(1:4))
+                  MOVE 00MOR997TO036(1:4) TO 02MOR997TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR996TO036 *** # OBLIG VIG MOR 120 ACTUAL CON CREDIFLORES
+           IF FUNCTION NUMVAL(00MOR996TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR996TO036(1:4)) < 0
+                 MOVE ZEROS TO 02MOR996TO036
+              END-IF
+              COMPUTE 02MOR996TO036 = 02MOR996TO036 + 00MOR996TO036
+           ELSE
+              IF FUNCTION NUMVAL(02MOR996TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR996TO036(1:4)) <
+                  FUNCTION NUMVAL(02MOR996TO036(1:4))
+                  MOVE 00MOR996TO036(1:4) TO 02MOR996TO036(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR995TO036 *** # OBLIG VIG CASTIG DUD REC CON CREDIFLORES
+           IF FUNCTION NUMVAL(00MOR995TO036(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR995TO036(1:4)) < 0
+                 MOVE ZEROS TO 02MOR995TO036
+              END-IF
+              COMPUTE 02MOR995TO036 = 02MOR995TO036 + 00MOR995TO036
+           ELSE
+              IF FUNCTION NUMVAL(02MOR995TO036(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR995TO036(1:4)) <
+                  FUNCTION NUMVAL(02MOR995TO036(1:4))
+                  MOVE 00MOR995TO036(1:4) TO 02MOR995TO036(1:4)
+               END-IF
+              END-IF
+           END-IF.
+
+       2749-PROCESE-CARCT-00END-EXT-36.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-34.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00END Y 02END CREDIFLORES
+REMARK******************************************************************
+          MOVE ALL "         -1" TO PER-36-NIVEL-00-END
+REMARK*** 00END999RO036 *** CUOTAS DE TARJETAS DE CREDITO
+          IF COD-CTA-ABD07 = 02 
+             MOVE ZEROS TO 00END999RO036
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-CUOTA-CARACT(I13) = "          -" OR 0)
+                         AND (VEC-SALDO-CARACT(I13) > 0 AND 
+                          VEC-IND-SLD-CARACT(I13) = 0 )  AND
+                         (VEC-INICIAL-CARACT(I13) > 0 AND
+                          VEC-IND-INI-CARACT(I13) = 0 )
+                         COMPUTE 00END999RO036 ROUNDED =
+                            (VEC-INICIAL-CARACT(I13) * 0.2947) /
+                            (1 - 1 / (1.2947) ** 24)
+                      ELSE
+                         IF (VEC-CUOTA-CARACT(I13) > 0 AND
+                             VEC-IND-CUO-CARACT(I13) = 0 ) AND
+                            (VEC-CUOTA-CARACT(I13) <>
+                             VEC-SALDO-CARACT(I13))
+                            MOVE VEC-CUOTA-CARACT(I13) TO 00END999RO036
+                         ELSE
+                            MOVE "        -88" TO 00END999RO036(1:11)
+                         END-IF
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999RO036(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999RO036(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999RO036(1:11)
+             END-IF
+          END-IF
+REMARK*** 00END999TO036 *** SALDO OBLIGACION VIGENTES CON CREDIFLORES
+          IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                 "CC" OR "OT" OR "CO"
+             IF NIT-SUSCRIP-S-ABD02 = 860056869
+                MOVE ZEROS TO 00END999TO036
+                IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 
+                   IF FECHA-ESTADO-CARACT > ZEROS AND
+                      ACT-DATE-CARACT > ZEROS
+                      IF MESES-DESAC-CARACT <= 3
+                         IF (VEC-SALDO-CARACT(I13) > 0 AND
+                            VEC-IND-SLD-CARACT(I13) = 0 )
+                            MOVE VEC-SALDO-CARACT(I13) TO 00END999TO036
+                         ELSE
+                            MOVE "        -88" TO 00END999TO036(1:11)
+                         END-IF
+                      ELSE
+                         MOVE "         -4" TO 00END999TO036(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -3" TO 00END999TO036(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -2" TO 00END999TO036(1:11)
+                END-IF
+             ELSE
+                MOVE "         -1" TO 00END999TO036(1:11)
+             END-IF
+          END-IF
+REMARK*** 01END999RO036 *** CUOTAS DE TARJETAS DE CREDITO            
+           IF FUNCTION NUMVAL(00END999RO036(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END999RO036(1:11)) < 0
+                 MOVE ZEROS TO 01END999RO036
+              END-IF
+              COMPUTE 01END999RO036 = 
+                      FUNCTION NUMVAL(01END999RO036) + 
+                      FUNCTION NUMVAL(00END999RO036)
+           ELSE
+              IF FUNCTION NUMVAL(01END999RO036(1:11)) < 0
+               IF FUNCTION NUMVAL(00END999RO036(1:11)) <
+                  FUNCTION NUMVAL(01END999RO036(1:11))
+                  MOVE 00END999RO036(1:11) TO 01END999RO036(1:11)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02END999TO036 *** SALDO OBLIGACION VIGENTES CON CREDIFLORES      
+           IF FUNCTION NUMVAL(00END999TO036(1:11)) >= 0
+              IF FUNCTION NUMVAL(02END999TO036(1:11)) < 0
+                 MOVE ZEROS TO 02END999TO036
+              END-IF
+              COMPUTE 02END999TO036 = 02END999TO036 + 00END999TO036
+           ELSE
+              IF FUNCTION NUMVAL(02END999TO036(1:11)) < 0
+               IF FUNCTION NUMVAL(00END999TO036(1:11)) <
+                  FUNCTION NUMVAL(02END999TO036(1:11))
+                  MOVE 00END999TO036(1:11) TO 02END999TO036(1:11)
+               END-IF
+              END-IF
+           END-IF.

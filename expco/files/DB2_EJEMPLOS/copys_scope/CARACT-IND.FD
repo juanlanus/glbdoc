@@ -1,0 +1,125 @@
+      * CARACT-IND.FD.v.01.001
+      * ARCHIVO INDEXADO CON LAS CARACTERISTICAS DE USA , NIVEL 01 y 02
+      * PARA PRECALCULO, ARCHIVO CON REGISTROS DE LONGITUD VARIABLES
+      ******************************************************************
+       FD CARACT-IND
+          RECORD CONTAINS 27 TO 9100 CHARACTERS
+          RECORDING MODE IS VARIABLE.
+REMARK* REGISTROS PARA CARACTERISTICAS 01NUM
+REMARK* SI IND-MATCH-CARIND = "M" LA IDENTIFICAION ES DE MATCH
+       01 REGIS-CARIND.
+          03 LLAVE-CARIND.
+             05 TIPO-ID-CARIND          PIC 9(01).
+             05 NRO-ID-CARIND           PIC 9(11).
+             05 NIVEL-CARIND            PIC 9(02).
+             05 TIPOL-CARIND            PIC X(03).
+          03 IND-MATCH-CARIND           PIC X(01).
+          03 REG-CARIND                 PIC X(846).
+REMARK* REGISTROS PARA CARACTERISTICAS 01INQ
+       01 REGIS2-CARIND.
+          03 LLAVE2-CARIND.
+             05 TIPO-ID-CARIND2         PIC 9(01).
+             05 NRO-ID-CARIND2          PIC 9(11).
+             05 NIVEL-CARIND2           PIC 9(02).
+             05 TIPOL-CARIND2           PIC X(03).
+          03 IND-MATCH-CARIND2          PIC X(01).
+          03 REG02-CARIND               PIC X(48).
+REMARK* REGISTROS PARA CARACTERISTICAS 01MOR
+       01 REGIS3-CARIND.
+          03 LLAVE3-CARIND.
+             05 TIPO-ID-CARIND3         PIC 9(01).
+             05 NRO-ID-CARIND3          PIC 9(11).
+             05 NIVEL-CARIND3           PIC 9(02).
+             05 TIPOL-CARIND3           PIC X(03).
+          03 IND-MATCH-CARIND3          PIC X(01).
+          03 REG03-CARIND               PIC X(4203).
+REMARK* REGISTROS PARA CARACTERISTICAS 01ACP
+       01 REGIS4-CARIND.
+          03 LLAVE4-CARIND.
+             05 TIPO-ID-CARIND4         PIC 9(01).
+             05 NRO-ID-CARIND4          PIC 9(11).
+             05 NIVEL-CARIND4           PIC 9(02).
+             05 TIPOL-CARIND4           PIC X(03).
+          03 IND-MATCH-CARIND4          PIC X(01).
+          03 REG04-CARIND               PIC X(1530).
+REMARK* REGISTROS PARA CARACTERISTICAS 01EXP
+       01 REGIS5-CARIND.
+          03 LLAVE5-CARIND.
+             05 TIPO-ID-CARIND5         PIC 9(01).
+             05 NRO-ID-CARIND5          PIC 9(11).
+             05 NIVEL-CARIND5           PIC 9(02).
+             05 TIPOL-CARIND5           PIC X(03).
+          03 IND-MATCH-CARIND5          PIC X(01).
+          03 REG05-CARIND               PIC X(522).
+REMARK* REGISTROS PARA CARACTERISTICAS 01DEM
+       01 REGIS6-CARIND.
+          03 LLAVE6-CARIND.
+             05 TIPO-ID-CARIND6         PIC 9(01).
+             05 NRO-ID-CARIND6          PIC 9(11).
+             05 NIVEL-CARIND6           PIC 9(02).
+             05 TIPOL-CARIND6           PIC X(03).
+          03 IND-MATCH-CARIND6          PIC X(01).
+          03 REG06-CARIND               PIC X(14).
+REMARK* REGISTROS PARA CARACTERISTICAS 01END
+       01 REGIS7-CARIND.
+          03 LLAVE7-CARIND.
+             05 TIPO-ID-CARIND7         PIC 9(01).
+             05 NRO-ID-CARIND7          PIC 9(11).
+             05 NIVEL-CARIND7           PIC 9(02).
+             05 TIPOL-CARIND7           PIC X(03).
+          03 IND-MATCH-CARIND7          PIC X(01).
+          03 REG07-CARIND.
+             05 REG07-CARINDRO          PIC X(981).
+             05 REG07-CARINDIN          PIC X(981).
+             05 REG07-CARINDVE          PIC X(981).
+             05 REG07-CARINDHP          PIC X(981).
+             05 REG07-CARINDOT          PIC X(981).
+             05 REG07-CARINDCC          PIC X(981).
+             05 REG07-CARINDCO          PIC X(981).
+             05 REG07-CARINDAH          PIC X(981).
+             05 REG07-CARINDCT          PIC X(981).
+REMARK* REGISTROS PARA CARACTERISTICAS 02NUM
+       01 REGIS8-CARIND.
+          03 LLAVE8-CARIND.
+             05 TIPO-ID-CARIND8         PIC 9(01).
+             05 NRO-ID-CARIND8          PIC 9(11).
+             05 NIVEL-CARIND8           PIC 9(02).
+             05 TIPOL-CARIND8           PIC X(03).
+          03 IND-MATCH-CARIND8          PIC X(01).
+          03 REG08-CARIND               PIC X(1433).
+REMARK* REGISTROS PARA CARACTERISTICAS 02INQ
+       01 REGIS9-CARIND.
+          03 LLAVE9-CARIND.
+             05 TIPO-ID-CARIND9         PIC 9(01).
+             05 NRO-ID-CARIND9          PIC 9(11).
+             05 NIVEL-CARIND9           PIC 9(02).
+             05 TIPOL-CARIND9           PIC X(03).
+          03 IND-MATCH-CARIND9          PIC X(01).
+          03 REG09-CARIND               PIC X(08).
+REMARK* REGISTROS PARA CARACTERISTICAS 02ACP
+       01 REGIS10-CARIND.
+          03 LLAVE10-CARIND.
+             05 TIPO-ID-CARIND10        PIC 9(01).
+             05 NRO-ID-CARIND10         PIC 9(11).
+             05 NIVEL-CARIND10          PIC 9(02).
+             05 TIPOL-CARIND10          PIC X(03).
+          03 IND-MATCH-CARIND10         PIC X(01).
+          03 REG10-CARIND               PIC X(10).
+REMARK* REGISTROS PARA CARACTERISTICAS 02EXP
+       01 REGIS11-CARIND.
+          03 LLAVE11-CARIND.
+             05 TIPO-ID-CARIND11        PIC 9(01).
+             05 NRO-ID-CARIND11         PIC 9(11).
+             05 NIVEL-CARIND11          PIC 9(02).
+             05 TIPOL-CARIND11          PIC X(03).
+          03 IND-MATCH-CARIND11         PIC X(01).
+          03 REG11-CARIND               PIC X(1335).
+REMARK* REGISTROS PARA CARACTERISTICAS 02END
+       01 REGIS12-CARIND.
+          03 LLAVE12-CARIND.
+             05 TIPO-ID-CARIND12        PIC 9(01).
+             05 NRO-ID-CARIND12         PIC 9(11).
+             05 NIVEL-CARIND12          PIC 9(02).
+             05 TIPOL-CARIND12          PIC X(03).
+          03 IND-MATCH-CARIND12         PIC X(01).
+          03 REG12-CARIND               PIC X(5058).

@@ -1,0 +1,230 @@
+REMARK*MAECRE-FD.0005
+******* MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR EN PARTICULAR
+      * MODIFICADO SEGUN COMUNICADOS Y SUGERENCIAS DE DATACREDITO
+      * CBIT - MAYO DE 2009
+009900******************************************************************
+      * CAV0002     * SLOLEY - SE CREA EL CAMPO IND-SOLO-LEY-CIC06 EN  *
+      * 23-ABR-2010 *          EL HEADER PARA IDENTIFICAR CUANDO EL    *
+      * C.VELASCO   *          ARCHIVO SE GENERO DE ARCH DTC Y SOLO LEY*       
+REMARK******************************************************************
+REMARK* CAV0003     * MICCSV - SE ADICIONA EL CAMPO                    *
+REMARK* 04-NOV-2011 *          TIPO-GAR-DETALLE-CIC06 PARA MANEJO DEL  *
+REMARK* C.VELASCO   *          DETALLE DE LA GARANTIA.                 *       
+REMARK******************************************************************
+REMARK* CAV0004     * CALDYT - SE ADICIONA CAMPO TOTAL-REGISTROS-CIC06 *
+REMARK* 18-SEP-2012 *          EN EL REGISTRO1 PARA GUARDAR DESDE LA   *
+REMARK* C.VELASCO   *          CALIFICACION EL TOTAL DE REG DEL ARCHIVO*       
+REMARK******************************************************************
+REMARK* CAV0005     * NUECMP - SE ADICIONA EL CAMPO NUMERO TARJETA PARA*
+REMARK* 09-ABR-2013 *          SUSCRIPTORES QUE REPORTAN TIPO CTA = 02 *
+REMARK* C.VELASCO   *          Y REPORTAN CONTRATO-TARJETA.            *
+REMARK******************************************************************
+010000 FD  ACTUAL1
+010200     BLOCK CONTAINS 40 RECORDS.
+FILL01 01  REG-LARGO-CIC06                      PIC X(800).                   
+       01  REGISTRO1-CIC06.	
+	   03  COD-SUSCRIPTOR-CEROS-CIC06 	PIC X(18).
+	   03  COD-SUSCRIPTOR-CIC06       	PIC 9(6).
+	   03  COD-TIP-CUENTA-CIC06       	PIC 9(2).
+   	   03  FECHA-NOVEDADES-CIC06            PIC 9(8).	
+           03  FECHA-NOVEDADES-CIC06-M  	
+               REDEFINES FECHA-NOVEDADES-CIC06.	 
+               05 SIG-NOVEDADES-CIC06-M    	PIC 99.
+               05 ANO-NOVEDADES-CIC06-M    	PIC 99.
+               05 MES-NOVEDADES-CIC06-M    	PIC 99.
+CBIT05         05 DIA-NOVEDADES-CIC06-M         PIC 99.
+	   03  IND-MILENIO-CIC06           	PIC X.       
+	   03  IND-VALORES-MIL-CIC06       	PIC X.       
+	   03  IND-TIPO-ENTREGA-CIC06      	PIC X.       
+	   03  FEC-INI-REPOR-CIC06        	PIC 9(8).    
+	   03  FEC-INI-REPOR-CIC06-R 	
+	       REDEFINES FEC-INI-REPOR-CIC06.  	 
+	       05 SIG-INI-REP-CIC06        	PIC 99.      
+	       05 ANO-INI-REP-CIC06        	PIC 99.      
+	       05 MES-INI-REP-CIC06        	PIC 99.      
+	       05 DIA-INI-REP-CIC06        	PIC 99.      
+	   03  FEC-FIN-REPOR-CIC06         	PIC 9(8).    
+	   03  FEC-FIN-REPOR-CIC06-R  	
+	       REDEFINES FEC-FIN-REPOR-CIC06.  	 
+	       05 SIG-FIN-REP-CIC06        	PIC 99.      
+	       05 ANO-FIN-REP-CIC06        	PIC 99.      
+	       05 MES-FIN-REP-CIC06        	PIC 99.      
+	       05 DIA-FIN-REP-CIC06        	PIC 99.      
+	   03  IND-PARTIR-CIC06            	PIC X.       
+SLOLEY     03  IND-SOLO-LEY-CIC06               PIC X(03).              CAV0002
+SLOLEY     03  RESTO-REG1                       PIC X(743).             CAV0002
+	   03  FILLER-CIC06-R 	
+	       REDEFINES RESTO-REG1.           	            
+CALDYT         05 FILLER-CIC06-R1               PIC X(640).             CAV0004
+CALDYT         05 TOTAL-REGISTROS-CIC06         PIC 9(10).              CAV0004
+	       05 FECHA-RECEPCION-CIC06   	PIC 9(8).    
+	       05 CALIFIC-DIRRES-CIC06    	PIC 999V99.  
+	       05 CALIFIC-DIRLAB-CIC06    	PIC 999V99.  
+	       05 CALIFIC-DIRCOR-CIC06    	PIC 999V99.  
+	       05 CALIFIC-TOTDIR-CIC06    	PIC 999V99.  
+	       05 TOTAL-REGDIR-CIC06      	PIC 9(8).    
+	       05 CALIFIC-FINAL-CIC06     	PIC 999V99.  
+	       05 CALIFIC-GRUPO1-CIC06   	PIC 999V99.  
+	       05 CALIFIC-GRUPO2-CIC06    	PIC 999V99.  
+	       05 CALIFIC-GRUPO3-CIC06    	PIC 999V99.  
+	       05 CALIFIC-TOTAL-CIC06     	PIC 999V99.  
+	       05 FECHA-CALIFIC-CIC06     	PIC 9(8).    
+	       05 NUM-SEGURIDAD-CIC06     	PIC 9(4).    
+	       05 IND-PROG-CALIFIC-CIC06  	PIC X(02).   
+	       05 IND-CONVERSION-CIC06    	PIC X(01).   
+	       05 FILLER-CIC06            	PIC X(02).   
+PENDIE	       05 IND-VISOR-CIC06         	PIC X(15).   
+CBIT05*     03  RESTO-REG1A                  	PIC X(438).  
+       01  REGISTRO2-CIC06.	
+       	   03  TIPO-IDEN-CIC06             	PIC 9.
+	   03  NUM-ID-CIC06                	PIC 9(11).
+	   03  NUM-CTA-CIC06               	PIC X(18).
+	   03  NUM-CTA16-CIC06    	
+	       REDEFINES NUM-CTA-CIC06.        	             
+	       05 NUM-CTA-VEN-CIC06        	PIC 9(16).   
+	       05 GARANTE-VEN-CIC06        	PIC 99.      
+	   03  NOMBRE-COMP-CIC06           	PIC X(45).
+CBIT05     03  SIT-TITULAR-CIC06           	PIC 9(1).
+	   03  FECHA-APERT-CIC06                PIC X(8).	
+           03  FECHA-APERT-CIC06-M  	
+               REDEFINES FECHA-APERT-CIC06.	
+               05 S-FAPE-M                 	PIC 9(2).
+               05 A-FAPE-M                 	PIC 9(2).
+               05 M-FAPE-M                 	PIC 9(2).
+CBIT05	       05 D-FAPE-M                   	PIC 9(2).
+	   03  FECHA-VENC-CIC06                 PIC X(8).	
+           03  FECHA-VENC-CIC06-M  	
+               REDEFINES FECHA-VENC-CIC06.	
+               05 S-FVEN-M                 	PIC 9(2).
+               05 A-FVEN-M                 	PIC 9(2).
+               05 M-FVEN-M                 	PIC 9(2).
+CBIT05         05 D-FVEN-M                   	PIC 9(2).
+	   03  GARANTE-CIC06 			PIC 9(2).
+	   03  TIPO-OBLIGACION-CIC06       	PIC 9.   
+CBIT05     03  SUBSIDIO-HIPOTECA-CIC06          PIC 9.
+CBIT05     03  FECHA-SUBSIDIO-CIC06             PIC X(8).
+CBIT05     03  FECHA-SUBSIDIO-CIC06-M
+CBIT05         REDEFINES FECHA-SUBSIDIO-CIC06.
+CBIT05         05 S-FSUB-M                      PIC 99.
+CBIT05         05 A-FSUB-M                      PIC 99.
+CBIT05         05 M-FSUB-M                      PIC 99.
+CBIT05         05 D-FSUB-M                      PIC 99.
+	   03  TERMINO-CONTRATO-CIC06       	PIC 9.       
+	   03  FORMA-DE-PAGO-CIC06         	PIC 9.       
+	   03  PERIODICIDAD-DE-PAGO-CIC06  	PIC 9.       
+ 	   03  NOVEDAD-CIC06               	PIC 9(2).
+CBIT05	   03  ESTADO-ORIG-CTA-CIC06  		PIC 9.
+CBIT05	   03  FECHA-ESTADO-ORIG-CIC06          PIC X(8).
+CBIT05	   03  FECHA-ESTADO-ORIG-CIC06R REDEFINES
+               FECHA-ESTADO-ORIG-CIC06.	
+CBIT05	       05 SIG-EST-ORIG		        PIC 99.
+CBIT05	       05 ANO-EST-ORIG		        PIC 99.
+CBIT05	       05 MES-EST-ORIG		        PIC 99.
+CBIT05	       05 DIA-EST-ORIG		        PIC 99.
+CBIT05	   03  ESTADO-CTA-CIC06			PIC 99.
+CBIT05	   03  FECHA-ESTADO-CTA-CIC06           PIC X(8).	
+CBIT05	   03  FECHA-ESTADO-CTA-CIC06R REDEFINES FECHA-ESTADO-CTA-CIC06.
+CBIT05	       05 SIG-EST-CTA			PIC 99.
+CBIT05	       05 ANO-EST-CTA			PIC 99.
+CBIT05	       05 MES-EST-CTA			PIC 99.
+CBIT05	       05 DIA-EST-CTA			PIC 99.
+CBIT05	   03  ESTADO-PLASTICO-CIC06		PIC 9.
+CBIT05	   03  FECHA-ESTADO-PLAS-CIC06          PIC X(8).
+CBIT05	   03  FECHA-ESTADO-PLAS-CIC06R REDEFINES
+               FECHA-ESTADO-PLAS-CIC06.	
+CBIT05	       05 SIG-EST-PLAS		        PIC 99.
+CBIT05	       05 ANO-EST-PLAS		        PIC 99.
+CBIT05	       05 MES-EST-PLAS		        PIC 99.
+CBIT05	       05 DIA-EST-PLAS		        PIC 99.
+CBIT05	   03  ADJETIVO-ACTUAL-1-CIC06		PIC 9.
+CBIT05	   03  FECHA-ADJETIVO-CIC06             PIC X(8).
+CBIT05	   03  FECHA-ADJETIVO-CIC06R REDEFINES
+               FECHA-ADJETIVO-CIC06.	
+CBIT05	       05 SIG-EST-ADJE		        PIC 99.
+CBIT05	       05 ANO-EST-ADJE		        PIC 99.
+CBIT05	       05 MES-EST-ADJE		        PIC 99.
+CBIT05	       05 DIA-EST-ADJE		        PIC 99.
+CBIT05	   03  CLASE-TARJETA-CIC06		PIC 9.
+CBIT05	   03  FRANQUICIA-CIC06		        PIC 9.
+CBIT05	   03  NOMBRE-MARCA-PRIVA-CIC06	        PIC X(30).   
+	   03  TIPO-MONEDA-CIC06           	PIC 9.       
+	   03  TIPO-GARANTIA-CIC06         	PIC 9.       
+CBIT05	   03  CALIFICACION-CIC06         	PIC XX.       
+CBIT05	   03  PROBABILIDAD-INCUM-CIC06         PIC 9(3).  
+	   03  MOROSIDAD-CIC06             	PIC 9(3).    
+	   03  VALOR-INICIAL-CIC06         	PIC 9(11).   
+	   03  VALOR-SALDO-DEUDA-CIC06     	PIC 9(11).  
+	   03  VALOR-DISPONIBLE-CIC06      	PIC 9(11).   
+	   03  VALOR-CUOTA-MES-CIC06      	PIC 9(11).   
+	   03  VALOR-SALDO-MORA-CIC06      	PIC 9(11).   
+	   03  TOTAL-CUOTAS-CIC06          	PIC 9(3).    
+	   03  CUOTAS-CANCELADAS-CIC06     	PIC 9(3).    
+	   03  CUOTAS-EN-MORA-CIC06        	PIC 9(3).    
+CBIT05	   03  CLAUSULA-PERMA-CIC06		PIC 9(3).    
+CBIT05	   03  FECHA-CLAUSULA-PERMA-CIC06       PIC X(8).	 
+CBIT05	   03  FECHA-CLAUSULA-PERMA-CIC06R REDEFINES
+               FECHA-CLAUSULA-PERMA-CIC06.
+CBIT05	       05 SIG-CLAU-PERM-CIC06		PIC 99.
+CBIT05	       05 ANO-CLAU-PERM-CIC06	        PIC 99.
+CBIT05	       05 MES-CLAU-PERM-CIC06 	        PIC 99.
+CBIT05	       05 DIA-CLAU-PERM-CIC06	        PIC 99.
+CBIT05     03  FECHA-LIMITE-PAGO-CIC06          PIC X(8).
+CBIT05	   03  FECHA-LIMITE-PAGO-CIC06R REDEFINES
+               FECHA-LIMITE-PAGO-CIC06.
+CBIT05	       05 SIG-LIMITE-PAGO-CIC06		PIC 99.
+CBIT05	       05 ANO-LIMITE-PAGO-CIC06		PIC 99.
+CBIT05	       05 MES-LIMITE-PAGO-CIC06		PIC 99.
+CBIT05         05 DIA-LIMITE-PAGO-CIC06		PIC 99.
+           03  FECHA-DE-PAGO-CIC06              PIC X(8).
+CBIT05	   03  FECHA-DE-PAGO-CIC06R REDEFINES
+               FECHA-DE-PAGO-CIC06.
+	       05 SIG-DE-PAGO-CIC06        	PIC 9(2).    
+	       05 ANO-DE-PAGO-CIC06        	PIC 9(2).    
+	       05 MES-DE-PAGO-CIC06       	PIC 9(2).    
+	       05 DIA-DE-PAGO-CIC06        	PIC 9(2).    
+           03  FECHA-DE-PAGO-CIC06-M
+	       REDEFINES  FECHA-DE-PAGO-CIC06. 
+	       05 SIG-DE-PAGO-CIC06-M        	PIC 9(2).    
+	       05 ANO-DE-PAGO-CIC06-M        	PIC 9(2).    
+	       05 MES-DE-PAGO-CIC06-M       	PIC 9(2).    
+	       05 DIA-DE-PAGO-CIC06-M        	PIC 9(2).
+	   03  OFICINA-RADICACION-CIC06    	PIC X(30).   
+           03  CIUDAD-RADICACION-CIC06     	PIC X(20).   
+CBIT05     03  COD-DANE-CIUD-RADIC-CIC06	PIC 9(8).    
+	   03  CIUDAD-RESIDENCIA-CIC06     	PIC X(20).   
+CBIT05     03  COD-DANE-CIUD-RESID-CIC06	PIC 9(8).    
+CBIT05	   03  DEPTO-RESIDENCIA-CIC06		PIC X(20).   
+	   03  DIREC-RESIDENCIA-CIC06      	PIC X(60).   
+	   03  TELEF-RESIDENCIA-CIC06      	PIC 9(12).   
+	   03  CIUDAD-LABORAL-CIC06        	PIC X(20).   
+CBIT05     03  COD-DANE-CIUD-LABORAL-CIC06	PIC 9(8).    
+CBIT05	   03  DEPTO-LABORAL-CIC06		PIC X(20).   
+CBIT05	   03  DIREC-LABORAL-CIC06      	PIC X(60).   
+	   03  TELEF-LABORAL-CIC06         	PIC 9(12).   
+	   03  CIUDAD-CORRESP-CIC06        	PIC X(20).   
+CBIT05     03  COD-DANE-CIUD-CORRESP-CIC06	PIC 9(8).    
+CBIT05	   03  DEPTO-CORRESP-CIC06		PIC X(20).   
+	   03  DIREC-CORRESP-CIC06        	PIC X(60).   
+CBIT05	   03  CORREO-ELECTRONICO-CIC06	        PIC X(60).   
+CBIT05	   03  CELULAR-CIC06       		PIC 9(12).   
+CBIT05     03  SUSCRIPTOR-DESTINO-CIC06	        PIC 9(6).    
+NUECMP     03  NUMERO-TARJETA-CIC06             PIC 9(18).              CAV0005
+MICCSV     03  TIPO-GAR-DETALLE-CIC06           PIC X(01).              CAV0003
+NUECMP     03  FILLER                           PIC X(18).              CAV0005
+NUECMP*    03  FILLER                           PIC X(36).              CAV0005
+	01  REGISTRO3-CIC06.              	             
+	   03  IDENTIFICADOR-CIC06         	PIC X(18).   
+	   03  FECHA-PROCESO-CIC06              PIC X(8). 
+           03  FECHA-PROCESO-CIC06-M
+	       REDEFINES  FECHA-PROCESO-CIC06.
+	       05 SIG-PROCESO-CIC06        	PIC 9(2).    
+	       05 ANO-PROCESO-CIC06        	PIC 9(2).    
+	       05 MES-PROCESO-CIC06        	PIC 9(2).    
+	       05 DIA-PROCESO-CIC06        	PIC 9(2).    
+	   03  NUM-REGISTROS-CIC06         	PIC 9(8).    
+	   03  SUMA-NOVEDADES-CIC06        	PIC 9(8).    
+	   03  RESTO-REG3                   	PIC X(758).  
+        01  REGISTRO4-CIC06.	
+	   03  DATOS-REPORTADOS-ACTUAL     	PIC X(117).
+	   03 FILLER                      	PIC X(253).
+	   03 FILLER              		PIC X(430).

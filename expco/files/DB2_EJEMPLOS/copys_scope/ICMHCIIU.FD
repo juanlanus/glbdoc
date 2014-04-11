@@ -1,0 +1,21 @@
+      * ICMHCIIU.-FD.v.0003
+      * MAESTRO QUE ALMACENA INFORMACION HISTORICA DE LAS
+      * ACTIVIDADES ECONOMICAS Y CODIGOS CIIU
+REMARK******************************************************************
+REMARK* VER DOCUMENTACION DCWIKI                                       *
+REMARK******************************************************************
+       FD  ICMHCIIU.
+       01  REGISTRO-ICMHCIIU.
+           03 LLAVE-MAES-ICMHCIIU.
+              07 TIPO-ID-ICMHCIIU           PIC 9.
+              07 NUM-ID-ICMHCIIU            PIC 9(11).
+              07 NIT-ENTID-ICMHCIIU         PIC 9(11).
+              07 COD-SUS-ICMHCIIU           PIC 9(6).
+              07 ORIGEN-ACT-ICMHCIIU        PIC X(02).
+              07 FECHA-CREA-ICMHCIIU        PIC X(08).
+           03 ACTIV-ECONOM-ICMHCIIU         PIC 9(02).
+           03 FECHA-ACTIV-ECONOM-ICMHCIIU   PIC 9(8)  COMP-3.
+           03 CIIU-ICMHCIIU                 PIC 9(10) COMP-3.
+           03 FECHA-CIIU-ICMHCIIU           PIC 9(8)  COMP-3.
+           03 FECHA-ULT-ACT-ICMHCIIU        PIC 9(8)  COMP-3.
+           03 FILLER                        PIC X(88).

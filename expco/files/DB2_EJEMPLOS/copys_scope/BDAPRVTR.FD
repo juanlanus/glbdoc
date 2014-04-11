@@ -1,0 +1,11 @@
+      * BDAPRVTR-FD.0001  
+      * ARCHIVO QUE CONTIENE INFORMACION DE MARCAS PRIVADAS
+      *******************************************************************
+       FD  BDAPRVTR.
+       01  REG-BDAPRVTR.
+           03  LLAVE-BDAPRVTR.
+               05 CONSEC-BDAPRVTR     PIC 9(03).
+           03  NOMB-BDAPRVTR          PIC X(30).
+           03  NIT-ENT-BDAPRVTR       PIC 9(11).
+           03  COD-SUSC-BDAPRVTR      PIC 9(06).
+           03  FILLER-BDAPRVTR        PIC X(50).

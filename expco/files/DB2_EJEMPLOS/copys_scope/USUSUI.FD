@@ -1,0 +1,21 @@
+      * USUSUI-FD.v.0001
+REMARK*******************************************************************
+REMARK* ARCHIVO QUE CONTIENE LAS CLAVES Y LOS SERVICIOS DE LA BASE DE  *
+REMARK* DATOS DE SUI PARA REEMPLAZAR ESTA BASE DE DATOS                *
+REMARK*******************************************************************
+       FD USUSUI.     
+       01 REG-USUSUI.
+         02 LLAVE-USUSUI.  
+            03 TIP-IDE-USUSUI            PIC 9(1).
+            03 NUM-IDE-USUSUI            PIC 9(11).
+         02 RESTO-REGISTRO.
+            03 CLAVE-USUSUI              PIC X(10).
+            03 NUMINT-USUSUI             PIC 9(02).
+            03 SERVINITS-USUSUI          OCCURS 5 TIMES. 
+               04 NIT-USUSUI             PIC 9(11).           
+               04 SERVICIOS-USUSUI       OCCURS 5 TIMES.
+                  05 SERVICIO-USUSUI     PIC 9.                    
+                  05 BLOQUEO-USUSUI      PIC 9.
+            03 FECHA-HORA-USUSUI         PIC 9(14).
+            03 INTENTOS-USUSUI           PIC 9.
+         02 FILLER                       PIC X(65).

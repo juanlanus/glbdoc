@@ -1,0 +1,11 @@
+REMARK* VALERRCL-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA TABLA ERRORES PARA MAESTRO DE CLIENTES              *
+REMARK******************************************************************
+       FD  VALERRCL.
+       01  REG-VALERRCL.
+           03 NUM-CAMPO-VALERRCL                PIC 9(2).
+           03 COD-ERROR-VALERRCL                PIC 9(2).
+           03 DES-ERROR-VALERRCL                PIC X(60).
+           03 IND-ACTUALIZA-VALERRCL            PIC X.
+           03 FILLER-VALERRCL                   PIC X(15).

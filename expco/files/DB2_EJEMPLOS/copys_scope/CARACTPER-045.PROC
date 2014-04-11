@@ -1,0 +1,474 @@
+      *CARACTPER-045.PROC.v.0001.
+      ******************************************************************
+      *    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 045 *
+      *    PARA NATURA                                                 *
+      ******************************************************************
+      * IMS0001    | R12212 - NATURA - VERSION INICIAL.                *
+      * 06-JUN-2013|                                                   *
+      * M.SALAMANCA|                                       REQ.CQ12212 *
+      ******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-045.
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999RO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999RO045) TO L-AUX
+               MOVE 01MOR999RO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999IN045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999IN045) TO L-AUX
+               MOVE 01MOR999IN045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999VE045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999VE045) TO L-AUX
+               MOVE 01MOR999VE045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999HP045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999HP045) TO L-AUX
+               MOVE 01MOR999HP045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999CC045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999CC045) TO L-AUX
+               MOVE 01MOR999CC045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999OT045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999OT045) TO L-AUX
+               MOVE 01MOR999OT045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999CO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999CO045) TO L-AUX
+               MOVE 01MOR999CO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO045) TO L-AUX
+               MOVE 01END999RO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999IN045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999IN045) TO L-AUX
+               MOVE 01END999IN045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999VE045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999VE045) TO L-AUX
+               MOVE 01END999VE045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999HP045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999HP045) TO L-AUX
+               MOVE 01END999HP045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999CC045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999CC045) TO L-AUX
+               MOVE 01END999CC045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999OT045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999OT045) TO L-AUX
+               MOVE 01END999OT045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999CO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999CO045) TO L-AUX
+               MOVE 01END999CO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998RO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998RO045) TO L-AUX
+               MOVE 01END998RO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998IN045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998IN045) TO L-AUX
+               MOVE 01END998IN045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998VE045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998VE045) TO L-AUX
+               MOVE 01END998VE045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998HP045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998HP045) TO L-AUX
+               MOVE 01END998HP045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998CC045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998CC045) TO L-AUX
+               MOVE 01END998CC045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998OT045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998OT045) TO L-AUX
+               MOVE 01END998OT045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998CO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998CO045) TO L-AUX
+               MOVE 01END998CO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997RO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997RO045) TO L-AUX
+               MOVE 01END997RO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997IN045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997IN045) TO L-AUX
+               MOVE 01END997IN045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997VE045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997VE045) TO L-AUX
+               MOVE 01END997VE045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997HP045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997HP045) TO L-AUX
+               MOVE 01END997HP045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997CC045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997CC045) TO L-AUX
+               MOVE 01END997CC045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997OT045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997OT045) TO L-AUX
+               MOVE 01END997OT045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997CO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997CO045) TO L-AUX
+               MOVE 01END997CO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996RO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996RO045) TO L-AUX
+               MOVE 01END996RO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996IN045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996IN045) TO L-AUX
+               MOVE 01END996IN045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996VE045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996VE045) TO L-AUX
+               MOVE 01END996VE045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996HP045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996HP045) TO L-AUX
+               MOVE 01END996HP045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996CC045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996CC045) TO L-AUX
+               MOVE 01END996CC045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996OT045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996OT045) TO L-AUX
+               MOVE 01END996OT045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996CO045" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996CO045) TO L-AUX
+               MOVE 01END996CO045(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               .
+
+       0000-INICIALIZAR-CARAC-EXT-45.
+      ******************************************************************
+      *0000-INICIALIZAR-CARAC-EXT-45.                                  *
+      *     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 45    *
+      *     PARA NATURA                                                *
+      ******************************************************************
+
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+              MOVE        "  -1"   TO   01MOR999XX045(PRT-45)(1:4)
+              MOVE "         -1"   TO   01END999XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   01END998XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   01END997XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   01END996XX045(PRT-45)(1:11)
+           END-PERFORM
+           .
+
+       2249-PROCESE-CARCT-00MOR-EXT-45.
+      ******************************************************************
+      *2249-PROCESE-CARCT-00MOR-EXT-45.                                *
+      *     CALCULO CARACTERISTICAS NIVEL 00MOR Y 01MOR                *
+      ******************************************************************
+
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+              MOVE        "  -1"   TO   00MOR999XX045(PRT-45)(1:4)
+           END-PERFORM
+      *
+      *** 00MOR999XX045 *** # PROD EN MORA 120 RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             MOVE  SPACES       TO   PORT-PER45
+             EVALUATE  PRT-45
+               WHEN 1       MOVE  "RO"   TO  PORT-PER45
+               WHEN 2       MOVE  "IN"   TO  PORT-PER45
+               WHEN 3       MOVE  "VE"   TO  PORT-PER45
+               WHEN 4       MOVE  "HP"   TO  PORT-PER45
+               WHEN 5       MOVE  "CC"   TO  PORT-PER45
+               WHEN 6       MOVE  "OT"   TO  PORT-PER45
+               WHEN 7       MOVE  "CO"   TO  PORT-PER45
+             END-EVALUATE
+      *
+             IF COD-PORTAF-CARACT  =  PORT-PER45
+               MOVE ZEROS   TO  00MOR999XX045(PRT-45)
+               IF REG-ABIERTO-CARACT = 1
+                 IF FECHA-ESTADO-CARACT  > ZEROS AND
+                    RUN-DATE-CARACT      > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                     IF MESES-DESAC-CARACT  <  0
+                       MOVE  49   TO  POS-PER45
+                     ELSE
+                       COMPUTE POS-PER45 = 49 - MESES-DESAC-CARACT
+                     END-IF
+                     IF  V-NOR-CARACT(POS-PER45:1)  =  4
+                       MOVE  1      TO 00MOR999XX045(PRT-45)
+                     END-IF
+                   ELSE
+                     MOVE  "  -4"   TO 00MOR999XX045(PRT-45)(1:4)
+                   END-IF
+                 ELSE
+                   MOVE  "  -3"   TO 00MOR999XX045(PRT-45)(1:4)
+                 END-IF
+               ELSE
+                 MOVE  "  -2"   TO 00MOR999XX045(PRT-45)(1:4)
+               END-IF
+             END-IF
+           END-PERFORM
+      *
+      *** 01MOR999XX045 *** # PROD EN MORA 120 RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             IF FUNCTION NUMVAL(00MOR999XX045(PRT-45)(1:4)) >= 0
+                IF FUNCTION NUMVAL(01MOR999XX045(PRT-45)(1:4)) < 0
+                   MOVE ZEROS TO 01MOR999XX045(PRT-45)
+                END-IF
+                COMPUTE 01MOR999XX045(PRT-45) = 
+                        FUNCTION NUMVAL(01MOR999XX045(PRT-45)) +
+                        FUNCTION NUMVAL(00MOR999XX045(PRT-45))
+             ELSE
+                IF FUNCTION NUMVAL(01MOR999XX045(PRT-45)(1:4)) < 0
+                 IF FUNCTION NUMVAL(00MOR999XX045(PRT-45)(1:4)) <
+                    FUNCTION NUMVAL(01MOR999XX045(PRT-45)(1:4))
+                    MOVE 00MOR999XX045(PRT-45)(1:4) TO
+                         01MOR999XX045(PRT-45)(1:4)
+                 END-IF
+                END-IF
+             END-IF
+           END-PERFORM
+           .
+
+       2249-PROCESE-CARCT-00END-EXT-45.
+      ******************************************************************
+      *2249-PROCESE-CARCT-00END-EXT-45.                                *
+      *     CALCULO CARACTERISTICAS NIVEL 00END Y 01END                *
+      ******************************************************************
+
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+              MOVE "         -1"   TO   00END999XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   00END998XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   00END997XX045(PRT-45)(1:11)
+              MOVE "         -1"   TO   00END996XX045(PRT-45)(1:11)
+           END-PERFORM
+      *
+      *** 00END999XX045 *** SALDO MORA 90 RO/IN/VE/HP/CC/OT/CO
+      *** 00END998XX045 *** SALDO MORA 120 RO/IN/VE/HP/CC/OT/CO
+      *** 00END997XX045 *** SALDO MORA CASTIG RO/IN/VE/HP/CC/OT/CO
+      *** 00END996XX045 *** SALDO MORA DUD RECAUDO RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             MOVE  SPACES       TO   PORT-PER45
+             EVALUATE  PRT-45
+               WHEN 1       MOVE  "RO"   TO  PORT-PER45
+               WHEN 2       MOVE  "IN"   TO  PORT-PER45
+               WHEN 3       MOVE  "VE"   TO  PORT-PER45
+               WHEN 4       MOVE  "HP"   TO  PORT-PER45
+               WHEN 5       MOVE  "CC"   TO  PORT-PER45
+               WHEN 6       MOVE  "OT"   TO  PORT-PER45
+               WHEN 7       MOVE  "CO"   TO  PORT-PER45
+             END-EVALUATE
+      *
+             IF COD-PORTAF-CARACT  =  PORT-PER45
+               MOVE ZEROS   TO  00END999XX045(PRT-45)
+                                00END998XX045(PRT-45)
+                                00END997XX045(PRT-45)
+                                00END996XX045(PRT-45)
+               IF REG-ABIERTO-CARACT = 1
+                 IF FECHA-ESTADO-CARACT  > ZEROS AND
+                    RUN-DATE-CARACT      > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                     IF VEC-SALDOMOR-CARACT(I13)  > 0 AND
+                        VEC-IND-SLDM-CARACT(I13)  = 0
+                       IF MESES-DESAC-CARACT  <  0
+                         MOVE  49   TO  POS-PER45
+                       ELSE
+                         COMPUTE POS-PER45 = 49 - MESES-DESAC-CARACT
+                       END-IF
+                       EVALUATE  V-NOR-CARACT(POS-PER45:1)
+                         WHEN 3
+                              MOVE VEC-SALDOMOR-CARACT(I13)  TO
+                                   00END999XX045(PRT-45)
+                         WHEN 4
+                              MOVE VEC-SALDOMOR-CARACT(I13)  TO
+                                   00END998XX045(PRT-45)
+                         WHEN 6
+                              MOVE VEC-SALDOMOR-CARACT(I13)  TO
+                                   00END996XX045(PRT-45)
+                         WHEN 7
+                              MOVE VEC-SALDOMOR-CARACT(I13)  TO
+                                   00END997XX045(PRT-45)
+                       END-EVALUATE
+                     ELSE
+                       MOVE "        -88" TO 00END999XX045(PRT-45)(1:11)
+                       MOVE "        -88" TO 00END998XX045(PRT-45)(1:11)
+                       MOVE "        -88" TO 00END997XX045(PRT-45)(1:11)
+                       MOVE "        -88" TO 00END996XX045(PRT-45)(1:11)
+                     END-IF
+                   ELSE
+                     MOVE "         -4" TO 00END999XX045(PRT-45)(1:11)
+                     MOVE "         -4" TO 00END998XX045(PRT-45)(1:11)
+                     MOVE "         -4" TO 00END997XX045(PRT-45)(1:11)
+                     MOVE "         -4" TO 00END996XX045(PRT-45)(1:11)
+                   END-IF
+                 ELSE
+                   MOVE "         -3" TO 00END999XX045(PRT-45)(1:11)
+                   MOVE "         -3" TO 00END998XX045(PRT-45)(1:11)
+                   MOVE "         -3" TO 00END997XX045(PRT-45)(1:11)
+                   MOVE "         -3" TO 00END996XX045(PRT-45)(1:11)
+                 END-IF
+               ELSE
+                 MOVE "         -2" TO 00END999XX045(PRT-45)(1:11)
+                 MOVE "         -2" TO 00END998XX045(PRT-45)(1:11)
+                 MOVE "         -2" TO 00END997XX045(PRT-45)(1:11)
+                 MOVE "         -2" TO 00END996XX045(PRT-45)(1:11)
+               END-IF
+             END-IF
+           END-PERFORM
+      *
+      *** 01END999XX045 *** SALDO MORA 90 RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             IF FUNCTION NUMVAL(00END999XX045(PRT-45)(1:11)) >= 0
+                IF FUNCTION NUMVAL(01END999XX045(PRT-45)(1:11)) < 0
+                   MOVE ZEROS TO 01END999XX045(PRT-45)
+                END-IF
+                COMPUTE 01END999XX045(PRT-45) = 
+                        FUNCTION NUMVAL(01END999XX045(PRT-45)) +
+                        FUNCTION NUMVAL(00END999XX045(PRT-45))
+             ELSE
+                IF FUNCTION NUMVAL(01END999XX045(PRT-45)(1:11)) < 0
+                 IF FUNCTION NUMVAL(00END999XX045(PRT-45)(1:11)) <
+                    FUNCTION NUMVAL(01END999XX045(PRT-45)(1:11))
+                    MOVE 00END999XX045(PRT-45)(1:11) TO
+                         01END999XX045(PRT-45)(1:11)
+                 END-IF
+                END-IF
+             END-IF
+           END-PERFORM
+      *
+      *** 01END998XX045 *** SALDO MORA 120 RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             IF FUNCTION NUMVAL(00END998XX045(PRT-45)(1:11)) >= 0
+                IF FUNCTION NUMVAL(01END998XX045(PRT-45)(1:11)) < 0
+                   MOVE ZEROS TO 01END998XX045(PRT-45)
+                END-IF
+                COMPUTE 01END998XX045(PRT-45) = 
+                        FUNCTION NUMVAL(01END998XX045(PRT-45)) +
+                        FUNCTION NUMVAL(00END998XX045(PRT-45))
+             ELSE
+                IF FUNCTION NUMVAL(01END998XX045(PRT-45)(1:11)) < 0
+                 IF FUNCTION NUMVAL(00END998XX045(PRT-45)(1:11)) <
+                    FUNCTION NUMVAL(01END998XX045(PRT-45)(1:11))
+                    MOVE 00END998XX045(PRT-45)(1:11) TO
+                         01END998XX045(PRT-45)(1:11)
+                 END-IF
+                END-IF
+             END-IF
+           END-PERFORM
+      *
+      *** 01END997XX045 *** SALDO MORA CASTIG RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             IF FUNCTION NUMVAL(00END997XX045(PRT-45)(1:11)) >= 0
+                IF FUNCTION NUMVAL(01END997XX045(PRT-45)(1:11)) < 0
+                   MOVE ZEROS TO 01END997XX045(PRT-45)
+                END-IF
+                COMPUTE 01END997XX045(PRT-45) = 
+                        FUNCTION NUMVAL(01END997XX045(PRT-45)) +
+                        FUNCTION NUMVAL(00END997XX045(PRT-45))
+             ELSE
+                IF FUNCTION NUMVAL(01END997XX045(PRT-45)(1:11)) < 0
+                 IF FUNCTION NUMVAL(00END997XX045(PRT-45)(1:11)) <
+                    FUNCTION NUMVAL(01END997XX045(PRT-45)(1:11))
+                    MOVE 00END997XX045(PRT-45)(1:11) TO
+                         01END997XX045(PRT-45)(1:11)
+                 END-IF
+                END-IF
+             END-IF
+           END-PERFORM
+      *
+      *** 01END996XX045 *** SALDO MORA DUD RECAUDO RO/IN/VE/HP/CC/OT/CO
+           PERFORM VARYING  PRT-45  FROM 1 BY 1  UNTIL  PRT-45 > 7
+             IF FUNCTION NUMVAL(00END996XX045(PRT-45)(1:11)) >= 0
+                IF FUNCTION NUMVAL(01END996XX045(PRT-45)(1:11)) < 0
+                   MOVE ZEROS TO 01END996XX045(PRT-45)
+                END-IF
+                COMPUTE 01END996XX045(PRT-45) = 
+                        FUNCTION NUMVAL(01END996XX045(PRT-45)) +
+                        FUNCTION NUMVAL(00END996XX045(PRT-45))
+             ELSE
+                IF FUNCTION NUMVAL(01END996XX045(PRT-45)(1:11)) < 0
+                 IF FUNCTION NUMVAL(00END996XX045(PRT-45)(1:11)) <
+                    FUNCTION NUMVAL(01END996XX045(PRT-45)(1:11))
+                    MOVE 00END996XX045(PRT-45)(1:11) TO
+                         01END996XX045(PRT-45)(1:11)
+                 END-IF
+                END-IF
+             END-IF
+           END-PERFORM
+           .

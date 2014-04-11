@@ -1,0 +1,1038 @@
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   1
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL
+* Options: int("LEESCORE.int") anim csi verbose reentrant nolist anim
+*          db2(db=INGR_PR1 pass=icgssopb.IcgssB06 version=icdgd
+*          UDB-VERSION=v97) endp list("LEESCORE.lst")
+     1$SET db2(db=INGR_DL1 pass=icgssode.IcgssD06,VALIDATE=RUN)
+     2$SET db2(connect=2)
+     3$set db2(BIND COLLECTION=COBOLAPP)
+     4$set db2(FORMAT=LOC VERSION=V8)
+     5$SET LIST SETTING
+* Setting: NOACCEPTREFRESH NOADV ALIGN"8" ALPHASTART"1" NOALTER NOAMODE ANIM
+*          NOANIMPREP ANS85 NOAPOST NOAREACHECK ARITHMETIC"MF" ASSIGN"DYNAMIC"
+*          NOASSIGN-PRINTER NOAUTOLOCK NOBELL NOBOUND NOBRIEF NOBS2000 BWZSTAR
+*          NOBYTEMODEMOVE CALLFH"EXTFH" NOCALLMCS NOCALLRECOVERY CALLSORT
+*          "EXTSM" CANCEL CANCELLBR NOCHANGEMESSAGE CHARSET"ASCII" CHECKDIV
+*          "ANSI" NOCHECKREFMOD NOCICS CICS-CPY NOCICSOPTIMIZE NOCMPR2
+*          NOCOBFSTATCONV NOCOBIDY NOCOBOL370 COBOLDIR COMP COMP-5"2" COMP-6
+*          "2" NOCOMS85 CONFIRM NOCONVERTRET CONVSPACE COPYEXT",cbl,cpy"
+*          NOCOPYLBR COPYLIST COPYLISTCOMMENT"1" CSI CURRENCY-SIGN"36"
+*          CURRENT-DATE"MMDDYY" NODATA DATACOMPRESS"0" NODATA-CONTEXT DATE
+*          DBCHECK DBCS"3" NODBCSSOSI DBSPACE DE-EDIT"2" DEFAULTBYTE"32"
+*          NODEFAULTCALLS DETECTLOCK NODG DIALECT"MF" NODIRECTIVES-IN-COMMENTS
+*          NODOSVS NODPCINSUBSCRIPT DYNAM NOEARLY-RELEASE ECHO NOECHOALL
+*          NOEDITOR ENSUITE"0" NOENTCOBOL ERRFORMAT"1" ERRLIST"EMBED" NOERRQ
+*          FASTSORT NOFCD3 NOFCDREG NOFDCLEAR NOFILESHARE FILETYPE"0" NOFLAG
+*          NOFLAGAS NOFLAGCD NOFLAGEUC NOFLAGMIG NOFLAGQ FLAGSINEDIT NOFLAGSTD
+*          NOFOLDCALLNAME NOFOLDCOPYNAME FORM"60" NOFP-ROUNDING
+*          NOHOSTARITHMETIC NOHOSTCONTZERO NOHOST-NUMCOMPARE NOHOST-NUMMOVE
+*          NOHOSTFD NOHOSTRW NOIBM-MS NOIBMCOMP IDXFORMAT"0" NOILGEN
+*          IMPLICITSCOPE NOINDD INFORETURN"0" NOINITCALL INITPTR INT
+*          "LEESCORE.int" INTDATE"ANSI" INTLEVEL"2" IOCONV NOISO2002
+*          NOIXNLSKEY NOIXNUMKEY KEEP-INT KEYCHECK KEYCOMPRESS"0" NOLIBRARIAN
+*          NOLINE-COUNT LIST LISTPATH"" LISTWIDTH"80" LITVAL-SIZE"4" LOCKTYPE
+*          "0" NOMAPNAME NOMAXERROR METHODDEFAULT"REFERENCE" MF"15" MFCOMMENT
+*          NOMOVELENCHECK NOMS NOMVS NATIVE"ASCII" NONATIVEFLOATINGPOINT
+*          NONCHAR NONEWBASENAME NONLS NSYMBOL"DBCS" NOODOOSVS NOODOSLIDE
+*          NOOLDBLANKLINE NOOLDCOPY NOOLDINDEX NOOLDNEXTSENTENCE NOOLDREADINTO
+*          NOOLDSTRMIX OOCTRL"-C-E-G-P+Q+R-S+W" OPTIONAL-FILE NOOS390 OSEXT""
+*          NOOSVS NOOUTDD NOP64 NOPANVALET PERFORM-TYPE"MF" NOPREPLIST
+*          NOPREPROCESS NOPRINT-EXT NOPROFILE NOPROGID-COMMENT
+*          NOPROGID-INT-NAME NOPROTECT-LINKAGE PROTOTYPE"RELAXED" QUAL
+*          QUALPROC NOQUERY QUOTE NORAWLIST NORDW RECMODE"F" REENTRANT"1"
+*          NOREF NOREFNO REMAINDER"1" REPORT-LINE"256" RESEQ NORETRYLOCK
+*          REWRITE-LS NORM RTNCODE-SIZE"4" NORWHARDPAGE NOSAA SEG NOSEQCHK
+*          SEQUENTIAL"RECORD" NOSERIAL SETTING"LINE" NOSHAREOUTDD NOSHOW-DIR
+*          SIGN"ASCII" NOSIGNDISCARD NOSIGNFIXUP SORTTYPE"DFSORT" SOURCEFORMAT
+*          "FIXED" SOURCETABSTOP"8" NOSPZERO NOSSRANGE STDERR NOSTICKY-LINKAGE
+*          NOSTICKY-PERFORM SUPFF SWITCHTYPE"1" SYMBSTART"1" SYSPUNCH"132"
+*          TERMPAGE TIME NOTRACE TRUNC NOTRUNCCALLNAME NOTRUNCCOPY TRUNCINC
+*          "10" UNICODE"NATIVE" VERBOSE NOVSC2 WARNING"1" NOWB NOWB2 NOWB3
+*          WEBSERVER"CGI" NOWRITELOCK NOWRITETHRU NOXOPEN NOXREF
+*          NOZEROLENGTHFALSE NOZEROSEQ NOZWB
+     6* LEESCORE.v.01.0001
+     7
+     8 IDENTIFICATION DIVISION.
+     9 PROGRAM-ID.    LEESCORE.
+    10 AUTHOR.        DATACREDITO.
+    11******************************************************************
+    12* ESTE PROGRAMA PERMITE ACCEDER LOS DATOS DE LA BASE DE DATOS DE *
+    13* SCORE                                                          *
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   2
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL
+    14******************************************************************
+    15 DATE-WRITTEN.
+    16 DATE-COMPILED. 10-Apr-14 11:44.
+    17 CONFIGURATION SECTION.
+    18 SOURCE-COMPUTER. MICROFOCUS.
+    19 OBJECT-COMPUTER. MICROFOCUS.
+    20 INPUT-OUTPUT SECTION.
+    21 FILE-CONTROL.
+    22     SELECT ARC-BIND ASSIGN TO DISK TITLE-ARC-BIND
+    23       ORGANIZATION IS LINE SEQUENTIAL.
+    24     SELECT SECUENCIAL-ENTRADA
+    25            ASSIGN TO DISK                   SEC-ENT-TITLE
+    26            ORGANIZATION IS LINE SEQUENTIAL
+    27            ACCESS MODE IS SEQUENTIAL
+    28            FILE STATUS IS COD-RET-ENT
+    29            LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+    30
+    31     SELECT SECUENCIAL-SALIDA
+    32            ASSIGN TO DISK                   SEC-SAL-TITLE
+    33            ORGANIZATION IS LINE SEQUENTIAL
+    34            ACCESS MODE IS SEQUENTIAL
+    35            FILE STATUS IS COD-RET-SAL
+    36            LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+    37*
+    38*----------------------------------------------------------------*
+    39 DATA DIVISION.
+    40 FILE SECTION.
+    41     FD ARC-BIND.
+    42     01 REG-BIND PIC X(500).
+    43     FD SECUENCIAL-ENTRADA.
+    44     01 REG-SEC-ENT.
+    45        02 ENT-TIP-ID         PIC 9(01).
+    46        02 ENT-NUM-ID         PIC 9(11).
+    47
+    48     FD SECUENCIAL-SALIDA.
+    49     01 REG-SEC-SAL.
+    50        02 SAL-TIP-ID         PIC X(01).
+    51        02 SAL-NUM-ID         PIC X(11).
+    52        02 SAL-FECHA          PIC X(08).
+    53        02 SAL-SCORE          PIC X(03).
+    54        02 SAL-EXCLUSION      PIC X(02).
+    55        02 SAL-SEGMENTO       PIC X(01).
+    56*-----------------------------------------------------------------
+    57 WORKING-STORAGE SECTION.
+    58*@DB2CFG_BD=DB2_SSO
+    59*  Include the SQL Communications Area. This includes the
+    60*  definitions of SQLCODE, etc
+*   61 exec sql include sqlca      end-exec
+    62 01 SQLCA.
+    63     05  SQLCAID         PIC X(8)         VALUE "SQLCA   ".
+    64     05  SQLCABC         PIC S9(9) COMP-5 VALUE 136.
+    65     05  SQLCODE         PIC S9(9) COMP-5 VALUE 0.
+    66     05  SQLERRM.
+    67         49  SQLERRML    PIC S9(4) COMP-5.
+    68         49  SQLERRMC    PIC X(70).
+    69     05  SQLERRP         PIC X(8).
+    70     05  SQLERRD         PIC S9(9) COMP-5 OCCURS 6 VALUE 0.
+    71     05  SQLWARN.
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   3
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/opt/mfocus/des/cobol/cpylib/sqlca.c
+    72         10  SQLWARN0    PIC X.
+    73         10  SQLWARN1    PIC X.
+    74         10  SQLWARN2    PIC X.
+    75         10  SQLWARN3    PIC X.
+    76         10  SQLWARN4    PIC X.
+    77         10  SQLWARN5    PIC X.
+    78         10  SQLWARN6    PIC X.
+    79         10  SQLWARN7    PIC X.
+    80     05  SQLEXT.
+    81         10  SQLWARN8    PIC X.
+    82         10  SQLWARN9    PIC X.
+    83         10  SQLWARN10   PIC X.
+    84         10  SQLWARNA    REDEFINES SQLWARN10 PIC X .
+    85     05  SQLSTATE    PIC X(5).
+    86 01 TITLE-ARC-BIND.
+    87    02 TXT-ARC-BIND           PIC X(80) VALUE SPACES.
+    88 01 TITULO-BD.
+    89    02 FILLER PIC X(20) VALUE "====================".
+    90    02 FILLER PIC X(10) VALUE "======= [ ".
+    91    02 TITULO-BD-TIT    PIC X(20).
+    92    02 FILLER PIC X(10) VALUE " ] =======".
+    93    02 FILLER PIC X(20) VALUE "====================".
+    94 01 COD-RET-ENT              PIC X(2) VALUE ZEROS.
+    95 01 COD-RET-SAL              PIC X(2) VALUE ZEROS.
+    96 01 REG-BIND-AUX1            pic X(100) VALUE SPACES.
+    97 01 REG-BIND-AUX2            pic X(100) VALUE SPACES.
+    98 01 WS-TOKEN                 pic X(70) VALUE SPACES.
+    99 01 WS-P1                    pic X(70) VALUE SPACES.
+   100 01 WS-P2                    pic X(70) VALUE SPACES.
+   101 01 WS-DBCONEXION            pic X(70) VALUE SPACES.
+   102 01 WS-PROGRAMA              pic X(06) VALUE SPACES.
+   103 01 WS-ARCHIVO               pic X(70) VALUE SPACES.
+   104 01 WS-DB                    pic X(15).
+   105 01 WS-ALIAS                 pic X(15).
+   106 01 WS-AMBIENTE              pic X(15).
+   107 01 WS-AMBIENTE-INI          pic X(15).
+   108 01 WS-USR                   pic X(15).
+   109 01 WS-PASS                  pic X(18).
+   110 01 I-INT-COL1               PIC 9(04).
+   111 01 SQLCODE-I                PIC 9(08).
+   112 01 INT-COL1                 pic S9(04) comp-5.
+   113 01 C1                       PIC X(40).
+   114 01 C2                       PIC X(40).
+   115 01 C3                       PIC X(40).
+   116 01 C4                       PIC X(40).
+   117 01 int-col                  pic S9(4) comp-5.
+   118 01 ws-dyn-query.
+   119    49 ws-dyn-query-len      pic s9(4) comp-5.
+   120    49 ws-dyn-query-txt      pic x(900).
+   121 01 SEC-ENT-TITLE            PIC X(80)
+   122                             VALUE "$TEMPORALES/SCOREENT".
+   123 01 SEC-SAL-TITLE            PIC X(80)
+   124                             VALUE "$TEMPORALES/SCORESAL".
+   125
+   126 01 COMANDO                  PIC X(40) VALUE SPACES.
+   127 01 PRIVILEGIO               PIC X(20) VALUE SPACES.
+   128*** INDICADORAS
+   129****************
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   4
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         pylib/sqlca.c
+   130 01 IND-SEC-ENT                 PIC 9(01) VALUE ZEROS.
+   131*** CONTADORES
+   132***************
+   133 01  W-LEIDOS                   PIC  9(12) VALUE ZEROS.
+   134 01  W-GRABADOS                 PIC  9(12) VALUE ZEROS.
+   135
+   136 01 VARIABLES-GENERALES.
+   137    03 AREA-MSG                    PIC X(80) VALUE SPACES.
+   138    03 I-XX                        PIC 9(2) VALUE 0.
+   139    03 AREA-OUTPUT                 PIC X(1900).
+   140    03 FILLER  REDEFINES AREA-OUTPUT.
+   141       05 V-OUTPUT                 PIC X(80) OCCURS 24 TIMES.
+   142    03 IND-RMB                     PIC 9(3) VALUE 0.
+   143    03 ETX                         PIC X VALUE X'03'.
+   144    03 IND-CTA                     PIC 9(2) VALUE 1.
+   145    03 FIN-PROGRAMA                PIC 9 VALUE 0.
+   146    03 FIN-BIND                    PIC 9 VALUE 0.
+*  147    copy "CCIWS.CPY".
+   148* CCIWS.PROC.v.0003
+   149* ESTE COPY CONTIENE CADA UNA DE LAS VARIABLES UTILIZADAS EN EL
+   150* MANEJO DE CCI
+   151****************************************************************
+   152* RMB0002      * TCP001: ADAPTACIONES PARA TRABAJAR CON TCP
+   153* R.MARTINEZ   *
+   154* ENE. 24/2014 *
+   155****************************************************************
+   156* RMB0003      * MFDS01 - SE CONTROLA SI HAY COMUNICACION TCP  *
+   157* R.MARTINEZ   *          VALIDA                               *
+   158* FEB.26/2014  *                                               *
+   159****************************************************************
+   160 01  Constantes.
+   161     03  Publicname              PIC X(30)   VALUE SPACES.
+   162*    03  CCI-Module              PIC X(8)    VALUE "CCINAMPU".    RMB0002
+   163     03  CCI-Module              PIC X(8)    VALUE "CCITCP".      RMB0002
+   164     03  Machinename             PIC X(21)   VALUE SPACES.
+   165
+   166 01  Otros.
+   167     03 Var-Ambiente             PIC X(80).
+   168
+   169 01  Apuntadores-Memoria.
+   170     03  Mem-Ptr                 USAGE POINTER.
+   171     03  Mem-Size                PIC X(4)    COMP-5 VALUE 2050.
+   172     03  Mem-Flags               PIC X(4)    COMP-5 VALUE 2.
+   173
+   174 01  Parametros-CCI.
+   175     03  Srvrhandle              PIC X(4)    COMP-5 VALUE 0.
+   176     03  Maxlen                  PIC X(4)    COMP-5.
+   177     03  Recvlen                 PIC X(4)    COMP-5.
+   178     03  Actuallen               PIC X(4)    COMP-5.
+   179     03  Sendlen                 PIC X(4)    COMP-5.
+   180     03  Sessid                  PIC X(4)    COMP-5 VALUE 0.
+   181     03  Async                   PIC S9(9)   COMP-5 VALUE 0.
+   182     03  Cciend                  PIC X(4)    COMP-5 VALUE 0.
+   183
+   184  01 Signature-Block.
+   185     03  Signature.
+   186         05  CCIsign             PIC X(6).
+   187         05  CCItype             PIC X(8).
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   5
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/d/iccol/desarrollo/copys/CCIWS.CPY)
+   188         05  CCIversn            PIC X(6).
+   189     03  CCIcaltab               USAGE POINTER.
+   190  01 COD-RETORNO-CONTROLTCP      PIC X(2) VALUE SPACES.           RMB0002
+   191  01 ABIERTO-CONTROLTCP          PIC 9(1) VALUE 0.                RMB0002
+   192  01 LABEL-CONTROLTCP.                                            RMB0002
+   193     02 FILLER                   PIC X(10) VALUE "$DATABASE/".    RMB0002
+   194     02 PUBLICNAME-CONTROLTCP    PIC X(80) VALUE SPACES.          RMB0002
+   195  01 COD-RETORNO-CCITCP          PIC 9(8) VALUE 0.                RMB0003
+   196  01 TEXTO-CCITCP                PIC X(80).                       RMB0003
+   197  01 MENSAJE-CCITCP              PIC X(80).                       RMB0003
+   198 01 RES-FILE-TITLE-CCITCP        PIC X(47).                       RMB0003
+   199 01 RES-FILE-DETAILS-CCITCP.                                      RMB0003
+   200    03 RES-FILE-SIZE-CCITCP      PIC X(8)  COMP-X.                RMB0003
+   201    03 RES-FILE-DATE-CCITCP.                                      RMB0003
+   202       05 RES-FILE-DAY-CCITCP    PIC X     COMP-X.                RMB0003
+   203       05 RES-FILE-MONTH-CCITCP  PIC X     COMP-X.                RMB0003
+   204       05 RES-FILE-YEAR-CCITC    PIC X(2)  COMP-X.                RMB0003
+   205    03 RES-FILE-TIME-CCITCP.                                      RMB0003
+   206       05 RES-FILE-HH-CCITCP     PIC X     COMP-X.                RMB0003
+   207       05 RES-FILE-MM-CCITCP     PIC X     COMP-X.                RMB0003
+   208       05 RES-FILE-SS-CCITCP     PIC X     COMP-X.                RMB0003
+   209       05 RES-FILE-CC-CCITCP     PIC X     COMP-X.                RMB0003
+   210 01 FILE-RES-CODE-CCITCP         PIC X     COMP-X.                RMB0003
+   211 01 FECHA-CCITCP                 PIC 9999/99/99/999999.           RMB0003
+   212
+*  213    COPY PE-TIME.WS.
+   214*PE-TIME.WS.v.01.0001.
+   215*----------------------------------------------------------------*
+   216*
+   217*    COPY  WORKING  PROCESOS ESPECIALES VERSION OCT/2004
+   218*
+   219*----------------------------------------------------------------*
+   220*    COPY AREA DE LOG PARA CONTROL DE TIEMPOS
+   221*----------------------------------------------------------------*
+   222
+   223*-----------------------------------------------------------*
+   224*      VARIABLES DE   LOG  DE EJECUCION
+   225*-----------------------------------------------------------*
+   226 01  W-RETORNO-LOG.
+   227     03 W-STATUS-LOG            PIC  9(02) VALUE ZEROS.
+   228     03 W-ARCHIVO-LOG.
+   229        05 W-ENTIDAD-LOG        PIC  X(03) VALUE SPACES.
+   230        05 W-FILLER-LOG         PIC  X(27) VALUE SPACES.
+   231     03 W-PROGRAMA              PIC  X(20) VALUE SPACES.
+   232     03 W-FECHA-HORA-INI.
+   233        05 W-FECHA-INI          PIC  X(10) VALUE SPACES.
+   234        05 W-HORA-INI           PIC  X(08) VALUE SPACES.
+   235     03 W-FECHA-HORA-FIN.
+   236        05 W-FECHA-FIN          PIC  X(10) VALUE SPACES.
+   237        05 W-HORA-FIN           PIC  X(08) VALUE SPACES.
+   238     03 W-USER-UNIX             PIC  9(06) VALUE ZEROS.
+   239*-----------------------------------------------------------*
+   240*      VARIABLES DE TIEMPO DE EJECUCION
+   241*-----------------------------------------------------------*
+   242 01  FECHAS-LOG.
+   243     03  HORA-SIS               PIC  9(08).
+   244     03  HORA-SIS-R  REDEFINES  HORA-SIS.
+   245         05  HORA-S             PIC  9(02).
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   6
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/d/iccol/desarrollo/copys/PE-TIME.WS
+   246         05  MINU-S             PIC  9(02).
+   247         05  SEGU-S             PIC  9(02).
+   248         05  DESE-S             PIC  9(02).
+   249     03  FECHA-S                PIC  9(08).
+   250     03  FECHA-CURRENT-DATE  REDEFINES  FECHA-S.
+   251         05  FECHA-SISTEMA      PIC  X(8).
+   252     03  FECHA-S-R           REDEFINES  FECHA-S.
+   253         05 ANIO-S             PIC  9(04).
+   254         05 ANIO-S-R         REDEFINES  ANIO-S.
+   255            07  ANIO-SIG1      PIC  9(02).
+   256            07  ANIO-SIG2      PIC  9(02).
+   257         05 MESE-S             PIC  9(02).
+   258         05 DIAS-S             PIC  9(02).
+   259     03 FECHA-PG.
+   260        05 ANIO-P              PIC  9(04)     VALUE ZEROS.
+   261        05 SLASH-1             PIC  X(01)     VALUE "/".
+   262        05 MESE-P              PIC  9(02)     VALUE ZEROS.
+   263        05 SLASH-2             PIC  X(01)     VALUE "/".
+   264        05 DIAS-P              PIC  9(02)     VALUE ZEROS.
+   265     03 HORA-PG.
+   266        05 HORA-P              PIC  9(02)     VALUE ZERO.
+   267        05 DOSPUNTO-1          PIC  X(01)     VALUE ":".
+   268        05 MINU-P              PIC  9(02)     VALUE ZERO.
+   269        05 DOSPUNTO-2          PIC  X(01)     VALUE ":".
+   270        05 SEGU-P              PIC  9(02)     VALUE ZEROS.
+   271*   COPY sqlca.cpy.
+   272 01 AREA-SUBTITULOS             PIC X(80).
+   273 01 AREA-SUB-SCORE.
+   274    02 FILLER     PIC X(20) VALUE "TIPID          NUMID".
+   275    02 FILLER     PIC X(20) VALUE "FECHA          SCORE".
+   276    02 FILLER     PIC X(20) VALUE "EXCLUSION           ".
+   277    02 FILLER     PIC X(20) VALUE "SEGMENTO            ".
+   278 01 TITULO-ENCABEZADO.
+   279    02 FILLER PIC X(20) VALUE "================= [ ".
+   280    02 FILLER PIC X(20) VALUE "LECTURA  BASE  DATOS".
+   281    02 FILLER PIC X(09) VALUE "SCORE    ".
+   282    02 AMB-ENCABEZADO   PIC X(11) VALUE "DESARROLLO ".
+   283    02 FILLER PIC X(20) VALUE " ] =================".
+   284 01 RAYAS   PIC X(80) VALUE ALL "=".
+   285 01 TEXTO-COMANDO.
+   286    02 T-COMANDO                    PIC X(100).
+   287    02 FILLER                       PIC X VALUE X'00'.
+   288 LINKAGE SECTION.
+   289 SCREEN SECTION.
+   290
+   291******************************************************************
+   292 PROCEDURE DIVISION.
+   293******************************************************************
+   294 0000-PROGRAMA-PRINCIPAL.
+   295******************************************************************
+   296*0000-PROGRAMA-PRINCIPAL.
+   297* SE TOMAN LOS PARAMETROS DE EJECUCION, SE PROCEDE DE ACUERDO    *
+   298* A ESTOS A INICIAR EL TIPO DE COMUNICACION, PROCESA HASTA QUE   *
+   299* LE LLEGUE LA ORDEN DE TERMINAR,CIERRA ARCHIVOS Y TERMINA       *
+   300******************************************************************
+   301     DISPLAY "                                                "
+   302     DISPLAY "************************************************"
+   303     DISPLAY "*PROGRAMA PARA BUSCAR REGISTROS EN LA TABLA    *"
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   7
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   304     DISPLAY "*REGISTRO.SCORE DE FORMA ALEATORIA             *"
+   305     DISPLAY "************************************************"
+   306     DISPLAY "*                                              *"
+   307     DISPLAY "*           PROGRAMA : LEESCORE .CBL           *"
+   308     DISPLAY "*                                              *"
+   309     DISPLAY "************************************************"
+   310     DISPLAY "                                                "
+   311     PERFORM 10-CONTROL-TIEMPO
+   312*
+   313     DISPLAY " Fecha Inicio Proceso : " FECHA-PG
+   314     DISPLAY " Hora  Inicio Proceso : " HORA-PG.
+   315*
+   316     MOVE "LEESCORE" TO WS-PROGRAMA.
+   317     MOVE "'DESARROL'" TO WS-AMBIENTE-INI
+   318     PERFORM 1000-ABRIR-ARCHIVOS.
+   319     PERFORM 2000-LEER-SECUENCIAL-ENTRADA
+   320       UNTIL IND-SEC-ENT = 1.
+   321     PERFORM 1000-CERRAR-XXXX-DL1.
+   322     PERFORM 6000-CERRAR-ARCHIVOS.
+   323     STOP RUN.
+   324*
+   325****************************************************************
+   326*10-CONTROL-TIEMPO
+   327*RUTINA PARA TOMAR LA FECHA DEL SISTEMA
+   328****************************************************************
+   329 10-CONTROL-TIEMPO.
+   330*
+   331     ACCEPT FECHA-S                   FROM DATE
+   332     ACCEPT HORA-SIS                  FROM TIME
+   333     MOVE HORA-S                      TO HORA-P
+   334     MOVE MINU-S                      TO MINU-P
+   335     MOVE SEGU-S                      TO SEGU-P
+   336     MOVE 20                          TO ANIO-SIG1
+   337     MOVE ANIO-S                      TO ANIO-P
+   338     MOVE MESE-S                      TO MESE-P
+   339     MOVE DIAS-S                      TO DIAS-P.
+   340
+   341 1000-ABRIR-ARCHIVOS.
+   342******************************************************************
+   343*1000-ABRIR-ARCHIVOS.
+   344******************************************************************
+   345     OPEN INPUT  SECUENCIAL-ENTRADA
+   346     IF COD-RET-ENT NOT = "00"
+   347        DISPLAY "Error Abriendo el Archivo SECUENCIAL ENTRADA"
+   348        COD-RET-ENT
+   349        STOP RUN
+   350     END-IF
+   351     OPEN OUTPUT SECUENCIAL-SALIDA
+   352     IF COD-RET-SAL NOT = "00"
+   353        DISPLAY "Error Abriendo el Archivo SECUENCIAL SALIDA"
+   354        COD-RET-SAL
+   355        STOP RUN
+   356     END-IF
+   357     PERFORM 1001-INICIAR-BASEDEDATOS.
+   358
+   359******************************************************************
+   360*2000-LEER-SECUENCIAL-ENTRADA.
+   361*LECTURA ARCHIVO SECUENCIAL CON REGISTROS DE FORMA ALEATORIA
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   8
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   362******************************************************************
+   363 2000-LEER-SECUENCIAL-ENTRADA.
+   364     READ SECUENCIAL-ENTRADA NEXT RECORD
+   365         AT END MOVE 1              TO IND-SEC-ENT
+   366     END-READ.
+   367     IF IND-SEC-ENT NOT = 1
+   368        ADD 1                       TO W-LEIDOS
+   369        PERFORM 3000-LEER-BD
+   370     END-IF.
+   371
+   372 3000-LEER-BD.
+   373****************************************************************
+   374*3000-LEER-BD.
+   375*  LEER REGISTROS BASE DE DATOS SCORE
+   376****************************************************************
+   377     MOVE TITULO-ENCABEZADO TO AREA-MSG.
+   378     PERFORM 9600-ABLOCAR.
+   379     PERFORM 4000-BUSCAR-SCORE
+   380     PERFORM 9700-FIN-ABLOCAR.
+   381
+   382 4000-BUSCAR-SCORE.
+   383******************************************************************
+   384*4000-BUSCAR-SCORE.
+   385*    BUSCAR REGISTROS EN TABLA REGISTRO.SCORE
+   386******************************************************************
+   387     MOVE SPACES TO WS-DYN-QUERY-TXT.
+   388     MOVE 1 TO WS-DYN-QUERY-LEN.
+   389     STRING
+   390       "SELECT FECHA,"
+   391           " SCORE,"
+   392           " EXCLUSION,"
+   393           " SEGMENTO"
+   394       " FROM REGISTRO.SCORE"
+   395       " WHERE TIPOID ="
+   396               ENT-TIP-ID
+   397          " AND NUMID =" ENT-NUM-ID
+   398       INTO WS-DYN-QUERY-TXT     POINTER WS-DYN-QUERY-LEN
+   399     END-STRING.
+   400     SUBTRACT 1                  FROM     WS-DYN-QUERY-LEN
+   401     MOVE AREA-SUB-SCORE TO AREA-SUBTITULOS
+   402     MOVE "       SCORE         " TO TITULO-BD-TIT
+   403     MOVE TITULO-BD     TO AREA-MSG.
+   404     PERFORM 9600-ABLOCAR
+   405     MOVE AREA-SUBTITULOS     TO AREA-MSG.
+   406     PERFORM 9600-ABLOCAR
+   407     MOVE RAYAS               TO AREA-MSG
+   408     PERFORM 9600-ABLOCAR
+   409     MOVE "- REGISTROS EN LA TABLA DE SCORE"  TO AREA-MSG.
+   410     PERFORM 9600-ABLOCAR
+   412     PERFORM 1000-SETCONNECTION-XXXX-DL1.
+   413     PERFORM 1000-BUSCAR-REG-SCORE.
+   415 1001-INICIAR-BASEDEDATOS.
+   416******************************************************************
+   417*1001-INICIAR-BASEDEDATOS.
+   418* SE DECLARA EL CUROSR GENERICO A SER USADO POR LOS QUERYS
+   419* DINAMICOS Y DE ADQUIEREN TODAS LAS CREDENCIALES PARA CONECTARSE
+   420* A LAS BASES DE DATOS
+   421******************************************************************
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   9
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   422     EXEC SQL
+   423         declare vcurs cursor for dynamic_sql
+   424     END-EXEC
+   425     if sqlcode not = 0
+   426          display "Error: cannot declare "
+   427          display sqlcode
+   428          display sqlerrmc
+   429          stop run
+   430     end-if.
+   431*    PERFORM 1000-CREDENCIALES-DB2SSO-RUTSQL.
+   432     PERFORM 1000-BUSCA-USUPASS.
+   433*    PERFORM 1000-HACER-BINDS-DINAMICOS.
+   434     PERFORM 1000-CONECTARSE-A-LAS-BDS.
+   435
+   436
+   437 1000-BUSCAR-REG-SCORE.
+   438*******************************************************************
+   439*1000-BUSCAR-REG-SCORE.
+   440*    SE REALIZA EL SELECT EN LA BASE DE DATOS Y SE RECUPERAN LOS
+   441*    DATOS
+   442*******************************************************************
+   443     PERFORM 1000-PREPARE.
+   444     INITIALIZE C1,C2,C3,C4 .
+   445     EXEC SQL
+   446         fetch vcurs into :C1,:C2,:C3,:C4
+   447     END-EXEC
+   448     if sqlcode = 100
+   449        MOVE "NO HAY REGISTROS EN LA BASE DE DATOS" TO AREA-MSG
+   450        PERFORM 9600-ABLOCAR
+   451     END-IF.
+   452     PERFORM UNTIL SQLCODE NOT =0
+   453        MOVE SPACES TO AREA-MSG
+   454        MOVE INT-COL1 TO I-INT-COL1
+   455
+   456        STRING C1(1:04)
+   457               C1(6:02)
+   458               C1(9:02)
+   459               " "
+   460               C2(1:03)
+   461               " "
+   462               C3(1:02)
+   463               "  "
+   464               C4(1:01)
+   465        INTO AREA-MSG
+   466        PERFORM 9600-ABLOCAR
+   467        PERFORM 5000-GRABAR-SALIDA
+   468        EXEC SQL
+   469            fetch vcurs into :C1,:C2,:C3,:C4
+   470        END-EXEC
+   471     END-PERFORM.
+   472     if sqlcode not = 100
+   473          MOVE SQLCODE TO sqlcode-I
+   474          STRING "Error: cannot fetch   ",
+   475                 WS-ALIAS
+   476                 sqlcode-I
+   477                 sqlerrmc
+   478          INTO AREA-MSG
+   479          PERFORM 9600-ABLOCAR
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  10
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   480     END-IF.
+   481     PERFORM 1000-CLOSEVCURS.
+   482
+   483******************************************************************
+   484*5000-GRABAR-SALIDA.
+   485*GRABAR ARCHIVO SECUENCIAL SALIDA CON REGISTROS ENCONTRADOS EN BD
+   486******************************************************************
+   487 5000-GRABAR-SALIDA.
+   488     INITIALIZE REG-SEC-SAL
+   489     MOVE ENT-TIP-ID                TO SAL-TIP-ID
+   490     MOVE ENT-NUM-ID                TO SAL-NUM-ID
+   491     MOVE C1(1:4)                   TO SAL-FECHA(1:4)
+   492     MOVE C1(6:2)                   TO SAL-FECHA(5:2)
+   493     MOVE C1(9:2)                   TO SAL-FECHA(7:2)
+   494     MOVE C2(1:3)                   TO SAL-SCORE
+   495     MOVE C3(1:2)                   TO SAL-EXCLUSION
+   496     MOVE C4(1:1)                   TO SAL-SEGMENTO
+   497     ADD 1                          TO W-GRABADOS
+   498     WRITE REG-SEC-SAL
+   499     END-WRITE.
+   500
+   501
+   502 1000-BUSCA-USUPASS.
+   503******************************************************************
+   504*1000-BUSCA-USUPASS.
+   505*    PARA CADA BASE DE DATOS SE BUSCAN LAS CREDENCIALES PARA LA
+   506*    CONEXION A LA BASE DE DATOS A CONSULTAR
+   507******************************************************************
+   508     MOVE "lstxclde"      TO WS-USR
+   509     MOVE "LstxcD8"       TO WS-PASS
+   510     MOVE "LIST_DL1"      TO WS-ALIAS
+   511     PERFORM 1000-BIND-RUTSQL.
+   512
+   513 1000-CONECTARSE-A-LAS-BDS.
+   514******************************************************************
+   515*1000-CONECTARSE-A-LAS-BDS.
+   516*    CON LAS CREDENCIALES LEIDAS DE LA TABLA CONEXION SE REALIZAN
+   517*    TODAS LAS CONEXIONES A LAS BD QUE USA EL PROGRAMA
+   518******************************************************************
+   519     PERFORM 1000-CONECTAR-XXXX-DL1.
+   520 1000-CONECTAR-XXXX-DL1.
+   521******************************************************************
+   522*1000-CONECTAR-XXXX-DL1.
+   523*    RUTINA PARA REALIZAR UNA CONEXION ESTANDARD A UNA BD
+   524******************************************************************
+   525     EXEC SQL
+   526          CONNECT TO :WS-ALIAS USER :WS-USR USING :WS-PASS
+   527     END-EXEC
+   528     if sqlcode not = 0
+   529          MOVE SQLCODE TO sqlcode-I
+   530          DISPLAY "Error: cannot connect ",WS-ALIAS
+   531                sqlcode-I
+   532                sqlerrmc
+   533     end-if.
+   534 1000-SETCONNECTION-XXXX-DL1.
+   535*****************************************************************
+   536*1000-SETCONNECTION-XXXX-DL1.
+   537*    SE SELECCIONA LA BASE DE DATOS A UTILIZAR EN LOS QUERYS DADO
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  11
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   538*    QUE HAY VARIAS ABIERTAS SIMULTANEAMENTE
+   539*****************************************************************
+   540     exec sql
+   541       SET CONNECTION :WS-ALIAS
+   542     end-exec
+   543     if sqlcode not = 0
+   544          MOVE SQLCODE TO sqlcode-I
+   545          STRING "Error: cannot set connect ",WS-ALIAS
+   546                sqlcode-I
+   547                sqlerrmc
+   548          INTO AREA-MSG
+   549          PERFORM 9600-ABLOCAR
+   550     end-if.
+   551*   PROCEDIMIENTO PARA VERIFICAR TAKE OVER O FALLA EN LA CONEXION
+   552*   CON LA BASE DE DATOS; SE REALIZA UN COMMIT PARA VERIFICAR SI
+   553*   EXISTE LA CONEXION CON LA BASE DE DATOS. SI HAY PROBLEMA
+   554*   SE INTENTA DE NUEVO LA RECONEXION
+   555     EXEC SQL
+   556         commit
+   557     END-EXEC.
+   558     IF SQLCODE NOT = 0
+   559          MOVE SQLCODE TO sqlcode-I
+   560          DISPLAY "Error: cannot commit  ",WS-ALIAS
+   561                sqlcode-I
+   562                sqlerrmc
+   563          DISPLAY "SE PROCEDE A DESCONECTAR",WS-ALIAS
+   564          PERFORM 1000-DISCONNECT
+   565          DISPLAY "SE PROCEDE A CONECTAR DE NUEVO",WS-ALIAS
+   566          PERFORM 1000-CONECTAR-XXXX-DL1
+   567          IF sqlcode = 0
+   568             DISPLAY "RECONEXION EXITOSA!!!",WS-ALIAS
+   569          ELSE
+   570             DISPLAY "FALLA EN RECONEXION!!!!",WS-ALIAS
+   571          END-IF
+   572     END-IF.
+   573 1000-CERRAR-XXXX-DL1.
+   574****************************************************************
+   575*1000-CERRAR-XXXX-DL1.
+   576*    SE CIERRA LA CONEXION CON LA BASE DE DATOS ELEGIDA
+   577****************************************************************
+   578     exec sql
+   579       SET CONNECTION :WS-ALIAS
+   580     end-exec
+   581     if sqlcode not = 0
+   582          MOVE SQLCODE TO sqlcode-I
+   583          DISPLAY "Error: cannot set connect ",WS-ALIAS
+   584                sqlcode-I
+   585                sqlerrmc
+   586     end-if.
+   587     EXEC SQL
+   588         commit
+   589     END-EXEC.
+   590     if sqlcode not = 0
+   591          MOVE SQLCODE TO sqlcode-I
+   592          DISPLAY "Error: cannot commit  ",WS-ALIAS
+   593                sqlcode-I
+   594                sqlerrmc
+   595     end-if.
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  12
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   596     PERFORM 1000-DISCONNECT.
+   597 1000-DISCONNECT.
+   598****************************************************************
+   599*1000-DISCONNECT.
+   600*    SE REALIZA LA FUNCION ESTANDARD DE DESCONEXION
+   601****************************************************************
+   602     EXEC SQL
+   603         disconnect :WS-ALIAS
+   604     END-EXEC.
+   605     if sqlcode not = 0
+   606          MOVE SQLCODE TO sqlcode-I
+   607          DISPLAY "Error: cannot discon  ",WS-ALIAS
+   608                sqlcode-I
+   609                sqlerrmc
+   610     end-if.
+   611 1000-PREPARE.
+   612****************************************************************
+   613*1000-PREPARE.
+   614*    SE REALIZA LA FUNCION ESTANDAR DE PREPARAR EL QUERY
+   615*    Y DE ABRIR EL CURSOR PARA LAS BUSQUEDAS
+   616****************************************************************
+   617     EXEC SQL
+   618         prepare dynamic_sql from :ws-dyn-query
+   619     END-EXEC
+   620     if sqlcode not = 0
+   621          MOVE SQLCODE TO sqlcode-I
+   622          STRING "Error: cannot prepare ",WS-ALIAS
+   623                sqlcode-I
+   624                sqlerrmc
+   625          INTO AREA-MSG
+   626          PERFORM 9600-ABLOCAR
+   627     end-if.
+   629     EXEC SQL
+   630         open vcurs using :int-col
+   631     END-EXEC
+   632     if sqlcode not = 0
+   633          MOVE SQLCODE TO sqlcode-I
+   634          STRING "Error: cannot open vc ",WS-ALIAS
+   635                sqlcode-I
+   636                sqlerrmc
+   637          INTO AREA-MSG
+   638          PERFORM 9600-ABLOCAR
+   639     end-if.
+   640 1000-CLOSEVCURS.
+   641****************************************************************
+   642*1000-CLOSEVCURS.
+   643*    SE REALIZA LA FUNCION ESTANDAR DE CERRAR EL CURSOR
+   644****************************************************************
+   645     EXEC SQL
+   646         close vcurs
+   647     END-EXEC.
+   648     if sqlcode not = 0
+   649          MOVE SQLCODE TO sqlcode-I
+   650          STRING "Error: cannot clos vc ",WS-ALIAS
+   651                sqlcode-I
+   652                sqlerrmc
+   653          INTO AREA-MSG
+   654          PERFORM 9600-ABLOCAR
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  13
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   655     end-if.
+   656 9600-ABLOCAR.
+   657******************************************************************
+   658*9600-ABLOCAR.
+   659* ESTA RUTINA SE PUEDE INVOCAR PARA MANDAR MENSAJES ABLOCADOS,   *
+   660* LA VARIABLE IND-CTA CONTROLA LA POSICION DENTRO DE V-OUTPUT    *
+   661* AL ACABAR DE RESPONDER UNA TRANSACCION SIEMPRE HAY QUE         *
+   662* INVOVAR LA RUTINA 9700-FIN-ABLOCAR PARA DESOCUPAR EL BUFFER    *
+   663* LOS MENSAJES SON DE 80 BYTES Y MAXIMO 24
+   664******************************************************************
+   665     MOVE AREA-MSG  TO V-OUTPUT(IND-CTA)
+   666     ADD 1 TO IND-CTA .
+   667     IF IND-CTA > 16
+   668        PERFORM 10900-ENVIA-CRCR
+   669        MOVE 1 TO IND-CTA
+   670     END-IF.
+   671 9700-FIN-ABLOCAR.
+   672******************************************************************
+   673*9700-FIN-ABLOCAR.
+   674* RUTINA QUE SE ENCARGA DE DESOCUPAR EL BUFFER AL CULMINAR LA    *
+   675* RESPUESTA DE UNA TRANSACCION.                                  *
+   676******************************************************************
+   677     IF IND-CTA > 1
+   678        PERFORM 10900-ENVIA-CRCR
+   679     END-IF.
+   680 10900-ENVIA-CRCR.
+   681******************************************************************
+   682*10900-ENVIA-CRCR.
+   683* SE DETERMINA SI SE REALIZA UN DISPLAY O SE MANDA LA RESPUESTA  *
+   684* POR MEDIO DE MODULO CCI.                                       *
+   685******************************************************************
+   686     MOVE 1 TO IND-RMB.
+   687     PERFORM 10920-ENVIA-DISPLAY.
+   688 10920-ENVIA-DISPLAY.
+   689******************************************************************
+   690*10920-ENVIA-DISPLAY.
+   691* EN CASO DE QUE EL PARAMETRO DE EJECUACION NO FUE SERVER SE     *
+   692* PROCEDE A REALIZAR DISPLAY EN CAMBIO DE MANDAR AL MODULO CCI   *
+   693******************************************************************
+   694     IF IND-CTA = 1
+   695        PERFORM 10900-DISPLAY
+   696     ELSE
+   697        SUBTRACT 1 FROM IND-CTA
+   698        PERFORM 10900-DISPLAY IND-CTA TIMES.
+   699     MOVE 1 TO IND-CTA.
+   700     DISPLAY ETX WITH NO ADVANCING.
+   701 10900-DISPLAY.
+   702******************************************************************
+   703*10900-DISPLAY.
+   704* SE REALIZA EL DISPLAY DE LOS MENSAJES A RETORNAR               *
+   705******************************************************************
+   706     DISPLAY V-OUTPUT(IND-RMB) .
+   707     ADD 1 TO IND-RMB.
+   708***************************RUTINAS PARA ADQUIRIR CREDENCIALES ****
+   709 1000-BIND-RUTSQL.
+   710******************************************************************
+   711*1000-BIND-RUTSQL.
+   712*    SE REALIZA EL BIND DINAMICO PARA UNA BASE DE DATOS. SE CREA
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  14
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   713*    UN ARCHIVO CON LAS INSTRUCCINES DB2 Y SE MANDA A EJECUTAR.
+   714*    ESTO SE REALIZA CON LAS CREDENCIALES EXTRACTADAS DE LA
+   715*    TABLA DE CONEXIONES
+   716*    PARAMETROS :
+   717*          WS-PROGRAMA
+   718*          WS-ALIAS
+   719*          WS-USR
+   720*          WS-PASS
+   721******************************************************************
+   722*    REALIZAR LA CREACION DEL PAQUETE (POR SI NO ESTABA)
+   723     MOVE SPACES TO TXT-ARC-BIND.
+   724     STRING
+   725         "$TEMPORALES/"
+   726         WS-PROGRAMA DELIMITED BY SIZE
+   727         ".BIND"
+   728     INTO TXT-ARC-BIND.
+   729     OPEN OUTPUT ARC-BIND.
+   730     MOVE SPACES TO REG-BIND.
+   731     STRING "db2 CONNECT TO "
+   732            WS-ALIAS DELIMITED BY "  "
+   733            " USER "
+   734            WS-USR    DELIMITED BY "  "
+   735            " USING "
+   736            WS-PASS  DELIMITED BY "  "
+   737     INTO REG-BIND.
+   738     WRITE REG-BIND.
+   739     MOVE REG-BIND TO REG-BIND-AUX1.
+   740     MOVE "HCOBND" TO VAR-AMBIENTE.
+   741     DISPLAY VAR-AMBIENTE UPON ENVIRONMENT-NAME.
+   742     ACCEPT VAR-AMBIENTE FROM ENVIRONMENT-VALUE.
+   743     IF VAR-AMBIENTE = "HCOBND"
+   744        DISPLAY "No se ha fijado: $HCOBND!!!!! "
+   745        STOP RUN
+   746     ELSE
+   747        MOVE SPACES TO WS-ARCHIVO
+   748        STRING
+   749           VAR-AMBIENTE DELIMITED BY "  "
+   750           WS-PROGRAMA DELIMITED BY SIZE
+   751           ".bnd"
+   752        INTO WS-ARCHIVO
+   753     END-IF.
+   754     MOVE SPACES TO REG-BIND.
+   755     STRING "db2 bind $HCOBND/"
+   756        WS-PROGRAMA DELIMITED BY SIZE
+   757        ".bnd"
+   758        " ACTION ADD COLLECTION COBOLAPP "
+   759     INTO REG-BIND.
+   760     WRITE REG-BIND.
+   761     MOVE "db2 quit" TO REG-BIND.
+   762     WRITE REG-BIND.
+   763     MOVE REG-BIND TO REG-BIND-AUX2.
+   764*    REALIZAR LA ACTUALIZACION DEL PAQUETE
+   765     WRITE REG-BIND FROM REG-BIND-AUX1.
+   766     MOVE SPACES TO REG-BIND.
+   767     STRING "db2 bind $HCOBND/"
+   768        WS-PROGRAMA DELIMITED BY SIZE
+   769        ".bnd"
+   770        " ACTION REPLACE REPLVER V8 RETAIN YES "
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  15
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   771        "COLLECTION COBOLAPP "
+   772     INTO REG-BIND.
+   773     WRITE REG-BIND.
+   774     WRITE REG-BIND FROM REG-BIND-AUX2.
+   775     CLOSE ARC-BIND.
+   776*    SE MANDA A EJECUTAR LA MACRO
+   777     MOVE SPACES TO WS-ARCHIVO
+   778     STRING
+   779           "chmod +x $TEMPORALES/"
+   780           WS-PROGRAMA  DELIMITED BY SIZE
+   781           ".BIND "
+   782     INTO WS-ARCHIVO
+   783     MOVE WS-ARCHIVO  TO T-COMANDO
+   784     CALL "SYSTEM" USING TEXTO-COMANDO.
+   785     MOVE SPACES TO WS-ARCHIVO.
+   786     STRING
+   787           "$TEMPORALES/"
+   788           WS-PROGRAMA  DELIMITED BY SIZE
+   789           ".BIND "
+   790     INTO WS-ARCHIVO
+   791     MOVE WS-ARCHIVO  TO T-COMANDO
+   792     CALL "SYSTEM" USING TEXTO-COMANDO.
+   793     IF I-XX > 0
+   794        MOVE SPACES TO WS-ARCHIVO
+   795        STRING
+   796              "cp $TEMPORALES/"
+   797              WS-PROGRAMA  DELIMITED BY SIZE
+   798              ".BIND $TEMPORALES/RMBBIND"
+   799              I-XX DELIMITED BY SIZE
+   800        INTO WS-ARCHIVO
+   801        MOVE WS-ARCHIVO  TO T-COMANDO
+   802        CALL "SYSTEM" USING TEXTO-COMANDO
+   803        ADD 1 TO I-XX
+   804     END-IF.
+   805     MOVE SPACES TO WS-ARCHIVO.
+   806     STRING
+   807           "rm $TEMPORALES/"
+   808           WS-PROGRAMA  DELIMITED BY SIZE
+   809           ".BIND "
+   810     INTO WS-ARCHIVO
+   811     MOVE WS-ARCHIVO  TO T-COMANDO.
+   812     CALL "SYSTEM" USING TEXTO-COMANDO.
+   813 2000-HALLAR-USU-PASS-RUTSQL.
+   814*****************************************************************
+   815*2000-HALLAR-USU-PASS-RUTSQL.
+   816*    SE BUSCA EN LA TABLA CONEXION LAS CREDENCIALES PARA
+   817*    ACCEDER A LA BASES DE DATOS A UTILIZAR. SE ACCEDEN POR
+   818*    AMBIENTE Y NOMBRE DE LA BASE DE DATOS.
+   819*    PARAMETROS DE ENTRADA:
+   820*         WS-ALIAS  (USADO PARA LA CONEXION A LA TABLA)
+   821*         WS-USR    (USADO PARA LA CONEXION A LA TABLA)
+   822*         WS-PASS   (USADO PARA LA CONEXION A LA TABLA)
+   823*         WS-AMBIENTE (USADO PARA EL QUERY A LA TABLA)
+   824*         WS-DB       (USADO PARA EL QUERY A LA TABLA)
+   825*    SALIDAS
+   826*         C1   USUARIO (RESPUESTA DEL QUERY)
+   827*         C2   PASSWOR (RESPUESTA DEL QUERY)
+   828*         C3   ALIAS   (RESPUESTA DEL QUERY)
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  16
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   829*****************************************************************
+   830     MOVE SPACES TO WS-DYN-QUERY-TXT.
+   831     MOVE 1 TO WS-DYN-QUERY-LEN.
+   832     STRING
+   833       "SELECT "
+   834           " NOMBRE_USER,"
+   835           " CONTRASEÑA,"
+   836           " ALIAS"
+   837       " FROM PARAM.CONEXION "
+   838       " WHERE AMBIENTE="
+   839          WS-AMBIENTE
+   840          " AND NOMBRE_BD="
+   841          WS-DB
+   842          " AND APLICACION='"
+   843          WS-PROGRAMA
+   844          "' WITH UR"
+   845       INTO WS-DYN-QUERY-TXT     POINTER WS-DYN-QUERY-LEN
+   846     END-STRING.
+   847     SUBTRACT 1                    FROM     WS-DYN-QUERY-LEN
+   848*
+   849     EXEC SQL
+   850          CONNECT TO :WS-ALIAS USER :WS-USR USING :WS-PASS
+   851     END-EXEC
+   852     IF sqlcode not = 0
+   853          MOVE SQLCODE TO sqlcode-I
+   854          DISPLAY "Error: cannot connect ",WS-ALIAS
+   855                sqlcode-I
+   856                sqlerrmc
+   857          STOP RUN
+   858     END-IF.
+   859*
+   860     EXEC SQL
+   861         prepare dynamic_sql from :ws-dyn-query
+   862     END-EXEC
+   863     IF sqlcode not = 0
+   864          MOVE SQLCODE TO sqlcode-I
+   865          DISPLAY "Error: cannot prepare ",WS-ALIAS
+   866                sqlcode-I
+   867                sqlerrmc
+   868         STOP RUN
+   869     END-IF.
+   870*
+   871     EXEC SQL
+   872         open vcurs using :int-col
+   873     END-EXEC
+   874     IF sqlcode not = 0
+   875          MOVE SQLCODE TO sqlcode-I
+   876          DISPLAY "Error: cannot open vc ",WS-ALIAS
+   877                sqlcode-I
+   878                sqlerrmc
+   879          STOP RUN
+   880     END-IF.
+   881*
+   882     INITIALIZE C1,C2,C3.
+   883     EXEC SQL
+   884         fetch vcurs into :C1,:C2,:C3
+   885     END-EXEC
+   886     IF sqlcode not = 0
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  17
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   887          MOVE SQLCODE TO sqlcode-I
+   888          DISPLAY "Error: cannot fetch   ",
+   889                 WS-ALIAS," "
+   890                 WS-DB," "
+   891                 WS-AMBIENTE," "
+   892                 sqlcode-I
+   893                 sqlerrmc
+   894          IF sqlcode = 100
+   895             MOVE "NOHAY" TO C1 C2 C3
+   896          ELSE
+   897             STOP RUN
+   898          END-IF
+   899     END-IF.
+   900*
+   901     EXEC SQL
+   902         close vcurs
+   903     END-EXEC.
+   904     IF sqlcode not = 0
+   905          MOVE SQLCODE TO sqlcode-I
+   906          DISPLAY "Error: cannot clos vc ",WS-ALIAS
+   907                sqlcode-I
+   908                sqlerrmc
+   909          STOP RUN
+   910     END-IF.
+   911     EXEC SQL
+   912         commit
+   913     END-EXEC.
+   914     if sqlcode not = 0
+   915          MOVE SQLCODE TO sqlcode-I
+   916          DISPLAY "Error: cannot commit  ",WS-ALIAS
+   917                sqlcode-I
+   918                sqlerrmc
+   919          STOP RUN
+   920     end-if.
+   921     EXEC SQL
+   922         disconnect current
+   923     END-EXEC.
+   924     if sqlcode not = 0
+   925          MOVE SQLCODE TO sqlcode-I
+   926          DISPLAY "Error: cannot discon  ",WS-ALIAS
+   927                sqlcode-I
+   928                sqlerrmc
+   929          STOP RUN
+   930     end-if.
+   931 9999-GENERAR-MASIVO.
+   932     MOVE SPACES TO TXT-ARC-BIND.
+   933     STRING
+   934         "$TEMPORALES/"
+   935         WS-PROGRAMA DELIMITED BY SIZE
+   936         ".MASIVO"
+   937     INTO TXT-ARC-BIND.
+   938     OPEN OUTPUT ARC-BIND.
+   939     MOVE "P0000000000000000" TO REG-BIND.
+   940     WRITE REG-BIND.
+   941     CLOSE ARC-BIND.
+   942******************************************************************
+   943*6000-CERRAR-ARCHIVOS.
+   944*SE CIERRAN LOS ARCHIVOS QUE SE UTILIZAN EN EL PROGRAMA
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  18
+* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
+   945******************************************************************
+   946 6000-CERRAR-ARCHIVOS.
+   947
+   948     PERFORM 10-CONTROL-TIEMPO
+   949*
+   950     DISPLAY " Fecha Fin    Proceso : " FECHA-PG
+   951     DISPLAY " Hora  Fin    Proceso : " HORA-PG.
+   952*
+   953
+   954     CLOSE SECUENCIAL-ENTRADA SECUENCIAL-SALIDA.
+   955
+* Micro Focus Server Express         V5.1 revision 000 Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+*                                                        REF GNR-015065005AF
+* Total Messages:     0
+* Data:        8064     Code:       10930

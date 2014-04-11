@@ -1,0 +1,154 @@
+REMARK*VALNOMCSV-PROC.v.0001
+REMARK******************************************************************
+REMARK* RUTINA QUE REALIZA LAS VALIDACIONES BASICAS DE LOS NOMBRES DE
+REMARK* REGISTROS SIN VALIDAR, SE TIENE EN CUENTA EL NUMERO DE BLOQUES
+REMARK* CANTIDAD DE LETRAS, VOCALES POR BLOQUE Y CARACTERES NUMERICOS.
+REMARK*      SW-VALNOM-CSV = 0 NOMBRE OK, = 1 NOMBRE NO VALIDO
+REMARK******************************************************************
+       130-VALIDA-NOMBRE-CSV.
+REMARK******************************************************************
+REMARK*130-VALIDA-NOMBRE-CSV.                                          *
+REMARK******************************************************************
+           MOVE 0 TO SW-VALNOM-CSV TOT-NUMER-CSV SW-SIN-VOCAL-CSV
+           MOVE 0 TO TOT-BLOQUES-CSV TOT-BLOQUOK-CVS
+           MOVE NOMBRE-VALNOM-CSV TO NOMBRE-AUX-VALNOM-CSV
+           MOVE FUNCTION UPPER-CASE(NOMBRE-AUX-VALNOM-CSV) TO
+                NOMBRE-AUX-VALNOM-CSV
+           IF TIPO-ID-VALNOM-CSV = 2 OR 3
+                INSPECT NOMBRE-AUX-VALNOM-CSV  REPLACING ALL
+                 " S.A. " BY "      ",
+                 "." BY " ", " LTDA " BY "      ",
+                 " LIMITADA " BY "          ",
+                 " CIA " BY "     ", " COMPA/IA " BY "          ",
+                 " INVERSIONES " BY "             ",
+                 " EMPRESA " BY "         ",
+                 " CORPORACION " BY "             ",
+                 " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+                 " S " BY "   ", " A " BY "   "
+                 " Y " BY "   "
+                INSPECT NOMBRE-AUX-VALNOM-CSV  REPLACING ALL
+                 " S.A. " BY "      ",
+                 "." BY " ", " LTDA " BY "      ",
+                 " LIMITADA " BY "          ",
+                 " CIA " BY "     ", " COMPA/IA " BY "          ",
+                 " INVERSIONES " BY "             ",
+                 " EMPRESA " BY "         ",
+                 " CORPORACION " BY "             ",
+                 " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+                 " S " BY "   ", " A " BY "   "
+                 " Y " BY "   "
+           ELSE
+              INSPECT NOMBRE-AUX-VALNOM-CSV  REPLACING ALL
+                       "." BY " ","-" BY " ", "," BY " ",
+                      " DE " BY "    "," LA " BY "    ",
+                      " DEL " BY "     ", " VDA " BY "     ",
+                      " VIUDA " BY "       ",
+                      " LOS " BY "     "
+              INSPECT NOMBRE-AUX-VALNOM-CSV  REPLACING ALL
+                       "." BY " ","-" BY " ", "," BY " ",
+                      " DE " BY "    "," LA " BY "    ",
+                      " DEL " BY "     ", " VDA " BY "     ",
+                      " VIUDA " BY "       "
+                      " LOS " BY "     "
+           END-IF
+           MOVE SPACES TO VECTOR-ENT-VALNOM-CSV
+           INITIALIZE VECTOR-CARATXBLQ-CSV
+           UNSTRING CADENA-VALNOM-CSV DELIMITED BY ALL " " INTO
+              BASURA-VALNOM-CSV
+              BLQ-ENT-VALNOM-CSV(1)  BLQ-ENT-VALNOM-CSV(2)
+              BLQ-ENT-VALNOM-CSV(3)  BLQ-ENT-VALNOM-CSV(4)
+              BLQ-ENT-VALNOM-CSV(5)  BLQ-ENT-VALNOM-CSV(6)
+              BLQ-ENT-VALNOM-CSV(7)  BLQ-ENT-VALNOM-CSV(8)
+              BLQ-ENT-VALNOM-CSV(9)  BLQ-ENT-VALNOM-CSV(10)
+              BLQ-ENT-VALNOM-CSV(11) BLQ-ENT-VALNOM-CSV(12)
+              BLQ-ENT-VALNOM-CSV(13) BLQ-ENT-VALNOM-CSV(14)
+              BLQ-ENT-VALNOM-CSV(15) BLQ-ENT-VALNOM-CSV(16)
+              BLQ-ENT-VALNOM-CSV(17) BLQ-ENT-VALNOM-CSV(18)
+              BLQ-ENT-VALNOM-CSV(19) BLQ-ENT-VALNOM-CSV(20)
+           PERFORM VARYING I-CSV FROM 1 BY 1 UNTIL I-CSV > 20 OR
+              BLQ-ENT-VALNOM-CSV(I-CSV) = SPACES
+              MOVE 0 TO TOT-CARCONT-CSV TOT-VOCCONT-CSV
+              MOVE 1 TO J-CSV
+              PERFORM UNTIL J-CSV > 15 OR
+                            BLQI-ENT-VALNOM(I-CSV,J-CSV) = SPACES
+                IF BLQI-ENT-VALNOM(I-CSV,J-CSV) NUMERIC
+                   ADD  1 TO TOT-NUMER-CSV
+                   MOVE 1 TO IND-BLOQCSV-OK(I-CSV)
+                END-IF
+                IF BLQI-ENT-VALNOM(I-CSV,J-CSV) = "A" OR "E" OR
+                                  "I" OR "O" OR "U"
+                   ADD 1 TO TOT-VOCALXBLQ-CSV(I-CSV)
+                   ADD 1 TO TOT-VOCCONT-CSV
+                   IF TOT-CARCONT-CSV > 3
+                      MOVE 1 TO IND-BLOQCSV-OK(I-CSV)
+                   END-IF
+                   MOVE 0 TO TOT-CARCONT-CSV
+                ELSE
+                   ADD 1 TO TOT-CARCONT-CSV
+                   IF TOT-VOCCONT-CSV > 3
+                      MOVE 1 TO IND-BLOQCSV-OK(I-CSV)
+                   END-IF
+                   MOVE 0 TO TOT-VOCCONT-CSV
+                END-IF
+                ADD 1 TO J-CSV
+              END-PERFORM
+              COMPUTE TOT-CARAXBLQ-CSV(I-CSV) = J-CSV - 1
+           END-PERFORM
+           COMPUTE TOT-BLOQUES-CSV = I-CSV - 1
+           IF TIPO-ID-VALNOM-CSV NOT = 2 AND 3
+              IF TOT-NUMER-CSV > 0
+                 MOVE 1 TO SW-VALNOM-CSV
+              END-IF
+              IF TOT-BLOQUES-CSV < 2
+                 MOVE 1 TO SW-VALNOM-CSV
+              ELSE
+                 PERFORM 140-CONSISTENCIA-NOMBRE
+              END-IF
+           ELSE
+              IF TOT-BLOQUES-CSV < 1
+                 MOVE 1 TO SW-VALNOM-CSV
+              END-IF
+              IF TOT-BLOQUES-CSV = 1
+                 IF TOT-CARAXBLQ-CSV(1) < 2
+                    MOVE 1 TO SW-VALNOM-CSV
+                 END-IF
+              END-IF
+           END-IF.
+      *    DISPLAY "NOM : " SW-VALNOM-CSV " " NOMBRE-AUX-VALNOM-CSV
+      *            " " TOT-BLOQUES-CSV " "  TOT-NUMER-CSV " ".
+      *            VECTOR-CARATXBLQ-CSV.
+
+       140-CONSISTENCIA-NOMBRE.
+REMARK******************************************************************
+REMARK*140-CONSISTENCIA-NOMBRE                                         *
+REMARK*VERIFICA CANTIDAD BLOQUES, CARACTERES Y VOCALES POR BLOQUE      *
+REMARK******************************************************************
+           IF TOT-BLOQUES-CSV > 0
+              PERFORM VARYING I-CSV FROM 1 BY 1 UNTIL I-CSV > 20 OR
+                      TOT-CARAXBLQ-CSV(I-CSV) = 0
+               IF TIPO-ID-VALNOM-CSV = 1
+                 IF TOT-CARAXBLQ-CSV(I-CSV) > 2 AND
+                    TOT-VOCALXBLQ-CSV(I-CSV) >= 1
+                    IF IND-BLOQCSV-OK(I-CSV) = 0
+                       ADD 1 TO TOT-BLOQUOK-CVS
+                    END-IF
+                 END-IF
+               ELSE
+                 IF TOT-CARAXBLQ-CSV(I-CSV) >= 2 AND
+                    TOT-VOCALXBLQ-CSV(I-CSV) >= 1
+                    ADD 1 TO TOT-BLOQUOK-CVS
+                 END-IF
+               END-IF
+              END-PERFORM
+              IF TOT-BLOQUES-CSV = 2
+                 IF TOT-BLOQUES-CSV <> TOT-BLOQUOK-CVS
+                    MOVE 1 TO SW-VALNOM-CSV
+                 END-IF
+              ELSE
+                 IF TOT-BLOQUOK-CVS < TOT-BLOQUES-CSV - TOT-BLOQUOK-CVS
+                    MOVE 1 TO SW-VALNOM-CSV
+                 END-IF
+              END-IF
+           ELSE
+              MOVE 1 TO SW-VALNOM-CSV
+           END-IF.

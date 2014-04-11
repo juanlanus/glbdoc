@@ -1,0 +1,182 @@
+      * ICBCLA-FD.v.0030
+      * MAESTRO DE CLAVES DE ACCESO AL SISTEMA DE DATACREDITO 
+      * GJC0003 SE AMPLIO LA ESTRUCTURA
+      *******************************************************************
+      * FAC0006     * WEB002 SE CREA NUEVO CAMPO PARA INCLUIR LA IDENTI-*
+      * AGO.16/2001 * CACION DEL DUENO DE LA CLAVE.                     *
+      *******************************************************************
+      * RMB0007     * WEB003 SE ADICIONA UN TIPO NUEVO DE REGISTRO PARA *
+      * AGO.24/2001 * DATAWEB                                           *
+      *******************************************************************
+      * OLG0008     * WEB004 SE ADICIONAN NUEVOS CAMPOS Y CAMBIA LA     
+      *		    * LONGITUD DEL REGISTRO PARA ACOMODARLO A LOS NUEVOS
+      *             * CAMPOS REQUERIDOS POR LA CLAVE DE INTERNET
+      *******************************************************************
+      * FAC0010     * SE ELIMINANA CAMPOS MANEJO WEB Y RAS
+      *******************************************************************
+      * FAC0010     * NEWPRO* SE INCLUYE UN NIVEL SUPERIOR A LA CLAVE
+      *             *         SE INCLUYE VECTOR PARA MANEJO DE BDU
+      *******************************************************************
+      * FAC0011     * NEWREQ* SE INCLUYE FECHA DE BLOQUEO 
+      *******************************************************************
+      * FAC0012     * BLO001* SE MUEVE LA FECHA DE BLOQUEO AL FILLER ANTERIOR
+      *             * SE CAMBIA CAMPO A NOMBRE FLAG-COOKIE
+      *******************************************************************
+      * FAC0013     * BLO002* SE INCLUYE CAMPO PARA MANEJO DE HORARIOS
+      *             * SE CAMBIA CAMPO A NOMBRE IND-HAB-WEB
+      *******************************************************************
+      * FAC0014     * BLO003* SE INCLUYE CAMPO PARA MANEJO DE SCORE
+      *             * EXTERNO
+      *******************************************************************
+      * FAC0015     * BLO004* SE INCLUYEN NUEVAS BDUS, PARA DIRECCIONES
+      *             * Y UNA BDU XXX SIN UTILIZAR
+      *******************************************************************
+      * GJC0016     * SE DEFINE EL CAMPO SISTEMA PARA IDENTIFICAR EN CUAL
+      *             * SE UBICA LA CLAVE         
+      *******************************************************************
+      * GJC0017     * SEQCOO - SE DEFINE EL CAMPO SECUENCIA DE COOKIE           
+      * NOV.19/02   *                           
+      *******************************************************************
+      * GJC0018     * SEQCO1 - SE REDEFINE EL CAMPO IND-HAB-WEB-ABD09
+      * NOV.28/02   * YA QUE ESTE SE MANEJA COMO UN ARREGLO. PRIMER
+      *             * INDICADOR PARA DESARROLLO Y SEGUNDO PARA PRODUCCION
+      *             * LOS SUBINDICES 3 Y 4 POR EL MOMENTO ESTAN LIBRES
+      *******************************************************************
+      * FAC0019     * LLAALT * CREACION DE LLAVE ALTERNA POR CODIGO DE
+      * F.CUADROS C.* LA CLAVE. INCLUSION DEL CAMPO DE FORMATO 9(4) ATADO
+      * JUL.30/2003 * AL SCORE EXTERNO
+      *******************************************************************
+      * GJC0020     * CONRAZ: POR CLAVE SE ADICIONA LA RAZON POR LA QUE 
+      * G.JIMENEZ   * NORMALMENTE CONSULTA EN EL SISTEMA                  
+      * SEP.11/2003 * 
+      *******************************************************************
+      * GJC0021     * CTRCTO: SE ADICIONA CAMPO CORRESPONDIENTE AL      
+      * G.JIMENEZ   *         CENTRO DE COSTO PARA ALIMENTACION MANUAL    
+      * MAR./2004   * 
+      *******************************************************************
+      * GJC0022     * CAMCAL: SE CAMBIA INDICADOR DE BDU XXX POR CCC PARA
+      * G.JIMENEZ   *         HABILITAR LA CAMARA DE COMERCIO DE CALI     
+      * AGO./2004   * 
+      * FAC0022     * DESCLA * INCLUSION DE CAMPO PARA DESCRIPCION DE LA
+      * F.CUADROS C.* CLAVE 
+      * NOV.17/2004 * 
+      *******************************************************************
+      * RMB0023     * ANALI1: SE ADICIONA CAMPO CORRESPONDIENTE AL      
+      * R.MARTINEZ  *         ULTIMO PRODUCTO NORMAL  CONSULTADO 
+      * FEB./2006   *         SE CREA CAMPO PARA MANEJAR TIPO DE ANALITICO
+      *******************************************************************
+      * FAC0024     * AMPLOG * INCLUSIÓN DE CAMPO PARA SABER EL PROGRAMA
+      * F.CUADROS C.* QUE ACTUALIZA EL ARCHIVO ICBCLA CON LOS VALORES:
+      * JUL.26/2006 * 1-ICJCLA, 2-BDAACLA, 3-ICGCON, 4-ICGMDF, 5-ICGSSO
+      *******************************************************************
+      * FAC0025     * VECPRO * INCLUSIÓN DE VECTOR DE PRODUCTOS ADICIONALES
+      * F.CUADROS C.* 
+      * OCT.05/2006 * 
+      *******************************************************************
+      * GJC0026     * CARAC1 * INCLUSIÓN DE CAMPO DE INDICADOR DE CARACTE-  
+      * G.JIMENEZ C.*          RISTICAS
+      * FEB. /2007  * 
+      *******************************************************************
+      * FLT0027     * LOGFEC * ADICION DE FECHA DE ULTIMA MODIFICACION       
+      * F.LOZANO T. *          DEL REGISTRO.
+      * JUN. /2007  * 
+      *******************************************************************
+      * ABB0028     * PROD01 - INCLUIR CAMPO DE CODIGO UNICO DE PRODUCTO*
+      * ALBEIRO B.  *                                                   *
+      * DIC/2009    *                                                   *
+      * GJC0028     * PRJUR2 - INDICADOR PARA IDENTIFICAR SI LAS CLAVE  *
+      * G.JIMENEZ.  *          PUEDE HACER CONSULTAS DE HISTORIA DE CRE *     
+      * FEB/2010    *          DITO SOLO PARA PERSONAS JURIDICAS, SOLO  * 
+      *             *          PARA PERSONAS NATURALES O PARA LOS 2     *
+      *******************************************************************
+      * GJC0029     * COMBO1 - SE CREA CAMPO PARA ARMAR Y COBRAR UNS    *
+      * G.JIMENEZ.  *          MEZCLA DE PRODUCTOS LOS CUALES DEBEN     *     
+      * MAR/2013    *          ESTAR EN LA TABLA DE PRODUCTOS ADICIONALES 
+      *******************************************************************
+REMARK* RMB0030    * PRO001: MANEJO DE PRODUCTO ALFANUMERICAMENTES. SE
+REMARK* R.MARTINEZ *         REDEFINEN CAMPOS A PIC X
+REMARK* ABR./2013  *
+REMARK* CAV0030    * PRO001  - REDEFINICION DEL VECTOR DE PRODUCTOS
+      *******************************************************************
+017900 FD  CLAVE.
+018000*    FILE OF SYSTEM PASSWORDS AND USER NAMES
+018100 01  REG-CLAVE.
+WEB003   02  LLAVES-ABD09. 
+WEB004       03 LLAVE-CLAVE.
+018300         05  COD-SUSCR-ABD09     PIC 9(6).
+NEWPRO         05 CLAVE-TOT-ABD09.                                      FAC0010
+NEWPRO            07 COD-CLAVE-ABD09   PIC 9(2).                        FAC0010
+NEWPRO            07 CLAVE-AUT-ABD09   PIC X(3).                        FAC0010
+*******        05  COD-CLAVE-ABD09     PIC 9(2).                        FAC0010
+*******        05  CLAVE-AUT-ABD09     PIC X(3).                        FAC0010
+WEB003   02  REGISTRO-ABD09.
+018600     03  NOMBR-CLAVE-ABD09       PIC X(45).
+           03  FILLER REDEFINES NOMBR-CLAVE-ABD09.           
+               05  NOMBRE-ABD09        PIC X(24).
+               05  OFICINA-CONS-ABD09  PIC X(15).
+               05  CIUDAD-CONS-ABD09   PIC 9(3).
+               05  ZONA-FAC-ABD09      PIC 9(3).
+               05 FILLER REDEFINES ZONA-FAC-ABD09.
+                  06 FILLER            PIC X(2).
+                  06 NUEVO-ABD09       PIC X(1).
+018700     03  IND-BLOQUEO-ABD09       PIC 9(1).
+           03  PRIVILEGIO-ABD09        PIC 9(1).                        DAT.001
+           03  TABLA-SCOR-ABD09        PIC 9(10).                       GJC0003 
+           03  TABLA-SCOR-ABD09-R  REDEFINES TABLA-SCOR-ABD09.          GJC0003 
+               05 TAB-SCOR-ABD09       PIC 9 OCCURS 10.                 GJC0003 
+           03  FEC-CREACION-ABD09      PIC 9(8).                        GJC0003 
+           03  FEC-VENCE-ABD09         PIC 9(8).                        GJC0003 
+           03  FEC-ULT-UTIL-ABD09      PIC 9(8).                        GJC0003 
+           03  IND-EST-UTIL-ABD09      PIC X.                           FAC0004
+           03  SUB-PRIVILEGIO-ABD09    PIC X.                           FAC0004
+BDU001     03  BDU-ABD09               PIC X.                           FAC0004
+WEB002     03  TIP-ID-ABD09            PIC 9(01).                       FAC0006
+WEB002     03  NUM-ID-ABD09            PIC 9(10).                       FAC0006
+REMARK* ESTA AMPLIACION DE LA LONGITUD DEL REGISTRO SE REALIZA          FAC0007
+REMARK* EN SEPTIEMBRE DEL 2001.                                         FAC0007
+CTRCTO     03  FILLER-ABD09-1          PIC X(11).                       GJC0021 
+CTRCTO     03  CENTRO-COSTO-ABD09      PIC 9(06).                       GJC0021 
+LLAALT     03  FORMATO-ABD09           PIC 9(4).                        FAC0019
+SEQCOO     03  SEQ-COOKIE-ABD09 OCCURS 4 TIMES  PIC 9.                  GJC0017
+SISTEM     03  FLAG-SISTEMA-ABD09      PIC X.                           GJC0016
+BLO003     03  SCOR-EXTERNO-ABD09      PIC X(6).                        FAC0014
+           03  IND-HORARIO-ABD09       PIC X.                           FAC0013
+BLO001     03  FEC-BLOQUEO-ABD09       PIC 9(8).                        FAC0012 
+           03  VECTOR-BDUS-ABD09.                                       FAC0010
+               05  IND-CCO-ABD09       PIC X(3).                        FAC0010
+               05  IND-BYR-ABD09       PIC X(3).                        FAC0010
+               05  IND-BYA-ABD09       PIC X(3).                        FAC0010
+               05  IND-DIR-ABD09       PIC X(3).                        FAC0015
+CAMCAL         05  IND-CCC-ABD09       PIC X(3).                        GJC0022 
+           03  FILLER REDEFINES VECTOR-BDUS-ABD09.                      FAC0010
+               05 V-BDUS-ABD09 OCCURS 5 TIMES PIC X(3).                 FAC0010 
+BLO002     03  IND-HAB-WEB-ABD09       PIC 9(4).                        FAC0013
+SEQCO1     03  IND-HAB-WEB-ABD09-R REDEFINES IND-HAB-WEB-ABD09.         GJC0018
+SEQCO1         05 IND-SUB-HAB-WEB-ABD09 OCCURS 4 TIMES PIC 9.           GJC0018
+WEB004     03  CODIGO-TERMINAL-ABD09   PIC 9(4).
+BLO001     03  FLAG-COOKIE-ABD09       PIC X(1).                        FAC0012
+WEB004     03  FLAG-CONNOM-ABD09       PIC 9(1).
+WEB004     03  FLAG-HUELLA-ABD09       PIC 9(1).
+WEB004     03  FLAG-VALAPE-ABD09       PIC 9(1).
+WEB004     03  FLAG-COBRAB-ABD09       PIC 9(1).
+WEB004     03  FLAG-SACAPE-ABD09       PIC 9(1).
+WEB004     03  FLAG-FULTAL-ABD09       PIC 9(1).
+CONRAZ     03  RAZON-CONSULTA-ABD09    PIC 9(3).                        GJC020  
+DESCLA     03  DESCRIPCION-ABD09       PIC X(40).                       FAC0022
+ANALI1     03  ULT-PROD-ABD09          PIC 9(04).                       RMB0023 
+ANALI1     03  ANALITICO-ABD09         PIC 9(02).                       RMB0023 
+AMPLOG     03  IND-PROGRAMA-ABD09      PIC X(01).                       FAC0024 
+PRO001     03  VECTOR-PROD-ADICIONAL-ABD09.                             CAV0030
+PRO001         04 VECTOR-PROD-ADIC-BD09 OCCURS 10 TIMES.                CAV0030
+PRO001            05 FILLER                   PIC X(01).                CAV0030
+PRO001            05 V-PROD-ADICIONAL-ABD09   PIC 9(02).                CAV0030
+PRO001            05 V-PROD-ADICIONAL-ABD09-R REDEFINES                 CAV0030
+PRO001                 V-PROD-ADICIONAL-ABD09 PIC X(02).                CAV0030
+CARAC1     03  CARACTERISTICAS-ABD09   PIC 9(02).                       GJC0026 
+LOGFEC     03  FEC-ULT-MODIF-ABD09     PIC 9(08).                       FLT0027 
+PROD01     03  PRODUCTO-UNICO-ABD09    PIC 9(02).                       ABB0028
+PRO001     03  PRODUCTO-UNICO-ABD09-R REDEFINES                         RMB0030
+PRO001         PRODUCTO-UNICO-ABD09    PIC X(02).                       RMB0030
+PRJUR2     03  HC-PN-PJ-ABD09          PIC 9(01).                       GJC0028
+COMBO1     03  COMBO-ABD09             PIC X(3).                        GJC0029
+COMBO1     03  FILLER-ABD09-2          PIC X(27).                       GJC0029

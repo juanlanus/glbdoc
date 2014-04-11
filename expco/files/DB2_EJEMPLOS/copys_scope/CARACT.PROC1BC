@@ -1,0 +1,458 @@
+REMARK************************************************************************
+REMARK*CARACT.PROC1BC.v.0005
+REMARK*    CALCULO DE LAS VARIABLES PROPIAS PARA BANCO DE CREDITO 
+REMARK************************************************************************
+REMARK* RMB0002     * INIV01 - SE INCLUYE LABEL PARA INICIAR CAR EXTERNAS 
+REMARK* R MARTINEZ  * 
+REMARK* SEPTI/2009  * 
+REMARK**********************************************************************
+REMARK* RMB0003    * BCOP01: SE DEFINENEN PROCEDIMIENTOS PROPIOS DEFINIDOS
+REMARK* R.MARTINEZ *         PARA EL BANCO POPULAR PARA SER ACCEDIDAD POR
+REMARK* 25-OCT-2009*         LOS PROGRAMAS DEL PRODUCTO DECISOR
+REMARK*************************************************************************
+REMARK* RMB0004    * MOR001: SE AFINA LA BUSQUEDA EN EL VECTOR YA QUE LAS 
+REMARK* R.MARTINEZ *         MORAS EN LOS ULTIMOS 12 MESES NO DEBEN INCLUIR
+REMARK* 30-JUL-2010*         EL ACTUAL                             
+REMARK*************************************************************************
+REMARK* RMB0005     * DUDO01 - SE INCLUYE TEMPORALMENTE EL MANEJO DE LA
+REMARK* R MARTINEZ  * CARACTERISTICA 02NUM020TO NUM DUDOSOS RECAUDOS USADA
+REMARK* MARZO/2011  * EN PREDICTA HD . ESTO MIENTRAS SE PROGRAMA EN CARACT.PROC
+REMARK*************************************************************************
+INIV01 0000-INICIALIZAR-CARAC-EXTERNAS.                                 RMB0002
+BCOP01     INITIALIZE VARIABLES-CARACTBP.                               RMB0003
+BCOP01     MOVE "-99" TO                                                RMB0003
+BCOP01          00MOR109(1:3) 00MOR110(1:3) 00MOR111(1:3) 00MOR112(1:3) RMB0003
+DUDO01     MOVE "  -1" TO 02NUM020TO(1:4).                              RMB0005
+INIV01     EXIT.                                                        RMB0002
+       2249-PROCESE-CARCT-00NUM.
+DUDO01     IF (00NUMPTF NOT = "CT" AND 00NUMPTF NOT = "AH")
+DUDO01        IF 02NUM020TO(1:4) = "  -1"                               RMB0005
+DUDO01           MOVE "0000" TO 02NUM020TO(1:4)                         RMB0005
+DUDO01        END-IF                                                    RMB0005
+DUDO01        IF NOV-REPORT-ABD07 = 47                                  RMB0005
+DUDO01           ADD 1 TO 02NUM020TO                                    RMB0005
+DUDO01        END-IF                                                    RMB0005
+DUDO01     END-IF.                                                      RMB0005
+           EXIT.
+       2349-PROCESE-CARCT-00MOR.
+           IF 02MOR001BC(1:3) =" -1"
+              MOVE 0 TO 02MOR001BC
+              MOVE 0 TO 02MOR002BC
+              MOVE 0 TO 02MOR003BC
+              MOVE 0 TO 02MOR004BC
+              MOVE 0 TO 02MOR005BC
+              MOVE 0 TO 02MOR006BC
+              MOVE 999 TO 02MOR007BC
+           END-IF.
+           IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR "CC" 
+                               OR "CO"
+
+              PERFORM VARYING I-CARACT FROM 1  BY 1 UNTIL
+                         I-CARACT > 49
+                 EVALUATE 00MOR104(I-CARACT:1) 
+                    WHEN "2" 
+                      COMPUTE J-CARACT = 49 - I-CARACT
+                      IF J-CARACT < 02MOR007BC
+                         MOVE J-CARACT TO 02MOR007BC
+                      END-IF
+                 END-EVALUATE
+              END-PERFORM
+
+MOR001*       PERFORM VARYING I-CARACT FROM 38 BY 1 UNTIL               RMB0004 
+MOR001*                  I-CARACT > 49                                  RMB0004 
+MOR001        PERFORM VARYING I-CARACT FROM 37 BY 1 UNTIL               RMB0004 
+MOR001                   I-CARACT > 48                                  RMB0004 
+                 EVALUATE 00MOR104(I-CARACT:1) 
+                    WHEN "1" 
+                      IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" 
+                                           OR "HP" OR "CO" 
+                         ADD 1 TO 02MOR005BC
+                      END-IF
+                      IF COD-PORTAF-CARACT = "CC" OR "CO" 
+                         ADD 1 TO 02MOR006BC
+                      END-IF
+                      ADD 1 TO 02MOR001BC
+                    WHEN "2" 
+                      ADD 1 TO 02MOR002BC
+                    WHEN "3" 
+                      ADD 1 TO 02MOR003BC
+                    WHEN "4" 
+                      ADD 1 TO 02MOR004BC
+NEWBC               WHEN "5" 
+NEWBC                 ADD 1 TO 02MOR004BC
+                    WHEN "6" 
+                      ADD 1 TO 02MOR004BC
+                    WHEN "7" 
+                      ADD 1 TO 02MOR004BC
+NEWBC               WHEN "8" 
+NEWBC                 ADD 1 TO 02MOR004BC
+                 END-EVALUATE
+              END-PERFORM
+           END-IF.
+DEBUG**    DISPLAY  TIPO-ID-CARACT
+DEBUG**             NRO-ID-CARACT , ";"
+DEBUG**             COD-PORTAF-CARACT , ";"  
+DEBUG**             00MOR104   , ";"
+DEBUG**             02MOR001BC , ";"
+DEBUG**             02MOR002BC , ";"
+DEBUG**             02MOR003BC , ";"
+DEBUG**             02MOR004BC , ";"
+DEBUG**             02MOR005BC , ";"
+DEBUG**             02MOR006BC , ";"
+DEBUG**             02MOR007BC , ";".
+BCOP01******************************************************************RMB0003
+BCOP01* SE CALCULAN LAS CARACTERISTICAS 00MOR109-00MOR112 PARA BANCO    RMB0003
+BCOP01* POPULAR, TAMBIEN LA MISMA RUTINA VA CALCULANDO LAS DE NIVEL 01  RMB0003
+BCOP01******************************************************************RMB0003
+BCOP01*** VALORES PARA CARACTERISTICAS 00MOR0109 A 00MOR112             RMB0003
+BCOP01    MOVE 12 TO P-CARACT                                           RMB0003
+BCOP01*** 00MOR109 *** PRODUCTO CON MORA   30  EN LOS ULTIMOS 12 MESES  RMB0003
+BCOP01*** 00MOR110 *** PRODUCTO CON MORA   60  EN LOS ULTIMOS 12 MESES  RMB0003
+BCOP01*** 00MOR111 *** PRODUCTO CON MORA   90  EN LOS ULTIMOS 12 MESES  RMB0003
+BCOP01*** 00MOR112 *** PRODUCTO CON MORA >=120 EN LOS ULTIMOS 12 MESES  RMB0003
+BCOP01     MOVE ZEROS TO MFLAG-CARACT NFLAG-CARACT MORA-CARACT          RMB0003
+BCOP01     IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR       RMB0003
+BCOP01                            "CC" OR "OT" OR "CO"                  RMB0003
+BCOP01      MOVE ZEROS TO 00MOR109 00MOR110 00MOR111 00MOR112           RMB0003
+BCOP01      IF FECHA-APERT-CARACT > ZEROS                               RMB0003
+BCOP01       IF (MESES-MADUR-CARACT + 1) > 0                            RMB0003
+BCOP01        IF MESES-DESAC-CARACT <= P-CARACT                         RMB0003
+BCOP01            COMPUTE I-CARACT = (48 - P-CARACT) + 1                RMB0003
+BCOP01            PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL            RMB0003
+BCOP01                    J-CARACT > P-CARACT                           RMB0003
+BCOP01              IF V-NOR-CARACT(I-CARACT:1) = 1                     RMB0003
+BCOP01                 ADD 1 TO 00MOR109                                RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01              IF V-NOR-CARACT(I-CARACT:1) = 2                     RMB0003
+BCOP01                 ADD 1 TO 00MOR110                                RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01              IF V-NOR-CARACT(I-CARACT:1) = 3                     RMB0003
+BCOP01                 ADD 1 TO 00MOR111                                RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01              IF V-NOR-CARACT(I-CARACT:1) >= 4                    RMB0003
+BCOP01                 ADD 1 TO 00MOR112                                RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01              ADD 1 TO I-CARACT                                   RMB0003
+BCOP01            END-PERFORM                                           RMB0003
+BCOP01        ELSE                                                      RMB0003
+BCOP01          MOVE " -4" TO 00MOR109(1:3)                             RMB0003
+BCOP01          MOVE " -4" TO 00MOR110(1:3)                             RMB0003
+BCOP01          MOVE " -4" TO 00MOR111(1:3)                             RMB0003
+BCOP01          MOVE " -4" TO 00MOR112(1:3)                             RMB0003
+BCOP01        END-IF                                                    RMB0003
+BCOP01       ELSE                                                       RMB0003
+BCOP01        MOVE " -3" TO 00MOR109(1:3)                               RMB0003
+BCOP01        MOVE " -3" TO 00MOR110(1:3)                               RMB0003
+BCOP01        MOVE " -3" TO 00MOR111(1:3)                               RMB0003
+BCOP01        MOVE " -3" TO 00MOR112(1:3)                               RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01      ELSE                                                        RMB0003
+BCOP01       MOVE " -2" TO 00MOR109(1:3)                                RMB0003
+BCOP01       MOVE " -2" TO 00MOR110(1:3)                                RMB0003
+BCOP01       MOVE " -2" TO 00MOR111(1:3)                                RMB0003
+BCOP01       MOVE " -2" TO 00MOR112(1:3)                                RMB0003
+BCOP01      END-IF                                                      RMB0003
+BCOP01     END-IF.                                                      RMB0003
+BCOP01****************CALCULOS DE MOR01 ******************************* RMB0003
+BCOP01*** 01MOR109 *** NUMERO DE MORAS 30 EN LOS ULTIMOS 12 MESES       RMB0003
+BCOP01     IF 00MOR109 >= 0                                             RMB0003
+BCOP01        IF 01MOR109(IND-PORTAF-CARACT) < 0                        RMB0003
+BCOP01           MOVE ZEROS TO 01MOR109(IND-PORTAF-CARACT)              RMB0003
+BCOP01        END-IF                                                    RMB0003
+BCOP01        COMPUTE 01MOR109(IND-PORTAF-CARACT) =                     RMB0003
+BCOP01                01MOR109(IND-PORTAF-CARACT) + 00MOR109            RMB0003
+BCOP01     ELSE                                                         RMB0003
+BCOP01        IF 01MOR109(IND-PORTAF-CARACT) < 1                        RMB0003
+BCOP01         IF FUNCTION NUMVAL(00MOR109(1:3)) <                      RMB0003
+BCOP01            FUNCTION NUMVAL(01MOR109(IND-PORTAF-CARACT)(2:3))     RMB0003
+BCOP01           MOVE " " TO 01MOR109(IND-PORTAF-CARACT)(1:1)           RMB0003
+BCOP01           MOVE 00MOR109(1:3) TO 01MOR109(IND-PORTAF-CARACT)(2:3) RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-IF                                                       RMB0003
+BCOP01*** 01MOR110 *** NUMERO DE MORAS 60 EN LOS ULTIMOS 12 MESES       RMB0003
+BCOP01     IF 00MOR110 >= 0                                             RMB0003
+BCOP01        IF 01MOR110(IND-PORTAF-CARACT) < 0                        RMB0003
+BCOP01           MOVE ZEROS TO 01MOR110(IND-PORTAF-CARACT)              RMB0003
+BCOP01        END-IF                                                    RMB0003
+BCOP01        COMPUTE 01MOR110(IND-PORTAF-CARACT) =                     RMB0003
+BCOP01                01MOR110(IND-PORTAF-CARACT) + 00MOR110            RMB0003
+BCOP01     ELSE                                                         RMB0003
+BCOP01        IF 01MOR110(IND-PORTAF-CARACT) < 1                        RMB0003
+BCOP01         IF FUNCTION NUMVAL(00MOR110(1:3)) <                      RMB0003
+BCOP01            FUNCTION NUMVAL(01MOR110(IND-PORTAF-CARACT)(2:3))     RMB0003
+BCOP01           MOVE " " TO 01MOR110(IND-PORTAF-CARACT)(1:1)           RMB0003
+BCOP01           MOVE 00MOR110(1:3) TO 01MOR110(IND-PORTAF-CARACT)(2:3) RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-IF                                                       RMB0003
+BCOP01*** 01MOR111 *** NUMERO DE MORAS 90 EN LOS ULTIMOS 12 MESES       RMB0003
+BCOP01     IF 00MOR111 >= 0                                             RMB0003
+BCOP01        IF 01MOR111(IND-PORTAF-CARACT) < 0                        RMB0003
+BCOP01           MOVE ZEROS TO 01MOR111(IND-PORTAF-CARACT)              RMB0003
+BCOP01        END-IF                                                    RMB0003
+BCOP01        COMPUTE 01MOR111(IND-PORTAF-CARACT) =                     RMB0003
+BCOP01                01MOR111(IND-PORTAF-CARACT) + 00MOR111            RMB0003
+BCOP01     ELSE                                                         RMB0003
+BCOP01        IF 01MOR111(IND-PORTAF-CARACT) < 1                        RMB0003
+BCOP01         IF FUNCTION NUMVAL(00MOR111(1:3)) <                      RMB0003
+BCOP01            FUNCTION NUMVAL(01MOR111(IND-PORTAF-CARACT)(2:3))     RMB0003
+BCOP01           MOVE " " TO 01MOR111(IND-PORTAF-CARACT)(1:1)           RMB0003
+BCOP01           MOVE 00MOR111(1:3) TO 01MOR111(IND-PORTAF-CARACT)(2:3) RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-IF                                                       RMB0003
+BCOP01*** 01MOR112 *** NUMERO DE MORAS 120 O MAS EN LOS ULTIMOS 12 MESESRMB0003
+BCOP01     IF 00MOR112 >= 0                                             RMB0003
+BCOP01        IF 01MOR112(IND-PORTAF-CARACT) < 0                        RMB0003
+BCOP01           MOVE ZEROS TO 01MOR112(IND-PORTAF-CARACT)              RMB0003
+BCOP01        END-IF                                                    RMB0003
+BCOP01        COMPUTE 01MOR112(IND-PORTAF-CARACT) =                     RMB0003
+BCOP01                01MOR112(IND-PORTAF-CARACT) + 00MOR112            RMB0003
+BCOP01     ELSE                                                         RMB0003
+BCOP01        IF 01MOR112(IND-PORTAF-CARACT) < 1                        RMB0003
+BCOP01         IF FUNCTION NUMVAL(00MOR112(1:3)) <                      RMB0003
+BCOP01            FUNCTION NUMVAL(01MOR112(IND-PORTAF-CARACT)(2:3))     RMB0003
+BCOP01           MOVE " " TO 01MOR112(IND-PORTAF-CARACT)(1:1)           RMB0003
+BCOP01           MOVE 00MOR112(1:3) TO 01MOR112(IND-PORTAF-CARACT)(2:3) RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-IF                                                       RMB0003
+           EXIT.
+       2449-PROCESE-CARCT-00ACP.
+           EXIT.
+       2549-PROCESE-CARCT-00EXP.
+           EXIT.
+       2649-PROCESE-CARACT-00DEM.
+BCOP01******************************************************************RMB0003
+BCOP01*  SE SUMARIZAN LAS CARACTERISTICAS 02MORXXX PARA BANCO POPULAR.  RMB0003
+BCOP01*  SE HACE EN ESTA RUTINA DADO QUE HAY QUE HACERLO AL "FINAL" DE  RMB0003
+BCOP01*  HABER PROCESADO TODAS LAS 00MORXXX y 01MOR0001                 RMB0003
+BCOP01******************************************************************RMB0003
+BCOP01     PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9      RMB0003
+BCOP01**   02MOR002 *** # TOTAL DE PRODUCTOS MORA 30 A LA FECHA         RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR002(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR002TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR002TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR002TO = 02MOR002TO + 01MOR002(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI002TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI002TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR002(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR002TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR002(R-CARACT)(2:3) TO 02MOR002TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01**   02MOR003 *** # TOTAL DE PRODUCTOS MORA 60 A LA FECHA         RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR003(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR003TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR003TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR003TO = 02MOR003TO + 01MOR003(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI003TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01           IF 02MORI003TO = 0                                     RMB0003
+BCOP01              IF FUNCTION NUMVAL(01MOR003(R-CARACT)(2:)) <        RMB0003
+BCOP01                 FUNCTION NUMVAL(02MOR003TO(1:))                  RMB0003
+BCOP01                 MOVE 01MOR003(R-CARACT)(2:3) TO 02MOR003TO(1:3)  RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01**   02MOR004 *** # TOTAL DE PRODUCTOS MORA 90 A LA FECHA         RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR004(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR004TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR004TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR004TO = 02MOR004TO + 01MOR004(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI004TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01           IF 02MORI004TO = 0                                     RMB0003
+BCOP01              IF FUNCTION NUMVAL(01MOR004(R-CARACT)(2:)) <        RMB0003
+BCOP01                 FUNCTION NUMVAL(02MOR004TO(1:))                  RMB0003
+BCOP01                 MOVE 01MOR004(R-CARACT)(2:3) TO 02MOR004TO(1:3)  RMB0003
+BCOP01              END-IF                                              RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01**   02MOR005 *** # TOTAL DE PRODUCTOS MORA 90 A LA FECHA         RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR005(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR005TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR005TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR005TO = 02MOR005TO + 01MOR005(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI005TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI005TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR005(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR005TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR005(R-CARACT)(2:3) TO 02MOR005TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01**   02MOR006 *** # TOTAL DE PRODUCTOS CASTIGADOS A LA FECHA      RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR006(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR006TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR006TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR006TO = 02MOR006TO + 01MOR006(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI006TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI006TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR006(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR006TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR006(R-CARACT)(2:3) TO 02MOR006TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01**   02MOR007 *** # TOTAL DE PRODUCTOS RECUPERADOS A LA FECHA     RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR007(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR007TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR007TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR007TO = 02MOR007TO + 01MOR007(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI007TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI007TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR007(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR007TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR007(R-CARACT)(2:3) TO 02MOR007TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01****   02MOR109 *** # TOTAL DE MORAS DE 30 DÍAS ÚLTIMOS 12 MESES  RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR109(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR109TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR109TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR109TO = 02MOR109TO + 01MOR109(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI109TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI109TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR109(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR109TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR109(R-CARACT)(2:3) TO 02MOR109TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01***  02MOR110 *** # TOTAL DE MORAS DE 60 DÍAS ÚLTIMOS 12 MESES    RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR110(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR110TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR110TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR110TO = 02MOR110TO + 01MOR110(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI110TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI110TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR110(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR110TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR110(R-CARACT)(2:3) TO 02MOR110TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01***  02MOR111 *** # TOTAL DE MORAS DE 90 DÍAS ÚLTIMOS 12 MESES    RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR111(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR111TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR111TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR111TO = 02MOR111TO + 01MOR111(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI111TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI111TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR111(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR111TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR111(R-CARACT)(2:3) TO 02MOR111TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01***  02MOR112 *** # TOTAL DE MORAS DE 120 DÍAS ÚLTIMOS 12 MESES   RMB0003
+BCOP01       IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7              RMB0003
+BCOP01         IF FUNCTION NUMVAL(01MOR112(R-CARACT)(2:)) >= ZEROS      RMB0003
+BCOP01            IF 02MOR112TO < 0                                     RMB0003
+BCOP01               MOVE ZEROS TO 02MOR112TO                           RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01            COMPUTE 02MOR112TO = 02MOR112TO + 01MOR112(R-CARACT)  RMB0003
+BCOP01            MOVE 1        TO 02MORI112TO                          RMB0003
+BCOP01         ELSE                                                     RMB0003
+BCOP01            IF 02MORI112TO = 0                                    RMB0003
+BCOP01               IF FUNCTION NUMVAL(01MOR112(R-CARACT)(2:)) <       RMB0003
+BCOP01                  FUNCTION NUMVAL(02MOR112TO(1:))                 RMB0003
+BCOP01                  MOVE 01MOR112(R-CARACT)(2:3) TO 02MOR112TO(1:3) RMB0003
+BCOP01               END-IF                                             RMB0003
+BCOP01            END-IF                                                RMB0003
+BCOP01         END-IF                                                   RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-PERFORM.                                                 RMB0003
+BCOP01     MOVE 0       TO SW-02MOR                                     RMB0003
+BCOP01     PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9      RMB0003
+BCOP01       IF 01MORPTF(R-CARACT) NOT = ZEROS                          RMB0003
+BCOP01        MOVE 1             TO SW-02MOR                            RMB0003
+BCOP01       ELSE                                                       RMB0003
+BCOP01        MOVE "  -1" TO                                            RMB0003
+BCOP01          01MOR109(R-CARACT)(1:4)                                 RMB0003
+BCOP01          01MOR110(R-CARACT)(1:4)                                 RMB0003
+BCOP01          01MOR111(R-CARACT)(1:4)                                 RMB0003
+BCOP01          01MOR112(R-CARACT)(1:4)                                 RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01       IF DEBUGC = 1                                              RMB0003
+BCOP01          DISPLAY TIPO-ID-CARACT,";",NRO-ID-CARACT,";"            RMB0003
+BCOP01          "01MORXXX;"V-POR-CARACT(R-CARACT),";"                   RMB0003
+BCOP01          01MOR109(R-CARACT) , ";"                                RMB0003
+BCOP01          01MOR110(R-CARACT) , ";"                                RMB0003
+BCOP01          01MOR111(R-CARACT) , ";"                                RMB0003
+BCOP01          01MOR112(R-CARACT)                                      RMB0003
+BCOP01       END-IF                                                     RMB0003
+BCOP01     END-PERFORM.                                                 RMB0003
+BCOP01     IF SW-02MOR = 0                                              RMB0003
+BCOP01        MOVE " -1" TO 02MOR002TO(1:3) 02MOR003TO(1:3)             RMB0003
+BCOP01                      02MOR004TO(1:3) 02MOR005TO(1:3)             RMB0003
+BCOP01                      02MOR006TO(1:3) 02MOR007TO(1:3)             RMB0003
+BCOP01                      02MOR109TO(1:3) 02MOR110TO(1:3)             RMB0003
+BCOP01                      02MOR111TO(1:3) 02MOR112TO(1:3)             RMB0003
+BCOP01     END-IF.                                                      RMB0003
+BCOP01       IF DEBUGC = 1                                              RMB0003
+BCOP01          DISPLAY TIPO-ID-CARACT,";",NRO-ID-CARACT,";"            RMB0003
+BCOP01          "02MORXXX;"                                             RMB0003
+BCOP01          02MOR002TO         , ";"                                RMB0003
+BCOP01          02MOR003TO         , ";"                                RMB0003
+BCOP01          02MOR004TO         , ";"                                RMB0003
+BCOP01          02MOR005TO         , ";"                                RMB0003
+BCOP01          02MOR006TO         , ";"                                RMB0003
+BCOP01          02MOR007TO         , ";"                                RMB0003
+BCOP01          02MOR109TO         , ";"                                RMB0003
+BCOP01          02MOR110TO         , ";"                                RMB0003
+BCOP01          02MOR111TO         , ";"                                RMB0003
+BCOP01          02MOR112TO         , ";"                                RMB0003
+BCOP01       END-IF                                                     RMB0003
+           EXIT.
+       2749-PROCESE-CARCT-00END.
+           EXIT.
+       4249-PROCESE-CARCT-00INQ.
+           EXIT.
+       4299-INICIALIZE-CARACTBC. 
+           MOVE " -1" TO 02MOR001BC(1:3).
+           MOVE " -1" TO 02MOR002BC(1:3).
+           MOVE " -1" TO 02MOR003BC(1:3).
+           MOVE " -1" TO 02MOR004BC(1:3).
+           MOVE " -1" TO 02MOR005BC(1:3).
+           MOVE " -1" TO 02MOR006BC(1:3).
+           MOVE " -1" TO 02MOR007BC(1:3).
+           EXIT.

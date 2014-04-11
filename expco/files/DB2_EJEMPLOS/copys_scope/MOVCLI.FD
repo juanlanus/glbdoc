@@ -1,0 +1,58 @@
+REMARK* MOVCLI-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO DE MOVIMIENTOS DE CLIENTES              *
+REMARK******************************************************************
+       FD  MOVCLI.
+       01  REG-MOVCLI.
+           03  REGISTRO-MOVCLI                     PIC  X(350).
+           03  REG-RED-CAB-MOVCLI   REDEFINES  REGISTRO-MOVCLI.
+               05 CAB-IND-REG-MOVCLI               PIC  X(018).
+               05 CAB-COD-SUBSC-MOVCLI             PIC  9(006).
+               05 CAB-FECHA-CORTE-MOVCLI           PIC  9(008).
+               05 CAB-FECHA-CORTE-MOVCLI-R REDEFINES 
+	                         CAB-FECHA-CORTE-MOVCLI.
+	          07 CAB-SIG-FEC-CORTE-MOVCLI      PIC  9(002).
+		  07 CAB-ANO-FEC-CORTE-MOVCLI      PIC  9(002).
+		  07 CAB-MES-FEC-CORTE-MOVCLI      PIC  9(002).
+		  07 CAB-DIA-FEC-CORTE-MOVCLI      PIC  9(002).
+	       05 CAB-NIT-ENTIDAD-MOVCLI           PIC  9(011).
+               05 CAB-FILLER-MOVCLI                PIC  X(307).
+           03  REG-RED-DET-MOVCLI   REDEFINES  REGISTRO-MOVCLI.
+               05 DET-TIPO-ID-MOVCLI               PIC  9(001).
+               05 DET-NUM-ID-MOVCLI                PIC  9(011).
+               05 DET-NOMBRE-MOVCLI                PIC  X(045).
+               05 DET-FECHA-EXP-DOC-MOVCLI         PIC  9(008).
+               05 DET-LUGAR-EXP-DOC-MOVCLI         PIC  9(008).
+               05 DET-FECHA-NACIM-MOVCLI           PIC  9(008).
+               05 DET-ACTIV-ECONOM-MOVCLI          PIC  9(002).
+               05 DET-CIIU-MOVCLI                  PIC  9(004).
+               05 DET-ESTRATO-MOVCLI               PIC  9(002).
+               05 DET-PERS-A-CARGO-MOVCLI          PIC  9(006).
+               05 DET-FEC-ACTU-PER-MOVCLI          PIC  9(008).
+               05 DET-ESTADO-CIVIL-MOVCLI          PIC  9(002).
+               05 DET-FEC-ACTU-EST-MOVCLI          PIC  9(008).
+               05 DET-NIVEL-ESTUDI-MOVCLI          PIC  9(002).
+               05 DET-FEC-ACTU-NIV-MOVCLI          PIC  9(008).
+               05 DET-INGRESOS-MOVCLI              PIC  9(013).
+               05 DET-FEC-ACTU-ING-MOVCLI          PIC  9(008).
+               05 DET-ACTIVOS-MOVCLI               PIC  9(013).
+               05 DET-PASIVOS-MOVCLI               PIC  9(013).
+               05 DET-FEC-CORTE-BALANCE-MOVCLI     PIC  9(008).
+               05 DET-NUM-NIT-EMPLEADOR-MOVCLI     PIC  9(011).
+               05 DET-EMPLEADOR-MOVCLI             PIC  X(045).
+               05 DET-FEC-INGRESO-EMPRESA-MOVCLI   PIC  9(008).
+               05 DET-FEC-ACTU-EMP-MOVCLI          PIC  9(008).
+               05 DET-TIPO-CONTRATO-MOVCLI         PIC  9(001).
+               05 DET-FEC-ACTU-CONTR-MOVCLI        PIC  9(008).
+               05 DET-OPER-INTERNAL-MOVCLI         PIC  9(001).
+               05 DET-FEC-ACTU-OPER-MOVCLI         PIC  9(008).
+               05 DET-COD-ESTADO-TITULAR-MOVCLI    PIC  9(001).
+               05 DET-FUERZA-MAYOR-MOVCLI          PIC  9(001).
+               05 DET-FEC-REP-FUERZA-MAYOR-MOVCLI  PIC  9(008).
+               05 DET-FILLER-MOVCLI                PIC  X(072).
+           03  REG-RED-CON-MOVCLI   REDEFINES  REGISTRO-MOVCLI.
+               05 CON-IND-REG-MOVCLI	           PIC  X(018).
+               05 CON-FECHA-PROCESO-MOVCLI         PIC  9(008).
+               05 CON-NUM-REG-MOVCLI               PIC  9(008).
+	       05 CON-SUMA-REGIDE-MOVCLI	   PIC  9(018).
+               05 CON-FILLER-MOVCLI                PIC  X(298).

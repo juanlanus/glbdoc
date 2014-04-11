@@ -1,0 +1,2254 @@
+REMARK*BDLDIR.PROC.v.0028
+MATCH1$SET CONSTANT HACERMATCH"NO"                                      RMB0013 
+MATCH1$IF HACERMATCH = "SI"                                             RMB0013 
+MATCH1$DISPLAY ".............COMPILANDO BDLDIR CON MATCH **********     RMB0013 
+MATCH1$ELSE                                                             RMB0013 
+MATCH1$DISPLAY ".............COMPILANDO BDLDIR SIN MATCH **********     RMB0013 
+MATCH1$END                                                              RMB0013 
+REMARK******************************************************************
+REMARK* RUTINA CREADA PARA MANEJAR LOS ALGORITMOS DE NOMBRES. HAY VARIAS
+REMARK* RUTINAS QUE MANEJAN LO NECESARIO PARA ESTANDARIZAR Y ORDENAR.    
+REMARK*    2010-U-INICIAR-TABLAS   INICIA LAS TABLAS DE ORDENAMIENTO
+REMARK*    2018-U-PASAR-REG-ICBDIR ALMACENA EN MEMORIA LOS DATOS DEL    
+REMARK*                            REGISTRO DIRECC .
+REMARK*    2017-U-ELEGIR-DIRECCIONES SE UNIFICAN LAS DIRECCIONES Y SE 
+REMARK*                              ORDENAN DE ACUERDO A LO DEFINIDO
+REMARK*    2017-U-ELEGIR-TELEFONOS   SE UNIFICAN LOS TELEFONOS Y SE
+REMARK*                              ORDENAN DE ACUERDO A LO DEFINIDO
+REMARK*    06000-U-CARGAR-TABLA-DIRESTAN SE CARGAN EN MEMORIA LAS TABLAS
+REMARK*                                  DE ESTANDARIZACION DE NOMBRES DE
+REMARK*                                  COMPONENTES DE LAS DIRECCIONES
+REMARK*    6100-U-ESTANDARIZAR-DIRECC SE ESTANDARIZA LA DIRECCION DE ACUERDO
+REMARK*                               A LAS TABLAS DE SINONIMOS LEIDA.
+REMARK*******************************************************************
+REMARK* RMB0002      * ALG001 - SE CAMBIA EL ORDEN DE LA DIRECCION MAS
+REMARK* FEB-15-2003  *          PROBABLE AUMENTANDO UN PESO CON BASE A LA
+REMARK* R.MARTINEZ   *          CONFORMACION DE LA DIRECCION O DEL TELEFONO
+REMARK*******************************************************************
+REMARK* RMB0003      * DIRACC - SE DEJA COMO RUTINA LA VALIDACION DE LOS
+REMARK* MAR-15-2003  *          PERMISOS DE ACCESO A LA BASE DE DATOS DE 
+REMARK* R.MARTINEZ   *          DIRECCIONES                                
+REMARK*******************************************************************
+REMARK* RMB0004      * VEC001 - SE CORRIGE PROBLEMA EN EL VECTOR DE TELE
+REMARK* ABR-15-2003  *          FONOS YA QUE USABA LA FECHA DE DIRECCIONES
+REMARK* R.MARTINEZ   *          Y NO LA V-FECHATEL                         
+REMARK*******************************************************************
+REMARK* RMB0005      * UBI001 - SE CORRIGE PROBLEMA DE REFLEGAR EN EL   
+REMARK* ABR-15-2003  *          INFORME LA MISMA DIRECCION COMO R,L,C DIF-
+REMARK* R.MARTINEZ   *          ENTE EN DETALLE Y RESUMEN                  
+REMARK*******************************************************************
+REMARK* VHF0006      * ESTAN1 - SE PERMITE QUE LAS PARTICULAS PARA      
+REMARK* MAY-27-2003  *          ESTANDARIZAR SEAN DE HASTA 30 CARACTERES  
+REMARK* V.FORERO     *          
+REMARK*******************************************************************
+      * RMB0007     * VALPRI- SE ARREGLA PROBLEMA DE SACAR TIPO-5 SI   *
+      * R.MARTINEZ  *         LA PERSONA TENIA SOLO UNA CUENTA Y ESTABA*
+      * MAR.13/2003 *         BLOQUEADA                                *
+REMARK******************************************************************
+      * RMB0008     * VEC002- SE CORRIGE PROBLEMA ADICIONAL EN EL VECTO*
+      * R.MARTINEZ  *         R DE TELEFONOS AL USAR LA FECHA DE LA    *
+      * JUNIO /2003 *         DIRECCION                                *
+REMARK******************************************************************
+REMARK* FAC0009     * AMPDIR * AMPLIACIÓN DE LA ESTRUCTURA DE ARCHIVO  *
+REMARK* F.CUADROS C.*          ICBDIR. SE AMPLIAN LOS TAMAÑOS DE CAMPOS*
+REMARK* FEB.14/2006 *          TELÉFONOS, DIRECCIONES, CIUDADES, DPTOS.*
+REMARK*             * DOMICI - SEÑAL PARA MATCH DE DOMICILIACION
+***********************************************************************
+REMARK* RMB0010     * RCNCER - OPTIMIZACION PARA PRODUCTO RECONOCER. SE*
+REMARK* R.MARTINEZ  *          INCLUYO ESTANDARIZACION DE CIUDADES CON *
+REMARK* JUN.15/2006 *          BASE EN ARCHIVO DE ESTANDARIZACION DE   *
+REMARK*             *          CIUDADES DE OUTSOURCING DE DOCUMENTOS,  *
+REMARK*             *          SE ADICIONARON NUEVAS PARTICULAS        *
+REMARK*             *          ESTANDARIZADAS PARA DIRECCIONES, SE     *
+REMARK*             *          OPTIMIZO ALGORITMO PAR SELECCION DE     *
+REMARK*             *          TELEFONOS Y SE ADICIONARON LOS CONCEPTOS*
+REMARK*             *          DE DIRECCIONES CERTIFICADAS Y PUNTOS    *
+REMARK*             *          ADICIONALES (PARA GEOREFERENCIACION)    *
+REMARK******************************************************************
+REMARK* GJC0011     * NWDIRB - SE INCLUYE RUTINA EN LA QUE PARA LAS DI-*
+REMARK* G.JIMENEZ   *          RECCIONES DE BOGOTA IDENTIFICA SI EXIS- *
+REMARK* FEBRERO/2007*          TE NUEVA NOMENCLATURA                   *
+REMARK******************************************************************
+REMARK* RMB0012     * DIRB02 - SE ELIMINA LLENADO INOFICIOSO DE LA    -*
+REMARK* G.JIMENEZ   *          LLAVE DEL ARCHIVO DE NUEVA NOMENCLATURA *
+REMARK* FEB.26/2007 *          (ERROR    EN LCLZCN PROD = LOCALIZACION *
+REMARK******************************************************************
+REMARK* DLM0013     * UNLSUS - QUITAR EL LOCK AL MOMENTO DE LEER LOS   *
+REMARK* DARIO LASSO.*   REGISTROS.                                     *
+REMARK* RMB0013     * MATCH1 - MANEJO DEL MATCH DE NOMBRES A PARTIR DE *
+REMARK* R.MARTINEZ  *          LAS ESTRUCTURAS BASE DE DATACREDITO
+REMARK******************************************************************
+REMARK* CAV0014     * CARTOT - CONTROLAR QUE EL INDICE QUE MANEJA      *
+REMARK* C. VELASCO. *          LA TABLA V-CARTOT-BDLDIR NO EXCEDA LAS  *
+REMARK* R.MARTINEZ  *          10 POSICIONES DE LAS MISMA.             *
+REMARK******************************************************************
+REMARK* VHF0015     * FASEII - DENTRO DE LA OPTIMIZACION DE RECONOCER  *
+REMARK* VICTOR HUGO *          SE MODIFICA EL ALOGORITMO PARA LA       *
+REMARK* FORERO      *          SELECCION DE LA MEJOR DIRECCION         *
+REMARK* JUL.25/2008 *                                                  *
+REMARK******************************************************************
+REMARK* RMB0016     * FECH01 - SE TOMA COMO DEFAULT LA FECHA DE APERTUR*
+REMARK* RICARDO MART*          COMO MEJOR FECHA, ESTO SI LA INDIVIDUAL *
+REMARK*             *          ESTA EN CEROS, CASO QUE SERIA UN ERROR  *
+REMARK* FEB.09/2009 *          LA MEJOR SIEMPRE ES LA INDIVIDUAL       *
+REMARK******************************************************************
+REMARK* AAM0017       * TELEXC - Se agrega validación para la exclusión*
+REMARK* A. ALGARIN M. *          de teléfonos y unificación de los que *
+REMARK* MAR.12/2009   *          coincidan en los últimos 7 números.   *
+REMARK* INTERSCHEMES  *          Se agrega en la salida el campo fecha *
+REMARK*               *          último reporte.                       *
+REMARK*               * UNIDIR - UNIFICAR DIRECCIONES QUE TENGAN       *
+REMARK*               *          COINCIDENCIAS CON OTRAS DIRECCIONES   *
+REMARK*               *          CON MAYOR CANTIDAD DE INFORMACION -   *
+REMARK*               *          INCLUIR EN LA SALIDA EL CAMPO FECHA   *
+REMARK*               *          ULTIMO REP                            *
+REMARK******************************************************************
+REMARK* AAM0018       * INIVAR - Se inicializa variable de control de  *
+REMARK* A. ALGARIN M. *          unificación de direcciones.           *
+REMARK* MAR.26/2009   *                                                *
+REMARK* INTERSCHEMES  *                                                *
+REMARK******************************************************************
+REMARK* HGO0019       * UNIDI1 - Se ajusta por si existe una direccion *
+REMARK* H. GARCIA O.  *          con basura y al estandarizar queda    *
+REMARK* JUN.30/2009   *          en espacios                           *
+REMARK* INTERSCHEMES  *                                                *
+REMARK******************************************************************
+REMARK* HGO0020       * TEXTEL - Se agregan nuevas exclusiones en la   *
+REMARK* H. GARCIA O.  *          tabla de telefonos y se amplia el     *
+REMARK* SEP.01/2009   *          numero de ocurrencias                 *
+REMARK* INTERSCHEMES  *                                                *
+REMARK******************************************************************
+REMARK* HGO0021       * PYSPAR - AJUSTE QUE BUSCAR GENERAR CALIFICACION*
+REMARK* H. GARCIA O.  *          PARA LA PRIMERA Y SEGUNDA PARTICULA Y *
+REMARK* AGO. 25/2009  *          LUEGO UNIFICAR TENIENDO EN CUENTA ESTE*
+REMARK* INTERSCHEMES. *          CRITERIO                              *
+REMARK******************************************************************
+REMARK* RGH0022      * MOD022 - PARA LAS DIRECCIONES QUE SE UNIFICA    *
+REMARK* R.GALVIS     *          SE DEJA COMO FECHA DE ULTIMO REPORTE   *
+REMARK* DIC.25/2009  *          LA FECHA MAS RESIENTE DE LOS REGISTROS *
+REMARK* INTERSCHEMES *          QUE SE UNIFICAN                        *
+REMARK******************************************************************
+REMARK* PJV0023      * NN0023 - AJUSTE, PARA EVITAR QUE SE REPITAN     *
+REMARK* P.VARGAS     *          DIRECCIONES EN EL MISMO REPORTE CUNADO *
+REMARK* JUL 01/2010  *          SE TRATAN DE NUEVAS NOMENCLATURAS EN   *
+REMARK* DATACREDITO  *          BOGOTA.                                *
+REMARK******************************************************************
+REMARK* PJV0024      * AMP024 -SE AMPLIAN LOS LIMITES DE LAS TABLAS DE *
+REMARK* P.VARGAS     *         ACEPCIONES QUE SE CARGAN EN MEMORIA.    *
+REMARK* SEP 09/2010  *         TAMBIEN SE AJUSTA PARA EVITAR LA        *
+REMARK* DATACREDITO  *         REPETICION DE DIRECCIONES PARA UNA MISMA*
+REMARK*              *         IDENTIFICACION.                         *
+REMARK******************************************************************
+REMARK* PJV0025      * TEL025 -NO MOSTRAR TELÉFONOS NI CELULARES CON 1 *
+REMARK* P.VARGAS     *         Ó 9 EN LA POSICIÓN 7 DE DERECHA A       *
+REMARK* SEP 21/2010  *         IZQUIERDA                               *
+REMARK* DATACREDITO  *                                                 *
+REMARK******************************************************************
+REMARK* RMB0026      * BLOQ01 -SE ADICIONA CONTROL DE BLOQUEO DE       *
+REMARK* R.MARTINEZ   *         LA INFORMACION DE DIRECCIONES           *
+REMARK* OCT 01/2011  *                                                 *
+      *
+REMARK* FARF026      * AJUCAL - SE AJUSTA PARA SUBIR DE 30 A 40 LOS 
+REMARK* F.RODRIGUEZ  *          VALORES DE V-CALFIN-BDLDIR PARA 
+REMARK* OCT 11/2011  *          DESEMPATAR POR FECHA
+      *
+REMARK* FARF026      * AJUACE - SE AJUSTA PARA QUE  MUEVA LAS PARTICULAS 
+REMARK* F.RODRIGUEZ  *          DE LAS ACCEPCIONES COMPUESTAS.
+REMARK* OCT 12/2011  *          
+REMARK******************************************************************
+REMARK* CAV0027      * CALDYT - SE ADICIONA LAS RUTINAS   PARA VALIDAR *
+REMARK* C.VELASCO.   *          LOS CAMPOS EMAIL Y TELEFONO CELULAR.   *
+REMARK* SEP 18/2012  *          8500-VALIDAR-EMAIL-BDLDIR.             *
+REMARK*              *          8600-VALIDAR-CELULAR-BDLDIR.           *
+REMARK******************************************************************
+REMARK* RMB0028      * FCRGCR- SE INTEGRA EL AJUSTE DE FECHAS DE       *
+REMARK* R.MARTINEZ   *         DIRECCIONES DE CUENTAS CERRADAS         *
+REMARK* OCT 16/2012  *         PARA IGUALAR CON LA RUTINA BDLDI2       *
+REMARK******************************************************************
+      *
+RUTINA*-----------------INICIALIZACION               --------------------
+INICIO 2010-U-INICIAR-TABLAS.                    
+RCNCER     MOVE 0 TO NUM-OK-SEND-BDLDIR.                                RMB0010 
+RCNCER     MOVE 1 TO DIR-OK-BDLDIR.                                     RMB0010 
+RCNCER     MOVE 1 TO TEL-OK-BDLDIR.                                     RMB0010 
+RCNCER     INITIALIZE TABLA-DIR-BDLDIR.                                 RMB0010 
+RCNCER     INITIALIZE TABLA-TEL-BDLDIR.                                 RMB0010 
+RCNCER     INITIALIZE TABLA-DIRFINALES-BDLDIR.                          RMB0010 
+RCNCER     INITIALIZE TABLA-TELFINALES-BDLDIR.                          RMB0010 
+UNIDIR     INITIALIZE TABLA-DIRFINALESFIN-BDLDIR.                       AAM0017
+UNIDIR     INITIALIZE T-DIRFINALESAUX-BDLDIR.                           AAM0017
+RUTINA*--------------------- LLENADO DE DATOS  --------------------
+RCNCER 2011-ESTANDARIZAR-CIUDAD.                                        RMB0010 
+RCNCER       PERFORM 2018-TOMAR-CIUDADES-ORIGINALES                     RMB0010 
+RCNCER       IF OPEN-BDLSTDCIU-BDLDIR = 0                               RMB0010 
+RCNCER          MOVE 1 TO OPEN-BDLSTDCIU-BDLDIR                         RMB0010 
+RCNCER          OPEN INPUT BDLSTDCIU                                    RMB0010 
+RCNCER       END-IF.                                                    RMB0010 
+RCNCER       IF CIURES-DIRECC NOT = SPACES                              RMB0010 
+RCNCER           MOVE CIURES-DIRECC TO LLAVE-BDLSTDCIU                  RMB0010 
+RCNCER           PERFORM 1000-PROCESAR-CIU                              RMB0010 
+RCNCER           MOVE CIUDAD-ESTANDAR-CIU-BDLDIR TO CIURES-DIRECC       RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        IF CIUCOR-DIRECC NOT = SPACES                             RMB0010 
+RCNCER           MOVE CIUCOR-DIRECC TO LLAVE-BDLSTDCIU                  RMB0010 
+RCNCER           PERFORM 1000-PROCESAR-CIU                              RMB0010 
+RCNCER           MOVE CIUDAD-ESTANDAR-CIU-BDLDIR TO CIUCOR-DIRECC       RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        IF CIULAB-DIRECC NOT = SPACES                             RMB0010 
+RCNCER           MOVE CIULAB-DIRECC TO LLAVE-BDLSTDCIU                  RMB0010 
+RCNCER           PERFORM 1000-PROCESAR-CIU                              RMB0010 
+RCNCER           MOVE CIUDAD-ESTANDAR-CIU-BDLDIR TO CIULAB-DIRECC       RMB0010 
+RCNCER        END-IF.                                                   RMB0010 
+RCNCER 1000-PROCESAR-CIU.                                               RMB0010 
+RCNCER     MOVE FUNCTION UPPER-CASE(LLAVE-BDLSTDCIU) TO LLAVE-BDLSTDCIU.RMB0010 
+RCNCER     INSPECT LLAVE-BDLSTDCIU REPLACING ALL '"' BY " ".            RMB0010 
+RCNCER     INSPECT LLAVE-BDLSTDCIU REPLACING ALL '*' BY " ".            RMB0010 
+RCNCER     INSPECT LLAVE-BDLSTDCIU REPLACING ALL '_' BY " ".            RMB0010 
+RCNCER     MOVE 0 TO PATRON-CIU-BDLDIR CODIGO-DANE-CIU-BDLDIR.          RMB0010 
+RCNCER     MOVE SPACES TO CODIGO-DANE-CIU-BDLDIR.                       RMB0010 
+RCNCER     MOVE 0 TO I-CIU-BDLDIR.                                      RMB0010 
+RCNCER     INSPECT LLAVE-BDLSTDCIU TALLYING I-CIU-BDLDIR FOR ALL "BOGOT"RMB0010 
+RCNCER     IF I-CIU-BDLDIR > 0                                          RMB0010 
+RCNCER        MOVE 1 TO PATRON-CIU-BDLDIR                               RMB0010 
+RCNCER        MOVE "BOGOTA" TO LLAVE-BDLSTDCIU                          RMB0010 
+RCNCER     ELSE                                                         RMB0010 
+RCNCER        MOVE LLAVE-BDLSTDCIU TO LLAVE-AUX-CIU-BDLDIR              RMB0010 
+RCNCER        UNSTRING LLAVE-AUX21-CIU-BDLDIR DELIMITED BY ALL " " INTO RMB0010 
+RCNCER           BASURA-CIU-BDLDIR CODIGO-DANE-CIU-BDLDIR               RMB0010 
+RCNCER        INSPECT CODIGO-DANE-CIU-BDLDIR REPLACING ALL " " BY "0"   RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER     MOVE SPACES TO CAMPO-CIU-BDLDIR                              RMB0010 
+RCNCER     MOVE 1 TO I-CIU-BDLDIR J-CIU-BDLDIR                          RMB0010 
+RCNCER     PERFORM UNTIL I-CIU-BDLDIR > 30                              RMB0010 
+RCNCER        IF LLAVE-BDLSTDCIU(I-CIU-BDLDIR:1) <> " "                 RMB0010 
+RCNCER           IF LLAVE-BDLSTDCIU(I-CIU-BDLDIR:1) =                   RMB0010 
+RCNCER              ("(" OR "-" OR "." OR "," OR "/" OR "\" )           RMB0010 
+RCNCER                                  AND J-CIU-BDLDIR > 4            RMB0010 
+RCNCER              MOVE 50 TO I-CIU-BDLDIR                             RMB0010 
+RCNCER           ELSE                                                   RMB0010 
+RCNCER              IF LLAVE-BDLSTDCIU(I-CIU-BDLDIR:1) NOT NUMERIC      RMB0010 
+RCNCER                 MOVE LLAVE-BDLSTDCIU(I-CIU-BDLDIR:1)             RMB0010 
+RCNCER                      TO CAMPO-CIU-BDLDIR(J-CIU-BDLDIR:1)         RMB0010 
+RCNCER                 ADD 1 TO J-CIU-BDLDIR                            RMB0010 
+RCNCER              END-IF                                              RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        ADD 1 TO I-CIU-BDLDIR                                     RMB0010 
+RCNCER     END-PERFORM.                                                 RMB0010 
+RCNCER     IF CAMPO-CIU-BDLDIR = SPACES                                 RMB0010 
+RCNCER        IF CODIGO-DANE-CIU-BDLDIR NUMERIC AND                     RMB0010 
+RCNCER           CODIGO-DANE-N-CIU-BDLDIR > 01000000                    RMB0010 
+RCNCER           MOVE CODIGO-DANE-CIU-BDLDIR TO CAMPO-CIU-BDLDIR        RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER     MOVE CAMPO-CIU-BDLDIR TO LLAVE-BDLSTDCIU                     RMB0010 
+RCNCER     READ BDLSTDCIU INVALID KEY                                   RMB0010 
+RCNCER            MOVE SPACES        TO CIUDAD-ESTANDAR-CIU-BDLDIR      RMB0010 
+RCNCER        NOT INVALID KEY                                           RMB0010 
+RCNCER            MOVE CIUDAD-BDLSTDCIU TO CIUDAD-ESTANDAR-CIU-BDLDIR   RMB0010 
+RCNCER     END-READ.                                                    RMB0010 
+LLENAR 2018-U-PASAR-REG-ICBDIR.
+REMARK******************************************************************
+REMARK* SE VERIFICA QUE NO SEAN MAS DE 500 DIRECCIONES LAS QUE SE VAN  *
+REMARK* A ENCADENAR                                                    *
+REMARK******************************************************************
+RCNCER     IF NUM-OK-SEND-BDLDIR <= 500                                 RMB0010 
+LLENAR        PERFORM 2018-TOMAR-DATOS
+LLENAR     END-IF.
+RCNCER     ADD 1 TO NUM-OK-SEND-BDLDIR.                                 RMB0010 
+
+RCNCER 2018-TOMAR-CIUDADES-ORIGINALES.                                  RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER*2018-TOMAR-CIUDADES-ORIGINALES.                                 *RMB0010 
+RCNCER*    TOMA LAS CIUDADES ORIGINALES DEL ARCHIVO DE DIRECCIONES     *RMB0010 
+RCNCER*    PARA CADA TIPO DE INFORMACION (RESIDENCIAL, LABORAL, ETC)   *RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER     MOVE CIURES-DIRECC TO CIUDAD-RES-A-ESTANDAR-BDLDIR           RMB0010 
+RCNCER     MOVE CIULAB-DIRECC TO CIUDAD-LAB-A-ESTANDAR-BDLDIR           RMB0010 
+RCNCER     MOVE CIUCOR-DIRECC TO CIUDAD-COR-A-ESTANDAR-BDLDIR.          RMB0010 
+
+LLENAR 2018-TOMAR-DATOS.
+REMARK******************************************************************
+REMARK* SE TOMAN LOS DATOS DEL REGISTRO DE DIRECCIONES Y SE PASAN A LOS*
+REMARK* SIGUIENTES VECTORES:                                           *
+REMARK*        DIRECCIONES     V-DIRECCION      DIRECCION
+REMARK*                        V-TIPODIR        UBICACION
+REMARK*                        V-CIUDADDIR      CIUDAD
+REMARK*                        V-SUSDIR         CODIGO SUSCRIPTOR
+REMARK*                        V-FECHADIR       FECHA MEJOR       
+REMARK*                        V-TNUMDIR        VECTOR DE NUMEROS ORDENAD
+REMARK*                        V-HASDIR         STRING DE NUMEROS ORDENAD
+REMARK*        TELEFONOS       V-TELEFONO       TELEFONO
+REMARK*                        V-TIPOTEL        UBICACION
+REMARK*                        V-CIUDTEL        CIUDAD
+REMARK*                        V-SUSTEL         CODIGO SUSCRIPTOR
+REMARK*                        V-FECHATEL       FECHA MEJOR       
+REMARK******************************************************************
+RCNCER     PERFORM 2011-ESTANDARIZAR-CIUDAD.                            RMB0010 
+LLENAR     IF CIURES-DIRECC NOT = SPACES 
+RCNCER        IF DIRRES-DIRECC NOT = SPACES AND DIR-OK-BDLDIR < 100     RMB0010 
+RCNCER           MOVE DIRRES-DIRECC TO V-DIRECCION-BDLDIR(DIR-OK-BDLDIR)RMB0010 
+RCNCER           MOVE "R"           TO V-TIPODIR-BDLDIR(DIR-OK-BDLDIR)  RMB0010 
+RCNCER                                 IND-DATO-BDLDIR                  RMB0010 
+RCNCER           MOVE CIURES-DIRECC TO V-CIUDADDIR-BDLDIR(DIR-OK-BDLDIR)RMB0010 
+RCNCER           MOVE COD-SUS-DIRECC TO V-SUSDIR-BDLDIR(DIR-OK-BDLDIR)  RMB0010 
+RCNCER           MOVE DIRRES-DIRECC TO T-CARDIR-BDLDIR                  RMB0010 
+FASEII           PERFORM 2019-ELEGIR-FECHA-DIR                          VHF0015 
+RCNCER           MOVE FECHA-MEJOR-BDLDIR                                RMB0010 
+RCNCER                TO V-FECHADIR-BDLDIR(DIR-OK-BDLDIR)               RMB0010 
+UNIDIR           MOVE FECULT-DIRECC TO V-FECULT-BDLDIR(DIR-OK-BDLDIR)   AAM0017
+LLENAR           PERFORM 2020-U-BUSCAR-NUMEROS
+LLENAR        END-IF
+RCNCER        IF TELRES-DIRECC > 0 AND TEL-OK-BDLDIR < 100 AND          RMB0010 
+LLENAR           TELRES-DIRECC < 9999999999
+RCNCER           MOVE CIURES-DIRECC TO V-CIUDADTEL-BDLDIR(TEL-OK-BDLDIR)RMB0010 
+RCNCER           MOVE TELRES-DIRECC TO V-TELEFONO-BDLDIR(TEL-OK-BDLDIR) RMB0010 
+RCNCER                                 V-HASTEL-BDLDIR(TEL-OK-BDLDIR)   RMB0010 
+RCNCER           MOVE COD-SUS-DIRECC TO V-SUSTEL-BDLDIR(TEL-OK-BDLDIR)  RMB0010 
+RCNCER           MOVE "R"           TO V-TIPOTEL-BDLDIR(TEL-OK-BDLDIR)  RMB0010 
+RCNCER                                 IND-DATO-BDLDIR                  RMB0010 
+FASEII           PERFORM 2019-ELEGIR-FECHA-TEL                          VHF0015 
+RCNCER           MOVE FECHA-MEJOR-BDLDIR                                RMB0010 
+RCNCER                TO V-FECHATEL-BDLDIR(TEL-OK-BDLDIR)               RMB0010 
+TELEXC           MOVE FECULT-DIRECC                                     AAM0017
+TELEXC                TO V-FECULTTEL-BDLDIR(TEL-OK-BDLDIR)              AAM0017
+RCNCER           ADD 1 TO TEL-OK-BDLDIR                                 RMB0010 
+LLENAR     END-IF.
+AMPDIR     IF CIULAB-DIRECC NOT = SPACES                                FAC0009 
+RCNCER        IF DIRLAB-DIRECC NOT = SPACES AND DIR-OK-BDLDIR < 100     RMB0010 
+RCNCER           MOVE DIRLAB-DIRECC TO V-DIRECCION-BDLDIR(DIR-OK-BDLDIR)RMB0010 
+RCNCER           MOVE "L"           TO V-TIPODIR-BDLDIR(DIR-OK-BDLDIR)  RMB0010 
+RCNCER                                 IND-DATO-BDLDIR                  RMB0010 
+RCNCER           MOVE CIULAB-DIRECC TO V-CIUDADDIR-BDLDIR(DIR-OK-BDLDIR)RMB0010 
+RCNCER           MOVE COD-SUS-DIRECC TO V-SUSDIR-BDLDIR(DIR-OK-BDLDIR)  RMB0010 
+RCNCER           MOVE DIRLAB-DIRECC TO T-CARDIR-BDLDIR                  RMB0010 
+FASEII           PERFORM 2019-ELEGIR-FECHA-DIR                          VHF0015 
+RCNCER           MOVE FECHA-MEJOR-BDLDIR                                RMB0010 
+RCNCER                TO V-FECHADIR-BDLDIR(DIR-OK-BDLDIR)               RMB0010 
+UNIDIR           MOVE FECULT-DIRECC TO V-FECULT-BDLDIR(DIR-OK-BDLDIR)   AAM0017
+AMPDIR           PERFORM 2020-U-BUSCAR-NUMEROS                          FAC0009 
+AMPDIR        END-IF                                                    FAC0009 
+RCNCER        IF TELLAB-DIRECC > 0 AND TEL-OK-BDLDIR < 100 AND          RMB0010 
+AMPDIR           TELLAB-DIRECC < 9999999999                             FAC0009 
+RCNCER           MOVE CIULAB-DIRECC TO V-CIUDADTEL-BDLDIR(TEL-OK-BDLDIR)RMB0010 
+RCNCER           MOVE TELLAB-DIRECC TO V-TELEFONO-BDLDIR(TEL-OK-BDLDIR) RMB0010 
+RCNCER                              V-HASTEL-BDLDIR(TEL-OK-BDLDIR)      RMB0010 
+RCNCER           MOVE COD-SUS-DIRECC TO V-SUSTEL-BDLDIR(TEL-OK-BDLDIR)  RMB0010 
+RCNCER           MOVE "L"           TO V-TIPOTEL-BDLDIR(TEL-OK-BDLDIR)  RMB0010 
+RCNCER                                 IND-DATO-BDLDIR                  RMB0010 
+FASEII           PERFORM 2019-ELEGIR-FECHA-TEL                          VHF0015 
+RCNCER           MOVE FECHA-MEJOR-BDLDIR                                RMB0010 
+RCNCER                TO V-FECHATEL-BDLDIR(TEL-OK-BDLDIR)               RMB0010 
+TELEXC           MOVE FECULT-DIRECC                                     AAM0017
+TELEXC                TO V-FECULTTEL-BDLDIR(TEL-OK-BDLDIR)              AAM0017
+RCNCER           ADD 1 TO TEL-OK-BDLDIR                                 RMB0010 
+AMPDIR        END-IF                                                    FAC0009 
+AMPDIR     END-IF.                                                      FAC0009 
+RCNCER     IF CIUCOR-DIRECC NOT = SPACES AND DIR-OK-BDLDIR < 100 AND    RMB0010 
+LLENAR        DIRCOR-DIRECC NOT = SPACES
+RCNCER        MOVE CIUCOR-DIRECC TO V-CIUDADDIR-BDLDIR(DIR-OK-BDLDIR)   RMB0010 
+RCNCER        MOVE DIRCOR-DIRECC TO V-DIRECCION-BDLDIR(DIR-OK-BDLDIR)   RMB0010 
+RCNCER        MOVE COD-SUS-DIRECC TO V-SUSDIR-BDLDIR(DIR-OK-BDLDIR)     RMB0010 
+RCNCER        MOVE "C"           TO V-TIPODIR-BDLDIR(DIR-OK-BDLDIR)     RMB0010 
+RCNCER                              IND-DATO-BDLDIR                     RMB0010 
+RCNCER        MOVE DIRCOR-DIRECC TO T-CARDIR-BDLDIR                     RMB0010 
+FASEII        PERFORM 2019-ELEGIR-FECHA-DIR                             VHF0015 
+RCNCER        MOVE FECHA-MEJOR-BDLDIR                                   RMB0010 
+RCNCER             TO V-FECHADIR-BDLDIR(DIR-OK-BDLDIR)                  RMB0010 
+UNIDIR           MOVE FECULT-DIRECC TO V-FECULT-BDLDIR(DIR-OK-BDLDIR)   AAM0017
+LLENAR        PERFORM 2020-U-BUSCAR-NUMEROS
+LLENAR     END-IF.
+FASEII 2019-ELEGIR-FECHA-DIR.                                           VHF0015 
+REMARK******************************************************************RMB0010
+REMARK*2019-ELEGIR-FECHA-DIR.                                          *VHF0015
+REMARK*    RUTINA PARA SELECCIONAR LA MEJOR FECHA DEL DATO EN PROCESO  *RMB0010
+REMARK******************************************************************RMB0010
+REMARK***  POR DEFECTO SE TOMA LA MEJOR FECHA ENTRE LA DE ACTUALIZACION RMB0010
+REMARK***  Y LA DE CREACION                                             RMB0010                                  
+FECH01*    IF FECACT-DIRECC >  FECCRE-DIRECC                            RMB0016 
+FECH01*       MOVE FECACT-DIRECC TO FECHA-MEJOR-BDLDIR                  RMB0016 
+FECH01*    ELSE                                                         RMB0016 
+FECH01*       MOVE FECAPE-DIRECC TO FECHA-MEJOR-BDLDIR                  RMB0016 
+FECH01*    END-IF.                                                      RMB0016 
+FECH01     MOVE FECAPE-DIRECC TO FECHA-MEJOR-BDLDIR *> DEFAULT SI ES 0  RMB0016 
+REMARK***  SI EXISTE LA FECHA ASOCIADA AL TIPO DE DATO SE TOMA COMO LA  RMB0010
+REMARK***  MEJOR
+RCNCER     EVALUATE IND-DATO-BDLDIR                                     RMB0010 
+RCNCER        WHEN "R"                                                  RMB0010 
+FASEII           IF FECDRES-DIRECC > 0                                  VHF0015 
+FASEII              MOVE FECDRES-DIRECC TO FECHA-MEJOR-BDLDIR           VHF0015 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        WHEN "L"                                                  RMB0010 
+RCNCER           IF FECDLAB-DIRECC > 0                                  VHF0015 
+FASEII              MOVE FECDLAB-DIRECC TO FECHA-MEJOR-BDLDIR           VHF0015 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        WHEN "C"                                                  RMB0010 
+FASEII           IF FECDCOR-DIRECC > 0                                  VHF0015 
+FASEII              MOVE FECDCOR-DIRECC TO FECHA-MEJOR-BDLDIR           VHF0015 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER     END-EVALUATE.                                                RMB0010 
+
+FASEII 2019-ELEGIR-FECHA-TEL.                                           VHF0015 
+REMARK******************************************************************VHF0015
+REMARK*2019-ELEGIR-FECHA-TEL.                                          *VHF0015
+REMARK*    FECHAS PARA EL MEJOR TELEFONO                               *VHF0015
+REMARK*    RUTINA PARA SELECCIONAR LA MEJOR FECHA DEL DATO EN PROCESO  *VHF0015
+REMARK******************************************************************VHF0015
+REMARK***  POR DEFECTO SE TOMA LA MEJOR FECHA ENTRE LA DE ACTUALIZACION VHF0015
+REMARK***  Y LA DE CREACION                                             VHF0015
+FECH01*    IF FECACT-DIRECC >  FECCRE-DIRECC                            RMB0016 
+FECH01*       MOVE FECACT-DIRECC TO FECHA-MEJOR-BDLDIR                  RMB0016 
+FECH01*    ELSE                                                         RMB0016 
+FECH01*       MOVE FECAPE-DIRECC TO FECHA-MEJOR-BDLDIR                  RMB0016 
+FECH01*    END-IF.                                                      RMB0016 
+FECH01     MOVE FECAPE-DIRECC TO FECHA-MEJOR-BDLDIR *> DEFAULT SI ES 0  RMB0016 
+REMARK***  SI EXISTE LA FECHA ASOCIADA AL TIPO DE DATO SE TOMA COMO LA  VHF0015
+REMARK***  MEJOR                                                        VHF0015
+FASEII     EVALUATE IND-DATO-BDLDIR                                     VHF0015
+FASEII        WHEN "R"                                                  VHF0015
+FASEII           IF FECTRES-DIRECC > 0                                  VHF0015
+FASEII              MOVE FECTRES-DIRECC TO FECHA-MEJOR-BDLDIR           VHF0015
+FASEII           END-IF                                                 VHF0015
+FASEII        WHEN "L"                                                  VHF0015
+FASEII           IF FECTLAB-DIRECC > 0                                  VHF0015
+FASEII              MOVE FECTLAB-DIRECC TO FECHA-MEJOR-BDLDIR           VHF0015
+FASEII           END-IF                                                 VHF0015
+FASEII     END-EVALUATE.                                                VHF0015
+
+LLENAR 2020-U-BUSCAR-NUMEROS.
+RCNCER     MOVE 1 TO I-BDLDIR.                                          RMB0010 
+RCNCER     MOVE 0 TO J-BDLDIR.                                          RMB0010 
+RCNCER     MOVE " " TO CAR-ANT-BDLDIR.                                  RMB0010 
+RCNCER     INITIALIZE T-CARTOT-BDLDIR.                                  RMB0010 
+CARTOT     PERFORM UNTIL I-BDLDIR > 60 OR J-BDLDIR >= 10                CAV0014 
+RCNCER       IF V-CARDIR-BDLDIR(I-BDLDIR) NUMERIC                       RMB0010 
+RCNCER          MOVE V-CARDIR-BDLDIR(I-BDLDIR) TO CAR-ACT-BDLDIR        RMB0010 
+RCNCER          IF CAR-ANT-BDLDIR NUMERIC                               RMB0010 
+RCNCER             COMPUTE V-CARTOT-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER                     = V-CARTOT-BDLDIR(J-BDLDIR)                  RMB0010 
+RCNCER                     * 10 + CAR-ACT-BDLDIR                        RMB0010 
+LLENAR          ELSE
+RCNCER             ADD 1 TO J-BDLDIR                                    RMB0010 
+RCNCER             MOVE V-CARDIR-BDLDIR(I-BDLDIR)                       RMB0010 
+RCNCER                  TO V-CARTOT-BDLDIR(J-BDLDIR)                    RMB0010 
+LLENAR          END-IF
+LLENAR       END-IF
+RCNCER       MOVE V-CARDIR-BDLDIR(I-BDLDIR) TO CAR-ANT-BDLDIR           RMB0010 
+RCNCER       ADD 1 TO I-BDLDIR                                          RMB0010 
+LLENAR     END-PERFORM.
+RCNCER     MOVE T-CARTOT-BDLDIR(1:10) TO V-PRIDIG-BDLDIR(DIR-OK-BDLDIR).RMB0010 
+RCNCER     SORT V-CARTOT-BDLDIR DESCENDING.                             RMB0010 
+RCNCER     MOVE 1 TO I-BDLDIR.                                          RMB0010 
+RCNCER     PERFORM UNTIL I-BDLDIR > J-BDLDIR                            RMB0010 
+RCNCER       MOVE V-CARTOT-BDLDIR(I-BDLDIR)                             RMB0010 
+RCNCER            TO V-NUMDIR-BDLDIR(DIR-OK-BDLDIR,I-BDLDIR)            RMB0010 
+RCNCER       ADD 1 TO I-BDLDIR                                          RMB0010 
+LLENAR     END-PERFORM.
+RCNCER     MOVE T-CARTOT-BDLDIR    TO V-HASDIR-BDLDIR(DIR-OK-BDLDIR).   RMB0010 
+RCNCER     ADD 1 TO DIR-OK-BDLDIR.                                      RMB0010 
+ELEJIR*-----------------MEJORES DIRECCIONES -----------------------------
+ELEGIR 2017-U-ELEGIR-DIRECCIONES.
+REMARK*******************************************************************
+REMARK* SE UNIFICAN LAS DIRECCIONES Y SE ORDENAN POR EL CRITERIO DE LA
+REMARK* MEJOR FECHA Y EL NUMERO DE OCURRENCIAS.                          
+REMARK* LA RUTINA DEVUELVE UN ARREGLO CON ESTAS DIRECCIONES ORDENADAS
+AMPDIR*         05 V-DIRFIN       PIC X(60) DIRECCION                   FAC0009 
+AMPDIR*         05 V-CIUFIN       PIC X(20) CIUDAD                      FAC0009 
+REMARK*         05 V-TIPFIN       PIC X(01) UBICACION
+REMARK*         05 V-FECFIN       PIC 9(6)  FECHA MEJOR.
+REMARK*         05 V-NUMFIN       PIC 9(3)  NUMERO DE COINCIDENCIAS.
+REMARK*         05 V-SUSFIN       PIC 9(6)  CODIGO DE SUSCRIPTOR.
+REMARK*         05 V-HASDIRFIN    PIC X(50) STRING DE NUMEROS.               
+REMARK*******************************************************************
+RCNCER     MOVE 0 TO J-BDLDIR.                                          RMB0010 
+PYSPAR     MOVE 0 TO J2-BDLDIR                                          HGO0021
+PYSPAR     INITIALIZE DIRECCION-BDLDIR                                  HGO0021
+RCNCER     IF DIR-OK-BDLDIR > 1                                         RMB0010 
+RCNCER        SORT T-DIR-BDLDIR                                         RMB0010 
+PYSPAR*RCNCER             DESCENDING T-NUMDIR-BDLDIR V-TIPODIR-BDLDIR   HGO0021
+PYSPAR             DESCENDING V-DIRECCION-BDLDIR V-TIPODIR-BDLDIR       HGO0021
+RCNCER        MOVE ALL "9" TO NUMDIR-BDLDIR                             RMB0010 
+RCNCER        MOVE 1 TO I-BDLDIR                                        RMB0010 
+RCNCER        MOVE ALL "0" TO TABLA-FECHADIR-AUX-BDLDIR                 RMB0010 
+RCNCER        MOVE 1 TO K-BDLDIR                                        RMB0010 
+RCNCER        PERFORM UNTIL I-BDLDIR >= DIR-OK-BDLDIR                   RMB0010 
+PYSPAR          IF T-NUMDIR-BDLDIR(I-BDLDIR) = ZEROS                    HGO0021
+PYSPAR            IF I-BDLDIR > 1                                       HGO0021
+PYSPAR                PERFORM 2017-CALCULAR-VECTOR-RES                  HGO0021
+PYSPAR                MOVE VEC-HIS-BDLDIR                               HGO0021
+PYSPAR                     TO V-VECFIN-BDLDIR(J-BDLDIR)                 HGO0021
+PYSPAR             END-IF                                               HGO0021
+PYSPAR             MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                     HGO0021
+PYSPAR                  TO V-FECHADIR-AUX-BDLDIR(K-BDLDIR)              HGO0021
+PYSPAR             ADD 1 TO K-BDLDIR                                    HGO0021
+PYSPAR             ADD 1 TO J-BDLDIR                                    HGO0021
+PYSPAR             MOVE V-DIRECCION-BDLDIR(I-BDLDIR)                    HGO0021
+PYSPAR                  TO V-DIRFIN-BDLDIR(J-BDLDIR)                    HGO0021
+PYSPAR                     DIRECCION-BDLDIR                             HGO0021
+PYSPAR             MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                     HGO0021
+PYSPAR                  TO V-FECFIN-BDLDIR(J-BDLDIR)                    HGO0021
+PYSPAR             MOVE V-CIUDADDIR-BDLDIR(I-BDLDIR)                    HGO0021
+PYSPAR                  TO V-CIUFIN-BDLDIR(J-BDLDIR)                    HGO0021
+PYSPAR             MOVE V-TIPODIR-BDLDIR(I-BDLDIR)                      HGO0021
+PYSPAR                  TO V-TIPFIN-BDLDIR(J-BDLDIR)                    HGO0021
+PYSPAR             MOVE V-SUSDIR-BDLDIR (I-BDLDIR)                      HGO0021
+PYSPAR                  TO V-SUSFIN-BDLDIR(J-BDLDIR)                    HGO0021
+PYSPAR             MOVE V-HASDIR-BDLDIR (I-BDLDIR)                      HGO0021
+PYSPAR                  TO V-HASDIRFIN-BDLDIR(J-BDLDIR)                 HGO0021
+PYSPAR             MOVE V-PRIDIG-BDLDIR (I-BDLDIR)                      HGO0021
+PYSPAR                  TO V-PRIDIGFIN-BDLDIR(J-BDLDIR)                 HGO0021
+PYSPAR             MOVE V-FECULT-BDLDIR(I-BDLDIR)                       HGO0021
+PYSPAR                  TO V-FECULTFIN-BDLDIR(J-BDLDIR)                 HGO0021
+PYSPAR             MOVE V-NUENOM-BDLDIR(I-BDLDIR)                       HGO0021
+PYSPAR                  TO V-NUENOMFIN-BDLDIR(J-BDLDIR)                 HGO0021
+PYSPAR             MOVE 1                  TO V-NUMFIN-BDLDIR(J-BDLDIR) HGO0021
+PYSPAR             MOVE T-NUMDIR-BDLDIR(I-BDLDIR)    TO NUMDIR-BDLDIR   HGO0021
+PYSPAR          END-IF                                                  HGO0021
+PYSPAR*RCNCER          IF NUMDIR-BDLDIR NOT = T-NUMDIR-BDLDIR (I-BDLDIR)HGO0021
+PYSPAR          IF DIRECCION-BDLDIR NOT = V-DIRECCION-BDLDIR(I-BDLDIR)  HGO0021
+PYSPAR          AND T-NUMDIR-BDLDIR(I-BDLDIR) NOT = ZEROS               HGO0021
+RCNCER             IF I-BDLDIR > 1                                      RMB0010 
+ORDDIR                PERFORM 2017-CALCULAR-VECTOR-RES        
+RCNCER                MOVE VEC-HIS-BDLDIR                               RMB0010 
+RCNCER                     TO V-VECFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+ORDDIR             END-IF
+RCNCER             MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECHADIR-AUX-BDLDIR(K-BDLDIR)              RMB0010 
+RCNCER             ADD 1 TO K-BDLDIR                                    RMB0010 
+RCNCER             ADD 1 TO J-BDLDIR                                    RMB0010 
+RCNCER             MOVE V-DIRECCION-BDLDIR(I-BDLDIR)                    RMB0010 
+RCNCER                  TO V-DIRFIN-BDLDIR(J-BDLDIR)                    RMB0010
+PYSPAR                     DIRECCION-BDLDIR                             HGO0021
+RCNCER             MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECFIN-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER             MOVE V-CIUDADDIR-BDLDIR(I-BDLDIR)                    RMB0010 
+RCNCER                  TO V-CIUFIN-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER             MOVE V-TIPODIR-BDLDIR(I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-TIPFIN-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER             MOVE V-SUSDIR-BDLDIR (I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-SUSFIN-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER             MOVE V-HASDIR-BDLDIR (I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-HASDIRFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE V-PRIDIG-BDLDIR (I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-PRIDIGFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+UNIDIR             MOVE V-FECULT-BDLDIR(I-BDLDIR)                       AAM0017
+UNIDIR                  TO V-FECULTFIN-BDLDIR(J-BDLDIR)                 AAM0017
+UNIDIR             MOVE V-NUENOM-BDLDIR(I-BDLDIR)                       AAM0017
+UNIDIR                  TO V-NUENOMFIN-BDLDIR(J-BDLDIR)                 AAM0017
+RCNCER             MOVE 1                  TO V-NUMFIN-BDLDIR(J-BDLDIR) RMB0010 
+RCNCER             MOVE T-NUMDIR-BDLDIR(I-BDLDIR)    TO NUMDIR-BDLDIR   RMB0010 
+ORDDIR          ELSE
+PYSPAR             IF T-NUMDIR-BDLDIR(I-BDLDIR) NOT = ZEROS             HGO0021
+RCNCER             MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECHADIR-AUX-BDLDIR(K-BDLDIR)              RMB0010 
+ORDDIR             ADD 1 TO K-BDLDIR
+RCNCER             ADD  1 TO V-NUMFIN-BDLDIR(J-BDLDIR)                  RMB0010 
+RCNCER             IF V-FECHADIR-BDLDIR(I-BDLDIR) >                     RMB0010 
+RCNCER                V-FECFIN-BDLDIR(J-BDLDIR)                         RMB0010 
+RCNCER                MOVE V-FECHADIR-BDLDIR(I-BDLDIR)                  RMB0010 
+RCNCER                     TO V-FECFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER                MOVE V-DIRECCION-BDLDIR(I-BDLDIR)                 RMB0010 
+RCNCER                     TO V-DIRFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER                MOVE V-CIUDADDIR-BDLDIR(I-BDLDIR)                 RMB0010 
+RCNCER                     TO V-CIUFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER                MOVE V-TIPODIR-BDLDIR(I-BDLDIR)                   RMB0010 
+RCNCER                     TO V-TIPFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER                MOVE V-SUSDIR-BDLDIR (I-BDLDIR)                   RMB0010 
+RCNCER                     TO V-SUSFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+MOD022*               MOVE V-FECULT-BDLDIR(I-BDLDIR)                    RGH0022
+MOD022*                    TO V-FECULTFIN-BDLDIR(J-BDLDIR)              RGH0022
+MOD022                IF V-FECULT-BDLDIR(I-BDLDIR) >                    RGH0022
+MOD022                   V-FECULTFIN-BDLDIR(J-BDLDIR)                   RGH0022
+MOD022                   MOVE V-FECULT-BDLDIR(I-BDLDIR)  TO             RGH0022
+MOD022                        V-FECULTFIN-BDLDIR(J-BDLDIR)              RGH0022
+MOD022                END-IF                                            RGH0022
+UNIDIR                MOVE V-NUENOM-BDLDIR(I-BDLDIR)                    AAM0017
+UNIDIR                     TO V-NUENOMFIN-BDLDIR(J-BDLDIR)              AAM0017
+ORDDIR             END-IF
+PYSPAR             END-IF                                               HGO0021
+ORDDIR          END-IF
+RCNCER          ADD 1 TO I-BDLDIR                                       RMB0010 
+ORDDIR        END-PERFORM
+AMP024* DESPLEGAR DESPUES DE CALCULOS                                   PJV0024
+PYSPAR*        MOVE 1 TO CONTADOR-TEMPORAL-BDLDIR                       HGO0021
+PYSPAR*        DISPLAY "VECTOR UNIFICADO NUMERICO Y FECHA"              HGO0021
+PYSPAR*      DISPLAY "DIRECCION                                        "HGO0021
+PYSPAR*-             "          FECHA REPORTES"                         HGO0021
+PYSPAR*        PERFORM UNTIL CONTADOR-TEMPORAL-BDLDIR > J-BDLDIR        HGO0021
+PYSPAR*         DISPLAY V-DIRFIN-BDLDIR(CONTADOR-TEMPORAL-BDLDIR)       HGO0021
+PYSPAR*         V-FECFIN-BDLDIR(CONTADOR-TEMPORAL-BDLDIR)               HGO0021
+PYSPAR*         V-NUMFIN-BDLDIR(CONTADOR-TEMPORAL-BDLDIR)               HGO0021
+PYSPAR*         ADD 1 TO CONTADOR-TEMPORAL-BDLDIR                       HGO0021
+PYSPAR*        END-PERFORM                                              HGO0021
+PYSPAR*        DISPLAY "VECTOR CARACTERES ESTANDARIZADO"                HGO0021
+PYSPAR*        DISPLAY "DIRECCION                                      "HGO0021
+PYSPAR*-             "            REPORTES"                             HGO0021
+RCNCER        IF I-BDLDIR > 1                                           RMB0010 
+ORDDIR           PERFORM 2017-CALCULAR-VECTOR-RES         
+RCNCER           MOVE VEC-HIS-BDLDIR TO V-VECFIN-BDLDIR(J-BDLDIR)       RMB0010 
+ORDDIR        END-IF
+ORDDIR     END-IF.
+RCNCER     IF J-BDLDIR > 0                                              RMB0010 
+RCNCER        MOVE 1 TO I-BDLDIR                                        RMB0010 
+RCNCER        PERFORM UNTIL I-BDLDIR > J-BDLDIR                         RMB0010 
+RCNCER           MOVE V-DIRFIN-BDLDIR (I-BDLDIR)                        RMB0010 
+RCNCER                TO DIRECCION-A-ESTANDARIZAR-BDLDIR                RMB0010 
+RCNCER           EVALUATE V-TIPFIN-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER              WHEN "R"                                            RMB0010 
+RCNCER                 MOVE CIUDAD-RES-A-ESTANDAR-BDLDIR                RMB0010 
+RCNCER                      TO CIUDAD-BDLDIR                            RMB0010 
+RCNCER                 MOVE 0 TO DIRCER-BDLDIR                          RMB0010 
+RCNCER                 MOVE 0 TO PTSADI-BDLDIR                          RMB0010 
+RCNCER                 IF CERRES-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE CERRES-DIRECC TO DIRCER-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER                 IF ADIRES-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE ADIRES-DIRECC TO PTSADI-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER              WHEN "L"                                            RMB0010 
+RCNCER                 MOVE CIUDAD-LAB-A-ESTANDAR-BDLDIR                RMB0010 
+RCNCER                      TO CIUDAD-BDLDIR                            RMB0010 
+RCNCER                 MOVE 0 TO DIRCER-BDLDIR                          RMB0010 
+RCNCER                 MOVE 0 TO PTSADI-BDLDIR                          RMB0010 
+RCNCER                 IF CERLAB-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE CERLAB-DIRECC TO DIRCER-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER                 IF ADILAB-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE ADILAB-DIRECC TO PTSADI-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER              WHEN "C"                                            RMB0010 
+RCNCER                 MOVE CIUDAD-COR-A-ESTANDAR-BDLDIR                RMB0010 
+RCNCER                      TO CIUDAD-BDLDIR                            RMB0010 
+RCNCER                 MOVE 0 TO DIRCER-BDLDIR                          RMB0010 
+RCNCER                 MOVE 0 TO PTSADI-BDLDIR                          RMB0010 
+RCNCER                 IF CERCOR-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE CERCOR-DIRECC TO DIRCER-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER                 IF ADICOR-DIRECC NUMERIC                         RMB0010 
+RCNCER                    MOVE ADICOR-DIRECC TO PTSADI-BDLDIR           RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER           END-EVALUATE                                           RMB0010 
+ALG001           PERFORM 6100-U-ESTANDARIZAR-DIRECC
+AMP024* DESPLEGAR DESPUES DE CALCULOS                                   PJV0024
+PYSPAR*          DISPLAY DIRECCION-ESTANDARIZADA-BDLDIR                 HGO0021
+PYSPAR*          V-NUMFIN-BDLDIR(I-BDLDIR)                              HGO0021
+RCNCER           MOVE DIRECCION-ESTANDARIZADA-BDLDIR                    RMB0010 
+RCNCER                TO V-STAFIN-BDLDIR(I-BDLDIR)                      RMB0010 
+PYSPAR           MOVE PRIPART-ESTANDARIZADA-BDLDIR TO                   HGO0021
+PYSPAR            V-PRIPARTFIN-BDLDIR(I-BDLDIR)                         HGO0021
+PYSPAR           MOVE SEGPART-ESTANDARIZADA-BDLDIR TO                   HGO0021
+PYSPAR            V-SEGPARTFIN-BDLDIR(I-BDLDIR)                         HGO0021
+RCNCER           MOVE CALIFICA-DIR-BDLDIR TO V-CALFIN-BDLDIR(I-BDLDIR)  RMB0010 
+AJUCAL           IF V-CALFIN-BDLDIR(I-BDLDIR) >= 30                     FARF026
+AJUCAL              MOVE 40 TO V-CALFIN-BDLDIR(I-BDLDIR)                FARF026
+AJUCAL           END-IF                                                 FARF026
+      *
+PYSPAR           MOVE CALIFICA-DIRPART1-BDLDIR TO                       HGO0021
+PYSPAR            V-CALFIN-PART1-BDLDIR(I-BDLDIR)                       HGO0021
+PYSPAR           MOVE CALIFICA-DIRPART2-BDLDIR TO                       HGO0021
+PYSPAR            V-CALFIN-PART2-BDLDIR(I-BDLDIR)                       HGO0021
+RCNCER***        SE ELIMINAN LAS DIRECCIONES MENORES A LA POLITICA      RMB0010 
+RCNCER           IF CALIFICA-DIR-BDLDIR < POLITICA-EXC-CAL-DIR-BDLDIR ORRMB0010 
+RCNCER              CALIFICA-DIR-BDLDIR = 0                             RMB0010 
+RCNCER              MOVE 0                  TO V-FECFIN-BDLDIR(I-BDLDIR)RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           ADD 1 TO I-BDLDIR                                      RMB0010 
+ALG001        END-PERFORM
+UNIDIR        MOVE 1 TO I-BDLDIR                                        AAM0017
+UNIDIR        PERFORM UNTIL I-BDLDIR > J-BDLDIR                         AAM0017
+UNIDIR         MOVE V-CIUFIN-BDLDIR(I-BDLDIR)  TO CIUDAD-BTA-BDLDIR     AAM0017
+UNIDIR         MOVE V-STAFIN-BDLDIR(I-BDLDIR)  TO DIRECCION-BTA-BDLDIR  AAM0017
+UNIDIR         PERFORM 2590-NVA-DIRECC-BOGOTA                           AAM0017
+UNIDIR         IF HAY-BDLNEWDIRBOG-BDLDIR = 1                           AAM0017
+UNIDIR          MOVE DIRNEW-BDLNEWDIRBOG TO V-STAFIN-BDLDIR(I-BDLDIR)   AAM0017
+UNIDIR          MOVE 1 TO V-NUENOMFIN-BDLDIR(I-BDLDIR)                  AAM0017
+UNIDIR         END-IF                                                   AAM0017
+UNIDIR         ADD 1 TO I-BDLDIR                                        AAM0017
+UNIDIR        END-PERFORM                                               AAM0017
+UNIDIR        MOVE 1 TO I-BDLDIR                                        AAM0017
+UNIDIR        PERFORM UNTIL I-BDLDIR > J-BDLDIR                         AAM0017
+UNIDIR         MOVE V-STAFIN-BDLDIR(I-BDLDIR) TO DIRECCION              AAM0017
+UNIDIR         PERFORM 2017-VECTOR-UNO                                  AAM0017
+UNIDIR         MOVE DIRECCION1 TO V-NUMDIRFIN-BDLDIR(I-BDLDIR)          AAM0017
+UNIDIR         ADD 1 TO I-BDLDIR                                        AAM0017
+UNIDIR        END-PERFORM                                               AAM0017
+UNIDIR        MOVE 0 TO CAMBIO                                          AAM0017
+INIVAR        MOVE 0 TO RMAYOR                                          AAM0018
+PYSPAR*UNIDIR        SORT T-DIRFINALES-BDLDIR DESCENDING V-NUMDIRFIN-BDLHGO0021
+PYSPAR*UNIDIR                                            V-NUENOMFIN-BDLHGO0021
+PYSPAR        SORT T-DIRFINALES-BDLDIR DESCENDING V-NUENOMFIN-BDLDIR    HGO0021
+AMP024* DESPLEGAR DESPUES DE CALCULOS                                   PJV0024
+PYSPAR*       MOVE 1 TO CON-PART-ESTANDARIZADA-BDLDIR                   HGO0021
+PYSPAR*        DISPLAY "ARREGLO ORDENADO POR NN"                        HGO0021
+PYSPAR*        DISPLAY "DIRECCION                                      "HGO0021
+PYSPAR*-             "            REPNCP1CP2CFN"                        HGO0021
+PYSPAR*        PERFORM UNTIL CON-PART-ESTANDARIZADA-BDLDIR > J-BDLDIR   HGO0021
+PYSPAR*         DISPLAY V-STAFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)  HGO0021
+PYSPAR*         V-NUMFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)          HGO0021
+PYSPAR*         V-NUENOMFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)       HGO0021
+PYSPAR*         V-CALFIN-PART1-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)    HGO0021
+PYSPAR*         V-CALFIN-PART2-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)    HGO0021
+PYSPAR*         V-CALFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)          HGO0021
+PYSPAR*         ADD 1 TO CON-PART-ESTANDARIZADA-BDLDIR                  HGO0021
+PYSPAR*        END-PERFORM                                              HGO0021
+PYSPAR        MOVE 1 TO J1-BDLDIR                                       HGO0021
+PYSPAR        MOVE 1 TO G-BDLDIR                                        HGO0021
+PYSPAR        PERFORM UNTIL J1-BDLDIR > J-BDLDIR                        HGO0021
+PYSPAR         IF V-NUENOMFIN-BDLDIR(J1-BDLDIR) = 1 AND                 HGO0021
+PYSPAR         V-STAFIN-BDLDIR(J1-BDLDIR) <> SPACES                     HGO0021
+PYSPAR            MOVE 0 TO CONTA                                       HGO0021
+PYSPAR            INSPECT V-NUMDIRFIN-BDLDIR(J1-BDLDIR) TALLYING CONTA  HGO0021
+PYSPAR            FOR CHARACTERS BEFORE INITIAL "  "                    HGO0021
+PYSPAR            COMPUTE H-BDLDIR = J1-BDLDIR + 1                      HGO0021
+NN0023            MOVE 0 TO SW-NN                                       PJV0023
+PYSPAR            PERFORM UNTIL H-BDLDIR > J-BDLDIR                     HGO0021
+NN0023              MOVE 1 TO SW-NN                                     PJV0023
+PYSPAR              MOVE 0 TO CONTA1                                    HGO0021
+PYSPAR              INSPECT V-NUMDIRFIN-BDLDIR(H-BDLDIR) TALLYING CONTA1HGO0021
+PYSPAR              FOR CHARACTERS BEFORE INITIAL "   "                 HGO0021
+PYSPAR               IF CONTA >= CONTA1 AND CONTA1 > 0 AND              HGO0021
+PYSPAR               (V-NUMDIRFIN-BDLDIR(J1-BDLDIR)(1:CONTA1) =         HGO0021
+PYSPAR               V-NUMDIRFIN-BDLDIR(H-BDLDIR)(1:CONTA1))            HGO0021
+PYSPAR                  PERFORM 2017-UNINN                              HGO0021
+PYSPAR               ELSE                                               HGO0021
+PYSPAR                  IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =          HGO0021
+PYSPAR                  V-NUMDIRFINAUX-BDLDIR                           HGO0021
+PYSPAR                     MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO       HGO0021
+PYSPAR                     T-DIRFINALESAUX-BDLDIR                       HGO0021
+PYSPAR                  END-IF                                          HGO0021
+PYSPAR               END-IF                                             HGO0021
+PYSPAR               ADD 1 TO H-BDLDIR                                  HGO0021
+PYSPAR            END-PERFORM                                           HGO0021
+NN0023            IF SW-NN = 0                                          PJV0023
+NN0023               MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO             PJV0023
+NN0023                    T-DIRFINALESAUX-BDLDIR                        PJV0023
+NN0023            END-IF                                                PJV0023
+PYSPAR            INITIALIZE T-DIRFINALES-BDLDIR(J1-BDLDIR)             HGO0021
+PYSPAR            ADD 1 TO J2-BDLDIR                                    HGO0021
+PYSPAR            MOVE T-DIRFINALESAUX-BDLDIR TO                        HGO0021
+PYSPAR               T-DIRFINALESFIN-BDLDIR(G-BDLDIR)                   HGO0021
+NN0023            INITIALIZE T-DIRFINALESAUX-BDLDIR                     PJV0023
+PYSPAR            ADD 1 TO G-BDLDIR                                     HGO0021
+PYSPAR            ADD 1 TO J1-BDLDIR                                    HGO0021
+PYSPAR         ELSE                                                     HGO0021
+PYSPAR            COMPUTE J1-BDLDIR = J-BDLDIR + 1                      HGO0021
+PYSPAR         END-IF                                                   HGO0021
+PYSPAR        END-PERFORM                                               HGO0021
+PYSPAR        SORT T-DIRFINALES-BDLDIR DESCENDING V-NUMDIRFIN-BDLDIR    HGO0021
+PYSPAR                                            V-CALFIN-BDLDIR       HGO0021
+PYSPAR                                            V-STAFIN-BDLDIR       HGO0021
+PYSPAR*        ADD 1 TO J2-BDLDIR                                       HGO0021
+PYSPAR        COMPUTE J-BDLDIR = J-BDLDIR - J2-BDLDIR                   HGO0021
+AMP024* DESPLEGAR DESPUES DE CALCULOS                                   PJV0024
+PYSPAR*        MOVE 1 TO CON-PART-ESTANDARIZADA-BDLDIR                  HGO0021
+PYSPAR*        DISPLAY "DESPUES DE T-DIRFINALES-BDLDIR ***"             HGO0021
+PYSPAR*        DISPLAY "DIRECCION                                      "HGO0021
+PYSPAR*-             "            REPCP1CP2CFN"                         HGO0021
+PYSPAR*        PERFORM UNTIL CON-PART-ESTANDARIZADA-BDLDIR > J-BDLDIR   HGO0021
+PYSPAR*         DISPLAY 
+      *         V-STAFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR) "|"      HGO0021
+PYSPAR*         V-NUMFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR) "|"       
+PYSPAR*         V-CALFIN-PART1-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR) "|" 
+PYSPAR*         V-CALFIN-PART2-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR) "|" 
+PYSPAR*         V-CALFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)       "|" 
+PYSPAR*         ADD 1 TO CON-PART-ESTANDARIZADA-BDLDIR               
+PYSPAR*        END-PERFORM
+
+PYSPAR        MOVE 1 TO J1-BDLDIR                                       HGO0021
+PYSPAR        PERFORM UNTIL J1-BDLDIR > J-BDLDIR                        HGO0021
+UNIDIR         MOVE 0 TO COMPO                                          AAM0017
+PYSPAR         INSPECT V-STAFIN-BDLDIR(J1-BDLDIR) TALLYING COMPO        HGO0021
+UNIDIR         FOR ALL SPACE BEFORE INITIAL "  "                        AAM0017
+PYSPAR         IF COMPO > 0 AND V-CALFIN-BDLDIR(J1-BDLDIR) > 0          HGO0021
+UNIDIR          MOVE 0 TO CONTA                                         AAM0017
+PYSPAR          INSPECT V-NUMDIRFIN-BDLDIR(J1-BDLDIR) TALLYING CONTA    HGO0021
+UNIDIR          FOR CHARACTERS BEFORE INITIAL "  "                      AAM0017
+PYSPAR          COMPUTE H-BDLDIR = J1-BDLDIR + 1                        HGO0021
+PYSPAR          PERFORM UNTIL H-BDLDIR > J-BDLDIR                       HGO0021
+PYSPAR*           IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) = SPACES
+PYSPAR*            MOVE ZEROS TO V-NUMDIRFIN-BDLDIR(J1-BDLDIR)
+PYSPAR*           END-IF
+AMP024           IF V-NUMDIRFIN-BDLDIR(H-BDLDIR) = SPACES               PJV0024
+AMP024            MOVE ZEROS TO V-NUMDIRFIN-BDLDIR(H-BDLDIR)            PJV0024
+AMP024           END-IF                                                 PJV0024
+PYSPAR           IF V-NUMDIRFIN-BDLDIR(H-BDLDIR) = SPACES
+PYSPAR            MOVE ZEROS TO V-NUMDIRFIN-BDLDIR(H-BDLDIR)
+PYSPAR           END-IF
+UNIDIR           MOVE 0 TO CONTA1                                       AAM0017
+UNIDIR           INSPECT V-NUMDIRFIN-BDLDIR(H-BDLDIR) TALLYING CONTA1   AAM0017
+UNIDIR           FOR CHARACTERS BEFORE INITIAL "   "                    AAM0017
+PYSPAR            IF (V-PRIPARTFIN-BDLDIR(J1-BDLDIR) =                  HGO0021
+PYSPAR              V-PRIPARTFIN-BDLDIR(H-BDLDIR) OR                    HGO0021
+PYSPAR              V-SEGPARTFIN-BDLDIR(J1-BDLDIR) =                    HGO0021
+PYSPAR              V-SEGPARTFIN-BDLDIR(H-BDLDIR) OR                    HGO0021
+PYSPAR              V-PRIPARTFIN-BDLDIR(J1-BDLDIR) =                    HGO0021
+PYSPAR              V-SEGPARTFIN-BDLDIR(H-BDLDIR) OR                    HGO0021
+PYSPAR              V-SEGPARTFIN-BDLDIR(J1-BDLDIR) =                    HGO0021
+PYSPAR              V-PRIPARTFIN-BDLDIR(H-BDLDIR))                      HGO0021
+UNIDIR             PERFORM 2017-UNIMAYOR                                AAM0017
+UNIDIR            ELSE                                                  AAM0017
+PYSPAR               IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =             HGO0021
+PYSPAR               V-NUMDIRFINAUX-BDLDIR                              HGO0021
+PYSPAR                  MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO          HGO0021
+UNIDIR                   T-DIRFINALESAUX-BDLDIR                         AAM0017
+PYSPAR               END-IF                                             HGO0021
+UNIDIR            END-IF                                                AAM0017
+PYSPAR           ADD 1 TO H-BDLDIR                                      HGO0021
+UNIDIR          END-PERFORM                                             AAM0017
+PYSPAR          IF H-BDLDIR > J-BDLDIR                                  HGO0021
+PYSPAR            IF ((V-CALFIN-PART1-BDLDIR(J1-BDLDIR) > 6 AND         HGO0021
+PYSPAR            V-STAFIN-BDLDIR(J1-BDLDIR) NOT =                      HGO0021
+PYSPAR            V-STAFINAUX-BDLDIR) OR                                HGO0021
+PYSPAR            (V-CALFIN-PART1-BDLDIR(J1-BDLDIR) > 6 AND             HGO0021
+PYSPAR            V-NUMDIRFIN-BDLDIR(J1-BDLDIR) = SPACES)) AND          HGO0021
+PYSPAR            V-DIRFIN-BDLDIR(J1-BDLDIR) NOT =                      HGO0021
+PYSPAR            V-DIRFINAUX-BDLDIR                                    HGO0021
+PYSPAR               MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO             HGO0021
+UNIDIR               T-DIRFINALESAUX-BDLDIR                             AAM0017
+PYSPAR            END-IF                                                HGO0021
+PYSPAR          END-IF                                                  HGO0021
+UNIDIR         END-IF                                                   AAM0017
+PYSPAR         MOVE 0 TO CONTA1                                         HGO0021
+PYSPAR         INSPECT V-PRIPARTFIN-BDLDIR(J1-BDLDIR) TALLYING CONTA1   HGO0021
+PYSPAR         FOR CHARACTERS BEFORE INITIAL "   "                      HGO0021
+PYSPAR         IF V-CALFIN-PART1-BDLDIR(J1-BDLDIR) > 6 AND              HGO0021
+PYSPAR            V-CALFIN-BDLDIR(J1-BDLDIR) > 0 AND CONTA1 > 1         HGO0021
+PYSPAR            MOVE T-DIRFINALESAUX-BDLDIR TO                        HGO0021
+PYSPAR            T-DIRFINALESFIN-BDLDIR(G-BDLDIR )                     HGO0021
+PYSPAR            ADD 1 TO G-BDLDIR                                     HGO0021
+PYSPAR         END-IF                                                   HGO0021
+PYSPAR         ADD 1 TO J1-BDLDIR                                       HGO0021
+UNIDIR        END-PERFORM                                               AAM0017
+AMP024        PERFORM PASAR-A-TABLA-FINAL                               PJV0024
+ORDDIR     END-IF.
+      *
+AMP024 PASAR-A-TABLA-FINAL.						                           PJV0024
+AMP024     INITIALIZE T-DIRFINALESAUX-BDLDIR				                  PJV0024
+AMP024     MOVE 1 TO CON-PART-ESTANDARIZADA-BDLDIR			               PJV0024
+AMP024     PERFORM UNTIL CON-PART-ESTANDARIZADA-BDLDIR > J-BDLDIR    	PJV0024
+AMP024        IF V-STAFINFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR) =	   PJV0024
+AMP024              V-STAFINAUX-BDLDIR					                     PJV0024
+AMP024            MOVE V-STAFINFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)PJV0024
+AMP024              TO V-STAFINAUX-BDLDIR      				               PJV0024
+AMP024           INITIALIZE 						                           PJV0024
+AMP024             T-DIRFINALESFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)PJV0024
+AMP024        ELSE                                							   PJV0024
+AMP024           MOVE V-STAFINFIN-BDLDIR(CON-PART-ESTANDARIZADA-BDLDIR)	PJV0024
+AMP024             TO V-STAFINAUX-BDLDIR				                     PJV0024
+AMP024        END-IF							                                 PJV0024
+AMP024        ADD 1 TO CON-PART-ESTANDARIZADA-BDLDIR     		         PJV0024
+AMP024     END-PERFORM							                              PJV0024
+AMP024     MOVE TABLA-DIRFINALESFIN-BDLDIR TO TABLA-DIRFINALES-BDLDIR	PJV0024
+AMP024     SORT T-DIRFINALES-BDLDIR DESCENDING V-CALFIN-BDLDIR        	PJV0024
+AMP024                              DESCENDING V-FECFIN-BDLDIR        	PJV0024
+AMP024                              DESCENDING V-NUMFIN-BDLDIR.       	PJV0024
+      *
+UNIDIR 2017-UNINN.                                                      AAM0017
+REMARK******************************************************************
+REMARK*2017-UNINN.                                                     *
+REMARK*    SE CALCULA UNIFICACION DE DIRECCIONES NUEVA NOMENCALTURA    *
+REMARK******************************************************************
+PYSPAR     IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT = V-NUMDIRFINAUX-BDLDIR HGO0021
+PYSPAR      MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO                      HGO0021
+PYSPAR      T-DIRFINALESAUX-BDLDIR                                      HGO0021
+UNIDIR       COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +          AAM0017
+UNIDIR               V-NUMFIN-BDLDIR(H-BDLDIR)                          AAM0017
+UNIDIR       IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR          AAM0017
+UNIDIR        MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO V-CALFINAUX-BDLDIR      AAM0017
+UNIDIR       END-IF                                                     AAM0017
+UNIDIR       IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR          AAM0017
+UNIDIR        MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO V-FECFINAUX-BDLDIR      AAM0017
+UNIDIR       END-IF                                                     AAM0017
+MOD022       IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                          RGH0022
+MOD022          V-FECULTFINAUX-BDLDIR                                   RGH0022
+MOD022          MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO                    RGH0022
+MOD022               V-FECULTFINAUX-BDLDIR                              RGH0022
+MOD022       END-IF                                                     RGH0022
+UNIDIR      ELSE                                                        AAM0017
+UNIDIR       COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +          AAM0017
+UNIDIR               V-NUMFIN-BDLDIR(H-BDLDIR)                          AAM0017
+UNIDIR       IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR          AAM0017
+UNIDIR        MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO V-CALFINAUX-BDLDIR      AAM0017
+UNIDIR       END-IF                                                     AAM0017
+UNIDIR       IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR          AAM0017
+UNIDIR        MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO V-FECFINAUX-BDLDIR      AAM0017
+UNIDIR       END-IF                                                     AAM0017
+MOD022       IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                          RGH0022
+MOD022          V-FECULTFINAUX-BDLDIR                                   RGH0022
+MOD022          MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO                    RGH0022
+MOD022               V-FECULTFINAUX-BDLDIR                              RGH0022
+MOD022       END-IF                                                     RGH0022
+UNIDIR      END-IF                                                      AAM0017
+PYSPAR     INITIALIZE T-DIRFINALES-BDLDIR(H-BDLDIR)                     HGO0021
+PYSPAR     ADD 1 TO J2-BDLDIR.                                          HGO0021
+
+UNIDIR 2017-UNIMAYOR.                                                   AAM0017
+REMARK******************************************************************
+REMARK*2017-UNIMAYOR.                                                  *
+REMARK*    SE CALCULA UNIFICACION DE DIRECCIONES MAS COMPLETAS         *
+REMARK******************************************************************
+PYSPAR     IF V-PRIPARTFIN-BDLDIR(J1-BDLDIR) =                          HGO0021
+PYSPAR     V-PRIPARTFIN-BDLDIR(H-BDLDIR) AND                            HGO0021
+PYSPAR     V-SEGPARTFIN-BDLDIR(J1-BDLDIR) =                             HGO0021
+PYSPAR     V-SEGPARTFIN-BDLDIR(H-BDLDIR)                                HGO0021
+PYSPAR      IF CONTA1 = 0                                               HGO0021
+PYSPAR         MOVE 1 TO CONTA1                                         HGO0021
+PYSPAR      END-IF                                                      HGO0021
+PYSPAR      IF (V-NUMDIRFIN-BDLDIR(J1-BDLDIR)(1:CONTA1) =               HGO0021
+PYSPAR      V-NUMDIRFIN-BDLDIR(H-BDLDIR)(1:CONTA1))                     HGO0021
+PYSPAR         IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =                   HGO0021
+PYSPAR         V-NUMDIRFINAUX-BDLDIR OR V-DIRFIN-BDLDIR(J1-BDLDIR)      HGO0021
+PYSPAR         NOT =  V-DIRFINAUX-BDLDIR                                HGO0021
+PYSPAR            MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO                HGO0021
+PYSPAR            T-DIRFINALESAUX-BDLDIR                                HGO0021
+PYSPAR            COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +     HGO0021
+PYSPAR            V-NUMFIN-BDLDIR(H-BDLDIR)                             HGO0021
+PYSPAR            IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR     HGO0021
+PYSPAR             MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO V-CALFINAUX-BDLDIR HGO0021
+PYSPAR            END-IF                                                HGO0021
+PYSPAR            IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR     HGO0021
+PYSPAR             MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO V-FECFINAUX-BDLDIR HGO0021
+PYSPAR            END-IF                                                HGO0021
+MOD022            IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                     RGH0022
+MOD022               V-FECULTFINAUX-BDLDIR                              RGH0022
+MOD022               MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO               RGH0022
+MOD022                    V-FECULTFINAUX-BDLDIR                         RGH0022
+MOD022            END-IF                                                RGH0022
+PYSPAR            INITIALIZE T-DIRFINALES-BDLDIR(H-BDLDIR)              HGO0021
+PYSPAR         ELSE                                                     HGO0021
+PYSPAR            COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +     HGO0021
+PYSPAR            V-NUMFIN-BDLDIR(H-BDLDIR)                             HGO0021
+PYSPAR            IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR     HGO0021
+PYSPAR             MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO V-CALFINAUX-BDLDIR HGO0021
+PYSPAR            END-IF                                                HGO0021
+PYSPAR            IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR     HGO0021
+PYSPAR             MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO V-FECFINAUX-BDLDIR HGO0021
+PYSPAR            END-IF                                                HGO0021
+MOD022            IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                     RGH0022
+MOD022               V-FECULTFINAUX-BDLDIR                              RGH0022
+MOD022               MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO               RGH0022
+MOD022                    V-FECULTFINAUX-BDLDIR                         RGH0022
+MOD022            END-IF                                                RGH0022
+PYSPAR            INITIALIZE T-DIRFINALES-BDLDIR(H-BDLDIR)              HGO0021
+PYSPAR         END-IF                                                   HGO0021
+PYSPAR      ELSE                                                        HGO0021
+PYSPAR         IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =                   HGO0021
+PYSPAR         V-NUMDIRFINAUX-BDLDIR                                    HGO0021
+PYSPAR            MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO                HGO0021
+PYSPAR            T-DIRFINALESAUX-BDLDIR                                HGO0021
+PYSPAR         END-IF                                                   HGO0021
+PYSPAR      END-IF                                                      HGO0021
+PYSPAR     ELSE                                                         HGO0021
+PYSPAR      IF V-SEGPARTFIN-BDLDIR(J1-BDLDIR) =                         HGO0021
+PYSPAR      V-PRIPARTFIN-BDLDIR(H-BDLDIR)                               HGO0021
+PYSPAR         IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR)(1:CONTA1) =             HGO0021
+PYSPAR         V-NUMDIRFIN-BDLDIR(H-BDLDIR)(1:CONTA1)                   HGO0021
+PYSPAR            IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =                HGO0021
+PYSPAR            V-NUMDIRFINAUX-BDLDIR                                 HGO0021
+PYSPAR               MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO             HGO0021
+PYSPAR               T-DIRFINALESAUX-BDLDIR                             HGO0021
+PYSPAR               COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +  HGO0021
+PYSPAR               V-NUMFIN-BDLDIR(H-BDLDIR)                          HGO0021
+PYSPAR               IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR  HGO0021
+PYSPAR                  MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO               HGO0021
+PYSPAR                  V-CALFINAUX-BDLDIR                              HGO0021
+PYSPAR               END-IF                                             HGO0021
+PYSPAR               IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR  HGO0021
+PYSPAR                  MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO               HGO0021
+PYSPAR                  V-FECFINAUX-BDLDIR                              HGO0021
+PYSPAR               END-IF                                             HGO0021
+MOD022               IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                  RGH0022
+MOD022                  V-FECULTFINAUX-BDLDIR                           RGH0022
+MOD022                  MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO            RGH0022
+MOD022                       V-FECULTFINAUX-BDLDIR                      RGH0022
+MOD022               END-IF                                             RGH0022
+PYSPAR               INITIALIZE T-DIRFINALES-BDLDIR(H-BDLDIR)           HGO0021
+PYSPAR            ELSE                                                  HGO0021
+PYSPAR               COMPUTE V-NUMFINAUX-BDLDIR = V-NUMFINAUX-BDLDIR +  HGO0021
+PYSPAR               V-NUMFIN-BDLDIR(H-BDLDIR)                          HGO0021
+PYSPAR               IF V-CALFIN-BDLDIR(H-BDLDIR) > V-CALFINAUX-BDLDIR  HGO0021
+PYSPAR                  MOVE V-CALFIN-BDLDIR(H-BDLDIR) TO               HGO0021
+PYSPAR                  V-CALFINAUX-BDLDIR                              HGO0021
+PYSPAR               END-IF                                             HGO0021
+PYSPAR               IF V-FECFIN-BDLDIR(H-BDLDIR) > V-FECFINAUX-BDLDIR  HGO0021
+PYSPAR                  MOVE V-FECFIN-BDLDIR(H-BDLDIR) TO               HGO0021
+PYSPAR                  V-FECFINAUX-BDLDIR                              HGO0021
+PYSPAR               END-IF                                             HGO0021
+MOD022               IF V-FECULTFIN-BDLDIR(H-BDLDIR) >                  RGH0022
+MOD022                  V-FECULTFINAUX-BDLDIR                           RGH0022
+MOD022                  MOVE V-FECULTFIN-BDLDIR(H-BDLDIR) TO            RGH0022
+MOD022                       V-FECULTFINAUX-BDLDIR                      RGH0022
+MOD022               END-IF                                             RGH0022
+PYSPAR               INITIALIZE T-DIRFINALES-BDLDIR(H-BDLDIR)           HGO0021
+PYSPAR            END-IF                                                HGO0021
+PYSPAR         ELSE                                                     HGO0021
+PYSPAR            IF V-NUMDIRFIN-BDLDIR(J1-BDLDIR) NOT =                HGO0021
+PYSPAR            V-NUMDIRFINAUX-BDLDIR                                 HGO0021
+PYSPAR               MOVE T-DIRFINALES-BDLDIR(J1-BDLDIR) TO             HGO0021
+PYSPAR               T-DIRFINALESAUX-BDLDIR                             HGO0021
+PYSPAR            END-IF                                                HGO0021
+PYSPAR         END-IF                                                   HGO0021
+PYSPAR       END-IF                                                     HGO0021
+PYSPAR     END-IF.                                                      HGO0021
+
+PYSPAR*UNIDIR     IF V-NUMDIRFIN-BDLDIR(H-BDLDIR) NOT = V-NUMDIRFINAUX-BHGO0021
+PYSPAR*UNIDIR      MOVE T-DIRFINALES-BDLDIR(H-BDLDIR) TO                HGO0021
+PYSPAR*UNIDIR           T-DIRFINALESAUX-BDLDIR                          HGO0021
+PYSPAR*UNIDIR      MOVE V-NUMFIN-BDLDIR(J-BDLDIR) TO V-NUMFINAUX-BDLDIR HGO0021
+PYSPAR*UNIDIR      IF V-CALFIN-BDLDIR(J-BDLDIR) > V-CALFINAUX-BDLDIR    HGO0021
+PYSPAR*UNIDIR       MOVE V-CALFIN-BDLDIR(J-BDLDIR) TO V-CALFINAUX-BDLDIRHGO0021
+PYSPAR*UNIDIR      END-IF                                               HGO0021
+PYSPAR*UNIDIR      IF V-FECFIN-BDLDIR(J-BDLDIR) > V-FECFINAUX-BDLDIR    HGO0021
+PYSPAR*UNIDIR       MOVE V-FECFIN-BDLDIR(J-BDLDIR) TO V-FECFINAUX-BDLDIRHGO0021
+PYSPAR*UNIDIR      END-IF                                               HGO0021
+PYSPAR*UNIDIR     ELSE                                                  HGO0021
+PYSPAR*UNIDIR      MOVE V-NUMFIN-BDLDIR(J-BDLDIR) TO V-NUMFINAUX-BDLDIR HGO0021
+PYSPAR*UNIDIR      IF V-CALFIN-BDLDIR(J-BDLDIR) > V-CALFINAUX-BDLDIR    HGO0021
+PYSPAR*UNIDIR       MOVE V-CALFIN-BDLDIR(J-BDLDIR) TO V-CALFINAUX-BDLDIRHGO0021
+PYSPAR*UNIDIR      END-IF                                               HGO0021
+PYSPAR*UNIDIR      IF V-FECFIN-BDLDIR(J-BDLDIR) > V-FECFINAUX-BDLDIR    HGO0021
+PYSPAR*UNIDIR       MOVE V-FECFIN-BDLDIR(J-BDLDIR) TO V-FECFINAUX-BDLDIRHGO0021
+PYSPAR*UNIDIR      END-IF                                               HGO0021
+PYSPAR*UNIDIR     END-IF                                                HGO0021
+PYSPAR*UNIDIR     MOVE 1 TO RMAYOR.                                     HGO0021
+UNIDIR 2017-VECTOR-UNO.                                                 AAM0017
+REMARK******************************************************************
+REMARK*2017-VECTOR-UNO.                                                *
+REMARK*    SE CALCULA EL VECTOR DE COMPONENTES DE DIRECCION 1          *
+REMARK******************************************************************
+UNIDIR     MOVE 1 TO E-BDLDIR                                           AAM0017
+UNIDIR     MOVE 1 TO F-BDLDIR                                           AAM0017
+UNIDIR     MOVE SPACES TO DIRECCION1                                    AAM0017
+UNIDIR     PERFORM UNTIL E-BDLDIR > 60                                  AAM0017
+UNIDIR      IF DIRECCION(E-BDLDIR:1) IS NUMERIC                         AAM0017
+UNIDIR         OR DIRECCION(E-BDLDIR:1) = SPACES                        AAM0017
+UNIDIR       IF F-BDLDIR > 1                                            AAM0017
+UNIDIR        IF DIRECCION(E-BDLDIR:1) NOT = SPACES                     AAM0017
+UNIDIR         MOVE DIRECCION(E-BDLDIR:1) TO DIRECCION1(F-BDLDIR:1)     AAM0017
+UNIDIR         ADD 1 TO F-BDLDIR                                        AAM0017
+UNIDIR        END-IF                                                    AAM0017
+UNIDIR        IF DIRECCION(E-BDLDIR:1) = SPACES                         AAM0017
+UNIDIR           AND DIRECCION1(F-BDLDIR - 1:1) NOT = SPACES            AAM0017
+UNIDIR         MOVE DIRECCION(E-BDLDIR:1) TO DIRECCION1(F-BDLDIR:1)     AAM0017
+UNIDIR         ADD 1 TO F-BDLDIR                                        AAM0017
+UNIDIR        END-IF                                                    AAM0017
+UNIDIR       END-IF                                                     AAM0017
+UNIDIR       IF F-BDLDIR = 1 AND DIRECCION(E-BDLDIR:1) NOT = SPACES     AAM0017
+UNIDIR        MOVE DIRECCION(E-BDLDIR:1) TO DIRECCION1(F-BDLDIR:1)      AAM0017
+UNIDIR        ADD 1 TO F-BDLDIR                                         AAM0017
+UNIDIR       END-IF                                                     AAM0017
+UNIDIR      END-IF                                                      AAM0017
+UNIDIR      ADD 1 TO E-BDLDIR                                           AAM0017
+UNIDIR     END-PERFORM.                                                 AAM0017
+ORDDIR 2017-CALCULAR-VECTOR-RES.
+REMARK******************************************************************
+REMARK*2018-CALCULAR-VECTOR-RES-DI4.                                   *
+REMARK*    SE CALCULA EL VECTOR DE CAMBIOS DE DIRECCION                *
+REMARK******************************************************************
+RCNCER     SORT O-FECHADIR-AUX-BDLDIR DESCENDING V-FECHADIR-AUX-BDLDIR. RMB0010 
+RCNCER     MOVE V-FECHADIR-AUX-BDLDIR(1) TO FECHA-RUTINA-BDLDIR.        RMB0010 
+RCNCER     MOVE 1 TO  JJ-BDLDIR.                                        RMB0010 
+RCNCER     MOVE 2 TO  II-BDLDIR.                                        RMB0010 
+RCNCER     MOVE SPACES TO VEC-HIS-BDLDIR.                               RMB0010 
+ORDDIR     PERFORM 2017-UN-MES-ATRAS
+RCNCER     PERFORM UNTIL II-BDLDIR >= K-BDLDIR OR                       RMB0010 
+RCNCER                   JJ-BDLDIR > 12                                 RMB0010 
+RCNCER        IF FECHA-RUTINA-BDLDIR =                                  RMB0010 
+RCNCER           V-FECHADIR-AUX-BDLDIR(II-BDLDIR)                       RMB0010 
+RCNCER           MOVE "R" TO VEC-HIS-BDLDIR(JJ-BDLDIR:1)                RMB0010 
+RCNCER           ADD 1 TO JJ-BDLDIR                                     RMB0010 
+ORDDIR           PERFORM 2017-UN-MES-ATRAS
+RCNCER           ADD 1 TO II-BDLDIR                                     RMB0010 
+ORDDIR         ELSE
+RCNCER           IF FECHA-RUTINA-BDLDIR >                               RMB0010 
+RCNCER              V-FECHADIR-AUX-BDLDIR(II-BDLDIR)                    RMB0010 
+RCNCER              MOVE "I" TO VEC-HIS-BDLDIR(JJ-BDLDIR:1)             RMB0010 
+RCNCER              ADD 1 TO JJ-BDLDIR                                  RMB0010 
+ORDDIR              PERFORM 2017-UN-MES-ATRAS
+ORDDIR           ELSE
+RCNCER              ADD 1 TO II-BDLDIR                                  RMB0010 
+ORDDIR           END-IF
+ORDDIR        END-IF
+ORDDIR     END-PERFORM.
+RCNCER     MOVE ALL "0" TO TABLA-FECHADIR-AUX-BDLDIR.                   RMB0010 
+RCNCER     MOVE 1 TO K-BDLDIR.                                          RMB0010 
+ORDDIR 2017-UN-MES-ATRAS.
+REMARK******************************************************************
+REMARK*2017-UN-MES-ATRAS.                                              *
+REMARK*    SE CALCULA EL MES ANTERIOR DE LA FECHA DADA PARA HACER LA   *
+REMARK*    LINEA DE BALANCE Y UBICAR EL VECTOR DE CAMBIOS DE DIRECCION *
+REMARK******************************************************************
+RCNCER     SUBTRACT 1 FROM MES-RUTINA-BDLDIR.                           RMB0010 
+RCNCER     IF MES-RUTINA-BDLDIR = 0                                     RMB0010 
+RCNCER        SUBTRACT 1 FROM ANO-RUTINA-BDLDIR                         RMB0010 
+RCNCER        MOVE 12 TO MES-RUTINA-BDLDIR                              RMB0010 
+ORDDIR     END-IF.
+ORDTEL*-----------------MEJORES TELEFONOS     ---------------------------
+ORDTEL 2017-U-ELEGIR-TELEFONOS.     
+REMARK*******************************************************************
+REMARK* SE UNIFICAN LAS TELEFONOS   Y SE ORDENAN POR EL CRITERIO DE LA
+REMARK* MEJOR FECHA Y EL NUMERO DE OCURRENCIAS.                          
+REMARK* LA RUTINA DEVUELVE UN ARREGLO CON ESTOS TELEFONOS   ORDENADOS
+AMPDIR*         05 V-TELFIN       PIC X(12) TELEFONO                    FAC0009 
+AMPDIR*         05 V-CIUTELFIN    PIC X(20) CIUDAD                      FAC0009 
+REMARK*         05 V-TIPTELFIN    PIC X(01) UBICACION
+REMARK*         05 V-FECTELFIN    PIC 9(6)  FECHA MEJOR.
+REMARK*         05 V-NUMTELFIN    PIC 9(3)  NUMERO DE COINCIDENCIAS.
+REMARK*         05 V-SUSTELFIN    PIC 9(6)  CODIGO DE SUSCRIPTOR.
+REMARK*******************************************************************
+RCNCER     MOVE 0 TO J-BDLDIR.                                          RMB0010 
+RCNCER     IF TEL-OK-BDLDIR > 1                                         RMB0010 
+RCNCER        SORT T-TEL-BDLDIR                                         RMB0010 
+RCNCER             DESCENDING V-TELEFONO-BDLDIR V-TIPOTEL-BDLDIR        RMB0010 
+RCNCER        MOVE ALL "9" TO NUMTEL-BDLDIR                             RMB0010 
+RCNCER        MOVE 1 TO I-BDLDIR                                        RMB0010 
+RCNCER        MOVE ALL "0" TO TABLA-FECHADIR-AUX-BDLDIR                 RMB0010 
+RCNCER        MOVE 1 TO K-BDLDIR                                        RMB0010 
+RCNCER        PERFORM UNTIL I-BDLDIR >= TEL-OK-BDLDIR                   RMB0010 
+RCNCER          IF NUMTEL-BDLDIR NOT = V-TELEFONO-BDLDIR (I-BDLDIR)     RMB0010 
+RCNCER             IF I-BDLDIR > 1                                      RMB0010 
+ORDTEL                PERFORM 2017-CALCULAR-VECTOR-RES        
+RCNCER                MOVE VEC-HIS-BDLDIR                               RMB0010 
+RCNCER                     TO V-VECTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+ORDTEL             END-IF
+RCNCER             MOVE V-FECHATEL-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECHADIR-AUX-BDLDIR(K-BDLDIR)              RMB0010 
+RCNCER             ADD 1 TO K-BDLDIR                                    RMB0010 
+RCNCER             ADD 1 TO J-BDLDIR                                    RMB0010 
+RCNCER             MOVE V-TELEFONO-BDLDIR (I-BDLDIR)                    RMB0010 
+RCNCER                  TO V-TELFIN-BDLDIR(J-BDLDIR)                    RMB0010 
+RCNCER             MOVE V-FECHATEL-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECTELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE V-CIUDADTEL-BDLDIR(I-BDLDIR)                    RMB0010 
+RCNCER                  TO V-CIUTELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE V-TIPOTEL-BDLDIR(I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-TIPTELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE V-SUSTEL-BDLDIR (I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-SUSTELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE V-HASTEL-BDLDIR (I-BDLDIR)                      RMB0010 
+RCNCER                  TO V-HASTELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER             MOVE 1  TO V-NUMTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+RCNCER             MOVE V-TELEFONO-BDLDIR(I-BDLDIR)  TO NUMTEL-BDLDIR   RMB0010 
+TELEXC             MOVE V-FECULTTEL-BDLDIR(I-BDLDIR)                    AAM0017
+TELEXC                  TO V-FECULTTELFIN-BDLDIR(J-BDLDIR)              AAM0017
+ORDTEL          ELSE
+RCNCER             MOVE V-FECHATEL-BDLDIR(I-BDLDIR)                     RMB0010 
+RCNCER                  TO V-FECHADIR-AUX-BDLDIR(K-BDLDIR)              RMB0010 
+RCNCER             ADD 1 TO K-BDLDIR                                    RMB0010 
+RCNCER             ADD 1 TO V-NUMTELFIN-BDLDIR(J-BDLDIR)                RMB0010 
+RCNCER             IF V-FECHATEL-BDLDIR(I-BDLDIR) >                     RMB0010 
+RCNCER                V-FECTELFIN-BDLDIR(J-BDLDIR)                      RMB0010 
+RCNCER                MOVE V-FECHATEL-BDLDIR(I-BDLDIR)                  RMB0010 
+RCNCER                     TO V-FECTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+RCNCER                MOVE V-TELEFONO-BDLDIR (I-BDLDIR)                 RMB0010 
+RCNCER                     TO V-TELFIN-BDLDIR(J-BDLDIR)                 RMB0010 
+RCNCER                MOVE V-CIUDADTEL-BDLDIR(I-BDLDIR)                 RMB0010 
+RCNCER                     TO V-CIUTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+RCNCER                MOVE V-TIPOTEL-BDLDIR(I-BDLDIR)                   RMB0010 
+RCNCER                     TO V-TIPTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+RCNCER                MOVE V-SUSTEL-BDLDIR (I-BDLDIR)                   RMB0010 
+RCNCER                     TO V-SUSTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+RCNCER                MOVE V-HASTEL-BDLDIR (I-BDLDIR)                   RMB0010 
+RCNCER                     TO V-HASTELFIN-BDLDIR(J-BDLDIR)              RMB0010 
+TELEXC                MOVE V-FECULTTEL-BDLDIR(I-BDLDIR)                 AAM0017
+TELEXC                     TO V-FECULTTELFIN-BDLDIR(J-BDLDIR)           AAM0017
+ORDTEL             END-IF
+ORDTEL          END-IF
+RCNCER          ADD 1 TO I-BDLDIR                                       RMB0010 
+ORDTEL        END-PERFORM
+RCNCER        IF I-BDLDIR > 1                                           RMB0010 
+ORDTEL           PERFORM 2017-CALCULAR-VECTOR-RES         
+RCNCER           MOVE VEC-HIS-BDLDIR                                    RMB0010 
+RCNCER                TO V-VECTELFIN-BDLDIR(J-BDLDIR)                   RMB0010 
+ORDTEL        END-IF
+ORDTEL     END-IF.
+RCNCER     IF J-BDLDIR > 0                                              RMB0010 
+RCNCER        MOVE 1 TO I-BDLDIR                                        RMB0010 
+RCNCER        PERFORM UNTIL I-BDLDIR > J-BDLDIR                         RMB0010 
+RCNCER           MOVE V-TELFIN-BDLDIR(I-BDLDIR) TO TELEFONO-BDLDIR      RMB0010 
+RCNCER           PERFORM 2017-U-CALIFICAR-TELEFONOS                     RMB0010 
+RCNCER           MOVE CAL-TEL-BDLDIR TO V-CALTELFIN-BDLDIR(I-BDLDIR)    RMB0010 
+TELEXC*-------- Se Excluyen Teléfonos según tabla de exclusión --------*AAM0017
+TELEXC           IF CAL-TEL-BDLDIR <> 0                                 AAM0017
+TELEXC              PERFORM 2018-EVALUA-EXCLUSION-TEL                   AAM0017
+TELEXC           END-IF                                                 AAM0017
+RCNCER***        SE ELIMINAN LOS TELEFONOS CALIFICADOS EN CERO          RMB0010 
+RCNCER           IF CAL-TEL-BDLDIR = 0                                  RMB0010 
+RCNCER              MOVE 0 TO V-FECTELFIN-BDLDIR(I-BDLDIR)              RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           ADD  1 TO I-BDLDIR                                     RMB0010 
+RCNCER        END-PERFORM                                               RMB0010 
+TELEXC        PERFORM 2020-UNIFICA-TELEFONOS                            AAM0017
+RCNCER        SORT T-TELFINALES-BDLDIR DESCENDING V-CALTELFIN-BDLDIR    RMB0010 
+RCNCER                                 DESCENDING V-FECTELFIN-BDLDIR    RMB0010 
+RCNCER                                 DESCENDING V-NUMTELFIN-BDLDIR    RMB0010 
+RCNCER        MOVE 1 TO I-BDLDIR                                        RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER*    IF J-DIR > 0                                                 RMB0010 
+RCNCER*       MOVE 1 TO I-DIR                                           RMB0010 
+RCNCER*       PERFORM UNTIL I-DIR > J-DIR                               RMB0010 
+RCNCER*          IF V-TELFIN(I-DIR) NUMERIC                             RMB0010 
+RCNCER*             MOVE V-TELFIN(I-DIR) TO TELE-DIR                    RMB0010 
+RCNCER*             DIVIDE TELE-DIR BY 1000000 GIVING COSI-DIR          RMB0010 
+RCNCER*                             REMAINDER         RESI-DIR          RMB0010 
+RCNCER*             IF COSI-DIR >= 1 AND RESI-DIR > 0                   RMB0010 
+RCNCER*                ADD 10 TO V-CALTELFIN(I-DIR)                     RMB0010 
+RCNCER*             ELSE                                                RMB0010 
+RCNCER*                DIVIDE TELE-DIR BY 100000 GIVING COSI-DIR        RMB0010 
+RCNCER*                                REMAINDER        RESI-DIR        RMB0010 
+RCNCER*                IF COSI-DIR >= 1 AND RESI-DIR > 0                RMB0010 
+RCNCER*                   ADD 5  TO V-CALTELFIN(I-DIR)                  RMB0010 
+RCNCER*                END-IF                                           RMB0010 
+RCNCER*             END-IF                                              RMB0010 
+RCNCER*          END-IF                                                 RMB0010 
+RCNCER*          ADD 1 TO I-DIR                                         RMB0010 
+RCNCER*       END-PERFORM                                               RMB0010 
+RCNCER*       SORT T-TELFINALES DESCENDING V-CALTELFIN                  RMB0010 
+RCNCER*                         DESCENDING V-FECTELFIN                  RMB0010 
+RCNCER*                         DESCENDING V-NUMTELFIN                  RMB0010 
+RCNCER*    END-IF.
+RCNCER*----------------- CALIFICAR TELEFONOS  --------------------------RMB0010 
+RCNCER 2017-U-CALIFICAR-TELEFONOS.                                      RMB0010 
+RCNCER     MOVE 1 TO M-BDLDIR                                           RMB0010 
+RCNCER     PERFORM UNTIL TELEFONO-BDLDIR(M-BDLDIR:1) NOT = "0"          RMB0010 
+RCNCER       ADD 1 TO M-BDLDIR                                          RMB0010 
+RCNCER       IF M-BDLDIR > 12                                           RMB0010 
+RCNCER          NEXT SENTENCE                                           RMB0010 
+RCNCER       END-IF                                                     RMB0010 
+RCNCER     END-PERFORM                                                  RMB0010 
+RCNCER     MOVE 0 TO CAL-TEL-BDLDIR                                     RMB0010
+TEL025     IF TELEFONO-BDLDIR(6:1) = "0" OR                             PJV0025
+TEL025        TELEFONO-BDLDIR(6:1) = "1" OR                             PJV0025
+TEL025        TELEFONO-BDLDIR(6:1) = "9"                                PJV0025
+TEL025        MOVE 1 TO M-BDLDIR                                        PJV0025
+TEL025     END-IF                                                       PJV0025
+RCNCER     EVALUATE M-BDLDIR                                            RMB0010
+RCNCER       WHEN 6                                                     RMB0010 
+RCNCER         MOVE 15 TO CAL-TEL-BDLDIR                                RMB0010 
+RCNCER       WHEN 4                                                     RMB0010 
+RCNCER         IF TELEFONO-BDLDIR(6:1) NOT = "0"                        RMB0010 
+RCNCER            IF TELEFONO-BDLDIR(4:1) = "9" OR "7" OR "5"           RMB0010 
+RCNCER               MOVE 15 TO CAL-TEL-BDLDIR                          RMB0010 
+RCNCER            END-IF                                                RMB0010 
+RCNCER         END-IF                                                   RMB0010 
+RCNCER       WHEN 3                                                     RMB0010 
+RCNCER          IF TELEFONO-BDLDIR(6:1) NOT = "0"                       RMB0010 
+RCNCER             IF TELEFONO-BDLDIR(3:2) = "57" AND                   RMB0010 
+RCNCER                (TELEFONO-BDLDIR(5:1) NOT = "3" OR "9")           RMB0010 
+RCNCER                MOVE 15 TO CAL-TEL-BDLDIR                         RMB0010 
+RCNCER             END-IF                                               RMB0010 
+RCNCER             IF TELEFONO-BDLDIR(3:1) = "3"                        RMB0010 
+RCNCER                MOVE 15 TO CAL-TEL-BDLDIR                         RMB0010 
+RCNCER             END-IF                                               RMB0010 
+RCNCER          END-IF                                                  RMB0010
+RCNCER     END-EVALUATE.                                                RMB0010 
+TELEXC*----------------- EVALUA EXCLUSION DE TELEFONOS ----------------*AAM0017
+TELEXC 2018-EVALUA-EXCLUSION-TEL.                                       AAM0017
+TELEXC     MOVE 1 TO IQ                                                 AAM0017
+TEXTEL*TELEXC     PERFORM UNTIL IQ > 12 OR CAL-TEL-BDLDIR = 0           HGO0020
+TEXTEL     PERFORM UNTIL IQ > 24 OR CAL-TEL-BDLDIR = 0                  HGO0020
+TELEXC        PERFORM 2019-BUSCA-POSINI-LONG-TELEXCLU                   AAM0017
+TELEXC        IF POSI-EXCLU < 7                                         AAM0017
+TELEXC           IF T-TELS-EXCLU(IQ)(POSI-EXCLU:LONGCOMP-EXCLU)         AAM0017
+TELEXC              = TELEFONO-BDLDIR(POSI-EXCLU:LONGCOMP-EXCLU)        AAM0017
+TELEXC              MOVE 0 TO CAL-TEL-BDLDIR                            AAM0017
+TELEXC           END-IF                                                 AAM0017
+TELEXC        END-IF                                                    AAM0017
+TELEXC        ADD 1 TO IQ                                               AAM0017
+TELEXC     END-PERFORM.                                                 AAM0017
+TELEXC******************************************************************AAM0017
+TELEXC*2019-BUSCA-POSINI-LONG-TELEXCLU                                  AAM0017
+TELEXC*    BUSCA POSICION INICIAL Y LONGITUD DE REGISTRO DE TELEFONOS A AAM0017
+TELEXC*    EXCLUIR.                                                     AAM0017
+TELEXC******************************************************************AAM0017
+TELEXC 2019-BUSCA-POSINI-LONG-TELEXCLU.                                 AAM0017
+TELEXC     MOVE 0                TO SW-ENCUENTRA-PI                     AAM0017
+TELEXC     MOVE 1                TO W-POSI                              AAM0017
+TELEXC     INSPECT T-TELS-EXCLU(IQ) REPLACING ALL LOW-VALUES            AAM0017
+TELEXC                                        BY SPACES                 AAM0017
+TELEXC     PERFORM UNTIL SW-ENCUENTRA-PI = 1 OR W-POSI > 12             AAM0017
+TELEXC        IF T-TELS-EXCLU(IQ)(W-POSI:1) NOT EQUAL " "               AAM0017
+TELEXC           MOVE 1          TO SW-ENCUENTRA-PI                     AAM0017
+TELEXC           MOVE W-POSI     TO POSI-EXCLU                          AAM0017
+TELEXC           COMPUTE LONGCOMP-EXCLU = 12 - ( W-POSI - 1 )           AAM0017
+TELEXC        END-IF                                                    AAM0017
+TELEXC        ADD 1              TO W-POSI                              AAM0017
+TELEXC     END-PERFORM                                                  AAM0017
+TELEXC     IF W-POSI > 12                                               AAM0017
+TELEXC        MOVE 12            TO POSI-EXCLU                          AAM0017
+TELEXC        MOVE 0             TO LONGCOMP-EXCLU                      AAM0017
+TELEXC     END-IF.                                                      AAM0017
+TELEXC******************************************************************AAM0017
+TELEXC*2020-UNIFICA-TELEFONOS                                           AAM0017
+TELEXC*    UNIFICA TELEFONOS REPETIDOS                                  AAM0017
+TELEXC******************************************************************AAM0017
+TELEXC 2020-UNIFICA-TELEFONOS.                                          AAM0017
+TELEXC     SORT T-TELFINALES-BDLDIR DESCENDING V-TELFIN-BDLDIR-2        AAM0017
+TELEXC     MOVE 1                      TO W-I                           AAM0017
+TELEXC*    MOVE W-I                    TO W-POSRC                       AAM0017
+TELEXC     MOVE 0                      TO SW-1 SW-2                     AAM0017
+TELEXC     MOVE 0                      TO W-OCURR                       AAM0017
+TELEXC     PERFORM UNTIL W-I > 99  OR SW-1 = 1                          AAM0017
+TELEXC       IF V-CALTELFIN-BDLDIR(W-I) > 0                             AAM0017
+TELEXC         MOVE 1                   TO SW-1                         AAM0017
+TELEXC         MOVE W-I                 TO W-POSRC                      AAM0017
+TELEXC         COMPUTE W-I = W-I - 1                                    AAM0017
+TELEXC       END-IF                                                     AAM0017
+TELEXC       ADD 1 TO W-I                                               AAM0017
+TELEXC     END-PERFORM                                                  AAM0017
+TELEXC     IF W-I < 100                                                 AAM0017
+TELEXC       MOVE V-TELFIN-BDLDIR(W-POSRC) TO W-TELANT                  AAM0017
+TELEXC       MOVE V-NUMTELFIN-BDLDIR(W-POSRC) TO W-OCURR                AAM0017
+TELEXC       MOVE 0 TO SW-1                                             AAM0017
+TELEXC     END-IF                                                       AAM0017
+TELEXC     PERFORM UNTIL W-I > 99  OR SW-1 = 1                          AAM0017
+TELEXC       MOVE V-TELFIN-BDLDIR(W-I + 1) TO W-TELDES                  AAM0017
+TELEXC       MOVE 1                     TO W-POSIUNI                    AAM0017
+TELEXC       IF W-TELDES(6:7) = "       "                               AAM0017
+TELEXC        MOVE 1                    TO SW-1                         AAM0017
+TELEXC       END-IF                                                     AAM0017
+TELEXC       IF V-CALTELFIN-BDLDIR(W-I + 1) > 0                         AAM0017
+TELEXC        IF W-TELANT(6:7) = W-TELDES(6:7)                          AAM0017
+TELEXC         COMPUTE W-OCURR = W-OCURR +                              AAM0017
+TELEXC                           V-NUMTELFIN-BDLDIR(W-I + 1)            AAM0017
+TELEXC         MOVE 0 TO SW-2                                           AAM0017
+TELEXC         PERFORM UNTIL W-POSIUNI > 12 OR SW-2 = 1                 AAM0017
+TELEXC          INSPECT W-TELANT REPLACING ALL LOW-VALUES BY SPACES     AAM0017
+TELEXC          INSPECT W-TELDES REPLACING ALL LOW-VALUES BY SPACES     AAM0017
+TELEXC          IF W-TELANT(W-POSIUNI:1) <> "0"                         AAM0017
+TELEXC           MOVE W-POSIUNI TO W-POSANT                             AAM0017
+TELEXC           MOVE 1         TO SW-2                                 AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC          ADD 1           TO W-POSIUNI                            AAM0017
+TELEXC         END-PERFORM                                              AAM0017
+TELEXC         IF W-POSIUNI > 12                                        AAM0017
+TELEXC          MOVE 12         TO W-POSANT                             AAM0017
+TELEXC         END-IF                                                   AAM0017
+TELEXC         MOVE 0           TO SW-2                                 AAM0017
+TELEXC         MOVE 1           TO W-POSIUNI                            AAM0017
+TELEXC         PERFORM UNTIL W-POSIUNI > 12 OR SW-2 = 1                 AAM0017
+TELEXC          IF W-TELDES(W-POSIUNI:1) <> "0"                         AAM0017
+TELEXC           MOVE W-POSIUNI TO W-POSDES                             AAM0017
+TELEXC           MOVE 1         TO SW-2                                 AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC          ADD 1           TO W-POSIUNI                            AAM0017
+TELEXC         END-PERFORM                                              AAM0017
+TELEXC         IF W-POSIUNI > 12                                        AAM0017
+TELEXC          MOVE 12         TO W-POSDES                             AAM0017
+TELEXC         END-IF                                                   AAM0017
+TELEXC         MOVE 0           TO SW-2                                 AAM0017
+TELEXC         IF W-POSANT < W-POSDES                                   AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC          IF V-FECTELFIN-BDLDIR(W-POSRC) <                        AAM0017
+TELEXC             V-FECTELFIN-BDLDIR(W-I + 1)                          AAM0017
+TELEXC           MOVE V-FECTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC             TO V-FECTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC          IF V-CALTELFIN-BDLDIR(W-POSRC) <                        AAM0017
+TELEXC             V-CALTELFIN-BDLDIR(W-I + 1)                          AAM0017
+TELEXC           MOVE V-CALTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC             TO V-CALTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC          MOVE 0 TO V-FECTELFIN-BDLDIR(W-I + 1)                   AAM0017
+TELEXC          MOVE 0 TO V-CALTELFIN-BDLDIR(W-I + 1)                   AAM0017
+TELEXC         ELSE                                                     AAM0017
+TELEXC          IF W-POSANT = W-POSDES                                  AAM0017
+TELEXC           IF V-NUMTELFIN-BDLDIR(W-POSRC) >                       AAM0017
+TELEXC              V-NUMTELFIN-BDLDIR(W-I + 1)                         AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC            IF V-FECTELFIN-BDLDIR(W-POSRC) <                      AAM0017
+TELEXC               V-FECTELFIN-BDLDIR(W-I + 1)                        AAM0017
+TELEXC             MOVE V-FECTELFIN-BDLDIR(W-I + 1)                     AAM0017
+TELEXC               TO V-FECTELFIN-BDLDIR(W-POSRC)                     AAM0017
+TELEXC            END-IF                                                AAM0017
+TELEXC            IF V-CALTELFIN-BDLDIR(W-POSRC) <                      AAM0017
+TELEXC               V-CALTELFIN-BDLDIR(W-I + 1)                        AAM0017
+TELEXC             MOVE V-CALTELFIN-BDLDIR(W-I + 1)                     AAM0017
+TELEXC               TO V-CALTELFIN-BDLDIR(W-POSRC)                     AAM0017
+TELEXC            END-IF                                                AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC            MOVE 0 TO V-FECTELFIN-BDLDIR(W-I + 1)                 AAM0017
+TELEXC            MOVE 0 TO V-CALTELFIN-BDLDIR(W-I + 1)                 AAM0017
+TELEXC           ELSE                                                   AAM0017
+TELEXC            IF V-NUMTELFIN-BDLDIR(W-POSRC) =                      AAM0017
+TELEXC               V-NUMTELFIN-BDLDIR(W-I + 1)                        AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC             IF V-FECTELFIN-BDLDIR(W-POSRC) <                     AAM0017
+TELEXC                V-FECTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC              MOVE V-FECTELFIN-BDLDIR(W-I + 1)                    AAM0017
+TELEXC                TO V-FECTELFIN-BDLDIR(W-POSRC)                    AAM0017
+TELEXC             END-IF                                               AAM0017
+TELEXC             IF V-CALTELFIN-BDLDIR(W-POSRC) <                     AAM0017
+TELEXC                V-CALTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC              MOVE V-CALTELFIN-BDLDIR(W-I + 1)                    AAM0017
+TELEXC                TO V-CALTELFIN-BDLDIR(W-POSRC)                    AAM0017
+TELEXC             END-IF                                               AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC             IF V-CALTELFIN-BDLDIR(W-POSRC) >                     AAM0017
+TELEXC                V-CALTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC              IF V-FECTELFIN-BDLDIR(W-POSRC) <                    AAM0017
+TELEXC                 V-FECTELFIN-BDLDIR(W-I + 1)                      AAM0017
+TELEXC               MOVE V-FECTELFIN-BDLDIR(W-I + 1)                   AAM0017
+TELEXC                 TO V-FECTELFIN-BDLDIR(W-POSRC)                   AAM0017
+TELEXC              END-IF                                              AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC              MOVE 0 TO V-FECTELFIN-BDLDIR(W-I + 1)               AAM0017
+TELEXC              MOVE 0 TO V-CALTELFIN-BDLDIR(W-I + 1)               AAM0017
+TELEXC             ELSE                                                 AAM0017
+TELEXC              IF V-CALTELFIN-BDLDIR(W-POSRC) =                    AAM0017
+TELEXC                 V-CALTELFIN-BDLDIR(W-I + 1)                      AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC               IF V-FECTELFIN-BDLDIR(W-POSRC) <                   AAM0017
+TELEXC                  V-FECTELFIN-BDLDIR(W-I + 1)                     AAM0017
+TELEXC                MOVE V-FECTELFIN-BDLDIR(W-I + 1)                  AAM0017
+TELEXC                  TO V-FECTELFIN-BDLDIR(W-POSRC)                  AAM0017
+TELEXC               END-IF                                             AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC               IF V-FECTELFIN-BDLDIR(W-POSRC) >                   AAM0017
+TELEXC                  V-FECTELFIN-BDLDIR(W-I + 1)                     AAM0017
+TELEXC                MOVE 0 TO V-FECTELFIN-BDLDIR(W-I + 1)             AAM0017
+TELEXC                MOVE 0 TO V-CALTELFIN-BDLDIR(W-I + 1)             AAM0017
+TELEXC               ELSE                                               AAM0017
+TELEXC                IF V-FECTELFIN-BDLDIR(W-POSRC) =                  AAM0017
+TELEXC                   V-FECTELFIN-BDLDIR(W-I + 1)                    AAM0017
+TELEXC                 MOVE 0 TO V-FECTELFIN-BDLDIR(W-I + 1)            AAM0017
+TELEXC                 MOVE 0 TO V-CALTELFIN-BDLDIR(W-I + 1)            AAM0017
+TELEXC                ELSE                                              AAM0017
+TELEXC                 MOVE 1 TO SW-2                                   AAM0017
+TELEXC                END-IF                                            AAM0017
+TELEXC               END-IF                                             AAM0017
+TELEXC              ELSE                                                AAM0017
+TELEXC               MOVE 1 TO SW-2                                     AAM0017
+TELEXC              END-IF                                              AAM0017
+TELEXC             END-IF                                               AAM0017
+TELEXC            ELSE                                                  AAM0017
+TELEXC             MOVE 1 TO SW-2                                       AAM0017
+TELEXC            END-IF                                                AAM0017
+TELEXC           END-IF                                                 AAM0017
+TELEXC          ELSE                                                    AAM0017
+TELEXC           IF V-FECTELFIN-BDLDIR(W-POSRC) >                       AAM0017
+TELEXC              V-FECTELFIN-BDLDIR(W-I + 1)                         AAM0017
+TELEXC            MOVE V-FECTELFIN-BDLDIR(W-POSRC)                      AAM0017
+TELEXC              TO V-FECTELFIN-BDLDIR(W-I + 1)                      AAM0017
+TELEXC           END-IF                                                 AAM0017
+TELEXC           IF V-CALTELFIN-BDLDIR(W-POSRC) >                       AAM0017
+TELEXC              V-CALTELFIN-BDLDIR(W-I + 1)                         AAM0017
+TELEXC            MOVE V-CALTELFIN-BDLDIR(W-POSRC)                      AAM0017
+TELEXC              TO V-CALTELFIN-BDLDIR(W-I + 1)                      AAM0017
+TELEXC           END-IF                                                 AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC           MOVE 0        TO V-FECTELFIN-BDLDIR(W-POSRC)           AAM0017
+TELEXC           MOVE 0        TO V-CALTELFIN-BDLDIR(W-POSRC)           AAM0017
+TELEXC           MOVE W-TELDES TO W-TELANT                              AAM0017
+TELEXC           COMPUTE W-POSRC = W-I + 1                              AAM0017
+TELEXC*          MOVE 1 TO SW-2                                         AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC         END-IF                                                   AAM0017
+TELEXC         IF SW-2 = 1                                              AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION INI *-------*            AAM0017
+TELEXC          IF V-FECTELFIN-BDLDIR(W-POSRC) <                        AAM0017
+TELEXC             V-FECTELFIN-BDLDIR(W-I + 1)                          AAM0017
+TELEXC           MOVE V-FECTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC             TO V-FECTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC          ELSE                                                    AAM0017
+TELEXC           MOVE V-FECTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC             TO V-FECTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC          IF V-CALTELFIN-BDLDIR(W-POSRC) <                        AAM0017
+TELEXC             V-CALTELFIN-BDLDIR(W-I + 1)                          AAM0017
+TELEXC           MOVE V-CALTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC             TO V-CALTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC          ELSE                                                    AAM0017
+TELEXC           MOVE V-CALTELFIN-BDLDIR(W-POSRC)                       AAM0017
+TELEXC             TO V-CALTELFIN-BDLDIR(W-I + 1)                       AAM0017
+TELEXC          END-IF                                                  AAM0017
+TELEXC*----------* VALIDA FECHA Y CALIFICACION FIN *-------*            AAM0017
+TELEXC          MOVE 0        TO V-FECTELFIN-BDLDIR(W-POSRC)            AAM0017
+TELEXC          MOVE 0        TO V-CALTELFIN-BDLDIR(W-POSRC)            AAM0017
+TELEXC          MOVE W-TELDES TO W-TELANT                               AAM0017
+TELEXC          COMPUTE W-POSRC = W-I + 1                               AAM0017
+TELEXC         END-IF                                                   AAM0017
+TELEXC        ELSE                                                      AAM0017
+TELEXC         MOVE W-OCURR  TO V-NUMTELFIN-BDLDIR(W-POSRC)             AAM0017
+TELEXC         MOVE W-TELDES TO W-TELANT                                AAM0017
+TELEXC         COMPUTE W-POSRC = W-I + 1                                AAM0017
+TELEXC         MOVE V-NUMTELFIN-BDLDIR(W-POSRC) TO W-OCURR              AAM0017
+TELEXC        END-IF                                                    AAM0017
+TELEXC       END-IF                                                     AAM0017
+TELEXC       IF SW-1 = 1 AND V-CALTELFIN-BDLDIR(W-I + 1) < 1            AAM0017
+TELEXC         MOVE W-OCURR  TO V-NUMTELFIN-BDLDIR(W-POSRC)             AAM0017
+TELEXC       END-IF                                                     AAM0017
+TELEXC       ADD 1 TO W-I                                               AAM0017
+TELEXC     END-PERFORM.                                                 AAM0017
+NEWDIR*-----------------------------------------------------------------
+REMARK*         RUTINAS PARA LA ESTANDARIZACION DE DIRECCIONES 
+REMARK*-----------------------------------------------------------------
+STANDA 06000-U-CARGAR-TABLA-DIRESTAN.
+REMARK******************************************************************
+REMARK*06000-CARGAR-TABLA-DIRESTAN.                                    *
+REMARK*    SE CARGA EN MEMORIA LA TABLA PARA ESTANDARIZACION DE        *
+REMARK*    DIRECCIONES                                                 *
+REMARK*    PARAMETROS
+REMARK*       INPUT      DECLARAR ARCHIVO DIREST
+REMARK*       OUTPUT     TABLA-DIR-ESTANDAR.
+REMARK******************************************************************
+RCNCER     INITIALIZE TABLA-DIR-COMPUESTAS-BDLDIR                       RMB0010 
+RCNCER     OPEN INPUT DIREST                                            RMB0010 
+RCNCER     MOVE 0 TO FDA-DIREST-BDLDIR                                  RMB0010 
+STANDA     READ DIREST
+STANDA        AT END
+RCNCER           MOVE 1 TO FDA-DIREST-BDLDIR                            RMB0010 
+STANDA     END-READ
+RCNCER     MOVE 1 TO I-STA-BDLDIR                                       RMB0010 
+RCNCER     MOVE 1 TO J-STA-BDLDIR                                       RMB0010 
+RCNCER*    PERFORM UNTIL FDA-DIREST-BDLDIR = 1 OR I-STA-BDLDIR >= 500   RMB0010
+AMP024     PERFORM UNTIL FDA-DIREST-BDLDIR = 1 OR I-STA-BDLDIR >= 2000  PJV0024
+RCNCER        IF DIR-ORIG-DIREST (1:4) <> "****"                        RMB0010 
+RCNCER           MOVE DIR-ORIG-DIREST                                   RMB0010 
+RCNCER                TO DIR-ORIGINAL-BDLDIR (I-STA-BDLDIR)             RMB0010 
+RCNCER           MOVE DIR-ESTAN-DIREST                                  RMB0010 
+RCNCER                TO DIR-ESTANDAR-BDLDIR (I-STA-BDLDIR)             RMB0010 
+RCNCER           INITIALIZE M-BDLDIR                                    RMB0010 
+RCNCER           INSPECT DIR-ORIG-DIREST TALLYING M-BDLDIR FOR ALL "*"  RMB0010 
+RCNCER           IF M-BDLDIR > 0                                        RMB0010 
+RCNCER              INITIALIZE M-BDLDIR                                 RMB0010 
+RCNCER              INSPECT DIR-ORIG-DIREST                             RMB0010 
+RCNCER                      TALLYING M-BDLDIR                           RMB0010 
+RCNCER                      FOR CHARACTERS BEFORE INITIAL " "           RMB0010 
+RCNCER              MOVE 0 TO DIR-COMPUESTAS-TIP-BDLDIR (J-STA-BDLDIR)  RMB0010 
+RCNCER              MOVE M-BDLDIR                                       RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-LON-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              MOVE DIR-ORIG-DIREST                                RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-AST-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              INSPECT DIR-ORIG-DIREST REPLACING ALL "*" BY " "    RMB0010 
+RCNCER              MOVE DIR-ORIG-DIREST                                RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-BLN-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              ADD 1 TO J-STA-BDLDIR                               RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           IF DIR-ORIG-DIREST (1:1) = "/" OR "(" OR ")" OR        RMB0010 
+RCNCER                                      "=" OR "?"                  RMB0010 
+RCNCER              INITIALIZE M-BDLDIR                                 RMB0010 
+RCNCER              INSPECT DIR-ORIG-DIREST                             RMB0010 
+RCNCER                      TALLYING M-BDLDIR FOR CHARACTERS BEFORE     RMB0010 
+RCNCER                               INITIAL " "                        RMB0010 
+RCNCER              MOVE 1 TO DIR-COMPUESTAS-TIP-BDLDIR (J-STA-BDLDIR)  RMB0010 
+RCNCER              MOVE M-BDLDIR                                       RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-LON-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              MOVE DIR-ORIG-DIREST                                RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-AST-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              EVALUATE  DIR-ORIG-DIREST (1:1)                     RMB0010 
+RCNCER                WHEN "/"                                          RMB0010 
+RCNCER                  INSPECT DIR-ORIG-DIREST REPLACING ALL "/" BY "0"RMB0010 
+RCNCER                WHEN "("                                          RMB0010 
+RCNCER                  INSPECT DIR-ORIG-DIREST REPLACING ALL "(" BY "1"RMB0010 
+RCNCER                WHEN ")"                                          RMB0010 
+RCNCER                  INSPECT DIR-ORIG-DIREST REPLACING ALL ")" BY "2"RMB0010 
+RCNCER                WHEN "="                                          RMB0010 
+RCNCER                  INSPECT DIR-ORIG-DIREST REPLACING ALL "=" BY "5"RMB0010 
+RCNCER                WHEN "?"                                          RMB0010 
+RCNCER                  INSPECT DIR-ORIG-DIREST REPLACING ALL "?" BY "7"RMB0010 
+RCNCER              END-EVALUATE                                        RMB0010 
+RCNCER              MOVE DIR-ORIG-DIREST                                RMB0010 
+RCNCER                   TO DIR-COMPUESTAS-BLN-BDLDIR (J-STA-BDLDIR)    RMB0010 
+RCNCER              ADD 1 TO J-STA-BDLDIR                               RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           ADD 1 TO I-STA-BDLDIR                                  RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        READ DIREST                                               RMB0010 
+RCNCER           AT END                                                 RMB0010 
+RCNCER              MOVE 1 TO FDA-DIREST-BDLDIR                         RMB0010 
+RCNCER        END-READ                                                  RMB0010 
+STANDA     END-PERFORM
+RCNCER*    PERFORM UNTIL I-STA-BDLDIR >= 500                            RMB0010
+AMP024     PERFORM UNTIL I-STA-BDLDIR >= 2000                           PJV0024
+RCNCER        MOVE "ZZZZZZZZZZZZZZZZZZZZ"                               RMB0010 
+RCNCER             TO DIR-ORIGINAL-BDLDIR (I-STA-BDLDIR)                RMB0010 
+RCNCER        MOVE SPACES                                               RMB0010 
+RCNCER             TO DIR-ESTANDAR-BDLDIR (I-STA-BDLDIR)                RMB0010 
+RCNCER        ADD 1 TO I-STA-BDLDIR                                     RMB0010 
+STANDA     END-PERFORM
+RCNCER     SORT TABLA-DIR-ESTANDAR-BDLDIR ASCENDING DIR-ORIGINAL-BDLDIR.RMB0010 
+STANDA 6100-U-ESTANDARIZAR-DIRECC.
+REMARK******************************************************************
+REMARK*6100-ESTANDARIZAR-DIRECC.                                       *
+REMARK*    ESTA RUTINA TOMA LA DIRECCION DE ENTRADA Y LA ESTANDARIZA DE*
+REMARK*    ACUERDO A LA TABLA DE ESTADARIZACION DE DIRECCIONES         *
+REMARK*    APLICANDO ADEMAS REEMPLAZOS DE CARACTERES ESPECIALES        *
+REMARK*    PARAMETROS
+REMARK*       INPUT        DIRECCION-A-ESTANDARIZAR.
+REMARK*       OUTPUT       DIRECCION-ESTANDARIZADA.     
+REMARK******************************************************************
+RCNCER***  SE DESCARTAN LAS DIRECCIONES QUE CONTIENEN EL NOMBRE DE LA   RMB0010 
+RCNCER***  CIUDAD                                                       RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (1:20) <> CIUDAD-BDLDIR   RMB0010 
+RCNCER        INSPECT DIRECCION-A-ESTANDARIZAR-BDLDIR                   RMB0010 
+RCNCER                REPLACING ALL "." BY " "                          RMB0010 
+RCNCER                              "-" BY " "                          RMB0010 
+RCNCER                              "'" BY " "                          RMB0010 
+RCNCER                              "#" BY " "                          RMB0010 
+RCNCER                              ":" BY " "                          RMB0010 
+RCNCER                              "/" BY " "                          RMB0010 
+RCNCER                              "," BY " "                          RMB0010 
+RCNCER                              "*" BY " "                          RMB0010 
+RCNCER                              "?" BY " "                          RMB0010 
+RCNCER                              "\" BY " "                          RMB0010 
+RCNCER                              "_" BY " "                          RMB0010 
+RCNCER                              ";" BY " "                          RMB0010 
+RCNCER                              "´" BY " "                          RMB0010 
+RCNCER                              "+" BY " "                          RMB0010 
+RCNCER                              "¿" BY " "                          RMB0010 
+RCNCER                              "!" BY " "                          RMB0010 
+RCNCER                              "¡" BY " "                          RMB0010 
+RCNCER                              "^" BY " "                          RMB0010 
+RCNCER                              "`" BY " "                          RMB0010 
+RCNCER                              "¬" BY " "                          RMB0010 
+RCNCER                              "|"  BY " "                          RMB0010 
+RCNCER                              "&" BY " "                          RMB0010 
+RCNCER                              "%" BY " "                          RMB0010 
+RCNCER                              "¨" BY " "                          RMB0010 
+RCNCER                              "[" BY " "                          RMB0010 
+RCNCER                              "]" BY " "                          RMB0010 
+RCNCER                              "{" BY " "                          RMB0010 
+RCNCER                              "}" BY " "                          RMB0010 
+RCNCER                              "~" BY " "                          RMB0010 
+RCNCER                              '"' BY " "                          RMB0010 
+RCNCER                              "(" BY " "                          RMB0010 
+RCNCER                              ")" BY " "                          RMB0010 
+RCNCER                              "°" BY " "                          RMB0010 
+RCNCER                              "$" BY " "                          RMB0010 
+RCNCER                              "@" BY " "                          RMB0010 
+RCNCER                              "<" BY " "                          RMB0010 
+RCNCER                              ">" BY " "                          RMB0010 
+RCNCER                              "=" BY " "                          RMB0010 
+RCNCER        MOVE FUNCTION UPPER-CASE (DIRECCION-A-ESTANDARIZAR-BDLDIR)RMB0010 
+RCNCER             TO DIRECCION-A-ESTANDARIZAR-BDLDIR                   RMB0010 
+RCNCER        PERFORM 6130-FILTRO-INICIAL                               RMB0010 
+RCNCER        MOVE 1 TO KK-STA-BDLDIR                                   RMB0010 
+RCNCER        INITIALIZE NUEVA-DIRECCION-BDLDIR                         RMB0010 
+RCNCER                   SUM-DIGITOS-BDLDIR                             RMB0010 
+RCNCER                   TIP-NUEVA-DIRECCION-BDLDIR                     RMB0010 
+PYSPAR                   CON-PART-ESTANDARIZADA-BDLDIR                  HGO0021
+RCNCER        MOVE 1 TO II-STA-BDLDIR                                   RMB0010 
+RCNCER        PERFORM UNTIL II-STA-BDLDIR > 60                          RMB0010 
+RCNCER           IF DIR-A-EST-BDLDIR (II-STA-BDLDIR) NUMERIC            RMB0010 
+RCNCER              MOVE "N" TO IND-TIPCAR-BDLDIR                       RMB0010 
+RCNCER              ADD   1  TO SUM-DIGITOS-BDLDIR                      RMB0010 
+RCNCER           ELSE                                                   RMB0010 
+RCNCER              MOVE "A" TO IND-TIPCAR-BDLDIR                       RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           INITIALIZE PART-A-ESTANDARIZAR-BDLDIR                  RMB0010 
+RCNCER           MOVE 1 TO JJ-STA-BDLDIR                                RMB0010 
+RCNCER           MOVE IND-TIPCAR-BDLDIR TO TIPCAR-WS-BDLDIR             RMB0010 
+RCNCER           PERFORM UNTIL II-STA-BDLDIR > 60 OR                    RMB0010 
+RCNCER                         JJ-STA-BDLDIR > 60 OR                    RMB0010 
+RCNCER                         IND-TIPCAR-BDLDIR <> TIPCAR-WS-BDLDIR OR RMB0010 
+RCNCER                         DIR-A-EST-BDLDIR (II-STA-BDLDIR) = SPACESRMB0010 
+RCNCER              MOVE DIR-A-EST-BDLDIR (II-STA-BDLDIR)               RMB0010 
+RCNCER                   TO PART-A-ESTAN-BDLDIR (JJ-STA-BDLDIR)         RMB0010 
+RCNCER              ADD 1 TO II-STA-BDLDIR                              RMB0010 
+RCNCER              ADD 1 TO JJ-STA-BDLDIR                              RMB0010 
+RCNCER              IF II-STA-BDLDIR <= 60                              RMB0010 
+RCNCER                 IF DIR-A-EST-BDLDIR (II-STA-BDLDIR) NUMERIC      RMB0010 
+RCNCER                    MOVE "N" TO IND-TIPCAR-BDLDIR                 RMB0010 
+RCNCER                    ADD   1  TO SUM-DIGITOS-BDLDIR                RMB0010 
+RCNCER                 ELSE                                             RMB0010 
+RCNCER                    MOVE "A" TO IND-TIPCAR-BDLDIR                 RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER              END-IF                                              RMB0010 
+RCNCER           END-PERFORM                                            RMB0010 
+PYSPAR           ADD 1 TO CON-PART-ESTANDARIZADA-BDLDIR                 HGO0021
+RCNCER           IF TIPCAR-WS-BDLDIR = "A"                              RMB0010 
+RCNCER              PERFORM 6110-ESTANDARIZAR-PART                      RMB0010 
+RCNCER              IF PART-ESTANDARIZADA-BDLDIR <> SPACES              RMB0010 
+PYSPAR                 IF CON-PART-ESTANDARIZADA-BDLDIR = 1             HGO0021
+PYSPAR                  MOVE PART-ESTANDARIZADA-BDLDIR TO               HGO0021
+PYSPAR                     PRIPART-ESTANDARIZADA-BDLDIR                 HGO0021
+PYSPAR                 ELSE                                             HGO0021
+PYSPAR                  IF CON-PART-ESTANDARIZADA-BDLDIR = 2            HGO0021
+PYSPAR                     MOVE PART-ESTANDARIZADA-BDLDIR TO            HGO0021
+PYSPAR                        SEGPART-ESTANDARIZADA-BDLDIR              HGO0021
+PYSPAR                  END-IF                                          HGO0021
+PYSPAR                 END-IF                                           HGO0021
+RCNCER                 MOVE PART-ESTANDARIZADA-BDLDIR                   RMB0010 
+RCNCER                      TO NVA-DIR-BDLDIR (KK-STA-BDLDIR)           RMB0010 
+RCNCER                 IF ENC-DIREST-BDLDIR = 0                         RMB0010 
+RCNCER                    MOVE "S" TO TIP-NVA-DIR-BDLDIR(KK-STA-BDLDIR) RMB0010 
+RCNCER                 ELSE                                             RMB0010 
+RCNCER                    MOVE "A" TO TIP-NVA-DIR-BDLDIR(KK-STA-BDLDIR) RMB0010 
+RCNCER                 END-IF                                           RMB0010 
+RCNCER                 ADD 1 TO KK-STA-BDLDIR                           RMB0010 
+PYSPAR              ELSE                                                HGO0021
+PYSPAR                 IF PART-ESTANDARIZADA-BDLDIR = SPACES AND        HGO0021
+PYSPAR                 PART-A-ESTANDARIZAR-BDLDIR = SPACES              HGO0021
+PYSPAR                  COMPUTE CON-PART-ESTANDARIZADA-BDLDIR =         HGO0021
+PYSPAR                  CON-PART-ESTANDARIZADA-BDLDIR - 1               HGO0021
+PYSPAR                 END-IF                                           HGO0021
+RCNCER              END-IF                                              RMB0010 
+RCNCER           ELSE                                                   RMB0010 
+RCNCER              IF PART-A-ESTANDARIZAR-BDLDIR <> SPACES             RMB0010 
+PYSPAR                 IF CON-PART-ESTANDARIZADA-BDLDIR = 1             HGO0021
+PYSPAR                  MOVE PART-A-ESTANDARIZAR-BDLDIR TO              HGO0021
+PYSPAR                     PRIPART-ESTANDARIZADA-BDLDIR                 HGO0021
+PYSPAR                 ELSE                                             HGO0021
+PYSPAR                  IF CON-PART-ESTANDARIZADA-BDLDIR = 2            HGO0021
+PYSPAR                     MOVE PART-A-ESTANDARIZAR-BDLDIR TO           HGO0021
+PYSPAR                        SEGPART-ESTANDARIZADA-BDLDIR              HGO0021
+PYSPAR                  END-IF                                          HGO0021
+PYSPAR                 END-IF                                           HGO0021
+RCNCER                 MOVE PART-A-ESTANDARIZAR-BDLDIR                  RMB0010 
+RCNCER                      TO NVA-DIR-BDLDIR (KK-STA-BDLDIR)           RMB0010 
+RCNCER                 MOVE "N" TO TIP-NVA-DIR-BDLDIR(KK-STA-BDLDIR)    RMB0010 
+RCNCER                 ADD 1 TO KK-STA-BDLDIR                           RMB0010 
+RCNCER              END-IF                                              RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           PERFORM UNTIL II-STA-BDLDIR > 60 OR                    RMB0010 
+RCNCER                   DIR-A-EST-BDLDIR (II-STA-BDLDIR) <> SPACES     RMB0010 
+RCNCER              ADD 1 TO II-STA-BDLDIR                              RMB0010 
+RCNCER           END-PERFORM                                            RMB0010 
+RCNCER        END-PERFORM                                               RMB0010 
+RCNCER        INITIALIZE DIRECCION-ESTANDARIZADA-BDLDIR                 RMB0010 
+RCNCER        MOVE 2 TO JJ-STA-BDLDIR                                   RMB0010 
+RCNCER        MOVE NVA-DIR-BDLDIR (1) TO DIRECCION-ESTANDARIZADA-BDLDIR RMB0010 
+RCNCER        MOVE 0 TO CALIFICA-DIR-BDLDIR                             RMB0010 
+RCNCER        IF TIP-NVA-DIR-BDLDIR(1) = "S"                            RMB0010 
+PYSPAR           MOVE 10 TO CALIFICA-DIRPART1-BDLDIR                    HGO0021
+PYSPAR           ADD 10 TO CALIFICA-DIR-BDLDIR                          HGO0021
+RCNCER           ADD 10 TO CALIFICA-DIR-BDLDIR                          RMB0010 
+RCNCER        ELSE                                                      RMB0010 
+RCNCER           IF TIP-NVA-DIR-BDLDIR(1) = "N"                         RMB0010 
+PYSPAR              MOVE 6 TO CALIFICA-DIRPART1-BDLDIR                  HGO0021
+PYSPAR              ADD 6 TO CALIFICA-DIR-BDLDIR                        HGO0021
+RCNCER              ADD 0 TO CALIFICA-DIR-BDLDIR                        RMB0010 
+RCNCER           ELSE                                                   RMB0010 
+PYSPAR              MOVE 8 TO CALIFICA-DIRPART1-BDLDIR                  HGO0021
+PYSPAR*RCNCER              ADD 5 TO CALIFICA-DIR-BDLDIR                 HGO0021
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        MOVE 0 TO CAMPOS-N-DIR-BDLDIR                             RMB0010 
+RCNCER        PERFORM UNTIL JJ-STA-BDLDIR >= KK-STA-BDLDIR              RMB0010 
+RCNCER           IF JJ-STA-BDLDIR = 2                                   RMB0010 
+PYSPAR*RCNCER              IF NVA-DIR-BDLDIR(2) NOT = SPACES            HGO0021
+PYSPAR*RCNCER                 ADD 10 TO CALIFICA-DIR-BDLDIR             HGO0021
+PYSPAR*RCNCER              END-IF                                       HGO0021
+PYSPAR              IF TIP-NVA-DIR-BDLDIR(2) = "S"                      HGO0021
+PYSPAR               MOVE 10 TO CALIFICA-DIRPART2-BDLDIR                HGO0021
+PYSPAR               ADD 10 TO CALIFICA-DIR-BDLDIR                      HGO0021
+PYSPAR              ELSE                                                HGO0021
+PYSPAR               IF TIP-NVA-DIR-BDLDIR(2) = "N"                     HGO0021
+PYSPAR                  MOVE 10 TO CALIFICA-DIRPART2-BDLDIR             HGO0021
+PYSPAR                  ADD 10 TO CALIFICA-DIR-BDLDIR                   HGO0021
+PYSPAR               ELSE                                               HGO0021
+PYSPAR                  MOVE 8 TO CALIFICA-DIRPART2-BDLDIR              HGO0021
+PYSPAR               END-IF                                             HGO0021
+PYSPAR              END-IF                                              HGO0021
+RCNCER           ELSE                                                   RMB0010 
+RCNCER              IF TIP-NVA-DIR-BDLDIR(JJ-STA-BDLDIR) = "N"          RMB0010 
+RCNCER                 ADD 1 TO CAMPOS-N-DIR-BDLDIR                     RMB0010 
+RCNCER              END-IF                                              RMB0010 
+RCNCER           END-IF                                                 RMB0010
+      *      
+RCNCER           STRING DIRECCION-ESTANDARIZADA-BDLDIR DELIMITED BY "  "RMB0010 
+RCNCER                  " "                     DELIMITED BY SIZE       RMB0010 
+AJUACE                 NVA-DIR-BDLDIR (JJ-STA-BDLDIR) DELIMITED BY "  " FARF026
+RCNCER*                  NVA-DIR-BDLDIR (JJ-STA-BDLDIR) DELIMITED BY " " RMB0010 
+RCNCER               INTO DIRECCION-ESTANDARIZADA-BDLDIR                RMB0010 
+RCNCER           END-STRING                                             RMB0010 
+RCNCER           ADD 1 TO JJ-STA-BDLDIR                                 RMB0010 
+RCNCER        END-PERFORM                                               RMB0010 
+RCNCER        IF CAMPOS-N-DIR-BDLDIR > 1                                RMB0010 
+RCNCER           ADD 10 TO CALIFICA-DIR-BDLDIR                          RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        IF DIRECCION-ESTANDARIZADA-BDLDIR <> SPACES               RMB0010 
+RCNCER           IF POLITICA-EXC-MAL-DIR-BDLDIR = 1                     RMB0010 
+RCNCER              PERFORM 6140-ELIMINAR-DIR-MALAS                     RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER           IF CALIFICA-DIR-BDLDIR > POLITICA-EXC-CAL-DIR-BDLDIR   RMB0010 
+RCNCER              PERFORM 6120-EVALUAR-ADICION-PUNTOS                 RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        ELSE                                                      RMB0010 
+RCNCER           MOVE 0 TO CALIFICA-DIR-BDLDIR                          RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER     ELSE                                                         RMB0010 
+RCNCER        MOVE 0 TO CALIFICA-DIR-BDLDIR                             RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+
+STANDA 6110-ESTANDARIZAR-PART.
+REMARK******************************************************************
+REMARK*6110-ESTANDARIZAR-PART.                                         *
+REMARK*    LA PARTICULA A ESTANDARIZAR SE BUSCA EN LA TABLA DE         *
+REMARK*    ESTANDARIZACION DE DIRECCIONES Y ES REEMPLAZADA, SI ES QUE  *
+REMARK*    SE ENCUENTRA                                                *
+REMARK******************************************************************
+RCNCER     MOVE 0 TO ENC-DIREST-BDLDIR                                  RMB0010 
+RCNCER     SEARCH ALL TABLA-DIR-ESTANDAR-BDLDIR                         RMB0010 
+STANDA        AT END
+RCNCER           MOVE 1 TO ENC-DIREST-BDLDIR                            RMB0010 
+RCNCER        WHEN DIR-ORIGINAL-BDLDIR (I-DIR-ESTANDAR-BDLDIR) =        RMB0010 
+RCNCER             PART-A-ESTANDARIZAR-BDLDIR                           RMB0010 
+RCNCER           SET JJ-STA-BDLDIR TO I-DIR-ESTANDAR-BDLDIR             RMB0010 
+RCNCER           MOVE DIR-ESTANDAR-BDLDIR (JJ-STA-BDLDIR)               RMB0010 
+RCNCER                TO PART-ESTANDARIZADA-BDLDIR                      RMB0010 
+STANDA     END-SEARCH
+RCNCER     IF ENC-DIREST-BDLDIR = 1                                     RMB0010 
+RCNCER        MOVE PART-A-ESTANDARIZAR-BDLDIR                           RMB0010 
+RCNCER             TO PART-ESTANDARIZADA-BDLDIR                         RMB0010 
+STANDA     END-IF.
+
+RCNCER 6130-FILTRO-INICIAL.                                             RMB0010 
+RCNCER     MOVE 0 TO CASO-NUMEROLETRA-BDLDIR                            RMB0010 
+RCNCER     MOVE 1 TO M-BDLDIR                                           RMB0010 
+RCNCER     PERFORM UNTIL M-BDLDIR > 58 OR                               RMB0010 
+RCNCER       (DIRECCION-A-ESTANDARIZAR-BDLDIR(M-BDLDIR:1) <> SPACES AND RMB0010 
+RCNCER        DIRECCION-A-ESTANDARIZAR-BDLDIR(M-BDLDIR:1) NOT NUMERIC)  RMB0010 
+RCNCER       ADD 1 TO M-BDLDIR                                          RMB0010 
+RCNCER     END-PERFORM.                                                 RMB0010 
+RCNCER     IF M-BDLDIR > 1 AND < 58                                     RMB0010 
+RCNCER        IF DIRECCION-A-ESTANDARIZAR-BDLDIR(M-BDLDIR - 1:1) NUMERICRMB0010 
+RCNCER           MOVE 1 TO CASO-NUMEROLETRA-BDLDIR                      RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER     END-IF                                                       RMB0010 
+RCNCER     MOVE 1 TO M-BDLDIR                                           RMB0010 
+RCNCER     MOVE DIRECCION-A-ESTANDARIZAR-BDLDIR TO DIRECCION-60-BDLDIR  RMB0010 
+RCNCER*    PERFORM UNTIL M-BDLDIR > 89 OR                               RMB0010
+AMP024     PERFORM UNTIL M-BDLDIR > 499 OR                              PJV0024
+RCNCER                   DIR-COMPUESTAS-AST-BDLDIR (M-BDLDIR) = SPACES  RMB0010 
+RCNCER        IF DIR-COMPUESTAS-TIP-BDLDIR (M-BDLDIR) = 0 OR            RMB0010 
+RCNCER          (DIR-COMPUESTAS-TIP-BDLDIR (M-BDLDIR) = 1 AND           RMB0010 
+RCNCER           CASO-NUMEROLETRA-BDLDIR = 1)                           RMB0010 
+RCNCER           MOVE DIR-COMPUESTAS-LON-BDLDIR(M-BDLDIR) TO N-BDLDIR   RMB0010 
+RCNCER           INITIALIZE DIR-COMPUESTAS-BLN-AUX-BDLDIR               RMB0010 
+RCNCER                      DIR-COMPUESTAS-AST-AUX-BDLDIR               RMB0010 
+RCNCER           MOVE DIR-COMPUESTAS-BLN-BDLDIR(M-BDLDIR)(1:N-BDLDIR) TORMB0010 
+RCNCER                DIR-COMPUESTAS-BLN-AUX-BDLDIR(2:N-BDLDIR)         RMB0010 
+RCNCER           MOVE DIR-COMPUESTAS-AST-BDLDIR(M-BDLDIR)(1:N-BDLDIR) TORMB0010 
+RCNCER                DIR-COMPUESTAS-AST-AUX-BDLDIR(2:N-BDLDIR)         RMB0010 
+RCNCER           ADD 2 TO N-BDLDIR                                      RMB0010 
+RCNCER           INSPECT DIRECCION-62-BDLDIR  REPLACING ALL             RMB0010 
+RCNCER                   DIR-COMPUESTAS-BLN-AUX-BDLDIR(1:N-BDLDIR) BY   RMB0010 
+RCNCER                   DIR-COMPUESTAS-AST-AUX-BDLDIR(1:N-BDLDIR)      RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER        ADD 1 TO M-BDLDIR                                         RMB0010 
+RCNCER     END-PERFORM.                                                 RMB0010 
+RCNCER     MOVE DIRECCION-60-BDLDIR TO DIRECCION-A-ESTANDARIZAR-BDLDIR  RMB0010 
+RCNCER     MOVE 1 TO M-BDLDIR                                           RMB0010 
+RCNCER     PERFORM UNTIL M-BDLDIR > 58 OR    *>MEJORA                   RMB0010 
+RCNCER             DIRECCION-A-ESTANDARIZAR-BDLDIR(M-BDLDIR:1) <> SPACESRMB0010 
+RCNCER       ADD 1 TO M-BDLDIR                                          RMB0010 
+RCNCER     END-PERFORM.                                                 RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) = "C "       RMB0010 
+RCNCER***     CALLE                                                     RMB0010 
+RCNCER        MOVE "! " TO DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) RMB0010 
+RCNCER     END-IF                                                       RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) = "K "       RMB0010 
+RCNCER***     CARRERA                                                   RMB0010 
+RCNCER        MOVE "# " TO DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) = "B "       RMB0010 
+RCNCER***     BARRIO                                                    RMB0010 
+RCNCER        MOVE "$ " TO DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) = "D "       RMB0010 
+RCNCER***     DIAGONAL                                                  RMB0010 
+RCNCER        MOVE "% " TO DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER     IF DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) = "T "       RMB0010 
+RCNCER***     TRANSVERSAL                                               RMB0010 
+RCNCER        MOVE "& " TO DIRECCION-A-ESTANDARIZAR-BDLDIR (M-BDLDIR:2) RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+
+RCNCER 6120-EVALUAR-ADICION-PUNTOS.                                     RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER*6120-EVALUAR-ADICION-PUNTOS.                                    *RMB0010 
+RCNCER*    ESTA PARTE DE LA RUTINA DETERMINA POR UN LADO SI LA         *RMB0010 
+RCNCER*    DIRECCION ES CERTIFICADA (CASO EN EL CUAL ADICIONA 50 A LA  *RMB0010 
+RCNCER*    CALIFICACION DEFINITIVA) O SI TIENE PUNTOS ADICIONALES POR  *RMB0010 
+RCNCER*    GEOREFERENCIACION (10 PUNTOS ADICIONALES)                   *RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER     IF DIRCER-BDLDIR = 1                                         RMB0010 
+RCNCER***     DIRECCION CERTIFICADA EXITOSAMENTE                        RMB0010
+RCNCER        ADD 50 TO CALIFICA-DIR-BDLDIR                             RMB0010 
+RCNCER     END-IF                                                       RMB0010 
+RCNCER     IF PTSADI-BDLDIR = 1                                         RMB0010
+RCNCER***     DIRECCION GEOREFERENCIADA EXITOSAMENTE                    RMB0010
+RCNCER        ADD 10 TO CALIFICA-DIR-BDLDIR                             RMB0010
+RCNCER     END-IF.                                                      RMB0010
+
+RCNCER 6140-ELIMINAR-DIR-MALAS.                                         RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER*6140-ELIMINAR-DIR-MALAS.                                        *RMB0010 
+RCNCER*    SE CALIFICAN CON 0 DIRECCIONES MALAS                        *RMB0010 
+RCNCER******************************************************************RMB0010 
+RCNCER     MOVE CALIFICA-DIR-BDLDIR TO CALIFICA-REAL-BDLDIR             RMB0010 
+RCNCER     MOVE DIRECCION-ESTANDARIZADA-BDLDIR TO DIRECCION-AUX-BDLDIR  RMB0010 
+PYSPAR*RCNCER     INSPECT DIRECCION-AUX-BDLDIR REPLACING ALL " " BY "0" HGO0021
+PYSPAR*RCNCER     IF DIRECCION-AUX-BDLDIR NUMERIC                       HGO0021
+PYSPAR*RCNCER        MOVE 0 TO CALIFICA-DIR-BDLDIR                      HGO0021
+PYSPAR*RCNCER     END-IF.                                               HGO0021
+RCNCER****                                                              RMB0010 
+RCNCER     IF CALIFICA-DIR-BDLDIR > 0                                   RMB0010 
+RCNCER        MOVE 1 TO M-BDLDIR                                        RMB0010 
+RCNCER        MOVE 0 TO N-BDLDIR                                        RMB0010 
+RCNCER        PERFORM UNTIL M-BDLDIR > 60                               RMB0010 
+RCNCER          IF DIRECCION-ESTANDARIZADA-BDLDIR(M-BDLDIR:1) <> SPACES RMB0010 
+RCNCER             ADD 1 TO N-BDLDIR                                    RMB0010 
+RCNCER          END-IF                                                  RMB0010 
+RCNCER          ADD 1 TO M-BDLDIR                                       RMB0010 
+RCNCER        END-PERFORM                                               RMB0010 
+RCNCER        IF N-BDLDIR < 6                                           RMB0010 
+RCNCER           IF CALIFICA-DIR-BDLDIR < 25                            RMB0010 
+RCNCER              MOVE 0 TO CALIFICA-DIR-BDLDIR                       RMB0010 
+RCNCER           END-IF                                                 RMB0010 
+RCNCER        END-IF                                                    RMB0010 
+RCNCER     END-IF.                                                      RMB0010 
+RCNCER*****                                                             RMB0010 
+PYSPAR*RCNCER     IF CALIFICA-DIR-BDLDIR > 0                            HGO0021
+PYSPAR*RCNCER        MOVE 0 TO M-BDLDIR                                 HGO0021
+PYSPAR*RCNCER        INSPECT TIP-NUEVA-DIRECCION-BDLDIR  TALLYING M-BDLDHGO0021
+PYSPAR*RCNCER                FOR ALL "S"                                HGO0021
+PYSPAR*RCNCER        IF M-BDLDIR = 0 AND CALIFICA-DIR-BDLDIR < 25   *> MHGO0021
+PYSPAR*RCNCER           MOVE 0 TO CALIFICA-DIR-BDLDIR                   HGO0021
+PYSPAR*RCNCER        END-IF                                             HGO0021
+PYSPAR*RCNCER     END-IF.                                               HGO0021
+
+DIRACC 2000-U-VALIDAR-ACCDIR.                                           RMB0003 
+REMARK******************************************************************
+REMARK* RUTINA CREADA PARA MANEJAR LOS ALGORITMOS DE NOMBRES. HAY VARIAS
+REMARK* RUTINAS QUE MANEJAN LO NECESARIO PARA ESTANDARIZAR Y ORDENAR.    
+REMARK* ENTRADAS 
+REMARK*         ABIERTO EL ICBSUS
+REMARK*         ABIERTO EL BDLCI
+REMARK*         ABIERTO EL ICMCRE
+REMARK*         ABIERTO EL ICMCHK
+REMARK*         LLAVE-DIRECC     LLAVE NORMAL DEL ARCHIVO DE DIRECCIONES
+REMARK*         PRIVILEGIO-INPUT VALOR DE PRIVILEGIO-BDLCI DEL CONSULTANTE
+REMARK*         NIT-CONSULTANTE-INPUT
+REMARK* SALIDAS
+REMARK*         VALIDACION-DIR-OUT 0: NO TOMAR EL REGISTRO,1 SI TOMARLO
+REMARK*******************************************************************
+RCNCER     MOVE 0 TO VALIDACION-DIR-OUT-BDLDIR.                         RMB0010 
+DIRACC     MOVE COD-SUS-DIRECC TO COD-SUSCRIP-ABD02.                    RMB0003 
+DIRACC     READ SUSCRIPTOR IGNORE LOCK                                  RMB0003 
+DIRACC        INVALID KEY                                               RMB0003 
+RCNCER           MOVE 0 TO VALIDACION-DIR-OUT-BDLDIR                    RMB0010 
+DIRACC        NOT INVALID KEY                                           RMB0003 
+VALPRI           MOVE NIT-SUSCRIP-S-ABD02 TO NIT-ID-BDLCLI              RMB0007 
+VALPRI           READ BDLCLI IGNORE LOCK                                RMB0007 
+VALPRI                INVALID KEY MOVE 0 TO INDICADOR-BDLCLI            RMB0007 
+VALPRI                            MOVE " " TO VALIDAR-DB-BDLCLI         RMB0007 
+BLOQ01                            MOVE " " TO IND-BLOQUEO-INF-BDLCLI    RMB0026
+VALPRI           END-READ                                               RMB0007 
+RCNCER           IF PRIVILEGIO-INPUT-BDLDIR = 2                         RMB0010 
+VALPRI              MOVE 1 TO INDICADOR-BDLCLI                          RMB0007 
+VALPRI           END-IF                                                 RMB0007 
+VALPRI           IF INDICADOR-BDLCLI = 1                                RMB0007 
+BLOQ01              AND IND-BLOQUEO-INF-BDLCLI <> "B"                   RMB0026 
+VALPRI              IF VALIDAR-DB-BDLCLI = "N"                          RMB0007 
+RCNCER                 MOVE 1 TO VALIDACION-DIR-OUT-BDLDIR              RMB0010 
+VALPRI              ELSE                                                RMB0007 
+RCNCER                 MOVE 0 TO VALIDACION-DIR-OUT-BDLDIR              RMB0010 
+VALPRI                 PERFORM 2100-U-VALIDAR-MAESTROS                  RMB0007 
+VALPRI              END-IF                                              RMB0007 
+VALPRI           END-IF                                                 RMB0007 
+DIRACC     END-READ.                                                    RMB0003 
+DIRACC 2100-U-VALIDAR-MAESTROS.                                         RMB0003 
+REMARK******************************************************************
+REMARK*4110-VALIDAR-MAESTROS.
+REMARK*    SE VALIDA CONTRA LOS MAESTROS DE CARTERA Y CUENTAS CORRIENTE*
+REMARK*    SI LA CUENTA EXISTE EN ELLOS                                *
+REMARK******************************************************************
+AMPDIR*    MOVE LLAVE-DIRECC TO LLAVE-MAES-CREDIT LLAVE-MAES-CHECK.     FAC0009 
+AMPDIR     MOVE TIPO-ID-DIRECC TO TIPO-ID-ABD07 TIPO-ID-ABD06           FAC0009 
+AMPDIR     MOVE NUM-ID-DIRECC  TO NUM-ID-ABD07  NUM-ID-ABD06            FAC0009 
+AMPDIR     MOVE COD-SUS-DIRECC TO COD-SUS-ABD07 COD-SUS-ABD06           FAC0009 
+AMPDIR     MOVE COD-CTA-DIRECC TO COD-CTA-ABD07 COD-CTA-ABD06           FAC0009 
+AMPDIR     MOVE NUM-CTA-DIRECC TO NUM-CTA-ABD07 NUM-CTA-ABD06           FAC0009 
+DIRACC     IF ESTADO-ABD02 = 1                                          RMB0003 
+DIRACC        IF COD-CTA-DIRECC = 1                                     RMB0003 
+UNLSUS           READ MAESTRO-CHECK WITH IGNORE LOCK   INVALID KEY      DLM0013 
+RCNCER                MOVE 0 TO VALIDACION-DIR-OUT-BDLDIR               RMB0010 
+DIRACC                NOT INVALID KEY                                   RMB0003 
+MATCH1                    $IF HACERMATCH = "SI"                         RMB0013 
+MATCH1                    PERFORM 8000-U-VER-CTAABD06-BDAMATCH          RMB0013 
+MATCH1                    $END                                          RMB0013 
+FCRGCR                    PERFORM 2590-VER-ESTADO-CTA                   RMB0028
+DIRACC                    IF IND-BLOQUEO-ABD06 = 0                      RMB0003 
+RCNCER                       MOVE 1 TO VALIDACION-DIR-OUT-BDLDIR        RMB0010 
+DIRACC                    END-IF                                        RMB0003 
+DIRACC           END-READ                                               RMB0003 
+DIRACC        ELSE                                                      RMB0003 
+UNLSUS           READ MAESTRO-CREDIT  WITH IGNORE LOCK  INVALID KEY     DLM0013 
+RCNCER                MOVE 0 TO VALIDACION-DIR-OUT-BDLDIR               RMB0010 
+DIRACC                NOT INVALID KEY                                   RMB0003 
+MATCH1                    $IF HACERMATCH = "SI"                         RMB0013 
+MATCH1                    PERFORM 8000-U-VER-CTAABD07-BDAMATCH          RMB0013 
+MATCH1                    $END                                          RMB0013 
+FCRGCR                    PERFORM 2590-VER-ESTADO-CTA                   RMB0028
+DIRACC                    IF IND-BLOQUEO-ABD07 = 0                      RMB0003 
+RCNCER                       MOVE 1 TO VALIDACION-DIR-OUT-BDLDIR        RMB0010 
+DIRACC                    END-IF                                        RMB0003 
+DIRACC           END-READ                                               RMB0003 
+DIRACC        END-IF                                                    RMB0003 
+DIRACC     END-IF.                                                      RMB0003 
+      *
+      ******************************************************************
+      * 2590-VER-ESTADO-CTA                                            *
+      *    SI LA CUENTA PADRE ESTA CERRADA SE CAMBIAN LAS FECHAS A LA  *
+      *    FECHA DE CIERRE SI ESTA ES MENOR A LA REPORTADA EN LA       *
+      *    DIRECCION.                                                  *
+      ******************************************************************
+      *
+FCRGCR 2590-VER-ESTADO-CTA.                                             RMB0028
+FCRGCR     MOVE 0 TO CTA-ACTIVA.                                        RMB0028
+FCRGCR     IF COD-CTA-DIRECC = 1                                        RMB0028
+FCRGCR        IF NOV-REPORT-ABD06 = 01 OR 06 OR 07                      RMB0028
+FCRGCR           MOVE 1 TO CTA-ACTIVA                                   RMB0028
+FCRGCR        ELSE                                                      RMB0028
+FCRGCR           MOVE FEC-NOVEDAD-ABD06 TO FEC-MMAA-BDLDI2              RMB0028
+FCRGCR        END-IF                                                    RMB0028
+FCRGCR     ELSE                                                         RMB0028
+FCRGCR        IF NOV-REPORT-ABD07 = 01 OR 45 OR 47 OR                   RMB0028
+FCRGCR           (NOV-REPORT-ABD07 >= 13 AND NOV-REPORT-ABD07 <= 41)    RMB0028
+FCRGCR           MOVE 1 TO CTA-ACTIVA                                   RMB0028
+FCRGCR        ELSE                                                      RMB0028
+FCRGCR           MOVE FEC-NOVEDAD-ABD07 TO FEC-MMAA-BDLDI2              RMB0028
+FCRGCR        END-IF                                                    RMB0028
+FCRGCR     END-IF.                                                      RMB0028
+      *
+FCRGCR     IF CTA-ACTIVA = 0                                            RMB0028
+      *       SE CONVIERTE AL MILENIO PARA LA COMPARACION
+FCRGCR        MOVE FEC-MMAA-BDLDI2(1:2) TO FEC-AAAAMM-BDLDI2(5:2)       RMB0028
+FCRGCR        MOVE FEC-MMAA-BDLDI2(3:2) TO FEC-AAAAMM-BDLDI2(3:2)       RMB0028
+FCRGCR        IF FEC-MMAA-BDLDI2(3:2) < "50"                            RMB0028
+FCRGCR           MOVE "20"   TO FEC-AAAAMM-BDLDI2(1:2)                  RMB0028
+FCRGCR        ELSE                                                      RMB0028
+FCRGCR           MOVE "19"   TO FEC-AAAAMM-BDLDI2(1:2)                  RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECRES-DIRECC                      RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECRES-DIRECC                RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECLAB-DIRECC                      RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECLAB-DIRECC                RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECCOR-DIRECC                      RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECCOR-DIRECC                RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECCEL-DIRECC                      RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECCEL-DIRECC                RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECTRES-DIRECC                     RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECTRES-DIRECC               RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECTLAB-DIRECC                     RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECTLAB-DIRECC               RMB0028
+FCRGCR        END-IF                                                    RMB0028
+      *
+FCRGCR        IF FEC-AAAAMM-BDLDI2 < FECMAIL-DIRECC                     RMB0028
+FCRGCR           MOVE FEC-AAAAMM-BDLDI2 TO FECMAIL-DIRECC               RMB0028
+FCRGCR        END-IF                                                    RMB0028
+FCRGCR     END-IF.                                                      RMB0028
+      *
+NWDIRB 2590-NVA-DIRECC-BOGOTA.                                          GJC0011 
+REMARK******************************************************************
+REMARK*2590-NVA-DIRECC-BOGOTA
+REMARK*    SI LA DIRECCION ES DE BOGOTA, BUSCA SI ESTA TIENE NUEVA NO- *
+REMARK*    MENCLATURA                                                  *
+REMARK******************************************************************
+NWDIRB        IF CIUDAD-BTA-BDLDIR(1:5)  = "BOGOT"                      GJC0011 
+NWDIRB           MOVE DIRECCION-BTA-BDLDIR TO T-CARMEJ-BDLDIR           GJC0011 
+NWDIRB           PERFORM 1200-CALCULAR-LLAVE                            GJC0011 
+DIRB02*          MOVE V-HASDIRFIN-BDLDIR (I-BDLDIR) TO                  RMB0012 
+DIRB02*               LLAVE-BDLNEWDIRBOG                                RMB0012 
+NWDIRB           PERFORM 8400-EXAMINE-BDLNEWDIRBOG                      GJC0011 
+NWDIRB        ELSE                                                      GJC0011 
+NWDIRB           MOVE 0 TO HAY-BDLNEWDIRBOG-BDLDIR                      GJC0011 
+NWDIRB        END-IF.                                                   GJC0011 
+
+NWDIRB 1200-CALCULAR-LLAVE.                                             GJC0011 
+REMARK*********************************************************************
+REMARK* 1200-CALCULAR-LLAVE.
+REMARK* SE PROCEDE A CLACULAR LA LLAVE DEL ARCHIVO DE NUEVA NOMENCLATURA
+REMARK* DE BOGOTA, LA CUAL SE COMPONE:
+REMARK*      1: SIGLA DE LA "AVENIDA" (2 CARACTERES)
+REMARK*      2: NUMEROS ORDENADOS     (5 CARACTERES 7 NUMEROS)
+REMARK*      3: NUMEROS ORIGINALES    (5 CARACTERES 3 NUMEROS) ADICIONANDO
+REMARK*         LOS VALORES ASCII POR POSICION A ESTOS
+REMARK*********************************************************************
+NWDIRB     MOVE 1 TO I-MEJ-BDLDIR.                                      GJC0011 
+NWDIRB     MOVE 1 TO K-MEJ-BDLDIR.                                      GJC0011 
+NWDIRB     MOVE 0 TO J-MEJ-BDLDIR.                                      GJC0011 
+NWDIRB     MOVE " " TO CAR-ANT-BDLDIR.                                  GJC0011 
+NWDIRB     INITIALIZE T-NUMMEJ-BDLDIR.                                  GJC0011 
+CARTOT     PERFORM UNTIL I-MEJ-BDLDIR > 60 OR J-MEJ-BDLDIR >= 10        CAV0014 
+NWDIRB       IF V-CARMEJ-BDLDIR(I-MEJ-BDLDIR) NUMERIC                   GJC0011 
+NWDIRB          MOVE V-CARMEJ-BDLDIR(I-MEJ-BDLDIR) TO CAR-ACT-BDLDIR    GJC0011 
+NWDIRB          IF CAR-ANT-BDLDIR NUMERIC                               GJC0011 
+NWDIRB             COMPUTE V-NUMMEJ-BDLDIR(J-MEJ-BDLDIR) =              GJC0011 
+NWDIRB                     V-NUMMEJ-BDLDIR(J-MEJ-BDLDIR) * 10 +         GJC0011 
+NWDIRB                                       CAR-ACT-BDLDIR             GJC0011 
+NWDIRB          ELSE                                                    GJC0011 
+NWDIRB             ADD 1 TO J-MEJ-BDLDIR                                GJC0011 
+NWDIRB             MOVE V-CARMEJ-BDLDIR(I-MEJ-BDLDIR) TO                GJC0011 
+NWDIRB                  V-NUMMEJ-BDLDIR(J-MEJ-BDLDIR)                   GJC0011 
+NWDIRB          END-IF                                                  GJC0011 
+NWDIRB          MOVE "N"             TO V-LETRAS-BDLDIR(K-MEJ-BDLDIR)   GJC0011 
+NWDIRB          ADD 1 TO K-MEJ-BDLDIR                                   GJC0011 
+NWDIRB          MOVE "U"             TO V-LETRAS-BDLDIR(K-MEJ-BDLDIR)   GJC0011 
+NWDIRB          ADD 1 TO K-MEJ-BDLDIR                                   GJC0011 
+NWDIRB          MOVE " "             TO V-LETRAS-BDLDIR(K-MEJ-BDLDIR)   GJC0011 
+NWDIRB          ADD 1 TO K-MEJ-BDLDIR                                   GJC0011 
+NWDIRB       ELSE                                                       GJC0011 
+NWDIRB          MOVE V-CARMEJ-BDLDIR(I-MEJ-BDLDIR) TO                   GJC0011 
+NWDIRB               V-LETRAS-BDLDIR(K-MEJ-BDLDIR)                      GJC0011 
+NWDIRB          ADD 1 TO K-MEJ-BDLDIR                                   GJC0011 
+NWDIRB       END-IF                                                     GJC0011 
+NWDIRB       MOVE V-CARMEJ-BDLDIR(I-MEJ-BDLDIR) TO CAR-ANT-BDLDIR       GJC0011 
+NWDIRB       ADD 1 TO I-MEJ-BDLDIR                                      GJC0011 
+NWDIRB     END-PERFORM.                                                 GJC0011 
+NWDIRB     MOVE V-NUMMEJ-BDLDIR(01) TO NN8-BDLDIR                       GJC0011 
+NWDIRB     MOVE V-NUMMEJ-BDLDIR(02) TO NN9-BDLDIR                       GJC0011 
+NWDIRB     MOVE V-NUMMEJ-BDLDIR(03) TO NN10-BDLDIR                      GJC0011 
+NWDIRB     SORT V-NUMMEJ-BDLDIR DESCENDING.                             GJC0011 
+NWDIRB     MOVE NN8-BDLDIR  TO  V-NUMMEJ-BDLDIR(08).                    GJC0011 
+NWDIRB     MOVE NN9-BDLDIR  TO  V-NUMMEJ-BDLDIR(09).                    GJC0011 
+NWDIRB     MOVE NN10-BDLDIR TO  V-NUMMEJ-BDLDIR(10).                    GJC0011 
+NWDIRB     INITIALIZE T-L-BDLDIR.                                       GJC0011 
+NWDIRB     UNSTRING T-LETRAS-BDLDIR DELIMITED BY ALL " " INTO           GJC0011 
+NWDIRB       L-BDLDIR(1)  L-BDLDIR(2)  L-BDLDIR(3)  L-BDLDIR(4)         GJC0011 
+NWDIRB       L-BDLDIR(5)  L-BDLDIR(6)  L-BDLDIR(7)  L-BDLDIR(8)         GJC0011 
+NWDIRB       L-BDLDIR(9)  L-BDLDIR(10) L-BDLDIR(11) L-BDLDIR(12)        GJC0011 
+NWDIRB       L-BDLDIR(13) L-BDLDIR(14) L-BDLDIR(15) L-BDLDIR(16)        GJC0011 
+NWDIRB       L-BDLDIR(17) L-BDLDIR(18) L-BDLDIR(19) L-BDLDIR(20)        GJC0011 
+NWDIRB       L-BDLDIR(21) L-BDLDIR(22) L-BDLDIR(23) L-BDLDIR(24)        GJC0011 
+NWDIRB       L-BDLDIR(25) L-BDLDIR(26) L-BDLDIR(27) L-BDLDIR(28)        GJC0011 
+NWDIRB       L-BDLDIR(29) L-BDLDIR(30)                                  GJC0011 
+NWDIRB     MOVE 2 TO I-MEJ-BDLDIR                                       GJC0011 
+NWDIRB     MOVE 8 TO J-MEJ-BDLDIR                                       GJC0011 
+NWDIRB     PERFORM UNTIL I-MEJ-BDLDIR > 30                              GJC0011 
+NWDIRB       IF J-MEJ-BDLDIR > 10                                       GJC0011 
+NWDIRB          MOVE 8 TO J-MEJ-BDLDIR                                  GJC0011 
+NWDIRB       END-IF                                                     GJC0011 
+NWDIRB       IF L-BDLDIR(I-MEJ-BDLDIR) <> SPACES                        GJC0011 
+NWDIRB          IF L-BDLDIR(I-MEJ-BDLDIR)(2:1) = " "                    GJC0011 
+NWDIRB             MOVE L-BDLDIR(I-MEJ-BDLDIR)(1:1) TO LETRA-BDLDIR     GJC0011 
+NWDIRB             MOVE FUNCTION ORD(LETRA-BDLDIR) TO ORDEN-ASCII-BDLDIRGJC0011 
+NWDIRB             COMPUTE ORDEN-ASCII-BDLDIR = ORDEN-ASCII-BDLDIR  *   GJC0011 
+NWDIRB                     I-MEJ-BDLDIR                                 GJC0011 
+NWDIRB             ADD ORDEN-ASCII-BDLDIR TO                            GJC0011 
+NWDIRB                 V-NUMMEJ-BDLDIR(J-MEJ-BDLDIR)                    GJC0011 
+NWDIRB             ADD 1 TO J-MEJ-BDLDIR                                GJC0011 
+NWDIRB          ELSE                                                    GJC0011 
+NWDIRB             IF L-BDLDIR(I-MEJ-BDLDIR) = "BIS" OR "MJ"            GJC0011 
+NWDIRB                MOVE "W" TO LETRA-BDLDIR                          GJC0011 
+NWDIRB                MOVE FUNCTION ORD(LETRA-BDLDIR) TO                GJC0011 
+NWDIRB                     ORDEN-ASCII-BDLDIR                           GJC0011 
+NWDIRB                ADD ORDEN-ASCII-BDLDIR TO                         GJC0011 
+NWDIRB                    V-NUMMEJ-BDLDIR(J-MEJ-BDLDIR)                 GJC0011 
+NWDIRB                ADD 1 TO J-MEJ-BDLDIR                             GJC0011 
+NWDIRB             END-IF                                               GJC0011 
+NWDIRB          END-IF                                                  GJC0011 
+NWDIRB       END-IF                                                     GJC0011 
+NWDIRB       ADD 1 TO I-MEJ-BDLDIR                                      GJC0011 
+NWDIRB    END-PERFORM.                                                  GJC0011 
+NWDIRB 8400-EXAMINE-BDLNEWDIRBOG.                                       GJC0011 
+REMARK**************************************************************
+REMARK*8400-EXAMINE-BDLNEWDIRBOG.
+REMARK* CON ESTA RUTINA SE DETERMINA SI UNA DIRECCION DE BOGOTA TIENE
+REMARK* NUEVA NOMENCLATURA O NO.
+REMARK*************************************************************
+NWDIRB     IF OPEN-BDLNEWDIRBOG-BDLDIR = 0                              GJC0011 
+NWDIRB        MOVE 1 TO OPEN-BDLNEWDIRBOG-BDLDIR                        GJC0011 
+NWDIRB        OPEN INPUT BDLNEWDIRBOG                                   GJC0011 
+NWDIRB     END-IF.                                                      GJC0011 
+NWDIRB     MOVE T-NUMMEJ-BDLDIR TO NUMEROS-BDLNEWDIRBOG                 GJC0011 
+NWDIRB     IF L-BDLDIR(1) NOT = SPACES                                  GJC0011 
+NWDIRB        MOVE L-BDLDIR(1) TO AVENIDA-BDLNEWDIRBOG                  GJC0011 
+NWDIRB     ELSE                                                         GJC0011 
+NWDIRB        MOVE L-BDLDIR(2) TO AVENIDA-BDLNEWDIRBOG                  GJC0011 
+NWDIRB     END-IF.                                                      GJC0011 
+NWDIRB     READ BDLNEWDIRBOG                                            GJC0011 
+NWDIRB       INVALID KEY                                                GJC0011 
+NWDIRB           MOVE 0 TO HAY-BDLNEWDIRBOG-BDLDIR                      GJC0011 
+NWDIRB       NOT INVALID KEY                                            GJC0011 
+NWDIRB           MOVE 1 TO HAY-BDLNEWDIRBOG-BDLDIR                      GJC0011 
+NWDIRB     END-READ.                                                    GJC0011 
+CALDYT*                                                                 CAV0027
+CALDYT 8500-VALIDAR-EMAIL-BDLDIR.                                       CAV0027
+REMARK******************************************************************
+REMARK*8500-VALIDAR-EMAIL-BDLDIR.
+REMARK*Se eleiman los espacios al inicio, debe existir un solo @, debe
+REMARK*aparecer por lo menos un . despues de @ pero no enseguida,
+REMARK*Ni el primer ni ultimo caracter pueden ser . o @, no debe tener
+REMARK*espacios intermedios
+REMARK******************************************************************
+CALDYT     INITIALIZE TMP-EMAIL-BDLDIR ERR-EMAIL-BDLDIR                 CAV0027
+CALDYT                CONT-ERR-BDLDIR CONT-ESP-INIC-BDLDIR              CAV0027
+CALDYT                CONT-ARO-BDLDIR CONT-PUN-BDLDIR LONG-EMIAL-BDLDIR CAV0027
+CALDYT     IF EMAIL-BDLDIR NOT = SPACE                                  CAV0027
+CALDYT        MOVE FUNCTION UPPER-CASE(EMAIL-BDLDIR) TO EMAIL-BDLDIR    CAV0027
+CALDYT     ELSE                                                         CAV0027
+CALDYT        MOVE 1 TO ERR-EMAIL-BDLDIR                                CAV0027
+CALDYT     END-IF                                                       CAV0027
+CALDYT     IF ERR-EMAIL-BDLDIR = 0                                      CAV0027
+CALDYT        INSPECT EMAIL-BDLDIR TALLYING                             CAV0027
+CALDYT                CONT-ESP-INIC-BDLDIR FOR LEADING " "              CAV0027
+CALDYT        IF CONT-ESP-INIC-BDLDIR > 0 AND < 60                      CAV0027
+CALDYT           ADD 1 TO CONT-ESP-INIC-BDLDIR                          CAV0027
+CALDYT           MOVE EMAIL-BDLDIR(CONT-ESP-INIC-BDLDIR:) TO            CAV0027
+CALDYT                TMP-EMAIL-BDLDIR                                  CAV0027
+CALDYT        ELSE                                                      CAV0027
+CALDYT           MOVE EMAIL-BDLDIR TO TMP-EMAIL-BDLDIR                  CAV0027
+CALDYT        END-IF                                                    CAV0027
+CALDYT        IF TMP-EMAIL-BDLDIR(1:1) = "." OR "@"                     CAV0027
+CALDYT           MOVE 1 TO ERR-EMAIL-BDLDIR                             CAV0027
+CALDYT        END-IF                                                    CAV0027
+CALDYT     END-IF                                                       CAV0027
+CALDYT     IF ERR-EMAIL-BDLDIR = 0                                      CAV0027
+CALDYT        INSPECT TMP-EMAIL-BDLDIR TALLYING                         CAV0027
+CALDYT        CONT-ARO-BDLDIR FOR ALL "@"                               CAV0027
+CALDYT        CONT-ERR-BDLDIR FOR ALL ".@"                              CAV0027
+CALDYT        CONT-ERR-BDLDIR FOR ALL "@."                              CAV0027
+CALDYT        CONT-PUN-BDLDIR FOR ALL "." AFTER "@"                     CAV0027
+CALDYT        IF CONT-ERR-BDLDIR = 0 AND CONT-ARO-BDLDIR = 1 AND        CAV0027
+CALDYT           (CONT-PUN-BDLDIR >= 1)                                 CAV0027
+CALDYT           PERFORM VARYING I-BDLDIR FROM 60 BY -1 UNTIL           CAV0027
+CALDYT                   I-BDLDIR = 0 OR ERR-EMAIL-BDLDIR = 1           CAV0027
+CALDYT             IF TMP-EMAIL-BDLDIR(I-BDLDIR:1) <> SPACES AND        CAV0027
+CALDYT                LONG-EMIAL-BDLDIR = 0                             CAV0027
+CALDYT                MOVE I-BDLDIR TO LONG-EMIAL-BDLDIR                CAV0027
+CALDYT                IF TMP-EMAIL-BDLDIR(I-BDLDIR:1) = "." OR "@"      CAV0027
+CALDYT                   MOVE 1 TO ERR-EMAIL-BDLDIR                     CAV0027
+CALDYT                END-IF                                            CAV0027
+CALDYT             END-IF                                               CAV0027
+CALDYT             IF TMP-EMAIL-BDLDIR(I-BDLDIR:1) = SPACES AND         CAV0027
+CALDYT                LONG-EMIAL-BDLDIR > 0                             CAV0027
+CALDYT                MOVE 1 TO ERR-EMAIL-BDLDIR                        CAV0027
+CALDYT             END-IF                                               CAV0027
+CALDYT           END-PERFORM                                            CAV0027
+CALDYT        ELSE                                                      CAV0027
+CALDYT           MOVE 1 TO ERR-EMAIL-BDLDIR                             CAV0027
+CALDYT        END-IF                                                    CAV0027
+CALDYT     END-IF.                                                      CAV0027
+CALDYT*                                                                 CAV0027
+CALDYT 8600-VALIDAR-CELULAR-BDLDIR.                                     CAV0027
+REMARK******************************************************************
+REMARK*8600-VALIDAR-CELULAR-BDLDIR.
+REMARK******************************************************************
+CALDYT     INITIALIZE ERR-CELULAR-BDLDIR TEL-AUX-CELULAR-BDLDIR         CAV0027
+CALDYT     IF TEL-CELULAR-BDLDIR <> ZEROS AND <> SPACES                 CAV0027
+CALDYT        MOVE TEL-CELULAR-BDLDIR TO TEL-AUX-CELULAR-BDLDIR         CAV0027
+CALDYT        IF ES-CELULAR-CEL-BDLDIR AND P1-TEL-AUX-CEL-BDLDIR = 0    CAV0027
+CALDYT           MOVE 0 TO ERR-CELULAR-BDLDIR                           CAV0027
+CALDYT        ELSE                                                      CAV0027
+CALDYT           MOVE 1 TO ERR-CELULAR-BDLDIR                           CAV0027
+CALDYT        END-IF                                                    CAV0027
+CALDYT     ELSE                                                         CAV0027
+CALDYT        MOVE 1 TO ERR-CELULAR-BDLDIR                              CAV0027
+CALDYT     END-IF.                                                      CAV0027

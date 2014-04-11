@@ -1,0 +1,15 @@
+REMARK* SCOREXTR-FD.v.0002
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE ALMACENA  LA INFORMACION DE
+REMARK* LOS SCORES EXTERNOS ASOCIADOS A CADA SUSCRIPTOR  POR NIT
+REMARK******************************************************************
+REMARK* RMB0002     * CSV001 : SE CREA FLAG PARA CONTROLAR CUANDO SE PUEDE 
+REMARK* R MARTINEZ  * MANDAR UNA TRANSACCION DE CSV A UN SCORE EXTERNO 
+REMARK* RFEB-18-2009* (OBLIGADO) SI EL FLAG ESTA EN 1 LO ENVIA!!!!!                       
+REMARK*************************************************************************
+       FD  SCOREXTR.        
+       01  REG-SCOREXTR.        
+           03 NIT-SUSCR-SCOREXTR       PIC 9(11).        
+           03 SCORE-SCOREXTR           PIC X(06).        
+CSV001     03 CSV-SCOREXTR             PIC X(01).                       RMB0002 
+CSV001     03 FILLER                   PIC X(14).                       RMB0002 

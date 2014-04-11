@@ -1,0 +1,19 @@
+      * BDIIDAS.v.03.0002
+      *====================================================================
+      * ARCHIVO MAESTRO DE CEDULAS DE EXTRANJERIA SUMINISTRADAS POR EL DAS
+      *====================================================================
+      * CAV0002 * INDMOD* INCLUSION DE FECHA-CREACION FECHA MODIFCACION E
+      * C. VELASCO  * INDICADOR MODIFICACION, A-ARCHIVO DAS,
+      * OCT/25/2007 * C-COMUNICACION DAS, S-SOLICTUD CAS.
+      *==================================================================
+       FD  BDIIDAS.
+       01  REG-BDIIDAS.
+           03 LLAVE-BDIIDAS.
+              05 TIPO-ID-BDIIDAS           PIC 9.
+              05 NUM-ID-BDIIDAS            PIC 9(11).
+           03 NACIO-BDIIDAS                PIC X(15).
+           03 NOMBRE-BDIIDAS               PIC X(45).
+INDMOD     03 FECHA-CREAC-BDIIDAS          PIC 9(8).                    CAV0002 
+INDMOD     03 FECHA-MODIF-BDIIDAS          PIC 9(8).                    CAV0002 
+INDMOD     03 IND-MODIF-BDIIDAS            PIC X(1).                    CAV0002 
+INDMOD     03 FILLER-BDIIDAS               PIC X(31).                   CAV0002 

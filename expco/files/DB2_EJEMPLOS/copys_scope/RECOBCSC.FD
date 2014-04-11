@@ -1,0 +1,109 @@
+      * RECOBCSC.FD.v.0001
+      * REGISTRO DE SALIDA PARA PROCESO ESPECIAL DE RECONOCER BCSC     
+       FD  SALIDA-CON.                
+       01  REG-SALIDA-CON.                
+           03 SL2-NUMERO                    PIC 9(08).        
+           03 SEP-01                        PIC X(01).
+           03 SL2-TIPO-ID-B                 PIC 9(01).                
+           03 SEP-02                        PIC X(01).
+           03 SL2-NUME-ID-B                 PIC 9(11).                
+           03 SEP-03                        PIC X(01).
+           03 SL2-NOMBRE-ID-B               PIC X(45).        
+           03 SEP-04                        PIC X(01).
+           03 SL2-TIPO-ID                   PIC 9(01).                
+           03 SEP-05                        PIC X(01).
+           03 SL2-NUME-ID                   PIC 9(11).                
+           03 SEP-06                        PIC X(01).
+           03 SL2-NOMBRE-ID.                
+              05 SL2-PR-NOMBRE               PIC X(79).                
+              05 SEP-07                      PIC X(01).
+              05 SL2-SG-NOMBRE               PIC X(29).                
+              05 SEP-08                      PIC X(01).
+              05 SL2-PR-APELL                PIC X(29).                
+              05 SEP-09                      PIC X(01).
+              05 SL2-SG-APELL                PIC X(29).                
+           03 SEP-10                        PIC X(01).
+           03 SL2-FEC-EXP                   PIC 9(08).                
+           03 SEP-11                        PIC X(01).
+           03 SL2-MUN-EXP                   PIC X(15).                
+           03 SEP-12                        PIC X(01).
+           03 SL2-MUN-EXP-DANE              PIC 9(08).                
+           03 SEP-13                        PIC X(01).
+           03 SL2-DEP-EXP                   PIC X(15).                
+           03 SEP-14                        PIC X(01).
+           03 FILLER                        PIC X(13).                
+           03 SEP-15                        PIC X(01).
+           03 SL2-DEP-EXP-DANE              PIC 9(02).                
+           03 SEP-16                        PIC X(01).
+           03 SL2-CIIU                      PIC 9(04).                
+           03 SEP-17                        PIC X(01).
+           03 SL2-CIIU-DESCR                PIC X(50).                
+           03 SEP-18                        PIC X(01).
+           03 SL2-GENERO                    PIC X(01).                
+           03 SEP-19                        PIC X(01).
+           03 SL2-RANGO-EDAD                PIC X(05).                
+           03 SEP-20                        PIC X(01).
+           03 SL2-ORIGEN-VAL                PIC X(01).                
+           03 SEP-21                        PIC X(01).
+           03 SL2-TELEFONOS OCCURS 10.                
+              05 SL2-TEL-CIUDAD             PIC X(20).                
+              05 SEP-22                     PIC X(01).
+              05 SL2-TEL-CODCIU             PIC X(08).                
+              05 SEP-23                     PIC X(01).
+              05 SL2-TEL-DEPTO              PIC X(20).                
+              05 SEP-24                     PIC X(01).
+              05 SL2-TEL-CODDEP             PIC X(02).                
+              05 SEP-25                     PIC X(01).
+              05 SL2-TEL-NUMERO.                
+                 07 SL2-TEL-IND             PIC X(03) VALUE SPACES.             
+      *          07 SL2-TEL-GUION           PIC X(01) VALUE SPACES.             
+                 07 SL2-TEL-NUM             PIC X(07) VALUE SPACES.             
+              05 SEP-26                     PIC X(01).
+              05 SL2-TEL-TIPO               PIC X(01).                
+              05 SEP-27                     PIC X(01).
+           03 SL2-CELULARES OCCURS 3.                
+              05 SL2-CELULAR.                
+                 07 SL2-CEL-IND             PIC X(03) VALUE SPACES.             
+      *          07 SL2-CEL-GUION           PIC X(01) VALUE SPACES.             
+                 07 SL2-CEL-NUM             PIC X(07) VALUE SPACES.             
+              05 SEP-28                     PIC X(01).
+           03 SL2-DIRECCIONES OCCURS 10.                
+              05 SL2-DIR-CIUDAD             PIC X(20).                
+              05 SEP-29                     PIC X(01).
+              05 SL2-DIR-CODCIU             PIC X(08).                
+              05 SEP-30                     PIC X(01).
+              05 SL2-DIR-DEPTO              PIC X(20).                
+              05 SEP-31                     PIC X(01).
+              05 SL2-DIR-CODDEP             PIC X(02).                
+              05 SEP-32                     PIC X(01).
+              05 SL2-DIR-DIRECCION          PIC X(60).                
+              05 SEP-33                     PIC X(01).
+              05 SL2-DIR-TIPO               PIC X(01).                
+              05 SEP-34                     PIC X(01).
+              05 SL2-DIR-ESTRATO            PIC X(01).                
+              05 SEP-35                     PIC X(01).
+           03 SL2-EMAIL-1                   PIC X(40).                
+           03 SEP-36                        PIC X(01).
+           03 SL2-EMAIL-2                   PIC X(40).                
+           03 SEP-37                        PIC X(01).
+           03 SL2-CELU-1                    PIC X(10).                
+           03 SEP-38                        PIC X(01).
+           03 SL2-CELU-2                    pic X(10).                
+           03 SEP-39                        PIC X(01).
+           03 SL2-ESTADO                    PIC 9(02).        
+           03 SEP-40                        PIC X(01).
+           03 SL2-CAUSAL                    PIC 9(02).        
+           03 SEP-41                        PIC X(01).
+           03 SL2-FLAG                      PIC 9(02).        
+           03 SEP-42                        PIC X(01).
+           03 SL2-BLOQS-PED                 PIC 9(02).        
+           03 SEP-43                        PIC X(01).
+           03 SL2-PORC-BLOQSPED             PIC 9(03).        
+           03 SEP-44                        PIC X(01).
+           03 SL2-BLOQS-VAL                 PIC 9(02).        
+           03 SEP-45                        PIC X(01).
+           03 SL2-PORC-BLOQSVAL             PIC 9(03).        
+           03 SEP-46                        PIC X(01).
+           03 SL2-NOMBRE-COMPL              PIC X(01).        
+           03 SEP-47                        PIC X(01).
+           03 SL2-CASO                      PIC 9(02).

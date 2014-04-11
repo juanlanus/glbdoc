@@ -1,0 +1,44 @@
+      * ICBCON-FD.0004  
+      * ARCHIVO QUE CONTIENE LAS HUELLAS DE CONSULTA, ES DECIR TIPO 1 Y
+      * TIPO 5
+      *******************************************************************
+      * RMB003       * FENA001: PARA LAS CONSULTAS REPETIDAS (MISMO DIA *
+      * R.MARTINEZ.  * SUSCRIPTOR, CLAVE) SE DEJA UN SOLA CONSULTA Y LA *
+      * JULIO 30/2001* CANTIDAD SE ACUMULA EN NUEVO CAMPO CONTADOR      *
+      *              * NUM-CONS-IND.                                    *
+032800*----------------------------------------------------------------**
+      * RMB003       * SCR002: PARA MANEJO DE PREFILTRO SE REDEFINEN    *
+      * R.MARTINEZ.  * CAMPOS.                                          *
+      * AGOS. 30/2002* CANTIDAD SE ACUMULA EN NUEVO CAMPO CONTADOR      *
+032800*----------------------------------------------------------------**
+      * GJC0004      * AMPLI1: AMPLIACION DEL ARCHIVO DE CONSULTA DE    *
+      * G.JIMENEZ.   * 50 A 123 POSICIONES, SE AMPLIA CON FILLER DE 50  *
+      * ENE.03/2003  * CARACTERES.                                      *
+      * FAC0004      * INCLUSION DE NUEVOS CAMPOS                       *
+      * ENE.22/2003  *                                                  *
+032800*----------------------------------------------------------------**
+032900 FD  INDEXADO.
+033000*    FILE OF SUCCESSFUL INQUIRIES, FOR BILLING AND SUSPICIOUS
+033100*    NUMBER OF CREDIT INQUIRIES
+033200 01  REG-INDEX.
+033300     03  COD-SUSCRIP-IND         PIC 9(6).
+033400     03  FEC-CONSUL-IND          PIC 9(6).
+033500     03  LLAVE-INDEX.
+033600         05  TIP-ID-IND          PIC 9.
+033700         05  NUM-ID-IND          PIC 9(11).
+033800         05  CONSECUTIVO-IND     PIC 9(2).
+REMARK*    SCORES 0=score10,1-9= SCORE1-9
+SCR002     03  SCO-PRE-INDEX           PIC 9.
+SCR002     03  CIUDAD-CONS-IND         PIC 9(2).
+034100     03  OFICINA-CONS-IND        PIC X(15).
+FENA01     03  NUM-CONS-IND            PIC 99.                           RMB003
+SCR002     03  FILLER-INDEX.                                                   
+SCR002         05 PRE-SCORE-INDEX      PIC X VALUE SPACES.    
+SCR002         05 PUN-SCORE-INDEX      PIC S9(05) COMP-3.          
+AMPLI1     03  RAZCON-IND              PIC 99.                          GJC0004
+AMPLI1     03  TIP-SCORE-IND           PIC 9(3).                        FAC0004
+AMPLI1     03  CLASIFICA-IND           PIC X(2).                        FAC0004
+AMPLI1     03  CALIFICA-IND            PIC S9(3)V99.                    FAC0004
+AMPLI1     03  CLAVE-IND               PIC X(5).                        FAC0004
+AMPLI1     03  CONTADOR-IND            PIC 9(3).                        FAC0004
+AMPLI1     03  FILLER-1-INDEX          PIC X(50).                       GJC0004

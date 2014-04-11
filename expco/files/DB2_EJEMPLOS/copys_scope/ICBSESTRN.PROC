@@ -1,0 +1,180 @@
+      *   ICBSESTRN.v.0001
+      ******************************************************************
+      * ESTA RUTINA SE ENCARGA DE LEER EL ARCHIVO DE SESIONES Y DETER- *
+      * MINAR CUAL ESTA LIBRE Y LO ASIGNA PARA HACER LOS PROCESOS DEL  *
+      * ICGCON EJECUTADO EN MODO BATCH. PARA LA EJECUCION EN LINEA SE  *
+      * ASIGNA LA SESION NO. 1. EL MAXIMO NUMERO DE SESIONES A MENEJAR *
+      * SON 9 Y ESTE VALOR ES TOMADO PARA EL ICBTCO Y NOMBRE ARCHIVOS. *
+      * PARA LA SESION DE LINEA NO SE GRABA EN EL ARCHIVO Y ES TOMADA  *
+      * PARA ADICIONAR EL NUMERO DE SERVIDOR Y LUEGO INCREMENTAR LAS   *
+      * SECUENCIAS PARA EL ICBTCO.                                     *
+      *                                                                *
+      ******************************************************************
+      *            *                                                   *
+      ******************************************************************
+       1000-SESIONES.  
+         MOVE  0    TO    W-LIBRE-ICBSES W-USO-1-ICBSES
+                          W-USADA-ICBSES
+                          EOF-ICBSES
+         MOVE  1    TO    NUM-ICBSES
+ 
+         IF COD-ENTRADA NOT = "SERVER"
+            OPEN I-O SESION       
+            INITIALIZE REG-ICBSES
+            START SESION KEY >= LLAVE-ICBSES INVALID KEY
+              MOVE 1 TO EOF-ICBSES 
+            END-START
+            IF EOF-ICBSES = 0
+               READ SESION NEXT RECORD AT END 
+                  MOVE 1 TO EOF-ICBSES 
+               END-READ
+            END-IF
+            PERFORM UNTIL EOF-ICBSES  = 1 OR NUM-ICBSES > W-MAX-ICBSES
+               IF FECHA-ICBSES = 0 
+                  ACCEPT FECHA-ICBSES FROM DATE YYYYMMDD
+                  ACCEPT HORA-ICBSES  FROM TIME
+                  IF COD-ENTRADA NOT = "SERVER" AND NUM-ICBSES NOT = 1
+                     MOVE   NUM-ICBSES   TO  W-LIBRE-ICBSES
+                     REWRITE REG-ICBSES
+                     IF S1-ICBSES NOT = 0           
+                        DISPLAY "ERROR ICBSES : ", S1-ICBSES,
+                                           "/",BIN-ICBSES
+                        STOP RUN
+                     ELSE
+                        DISPLAY "VALOR ENCONTRADO                  ",
+                             "NUMERO SESION     ", W-LIBRE-ICBSES
+                     END-IF
+                     MOVE 1   TO   EOF-ICBSES
+                  END-IF
+               ELSE
+                  MOVE NUM-ICBSES    TO   W-USADA-ICBSES
+                  READ SESION NEXT RECORD AT END 
+                    MOVE 1 TO EOF-ICBSES 
+                  END-READ
+               END-IF
+            END-PERFORM
+            IF W-LIBRE-ICBSES  =  0 AND W-USADA-ICBSES < W-MAX-ICBSES
+               IF COD-ENTRADA NOT = "SERVER"
+                  IF W-USADA-ICBSES = 0
+                     COMPUTE W-LIBRE-ICBSES = W-USADA-ICBSES + 2
+                  ELSE
+                     COMPUTE W-LIBRE-ICBSES = W-USADA-ICBSES + 1
+                  END-IF
+                  ACCEPT FECHA-ICBSES FROM DATE YYYYMMDD
+                  ACCEPT HORA-ICBSES  FROM TIME
+                  MOVE   W-LIBRE-ICBSES  TO  NUM-ICBSES
+                  WRITE REG-ICBSES
+                  IF S1-ICBSES NOT = 0           
+                     DISPLAY "ERROR ICBSES : ", S1-ICBSES,
+                                                   "/",BIN-ICBSES
+                     STOP RUN
+                  ELSE
+                     DISPLAY "VALOR ENCONTRADO                  ",
+                          "NUMERO SESION     ", W-LIBRE-ICBSES
+                  END-IF
+               END-IF
+            ELSE 
+               IF W-USADA-ICBSES >= W-MAX-ICBSES AND 
+                  COD-ENTRADA NOT = "SERVER"
+                  DISPLAY "ERROR, TODAS LAS SESIONES UTILIZADAS "
+                  STOP RUN
+               END-IF
+            END-IF
+            CLOSE SESION
+         ELSE
+            MOVE 1            TO   NUM-ICBSES
+            MOVE 1            TO   W-USO-1-ICBSES
+            MOVE NUM-ICBSES   TO   W-LIBRE-ICBSES
+            DISPLAY "VALOR ENCONTRADO                  ",
+                    "NUMERO SESION     ", W-LIBRE-ICBSES
+         END-IF.
+
+       1000-SESIONES-CLAVE.  
+         IF COD-ENTRADA NOT = "SERVER"
+            OPEN I-O SESION       
+            MOVE  0    TO    NUM-ICBSES
+            MOVE  0    TO    EOF-ICBSES
+            MOVE  0    TO    W-OTRA-ICBSES
+            START SESION KEY >= LLAVE-ICBSES INVALID KEY
+                 MOVE 1 TO EOF-ICBSES 
+            END-START
+            PERFORM UNTIL EOF-ICBSES  = 1 OR NUM-ICBSES > W-MAX-ICBSES
+               IF CLAVE-ICBSES = W-CLAVE-ICBSES
+                  DISPLAY "CLAVE UTILIZANDO OTRA SESION, VERIFIQUE"
+                  STOP RUN
+               ELSE
+                  ACCEPT W-FEC-AUX-ICBSES FROM DATE YYYYMMDD
+                  IF (FECHA-ICBSES - W-FEC-AUX-ICBSES) > W-TIEMPO-ICBSES
+                     MOVE   0     TO   FECHA-ICBSES
+                     MOVE   0     TO   HORA-ICBSES
+                     REWRITE REG-ICBSES
+                     IF S1-ICBSES NOT = 0           
+                        DISPLAY "ERROR ICBSES:", S1-ICBSES,
+                                                  "/",BIN-ICBSES
+                        STOP RUN
+                     END-IF
+                  ELSE
+                     IF NUM-ICBSES  =  W-LIBRE-ICBSES
+                        MOVE W-CLAVE-ICBSES   TO   CLAVE-ICBSES
+                        REWRITE REG-ICBSES
+                        IF S1-ICBSES NOT = 0           
+                           DISPLAY "ERROR ICBSES : ", S1-ICBSES,
+                                              "/",BIN-ICBSES
+                           STOP RUN
+                        END-IF
+                     END-IF
+                  END-IF
+                  READ SESION NEXT RECORD AT END 
+                       MOVE 1 TO EOF-ICBSES 
+                  END-READ
+               END-IF
+            END-PERFORM
+            CLOSE SESION
+         END-IF.
+
+       1000-SESIONES-TERMINA.
+         IF COD-ENTRADA NOT = "SERVER"
+            OPEN I-O SESION       
+            MOVE  0    TO    NUM-ICBSES
+            MOVE  0    TO    EOF-ICBSES
+            MOVE  0    TO    W-OTRA-ICBSES
+            START SESION KEY >= LLAVE-ICBSES INVALID KEY
+                 MOVE 1 TO EOF-ICBSES 
+            END-START
+            PERFORM UNTIL EOF-ICBSES  = 1 OR NUM-ICBSES > W-MAX-ICBSES
+               IF W-LIBRE-ICBSES = LLAVE-ICBSES
+                  MOVE   0     TO   FECHA-ICBSES
+                  MOVE   0     TO   HORA-ICBSES
+                  REWRITE REG-ICBSES  
+                  IF S1-ICBSES NOT = 0           
+                     DISPLAY "ERROR ICBSES : ", S1-ICBSES,
+                                                    "/",BIN-ICBSES
+                     STOP RUN
+                  ELSE
+                     DISPLAY "SESION LIBERADA                   ",
+                          "NUMERO SESION     ", W-LIBRE-ICBSES
+                  END-IF
+               ELSE
+                  ACCEPT W-FEC-AUX-ICBSES FROM DATE YYYYMMDD
+                  IF (W-FEC-AUX-ICBSES - FECHA-ICBSES >= 
+                                                  W-TIEMPO-ICBSES)
+                       AND NUM-ICBSES    > 1 AND FECHA-ICBSES > 0
+                     MOVE   0     TO   FECHA-ICBSES
+                     MOVE   0     TO   HORA-ICBSES
+                     REWRITE REG-ICBSES  
+                     IF S1-ICBSES NOT = 0           
+                        DISPLAY "ERROR ICBSES:", S1-ICBSES,
+                                                      "/",BIN-ICBSES
+                        STOP RUN
+                     ELSE
+                        DISPLAY "SESION RECICLADA                  ",
+                          "NUMERO SESION     ", NUM-ICBSES     
+                     END-IF
+                  END-IF
+               END-IF
+               READ SESION NEXT RECORD AT END 
+                  MOVE 1 TO EOF-ICBSES 
+               END-READ
+            END-PERFORM
+            CLOSE SESION
+         END-IF.

@@ -1,0 +1,12 @@
+REMARK*BDLDIRACE-FD.v.0000
+REMARK******************************************************************
+REMARK* ARCHIVO DE ACEPCIONES DE DIRECCIONES                      *
+REMARK******************************************************************
+      *
+      ******************************************************************
+       FD  BDLDIRACE.
+       01  REG-BDLDIRACE.
+           03  LLAVE-BDLDIRACE.
+               05  DIR-ORIG-BDLDIRACE     PIC X(20).
+           03  DIR-ESTAN-BDLDIRACE        PIC X(10).
+           03  FILLER                     PIC X(100).

@@ -1,0 +1,3466 @@
+REMARK*CARACTPER-003.PROC.v.0006.
+REMARK* set de Características Personalizadas 
+REMARK* 5 Tipología END . Nivel 01
+REMARK* CO01END999XX003 . Cupo total a la fecha.
+REMARK* CO01END998XX003 . Saldo total a la fecha.
+REMARK* CO01END997XX003 . Cuota total a la fecha.
+REMARK* CO01END996XX003 . Máxima suma de los cupos por entidad.
+REMARK* CO01END995XX003 . Máxima suma de los saldos por entidad.
+REMARK* CO01END994XX003 . Suma de saldos por entidad con suma de cupos máxima. 
+REMARK* CO01END993XX003 . Saldo de obligaciones financieras castigadas 
+REMARK* CO01END992XX003 . Saldo de obligaciones en mora mayor a 90 días.
+REMARK* CO01END991XX003 . Saldo de obligaciones en mora entre 30 y 60 días.
+REMARK* CO01END990XX003 . Cuota de obligaciones en mora mayor a 90 días.
+REMARK* CO01END989XX003 . Cuota de obligaciones en mora entre 30 y 90 días.
+REMARK* CO01END988XX003 . Utilización Tarjetas de crédito.
+REMARK* CO01END987XX003 . Máxima utilización Tarjetas de crédito.
+REMARK* CO01END986XX003 . Utilización total de tarjetas de crédito.
+REMARK* CO01END984XX003 . Máxima utilización Tarjetas de crédito.
+REMARK* CO01END981XX003 . Saldo de obligaciones financieras de dudoso recaudo.
+REMARK* 6 Tipología EXP . Nivel 01
+REMARK* CO01EXP999XX003 . Máxima Antigüedad 
+REMARK* CO01EXP996XX003 . Meses máximo de apertura de cuentas abiertas
+REMARK* CO01EXP994XX003 . Meses mínimo de actualización
+REMARK* 7 Tipología EXT . Nivel 01 
+REMARK* CO01EXT999XX003 . Cuenta vigente en Telmex 
+REMARK* CO01EXT998XX003 . Cuenta vigente en Telecom 
+REMARK* CO01EXT997XX003 . Cuenta vigente en DirecTV 
+REMARK* CO01EXT996XX003 . Cuenta vigente en Movistar 
+REMARK* CO01EXT995XX003 . Cuenta vigente en Comcel 
+REMARK* CO01EXT994XX003 . Cuenta vigente en HP (Hipotecario) 
+REMARK* CO01EXT993XX003 . Indicador de sobrecupo TC 
+REMARK* CO01EXT992XX003 . Indicador de Productos de Consumo abiertos pero no tiene TC
+REMARK* CO01EXT990XX003 . Indicador de Productos de Consumo 
+REMARK* 8 Tipología MOR . Nivel 01 
+REMARK* CO01MOR999XX003 . Moras de 120 días ó más a la fecha 
+REMARK* CO01MOR998XX003 . Moras de 90 días a la fecha 
+REMARK* CO01MOR997XX003 . Moras de 60 días a la fecha 
+REMARK* CO01MOR996XX003 . Moras de 30 días a la fecha 
+REMARK* CO01MOR995XX003 . Moras de 180 días ó más últimos 12 meses 
+REMARK* CO01MOR994XX003 . Moras de 150 días últimos 12 meses 
+REMARK* CO01MOR993XX003 . Moras de 120 días últimos 12 meses 
+REMARK* CO01MOR992XX003 . Moras de 90 días últimos 12 meses 
+REMARK* CO01MOR991XX003 . Moras de 60 días últimos 12 meses 
+REMARK* CO01MOR990XX003 . Moras de 30 días últimos 12 meses 
+REMARK* CO01MOR989XX003 . Meses última mora 
+REMARK* CO01MOR988XX003 . Cuentas en mora como garante 
+REMARK* CO01MOR986XX003 . Moras de 60 días últimos 24 meses 
+REMARK* CO01MOR985XX003 . Moras de 30 días ó más últimos 12 meses 
+REMARK* CO01MOR984XX003 . Ever 60 últimos 12 meses Portafolio MX_01 
+REMARK* CO01MOR983XX003 . Cuentas en Mora Portafolio MX_01 
+REMARK* CO01MOR980XX003 . Mínimo de meses al día 
+REMARK* 9 Tipología NUM . Nivel 01 
+REMARK* CO01NUM999XX003 . Número de referencias financieras castigadas 
+REMARK* CO01NUM998XX003 . Número de referencias financieras actuales en recaudo dudoso 
+REMARK* CO01NUM997XX003 . Número de referencias financieras embargadas
+REMARK* CO01NUM996XX003 . Número de referencias financieras en dudoso recaudo en los últimos 
+REMARK* 12 meses 
+REMARK* CO01NUM995XX003 . Número de referencias financieras castigadas en los últimos 12 
+REMARK* meses 
+REMARK* CO01NUM994XX003 . Número de bancos con los cuales el cliente tiene productos 
+REMARK* CO01NUM993XX003 . Número referencias financieras. 
+REMARK* CO01NUM991XX003 . Número de cuentas abiertas en los últimos 12 meses 
+REMARK* CO01NUM990XX003 .Meses desde el último pago en tarjetas de crédito. 
+REMARK* CO01NUM989XX003 .Número de cuentas financieras cerradas. 
+REMARK* CO01NUM983XX003 .Número de cuentas vigentes en los últimos 12 meses 
+REMARK* 10 Tipología END . Nivel 02 
+REMARK* CO02END985_003 . Máximo del balance para las cuentas de PIL 
+REMARK* CO02END983XX003 . Máxima suma de los cupos por entidad.
+REMARK* CO02END982XX003 . Suma de saldos por entidad con suma de cupos máxima.
+REMARK* 11 Tipología EXP . Nivel 02 
+REMARK* CO02EXP998_003 . Meses máximo de apertura de cuentas 
+REMARK* CO02EXP997_003 . Meses máximo de apertura de cuentas abiertas 
+REMARK* CO02EXP995_003 . Meses máximo de apertura 
+REMARK* 12 Tipología EXT . Nivel 02 
+REMARK* CO02EXT991_003 . Indicador de NO Productos Abiertos 
+REMARK* 13 Tipología INQ . Nivel 02 
+REMARK* CO02INQ999_003 - Número de Consultas en los últimos 3 meses excluyendo CITI 
+REMARK* Parcialmente 
+REMARK* CO02INQ998_003 - Número de Consultas en los últimos 6 meses excluyendo Citibank
+REMARK* CO02INQ997_003 - Número de Consultas en los últimos 3 meses incluyendo CITI 
+REMARK* CO02INQ996_003 - Consultas en los últimos 6 meses. Incluye Citibank 
+REMARK* CO02INQ995_003 - Consultas en los últimos 6 meses. Excluye Citibank Parcialmente 
+REMARK* 14 Tipología MOR . Nivel 02 
+REMARK* CO02MOR987_003 . Cuentas en mora 
+REMARK* CO02MOR982_003 . Moras de 120 días últimos 12 meses 
+REMARK* CO02MOR981_003 . Ever 30 últimos 12 meses excluyendo Citibank 
+REMARK* CO02MOR979_003 . Ever 30 últimos 12 meses 
+REMARK* 15 Tipología NUM . Nivel 02 
+REMARK* CO02NUM992_003 . Número de refinanciaciones en los últimos 24 meses.
+REMARK* CO02NUM988_003 .Número de cuentas en proceso ejecutivo.
+REMARK* CO02NUM987_003 .Número de cuentas en mandamiento de pago.
+REMARK* CO02NUM986_003 .Número de cuentas en mandamiento de pago.
+REMARK* CO02NUM985_003 .Número de cuentas en cobrador.
+REMARK* CO02NUM984_003 .Número de cuentas vigentes.
+CQ5718* CO00DEM031000 = AÑO DE CONSULTA     9999                        IMS0002
+CQ5718* CO00DEM032000 = MES DE CONSULTA     99                          IMS0002
+CQ5718* CO00DEM033000 = DIA DE CONSULTA     99                          IMS0002
+CQ5718* CO00DEM034000 = SALARIO MINIMO      99999.999                   IMS0002
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 003
+REMARK*    CITIBANK           
+REMARK******************************************************************
+REMARK* CIG0001    | RQ3921 - SE AGREGAN LAS RUTINAS QUE SE ENCONTRABAN*
+REMARK* 28-NOV-2011|    EN EL CARACTPER.PROC                           *
+REMARK******************************************************************
+CQ5718* IMS0002    | CQ5718 - SE AGREGAN LAS CARACTERISTICAS AÑO, MES, *IMS0002
+CQ5718* MAY.02-2012|     DIA Y SALARIO MINIMO.  REQ. 5718              *IMS0002
+CQ5718* M.SALAMANCA|                                                   *IMS0002
+CQ5718******************************************************************IMS0002
+REMARK* CAV0003     | CQ8603 - SE INCLUYE ARCHIVO DE CLIENTES FERIA    *
+REMARK* 31-OCT-2012 |          PARA CITI PER 003.                      *
+REMARK******************************************************************
+REMARK* IMS0004     | CQ8875 - SE REALIZA AJUSTE PARA INCIDENCIA       *
+REMARK* 14-NOV-2012 |          REPORTADA.                              *
+REMARK******************************************************************
+REMARK* IMS0005     | CQ9139 - INCIDENTE PRODUCCION.                   *
+REMARK* 05-DIC-2012 |                                                  *
+REMARK******************************************************************
+REMARK* IMS0006     | R10704 - SE AGREGA LA CARACTERISTICA EXTERNA     *
+REMARK* 26-FEB-2013 |          TMCITIFER003                            *
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-003.
+RQ3921         INITIALIZE  LLAVE-BDIIDIAN                               CIG0001
+RQ3921         MOVE  TIPO-ID-CARACT    TO  NITS-R-BDIIDIAN              CIG0001
+RQ3921         MOVE  NRO-ID-CARACT     TO  NITS-R-BDIIDIAN              CIG0001
+RQ3921         PERFORM  5200-LEA-INDEX-CLIENTCITI                       CIG0001
+CQ5718         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ5718         MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ5718         MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              IMS0002
+CQ5718         MOVE  00DEM031000(1:L-AUX)  TO                           IMS0002
+CQ5718                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ5718                                                                  IMS0002
+CQ5718         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ5718         MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ5718         MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              IMS0002
+CQ5718         MOVE  00DEM032000(1:L-AUX)  TO                           IMS0002
+CQ5718                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ5718                                                                  IMS0002
+CQ5718         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ5718         MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ5718         MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX              IMS0002
+CQ5718         MOVE  00DEM033000(1:L-AUX)  TO                           IMS0002
+CQ5718                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+CQ5718                                                                  IMS0002
+CQ5718         ADD   1                 TO  I-VAR-PER                    IMS0002
+CQ5718         MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0002
+CQ5718         MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              IMS0002
+CQ5718         MOVE  00DEM034000(1:L-AUX)  TO                           IMS0002
+CQ5718                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0002
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CLTCIT_TIP_EMPL"  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(CLTCIT-TIPO-EMPLEO) TO L-AUX       CIG0001
+RQ3921         MOVE  CLTCIT-TIPO-EMPLEO(1:L-AUX)  TO                    CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CLTCIT_F_ULTSOL"  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(CLTCIT-FECHA-ULT-SOL) TO L-AUX     CIG0001
+RQ3921         MOVE  CLTCIT-FECHA-ULT-SOL(1:L-AUX)  TO                  CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CLTCIT_INGR_VAL"  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(CLTCIT-INGRESO-VAL) TO L-AUX       CIG0001
+RQ3921         MOVE  CLTCIT-INGRESO-VAL(1:L-AUX)  TO                    CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         READ  BDIIDIAN                                           CIG0001
+RQ3921           INVALID KEY                                            CIG0001
+RQ3921              MOVE  ZEROS        TO  COD-CIIU-BDIIDIAN            CIG0001
+RQ3921         END-READ                                                 CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CODIGO_CIIU    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(COD-CIIU-BDIIDIAN) TO L-AUX        CIG0001
+RQ3921         MOVE  COD-CIIU-BDIIDIAN(1:L-AUX)  TO                     CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CLTCIT_EVALUACI"  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(CLTCIT-EVALUACION) TO L-AUX        CIG0001
+RQ3921         MOVE  CLTCIT-EVALUACION(1:L-AUX)  TO                     CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "CLTCIT_CLIENTE "  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(CLTCIT-CLIENTE) TO L-AUX           CIG0001
+RQ3921         MOVE  CLTCIT-CLIENTE(1:L-AUX)  TO                        CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "SLD_SCORE_1  "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(SLD-SCORE-1) TO L-AUX              CIG0001
+RQ3921         MOVE  SLD-SCORE-1(1:L-AUX)  TO                           CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "SLD_SCORE_2  "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(SLD-SCORE-2) TO L-AUX              CIG0001
+RQ3921         MOVE  SLD-SCORE-2(1:L-AUX)  TO                           CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "SLD_GRUPO_1  "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(SLD-GRUPO-1) TO L-AUX              CIG0001
+RQ3921         MOVE  SLD-GRUPO-1(1:L-AUX)  TO                           CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "SLD_GRUPO_2  "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(SLD-GRUPO-2) TO L-AUX              CIG0001
+RQ3921         MOVE  SLD-GRUPO-2(1:L-AUX)  TO                           CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "WS_THICK     "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(WS-THICK) TO L-AUX                 CIG0001
+RQ3921         MOVE  WS-THICK(1:L-AUX) TO                               CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "WS_THIN      "    TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(WS-THIN) TO L-AUX                  CIG0001
+RQ3921         MOVE  WS-THIN(1:L-AUX)  TO                               CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+RQ3921         ADD   1                 TO  I-VAR-PER                    CIG0001
+RQ3921         MOVE "SLD_CALIFICACIO"  TO  NOMBRE-VAR-PER(I-VAR-PER)    CIG0001
+RQ3921         MOVE  FUNCTION LENGTH(WS-CLASIF-SCO-CARACT) TO L-AUX     CIG0001
+RQ3921         MOVE  WS-CLASIF-SCO-CARACT(1:L-AUX)  TO                  CIG0001
+RQ3921               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)                    CIG0001
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO003) TO L-AUX
+               MOVE 01END999RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999R1003) TO L-AUX
+               MOVE 01END999R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999IN003) TO L-AUX
+               MOVE 01END999IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999VE003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999VE003) TO L-AUX
+               MOVE 01END999VE003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999HP003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999HP003) TO L-AUX
+               MOVE 01END999HP003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998RO003) TO L-AUX
+               MOVE 01END998RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998R1003) TO L-AUX
+               MOVE 01END998R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998IN003) TO L-AUX
+               MOVE 01END998IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998VE003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998VE003) TO L-AUX
+               MOVE 01END998VE003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998HP003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998HP003) TO L-AUX
+               MOVE 01END998HP003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997RO003) TO L-AUX
+               MOVE 01END997RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997R1003) TO L-AUX
+               MOVE 01END997R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997IN003) TO L-AUX
+               MOVE 01END997IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997VE003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997VE003) TO L-AUX
+               MOVE 01END997VE003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997HP003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997HP003) TO L-AUX
+               MOVE 01END997HP003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996RO003) TO L-AUX
+               MOVE 01END996RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996R1003) TO L-AUX
+               MOVE 01END996R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996IN003) TO L-AUX
+               MOVE 01END996IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END995IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END995IN003) TO L-AUX
+               MOVE 01END995IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END994RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END994RO003) TO L-AUX
+               MOVE 01END994RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END994R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END994R1003) TO L-AUX
+               MOVE 01END994R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END993MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END993MX003) TO L-AUX
+               MOVE 01END993MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END992MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END992MX003) TO L-AUX
+               MOVE 01END992MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END991MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END991MX003) TO L-AUX
+               MOVE 01END991MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END990MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END990MX003) TO L-AUX
+               MOVE 01END990MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END989MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END989MX003) TO L-AUX
+               MOVE 01END989MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END988RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END988RO003) TO L-AUX
+               MOVE 01END988RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END987RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END987RO003) TO L-AUX
+               MOVE 01END987RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END986RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END986RO003) TO L-AUX
+               MOVE 01END986RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END984RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END984RO003) TO L-AUX
+               MOVE 01END984RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01END981MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END981MX003) TO L-AUX
+               MOVE 01END981MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999AH003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999AH003) TO L-AUX
+               MOVE 01EXP999AH003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999CT003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999CT003) TO L-AUX
+               MOVE 01EXP999CT003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999RO003) TO L-AUX
+               MOVE 01EXP999RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999R1003) TO L-AUX
+               MOVE 01EXP999R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999VE003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999VE003) TO L-AUX
+               MOVE 01EXP999VE003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999IN003) TO L-AUX
+               MOVE 01EXP999IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP999HP003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP999HP003) TO L-AUX
+               MOVE 01EXP999HP003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP996RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP996RO003) TO L-AUX
+               MOVE 01EXP996RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXP994MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXP994MX003) TO L-AUX
+               MOVE 01EXP994MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT999CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT999CC003) TO L-AUX
+               MOVE 01EXT999CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT998CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT998CC003) TO L-AUX
+               MOVE 01EXT998CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT997CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT997CC003) TO L-AUX
+               MOVE 01EXT997CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT996CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT996CC003) TO L-AUX
+               MOVE 01EXT996CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT995CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT995CC003) TO L-AUX
+               MOVE 01EXT995CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT994HP003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT994HP003) TO L-AUX
+               MOVE 01EXT994HP003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT993RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT993RO003) TO L-AUX
+               MOVE 01EXT993RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT992MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT992MX003) TO L-AUX
+               MOVE 01EXT992MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01EXT990MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01EXT990MX003) TO L-AUX
+               MOVE 01EXT990MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999MX003) TO L-AUX
+               MOVE 01MOR999MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR998MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR998MX003) TO L-AUX
+               MOVE 01MOR998MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR997MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR997MX003) TO L-AUX
+               MOVE 01MOR997MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR996MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR996MX003) TO L-AUX
+               MOVE 01MOR996MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR995MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR995MX003) TO L-AUX
+               MOVE 01MOR995MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR994MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR994MX003) TO L-AUX
+               MOVE 01MOR994MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR993MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR993MX003) TO L-AUX
+               MOVE 01MOR993MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR992MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR992MX003) TO L-AUX
+               MOVE 01MOR992MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR991MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR991MX003) TO L-AUX
+               MOVE 01MOR991MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR990MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR990MX003) TO L-AUX
+               MOVE 01MOR990MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR989MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR989MX003) TO L-AUX
+               MOVE 01MOR989MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR988MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR988MX003) TO L-AUX
+               MOVE 01MOR988MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR986MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR986MX003) TO L-AUX
+               MOVE 01MOR986MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR985CC003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR985CC003) TO L-AUX
+               MOVE 01MOR985CC003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR984MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR984MX003) TO L-AUX
+               MOVE 01MOR984MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR983MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR983MX003) TO L-AUX
+               MOVE 01MOR983MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR980MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR980MX003) TO L-AUX
+               MOVE 01MOR980MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999MX003) TO L-AUX
+               MOVE 01NUM999MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM998MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM998MX003) TO L-AUX
+               MOVE 01NUM998MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM997CT003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM997CT003) TO L-AUX
+               MOVE 01NUM997CT003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM996MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM996MX003) TO L-AUX
+               MOVE 01NUM996MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM995MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM995MX003) TO L-AUX
+               MOVE 01NUM995MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM994RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM994RO003) TO L-AUX
+               MOVE 01NUM994RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM994R1003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM994R1003) TO L-AUX
+               MOVE 01NUM994R1003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM994IN003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM994IN003) TO L-AUX
+               MOVE 01NUM994IN003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM993MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM993MX003) TO L-AUX
+               MOVE 01NUM993MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM991MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM991MX003) TO L-AUX
+               MOVE 01NUM991MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM990RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM990RO003) TO L-AUX
+               MOVE 01NUM990RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM989MX003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM989MX003) TO L-AUX
+               MOVE 01NUM989MX003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END985_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END985-003) TO L-AUX
+               MOVE 02END985-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END983RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END983RO003) TO L-AUX
+               MOVE 02END983RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02END982RO003" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END982RO003) TO L-AUX
+               MOVE 02END982RO003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXP998_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXP998-003) TO L-AUX
+               MOVE 02EXP998-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXP997_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXP997-003) TO L-AUX
+               MOVE 02EXP997-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXP995_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXP995-003) TO L-AUX
+               MOVE 02EXP995-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02INQ999_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02INQ999-003) TO L-AUX
+               MOVE 02INQ999-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02INQ998_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02INQ998-003) TO L-AUX
+               MOVE 02INQ998-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02INQ997_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02INQ997-003) TO L-AUX
+               MOVE 02INQ997-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02INQ996_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02INQ996-003) TO L-AUX
+               MOVE 02INQ996-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02INQ995_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02INQ995-003) TO L-AUX
+               MOVE 02INQ995-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR987_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR987-003) TO L-AUX
+               MOVE 02MOR987-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR982_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR982-003) TO L-AUX
+               MOVE 02MOR982-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR981_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR981-003) TO L-AUX
+               MOVE 02MOR981-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR979_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR979-003) TO L-AUX
+               MOVE 02MOR979-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM992_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM992-003) TO L-AUX
+               MOVE 02NUM992-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM988_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM988-003) TO L-AUX
+               MOVE 02NUM988-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM987_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM987-003) TO L-AUX
+               MOVE 02NUM987-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM986_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM986-003) TO L-AUX
+               MOVE 02NUM986-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM985_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM985-003) TO L-AUX
+               MOVE 02NUM985-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM984_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM984-003) TO L-AUX
+               MOVE 02NUM984-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT991_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT991-003) TO L-AUX
+               MOVE 02EXT991-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT989_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT989-003) TO L-AUX
+               MOVE 02EXT989-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT988_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT988-003) TO L-AUX
+               MOVE 02EXT988-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT987_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT987-003) TO L-AUX
+               MOVE 02EXT987-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT986_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT986-003) TO L-AUX
+               MOVE 02EXT986-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT985_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT985-003) TO L-AUX
+               MOVE 02EXT985-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT984_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT984-003) TO L-AUX
+               MOVE 02EXT984-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT983_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT983-003) TO L-AUX
+               MOVE 02EXT983-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT982_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT982-003) TO L-AUX
+               MOVE 02EXT982-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT981_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT981-003) TO L-AUX
+               MOVE 02EXT981-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT980_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT980-003) TO L-AUX
+               MOVE 02EXT980-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT979_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT979-003) TO L-AUX
+               MOVE 02EXT979-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT978_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT978-003) TO L-AUX
+               MOVE 02EXT978-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT977_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT977-003) TO L-AUX
+               MOVE 02EXT977-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT976_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT976-003) TO L-AUX
+               MOVE 02EXT976-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT975_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT975-003) TO L-AUX
+               MOVE 02EXT975-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT974_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT974-003) TO L-AUX
+               MOVE 02EXT974-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT973_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT973-003) TO L-AUX
+               MOVE 02EXT973-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT972_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT972-003) TO L-AUX
+               MOVE 02EXT972-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT971_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT971-003) TO L-AUX
+               MOVE 02EXT971-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT970_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT970-003) TO L-AUX
+               MOVE 02EXT970-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT969_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT969-003) TO L-AUX
+               MOVE 02EXT969-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT968_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT968-003) TO L-AUX
+               MOVE 02EXT968-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT967_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT967-003) TO L-AUX
+               MOVE 02EXT967-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT966_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT966-003) TO L-AUX
+               MOVE 02EXT966-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT965_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT965-003) TO L-AUX
+               MOVE 02EXT965-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT964_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT964-003) TO L-AUX
+               MOVE 02EXT964-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT963_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT963-003) TO L-AUX
+               MOVE 02EXT963-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT962_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT962-003) TO L-AUX
+               MOVE 02EXT962-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT961_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT961-003) TO L-AUX
+               MOVE 02EXT961-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT960_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT960-003) TO L-AUX
+               MOVE 02EXT960-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT959_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT959-003) TO L-AUX
+               MOVE 02EXT959-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXT958_003 " TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXT958-003) TO L-AUX
+               MOVE 02EXT958-003(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+CQ8603         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ8603         MOVE "INDCLIFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ8603         MOVE FUNCTION LENGTH(INDCLIFER003) TO L-AUX              CAV0003
+CQ8603         MOVE INDCLIFER003(1:L-AUX)   TO                          CAV0003
+CQ8603                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+CQ8603         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ8603         MOVE "FLAGAGFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ8603         MOVE FUNCTION LENGTH(FLAGAGFER003) TO L-AUX              CAV0003
+CQ8603         MOVE FLAGAGFER003(1:L-AUX)   TO                          CAV0003
+CQ8603                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+CQ8603         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ8603         MOVE "TIPPREFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ8603         MOVE FUNCTION LENGTH(TIPPREFER003) TO L-AUX              CAV0003
+CQ8603         MOVE TIPPREFER003(1:L-AUX)   TO                          CAV0003
+CQ8603                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+CQ8603         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ8603         MOVE "HELLONFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ8603         MOVE FUNCTION LENGTH(HELLONFER003) TO L-AUX              CAV0003
+CQ8603         MOVE HELLONFER003(1:L-AUX)   TO                          CAV0003
+CQ8603                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+CQ8603         ADD 1 TO I-VAR-PER                                       CAV0003
+CQ8603         MOVE "OFERTAFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+CQ8603         MOVE FUNCTION LENGTH(OFERTAFER003) TO L-AUX              CAV0003
+CQ8603         MOVE OFERTAFER003(1:L-AUX)   TO                          CAV0003
+CQ8603                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+R10704         ADD 1 TO I-VAR-PER                                       IMS0006
+R10704         MOVE "TMCITIFER003 " TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0006
+R10704         MOVE FUNCTION LENGTH(TMCITIFER003) TO L-AUX              IMS0006
+R10704         MOVE TMCITIFER003(1:L-AUX)   TO                          IMS0006
+R10704                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0006
+                                  
+               .
+               *>
+REMARK 0000-INICIALIZAR-CARAC-EXT-03.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-03.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 03    *
+REMARK*     PARA CITIBANK          
+REMARK******************************************************************
+             MOVE ZEROS TO 01END999XX003  01END998XX003  01END997XX003
+                           01END996XX003  01END995IN003  01END994XX003
+                           01END993MX003  01END992MX003  01END991MX003
+                           01END990MX003  01END989MX003  01END988RO003
+                           01END987RO003  01END986RO003  01END984RO003
+                           01END981MX003  
+
+             MOVE ZEROS TO 01EXP999XX003  01EXP996RO003  
+
+             MOVE ZEROS TO 01EXT999CC003  01EXT998CC003  01EXT997CC003
+                           01EXT996CC003  01EXT995CC003  01EXT994HP003
+                           01EXT993RO003  01EXT992MX003  01EXT990MX003
+
+             MOVE ZEROS TO 01MOR999MX003  01MOR998MX003  01MOR997MX003
+                           01MOR996MX003  01MOR995MX003  01MOR994MX003
+                           01MOR993MX003  01MOR992MX003  01MOR991MX003
+                           01MOR990MX003  01MOR989MX003  01MOR988MX003
+                           01MOR986MX003  01MOR985CC003  01MOR984MX003
+                           01MOR983MX003  01MOR980MX003
+
+             MOVE ZEROS TO 01NUM999MX003  01NUM998MX003  01NUM997CT003
+                           01NUM996MX003  01NUM995MX003  01NUM994XX003 
+                           01NUM993MX003  01NUM991MX003  01NUM990RO003
+                           01NUM989MX003  
+
+             MOVE ZEROS TO 02END985-003  02END983XX003 
+
+             MOVE ZEROS TO 02EXP998-003  02EXP997-003  02EXP995-003
+
+             MOVE ZEROS TO 02INQ999-003  02INQ998-003  02INQ997-003
+                           02INQ996-003  02INQ995-003
+
+             MOVE ZEROS TO 02MOR987-003  02MOR982-003  02MOR981-003
+                           02MOR979-003
+
+             MOVE ZEROS TO 02NUM992-003  02NUM988-003  02NUM987-003
+                           02NUM986-003  02NUM985-003  02NUM984-003
+
+             MOVE 999   TO 01EXP994MX003  01MOR989MX003 01NUM990RO003
+             
+             INITIALIZE TABLA-ENTIDADES-CITI 
+             MOVE 99999999999 TO NIT-ENTID-CITI (1)
+
+             INITIALIZE TABLA-ENT-CONSL-CITI
+             MOVE 99999999999 TO NIT-ENT-CS-CITI (1)
+
+             INITIALIZE VARIABLES-PER-003
+             MOVE 999 TO WS-003-MINPO WS-003-MINTO WS-003-MOB13
+                         WS-003-MINDELQ WS-003-DELQ
+
+CQ5220       INITIALIZE TABLA-985-PORTA-CITI
+
+             INITIALIZE NUEVOS
+CQ8875       MOVE "EXP"                TO 02EXT989-003                  IMS0004
+CQ8875       MOVE CURRENT-DATE-CARACT  TO 02EXT988-003                  IMS0004
+             MOVE "-0000000001" TO 02EXT987-003 02EXT986-003
+                                   02EXT985-003 02EXT980-003
+                                   02EXT979-003 02EXT978-003
+                                   02EXT977-003 02EXT976-003
+                                   02EXT975-003 02EXT974-003
+                                   02EXT973-003 02EXT972-003
+                                   02EXT971-003 
+                                   02EXT969-003 02EXT968-003
+                                   02EXT966-003                 
+                                   02EXT966-003 02EXT965-003
+                                   02EXT964-003 02EXT963-003
+                                   02EXT962-003 02EXT961-003
+
+120612        MOVE "-01"       TO  02EXT967-003
+
+120612        MOVE "-0000100000" TO 02EXT981-003-R 02EXT982-003-R
+                                    02EXT983-003-R 02EXT984-003-R
+
+              MOVE ZEROS       TO  02EXT969-003 02EXT968-003
+                                   02EXT970-003 02EXT960-003
+                                   02EXT959-003 02EXT958-003
+
+             MOVE 1     TO 02EXT991-003
+
+120923       MOVE ALL "9" TO TABLA-END987-003
+
+CQ5718       PERFORM  9999-CARAC-GENERALES                              IMS0002
+             .
+
+REMARK* *-------------------------------------------------------------*
+       0100-ESTABLECER-PARAMS-PORTF-03.
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* AL COMIENZO DE ESTABLECER:
+REMARK*    OBLIGACIONES A EVALUAR
+REMARK*    SI ES CUENTA DEL CITI, CITI PARCIAL O CIUDADANO
+REMARK*    GARANTE       
+REMARK*    ENTIDAD
+REMARK*    MESES-MADUR-CARCIT (MESES-NOVAP O MESES-VENAP)
+REMARK*    EN 00NUMPTF ESTA EL CODIGO DEL PORTAFOLIO ESTANDARD
+111229     MOVE  0 TO SW-PROCESAR-003
+111229     IF COD-PORTAF-CARACT NOT = "AH" AND
+111229        COD-PORTAF-CARACT NOT = "CT"
+              MOVE  COD-SUS-ABD07   TO SUSCRIPTOR-003
+111229        IF IND-BLOQUEO-ABD07 <>  0
+111229*       OR GARANTE-ABD07 <> 0
+111229*       OR (NUM-CTA-ABD07(17:1) = "C" or "c")
+111229           MOVE  1 TO SW-PROCESAR-003
+111229        END-IF
+111229     ELSE
+              MOVE  COD-SUS-ABD06   TO SUSCRIPTOR-003
+111229        IF IND-BLOQUEO-ABD06 <>  0
+111229           MOVE  1 TO SW-PROCESAR-003
+111229        END-IF
+111229     END-IF
+      *    MIRAR SUSCRIPTOR BBVA
+CQ5220     MOVE "  " TO WS-ENTSUSC-CITI-CIU 
+CQ5220                  WS-ENTSUSC-CITI-PAR 
+                        WS-ENTSUSC-CITI-B   
+                        WS-ENTSUSC-CITI     
+           IF SW-SUSCR-CITI = 0
+              OPEN INPUT TABSUSCR-C
+              MOVE 0 TO I-IND-C I-IND-B I-IND-CIU I-IND-PAR
+              PERFORM  UNTIL SW-SUSCR-CITI = 1      
+                 READ TABSUSCR-C AT END MOVE 1 TO SW-SUSCR-CITI
+                 END-READ
+                 IF SW-SUSCR-CITI NOT = 1
+                    MOVE REG-TABSUSCR-C TO  W-SUSC-CITI 
+                    IF W-SUS-CITI-T = 1
+                       ADD 1 TO I-IND-B
+                       MOVE W-SUS-CITI-S TO SUS-CITI-B (I-IND-B)
+                    END-IF
+                    IF W-SUS-CITI-T = 2
+                       ADD 1 TO I-IND-C
+                       MOVE W-SUS-CITI-S TO SUS-CITI (I-IND-C)
+                    END-IF
+                    IF W-SUS-CITI-T = 3
+                       ADD 1 TO I-IND-PAR
+                       MOVE W-SUS-CITI-S TO SUS-CITI-PAR (I-IND-PAR)
+                    END-IF
+                    IF W-SUS-CITI-T = 4
+                       ADD 1 TO I-IND-CIU
+                       MOVE W-SUS-CITI-S TO SUS-CITI-CIU (I-IND-CIU)
+                    END-IF
+                 END-IF
+              END-PERFORM
+              PERFORM UNTIL I-IND-B    >  199
+                 ADD 1 TO I-IND-B   
+                 MOVE ALL "9" TO SUS-CITI-B (I-IND-B)
+              END-PERFORM
+              PERFORM UNTIL I-IND-C    >  19
+                 ADD 1 TO I-IND-C   
+                 MOVE ALL "9" TO SUS-CITI (I-IND-C)
+              END-PERFORM
+              PERFORM UNTIL I-IND-PAR  >  9
+                 ADD 1 TO I-IND-PAR 
+                 MOVE ALL "9" TO SUS-CITI-PAR (I-IND-PAR)
+              END-PERFORM
+              PERFORM UNTIL I-IND-CIU  >  9
+                 ADD 1 TO I-IND-CIU 
+                 MOVE ALL "9" TO SUS-CITI-CIU (I-IND-CIU)
+              END-PERFORM
+              SORT TB-SUSC-CITI ASCENDING KEY
+              SORT TB-SUSC-CITI-B ASCENDING KEY
+              SORT TB-SUSC-CITI-PAR ASCENDING KEY
+              SORT TB-SUSC-CITI-CIU ASCENDING KEY
+           END-IF
+111229     IF SW-PROCESAR-003 = 0
+              SET IND-S TO 1
+              SEARCH ALL TB-SUSC-CITI
+                 AT END
+                    MOVE "  "  TO WS-ENTSUSC-CITI
+                 WHEN SUS-CITI(IND-S) = SUSCRIPTOR-003
+                      MOVE "SI"     TO WS-ENTSUSC-CITI
+              END-SEARCH
+CQ5220        IF NOT ENT-CITI
+                 SET IND-C TO 1
+                 SEARCH ALL TB-SUSC-CITI-CIU
+                    AT END
+                       MOVE "  "  TO WS-ENTSUSC-CITI-CIU
+                    WHEN SUS-CITI-CIU(IND-C) = SUSCRIPTOR-003
+                         MOVE "SI"     TO WS-ENTSUSC-CITI-CIU
+                 END-SEARCH
+CQ5220           IF NOT ENT-CITI-CIUD
+                    SET IND-P TO 1
+                    SEARCH ALL TB-SUSC-CITI-PAR
+                       AT END
+                          MOVE "  "  TO WS-ENTSUSC-CITI-PAR
+                       WHEN SUS-CITI-PAR(IND-P) = SUSCRIPTOR-003
+                            MOVE "SI"     TO WS-ENTSUSC-CITI-PAR
+                    END-SEARCH
+CQ5220              IF NOT ENT-CITI-PAR
+                       SET IND-B TO 1
+                       SEARCH ALL TB-SUSC-CITI-B  
+                          AT END
+                             MOVE "  "  TO WS-ENTSUSC-CITI-B  
+                          WHEN SUS-CITI-B (IND-B) = SUSCRIPTOR-003
+                               MOVE "SI"     TO WS-ENTSUSC-CITI-B   
+                       END-SEARCH
+CQ5220              END-IF
+CQ5220           END-IF
+CQ5220        END-IF
+           END-IF
+           IF ENT-CITI-B
+              MOVE 1 TO SW-PROCESAR-003
+           END-IF
+      *
+111229     IF SW-PROCESAR-003 = 0
+      *   GARANTE
+           MOVE 0 TO GARANTE-CITI 
+           IF NUM-CTA-ABD07(17:1) = "C" or "c"
+111229     OR GARANTE-ABD07 <> 0
+              MOVE 1 TO GARANTE-CITI 
+           END-IF
+111209     IF MESES-VENAP-CARACT < MESES-NOVAP-CARACT
+111221     AND MESES-VENAP-CARACT > 0                      
+              MOVE MESES-VENAP-CARACT TO MESES-MADUR-CARCIT
+           ELSE 
+              MOVE MESES-NOVAP-CARACT TO MESES-MADUR-CARCIT
+           END-IF
+           MOVE COD-CTA-ABD07 TO COD-CTA-PORTAF        
+           MOVE NIT-SUSCRIP-S-ABD02 TO WS-ENTIDAD-CITI
+           MOVE 1 TO IND-ENTIDAD 
+           PERFORM UNTIL NIT-ENTID-CITI(IND-ENTIDAD) = 99999999999 OR
+                NIT-ENTID-CITI(IND-ENTIDAD)   = NIT-SUSCRIP-S-ABD02
+             ADD 1 TO IND-ENTIDAD 
+           END-PERFORM
+           IF NIT-ENTID-CITI(IND-ENTIDAD)    = 99999999999
+              MOVE NIT-SUSCRIP-S-ABD02 TO NIT-ENTID-CITI(IND-ENTIDAD)
+              MOVE 99999999999 TO NIT-ENTID-CITI(IND-ENTIDAD + 1)
+      *       ADD 1 TO IND-ENTIDAD 
+           END-IF 
+REMARK*    TABLA FACTOR-CITI
+           IF SW-FACTOR-CITI = 0
+              OPEN INPUT TABFACTOR-C
+              MOVE 0 TO I-FACTOR-C
+              PERFORM  UNTIL SW-FACTOR-CITI = 1      
+                 READ TABFACTOR-C AT END MOVE 1 TO SW-FACTOR-CITI
+                 END-READ
+                 ADD 1 TO I-FACTOR-C
+                 IF SW-FACTOR-CITI NOT = 1
+                    MOVE REG-TABFACTOR-C TO T-FACTOR-CITI(I-FACTOR-C)
+                 ELSE
+                    MOVE ALL "9" TO T-FACTOR-CITI(I-FACTOR-C)
+                 END-IF
+              END-PERFORM
+           END-IF
+      *      FLAG VALORES
+           MOVE 0 TO SALDO-CARCIT CUPO-CARCIT CUOTA-CARCIT
+121025     IF I13 > 0
+121219     IF VEC-SALDO-CARACT(I13) IS NUMERIC AND
+              VEC-SALDO-CARACT(I13) >= ZEROS AND
+              VEC-IND-SLD-CARACT(I13) = 0
+              MOVE VEC-SALDO-CARACT(I13) TO SALDO-CARCIT
+           END-IF
+           IF VEC-INICIAL-CARACT(I13) IS NUMERIC AND
+121219        VEC-INICIAL-CARACT(I13) >= ZEROS AND   
+              VEC-IND-INI-CARACT(I13) = 0
+              MOVE VEC-INICIAL-CARACT(I13) TO CUPO-CARCIT
+           END-IF
+121219     IF VEC-CUOTA-CARACT(I13) IS NUMERIC AND
+              VEC-CUOTA-CARACT(I13) >= ZEROS AND
+              VEC-IND-CUO-CARACT(I13) = 0
+              MOVE VEC-CUOTA-CARACT(I13) TO CUOTA-CARCIT
+           END-IF
+           IF CUOTA-CARCIT > 0 OR SALDO-CARCIT > 0 OR CUPO-CARCIT > 0        
+              MOVE 1 TO FLAG-VALORES-CARCIT
+           END-IF
+           IF SALDO-CARCIT NOT NUMERIC AND FLAG-VALORES-CARCIT = 1
+              MOVE 0 TO SALDO-CARCIT
+           END-IF
+           IF CUPO-CARCIT NOT NUMERIC AND FLAG-VALORES-CARCIT = 1
+              MOVE 0 TO CUPO-CARCIT
+           END-IF
+121025     END-IF
+      *     MESES ENTRE FECHAS REQUERIDAS
+      *      RunDate Consulta - Fecha de Novedad (MESES-DESAC-CARCIT2)
+           MOVE FEC-NOVEDAD-ABD07 TO FECHA-AUX-003
+           MOVE FECHA-AUX-003(1:2) TO MM-NOV-003
+           MOVE FECHA-AUX-003(3:2) TO AA-NOV-003(3:2)
+           IF FECHA-AUX-003(3:2) > "50"
+              MOVE "19" TO AA-NOV-003(1:2)
+           ELSE
+              MOVE "20" TO AA-NOV-003(1:2)
+           END-IF
+           COMPUTE MESES-DESAC-CARCIT2 =                                       
+             ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+                         ((AA-NOV-003 * 12) + MM-NOV-003)
+      *      RunDate Consulta - Fecha Ultimo Reporte (MESES-DESAC-CARCIT)   
+           COMPUTE MESES-DESAC-CARCIT =
+              ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+                 ((SIG-ANO-NOV-CARACT * 12) + MES-NOV-CARACT)   
+      *      Fecha Ultimo Reporte - Fecha Novedad    (MESES-DESAC-CARCIT3)   
+            COMPUTE MESES-DESAC-CARCIT3 =
+              ((SIG-ANO-NOV-CARACT * 12) + MES-NOV-CARACT) -
+                ((AA-NOV-003 * 12) + MM-NOV-003)
+      *      RunDate Consulta - Fecha Apertura       (MESES-NOVAP-CARCIT2)   
+           COMPUTE MESES-NOVAP-CARCIT2 =
+              ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+                 ((SIG-ANO-APE-CARACT * 12) + MES-APE-CARACT)
+           MOVE MESES-NOVAP-CARCIT2 TO MESES-MADUR-CARCIT2
+      *      RunDate Consulta - Fecha Consulta       (MESES-CONST-CARCIT)   
+      *    COMPUTE MESES-CONST-CARCIT  =
+      *       ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+      *       ((SIG-ANO-CONS-CARACT * 12) + MES-CONS-CARACT)
+      *      RunDate Consulta - Fecha adjtv menor(MESES-ADJTV-MENOR)
+           MOVE FEC-MEN-ADJ-ABD07 TO FECHA-AUX-003
+           MOVE FECHA-AUX-003(1:2) TO MM-MEN-003
+           MOVE FECHA-AUX-003(3:2) TO AA-MEN-003(3:2)
+           IF FECHA-AUX-003(3:2) > "50"
+              MOVE "19" TO AA-MEN-003(1:2)
+           ELSE
+              MOVE "20" TO AA-MEN-003(1:2)
+           END-IF
+           COMPUTE MESES-ADJTV-MENOR   =                                       
+             ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+                         ((AA-MEN-003 * 12) + MM-MEN-003)
+      *      RunDate Consulta - Fecha adjtv mayor(MESES-ADJTV-MAYOR)
+           MOVE FEC-MAY-ADJ-ABD07 TO FECHA-AUX-003
+           MOVE FECHA-AUX-003(1:2) TO MM-MAY-003
+           MOVE FECHA-AUX-003(3:2) TO AA-MAY-003(3:2)
+           IF FECHA-AUX-003(3:2) > "50"
+              MOVE "19" TO AA-MAY-003(1:2)
+           ELSE
+              MOVE "20" TO AA-MAY-003(1:2)
+           END-IF
+           COMPUTE MESES-ADJTV-MAYOR   =                                       
+             ((ANO-RUN-CARACT * 12) + MES-RUN-CARACT) -
+                         ((AA-MAY-003 * 12) + MM-MAY-003)
+      *     CALCULO DE CUOTAS SI ES NECESARIO
+           IF COD-PORTAF-CARACT NOT = "AH" AND
+              COD-PORTAF-CARACT NOT = "CT"
+              IF TOTAL-CUOTAS-ABD07 >= 0 AND
+                 MESES-VENAP-CARACT = 0
+                   MOVE  TOTAL-CUOTAS-ABD07 TO CUOTAS-CARCIT
+              ELSE
+                 IF MESES-VENAP-CARACT NOT > 0 OR
+                    MESES-VENAP-CARACT > 998
+                    MOVE 199 TO CUOTAS-CARCIT 
+                 ELSE
+                    MOVE  MESES-VENAP-CARACT TO CUOTAS-CARCIT
+                 END-IF
+              END-IF
+           END-IF
+120612*    .
+REMARK*    FACTOR-CITI
+           IF COD-CTA-ABD07 = 05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15
+                           OR 17
+              MOVE "IN-01" TO NM-FACTOR-CITI
+           ELSE
+              IF COD-CTA-ABD07 = 13
+                 MOVE "HP-01" TO NM-FACTOR-CITI
+              ELSE
+                 IF COD-CTA-ABD07 = 04 OR 45
+                    MOVE "VE-01" TO NM-FACTOR-CITI
+                 ELSE
+                    IF COD-CTA-ABD07 = 02
+                       MOVE "RO-01" TO NM-FACTOR-CITI
+                    ELSE
+                       IF COD-CTA-ABD07 = 03 OR 48
+                          MOVE "R1-01" TO NM-FACTOR-CITI
+                       ELSE
+                          MOVE SPACES TO NM-FACTOR-CITI
+                       END-IF
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           MOVE 0 TO FACTOR-CITI
+           MOVE 1 TO I-FACTOR-C
+      *      Verificar si es >= o solo >
+120727     MOVE 0 TO SW-FACTOR-CITI-CAL
+           PERFORM UNTIL COD-PORTAF-C(I-FACTOR-C) = "99999"
+120727        OR SW-FACTOR-CITI-CAL = 1
+              IF COD-PORTAF-C(I-FACTOR-C) = NM-FACTOR-CITI
+      *          IF TOTAL-CUOTAS-ABD07  >= NUM-CUOTAS-C(I-FACTOR-C)
+                 IF CUOTAS-CARCIT       <= NUM-CUOTAS-C(I-FACTOR-C)
+120724*             MOVE VAL-FACTOR-C(I-FACTOR-C) TO FACTOR-CITI
+120724             COMPUTE FACTOR-CITI = VAL-FACTOR-C(I-FACTOR-C) / 100       
+120727             MOVE 1 TO SW-FACTOR-CITI-CAL
+                 END-IF
+              END-IF
+              ADD 1 TO I-FACTOR-C
+           END-PERFORM
+           .
+              
+              
+
+REMARK* *-------------------------------------------------------------*
+       2749-PROCESE-CARCT-00END-EXT-03.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-03.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01END Y 02END PARA
+REMARK*     CITIBANK                   
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 5 Tipología END . Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01END999XX003 . Cupo total a la fecha. 
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para RO_01 R1_01 IN_01 VE_01 HP_01
+REMARK* CALCULO VARIABLE 01END999RO003 Cupo_TC               
+           IF COD-PORTAF-CARACT NOT = "AH" AND
+              COD-PORTAF-CARACT NOT = "CT"
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-03
+111229     IF SW-PROCESAR-003 = 0
+           IF NOT ENT-CITI
+            IF COD-CTA-ABD07 = 02  AND        *> TDC (RO_01)    
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO RO-01FLAG
+120727*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+120727                ADD  CUPO-CARCIT                 TO              
+                           01END999RO003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END999R1003 Cupo_Rota             
+            IF (COD-CTA-ABD07 = 03 OR 48)  AND      *> R1_01       
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO R1-01FLAG
+120727*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+120727                ADD  CUPO-CARCIT                 TO              
+                           01END999R1003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END999IN003 Cupo_Inicial_Instal   
+            IF (COD-CTA-ABD07 = 
+               05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15 OR 17) AND  *> IN_01
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO IN-01FLAG
+120727*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+120727                ADD  CUPO-CARCIT                 TO              
+                           01END999IN003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END999VE003 Cupo_Inicial_Veh      
+            IF (COD-CTA-ABD07 = 04 OR 45) AND   *> VE_01                      
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO VE-01FLAG
+120727*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+120727                ADD  CUPO-CARCIT                 TO              
+                           01END999VE003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END999HP003 Cupo Inicial Hipot    
+            IF COD-CTA-ABD07 = 13  AND  *> HP_01                            
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO HP-01FLAG
+120727*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+120727                ADD  CUPO-CARCIT                 TO              
+                           01END999HP003                               
+            END-IF                                                     
+REMARK*                                                                
+REMARK* CO01END998XX003 . Saldo total a la fecha. 
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para RO_01 R1_01 IN_01 VE_01 HP_01
+REMARK* CALCULO VARIABLE 01END998RO003 Saldo TC               
+            IF COD-CTA-ABD07 = 02  AND       *> TDC (RO_01)    
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO RO-01FLAG
+120612                ADD SALDO-CARCIT                 TO              
+                           01END998RO003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END998R1003 Saldo Rota             
+            IF (COD-CTA-ABD07 = 03 OR 48) AND    *> R1_01         
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO R1-01FLAG
+120612                ADD  SALDO-CARCIT                TO              
+                           01END998R1003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END998IN003 Saldo Instal   
+            IF (COD-CTA-ABD07 = 
+             05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15 OR 17) AND  *> IN_01
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO IN-01FLAG
+120612                ADD  SALDO-CARCIT                TO              
+                           01END998IN003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END998VE003 Saldo Veh             
+            IF (COD-CTA-ABD07 = 04 OR 45) AND    *> VE_01                      
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO VE-01FLAG
+120612                ADD  SALDO-CARCIT                TO              
+                           01END998VE003                               
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END998HP003 Saldo Hipot    
+            IF COD-CTA-ABD07 = 13 AND   *> HP_01                            
+              ((MESES-DESAC-CARCIT2 <= 60 AND
+                    (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47))) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO HP-01FLAG
+120612                ADD  SALDO-CARCIT                TO              
+                           01END998HP003                               
+            END-IF                                                     
+REMARK* CO01END997XX003 . Cuota total a la fecha. 
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para RO_01 R1_01 IN_01 VE_01 HP_01
+REMARK* SE DEBE BUSCAR EL FACTOR-CITI
+REMARK* CALCULO VARIABLE 01END997RO003 Cuota TC               
+            IF COD-CTA-ABD07 = 02   AND    *> TDC (RO_01)                       
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                   IF CUOTA-CARCIT       > 0                  
+                      MOVE 1 TO RO-01FLAG-CUO
+                      ADD CUOTA-CARCIT    TO   01END997RO003-AUX
+111203             ELSE
+111203                IF CUPO-CARCIT  > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO RO-01FLAG-CUO
+111203                   COMPUTE 01END997RO003-AUX = 01END997RO003-AUX 
+120724                   + (CUPO-CARCIT  * FACTOR-CITI )             
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END997RO003 ROUNDED = 01END997RO003-AUX     
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END997R1003 Cuota Rota             
+            IF (COD-CTA-ABD07 = 03 OR 48)  AND   *> R1_01         
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                   IF CUOTA-CARCIT       > 0                           
+                      MOVE 1 TO R1-01FLAG-CUO
+                      ADD CUOTA-CARCIT                 TO              
+                          01END997R1003-AUX
+111203             ELSE
+111203                IF CUPO-CARCIT             > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO R1-01FLAG-CUO
+111203                   COMPUTE 01END997R1003-AUX = 01END997R1003-AUX 
+120612                   + (CUPO-CARCIT             * FACTOR-CITI )   
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END997R1003 ROUNDED = 01END997R1003-AUX     
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END997IN003 Cuota Instal   
+            IF (COD-CTA-ABD07 = 
+              05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15 OR 17) AND *> IN_01
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                   IF CUOTA-CARCIT       > 0                           
+                      MOVE 1 TO IN-01FLAG-CUO
+                      ADD CUOTA-CARCIT                 TO              
+                           01END997IN003-AUX
+111203             ELSE
+111203                IF CUPO-CARCIT             > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO IN-01FLAG-CUO
+111203                   COMPUTE 01END997IN003-AUX = 01END997IN003-AUX 
+120724                   + (CUPO-CARCIT             * FACTOR-CITI ) 
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END997IN003 ROUNDED = 01END997IN003-AUX     
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END997VE003 Cuota Veh             
+            IF (COD-CTA-ABD07 = 04 OR 45)  AND    *> VE_01                      
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                   IF CUOTA-CARCIT       > 0                           
+                      MOVE 1 TO VE-01FLAG-CUO
+                      ADD CUOTA-CARCIT                 TO              
+                           01END997VE003-AUX                           
+111203             ELSE
+111203                IF CUPO-CARCIT             > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO VE-01FLAG-CUO
+111203                   COMPUTE 01END997VE003-AUX = 01END997VE003-AUX 
+120724                   + (CUPO-CARCIT   * FACTOR-CITI )             
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END997VE003 ROUNDED = 01END997VE003-AUX     
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END997HP003 Cuota Hipot    
+            IF COD-CTA-ABD07 = 13    AND    *> HP_01                            
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                   IF CUOTA-CARCIT       > 0                           
+                      MOVE 1 TO HP-01FLAG-CUO
+                      ADD CUOTA-CARCIT                 TO              
+                           01END997HP003-AUX                           
+111203             ELSE
+111203                IF CUPO-CARCIT             > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO HP-01FLAG-CUO
+111203                   COMPUTE 01END997HP003-AUX = 01END997HP003-AUX 
+120724                   + (CUPO-CARCIT             * FACTOR-CITI )    
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END997HP003 ROUNDED = 01END997HP003-AUX     
+            END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* * DEBE ESTABLECER LA ENTIDAD                                  *
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01END996XX003 . Máxima suma de los cupos por entidad
+REMARK* Aplica para RO_01 R1_01 IN_01
+REMARK* Al final se establece la caracteristica
+REMARK* CALCULO VARIABLE 01END996RO003 Cupo_TC               
+            IF COD-CTA-ABD07 = 02  AND   *> TDC (RO_01)                       
+120915*       ((MESES-DESAC-CARCIT2 <= 60 AND
+120915*             (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO RO-01FLAG-996
+                      ADD  CUPO-CARCIT    TO              
+      *                    01END996RO003                               
+                           SUMA-C-RO(IND-ENTIDAD)                       
+CQ5220                ADD SALDO-CARCIT TO SUMA-S-RO(IND-ENTIDAD)
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END996R1003 Cupo_Rota             
+            IF (COD-CTA-ABD07 = 03 OR 48)  AND   *> R1_01         
+120915*       ((MESES-DESAC-CARCIT2 <= 60 AND
+120915*             (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO R1-01FLAG-996
+                      ADD  CUPO-CARCIT       TO              
+      *                    01END996R1003                               
+                           SUMA-C-R1(IND-ENTIDAD)                       
+CQ5220                ADD SALDO-CARCIT TO SUMA-S-R1(IND-ENTIDAD)
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01END996IN003 Cupo_Inicial_Instal   
+            IF (COD-CTA-ABD07 = 
+             05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15 OR 17) AND  *> IN_01
+120915*       ((MESES-DESAC-CARCIT2 <= 60 AND
+120915*             (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO IN-01FLAG-996
+121218*               ADD  VEC-INICIAL-CARACT(I13)     TO              
+121218                ADD  CUPO-CARCIT                 TO              
+      *                    01END996IN003                               
+                           SUMA-C-IN(IND-ENTIDAD)                       
+            END-IF                                                     
+REMARK* CO01END995XX003 . Máxima suma de los saldos por entidad
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para IN_01                 
+REMARK* CALCULO VARIABLE 01END995IN003 Saldo Instal   
+            IF (COD-CTA-ABD07 = 
+             05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15 OR 17) AND  *> IN_01
+120915*       ((MESES-DESAC-CARCIT2 <= 60 AND
+120915*             (NOV-REPORT-ABD07 = 45 OR 47)) OR  
+              (MESES-DESAC-CARCIT <= 4 AND (NOV-REPORT-ABD07 <> 45
+                                      AND NOV-REPORT-ABD07 <> 47)) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO IN-01FLAG-996
+                      ADD  SALDO-CARCIT                TO              
+      *                    01END995IN003                               
+                           SUMA-S-IN(IND-ENTIDAD)                       
+            END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01END994XX003 . Suma de saldos por entidad con suma de cupos máxima
+REMARK*   SOLO SE PUEDE AL FINALIZAR PROCESO DE CLIENTE
+REMARK* *-------------------------------------------------------------*
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01END993XX003 . Saldo de obligaciones financieras castigadas
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para MX_02
+REMARK* CALCULO VARIABLE 01END993XX003 Saldos cart. cast. Portafolio       
+REMARK*                                                                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 27 OR 07 OR 18
+                OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT2 <= 60 AND
+              NOV-REPORT-ABD07 = 45 AND          
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO MX-02FLAG-993
+                      ADD  SALDO-CARCIT                TO              
+                        01END993MX003                               
+            END-IF                                                     
+REMARK* CO01END992XX003 . Saldo de obligaciones en mora mayor 90 dias
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para 
+REMARK* Portafolio MX_02
+REMARK* CALCULO VARIABLE 01END992XX003 Saldos mora mayor a 90 dias         
+REMARK*                                                                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                  OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT <= 4  AND
+              (NOV-REPORT-ABD07  = 19 or 26 or 28 or 32 or 36
+                             OR 40 OR 20 OR 29 OR 33 OR 37 OR 41) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO MX-02FLAG-992
+                      ADD  SALDO-CARCIT              TO
+                                             01END992MX003  
+            END-IF                                                     
+REMARK* CO01END991XX003 . Saldo de obligaciones en mora 30 a 90 dias
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para 
+REMARK* Portafolio MX_02
+REMARK* CALCULO VARIABLE 01END991MX003 Saldos mora 30 a 90 dias            
+REMARK*                                                                
+      *     IF PORTAF-MX-02      
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT <= 4  AND
+              (NOV-REPORT-ABD07  = 18 OR 22 OR 23 OR 25 OR 27 OR 31
+                OR 35 OR 39 OR 17 OR 21 OR 24 OR 30 OR 34 OR 38) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO MX-02FLAG-991
+                      ADD SALDO-CARCIT                TO
+                          01END991MX003
+            END-IF                                                     
+REMARK* CO01END990XX003 . Cuota de obligaciones en mora mayor a 90 días
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para 
+REMARK* Portafolio MX_02
+REMARK* CALCULO VARIABLE 01END990MX003 Cuotas mora mayor a 90 dias         
+      *     IF PORTAF-MX-02      
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+               OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT <= 4  AND
+              (NOV-REPORT-ABD07  = 19 or 26 or 28 or 32 or 36
+                OR 40 OR 20 OR 29 OR 33 OR 37 OR 41) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 
+                  IF CUOTA-CARCIT          > 0
+                      MOVE 1 TO MX-02FLAG-990
+                      ADD CUOTA-CARCIT  TO   01END990MX003-AUX
+                  ELSE
+111203                IF CUPO-CARCIT   > 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO MX-02FLAG-990
+111203                   COMPUTE 01END990MX003-AUX = 01END990MX003-AUX 
+120724                   + (CUPO-CARCIT  * FACTOR-CITI) 
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END990MX003 ROUNDED = 01END990MX003-AUX     
+            END-IF                                                     
+REMARK* CO01END989XX003 . Cuota de obligaciones en mora entre 30 y 90 días
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para 
+REMARK* Portafolio MX_02
+REMARK* CALCULO VARIABLE 01END989MX003 Cuotas mora 30 a 90 dias            
+REMARK*                                                                
+      *     IF PORTAF-MX-02      
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+               OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT <= 4  AND
+              (NOV-REPORT-ABD07  = 18 OR 22 OR 23 OR 25 OR 27 OR 31
+               OR 35 OR 39 OR 17 OR 21 OR 24 OR 30 OR 34 OR 38) AND
+              GARANTE-CITI = 0 AND
+              REG-ABIERTO-CARACT = 1 AND
+0J00J0        FLAG-VALORES-CARCIT = 1
+                  IF CUOTA-CARCIT          > 0
+                      MOVE 1 TO MX-02FLAG-989
+                      ADD CUOTA-CARCIT   TO  01END989MX003-AUX
+                  ELSE
+120724                IF CUPO-CARCIT  >= 0 AND FACTOR-CITI > 0       
+                         MOVE 1 TO MX-02FLAG-989
+111203                   COMPUTE 01END989MX003-AUX = 01END989MX003-AUX 
+120724                   + (CUPO-CARCIT * FACTOR-CITI) 
+111203                END-IF
+                   END-IF                                              
+120829             COMPUTE 01END989MX003 ROUNDED = 01END989MX003-AUX        
+            END-IF                                                     
+REMARK* CO01END988XX003 . Utilización Tarjetas de crédito
+REMARK* La caracteristica se calcula al final del proceso del cliente
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para R0_01
+REMARK* Portafolio 
+REMARK* CALCULO VARIABLE 01END988RO003 Utilizacion TDC                     
+REMARK*                                                                
+            IF COD-CTA-ABD07 = 02 *> TDC (RO_01)                       
+               MOVE 1 TO RO-01FLAG-988
+               IF REG-ABIERTO-CARACT = 1 
+                  IF MESES-DESAC-CARCIT <= 4  
+                      ADD SALDO-CARCIT          TO SAL-TC-NONC
+                      ADD CUPO-CARCIT           TO CUPO-TC-NONC
+REMARK*                   01END988RO003 = SAL-TC-NONC/CUPO-TC-NONC
+                  END-IF                                              
+               END-IF
+            END-IF                                                     
+REMARK* CO01END987XX003 . Máxima utilización Tarjetas de crédito
+REMARK* La caracteristica se calcula al final del proceso del cliente
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para RO_01
+REMARK* Portafolio 
+REMARK* CALCULO VARIABLE 01END987RO003 Max. Utilizacion Tarjetas              
+REMARK*                                                                
+            IF COD-CTA-ABD07 = 02 *> TDC (RO-01)                       
+120923         MOVE 1 TO RO-01FLAG-987
+               IF REG-ABIERTO-CARACT = 1
+120923               MOVE "1" TO FLAG-SDO-003-987
+120923               ADD 1 TO I-C-003
+120923               MOVE SALDO-CARCIT TO SALDO-987-003 (I-C-003)
+120923               MOVE CUPO-CARCIT  TO CUPO-987-003 (I-C-003)
+120923               MOVE I-C-003      TO CONSECUTIVO-987(I-C-003)
+120923               MOVE FECHA-ESTADO-CARACT TO
+120923                                    FECHA-UL-987(I-C-003)
+120923               MOVE FECHA-APERT-CARACT  to
+120923                                    FECHA-AP-987(I-C-003)
+               END-IF
+      *        IF REG-ABIERTO-CARACT = 1 
+      *           IF MESES-DESAC-CARCIT <= 4 AND
+      *              SALDO-CARCIT >= 0  AND
+      *              CUPO-CARCIT > 0
+      *              MOVE 1 TO RO-01FLAG-987
+      *              ADD SALDO-CARCIT TO RO987-SALDOS
+      *              ADD CUPO-CARCIT  TO RO987-CUPOS
+120612*              COMPUTE UTLZ-TC-NONC ROUNDED =  (
+      *                       SALDO-CARCIT / CUPO-CARCIT)         
+      *                       RO987-SALDOS / RO987-CUPOS)         
+      *              IF UTLZ-TC-NONC > 01END987RO003          
+      *                  MOVE UTLZ-TC-NONC TO  01END987RO003 
+      *              END-IF
+      *           END-IF                                              
+      *        END-IF                                                  
+            END-IF                                                     
+           END-IF
+REMARK* CO01END986XX003 . Utilización total de tarjetas de crédito
+REMARK* La caracteristica se calcula al final del proceso del cliente
+REMARK* Esta caracteristica NO excluye Citibank.     
+REMARK* Aplica para 
+REMARK* Portafolio 
+REMARK* CALCULO VARIABLE 01END986RO003 Utilizacion TOTAL Tarjetas
+REMARK*                                                                
+            IF COD-CTA-ABD07 = 02     AND    *> TDC (RO-01)    
+              REG-ABIERTO-CARACT = 1  AND
+              GARANTE-CITI = 0 
+               MOVE 1 TO RO-01FLAG-986
+               ADD CUPO-CARCIT           TO CUPO-TC-CONC
+               ADD SALDO-CARCIT          TO SAL-TC-CONC
+REMARK*                   01END986RO003 = SAL-TC-CONC/CUPO-TC-CONC
+            END-IF                                                     
+REMARK* CO01END984XX003 . Máxima utilización Tarjetas de crédito
+REMARK* La caracteristica se calcula al final del proceso del cliente
+REMARK* Esta caracteristica NO excluye Citibank.     
+REMARK* Aplica para RO-01
+REMARK* Portafolio RO-01
+REMARK* CALCULO VARIABLE 01END984RO003 Max. Utilizacion Tarjetas              
+REMARK*                                                                
+            IF COD-CTA-ABD07 = 02    AND     *> TDC (RO-01)       
+              REG-ABIERTO-CARACT = 1  AND
+              GARANTE-CITI = 0 
+               MOVE 1 TO RO-01FLAG-986
+               ADD CUPO-CARCIT           TO CUPO-TC-CONC-1  
+               ADD SALDO-CARCIT          TO SAL-TC-CONC-1  
+120612         COMPUTE UTLZ-TC-CONC-1 ROUNDED =  (
+                              SAL-TC-CONC-1 / CUPO-TC-CONC-1)     
+               IF UTLZ-TC-CONC-1 > 01END984RO003
+                   MOVE UTLZ-TC-CONC-1 TO 01END984RO003
+               END-IF
+            END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* 10 Tipología END . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* CO02END985_003 . Máximo del balance para las cuentas de PIL
+REMARK* PORTAF02END985    VALUE 05 06 27 18 07 46 44
+      * SE REQUIERE GUARDAR PORTAFOLIO ANTERIOR PARA ROMPE PORTAF
+            MOVE 0 TO WS-UTILIZATO
+            IF (COD-CTA-ABD07 = 05 OR 06 OR 07 OR 18 OR 27 OR 44 OR 46)         
+            AND REG-ABIERTO-CARACT = 1                                    
+            AND  GARANTE-CITI  = 0          
+            AND  SALDO-CARCIT >= 0             
+            AND  CUPO-CARCIT  >= 0
+                 MOVE 1 TO FLAG-END985
+CQ5220           EVALUATE COD-CTA-ABD07
+CQ5220              WHEN 05 MOVE 1 TO II-TP
+CQ5220              WHEN 06 MOVE 2 TO II-TP
+CQ5220              WHEN 27 MOVE 2 TO II-TP
+CQ5220              WHEN 18 MOVE 3 TO II-TP
+CQ5220              WHEN 07 MOVE 4 TO II-TP
+CQ5220              WHEN 46 MOVE 5 TO II-TP
+CQ5220              WHEN 44 MOVE 6 TO II-TP
+CQ5220           END-EVALUATE    
+CQ5220           ADD SALDO-CARCIT   TO  END985-SALDOS(II-TP)
+CQ5220           ADD CUPO-CARCIT    TO  END985-CUPOS(II-TP)
+120612           COMPUTE WS-UTILIZATO ROUNDED =          
+CQ5220                (END985-SALDOS(II-TP) / END985-CUPOS(II-TP))
+CQ5220           IF WS-UTILIZATO > END985-MAXPOR(II-TP)
+CQ5220              MOVE WS-UTILIZATO TO END985-MAXPOR(II-TP)
+CQ5220           END-IF
+CQ5220           IF 02END985-003 < END985-MAXPOR(II-TP)
+CQ5220                  MOVE END985-MAXPOR(II-TP) TO 02END985-003     
+CQ5220           END-IF
+            END-IF                                                     
+REMARK* CO01END981XX003 . Saldo de obligaciones financieras dudoso rec
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* aplica para 
+REMARK* CALCULO VARIABLE 01END981XX003 Saldos dudoso rec. Portafolio       
+REMARK*                                                                
+           IF NOT ENT-CITI
+      *     IF SECTOR-FINANCIERO
+120918      IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+               OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+              MESES-DESAC-CARCIT2 <= 60 AND
+              NOV-REPORT-ABD07  = 47    AND
+              GARANTE-CITI = 0 AND
+              FLAG-VALORES-CARCIT = 1
+                      MOVE 1 TO MX-02FLAG-981
+                      ADD SALDO-CARCIT          TO 01END981MX003
+            END-IF                                                     
+REMARK*
+REMARK* CO02END983XX003 . Máxima suma de los cupos por entidad
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  RO_03                                    
+REMARK* CALCULO VARIABLE 02END983RO003 se debe hacer al final      
+REMARK* 02END983RO003 -  se debe inicializar en 0 
+           IF (COD-CTA-ABD07 = 02 OR 03 OR 48)        AND
+               REG-ABIERTO-CARACT = 1                  AND            
+               MESES-DESAC-CARCIT <= 4                AND
+               (NOV-REPORT-ABD07 NOT = 45 AND 47)      AND
+               (NOT ENT-CITI)                          AND
+               GARANTE-CITI = 0                        AND
+               FLAG-VALORES-CARCIT = 1
+                    MOVE 1 TO RO-03FLAG
+                    ADD CUPO-CARCIT TO SUMA-C-RO-03(IND-ENTIDAD)         
+                    ADD SALDO-CARCIT TO SUMA-S-RO-03(IND-ENTIDAD)
+           END-IF                                                     
+REMARK* CO02END982XX003 Suma saldos por entidad con suma cupos máxima
+REMARK* CALCULO VARIABLE 02END982RO003 se debe hacer al final      
+REMARK* con el calculo hecho en el anterior
+REMARK*                                                                
+           .
+
+
+       2249-PROCESE-CARCT-00EXP-EXT-03.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00EXP-EXT-03.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01EXP Y 02EXP PARA
+REMARK*     CITIBANK                   
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 6 Tipologia EXP - Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01EXP999XX003 . Máxima Antigüedad
+REMARK* Esta caracteristica excluye Citibank.     
+REMARK* Aplica para CT, RO_01, R1_01, VE_01, IN_01, HP_01, AH_01
+REMARK* MESES-MADUR-CARCIT se debe calcular al principio de la rutina
+REMARK* CALCULO VARIABLE 01EXP999AH003 Maxima antiguedad AH_01             
+REMARK* 01EXP999AH003 se debe inicializar en 0 y al final se determina 
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-03
+111229     IF SW-PROCESAR-003 = 0
+           IF COD-PORTAF-CARACT NOT = "AH" AND
+              COD-PORTAF-CARACT NOT = "CT"
+               PERFORM 2749-PROCESE-00EXP-EXT-03-CAR
+           ELSE
+           IF NOT ENT-CITI
+             IF REG-ABIERTO-CARACT = 1                            *>  
+              IF FECHA-APERT-CARACT > ZEROS
+111229        AND MESES-DESAC-CARCIT <= 12
+120612        AND NOV-REPORT-ABD06 = 01 OR 07
+111221         COMPUTE MESES-MADUR-CARCIT =
+111221            ((SIG-ANO-NOV-CARACT * 12) + MES-NOV-CARACT) -
+111221            ((SIG-ANO-APE-CARACT * 12) + MES-APE-CARACT)
+                   IF COD-PORTAF-CARACT  = "CT"
+120612                MOVE 1 TO CT-FLAG
+                      IF MESES-MADUR-CARCIT > 01EXP999CT003
+                         MOVE MESES-MADUR-CARCIT TO 01EXP999CT003
+                      END-IF
+                   ELSE
+120612                MOVE 1 TO AH-FLAG
+                      IF MESES-MADUR-CARCIT > 01EXP999AH003               
+                         MOVE MESES-MADUR-CARCIT TO 01EXP999AH003   
+                      END-IF
+                   END-IF                                              
+              END-IF                                                   
+             END-IF                                                     
+            .
+       
+       2749-PROCESE-00EXP-EXT-03-CAR.
+REMARK* CALCULO VARIABLE 01EXP999R1003 Maxima antiguedad R1_01             
+REMARK* 01EXP999R1003 se debe inicializar en 0 y al final se determina 
+           IF NOT ENT-CITI
+            IF (COD-CTA-ABD07 = 03 OR 48)   AND
+             REG-ABIERTO-CARACT = 1 AND
+             (NOV-REPORT-ABD07 <> 45 AND NOV-REPORT-ABD07 <> 47) AND
+             MESES-DESAC-CARCIT <= 12 
+             IF FECHA-VENCE-CARACT > 0 AND 
+                FECHA-VENCE-CARACT >= FECHA-APERT-CARACT AND
+                GARANTE-CITI =  0
+                MOVE 1 TO R1-01FLAG-EXP   
+111230          IF MESES-MADUR-CARCIT > 01EXP999R1003               
+111230                MOVE MESES-MADUR-CARCIT TO 01EXP999R1003   
+                END-IF                                              
+             END-IF                                                   
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01EXP999RO003 Maxima antiguedad RO_01             
+REMARK* 01EXP999RO003 se debe inicializar en 0 y al final se determina 
+            IF COD-CTA-ABD07 = 02   AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             (NOV-REPORT-ABD07 <> 45 AND NOV-REPORT-ABD07 <> 47) AND
+             MESES-DESAC-CARCIT <= 12
+             IF FECHA-VENCE-CARACT > 0 AND 
+                FECHA-VENCE-CARACT >= FECHA-APERT-CARACT AND
+                GARANTE-CITI =  0
+                MOVE 1 TO RO-01FLAG-EXP   
+                IF MESES-MADUR-CARCIT > 01EXP999RO003               
+                      MOVE MESES-MADUR-CARCIT TO 01EXP999RO003   
+                END-IF                                              
+             END-IF                                                   
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01EXP999VE003 Maxima antiguedad VE_01             
+REMARK* 01EXP999VE003 se debe inicializar en 0 y al final se determina 
+            IF (COD-CTA-ABD07 = 04 OR 45)   AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             (NOV-REPORT-ABD07 <> 45 AND NOV-REPORT-ABD07 <> 47) AND
+             MESES-DESAC-CARCIT <= 12
+             IF FECHA-VENCE-CARACT > 0 AND 
+                FECHA-VENCE-CARACT >= FECHA-APERT-CARACT AND
+                GARANTE-CITI =  0
+                MOVE 1 TO VE-01FLAG-EXP   
+                IF MESES-MADUR-CARCIT > 01EXP999VE003               
+                      MOVE MESES-MADUR-CARCIT TO 01EXP999VE003   
+                END-IF                                              
+              END-IF                                                   
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01EXP999IN003 Maxima antiguedad IN_01             
+REMARK* 01EXP999IN003 se debe inicializar en 0 y al final se determina 
+            IF (COD-CTA-ABD07 = 05 OR 06 OR 07 OR 27 OR 18 OR 14 OR 15
+                           OR 17)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             (NOV-REPORT-ABD07 <> 45 AND NOV-REPORT-ABD07 <> 47) AND
+             MESES-DESAC-CARCIT <= 12
+             IF FECHA-VENCE-CARACT > 0 AND 
+                FECHA-VENCE-CARACT >= FECHA-APERT-CARACT AND
+                GARANTE-CITI =  0
+                MOVE 1 TO IN-01FLAG-EXP   
+                IF MESES-MADUR-CARCIT > 01EXP999IN003               
+                      MOVE MESES-MADUR-CARCIT TO 01EXP999IN003   
+                END-IF                                              
+             END-IF                                              
+            END-IF                                                     
+REMARK* CALCULO VARIABLE 01EXP999HP003 Maxima antiguedad HP_01             
+REMARK* 01EXP999HP003 se debe inicializar en 0 y al final se determina 
+            IF COD-CTA-ABD07 = 13    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             (NOV-REPORT-ABD07 <> 45 AND NOV-REPORT-ABD07 <> 47) AND
+             MESES-DESAC-CARCIT <= 12
+             IF FECHA-VENCE-CARACT > 0 AND 
+                FECHA-VENCE-CARACT >= FECHA-APERT-CARACT AND
+                GARANTE-CITI =  0
+                MOVE 1 TO HP-01FLAG-EXP   
+                IF MESES-MADUR-CARCIT > 01EXP999HP003               
+                      MOVE MESES-MADUR-CARCIT TO 01EXP999HP003   
+                END-IF                                              
+             END-IF                                                   
+            END-IF                                                     
+           END-IF                                                     
+REMARK* CO01EXP996XX003 . Meses máximo de apertura de cuentas abiertas
+REMARK* NO EXCLUYE CITI   
+REMARK* Aplica para RO_01
+REMARK* CALCULO VARIABLE 01EXP996RO003 Maxima antiguedad RO_01             
+REMARK* 01EXP996RO003 se debe inicializar en 0 y al final se determina 
+            IF COD-CTA-ABD07 = 02    AND     *> TDC
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0
+                MOVE 1 TO RO-01FLAG-EXP-996
+                IF MESES-MADUR-CARCIT2 > 01EXP996RO003               
+                      MOVE MESES-MADUR-CARCIT2 TO 01EXP996RO003   
+                END-IF                                              
+            END-IF                                                     
+REMARK* CO01EXP994XX003 . Meses mínimo de actualización
+REMARK* NO EXCLUYE CITI   
+REMARK* Aplica para MX_01
+REMARK* CALCULO VARIABLE 01EXP994MX003 Meses minimo de actualizacion       
+REMARK* 01EXP994MX003 se debe inicializar en 999 y al final se determina 
+      *     IF PORTAF-MX-01                
+            IF (COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                   OR 18 OR 27 OR 44 OR 45 OR 46 OR 04)   AND
+             GARANTE-CITI   = 0
+                   MOVE 1 TO MX-01FLAG-EXP-994
+                   IF MESES-MADUR-CARCIT2 < 01EXP994MX003               
+                      MOVE MESES-MADUR-CARCIT2 TO 01EXP994MX003   
+                   END-IF                                              
+            END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* 11 Tipología EXP . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* CO02EXP998_003 . Meses máximo de apertura de cuentas
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  
+REMARK* CO02EXP998_003 -  se debe inicializar en 0 
+           IF NOT ENT-CITI               
+              MOVE 1 TO FLAG-NONCITI
+              IF MESES-MADUR-CARCIT2 > 02EXP998-003
+                 MOVE MESES-MADUR-CARCIT2  TO 02EXP998-003
+              END-IF
+           END-IF
+REMARK* CO02EXP997_003 . Meses máximo de apertura de cuentas abiertas
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  
+REMARK* CO02EXP997_003 -  se debe inicializar en 0 
+120716     MOVE 1 TO FLAG-OPNOCITI
+           IF (NOT ENT-CITI)       AND    
+           REG-ABIERTO-CARACT = 1                                    
+120716*        MOVE 1 TO FLAG-OPNOCITI
+               IF MESES-MADUR-CARCIT2 > 02EXP997-003
+                  MOVE MESES-MADUR-CARCIT2 TO 02EXP997-003
+               END-IF
+           END-IF
+REMARK* CO02EXP995_003 . Meses máximo de apertura
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* Aplica  
+REMARK* CO02EXP995_003 -  se debe inicializar en 0 
+            IF MESES-MADUR-CARCIT2   > 02EXP995-003
+               MOVE MESES-MADUR-CARCIT2   TO 02EXP995-003
+            END-IF
+           .
+
+
+       2749-PROCESE-CARCT-00EXT-EXT-03.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00EXT-EXT-03.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01EXT Y 02EXT PARA
+REMARK*     CITIBANK                   
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 7 Tipología EXT . Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01EXT999XX003 . Cuenta vigente en Telmex
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01EXT999CC003 Cuenta vigente Telmex               
+REMARK* 01EXT999CC003 se debe inicializar en 0
+           IF COD-PORTAF-CARACT NOT = "AH" AND
+              COD-PORTAF-CARACT NOT = "CT"
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-03
+111229     IF SW-PROCESAR-003 = 0
+            IF (COD-CTA-ABD07 = 23 OR 24)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0    AND
+             MESES-DESAC-CARCIT2 <= 4       AND
+             NIT-SUSCRIP-S-ABD02 = 830053800
+                MOVE 1 TO 01EXT999CC003     
+            END-IF                                                     
+REMARK* CO01EXT998XX003 . Cuenta vigente en Telecom
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01EXT998CC003 Cuenta vigente Telecom              
+REMARK* 01EXT998CC003 se debe inicializar en 0
+            IF (COD-CTA-ABD07 = 23 OR 24)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0    AND
+             MESES-DESAC-CARCIT2 <= 4       AND
+             NIT-SUSCRIP-S-ABD02 = 830122566
+                MOVE 1 TO 01EXT998CC003     
+            END-IF                                                     
+REMARK* CO01EXT997XX003 . Cuenta vigente en DirecTV
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01EXT997CC003 Cuenta vigente DirecTV              
+REMARK* 01EXT997CC003 se debe inicializar en 0
+            IF (COD-CTA-ABD07 = 23 OR 24)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0    AND
+             MESES-DESAC-CARCIT2 <= 4       AND
+             NIT-SUSCRIP-S-ABD02 = 805006014
+                MOVE 1 TO 01EXT997CC003     
+            END-IF                                                     
+REMARK* CO01EXT996XX003 . Cuenta vigente en Movistar
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01EXT996CC003 Cuenta vigente Movistar             
+REMARK* 01EXT996CC003 se debe inicializar en 0
+            IF (COD-CTA-ABD07 = 23 OR 24)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0    AND
+             MESES-DESAC-CARCIT2 <= 4       AND
+             NIT-SUSCRIP-S-ABD02 = 830037330
+                MOVE 1 TO 01EXT996CC003     
+            END-IF                                                     
+REMARK* CO01EXT995XX003 . Cuenta vigente en Comcel  
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01EXT995CC003 Cuenta vigente Comcel               
+REMARK* 01EXT995CC003 se debe inicializar en 0
+            IF (COD-CTA-ABD07 = 23 OR 24)    AND
+             REG-ABIERTO-CARACT = 1 AND                               
+             GARANTE-CITI    = 0    AND
+             MESES-DESAC-CARCIT2 <= 4       AND
+             NIT-SUSCRIP-S-ABD02 = 800153993
+                MOVE 1 TO 01EXT995CC003     
+            END-IF                                                     
+REMARK* CO01EXT994XX003 . Cuenta vigente en HP (Hipotecario)
+REMARK* NO EXCLUYE CITI
+REMARK* Aplica para HP_02 
+REMARK* CALCULO VARIABLE 01EXT994HP003 Cuenta vigente HP                   
+REMARK* 01EXT994HP003 se debe inicializar en 0
+            IF COD-CTA-ABD07 = 13 OR 15 OR 16
+                      MOVE 1                  TO 01EXT994HP003   
+            END-IF                                                     
+REMARK* CO01EXT993XX003 . Indicador de sobrecupo TC
+REMARK* NO EXCLUYE CITI
+REMARK* Aplica para RO_01 
+REMARK* CALCULO VARIABLE 01EXT993RO003 Indicador de sobrecupo TC           
+REMARK* 01EXT993RO003 se debe inicializar en 0
+            IF COD-CTA-ABD07 = 02    AND   
+             REG-ABIERTO-CARACT = 1  AND                              
+             GARANTE-CITI   = 0      AND  
+             SALDO-CARCIT >= 0       AND                               
+             CUPO-CARCIT  >  0                                          
+                  COMPUTE RO-SALDOS = RO-SALDOS + SALDO-CARCIT
+                  COMPUTE RO-CUPOS  = RO-CUPOS  + CUPO-CARCIT          
+                  COMPUTE WS-PORIN ROUNDED = RO-SALDOS / RO-CUPOS     
+                  IF WS-PORIN > RO-VALUE
+      *                 MOVE 1 TO 01EXT993RO003  *>  CALCULO AL FINAL
+                        MOVE WS-PORIN TO RO-VALUE
+                  END-IF
+            END-IF                                                     
+REMARK* CO01EXT992XX003 . Ind. de Productos de Consumo pero sin TC
+REMARK* NO EXCLUYE CITI
+REMARK* Aplica para MX_01 
+REMARK* CALCULO VARIABLE 01EXT992MX003 Prods. consumo pero no TC           
+REMARK* 01EXT992MX003 se debe inicializar en 0 y setiar al final
+      *     IF PORTAF-MX-01                
+            IF COD-CTA-ABD07 = (02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                   OR 18 OR 27 OR 44 OR 45 OR 46 OR 04)   AND
+             REG-ABIERTO-CARACT = 1                                    
+                  MOVE 1 TO WS-PRODS-C
+                  IF COD-CTA-ABD07 = 02
+                      MOVE 1   TO WS-PRODS-TDC                   
+                  END-IF                                                  
+            END-IF                                                     
+REMARK* CO01EXT990XX003 . Indicador de Productos de Consumo
+REMARK* NO EXCLUYE CITI
+REMARK* Aplica para MX_01 
+REMARK* CALCULO VARIABLE 01EXT990MX003 Indicador Prods. consumo
+REMARK* 01EXT990MX003 se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+            IF COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                      OR 18 OR 27 OR 44 OR 45 OR 46 OR 04
+                   MOVE 1                  TO 01EXT990MX003   
+            END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* 12 Tipología EXT . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* CO02EXT991_003 . Indicador de NO Productos Abiertos
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* Aplica  
+REMARK* CO02EXT991_003 -  se debe inicializar en 1 
+            IF REG-ABIERTO-CARACT   =  1                                 
+               MOVE 0                  TO 02EXT991-003
+            END-IF
+REMARK* CO02EXT989_003 . ID Buro                               
+            MOVE "EXP"  TO  02EXT989-003
+REMARK* CO02EXT988_003 . Fecha de consulta
+            MOVE CURRENT-DATE-CARACT  TO 02EXT988-003
+           .
+
+REMARK*                                                                
+       2249-PROCESE-CARCT-00MOR-EXT-03.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-03.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01MOR Y 02MOR PARA
+REMARK*     CITIBANK                   
+REMARK******************************************************************
+           IF COD-PORTAF-CARACT NOT = "AH" AND
+              COD-PORTAF-CARACT NOT = "CT"
+REMARK* *-------------------------------------------------------------*
+REMARK* 8 Tipología MOR . Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* CO01MOR999XX003 . Moras de 120 días ó más a la fecha
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para MX_02 
+REMARK* CALCULO VARIABLE 01MOR999MX003 Moras 120 días ó más a la fecha
+REMARK* 01MOR999MX003 se debe inicializar en 0
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-03
+111229     IF SW-PROCESAR-003 = 0
+      *    IF NOT ENT-CITI
+      *    IF PORTAF-MX-02                
+           IF COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                            OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48
+              MOVE 1 TO MX-02FLAG-MOR
+              IF REG-ABIERTO-CARACT = 1   AND
+               GARANTE-CITI   = 0         AND
+               (NOT ENT-CITI)             AND
+               MESES-DESAC-CARCIT  <=4   
+                  IF NOV-REPORT-ABD07  = 20 OR 29 OR 33 OR 37 OR 41
+                     ADD  1                  TO 01MOR999MX003   
+                  END-IF
+REMARK* CO01MOR998XX003 . Moras de 90 días a la fecha
+                  IF  NOV-REPORT-ABD07  = 19 OR 26 OR 28 OR 32 OR 36
+                                      OR 40
+                     ADD  1                  TO 01MOR998MX003   
+                  END-IF
+REMARK* CO01MOR997XX003 . Moras de 60 días a la fecha
+                  IF  NOV-REPORT-ABD07  = 18 OR 23 OR 25 OR 27 OR 31
+                                      OR 35 OR 39
+                     ADD  1                  TO 01MOR997MX003   
+                  END-IF                                                  
+REMARK* CO01MOR996XX003 . Moras de 30 días a la fecha
+                  IF  NOV-REPORT-ABD07  = 17 OR 21 OR 22 OR 24 OR 30
+                                      OR 34 OR 38
+                     ADD  1                  TO 01MOR996MX003   
+                  END-IF                                                  
+              END-IF                                                   
+           END-IF                                                     
+
+REMARK* CO01MOR995XX003 . Moras de 180 días ó más últimos 12 meses
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para MX_02 
+REMARK* CALCULO VARIABLE 01MOR995MX003 Moras 180 o mas ultimos 12
+REMARK* HASTA
+REMARK* CALCULO VARIABLE 01MOR990MX003 Moras 30 dias ultimos 12
+REMARK* 01MOR995MX003 - 01MOR990MX003 se deben inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                            OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48
+              MOVE 1 TO MX-02FLAG-MOR
+              IF GARANTE-CITI   = 0       AND
+              (NOT ENT-CITI)              AND
+              MESES-DESAC-CARCIT <= 12                       
+                  IF MESES-DESAC-CARCIT = 0
+                     MOVE 37 TO WS-INICIO12
+                  ELSE
+                     MOVE 38 TO WS-INICIO12
+                  END-IF
+                  COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -       
+                                          MESES-DESAC-CARCIT3
+                  PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+                     UNTIL WS-NN > WS-FINCU
+                     COMPUTE WS-NN-1 = WS-NN - 1
+                     COMPUTE WS-NN-2 = WS-NN - 2
+      *  aca se pueden calcular todas las moras ultimos 12 meses
+                     MOVE V-NOR-CARACT(WS-NN:1) TO WS-ACTUAL-CITI
+                     MOVE V-NOR-CARACT(WS-NN-1:1) TO WS-ANT-CITI
+                     MOVE V-NOR-CARACT(WS-NN-2:1) TO WS-ANT2-CITI
+                     IF WS-ACTUAL-CITI = 4 AND WS-ANT-CITI = 4 AND
+                        WS-ANT2-CITI = 4
+                            ADD  1  TO 01MOR995MX003   
+                     END-IF
+                     IF WS-ACTUAL-CITI = 4 AND WS-ANT-CITI = 4 AND
+                        WS-ANT2-CITI < 4
+                            ADD 1 TO 01MOR994MX003
+                     END-IF
+                     IF WS-ACTUAL-CITI = 4 AND WS-ANT-CITI < 4 
+                            ADD 1 TO 01MOR993MX003
+                     END-IF
+                     IF WS-ACTUAL-CITI = 3
+                            ADD 1 TO 01MOR992MX003
+                     END-IF
+                     IF WS-ACTUAL-CITI = 2
+                            ADD 1 TO 01MOR991MX003
+                     END-IF
+                     IF WS-ACTUAL-CITI = 1
+                            ADD 1 TO 01MOR990MX003
+                     END-IF
+                  END-PERFORM
+              END-IF                                                   
+            END-IF                                                     
+
+REMARK* CO01MOR989XX003 . Meses última mora
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para MX_02 
+REMARK* CALCULO VARIABLE 01MOR989MX003 Meses última mora           
+REMARK* 01MOR989MX003 - se debe inicializar en 999
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                        OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+             GARANTE-CITI = 0 AND
+             (NOT ENT-CITI)
+120915        MOVE 0 TO WS-VAL989
+              IF MESES-DESAC-CARCIT > 0                        
+                 MOVE 1 TO WS-TOL-CITI
+                 MOVE 38 TO WS-INICIO12
+              ELSE
+                 MOVE 0 TO WS-TOL-CITI
+                 MOVE 37 TO WS-INICIO12
+              END-IF
+              IF (NOV-REPORT-ABD07 > 16 AND NOV-REPORT-ABD07 < 42)
+              OR (NOV-REPORT-ABD07 = 45 OR 47)
+120724           MOVE 1 TO MX-02FLAG-MOR989
+                 MOVE MESES-DESAC-CARCIT2 TO WS-VAL989
+              ELSE
+                 COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT
+111221           PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1     
+                    UNTIL WS-NN > WS-FINCU
+                        IF V-NOR-CARACT(WS-NN:1) >= 1
+                        AND MESES-DESAC-CARCIT <= 12
+                           MOVE 1 TO MX-02FLAG-MOR989
+                           COMPUTE WS-VAL989 = 49 - WS-NN + WS-TOL-CITI     
+                        END-IF
+                 END-PERFORM
+              END-IF
+            END-IF
+120915      IF 01MOR989MX003 > WS-VAL989 AND WS-VAL989 > 0
+               MOVE WS-VAL989 TO 01MOR989MX003
+            END-IF
+REMARK* CO01MOR988MX003 . Cuentas como titular  en mora 
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para todas las cuentas
+REMARK* CALCULO VARIABLE 01MOR988MX003 Cuentas en mora como titular
+REMARK* 01MOR988MX003 - se debe inicializar en 0  
+            MOVE    1     TO   WS-FLAG-CITI
+            IF GARANTE-CITI = 0       AND                            
+            REG-ABIERTO-CARACT  =  1  AND
+            (NOT ENT-CITI)            AND
+            NOV-REPORT-ABD07 >= 17    AND
+            NOV-REPORT-ABD07 <= 41
+                        ADD  1                  TO 01MOR988MX003
+            END-IF
+REMARK* CO01MOR986XX003 . Moras de 60 días últimos 24 meses
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para MX_02 
+REMARK* CALCULO VARIABLE 01MOR986MX003 Moras 60  ultimos 24
+REMARK* 01MOR995MX003 - 01MOR990MX003 se deben inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                            OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48
+               MOVE 1 TO MX-02FLAG
+               IF MESES-DESAC-CARCIT = 0
+                  MOVE 25 TO WS-INICIO24
+               ELSE
+                  MOVE 26 TO WS-INICIO24
+               END-IF
+               IF GARANTE-CITI = 0        AND
+                  (NOT ENT-CITI)          AND
+                  MESES-DESAC-CARCIT <= 24                       
+                  COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -        
+                                          MESES-DESAC-CARCIT3
+                  PERFORM VARYING WS-NN FROM WS-INICIO24 BY 1
+                     UNTIL WS-NN > WS-FINCU
+      *  aca se pueden calcular todas las moras ultimos 24 meses
+                     IF V-NOR-CARACT(WS-NN:1) = 2
+                            ADD  1  TO 01MOR986MX003   
+                     END-IF
+                  END-PERFORM
+               END-IF                                                  
+            END-IF                                                     
+REMARK* CO01MOR985XX003 . Moras de 30 días ó más últimos 12 meses
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para CC    
+REMARK* CALCULO VARIABLE 01MOR985CC003 Moras 30 + ultimos 12
+REMARK* 01MOR985CC003 -  se debe inicializar en 0
+            IF  COD-CTA-ABD07 = 23 OR 24   
+               IF MESES-DESAC-CARCIT = 0
+                  MOVE 37 TO WS-INICIO12
+               ELSE
+                  MOVE 38 TO WS-INICIO12
+               END-IF
+               IF REG-ABIERTO-CARACT = 1     AND
+                  GARANTE-CITI = 0           AND
+                  MESES-DESAC-CARCIT <= 12                       
+                  MOVE 1 TO CC-FLAG
+                  IF NOV-REPORT-ABD07  = 45 OR  47   *>    VERIFICAR
+                   COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -       
+                                           MESES-DESAC-CARCIT3
+120717            ELSE
+120717             COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT 
+120717            END-IF                                                  
+                  PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+                     UNTIL WS-NN > WS-FINCU
+      *  aca se pueden calcular todas las moras ultimos 12 meses
+                     IF V-NOR-CARACT(WS-NN:1) >= 1
+                         ADD  1  TO 01MOR985CC003   
+                     END-IF
+                  END-PERFORM
+120717*           END-IF                                                  
+               END-IF                                                   
+            END-IF                                                     
+REMARK* CO01MOR984XX003 . Ever 60 últimos 12 meses Portafolio MX_01
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica para MX_01 
+REMARK* CALCULO VARIABLE 01MOR984MX003 Ever 60  ultimos 12
+REMARK* 01MOR984MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+            IF COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                      OR 18 OR 27 OR 44 OR 45 OR 46 OR 04
+               IF MESES-DESAC-CARCIT = 0
+                  MOVE 37 TO WS-INICIO12
+               ELSE
+                  MOVE 38 TO WS-INICIO12
+               END-IF
+               IF REG-ABIERTO-CARACT = 1     AND
+                  MESES-DESAC-CARCIT <= 12                       
+                  MOVE 1 TO MX-01FLAG-984
+                  IF NOV-REPORT-ABD07  = 45 OR  47   *>    VERIFICAR
+                   COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -       
+                                           MESES-DESAC-CARCIT3
+120717            ELSE
+120717             COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT
+120717            END-IF                                                  
+                  PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+                     UNTIL WS-NN > WS-FINCU OR 01MOR984MX003 = 1
+                     IF V-NOR-CARACT(WS-NN:1) >= 2
+                         MOVE 1  TO 01MOR984MX003   
+                     END-IF
+                  END-PERFORM
+120717*           END-IF                                                  
+               END-IF                                                   
+            END-IF                                                     
+REMARK* CO01MOR983XX003 . Cuentas en Mora Portafolio MX_01
+REMARK* Esta característica NO EXCLUYE a Citibank
+REMARK* Aplica para MX_01 
+REMARK* CALCULO VARIABLE 01MOR983MX003 Cuentas en Mora Portaf MX_01
+REMARK* 01MOR983MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+            IF (COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                OR 18 OR 27 OR 44 OR 45 OR 46 OR 04)    AND
+            REG-ABIERTO-CARACT = 1     AND
+            GARANTE-CITI   = 0         AND
+            NOV-REPORT-ABD07 > 16 AND NOV-REPORT-ABD07 < 42
+                        ADD  1                  TO 01MOR983MX003
+            END-IF                                                     
+REMARK* CO01MOR980XX003 . Mínimo de meses al día
+REMARK* No excluye CITIBANK
+      *     IF PORTAF-MX-01
+            IF COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+                            OR 18 OR 27 OR 44 OR 45 OR 46 OR 04
+               IF MESES-DESAC-CARCIT = 0
+                  MOVE 25 TO WS-INICIO24
+               ELSE
+                  MOVE 26 TO WS-INICIO24
+               END-IF
+120907         MOVE SPACES  TO WS-003-MINMO-R
+               IF REG-ABIERTO-CARACT = 1     AND
+               GARANTE-CITI   = 0                             
+120724            MOVE MESES-NOVAP-CARCIT2   TO WS-003-MOB13
+                  IF NOV-REPORT-ABD07 = 45 OR 47
+                     COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -
+                                             MESES-DESAC-CARCIT3
+                     PERFORM VARYING WS-NN FROM WS-INICIO24 BY 1
+                              UNTIL WS-NN > WS-FINCU
+                        IF V-NOR-CARACT(WS-NN:1) >= 1
+                           COMPUTE WS-003-MINMO = WS-FINCU - WS-NN + 1
+                        END-IF
+                     END-PERFORM
+                  ELSE
+                     COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT 
+                     PERFORM VARYING WS-NN FROM WS-INICIO24 BY 1
+                              UNTIL WS-NN > WS-FINCU
+                        IF V-NOR-CARACT(WS-NN:1) >= 1
+                           COMPUTE WS-003-MINMO = WS-FINCU - WS-NN + 1
+                        END-IF
+                     END-PERFORM
+                  END-IF
+                  IF WS-003-MINMO >= 0 AND WS-003-MINMO-R <> SPACES
+                     COMPUTE WS-003-DELQ = MESES-DESAC-CARCIT2 +
+                                           WS-003-MINMO
+120907            ELSE
+120907               MOVE 998     TO WS-003-DELQ  
+                  END-IF
+                  IF WS-003-MOB13 > WS-003-MAXMOB13
+                     MOVE WS-003-MOB13 TO WS-003-MAXMOB13
+                  END-IF
+                  IF WS-003-DELQ < WS-003-MINDELQ
+                     MOVE WS-003-DELQ TO WS-003-MINDELQ
+                  END-IF
+                         
+               END-IF
+            END-IF
+REMARK* ***************************************
+REMARK*                                                                
+REMARK* *-------------------------------------------------------------*
+REMARK* 14 Tipología MOR . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* CO02MOR987_003 . Cuentas en mora
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  
+REMARK* CO02MOR987_003 -  se debe inicializar en 0 
+           IF REG-ABIERTO-CARACT = 1   AND
+           NOT ENT-CITI                AND
+           NOV-REPORT-ABD07 > 16 AND < 42 *>  
+                  ADD 1                   TO 02MOR987-003
+           END-IF
+REMARK* CO02MOR982_003 . Moras de 120 días últimos 12 meses
+REMARK* Esta característica NO excluye a Citibank
+REMARK* Aplica 
+REMARK* CALCULO VARIABLE 02MOR982-003 Moras 120 ultimos 12
+REMARK* 02MOR982_003 -  se debe inicializar en 0
+            IF MESES-DESAC-CARCIT <= 12                       
+               IF MESES-DESAC-CARCIT = 0
+                  MOVE 37 TO WS-INICIO12
+               ELSE
+                  MOVE 38 TO WS-INICIO12
+               END-IF
+               COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -
+                                       MESES-DESAC-CARCIT3
+               PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+111221               UNTIL WS-NN > WS-FINCU
+                     COMPUTE WS-NN-1 = WS-NN - 1
+                     MOVE V-NOR-CARACT(WS-NN:1)  TO WS-ACTUAL-CITI
+                     MOVE V-NOR-CARACT(WS-NN-1:1) TO WS-ANT-CITI
+                     IF WS-ACTUAL-CITI = 4 AND WS-ANT-CITI < 4
+                            ADD  1  TO 02MOR982-003   
+                     END-IF
+               END-PERFORM
+            END-IF                                                     
+REMARK* CO02MOR981_003 . Ever 30 últimos 12 meses excluyendo Citibank
+REMARK* Esta característica excluye a Citibank
+REMARK* CO02MOR979_003 . Ever 30 últimos 12 meses
+REMARK* Esta característica NO excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02MOR981-003 Ever 30 ultimos 12 meses
+REMARK* 02MOR981_003 - CO02MOR979_003 se deben inicializar en 0
+            IF MESES-DESAC-CARCIT <= 12      AND
+               GARANTE-CITI = 0              AND
+               NOT ENT-CITI
+                  IF MESES-DESAC-CARCIT = 0
+                     MOVE 37 TO WS-INICIO12
+                  ELSE
+                     MOVE 38 TO WS-INICIO12
+                  END-IF
+                  COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -
+                                          MESES-DESAC-CARCIT3
+                  PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+                     UNTIL WS-NN > WS-FINCU OR
+                       02MOR981-003 = 1
+                     IF V-NOR-CARACT(WS-NN:1) >= 1
+                           MOVE 1  TO 02MOR981-003
+                     END-IF
+                  END-PERFORM
+            END-IF
+REMARK* CO02MOR979_003 . Ever 30 últimos 12 meses
+REMARK* Esta característica NO excluye a Citibank
+            IF MESES-DESAC-CARCIT <= 12      AND
+               REG-ABIERTO-CARACT = 1                 
+                  IF MESES-DESAC-CARCIT = 0
+                     MOVE 37 TO WS-INICIO12
+                  ELSE
+                     MOVE 38 TO WS-INICIO12
+                  END-IF
+                  COMPUTE WS-FINCU = 48 - MESES-DESAC-CARACT -
+                                          MESES-DESAC-CARCIT3
+                  PERFORM VARYING WS-NN FROM WS-INICIO12 BY 1
+                     UNTIL WS-NN > WS-FINCU OR
+                       02MOR979-003 = 1
+                     IF V-NOR-CARACT(WS-NN:1) >= 1
+                           MOVE 1  TO 02MOR979-003
+                     END-IF
+                  END-PERFORM
+            END-IF
+           .
+
+
+       2249-PROCESE-CARCT-00NUM-EXT-03.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-03.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01NUM Y 02NUM PARA
+REMARK*     CITIBANK                   
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 9 Tipología NUM . Nivel 01
+REMARK* *-------------------------------------------------------------*
+REMARK* 01NUM997CT003 -  se debe inicializar en 0
+REMARK* CO01NUM997XX003 . Número de referencias financieras embargadas
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para CT                           
+REMARK* CALCULO VARIABLE 01NUM997CT003 Num ref. fin. embargadas    
+           PERFORM 0100-ESTABLECER-PARAMS-PORTF-03
+111229     IF SW-PROCESAR-003 = 0
+           IF COD-PORTAF-CARACT  = "AH" OR "CT"
+              IF COD-PORTAF-CARACT = "CT"    AND
+              ( NOT ENT-CITI )               AND
+              REG-ABIERTO-CARACT = 1         AND
+              GARANTE-CITI   = 0             AND
+              MESES-DESAC-CARCIT <= 60       AND
+              NOV-REPORT-ABD06 = 06
+                   ADD  1           TO 01NUM997CT003
+              END-IF
+           ELSE
+              MOVE 1 TO TIPO3-FLAG 
+REMARK* CO01NUM999XX003 . Número de referencias financieras castigadas
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02  [es RO o MX ????? ]
+REMARK* CALCULO VARIABLE 01NUM999MX003 Num ref. fin. castigadas    
+REMARK* 01NUM999MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+            (NOT ENT-CITI)         AND
+            REG-ABIERTO-CARACT = 1 AND
+            GARANTE-CITI   = 0     AND
+            NOV-REPORT-ABD07 = 45  AND
+            MESES-DESAC-CARCIT2   <= 12
+                        ADD  1           TO 01NUM999MX003
+            END-IF                                                     
+REMARK* CO01NUM998XX003 . Número de ref. fin. en recaudo dudoso
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02  [es RO o MX ????? ]
+REMARK* CALCULO VARIABLE 01NUM998MX003 Num ref. fin. castigadas    
+REMARK* 01NUM998MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+            (NOT ENT-CITI)         AND
+            REG-ABIERTO-CARACT = 1 AND
+            GARANTE-CITI   = 0     AND
+            NOV-REPORT-ABD07 = 47  AND
+            MESES-DESAC-CARCIT2   <= 12
+                        ADD  1           TO 01NUM998MX003
+            END-IF                                                     
+REMARK* CO01NUM996XX003 . Número de ref. fin. dud rec últimos 12
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02                        
+REMARK* CALCULO VARIABLE 01NUM996MX003 Num ref. fin. D.R.          
+REMARK* 01NUM996MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+            (NOT ENT-CITI)         AND
+            REG-ABIERTO-CARACT = 1 AND
+            GARANTE-CITI   = 0     AND
+            NOV-REPORT-ABD07 = 47  AND
+            MESES-DESAC-CARCIT2   <= 60
+                        ADD  1           TO 01NUM996MX003
+            END-IF                                                     
+REMARK* CO01NUM995XX003 . Número de ref. fin. castigadas últimos 12
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02                        
+REMARK* CALCULO VARIABLE 01NUM995MX003 Num ref. fin. C.Castigada   
+REMARK* 01NUM995CT003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48) AND
+            (NOT ENT-CITI)         AND
+            REG-ABIERTO-CARACT = 1 AND
+            GARANTE-CITI   = 0     AND
+            NOV-REPORT-ABD07 = 45  AND
+            MESES-DESAC-CARCIT2   <= 60
+                        ADD  1           TO 01NUM995MX003
+            END-IF                                                     
+REMARK* CO01NUM994XX003 . Nro bancos con los cuales tiene productos
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  RO R1 IN                         
+REMARK* CALCULO VARIABLE 01NUM994XX003 se debe hacer al final      
+REMARK* 01NUM994XX003 -  se debe inicializar en 0 (XX: RO R1 IN)
+            IF NOT ENT-CITI   AND                                    
+            REG-ABIERTO-CARACT = 1       AND
+            GARANTE-CITI = 0             AND
+            MESES-DESAC-CARCIT2 <= 4
+                 IF COD-CTA-ABD07 = 02
+                        ADD  1           TO NUM-C-RO(IND-ENTIDAD)
+                 ELSE
+                   IF COD-CTA-ABD07 = 03 OR 48
+                        ADD  1           TO NUM-C-R1(IND-ENTIDAD)
+                   ELSE
+                     IF COD-CTA-ABD07 = 05 OR 06 OR 07 OR 27 OR 18 
+                           OR 14 OR 15 OR 17
+                        ADD  1           TO NUM-C-IN(IND-ENTIDAD)
+                     END-IF
+                   END-IF
+                 END-IF
+            END-IF                                                     
+REMARK* CO01NUM993XX003 . Número referencias financieras
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02                        
+REMARK* CALCULO VARIABLE 01NUM993MX003 Num ref. financieras        
+REMARK* 01NUM993MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48)   AND
+            (NOT ENT-CITI)                 AND
+            REG-ABIERTO-CARACT = 1         AND                        
+            GARANTE-CITI   = 0             AND
+            MESES-DESAC-CARCIT2  <= 4  
+                        ADD  1           TO 01NUM993MX003
+            END-IF                                                     
+REMARK* CO01NUM992XX003 . Número refinanciaciones excluyendo Citi
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica para MX_02                        
+REMARK* CALCULO VARIABLE 01NUM992MX003 Num ref. financieras        
+REMARK* 01NUM992MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-02                
+            IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 27 OR 18
+                   OR 14 OR 15 OR 17 OR 04 OR 45 OR 13 OR 48)   AND
+            (NOT ENT-CITI)                 AND
+            GARANTE-CITI   = 0             AND
+            MESES-DESAC-CARCIT2  <= 24     AND
+            FORMA-PAGO-TOTAL-ABD07 = 4
+                        ADD  1           TO 02NUM992-003 
+            END-IF                                                     
+REMARK* CO01NUM991XX003 Número cuentas abiertas últimos 12 meses
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* Aplica para MX_01                        
+REMARK* CALCULO VARIABLE 01NUM991MX003 Num abiertas ult 12 meses   
+REMARK* 01NUM991MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+            IF (COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612                      OR 18 OR 27 OR 44 OR 45 OR 46 OR 04)  AND
+            REG-ABIERTO-CARACT = 1              AND                   
+120712      GARANTE-CITI   = 0             AND
+            MESES-NOVAP-CARCIT2 <= 12          
+                        MOVE 1           TO MX-01FLAG-NUM
+                        ADD  1           TO 01NUM991MX003
+            END-IF                                                     
+REMARK* CO01NUM990XX003 Meses desde el últ. pago tarjetas de crédito
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* 01NUM990RO003 se debe inicializar en 999
+REMARK* CALCULO VARIABLE 01NUM990RO003 Se hace al final de la cedula
+            MOVE 999  TO  MESES-ULT-PAGOTC
+            IF COD-CTA-ABD07 = 02            *> TDC (RO_01)   
+120724       MOVE 1 TO TIPO3-FLAG-RO
+120724       IF REG-ABIERTO-CARACT = 1                                      
+               ADD  VALOR-SALDO-DEUDAM-ABD07 TO RO-01SALDO
+               COMPUTE WS-FINCU = 48 -  MESES-DESAC-CARACT - 
+                                         MESES-DESAC-CARCIT3
+111210         PERFORM 2330-NORMALIZA-VECTOR-49  
+111221         MOVE V-NOR-CARACT(WS-FINCU:1) TO V-NOR-CARACT-003
+               IF V-NOR-CARACT-003   = "0" OR "1"                       
+                  COMPUTE MESES-ULT-PAGOTC = 1 + MESES-DESAC-CARCIT +       
+                                              MESES-DESAC-CARCIT3
+               ELSE
+                  IF V-NOR-CARACT-003   > 1
+                      COMPUTE MESES-ULT-PAGOTC = V-NOR-CARACT-003  +
+                              MESES-DESAC-CARCIT + MESES-DESAC-CARCIT3      
+                  END-IF
+               END-IF
+               IF  MESES-ULT-PAGOTC < 01NUM990RO003
+                    MOVE MESES-ULT-PAGOTC TO 01NUM990RO003
+               END-IF
+120724       END-IF
+            END-IF                                                     
+REMARK*
+REMARK* CO01NUM989XX003 .Número de cuentas financieras cerradas
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* Aplica para MX_01                        
+REMARK* CALCULO VARIABLE 01NUM989MX003 Num cerradas                
+REMARK* 01NUM989MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+            IF (COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+120612               OR 18 OR 27 OR 44 OR 45 OR 46 OR 04)    AND
+            REG-CERRADO-CARACT = 1                                 
+                        MOVE 1           TO MX-01FLAG-CERR
+                        ADD  1           TO 01NUM989MX003
+            END-IF                                                     
+REMARK* CO01NUM983XX003 Núm. cuentas vigentes en los últimos 12 meses
+REMARK* Esta característica NO  EXCLUYE a Citibank
+REMARK* Aplica para MX_01                        
+REMARK* CALCULO VARIABLE 01NUM983MX003 Num vigentes ult 12 meses   
+REMARK* 01NUM983MX003 -  se debe inicializar en 0
+      *     IF PORTAF-MX-01                
+      *     IF COD-CTA-ABD07 = 02 OR 05 OR 06 OR 07 OR 13 OR 15 OR 16
+      *                     OR 18 OR 27 OR 44 OR 45 OR 46
+      *      IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1 *>  
+      *        IF SW-LECTURA-LEEICMVLR = 1
+      *          IF MESES-DESAC-CARACT <= 12     *> Vale???
+      *                 ADD  1           TO 01NUM983MX003
+      *          END-IF
+      *        END-IF
+      *      END-IF                                                  
+      *     END-IF                                                     
+REMARK* *-------------------------------------------------------------*
+REMARK* 15 Tipología NUM . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* CO02NUM992_003 Núm. de refinanciaciones en los últimos 24 meses
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM992-003 Refinanciaciones ult. 24 meses
+REMARK* 02NUM992_003 - se debe inicializar en 0
+120724*    IF NOT ENT-CITI
+120724*     IF MESES-DESAC-CARACT <= 24
+120724*        IF SW-LECTURA-LEEICMVLR = 1
+120724*           IF FORMA-PAGO-TOTAL-ABD07 = 4
+120724*              ADD  1  TO 02NUM992-003
+120724*           END-IF
+120724*        END-IF
+120724*     END-IF
+REMARK* CO02NUM988_003 .Número de cuentas en proceso ejecutivo
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM988-003 Cuentas en proceso ejecutivo  
+REMARK* 02NUM988_003 - se debe inicializar en 0
+            IF (NOT ENT-CITI)         AND
+120724      GARANTE-CITI   = 0        AND
+            MESES-DESAC-CARCIT2 <= 24 AND
+            FORMA-PAGO-TOTAL-ABD07 = 2
+                     ADD  1  TO 02NUM988-003
+            END-IF
+REMARK* CO02NUM987_003 .Número de cuentas en mandamiento de pago
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM987-003 Cuentas mandamiento de pago   
+REMARK* 02NUM987_003 - se debe inicializar en 0
+            IF (NOT ENT-CITI)         AND
+120724      GARANTE-CITI   = 0        AND
+            MESES-DESAC-CARCIT2 <= 24 AND
+            FORMA-PAGO-TOTAL-ABD07 = 3
+                     ADD  1  TO 02NUM987-003
+            END-IF
+REMARK* CO02NUM986_003 .Número de cuentas en dación de pago
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM986-003 Cuentas dación de pago        
+REMARK* 02NUM986_003 - se debe inicializar en 0
+            IF (NOT ENT-CITI)         AND
+120724      GARANTE-CITI   = 0        AND
+            MESES-DESAC-CARCIT2 <= 24 AND
+            FORMA-PAGO-TOTAL-ABD07 = 5
+                     ADD  1  TO 02NUM986-003
+            END-IF
+REMARK* CO02NUM985_003 .Número de cuentas en cobrador
+REMARK* Esta característica NO excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM985-003 Cuentas en cobrador           
+REMARK* 02NUM985_003 - se debe inicializar en 0
+            IF (MESES-ADJTV-MENOR  <= 24 OR MESES-ADJTV-MAYOR <= 24)
+            AND (ADJETIVO1-ABD07 = 2 OR ADJETIVO2-ABD07 = 2 OR
+                 ADJETIVO3-ABD07 = 2)
+                     ADD  1  TO 02NUM985-003
+            END-IF
+REMARK* CO02NUM984_003 .Número de cuentas vigentes
+REMARK* Esta característica excluye a Citibank
+REMARK* Aplica
+REMARK* CALCULO VARIABLE 02NUM984-003 Cuentas vigentes              
+REMARK* 02NUM984_003 - se debe inicializar en 0
+           IF NOT ENT-CITI                    AND                   
+           REG-ABIERTO-CARACT         = 1
+                     ADD  1  TO 02NUM984-003
+           END-IF
+           .
+
+           PERFORM 2249-PROCESE-CARCT-00EXP-EXT-03
+           PERFORM 2749-PROCESE-CARCT-00EXT-EXT-03
+           .
+
+
+
+       4249-PROCESE-CARCT-00INQ-EXT-03.
+REMARK* *-------------------------------------------------------------*
+REMARK* 13 Tipología INQ . Nivel 02
+REMARK* *-------------------------------------------------------------*
+120813     IF SW-INQ-003 = 1
+120813      MOVE 0 TO SW-INQ-003
+REMARK*     SE HACE LA LECTURA DE CONSULTAS EN ESTA RUTINA
+            INITIALIZE LLAVE-INDEX
+            MOVE TIPO-ID-CARACT TO TIP-ID-IND
+            MOVE NRO-ID-CARACT  TO NUM-ID-IND
+            START INDEXADO KEY NOT < LLAVE-INDEX
+              INVALID KEY
+                 MOVE 1 TO SW-LECTURA-CARACT
+              NOT INVALID KEY
+                 READ INDEXADO NEXT RECORD WITH IGNORE LOCK       
+                    AT END  MOVE 1 TO SW-LECTURA-CARACT
+                 END-READ
+            END-START
+            PERFORM UNTIL TIP-ID-IND NOT = TIPO-ID-CARACT OR
+                         NUM-ID-IND NOT = NRO-ID-CARACT  OR
+                         SW-LECTURA-CARACT = 1
+              MOVE  COD-SUSCRIP-IND    TO COD-SUSCRIP-ABD02
+              READ SUSCRIPTOR WITH IGNORE LOCK
+                   INVALID KEY
+                      MOVE 1 TO SW-LEESUSC-CARACT
+                   NOT INVALID KEY
+                      MOVE 0 TO SW-LEESUSC-CARACT
+              END-READ
+      *       IF SW-LEESUSC-CARACT = 0 AND ESTADO-ABD02 = 1
+              IF SW-LEESUSC-CARACT = 0 
+               PERFORM 4100-CAL-FECHA-CONSULTA
+               PERFORM 4249-PROCESE-CARCT-00INQ-EXT-NV   
+              END-IF
+              READ  INDEXADO NEXT RECORD WITH IGNORE LOCK             
+                 AT END
+                    MOVE 1 TO SW-LECTURA-CARACT
+              END-READ
+            END-PERFORM.
+REMARK*     FIN DE LA LECTURA DE CONSULTAS EN ESTA RUTINA
+
+
+       4249-PROCESE-CARCT-00INQ-EXT-NV.
+REMARK* *-------------------------------------------------------------*
+REMARK* 13 Tipología INQ . Nivel 02
+REMARK* *-------------------------------------------------------------*
+120716*    MIRAR SUSCRIPTOR BBVA
+CQ5220      MOVE "  " TO WS-ENTSUSC-CITI-CIU 
+CQ5220                   WS-ENTSUSC-CITI-PAR 
+                         WS-ENTSUSC-CITI-B   
+                         WS-ENTSUSC-CITI     
+120915      MOVE 0 TO SW-PROCESAR-003
+120724      MOVE COD-SUSCRIP-IND TO SUSCRIPTOR-003
+            SET IND-S TO 1
+            SEARCH ALL TB-SUSC-CITI
+              AT END
+                 MOVE "  "  TO WS-ENTSUSC-CITI
+              WHEN SUS-CITI(IND-S) = SUSCRIPTOR-003
+                   MOVE "SI"     TO WS-ENTSUSC-CITI
+            END-SEARCH
+120915*     IF NOT ENT-CITI
+               SET IND-C TO 1
+               SEARCH ALL TB-SUSC-CITI-CIU
+                  AT END
+                     MOVE "  "  TO WS-ENTSUSC-CITI-CIU
+                  WHEN SUS-CITI-CIU(IND-C) = SUSCRIPTOR-003
+                       MOVE "SI"     TO WS-ENTSUSC-CITI-CIU
+               END-SEARCH
+120915*        IF NOT ENT-CITI-CIUD
+                  SET IND-P TO 1
+                  SEARCH ALL TB-SUSC-CITI-PAR
+                     AT END
+                        MOVE "  "  TO WS-ENTSUSC-CITI-PAR
+                     WHEN SUS-CITI-PAR(IND-P) = SUSCRIPTOR-003
+                          MOVE "SI"     TO WS-ENTSUSC-CITI-PAR
+                  END-SEARCH
+120915*           IF NOT ENT-CITI-PAR
+                     SET IND-B TO 1
+                     SEARCH ALL TB-SUSC-CITI-B  
+                        AT END
+                           MOVE "  "  TO WS-ENTSUSC-CITI-B  
+                        WHEN SUS-CITI-B (IND-B) = SUSCRIPTOR-003
+                             MOVE "SI"     TO WS-ENTSUSC-CITI-B   
+                     END-SEARCH
+120915*           END-IF
+120915*        END-IF
+120915*     END-IF
+            IF ENT-CITI-B
+               MOVE 1 TO SW-PROCESAR-003
+            END-IF
+      *
+111229      IF SW-PROCESAR-003 = 0
+            MOVE NIT-SUSCRIP-S-ABD02 TO WS-ENTIDAD-CITI
+            MOVE 1 TO IND-ENTIDAD 
+            PERFORM UNTIL NIT-ENT-CS-CITI(IND-ENTIDAD) = 99999999999 OR
+                 NIT-ENT-CS-CITI(IND-ENTIDAD)  = NIT-SUSCRIP-S-ABD02
+              ADD 1 TO IND-ENTIDAD 
+            END-PERFORM
+            IF NIT-ENT-CS-CITI(IND-ENTIDAD)    = 99999999999
+               MOVE NIT-SUSCRIP-S-ABD02 TO NIT-ENT-CS-CITI(IND-ENTIDAD)
+               MOVE 99999999999 TO NIT-ENT-CS-CITI(IND-ENTIDAD + 1)
+            END-IF 
+REMARK* CO02INQ999_003 - Entidades con huellas ultimos 3 meses no CITI P
+REMARK* Esta característica EXCLUYE a Citibank PARCIALMENTE
+REMARK* CO02INQ999_003 se debe inicializar en zero
+           IF (NOT ENT-CITI-CIUD)       AND
+              (NOT ENT-CITI-PAR)        AND
+             (MESES-CONST-CARACT >= 0 AND <= 3)
+              MOVE  1  TO  INQFLAG-3M
+              ADD 1 TO NUM-C-3M-P(IND-ENTIDAD)
+           END-IF
+
+REMARK* CO02INQ998_003 - Núm Consultas últ 6 meses excluyendo Citibank
+REMARK* Esta característica EXCLUYE a Citibank
+           MOVE 1 TO INQFLAG
+           IF NOT ENT-CITI              AND
+              (NOT ENT-CITI-CIUD)       AND
+              (MESES-CONST-CARACT >= 0 AND <= 6)
+              ADD 1 TO NUM-C-6M-NOCITI(IND-ENTIDAD)
+              ADD 1 TO 02INQ998-003
+           END-IF
+
+REMARK* CO02INQ997_003 - Núm Consultas últimos 3 meses incluyendo CITI
+           IF NOT ENT-CITI-CIUD         AND
+              (MESES-CONST-CARACT >= 0 AND <= 3)
+              MOVE 1 TO INQFLAG-997
+              ADD 1 TO NUM-C-3M(IND-ENTIDAD)
+           END-IF
+
+REMARK* CO02INQ996_003 - Consultas últimos 6 meses. Incluye Citibank
+           IF NOT ENT-CITI-CIUD         AND
+              (MESES-CONST-CARACT >= 0 AND <= 6)
+              ADD 1 TO NUM-C-6M(IND-ENTIDAD)
+              ADD 1 TO 02INQ996-003
+           END-IF
+
+REMARK* CO02INQ995_003 - Consultas últ 6 meses Excluye Citibank P
+           IF NOT ENT-CITI-CIUD         AND
+              (NOT ENT-CITI-PAR)         AND
+              (MESES-CONST-CARACT >= 0 AND <= 6)
+              MOVE 1 TO INQFLAG-995
+              ADD 1 TO NUM-C-6M-P(IND-ENTIDAD)
+           END-IF
+           .
+
+
+
+
+
+       2649-PROCESE-CARACT-02XX-EXT-03.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-03.
+REMARK*    SE MIRA SI HAY ALGO PERSONALIZADO PARA NIVEL 02     
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 10 Tipología END . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* HACE LA LECTURA DE CONSULTAS PARA CITIBANK
+            MOVE 1 TO SW-INQ-003
+120912      MOVE 0 TO SW-PROCESAR-003
+            PERFORM 4249-PROCESE-CARCT-00INQ-EXT-03
+REMARK* FIN PROCESO DE CONSULTAS PARA CITI
+REMARK* CO02END985_003 . Máximo del balance para las cuentas de PIL
+REMARK      IF FLAG-END985 = 0
+               MOVE "-0100000" TO 02END985-003(1:8)
+            END-IF
+REMARK*
+REMARK* 01END999RO003
+            IF RO-01FLAG = 0
+               MOVE "-0000000001" TO 01END999RO003(1:11)
+            END-IF
+REMARK* 01END999R1003
+            IF R1-01FLAG = 0
+               MOVE "-0000000001" TO 01END999R1003(1:11)
+            END-IF
+REMARK* 01END999IN003
+            IF IN-01FLAG = 0
+               MOVE "-0000000001" TO 01END999IN003(1:11)
+            END-IF
+REMARK* 01END999VE003
+            IF VE-01FLAG = 0
+               MOVE "-0000000001" TO 01END999VE003(1:11)
+            END-IF
+REMARK* 01END999HP003
+            IF HP-01FLAG = 0
+               MOVE "-0000000001" TO 01END999HP003(1:11)
+            END-IF
+REMARK* 01END998RO003
+            IF RO-01FLAG = 0
+               MOVE "-0000000001" TO 01END998RO003(1:11)
+            END-IF
+REMARK* 01END998R1003
+            IF R1-01FLAG = 0
+               MOVE "-0000000001" TO 01END998R1003(1:11)
+            END-IF
+REMARK* 01END998IN003
+            IF IN-01FLAG = 0
+               MOVE "-0000000001" TO 01END998IN003(1:11)
+            END-IF
+REMARK* 01END998VE003
+            IF VE-01FLAG = 0
+               MOVE "-0000000001" TO 01END998VE003(1:11)
+            END-IF
+REMARK* 01END998HP003
+            IF HP-01FLAG = 0
+               MOVE "-0000000001" TO 01END998HP003(1:11)
+            END-IF
+REMARK* 01END997RO003
+            IF RO-01FLAG-CUO = 0
+               MOVE "-0000000001" TO 01END997RO003(1:11)
+            END-IF
+REMARK* 01END997R1003
+            IF R1-01FLAG-CUO = 0
+               MOVE "-0000000001" TO 01END997R1003(1:11)
+            END-IF
+REMARK* 01END997IN003
+            IF IN-01FLAG-CUO = 0
+               MOVE "-0000000001" TO 01END997IN003(1:11)
+            END-IF
+REMARK* 01END997VE003
+            IF VE-01FLAG-CUO = 0
+               MOVE "-0000000001" TO 01END997VE003(1:11)
+            END-IF
+REMARK* 01END997HP003
+            IF HP-01FLAG-CUO = 0
+               MOVE "-0000000001" TO 01END997HP003(1:11)
+            END-IF
+REMARK* 01END993MX003
+            IF MX-02FLAG-993 = 0
+               MOVE "-0000000001" TO 01END993MX003(1:11)
+            END-IF
+REMARK* 01END992MX003
+            IF MX-02FLAG-992 = 0
+               MOVE "-0000000001" TO 01END992MX003(1:11)
+            END-IF
+REMARK* 01END991MX003
+            IF MX-02FLAG-991 = 0
+               MOVE "-0000000001" TO 01END991MX003(1:11)
+            END-IF
+REMARK* 01END990MX003
+            IF MX-02FLAG-990 = 0
+               MOVE "-0000000001" TO 01END990MX003(1:11)
+            END-IF
+REMARK* 01END989MX003
+            IF MX-02FLAG-989 = 0
+               MOVE "-0000000001" TO 01END989MX003(1:11)
+            END-IF
+REMARK* 01NUM990RO003
+CQ5220*     IF 01END998RO003 <= 0 AND 01NUM990RO003    <= 2
+CQ5220      IF RO-01SALDO <= 0 OR 01NUM990RO003 <= 2 OR
+                   01NUM990RO003 = 999
+               MOVE 1 TO 01NUM990RO003
+            ELSE
+               MOVE 2 TO 01NUM990RO003 
+            END-IF
+            IF TIPO3-FLAG-RO = 0
+               MOVE 3 TO 01NUM990RO003
+            END-IF
+      *
+REMARK* 01END988RO003
+            IF SAL-TC-NONC >  0 AND CUPO-TC-NONC > 0 
+              COMPUTE 01END988RO003 ROUNDED = (SAL-TC-NONC /
+                                   CUPO-TC-NONC) 
+            ELSE
+120729         IF (SAL-TC-NONC   <= 0 OR  CUPO-TC-NONC  <= 0)
+120724         AND RO-01FLAG-988 = 1
+                  MOVE 0 TO 01END988RO003
+               ELSE
+                  MOVE "-0100000" TO 01END988XX003(1:8)
+               END-IF
+            END-IF
+      *
+REMARK* 01END987RO003
+120923      IF FECHA-AP-987 (1) < 999999
+               SORT TB-END987-003 ASCENDING KEY
+120923         MOVE 1 TO I-C-003
+               PERFORM UNTIL FECHA-AP-987 (I-C-003) = 999999
+                  IF SALDO-987-003(I-C-003) >= 0 AND
+                     CUPO-987-003(I-C-003) > 0
+                     ADD SALDO-987-003-R(I-C-003) TO  RO987-SALDOS
+                     ADD CUPO-987-003-R(I-C-003)  TO  RO987-CUPOS
+                     MOVE "1" TO FLAG-VLR-003-987
+                     COMPUTE UTLZ-TC-NONC ROUNDED =  (
+                          RO987-SALDOS / RO987-CUPOS)
+                     IF UTLZ-TC-NONC > 01END987RO003
+                         MOVE UTLZ-TC-NONC TO  01END987RO003
+                     END-IF
+                  END-IF
+                  ADD 1 TO I-C-003
+               END-PERFORM
+            END-IF
+111221      IF RO-01FLAG-987 = 0 OR FLAG-VLR-003-987 = SPACES
+               MOVE "-0100000" TO 01END987XX003(1:8)
+120923      END-IF 
+120928      IF FLAG-SDO-003-987 = SPACES AND RO-01FLAG-987 = 1        
+120923         MOVE 0          TO 01END987RO003
+120923      END-IF
+      *
+REMARK* 01END984RO003
+120923      IF RO-01FLAG-986 = 0
+120923         MOVE "-0100000" TO 01END984XX003(1:8)
+120923      END-IF
+      *
+REMARK* 01END981MX003
+111221      IF MX-02FLAG-981 = 0
+               MOVE "-0000000001" TO 01END981XX003(1:11)
+            END-IF
+      *
+REMARK* 01EXP999XX003
+120612      IF CT-FLAG = 0
+120612         MOVE "-01" TO 01EXP999CT003(1:3)
+120612      END-IF
+120612      IF AH-FLAG = 0
+120612         MOVE "-01" TO 01EXP999AH003(1:3)
+120612      END-IF
+111221      IF RO-01FLAG-EXP = 0
+               MOVE "-01" TO 01EXP999RO003(1:3)
+            END-IF
+111221      IF R1-01FLAG-EXP = 0
+               MOVE "-01" TO 01EXP999R1003(1:3)
+            END-IF
+111221      IF IN-01FLAG-EXP = 0
+               MOVE "-01" TO 01EXP999IN003(1:3)
+            END-IF
+111221      IF VE-01FLAG-EXP = 0
+               MOVE "-01" TO 01EXP999VE003(1:3)
+            END-IF
+111221      IF HP-01FLAG-EXP = 0
+               MOVE "-01" TO 01EXP999HP003(1:3)
+            END-IF
+111221      IF RO-01FLAG-EXP-996 = 0
+               MOVE "-01" TO 01EXP996RO003(1:3)
+            END-IF
+111221      IF MX-01FLAG-EXP-994 = 0
+               MOVE "-01" TO 01EXP994MX003(1:3)
+            END-IF
+            IF RO-VALUE > 1
+               MOVE 1 TO 01EXT993RO003
+            ELSE
+               MOVE 0 TO 01EXT993RO003
+            END-IF
+      *     01MOR999XX003 HASTA 01MOR990XX003
+            IF MX-02FLAG-MOR     = 0
+               MOVE "-01" TO 01MOR999XX003     
+                             01MOR998XX003 
+                             01MOR997XX003 
+                             01MOR996XX003 
+                             01MOR995XX003 
+                             01MOR994XX003 
+                             01MOR993XX003 
+                             01MOR992XX003 
+                             01MOR991XX003 
+                             01MOR990XX003 
+            END-IF
+            IF MX-02FLAG-MOR989  = 0
+               MOVE "-01" TO 01MOR989XX003     
+            END-IF
+            IF WS-FLAG-CITI      = 0
+               MOVE "-01" TO 01MOR988XX003     
+            END-IF
+            IF MX-02FLAG         = 0
+               MOVE "-01" TO 01MOR986XX003     
+            END-IF
+            IF CC-FLAG           = 0
+               MOVE "-01" TO 01MOR985XX003     
+            END-IF
+      *     01NUM991XX003 Y  01NUM989XX003
+            IF MX-01FLAG-NUM     = 0
+               MOVE "-001" TO 01NUM991XX003     
+            END-IF
+            IF MX-01FLAG-CERR    = 0
+               MOVE "-001" TO 01NUM989XX003     
+            END-IF
+      *
+REMARK* 01END986RO003
+            IF SAL-TC-CONC > 0 AND CUPO-TC-CONC > 0
+               COMPUTE 01END986RO003 ROUNDED = (SAL-TC-CONC/CUPO-TC-CONC        
+120612                              )       
+            ELSE
+120729         IF (CUPO-TC-CONC <= 0  OR SAL-TC-CONC <= 0)
+120724         AND RO-01FLAG-986 = 1
+                  MOVE 0 TO 01END986RO003
+               ELSE
+                   MOVE "-0100000" TO 01END986XX003(1:8)
+               END-IF
+            END-IF
+      *
+            PERFORM VARYING IND-ENTIDAD FROM 1 BY 1
+               UNTIL NIT-ENTID-CITI(IND-ENTIDAD) = 999999999
+               OR IND-ENTIDAD = 100
+REMARK* CO02END983XX003 . Máxima suma de los cupos por entidad
+REMARK* Esta característica  EXCLUYE a Citibank
+REMARK* Aplica  RO_03                                    
+REMARK* CALCULO VARIABLE 02END983RO003 se debe hacer al final      
+REMARK* 02END983RO003 -  se debe inicializar en 0 
+                  IF SUMA-C-RO-03(IND-ENTIDAD) > 02END983RO003
+                     MOVE  SUMA-C-RO-03(IND-ENTIDAD) TO 02END983RO003
+                  END-IF
+REMARK* CO02END982XX003 Suma saldos por entidad con suma cupos máxima
+                  IF SUMA-C-RO-03(IND-ENTIDAD) > SUMA-CUPO    
+                     MOVE  SUMA-C-RO-03(IND-ENTIDAD) TO SUMA-CUPO    
+                     MOVE SUMA-S-RO-03(IND-ENTIDAD) TO 02END982RO003
+120724            ELSE
+120724               IF SUMA-C-RO-03(IND-ENTIDAD) = SUMA-CUPO AND
+120724                  SUMA-S-RO-03(IND-ENTIDAD) > 02END982RO003
+120724                  MOVE SUMA-S-RO-03(IND-ENTIDAD) TO 02END982RO003
+120724               END-IF
+                  END-IF
+REMARK* CALCULO VARIABLE 01END996IN003 Cupo_Inicial_Instal
+                  IF SUMA-C-IN   (IND-ENTIDAD) > 01END996IN003
+                     MOVE  SUMA-C-IN   (IND-ENTIDAD) TO 01END996IN003
+                  END-IF
+REMARK* CALCULO VARIABLE 01END995IN003 Max. saldo por entidad
+                  IF SUMA-S-IN   (IND-ENTIDAD) > 01END995IN003
+                     MOVE  SUMA-S-IN   (IND-ENTIDAD) TO 01END995IN003
+                  END-IF
+                  IF IN-01FLAG-996 = 0
+                     MOVE "-0000000001" TO 01END995IN003(1:11)
+                  END-IF
+REMARK* CALCULO VARIABLE 01END996RO003 Cupo_Inicial_TC     
+                  IF SUMA-C-RO   (IND-ENTIDAD) > 01END996RO003
+                     MOVE  SUMA-C-RO   (IND-ENTIDAD) TO 01END996RO003
+                     MOVE  SUMA-S-RO (IND-ENTIDAD) TO 01END994RO003
+111228            ELSE
+111228               IF SUMA-C-RO   (IND-ENTIDAD) = 01END996RO003
+111228                  IF SUMA-S-RO (IND-ENTIDAD) > 01END994RO003
+111228                     MOVE SUMA-S-RO (IND-ENTIDAD) TO 01END994RO003
+111228                  END-IF
+111228               END-IF
+                  END-IF
+                  IF RO-01FLAG-996 = 0
+                     MOVE "-0000000001" TO 01END996RO003(1:11)
+                     MOVE "-0000000001" TO 01END994RO003(1:11)
+                  END-IF
+REMARK* CALCULO VARIABLE 01END996R1003 Cupo_Inicial_Rot 
+                  IF SUMA-C-R1   (IND-ENTIDAD) > 01END996R1003
+CQ9139*              MOVE  SUMA-C-R1   (IND-ENTIDAD) TO 01END996R1003   IMS0005
+CQ9139               MOVE  FUNCTION NUMVAL(SUMA-C-R1(IND-ENTIDAD))      IMS0005
+CQ9139                                             TO 01END996R1003     IMS0005
+                     MOVE  SUMA-S-R1 (IND-ENTIDAD) TO 01END994R1003
+111228            ELSE
+111228               IF SUMA-C-R1   (IND-ENTIDAD) = 01END996R1003
+111228                  IF SUMA-S-R1 (IND-ENTIDAD) > 01END994R1003
+111228                     MOVE SUMA-S-R1 (IND-ENTIDAD) TO 01END994R1003
+111228                  END-IF
+111228               END-IF
+                  END-IF
+                  IF R1-01FLAG-996 = 0
+                     MOVE "-0000000001" TO 01END996R1003(1:11)
+                     MOVE "-0000000001" TO 01END994R1003(1:11)
+                  END-IF
+REMARK* CALCULO VARIABLE 01END996IN003 Cupo_Inicial_Ins    
+                  IF SUMA-C-IN   (IND-ENTIDAD) > 01END996IN003
+                     MOVE  SUMA-C-IN   (IND-ENTIDAD) TO 01END996IN003
+                  END-IF
+                  IF IN-01FLAG-996 = 0
+                     MOVE "-0000000001" TO 01END996IN003(1:11)
+                  END-IF
+REMARK* CALCULO VARIABLE 01NUM994RO003 Numero de entidades 
+                  IF  NUM-C-RO   (IND-ENTIDAD) > 0             
+                     ADD   1                         TO 01NUM994RO003
+                  END-IF
+REMARK* CALCULO VARIABLE 01NUM994R1003 Numero de entidades 
+                  IF  NUM-C-R1   (IND-ENTIDAD) > 0             
+                     ADD   1                         TO 01NUM994R1003
+                  END-IF
+REMARK* CALCULO VARIABLE 01NUM994IN003 Numero de entidades 
+                  IF  NUM-C-IN   (IND-ENTIDAD) > 0             
+                     ADD   1                         TO 01NUM994IN003
+                  END-IF
+            END-PERFORM
+REMARK* CALCULOS CON LOS FLAGS
+            IF RO-03FLAG = 0
+               MOVE "-0000000001" TO 02END983RO003(1:11)
+                                     02END982RO003(1:11)
+            END-IF
+REMARK* 02EXP998-003 02EXP997-003 02EXP995-003
+            IF FLAG-NONCITI = 0
+               MOVE "-01" TO 02EXP998-003(1:3)
+            END-IF
+            IF FLAG-OPNOCITI = 0
+               MOVE "-01" TO 02EXP997-003(1:3)
+            END-IF
+            IF TIPO3-FLAG    = 0
+               MOVE "-01" TO 02EXP995-003(1:3)
+            END-IF
+
+
+REMARK* CALCULO VARIABLE 01EXT992MX003 Prods. consumo pero no TC           
+            IF WS-PRODS-C = 1 AND WS-PRODS-TDC = 0
+               MOVE 1 TO 01EXT992MX003
+            ELSE
+               MOVE 0 TO 01EXT992MX003
+            END-IF
+REMARK* CALCULO VARIABLE 01MOR980MX003
+            IF WS-003-MAXMOB13 > 12 AND (WS-003-MINDELQ > 12 OR
+120907                                   WS-003-MINDELQ-R = SPACES)
+                  MOVE 1 TO 01MOR980MX003
+            END-IF
+
+REMARK* CO02INQ999_003 - Num Consultas últimos 3 meses excluyendo CITI P
+REMARK* CO02INQ999_003 se debe inicializar en zero
+            PERFORM VARYING IND-ENTIDAD FROM 1 BY 1
+                    UNTIL IND-ENTIDAD > 98
+                    OR NIT-ENT-CS-CITI(IND-ENTIDAD) = 99999999999
+                 IF NUM-C-3M-P (IND-ENTIDAD) > 0
+                    ADD 1 TO 02INQ999-003
+                 END-IF
+REMARK* CO02INQ998_003 - Núm Consultas últ 6 meses excluyendo Citibank
+REMARK* Esta característica EXCLUYE a Citibank
+120622*          IF NUM-C-6M-NOCITI(IND-ENTIDAD) > 0
+120622*             ADD 1 TO 02INQ998-003
+120622*          END-IF
+REMARK* CO02INQ997_003 - Núm Consultas últimos 3 meses incluyendo CITI
+                 IF NUM-C-3M(IND-ENTIDAD) > 0
+                    ADD 1 TO 02INQ997-003
+                 END-IF
+REMARK* CO02INQ996_003 - Consultas últimos 6 meses. Incluye Citibank
+120622*          IF NUM-C-6M(IND-ENTIDAD) > 0
+120622*             ADD 1 TO 02INQ996-003
+120622*          END-IF
+REMARK* CO02INQ995_003 - Consultas últ 6 meses Excluye Citibank P
+                 IF NUM-C-6M-P(IND-ENTIDAD) > 0
+                    ADD 1 TO 02INQ995-003
+                 END-IF
+            END-PERFORM
+            IF INQFLAG-3M = 0
+               MOVE "-001"      TO  02INQ999-003(1:4)
+            END-IF
+            IF INQFLAG    = 0
+               MOVE "-001"      TO  02INQ998-003(1:4)
+               MOVE "-001"      TO  02INQ996-003(1:4)
+            END-IF
+            IF INQFLAG-997    = 0
+               MOVE "-001"      TO  02INQ997-003(1:4)
+            END-IF
+            IF INQFLAG-995    = 0
+               MOVE "-001"      TO  02INQ995-003(1:4)
+            END-IF
+REMARK* 02MOR987-003 02MOR981-003
+            IF TIPO3-FLAG = 0
+               MOVE "-01"      TO 02MOR987-003(1:3)
+                                  02MOR981-003(1:3)
+            END-IF
+CQ8603      INITIALIZE VAR-CITI-FERIA-003                               CAV0003
+CQ8603      PERFORM 5200-LEA-INDEX-CITICLIFERIA                         CAV0003
+CQ8603      IF SW-EXIST-CITICLIFERIA = 1                                CAV0003
+CQ8603         MOVE 1 TO INDCLIFER003                                   CAV0003
+CQ8603         MOVE FLG-AGE-CITICLIFERIA TO FLAGAGFER003                CAV0003
+CQ8603         IF TIP-PRS-CITICLIFERIA = "NO APLICA      "              CAV0003
+CQ8603            MOVE 0 TO TIPPREFER003                                CAV0003
+CQ8603         ELSE                                                     CAV0003
+CQ8603           IF TIP-PRS-CITICLIFERIA = "TOP UP         "            CAV0003
+CQ8603              MOVE 1 TO TIPPREFER003                              CAV0003
+CQ8603           ELSE                                                   CAV0003
+CQ8603             IF TIP-PRS-CITICLIFERIA = "BALCON         "          CAV0003
+CQ8603                MOVE 2 TO TIPPREFER003                            CAV0003
+CQ8603             ELSE                                                 CAV0003
+CQ8603               IF TIP-PRS-CITICLIFERIA = "LIBRE INVERSION"        CAV0003
+CQ8603                  MOVE 3 TO TIPPREFER003                          CAV0003
+R10704               ELSE                                               IMS0006
+R10704                 IF TIP-PRS-CITICLIFERIA = "OTRO           "      IMS0006
+R10704                    MOVE 4 TO TIPPREFER003                        IMS0006
+R10704                 END-IF                                           IMS0006
+CQ8603               END-IF                                             CAV0003
+CQ8603             END-IF                                               CAV0003
+CQ8603           END-IF                                                 CAV0003
+CQ8603         END-IF                                                   CAV0003
+CQ8603         MOVE SHELL-ON-CITICLIFERIA TO HELLONFER003               CAV0003
+icimsd         MOVE OFERTA-CITICLIFERIA(3:13) TO OFERTAFER003           CAV0003
+icimsd*CQ8603  MOVE OFERTA-CITICLIFERIA   TO OFERTAFER003               CAV0003
+R10704         MOVE TM-CITICLIFERIA       TO TMCITIFER003               IMS0006
+CQ8603      END-IF                                                      CAV0003
+           .
+

@@ -1,0 +1,28 @@
+      *LIBSQL-FD.0002
+REMARK******************************************************************
+REMARK* NDG0002     * CONSQL - SE INCLUYE LOGICA PARA UTILIZAR DE FOR- *
+REMARK* N.DUARTE    *          MA INDEPENDIENTE EL ARCHIVO LIBSQL-CF   *
+REMARK* 11/02/2010  *          PARA LEER LOS PARAMETROS DE CONEXION A  *
+REMARK*             *          LA BASE DE DATOS DB2.                   *
+REMARK*             *                                                  *
+REMARK******************************************************************
+
+      *LIBSQL.FD.V0001.
+REMARK******************************************************************
+REMARK*ARCHIVO PARA GUARDAR EL RESULTADO DE CONSULTAS A BD RELACIONES  *
+REMARK******************************************************************
+       FD  LIBSQL.
+       01  REG-LIBSQL                 PIC X(1000).
+
+REMARK******************************************************************
+REMARK*ARCHIVO PARA ALMACENAR LOG DE MODO DEBUG                        *
+REMARK******************************************************************
+       FD  DEBUG-ARCH-LIBSQL.
+       01  REG-DEBUG-LIBSQL                PIC X(3000).
+
+NELSON*LIBSQL-CF.FD.V0001.
+REMARK******************************************************************
+REMARK*ARCHIVO DE CONFIGURACION CONEXION A DB2                         *
+REMARK******************************************************************
+CONSQL FD  LIBSQL-CF.                                                   NDG0002
+CONSQL 01  REG-LIBSQL-CF             PIC X(1000).                       NDG0002

@@ -1,0 +1,75 @@
+REMARK*CARACTPER-014.PROC.v.0002.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 014
+REMARK*    PARA RENAWARE.      
+REMARK******************************************************************
+      ******************************************************************
+      * DLM0002    | CQ4143 - Renaware.                                *
+      * 11-ENE-2012|    REQ. CQ. 4143.                                 *
+      * DARIO LASSO|                                                   *
+      ******************************************************************
+CQ4143** Caracteristicas: SE TOMA DEFINICION Y CALCULO DEL CARACTPER-009DLM0002
+CQ4143*   Tipología DEM : Nivel 00                                      DLM0002
+CQ4143* CO00DEM031000 = AÑO DE CONSULTA     9999                        DLM0002
+CQ4143* CO00DEM032000 = MES DE CONSULTA     99                          DLM0002
+CQ4143* CO00DEM033000 = DIA DE CONSULTA     99                          DLM0002
+CQ4143* CO00DEM034000 = SALARIO MINIMO      99999.999                   DLM0002
+CQ4143*                                                                 DLM0002
+       0000-LLENAR-VEC-PERSONALIZ-014.                 
+CQ4143* 1                                                               DLM0002
+CQ4143         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ4143         MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ4143         MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              DLM0002
+CQ4143         MOVE  00DEM031000(1:L-AUX)  TO                           DLM0002
+CQ4143                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ4143* 2                                                               DLM0002
+CQ4143         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ4143         MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ4143         MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              DLM0002
+CQ4143         MOVE  00DEM032000(1:L-AUX)  TO                           DLM0002
+CQ4143                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ4143* 3                                                               DLM0002
+CQ4143         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ4143         MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ4143         MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX              DLM0002
+CQ4143         MOVE  00DEM033000(1:L-AUX)  TO                           DLM0002
+CQ4143                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ4143* 4                                                               DLM0002
+CQ4143         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ4143         MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ4143         MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              DLM0002
+CQ4143         MOVE  00DEM034000(1:L-AUX)  TO                           DLM0002
+CQ4143                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+            .
+       0000-INICIALIZAR-CARAC-EXT-14.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-14.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 14  *
+REMARK*----------------------------------------------------------------*   
+CQ4143     PERFORM  9999-CARAC-GENERALES
+           .                                                            
+CQ4143 9999-CARAC-GENERALES.                                   
+CQ4143*----------------------------------------------------------------*
+CQ4143*0000-INICIALIZAR-CARAC-EXT-14.                                  *
+CQ4143*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 14  *
+CQ4143*----------------------------------------------------------------*   
+CQ4143** SE TOMA DEFINICION Y CALCULO DEL CARACTPER-009
+CQ4143*** 00DEM031000 *** AÑO DE CONSULTA
+CQ4143*** 00DEM032000 *** MES DE CONSULTA
+CQ4143*** 00DEM033000 *** DIA DE CONSULTA
+CQ4143*** 00DEM034000 *** SALARIO MINIMO. 
+CQ4143     MOVE FUNCTION CURRENT-DATE(1:4) TO  00DEM031000
+CQ4143                                         ANO-NOV-SMLMV-CARACT
+CQ4143     MOVE FUNCTION CURRENT-DATE(5:2) TO  00DEM032000
+CQ4143     MOVE FUNCTION CURRENT-DATE(7:2) TO  00DEM033000
+CQ4143*** BUSCAR-SMLMV.
+CQ4143     SET   J-SMLMV-CARACT            TO  1
+CQ4143     MOVE  0                         TO  IND-E-CARACT
+CQ4143     SEARCH  ALL  VCT-SMLMV-CARACT
+CQ4143       AT   END 
+CQ4143          ADD   1                    TO  IND-E-CARACT
+CQ4143       WHEN ANO-SMLMV-CARACT(J-SMLMV-CARACT) =
+CQ4143            ANO-NOV-SMLMV-CARACT
+CQ4143     END-SEARCH
+CQ4143     COMPUTE 00DEM034000 = VLR-SMLMV-CARACT(J-SMLMV-CARACT) / 1000
+CQ4143     .

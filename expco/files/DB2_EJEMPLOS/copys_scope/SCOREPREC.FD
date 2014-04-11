@@ -1,0 +1,14 @@
+REMARK* SCOREPREC-FD.v.0001
+      ******************************************************************
+      ******************************************************************
+      ************************************************
+      *  INDEXADO DE SCORES CLIENTES TDC BANCOLOMBIA *
+      ************************************************
+
+       FD SCOREPREC.
+       01 SCOREPREC-REGISTRO.
+          03 SCOREPREC-LLAVE.
+             05 SCOREPREC-TIP-ID          PIC 9(2).
+             05 SCOREPREC-NUM-ID          PIC 9(11).
+          03 SCOREPREC-TIPO-SCORE         PIC 9(02).
+          03 SCOREPREC-VLR-SCORE          PIC 9(05).

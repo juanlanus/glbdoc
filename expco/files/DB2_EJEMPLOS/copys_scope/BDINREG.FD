@@ -1,0 +1,20 @@
+REMARK* BDINREG-FD.v.0002
+REMARK******************************************************************
+REMARK* ARCHIVO DE NOMBRES DE REGISTRADURIA                            *
+REMARK******************************************************************
+REMARK* VHF0002     * SE CAMBIA EL CAMPO CAR-BDINREG DE SER ATRIBUTO A *
+REMARK* VICTOR HUGO * FORMAR PARTE DE LA LLAVE PRIMARIA CON EL FIN DE  *
+REMARK* FORERO      * AGILIZAR LA CONSULTA                             *
+REMARK* MAR.20/2002 *                                                  *
+REMARK******************************************************************
+       FD BDINREG.
+       01 REG-BDINREG.
+          03 LLAVE-BDINREG.                                 
+             05 PRAPE-BDINREG            PIC X(16).
+             05 CAR-BDINREG              PIC X(01).                     VHF0002
+             05 SEC-BDINREG              PIC 9(04).
+          03 SLOT-BDINREG                PIC 9(03) COMP-3.
+          03 INFO-BDINREG.
+             05 FILLER                   OCCURS 100 TIMES.
+                07 CED-BDINREG           PIC 9(11) COMP-3.
+                07 SEG-BDINREG           PIC 9(05) COMP-3.

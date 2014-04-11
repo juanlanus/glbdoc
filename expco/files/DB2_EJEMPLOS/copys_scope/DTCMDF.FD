@@ -1,0 +1,9 @@
+REMARK* DTCMDF-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO DE CONSECUTIVO DE MODIFICACIONES HECHAS *
+REMARK* POR EL SUSCRIPTOR                                              *
+REMARK******************************************************************
+       FD  DTCMDF.
+       01  REG-DTCMDF.
+           03 LLAVE-DTCMDF           PIC X(03).
+           03 CONSECUTIVO-DTCMDF     PIC 9(10).

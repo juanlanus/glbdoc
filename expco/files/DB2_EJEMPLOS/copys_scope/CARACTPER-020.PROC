@@ -1,0 +1,294 @@
+REMARK*CARACTPER-020.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 020
+REMARK*    PARA COONALRECAUDO.
+REMARK******************************************************************
+
+       0000-LLENAR-VEC-PERSONALIZ-020.                 
+               ADD 1 TO I-VAR-PER
+               MOVE "00DEM999TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(00DEM999TO020) TO L-AUX
+               MOVE 00DEM999TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM999TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO020) TO L-AUX
+               MOVE 02NUM999TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM998TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM998TO020) TO L-AUX
+               MOVE 02NUM998TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO020) TO L-AUX
+               MOVE 02MOR999TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO020) TO L-AUX
+               MOVE 02MOR998TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ999TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ999TO020) TO L-AUX
+               MOVE 01INQ999TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ998TO020" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ998TO020) TO L-AUX
+               MOVE 01INQ998TO020(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            .
+
+       0000-INICIALIZAR-CARAC-EXT-20.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-20.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 20  *
+REMARK*       PARA COONALRECAUDO.                                      *
+REMARK*----------------------------------------------------------------*   
+             MOVE ZEROS TO 00DEM999TO020       
+             MOVE ALL "  -1" TO PER-20-NIVEL-00-INQ
+             MOVE ALL "  -1" TO PER-20-NIVEL-02-NUM
+             MOVE ALL "  -1" TO PER-20-NIVEL-02-MOR
+             MOVE ALL "  -1" TO PER-20-NIVEL-01-INQ.                                                            
+ 
+       2649-PROCESE-CARACT-02XX-EXT-20.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-20.
+REMARK*     CALCULA CARACTERISTICAS NIVEL 00DEM COONALRECAUDO
+REMARK******************************************************************
+REMARK* SE LEE BDIIREGI PORQUE NO SE PUEDE DETERMINAR SI EN LA LECTURA
+REMARK* DE CARACT.PROC EXISTE O NO LA IDENTIFICACION EN BDIIREGI
+           MOVE ZEROS TO 00DEM999TO020 PER-20-EXIST-CC
+           IF TIPO-ID-CARACT = 1 
+              INITIALIZE LLAVE-BDIIREGI
+              MOVE TIPO-ID-CARACT TO TIPO-ID-BDIIREGI
+              MOVE NRO-ID-CARACT  TO CEDULA-BDIIREGI
+              READ BDIIREGI WITH IGNORE LOCK
+                   INVALID KEY
+                     MOVE 1 TO PER-20-EXIST-CC
+                   NOT INVALID KEY
+                     MOVE 0 TO PER-20-EXIST-CC
+              END-READ
+              IF PER-20-EXIST-CC = 0
+                 IF ESTADO-VIG-BDIIREGI = 12
+                    MOVE 1 TO 00DEM999TO020
+                 END-IF
+              END-IF
+           END-IF.
+
+       2249-PROCESE-CARCT-00NUM-EXT-20.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-20.
+REMARK*     CALCULA CARACTERISTICAS NIVEL 00NUM Y 02NUM COONALRECAUDO
+REMARK******************************************************************
+          IF COD-PORTAF-CARACT <> "AH" AND <> "CT"
+           MOVE ALL "  -1" TO PER-20-NIVEL-00-NUM
+           MOVE 0 TO PER-20-EXIST-NIT
+           SET PER-20-I TO 1
+           SEARCH ALL PER-20-TABLA-NIT AT END
+                MOVE 0 TO PER-20-EXIST-NIT
+             WHEN PER-20-TAB-NIT(PER-20-I) = NIT-SUSCRIP-S-ABD02
+                MOVE 1 TO PER-20-EXIST-NIT
+           END-SEARCH
+           IF PER-20-EXIST-NIT = 1
+              IF PER-20-TAB-TOT(PER-20-I) = 0
+                 IF PER-20-TAB-CTA1(PER-20-I) <> COD-CTA-ABD07 AND
+                    PER-20-TAB-CTA2(PER-20-I) <> COD-CTA-ABD07 AND
+                    PER-20-TAB-CTA3(PER-20-I) <> COD-CTA-ABD07 AND
+                    PER-20-TAB-CTA4(PER-20-I) <> COD-CTA-ABD07 AND
+                    PER-20-TAB-CTA5(PER-20-I) <> COD-CTA-ABD07 
+                    MOVE 0 TO PER-20-EXIST-NIT
+                 END-IF
+              END-IF
+           END-IF
+REMARK*** 00NUM999TO020 *** CARTERAS CASTIGADAS SECTOR LIBRANZA     
+           IF PER-20-EXIST-NIT = 1 AND GARANTE-ABD07 = 0
+              MOVE ZEROS TO 00NUM999TO020
+              IF NOV-REPORT-ABD07 = 45
+                 MOVE 1 TO 00NUM999TO020
+              END-IF
+           END-IF
+REMARK*** 00NUM998TO020 *** CARTERAS CASTIGADAS SECTOR LIBRANZA     
+           IF PER-20-EXIST-NIT = 0 AND GARANTE-ABD07 = 0
+              MOVE ZEROS TO 00NUM998TO020
+              IF NOV-REPORT-ABD07 = 45
+                 MOVE 1 TO 00NUM998TO020
+              END-IF
+           END-IF
+
+REMARK*** 02NUM999TO020 *** CARTERAS CASTIGADAS SECTOR LIBRANZA     
+           IF FUNCTION NUMVAL(00NUM999TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM999TO020(1:4)) < 0
+                 MOVE ZEROS TO 02NUM999TO020
+              END-IF
+              COMPUTE 02NUM999TO020 = 02NUM999TO020 + 00NUM999TO020
+           ELSE
+              IF FUNCTION NUMVAL(02NUM999TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999TO020(1:4)) <
+                  FUNCTION NUMVAL(02NUM999TO020(1:4))
+                  MOVE 00NUM999TO020(1:4) TO 02NUM999TO020(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02NUM998TO020 *** CARTERAS CASTIGADAS OTRO SECTOR
+           IF FUNCTION NUMVAL(00NUM998TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM998TO020(1:4)) < 0
+                 MOVE ZEROS TO 02NUM998TO020
+              END-IF
+              COMPUTE 02NUM998TO020 = 02NUM998TO020 + 00NUM998TO020
+           ELSE
+              IF FUNCTION NUMVAL(02NUM998TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM998TO020(1:4)) <
+                  FUNCTION NUMVAL(02NUM998TO020(1:4))
+                  MOVE 00NUM998TO020(1:4) TO 02NUM998TO020(1:4)
+               END-IF
+              END-IF
+           END-IF
+          END-IF.
+        
+       2249-PROCESE-CARCT-00MOR-EXT-20.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-20.
+REMARK*     CALCULA CARACTERISTICAS DE NIVEL 00MOR Y 02MOR COONALRECAUDO
+REMARK******************************************************************
+          IF COD-PORTAF-CARACT <> "AH" AND <> "CT"
+           MOVE ALL "  -1" TO PER-20-NIVEL-00-MOR
+REMARK*** 00MOR999TO020 *** MORAS MAYORES A 090 EN ULTIMOS  3 MESES
+REMARK*** 00MOR998TO020 *** MORAS MENOR O IGUAL A 090 EN ULTIMOS 3 MESES
+           MOVE 0 TO P-CARACT
+           IF GARANTE-ABD07 = 0
+              MOVE ZEROS TO 00MOR999TO020 00MOR998TO020
+              IF ACT-DATE-CARACT > ZEROS AND 
+                 FECHA-ESTADO-CARACT > ZEROS
+                 IF (REG-ABIERTO-CARACT = 1 AND
+                     MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 3)
+                   IF MESES-DESAC-CARACT < 0
+                      MOVE 0 TO P-CARACT
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT
+                   END-IF
+                   COMPUTE I-CARACT = (49 - P-CARACT - 2 )
+                   PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                           J-CARACT > ( 49 - P-CARACT )
+                      IF V-NOR-CARACT(J-CARACT:1) = 4 OR 6
+                         COMPUTE 00MOR999TO020 = 00MOR999TO020 + 1
+                      END-IF
+                      IF V-NOR-CARACT(J-CARACT:1) = 1 OR 2 OR 3
+                         COMPUTE 00MOR998TO020 = 00MOR998TO020 + 1
+                      END-IF
+                   END-PERFORM
+                 ELSE
+                    MOVE "  -4" TO 00MOR999TO020(1:4)
+                    MOVE "  -4" TO 00MOR998TO020(1:4)
+                 END-IF
+              ELSE
+                 MOVE "  -3" TO 00MOR999TO020(1:4)
+                 MOVE "  -3" TO 00MOR998TO020(1:4)
+              END-IF
+           END-IF
+
+REMARK*** 02MOR999TO020 *** MORAS MAYORES A 090 EN ULTIMOS  3 MESES
+           IF FUNCTION NUMVAL(00MOR999TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR999TO020(1:4)) < 0
+                 MOVE ZEROS TO 02MOR999TO020
+              END-IF
+              COMPUTE 02MOR999TO020 = 02MOR999TO020 + 00MOR999TO020
+           ELSE
+              IF FUNCTION NUMVAL(02MOR999TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999TO020(1:4)) <
+                  FUNCTION NUMVAL(02MOR999TO020(1:4))
+                  MOVE 00MOR999TO020(1:4) TO 02MOR999TO020(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR998TO020 *** MORAS MENOR O IGUAL A 090 EN ULTIMOS 3 MESES
+           IF FUNCTION NUMVAL(00MOR998TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO020(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO020
+              END-IF
+              COMPUTE 02MOR998TO020 = 02MOR998TO020 + 00MOR998TO020
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO020(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO020(1:4))
+                  MOVE 00MOR998TO020(1:4) TO 02MOR998TO020(1:4)
+               END-IF
+              END-IF
+           END-IF
+          END-IF.
+
+       4249-PROCESE-CARCT-00INQ-EXT-20.
+REMARK******************************************************************
+REMARK*4249-PROCESE-CARCT-00INQ-EXT-20.
+REMARK*     CALCULA CARACTERISTICAS DE NIVEL 00INQ Y 01INQ COONALRECAUDO
+REMARK******************************************************************
+           MOVE ZEROS TO 00INQ999TO020 00INQ998TO020
+           MOVE 0 TO PER-20-EXIST-NIT
+           SET PER-20-I TO 1
+           SEARCH ALL PER-20-TABLA-NIT AT END
+                MOVE 0 TO PER-20-EXIST-NIT
+             WHEN PER-20-TAB-NIT(PER-20-I) = NIT-SUSCRIP-S-ABD02
+                MOVE 1 TO PER-20-EXIST-NIT
+           END-SEARCH
+           IF PER-20-EXIST-NIT = 1
+              IF PER-20-TAB-TOT(PER-20-I) = 0
+                 IF PER-20-TAB-CTA1(PER-20-I) <> COD-TIPCTA-ABD02 AND
+                    PER-20-TAB-CTA2(PER-20-I) <> COD-TIPCTA-ABD02 AND
+                    PER-20-TAB-CTA3(PER-20-I) <> COD-TIPCTA-ABD02 AND
+                    PER-20-TAB-CTA4(PER-20-I) <> COD-TIPCTA-ABD02 AND
+                    PER-20-TAB-CTA5(PER-20-I) <> COD-TIPCTA-ABD02 
+                    MOVE 0 TO PER-20-EXIST-NIT
+                 END-IF
+              END-IF
+           END-IF
+REMARK*** 00INQ999TO020 *** NUMERO CONSULTAS ULTIMOS 2 MESES LIBRANZAS
+           IF PER-20-EXIST-NIT = 1
+              IF MESES-CONST-CARACT >= 0 AND <= 2
+                 MOVE 1 TO 00INQ999TO020
+              END-IF
+           END-IF
+REMARK*** 00INQ998TO020 *** NUMERO CONSULTAS ULTIMOS 2 MESES OTRO SECT
+           IF PER-20-EXIST-NIT = 0
+              IF MESES-CONST-CARACT >= 0 AND <= 2
+                 MOVE 1 TO 00INQ998TO020
+              END-IF
+           END-IF
+REMARK*** 01INQ999TO020 *** NUMERO CONSULTAS ULTIMOS 2 MESES LIBRANZAS
+           IF FUNCTION NUMVAL(00INQ999TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(01INQ999TO020(1:4)) < 0
+                 MOVE ZEROS TO 01INQ999TO020
+              END-IF
+              COMPUTE 01INQ999TO020 = 01INQ999TO020 + 00INQ999TO020
+           ELSE
+              IF FUNCTION NUMVAL(01INQ999TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00INQ999TO020(1:4)) <
+                  FUNCTION NUMVAL(01INQ999TO020(1:4))
+                  MOVE 00INQ999TO020(1:4) TO 01INQ999TO020(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 01INQ998TO020 *** NUMERO CONSULTAS ULTIMOS 2 MESES OTRO SECT
+           IF FUNCTION NUMVAL(00INQ998TO020(1:4)) >= 0
+              IF FUNCTION NUMVAL(01INQ998TO020(1:4)) < 0
+                 MOVE ZEROS TO 01INQ998TO020
+              END-IF
+              COMPUTE 01INQ998TO020 = 01INQ998TO020 + 00INQ998TO020
+           ELSE
+              IF FUNCTION NUMVAL(01INQ998TO020(1:4)) < 0
+               IF FUNCTION NUMVAL(00INQ998TO020(1:4)) <
+                  FUNCTION NUMVAL(01INQ998TO020(1:4))
+                  MOVE 00INQ998TO020(1:4) TO 01INQ998TO020(1:4)
+               END-IF
+              END-IF
+           END-IF.
+

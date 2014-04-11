@@ -1,0 +1,147 @@
+      * MAECTEA.FD.V.02.0001           
+      * MAESTRO DEL MES INMEDIATAMENTE ANTERIOR ENTREGADO POR UN SUSCRIP        
+      * EN PARTICULAR        
+      * MODIFICADO SEGUN COMUNICADOS Y SUGERENCIAS DE DATACREDITO Y ES S        
+      * PARA CUENTAS ORRIENTES        
+      * CBIT - MAYO DE 2009        
+      ******************************************************************        
+       FD  ANTERI        
+           BLOCK CONTAINS 40 RECORDS.        
+       01  REG1-ANTERIOR.	        
+           03  COD-SUSCRIPTOR-CEROS-ANTERIOR  	  PIC X(18).        
+           03  COD-SUSCRIPTOR-ANTERIOR        	  PIC 9(6).        
+           03  COD-TIP-CUENTA-ANTERIOR        	  PIC 9(2).        
+           03  FECHA-NOVEDADES-ANTERIOR.        
+               05 DIA-NOVEDADES-ANTERIOR      	  PIC 99.        
+               05 MES-NOVEDADES-ANTERIOR          PIC 99.        
+               05 SIG-NOVEDADES-ANTERIOR      	  PIC 99.        
+               05 ANO-NOVEDADES-ANTERIOR      	  PIC 99.        
+           03  FECHA-NOVEDADES-ANTERIOR-M          
+               REDEFINES FECHA-NOVEDADES-ANTERIOR.        
+               05 SIG-NOVEDADES-ANTERIOR-M    	  PIC 99.        
+               05 ANO-NOVEDADES-ANTERIOR-M    	  PIC 99.        
+               05 MES-NOVEDADES-ANTERIOR-M    	  PIC 99.        
+               05 DIA-NOVEDADES-ANTERIOR-M    	  PIC 99.        
+           03  IND-MILENIO-ANTERIOR           	  PIC X.                         
+           03  IND-VALORES-MIL-ANTERIOR           PIC X.                        
+           03  RESTO-REG1-ANTERIOR             	  PIC X(764).                   
+           03  FILLER-ANTERIOR-R REDEFINES RESTO-REG1-ANTERIOR.                 
+               05  FILLER-ANTERIOR-R1         	  PIC X(653).                    
+               05  IND-TIPO-ENTREGA-ANTERIOR      PIC X.                        
+               05  FEC-INI-REPOR-ANTERIOR         PIC 9(8).                     
+               05  FEC-INI-REPOR-ANTERIOR-R         
+                   REDEFINES FEC-INI-REPOR-ANTERIOR. 		
+                   07 SIG-INI-REP-ANTERIOR        PIC 99.                       
+                   07 ANO-INI-REP-ANTERIOR        PIC 99.                       
+                   07 MES-INI-REP-ANTERIOR        PIC 99.                       
+                   07 DIA-INI-REP-ANTERIOR        PIC 99.                       
+               05  FEC-FIN-REPOR-ANTERIOR         PIC 9(8).                     
+               05  FEC-FIN-REPOR-ANTERIOR-R         
+                   REDEFINES FEC-FIN-REPOR-ANTERIOR.                            
+                   07 SIG-FIN-REP-ANTERIOR        PIC 99.                       
+                   07 ANO-FIN-REP-ANTERIOR        PIC 99.                       
+                   07 MES-FIN-REP-ANTERIOR        PIC 99.                       
+                   07 DIA-FIN-REP-ANTERIOR        PIC 99.                       
+               05 IND-DATACLI-ANTERIOR            PIC X.                        
+               05  FECHA-RECEPCION-ANTERIOR   	  PIC 9(8).                      
+               05  CALIFIC-DIRRES-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-DIRLAB-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-DIRCOR-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-TOTDIR-ANTERIOR    	  PIC 999V99.                    
+               05  TOTAL-REGDIR-ANTERIOR      	  PIC 9(8).                      
+               05  CALIFIC-FINAL-ANTERIOR     	  PIC 999V99.                    
+               05  CALIFIC-GRUPO1-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-GRUPO2-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-GRUPO3-ANTERIOR    	  PIC 999V99.                    
+               05  CALIFIC-TOTAL-ANTERIOR     	  PIC 999V99.                    
+               05  FECHA-CALIFIC-ANTERIOR     	  PIC 9(8).                      
+               05  NUM-SEGURIDAD-ANTERIOR     	  PIC 9(4).                      
+               05  IND-PROG-CALIFIC-ANTERIOR  	  PIC X(02).                     
+               05  IND-CONVERSION-ANTERIOR    	  PIC X(01).                     
+               05  FILLER-ANTERIOR            	  PIC X(02).                     
+               05  IND-VISOR-ANTERIOR         	  PIC X(15).                     
+       01  REG2-ANTERIOR.        
+           03  TIPO-IDEN-ANTERIOR            	  PIC 9.        
+           03  NUM-ID-ANTERIOR              	  PIC 9(11).        
+           03  NUM-CTA-ANTERIOR             	  PIC X(18).        
+           03  NUM-CTA16-ANTERIOR            
+               REDEFINES NUM-CTA-ANTERIOR.                       
+               05 NUM-CTA-VEN-ANTERIOR    	  PIC 9(16).         
+               05 GARANTE-VEN-ANTERIOR   	  PIC 99.            
+           03  NOMBRE-COMP-ANTERIOR               PIC X(45).        
+           03  SIT-TITULAR-ANTERIOR               PIC 9.        
+           03  FECHA-APERT-ANTERIOR               PIC X(8).        
+           03  FECHA-APERT-ANTERIOR-M          
+               REDEFINES FECHA-APERT-ANTERIOR.        
+               05 S-APE-ANTERIOR-M                PIC 9(2).        
+               05 A-APE-ANTERIOR-M                PIC 9(2).        
+               05 M-APE-ANTERIOR-M                PIC 9(2).        
+               05 D-APE-ANTERIOR-M                PIC 9(2).        
+           03  NOVEDAD-ANTERIOR                   PIC 9(2).        
+           03  FECHA-NOV-ANTERIOR                 PIC X(8).        
+           03  FECHA-NOV-ANTERIOR-M        
+               REDEFINES FECHA-NOV-ANTERIOR.        
+               05 S-FNOV-ANTERIOR-M               PIC 9(2).        
+               05 A-FNOV-ANTERIOR-M               PIC 9(2).        
+               05 M-FNOV-ANTERIOR-M               PIC 9(2).        
+               05 D-FNOV-ANTERIOR-M               PIC 9(2).        
+           03  ADJETIVO-ACTUAL-1-ANTERIOR      	  PIC 9.        
+           03  TIPO-MONEDA-ANTERIOR           	  PIC 9.                         
+      *    03  CALIFICACION-ANTERIOR          	  PIC 9.                         
+      	   03  CALIFICACION-ANTERIOR          	  PIC X.                          
+           03  CLASE-CTA-ANTERIOR             	  PIC 9.        
+           03  IND-SOBREGIRO-ANTERIOR         	  PIC 9.        
+           03  TOT-DEBI-EFEC-ANTERIOR         	  PIC 9(11).        
+           03  TOT-CRED-EFEC-ANTERIOR         	  PIC 9(11).        
+           03  TOT-DEBI-TRANS-ANTERIOR        	  PIC 9(11).        
+           03  TOT-CRED-TRANS-ANTERIOR        	  PIC 9(11).        
+           03  CANT-CHEQ-DEV-ANTERIOR         	  PIC 9(3).        
+           03  CANT-CHEQ-PAG-ANTERIOR         	  PIC 9(3).        
+           03  VLR-TOT-CHEQ-DEV-ANTERIOR      	  PIC 9(11).        
+           03  VLR-TOT-CHEQ-PAG-ANTERIOR      	  PIC 9(11).        
+           03  CUPO-SOBREG-AUTO-ANTERIOR      	  PIC 9(11).        
+           03  DIAS-SOBREG-AUTO-ANTERIOR      	  PIC 9(3).        
+           03  FECHA-CUPO-ANTERIOR                PIC X(8).        
+           03  FECHA-CUPO-ANTERIOR-M          
+               REDEFINES FECHA-CUPO-ANTERIOR.        
+               05 S-FCUPO-ANTERIOR-M   	          PIC 9(2).        
+               05 A-FCUPO-ANTERIOR-M   	   	  PIC 9(2).        
+               05 M-FCUPO-ANTERIOR-M   	          PIC 9(2).        
+               05 D-FCUPO-ANTERIOR-M           	  PIC 9(2).        
+           03  OFICINA-RADICACION-ANTERIOR    	  PIC X(30).                     
+           03  CIUDAD-RADICACION-ANTERIOR     	  PIC X(30).                     
+           03  COD-DANE-CIU-RADI-ANTERIOR     	  PIC 9(8).        
+           03  CIUDAD-RESIDENCIA-ANTERIOR     	  PIC X(20).                     
+           03  COD-DANE-CIU-RESI-ANTERIOR     	  PIC 9(8).        
+           03  DEPARTAMENTO-RESI-ANTERIOR     	  PIC X(20).        
+           03  DIREC-RESIDENCIA-ANTERIOR     	  PIC X(60).         
+           03  TELEF-RESIDENCIA-ANTERIOR     	  PIC 9(12).        
+           03  CIUDAD-LABORAL-ANTERIOR        	  PIC X(20).                     
+           03  COD-DANE-CIU-LABO-ANTERIOR     	  PIC 9(8).        
+           03  DEPARTAMENTO-LABO-ANTERIOR    	  PIC X(20).        
+           03  DIREC-LABORAL-ANTERIOR        	  PIC X(60).        
+           03  TELEF-LABORAL-ANTERIOR        	  PIC 9(12).       
+           03  CIUDAD-CORRESP-ANTERIOR        	  PIC X(20).                     
+           03  COD-DANE-CIU-CORR-ANTERIOR    	  PIC 9(8).        
+           03  DEPARTAMENTO-CORR-ANTERIOR     	  PIC X(20).        
+           03  DIREC-CORRESP-ANTERIOR         	  PIC X(60).                     
+           03  CORREO-ELECT-ANTERIOR          	  PIC X(60).        
+           03  TELEF-CELULAR-ANTERIOR         	  PIC 9(12).        
+           03  RESTO-REG2-ANTERIOR             	  PIC X(119).                   
+       01  REGISTRO3-ANTERIOR.                                                  
+           03  IDENTIFICADOR-ANTERIOR             PIC X(18).                    
+           03  FECHA-PROCESO-ANTERIOR.                                          
+               05 DIA-PROCESO-ANTERIOR            PIC 9(2).                     
+               05 MES-PROCESO-ANTERIOR            PIC 9(2).                     
+               05 SIG-PROCESO-ANTERIOR            PIC 9(2).                     
+               05 ANO-PROCESO-ANTERIOR            PIC 9(2).                     
+           03  FECHA-PROCESO-ANTERIOR-M          
+               REDEFINES FECHA-PROCESO-ANTERIOR.                                
+               05 SIG-PROCESO-ANTERIOR-M          PIC 9(2).                     
+               05 ANO-PROCESO-ANTERIOR-M          PIC 9(2).                     
+               05 MES-PROCESO-ANTERIOR-M          PIC 9(2).                     
+               05 DIA-PROCESO-ANTERIOR-M          PIC 9(2).                     
+           03  NUM-REGISTROS-ANTERIOR             PIC 9(8).                     
+           03  SUMA-NOVEDADES-ANTERIOR            PIC 9(8).                     
+           03 RESTO-REG3-ANTERIOR                 PIC X(758).                   
+      ******************************************************************        

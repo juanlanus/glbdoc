@@ -1,0 +1,8 @@
+      * DTCNHAB-FD.v.0001
+REMARK******************************************************************
+REMARK* ARCHIVO CON FECHAS NO HABILES, SE INCLUYEN SABADOS Y DOMINGOS  *
+REMARK******************************************************************
+       FD  DTCNHAB.
+       01  REG-DTCNHAB.
+           03 LLAVE-DTCNHAB.
+              05 FECHA-DTCNHAB       PIC 9(08).

@@ -1,0 +1,7 @@
+REMARK* FRARED-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE CONTIENE LAS TABLAS QUE IMPLEMENTAN  
+REMARK* LAS RED NEURONAL DE EVIDENTE II                                
+REMARK******************************************************************
+       FD  FRARED.
+       01  REG-FRARED                PIC X(100).

@@ -1,0 +1,22 @@
+      * ICBDIM.v.01.0001.0001
+      *=================================================================
+      * ESTRUCTURA DEL ARCHIVO DE CARGA CONSUMIDORES Y DATACAS 
+      *=================================================================
+      *
+      *================================================================*=
+       FD  ICBDIM.
+       01  REG-ICBDIM.
+           03 LLAVE-ICBDIM.
+              05 TIPO-IDEN-ICBDIM         PIC 9(01).
+              05 NUM-ID-ICBDIM            PIC 9(11).
+              05 ORIGEN-ICBDIM            PIC 9(01).
+           03 E-MAIL-ICBDIM               PIC X(40).
+           03 TEL-CEL-ICBDIM              PIC 9(12).
+           03 FECHA-APERT-ICBDIM.         
+              05 A-FAPE-ICBDIM            PIC 9(04).
+              05 M-FAPE-ICBDIM            PIC 9(02).
+              05 D-FAPE-ICBDIM            PIC 9(02).
+           03 FECHA-ACT-ICBDIM.           
+              05 A-ACT-ICBDIM             PIC 9(04).
+              05 M-ACT-ICBDIM             PIC 9(02).
+              05 D-ACT-ICBDIM             PIC 9(02).

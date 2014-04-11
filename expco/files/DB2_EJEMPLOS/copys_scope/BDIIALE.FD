@@ -1,0 +1,30 @@
+REMARK* BDIIALE-FD.v01.0003.
+REMARK* MAESTRO DE ALERTAS REPORTADAS POR SUSCRIPTORES                   
+REMARK*----------------------------------------------------------------*
+EMARK******************************************************************
+REMARK* RMB0003   * CIU001: SE INCLUYE EL CODIGO DE LA ALERTA DENTRO DE  
+REMARK* R.MARTINEZ* LA LLAVE, SE CAMBIA LA LONGITUD DE LLAVE-SECUNDARIA  
+REMARK* OCTUB/2006* Y SE MANEJAN ALERTAS DE TEXTO FIJO 
+REMARK******************************************************************
+
+       FD BDIIALE.
+       01 REG-BDIIALE.
+          02 LLAVE-BDIIALE.
+             03 TIP-IDE-BDIIALE        PIC 9(01).
+             03 NUM-IDE-BDIIALE        PIC 9(11).
+             03 FUENTE-BDIIALE         PIC 9(06).
+CIU001       03 COD-ALERTA-BDIIALE     PIC 9(03).                       RMB0003 
+CIU001       03 LLASEC-BDIIALE         PIC X(08).                       RMB0003 
+          02 ENCABEZADO-BDIIALE.
+CIU001       03 FEC-NOV-BDIIALE        PIC 9(08).                       RMB0003 
+CIU001       03 FEC-VEN-BDIIALE        PIC 9(08).                       RMB0003 
+CIU001       03 FEC-REP-BDIIALE        PIC 9(08).                       RMB0003 
+             03 BLOQUEO-BDIIALE        PIC 9(01).
+CIU001       03 FILLER-BDIIALE         PIC X(10).                       RMB0003 
+CIU001       03 INF-DATAHOST-BDIIALE   PIC X(18).                       RMB0003 
+CIU001       03 LINEAS-BDIIALE.                                         RMB0003
+CIU001          04 LINEA1-BDIIALE      PIC X(50).                       RMB0003 
+CIU001          04 LINEA2-BDIIALE      PIC X(50).                       RMB0003 
+CIU001       03 FILLER REDEFINES LINEAS-BDIIALE.                        RMB0003 
+CIU001          04 DATOS-BDIIALE       PIC X(100).                      RMB0003 
+

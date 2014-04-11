@@ -1,0 +1,12 @@
+      * NOAMNISTIA21-FD.v.0001
+      * ARCHIVO DE IDENTIFICACIONES A LAS CUALES NO APLICA LA
+      * AMNISTIA POR QUE TODOS SUS REGISTROS SE ENCUENTRAN AL DIA
+      ******************************************************************
+      ******************************************************************
+       FD  NOAMNISTIA21.
+       01  REG-NOAMNISTIA21.
+           03 LLAVE-NOAMNISTIA21.
+              05  TIPO-ID-NOAMNISTIA21      PIC 9(01).
+              05  NUM-ID-NOAMNISTIA21       PIC 9(11).
+           03  FECHA-CREA-NOAMNISTIA21      PIC 9(08).
+           03  FILLER                       PIC X(10).

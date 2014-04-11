@@ -1,0 +1,123 @@
+      *RUCOMER.V.0001        
+REMARK**********************************************************************
+REMARK* SCOTRUCOMER.PROC
+REMARK* RUTINA QUE PERMITE CALCULAS LAS SIGUIENTES CARACTERISTICAS Y VARIABLES
+REMARK* INICIALMENTE PARA PARAMETRIZADOR ICGSRC
+REMARK**********************************************************************
+       5000-TRU-CALCULA-CARAC-VAR.        
+           PERFORM 5000-TRU-SCORING-TOTAL.        
+              
+       5000-TRU-USU-CKXXX.        
+           PERFORM 5000-TRU-CAR-CKXXX.        
+       5000-TRU-USU-GDXXX.        
+           PERFORM 5000-TRU-CAR-GDXXX.        
+       5000-TRU-USU-IQXXX.        
+           PERFORM 5000-TRU-CAR-IQXXX.        
+       5320-TRU-USU-CTACAR.        
+           PERFORM 0050-CARTERA        
+           PERFORM 5320-TRU-CAR-CTACAR.        
+       5000-TRU-USU-FINSCO.        
+            PERFORM 5000-TRU-BUS-IDENTIDAD.        
+            PERFORM 5000-TRU-CAR-CONSOLIDAR.        
+          INITIALIZE ADV-ACIERTA-PLUS.                                          
+          MOVE 0 TO P-SCORE-CARD.                                               
+          IF IQ01X(4)(1:3) NOT =  IQ014                                         
+             DISPLAY "INCONSISTENCIA1  EN SISTEMA"                              
+             DISPLAY "IQ01X(4)=",IQ01X(4)                                       
+             DISPLAY "IQ014   =",IQ014                                          
+          END-IF.                                                               
+          MOVE 1 TO I.                                                          
+          PERFORM UNTIL I > 408                                                 
+             IF V-CARTERAS(I) NOT NUMERIC                                       
+                MOVE 000 TO V-TCARTERAS(I)                                      
+             ELSE                                                               
+                MOVE V-CARTERAS(I) TO V-TCARTERAS(I)                            
+             END-IF                                                             
+             ADD 1 TO I                                                         
+          END-PERFORM.                                                          
+          IF V-CARTERAS(408) NOT NUMERIC                                        
+             IF TCP103 NOT = 0                                                  
+                DISPLAY "INCONSISTENCIA2 EN SISTEMA"                            
+                DISPLAY "V-CARTERAS(408)=",V-CARTERAS(408)                      
+                DISPLAY "TCP103       =",TCP103                                 
+             END-IF                                                             
+          ELSE                                                                  
+             IF TCP103 NOT = V-CARTERAS(408)                                    
+                DISPLAY "INCONSISTENCIA3 EN SISTEMA"                            
+                DISPLAY "V-CARTERAS(408)=",V-CARTERAS(408)                      
+                DISPLAY "TCP103       =",TCP103                                 
+             END-IF                                                             
+          END-IF.                                                               
+      *   VARIABLES NO CONVERTIDAS EN LA PARTE AUTOMATICA                       
+          IF CR104 NUMERIC MOVE CR104 TO TCR104.                                
+          IF BS104 NUMERIC MOVE BS104 TO TBS104.                                
+          IF CC104 NUMERIC MOVE CC104 TO TCC104.                                
+          IF OT104 NUMERIC MOVE OT104 TO TOT104.                                
+          IF MT104 NUMERIC MOVE MT104 TO TMT104.                                
+          IF CR105 NUMERIC MOVE CR105 TO TCR105.                                
+          IF BS105 NUMERIC MOVE BS105 TO TBS105.                                
+          IF CC105 NUMERIC MOVE CC105 TO TCC105.                                
+          IF OT105 NUMERIC MOVE OT105 TO TOT105.                                
+          IF MT105 NUMERIC MOVE MT105 TO TMT105.                                
+          IF CR041 NOT NUMERIC MOVE 999 TO TCR041.                              
+          IF CR100 NOT NUMERIC MOVE 999 TO TCR100.                              
+          IF CR101 NOT NUMERIC MOVE 999 TO TCR101.                              
+          IF CR102 NOT NUMERIC MOVE 999 TO TCR102.                              
+          IF CR103 NOT NUMERIC MOVE 999 TO TCR103.                              
+          IF CR104 NOT NUMERIC MOVE 999 TO TCR104.                              
+          IF CR105 NOT NUMERIC MOVE 999 TO TCR105.                              
+          IF BS041 NOT NUMERIC MOVE 999 TO TBS041.                              
+          IF BS100 NOT NUMERIC MOVE 999 TO TBS100.                              
+          IF BS101 NOT NUMERIC MOVE 999 TO TBS101.                              
+          IF BS102 NOT NUMERIC MOVE 999 TO TBS102.                              
+          IF BS103 NOT NUMERIC MOVE 999 TO TBS103.                              
+          IF BS104 NOT NUMERIC MOVE 999 TO TBS104.                              
+          IF BS105 NOT NUMERIC MOVE 999 TO TBS105.                              
+          IF CC041 NOT NUMERIC MOVE 999 TO TCC041.                              
+          IF CC100 NOT NUMERIC MOVE 999 TO TCC100.                              
+          IF CC101 NOT NUMERIC MOVE 999 TO TCC101.                              
+          IF CC102 NOT NUMERIC MOVE 999 TO TCC102.                              
+          IF CC103 NOT NUMERIC MOVE 999 TO TCC103.                              
+          IF CC104 NOT NUMERIC MOVE 999 TO TCC104.                              
+          IF CC105 NOT NUMERIC MOVE 999 TO TCC105.                              
+          IF OT041 NOT NUMERIC MOVE 999 TO TOT041.                              
+          IF OT100 NOT NUMERIC MOVE 999 TO TOT100.                              
+          IF OT101 NOT NUMERIC MOVE 999 TO TOT101.                              
+          IF OT102 NOT NUMERIC MOVE 999 TO TOT102.                              
+          IF OT103 NOT NUMERIC MOVE 999 TO TOT103.                              
+          IF OT104 NOT NUMERIC MOVE 999 TO TOT104.                              
+          IF OT105 NOT NUMERIC MOVE 999 TO TOT105.                              
+          IF MT041 NOT NUMERIC MOVE 999 TO TMT041.                              
+          IF MT100 NOT NUMERIC MOVE 999 TO TMT100.                              
+          IF MT101 NOT NUMERIC MOVE 999 TO TMT101.                              
+          IF MT102 NOT NUMERIC MOVE 999 TO TMT102.                              
+          IF MT103 NOT NUMERIC MOVE 999 TO TMT103.                              
+          IF MT104 NOT NUMERIC MOVE 999 TO TMT104.                              
+          IF MT105 NOT NUMERIC MOVE 999 TO TMT105.                              
+      ************** OTRAS VARIABLES A CONVERTIR *********************          
+REMARK*   ESTAS VARIABLES SE CONVIERTEN ANTES DE CADA PREGUNTA PARA
+REMARK*   EVITAR LAS FALTA DE CONVERSION                             *
+      ************** OTRAS VARIABLES A CONVERTIR *********************          
+      *   IF AT124 NUMERIC MOVE AT124 TO TAT124 ELSE MOVE 0 TO TAT124.          
+      *   IF CC111 NUMERIC MOVE CC111 TO TCC111 ELSE MOVE 0 TO TCC111.          
+      *   IF IQ001 NUMERIC MOVE IQ001 TO TIQ001 ELSE MOVE 0 TO TIQ001.          
+      *   IF IQ002 NUMERIC MOVE IQ002 TO TIQ002 ELSE MOVE 0 TO TIQ002.          
+REMARK**********************FIN CONVERSION A NUMERICO DE VARIABLES *******
+REMARK* SE CALCULAN LAS VARIABLES INICIALES QUE DECIDEN EN QUE SCORE CARD*
+REMARK* SE CLASIFICA LA PERSONA A SER ANALIZADA                          *
+REMARK********************************************************************
+          MOVE FECHA-RUN-DATE(1:4) TO M-ANO(1:4).                               
+          IF M-ANO >= 1990 AND M-ANO <= 2009 AND P-MUESTRA = 0                  
+             COMPUTE M-IANO = M-ANO - 1989                                      
+             COMPUTE P-INDEX = 385 / M-SALMINIMO(M-IANO)                        
+          ELSE                                                                  
+             MOVE 1 TO P-INDEX                                                  
+          END-IF                                                                
+          COMPUTE P-SUM001 = TCR001 + TBS001 + TCC001 + TOT001 + TMT001.        
+          PERFORM 12001-P-RECDEL-DECDELP.                                       
+          PERFORM 11820-VAR-SPLITS-P.                                           
+      *** COMPUTE SUM050 = TCR050 + TBS050 + TCC050 + TOT050.        
+          COMPUTE SUM050 = TCR050 + TBS050 + TCC050 + TOT050 +        
+                           TMT050 + TCP050.        
+                 
+              

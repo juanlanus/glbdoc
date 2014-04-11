@@ -1,0 +1,64 @@
+REMARK*BDALOSFX.v03.001.
+      *----------------------------------------------------------------*
+      *ESTRUCTURA DE LOG DE CLAVES UNIX GENERADAS EN ARCHIVO ICBCLA
+      *SOLAMENTE PARA LOS CAMPOS UTILIZADOS EN LA IMPRESIÓN DEL SOBREFLEX.
+      *----------------------------------------------------------------*
+       FD  BDALOSFX.
+       01  REG-BDALOSFX.
+           03 LLAVE-BDALOSFX.
+              05 NUM-CONSEC-BDALOSFX           PIC 9(5).
+           03 FILLER01-BDALOSFX                PIC X.
+           03 COD-SUSC-BDALOSFX                PIC 9(6).
+           03 FILLER02-BDALOSFX                PIC X.
+           03 CLAVE-TOT-BDALOSFX.
+              05 COD-NUM-BDALOSFX              PIC 9(2).
+              05 COD-CLAV-BDALOSFX             PIC X(3).
+           03 FILLER1-BDALOSFX                 PIC X.
+           03 NOM-SUS-BDALOSFX                 PIC X(40).
+           03 FILLER2-BDALOSFX                 PIC X.
+           03 NOM-DUEN-BDALOSFX                PIC X(24).
+           03 FILLER3-BDALOSFX                 PIC X.
+           03 NOM-OFIC-BDALOSFX                PIC X(15).
+           03 FILLER4-BDALOSFX                 PIC X.
+           03 COD-CIUD-BDALOSFX                PIC 9(3).
+           03 FILLER5-BDALOSFX                 PIC X.
+           03 ZONA-FAC-BDALOSFX                PIC 9(3).
+           03 FILLER50-BDALOSFX                PIC X.
+           03 IND-BLOQ-BDALOSFX                PIC X.
+           03 FILLER6-BDALOSFX                 PIC X.
+           03 IND-PRIV-BDALOSFX                PIC X.
+           03 FILLER7-BDALOSFX                 PIC X.
+           03 FEC-CREA-BDALOSFX                PIC 9(8).
+           03 FILLER8-BDALOSFX                 PIC X.
+           03 FEC-VENC-BDALOSFX                PIC 9(8).
+           03 FILLER9-BDALOSFX                 PIC X.
+           03 TAB-SCOR-BDALOSFX                PIC 9(10).
+           03 FILLER0-BDALOSFX                 PIC X.
+           03 SUBPRIVIL-BDALOSFX               PIC X.
+           03 FILLER10-BDALOSFX                PIC X.
+           03 BDU-BDALOSFX                     PIC X.
+           03 FILLER11-BDALOSFX                PIC X.
+           03 TIP-ID-BDALOSFX                  PIC 9(01).
+           03 FILLER12-BDALOSFX                 PIC X.
+           03 NUM-ID-BDALOSFX                  PIC 9(10).
+           03 FILLERA-BDALOSFX                 PIC X.
+           03 NOM-CIUDAD-BDALOSFX              PIC X(30).
+           03 FILLERB1-BDALOSFX                PIC X.
+           03 REGIONAL-BDALOSFX                PIC 9(3).
+           03 FILLERC1-BDALOSFX                PIC X.
+           03 FEC-BLOQUEO-BDALOSFX             PIC 9(8).
+           03 FILLERD1-BDALOSFX                PIC X.
+           03 FLAG-SISTEMA-BDALOSFX            PIC 9(1).
+           03 FILLERE1-BDALOSFX                PIC X.
+           03 PRODUC-BDALOSFX                  PIC 9(2).
+           03 FILLERF1-BDALOSFX                PIC X.
+           03 V-BDUS-BDALOSFX                  OCCURS 5 PIC X(3).
+           03 FILLERG1-BDALOSFX                PIC X.
+           03 FLAG-CONNOM-BDALOSFX             PIC X.
+           03 FILLERH1-BDALOSFX                PIC X.
+REMARK*LAS ADICIONES A ESTE ARCHIVO HACERLAS ANTES DE ESTE PUNTO
+           03 IND-REGI-BDALOSFX                PIC X.
+           03 FILLERB-BDALOSFX                 PIC X.
+           03 IND-EST-BDALOSFX                 PIC X.
+           03 FILLERC-BDALOSFX                 PIC X.
+           03 DES-EST-BDALOSFX                 PIC X(15).

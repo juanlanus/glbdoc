@@ -1,0 +1,21 @@
+      * EST001.v.02.002
+      * ARCHIVO QUE CONTIENE EL MAYOR NUMERO DE CEDULA GRABADO EN CADA 
+      * UNO DE LOS CUATRO ARCHIVOS FISICOS QUE FORMAN EL ARCHIVO DE LA
+      * REGISTRADURIA    
+000000 FD CEDULAS.                                                      GRB
+007500 01 REG-CEDULAS.                                                  GRB
+011710    03 NUMERO-CEDULA             PIC 9(11).                       GRB
+011300*----------------------------------------------------------------*
+004700 FD  FILERROR.                                                    GRB
+004800 01  REGS-ERRS.                                                   GRB
+000000     03 NUMFILE-ERRINP           PIC 9(2).                        GRB
+005000     03 FILLER                   PIC X.                           GRB
+000000     03 NUM-ARCHIVO-IDX          PIC 9(2).                        GRB
+005000     03 FILLER                   PIC X.                           GRB
+004900     03 REG-ERRADO               PIC 9(8).                        GRB
+005000     03 FILLER                   PIC X.                           GRB 
+004900     03 REG-REPETID              PIC 9(8).                        GRB
+005000     03 FILLER                   PIC X.                           GRB
+005100     03 CED-ERRADA               PIC X(12).                       GRB
+005200     03 FILLER                   PIC X.                           GRB
+005300     03 NOM-ERRADO               PIC X(56).                       GRB

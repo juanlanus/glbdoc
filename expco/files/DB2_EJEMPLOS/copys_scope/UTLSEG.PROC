@@ -1,0 +1,121 @@
+REMARK* UTLSEG.PROC.v.0001
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS QUE SE DEBEN MANEJAR
+REMARK* CUANDO CUALQUIER PROGRAMA REQUIERE QUE SE CALCULE O VERIFIQUE    
+REMARK* EL CODIGO DE SEGURIDAD QUE SE PRESENTA EN LA CONSULTA 
+REMARK*******************************************************************
+       5090-CALCULE-CODIGO-UTLSEG.              
+REMARK******************************************************************
+REMARK*5090-CODIGO-DE-SEGURIDAD.                                                
+REMARK* SE CALCULA EL CODIGO DE SEGURIDAD CON BASE A LA CEDULA Y SECUEN-        
+REMARK* ENCIA EN EL ICBTCO ASI: XXXZYYW DONDE XXX TRES ULTIMOS DIGITOS          
+REMARK* DEL ICBTCO , Z=PRIMER DIGITO DE LA CEDULA,W=UTLTIMO DIGITO,             
+REMARK* YY=SUMA DE DIGITOS ENCRIPTADOS CON LLAVE XXX. POR OTRO LADO             
+REMARK* SE TOMAN DE LA HORA LOS MILISEGUNDOS Y SE CALCULA UN MODULO 4           
+REMARK* PARA ENMASCAR LA SEMILLA XXX.                                           
+REMARK* INPUT     INPUT-NUMSEC-UTLSEG: SECUENCIA DIFERENCIADORA, EJ. DE         
+REMARK*                             ICBTCO                
+REMARK*           INPUT-NUMIDE-UTLSEG: IDENTIFICACION                
+REMARK* OUTPUT:   OUTPUT-CODSEG-UTLSEG : CODIGO DE SEGURIDAD                
+REMARK******************************************************************
+          ADD 1       TO INPUT-NUMSEC-UTLSEG                                    
+          MOVE INPUT-NUMIDE-UTLSEG(11:1) TO FRAU-W-UTLSEG                       
+          MOVE 0                 TO FRAU-Z-UTLSEG                               
+          MOVE 0                 TO FRAU-YY-UTLSEG                              
+          MOVE 1 TO I-UTLSEG                                                    
+          PERFORM UNTIL I-UTLSEG > 11                        
+            MOVE INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) TO FRAU-DIGITO-UTLSEG          
+            ADD FRAU-DIGITO-UTLSEG TO FRAU-YY-UTLSEG                    
+            IF INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) > 0 AND                 
+               FRAU-Z-UTLSEG = 0                        
+               MOVE INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) TO FRAU-Z-UTLSEG            
+            END-IF                                                              
+            ADD 1 TO I-UTLSEG                                                   
+          END-PERFORM.                                                          
+          MOVE FRAU-ICBTCO-3DIG-UTLSEG TO FRAU-XXX-UTLSEG                    
+          MOVE FRAU-ICBTCO-3DIG-UTLSEG TO SEMILLA3-UTLCRI.                      
+          MOVE FRAU-COD-PURO-UTLSEG    TO INPUT-UTLCRI.                         
+          PERFORM 0001-ENCRIPX-TRIPLE-UTLCRI.                                   
+          MOVE OUTPUT-UTLCRI TO FRAU-COD-ENCR-UTLSEG                         
+          ACCEPT HORA-AUX-SEC-UTLSEG FROM TIME                                  
+          MOVE 1 TO I-UTLSEG                                                    
+          PERFORM UNTIL I-UTLSEG > 4                                            
+            IF FRAU-COD-ENCR-UTLSEG(I-UTLSEG:1) = " "                           
+               MOVE FRAU-ENE-UTLSEG  TO FRAU-COD-ENCR-UTLSEG(I-UTLSEG:1)        
+            END-IF                                                              
+            ADD 1 TO I-UTLSEG                                                   
+          END-PERFORM.                                                          
+          MOVE 1 TO I-UTLSEG                                                    
+          PERFORM UNTIL I-UTLSEG > 3                                            
+            MOVE FRAU-XXX-UTLSEG(I-UTLSEG:1) TO FRAU-DIGITO-UTLSEG           
+            IF FRAU-DIGITO-UTLSEG = 0                                           
+               MOVE 10 TO J-UTLSEG                                              
+            ELSE                                                                
+               MOVE FRAU-DIGITO-UTLSEG TO J-UTLSEG                              
+            END-IF                                                              
+            DIVIDE HORA-AUX-SEC-UTLSEG BY 4 GIVING FRAU-DIV-UTLSEG             
+                   REMAINDER FRAU-RES-UTLSEG                
+            ADD 1 TO FRAU-RES-UTLSEG                                            
+            MOVE TAB2-MASCARA-UTLSEG(J-UTLSEG,FRAU-RES-UTLSEG) TO               
+                 FRAU-SEM-ENCR-UTLSEG(I-UTLSEG:1)                       
+            DIVIDE HORA-AUX-SEC-UTLSEG BY 10 GIVING HORA-AUX-SEC-UTLSEG         
+            ADD 1 TO I-UTLSEG                                                   
+          END-PERFORM.                                                          
+       5090-VERIFIQUE-CODIGO-UTLSEG.              
+REMARK******************************************************************
+REMARK*5090-VERIFIQUE-CODIGO-UTLSEG.                                            
+REMARK* SE VERIFICA QUE EL CODIGO DE SEGURIDAD CORRESPONDA A LA CEDULA          
+REMARK* POR HACER EL CHEQUEO.                                                   
+REMARK* INPUT     OUTPUT-CODSEG-UTLSEG: CODIGO DE SEGURIDAD                     
+REMARK*           INPUT-NUMIDE-UTLSEG: IDENTIFICACION                
+REMARK* OUTPUT:   OUTPUT-VERIFICACION-UTLSEG: 1=OK, 0=NO CORRESPONDE         
+REMARK******************************************************************
+             MOVE 111 TO SEMILLA3-UTLCRI        
+             MOVE 1 TO I-UTLSEG        
+             PERFORM UNTIL I-UTLSEG > 3        
+               MOVE OUTPUT-CODSEG-UTLSEG(I-UTLSEG:1) TO         
+                                                     FRAU-LETRA-UTLSEG        
+               IF FRAU-LETRA-UTLSEG NUMERIC        
+                  MOVE OUTPUT-CODSEG-UTLSEG (I-UTLSEG:1) TO        
+                                          SEMILLA3-UTLCRI(I-UTLSEG:1)        
+               ELSE        
+                  MOVE 1 TO J-UTLSEG        
+                  PERFORM UNTIL J-UTLSEG > 10        
+                    MOVE 2 TO K-UTLSEG        
+                    PERFORM UNTIL K-UTLSEG > 4        
+                      IF TAB2-MASCARA-UTLSEG(J-UTLSEG,K-UTLSEG) =        
+                                       OUTPUT-CODSEG-UTLSEG(I-UTLSEG:1)        
+                         MOVE J-UTLSEG TO FRAU-DIGITO-UTLSEG        
+                         MOVE FRAU-DIGITO-UTLSEG  TO        
+                                            SEMILLA3-UTLCRI(I-UTLSEG:1)        
+                      END-IF        
+                      ADD 1 TO K-UTLSEG        
+                    END-PERFORM        
+                    ADD 1 TO J-UTLSEG        
+                  END-PERFORM        
+               END-IF        
+               ADD 1 TO I-UTLSEG        
+             END-PERFORM        
+             MOVE INPUT-NUMIDE-UTLSEG (11:1) TO FRAU-W-UTLSEG        
+             MOVE 0 TO FRAU-Z-UTLSEG        
+             MOVE 0 TO FRAU-YY-UTLSEG        
+             MOVE 1 TO I-UTLSEG        
+             PERFORM UNTIL I-UTLSEG > 11        
+               MOVE INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) TO        
+                                                    FRAU-DIGITO-UTLSEG        
+               ADD FRAU-DIGITO-UTLSEG       TO FRAU-YY-UTLSEG        
+               IF INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) > 0 AND        
+                                                      FRAU-Z-UTLSEG = 0        
+                  MOVE INPUT-NUMIDE-UTLSEG(I-UTLSEG:1) TO FRAU-Z-UTLSEG        
+               END-IF        
+               ADD 1 TO I-UTLSEG        
+             END-PERFORM        
+             MOVE FRAU-COD-PURO-UTLSEG TO INPUT-UTLCRI        
+             PERFORM 0001-ENCRIPX-TRIPLE-UTLCRI        
+             MOVE OUTPUT-UTLCRI    TO FRAU-COD-ENCR-UTLSEG        
+             INSPECT  FRAU-COD-ENCR-UTLSEG REPLACING ALL " " BY        
+                                           FRAU-ENE-UTLSEG        
+             IF FRAU-COD-ENCR-UTLSEG(1:4) = OUTPUT-CODSEG-UTLSEG(4:4)        
+                MOVE 1 TO OUTPUT-VERIFICACION-UTLSEG          
+             ELSE        
+                MOVE 0 TO OUTPUT-VERIFICACION-UTLSEG          
+             END-IF.        

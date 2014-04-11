@@ -1,0 +1,762 @@
+REMARK* DIRECC.PROC.v.00016
+REMARK******************************************************************RMB0004
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* DIRECCIONES EN EL ASPECTO DE CREACION Y ACTUALIZACION
+REMARK*                                                                *RMB0004
+REMARK* RMB0004     * REMARK: SE DOCUMENTA LAS RUTINAS DEL COPY        *RMB0004
+REMARK* R.MARTINEZ. *                                                  *RMB0004
+REMARK* MAR.13/2002 *                                                  *RMB0004
+REMARK******************************************************************
+REMARK*FAC0004    * DIREC2 - SE DEJA MANEJO DE FILE STATUS             *
+REMARK*F.CUADROS  *          PARA CONTROLAR SI EL ARCHIVO ICBDIR       *
+REMARK*MAR.14/2002*          ABRE CORRECTAMENTE                        *
+REMARK******************************************************************
+REMARK*FAC0005    * DIREC5 - SE MODIFICA RUTINA PARA QUE ACTUALICE     *
+REMARK*F.CUADROS  *          TELEFONOS AJUSTADOS DIFERENTE PERO        *
+REMARK*MAR.20/2002*          SIN AFECTAR LAS FECHAS                    *
+REMARK******************************************************************
+REMARK*FAC0006    * HDIR01 - EN LA ACTUALIZACION DEL ARCHIVO DE DIREC- *
+REMARK*F.CUADROS  *          CIONES, SI ALGUNA CAMBIA, ANTES DE REES-  * 
+REMARK*MAR.06/2003*          CRIBIR SE CREAN EN UN ARCHIO HISTORICO    *
+REMARK******************************************************************
+REMARK* FAC0007     * AMPDIR * AMPLIACIÓN DE LA ESTRUCTURA DE ARCHIVOS*
+REMARK* F.CUADROS C.* ICBDIR Y BDUHDIR. SE AMPLIAN LOS TAMAÑOS DE LOS *
+REMARK* FEB.20/2006 * CAMPOS: TELÉFONOS, DIRECCIONES, CIUDADES, DPTOS.*
+***********************************************************************
+REMARK* FAC0008     * RCNCER * SE PERMITE MODIFICACIÓN DE REGISTROS   *
+REMARK* F.CUADROS C.* CON FECHA >= QUE LA FECHA ACTUAL SIEMPRE QUE LA *
+REMARK* JUL.13/2006 * FECHA FEC-ACTDIR-ABD02 DEL ICBSUS, SEA MENOR QUE*
+REMARK*             * LA FECHA DEL MAESTRO QUE SE ESTÁ ACTUALIZANDO.  *
+REMARK*             * AL CAMBIAR UNA DIRECCIÓN SE INICIALIZAN FLAGS   *
+REMARK*             * PARA CERTIFICACIÓN Y CAMPOS GEORREFERENCIACIÓN  *
+***********************************************************************
+REMARK* CAV0009      * BDACSV - INCLUIR INDICADOR PARA DETERMINAR SI  *
+REMARK* C VELASCO    *          EL REGISTRO CORRESPONDE A UNA CUENTA  *
+REMARK* AGO/27/2007  *          SIN VALIDAR IDENTIFICACION            *
+REMARK*****************************************************************
+REMARK* VHF0010      * FASEII - MODIFICAR RUTINAS PARA MANEJO DE FECHAS*
+REMARK* VICTOR HUGO  *          INDEPENDIENTES PARA CADA TIPO DE DATOS *
+REMARK* FORERO       *          DE LOCALIZACION                        *
+REMARK* JUL.28/2008  *                                                 *
+REMARK******************************************************************
+REMARK* VHF0011      * FASE2A - CORREGIR SUBINDICES PARA VERIFICACION  *
+REMARK* VICTOR HUGO  *          DE CAMPOS REPORTADOS POR LA ENTIDAD YA *
+REMARK* FORERO       *          QUE SE ESTAN UTILIZANDO LOS DE         *
+REMARK* JUN.09/2009  *          DATACLIENTES Y SE DEBE USAR LOS DE     *
+REMARK*              *          HABITO DE PAGO                         *
+REMARK******************************************************************
+REMARK* RMB0012      * AMPL01 - SE ADMITEN LAS DIRECCIONES DE LONGITUD *
+REMARK* R. MARTINEZ  *          DE 60 CARACTERES PERO CUIDANDO DE NO   *
+REMARK* NOV.15.2011  *          ACTUALIZAR LAS FECHAS EN CASO QUE SOLO *
+REMARK*              *          VARIE EN LOS 31-60 QUE NO EXISTIAN EN  *
+REMARK*              *          EL ICBDIR                              *
+REMARK******************************************************************
+REMARK* RMB0013     * NUM001 - CONTROLAR QUE EL INDICE QUE MANEJA      *
+REMARK* NOVIEMB/2011*          LA TABLA V-CARTOT-BDLDIR NO EXCEDA LAS  *
+REMARK* R.MARTINEZ  *          10 POSICIONES DE LAS MISMA.             *
+REMARK******************************************************************
+REMARK* CAV0014     * AJUFCH - CONTROLAR QUE SE ACTUALICE LA FECHA DE  *
+REMARK* DICIEMB/2011*          ACTULIZACION Y ULTIMO REPORTE DE DIRECC-*
+REMARK* C.VELASCO.  *          IONES CUANDO CAMBIA ALGUN DATO.         *
+REMARK*             *          MANEJO FLAG CAMBIO-DIRECC               *
+REMARK******************************************************************
+REMARK* CAV0015     * CALDYT - NO VALIDAR QUE EL CAMPO ESTE PRENDIDO   *
+REMARK* C. VELASCO. *          PARA ACTUALIZAR DIRECCIONES, INCUIR LOS *
+REMARK* 21/SEP/2012.*          CAMPOS DIR LABORAL, EMAIL Y CELULAR.    *
+REMARK******************************************************************
+REMARK* CAV0016     * FLAGCM - INCLUIR UN FLAG POR CADA CAMPO PARA     *
+REMARK* C. VELASCO. *          IDENTIFICAR CUANDO ESTABA VACIO Y SE    *
+REMARK* 25/OCT/2012.*          ACTUALIZO. AJUSTE ACTAULIZAR FECHA-ULT. *
+REMARK*             * ULTREP - ACTUALIZAR CORRECTAMENTE FECULT-DIRECC. *
+REMARK******************************************************************
+
+DIRECC 0001-ABRIR-ARCHIVO-DIRECC.
+REMARK******************************************************************RMB0004
+REMARK*0001-ABRIR-ARCHIVO-DIRECC.                                       RMB0004
+REMARK* SE ABRE DE I-O EL ARCHIVO DE DIRECCIONES, SI NO EXISTE SE RECREARMB0004
+HDIR01* SE ABRE ARCHIVO MAESTRO HISTORICO DE DIRECCIONES                FAC0006
+REMARK******************************************************************RMB0004
+AMPDIR     IF OPCION-W = "A"                                            FAC0007 
+AMPDIR        OPEN I-O MAESTRO-DIRECC MAESTRO-BDUHDIR                   FAC0007 
+AMPDIR        IF EST-ICBDIR <> ZEROS                                    FAC0007 
+AMPDIR           DISPLAY                                                FAC0007 
+AMPDIR           "SE VA A CREAR ARCHIVO ICBDIR, O ESTA ERRADO, ESTADO: "FAC0007 
+AMPDIR           EST-ICBDIR                                             FAC0007 
+AMPDIR           STOP RUN RETURNING 11                                  FAC0007 
+AMPDIR        END-IF                                                    FAC0007 
+AMPDIR     ELSE OPEN INPUT MAESTRO-DIRECC                               FAC0007 
+AMPDIR     END-IF.                                                      FAC0007 
+DIRECC     INITIALIZE VALLOC-DIRECC.
+DIRECC 0002-ACTUALIZA-DIRECC.               
+REMARK******************************************************************RMB0004
+REMARK*0002-ACTUALIZA-DIRECC.                                           RMB0004
+REMARK* SE EXAMINA LA INFORMACION DEL MAESTRO, SI HAY UN "BUEN DATO" DE RMB0004
+REMARK* LOCALIZACION SE BUSCA YA SEA PARA CREARLO O ACTUALIZARLO        RMB0004
+REMARK******************************************************************RMB0004
+DIRECC     MOVE 0 TO ERROR-DIRECC.
+CALDYT*    IF ((T-LOCALIZACION(1) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,19) = 1) AND                      CAV0015
+CALDYT*         ((T-LOCALIZACION(2) = 0 AND                             CAV0015
+CALDYT*           IND-CAMPO-VALPREP-W(K,20) = 1) OR                     CAV0015
+CALDYT*          (T-LOCALIZACION(3) = 0 AND                             CAV0015
+CALDYT*           IND-CAMPO-VALPREP-W(K,21) = 1))) OR                   CAV0015
+CALDYT*       (T-LOCALIZACION(5) = 0 AND                                CAV0015
+CALDYT*        IND-CAMPO-VALPREP-W(K,22) = 1 AND                        CAV0015
+CALDYT*        T-LOCALIZACION(7) = 0 AND                                CAV0015
+CALDYT*        IND-CAMPO-VALPREP-W(K,23) = 1) OR                        CAV0015
+CALDYT*       (T-LOCALIZACION(9) = 0 AND                                CAV0015
+CALDYT*        IND-CAMPO-VALPREP-W(K,24) = 1 AND                        CAV0015
+CALDYT*        T-LOCALIZACION(10) = 0 AND                               CAV0015
+CALDYT*        IND-CAMPO-VALPREP-W(K,25) = 1)                           CAV0015
+REMARK***      SOLO SE PROCESAN REGISTROS QUE TENGAN LA CIUDAD Y ALGUN  CAV0015
+REMARK***      OTRO DATOS COMO DIRECCION Y/O TELEFONO, YA SEA           CAV0015
+REMARK***      RESIDENCIAL, LABORAL O DE CORRESPONDENCIA                CAV0015
+REMARK***      SI SOLO LLEGA MAIL Y/O CELULAR SE PROCESA EL REGITRO     VCAV015
+CALDYT     IF (T-LOCALIZACION(1) = 0 AND                                CAV0015
+CALDYT         (T-LOCALIZACION(2) = 0 OR                                CAV0015
+CALDYT          T-LOCALIZACION(3) = 0)) OR                              CAV0015
+CALDYT        (T-LOCALIZACION(5) = 0 AND                                CAV0015
+CALDYT         (T-LOCALIZACION(6) = 0 OR                                CAV0015
+CALDYT          T-LOCALIZACION(7) = 0)) OR                              CAV0015
+CALDYT        (T-LOCALIZACION(9) = 0 AND                                CAV0015
+CALDYT         T-LOCALIZACION(10) = 0 ) OR                              CAV0015
+CALDYT        (T-LOCALIZACION(12) = 0 ) OR                              CAV0015
+CALDYT        (T-LOCALIZACION(13) = 0 )                                 CAV0015
+DIRECC         MOVE TIPO-IDEN-CIC06      TO TIPO-ID-DIRECC 
+DIRECC         MOVE NUM-ID-CIC06         TO NUM-ID-DIRECC 
+DIRECC         MOVE COD-SUS-H            TO COD-SUS-DIRECC 
+DIRECC         MOVE COD-TIP-CTA-H        TO COD-CTA-DIRECC 
+DIRECC         MOVE NUM-CTA-CIC06        TO NUM-CTA-DIRECC 
+DIRECC         READ MAESTRO-DIRECC INVALID KEY 
+DIRECC              MOVE 1 TO IND-DIRECC
+DIRECC            NOT INVALID KEY 
+DIRECC              MOVE 0 TO IND-DIRECC
+DIRECC         END-READ 
+DIRECC         IF IND-DIRECC = 0
+DIRECC            MOVE FECHA-S TO FECHA6-DIRECC
+RCNCER            IF FECHA6-DIRECC >= FECACT-DIRECC                     FAC0008 
+DIRECC               PERFORM 0004-VER-CAMBIO-DIRECC
+DIRECC            ELSE ADD 1 TO MENOSACTUAL-DIRECC
+DIRECC            END-IF
+DIRECC         ELSE PERFORM 0003-CREAR-DIRECC
+DIRECC         END-IF
+DIRECC     ELSE
+DIRECC         ADD 1 TO CAMPOSVACIOS-DIRECC
+DIRECC         MOVE 1 TO ERROR-DIRECC
+DIRECC     END-IF.                            
+
+DIRECC 0003-CREAR-DIRECC.
+REMARK******************************************************************RMB0004
+REMARK*0003-CREAR-DIRECC.                                               RMB0004
+REMARK* SE CREA UN REGISTRO DE DIRECCION DE LA CUENTA ASOCIADA. SE COLOCRMB0004
+REMARK* LA FECHA DE APERTURA DE LA CUENTA, DE ACTUALIZACION DEL MAESTRO RMB0004
+REMARK* DE CREACION DEL REGISTRO QUE EN ESTE CASO ES IGUAL A LA ACTUALIZRMB0004
+REMARK******************************************************************RMB0004
+            INITIALIZE REG-DIRECC
+AMPDIR      MOVE FECHA-S           TO FECHA6-DIRECC.                    FAC0007 
+DIRECC      MOVE TIPO-IDEN-CIC06   TO TIPO-ID-DIRECC.
+DIRECC      MOVE NUM-ID-CIC06      TO NUM-ID-DIRECC.
+DIRECC      MOVE COD-SUS-H         TO COD-SUS-DIRECC.
+DIRECC      MOVE COD-TIP-CTA-H     TO COD-CTA-DIRECC.
+DIRECC      MOVE NUM-CTA-CIC06     TO NUM-CTA-DIRECC.
+BDACSV      MOVE REG-CSV-DIRECC    TO INDCSV-DIRECC.                    CAV0009 
+CALDYT      IF  T-LOCALIZACION(1) = 0 AND T-LOCALIZACION(2) = 0         CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,19) = 1 AND                       CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,20) = 1                           CAV0015
+DIRECC          MOVE CIUDAD-RESIDENCIA-CIC06 TO CIURES-DIRECC  
+DIRECC          MOVE DIREC-RESIDENCIA-CIC06  TO DIRRES-DIRECC   
+FASEII          MOVE FECHA6-DIRECC           TO FECDRES-DIRECC          VHF0010
+FLAGCM          MOVE "V"                     TO FLAG-DIRRES-DIRECC      CAV0016
+DIRECC      END-IF.
+CALDYT      IF  T-LOCALIZACION(1) = 0 AND T-LOCALIZACION(3) = 0         CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,19) = 1 AND                       CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,21) = 1                           CAV0015
+DIRECC          MOVE CIUDAD-RESIDENCIA-CIC06 TO CIURES-DIRECC  
+DIRECC          MOVE TELEF-RESIDENCIA-CIC06  TO TELRES-DIRECC  
+FASEII          MOVE FECHA6-DIRECC           TO FECTRES-DIRECC          VHF0010
+FLAGCM          MOVE "V"                     TO FLAG-TELRES-DIRECC      CAV0016
+DIRECC      END-IF.
+CALDYT      IF  T-LOCALIZACION(5) = 0 AND T-LOCALIZACION(6) = 0         CAV0015
+CALDYT          MOVE CIUDAD-LABORAL-CIC06    TO CIULAB-DIRECC           CAV0015
+CALDYT          MOVE DIREC-LABORAL-CIC06     TO DIRLAB-DIRECC           CAV0015
+CALDYT          MOVE FECHA6-DIRECC           TO FECLAB-DIRECC           CAV0015
+FLAGCM          MOVE "V"                     TO FLAG-DIRLAB-DIRECC      CAV0016
+CALDYT      END-IF.                                                     CAV0015
+CALDYT      IF  T-LOCALIZACION(5) = 0 AND T-LOCALIZACION(7) = 0         CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,22) = 1 AND                       CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,23) = 1                           CAV0015
+DIRECC          MOVE CIUDAD-LABORAL-CIC06    TO CIULAB-DIRECC  
+DIRECC          MOVE TELEF-LABORAL-CIC06     TO TELLAB-DIRECC  
+FASEII          MOVE FECHA6-DIRECC           TO FECTLAB-DIRECC          VHF0010
+FLAGCM          MOVE "V"                     TO FLAG-TELLAB-DIRECC      CAV0016
+DIRECC      END-IF.
+CALDYT      IF  T-LOCALIZACION(9) = 0 AND T-LOCALIZACION(10) = 0        CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,24) = 1 AND                       CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,25) = 1                           CAV0015
+DIRECC          MOVE CIUDAD-CORRESP-CIC06    TO CIUCOR-DIRECC  
+DIRECC          MOVE DIREC-CORRESP-CIC06     TO DIRCOR-DIRECC  
+FASEII          MOVE FECHA6-DIRECC           TO FECDCOR-DIRECC          VHF0010
+FLAGCM          MOVE "V"                     TO FLAG-DIRCOR-DIRECC      CAV0016
+DIRECC      END-IF.
+CALDYT      IF  T-LOCALIZACION(12) = 0                                  CAV0015
+CALDYT          MOVE CORREO-ELECTRONICO-CIC06 TO E-MAIL-DIRECC          CAV0015
+CALDYT          MOVE FECHA6-DIRECC            TO FECMAIL-DIRECC         CAV0015
+FLAGCM          MOVE "V"                      TO FLAG-EMAIL-DIRECC      CAV0016
+CALDYT      END-IF.                                                     CAV0015
+CALDYT      IF  T-LOCALIZACION(13) = 0                                  CAV0015
+CALDYT          MOVE CELULAR-CIC06           TO TELCEL-DIRECC           CAV0015
+CALDYT          MOVE FECHA6-DIRECC           TO FECCEL-DIRECC           CAV0015
+FLAGCM          MOVE "V"                     TO FLAG-CELULAR-DIRECC     CAV0016
+CALDYT      END-IF.                                                     CAV0015
+DIRECC      MOVE FECHA6-DIRECC        TO FECACT-DIRECC FECCRE-DIRECC
+AMPDIR           FECULT-DIRECC                                          FAC0007 
+DIRECC      MOVE FECHA-APERT-CIC06    TO FECHA-W6-R
+DIRECC      MOVE FECHA-W6             TO FECAPE-DIRECC
+AMPDIR      IF OPCION-W = "A"                                           FAC0007 
+AMPDIR         WRITE REG-DIRECC INVALID KEY                             FAC0007 
+DIRECC           MOVE 2 TO ERROR-DIRECC
+DIRECC           ADD 1 TO ERRORES-DIRECC
+DIRECC         NOT INVALID KEY
+DIRECC           ADD 1 TO CREACIONES-DIRECC
+DIRECC         END-WRITE
+AMPDIR      ELSE ADD 1 TO CREACIONES-DIRECC                             FAC0007 
+AMPDIR      END-IF.                                                     FAC0007 
+
+DIRECC 0004-VER-CAMBIO-DIRECC.
+REMARK******************************************************************RMB0004
+REMARK*0004-VER-CAMBIO-DIRECC.                                          RMB0004
+REMARK* SE VERIFICA SI ALGUN CAMPO SE A ACTUALIZADO, SI ES ASI SE PROCEDRMB0004
+REMARK* A ACTUALIZARLO Y SE CAMBIA LA FECHA DE ULTIMA ACTUALIZACION.    RMB0004
+REMARK******************************************************************RMB0004
+DIRECC      MOVE 0 TO CAMBIO-DIRECC.
+AMPDIR      IF OPCION-W = "A"                                           FAC0007 
+AMPDIR         PERFORM 0005-MOVER-CAMPOS-HISTORICO                      FAC0007 
+AMPDIR      END-IF                                                      FAC0007 
+REMARK*********************CAMBIO DE CIUDAD RESIDENCIA***************** VHF0010
+CALDYT*     IF  (T-LOCALIZACION(1) = 0 AND                              CAV0015
+CALDYT*          IND-CAMPO-VALPREP-W(K,19) = 1) AND                     CAV0015
+CALDYT*         ((T-LOCALIZACION(2) = 0 AND                             CAV0015
+CALDYT*           IND-CAMPO-VALPREP-W(K,20) = 1) OR                     CAV0015
+CALDYT*          (T-LOCALIZACION(3) = 0 AND                             CAV0015
+CALDYT*           IND-CAMPO-VALPREP-W(K,21) = 1))                       CAV0015
+CALDYT      IF  (T-LOCALIZACION(1) = 0 AND                              CAV0015
+CALDYT           (T-LOCALIZACION(2) = 0 OR                              CAV0015
+CALDYT            T-LOCALIZACION(3) = 0))                               CAV0015
+ULTREP*         IF CIURES-DIRECC(1:15) NOT = CIUDAD-RESIDENCIA-CIC06    CAV0016
+ULTREP          IF CIURES-DIRECC NOT = CIUDAD-RESIDENCIA-CIC06          CAV0016
+FASEII             MOVE 9 TO CAMBIO-DIRECC                              VHF0010
+FASEII             MOVE CIUDAD-RESIDENCIA-CIC06 TO CIURES-DIRECC        VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK*********************CAMBIO DE DIRECCION RESIDENCIA ************* VHF0010
+CALDYT*     IF  T-LOCALIZACION(1) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,19) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(2) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,20) = 1                           CAV0015
+AMPL01*         IF DIRRES-DIRECC(1:30) NOT = DIREC-RESIDENCIA-CIC06     RMB0012
+CALDYT      IF  T-LOCALIZACION(1) = 0 AND                               CAV0015
+CALDYT          T-LOCALIZACION(2) = 0                                   CAV0015
+AMPL01          IF DIRRES-DIRECC       NOT = DIREC-RESIDENCIA-CIC06     RMB0012
+FASEII             MOVE DIRRES-DIRECC          TO DIR-ACTUAL            VHF0010
+FASEII             MOVE DIREC-RESIDENCIA-CIC06 TO DIR-NUEVA             VHF0010
+FASEII             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                VHF0010
+FASEII             IF SW-HACER-CAMBIO = 1                               VHF0010
+AMPL01                IF DIRRES-DIRECC(1:30) NOT =                      RMB0012
+AMPL01                    DIREC-RESIDENCIA-CIC06(1:30)                  RMB0012
+AMPL01                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+AMPL01                      MOVE FECHA6-DIRECC  TO FECDRES-DIRECC       VHF0010
+AMPL01                ELSE                                              RMB0012
+AMPL01                   IF DIRRES-DIRECC(31:) <> SPACES                RMB0012
+AMPL01                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+AMPL01                      MOVE FECHA6-DIRECC  TO FECDRES-DIRECC       VHF0010
+AMPL01                   ELSE                                           RMB0012
+AMPL01                      MOVE 9 TO CAMBIO-DIRECC                     RMB0012
+AMPL01                   END-IF                                         RMB0012
+AMPL01                END-IF                                            RMB0012
+FASEII             ELSE                                                 VHF0010
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0010
+FASEII             END-IF                                               VHF0010
+FLAGCM             IF DIRRES-DIRECC = SPACES                            CAV0016
+FLAGCM                MOVE "V" TO FLAG-DIRRES-DIRECC                    CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-DIRRES-DIRECC                 CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+FASEII             MOVE DIREC-RESIDENCIA-CIC06 TO DIRRES-DIRECC         VHF0010
+FASEII             MOVE 0 TO CERRES-DIRECC ADIRES-DIRECC                VHF0010
+FASEII             MOVE CIUDAD-RESIDENCIA-CIC06 TO CIURES-DIRECC        VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK*********************CAMBIO DE TELEFONO  RESIDENCIA ************* VHF0010
+            INITIALIZE VARIABLES-TRAB-DIRECC                            FAC0003
+CALDYT*     IF  T-LOCALIZACION(1) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,19) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(3) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,21) = 1                           CAV0015
+CALDYT      IF  T-LOCALIZACION(1) = 0 AND                               CAV0015
+CALDYT          T-LOCALIZACION(3) = 0                                   CAV0015
+DIRECC          IF TELRES-DIRECC NOT = TELEF-RESIDENCIA-CIC06           FAC0003
+DIRECC             MOVE TELRES-DIRECC TO TEL-W1                         FAC0003
+REMARK***          SE UBICA EL PRIMER DIGITO DIFERENTE DE CERO PARA     VHF0010
+REMARK***          TOMAR EL NUMERO DE TELEFONO ACTUAL DEL ARCHIVO       VHF0010
+FASEII             MOVE 1 TO NUM-CAR-W                                  VHF0010
+FASEII             PERFORM UNTIL TEL-W1 (NUM-CAR-W:1) <> 0 OR           VHF0010
+FASEII                           NUM-CAR-W > 12                         VHF0010
+FASEII                ADD 1 TO NUM-CAR-W                                VHF0010
+FASEII             END-PERFORM                                          VHF0010
+FASEII             IF NUM-CAR-W > 12                                    VHF0010
+REMARK***             EL TELEFONO ACTUAL ESTA EN CEROS. HAY QUE         VHF0010
+REMARK***             ACTUALIZAR EL NUEVO CON SU FECHA                  VHF0010
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0010
+FASEII                MOVE FECHA6-DIRECC  TO FECTRES-DIRECC             VHF0010
+FASEII             ELSE                                                 VHF0010
+REMARK***             SE TOMA EL DIGITO HALLADO                         VHF0010
+FASEII                MOVE TEL-W1 (NUM-CAR-W:1) TO CAR-W                VHF0010
+REMARK***             SE TOMA EL TELEFONO ACTUAL DESDE EL DIGITO HALLADOVHF0010
+FASEII                INITIALIZE TEL-W2                                 VHF0010
+FASEII                MOVE TEL-W1 (NUM-CAR-W:) TO TEL-W2                VHF0010
+FASEII                INSPECT TEL-W2 REPLACING ALL " " BY "0"           VHF0010
+FASEII                MOVE TELEF-RESIDENCIA-CIC06 TO TEL-W1             VHF0010
+REMARK***             SE BUSCA EL PRIMER DIGITO DEL TELEFONO ACTUAL EN  VHF0010
+REMARK***             EL NUEVO PARA TOMARLO                             VHF0010
+FASEII                INITIALIZE NUM-CAR-W                              VHF0010
+FASEII                INSPECT TEL-W1 TALLYING NUM-CAR-W                 VHF0010
+FASEII                        FOR CHARACTERS BEFORE INITIAL CAR-W       VHF0010
+FASEII                IF NUM-CAR-W = 12                                 VHF0010
+REMARK***                NO SE ENCUENTRA EL DIGITO DEL TELEFONO ACTUAL  VHF0010
+REMARK***                EN EL NUEVO. HAY QUE ACTUALIZAR EL NUEVO Y SU  VHF0010
+REMARK***                FECHA                                          VHF0010
+FASEII                   MOVE 1 TO CAMBIO-DIRECC                        VHF0010
+FASEII                   MOVE FECHA6-DIRECC  TO FECTRES-DIRECC          VHF0010
+FASEII                ELSE                                              VHF0010
+REMARK***                SE TOMA EL NUMERO DEL TELEFONO NUEVO DESDE LA  VHF0010
+REMARK***                POSICION ENCONTRADA                            VHF0010
+FASEII                   ADD 1 TO NUM-CAR-W                             VHF0010
+FASEII                   MOVE TEL-W1 (NUM-CAR-W:) TO TEL-WW2            VHF0010
+FASEII                   INSPECT TEL-WW2 REPLACING ALL " " BY "0"       VHF0010
+FASEII                   IF TEL-W2 NOT = TEL-WW2                        VHF0010
+REMARK***                   SI LOS DOS TELEFONOS SON DIFERENTES SE      VHF0010
+REMARK***                   ACTUALIZA EL NUEVO Y LA FECHA RESPECTIVA    VHF0010
+FASEII                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+FASEII                      MOVE FECHA6-DIRECC  TO FECTRES-DIRECC       VHF0010
+FASEII                   ELSE                                           VHF0010
+REMARK***                   SI LAS PARTES COMPARADAS DE LOS TELEFONOS   VHF0010
+REMARK***                   SON IGUALES SE ACTUALIZA EL TELEFONO PERO   VHF0010
+REMARK***                   NO LA DIRECCION YA QUE NO SE CONSIDERA UN   VHF0010
+REMARK***                   CAMBIO DE TELEFONO                          VHF0010
+FASEII                      IF CAMBIO-DIRECC <> 1                       VHF0010
+REMARK***                      EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA VHF0010
+REMARK***                      ACTUALIZACION DE FECHA                   VHF0010
+FASEII                         MOVE 9 TO CAMBIO-DIRECC                  VHF0010
+FASEII                      END-IF                                      VHF0010
+FASEII                   END-IF                                         VHF0010
+FASEII                END-IF                                            VHF0010
+FASEII             END-IF                                               VHF0010
+FLAGCM             IF TELRES-DIRECC = ZEROS OR SPACES                   CAV0016
+FLAGCM                MOVE "V" TO FLAG-TELRES-DIRECC                    CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-TELRES-DIRECC                 CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+FASEII             MOVE TELEF-RESIDENCIA-CIC06 TO TELRES-DIRECC         VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK**************************CAMBIO DE CIUDAD LABORAL****************VHF0010
+CALDYT*     IF  T-LOCALIZACION(5) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,22) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(7) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,23) = 1                           CAV0015
+CALDYT      IF (T-LOCALIZACION(5) = 0 AND                               CAV0015
+CALDYT          (T-LOCALIZACION(6) = 0 OR                               CAV0015
+CALDYT           T-LOCALIZACION(7) = 0))                                CAV0015
+ULTREP*         IF CIULAB-DIRECC(1:15) NOT = CIUDAD-LABORAL-CIC06       CAV0016
+ULTREP          IF CIULAB-DIRECC NOT = CIUDAD-LABORAL-CIC06             CAV0016
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0010
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0010
+REMARK***             ACTUALIZACION DE FECHA                            VHF0010
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0010
+FASEII             END-IF                                               VHF0010
+FASEII             MOVE CIUDAD-LABORAL-CIC06 TO CIULAB-DIRECC           VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK**************************CAMBIO DE DIRECCION LABORAL*************CAV0015
+CALDYT      IF  T-LOCALIZACION(5) = 0 AND                               CAV0015
+CALDYT          T-LOCALIZACION(6) = 0                                   CAV0015
+CALDYT          IF DIRLAB-DIRECC       NOT = DIREC-LABORAL-CIC06        CAV0015
+CALDYT             MOVE DIRLAB-DIRECC          TO DIR-ACTUAL            CAV0015
+CALDYT             MOVE DIREC-LABORAL-CIC06    TO DIR-NUEVA             CAV0015
+CALDYT             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                CAV0015
+CALDYT             IF SW-HACER-CAMBIO = 1                               CAV0015
+CALDYT                IF DIRLAB-DIRECC(1:30) NOT =                      CAV0015
+CALDYT                    DIREC-LABORAL-CIC06(1:30)                     CAV0015
+CALDYT                      MOVE 1 TO CAMBIO-DIRECC                     CAV0015
+CALDYT                      MOVE FECHA6-DIRECC  TO FECLAB-DIRECC        CAV0015
+CALDYT                ELSE                                              CAV0015
+CALDYT                   IF DIRLAB-DIRECC(31:) <> SPACES                CAV0015
+CALDYT                      MOVE 1 TO CAMBIO-DIRECC                     CAV0015
+CALDYT                      MOVE FECHA6-DIRECC  TO FECLAB-DIRECC        CAV0015
+CALDYT                   ELSE                                           CAV0015
+CALDYT                      MOVE 9 TO CAMBIO-DIRECC                     CAV0015
+CALDYT                   END-IF                                         CAV0015
+CALDYT                END-IF                                            CAV0015
+CALDYT             ELSE                                                 CAV0015
+CALDYT                MOVE 9 TO CAMBIO-DIRECC                           CAV0015
+CALDYT             END-IF                                               CAV0015
+FLAGCM             IF DIRLAB-DIRECC = SPACES                            CAV0016
+FLAGCM                MOVE "V" TO FLAG-DIRLAB-DIRECC                    CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-DIRLAB-DIRECC                 CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+CALDYT             MOVE DIREC-LABORAL-CIC06    TO DIRLAB-DIRECC         CAV0015
+CALDYT             MOVE 0 TO CERLAB-DIRECC ADILAB-DIRECC                CAV0015
+CALDYT             MOVE CIUDAD-LABORAL-CIC06   TO CIULAB-DIRECC         CAV0015
+CALDYT          END-IF                                                  CAV0015
+CALDYT      END-IF                                                      CAV0015
+REMARK*********************CAMBIO DE TELEFONO  LABORAL    ************* VHF0010
+CALDYT*     IF  T-LOCALIZACION(5) = 0 AND                               CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,22) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(7) = 0 AND IND-CAMPO-VALPREP-W(K,23) = 1 CAV0015
+CALDYT      IF  T-LOCALIZACION(5) = 0 AND                               CAV0015
+CALDYT          T-LOCALIZACION(7) = 0                                   CAV0015
+FASEII          IF TELLAB-DIRECC NOT = TELEF-LABORAL-CIC06              VHF0010
+FASEII             MOVE TELLAB-DIRECC TO TEL-W1                         VHF0010
+REMARK***          SE UBICA EL PRIMER DIGITO DIFERENTE DE CERO PARA     VHF0010
+REMARK***          TOMAR EL NUMERO DE TELEFONO ACTUAL DEL ARCHIVO       VHF0010
+FASEII             MOVE 1 TO NUM-CAR-W                                  VHF0010
+FASEII             PERFORM UNTIL TEL-W1 (NUM-CAR-W:1) <> 0 OR           VHF0010
+FASEII                           NUM-CAR-W > 12                         VHF0010
+FASEII                ADD 1 TO NUM-CAR-W                                VHF0010
+FASEII             END-PERFORM                                          VHF0010
+FASEII             IF NUM-CAR-W > 12                                    VHF0010
+REMARK***             EL TELEFONO ACTUAL ESTA EN CEROS. HAY QUE         VHF0010
+REMARK***             ACTUALIZAR EL NUEVO CON SU FECHA                  VHF0010
+FASEII                MOVE 1 TO CAMBIO-DIRECC                           VHF0010
+FASEII                MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC             VHF0010
+FASEII             ELSE                                                 VHF0010
+REMARK***             SE TOMA EL DIGITO HALLADO                         VHF0010
+FASEII                MOVE TEL-W1 (NUM-CAR-W:1) TO CAR-W                VHF0010
+REMARK***             SE TOMA EL TELEFONO ACTUAL DESDE EL DIGITO HALLADOVHF0010
+FASEII                INITIALIZE TEL-W2                                 VHF0010
+FASEII                MOVE TEL-W1 (NUM-CAR-W:) TO TEL-W2                VHF0010
+FASEII                INSPECT TEL-W2 REPLACING ALL " " BY "0"           VHF0010
+FASEII                MOVE TELEF-LABORAL-CIC06 TO TEL-W1                VHF0010
+REMARK***             SE BUSCA EL PRIMER DIGITO DEL TELEFONO ACTUAL EN  VHF0010
+REMARK***             EL NUEVO PARA TOMARLO                             VHF0010
+FASEII                INITIALIZE NUM-CAR-W                              VHF0010
+FASEII                INSPECT TEL-W1 TALLYING NUM-CAR-W                 VHF0010
+FASEII                        FOR CHARACTERS BEFORE INITIAL CAR-W       VHF0010
+FASEII                IF NUM-CAR-W = 12                                 VHF0010
+REMARK***                NO SE ENCUENTRA EL DIGITO DEL TELEFONO ACTUAL  VHF0010
+REMARK***                EN EL NUEVO. HAY QUE ACTUALIZAR EL NUEVO Y SU  VHF0010
+REMARK***                FECHA                                          VHF0010
+FASEII                   MOVE 1 TO CAMBIO-DIRECC                        VHF0010
+FASEII                   MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC          VHF0010
+FASEII                ELSE                                              VHF0010
+REMARK***                SE TOMA EL NUMERO DEL TELEFONO NUEVO DESDE LA  VHF0010
+REMARK***                POSICION ENCONTRADA                            VHF0010
+FASEII                   ADD 1 TO NUM-CAR-W                             VHF0010
+FASEII                   MOVE TEL-W1 (NUM-CAR-W:) TO TEL-WW2            VHF0010
+FASEII                   INSPECT TEL-WW2 REPLACING ALL " " BY "0"       VHF0010
+FASEII                   IF TEL-W2 NOT = TEL-WW2                        VHF0010
+REMARK***                   SI LOS DOS TELEFONOS SON DIFERENTES SE      VHF0010
+REMARK***                   ACTUALIZA EL NUEVO Y LA FECHA RESPECTIVA    VHF0010
+FASEII                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+FASEII                      MOVE FECHA6-DIRECC  TO FECTLAB-DIRECC       VHF0010
+FASEII                   ELSE                                           VHF0010
+REMARK***                   SI LAS PARTES COMPARADAS DE LOS TELEFONOS   VHF0010
+REMARK***                   SON IGUALES SE ACTUALIZA EL TELEFONO PERO   VHF0010
+REMARK***                   NO LA DIRECCION YA QUE NO SE CONSIDERA UN   VHF0010
+REMARK***                   CAMBIO DE TELEFONO                          VHF0010
+FASEII                      IF CAMBIO-DIRECC <> 1                       VHF0010
+REMARK***                      EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA VHF0010
+REMARK***                      ACTUALIZACION DE FECHA                   VHF0010
+FASEII                         MOVE 9 TO CAMBIO-DIRECC                  VHF0010
+FASEII                      END-IF                                      VHF0010
+FASEII                   END-IF                                         VHF0010
+FASEII                END-IF                                            VHF0010
+FASEII             END-IF                                               VHF0010
+FLAGCM             IF TELLAB-DIRECC = ZEROS OR SPACES                   CAV0016
+FLAGCM                MOVE "V" TO FLAG-TELLAB-DIRECC                    CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-TELLAB-DIRECC                 CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+FASEII             MOVE CIUDAD-LABORAL-CIC06 TO CIULAB-DIRECC           VHF0010
+FASEII             MOVE TELEF-LABORAL-CIC06 TO TELLAB-DIRECC            VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK********************CAMBIO DE CIUDAD CORRESPONDENCIA**************VHF0010
+CALDYT*     IF  T-LOCALIZACION(9)  = 0 AND                              CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,24) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(10) = 0 AND                              CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,25) = 1                           CAV0015
+CALDYT      IF  T-LOCALIZACION(9)  = 0 AND                              CAV0015
+CALDYT          T-LOCALIZACION(10) = 0                                  CAV0015
+ULTREP*         IF CIUCOR-DIRECC(1:15) NOT = CIUDAD-CORRESP-CIC06       CAV0016
+ULTREP          IF CIUCOR-DIRECC NOT = CIUDAD-CORRESP-CIC06             CAV0016
+FASEII             IF CAMBIO-DIRECC <> 1                                VHF0010
+REMARK***             EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA          VHF0010
+REMARK***             ACTUALIZACION DE FECHA                            VHF0010
+FASEII                MOVE 9 TO CAMBIO-DIRECC                           VHF0010
+FASEII             END-IF                                               VHF0010
+FASEII             MOVE CIUDAD-CORRESP-CIC06 TO CIUCOR-DIRECC           VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK*********************CAMBIO DE DIRECCION CORRESPONDENCIA ******** VHF0010
+FASEII      INITIALIZE VARIABLES-TRAB-DIRECC                            VHF0010
+CALDYT*     IF  T-LOCALIZACION(9)  = 0 AND                              CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,24) = 1 AND                       CAV0015
+CALDYT*         T-LOCALIZACION(10) = 0 AND                              CAV0015
+CALDYT*         IND-CAMPO-VALPREP-W(K,25) = 1                           CAV0015
+AMPL01*         IF DIRCOR-DIRECC(1:30) NOT = DIREC-CORRESP-CIC06        RMB0012
+CALDYT      IF  T-LOCALIZACION(9)  = 0 AND                              CAV0015
+CALDYT          T-LOCALIZACION(10) = 0                                  CAV0015
+AMPL01          IF DIRCOR-DIRECC       NOT = DIREC-CORRESP-CIC06        RMB0012
+FASEII             MOVE DIRCOR-DIRECC       TO DIR-ACTUAL               VHF0010
+FASEII             MOVE DIREC-CORRESP-CIC06 TO DIR-NUEVA                VHF0010
+FASEII             PERFORM 0004-1-MIRAR-CAMBIO-DIRECCION                VHF0010
+FASEII             IF SW-HACER-CAMBIO = 1                               VHF0010
+AMPL01                IF DIRCOR-DIRECC(1:30) NOT =                      RMB0012
+AMPL01                    DIREC-CORRESP-CIC06  (1:30)                   RMB0012
+AMPL01                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+AMPL01                      MOVE FECHA6-DIRECC  TO FECDCOR-DIRECC       VHF0010
+AMPL01                ELSE                                              RMB0012
+AMPL01                   IF DIRCOR-DIRECC(31:) <> SPACES                RMB0012
+AMPL01                      MOVE 1 TO CAMBIO-DIRECC                     VHF0010
+AMPL01                      MOVE FECHA6-DIRECC  TO FECDCOR-DIRECC       VHF0010
+AMPL01                   ELSE                                           VHF0010
+AJUFCH                    IF CAMBIO-DIRECC <> 1                         CAV0014
+AMPL01                      MOVE 9 TO CAMBIO-DIRECC                     VHF0010
+AJUFCH                    END-IF                                        CAV0014
+AMPL01                   END-IF                                         RMB0012
+AMPL01                END-IF                                            RMB0012
+FASEII             ELSE                                                 VHF0010
+FASEII                IF CAMBIO-DIRECC <> 1                             VHF0010
+REMARK***                EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA       VHF0010
+REMARK***                ACTUALIZACION DE FECHA                         VHF0010
+FASEII                   MOVE 9 TO CAMBIO-DIRECC                        VHF0010
+FASEII                END-IF                                            VHF0010
+FASEII             END-IF                                               VHF0010
+FLAGCM             IF DIRCOR-DIRECC = SPACES                            CAV0016
+FLAGCM                MOVE "V" TO FLAG-DIRCOR-DIRECC                    CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-DIRCOR-DIRECC                 CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+FASEII             MOVE DIREC-CORRESP-CIC06 TO DIRCOR-DIRECC            VHF0010
+FASEII             MOVE 0 TO CERCOR-DIRECC ADICOR-DIRECC                VHF0010
+FASEII             MOVE CIUDAD-CORRESP-CIC06 TO CIUCOR-DIRECC           VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII      END-IF                                                      VHF0010
+REMARK*********************CAMBIO DE CORREO ELECTRONICO *************** CAV0015
+CALDYT      IF  T-LOCALIZACION(12) = 0                                  CAV0015
+CALDYT          IF E-MAIL-DIRECC NOT = CORREO-ELECTRONICO-CIC06         CAV0015
+FLAGCM             IF E-MAIL-DIRECC = ZEROS OR SPACES                   CAV0016
+FLAGCM                MOVE "V" TO FLAG-EMAIL-DIRECC                     CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                MOVE " " TO FLAG-EMAIL-DIRECC                     CAV0016
+FLAGCM             END-IF                                               CAV0016
+CALDYT             MOVE CORREO-ELECTRONICO-CIC06 TO E-MAIL-DIRECC       CAV0015
+AMPL01             MOVE 1 TO CAMBIO-DIRECC
+AMPL01             MOVE FECHA6-DIRECC  TO FECMAIL-DIRECC
+CALDYT          END-IF                                                  CAV0015
+CALDYT      END-IF                                                      CAV0015
+REMARK*********************CAMBIO DE TELEFONO CELULAR ***************** CAV0015
+CALDYT      IF  T-LOCALIZACION(13) = 0                                  CAV0015
+CALDYT          IF TELCEL-DIRECC NOT = CELULAR-CIC06                    CAV0015
+CALDYT             MOVE TELCEL-DIRECC TO TEL-W1                         CAV0015
+REMARK***          SE UBICA EL PRIMER DIGITO DIFERENTE DE CERO PARA    
+REMARK***          TOMAR EL NUMERO DE TELEFONO ACTUAL DEL ARCHIVO      
+CALDYT             MOVE 1 TO NUM-CAR-W                                  CAV0015
+CALDYT             PERFORM UNTIL TEL-W1 (NUM-CAR-W:1) <> 0 OR           CAV0015
+CALDYT                           NUM-CAR-W > 12                         CAV0015
+CALDYT                ADD 1 TO NUM-CAR-W                                CAV0015
+CALDYT             END-PERFORM                                          CAV0015
+CALDYT             IF NUM-CAR-W > 12                                    CAV0015
+REMARK***             EL TELEFONO ACTUAL ESTA EN CEROS. HAY QUE        
+REMARK***             ACTUALIZAR EL NUEVO CON SU FECHA                 
+CALDYT                MOVE 1 TO CAMBIO-DIRECC                           CAV0015
+CALDYT                MOVE FECHA6-DIRECC  TO FECCEL-DIRECC              CAV0015
+CALDYT             ELSE                                                 CAV0015
+REMARK***             SE TOMA EL DIGITO HALLADO                        
+CALDYT                MOVE TEL-W1 (NUM-CAR-W:1) TO CAR-W                CAV0015
+REMARK***             SE TOMA EL TELEFONO ACTUAL DESDE EL DIGITO HALLAD
+CALDYT                INITIALIZE TEL-W2                                 CAV0015
+CALDYT                MOVE TEL-W1 (NUM-CAR-W:) TO TEL-W2                CAV0015
+CALDYT                INSPECT TEL-W2 REPLACING ALL " " BY "0"           CAV0015
+CALDYT                MOVE CELULAR-CIC06       TO TEL-W1                CAV0015
+REMARK***             SE BUSCA EL PRIMER DIGITO DEL TELEFONO ACTUAL EN 
+REMARK***             EL NUEVO PARA TOMARLO                            
+CALDYT                INITIALIZE NUM-CAR-W                              CAV0015
+CALDYT                INSPECT TEL-W1 TALLYING NUM-CAR-W                 CAV0015
+CALDYT                        FOR CHARACTERS BEFORE INITIAL CAR-W       CAV0015
+CALDYT                IF NUM-CAR-W = 12                                 CAV0015
+REMARK***                NO SE ENCUENTRA EL DIGITO DEL TELEFONO ACTUAL 
+REMARK***                EN EL NUEVO. HAY QUE ACTUALIZAR EL NUEVO Y SU 
+REMARK***                FECHA                                         
+CALDYT                   MOVE 1 TO CAMBIO-DIRECC                        CAV0015
+CALDYT                   MOVE FECHA6-DIRECC  TO FECCEL-DIRECC           CAV0015
+CALDYT                ELSE                                              CAV0015
+REMARK***                SE TOMA EL NUMERO DEL TELEFONO NUEVO DESDE LA 
+REMARK***                POSICION ENCONTRADA                           
+CALDYT                   ADD 1 TO NUM-CAR-W                             CAV0015
+CALDYT                   MOVE TEL-W1 (NUM-CAR-W:) TO TEL-WW2            CAV0015
+CALDYT                   INSPECT TEL-WW2 REPLACING ALL " " BY "0"       CAV0015
+CALDYT                   IF TEL-W2 NOT = TEL-WW2                        CAV0015
+REMARK***                   SI LOS DOS TELEFONOS SON DIFERENTES SE     
+REMARK***                   ACTUALIZA EL NUEVO Y LA FECHA RESPECTIVA   
+CALDYT                      MOVE 1 TO CAMBIO-DIRECC                     CAV0015
+CALDYT                      MOVE FECHA6-DIRECC  TO FECCEL-DIRECC        CAV0015
+CALDYT                   ELSE                                           CAV0015
+REMARK***                   SI LAS PARTES COMPARADAS DE LOS TELEFONOS  
+REMARK***                   SON IGUALES SE ACTUALIZA EL TELEFONO PERO  
+REMARK***                   NO SE ACTUALIZA LA FECHA                   
+CALDYT                      IF CAMBIO-DIRECC <> 1                       CAV0015
+REMARK***                      EL INDICADOR DE CAMBIO ACTUAL NO IMPLICA
+REMARK***                      ACTUALIZACION DE FECHA                  
+CALDYT                         MOVE 9 TO CAMBIO-DIRECC                  CAV0015
+CALDYT                      END-IF                                      CAV0015
+CALDYT                   END-IF                                         CAV0015
+CALDYT                END-IF                                            CAV0015
+CALDYT             END-IF                                               CAV0015
+FLAGCM             IF TELCEL-DIRECC = ZEROS OR SPACES                   CAV0016
+FLAGCM                MOVE "V" TO FLAG-CELULAR-DIRECC                   CAV0016
+FLAGCM             ELSE                                                 CAV0016
+FLAGCM                IF CAMBIO-DIRECC <> 9                             CAV0016
+FLAGCM                   MOVE " " TO FLAG-CELULAR-DIRECC                CAV0016
+FLAGCM                END-IF                                            CAV0016
+FLAGCM             END-IF                                               CAV0016
+CALDYT             MOVE CELULAR-CIC06       TO TELCEL-DIRECC            CAV0015
+CALDYT          END-IF                                                  CAV0015
+CALDYT      END-IF                                                      CAV0015
+BDACSV      IF INDCSV-DIRECC = 1 AND REG-CSV-DIRECC = 0                 CAV0009 
+BDACSV         MOVE 2 TO INDCSV-DIRECC                                  CAV0009 
+BDACSV         MOVE 1 TO CAMBIO-DIRECC                                  CAV0009 
+BDACSV      ELSE                                                        CAV0009 
+BDACSV         MOVE REG-CSV-DIRECC TO INDCSV-DIRECC                     CAV0009 
+BDACSV      END-IF.                                                     CAV0009 
+ULTREP*     IF CAMBIO-DIRECC > 0                                        CAV0016
+ULTREP      IF CAMBIO-DIRECC > 0 AND CAMBIO-DIRECC <> 9                 CAV0016
+DIREC5         IF CAMBIO-DIRECC = 1                                     FAC0005
+AMPDIR            MOVE FECHA6-DIRECC TO FECACT-DIRECC FECULT-DIRECC     FAC0007 
+DIRECC            MOVE FECHA-APERT-CIC06 TO FECHA-W6-R
+DIRECC            MOVE FECHA-W6 TO FECAPE-DIRECC
+DIREC5         END-IF                                                   FAC0005
+DIRECC      ELSE
+DIRECC         ADD 1 TO SINCAMBIOS-DIRECC
+RCNCER         IF FECHA6-DIRECC <> FECULT-DIRECC                        FAC0008 
+RCNCER            MOVE FECHA6-DIRECC TO FECULT-DIRECC                   FAC0008 
+RCNCER            MOVE 3 TO CAMBIO-DIRECC                               FAC0008 
+RCNCER         END-IF                                                   FAC0008 
+DIRECC      END-IF.
+AMPDIR      IF CAMBIO-DIRECC > 0                                        FAC0007 
+AMPDIR         IF OPCION-W = "A"                                        FAC0007 
+AMPDIR            REWRITE REG-DIRECC INVALID KEY                        FAC0007 
+AMPDIR            MOVE 3 TO ERROR-DIRECC                                FAC0007 
+AMPDIR            ADD 1 TO ERRORES-DIRECC                               FAC0007 
+AMPDIR            NOT INVALID KEY                                       FAC0007 
+AMPDIR              IF CAMBIO-DIRECC <> 3                               FAC0007 
+AMPDIR                 ADD 1 TO CAMBIOS-DIRECC                          FAC0007 
+AMPDIR              END-IF                                              FAC0007 
+AMPDIR            END-REWRITE                                           FAC0007 
+AMPDIR         ELSE                                                     FAC0007 
+AMPDIR            IF CAMBIO-DIRECC <> 3                                 FAC0007 
+AMPDIR               ADD 1 TO CAMBIOS-DIRECC                            FAC0007 
+AMPDIR            END-IF                                                FAC0007 
+AMPDIR         END-IF                                                   FAC0007 
+AMPDIR      END-IF.                                                     FAC0007 
+
+FASEII 0004-1-MIRAR-CAMBIO-DIRECCION.                                   VHF0010
+REMARK******************************************************************VHF0010
+REMARK*0004-1-MIRAR-CAMBIO-DIRECCION.                                  *VHF0010
+REMARK*    SE EXAMINA SI EFECTIVAMENTE CAMBIO LA PARTE NUMERICA DE LA  *VHF0010
+REMARK*    DIRECCION                                                   *VHF0010
+REMARK******************************************************************VHF0010
+FASEII     MOVE 0 TO SW-HACER-CAMBIO.                                   VHF0010
+FASEII     MOVE DIR-ACTUAL TO T-CARDIR-BDLDIR.                          VHF0010
+FASEII     PERFORM 2020-X-BUSCAR-NUMEROS.                               VHF0010
+FASEII     MOVE T-CARTOT-BDLDIR TO T-CARTOT-AUX.                        VHF0010
+FASEII     MOVE DIR-NUEVA  TO T-CARDIR-BDLDIR.                          VHF0010
+FASEII     PERFORM 2020-X-BUSCAR-NUMEROS.                               VHF0010
+FASEII     IF T-CARTOT-AUX <> T-CARTOT-BDLDIR                           VHF0010
+FASEII        MOVE 1 TO SW-HACER-CAMBIO                                 VHF0010
+FASEII     END-IF.                                                      VHF0010
+
+FASEII 2020-X-BUSCAR-NUMEROS.                                           VHF0010
+REMARK******************************************************************VHF0010
+REMARK*2020-X-BUSCAR-NUMEROS.                                          *VHF0010
+REMARK******************************************************************VHF0010
+FASEII     MOVE 1 TO I-BDLXXX.                                          VHF0010
+FASEII     MOVE 0 TO J-BDLXXX.                                          VHF0010
+FASEII     MOVE " " TO CAR-ANT-BDLDIR.                                  VHF0010
+FASEII     INITIALIZE T-CARTOT-BDLDIR.                                  VHF0010
+NUM001     PERFORM UNTIL I-BDLXXX > 60 OR J-BDLXXX >= 10                RMB0013
+FASEII       IF V-CARDIR-BDLDIR(I-BDLXXX) NUMERIC                       VHF0010
+FASEII          MOVE V-CARDIR-BDLDIR(I-BDLXXX) TO CAR-ACT-BDLDIR        VHF0010
+FASEII          IF CAR-ANT-BDLDIR NUMERIC                               VHF0010
+FASEII             COMPUTE V-CARTOT-BDLDIR(J-BDLXXX)                    VHF0010
+FASEII                     = V-CARTOT-BDLDIR(J-BDLXXX)                  VHF0010
+FASEII                     * 10 + CAR-ACT-BDLDIR                        VHF0010
+FASEII          ELSE                                                    VHF0010
+FASEII             ADD 1 TO J-BDLXXX                                    VHF0010
+FASEII             MOVE V-CARDIR-BDLDIR(I-BDLXXX)                       VHF0010
+FASEII                  TO V-CARTOT-BDLDIR(J-BDLXXX)                    VHF0010
+FASEII          END-IF                                                  VHF0010
+FASEII       END-IF                                                     VHF0010
+FASEII       MOVE V-CARDIR-BDLDIR(I-BDLXXX) TO CAR-ANT-BDLDIR           VHF0010
+FASEII       ADD 1 TO I-BDLXXX                                          VHF0010
+FASEII     END-PERFORM.                                                 VHF0010
+FASEII     SORT V-CARTOT-BDLDIR DESCENDING.                             VHF0010
+
+HDIR01 0005-MOVER-CAMPOS-HISTORICO.                                     FAC0006
+REMARK******************************************************************
+HDIR01*0005-MOVER-CAMPOS-HISTORICO.                                     FAC0006
+HDIR01*Mueve los datos del registro de ICBDIR al registro de BDUHDIR    FAC0006
+HDIR01*como estaban antes de modificar el registro de ICBDIR            FAC0006
+REMARK******************************************************************
+HDIR01     INITIALIZE REG-BDUHDIR-WS                                    FAC0006
+HDIR01     MOVE TIPO-ID-DIRECC TO TIPO-ID-BDUHDIR-WS                    FAC0006
+HDIR01     MOVE NUM-ID-DIRECC TO NUM-ID-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE COD-CTA-DIRECC TO COD-CTA-BDUHDIR-WS                    FAC0006
+HDIR01     MOVE COD-SUS-DIRECC TO COD-SUS-BDUHDIR-WS                    FAC0006
+HDIR01     MOVE NUM-CTA-DIRECC TO NUM-CTA-BDUHDIR-WS                    FAC0006
+HDIR01     MOVE ZEROS TO  NUM-CONSEC-BDUHDIR-WS                         FAC0006
+HDIR01     MOVE CIURES-DIRECC TO CIURES-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE DIRRES-DIRECC TO DIRRES-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE TELRES-DIRECC TO TELRES-BDUHDIR-WS                      FAC0006
+FASEII     MOVE FECDRES-DIRECC TO FECDRES-BDUHDIR-WS                    VHF0010
+AMPDIR     MOVE DPTRES-DIRECC TO DPTRES-BDUHDIR-WS                      FAC0007 
+HDIR01     MOVE CIULAB-DIRECC TO CIULAB-BDUHDIR-WS                      FAC0006
+FASEII     MOVE DIRLAB-DIRECC TO DIRLAB-BDUHDIR-WS                      VHF0010
+HDIR01     MOVE TELLAB-DIRECC TO TELLAB-BDUHDIR-WS                      FAC0006
+AMPDIR     MOVE DPTLAB-DIRECC TO DPTLAB-BDUHDIR-WS                      FAC0007 
+FASEII     MOVE FECDLAB-DIRECC TO FECDLAB-BDUHDIR-WS                    VHF0010
+HDIR01     MOVE CIUCOR-DIRECC TO CIUCOR-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE DIRCOR-DIRECC TO DIRCOR-BDUHDIR-WS                      FAC0006
+AMPDIR     MOVE DPTCOR-DIRECC TO DPTCOR-BDUHDIR-WS                      FAC0007 
+FASEII     MOVE FECDCOR-DIRECC TO FECDCOR-BDUHDIR-WS                    VHF0010
+HDIR01     MOVE FECACT-DIRECC TO FECACT-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE FECAPE-DIRECC TO FECAPE-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE FECCRE-DIRECC TO FECCRE-BDUHDIR-WS                      FAC0006
+HDIR01     MOVE FECHA-SIST(1:6) TO FECSIS-BDUHDIR-WS                    FAC0006
+AMPDIR     MOVE E-MAIL-DIRECC TO E-MAIL-BDUHDIR-WS                      FAC0007 
+AMPDIR     MOVE TELCEL-DIRECC TO TELCEL-BDUHDIR-WS                      FAC0007 
+FASEII     MOVE FECCEL-DIRECC TO FECCEL-BDUHDIR-WS                      VHF0010
+AMPDIR     MOVE FECULT-DIRECC TO FECULT-BDUHDIR-WS                      FAC0007 
+RCNCER     MOVE FECHA6-DIRECC TO FECSUS-BDUHDIR-WS                      FAC0008 
+RCNCER     MOVE CERRES-DIRECC TO CERRES-BDUHDIR-WS                      FAC0008 
+RCNCER     MOVE ADIRES-DIRECC TO ADIRES-BDUHDIR-WS                      FAC0008 
+RCNCER     MOVE CERLAB-DIRECC TO CERLAB-BDUHDIR-WS                      FAC0008 
+RCNCER     MOVE ADILAB-DIRECC TO ADILAB-BDUHDIR-WS                      FAC0008 
+RCNCER     MOVE CERCOR-DIRECC TO CERCOR-BDUHDIR-WS                      FAC0008 
+BDACSV     MOVE ADICOR-DIRECC TO ADICOR-BDUHDIR-WS                      CAV0009 
+BDACSV     MOVE INDCSV-DIRECC TO INDCSV-BDUHDIR-WS.                     CAV0009 
+FASEII     MOVE FECTRES-DIRECC TO FECTRES-BDUHDIR-WS.                   VHF0010
+FASEII     MOVE FECTLAB-DIRECC TO FECTLAB-BDUHDIR-WS.                   VHF0010
+FASEII     MOVE FECMAIL-DIRECC TO FECMAIL-BDUHDIR-WS.                   VHF0010

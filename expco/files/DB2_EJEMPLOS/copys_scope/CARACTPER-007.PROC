@@ -1,0 +1,191 @@
+REMARK*CARACTPER-007.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 007
+REMARK*    FINANCIERA INTERNACIONAL
+REMARK******************************************************************
+REMARK 0000-INICIALIZAR-CARAC-EXT-07.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-07.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 07    *
+REMARK*     PARA FINANCIERA INTERNACIONAL
+REMARK******************************************************************
+             MOVE ALL "         -1" TO PER-07-NIVEL-02-END        
+             MOVE ZEROS             TO PER-07-NIVEL-02-ENDV        
+             .        
+REMARK*
+       0000-LLENAR-VEC-PERSONALIZ-007.        
+REMARK******************************************************************
+REMARK*0000-LLENAR-VEC-PERSONALIZ-007.                                 *
+REMARK*     SE LLENA EL VECTOR CON LAS PERSONALIZACIONES SOLICITADAS   *
+REMARK******************************************************************
+      *                                                                         
+               ADD 1 TO I-VAR-PER                                               
+               MOVE "02END999TO007" TO NOMBRE-VAR-PER(I-VAR-PER)                
+               MOVE FUNCTION LENGTH(02END999TO007) TO L-AUX                     
+               MOVE 02END999TO007(1:L-AUX)      TO                              
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+      *                                                                         
+               ADD 1 TO I-VAR-PER                                               
+               MOVE "02END998TO007" TO NOMBRE-VAR-PER(I-VAR-PER)                
+               MOVE FUNCTION LENGTH(02END998TO007) TO L-AUX                     
+               MOVE 02END998TO007(1:L-AUX)      TO                              
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+      *                                                                         
+               ADD 1 TO I-VAR-PER                                               
+               MOVE "02END997TO007" TO NOMBRE-VAR-PER(I-VAR-PER)                
+               MOVE FUNCTION LENGTH(02END997TO007) TO L-AUX                     
+               MOVE 02END997TO007(1:L-AUX)      TO                              
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+      *                                                                         
+               ADD 1 TO I-VAR-PER                                               
+               MOVE "02END996TO007" TO NOMBRE-VAR-PER(I-VAR-PER)                
+               MOVE FUNCTION LENGTH(02END996TO007) TO L-AUX                     
+               MOVE 02END996TO007(1:L-AUX)      TO                              
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+               .        
+      *                                                                         
+               
+       2749-PROCESE-CARCT-00END-EXT-07.        
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-07.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00END Y 02END PARA
+REMARK*     FINANCIERA INTERNACIONAL
+REMARK******************************************************************
+           MOVE ALL "         -1" TO PER-07-NIVEL-00-END        
+           MOVE ALL "         -1" TO PER-07-NIVEL-00-END-TMP        
+           MOVE ZEROS             TO PER-07-NIVEL-00-ENDV-TMP        
+REMARK***  INSUMO: VECTOR NORMALIZADO DE VALORES USA
+      *        
+      *    DISPLAY LLAVE-MAES-CREDIT " " COD-PORTAF-CARACT " "        
+      *            NOV-REPORT-ABD07 " "FECHA-ESTADO-CARACT " "        
+      *            VEC-CUOTA-CARACT(I13) " "         
+      *            VEC-INICIAL-CARACT(I13) " "        
+      *            VEC-SALDO-CARACT(I13) " "         
+              IF REG-ABIERTO-CARACT = 1        
+                 IF FECHA-ESTADO-CARACT > ZEROS AND        
+                    ACT-DATE-CARACT > ZEROS                                    
+                    IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0        
+      * VECTOR CUOTA POSICION 13        
+                       IF VEC-CUOTA-CARACT(I13) >= ZEROS AND                   
+                          VEC-IND-CUO-CARACT(I13) = 0                          
+                          MOVE VEC-CUOTA-CARACT(I13) TO 00ENDVCUOTA007        
+                                                   00ENDCUOTA007(1:11)        
+                       ELSE        
+                         IF VEC-CUOTA-CARACT(I13) NOT NUMERIC                  
+                          MOVE "        -88" TO 00ENDCUOTA007(1:11)        
+                         END-IF        
+                       END-IF        
+      * VECTOR CUPOS POSICION 13        
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND                 
+                          VEC-IND-INI-CARACT(I13) = 0                          
+                         MOVE VEC-INICIAL-CARACT(I13) TO 00ENDVCUPOS007        
+                                                    00ENDCUPOS007(1:11)        
+                       ELSE        
+                         IF VEC-INICIAL-CARACT(I13) NOT NUMERIC                
+                          MOVE "        -88" TO 00ENDCUPOS007(1:11)        
+                         END-IF        
+                       END-IF        
+      * VECTOR SALDOS POSICION 13        
+                       IF VEC-SALDO-CARACT(I13) >= ZEROS AND        
+                          VEC-IND-SLD-CARACT(I13) = 0        
+                          MOVE VEC-SALDO-CARACT(I13) TO 00ENDVSALDO007        
+                                                   00ENDSALDO007(1:11)        
+                       ELSE        
+                         IF VEC-SALDO-CARACT(I13) NOT NUMERIC        
+                          MOVE "        -88" TO 00ENDSALDO007(1:11)        
+                         END-IF        
+                       END-IF        
+      * VECTOR SALDO MORA POSICION 13        
+                       IF VEC-SALDOMOR-CARACT(I13) >= ZEROS AND        
+                          VEC-IND-SLDM-CARACT(I13) = 0        
+                          MOVE VEC-SALDOMOR-CARACT(I13) TO         
+                                                        00ENDVSMORO007        
+                                                   00ENDSMORO007(1:11)        
+                       ELSE        
+                         IF VEC-SALDO-CARACT(I13) NOT NUMERIC        
+                          MOVE "        -88" TO 00ENDSMORO007(1:11)        
+                         END-IF        
+                       END-IF        
+                    ELSE        
+                       MOVE "         -4" TO 00ENDCUOTA007(1:11)        
+                       MOVE "         -4" TO 00ENDCUPOS007(1:11)        
+                       MOVE "         -4" TO 00ENDSALDO007(1:11)        
+                       MOVE "         -4" TO 00ENDSMORO007(1:11)        
+                    END-IF        
+                 ELSE        
+                    MOVE "         -3" TO 00ENDCUOTA007(1:11)        
+                    MOVE "         -3" TO 00ENDCUPOS007(1:11)        
+                    MOVE "         -3" TO 00ENDSALDO007(1:11)        
+                    MOVE "         -3" TO 00ENDSMORO007(1:11)        
+                 END-IF        
+              ELSE        
+                 MOVE "         -2" TO 00ENDCUOTA007(1:11)        
+                 MOVE "         -2" TO 00ENDCUPOS007(1:11)        
+                 MOVE "         -2" TO 00ENDSALDO007(1:11)        
+                 MOVE "         -2" TO 00ENDSMORO007(1:11)        
+              END-IF        
+REMARK***  02END999TO007 *** CUPOS OBLIGACIONES FINANCIERA INTERNACIONAL
+           IF NIT-SUSCRIP-S-ABD02 = 860065913        
+             MOVE ZEROS TO 00END999TO007        
+             MOVE 00ENDCUPOS007(1:11) TO 00END999TO007(1:11)        
+             IF FUNCTION NUMVAL(00END999TO007(1:11)) >= 0        
+                COMPUTE 02ENDV999TO007 = 02ENDV999TO007 + 00ENDVCUPOS007        
+                MOVE 02ENDV999TO007 TO 02END999TO007        
+             ELSE        
+              IF FUNCTION NUMVAL(02END999TO007(1:11)) < 0        
+                IF FUNCTION NUMVAL(00END999TO007(1:11)) <        
+                   FUNCTION NUMVAL(02END999TO007(1:11))        
+                   MOVE 00END999TO007(1:11) TO 02END999TO007(1:11)        
+                END-IF        
+              END-IF        
+             END-IF        
+           END-IF        
+REMARK***  02END998TO007 *** CUOTAS OBLIGACIONES FINANCIERA INTERNACIONAL 
+           IF NIT-SUSCRIP-S-ABD02 = 860065913        
+             MOVE ZEROS TO 00END998TO007        
+             MOVE 00ENDCUOTA007(1:11) TO 00END998TO007(1:11)        
+             IF FUNCTION NUMVAL(00END998TO007(1:11)) >= 0        
+                COMPUTE 02ENDV998TO007 = 02ENDV998TO007 + 00ENDVCUOTA007        
+                MOVE 02ENDV998TO007 TO 02END998TO007        
+             ELSE        
+              IF FUNCTION NUMVAL(02END998TO007(1:11)) < 0        
+                IF FUNCTION NUMVAL(00END998TO007(1:11)) <        
+                   FUNCTION NUMVAL(02END998TO007(1:11))        
+                   MOVE 00END998TO007(1:11) TO 02END998TO007(1:11)        
+                END-IF        
+              END-IF        
+             END-IF        
+           END-IF        
+REMARK***  02END997TO007 *** SALDOS OBLIGACIONES FINANCIERA INTERNACIONAL
+           IF NIT-SUSCRIP-S-ABD02 = 860065913        
+             MOVE ZEROS TO 00END997TO007        
+             MOVE 00ENDSALDO007(1:11) TO 00END997TO007(1:11)        
+             IF FUNCTION NUMVAL(00END997TO007(1:11)) >= 0        
+                COMPUTE 02ENDV997TO007 = 02ENDV997TO007 + 00ENDVSALDO007        
+                MOVE 02ENDV997TO007 TO 02END997TO007        
+             ELSE        
+              IF FUNCTION NUMVAL(02END997TO007(1:11)) < 0        
+                IF FUNCTION NUMVAL(00END997TO007(1:11)) <        
+                   FUNCTION NUMVAL(02END997TO007(1:11))        
+                   MOVE 00END997TO007(1:11) TO 02END997TO007(1:11)        
+                END-IF        
+              END-IF        
+             END-IF        
+           END-IF        
+REMARK***  02END996TO007 *** SALDO MORA OBLS. FINANCIERA INTERNACIONAL
+           IF NIT-SUSCRIP-S-ABD02 = 860065913        
+             MOVE ZEROS TO 00END996TO007        
+             MOVE 00ENDSMORO007(1:11) TO 00END996TO007(1:11)        
+             IF FUNCTION NUMVAL(00END996TO007(1:11)) >= 0        
+                COMPUTE 02ENDV996TO007 = 02ENDV996TO007 + 00ENDVSMORO007        
+                MOVE 02ENDV996TO007 TO 02END996TO007        
+             ELSE        
+              IF FUNCTION NUMVAL(02END996TO007(1:11)) < 0        
+                IF FUNCTION NUMVAL(00END996TO007(1:11)) <        
+                   FUNCTION NUMVAL(02END996TO007(1:11))        
+                   MOVE 00END996TO007(1:11) TO 02END996TO007(1:11)        
+                END-IF        
+              END-IF        
+             END-IF        
+           END-IF        
+           .        

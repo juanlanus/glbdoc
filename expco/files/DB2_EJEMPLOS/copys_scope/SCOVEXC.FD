@@ -1,0 +1,34 @@
+REMARK* SCOVEXC.FD.v.0002
+REMARK******************************************************************
+REMARK* ARCHIVO DONDE QUEDAN REPORTADAS LAS TARJETAS A LAS CUALES NO SE*
+REMARK* LES GENERO EXTRACUPO CON SU CODIGO ASOCIADO ASI:               *
+REMARK*     01 - TARJETA NO ES DE PERSONA NATURAL                      *
+REMARK*     02 - TARJETA NO VIGENTE                                    *
+REMARK*     03 - TARJETA EN DUDOSO RECAUDO O CARTERA CASTIGADA         *
+REMARK*     04 - TARJETA CON CUPO EN CERO                              *
+REMARK*     05 - TARJETA CON SCORE EN CEROS                            *
+REMARK*     06 - NO SE ENCONTRO PARAMETRO DE EXTRACUPO (BIN, CLASIFICA-*
+REMARK*          CION, TITULAR)                                        *
+REMARK*     07 - TIPO DE EXTRACUPO INVALIDO                            *
+REMARK*     08 - VALOR DE SCORE NO PARAMETRIZADO                       *
+REMARK*     09 - CUPO NO PARAMETRIZADO EN NINGUN RANGO                 *
+NVAEXC*     10 - TARJETA FIGURA PARA DOS INDENTIFICACIONES DIFERENTES  *VHF0002
+NVAEXC*     11 - ADJETIVO DE FALLECIDO,CUENTA EN COBRADOR O ILOCALIZADO*VHF0002
+NVAEXC*     12 - CUPO EXCEDIDO                                         *VHF0002
+NVAEXC*     13 - IDENTIFICACION NO EXISTE EN REGISTRADURIA             *VHF0002
+NVAEXC*     14 - IDENTIFICACION EN ESTADO FALLECIDO                    *VHF0002
+NVAEXC*     15 - EXTRACUPO CALCULADO = 0                               *VHF0002
+NVAEXC*     16 - SUSCRIPTOR NO EXISTE                                  *VHF0002
+NVAEXC*     17 - VALORES NO REPORTADOS POR LA ENTIDAD                  *VHF0002
+NVAEXC*     18 - REGISTRO EXCLUIDO POR ARCHIVO FILTRO                  *VHF0002
+REMARK******************************************************************
+REMARK* VHF0002     * NVAEXC - SE MODIFICA DOCUMENTACION PARA ADICIONAR*
+REMARK* VICTOR HUGO *          TARJETAS EXCLUIDAS POR CONCEPTOS VARIOS *
+REMARK* FORERO      *                                                  *
+REMARK* JUL.03/2008 *                                                  *
+REMARK******************************************************************
+       FD  SCOVEXC.
+       01  REG-SCOVEXC.
+           03 CODIGO-SCOVEXC            PIC 9(02).
+           03 LLATAR-SCOVEXC            PIC X(38).
+           03 DESCRP-SCOVEXC            PIC X(100).

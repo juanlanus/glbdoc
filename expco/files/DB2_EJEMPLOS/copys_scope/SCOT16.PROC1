@@ -1,0 +1,40 @@
+REMARK* RUT016-PROC1.V.0007
+REMARK*********************************************************************
+REMARK* RUTINAS PARA ELECCION DE LOS SCORES ESPECIFICOS  
+REMARK*********************************************************************
+REMARK* RMB0004     * ACIERT : SE ESCOGE EL SCORE DE ACUERDO AL VALOR DE LA
+REMARK*             *        VARIABLE TIP-SCO-GENERICO,1=PREDICTA,4=ACIERTA
+REMARK* MARTINEZ    *
+REMARK* OCT.5.2002  *
+REMARK*********************************************************************
+REMARK* RMB0005     * MICR01 SE IMPLEMENTA EL LLAMADO AL SCORE #6 QUE      
+REMARK* R.MARTINEZ  *        CORRESPONDE A LA IMPLEMENTACIÖN DE LA
+REMARK* MAR.29 2005 *        SEGMENTACION DE MICROCREDITO
+REMARK*********************************************************************
+REMARK* RMB0006     * MICR03 SE ELIMINA PARA EL SOCRE DE MICOCREDITO EL    
+REMARK* R.MARTINEZ  *        LLAMAO AL CALCULO DEL SCORE ACIERTA  
+REMARK* SEPT.  2005 *       
+REMARK*********************************************************************
+REMARK* RMB0007     * ACIEME SE IMPLEMENTA EL LLAMADO AL SCORE #8 ACIERTA  
+REMARK* R.MARTINEZ  *        PLUS                                  
+REMARK* DIC-30-2006 *       
+REMARK*********************************************************************
+       5000-TRU-USU-CKXXX.
+           PERFORM 5000-TRU-CAR-CKXXX.
+       5000-TRU-USU-GDXXX.
+           PERFORM 5000-TRU-CAR-GDXXX.
+       5000-TRU-USU-IQXXX.
+           PERFORM 5000-TRU-CAR-IQXXX.
+       5320-TRU-USU-CTACAR.
+           PERFORM 5320-TRU-CAR-CTACAR.
+       5000-TRU-USU-FINSCO.
+            PERFORM 5000-TRU-BUS-IDENTIDAD.
+            PERFORM 5000-TRU-CAR-CONSOLIDAR.
+ACIERT      IF TIP-SCO-GENERICO = 1                                     RMB0004 
+ACIERT         PERFORM 5800-TRU-REALIZAR-SCORE.                         RMB0004 
+ACIERT      IF TIP-SCO-GENERICO = 4                                     RMB0004 
+ACIERT         PERFORM 7800-TRU-REALIZAR-SCORE-A.                       RMB0004 
+MICR01      IF TIP-SCO-GENERICO = 6                                     RMB0005 
+MICR01         PERFORM 9800-TRA-SEGMENTACION-M.                         RMB0005 
+ACIEME      IF TIP-SCO-GENERICO = 8                                     RMB0007 
+ACIEME         PERFORM 11800-TRU-REALIZAR-SCORE-P.                      RMB0007 

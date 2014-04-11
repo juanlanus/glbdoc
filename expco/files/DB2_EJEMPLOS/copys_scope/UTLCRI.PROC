@@ -1,0 +1,242 @@
+REMARK* UTLCRI.PROC.v.0002
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* ENCRIPCION                                 
+REMARK*******************************************************************
+REMARK* RMB0002     * ALF001 - SE MANEJA LA ENCRIPCION ALFANUMERICA     *
+REMARK* R. MARTINEZ *          CON EL ESTANDAR MANEJADO EN WEB Y NOVEDAT*
+REMARK*             *          EN LINEA .                               *
+REMARK* FEB.03/2004 *                                                   *
+REMARK*******************************************************************
+REMARK*
+UTLCRI 0001-ENCRIPTA-UTLCRI.
+REMARK******************************************************************
+REMARK*0001-ENCRIPTA-UTLCRI.
+REMARK*      STRING DE 10 A ENCRIPTAR : INPUT-UTLCRI
+REMARK*      STRING DE 10 A ENCRIPTADO: OUTPUT-UTLCRI
+REMARK*                     SEMILLA   : SEMILLA-UTLCRI
+REMARK******************************************************************
+REMARK***  SE AJUSTAN LAS POSICIONES YA QUE LOS VECTORES VAN DE 1 A 10
+REMARK***  Y LOS DIGITOS DE LA SEMILLA VA DE 0 A 9
+UTLCRI     ADD 1 TO FILA-UTLCRI GIVING F-UTLCRI.
+UTLCRI     ADD 1 TO SLOT-UTLCRI GIVING S-UTLCRI.
+REMARK***  SE UBICA EN EL PRIMER ELEMENTO DEL VECTOR
+UTLCRI     MOVE 1 TO I-UTLCRI.
+UTLCRI     PERFORM 10 TIMES                   
+UTLCRI        MOVE TRANSPONE-UTLCRI(I-UTLCRI,F-UTLCRI) TO X-UTLCRI
+UTLCRI        ADD 1 TO X-UTLCRI
+REMARK***     SE HACE EL INTERCAMBIO DE POSICION DEL DIGITO
+UTLCRI        MOVE V-INPUT-UTLCRI(I-UTLCRI) TO V-OUTPUT-UTLCRI(X-UTLCRI)
+UTLCRI        IF V-OUTPUT-UTLCRI(X-UTLCRI) NUMERIC
+UTLCRI           MOVE V-OUTPUT-UTLCRI(X-UTLCRI) TO Y-UTLCRI
+UTLCRI           MOVE PERMUTA-UTLCRI(I-UTLCRI,S-UTLCRI) TO Z-UTLCRI
+UTLCRI           ADD  Z-UTLCRI TO Y-UTLCRI
+REMARK***        SE CAMBIA EL VALOR DEL DIGITO
+UTLCRI           MOVE Y-UTLCRI(2:1) TO V-OUTPUT-UTLCRI(X-UTLCRI)
+UTLCRI        END-IF
+UTLCRI        ADD 1 TO I-UTLCRI
+UTLCRI     END-PERFORM.
+
+UTLCRI 0002-DESENCRIPTA-UTLCRI.
+REMARK******************************************************************
+REMARK*0001-ENCRIPTA-UTLCRI.
+REMARK*      STRING DE 10 A ENCRIPTAR : INPUT-UTLCRI
+REMARK*      STRING DE 10 A ENCRIPTADO: OUTPUT-UTLCRI
+REMARK*                     SEMILLA   : SEMILLA-UTLCRI
+REMARK******************************************************************
+UTLCRI     ADD 1 TO FILA-UTLCRI GIVING F-UTLCRI.
+UTLCRI     ADD 1 TO SLOT-UTLCRI GIVING S-UTLCRI.
+UTLCRI     MOVE 1 TO I-UTLCRI.
+UTLCRI     PERFORM 10 TIMES                   
+UTLCRI       MOVE TRANSPONE-UTLCRI(I-UTLCRI,F-UTLCRI) TO X-UTLCRI
+UTLCRI       ADD 1 TO X-UTLCRI
+REMARK***    SE RECUPERA LA POSICION ORIGINAL DEL DIGITO
+UTLCRI       MOVE V-INPUT-UTLCRI(X-UTLCRI) TO V-OUTPUT-UTLCRI(I-UTLCRI)
+UTLCRI       IF V-OUTPUT-UTLCRI(I-UTLCRI) NUMERIC
+UTLCRI          MOVE V-OUTPUT-UTLCRI(I-UTLCRI) TO Y-UTLCRI
+UTLCRI          MOVE PERMUTA-UTLCRI (I-UTLCRI,S-UTLCRI) TO X-UTLCRI
+UTLCRI          COMPUTE  Y-UTLCRI  = 10 + Y-UTLCRI - X-UTLCRI
+REMARK***       SE REESTABLECE EL VALOR ORIGINAL DEL DIGITO
+UTLCRI          MOVE Y-UTLCRI(2:1) TO V-OUTPUT-UTLCRI(I-UTLCRI) 
+UTLCRI       END-IF
+UTLCRI       ADD 1 TO I-UTLCRI 
+UTLCRI     END-PERFORM.                        
+
+REMARK********************************************************************
+REMARK*    ESTAS RUTINAS MANEJAN ENCRIPCION ALFANUMERICA DE CADENAS HASTA*
+REMARK*    DE 10 CARACTERES. SON LAS UTILIZADAS EN WEB Y NOVEDAT CON UNA *
+REMARK*    SEMILLA DE 3 DIGITOS O DE FORMA SIMPLE CON UNA SEMILLA DE     *
+REMARK*    DOS DIGITOS.                                                  *
+REMARK********************************************************************
+ALF001 0001-ENCRIPX-SIMPLE-UTLCRI.                                      RMB0002 
+REMARK*    LLAMADO CON SEMILLA DE DOS DIGITOS EN SEMILLA-UTLCRI
+REMARK******************************************************************
+ALF001     INSPECT INPUT-UTLCRI REPLACING ALL " " BY "*"                RMB0002 
+ALF001     PERFORM 0001-ENCRIPTA-ALFA-UTLCRI.                           RMB0002 
+REMARK******************************************************************
+ALF001 0002-DESENCRIPX-SIMPLE-UTLCRI.                                   RMB0002 
+REMARK*    LLAMADO CON SEMILLA DE DOS DIGITOS EN SEMILLA-UTLCRI
+REMARK******************************************************************
+ALF001     PERFORM 0002-DESENCRIPTA-ALFA-UTLCRI.                        RMB0002 
+ALF001     INSPECT OUTPUT-UTLCRI REPLACING ALL "*" BY " ".              RMB0002 
+REMARK******************************************************************
+ALF001 0001-ENCRIPX-TRIPLE-UTLCRI.                                      RMB0002 
+REMARK*    LLAMADO CON SEMILLA DE TRES DIGITOS EN SEMILLA3-UTLCRI
+REMARK******************************************************************
+ALF001     INSPECT INPUT-UTLCRI REPLACING ALL " " BY "*"                RMB0002 
+ALF001     MOVE DIG1-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG2-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0001-ENCRIPTA-ALFA-UTLCRI                            RMB0002 
+ALF001     MOVE OUTPUT-UTLCRI TO INPUT-UTLCRI                           RMB0002 
+ALF001     MOVE DIG3-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG1-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0002-DESENCRIPTA-ALFA-UTLCRI                         RMB0002 
+ALF001     MOVE OUTPUT-UTLCRI TO INPUT-UTLCRI                           RMB0002 
+ALF001     MOVE DIG2-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG3-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0001-ENCRIPTA-ALFA-UTLCRI.                           RMB0002 
+REMARK******************************************************************
+ALF001 0002-DESENCRIPX-TRIPLE-UTLCRI.                                   RMB0002 
+REMARK*    LLAMADO CON SEMILLA DE TRES DIGITOS EN SEMILLA3-UTLCRI
+REMARK******************************************************************
+ALF001     MOVE DIG2-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG3-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0002-DESENCRIPTA-ALFA-UTLCRI                         RMB0002 
+ALF001     MOVE OUTPUT-UTLCRI TO INPUT-UTLCRI                           RMB0002 
+ALF001     MOVE DIG3-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG1-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0001-ENCRIPTA-ALFA-UTLCRI                            RMB0002 
+ALF001     MOVE OUTPUT-UTLCRI TO INPUT-UTLCRI                           RMB0002 
+ALF001     MOVE DIG1-SEM3-UTLCRI TO FILA-UTLCRI.                        RMB0002 
+ALF001     MOVE DIG2-SEM3-UTLCRI TO SLOT-UTLCRI.                        RMB0002 
+ALF001     PERFORM 0002-DESENCRIPTA-ALFA-UTLCRI.                        RMB0002 
+ALF001     INSPECT OUTPUT-UTLCRI REPLACING ALL "*" BY " ".              RMB0002 
+ALF001 0001-ENCRIPTA-ALFA-UTLCRI.                                       RMB0002 
+REMARK******************************************************************
+REMARK*0001-ENCRIPTA-ALFA-UTLCRI.
+REMARK*      STRING DE 10 A ENCRIPTAR : INPUT-UTLCRI
+REMARK*      STRING DE 10 A ENCRIPTADO: OUTPUT-UTLCRI
+REMARK*                     SEMILLA   : SEMILLA-UTLCRI DOS DIGITOS
+REMARK*      LA RUTINA TOMA EL STRING, PERMUTA CADA CARACTER DE ACUERDO
+REMARK*      A LAS TABLAS DEFINIDAS Y AL PRIMER DIGITO DE LA SEMILLA,LUEGO
+REMARK*      TRANSPONE CADA CARACTER PERMUTADO DE ACUERDO A LAS TABLAS
+REMARK*      DEFINIDAS Y AL SEGUNDO DIGITO DE LA SEMILLA.
+REMARK******************************************************************
+REMARK***  SE AJUSTAN LAS POSICIONES YA QUE LOS VECTORES VAN DE 1 A 10
+REMARK***  Y LOS DIGITOS DE LA SEMILLA VA DE 0 A 9
+ALF001     ADD 1 TO FILA-UTLCRI GIVING F-UTLCRI.                        RMB0002 
+ALF001     ADD 1 TO SLOT-UTLCRI GIVING S-UTLCRI.                        RMB0002 
+REMARK***  SE UBICA EN EL PRIMER ELEMENTO DEL VECTOR
+ALF001     MOVE 1 TO I-UTLCRI.                                          RMB0002 
+ALF001     PERFORM UNTIL I-UTLCRI > 10                                  RMB0002 
+ALF001       IF V-INPUT-UTLCRI(I-UTLCRI) = "*"                          RMB0002 
+ALF001          NEXT SENTENCE                                           RMB0002 
+ALF001       END-IF                                                     RMB0002 
+ALF001       ADD 1 TO I-UTLCRI                                          RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001     IF I-UTLCRI > 10                                             RMB0002 
+ALF001        MOVE 10 TO LON-UTLCRI                                     RMB0002 
+ALF001     ELSE                                                         RMB0002 
+ALF001        COMPUTE LON-UTLCRI = I-UTLCRI - 1                         RMB0002 
+ALF001     END-IF.                                                      RMB0002 
+ALF001     MOVE 1 TO I-UTLCRI.                                          RMB0002 
+ALF001     MOVE INPUT-UTLCRI TO OUTPUT-UTLCRI.                          RMB0002 
+REMARK*    SE PROCEDE A PERMUTAR (CAMBIO DE CARACTERES)
+ALF001     PERFORM LON-UTLCRI TIMES                                     RMB0002 
+ALF001        MOVE PERTRA-UTLCRI(S-UTLCRI,I-UTLCRI) TO X-UTLCRI         RMB0002 
+ALF001        COMPUTE X-UTLCRI = X-UTLCRI + I-UTLCRI - 1                RMB0002 
+ALF001        MOVE FUNCTION MOD(X-UTLCRI,LON-UTLCRI) TO X-UTLCRI        RMB0002 
+ALF001        ADD 1 TO X-UTLCRI                                         RMB0002 
+ALF001        MOVE V-OUTPUT-UTLCRI(I-UTLCRI) TO CAR-UTLCRI              RMB0002 
+ALF001        MOVE V-OUTPUT-UTLCRI(X-UTLCRI)                            RMB0002 
+ALF001             TO V-OUTPUT-UTLCRI(I-UTLCRI)                         RMB0002 
+ALF001        MOVE CAR-UTLCRI TO V-OUTPUT-UTLCRI(X-UTLCRI)              RMB0002 
+ALF001        ADD 1 TO I-UTLCRI                                         RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+REMARK*    SE PROCEDE A TRANSPONER (CAMBIO DE POSICION)    
+ALF001     MOVE 1 TO I-UTLCRI.                                          RMB0002 
+ALF001     PERFORM LON-UTLCRI TIMES                                     RMB0002 
+ALF001        MOVE V-OUTPUT-UTLCRI(I-UTLCRI) TO CAR-UTLCRI              RMB0002 
+ALF001        PERFORM 0001-UBICAR-UTLCRI                                RMB0002 
+ALF001        MOVE PERTRA-UTLCRI(F-UTLCRI,I-UTLCRI) TO Z-UTLCRI         RMB0002 
+ALF001        ADD  Z-UTLCRI TO Y-UTLCRI                                 RMB0002 
+ALF001        MOVE V-CAR-UTLCRI  (Y-UTLCRI) TO                          RMB0002 
+ALF001                                    V-OUTPUT-UTLCRI(I-UTLCRI)     RMB0002 
+ALF001        ADD 1 TO I-UTLCRI                                         RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001     PERFORM UNTIL I-UTLCRI > 10                                  RMB0002 
+ALF001        MOVE "*" TO V-OUTPUT-UTLCRI(I-UTLCRI)                     RMB0002 
+ALF001        ADD 1 TO I-UTLCRI                                         RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001 0001-UBICAR-UTLCRI.                                              RMB0002 
+REMARK******************************************************************
+REMARK*    SE UBICA LA POSICION DEL CARACTER EN LA CADENA.         
+REMARK******************************************************************
+ALF001     MOVE 1 TO Y-UTLCRI                                           RMB0002 
+ALF001     PERFORM UNTIL Y-UTLCRI > 75                                  RMB0002 
+ALF001       IF V-CAR-UTLCRI(Y-UTLCRI) = CAR-UTLCRI                     RMB0002 
+ALF001          NEXT SENTENCE                                           RMB0002 
+ALF001       END-IF                                                     RMB0002 
+ALF001       ADD 1 TO Y-UTLCRI                                          RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001     IF Y-UTLCRI > 75                                             RMB0002 
+ALF001        MOVE 1 TO Y-UTLCRI                                        RMB0002 
+ALF001     END-IF.                                                      RMB0002 
+UTLCRI 0002-DESENCRIPTA-ALFA-UTLCRI.
+REMARK******************************************************************
+REMARK*0002-DESENCRIPTA-ALFA-UTLCRI.
+REMARK*      STRING DE 10 A ENCRIPTAR : INPUT-UTLCRI
+REMARK*      STRING DE 10 A ENCRIPTADO: OUTPUT-UTLCRI
+REMARK*                     SEMILLA   : SEMILLA-UTLCRI 2 POSICIONES
+REMARK*      LA RUTINA TOMA EL STRING, TRASPONE CADA CARACTER DE ACUERDO
+REMARK*      A LAS TABLAS DEFINIDAS Y AL SEGUNDO DIGITO DE LA SEMILLA,LUEGO
+REMARK*      PERMUTA CADA CARACTER TRANSPUESTO DE ACUERDO A LAS TABLAS
+REMARK*      DEFINIDAS Y AL SEGUNDO PRIMER DE LA SEMILLA.
+REMARK******************************************************************
+ALF001     INITIALIZE OUTPUT-UTLCRI                                     RMB0002 
+ALF001     ADD 1 TO FILA-UTLCRI GIVING F-UTLCRI.                        RMB0002 
+ALF001     ADD 1 TO SLOT-UTLCRI GIVING S-UTLCRI.                        RMB0002 
+ALF001     MOVE 1 TO I-UTLCRI.                                          RMB0002 
+ALF001     PERFORM UNTIL I-UTLCRI > 10                                  RMB0002 
+ALF001       IF V-INPUT-UTLCRI(I-UTLCRI) = "*"                          RMB0002 
+ALF001          NEXT SENTENCE                                           RMB0002 
+ALF001       END-IF                                                     RMB0002 
+ALF001       ADD 1 TO I-UTLCRI                                          RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001     IF I-UTLCRI > 10                                             RMB0002 
+ALF001        MOVE 10 TO LON-UTLCRI                                     RMB0002 
+ALF001     ELSE                                                         RMB0002 
+ALF001        COMPUTE LON-UTLCRI = I-UTLCRI - 1                         RMB0002 
+ALF001     END-IF.                                                      RMB0002 
+REMARK*    SE PROCEDE A TRANSPONER (CAMBIO DE POSICION)    
+ALF001     MOVE LON-UTLCRI TO I-UTLCRI.                                 RMB0002 
+ALF001     PERFORM LON-UTLCRI TIMES                                     RMB0002 
+ALF001       MOVE V-INPUT-UTLCRI(I-UTLCRI) TO CAR-UTLCRI                RMB0002 
+ALF001       MOVE PERTRA-UTLCRI(F-UTLCRI,I-UTLCRI) TO X-UTLCRI          RMB0002 
+ALF001       PERFORM 0001-UBICAR-UTLCRI                                 RMB0002 
+ALF001       IF Y-UTLCRI - X-UTLCRI > 0                                 RMB0002 
+ALF001          COMPUTE X-UTLCRI = Y-UTLCRI - X-UTLCRI                  RMB0002 
+ALF001       ELSE                                                       RMB0002 
+ALF001          COMPUTE X-UTLCRI = 63 - (X-UTLCRI - Y-UTLCRI)           RMB0002 
+ALF001       END-IF                                                     RMB0002 
+ALF001       MOVE V-CAR-UTLCRI(X-UTLCRI) TO V-OUTPUT-UTLCRI(I-UTLCRI)   RMB0002 
+ALF001       SUBTRACT 1 FROM I-UTLCRI                                   RMB0002 
+ALF001     END-PERFORM                                                  RMB0002 
+REMARK*    SE PROCEDE A PERMUTAR (CAMBIO DE CARACTERES)
+ALF001     MOVE LON-UTLCRI TO I-UTLCRI.                                 RMB0002 
+ALF001     PERFORM LON-UTLCRI TIMES                                     RMB0002 
+ALF001       MOVE PERTRA-UTLCRI(S-UTLCRI,I-UTLCRI) TO X-UTLCRI          RMB0002 
+ALF001       COMPUTE X-UTLCRI = X-UTLCRI + I-UTLCRI - 1                 RMB0002 
+ALF001       MOVE FUNCTION MOD(X-UTLCRI,LON-UTLCRI) TO X-UTLCRI         RMB0002 
+ALF001       ADD 1 TO X-UTLCRI                                          RMB0002 
+ALF001       MOVE V-OUTPUT-UTLCRI(X-UTLCRI) TO CAR-UTLCRI               RMB0002 
+ALF001       MOVE V-OUTPUT-UTLCRI(I-UTLCRI) TO V-OUTPUT-UTLCRI(X-UTLCRI)RMB0002 
+ALF001       MOVE CAR-UTLCRI TO V-OUTPUT-UTLCRI(I-UTLCRI)               RMB0002 
+ALF001       SUBTRACT 1 FROM I-UTLCRI                                   RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 
+ALF001     MOVE LON-UTLCRI TO I-UTLCRI.                                 RMB0002 
+REMARK*    SE RELLENA EL STRING DE "*" PARA MANEJAR LOS BLANCOS
+ALF001     ADD 1 TO I-UTLCRI.                                           RMB0002 
+ALF001     PERFORM UNTIL I-UTLCRI > 10                                  RMB0002 
+ALF001        MOVE "*" TO V-OUTPUT-UTLCRI(I-UTLCRI)                     RMB0002 
+ALF001        ADD      1 TO I-UTLCRI                                    RMB0002 
+ALF001     END-PERFORM.                                                 RMB0002 

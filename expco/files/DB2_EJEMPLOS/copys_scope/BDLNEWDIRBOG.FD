@@ -1,0 +1,11 @@
+******* BDLNEWDIRBOG-FD.0001
+******* ARCHIVO DE NUEVAS DIRECCIONES DE BOGOTA                         
+       FD BDLNEWDIRBOG.
+       01 REG-BDLNEWDIRBOG.
+          02 LLAVE-BDLNEWDIRBOG.
+             03 AVENIDA-BDLNEWDIRBOG         PIC X(02).
+             03 NUMEROS-BDLNEWDIRBOG.
+                04 CODIGO-BDLNEWDIRBOG OCCURS 10 TIMES.
+                   05 NUMCOD-BDLNEWDIRBOG    PIC 9(05).
+          02 DIRORI-BDLNEWDIRBOG             PIC X(60).
+          02 DIRNEW-BDLNEWDIRBOG             PIC X(60).

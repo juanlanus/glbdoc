@@ -1,0 +1,26 @@
+      * CARACT-NIT.FD.v.01.002
+      * ARCHIVO INDEXADO CON LAS CARACTERISTICAS PRECALCULADAS  
+      * PARA CLIENTES IDENTIFICADOS CON NIT
+      ******************************************************************
+      * JAA0002    | NEWVAR - SE ADICIONO NUEVAS VARIABLES DEL ICGS06  *
+      * 22-FEC-2011|        CALCULADAS A PARTIR DEL ENDEDUAMIENTO      *
+      * JALBARRACIN|                                                   *
+      ******************************************************************
+       FD CARACT-NIT.
+       01 REGISTRO-CARNIT.
+          03 LLAVE-CARNIT.
+             05 TIPO-ID-CARNIT          PIC 9(01).
+             05 NRO-ID-CARNIT           PIC 9(11).
+             05 CARACTERISTICA-CARNIT   PIC X(14).
+             05 CARACTERISTICA-CARNIT-R REDEFINES CARACTERISTICA-CARNIT.
+                 07 GRUPO-CARNIT        PIC X(03).
+                 07 CLASE-CARNIT        PIC X(03). 
+                 07 ESTADO-CARNIT       PIC 9(02).
+                 07 EXPERIENCIA-CARNIT  PIC 9(01).
+                 07 PFOLIO-CARNIT       PIC X(02).
+                 07 SECUENCIA-CARNIT    PIC 9(03).
+          03 VAL-PRECALCULO-CARNIT      PIC 9(15).
+NEWVAR    03 VAL-PRECALCULO-CARNIT-R  REDEFINES VAL-PRECALCULO-CARNIT.  JAA0002
+NEWVAR       05 TXT-PRECALCULO-CARNIT   PIC X(15).                      JAA0002
+NEWVAR    03 FILLER                     PIC X(20).                      JAA0002
+

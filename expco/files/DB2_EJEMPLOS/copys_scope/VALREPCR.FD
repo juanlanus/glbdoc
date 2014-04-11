@@ -1,0 +1,10 @@
+******* VALREPCR-FD.v01.0001
+REMARK* Parametros de campos a reportar por consecutivo definido
+REMARK* para maestro ampliado. Proceso de validacion Cartera y Tarjetas
+036300*----------------------------------------------------------------*
+       FD  VALREPCR.
+       01  REG-VALREPCR.
+           03 LLAVE-VALREPCR.
+              05 NUM-CONSEC-VALREPCR           PIC 9(4).
+           03 IND-CAMPO-VALREPCR OCCURS 80     PIC 9.
+           03 FILLER-VALREPCR                  PIC X(30).

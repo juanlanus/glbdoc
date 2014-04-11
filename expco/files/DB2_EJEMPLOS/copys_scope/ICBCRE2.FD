@@ -1,0 +1,99 @@
+      * ICBCRE2.FD.v.01.0001
+      * MAESTRO OBLIGACIONES DE CARTERA Y TARJETAS DE CREDITO REPORTADAS
+      * POR LOS DIFERENTES SUSCRIPTORES UTILIZADO POR CARACTERISTICAS PARA
+      * LEER INFORMACION DE VECTORES NO EMPALMADOS (VECTOR 3 y 4).
+      ******************************************************************
+       FD  MAESTRO-CREDIT-2.        
+       01  COMPLETO-ABD07-2.        
+           03  LLAVE-MAES-CREDIT-2.        
+               05  LLAVE-MAES-CREDIT-PRI-2.        
+                   07  TIPO-ID-ABD07-2     PIC 9.        
+                   07  NUM-ID-ABD07-2      PIC 9(11).        
+               05  LLAVE-MAES-CREDIT-ALT-2.        
+                   07  COD-SUS-ABD07-2     PIC 9(6).        
+                   07  COD-CTA-ABD07-2     PIC 99.        
+                   07  NUM-CTA-ABD07-2     PIC X(18).        
+                   07  NUM-CTA-VEN16-ABD07-2 REDEFINES NUM-CTA-ABD07-2.         
+                       09  NUM-CTA-VEN-ABD07-2 PIC 9(16).                       
+                       09  GARANTE-VEN-ABD07-2 PIC 99.                          
+           03  IND-BLOQUEO-ABD07-2         PIC 9     COMP-3.        
+           03  FECHA-APERT-ABD07-2         PIC 9(4)  COMP-3.        
+           03  FECHA-VENC-ABD07-2          PIC 9(4)  COMP-3.        
+           03  CUANTIA-ABD07-2             PIC 9(5)  COMP-3.        
+           03  CALIFIC-ABD07-2             PIC 9     COMP-3.        
+           03  TIP-CALIFIC-ABD07-2         PIC 9     COMP-3.        
+           03  NOV-REPORT-ABD07-2          PIC 99    COMP-3.        
+           03  FEC-NOVEDAD-ABD07-2         PIC 9(4)  COMP-3.        
+           03  NUM-MORAS30-ABD07-2         PIC 99    COMP-3.        
+           03  ESTADO-MES-ABD07-2          PIC 9(12) COMP-3.        
+           03  VECTOR-HIS-1-ABD07-2        PIC 9(12) COMP-3     *> AÑO 1        
+               REDEFINES                 ESTADO-MES-ABD07-2.                    
+           03  MORA-MAXIMA-ABD07-2         PIC 9     COMP-3.        
+           03  ADJETIVO1-ABD07-2           PIC 9     COMP-3.        
+           03  FEC-MEN-ADJ-ABD07-2         PIC 9(4)  COMP-3.        
+           03  ADJETIVO2-ABD07-2           PIC 9     COMP-3.        
+           03  FEC-MAY-ADJ-ABD07-2         PIC 9(4)  COMP-3.        
+           03  ADJETIVO3-ABD07-2           PIC 9     COMP-3.        
+           03  ART15-ABD07-2               PIC 9     COMP-3.        
+           03  IND-MODIFICACION-ABD07-2    PIC 9     COMP-3                     
+               REDEFINES                 ART15-ABD07-2.                         
+           03  RECLAMO-ABD07-2             PIC 9(5)  COMP-3.        
+           03  RECLAMO-ABD07-2-RR          REDEFINES RECLAMO-ABD07-2            
+                                         PIC 9(3).                              
+           03  RECLAMO-ABD07-2-R           REDEFINES RECLAMO-ABD07-2.           
+               05 IND-RECLAMO-ABD07-2      PIC 9(01).                           
+               05 REG-LOCK-ABD07-2         PIC 9(01).                           
+               05 FILLER-RECLAMO-ABD07-2   PIC 9(01).                           
+           03  IND-BLOQUEO-R-ABD07-2       PIC 9     COMP-3.        
+           03  CALIFIC-R-ABD07-2           PIC 9     COMP-3.        
+           03  TIP-CALIFIC-R-ABD07-2       PIC 9     COMP-3.        
+           03  IND-MAPA-BITS-VLR-ABD07-2 REDEFINES TIP-CALIFIC-R-ABD07-2        
+                                         PIC 9     COMP-3.        
+           03  NOV-REPORT-R-ABD07-2        PIC 99    COMP-3.        
+           03  FEC-NOVEDAD-R-ABD07-2       PIC 9(4)  COMP-3.        
+           03  NUM-MORAS30-R-ABD07-2       PIC 99    COMP-3.        
+           03  MAPA-BITS-VLR-ABD07-2 REDEFINES NUM-MORAS30-R-ABD07-2            
+                                         PIC X(02).                             
+           03  ESTADO-MES-R-ABD07-2        PIC 9(12) COMP-3.        
+           03  VECTOR-HIS-3-ABD07-2        PIC 9(12) COMP-3     *> AÑO 3        
+               REDEFINES                 ESTADO-MES-R-ABD07-2.                  
+           03  MORA-MAXIMA-R-ABD07-2       PIC 9     COMP-3.        
+           03  VALOR-INICIAL-ABD07-2       PIC 9(7)  COMP-3.                    
+           03  VALOR-SALDO-DEUDA-ABD07-2-R           OCCURS 4 TIMES.            
+               05  VALOR-SALDO-DEUDA-ABD07-2   PIC  9(7) COMP-3.                
+           03  VALOR-DISPONIBLE-ABD07-2-R            OCCURS 4 TIMES.            
+               05  VALOR-DISPONIBLE-ABD07-2    PIC  9(7) COMP-3.                
+           03  VALOR-SALDO-MORA-ABD07-2-R            OCCURS 4 TIMES.            
+               05  VALOR-SALDO-MORA-ABD07-2    PIC  9(7) COMP-3.                
+           03  CALIFICACION-ABD07-2-R                OCCURS 4 TIMES.            
+               05  CALIFICACION-ABD07-2        PIC  9    COMP-3.                
+           03  VALOR-SALDO-DEUDAM-ABD07-2   PIC 9(7)  COMP-3.                   
+           03  VALOR-DISPONIBLEM-ABD07-2    PIC 9(7)  COMP-3.                   
+           03  VALOR-SALDO-MORAM-ABD07-2    PIC 9(7)  COMP-3.                   
+           03  CALIFICACIONM-ABD07-2        PIC 9     COMP-3.                   
+           03  TIPO-MONEDA-ABD07-2          PIC 9     COMP-3.                   
+           03  TIPO-OBLIGACION-ABD07-2      PIC 9     COMP-3.                   
+           03  TIPO-GARANTIA-ABD07-2        PIC 9     COMP-3.                   
+           03  CUOTAS-CANCELADAS-ABD07-2    PIC 9(3)  COMP-3.                   
+           03  FECHA-DE-PAGO-ABD07-2        PIC 9(8)  COMP-3.                   
+           03  TOTAL-CUOTAS-ABD07-2         PIC 9(3)  COMP-3.                   
+           03  CUOTAS-EN-MORA-ABD07-2       PIC 9(3)  COMP-3.                   
+           03  SITUACION-ABD07-2            PIC X.                              
+           03  FECHA-ACT-END-ABD07-2        PIC 9(6)  COMP-3.                   
+           03  CONSECUTIVO-ABD07-2          PIC 99    COMP-3.                   
+           03  FECHA-MORA-MAXIMA-ABD07-2    PIC 9(6)  COMP-3.                   
+           03  FECHA-ACTUALIZ-VALOR-ABD07-2 PIC 9(6)  COMP-3.                   
+      *    03  FECHA-CARTERA-CASTIG-ABD07-2 PIC 9(6)  COMP-3.                   
+           03  FECHA-SITUACION-ABD07-2      PIC 9(6)  COMP-3.                   
+           03  VECTOR-2-ABD07-2             PIC 9(12) COMP-3.                   
+           03  VECTOR-HIS-2-ABD07-2         PIC 9(12) COMP-3                    
+               REDEFINES                  VECTOR-2-ABD07-2.     *> AÑO 2        
+           03  PERIODICIDAD-PAGO-ABD07-2    PIC 9     COMP-3.                   
+           03  GARANTE-ABD07-2              PIC 9(2)  COMP-3.                   
+           03  FORMA-PAGO-TOTAL-ABD07-2     PIC 9     COMP-3.                   
+           03  MOROSIDAD-ABD07-2            PIC 9(3)  COMP-3.                   
+           03  NOV-REPORT2-ABD07-2          PIC 9(2).                           
+           03  VECTOR-2-R-ABD07-2           PIC 9(12) COMP-3.                   
+           03  VECTOR-HIS-4-ABD07-2         PIC 9(12) COMP-3    *> AÑO 4        
+               REDEFINES                  VECTOR-2-R-ABD07-2.                   
+              

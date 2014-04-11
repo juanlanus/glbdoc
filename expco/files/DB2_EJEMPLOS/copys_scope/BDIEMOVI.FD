@@ -1,0 +1,13 @@
+REMARK* BDIEMOVI-FD.v.0001
+      *************************************************
+      * PROYECTO SUPERBANCARIA- ARCHIVO DE MOVIMIENTOS*
+      *************************************************
+
+       FD BDIEMOVI.
+       01 BDIEMOVI-REGISTRO.
+          02 BDIEMOVI-FEC-CORTE       PIC 9(8).
+          02 BDIEMOVI-TIP-ENTID       PIC 9(2).
+          02 BDIEMOVI-COD-ENTID       PIC 9(6).
+          02 BDIEMOVI-TIP-REG         PIC 9(1).
+          02 BDIEMOVI-RESTO           PIC X(63).
+

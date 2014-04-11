@@ -1,0 +1,13 @@
+******* VALPNOT-fd.v.03.0002
+   **** VALPNOT.v03.002
+REMARK*Archivo novedades validas y adjetivos para cuentas corrientes
+036300*----------------------------------------------------------------*
+022500 FD  VALPNOT.
+022700 01  REG-VALPNOT.
+           03  NUM-NOVEDAD-VALPNOT           PIC 99.
+022810     03  DES-NOVEDAD-VALPNOT           PIC X(30).
+           03  IND-MORAMAX-VALPNOT           PIC 9(1).
+           03  IND-TIPO-VALPNOT              PIC X(1).
+           03  IND-ADJETIVO-VALPNOT          PIC X(1).
+           03  IND-VALR-VALPNOT              PIC 9(1).                  FAC0002
+           03  FILLER-VALPNOT                PIC X(30).

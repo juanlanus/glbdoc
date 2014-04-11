@@ -1,0 +1,12 @@
+REMARK* DTCCFG-FD.v.0001
+REMARK******************************************************************
+REMARK* ARCHIVO QUE CONTIENE LA CONFIGURACION PARA QUE EL PROGRAMA     *
+REMARK* COBOL SE CONECTE Y EJECUTE OPERACIONES EN LA BD                *
+REMARK******************************************************************
+       FD  DTCCFG.
+       01  REG-DTCCFG.
+           03 PATH-DTCCFG            PIC X(100).
+           03 USUARIO-DTCCFG         PIC X(10).
+           03 CLAVE-DTCCFG           PIC X(10).
+
+

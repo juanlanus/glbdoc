@@ -1,0 +1,12 @@
+******* VALPREP-fd.v03.0001
+   **** VALPREP.v03.001
+REMARK*Parametros de campos a reportar por consecutivo definido
+REMARK*para maestro ampliado. Proceso de validacion
+036300*----------------------------------------------------------------*
+       FD  VALPREP.
+       01  REG-VALPREP.
+           03 LLAVE-VALPREP.
+              05 NUM-CONSEC-VALPREP            PIC 9(4).
+           03 IND-CAMPO-VALPREP OCCURS 40      PIC 9.
+           03 FILLER-VALPREP                   PIC X(30).
+

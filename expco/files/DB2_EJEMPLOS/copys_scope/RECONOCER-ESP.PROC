@@ -1,0 +1,203 @@
+
+       5000-SCORE-FRAUDE.
+      ******************************************************************
+      *5000-SCORE-FRAUDE.                                              *
+      * ESTA RUTINA CALCULA UN SCORE CON BASE A LOS DATOS DE LA DIRECCI*
+      * BUSCA QUE TANTO COINCIDE EL TELEFONO,LA DIRECCION Y LA CIUDAD  *
+      * RESPECTO A LO QUE LLEGA. TRABAJA COMO UN SCORE EXTERNO         *
+      ******************************************************************
+
+           IF DIRECCION-F NOT = SPACES OR  TELEFONO-F NOT = SPACES OR
+              CIUDAD-F NOT = SPACES
+              IF TELEFONO-F = SPACES
+                 MOVE "999999999999999" TO TELEFONO-F
+              END-IF
+
+              MOVE "SIN INF" TO DIR-SCORE TEL-SCORE CIU-SCORE
+              MOVE 0         TO DIR-SCORE-POR
+              PERFORM 5100-VALIDAR-DATOS-DIRECCIONES
+
+              IF DIR-SCORE = "SIN INF"
+                 MOVE 30 TO PESO-DIR
+              ELSE
+                 COMPUTE PESO-DIR = DIR-SCORE-POR * 0.6
+              END-IF
+              IF TEL-SCORE = "SIN INF"
+                 MOVE 15 TO PESO-TEL
+              ELSE
+                 IF TEL-SCORE = "SI"
+                    MOVE 30 TO PESO-TEL
+                 ELSE
+                    MOVE 0  TO PESO-TEL
+                 END-IF
+              END-IF
+              IF CIU-SCORE = "SIN INF"
+                 MOVE 05 TO PESO-CIU
+              ELSE
+                 IF CIU-SCORE = "SI"
+                    MOVE 10 TO PESO-CIU
+                 ELSE
+                    MOVE 0  TO PESO-CIU
+                 END-IF
+              END-IF
+              COMPUTE PESO-TOTAL-SCORE = PESO-DIR + PESO-TEL + PESO-CIU
+           END-IF.
+
+       5100-VALIDAR-DATOS-DIRECCIONES.
+      ******************************************************************
+      *5100-VALIDAR-DATOS-DIRECCIONES.                                 *
+      * SE MIRA LA CONCORDANCIA ENTRE LOS DATOS DE LOCALIZACION EN LA B*
+      * LOS QUE LLEGAN EN EL MENSAJE.                                  *
+      ******************************************************************
+           MOVE ZEROS               TO T-NUMDIR-BDLDIR(1)
+           MOVE DIRECCION-F         TO T-CARDIR-BDLDIR
+           MOVE 1                   TO DIR-OK-BDLDIR
+           PERFORM 2020-U-BUSCAR-NUMEROS
+           MOVE J-BDLDIR       TO DIG-DIR-F
+           INITIALIZE LLAVE-DIRECC
+           MOVE 0      TO FIN-BUSCAR
+           MOVE TIP-ID TO TIPO-ID-DIRECC
+           MOVE NUM-ID TO NUM-ID-DIRECC
+           START MAESTRO-DIRECC KEY >= LLAVE-DIRECC
+              INVALID KEY
+                 MOVE 1 TO FIN-BUSCAR
+              NOT INVALID KEY
+                 READ MAESTRO-DIRECC  NEXT RECORD
+                    AT END
+                       MOVE 1 TO FIN-BUSCAR
+                 END-READ
+           END-START
+           PERFORM UNTIL NUM-ID  NOT = NUM-ID-DIRECC OR
+              TIP-ID NOT = TIPO-ID-DIRECC OR FIN-BUSCAR = 1
+              MOVE COD-SUS-DIRECC TO COD-SUSCRIP-ABD02
+              MOVE 0              TO NADA
+              READ SUSCRIPTOR IGNORE LOCK
+                 INVALID KEY
+                    MOVE 1 TO NADA
+              END-READ
+              IF NADA  = 0
+                 IF DIRCOR-DIRECC NOT = SPACES
+                    MOVE DIRCOR-DIRECC TO T-CARDIR-BDLDIR
+                    PERFORM 5100-VALIDA-DIRECCION
+                 END-IF
+                 IF DIRRES-DIRECC NOT = SPACES
+                    MOVE DIRRES-DIRECC TO T-CARDIR-BDLDIR
+                    PERFORM 5100-VALIDA-DIRECCION
+                 END-IF
+                 IF TELRES-DIRECC > 0
+                    MOVE TELRES-DIRECC TO TELEFONO-AUX
+                    PERFORM 5200-VALIDA-TELEFONO
+                 END-IF
+                 IF TELLAB-DIRECC > 0
+                    MOVE TELLAB-DIRECC TO TELEFONO-AUX
+                    PERFORM 5200-VALIDA-TELEFONO
+                 END-IF
+                 IF CIURES-DIRECC NOT = SPACES
+                    MOVE CIURES-DIRECC   TO NOMBOK-INPUT-VALNOM
+                    PERFORM 5300-VALIDA-CIUDAD
+                 END-IF
+                 IF CIULAB-DIRECC NOT = SPACES
+                    MOVE CIULAB-DIRECC   TO NOMBOK-INPUT-VALNOM
+                    PERFORM 5300-VALIDA-CIUDAD
+                 END-IF
+                 IF CIUCOR-DIRECC NOT = SPACES
+                    MOVE CIUCOR-DIRECC   TO NOMBOK-INPUT-VALNOM
+                    PERFORM 5300-VALIDA-CIUDAD
+                 END-IF
+              END-IF
+              READ MAESTRO-DIRECC NEXT RECORD AT END
+                   MOVE 1 TO FIN-BUSCAR
+              END-READ
+           END-PERFORM.
+
+       5100-VALIDA-DIRECCION.
+      ******************************************************************
+      *5100-VALIDA-DIRECCION.                                          *
+      * SE BUSCA QUE TANTO COINCIDE LA DIRECCION DE ENTRADA CON TODOS  *
+      * LOS DATOS QUE HAYA DE DIRECCIONES. SE TOMA LA MEJOR COINCIDENCI*
+      * PARA CALCULAR EL SCORE                                         *
+      ******************************************************************
+           MOVE ZEROS TO T-NUMDIR-BDLDIR(2)
+           MOVE 2 TO DIR-OK-BDLDIR
+           PERFORM 2020-U-BUSCAR-NUMEROS
+           MOVE J-BDLDIR TO DIG-DIR
+           MOVE 1 TO I J
+           MOVE 0 TO HITS
+           PERFORM UNTIL I > 10 OR J > 10
+              IF V-NUMDIR-BDLDIR(1,I) = 0 OR V-NUMDIR-BDLDIR(2,J) = 0
+                 NEXT SENTENCE
+              END-IF
+              IF V-NUMDIR-BDLDIR(1,I) = V-NUMDIR-BDLDIR(2,J)
+                 ADD 1 TO HITS I J
+              ELSE
+                 IF V-NUMDIR-BDLDIR(1,I) > V-NUMDIR-BDLDIR(2,J)
+                    ADD 1 TO I
+                 ELSE
+                    ADD 1 TO J
+                 END-IF
+              END-IF
+           END-PERFORM.
+
+           IF HITS > 0
+              IF HITS >= DIG-DIR
+                 MOVE 100 TO POR-DIR
+              ELSE
+                 COMPUTE POR-DIR = ( HITS / DIG-DIR ) * 100
+              END-IF
+           ELSE
+              MOVE 0 TO POR-DIR
+           END-IF
+           IF POR-DIR > DIR-SCORE-POR
+              MOVE POR-DIR TO DIR-SCORE-POR
+           END-IF
+           MOVE DIR-SCORE-X TO DIR-SCORE.
+
+       5200-VALIDA-TELEFONO.
+      ******************************************************************
+      *5200-VALIDA-TELEFONO.                                           *
+      * SE BUSCA QUE TANTO COINCIDE EL TELEFONO  DE ENTRADA CON TODOS  *
+      * LOS DATOS QUE HAYA DE TELEFONOS  . SE TOMA LA MEJOR COINCIDENCI*
+      * PARA CALCULAR EL SCORE                                         *
+      ******************************************************************
+           MOVE 0 TO J
+           MOVE 1 TO I
+           PERFORM UNTIL I > 15
+              IF TELEFONO-F(I:1) NOT = SPACES
+                 ADD 1 TO J
+              END-IF
+              ADD 1 TO I
+           END-PERFORM
+           MOVE 0 TO I
+           INSPECT TELEFONO-AUX TALLYING I
+                   FOR CHARACTERS BEFORE INITIAL         TELEFONO-F(1:J)
+           IF J < 4
+              MOVE 0 TO I
+           END-IF
+           IF TEL-SCORE <> "SI     "
+              IF I > 0  AND I < 15
+                 MOVE "SI       " TO TEL-SCORE
+              ELSE
+                 MOVE "NO       " TO TEL-SCORE
+              END-IF
+           END-IF.
+
+
+       5300-VALIDA-CIUDAD.
+      ******************************************************************
+      * 5300-VALIDA-CIUDAD.                                            *
+      * SE BUSCA QUE TANTO COINCIDE LA CIUDAD    DE ENTRADA CON TODOS  *
+      * LOS DATOS QUE HAYA DE CIUDAD     . SE TOMA LA MEJOR COINCIDENCI*
+      * PARA CALCULAR EL SCORE                                         *
+      ******************************************************************
+          MOVE CIUDAD-F        TO NOMBRE-INPUT-VALNOM
+          MOVE 1               TO TIP-ID-INPUT-VALNOM
+          MOVE 1               TO BLOQUES-INPUT-VALNOM
+          PERFORM 10000-MATCH-NOMBRES-VALNOM
+          IF CIU-SCORE <> "SI     "
+             IF MATCH-OK-OUT-VALNOM > 0
+                 MOVE "SI       " TO CIU-SCORE
+              ELSE
+                 MOVE "NO       " TO CIU-SCORE
+              END-IF
+          END-IF.
+

@@ -1,0 +1,126 @@
+      * ICMCREH-FD.v.01.0001
+      * MAESTRO OBLIGACIONES DE CARTERA Y TARJETAS DE CREDITO REPORTADAS        
+      * POR LOS DIFERENTES SUSCRIPTORES PASADAS AL ARCHIVO HISTORICO
+      *----------------------------------------------------------------*
+REMARK******************************************************************
+       FD  MAESTRO-ICMCREH.
+       01  COMPLETO-ICMCREH.
+           03  LLAVE-MAES-ICMCREH.
+               05  LLAVE-MAES-ICMCREH-PRI.
+                   07  TIPO-ID-ICMCREH           PIC 9.
+                   07  NUM-ID-ICMCREH            PIC 9(11).
+               05  LLAVE-MAES-ICMCREH-ALT.
+                   07  COD-SUS-ICMCREH           PIC 9(6).
+                   07  COD-CTA-ICMCREH           PIC 99.
+                   07  NUM-CTA-ICMCREH           PIC X(18).
+                   07  NUM-CTA-VEN16-ICMCREH REDEFINES 
+                       NUM-CTA-ICMCREH.
+                       09  NUM-CTA-VEN-ICMCREH   PIC 9(16).
+                       09  GARANTE-VEN-ICMCREH   PIC 99.
+           03  IND-BLOQUEO-ICMCREH               PIC 9     COMP-3.
+           03  FECHA-APERT-ICMCREH               PIC 9(4)  COMP-3.
+           03  FECHA-VENC-ICMCREH                PIC 9(4)  COMP-3.
+           03  CUANTIA-ICMCREH                   PIC 9(5)  COMP-3.
+           03  CALIFIC-ICMCREH                   PIC 9     COMP-3.
+           03  TIP-CALIFIC-ICMCREH               PIC 9     COMP-3.
+           03  NOV-REPORT-ICMCREH                PIC 99    COMP-3.
+           03  FEC-NOVEDAD-ICMCREH               PIC 9(4)  COMP-3.
+           03  NUM-MORAS30-ICMCREH               PIC 99    COMP-3.
+           03  ESTADO-MES-ICMCREH                PIC 9(12) COMP-3.
+           03  VECTOR-HIS-1-ICMCREH              PIC 9(12) COMP-3     *> AÑO 1
+               REDEFINES                 ESTADO-MES-ICMCREH.
+           03  MORA-MAXIMA-ICMCREH               PIC 9     COMP-3.
+           03  ADJETIVO1-ICMCREH                 PIC 9     COMP-3.
+           03  FEC-MEN-ADJ-ICMCREH               PIC 9(4)  COMP-3.
+           03  ADJETIVO2-ICMCREH                 PIC 9     COMP-3.
+           03  FEC-MAY-ADJ-ICMCREH               PIC 9(4)  COMP-3.
+           03  ADJETIVO3-ICMCREH                 PIC 9     COMP-3.
+           03  ART15-ICMCREH                     PIC 9     COMP-3.
+           03  IND-MODIFICACION-ICMCREH          PIC 9     COMP-3
+               REDEFINES                 ART15-ICMCREH.
+           03  RECLAMO-ICMCREH                   PIC 9(5)  COMP-3.
+           03  RECLAMO-ICMCREH-RR      REDEFINES RECLAMO-ICMCREH
+                                                 PIC 9(3).
+           03  RECLAMO-ICMCREH-R       REDEFINES RECLAMO-ICMCREH.
+               05 IND-RECLAMO-ICMCREH            PIC 9(01).
+               05 REG-LOCK-ICMCREH               PIC 9(01).
+               05 FILLER-RECLAMO-ICMCREH         PIC 9(01).
+               05 TARJ-ESTADO-PLAST-ICMCREH      PIC 9(1)  REDEFINES
+                  FILLER-RECLAMO-ICMCREH.
+               05 REAL-TERMINO-CONTRATO-ICMCREH  PIC 9(1)  *> 1-DEFINIDO
+                  REDEFINES FILLER-RECLAMO-ICMCREH.        *> 2-INDEF
+               05 IND-SUBSIDIO-HIPOTEC-ICMCREH   PIC 9(1)  *> 0-NO
+                  REDEFINES FILLER-RECLAMO-ICMCREH.        *> 1-SI
+           03  IND-BLOQUEO-R-ICMCREH             PIC 9     COMP-3.
+           03  CALIFIC-R-ICMCREH                 PIC 9     COMP-3.
+           03  TIP-CALIFIC-R-ICMCREH             PIC 9     COMP-3.
+           03  IND-MAPA-BITS-VLR-ICMCREH REDEFINES 
+               TIP-CALIFIC-R-ICMCREH             PIC 9     COMP-3.
+           03  NOV-REPORT-R-ICMCREH              PIC 99    COMP-3.
+           03  FEC-NOVEDAD-R-ICMCREH             PIC 9(4)  COMP-3.
+           03  NUM-MORAS30-R-ICMCREH             PIC 99    COMP-3.
+           03  MAPA-BITS-VLR-ICMCREH     REDEFINES 
+               NUM-MORAS30-R-ICMCREH             PIC X(02).
+           03  ESTADO-MES-R-ICMCREH              PIC 9(12) COMP-3.
+           03  VECTOR-HIS-3-ICMCREH              PIC 9(12) COMP-3     *> AÑO 3
+               REDEFINES                 ESTADO-MES-R-ICMCREH.
+           03  MORA-MAXIMA-R-ICMCREH             PIC 9     COMP-3.
+           03  VALOR-INICIAL-ICMCREH             PIC 9(7)  COMP-3.
+           03  NUEVOS-CAMPOS-HISTORIA-CREDITO.
+REMARK* CAMPOS DE FECHAS QUE EXISTIAN PERO AHORA SON COMPLETAS
+              05  FECHA-APERTURA-ICMCREH         PIC 9(8)  COMP-3.
+              05  FECHA-VENCIMIENTO-ICMCREH      PIC 9(8)  COMP-3.
+              05  FECHA-ADJETIVO1-ICMCREH        PIC 9(8)  COMP-3.
+              05  FECHA-ADJETIVO2-ICMCREH        PIC 9(8)  COMP-3.
+              05  FECHA-ADJETIVO3-ICMCREH        PIC 9(8)  COMP-3.
+REMARK* DEFINICIONES DE NUEVOS CAMPOS
+               05  ESTADO-OBLIG-ICMCREH          PIC 9(2)  COMP-3.
+               05  FECHA-ESTADO-OBLIG-ICMCREH    PIC 9(8)  COMP-3.
+               05  FECHA-ESTADO-ORIGEN-ICMCREH   PIC 9(8)  COMP-3.
+               05  FECHA-LIMITE-PAGO-ICMCREH     PIC 9(8)  COMP-3.
+               05  TARJ-FEC-ESTADO-PLAST-ICMCREH PIC 9(8)  COMP-3.
+               05  REAL-FEC-CLAUS-PERM-ICMCREH   PIC 9(8)  COMP-3
+                   REDEFINES TARJ-FEC-ESTADO-PLAST-ICMCREH.
+               05  FEC-SUBSIDIO-HIPOTEC-ICMCREH  PIC 9(8)  COMP-3
+                   REDEFINES TARJ-FEC-ESTADO-PLAST-ICMCREH.
+               05  TARJ-CLASE-ICMCREH            PIC 9(1)  COMP-3.
+               05  TARJ-FRANQUICIA-ICMCREH       PIC 9(1)  COMP-3.
+               05  PROBAB-INCUMP-ICMCREH         PIC 9(3)  COMP-3.
+               05  RAZON-BLOQUEO-ICMCREH         PIC X(1).
+REMARK* CONTINUAN LOS CAMPOS QUE YA EXISTIAN ANTES
+           03  VALOR-SALDO-DEUDAM-ICMCREH        PIC 9(7)  COMP-3.
+           03  VALOR-DISPONIBLEM-ICMCREH         PIC 9(7)  COMP-3.
+           03  VALOR-SALDO-MORAM-ICMCREH         PIC 9(7)  COMP-3.
+           03  CALIFICACIONM-ICMCREH             PIC 9     COMP-3.
+           03  TIPO-MONEDA-ICMCREH               PIC 9     COMP-3.
+           03  TIPO-OBLIGACION-ICMCREH           PIC 9     COMP-3.
+           03  TIPO-GARANTIA-ICMCREH             PIC 9     COMP-3.
+           03  CUOTAS-CANCELADAS-ICMCREH         PIC 9(3)  COMP-3.
+           03  FECHA-DE-PAGO-ICMCREH             PIC 9(8)  COMP-3.
+           03  TOTAL-CUOTAS-ICMCREH              PIC 9(3)  COMP-3.
+           03  CUOTAS-EN-MORA-ICMCREH            PIC 9(3)  COMP-3.
+           03  SITUACION-ICMCREH                 PIC X.
+           03  FECHA-ACT-END-ICMCREH             PIC 9(6)  COMP-3.
+           03  CAMPOS-NUEVOS-NHC-ICMCREH REDEFINES 
+               FECHA-ACT-END-ICMCREH.
+               05  ESTADO-ORIGEN-ICMCREH         PIC 9(1)  COMP-3.
+               05  CAMPOS-TARJETA-ICMCREH.
+                   07 TARJ-MARCA-PRIV-ICMCREH    PIC 9(3)  COMP-3.
+                   07 REAL-CLAUS-PERM-ICMCREH    PIC 9(3)  COMP-3
+                      REDEFINES TARJ-MARCA-PRIV-ICMCREH. *> MESES CLAUSULA
+               05 SITUACION-TITULAR-ICMCREH      PIC 9(1)  COMP-3.*> EJ.LIQ    
+           03  CONSECUTIVO-ICMCREH               PIC 99    COMP-3.
+           03  FECHA-MORA-MAXIMA-ICMCREH         PIC 9(6)  COMP-3.
+           03  FECHA-ACTUALIZ-VALOR-ICMCREH      PIC 9(6)  COMP-3.
+           03  FECHA-SITUACION-ICMCREH           PIC 9(6)  COMP-3.
+           03  VECTOR-2-ICMCREH                  PIC 9(12) COMP-3.
+           03  VECTOR-HIS-2-ICMCREH              PIC 9(12) COMP-3
+               REDEFINES                  VECTOR-2-ICMCREH.     *> AÑO 2
+           03  PERIODICIDAD-PAGO-ICMCREH         PIC 9     COMP-3.
+           03  GARANTE-ICMCREH                   PIC 9(2)  COMP-3.
+           03  FORMA-PAGO-TOTAL-ICMCREH          PIC 9     COMP-3.
+           03  MOROSIDAD-ICMCREH                 PIC 9(3)  COMP-3.
+           03  NOV-REPORT2-ICMCREH               PIC 9(2).
+           03  VECTOR-2-R-ICMCREH                PIC 9(12) COMP-3.
+           03  VECTOR-HIS-4-ICMCREH              PIC 9(12) COMP-3    *> AÑO 4
+               REDEFINES                  VECTOR-2-R-ICMCREH.

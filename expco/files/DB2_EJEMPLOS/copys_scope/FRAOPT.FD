@@ -1,0 +1,7 @@
+REMARK* FRAOPT-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE CONTIENE LAS TABLAS DEL OPTIMIZADOR  
+REMARK* PARA GENERAR PREGUNTAS                                         
+REMARK******************************************************************
+       FD  FRAOPT.
+       01  REG-FRAOPT                PIC X(100).

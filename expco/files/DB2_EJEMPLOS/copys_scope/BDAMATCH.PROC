@@ -1,0 +1,1201 @@
+* OJO **recordar que este copy está en LEEMAESTROS.PROC Y NO EN LOS PROGRAMAS
+REMARK* BDAMATCH.PROC.v.0005
+REMARK******************************************************************
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINA QUE ACCEDER AL MATCH   
+REMARK* DE NOMBRES USANDO LAS ESTRUCTURAS ESTANDARES DE DATACREDITO
+REMARK* COPY QUE CONTIENE LA VARIABLES NECESARIAS PARA ELECCION DE MEJOR
+REMARK* PORTAFOLIO Y MATCH DE NOMBRES A PARTIR DE LA INFORMACION DE LAS
+REMARK* ESTRUCTURAS ESTANDAR DE DATACREDITO BDACSV, ICBDIR ICMCRE E ICMCHK.
+REMARK********************************************************************
+REMARK* CAV0002     * CARTOT - CONTROLAR QUE EL INDICE QUE MANEJA      *
+REMARK* C. VELASCO. * 2008-02  LA TABLA V-CARTOT-BDAMATCH NO EXCEDA LAS*
+REMARK* R.MARTINEZ  *          10 POSICIONES DE LAS MISMA.             *
+REMARK******************************************************************
+REMARK* RMB0003     *VIGE01: SE CONTARAN LAS CUENTAS CON ADJETIVOS DE
+REMARK* R.MARTINEZ  *        MUERTOS Y EL NUMERO TOTAL DE CUENTAS DEL 
+REMARK*             *        MEJOR PORTAFOLIO
+REMARK* 25-MARZ-2010*        SALIDAS:  NUM-MUERTOS-OUTPUT-BDAMATCH 
+REMARK*             *                  NUM-CTAS-OUTPUT-BDAMATCH   
+REMARK*             *SINBLQ: TRABAJAR SOLO CON LOS REGISTROS DE CSV SIN
+REMARK*             *        BLOQUEO (9 CONSECUTIVO 5) O CON BLOQUE  
+REMARK*             *        DE FRENADAS
+REMARK*****************************************************************
+REMARK* RMB0004     * PESO01 - OPTIMIZAR MANEJO DEL CALCULO DEL PESO  *
+REMARK* R-MARTINEZ. *          DEL PORTAFOLIO .                       *
+REMARK* 5-SEP-2001  * MEJO01 - DESEMPATAR PORTAFOLIOS EN CASO DE IGUL * 
+REMARK*             * BLOQ01 - MANEJAR BLOQUEO EN REGISTROS CSV       * 
+REMARK*             * FUEN01 - NCLUIR  FUENTES EXTERNAS               * 
+REMARK*             * APEL01 - INCLUIR PRIMER APELLIDO EN MATCH       * 
+REMARK*             * LIMT01 - MANEJAR LIMITES > 500 COMO TIPO 7      * 
+REMARK*             * NOMB01 - MAQUILLAR EL NOMBRE                    * 
+REMARK*             * VLNIT1 - SE ENVIA A LA RUTINA VALNOM LA VALIDA- *
+REMARK*             *         CION DE LOS NITS CON 1 PARTICULA Y TIPO2*
+REMARK*****************************************************************
+REMARK* RMB0005     * AJUS01 - SE AJUSTA EL SOFTWARE PARA UE NO TOME  *
+REMARK* R-MARTINEZ. *          EL TIPO DE CUENTA DE LAS 2 PRIMERAS PO-*
+REMARK* 14-DIC 2011 *          SICIONES DEL SUSCRIPTOR SINO DEL TIPO  *
+REMARK*             *          DECUENTA DE LA MISMA CUENTA            *
+REMARK*****************************************************************
+
+       1000-U-RECORRER-CSV-BDAMATCH.                  
+REMARK******************************************************************
+REMARK*1000-U-RECORRER-CSV-BDAMATCH.             
+REMARK* SE RECORRE TODA LA ESTRUCTURA BDACSV PARA LA IDENTIFICACION 
+REMARK* BUSCADA. EN CASO DE HALLAR REGISTROS SE PROCEDE A REALIZAR EL
+REMARK* MATCH 
+REMARK******************************************************************
+           MOVE 0 TO IDE-TIPO-BDAMATCH        
+VIGE01     MOVE 0 TO  NUM-MUERTOS-OUTPUT-BDAMATCH .                     RMB0003
+VIGE01     MOVE 0 TO  NUM-CTAS-OUTPUT-BDAMATCH.                         RMB0003
+           MOVE 0 TO MAX-CUENTAS-BDAMATCH.        
+           IF ABIERTO-BDAMATCH  = 0                
+              OPEN INPUT  BDACSV                                                
+              MOVE 1 TO ABIERTO-BDAMATCH                 
+           END-IF.                
+           INITIALIZE LLAVE-BDACSV.        
+           MOVE TIP-IDE-INPUT-BDAMATCH  TO TIPO-ID-BDACSV .                
+           MOVE NUM-IDE-INPUT-BDAMATCH  TO NUM-ID-BDACSV .                
+           MOVE 0 TO FIN-BDAMATCH .                
+           MOVE 0 TO PROCESAR-BDAMATCH .                                  
+           START BDACSV  KEY > LLAVE-BDACSV                  
+                 INVALID KEY                 
+                    MOVE 1 TO FIN-BDAMATCH                 
+                 NOT INVALID KEY                 
+                    READ BDACSV IGNORE LOCK NEXT RECORD                      
+                       AT END                
+                          MOVE 1 TO FIN-BDAMATCH                    
+                    END-READ                
+           END-START.                
+           PERFORM UNTIL FIN-BDAMATCH  = 1 OR NUM-ID-BDACSV  NOT =              
+                                            NUM-IDE-INPUT-BDAMATCH  OR          
+                                            TIPO-ID-BDACSV  NOT =               
+                                            TIP-IDE-INPUT-BDAMATCH              
+              MOVE COD-SUS-BDACSV TO COD-SUSCRIP-ABD02        
+              READ SUSCRIPTOR IGNORE LOCK        
+                 INVALID KEY        
+                    MOVE 0 TO PROCESAR-BDAMATCH        
+                 NOT INVALID KEY         
+FUEN01              MOVE 1 TO PROCESAR-BDAMATCH                         RMB0004
+              END-READ        
+BLOQ01        IF PROCESAR-BDAMATCH = 1                                  RMB0004
+BLOQ01           IF ESTADO-ABD02 = 1                                    RMB0004
+BLOQ01              IF IND-BLOQUEO-BDACSV <> "B"                        RMB0004
+BLOQ01                 MOVE 1 TO PROCESAR-BDAMATCH                      RMB0004
+FUEN01                 IF FUENTE-REG-BDACSV <= 01                       RMB0004
+FUEN01                    PERFORM 1100-UBICAR-CHKCRE-CSV-BDAMATCH       RMB0004
+FUEN01                 ELSE                                             RMB0004
+FUEN01                    PERFORM 1100-LLENAR-AUX-BDAMATCH              RMB0004
+FUEN01                 END-IF                                           RMB0004
+FUEN01              ELSE                                                RMB0004
+BLOQ01                 MOVE 0 TO PROCESAR-BDAMATCH                      RMB0004
+BLOQ01              END-IF                                              RMB0004
+BLOQ01           ELSE                                                   RMB0004
+BLOQ01              MOVE 0 TO PROCESAR-BDAMATCH                         RMB0004
+BLOQ01           END-IF                                                 RMB0004
+BLOQ01        END-IF                                                    RMB0004
+              IF PROCESAR-BDAMATCH = 1        
+                 PERFORM 1200-PROC-REG-CSV-BDAMATCH        
+              END-IF        
+              READ BDACSV IGNORE LOCK   NEXT RECORD                      
+              AT END                
+                 MOVE 1 TO FIN-BDAMATCH                    
+              END-READ                
+LIMI01        IF MAX-CUENTAS-BDAMATCH >= LIM-BDAMATCH *> TABLA LLENA    RMB0004
+LIMI01           MOVE 1 TO FIN-BDAMATCH               *> SE ABLIGA A TIPRMB0004
+LIMI01           MOVE 0 TO MAX-CUENTAS-BDAMATCH       *> EFICIENCIA Y   RMB0004
+LIMI01           MOVE SPACES TO NOM-OUTPUT-BDAMATCH   *> CONSISTENCIA   RMB0004
+LIMI01        END-IF                                                    RMB0004
+           END-PERFORM.                
+           IF MAX-CUENTAS-BDAMATCH > 0        
+APEL01        IF APELLIDO-INPUT-BDAMATCH <> SPACES AND                  RMB0004
+APEL01           MAX-CUENTAS-BDAMATCH > 1                               RMB0004
+APEL01           PERFORM 1100-LLENAR-CSV-APE-BDAMATCH                   RMB0004
+APEL01           PERFORM 1100-LLENAR-AUX-BDAMATCH                       RMB0004
+APEL01           PERFORM 1200-PROC-REG-CSV-BDAMATCH                     RMB0004
+APEL01        END-IF                                                    RMB0004
+              PERFORM 9000-U-REALIZAR-BDAMATCH         
+NOMB01        IF NOM-OUTPUT-BDAMATCH <> SPACES AND                      RMB0004
+NOMB01           (TIP-IDE-INPUT-BDAMATCH = 1 OR 4)                      RMB0004
+NOMB01           MOVE NOM-OUTPUT-BDAMATCH TO NOMBRE-INPMAQ              RMB0004
+NOMB01           PERFORM 1100-MAQUILLAR-NOMBRE-MAQ                      RMB0004
+NOMB01           MOVE NOMBRE-OUTMAQ-OK TO NOM-OUTPUT-BDAMATCH           RMB0004
+NOMB01        END-IF                                                    RMB0004
+              IF NOM-OUTPUT-BDAMATCH <> SPACES        
+                 MOVE 1 TO IDE-TIPO-BDAMATCH        
+              END-IF        
+           END-IF.        
+NOMB01 1100-MAQUILLAR-NOMBRE-MAQ.                                       RMB0004
+NOMB01     MOVE FUNCTION UPPER-CASE(NOMBRE-INPMAQ) TO NOMBRE-INPMAQ     RMB0004
+NOMB01     MOVE 0 TO I-MAQ                                              RMB0004
+NOMB01     INSPECT NOMBRE-INPMAQ TALLYING I-MAQ FOR CHARACTERS BEFORE   RMB0004
+NOMB01             INITIAL "Y/O"                                        RMB0004
+NOMB01             OR      "Y\O"                                        RMB0004
+NOMB01             OR      " Y/OTRO "                                   RMB0004
+NOMB01             OR      " Y/OTRA "                                   RMB0004
+NOMB01             OR      " Y\OTRO "                                   RMB0004
+NOMB01             OR      " Y\OTRA "                                   RMB0004
+NOMB01             OR      " Y OTRO "                                   RMB0004
+NOMB01             OR      " Y OTRA "                                   RMB0004
+NOMB01     IF I-MAQ < 45 AND I-MAQ > 2                                  RMB0004
+NOMB01        ADD 1 TO I-MAQ                                            RMB0004
+NOMB01        MOVE SPACES TO NOMBRE-INPMAQ(I-MAQ:)                      RMB0004
+NOMB01     ELSE                                                         RMB0004
+NOMB01        IF I-MAQ < 45                                             RMB0004
+NOMB01           ADD 1 TO I-MAQ                                         RMB0004
+NOMB01           MOVE SPACES TO NOMBRE-INPMAQ(I-MAQ:3)                  RMB0004
+NOMB01        END-IF                                                    RMB0004
+NOMB01     END-IF                                                       RMB0004
+NOMB01     MOVE 0 TO SW-BORRAR-MAQ                                      RMB0004
+NOMB01     MOVE 1 TO I-MAQ.                                             RMB0004
+NOMB01     PERFORM UNTIL I-MAQ > 45                                     RMB0004
+NOMB01       MOVE NOMBRE-INPMAQ(I-MAQ:1) TO ACTUAL-MAQ                  RMB0004
+NOMB01       IF TILDE-MAQ                                               RMB0004
+NOMB01          PERFORM 1000-CAMBIAR-TILDE-MAQ                          RMB0004
+NOMB01          MOVE ACTUAL-MAQ TO NOMBRE-INPMAQ(I-MAQ:1)               RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       IF FUNCTION ORD(ACTUAL-MAQ) < 31                           RMB0004
+NOMB01          MOVE "." TO ACTUAL-MAQ                                  RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       MOVE " " TO ANT-MAQ                                        RMB0004
+NOMB01       IF I-MAQ > 1                                               RMB0004
+NOMB01          COMPUTE J-MAQ = I-MAQ - 1                               RMB0004
+NOMB01          MOVE NOMBRE-INPMAQ(J-MAQ:1) TO ANT-MAQ                  RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       MOVE " " TO SIG-MAQ                                        RMB0004
+NOMB01       IF I-MAQ < 45                                              RMB0004
+NOMB01          COMPUTE J-MAQ = I-MAQ + 1                               RMB0004
+NOMB01          MOVE NOMBRE-INPMAQ(J-MAQ:1) TO SIG-MAQ                  RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       IF ACTUAL-MAQ = ")"                                        RMB0004
+NOMB01          MOVE 0 TO SW-BORRAR-MAQ                                 RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       IF SW-BORRAR-MAQ = 0                                       RMB0004
+NOMB01          IF ELIMINAR-MAQ                                         RMB0004
+NOMB01             MOVE " " TO NOMBRE-INPMAQ (I-MAQ:1)                  RMB0004
+NOMB01             IF I-MAQ > 1                                         RMB0004
+NOMB01                MOVE 1 TO SW-BORRAR-MAQ                           RMB0004
+NOMB01             END-IF                                               RMB0004
+NOMB01          ELSE                                                    RMB0004
+NOMB01             IF BORRAR-MAQ                                        RMB0004
+NOMB01                MOVE " " TO NOMBRE-INPMAQ (I-MAQ:1)               RMB0004
+NOMB01             ELSE                                                 RMB0004
+NOMB01                IF QUITAR-MAQ                                     RMB0004
+NOMB01                   COMPUTE J-MAQ = I-MAQ + 1                      RMB0004
+NOMB01                   MOVE NOMBRE-INPMAQ(J-MAQ:) TO                  RMB0004
+NOMB01                        NOMBRE-INPMAQ(I-MAQ:)                     RMB0004
+NOMB01                   COMPUTE I-MAQ = I-MAQ - 1                      RMB0004
+NOMB01                ELSE                                              RMB0004
+NOMB01                   IF VALIDO-MAQ                                  RMB0004
+NOMB01                      CONTINUE                                    RMB0004
+NOMB01                   ELSE                                           RMB0004
+NOMB01                      IF ANT-MAQ = "N" AND SIG-VOCAL-MAQ          RMB0004
+NOMB01                         COMPUTE J-MAQ = I-MAQ + 1                RMB0004
+NOMB01                         MOVE NOMBRE-INPMAQ(J-MAQ:) TO            RMB0004
+NOMB01                              NOMBRE-INPMAQ(I-MAQ:)               RMB0004
+NOMB01                         COMPUTE I-MAQ = I-MAQ - 1                RMB0004
+NOMB01                      ELSE                                        RMB0004
+NOMB01                         IF (ANT-VOCAL-MAQ AND SIG-VOCAL-MAQ) OR  RMB0004
+NOMB01                            (ANT-VOCAL-MAQ AND SIG-MAQ = "N")     RMB0004
+NOMB01                            IF (ANT-VOCAL-MAQ AND SIG-MAQ = "N")  RMB0004
+NOMB01                               COMPUTE J-MAQ = I-MAQ + 1          RMB0004
+NOMB01                               MOVE NOMBRE-INPMAQ(J-MAQ:) TO      RMB0004
+NOMB01                                    NOMBRE-INPMAQ(I-MAQ:)         RMB0004
+NOMB01                            ELSE                                  RMB0004
+NOMB01                               MOVE "N" TO NOMBRE-INPMAQ(I-MAQ:1) RMB0004
+NOMB01                            END-IF                                RMB0004
+NOMB01                         ELSE                                     RMB0004
+NOMB01                            IF NOT ANT-VOCAL-MAQ AND              RMB0004
+NOMB01                                   SIG-VOCAL-MAQ                  RMB0004
+NOMB01                               MOVE "I" TO NOMBRE-INPMAQ(I-MAQ:1) RMB0004
+NOMB01                            ELSE                                  RMB0004
+NOMB01                               MOVE " " TO NOMBRE-INPMAQ(I-MAQ:1) RMB0004
+NOMB01                            END-IF                                RMB0004
+NOMB01                         END-IF                                   RMB0004
+NOMB01                      END-IF                                      RMB0004
+NOMB01                   END-IF                                         RMB0004
+NOMB01                END-IF                                            RMB0004
+NOMB01             END-IF                                               RMB0004
+NOMB01          END-IF                                                  RMB0004
+NOMB01       ELSE                                                       RMB0004
+NOMB01          MOVE " " TO NOMBRE-INPMAQ (I-MAQ:1)                     RMB0004
+NOMB01       END-IF                                                     RMB0004
+NOMB01       ADD 1 TO I-MAQ                                             RMB0004
+NOMB01     END-PERFORM.                                                 RMB0004
+NOMB01     INITIALIZE PARTICULAS-INPMAQ                                 RMB0004
+NOMB01     UNSTRING NOMBRE-INPMAQ-X DELIMITED BY ALL " "                RMB0004
+NOMB01       INTO BASURA-INPMAQ P1-INPMAQ P2-INPMAQ P3-INPMAQ P4-INPMAQ RMB0004
+NOMB01            P5-INPMAQ P6-INPMAQ P7-INPMAQ P8-INPMAQ P9-INPMAQ     RMB0004
+NOMB01            P10-INPMAQ                                            RMB0004
+NOMB01     MOVE SPACES TO NOMBRE-OUTMAQ-OK                              RMB0004
+NOMB01     STRING P1-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P2-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P3-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P4-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P5-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P6-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P7-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P8-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P9-INPMAQ DELIMITED BY " "                            RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01            P10-INPMAQ DELIMITED BY " "                           RMB0004
+NOMB01            " " DELIMITED BY SIZE                                 RMB0004
+NOMB01       INTO NOMBRE-OUTMAQ-OK.                                     RMB0004
+NOMB01       INSPECT NOMBRE-OUTMAQ-OK                                   RMB0004
+NOMB01         REPLACING ALL  " PE A " BY " PENA ".                     RMB0004
+NOMB01  1000-CAMBIAR-TILDE-MAQ.                                         RMB0004
+NOMB01       EVALUATE ACTUAL-MAQ                                        RMB0004
+NOMB01          WHEN "Á"                                                RMB0004
+NOMB01            MOVE "A" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "É"                                                RMB0004
+NOMB01            MOVE "E" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "Í"                                                RMB0004
+NOMB01            MOVE "I" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "Ó"                                                RMB0004
+NOMB01            MOVE "O" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "Ú"                                                RMB0004
+NOMB01            MOVE "U" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "á"                                                RMB0004
+NOMB01            MOVE "A" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "é"                                                RMB0004
+NOMB01            MOVE "E" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "í"                                                RMB0004
+NOMB01            MOVE "I" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "ó"                                                RMB0004
+NOMB01            MOVE "O" TO ACTUAL-MAQ                                RMB0004
+NOMB01          WHEN "Ú"                                                RMB0004
+NOMB01            MOVE "U" TO ACTUAL-MAQ                                RMB0004
+NOMB01        END-EVALUATE.                                             RMB0004
+APEL01 1100-LLENAR-CSV-APE-BDAMATCH.                                    RMB0004
+APEL01     INITIALIZE REG-BDACSV                                        RMB0004
+APEL01     MOVE TIP-IDE-INPUT-BDAMATCH TO  TIPO-ID-BDACSV               RMB0004
+APEL01     MOVE NUM-IDE-INPUT-BDAMATCH TO  NUM-ID-BDACSV                RMB0004
+APEL01     MOVE 980001         TO  COD-SUS-BDACSV COD-SUSCRIP-ABD02     RMB0004
+APEL01     MOVE 02             TO  COD-CTA-BDACSV                       RMB0004
+APEL01     MOVE "APELLID-01"   TO  NUM-CTA-BDACSV                       RMB0004
+APEL01     MOVE APELLIDO-INPUT-BDAMATCH TO  NOMBRE-BDACSV               RMB0004
+APEL01     MOVE ".-,"                   TO  NOMBRE-BDACSV(43:3)         RMB0004
+APEL01     MOVE 20110801       TO  FECHA-CREA-BDACSV                    RMB0004
+APEL01     MOVE 0              TO  NUM-PORTAF-BDACSV                    RMB0004
+APEL01     MOVE 0              TO  IND-NOMBRE-BDACSV                    RMB0004
+APEL01     MOVE 0              TO  MEJOR-PORTAF-BDACSV                  RMB0004
+APEL01     MOVE 0              TO  IND-ACTUALIZ-BDACSV                  RMB0004
+APEL01     MOVE 01             TO  FUENTE-REG-BDACSV.                   RMB0004
+APEL01 1100-LLENAR-AUX-BDAMATCH.                                        RMB0004
+REMARK***********************************************************************
+REMARK*1100-LLENAR-AUX-BDAMATCH.         
+REMARK* SE LLENAN LOS CAMPOS DEL CSV EN AREAS AUXILIARES DE CONVERSION DE  
+REMARK* TAMAÑO                                                              
+REMARK***********************************************************************
+APEL01     MOVE TIPO-ID-BDACSV    TO TIPO-ID-AUX11-BDAMATCH  .          RMB0004
+APEL01     MOVE NUM-ID-BDACSV     TO NUM-ID-AUX11-BDAMATCH   .          RMB0004
+APEL01     MOVE COD-SUS-BDACSV    TO COD-SUS-AUX11-BDAMATCH  .          RMB0004
+APEL01     MOVE COD-CTA-BDACSV    TO COD-CTA-AUX11-BDAMATCH  .          RMB0004
+APEL01     MOVE NUM-CTA-BDACSV    TO NUM-CTA-AUX11-BDAMATCH  .          RMB0004
+APEL01     MOVE TIPO-ID-BDACSV    TO TIPO-ID-AUX13-BDAMATCH  .          RMB0004
+APEL01     MOVE NUM-ID-BDACSV     TO NUM-ID-AUX13-BDAMATCH   .          RMB0004
+APEL01     MOVE COD-SUS-BDACSV    TO COD-SUS-AUX13-BDAMATCH  .          RMB0004
+APEL01     MOVE COD-CTA-BDACSV    TO COD-CTA-AUX13-BDAMATCH  .          RMB0004
+APEL01     MOVE NUM-CTA-BDACSV    TO NUM-CTA-AUX13-BDAMATCH  .          RMB0004
+APEL01     MOVE 0 TO FALLECIDO-BDAMATCH.                                RMB0004
+       1100-UBICAR-CHKCRE-CSV-BDAMATCH.        
+REMARK***********************************************************************
+REMARK*1100-UBICAR-CHKCRE-CSV-BDAMATCH.
+REMARK* DE ACUERDO AL TIPO DE CUENTA SE PROCEDE A VALIDAR QUE ESTAS EXISTAN
+REMARK* EN CUYO CASO SE INSERTA LA INFORMACION EN LAS ESTRUCTURAS DEL MATCH
+REMARK***********************************************************************
+           MOVE TIPO-ID-BDACSV    TO TIPO-ID-AUX11-BDAMATCH  .        
+           MOVE NUM-ID-BDACSV     TO NUM-ID-AUX11-BDAMATCH   .        
+           MOVE COD-SUS-BDACSV    TO COD-SUS-AUX11-BDAMATCH  .        
+           MOVE COD-CTA-BDACSV    TO COD-CTA-AUX11-BDAMATCH  .        
+           MOVE NUM-CTA-BDACSV    TO NUM-CTA-AUX11-BDAMATCH  .        
+           MOVE TIPO-ID-BDACSV    TO TIPO-ID-AUX13-BDAMATCH  .        
+           MOVE NUM-ID-BDACSV     TO NUM-ID-AUX13-BDAMATCH   .        
+           MOVE COD-SUS-BDACSV    TO COD-SUS-AUX13-BDAMATCH  .        
+           MOVE COD-CTA-BDACSV    TO COD-CTA-AUX13-BDAMATCH  .        
+           MOVE NUM-CTA-BDACSV    TO NUM-CTA-AUX13-BDAMATCH  .        
+VIGE01     MOVE 0 TO FALLECIDO-BDAMATCH                                 RMB0003
+           IF COD-CTA-BDACSV = 01 OR 51         
+              MOVE LLAVE-AUX11-BDAMATCH  TO LLAVE-MAES-CHECK         
+              READ MAESTRO-CHECK IGNORE LOCK INVALID KEY         
+                   MOVE 0 TO PROCESAR-BDAMATCH        
+VIGE01        NOT INVALID KEY                                           RMB0003
+BLOQ01            IF (IND-BLOQUEO-ABD06 = 7 OR 8 OR 9)                  RMB0004
+SINBLQ                AND CONSECUTIVO-ABD06 = 1
+VIGE01               IF ADJETIVO-ABD06 = 1                              RMB0003
+VIGE01                  MOVE 1 TO FALLECIDO-BDAMATCH                    RMB0003
+VIGE01               END-IF                                             RMB0003
+SINBLQ            ELSE                                                  RMB0003
+SINBLQ               MOVE 0 TO PROCESAR-BDAMATCH                        RMB0003
+SINBLQ            END-IF                                                RMB0003
+SINBLQ        END-READ        
+           ELSE        
+              MOVE LLAVE-AUX11-BDAMATCH  TO LLAVE-MAES-CREDIT         
+              READ MAESTRO-CREDIT IGNORE LOCK INVALID KEY         
+                   MOVE 0 TO PROCESAR-BDAMATCH        
+VIGE01        NOT INVALID KEY                                           RMB0003
+BLOQ01            IF (IND-BLOQUEO-ABD07 = 7 OR 8 OR 9)                  RMB0004
+SINBLQ               AND CONSECUTIVO-ABD07 = 1
+VIGE01               IF ADJETIVO1-ABD07 = 1 OR                          RMB0003
+VIGE01                  ADJETIVO2-ABD07 = 1 OR                          RMB0003
+VIGE01                  ADJETIVO3-ABD07 = 1                             RMB0003
+VIGE01                  MOVE 1 TO FALLECIDO-BDAMATCH                    RMB0003
+VIGE01               END-IF                                             RMB0003
+SINBLQ            ELSE                                                  RMB0003
+SINBLQ               MOVE 0 TO PROCESAR-BDAMATCH                        RMB0003
+VIGE01            END-IF                                                RMB0003
+              END-READ        
+           END-IF.        
+              
+       1200-PROC-REG-CSV-BDAMATCH.                                        
+REMARK***********************************************************************
+REMARK*1200-PROC-REG-CSV-BDAMATCH.                      
+REMARK* SE INSERTA LA CUENTA,EL NOMBRE Y SE UBICA EL REGISTRO DE DIRECCIONES
+REMARK* SI LO HAY
+REMARK***********************************************************************
+           IF MAX-CUENTAS-BDAMATCH = 0        
+              PERFORM 1000-U-INICIALIZAR-BDAMATCH         
+           END-IF.        
+           MOVE LLAVE-AUX11-BDAMATCH   TO CTA-INPUT-BDAMATCH.        
+           MOVE  COD-SUSCRIP-ABD02     TO  SUSC-CTAS-BDAMATCH.    *>DLMDLM
+           PERFORM 2000-U-INSERTAR-CTA-BDAMATCH.         
+           MOVE NOMBRE-BDACSV  TO NOM-INPUT-BDAMATCH.                    
+           PERFORM 2000-U-INSERTAR-NOM-BDAMATCH.         
+           MOVE LLAVE-AUX13-BDAMATCH TO LLAVE-DIRECC.        
+           READ MAESTRO-DIRECC IGNORE LOCK                                      
+MEJO01*         NOT INVALID KEY                                         RMB0004
+MEJO01*             PERFORM 1210-DIRTEL-BDACSV-BDAMATCH                 RMB0004
+MEJO01          INVALID KEY                                             RMB0004
+MEJO01              MOVE SPACES TO LLAVE-DIRECC                         RMB0004
+           END-READ.        
+MEJO01     IF LLAVE-DIRECC <> SPACES                                    RMB0004
+MEJO01        PERFORM 1210-DIRTEL-BDACSV-BDAMATCH                       RMB0004
+MEJO01     END-IF.                                                      RMB0004
+              
+       1210-DIRTEL-BDACSV-BDAMATCH.        
+REMARK***********************************************************************
+REMARK*1210-DIRTEL-BDACSV-BDAMATCH.
+REMARK* SE INSERTAN LAS DIRECCIONES Y LOS TELEFONOS DEL REGISTRO ESTANDAR DE
+REMARK* DE DIRECCIONES DENTRO DE LAS ESTRUCTURAS DEL MATCH.
+REMARK***********************************************************************
+           IF CIURES-DIRECC NOT = SPACES        
+              IF DIRRES-DIRECC NOT = SPACES         
+                 MOVE DIRRES-DIRECC TO DIR-INPUT-BDAMATCH        
+                 PERFORM 2000-U-INSERTAR-DIR-BDAMATCH          
+              END-IF        
+              IF TELRES-DIRECC > 0 AND         
+                 TELRES-DIRECC < 9999999999        
+                 MOVE TELRES-DIRECC TO TEL-INPUT-BDAMATCH            
+                 PERFORM 2000-U-INSERTAR-TEL-BDAMATCH         
+              END-IF        
+           END-IF.        
+           IF CIULAB-DIRECC NOT = SPACES                        
+              IF DIRLAB-DIRECC NOT = SPACES         
+                 MOVE DIRLAB-DIRECC TO DIR-INPUT-BDAMATCH        
+                 PERFORM 2000-U-INSERTAR-DIR-BDAMATCH         
+              END-IF                                          
+              IF TELLAB-DIRECC > 0 AND         
+                 TELLAB-DIRECC < 9999999999                  
+                 MOVE TELLAB-DIRECC TO TEL-INPUT-BDAMATCH            
+                 PERFORM 2000-U-INSERTAR-TEL-BDAMATCH         
+              END-IF                                            
+           END-IF.                                             
+           IF CIUCOR-DIRECC NOT = SPACES AND         
+              DIRCOR-DIRECC NOT = SPACES        
+              MOVE DIRCOR-DIRECC TO DIR-INPUT-BDAMATCH        
+              PERFORM 2000-U-INSERTAR-DIR-BDAMATCH        
+           END-IF.        
+              
+       8000-U-VER-CTAABD07-BDAMATCH.           
+REMARK***********************************************************************
+REMARK*8000-U-VER-CTAABD07-BDAMATCH.  
+REMARK*  SE BUSCA EN LA TABLA DE CUENTAS DEL MEJOR PORTAFOLIO SI LA LLAVE DE
+REMARK*  LA CUENTA DEL ICMCRE ES VALIDA. EN ESTE CASO SE CAMBIA EL INDICADOR
+REMARK*  DE BLOQUEO A 0
+REMARK***********************************************************************
+           IF IDE-TIPO-BDAMATCH = 1        
+              MOVE LLAVE-MAES-CREDIT TO CTA-INPUT-BDAMATCH        
+              PERFORM 5000-U-VALIDAR-CUENTA-BDAMATCH         
+              IF VALCTA-OUTPUT-BDAMATCH = 1 AND IND-BLOQUEO-ABD07 = 9        
+                 MOVE 0 TO IND-BLOQUEO-ABD07        
+              END-IF        
+           END-IF.        
+              
+       8000-U-VER-CTAABD06-BDAMATCH.          
+REMARK***********************************************************************
+REMARK*8000-U-VER-CTAABD06-BDAMATCH.  
+REMARK*  SE BUSCA EN LA TABLA DE CUENTAS DEL MEJOR PORTAFOLIO SI LA LLAVE DE
+REMARK*  LA CUENTA DEL ICMCHK ES VALIDA. EN ESTE CASO SE CAMBIA EL INDICADOR
+REMARK*  DE BLOQUEO A 0
+REMARK***********************************************************************
+           IF IDE-TIPO-BDAMATCH = 1        
+              MOVE LLAVE-MAES-CHECK  TO CTA-INPUT-BDAMATCH        
+              PERFORM 5000-U-VALIDAR-CUENTA-BDAMATCH         
+              IF VALCTA-OUTPUT-BDAMATCH = 1 AND IND-BLOQUEO-ABD06 = 9        
+                 MOVE 0 TO IND-BLOQUEO-ABD06        
+              END-IF        
+           END-IF.        
+              
+REMARK*======================================================================
+       1000-U-INICIALIZAR-BDAMATCH.          
+REMARK********************************************************************
+REMARK*1000-U-INICIALIZAR-BDAMATCH.
+REMARK* INPUT = VACIO 
+REMARK* OUTPUT= VACIO 
+REMARK* SE INICIALIZAN TODAS LAS ESTRUCTURAS UTILIZADAS EN LA REALIZACION
+REMARK* DEl MATCH.
+REMARK********************************************************************
+           MOVE 1 TO I-DIR-BDAMATCH I-TEL-BDAMATCH I-NOM-BDAMATCH.        
+           MOVE 0 TO I-CTA-BDAMATCH.        
+PESO01     INITIALIZE TABLA-CUENTAS-BDAMATCH.                           RMB0004
+           INITIALIZE TABLA-DIR-BDAMATCH.             
+           INITIALIZE TABLA-TEL-BDAMATCH.           
+           INITIALIZE TABLA-NOM-BDAMATCH.        
+           INITIALIZE TABLA-GRUNOM-BDAMATCH.                  
+           INITIALIZE V-INTERRELAC-BDAMATCH.         
+           MOVE ZEROS   TO POSIC-SUSC-BDAMATCH        
+                            POSIC-SUS-GRU-BDAMATCH        
+           MOVE ALL "9" TO TABLA-SUSC-DIR-BDAMATCH        
+           MOVE ALL "9" TO TABLA-SUSC-NOMBRE-BDAMATCH.        
+              
+       2000-U-INSERTAR-DIR-BDAMATCH.         
+REMARK********************************************************************
+REMARK*2000-U-INSERTAR-DIR-BDAMATCH. 
+REMARK* INPUT = DIR-INPUT-BDAMATCH
+REMARK* OUTPUT= VACIO 
+REMARK* SE INSERTA EN LA TABLA DE DIRECCIONES LOS NUMEROS DE LA DIRECCION
+REMARK* PASADA EN EL PARAMETRO ORDENADOS DE MAYOR A MENOR . SIEMPRE QUE
+REMARK* LA DIRECCION CONTENGA ALGUN NUMERO
+REMARK********************************************************************
+           MOVE DIR-INPUT-BDAMATCH  TO T-CARDIR-BDAMATCH.        
+           MOVE 1 TO I-BDAMATCH                                                 
+           MOVE 0 TO J-BDAMATCH                                                 
+           MOVE " " TO CAR-ANT-BDAMATCH                                         
+           INITIALIZE T-CARTOT-BDAMATCH                                         
+CARTOT     PERFORM UNTIL I-BDAMATCH > 60 OR J-BDAMATCH >= 10            CAV0002 
+             IF V-CARDIR-BDAMATCH  (I-BDAMATCH) NUMERIC                         
+                MOVE V-CARDIR-BDAMATCH (I-BDAMATCH) TO CAR-ACT-BDAMATCH        
+                IF CAR-ANT-BDAMATCH   NUMERIC                                   
+                   COMPUTE V-CARTOT-BDAMATCH (J-BDAMATCH)           
+                           = V-CARTOT-BDAMATCH  (J-BDAMATCH)                    
+                           * 10 + CAR-ACT-BDAMATCH                              
+                ELSE        
+                   ADD 1 TO J-BDAMATCH                                          
+                   MOVE V-CARDIR-BDAMATCH  (I-BDAMATCH)                         
+                        TO V-CARTOT-BDAMATCH  (J-BDAMATCH)                      
+                END-IF        
+             END-IF        
+             MOVE V-CARDIR-BDAMATCH (I-BDAMATCH) TO CAR-ANT-BDAMATCH            
+             ADD 1 TO I-BDAMATCH                                                
+           END-PERFORM.        
+           SORT V-CARTOT-BDAMATCH   DESCENDING.                                 
+           IF T-CARTOT-BDAMATCH   NOT = ZEROS AND         
+              I-DIR-BDAMATCH < LIM-BDAMATCH        
+              MOVE T-CARTOT-BDAMATCH TO         
+                   NUM-DIR-BDAMATCH(I-DIR-BDAMATCH)        
+              MOVE SUSC-CTAS-BDAMATCH TO         
+                   SUS-DIR-BDAMATCH(I-DIR-BDAMATCH)        
+              MOVE I-CTA-BDAMATCH TO CTA-DIR-BDAMATCH(I-DIR-BDAMATCH)        
+              PERFORM  VARYING POSIC-SUMA-BDAMATCH FROM 1 BY 1        
+                       UNTIL  POSIC-SUMA-BDAMATCH  >  10 OR        
+                       V-CARTOT-BDAMATCH(POSIC-SUMA-BDAMATCH)  =  ZERO        
+                 ADD   1  TO   LNG-DIR-BDAMATCH (I-DIR-BDAMATCH)        
+              END-PERFORM        
+              ADD 1 TO I-DIR-BDAMATCH        
+           END-IF.        
+              
+       2000-U-INSERTAR-TEL-BDAMATCH.          
+REMARK********************************************************************
+REMARK*2000-U-INSERTAR-TEL-BDAMATCH. 
+REMARK* INPUT = TEL-INPUT-BDAMATCH
+REMARK* OUTPUT= VACIO 
+REMARK* SE INSERTA EN LA TABLA DE TELEFONOS EL NUMERO DEL TELEFONO     
+REMARK* PASADO EN EL PARAMETRO  SIEMPRE QUE SEA MAYOR A CERO
+REMARK********************************************************************
+           IF I-TEL-BDAMATCH < LIM-BDAMATCH AND TEL-INPUT-BDAMATCH > 0        
+              MOVE TEL-INPUT-BDAMATCH TO         
+                                      NUM-TEL-BDAMATCH(I-TEL-BDAMATCH)        
+              MOVE SUSC-CTAS-BDAMATCH TO         
+                                      SUS-TEL-BDAMATCH(I-TEL-BDAMATCH)        
+              MOVE I-CTA-BDAMATCH     TO         
+                                      CTA-TEL-BDAMATCH(I-TEL-BDAMATCH)        
+              ADD 1 TO I-TEL-BDAMATCH        
+           END-IF.        
+              
+       2000-U-INSERTAR-NOM-BDAMATCH.          
+REMARK********************************************************************
+REMARK*2000-U-INSERTAR-NOM-BDAMATCH. 
+REMARK* INPUT = NOM-INPUT-BDAMATCH 
+REMARK* OUTPUT= VACIO 
+REMARK* SE INSERTA EN LA TABLA DE NOMBRES   EL NOMBRE                  
+REMARK* PASADO EN EL PARAMETRO  SIEMPRE QUE SEA DIFERENTE DE ESPACIOS
+REMARK********************************************************************
+           IF I-NOM-BDAMATCH < LIM-BDAMATCH AND         
+              NOM-INPUT-BDAMATCH <> SPACES        
+              MOVE NOM-INPUT-BDAMATCH  TO         
+                   NOM-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+                                         NOM-LIMPI-BDAMATCH        
+              MOVE I-CTA-BDAMATCH TO CTA-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+              MOVE ZEROS TO PESO-CTAS-TOT-BDAMATCH  NRO-VECES-1-BDAMATCH        
+                                  NRO-VECES-2-BDAMATCH        
+              PERFORM VARYING NRO-VECES-1-BDAMATCH FROM 1 BY 1        
+                UNTIL  NRO-VECES-1-BDAMATCH  >  60        
+                IF NRO-VECES-1-BDAMATCH  >  1 AND        
+                 NOM-LIMPI-BDAMATCH(NRO-VECES-1-BDAMATCH - 1:1) = " "        
+                   SUBTRACT  1 FROM  NRO-VECES-1-BDAMATCH        
+                END-IF        
+                IF NOM-LIMPI-BDAMATCH(NRO-VECES-1-BDAMATCH:1) = " "        
+                  COMPUTE  NRO-VECES-2-BDAMATCH =         
+                           60 - NRO-VECES-1-BDAMATCH        
+                  MOVE  NOM-LIMPI-BDAMATCH(NRO-VECES-1-BDAMATCH +         
+                        1:NRO-VECES-2-BDAMATCH)        
+                      TO   NOM-LIMPI-BDAMATCH(NRO-VECES-1-BDAMATCH:)        
+                  IF NOM-LIMPI-BDAMATCH(NRO-VECES-1-BDAMATCH +         
+                     1:NRO-VECES-2-BDAMATCH) = SPACES        
+                     MOVE  85           TO  NRO-VECES-1-BDAMATCH        
+                  END-IF        
+                END-IF        
+              END-PERFORM        
+              INSPECT NOM-LIMPI-BDAMATCH        
+                      TALLYING       PESO-CTAS-TOT-BDAMATCH        
+                      FOR CHARACTERS BEFORE INITIAL " "        
+              MOVE  PESO-CTAS-TOT-BDAMATCH TO         
+                    LNG-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+FUEN01        IF FUENTE-REG-BDACSV >= 02                                RMB0004
+FUEN01           MOVE 99 TO LNG-NOM-BDAMATCH(I-NOM-BDAMATCH)            RMB0004
+FUEN01        END-IF                                                    RMB0004
+              MOVE  SUSC-CTAS-BDAMATCH TO         
+                    SUS-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+              ADD 1 TO I-NOM-BDAMATCH        
+           END-IF.        
+              
+       2000-U-INSERTAR-CTA-BDAMATCH.         
+REMARK********************************************************************
+REMARK*2000-U-INSERTAR-CTA-BDAMATCH.  
+REMARK* INPUT = CTA-INPUT-BDAMATCH
+REMARK* OUTPUT= VACIO 
+REMARK* SE INSERTA EN LA TABLA DE CUENTAS EL VALOR DE LA CUENTA        
+REMARK* PASADO EN EL PARAMETRO  SIEMPRE QUE SEA DIFERENTE DE ESPACIOS
+REMARK********************************************************************
+           IF I-CTA-BDAMATCH < LIM-BDAMATCH AND         
+              CTA-INPUT-BDAMATCH <> SPACES        
+              ADD 1 TO I-CTA-BDAMATCH        
+              MOVE CTA-INPUT-BDAMATCH TO         
+                   CTA-CUENTAS-BDAMATCH(I-CTA-BDAMATCH)        
+              MOVE I-CTA-BDAMATCH     TO MAX-CUENTAS-BDAMATCH         
+VIGE01        MOVE FALLECIDO-BDAMATCH TO                                RMB0003
+VIGE01             CTA-FALLECIDO-BDAMATCH(I-CTA-BDAMATCH)               RMB0003
+FUEN01        IF FUENTE-REG-BDACSV >= 2                                 RMB0004
+FUEN01           MOVE 1 TO FUEEXT-CUENTAS-BDAMATCH(I-CTA-BDAMATCH)      RMB0004
+FUEN01        END-IF                                                    RMB0004
+           END-IF.        
+       3000-U-ORDENAR-DIR-BDAMATCH.        
+REMARK********************************************************************
+REMARK*3000-U-ORDENAR-DIR-BDAMATCH.
+REMARK* INPUT = TABLA DE DIRECCIONES LLENA
+REMARK* OUTPUT= TABLA DE RELACIONES LLENADA CON DIRECCIONES
+REMARK* SE ORDENA LA TABLA DE DIRECCIONES EN SUBPORTAFOLIOS QUE SON    
+REMARK* INSERTADOS EN LA TABLA DE RELACIONAMIENTO                      
+REMARK********************************************************************
+           SORT T-DIR-BDAMATCH        
+                DESCENDING NUM-DIR-BDAMATCH         
+                ASCENDING  CTA-DIR-BDAMATCH.        
+           MOVE 1 TO I-CTA-BDAMATCH.        
+           MOVE 0 TO FIL-FUE-BDAMATCH        
+           MOVE 1 TO COL-FUE-BDAMATCH        
+           MOVE 999                TO CTA-DIR-ANT-BDAMATCH        
+           MOVE ALL "9"            TO NUM-DIR-ANT-BDAMATCH        
+           PERFORM UNTIL I-CTA-BDAMATCH > LIM-BDAMATCH OR        
+                               CTA-DIR-BDAMATCH(I-CTA-BDAMATCH) = 0        
+             IF NUM-DIR-ANT-BDAMATCH <>         
+                                       NUM-DIR-BDAMATCH(I-CTA-BDAMATCH)        
+                ADD  1 TO FIL-FUE-BDAMATCH        
+                MOVE 1 TO COL-FUE-BDAMATCH        
+                MOVE CTA-DIR-BDAMATCH(I-CTA-BDAMATCH) TO        
+                     CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                MOVE "DIR" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                ADD 1 TO NUM-CTAS-DIR-BDAMATCH(I-CTA-BDAMATCH)        
+                MOVE  I-CTA-BDAMATCH       TO  POSIC-SUMA-BDAMATCH        
+                ADD 1 TO COL-FUE-BDAMATCH        
+             ELSE        
+                IF CTA-DIR-ANT-BDAMATCH <>         
+                   CTA-DIR-BDAMATCH(I-CTA-BDAMATCH)        
+                   MOVE CTA-DIR-BDAMATCH(I-CTA-BDAMATCH) TO        
+                     CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                   MOVE "DIR" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                   ADD 1 TO COL-FUE-BDAMATCH        
+                END-IF        
+                  ADD 1 TO NUM-CTAS-DIR-BDAMATCH(POSIC-SUMA-BDAMATCH)        
+             END-IF        
+             MOVE CTA-DIR-BDAMATCH(I-CTA-BDAMATCH) TO         
+                                                CTA-DIR-ANT-BDAMATCH        
+             MOVE NUM-DIR-BDAMATCH(I-CTA-BDAMATCH) TO         
+                                                 NUM-DIR-ANT-BDAMATCH        
+             ADD 1 TO I-CTA-BDAMATCH        
+           END-PERFORM.        
+           MOVE FIL-FUE-BDAMATCH TO MAX-REL-BDAMATCH.        
+              
+       3000-U-ORDENAR-TEL-BDAMATCH.        
+REMARK********************************************************************
+REMARK*3000-U-ORDENAR-TEL-BDAMATCH.
+REMARK* INPUT = TABLA DE TELEFONOS   LLENA
+REMARK* OUTPUT= TABLA DE RELACIONES LLENADA CON TELEFONOS    
+REMARK* SE ORDENA LA TABLA DE TELEFONOS EN SUBPORTAFOLIOS QUE SON    
+REMARK* INSERTADOS EN LA TABLA DE RELACIONAMIENTO                      
+REMARK********************************************************************
+           SORT T-TEL-BDAMATCH        
+                DESCENDING NUM-TEL-BDAMATCH        
+                ASCENDING  CTA-TEL-BDAMATCH .        
+           MOVE 1 TO I-CTA-BDAMATCH.        
+           MOVE 1 TO COL-FUE-BDAMATCH        
+           MOVE 999      TO CTA-TEL-ANT-BDAMATCH        
+           MOVE ALL "9"  TO NUM-TEL-ANT-BDAMATCH        
+           PERFORM UNTIL I-CTA-BDAMATCH > LIM-BDAMATCH        
+                   OR  CTA-TEL-BDAMATCH(I-CTA-BDAMATCH) = 0        
+                   OR  FIL-FUE-BDAMATCH > LIM-BDAMATCH        
+                   OR  COL-FUE-BDAMATCH > LIM-BDAMATCH        
+             IF NUM-TEL-ANT-BDAMATCH <>        
+                NUM-TEL-BDAMATCH(I-CTA-BDAMATCH)        
+                ADD  1 TO FIL-FUE-BDAMATCH        
+                MOVE 1 TO COL-FUE-BDAMATCH        
+                MOVE CTA-TEL-BDAMATCH(I-CTA-BDAMATCH) TO        
+                     CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                MOVE "TEL" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                ADD  1 TO  NUM-CTAS-TEL-BDAMATCH(I-CTA-BDAMATCH)        
+                MOVE I-CTA-BDAMATCH TO POSIC-SUMA-BDAMATCH        
+                ADD 1 TO COL-FUE-BDAMATCH        
+             ELSE        
+                IF CTA-TEL-ANT-BDAMATCH <>        
+                   CTA-TEL-BDAMATCH(I-CTA-BDAMATCH)        
+                   MOVE CTA-TEL-BDAMATCH(I-CTA-BDAMATCH) TO        
+                       CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                   MOVE "TEL" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                   ADD 1 TO COL-FUE-BDAMATCH        
+                END-IF        
+                  ADD   1 TO NUM-CTAS-TEL-BDAMATCH(POSIC-SUMA-BDAMATCH)        
+             END-IF        
+             MOVE CTA-TEL-BDAMATCH(I-CTA-BDAMATCH) TO        
+                                                 CTA-TEL-ANT-BDAMATCH        
+             MOVE NUM-TEL-BDAMATCH(I-CTA-BDAMATCH) TO        
+                                                 NUM-TEL-ANT-BDAMATCH        
+             ADD 1 TO I-CTA-BDAMATCH        
+           END-PERFORM.        
+           MOVE FIL-FUE-BDAMATCH TO MAX-REL-BDAMATCH.        
+              
+       3000-U-ORDENAR-NOM-BDAMATCH.        
+REMARK********************************************************************
+REMARK*3000-U-ORDENAR-NOM-BDAMATCH.
+REMARK* INPUT = TABLA DE NOMBRES     LLENA
+REMARK* OUTPUT= TABLA DE RELACIONES LLENADA CON NOMBRES
+REMARK* SE ORDENA LA TABLA DE NOMBRES   EN SUBPORTAFOLIOS QUE SON
+REMARK* INSERTADOS EN LA TABLA DE RELACIONAMIENTO
+REMARK********************************************************************
+           SORT T-NOM-BDAMATCH        
+                DESCENDING NOM-NOM-BDAMATCH        
+                DESCENDING LNG-NOM-BDAMATCH        
+                ASCENDING  CTA-NOM-BDAMATCH .        
+           MOVE 1 TO I-NOM-BDAMATCH.        
+           MOVE 1 TO GRU-NOM-BDAMATCH.        
+           MOVE GRU-NOM-BDAMATCH TO         
+                GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH).        
+           MOVE GRU-NOM-BDAMATCH TO         
+                GRUPO-GRUNOM-BDAMATCH(I-NOM-BDAMATCH).        
+           MOVE NOM-NOM-BDAMATCH(I-NOM-BDAMATCH) TO        
+                NOM-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH).        
+           MOVE SUS-NOM-BDAMATCH(I-NOM-BDAMATCH) TO         
+                SUSC-GRUP-SUS-BDAMATCH        
+           MOVE GRUPO-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH) TO         
+                SUSC-GRUP-GRU-BDAMATCH        
+           PERFORM  400-BUSCAR-SUSC-GRUPO-BDAMATCH        
+           IF  INV-BDAMATCH  =  1        
+             ADD   1        TO        
+             NUM-CTAS-GRUNOM-BDAMATCH(GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH))        
+           END-IF        
+           MOVE LNG-NOM-BDAMATCH(I-NOM-BDAMATCH) TO        
+                LNG-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+           ADD 1 TO I-NOM-BDAMATCH.        
+           PERFORM UNTIL I-NOM-BDAMATCH > LIM-BDAMATCH        
+                   OR CTA-NOM-BDAMATCH(I-NOM-BDAMATCH) = 0        
+             MOVE 1 TO I-GRU-BDAMATCH        
+             MOVE 0 TO MATCH-OK-OUT-VALNOM        
+             PERFORM UNTIL NOM-GRUNOM-BDAMATCH(I-GRU-BDAMATCH) =         
+                     SPACES OR I-GRU-BDAMATCH > LIM-BDAMATCH        
+                     OR MATCH-OK-OUT-VALNOM = 1        
+               MOVE NOM-NOM-BDAMATCH(I-NOM-BDAMATCH) TO         
+                    NOMBRE-INPUT-VALNOM        
+               MOVE NOM-GRUNOM-BDAMATCH(I-GRU-BDAMATCH) TO        
+                    NOMBOK-INPUT-VALNOM        
+VLNIT1         IF  TIP-IDE-INPUT-BDAMATCH = 2 OR 3                      RMB0004
+VLNIT1            IF NUM-IDE-INPUT-BDAMATCH >= 600000000 AND            RMB0004
+VLNIT1               NUM-IDE-INPUT-BDAMATCH <= 999999999                RMB0004
+VLNIT1               MOVE 2 TO TIP-ID-INPUT-VALNOM                      RMB0004
+VLNIT1               MOVE 1 TO BLOQUES-INPUT-VALNOM                     RMB0004
+VLNIT1            ELSE                                                  RMB0004
+VLNIT1               MOVE 1 TO TIP-ID-INPUT-VALNOM                      RMB0004
+VLNIT1               MOVE 2 TO BLOQUES-INPUT-VALNOM                     RMB0004
+VLNIT1            END-IF                                                RMB0004
+VLNIT1         ELSE                                                     RMB0004
+VLNIT1            MOVE 1 TO TIP-ID-INPUT-VALNOM                         RMB0004
+VLNIT1            MOVE 2 TO BLOQUES-INPUT-VALNOM                        RMB0004
+VLNIT1         END-IF                                                   RMB0004
+APEL01         IF NOMBRE-INPUT-VALNOM(43:3) = ".-," OR                  RMB0004
+APEL01            NOMBOK-INPUT-VALNOM(43:3) = ".-,"                     RMB0004
+APEL01            MOVE 1 TO BLOQUES-INPUT-VALNOM                        RMB0004
+APEL01         END-IF                                                   RMB0004
+               PERFORM 10000-MATCH-NOMBRES-VALNOM        
+               IF MATCH-OK-OUT-VALNOM = 1        
+                  MOVE I-GRU-BDAMATCH TO         
+                       GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH)        
+                  MOVE SUS-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+                                       TO  SUSC-GRUP-SUS-BDAMATCH        
+                  MOVE GRUPO-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+                                       TO  SUSC-GRUP-GRU-BDAMATCH        
+APEL01            IF BLOQUES-INPUT-VALNOM = 1   *> ES UN APELLIDO       RMB0004
+APEL01               MOVE 1 TO APE-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)    RMB0004
+APEL01            END-IF                                                RMB0004
+                  PERFORM  400-BUSCAR-SUSC-GRUPO-BDAMATCH        
+                  IF  INV-BDAMATCH  =  1        
+                    ADD   1  TO           
+             NUM-CTAS-GRUNOM-BDAMATCH(GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH))        
+                  END-IF        
+                  IF  LNG-NOM-BDAMATCH(I-NOM-BDAMATCH)  >        
+                      LNG-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+                    MOVE LNG-NOM-BDAMATCH(I-NOM-BDAMATCH) TO        
+                      LNG-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+PESO01              MOVE NOM-NOM-BDAMATCH(I-NOM-BDAMATCH) TO            RMB0004
+PESO01                NOM-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)             RMB0004
+                  END-IF        
+               END-IF        
+               ADD 1 TO I-GRU-BDAMATCH        
+             END-PERFORM        
+             IF MATCH-OK-OUT-VALNOM = 0  *> NUEVO GRUPO        
+                ADD 1 TO GRU-NOM-BDAMATCH        
+                MOVE NOM-NOM-BDAMATCH(I-NOM-BDAMATCH) TO        
+                     NOM-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+                MOVE GRU-NOM-BDAMATCH  TO        
+                     GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH)        
+                MOVE GRU-NOM-BDAMATCH  TO         
+                     GRUPO-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)*> DLM        
+                MOVE SUS-NOM-BDAMATCH(I-NOM-BDAMATCH)        
+                                   TO  SUSC-GRUP-SUS-BDAMATCH        
+                MOVE GRUPO-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+                                   TO  SUSC-GRUP-GRU-BDAMATCH        
+                PERFORM  400-BUSCAR-SUSC-GRUPO-BDAMATCH        
+                IF  INV-BDAMATCH  =  1        
+                  ADD   1   TO           
+             NUM-CTAS-GRUNOM-BDAMATCH(GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH))        
+                END-IF        
+                MOVE LNG-NOM-BDAMATCH(I-NOM-BDAMATCH) TO        
+                     LNG-GRUNOM-BDAMATCH(GRU-NOM-BDAMATCH)        
+             ELSE                                                    *>         
+                MOVE GRU-NOM-BDAMATCH TO         
+                     GRU-NOMS-BDAMATCH(I-NOM-BDAMATCH)   *> DLM        
+             END-IF        
+             ADD 1 TO I-NOM-BDAMATCH        
+           END-PERFORM.        
+           SORT T-NOM-BDAMATCH        
+                DESCENDING NOM-NOM-BDAMATCH        
+                DESCENDING GRU-NOMS-BDAMATCH        
+                DESCENDING LNG-NOM-BDAMATCH        
+                ASCENDING  CTA-NOM-BDAMATCH .        
+           MOVE 1 TO I-CTA-BDAMATCH.        
+           MOVE 1 TO COL-FUE-BDAMATCH        
+           MOVE 999                TO CTA-NOM-ANT-BDAMATCH        
+           MOVE ALL "9"            TO GRU-NOM-ANT-BDAMATCH        
+           PERFORM UNTIL I-CTA-BDAMATCH > LIM-BDAMATCH        
+                   OR CTA-NOM-BDAMATCH (I-CTA-BDAMATCH) = 0        
+                   OR FIL-FUE-BDAMATCH > LIM-BDAMATCH        
+                   OR COL-FUE-BDAMATCH > LIM-BDAMATCH        
+             IF GRU-NOM-ANT-BDAMATCH <>         
+                GRU-NOMS-BDAMATCH(I-CTA-BDAMATCH)        
+                ADD  1 TO FIL-FUE-BDAMATCH        
+                MOVE 1 TO COL-FUE-BDAMATCH        
+                MOVE CTA-NOM-BDAMATCH(I-CTA-BDAMATCH) TO        
+                     CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                MOVE "NOM" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                ADD 1 TO COL-FUE-BDAMATCH        
+             ELSE        
+                IF CTA-NOM-ANT-BDAMATCH <>         
+                   CTA-NOM-BDAMATCH(I-CTA-BDAMATCH)        
+                   MOVE CTA-NOM-BDAMATCH(I-CTA-BDAMATCH) TO        
+                        CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH)        
+                   MOVE "NOM" TO CARAC-REL-BDAMATCH(FIL-FUE-BDAMATCH)        
+                   ADD 1 TO COL-FUE-BDAMATCH        
+                END-IF        
+             END-IF        
+             MOVE CTA-NOM-BDAMATCH(I-CTA-BDAMATCH) TO        
+                  CTA-NOM-ANT-BDAMATCH        
+             MOVE GRU-NOMS-BDAMATCH(I-CTA-BDAMATCH) TO         
+                  GRU-NOM-ANT-BDAMATCH        
+             ADD 1 TO I-CTA-BDAMATCH        
+           END-PERFORM.        
+           MOVE FIL-FUE-BDAMATCH TO MAX-REL-BDAMATCH.        
+              
+       4000-U-INTERELACIONAR-BDAMATCH.        
+REMARK********************************************************************
+REMARK*4000-U-INTERELACIONAR-BDAMATCH.
+REMARK* INPUT = TABLA DE RELACIONES LLENA CON NOMBRES,DIRECCIONES,TELEFONOS
+REMARK* OUTPUT= TABLA DE RELACIONES CON LOS PORTAFOLIOS DETERMINADOS
+REMARK* SE REALIZAN  TABLA DE NOMBRES   EN SUBPORTAFOLIOS QUE SON    
+REMARK* INSERTADOS EN LA TABLA DE RELACIONAMIENTO                      
+REMARK********************************************************************
+PESO01*    PERFORM 1110-MOSTRAR-MATRIZ1                                 RMB0004
+           MOVE 1 TO MOVIDO-BDAMATCH    .        
+           PERFORM UNTIL MOVIDO-BDAMATCH = 0        
+              MOVE 0 TO MOVIDO-BDAMATCH        
+              MOVE 1 TO FIL-BUS-BDAMATCH        
+              PERFORM UNTIL FIL-BUS-BDAMATCH > MAX-REL-BDAMATCH        
+                MOVE 1 TO COL-BUS-BDAMATCH        
+                PERFORM UNTIL COL-BUS-BDAMATCH > MAX-CUENTAS-BDAMATCH        
+                  IF CAJA-BDAMATCH(FIL-BUS-BDAMATCH,COL-BUS-BDAMATCH)        
+                     > 0        
+                  MOVE CAJA-BDAMATCH(FIL-BUS-BDAMATCH,COL-BUS-BDAMATCH)        
+                       TO BUSCADO-BDAMATCH        
+                     PERFORM 4100-BUSCAR-RELACION-BDAMATCH        
+                  ELSE        
+                     MOVE MAX-CUENTAS-BDAMATCH TO COL-BUS-BDAMATCH        
+                  END-IF        
+                  ADD 1 TO COL-BUS-BDAMATCH        
+                END-PERFORM        
+                ADD 1 TO FIL-BUS-BDAMATCH        
+              END-PERFORM        
+           END-PERFORM.        
+              
+       4100-BUSCAR-RELACION-BDAMATCH.        
+REMARK********************************************************************
+REMARK*4100-BUSCAR-RELACION-BDAMATCH.
+REMARK* SE BUSCA LA RELACION DE UNA CUENTA CON LAS CUENTAS DE UNA FILA
+REMARK********************************************************************
+           MOVE 1 TO FIL-FUE-BDAMATCH.        
+           PERFORM UNTIL FIL-FUE-BDAMATCH > MAX-REL-BDAMATCH        
+              IF FIL-FUE-BDAMATCH <> FIL-BUS-BDAMATCH        
+                 MOVE 0 TO EXISTE-BDAMATCH        
+                 INSPECT FILA-REL-BDAMATCH(FIL-FUE-BDAMATCH)         
+                    TALLYING EXISTE-BDAMATCH        
+                    FOR CHARACTERS BEFORE INITIAL BUSCADO-D-BDAMATCH        
+                  ADD 1 TO EXISTE-BDAMATCH        
+                  IF EXISTE-BDAMATCH <= 2000        
+                      PERFORM 4110-MOVER-RELACIONES-BDAMATCH        
+                 END-IF        
+              END-IF        
+              ADD 1 TO FIL-FUE-BDAMATCH        
+           END-PERFORM.        
+              
+       4110-MOVER-RELACIONES-BDAMATCH.        
+REMARK********************************************************************
+REMARK*4110-MOVER-RELACIONES-BDAMATCH.
+REMARK* ENCONTRADA LA RELACION SE PROCEDE A MOVER TODAS LAS RELACIONES
+REMARK* QUe NO EXISTAN A LA FILA FUENTE DE LA BUSQUEDA
+REMARK********************************************************************
+             MOVE 0 TO FIN-FUENTE-BDAMATCH.        
+             INSPECT FILA-REL-BDAMATCH(FIL-FUE-BDAMATCH)         
+                     TALLYING FIN-FUENTE-BDAMATCH        
+                     FOR CHARACTERS BEFORE INITIAL "000 "        
+             COMPUTE FIN-FUENTE-BDAMATCH = FIN-FUENTE-BDAMATCH / 4        
+             MOVE 0 TO LIBRE-BUSCADO-BDAMATCH.        
+             INSPECT FILA-REL-BDAMATCH(FIL-BUS-BDAMATCH)         
+                     TALLYING LIBRE-BUSCADO-BDAMATCH        
+                     FOR CHARACTERS BEFORE INITIAL "000 "        
+             COMPUTE LIBRE-BUSCADO-BDAMATCH = LIBRE-BUSCADO-BDAMATCH / 4        
+             ADD 1 TO LIBRE-BUSCADO-BDAMATCH.        
+             MOVE 1 TO COL-FUE-BDAMATCH.        
+             PERFORM UNTIL COL-FUE-BDAMATCH > FIN-FUENTE-BDAMATCH        
+                MOVE CAJA-BDAMATCH(FIL-FUE-BDAMATCH,COL-FUE-BDAMATCH) TO        
+                               PORINSERTAR-BDAMATCH        
+                MOVE 0 TO EXISTE-BDAMATCH        
+                INSPECT FILA-REL-BDAMATCH(FIL-BUS-BDAMATCH)         
+                     TALLYING EXISTE-BDAMATCH        
+                    FOR CHARACTERS BEFORE INITIAL PORINSERTAR-D-BDAMATCH        
+                ADD 1 TO EXISTE-BDAMATCH        
+                IF EXISTE-BDAMATCH > 2000        
+                  MOVE PORINSERTAR-BDAMATCH TO         
+                  CAJA-BDAMATCH(FIL-BUS-BDAMATCH,LIBRE-BUSCADO-BDAMATCH)        
+                  ADD 1 TO LIBRE-BUSCADO-BDAMATCH        
+                  MOVE 1 TO MOVIDO-BDAMATCH        
+                END-IF        
+                ADD 1 TO COL-FUE-BDAMATCH        
+             END-PERFORM.        
+             INITIALIZE          
+                  FILA-REL-BDAMATCH(FIL-FUE-BDAMATCH). *> SE BORRA LO TR        
+              
+       5000-U-MEJOR-PORTAFOL-BDAMATCH.        
+REMARK********************************************************************
+REMARK*5000-U-MEJOR-PORTAFOL-BDAMATCH.
+REMARK* SE DETERMINA LA FILA QUE DA LAS MEJORES CARACTERISTICAS PARA EL
+REMARK* PORTAFOLIO QUE TIENE MAS CUENTAS 
+REMARK********************************************************************
+            MOVE 0 TO MEJOR-PORTAFOLIO-BDAMATCH.        
+            MOVE 0 TO MAXREL-PER-BDAMATCH        
+            MOVE 0 TO FIN-FUENTE-BDAMATCH.        
+            MOVE 1 TO FIL-FUE-BDAMATCH.        
+            MOVE 0 TO  PESOS-CTRL-BDAMATCH        
+            PERFORM UNTIL FIL-FUE-BDAMATCH > MAX-REL-BDAMATCH        
+              INSPECT FILA-REL-BDAMATCH(FIL-FUE-BDAMATCH)         
+                     TALLYING FIN-FUENTE-BDAMATCH        
+                     FOR CHARACTERS BEFORE INITIAL "000 "        
+              COMPUTE FIN-FUENTE-BDAMATCH = FIN-FUENTE-BDAMATCH    / 4        
+              MOVE 0 TO PESO-CTAS-TOT-BDAMATCH        
+              MOVE 1 TO POSIC-SUMA-BDAMATCH        
+PESO01        MOVE ALL "9" TO TABLA-SUSC-DIR-BDAMATCH                   RMB0004
+PESO01        MOVE 0 TO  POSIC-SUSC-BDAMATCH                            RMB0004
+PESO01        MOVE 0 TO ENT-FIN-PORT-BDAMATCH                           RMB0004
+PESO01        MOVE 0 TO ENT-UNICAS-PORT-BDAMATCH                        RMB0004
+              PERFORM  VARYING  NRO-VECES-1-BDAMATCH  FROM  1  BY  1          
+                 UNTIL  NRO-VECES-1-BDAMATCH  >  FIN-FUENTE-BDAMATCH        
+                 MOVE          
+              FILA-REL-BDAMATCH(FIL-FUE-BDAMATCH)(POSIC-SUMA-BDAMATCH:3)        
+                      TO  CTA-A-BUSCAR-BDAMATCH        
+PESO01           IF CTA-A-BUSCAR-BDAMATCH > 0                           RMB0004
+PESO01            MOVE CTA-CUENTAS-BDAMATCH(CTA-A-BUSCAR-BDAMATCH)(13:6)RMB0004
+PESO01                 TO SUSC-CTAS-BDAMATCH                            RMB0004
+AJUS01            MOVE CTA-CUENTAS-BDAMATCH(CTA-A-BUSCAR-BDAMATCH)(19:2)RMB0005
+AJUS01                 TO I2-BDAMATCH                                   RMB0005
+PESO01            PERFORM 5100-CALCULAR-PESO-DIR-BDAMATCH               RMB0004
+PESO01            PERFORM 5200-CALCULAR-PESO-TEL-BDAMATCH               RMB0004
+PESO01            PERFORM 5300-CALCULAR-PESO-CTA-BDAMATCH               RMB0004
+PESO01           END-IF                                                 RMB0004
+                 ADD 4 TO  POSIC-SUMA-BDAMATCH        
+              END-PERFORM        
+PESO01        PERFORM 5400-DEDUCIR-MEJ-PORT-BDAMATCH                    RMB0004
+              ADD 1 TO FIL-FUE-BDAMATCH        
+            END-PERFORM.        
+PESO01 5100-CALCULAR-PESO-DIR-BDAMATCH.                                 RMB0004
+PESO01     PERFORM  VARYING  NRO-VECES-2-BDAMATCH  FROM  1  BY  1       RMB0004
+PESO01        UNTIL  NRO-VECES-2-BDAMATCH  >  LIM-BDAMATCH OR           RMB0004
+PESO01        CTA-DIR-BDAMATCH(NRO-VECES-2-BDAMATCH) =  ZEROS           RMB0004
+PESO01        IF CTA-DIR-BDAMATCH(NRO-VECES-2-BDAMATCH)                 RMB0004
+PESO01                                     =  CTA-A-BUSCAR-BDAMATCH     RMB0004
+PESO01          COMPUTE PESO-CTAS-TOT-BDAMATCH  =                       RMB0004
+PESO01                   PESO-CTAS-TOT-BDAMATCH +                       RMB0004
+PESO01          (NUM-CTAS-DIR-BDAMATCH(NRO-VECES-2-BDAMATCH) *          RMB0004
+PESO01                  PESO-DIR-BDAMATCH )                             RMB0004
+PESO01        END-IF                                                    RMB0004
+PESO01     END-PERFORM.                                                 RMB0004
+PESO01 5200-CALCULAR-PESO-TEL-BDAMATCH.                                 RMB0004
+PESO01     PERFORM VARYING NRO-VECES-2-BDAMATCH FROM 1 BY 1             RMB0004
+PESO01        UNTIL NRO-VECES-2-BDAMATCH > LIM-BDAMATCH OR              RMB0004
+PESO01        CTA-TEL-BDAMATCH(NRO-VECES-2-BDAMATCH) = ZEROS            RMB0004
+PESO01        IF  CTA-TEL-BDAMATCH(NRO-VECES-2-BDAMATCH)                RMB0004
+PESO01                                      =  CTA-A-BUSCAR-BDAMATCH    RMB0004
+PESO01          COMPUTE  PESO-CTAS-TOT-BDAMATCH  =                      RMB0004
+PESO01             PESO-CTAS-TOT-BDAMATCH +                             RMB0004
+PESO01           (NUM-CTAS-TEL-BDAMATCH(NRO-VECES-2-BDAMATCH) *         RMB0004
+PESO01             PESO-TEL-BDAMATCH )                                  RMB0004
+PESO01        END-IF                                                    RMB0004
+PESO01     END-PERFORM.                                                 RMB0004
+PESO01 5300-CALCULAR-PESO-CTA-BDAMATCH.                                 RMB0004
+REMARK******************************************************************
+PESO01*5300-CALCULAR-PESO-CTA-BDAMATCH.                                 RMB0004
+REMARK* SE BUSCA EN TABLA DE MEMORIA DE SUSCRIPTORES Y SE CUENTAN SOLO
+REMARK* LAS ENTIDADES UNICAS Y LAS FINANCIERAS
+REMARK******************************************************************
+PESO01     SET IND-DIR-BDAMATCH TO 1.                                   RMB0004
+PESO01     SEARCH ALL REG-SUSC-DIR-BDAMATCH AT END                      RMB0004
+PESO01         MOVE 1 TO  INV-BDAMATCH                                  RMB0004
+PESO01       WHEN COD-SUSC-DIR-BDAMATCH(IND-DIR-BDAMATCH) =             RMB0004
+PESO01            SUSC-CTAS-BDAMATCH                                    RMB0004
+PESO01         MOVE 0 TO  INV-BDAMATCH                                  RMB0004
+PESO01     END-SEARCH.                                                  RMB0004
+PESO01     IF INV-BDAMATCH  =  1                                        RMB0004
+PESO01        AND POSIC-SUSC-BDAMATCH  <  LIM-BDAMATCH                  RMB0004
+PESO01        COMPUTE PESO-CTAS-TOT-BDAMATCH = PESO-CTAS-TOT-BDAMATCH   RMB0004
+PESO01                                       + PESO-NOM-BDAMATCH        RMB0004
+PESO01        ADD   1                TO  POSIC-SUSC-BDAMATCH            RMB0004
+PESO01        MOVE SUSC-CTAS-BDAMATCH  TO                               RMB0004
+PESO01             COD-SUSC-DIR-BDAMATCH(POSIC-SUSC-BDAMATCH)           RMB0004
+AJUS01*       MOVE  SUSC-CTAS-BDAMATCH(1:2)  TO I2-BDAMATCH             RMB0005
+AJUS01        IF I2-BDAMATCH > 0 AND I2-BDAMATCH <= 100                 RMB0005
+AJUS01           IF V-TIPCTA-BDAMATCH(I2-BDAMATCH) = 1 OR 2             RMB0005
+AJUS01              ADD 1 TO ENT-FIN-PORT-BDAMATCH                      RMB0005
+AJUS01           END-IF                                                 RMB0005
+AJUS01        END-IF                                                    RMB0005
+PESO01        ADD 1 TO ENT-UNICAS-PORT-BDAMATCH                         RMB0004
+PESO01     END-IF.                                                      RMB0004
+PESO01     IF FUEEXT-CUENTAS-BDAMATCH(CTA-A-BUSCAR-BDAMATCH) = 1        RMB0004
+PESO01        ADD 1000 TO PESO-CTAS-TOT-BDAMATCH                        RMB0004
+PESO01     END-IF.                                                      RMB0004
+PESO01 5400-DEDUCIR-MEJ-PORT-BDAMATCH.                                  RMB0004
+PESO01     IF FIN-FUENTE-BDAMATCH > MAXREL-PER-BDAMATCH                 RMB0004
+PESO01        MOVE  FIN-FUENTE-BDAMATCH  TO  MAXREL-PER-BDAMATCH        RMB0004
+PESO01     END-IF                                                       RMB0004
+PESO01     IF PESO-CTAS-TOT-BDAMATCH  >  PESOS-CTRL-BDAMATCH            RMB0004
+PESO01        MOVE  PESO-CTAS-TOT-BDAMATCH TO PESOS-CTRL-BDAMATCH       RMB0004
+PESO01        MOVE  FIL-FUE-BDAMATCH TO MEJOR-PORTAFOLIO-BDAMATCH       RMB0004
+PESO01        MOVE ENT-FIN-PORT-BDAMATCH TO ENT-FIN-MEJ-PORT-BDAMATCH   RMB0004
+PESO01     ELSE                                                         RMB0004
+PESO01        IF PESO-CTAS-TOT-BDAMATCH  =  PESOS-CTRL-BDAMATCH         RMB0004
+MEJO01           PERFORM 5410-DESEMPATAR-BDAMATCH                       RMB0004
+PESO01        END-IF                                                    RMB0004
+PESO01     END-IF.                                                      RMB0004
+MEJO01 5410-DESEMPATAR-BDAMATCH.                                        RMB0004
+MEJO01      IF ENT-FIN-PORT-BDAMATCH > ENT-FIN-MEJ-PORT-BDAMATCH        RMB0004
+MEJO01         MOVE PESO-CTAS-TOT-BDAMATCH TO PESOS-CTRL-BDAMATCH       RMB0004
+MEJO01         MOVE FIL-FUE-BDAMATCH TO MEJOR-PORTAFOLIO-BDAMATCH       RMB0004
+MEJO01         MOVE ENT-FIN-PORT-BDAMATCH TO ENT-FIN-MEJ-PORT-BDAMATCH  RMB0004
+MEJO01      ELSE                                                        RMB0004
+MEJO01         IF ENT-FIN-PORT-BDAMATCH = ENT-FIN-MEJ-PORT-BDAMATCH     RMB0004
+MEJO01            IF APE-GRUNOM-BDAMATCH(FIL-FUE-BDAMATCH) = 1 AND      RMB0004
+MEJO01               NOM-GRUNOM-BDAMATCH(FIL-FUE-BDAMATCH)(43:3) <>     RMB0004
+MEJO01                                                             ".-,"RMB0004
+MEJO01               MOVE  PESO-CTAS-TOT-BDAMATCH TO PESOS-CTRL-BDAMATCHRMB0004
+MEJO01               MOVE  FIL-FUE-BDAMATCH TO MEJOR-PORTAFOLIO-BDAMATCHRMB0004
+MEJO01               MOVE ENT-FIN-PORT-BDAMATCH TO                      RMB0004
+MEJO01                                         ENT-FIN-MEJ-PORT-BDAMATCHRMB0004
+MEJO01            ELSE                                                  RMB0004
+MEJO01              IF LNG-GRUNOM-BDAMATCH(FIL-FUE-BDAMATCH) >          RMB0004
+MEJO01                 LNG-GRUNOM-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH)   RMB0004
+MEJO01               MOVE  PESO-CTAS-TOT-BDAMATCH TO PESOS-CTRL-BDAMATCHRMB0004
+MEJO01               MOVE  FIL-FUE-BDAMATCH TO MEJOR-PORTAFOLIO-BDAMATCHRMB0004
+MEJO01               MOVE ENT-FIN-PORT-BDAMATCH TO                      RMB0004
+MEJO01                                         ENT-FIN-MEJ-PORT-BDAMATCHRMB0004
+MEJO01            END-IF                                                RMB0004
+MEJO01         END-IF                                                   RMB0004
+MEJO01      END-IF.                                                     RMB0004
+       5000-U-VALIDAR-CUENTA-BDAMATCH.        
+REMARK*********************************************************************
+REMARK*5000-U-VALIDAR-CUENTA-BDAMATCH.
+REMARK* SE VALIDA SI LA LLAVE DE LA CUENTA "CTA-INPUT-BDAMATCH" ESTA DENTRO
+REMARK* EL MEJOR PORTAFOLIO UBICADO. RETORNA VALCTA-OUTPUT-BDAMATCH
+REMARK*********************************************************************
+           MOVE 0 TO VALCTA-OUTPUT-BDAMATCH        
+           MOVE 1 TO I-BDAMATCH.        
+           IF MEJOR-PORTAFOLIO-BDAMATCH > 0         
+              PERFORM UNTIL I-BDAMATCH > LIM-BDAMATCH OR         
+                VALCTA-OUTPUT-BDAMATCH = 1 OR        
+                CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,I-BDAMATCH) = 0        
+                MOVE CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,I-BDAMATCH)        
+                     TO J-BDAMATCH        
+                IF CTA-CUENTAS-BDAMATCH(J-BDAMATCH) = CTA-INPUT-BDAMATCH        
+                   MOVE 1 TO VALCTA-OUTPUT-BDAMATCH        
+                END-IF        
+                ADD 1 TO I-BDAMATCH        
+              END-PERFORM        
+           END-IF.        
+      *        
+       6000-U-MEJOR-DIR-BDAMATCH.        
+REMARK*********************************************************************
+REMARK*6000-U-MEJOR-DIR-BDAMATCH.
+REMARK*   SALIDA DIRECCION-OUTPUT-BDAMATCH .......... MEJOR DIRECCION
+REMARK*********************************************************************
+           SORT T-DIR-BDAMATCH        
+                DESCENDING  NUM-CTAS-DIR-BDAMATCH        
+                DESCENDING       LNG-DIR-BDAMATCH        
+                DESCENDING       NUM-DIR-BDAMATCH        
+                DESCENDING       CTA-DIR-BDAMATCH.        
+          MOVE  NUM-DIR-BDAMATCH(01) TO  DIR-OUTPUT-BDAMATCH.        
+               
+       6000-U-MEJOR-TEL-BDAMATCH.        
+REMARK*********************************************************************
+REMARK*6000-U-MEJOR-TEL-BDAMATCH.
+REMARK*   SALIDA TELEFONO-OUTPUT-BDAMATCH .......... MEJOR TELEFONO
+REMARK*********************************************************************
+           SORT T-TEL-BDAMATCH        
+                DESCENDING  NUM-CTAS-TEL-BDAMATCH        
+                DESCENDING       NUM-TEL-BDAMATCH        
+                DESCENDING       CTA-TEL-BDAMATCH.        
+          MOVE  NUM-TEL-BDAMATCH(01) TO  TEL-OUTPUT-BDAMATCH.        
+      *        
+       6000-U-MEJOR-NOM-BDAMATCH.        
+REMARK*********************************************************************
+REMARK*6000-U-MEJOR-NOM-BDAMATCH.
+REMARK*   SALIDA NOMBRE-OUTPUT-BDAMATCH .......... MEJOR NOMBRE
+REMARK*********************************************************************
+           SORT T-GRUNOM-BDAMATCH        
+                DESCENDING  NUM-CTAS-GRUNOM-BDAMATCH        
+                DESCENDING  LNG-GRUNOM-BDAMATCH        
+                DESCENDING  NOM-GRUNOM-BDAMATCH.        
+           MOVE  ZEROS TO  ESTA-CTA-BDAMATCH.        
+           PERFORM VARYING NRO-VECES-3-BDAMATCH  FROM  1 BY  1        
+             UNTIL NRO-VECES-3-BDAMATCH  >  LIM-BDAMATCH        
+                OR GRUPO-GRUNOM-BDAMATCH(NRO-VECES-3-BDAMATCH)  =  ZEROS        
+                OR ESTA-CTA-BDAMATCH  =  1        
+            PERFORM VARYING NRO-VECES-2-BDAMATCH  FROM  1 BY  1        
+             UNTIL NRO-VECES-2-BDAMATCH  >  LIM-BDAMATCH        
+                OR CTA-NOM-BDAMATCH(NRO-VECES-2-BDAMATCH)  =  ZEROS        
+                OR ESTA-CTA-BDAMATCH  =  1        
+              IF  GRUPO-GRUNOM-BDAMATCH(NRO-VECES-3-BDAMATCH)  =        
+                  GRU-NOMS-BDAMATCH (NRO-VECES-2-BDAMATCH)        
+               PERFORM VARYING NRO-VECES-1-BDAMATCH  FROM  1 BY  1        
+                UNTIL NRO-VECES-1-BDAMATCH  >  LIM-BDAMATCH        
+                 OR CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,        
+                    NRO-VECES-1-BDAMATCH) = 0        
+                 OR ESTA-CTA-BDAMATCH  =  1        
+                 IF  CTA-NOM-BDAMATCH(NRO-VECES-2-BDAMATCH)  =        
+                     CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,        
+                                   NRO-VECES-1-BDAMATCH)        
+                   MOVE GRU-NOMS-BDAMATCH(NRO-VECES-2-BDAMATCH) TO         
+                        POSIC-SUS-GRU-BDAMATCH        
+                   MOVE NOM-GRUNOM-BDAMATCH(NRO-VECES-3-BDAMATCH) TO         
+                        NOM-OUTPUT-BDAMATCH        
+                   MOVE 1 TO  ESTA-CTA-BDAMATCH        
+                 END-IF        
+               END-PERFORM        
+              END-IF        
+            END-PERFORM         
+           END-PERFORM.        
+      *        
+       9000-U-REALIZAR-BDAMATCH.        
+REMARK******************************************************************
+REMARK*9000-U-REALIZAR-BDAMATCH.                                               
+REMARK* HACE EL LLAMADO DE LAS RUTINAS PARA ENCONTRAR DINALMENTE EL 
+REMARK* MEJOR NOMBRE 
+REMARK******************************************************************
+           MOVE  ZEROS                 TO  POSIC-SUSC-BDAMATCH        
+           MOVE  ALL "9"               TO  TABLA-SUSC-DIR-BDAMATCH        
+           PERFORM 3000-U-ORDENAR-DIR-BDAMATCH        
+           PERFORM 3000-U-ORDENAR-TEL-BDAMATCH        
+           PERFORM 3000-U-ORDENAR-NOM-BDAMATCH        
+           PERFORM 4000-U-INTERELACIONAR-BDAMATCH        
+           PERFORM 6000-U-MEJOR-DIR-BDAMATCH.        
+           PERFORM 6000-U-MEJOR-TEL-BDAMATCH.        
+           PERFORM 5000-U-MEJOR-PORTAFOL-BDAMATCH.        
+           PERFORM 6000-U-MEJOR-NOM-BDAMATCH.        
+      *        
+       9010-U-VER-FALLECIDO-BDAMATCH.        
+REMARK*********************************************************************
+REMARK*9010-U-VER-FALLECIDO-BDAMATCH.        
+REMARK* SE EXAMINAN TODAS LAS CUENTAS DEL MEJOR PORTAFOLIO, SE CUENTAN EL  
+REMARK* NUMERO TOTAL DE CUENTAS Y DE CUENTAS CON FALLECIDO.            
+REMARK*********************************************************************
+VIGE01     MOVE 1 TO I-BDAMATCH.                                        RMB0003
+VIGE01     IF MEJOR-PORTAFOLIO-BDAMATCH > 0                             RMB0003
+VIGE01        PERFORM UNTIL I-BDAMATCH > LIM-BDAMATCH OR                RMB0003
+VIGE01          VALCTA-OUTPUT-BDAMATCH = 1 OR                           RMB0003
+VIGE01          CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,I-BDAMATCH) = 0 RMB0003
+VIGE01          MOVE CAJA-BDAMATCH(MEJOR-PORTAFOLIO-BDAMATCH,I-BDAMATCH)RMB0003
+VIGE01               TO J-BDAMATCH                                      RMB0003
+VIGE01          ADD 1 TO NUM-CTAS-OUTPUT-BDAMATCH                       RMB0003
+VIGE01          IF CTA-FALLECIDO-BDAMATCH(J-BDAMATCH) = 1               RMB0003
+VIGE01             ADD 1 TO NUM-MUERTOS-OUTPUT-BDAMATCH                 RMB0003
+VIGE01          END-IF                                                  RMB0003
+VIGE01          ADD 1 TO I-BDAMATCH                                     RMB0003
+VIGE01        END-PERFORM                                               RMB0003
+VIGE01     END-IF.                                                      RMB0003
+VIGE01*                                                                 RMB0003
+       400-BUSCAR-SUSC-GRUPO-BDAMATCH.        
+REMARK******************************************************************
+REMARK*400-BUSCAR-SUSC-GRUPO-BDAMATCH.
+REMARK* BUSCA EN TABLA DE MEMORIA DE SUSCRIPTORES Y GRUPOS.
+REMARK******************************************************************
+           SET IND-NOM-BDAMATCH TO 1.        
+           SEARCH ALL REG-SUSC-NOM-BDAMATCH AT END        
+               MOVE 1 TO  INV-BDAMATCH        
+               WHEN KEY-SUSC-NOM-BDAMATCH(IND-NOM-BDAMATCH) =         
+                    SUSC-GRUPO-BDAMATCH        
+               MOVE 0 TO  INV-BDAMATCH        
+           END-SEARCH.        
+           IF  INV-BDAMATCH = 1        
+           AND POSIC-SUS-GRU-BDAMATCH <  LIM-BDAMATCH        
+             ADD 1 TO  POSIC-SUS-GRU-BDAMATCH        
+             MOVE SUSC-GRUP-SUS-BDAMATCH TO        
+                  COD-SUSC-NOM-BDAMATCH(POSIC-SUS-GRU-BDAMATCH)        
+             MOVE SUSC-GRUP-GRU-BDAMATCH TO          
+                  GRUPO-SUS-NOM-BDAMATCH(POSIC-SUS-GRU-BDAMATCH)        
+           END-IF.        

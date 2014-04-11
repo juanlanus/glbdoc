@@ -1,0 +1,736 @@
+REMARK* BDUUNI-PROC.v.0019
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PORPIAS DEL MANEJO DE
+REMARK* CONSULTAS DE BASE DE DATOS UNIVERSAL.
+REMARK******************************************************************
+REMARK* RMB0002    * PROD11: SE ADICIONA RUTINA 2420-PRODUCTO-SOLO-BDU
+REMARK* R.MARTINEZ *   PARA MANEJAR LOS PRODUCTOS DE BDU CUANDO ESTA  
+REMARK* NOV.23/2000*   SE MANEJA COMO PRODUCTO EXCLUYENTE
+REMARK******************************************************************
+REMARK* RMB0003    * BDU003:SE DEJA BASE DE DATOS UNIVERSAL COMO PRODUC-
+REMARK* R.MARTINEZ *   TO MAYOR A 70                                  
+REMARK* DIC.12/2000*   SE INICIALIZAN CAMPOS DE PREPAGOS Y DE PREDICTAS
+REMARK******************************************************************
+REMARK* RMB0004    * BDU004: MANEJO CORRECTO DE LAS RESPUESTAS CUANDO
+REMARK* R.MARTINEZ *   LA CLAVE NO TIENE PRIVILEGIO DE BDU.
+REMARK* ABR.30/2001*                                                           
+REMARK******************************************************************
+REMARK* RMB0005    * PROD00: SE ESTANDARIZA SACAR TIPO 7 PARA EL PRODUCTO
+REMARK* R.MARTINEZ *         SOLO BD. PARA VENEZUELA TOCA EVALUAR SI SE
+REMARK* OCT.01/2001*         DEJA, DEPENDE DEL ESTADO DE ACTUALIZACION
+REMARK******************************************************************
+REMARK* VHF0006     * BDUAMP - SE AMPLIA EL NUMERO DE LINEAS POR       *
+REMARK* VICTOR HUGO *          REPORTE DE 999 A 9999                   *
+REMARK* FORERO      *                                                  *
+REMARK* NOV.19/2001 *                                                  *
+REMARK******************************************************************
+REMARK* RMB0007    * BDU007: SE CONTROLA LA CONSULTA A BDU SEGUN PRIVILE- 
+REMARK* R.MARTINEZ *         GIOS DECLARADOS EN EL ICBCLA                 
+REMARK* MAR.07/2002*                                                  
+REMARK******************************************************************
+REMARK* RMB0008    * DIR001: SE CREA EL CONCEPTO DE BDU EXTERNA. SI EL    
+REMARK* R.MARTINEZ *         CAMPO DE HUELLA TIENE UNO SE ENVIA A UN 
+REMARK*            *         PROGRAMA EXTERNO ICG+<BDU>, EJ ICGDIR
+REMARK* MAY.29/2002*                                                  
+REMARK******************************************************************
+REMARK* RMB0009    * BDUTIT: SE MANEJA DINAMICAMENTE EL MENSAJE DE PUBLI- 
+REMARK* R.MARTINEZ *         CIDAD. SE USA EL REGISTRO SECUENCIA 2     
+REMARK*            * BDUEXT  SE QUITAN VALIDACIONES QUE YA REALIZA ICGDIR
+REMARK* SEP.20/2002*                                                  
+REMARK******************************************************************
+REMARK* RMB0010    * BOL001: AJUSTES PARA CAPA DE PRESENTACION DEL        
+REMARK* R.MARTINEZ *         INFORME A TRAVES DE WEB                        
+REMARK* ABRIL/2004 * 
+REMARK******************************************************************
+REMARK* RMB0011    * MENU01: SE MUESTRAN SOLO LAS BDUS HABILITADAS PARA   
+REMARK* R.MARTINEZ *         LA CLAVE                                       
+REMARK* MARZO/2005 * 
+REMARK******************************************************************
+REMARK* RMB0012    * HIPE01: SE MANEJA MOSTRAR O NO HIPERVINCULOS DEPEN-  
+REMARK* R.MARTINEZ *         DIENDO DEL PARAMETRO DE LA TABLA ICBPRO        
+REMARK* MAY-10-2005* 
+REMARK********************************************************************
+      * RMB0013     * EMP001 - CREACION DE LA MECÁNICA PARA EL MANEJO DEL*
+      * R.MARTINEZ  *          SCORE EMPIRICO                            *
+      * MARZO/2006  *                                                    *
+      ******************************************************************** 
+      * RMB0014     * MENU02 - SE ADMITE QUE HAY BDUs EN BLANCO INTERMEDI*
+      * R.MARTINEZ  *          AS EN LA DEFICION DE LA CLAVE             *
+      * MARZO/2006  * HIPE02 - SE CREA UN HIPERVINCULO PARA EVIDENTE     *
+      ******************************************************************** 
+      * RMB0015     * HIPE03 - SE CREAN HIPERVINCULOS DINAMICOS PARA     *
+      * R.MARTINEZ  *          ACEPTAR OFERTAS , FORMATO Fxx , xx ES EL  *
+      * MARZO/2006  *          CONSECUTIVO DE LOS FORMULARIOS DINAMICOS  *
+      ******************************************************************** 
+      * RMB0016     * HIPE04 - SE CREAN LOS HIPERVINCULOS PARA LOS PRO-  *
+      * R.MARTINEZ  *          DUCTOS EVIDENTE Y RECONOCER. SE DEJA INHA-*
+      * FEBRERO/2006*          BILITADO EL DE EVIDENTE                   *
+      ********************************************************************
+      * DLM0017     * INI001 - SE CREAN LOS HIPERVINCULOS PARA LOS PRO-  *
+      * DARIO LASSO.*          DUCTOS EVIDENTE Y RECONOCER. SE DEJA INHA-*
+      * 03-SEP-2007 *          BILITADO EL DE EVIDENTE                   *
+      ******************************************************************** 
+      * GJC0018    * PROEX1: MANEJO DE PRODUCTOS EXTERNOS AL ICGCON      *
+      * G.JIMENEZ C*                                                     *
+      * DIC./2007  *                                                     *
+      ********************************************************************
+      * DLM0019    * ESTRAT: INCLUSION DE LINK PARA SUPERFIL ESTRATEGICO,*
+      * DARIO LASSO*    APROVECHANDO LA FUNCIONALIDAD DE INICIA.         *
+      * 05-JUN-2008*    REQ. 053837.                                     *
+     *********************************************************************
+NEWUNI 2300-OTRAS-BD.
+REMARK******************************************************************
+NEWUNI*2300-OTRAS-BD.
+REMARK* SE EJECUTA LA CONSULTA  DE UN PRODUCTO BDU A UNA PERSONA. PARA   
+REMARK* ESTO SE REALIZAN LOS SIGUIENTES PASOS:      
+REMARK*        1) VERIFICAR LA EXISTENCIA DEL PRODUCTO EN LA LISTA 
+REMARK*        2) BUSCAR EL PRODUCTO EN LA PERSONA              
+REMARK*        3) ENVIAR LA INFORMACION DE LO ENCONTRADO
+REMARK*        4) LLENAR ADECUADAMENTE EL REGISTRO DEL ICBTCO Y GRABAR
+REMARK*        5) ENVIAR REGISTRO DE FIN DE CONSULTA    
+REMARK* LA RUTINA TRABAJA CON LOS TIPOS STANDARD DE CONSULTA ASI:
+REMARK*        TIPO 1  CONSULTA EXITOSA
+REMARK*        TIPO 2  NO EXITOSA PRODUCTO SOLO BD
+REMARK*        TIPO 3  DATOS INVALIDOS EN LA CONSULTA
+REMARK*        TIPO 7  NO EXITOSA PRODUCTOS DIFERENTES A SOLO BD
+REMARK*        QUEDAN DISPONIBLES LOS DEMAS PARA SER MANEJADOS
+REMARK*        DINAMICAMENTE EN EL REGISTRO 1 DEL BDU
+REMARK******************************************************************
+NEWUNI     MOVE 3 TO TIP-CONSUL-ABD11.
+NEWUNI     MOVE 1 TO I.
+NEWUNI     MOVE PUB-COMANDO TO PUB-PRODUCTO(2:3).
+NEWUNI     PERFORM UNTIL PUB-COMANDO = PUB-VEC-COM(I) 
+NEWUNI        ADD 1 TO I 
+MENU02*       IF I = 50 OR PUB-VEC-COM(I) = SPACES                      RMB0014 
+MENU02        IF I = 50                                                 RMB0014 
+NEWUNI           MOVE 50 TO I
+NEWUNI           NEXT SENTENCE
+NEWUNI        END-IF
+NEWUNI     END-PERFORM.
+DIR001     IF I NOT = 50 AND MULT-BDU(HEADER-LSN) = "U"                 RMB0008 
+PROEX1*       IF PUB-VEC-HUE(I) = 1                                     GJC0018 
+PROEX1        IF PUB-VEC-EXT(I) = "E"                                   GJC0018 
+DIR001           PERFORM 2301-BDU-EXTERNA                               RMB0008 
+DIR001        ELSE                                                      RMB0008 
+DIR001           PERFORM 2301-BDU-INTERNA                               RMB0008 
+DIR001        END-IF                                                    RMB0008 
+DIR001     ELSE                                                         RMB0008 
+DIR001        PERFORM 2301-BDU-INTERNA                                  RMB0008 
+DIR001     END-IF.                                                      RMB0008 
+DIR001 2301-BDU-EXTERNA.                                                RMB0008 
+DIR001     PERFORM 2320-PRIVILEGIOS.                                    RMB0008 
+DIR001     COMPUTE   PRO-TAB = I + 70 - 1.                              RMB0008 
+DIR001     INITIALIZE AREA-MULSER.                                      RMB0008 
+DIR001     MOVE 1 TO MENS-ERR.                                          RMB0008 
+DIR001     IF MULT-BDUS(HEADER-LSN) NOT = SPACES                        RMB0008 
+DIR001        MOVE 1 TO I                                               RMB0008 
+DIR001        PERFORM UNTIL I > 5 OR MENS-ERR = 0                       RMB0008 
+DIR001          IF MULT-VEC-BDUS(HEADER-LSN,I) = PUB-COMANDO            RMB0008 
+DIR001             MOVE 0 TO MENS-ERR                                   RMB0008 
+DIR001          ELSE                                                    RMB0008 
+DIR001             ADD 1 TO I                                           RMB0008 
+DIR001          END-IF                                                  RMB0008 
+DIR001        END-PERFORM                                               RMB0008 
+DIR001     ELSE                                                         RMB0008 
+DIR001        MOVE 0 TO MENS-ERR                                        RMB0008 
+DIR001     END-IF.                                                      RMB0008 
+DIR001     IF MENS-ERR = 1                                              RMB0008 
+DIR001        MOVE " NO TIENE PRIVILEGIO PARA ESTA BDU " TO             RMB0008 
+DIR001               MENSAJE-GENERAL                                    RMB0008 
+DIR001     ELSE                                                         RMB0008 
+BDUEXT        PERFORM 2800-VALIDE-DATOS-ENTRADA                         RMB0009
+DIR001      END-IF.                                                     RMB0008 
+DIR001      MOVE 3                           TO CONSUL-COBRA.           RMB0008 
+DIR001      MOVE MULT-MODALIDAD(HEADER-LSN)  TO MOD-TAB                 RMB0008 
+DIR001      MOVE MULT-CODIGO(HEADER-LSN)     TO COD-SUSCRIP.            RMB0008 
+DIR001      MOVE MULT-TERMINAL(HEADER-LSN)   TO NUM-TER.                RMB0008 
+DIR001      MOVE MULT-CLAVE (HEADER-LSN)     TO CLAVE-TOT.              RMB0008 
+DIR001      MOVE MULT-PRIV-CLAVE(HEADER-LSN) TO PRIVILEGIO-CLAVE.       RMB0008 
+DIR001      MOVE 0 TO NUMERO-DE-SCORES CON-PREPAGO.                     RMB0008 
+DIR001      PERFORM 8000-CREE-REGISTRO.                                 RMB0008 
+DIR001      PERFORM 8100-ESCRIBA-SECUENCIAL.                            RMB0008 
+DIR001      MOVE 1 TO IND-CTA.                                          RMB0008 
+DIR001      IF MENS-ERR = 0                                             RMB0008 
+DIR001         MOVE 3 TO HEADER-FILA                                    RMB0008 
+DIR001         STRING "ICG" DELIMITED BY SIZE                           RMB0008 
+DIR001             PUB-COMANDO DELIMITED BY SIZE                        RMB0008 
+DIR001             INTO HEADER-NOMB-PROG                                RMB0008 
+DIR001         MOVE MSG-ORIGINAL TO TEXTO-MULSER                        RMB0008 
+DIR001         MOVE LLAVE-SEC TO LLAVE-MULSER                           RMB0008 
+DIR001         MOVE AREA-MULSER TO PANTALLA                             RMB0008 
+DIR001       ELSE                                                       RMB0008 
+DIR001         MOVE 1 TO IND-CTA                                        RMB0008 
+DIR001         MOVE MENSAJE-GENERAL TO S11-01                           RMB0008 
+DIR001         MOVE SUS-TAB TO S11-02                                   RMB0008 
+DIR001         MOVE NUM-ID-ALFA      TO S11-03                          RMB0008 
+DIR001         MOVE PR-APELLIDO   TO S11-04                             RMB0008 
+DIR001         PERFORM FORMATOS-11                                      RMB0008 
+DIR001      END-IF.                                                     RMB0008 
+DIR001      PERFORM 10900-ENVIA-CRCR.                                   RMB0008 
+DIR001 2301-BDU-INTERNA.                                                RMB0008 
+BDU001     IF I = 50 OR MULT-BDU(HEADER-LSN) NOT = "U"
+BDU001        IF MULT-BDU(HEADER-LSN) = "U"
+                 MOVE MULT-PRODUCTO(HEADER-LSN) TO PRO-TAB                     
+NEWUNI           MOVE " PRODUCTO UNIVERSAL INVALIDO , RECHAZADO  " TO
+NEWUNI                  MENSAJE-GENERAL 
+BDU001        ELSE
+BDU004           MOVE OBSER-25  TO MENSAJE-GENERAL                      RMB0004 
+BDU001        END-IF            
+NEWUNI     ELSE
+BDU003        COMPUTE   PRO-TAB = I + 70                                RMB0003 
+BDU007        MOVE 50 TO I                                              RMB0007
+BDU007        IF MULT-BDUS(HEADER-LSN) NOT = SPACES                     RMB0007
+BDU007           MOVE 1 TO I                                            RMB0007
+BDU007           PERFORM UNTIL I > 5                                    RMB0007
+BDU007             IF MULT-VEC-BDUS(HEADER-LSN,I) = PUB-COMANDO         RMB0007
+BDU007                MOVE 50 TO I                                      RMB0007
+BDU007             ELSE                                                 RMB0007
+BDU007                ADD 1 TO I                                        RMB0007
+BDU007             END-IF                                               RMB0007
+BDU007           END-PERFORM                                            RMB0007
+BDU007        END-IF                                                    RMB0007
+BDU007        IF I = 50                                                 RMB0007
+NEWUNI        INITIALIZE LLAVE-BDUUNI
+NEWUNI        MOVE TIP-ID TO TIP-IDE-BDUUNI
+NEWUNI        MOVE NUM-ID TO NUM-IDE-BDUUNI
+NEWUNI        MOVE PUB-COMANDO TO PRODUCT-BDUUNI
+NEWUNI        MOVE 0 TO FIN-BDUUNI
+NEWUNI        MOVE 1 TO IND-CTA
+NEWUNI        START BDUUNI KEY > LLAVE-BDUUNI 
+NEWUNI              INVALID KEY 
+NEWUNI              MOVE 7 TO TIP-CONSUL-ABD11
+NEWUNI              MOVE OBSER-9 TO MENSAJE-GENERAL 
+NEWUNI              NOT INVALID KEY 
+NEWUNI                 READ BDUUNI NEXT RECORD AT END 
+NEWUNI                      MOVE 1 TO FIN-BDUUNI
+NEWUNI                 END-READ
+NEWUNI                 IF   NUM-ID  = NUM-IDE-BDUUNI AND 
+NEWUNI                    PUB-COMANDO  = PRODUCT-BDUUNI AND
+NEWUNI                    FIN-BDUUNI = 0
+NEWUNI                    PERFORM  2301-SACAR-UNI-ABLO   
+NEWUNI                 ELSE             
+NEWUNI                    MOVE 7 TO TIP-CONSUL-ABD11
+NEWUNI                    MOVE OBSER-9 TO MENSAJE-GENERAL 
+NEWUNI                 END-IF
+NEWUNI        END-START
+BDU007        ELSE                                                      RMB0007
+BDU007           MOVE " NO TIENE PRIVILEGIO PARA ESTA BDU " TO          RMB0007
+BDU007                  MENSAJE-GENERAL                                 RMB0007
+BDU007        END-IF                                                    RMB0007
+NEWUNI     END-IF.
+PROD00*    IF TIP-CONSUL-ABD11 = 7 AND MULT-PRODUCTO(HEADER-LSN) = 0    RMB0005 
+PROD00*       MOVE 2 TO TIP-CONSUL-ABD11                                RMB0005
+PROD00*       MOVE OBSER-7 TO MENSAJE-GENERAL                           RMB0005
+PROD00*       MOVE 7 TO NUM-OBS                                         RMB0005
+PROD00*    END-IF.                                                      RMB0005
+NEWUNI     MOVE MULT-MODALIDAD(HEADER-LSN)  TO MOD-TAB
+NEWUNI     MOVE MULT-CODIGO(HEADER-LSN)     TO COD-SUSCRIP.
+NEWUNI     MOVE MULT-TERMINAL(HEADER-LSN)   TO NUM-TER. 
+NEWUNI     MOVE MULT-CLAVE (HEADER-LSN)     TO CLAVE-TOT.
+NEWUNI     MOVE MULT-PRIV-CLAVE(HEADER-LSN) TO PRIVILEGIO-CLAVE.
+BDU003     MOVE 0 TO NUMERO-DE-SCORES CON-PREPAGO.                      RMB0003 
+           IF PRIVILEGIO-CLAVE = 1 OR 9                                        
+              MOVE 1 TO CONSUL-COBRA                                           
+           ELSE                                                                
+              MOVE 0 TO CONSUL-COBRA                                           
+           END-IF.                                                             
+           IF TIP-CONSUL-ABD11 NOT = 3                                         
+              MOVE 3                           TO CONSUL-COBRA.                
+NEWUNI     IF TIP-CONSUL-ABD11 = 1
+NEWUNI        PERFORM FORMATOS-27
+NEWUNI     ELSE
+NEWUNI        MOVE MENSAJE-GENERAL TO S11-01
+NEWUNI        MOVE SUS-TAB TO S11-02
+NEWUNI        MOVE NUM-ID           TO S11-03
+NEWUNI        MOVE PUB-PRODUCTO  TO S11-04
+NEWUNI        PERFORM FORMATOS-11
+NEWUNI     END-IF.
+NEWUNI     MOVE 1 TO IND-CTA.
+NEWUNI     PERFORM 10900-ENVIA-CRCR.
+BDU001     IF TIP-CONSUL-ABD11 = 1 
+BDU001        MOVE TIP-CON-BDUUNI-AUX TO TIP-CONSUL-ABD11
+BDU001     END-IF.
+BDU001     COMPUTE   PRO-TAB = PRO-TAB - 1
+REMARK*    LOS PRODUCTOS EN EL ICBTCO SON 1 MENOS QUE EN EL ICBPRO
+NEWUNI     PERFORM 8000-CREE-REGISTRO.
+NEWUNI     PERFORM 8100-ESCRIBA-SECUENCIAL.
+NEWUNI 2301-SACAR-UNI-ABLO.
+REMARK******************************************************************
+REMARK*2301-SACAR-UNI-ABLO.
+REMARK* SE EXTRAE LA INFORMACION DE CADA REGISTRO DEL PRODUCTO SOLICITADO
+REMARK* Y SE ENVIA COMO RESPUESTA AL REQUERIMIENTO.
+REMARK******************************************************************
+NEWUNI     MOVE 0 TO W-PRIMERA-VEZ.
+NEWUNI     MOVE 1 TO REC.
+BDU001     MOVE 0 TO TIP-CON-BDUUNI-AUX.
+NEWUNI     PERFORM   UNTIL 
+NEWUNI                    NUM-ID NOT = NUM-IDE-BDUUNI OR 
+NEWUNI                    PUB-COMANDO NOT = PRODUCT-BDUUNI OR
+NEWUNI                    FIN-BDUUNI = 1
+NEWUNI        IF CONSECU-BDUUNI > 009 
+NEWUNI           IF INFORMACION-BDUUNI(1:1) = "*" 
+NEWUNI              MOVE "'" TO INFORMACION-BDUUNI(1:1)
+NEWUNI           END-IF
+NEWUNI           MOVE INFORMACION-BDUUNI TO INF-LINEA-UNI  
+NEWUNI           MOVE LINEA-UNIVERSAL    TO MOVIMIENTO-S    
+HIPE01           IF PUB-VEC-HIP(I) = 0                                  RMB0012 
+HIPE01              INSPECT MOVIMIENTO-S REPLACING ALL "[C.C] " BY      RMB0012
+HIPE01                                              "[C.C ]"            RMB0012
+HIPE01              INSPECT MOVIMIENTO-S REPLACING ALL "[NIT] " BY      RMB0012
+HIPE01                                              "[NIT ]"            RMB0012
+HIPE01              INSPECT MOVIMIENTO-S REPLACING ALL "[N.E] " BY      RMB0012
+HIPE01                                              "[N.E ]"            RMB0012
+HIPE01              INSPECT MOVIMIENTO-S REPLACING ALL "[C.E] " BY      RMB0012
+HIPE01                                              "[C.E ]"            RMB0012
+HIPE01           END-IF                                                 RMB0012
+NEWUNI           PERFORM 6700-CONT-CTA 
+NEWUNI        ELSE 
+NEWUNI           IF CONSECU-BDUUNI = 001 
+BDU001              IF TIP-CON-BDUUNI NUMERIC
+BDU001                 IF TIP-CON-BDUUNI-AUX = 0
+BDU001                    MOVE TIP-CON-BDUUNI TO TIP-CON-BDUUNI-AUX
+BDU001                 ELSE   
+BDU001                    IF (TIP-CON-BDUUNI-AUX < TIP-CON-BDUUNI) 
+BDU001                       MOVE TIP-CON-BDUUNI TO TIP-CON-BDUUNI-AUX
+BDU001                    END-IF
+BDU001                 END-IF
+BDU001              ELSE
+BDU001                 MOVE 1              TO TIP-CON-BDUUNI-AUX
+BDU001              END-IF
+NEWUNI              IF BLOQUEO-BDUUNI NOT = 1 AND BLOQUES-BDUUNI > 0 AND
+NEWUNI                 VALIDAR-APEL = 1
+NEWUNI                 PERFORM 2301-VALIDAR-NOMBRE-BDUUNI
+NEWUNI              END-IF
+NEWUNI              IF BLOQUEO-BDUUNI = 1
+BDUAMP                 MOVE 9999 TO CONSECU-BDUUNI
+NEWUNI                 START BDUUNI KEY > LLAVE-BDUUNI 
+NEWUNI                       INVALID KEY 
+PATCH2                          MOVE 1 TO FIN-BDUUNI
+PATCH2                 END-START
+NEWUNI              ELSE
+NEWUNI                 IF W-PRIMERA-VEZ = 0 
+BDU003                    COMPUTE I = PRO-TAB - 70                      RMB0003 
+NEWUNI                    MOVE PUB-VEC-EXP(I) TO LEYENDA-UNI
+NEWUNI                    MOVE TITULO-UNI     TO MOVIMIENTO-S
+NEWUNI                    MOVE 1              TO W-PRIMERA-VEZ
+NEWUNI                    PERFORM 6700-CONT-CTA 
+NEWUNI                 ELSE
+NEWUNI                    MOVE IGUALES            TO INF-LINEA-UNI  
+NEWUNI                    MOVE LINEA-UNIVERSAL    TO MOVIMIENTO-S    
+NEWUNI                    PERFORM 6700-CONT-CTA 
+NEWUNI                 END-IF
+NEWUNI                 MOVE SUSCRIP-BDUUNI TO COD-SUSCRIP-ABD02
+NEWUNI                 READ SUSCRIPTOR INVALID KEY
+NEWUNI                      MOVE SUSCRIP-BDUUNI TO NOM-COR1-ABD02
+NEWUNI                 END-READ
+NEWUNI                 MOVE NOM-COR1-ABD02 TO SUS-UNI
+NEWUNI                 MOVE FEC-ACT-BDUUNI TO FEC-UNI
+NEWUNI                 MOVE LINEA1-UNI     TO MOVIMIENTO-S 
+NEWUNI                 PERFORM 6700-CONT-CTA 
+NEWUNI              END-IF
+NEWUNI           END-IF
+NEWUNI        END-IF
+PATCH2        IF FIN-BDUUNI = 0
+NEWUNI           READ BDUUNI NEXT RECORD AT END 
+NEWUNI                MOVE 1 TO FIN-BDUUNI 
+NEWUNI           END-READ
+NEWUNI        END-IF
+NEWUNI      END-PERFORM.
+NEWUNI      IF W-PRIMERA-VEZ = 1
+NEWUNI         MOVE ALL "-" TO MOVIMIENTO-S
+NEWUNI         PERFORM 6700-CONT-CTA 
+NEWUNI         IF ENVIE = 0 
+NEWUNI            PERFORM 10900-ENVIA-CRCR
+NEWUNI         END-IF 
+NEWUNI         MOVE 1 TO TIP-CONSUL-ABD11 
+NEWUNI       ELSE
+NEWUNI         MOVE OBSER-9 TO MENSAJE-GENERAL
+NEWUNI         MOVE 7 TO TIP-CONSUL-ABD11
+NEWUNI       END-IF.
+NEWUNI       MOVE 0 TO REC.
+NEWUNI 2301-VALIDAR-NOMBRE-BDUUNI.
+REMARK******************************************************************
+REMARK*2301-VALIDAR-NOMBRE-BDUUNI.
+REMARK* SE BUSCA DETERMINAR SI EL NOMBRE DE LA PERSONA CONSULTADA HACE 
+REMARK* MATCH CON EL NOMBRE ENVIADO EN LA CONSULTA .ESTO APLICA CUANDO 
+REMARK* EL LA BDU SE EXIGE QUE SE REALIZE ESTA VALIDACION. EN LA GENERACION
+REMARK* DEL ARCHIVO BDU SE PRESTABLECE CUANTOS BLOQUES SE VALIDAN.
+REMARK******************************************************************
+NEWUNI     IF BLOQUES-BDUUNI > 2 
+NEWUNI        MOVE 2 TO BLOQUES-BDUUNI
+NEWUNI     END-IF.
+NEWUNI     MOVE NOMBRE-COMPLETO TO NOMBRE-AUX.
+NEWUNI     IF TIP-ID  = 2 
+NEWUNI        COMPUTE MIN-BLOQUES = BLOQUES-BDUUNI - 1
+NEWUNI        INSPECT NOMBRE-AUX REPLACING ALL "S.A." BY "    ",
+NEWUNI           "." BY " ","LTDA" BY "    ","LIMITADA" BY "        ",
+NEWUNI           " CIA " BY "     ","COMPA/IA" BY "        ",
+NEWUNI           "INVERSIONES" BY "           "," INV " BY "     ",
+NEWUNI           "EMPRESA" BY "       "," EMP " BY "     ",
+NEWUNI           "CORPORACION" BY "           ",
+NEWUNI           "CORPORATION" BY "           ",
+NEWUNI           " CORP " BY "      "," CO " BY "    ",
+NEWUNI           "SOCIEDAD" BY "        "," SOC " BY "     ",
+NEWUNI           "COOPERATIVA" BY "           "," COOP " BY "      ",
+NEWUNI           " BANCO " BY "       "," BCO " BY "     ",
+NEWUNI           "ASOCIACION" BY "          "," ASOC " BY "      "
+NEWUNI     ELSE   
+PATCH1        MOVE BLOQUES-BDUUNI TO MIN-BLOQUES 
+NEWUNI        INSPECT NOMBRE-AUX REPLACING ALL "." BY " ","-" BY " "
+NEWUNI                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
+NEWUNI                "Y" BY "I"," DE " BY "    "," LA " BY "    ",
+NEWUNI            " DEL " BY "     " 
+NEWUNI     END-IF.
+NEWUNI     MOVE SPACES TO VECTOR-INPUT.
+NEWUNI     UNSTRING NOMBRE-AUX        DELIMITED BY ALL " " INTO 
+NEWUNI      V-INPUT(1) V-INPUT(2) V-INPUT(3) V-INPUT(4) V-INPUT(5) 
+NEWUNI      V-INPUT(6) V-INPUT(7) V-INPUT(8) V-INPUT(9) V-INPUT(10).
+NEWUNI     MOVE 0 TO V-SEC(1).
+NEWUNI     MOVE 1 TO CONSECUTIVO-ABD05.
+NEWUNI     MOVE NOMBRE-BDUUNI TO RAZONSOCIAL-ABD05.
+NEWUNI     PERFORM 2121-MATCH-VALIDAR-NOMBRES-UNI.
+NEWUNI     IF V-SEC(1) = 0
+NEWUNI        MOVE 1 TO BLOQUEO-BDUUNI
+NEWUNI     END-IF.
+MATCH  2121-MATCH-VALIDAR-NOMBRES-UNI.
+REMARK******************************************************************
+REMARK*2121-MATCH-VALIDAR-NOMBRES-UNI.
+REMARK* SE BUSCA CUANTOS BLOQUES DEL NOMBRE REGISTRADO EN EL BDU HACEN 
+REMARK* MATCH CON EL NOMBRE ENVIADO EN LA CONSULTA .                    
+REMARK******************************************************************
+MATCH      MOVE SPACES TO VECTOR-ARCHI.
+MATCH      MOVE RAZONSOCIAL-ABD05 TO NOMBRE-AUX.
+MATCH      IF TIP-ID NOT = 2 
+MATCH         INSPECT NOMBRE-AUX REPLACING ALL "." BY " ","-" BY " "
+MATCH                 "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
+MATCH                 "Y" BY "I"," DE " BY "    "," LA " BY "    ",
+MATCH                 " DEL " BY "     "
+MATCH      END-IF.
+MATCH      UNSTRING NOMBRE-AUX   DELIMITED BY ALL " " INTO 
+MATCH       V-ARCHI(1) V-ARCHI(2) V-ARCHI(3) V-ARCHI(4) V-ARCHI(5) 
+MATCH       V-ARCHI(6) V-ARCHI(7) V-ARCHI(8) V-ARCHI(9) V-ARCHI(10).
+MATCH      MOVE 1 TO TOT-BLOQUES.
+MATCH      PERFORM UNTIL V-ARCHI(TOT-BLOQUES) = SPACES
+MATCH        ADD 1 TO TOT-BLOQUES
+MATCH        IF TOT-BLOQUES = 11
+MATCH           NEXT SENTENCE
+MATCH        END-IF
+MATCH      END-PERFORM.
+MATCH      SUBTRACT 1 FROM TOT-BLOQUES.
+MATCH      MOVE 1 TO I.
+MATCH      MOVE 0 TO BLOQUES-OK.
+MATCH      PERFORM UNTIL V-INPUT(I) = SPACES
+MATCH        MOVE 1 TO J 
+MATCH        PERFORM UNTIL J > 10 
+MATCH          IF V-INPUT(I) = V-ARCHI(J)
+MATCH             ADD 1 TO BLOQUES-OK 
+MATCH             MOVE SPACES TO V-ARCHI(J)
+MATCH             MOVE 11 TO J
+MATCH          END-IF
+MATCH          ADD 1 TO J
+MATCH        END-PERFORM
+MATCH        ADD 1 TO I
+MATCH        IF I = 11 
+MATCH           NEXT SENTENCE
+MATCH        END-IF
+MATCH      END-PERFORM.
+MATCH      IF BLOQUES-OK >= MIN-BLOQUES             
+MATCH         MOVE 1 TO V-SEC(CONSECUTIVO-ABD05)
+MATCH      END-IF.
+NEWUNI 8200-SACAR-MENSAJE-FIN-UNI.
+REMARK******************************************************************
+REMARK*8200-SACAR-MENSAJE-FIN-UNI.
+REMARK* SE BUSCA LOS PRODUCTOS QUE TIENE REGISTRADOS LA PERSONA QUE SE 
+REMARK* CONSULTA. ESTOS PRODUCTOS SON ENVIADOS AL FINAL DEL REPORTE     
+REMARK* ENMARCADOS ENTRE ARROBAS.                                  
+REMARK******************************************************************
+NEWUNI     INITIALIZE LLAVE-BDUUNI.
+NEWUNI     MOVE TIP-ID TO TIP-IDE-BDUUNI.
+NEWUNI     MOVE NUM-ID TO NUM-IDE-BDUUNI.
+NEWUNI     MOVE 0 TO FIN-BDUUNI.
+NEWUNI     MOVE 1 TO J.
+INI001**** IF MULT-SCORES(HEADER-LSN,7) = 1 AND (TIP-ID = 1 OR 4 ) AND  DLM0017 
+INI001****    MULT-SCORES(HEADER-LSN,10) = 0                            DLM0017 
+ESTRAT     IF (MULT-SCORES(HEADER-LSN,7) = 1  OR  2)                    DLM0019 
+ESTRAT     AND (TIP-ID = 1 OR 4 )                                       DLM0019 
+ESTRAT        IF (TIP-CON-SEC = 5  AND                                  DLM0019 
+ESTRAT             MULT-TABLA-SCORES(HEADER-LSN)(7:1) = "1") OR         DLM0019 
+EMP001           (TIP-CON-SEC = 1 AND CALIFICACION-DES-SEC = 0 AND      RMB0013 
+ESTRAT            MULT-TABLA-SCORES(HEADER-LSN)(7:1) = "1"   AND        DLM0019 
+EMP001            MULT-TABLA-SCORES(HEADER-LSN) NOT = "0000001000" )    RMB0013 
+EMP001            MOVE 1 TO HAY-LINK-EMPIRICO                           RMB0013 
+EMP001            MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)                   RMB0013 
+EMP001            MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)                    RMB0013 
+EMP001            ADD 2 TO J                                            RMB0013 
+ESTRAT            MOVE "EP1"           TO  PUB-COM-NOM                  DLM0019 
+ESTRAT            MOVE "+INICIA     "  TO  PUB-COM-EXP                  DLM0019 
+ESTRAT            MOVE "    SCORE PARA PERSONAS NATURALES SIN HISTORIAL"DLM0019 
+ESTRAT                                 TO  PUB-MSG                      DLM0019 
+ESTRAT            MOVE "F"             TO  PUB-TIP-FOR                  DLM0019 
+ESTRAT            MOVE  PUB-COM        TO  PUB-VEC-MEMORIA(J)           DLM0019 
+ESTRAT            ADD   1              TO  J                            DLM0019 
+INI001*           MOVE "EP2" TO PUB-COM-NOM                             DLM0017 
+INI001*           MOVE "+EMPIRICO MICROEMPR"  TO PUB-COM-EXP            DLM0017 
+INI001*           MOVE "    SCORE PARA MICROEMPRESARIOS   SIN HISTORIAL"DLM0017 
+INI001*                  TO PUB-MSG                                     DLM0017 
+INI001*           MOVE "F" TO PUB-TIP-FOR                               DLM0017 
+INI001*           MOVE PUB-COM TO PUB-VEC-MEMORIA(J)                    DLM0017 
+INI001*           ADD 1 TO J                                            DLM0017 
+EMP001         END-IF                                                   RMB0013 
+ESTRAT         IF (TIP-CON-SEC = 5  AND                                 DLM0019 
+ESTRAT             MULT-TABLA-SCORES(HEADER-LSN)(7:1) = "2") OR         DLM0019 
+ESTRAT           (TIP-CON-SEC = 1 AND CALIFICACION-DES-SEC = 0 AND      DLM0019 
+ESTRAT            MULT-TABLA-SCORES(HEADER-LSN)(7:1) = "2"   AND        DLM0019 
+ESTRAT            MULT-TABLA-SCORES(HEADER-LSN) NOT = "0000002000")     DLM0019 
+ESTRAT            MOVE  1              TO  HAY-LINK-EMPIRICO            DLM0019 
+ESTRAT            MOVE  TIT-BDUS       TO  PUB-VEC-MEMORIA(1)           DLM0019 
+ESTRAT            MOVE  PUB-LIN        TO  PUB-VEC-MEMORIA(2)           DLM0019 
+ESTRAT            ADD   2              TO  J                            DLM0019 
+ESTRAT            MOVE "EP2"           TO  PUB-COM-NOM                  DLM0019 
+ESTRAT            MOVE "+ESTRATEGICO"  TO  PUB-COM-EXP                  DLM0019 
+ESTRAT            MOVE "    SCORE PARA PERSONAS NATURALES SIN HISTORIAL"DLM0019 
+ESTRAT                                 TO  PUB-MSG                      DLM0019 
+ESTRAT            MOVE "F"             TO  PUB-TIP-FOR                  DLM0019 
+ESTRAT            MOVE  PUB-COM        TO  PUB-VEC-MEMORIA(J)           DLM0019 
+ESTRAT            ADD   1              TO  J                            DLM0019 
+ESTRAT         END-IF                                                   DLM0019 
+EMP001     END-IF.                                                      RMB0013 
+REMARK*    EN CASO DE UN SCORE EXTERNO QUE ENVIE DENTRO DE AREA DE
+REMARK*    PRODUCTOS , EN LETRAS LA SIGLA "EVI", SE ENVIARA UN HIP
+REMARK*    ERVINCULO PARA PODER LLEGAR A EL DIRECTAMENTE
+HIPE02     IF MULT-SCORES (HEADER-LSN,10) > 0 AND                       RMB0014 
+HIPE02        OTRO-PROD-EXT = "PRO"                                     RMB0014 
+HIPE02        MOVE 1 TO K                                               RMB0014 
+HIPE02        PERFORM UNTIL K > 4                                       RMB0014 
+HIPE02          IF CUAL-PRO-EXT(K) NOT NUMERIC                          RMB0014 
+HIPE02             EVALUATE CUAL-PRO-EXT(K)(1:3)                        RMB0014 
+HIPE02               WHEN "EVI"                                         RMB0014 
+HIPE02                 IF J = 1                                         RMB0014 
+HIPE02                    MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)           RMB0014 
+HIPE02                    MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)            RMB0014 
+HIPE02                    ADD 2 TO J                                    RMB0014 
+HIPE02                 END-IF                                           RMB0014 
+HIPE02                 MOVE "EVI" TO PUB-COM-NOM                        RMB0014 
+HIPE02                 MOVE "+REALIZAR EVIDENTE "  TO PUB-COM-EXP       RMB0014 
+HIPE02                 MOVE                                             RMB0014 
+HIPE02            "    PREGUNTAS PARA VALIDACION DE IDENTIDAD     "     RMB0014 
+HIPE02                 TO PUB-MSG                                       RMB0014 
+HIPE02                 MOVE "F" TO PUB-TIP-FOR                          RMB0014 
+HIPE02                 MOVE PUB-COM TO PUB-VEC-MEMORIA(J)               RMB0014 
+HIPE02                 ADD 1 TO J                                       RMB0014 
+HIPE03               WHEN ANY                                           RMB0015 
+HIPE03                 IF CUAL-PRO-EXT(K)(1:1) = "D" AND                RMB0015 
+HIPE03                    CUAL-PRO-EXT(K)(2:2) NUMERIC                  RMB0015 
+HIPE03                    IF J = 1                                      RMB0015 
+HIPE03                       MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)        RMB0015 
+HIPE03                       MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)         RMB0015 
+HIPE03                       ADD 2 TO J                                 RMB0015 
+HIPE03                    END-IF                                        RMB0015 
+HIPE03                    MOVE CUAL-PRO-EXT(K)(1:3) TO PUB-COM-NOM      RMB0015 
+HIPE03                    MOVE "+CONFIRMAR OFERTA  "  TO PUB-COM-EXP    RMB0015 
+HIPE03                    MOVE                                          RMB0015 
+HIPE03               "    ACEPTACION DE OFERTA DE PRODUCTOS          "  RMB0015 
+HIPE03                    TO PUB-MSG                                    RMB0015 
+HIPE03                    MOVE "F" TO PUB-TIP-FOR                       RMB0015 
+HIPE03                    MOVE PUB-COM TO PUB-VEC-MEMORIA(J)            RMB0015 
+HIPE03                    ADD 1 TO J                                    RMB0015 
+HIPE03                 END-IF                                           RMB0015 
+HIPE02             END-EVALUATE                                         RMB0014 
+HIPE02          END-IF                                                  RMB0014 
+HIPE02          ADD 1 TO K                                              RMB0014 
+HIPE02        END-PERFORM                                               RMB0014 
+HIPE02     END-IF.                                                      RMB0014 
+HIPE04*************************************************************     RMB0016 
+HIPE04*    IF J = 1                                                     RMB0016 
+HIPE04*       MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)                       RMB0016 
+HIPE04*       MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)                        RMB0016 
+HIPE04*       ADD 2 TO J                                                RMB0016 
+HIPE04*    END-IF                                                       RMB0016 
+HIPE04*    MOVE "EVI" TO PUB-COM-NOM                                    RMB0016 
+HIPE04*    MOVE "+REALIZAR EVIDENTE "  TO PUB-COM-EXP                   RMB0016 
+HIPE04*    MOVE                                                         RMB0016 
+HIPE04*    "    PREGUNTAS PARA VALIDACION DE IDENTIDAD     "            RMB0016 
+HIPE04*    TO PUB-MSG                                                   RMB0016 
+HIPE04*    MOVE "F" TO PUB-TIP-FOR                                      RMB0016 
+HIPE04*    MOVE PUB-COM TO PUB-VEC-MEMORIA(J)                           RMB0016 
+HIPE04*    ADD 1 TO J                                                   RMB0016 
+HIPE04     IF MULT-BDU(HEADER-LSN) = "U"                          AND   RMB0016 
+HIPE04        (TIP-CONSUL-ABD11 = 1 OR 5 )                        AND   RMB0016 
+HIPE04        MULT-BDUS(HEADER-LSN) NOT = SPACES                  AND   RMB0016 
+HIPE04        INF-RECONOCER-USADO = 0                             AND   RMB0016 
+HIPE04        (MULT-VISOR(HEADER-LSN) = "X" OR "E" OR "N" )             RMB0016
+HIPE04        MOVE 1 TO I                                               RMB0016 
+HIPE04        PERFORM UNTIL I > 5                                       RMB0016 
+HIPE04          IF MULT-VEC-BDUS(HEADER-LSN,I) = "DIR"                  RMB0016 
+HIPE04             MOVE 50 TO I                                         RMB0016 
+HIPE04          ELSE                                                    RMB0016 
+HIPE04             ADD 1 TO I                                           RMB0016 
+HIPE04          END-IF                                                  RMB0016 
+HIPE04        END-PERFORM                                               RMB0016 
+HIPE04        IF I = 50                                                 RMB0016 
+HIPE04           IF J = 1                                               RMB0016 
+HIPE04              MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)                 RMB0016 
+HIPE04              MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)                  RMB0016 
+HIPE04              ADD 2 TO J                                          RMB0016 
+HIPE04           END-IF                                                 RMB0016 
+HIPE04           MOVE "DIR" TO PUB-COM-NOM                              RMB0016 
+HIPE04           MOVE "+REALIZAR RECONOCER"  TO PUB-COM-EXP             RMB0016 
+HIPE04           MOVE                                                   RMB0016 
+HIPE04           "    INFORMACION DE LOCALIZACION                "      RMB0016 
+HIPE04           TO PUB-MSG                                             RMB0016 
+HIPE04           MOVE "E" TO PUB-TIP-FOR                                RMB0016 
+HIPE04           MOVE PUB-COM TO PUB-VEC-MEMORIA(J)                     RMB0016 
+HIPE04           ADD 1 TO J                                             RMB0016 
+HIPE04        END-IF                                                    RMB0016 
+HIPE04     END-IF.                                                      RMB0016 
+HIPE04*************************************************************     RMB0016 
+EMP001     MOVE "E" TO PUB-TIP-FOR                                      RMB0013 
+NEWUNI     PERFORM UNTIL FIN-BDUUNI = 1 OR 
+BDU001                   MULT-BDU(HEADER-LSN) NOT = "U"
+NEWUNI        START BDUUNI KEY > LLAVE-BDUUNI 
+NEWUNI           INVALID KEY 
+NEWUNI              MOVE 1 TO FIN-BDUUNI
+NEWUNI           NOT INVALID KEY 
+NEWUNI              READ BDUUNI NEXT RECORD 
+NEWUNI                   AT END 
+NEWUNI                      MOVE 1 TO FIN-BDUUNI
+NEWUNI                   NOT AT END
+NEWUNI                     IF TIP-ID NOT = TIP-IDE-BDUUNI OR
+NEWUNI                        NUM-ID NOT = NUM-IDE-BDUUNI 
+NEWUNI                        MOVE 1 TO FIN-BDUUNI 
+NEWUNI                     ELSE
+HIPE04                       IF BLOQUEO-BDUUNI = 0                      RMB0016 
+HIPE04                          MOVE 1 TO BLOQUEO-BDUUNI                RMB0016 
+HIPE04                          MOVE 1 TO I                             RMB0016 
+HIPE04                          PERFORM UNTIL I > 5                     RMB0016 
+HIPE04                            IF MULT-VEC-BDUS(HEADER-LSN,I) =      RMB0016 
+HIPE04                               PRODUCT-BDUUNI                     RMB0016 
+HIPE04                               MOVE 0 TO BLOQUEO-BDUUNI           RMB0016 
+HIPE04                            END-IF                                RMB0016 
+HIPE04                            ADD 1 TO I                            RMB0016 
+HIPE04                          END-PERFORM                             RMB0016 
+HIPE04                       END-IF                                     RMB0016 
+BDU004                       IF BLOQUEO-BDUUNI = 0                      RMB0004 
+NEWUNI                          PERFORM 8210-EXTRAE-PROD-BDUUNI
+BDU004                          MOVE 999999 TO SUSCRIP-BDUUNI           RMB0004 
+BDUAMP                          MOVE 9999   TO CONSECU-BDUUNI           RMB0004 
+BDU004                       ELSE                                       RMB0004 
+BDUAMP                          MOVE 9999   TO CONSECU-BDUUNI           RMB0004 
+BDU004                       END-IF                                     RMB0004 
+NEWUNI                     END-IF
+NEWUNI              END-READ
+NEWUNI        END-START        
+NEWUNI     END-PERFORM.
+NEWUNI     IF  J > 1          
+NEWUNI        MOVE PUB-LIN TO PUB-VEC-MEMORIA(J)
+NEWUNI        MOVE 1 TO REC 
+NEWUNI        MOVE 1 TO I 
+NEWUNI        PERFORM UNTIL I > J 
+NEWUNI           MOVE PUB-VEC-MEMORIA(I) TO MOVIMIENTO-S 
+NEWUNI           PERFORM 6700-CONT-CTA
+NEWUNI           ADD 1 TO I       
+NEWUNI        END-PERFORM
+NEWUNI        IF ENVIE = 0 
+NEWUNI           PERFORM 10900-ENVIA-CRCR
+NEWUNI        END-IF
+NEWUNI        MOVE 0 TO REC
+NEWUNI     END-IF.         
+NEWUNI 8210-EXTRAE-PROD-BDUUNI.
+REMARK******************************************************************
+REMARK*8210-EXTRAE-PROD-BDUUNI.
+REMARK* SE LEE EL SIGUIENTE REGISTRO, SI TIENE SECUENCIA 2 Y TIENE EL
+REMARK* TOKEN "TITULO->", SE EXTRAE LA PUBLICIDAD DE HAY.
+REMARK* SE BUSCA LA SIGLA DEL PRODUCTO DEL REGISTRO UBICADO EN LA LISTA
+REMARK* DE LOS PRODUCTOS UNIVERSALES. SE DETERMINA SU DESCRIPCION Y SE
+REMARK* ALMACENA EN UN ARREGLO PARA SER ENVIADO POSTERIORMENTE.
+REMARK******************************************************************
+BDUTIT     MOVE SPACES TO PUB-MSG.                                      RMB0009
+BDUTIT     READ BDUUNI NEXT RECORD                                      RMB0009
+BDUTIT          AT END                                                  RMB0009
+BDUTIT             MOVE MSG-DEFAULT-BDU TO PUB-MSG                      RMB0009
+BDUTIT     NOT AT END                                                   RMB0009
+BDUTIT         IF CONSECU-BDUUNI = 2 AND REG-BDUUNI(36:8) = "TITULO->"  RMB0009
+BDUTIT            MOVE REG-BDUUNI(44:45) TO PUB-MSG(5:45)               RMB0009
+BDUTIT         ELSE                                                     RMB0009
+BDUTIT             MOVE MSG-DEFAULT-BDU TO PUB-MSG                      RMB0009
+BDUTIT         END-IF                                                   RMB0009
+BDUTIT     END-READ.                                                    RMB0009
+NEWUNI     MOVE SPACES TO  PUB-COM-NOM.
+NEWUNI     MOVE 1 TO I.
+NEWUNI     PERFORM UNTIL  I >= 50 OR J >= 50 OR
+NEWUNI                    PUB-VEC-COM(I) = SPACES   
+NEWUNI       IF PUB-VEC-COM(I) = PRODUCT-BDUUNI 
+NEWUNI          IF J = 1 
+BOL001             MOVE TIT-BDUS TO PUB-VEC-MEMORIA(1)                  RMB0010 
+BOL001             MOVE PUB-LIN TO PUB-VEC-MEMORIA(2)                   RMB0010 
+BOL001             ADD 2 TO J                                           RMB0010 
+NEWUNI          END-IF           
+NEWUNI          MOVE PUB-VEC-COM(I) TO PUB-COM-NOM
+NEWUNI          MOVE PUB-VEC-EXP(I) TO PUB-COM-EXP
+NEWUNI          MOVE PUB-COM TO PUB-VEC-MEMORIA(J)
+NEWUNI          ADD 1 TO J
+NEWUNI          MOVE 50 TO I
+NEWUNI       END-IF
+NEWUNI       ADD 1 TO I
+NEWUNI     END-PERFORM.
+NEWUNI 2302-MOSTRAR-PRODUCTOS-BDU.
+REMARK******************************************************************
+REMARK*2302-MOSTRAR-PRODUCTOS-BDU.
+REMARK* PARA EL MENSAJE "UNIVERSAL" SE ENVIA LA LISTA DE PRODUCTOS PARA
+REMARK* BASE DE DATOS UNIVERAL QUE EXISTEN.
+REMARK******************************************************************
+NEWUNI     MOVE 1 TO W-PRIMERA-VEZ.
+NEWUNI     MOVE 1 TO REC.
+NEWUNI     MOVE TITULO-MENU-PRO-BDU TO MOVIMIENTO-S.
+NEWUNI     PERFORM 6700-CONT-CTA .
+NEWUNI     MOVE 1 TO IND-MENU .
+BDU001     PERFORM UNTIL IND-MENU = 50 OR MULT-BDU(HEADER-LSN) NOT = "U"
+MENU01        MOVE 1 TO I                                               RMB0011 
+MENU01        IF PUB-VEC-EXP(IND-MENU) <> SPACES                        RMB0011 
+MENU01           PERFORM UNTIL I > 5                                    RMB0011 
+MENU01             IF MULT-VEC-BDUS(HEADER-LSN,I) =                     RMB0011 
+MENU01                                            PUB-VEC-COM(IND-MENU) RMB0011 
+MENU01                MOVE 9 TO I                                       RMB0011 
+MENU01             END-IF                                               RMB0011 
+MENU01             ADD 1 TO I                                           RMB0011 
+MENU01           END-PERFORM                                            RMB0011 
+MENU01        END-IF                                                    RMB0011 
+MENU01        IF PUB-VEC-COM(IND-MENU) = "BDU"                          RMB0011 
+MENU01           MOVE 10 TO I                                           RMB0011 
+MENU01        END-IF                                                    RMB0011 
+MENU01        IF PUB-VEC-EXP(IND-MENU) <> SPACES AND I = 10             RMB0011 
+NEWUNI           MOVE PUB-VEC-EXP(IND-MENU) TO MENSAJE-MENU-BDU
+NEWUNI           MOVE PUB-VEC-COM(IND-MENU) TO INI-MENU-BDU
+NEWUNI           MOVE LINEA-MENU-PRO-BDU   TO MOVIMIENTO-S            
+NEWUNI           PERFORM 6700-CONT-CTA 
+NEWUNI        END-IF
+NEWUNI        ADD 1 TO IND-MENU
+NEWUNI     END-PERFORM.
+BDU001     IF MULT-BDU(HEADER-LSN) NOT = "U"
+BDU004        MOVE "-BDU NO HABILITADO   " TO MENSAJE-MENU-BDU          RMB0004 
+BDU004        MOVE "XXX"                  TO INI-MENU-BDU               RMB0004 
+BDU001        MOVE LINEA-MENU-PRO-BDU   TO MOVIMIENTO-S            
+BDU001        PERFORM 6700-CONT-CTA 
+BDU001     END-IF.
+NEWUNI     IF ENVIE = 0                        
+NEWUNI        PERFORM 10900-ENVIA-CRCR
+NEWUNI     END-IF.
+NEWUNI     MOVE RAYAS-BDU   TO V-47(1).
+NEWUNI     MOVE 1 TO IND-CTA.
+NEWUNI     PERFORM 10900-ENVIA-CRCR.                                           
+NEWUNI     MOVE 0 TO REC.
+PROD11 2420-PRODUCTO-SOLO-BDU.                                          RMB0002 
+REMARK******************************************************************
+REMARK*2420-PRODUCTO-SOLO-BDU.     
+REMARK* ESTE PRODUCTO ES PARA QUIEN SOLO SE INSCRIBE A ESTE Y SE COMPORTA
+REMARK* COMO UN PRODUCTO EXCLUYENTE. SOLO MUESTRA PARA QUE PRODUCTOS HAY
+REMARK* INFORMACION DE BDU.                                              
+REMARK******************************************************************
+PROD11     MOVE 1 TO W-PRIMERA-VEZ.                                     RMB0002 
+PROD11     PERFORM 8200-SACAR-MENSAJE-FIN-UNI.                          RMB0002 
+PROD11     MOVE 1 TO MENS-ERR                                           RMB0002 
+PROD11     IF J > 1                                                     RMB0002 
+PROD11      MOVE "  EXISTE BDUS PARA EL CONSULTADO " TO MENSAJE-GENERAL RMB0002 
+PROD11     ELSE                                                         RMB0002 
+PROD11      MOVE "  NO HAY BDUS PARA EL CONSULTADO " TO MENSAJE-GENERAL RMB0002 
+PROD11     END-IF.                                                      RMB0002 
+PROD11     MOVE 3 TO TIP-CONSUL-ABD11.                                  RMB0002 

@@ -1,0 +1,95 @@
+      *ICGAUD.PROC.v.01.0001
+      ******************************************************************
+      * ICGAUD.PROC : PROCEDIMIENTO PARA CONTROLAR EL REGISTRO DE LAS  *
+      *   TRANSACCIONES DE AUDITORIA DE LOS SCORES A LA MEDIDA.        *
+      *      "S" ---> SUBIDA DEL PROGRAMA.                             *
+      *      "U" ---> REGISTRO DE LA ULTIMA TRANSACCION.               *
+      *      "T" ---> TERMINACION DEL PROGRAMA.                        *
+      ******************************************************************
+      *
+       0400-ABRIR-AUDITORIA.
+           IF  COD-ENTRADA  =  "SERVER"
+             OPEN  I-O  AUDITORIA
+             IF  W-STATUS-AUD  NOT =  ZEROS
+             AND W-STATUS-AUD  NOT =  05
+               IF  W-STATUS-AUD-9  =  9
+                 DISPLAY AUDI-PROGRAMA "ERROR ARCHIVO DE AUDITORIA! 9.."
+                          W-STATUS-AUD-X
+               ELSE
+                 DISPLAY AUDI-PROGRAMA "ERROR ARCHIVO DE AUDITORIA! ..."
+                          W-STATUS-AUD
+               END-IF
+               STOP RUN
+             ELSE
+               MOVE  "S"                 TO  AUDI-FLAG
+               PERFORM  0500-GRABE-AUDITORIA
+             END-IF
+           END-IF
+           .
+      *
+       0500-GRABE-AUDITORIA.
+           MOVE  PROGRAMA-EMAIL        TO  AUDI-PROGRAMA
+           MOVE  FUNCTION CURRENT-DATE
+                                       TO  W-FECHA-HORA
+           IF  AUDI-FLAG  =  "S"
+           OR  AUDI-FLAG  =  "T"
+             MOVE  SPACES              TO  AUDI-DATA
+             MOVE  W-FECHA-HORA        TO  AUDI-DATA
+             WRITE REG-AUDITORIA
+             MOVE "WRITE"              TO  W-OPERACION
+             IF  AUDI-FLAG  =  "S"
+             AND W-STATUS-AUD  =  ZEROS
+               PERFORM  0600-VERIFICA-STATUS-AUD
+               MOVE  "U"               TO  AUDI-FLAG
+               WRITE  REG-AUDITORIA
+               MOVE "WRITE"            TO  W-OPERACION
+             END-IF
+           ELSE
+             READ AUDITORIA
+             END-READ
+             STRING
+                 W-FECHA-HORA      DELIMITED  BY SIZE
+                 LLAVE-MULSER      DELIMITED  BY SIZE
+                 CLAVE-CONS-MULSER DELIMITED  BY SIZE
+                 AREA-INPUT        DELIMITED  BY SIZE
+               INTO  AUDI-DATA
+             END-STRING
+             MOVE "READ "              TO  W-OPERACION
+             IF  W-STATUS-AUD  =  ZEROS
+                 PERFORM  0600-VERIFICA-STATUS-AUD
+                 REWRITE  REG-AUDITORIA
+                 MOVE "REWRITE"        TO  W-OPERACION
+             END-IF
+           END-IF
+           PERFORM  0600-VERIFICA-STATUS-AUD
+           .
+      *
+       0600-VERIFICA-STATUS-AUD.
+           IF  W-STATUS-AUD  NOT =  ZEROS
+             IF  W-STATUS-AUD-9  =  9
+               DISPLAY "ERROR AUDITORIA..."  REG-AUDITORIA  W-OPERACION
+                       " CODIGO DE ERROR 9.."
+                        W-STATUS-AUD-X
+               MOVE  W-STATUS-AUD-X    TO  W-STATUS-AUD
+               STRING
+                    AUDI-PROGRAMA                 DELIMITED  BY  SIZE
+                    W-OPERACION                   DELIMITED  BY  SIZE
+                   " CODIGO DE ERROR ... 9.."     DELIMITED  BY  SIZE
+                    W-STATUS-AUD                  DELIMITED  BY  SIZE
+                  INTO MENSAJE-EMAIL
+               END-STRING
+             ELSE
+               DISPLAY "ERROR AUDITORIA..."  REG-AUDITORIA  W-OPERACION
+                       " CODIGO DE ERROR "
+                        W-STATUS-AUD
+               STRING
+                    AUDI-PROGRAMA                 DELIMITED  BY  SIZE
+                    W-OPERACION                   DELIMITED  BY  SIZE
+                   "CODIGO DE ERROR ... "         DELIMITED  BY  SIZE
+                    W-STATUS-AUD                  DELIMITED  BY  SIZE
+                  INTO MENSAJE-EMAIL
+               END-STRING
+             END-IF
+             CALL "SYSTEM"          USING  COMANDO-EMAIL
+           END-IF
+           .

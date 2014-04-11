@@ -1,0 +1,13 @@
+******* VALERRCR-FD.v.0001
+REMARK*Parametros de errores por cada campo del maestro reumido ampliado
+REMARK*Proceso de validacion Cartera y Tarjetas
+036300*----------------------------------------------------------------*
+       FD  VALERRCR.
+       01  REG-VALERRCR.
+           03 NUM-CAMPO-VALERRCR               PIC 9(2).
+           03 COD-ERROR-VALERRCR               PIC 9(2).
+           03 DES-ERROR-VALERRCR               PIC X(60).
+           03 IND-ACTUALIZA-VALERRCR           PIC X.
+      *    03 NUM-PRIORIDAD-VALERRCR           PIC 9(2).
+           03 FILLER-VALERRCR                  PIC X(15).
+

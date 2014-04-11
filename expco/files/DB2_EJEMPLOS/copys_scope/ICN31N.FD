@@ -1,0 +1,193 @@
+******* ICN31N-FD.v.02.011
+******* MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR EN PARTICULAR
+009900********************************************************************
+REMARK* GJC0004   *   SE CAMBIAN LOS NOMBRES DE LOS FILLER POR RESTO-REGx*     
+REAMRK*FEB.26/2001*                                                      *
+REMARk********************************************************************
+REMARK* FAC0005   *   SE ADICIONAN NUEVOS CAMPOS PARA EL VALIDADOR       *
+REAMRK*MAR.26/2001*                                                      *
+REMARK********************************************************************
+REMARK*VHF0006    *   SE ADICIONA UN CAMPO PARA DETERMINAR SI EL REGISTRO*
+REMARK*VICTOR HUGO*   VA A SER ACTUALIZADO O NO (0 o 1 RESPECTIVAMENTE)  *
+REMARK*FORERO     *                                                      *
+REMARK*ENE.23/2002*                                                      *
+REMARk********************************************************************
+REMARK* FAC0007   *   SE ADICIONAN NUEVOS CAMPOS PARA CONTROL PROGRAMAS  *
+REAMRK*F.CUADROS  *   DE VISUAL. ADEMAS SE INCLUYEN CAMPOS PARA MANEJO   *
+REMARK*SEP.17/2002*   DE RESOLUCION 489 CRT EN EL HEADER.                *
+REMARK********************************************************************
+REMARK* FAC0008     * PAG023*  INCLUSION DE INDICADOR DE CONVERSION PARA
+REMARK* F.CUADROS C.* MAESTRO DE PAGOS
+REMARK* SEP.10/2004 *
+************************************************************************
+REMARK* GJC0009     * FILL01*  SE AMPLIA EL FILLER PARA LECTURA DEL ARCHIVO
+REMARK* G.JIMENEZ C.* EVITANDO TRUNCAMIENTO DE REGISTROS MAS LARGOS DE
+REMARK* FEB./2006   * LO ESTANDAR
+************************************************************************
+REMARK* FAC0010     * RCNCER*  INCLUSION DE CAMPOS PARA GUARDAR LA      
+REMARK* F.CUADROS C.* INFORMACIÓN DE CALIFICACIÓN DE DATOS DE UBICACIÓN  
+REMARK* JUL.06/2006 * RESIDENCIAL, LABORAL Y DE CORRESPONDENCIA
+************************************************************************
+REMARK* FAC0011     * FECREC*  INCLUSION DE CAMPO PARA ALMACENAR LA     
+REMARK* F.CUADROS C.* FECHA DE RECEPCIÓN DEL MAESTRO. 
+REMARK* SEP.15/2006 *
+************************************************************************
+010000 FD  ACTUAL1
+010200     BLOCK CONTAINS 40 RECORDS.
+FILL01 01  REG-LARGO-CIC06                 PIC X(500).                  GJC0009
+010400 01  REGISTRO1-CIC06.
+010500     03  COD-SUSCRIPTOR-CEROS-CIC06  PIC 9(18).
+010600     03  COD-SUSCRIPTOR-CIC06        PIC X(6).
+010700     03  COD-TIP-CUENTA-CIC06        PIC X(2).
+010800     03  FECHA-NOVEDADES-CIC06.
+010900         05 MES-NOVEDADES-CIC06      PIC 99.
+               05 SIG-NOVEDADES-CIC06      PIC 99.
+011000         05 ANO-NOVEDADES-CIC06      PIC 99.
+           03  FECHA-NOVEDADES-CIC06-M  REDEFINES FECHA-NOVEDADES-CIC06.
+               05 SIG-NOVEDADES-CIC06-M    PIC 99.
+               05 ANO-NOVEDADES-CIC06-M    PIC 99.
+               05 MES-NOVEDADES-CIC06-M    PIC 99.
+           03  IND-MILENIO-CIC06           PIC X.                        AMPINF
+           03  IND-VALORES-MIL-CIC06       PIC X.                       AMPINF9
+           03  IND-TIPO-ENTREGA-CIC06      PIC X.                       FAC0007
+           03  FEC-INI-REPOR-CIC06         PIC 9(8).                    FAC0007
+           03  FEC-INI-REPOR-CIC06-R REDEFINES FEC-INI-REPOR-CIC06.     FAC0007
+               05 SIG-INI-REP-CIC06        PIC 99.                      FAC0007
+               05 ANO-INI-REP-CIC06        PIC 99.                      FAC0007
+               05 MES-INI-REP-CIC06        PIC 99.                      FAC0007
+               05 DIA-INI-REP-CIC06        PIC 99.                      FAC0007
+           03  FEC-FIN-REPOR-CIC06         PIC 9(8).                    FAC0007
+           03  FEC-FIN-REPOR-CIC06-R REDEFINES FEC-FIN-REPOR-CIC06.     FAC0007
+               05 SIG-FIN-REP-CIC06        PIC 99.                      FAC0007
+               05 ANO-FIN-REP-CIC06        PIC 99.                      FAC0007
+               05 MES-FIN-REP-CIC06        PIC 99.                      FAC0007
+               05 DIA-FIN-REP-CIC06        PIC 99.                      FAC0007
+            03 IND-DATACLI-CIC06           PIC X.                       FAC0007
+014700     03  RESTO-REG1                  PIC X(308).                  FAC0007
+           03  FILLER-CIC06-R REDEFINES RESTO-REG1.                     FAC0005
+FECREC         05  FILLER-CIC06-R1         PIC X(215).                  FAC0011 
+FECREC         05  FECHA-RECEPCION-CIC06   PIC 9(8).                    FAC0011 
+RCNCER         05  CALIFIC-DIRRES-CIC06    PIC 999V99.                  FAC0010 
+RCNCER         05  CALIFIC-DIRLAB-CIC06    PIC 999V99.                  FAC0010 
+RCNCER         05  CALIFIC-DIRCOR-CIC06    PIC 999V99.                  FAC0010 
+RCNCER         05  CALIFIC-TOTDIR-CIC06    PIC 999V99.                  FAC0010 
+RCNCER         05  TOTAL-REGDIR-CIC06      PIC 9(8).                    FAC0010 
+               05  CALIFIC-FINAL-CIC06     PIC 999V99.                  FAC0005
+               05  CALIFIC-GRUPO1-CIC06    PIC 999V99.                  FAC0005
+               05  CALIFIC-GRUPO2-CIC06    PIC 999V99.                  FAC0005
+               05  CALIFIC-GRUPO3-CIC06    PIC 999V99.                  FAC0005
+               05  CALIFIC-TOTAL-CIC06     PIC 999V99.                  FAC0005
+               05  FECHA-CALIFIC-CIC06     PIC 9(8).                    FAC0005
+               05  NUM-SEGURIDAD-CIC06     PIC 9(4).                    FAC0005
+               05  IND-PROG-CALIFIC-CIC06  PIC X(02).                   FAC0005
+PAG023         05  IND-CONVERSION-CIC06    PIC X(01).                   FAC0008
+PAG023         05  FILLER-CIC06            PIC X(02).                   FAC0008
+014700         05  IND-VISOR-CIC06         PIC X(15).                   FAC0007
+011200 01  REGISTRO2-CIC06.
+011300     03  NUM-CTA-CIC06               PIC X(18).
+           03  NUM-CTA16-CIC06    REDEFINES NUM-CTA-CIC06.               AMPINF
+               05 NUM-CTA-VEN-CIC06        PIC 9(16).                    AMPINF
+               05 GARANTE-VEN-CIC06        PIC 99.                       AMPINF
+011400     03  NUM-ID-CIC06                PIC 9(11).
+011500     03  NOMBRE-COMP-CIC06           PIC X(45).
+011600     03  FECHA-NAC-CIC06.
+011700         05 M-FNAC                   PIC 9(2).
+               05 S-FNAC                   PIC 9(2).
+011800         05 A-FNAC                   PIC 9(2).
+           03  FECHA-NAC-CIC06-M  REDEFINES FECHA-NAC-CIC06.
+               05 S-FNAC-M                 PIC 9(2).
+               05 A-FNAC-M                 PIC 9(2).
+               05 M-FNAC-M                 PIC 9(2).
+011900     03  FECHA-APERT-CIC06.
+012000         05 M-FAPE                   PIC 9(2).
+               05 S-FAPE                   PIC 9(2).
+012100         05 A-FAPE                   PIC 9(2).
+           03  FECHA-APERT-CIC06-M  REDEFINES FECHA-APERT-CIC06.
+               05 S-FAPE-M                 PIC 9(2).
+               05 A-FAPE-M                 PIC 9(2).
+               05 M-FAPE-M                 PIC 9(2).
+012200     03  FECHA-VENC-CIC06.
+012300         05 M-FVEN                   PIC 9(2).
+               05 S-FVEN                   PIC 9(2).
+012400         05 A-FVEN                   PIC 9(2).
+           03  FECHA-VENC-CIC06-M  REDEFINES FECHA-VENC-CIC06.
+               05 S-FVEN-M                 PIC 9(2).
+               05 A-FVEN-M                 PIC 9(2).
+               05 M-FVEN-M                 PIC 9(2).
+012500     03  VALOR-CUOTA-MES-CIC06       PIC 9(10).
+012600     03  NOVEDAD-CIC06               PIC 9(2).
+012700     03  ADJETIVO-ACTUAL-1           PIC 99.
+012800     03  TIPO-IDEN-CIC06             PIC 9.
+      *    INFORMACION ENDEUDAMIENTO GLOBAL                              AMPINF
+           03  VALOR-INICIAL-CIC06         PIC 9(10).                    AMPINF
+           03  VALOR-SALDO-DEUDA-CIC06     PIC 9(10).                    AMPINF
+           03  VALOR-SALDO-MORA-CIC06      PIC 9(10).                    AMPINF
+           03  VALOR-DISPONIBLE-CIC06      PIC 9(10).                    AMPINF
+           03  TIPO-MONEDA-CIC06           PIC 9.                        AMPINF
+           03  TIPO-OBLIGACION-CIC06       PIC 9.                        AMPINF
+           03  TIPO-GARANTIA-CIC06         PIC 9.                        AMPINF
+           03  CALIFICACION-CIC06          PIC X.                        AMPINF
+      *    INFORMACION ADICIONAL PERSONAL                                AMPINF
+           03  CIUDAD-RESIDENCIA-CIC06     PIC X(15).                    AMPINF
+           03  DIREC-RESIDENCIA-CIC06      PIC X(30).                    AMPINF
+           03  TELEF-RESIDENCIA-CIC06      PIC 9(10).                    AMPINF
+           03  CIUDAD-LABORAL-CIC06        PIC X(15).                    AMPINF
+           03  TELEF-LABORAL-CIC06         PIC 9(10).                    AMPINF
+           03  CIUDAD-CORRESP-CIC06        PIC X(15).                    AMPINF
+           03  DIREC-CORRESP-CIC06         PIC X(30).                    AMPINF
+           03  CIIU-CIC06                  PIC 9(6).                     AMPINF
+      *    INFORMACION ADICIONAL HABITO DE PAGO                          AMPINF
+           03  TOTAL-CUOTAS-CIC06          PIC 9(3).                     AMPINF
+           03  CUOTAS-CANCELADAS-CIC06     PIC 9(3).                     AMPINF
+           03  CUOTAS-EN-MORA-CIC06        PIC 9(3).                     AMPINF
+           03  FECHA-DE-PAGO-CIC06.                                      AMPINF
+               05 DIA-DE-PAGO-CIC06        PIC 9(2).                     AMPINF
+               05 MES-DE-PAGO-CIC06        PIC 9(2).                     AMPINF
+               05 SIG-DE-PAGO-CIC06        PIC 9(2).                     AMPINF
+               05 ANO-DE-PAGO-CIC06        PIC 9(2).                     AMPINF
+           03  FECHA-DE-PAGO-CIC06-M  REDEFINES FECHA-DE-PAGO-CIC06.     AMPINF
+               05 SIG-DE-PAGO-CIC06-M      PIC 9(2).                     AMPINF
+               05 ANO-DE-PAGO-CIC06-M      PIC 9(2).                     AMPINF
+               05 MES-DE-PAGO-CIC06-M      PIC 9(2).                     AMPINF
+               05 DIA-DE-PAGO-CIC06-M      PIC 9(2).                     AMPINF
+           03  OFICINA-RADICACION-CIC06    PIC X(15).                    AMPINF
+           03  CIUDAD-RADICACION-CIC06     PIC X(15).                    AMPINF
+           03  FORMA-DE-PAGO-CIC06         PIC 9.                        AMPINF
+           03  PERIODICIDAD-DE-PAGO-CIC06  PIC 9.                        AMPINF
+           03  MOROSIDAD-CIC06             PIC 9(3).                     MOROSI
+           03  FECHA-DE-CORTE-CIC06.                                     AMPINF
+               05 DIA-DE-CORTE-CIC06       PIC 9(2).                     AMPINF
+               05 MES-DE-CORTE-CIC06       PIC 9(2).                     AMPINF
+               05 SIG-DE-CORTE-CIC06       PIC 9(2).                     AMPINF
+               05 ANO-DE-CORTE-CIC06       PIC 9(2).                     AMPINF
+           03  FECHA-DE-CORTE-CIC06-M  REDEFINES FECHA-DE-CORTE-CIC06.   AMPINF
+               05 SIG-DE-CORTE-CIC06-M     PIC 9(2).                     AMPINF
+               05 ANO-DE-CORTE-CIC06-M     PIC 9(2).                     AMPINF
+               05 MES-DE-CORTE-CIC06-M     PIC 9(2).                     AMPINF
+               05 DIA-DE-CORTE-CIC06-M     PIC 9(2).                     AMPINF
+           03  IND-CORRECCION-CIC06        PIC 9.                        AMPINF
+           03  GARANTE-CIC06               PIC 9(2).                     AMPINF
+           03  ESTRATO-CIC06               PIC 9.                        AMPINF
+      *    ESPACIO DE USO FUTURO                                         AMPINF
+           03  NUM-CONTROL-CIC06           PIC 9(03).                   FAC0005
+           03  IND-ACTUAL-CIC06            PIC 9(01).                   VHF0006
+           03  FILLER                      PIC X(10).                   VHF0006
+013100 01  REGISTRO3-CIC06.                                              AMPINF
+           03  IDENTIFICADOR-CIC06         PIC X(18).                    AMPINF
+           03  FECHA-PROCESO-CIC06.                                      AMPINF
+               05 DIA-PROCESO-CIC06        PIC 9(2).                     AMPINF
+               05 MES-PROCESO-CIC06        PIC 9(2).                     AMPINF
+               05 SIG-PROCESO-CIC06        PIC 9(2).                     AMPINF
+               05 ANO-PROCESO-CIC06        PIC 9(2).                     AMPINF
+           03  FECHA-PROCESO-CIC06-M  REDEFINES FECHA-PROCESO-CIC06.     AMPINF
+               05 SIG-PROCESO-CIC06-M      PIC 9(2).                     AMPINF
+               05 ANO-PROCESO-CIC06-M      PIC 9(2).                     AMPINF
+               05 MES-PROCESO-CIC06-M      PIC 9(2).                     AMPINF
+               05 DIA-PROCESO-CIC06-M      PIC 9(2).                     AMPINF
+           03  NUM-REGISTROS-CIC06         PIC 9(8).                     AMPINF
+           03  SUMA-NOVEDADES-CIC06        PIC 9(8).                     AMPINF
+013310     03 RESTO-REG3                   PIC X(318).                   AMPINF
+013100 01  REGISTRO4-CIC06.
+013200     03  DATOS-REPORTADOS-ACTUAL     PIC X(107).
+013310     03 FILLER                       PIC X(253).
+013400******************************************************************

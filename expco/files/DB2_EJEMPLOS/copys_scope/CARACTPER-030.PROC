@@ -1,0 +1,411 @@
+REMARK*CARACTPER-030.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 030
+REMARK*    BANCO POPULAR      
+REMARK******************************************************************
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-030.
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999RO030) TO L-AUX
+               MOVE 01NUM999RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM998RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM998RO030) TO L-AUX
+               MOVE 01NUM998RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM997RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM997RO030) TO L-AUX
+               MOVE 01NUM997RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM996RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM996RO030) TO L-AUX
+               MOVE 01NUM996RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO030) TO L-AUX
+               MOVE 01END999RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END998RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END998RO030) TO L-AUX
+               MOVE 01END998RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END997RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END997RO030) TO L-AUX
+               MOVE 01END997RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END996RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END996RO030) TO L-AUX
+               MOVE 01END996RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM995RO030" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM995RO030) TO L-AUX
+               MOVE 01NUM995RO030(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-30.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-30.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 30    *
+REMARK*     PARA BANCO POPULAR      
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-30-NIVEL-01-NUM
+             MOVE ALL "         -1" TO PER-30-NIVEL-01-END
+             PERFORM  9999-CARAC-GENERALES.
+
+       2249-PROCESE-CARCT-00NUM-EXT-30.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-30.                                *
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00NUM Y 01NUM     *
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+            MOVE ALL "  -1" TO PER-30-NIVEL-00-NUM
+REMARK*** 00NUM999RO030 *** CANTIDAD TDC DIFERENTE A BANCO POPULAR
+            IF COD-CTA-ABD07 = 02
+               MOVE ZEROS TO 00NUM999RO030
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        IF NIT-SUSCRIP-S-ABD02 <> 860007738
+                           MOVE 1 TO 00NUM999RO030
+                        END-IF
+                     ELSE
+                        MOVE "  -4" TO 00NUM999RO030(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM999RO030(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM999RO030(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM998RO030 *** CANTIDAD TDC DEL BANCO POPULAR
+            IF COD-CTA-ABD07 = 02
+               MOVE ZEROS TO 00NUM998RO030
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        IF NIT-SUSCRIP-S-ABD02 = 860007738
+                           MOVE 1 TO 00NUM998RO030
+                        END-IF
+                     ELSE
+                        MOVE "  -4" TO 00NUM998RO030(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM998RO030(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM998RO030(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM997RO030 *** # TDC DIFERENTE BANCO POPULAR ABIER ULT 6 M
+            IF COD-CTA-ABD07 = 02
+               MOVE ZEROS TO 00NUM997RO030
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     FECHA-APERT-CARACT > ZEROS
+                     IF MESES-MADUR-CARACT <= 6
+                        IF NIT-SUSCRIP-S-ABD02 <> 860007738
+                           MOVE 1 TO 00NUM997RO030
+                        END-IF
+                     ELSE
+                        MOVE "  -4" TO 00NUM997RO030(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM997RO030(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM997RO030(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM996RO030 *** # TDC BANCO POPULAR ABIERTA ULT 6 MESES
+            IF COD-CTA-ABD07 = 02
+               MOVE ZEROS TO 00NUM996RO030
+               IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     FECHA-APERT-CARACT > ZEROS
+                     IF MESES-MADUR-CARACT <= 6
+                        IF NIT-SUSCRIP-S-ABD02 = 860007738
+                           MOVE 1 TO 00NUM996RO030
+                        END-IF
+                     ELSE
+                        MOVE "  -4" TO 00NUM996RO030(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM996RO030(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM996RO030(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM995RO030 *** TDC CANCELADAS MAL MANEJO               
+            IF COD-CTA-ABD07 = 02
+               MOVE ZEROS TO 00NUM995RO030
+               IF NOV-REPORT-ABD07 = 03
+                  MOVE 1 TO 00NUM995RO030
+               END-IF
+            END-IF
+REMARK*** 01NUM999RO030 *** CANTIDAD TDC DIFERENTE A BANCO POPULAR
+           IF FUNCTION NUMVAL(00NUM999RO030(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM999RO030(1:4)) < 0
+                 MOVE ZEROS TO 01NUM999RO030
+              END-IF
+              COMPUTE 01NUM999RO030 = 01NUM999RO030 + 00NUM999RO030
+           ELSE
+              IF FUNCTION NUMVAL(01NUM999RO030(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999RO030(1:4)) <
+                  FUNCTION NUMVAL(01NUM999RO030(1:4))
+                  MOVE 00NUM999RO030(1:4) TO 01NUM999RO030(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 01NUM998RO030 *** CANTIDAD TDC DEL BANCO POPULAR
+           IF FUNCTION NUMVAL(00NUM998RO030(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM998RO030(1:4)) < 0
+                 MOVE ZEROS TO 01NUM998RO030
+              END-IF
+              COMPUTE 01NUM998RO030 = 01NUM998RO030 + 00NUM998RO030
+           ELSE
+              IF FUNCTION NUMVAL(01NUM998RO030(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM998RO030(1:4)) <
+                  FUNCTION NUMVAL(01NUM998RO030(1:4))
+                  MOVE 00NUM998RO030(1:4) TO 01NUM998RO030(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 01NUM997RO030 *** # TDC DIFERENTE BANCO POPULAR ABIER ULT 6 M
+           IF FUNCTION NUMVAL(00NUM997RO030(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM997RO030(1:4)) < 0
+                 MOVE ZEROS TO 01NUM997RO030
+              END-IF
+              COMPUTE 01NUM997RO030 = 01NUM997RO030 + 00NUM997RO030
+           ELSE
+              IF FUNCTION NUMVAL(01NUM997RO030(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM997RO030(1:4)) <
+                  FUNCTION NUMVAL(01NUM997RO030(1:4))
+                  MOVE 00NUM997RO030(1:4) TO 01NUM997RO030(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 01NUM996RO030 *** # TDC BANCO POPULAR ABIERTA ULT 6 MESES
+           IF FUNCTION NUMVAL(00NUM996RO030(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM996RO030(1:4)) < 0
+                 MOVE ZEROS TO 01NUM996RO030
+              END-IF
+              COMPUTE 01NUM996RO030 = 01NUM996RO030 + 00NUM996RO030
+           ELSE
+              IF FUNCTION NUMVAL(01NUM996RO030(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM996RO030(1:4)) <
+                  FUNCTION NUMVAL(01NUM996RO030(1:4))
+                  MOVE 00NUM996RO030(1:4) TO 01NUM996RO030(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 01NUM995RO030 *** TDC CANCELADAS MAL MANEJO
+           IF FUNCTION NUMVAL(00NUM995RO030(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM995RO030(1:4)) < 0
+                 MOVE ZEROS TO 01NUM995RO030
+              END-IF
+              COMPUTE 01NUM995RO030 = 01NUM995RO030 + 00NUM995RO030
+           ELSE
+              IF FUNCTION NUMVAL(01NUM995RO030(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM995RO030(1:4)) <
+                  FUNCTION NUMVAL(01NUM995RO030(1:4))
+                  MOVE 00NUM995RO030(1:4) TO 01NUM995RO030(1:4)
+               END-IF
+              END-IF
+           END-IF               
+         END-IF.
+
+       2749-PROCESE-CARCT-00END-EXT-30.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-30.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00END Y 01END BCO POPULAR
+REMARK******************************************************************
+           MOVE ALL "         -1" TO PER-30-NIVEL-00-END
+REMARK***  INSUMO: VECTOR NORMALISADO DE VALORES USA
+REMARK***  00END999RO030 *** CUPO MAXIMO TDC SIN BCO POPULAR    
+           IF COD-CTA-ABD07 = 02
+              MOVE ZEROS TO 00END999RO030
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND
+                 NIT-SUSCRIP-S-ABD02 <> 860007738
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND
+                          VEC-IND-INI-CARACT(I13) = 0
+                          MOVE VEC-INICIAL-CARACT(I13) TO
+                               00END999RO030
+                       ELSE
+                          MOVE "        -88" TO 00END999RO030(1:11)
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00END999RO030(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00END999RO030(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00END999RO030(1:11)
+              END-IF
+           END-IF
+REMARK***  00END998RO030 *** CUPO MAXIMO TDC BCO POPULAR
+           IF COD-CTA-ABD07 = 02
+              MOVE ZEROS TO 00END998RO030
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND
+                 NIT-SUSCRIP-S-ABD02 = 860007738
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND
+                          VEC-IND-INI-CARACT(I13) = 0
+                          MOVE VEC-INICIAL-CARACT(I13) TO
+                               00END998RO030
+                       ELSE
+                          MOVE "        -88" TO 00END998RO030(1:11)
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00END998RO030(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00END998RO030(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00END998RO030(1:11)
+              END-IF
+           END-IF
+REMARK***  00END997RO030 *** CUPO MINIMO TDC SIN BCO POPULAR
+           IF COD-CTA-ABD07 = 02
+              MOVE 99999999999 TO 00END997RO030
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND
+                 NIT-SUSCRIP-S-ABD02 <> 860007738
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND
+                          VEC-IND-INI-CARACT(I13) = 0
+                          MOVE VEC-INICIAL-CARACT(I13) TO
+                               00END997RO030
+                       ELSE
+                          MOVE "        -88" TO 00END997RO030(1:11)
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00END997RO030(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00END997RO030(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00END997RO030(1:11)
+              END-IF
+           END-IF
+REMARK***  00END996RO030 *** CUPO MINIMO TDC BCO POPULAR
+           IF COD-CTA-ABD07 = 02
+              MOVE 99999999999 TO 00END996RO030
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0 AND
+                 NIT-SUSCRIP-S-ABD02 = 860007738
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND
+                          VEC-IND-INI-CARACT(I13) = 0
+                          MOVE VEC-INICIAL-CARACT(I13) TO
+                               00END996RO030
+                       ELSE
+                          MOVE "        -88" TO 00END996RO030(1:11)
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00END996RO030(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00END996RO030(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00END996RO030(1:11)
+              END-IF
+           END-IF
+REMARK***  01END999RO030 *** CUPO MAXIMO TDC SIN BCO POPULAR    
+           IF FUNCTION NUMVAL(00END999RO030(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END999RO030(1:11)) < 0
+                 MOVE ZEROS TO 01END999RO030
+              END-IF
+              IF 00END999RO030 > 01END999RO030
+                 MOVE 00END999RO030 TO 01END999RO030
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(01END999RO030(1:11)) < 0
+               IF FUNCTION NUMVAL(00END999RO030(1:11)) <
+                  FUNCTION NUMVAL(01END999RO030(1:11))
+                  MOVE 00END999RO030(1:11) TO 01END999RO030(1:11)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  01END998RO030 *** CUPO MAXIMO TDC BCO POPULAR
+           IF FUNCTION NUMVAL(00END998RO030(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END998RO030(1:11)) < 0
+                 MOVE ZEROS TO 01END998RO030
+              END-IF
+              IF 00END998RO030 > 01END998RO030
+                 MOVE 00END998RO030 TO 01END998RO030
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(01END998RO030(1:11)) < 0
+               IF FUNCTION NUMVAL(00END998RO030(1:11)) <
+                  FUNCTION NUMVAL(01END998RO030(1:11))
+                  MOVE 00END998RO030(1:11) TO 01END998RO030(1:11)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  01END997RO030 *** CUPO MINIMO TDC SIN BCO POPULAR
+           IF FUNCTION NUMVAL(00END997RO030(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END997RO030(1:11)) < 0
+                 MOVE 99999999999 TO 01END997RO030
+              END-IF
+              IF 00END997RO030 < 01END997RO030
+                 MOVE 00END997RO030 TO 01END997RO030
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(01END997RO030(1:11)) < 0
+               IF FUNCTION NUMVAL(00END997RO030(1:11)) <
+                  FUNCTION NUMVAL(01END997RO030(1:11))
+                  MOVE 00END997RO030(1:11) TO 01END997RO030(1:11)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  01END996RO030 *** CUPO MINIMO TDC BCO POPULAR
+           IF FUNCTION NUMVAL(00END996RO030(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END996RO030(1:11)) < 0
+                 MOVE 99999999999 TO 01END996RO030
+              END-IF
+              IF 00END996RO030 < 01END996RO030
+                 MOVE 00END996RO030 TO 01END996RO030
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(01END996RO030(1:11)) < 0
+               IF FUNCTION NUMVAL(00END996RO030(1:11)) <
+                  FUNCTION NUMVAL(01END996RO030(1:11))
+                  MOVE 00END996RO030(1:11) TO 01END996RO030(1:11)
+               END-IF
+              END-IF
+           END-IF.
+

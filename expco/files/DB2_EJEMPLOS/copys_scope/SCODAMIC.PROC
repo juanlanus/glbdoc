@@ -1,0 +1,128 @@
+      * SCODAMIC-PROC.v.0001
+REMARK************************************************************************
+REMARK* CONJUNTO DE RUTINAS QUE PERMITE CALCULAR EL SCORE GENERICO DE
+REMARK* MICROCREDITO                                                       *
+REMARK* ENTRADA :CUANDO SE INVOCA ESTE COPY LAS CARACTERÍSTICAS YA DEBEN
+REMARK*  ESTAR LEÍDAS Y CALCULADAS Y LA FORMA DE LLAMADO ES PERFORM A
+REMARK*  5000-CALCULAR-SCORE-DAMIC.
+REMARK*  LAS CARACTERISTICAS SE TUVIERON QUE HABER LLAMADO CON "MIC"
+REMARK*  EN EL PARAMETRO RUTINA-PORTAFOLIO-CARACT
+REMARK* SALIDAS
+REMARK*   EL CALCULO DEL SCORE SE ENTREGA 
+REMARK*   SIGUIENTES VARIABLES
+REMARK*      SCORE-DAMIC                        PIC 9(3).
+REMARK*  ADICIONALMENTE SE ENTREGAN LAS RAZONES ADVERSAS Y EL SCORE-CARD
+REMARK*      ADVERSE-RAZON-USAPI OCCURS 4 TIMES PIC 9(02).
+REMARK*      SCORE-CARD-USAPI                   PIC 9(01).
+REMARK*
+REMARK**********************************************************************
+       5000-CALCULAR-CAR-SCORE-DAMIC.
+REMARK**********************************************************************
+REMARK*5000-CALCULAR-CAR-SCORE-DAMIC.
+REMARK* RUTINA QUE LLAMA LAS CARACTERISTICAS SIN LEY EL SCORE PREDICTA HD
+REMARK**********************************************************************
+           MOVE AMNISTIA21-LEEMSTRS TO AMNISTIA21-CARACT.      
+           MOVE SW-ART13-AMNIST21   TO AMNISTIA21-ART13-CARACT.
+           MOVE 0 TO AMNISTIA21-LEEMSTRS .
+           MOVE 0 TO SW-ART13-AMNIST21  .  
+           IF TIPO-ID-CARACT = 1 OR TIPO-ID-CARACT  = 4 
+              MOVE "MIC" TO RUTINA-PORTAFOLIO-CARACT
+              PERFORM 1000-CALCULAR-CARACTERISTICAS    
+              PERFORM 5000-CALCULAR-SCORE-DAMIC      
+           ELSE                                     
+              PERFORM 5000A-INICIALIZAR-DAMIC      
+              MOVE 1 TO CON-EXCLUSION-DAMIC       
+              MOVE 70  TO  ADVERSE-RAZON-DAMIC(1)
+           END-IF.                              
+           MOVE  AMNISTIA21-CARACT TO AMNISTIA21-LEEMSTRS.
+           MOVE  AMNISTIA21-ART13-CARACT TO SW-ART13-AMNIST21.
+       5000-CALCULAR-SCORE-DAMIC.
+REMARK**********************************************************************
+REMARK*5000-CALCULAR-SCORE-DAMIC.
+REMARK* RUTINA QUE EXAMINA EL PERFIL DE UNA PERSONA, APLICA EXCLUSIONES
+REMARK* Y SI PASA EL FILTRO ESTIMA EL INGRESO DE ELLA.
+REMARK**********************************************************************
+           PERFORM 5000A-INICIALIZAR-DAMIC.
+           PERFORM 5100-VER-EXCLUSIONES-DAMIC
+           IF CON-EXCLUSION-DAMIC = 0
+              PERFORM 5200-VER-SCORE-CARD-DAMIC
+           END-IF.    
+       5000A-INICIALIZAR-DAMIC.
+REMARK**********************************************************************
+REMARK*    SE INICIALIZAN LAS VARIABLES INVOLUCRADAS EN LAS EXCLUSIONES Y
+REMARK*    CALCULO DE LA SEGMENTACION A APLICAR.
+REMARK**********************************************************************
+           INITIALIZE VARIABLES-WORK-DAMIC.
+       5100-VER-EXCLUSIONES-DAMIC.
+REMARK**********************************************************************
+REMARK*5100-VER-EXCLUSIONES-DAMIC.
+REMARK* DE ACUERDO A CARACTERISTICAS ESPECIFICAS SE EXAMINA SI ES UNA
+REMARK* PERSONA SUJETA A EXCLUSION EN EL CALCULO DE PREDICTA HD
+REMARK**********************************************************************
+           *> CLIENTES TIPO ID 2 OR 3
+           IF TIPO-ID-CARACT NOT = 1 AND TIPO-ID-CARACT NOT = 4
+              MOVE 1 TO CON-EXCLUSION-DAMIC 
+              MOVE 70  TO  ADVERSE-RAZON-DAMIC(1)  
+           END-IF.
+           IF CON-EXCLUSION-DAMIC = 0
+              IF RUTINA-PORTAFOLIO-CARACT <> "MIC"
+                 MOVE 1 TO CON-EXCLUSION-DAMIC 
+                 MOVE 81  TO  ADVERSE-RAZON-DAMIC(1)  
+              END-IF
+           END-IF.
+           IF CON-EXCLUSION-DAMIC = 0
+              IF MI-ACTIVOS-TOTALES-DAMIC NOT NUMERIC 
+                 MOVE 1 TO CON-EXCLUSION-DAMIC 
+                 MOVE 82  TO  ADVERSE-RAZON-DAMIC(1)  
+              END-IF
+           END-IF.
+           IF CON-EXCLUSION-DAMIC = 0
+              IF MI-PERSONAS-A-CARGO-DAMIC   NOT NUMERIC 
+                 MOVE 1 TO CON-EXCLUSION-DAMIC 
+                 MOVE 83  TO  ADVERSE-RAZON-DAMIC(1)  
+              END-IF
+           END-IF.
+       5200-VER-SCORE-CARD-DAMIC.
+REMARK**********************************************************************
+REMARK*5200-VER-SCORE-CARD-DAMIC.
+REMARK*    SE EXAMINAN LAS CARACTERISTICAS QUE DETERMINAN A QUE SEGMENTO 
+REMARK*    PERTENECE LA PERSONA EXAMINANADA.
+REMARK**********************************************************************
+           PERFORM 6100-SCORE-CARD1-DAMIC.
+       6100-SCORE-CARD1-DAMIC.
+REMARK********************************************************************
+REMARK*6100-SCORE-CARD1-DAMIC.
+REMARK*    SE CALCULA EL SCORE PARA LOS CLIENTES O PERSONAS SIN UN         
+REMARK*    PORTAFOLIO MUY COMPLEJO           
+REMARK********************************************************************
+           MOVE 1   TO  SCORE-CARD-DAMIC.
+           MOVE 99  TO  ADVERSE-RAZON-DAMIC(1) .
+           MOVE 200   TO  SCORE-DAMIC
+           IF MI-ACTIVOS-TOTALES-DAMIC <> ALL "9"
+              ADD 100 TO  SCORE-DAMIC
+              MOVE 1 TO I-DAMIC
+              PERFORM UNTIL I-DAMIC > 15
+                MOVE
+                FUNCTION NUMVAL(MI-ACTIVOS-TOTALES-DAMIC(I-DAMIC:1)) 
+                TO J-DAMIC
+                ADD J-DAMIC TO ADVERSE-RAZON-DAMIC(2)
+                ADD 1 TO I-DAMIC
+              END-PERFORM
+           ELSE
+              MOVE 99 TO ADVERSE-RAZON-DAMIC(2)
+           END-IF
+           IF MI-PERSONAS-A-CARGO-DAMIC <> ALL "9"
+              ADD 300 TO  SCORE-DAMIC
+              MOVE 1 TO I-DAMIC
+              PERFORM UNTIL I-DAMIC > 5
+                MOVE
+                FUNCTION NUMVAL(MI-PERSONAS-A-CARGO-DAMIC(I-DAMIC:1)) 
+                TO J-DAMIC
+                ADD J-DAMIC TO ADVERSE-RAZON-DAMIC(3)
+                ADD 1 TO I-DAMIC
+              END-PERFORM
+           ELSE
+              MOVE 99 TO ADVERSE-RAZON-DAMIC(3)
+           END-IF.             
+       6000-DESPLEGAR-AUDITORIA-DAMIC.
+           EXIT.

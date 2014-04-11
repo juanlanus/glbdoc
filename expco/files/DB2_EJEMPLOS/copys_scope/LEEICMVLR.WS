@@ -1,0 +1,362 @@
+      *LEEICMVLR.WS.v.01.0005
+      ******************************************************************
+      * ESTE ARCHIVO CONTIENE LAS VARIABLES NECESARIAS PARA REALIZAR EL*
+      * LLAMADO A LA RUTINA LEEICMVLR.PROC                             *
+REMARK******************************************************************
+REMARK*                     LOG DE MODIFICACIONES                      *
+REMARK******************************************************************
+REMARK* EAL002      * ICMVLR - ADICIONAR VARIABLES PARA VERIFICACION DE*
+REMARK* E. ALVAREZ  *          EXISTENCIA DE ARCHIVOS ICMVLR           *
+REMARK* AUG./2009   *                                                  *
+REMARK* INTERSCHEMES*                                                  *
+REMARK******************************************************************
+REMARK* EAL0003     * CAMCHK - ADICIONAR VARIABLES PARA MODIFICACION   *
+REMARK* E. ALVAREZ  *          EN LEEICMVLR.PROC DE LA FECHA DE CUENTAS*
+REMARK* JAN./2010   *          INACTIVAS                               *
+REMARK* DATACREDITO *                                                  *
+REMARK******************************************************************
+REMARK* EHA0004     * CAMOPT - SE REALIZAN MODIFICACIONES PARA SACAR   *
+REMARK* E. ALVAREZ  *          LA LOGICA INCLUIDA EN LOS READ DE LOS   *
+REMARK* FEB/2010    *          ARCHIVOS DE VALORES.                    *
+REMARK*             * EHAXXX - SE INCLUYEN VARIABLES PARA EL MANEJO DE *
+REMARK*             *          OBLIGACIONES CON NOVEDAD 45 Y 47        *
+REMARK******************************************************************
+REMARK* CAV0005     * INFHIS - SE REDEFINEN CAMPOS DE CTAS CTES PARA   *
+REMARK* C. VELASCO. *          GUARDAR INFORMACION HISTORICA DE CARTERA*
+REMARK* 10/OCT/2011.*          Y SE ADICIONA VECTOR DE CALIFICACIONES  *
+REMARK******************************************************************
+      *VARIABLES DE SALIDA*
+******* VEC-VAL-NV-LEEICMVLR CONTIENE LAS 48 OCURRENCIAS DE VALORES
+******* TOMANDO LA OCURRENCIA 1 COMO LA MÁS RECIENTE Y LA 48 COMO LA MÁS
+******* ANTIGUA EN EL VECTOR
+
+       01  RESTO-VALORES-LEEICMVLR.
+           03  LLAVE-MAES-LEEICMVLR.
+               05  TIPO-ID-LEEICMVLR              PIC 9.
+               05  NUM-ID-LEEICMVLR               PIC 9(11).
+               05  COD-SUS-LEEICMVLR              PIC 9(06).
+               05  COD-CTA-LEEICMVLR              PIC 99.
+               05  NUM-CTA-LEEICMVLR              PIC X(18).
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03  CODIGO-DANE-LEEICMVLR          PIC 9(8) COMP-3.
+           03  CIUDAD-RADICACION-LEEICMVLR    PIC X(30).
+           03  OFICINA-RADICACION-LEEICMVLR   PIC X(30).
+           03 MIGRADO-UNIFICADO-LEEICMVLR     PIC X(01).
+           03 FILLER                          PIC X(50).
+      
+       01  VALORES-NV-LEEICMVLR.
+           03 VEC-VAL-NV-LEEICMVLR            OCCURS  48  TIMES.
+              05  CUOTA-NV-LEEICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-NV-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-NV-LEEICMVLR.
+              05  IND-CUOTA-NV-LEEICMVLR            PIC 9.
+              05  IND-DEBITOS-EFEC-NV-LEEICMVLR     PIC 9
+                  REDEFINES                     IND-CUOTA-NV-LEEICMVLR.
+
+              05  SALDO-NV-LEEICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-NV-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-NV-LEEICMVLR.
+              05  IND-SALDO-NV-LEEICMVLR            PIC 9.
+              05  IND-CREDITO-EFEC-NV-LEEICMVLR     PIC 9
+                  REDEFINES                     IND-SALDO-NV-LEEICMVLR.
+
+              05  SALDO-MORA-NV-LEEICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TR-NV-LEEICMVLR       PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-NV-LEEICMVLR.
+              05  IND-SALDO-MORA-NV-LEEICMVLR       PIC 9.
+              05  IND-DEBITOS-TR-NV-LEEICMVLR       PIC 9
+                  REDEFINES                IND-SALDO-MORA-NV-LEEICMVLR.
+
+              05  VAL-INICIAL-NV-LEEICMVLR          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TR-NV-LEEICMVLR        PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-NV-LEEICMVLR.
+              05  IND-VAL-INIC-NV-LEEICMVLR         PIC 9.
+              05  IND-CREDIT-TR-NV-LEEICMVLR        PIC 9
+                  REDEFINES                  IND-VAL-INIC-NV-LEEICMVLR.
+
+              05  SALDO-DISP-NV-LEEICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-NV-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-NV-LEEICMVLR.
+              05  IND-SALDO-DISP-NV-LEEICMVLR       PIC 9.
+              05  IND-CHEQ-DEVUELT-NV-LEEICMVLR     PIC 9
+                  REDEFINES                IND-SALDO-DISP-NV-LEEICMVLR.
+
+              05  MOROSIDAD-NV-LEEICMVLR            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-NV-LEEICMVLR       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-NV-LEEICMVLR.
+              05  IND-MOROSIDAD-NV-LEEICMVLR        PIC 9.
+              05  IND-CANT-CHE-DEV-NV-LEEICMVLR     PIC 9
+                  REDEFINES IND-MOROSIDAD-NV-LEEICMVLR.
+REMARK* CAMPOS CREADOS PARA INFORMACION DE CUENTAS CTES Y AHORROS
+INFHIS*SE CAMBIA EL ORDEN DEL REDEFINE CON RESPECTO AL ICMVLR.FD PARA   CAV0005
+INFHIS*INICIALIZAR LOS VALORES CON RESPECTO A LOS REGISTROS DE CARTERA  CAV0005
+INFHIS*LOS DE ICMCHK SE INICIALIZAN DESPUES DE LA INST INITIALIZE       CAV0005
+INFHIS        05  INF-CARTERA-NV-LEEICMVLR.                             CAV0005
+INFHIS            07  FECHA-PAGO-NV-LEEICMVLR         PIC 9(06) COMP-3. CAV0005
+INFHIS            07  IND-FECHA-PAGO-NV-LEEICMVLR     PIC 9.            CAV0005
+INFHIS            07  FECHA-LIM-PAGO-NV-LEEICMVLR     PIC 9(06) COMP-3. CAV0005
+INFHIS            07  IND-FECHA-LIM-PAGO-NV-LEEICMVLR PIC 9.            CAV0005
+INFHIS        05  INF-CTES-Y-AHO-NV-LEEICMVLR REDEFINES                 CAV0005
+INFHIS                                   INF-CARTERA-NV-LEEICMVLR.      CAV0005
+INFHIS            07  VAL-CHEQ-PAGADOS-NV-LEEICMVLR  PIC 9(11)  COMP-3. CAV0005
+INFHIS            07  IND-CHEQ-PAGADOS-NV-LEEICMVLR  PIC 9.             CAV0005
+INFHIS            07  CANT-CHEQ-PAG-NV-LEEICMVLR     PIC 9(3)   COMP-3. CAV0005
+INFHIS            07  IND-CANT-CHE-PA-NV-LEEICMVLR   PIC 9.             CAV0005
+
+INFHIS     03 VEC-CALIFIC-NV-LEEICMVLR OCCURS 48 TIMES.                 CAV0005
+INFHIS        05  CALIFICACION-NV-LEEICMVLR         PIC X(01).          CAV0005
+INFHIS        05  V-IND-CALIFICACION-NV-LEEICMVLR   PIC 9.              CAV0005
+
+******* VEC-VAL-NV-LEEICMVLR CONTIENE LAS 48 OCURRENCIAS DE VALORES
+******* TOMANDO LA OCURRENCIA 1 COMO LA MÁS ANTIGUA Y LA 48 COMO LA MÁS
+******* RECIENTE EN EL VECTOR
+
+       01  VALORES-VN-LEEICMVLR.
+           03 VEC-VAL-VN-LEEICMVLR            OCCURS  48  TIMES.
+              05  CUOTA-VN-LEEICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-VN-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-VN-LEEICMVLR.
+              05  IND-CUOTA-VN-LEEICMVLR            PIC 9.
+              05  IND-DEBITOS-EFEC-VN-LEEICMVLR     PIC 9
+                  REDEFINES                   IND-CUOTA-VN-LEEICMVLR.
+
+              05  SALDO-VN-LEEICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-VN-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-VN-LEEICMVLR.
+              05  IND-SALDO-VN-LEEICMVLR            PIC 9.
+              05  IND-CREDITO-EFEC-VN-LEEICMVLR     PIC 9
+                  REDEFINES                   IND-SALDO-VN-LEEICMVLR.
+
+              05  SALDO-MORA-VN-LEEICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TR-VN-LEEICMVLR       PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-VN-LEEICMVLR.
+              05  IND-SALDO-MORA-VN-LEEICMVLR       PIC 9.
+              05  IND-DEBITOS-TR-VN-LEEICMVLR       PIC 9
+                  REDEFINES              IND-SALDO-MORA-VN-LEEICMVLR.
+
+              05  VAL-INICIAL-VN-LEEICMVLR          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TR-VN-LEEICMVLR        PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-VN-LEEICMVLR.
+              05  IND-VAL-INIC-VN-LEEICMVLR         PIC 9.
+              05  IND-CREDIT-TR-VN-LEEICMVLR        PIC 9
+                  REDEFINES                IND-VAL-INIC-VN-LEEICMVLR.
+
+              05  SALDO-DISP-VN-LEEICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-VN-LEEICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-VN-LEEICMVLR.
+              05  IND-SALDO-DISP-VN-LEEICMVLR       PIC 9.
+              05  IND-CHEQ-DEVUELT-VN-LEEICMVLR     PIC 9
+                  REDEFINES                IND-SALDO-DISP-VN-LEEICMVLR.
+
+              05  MOROSIDAD-VN-LEEICMVLR            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-VN-LEEICMVLR       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-VN-LEEICMVLR.
+              05  IND-MOROSIDAD-VN-LEEICMVLR        PIC 9.
+              05  IND-CANT-CHE-DEV-VN-LEEICMVLR     PIC 9
+                  REDEFINES IND-MOROSIDAD-VN-LEEICMVLR.
+REMARK* CAMPOS CREADOS PARA INFORMACION DE CUENTAS CTES Y AHORROS
+INFHIS*SE CAMBIA EL ORDEN DEL REDEFINE CON RESPECTO AL ICMVLR.FD PARA   CAV0005
+INFHIS*INICIALIZAR LOS VALORES CON RESPECTO A LOS REGISTROS DE CARTERA  CAV0005
+INFHIS*LOS DE ICMCHK SE INICIALIZAN DESPUES DE LA INST INITIALIZE       CAV0005
+INFHIS        05  INF-CARTERA-VN-LEEICMVLR.                             CAV0005
+INFHIS            07  FECHA-PAGO-VN-LEEICMVLR         PIC 9(06) COMP-3. CAV0005
+INFHIS            07  IND-FECHA-PAGO-VN-LEEICMVLR     PIC 9.            CAV0005
+INFHIS            07  FECHA-LIM-PAGO-VN-LEEICMVLR     PIC 9(06) COMP-3. CAV0005
+INFHIS            07  IND-FECHA-LIM-PAGO-VN-LEEICMVLR PIC 9.            CAV0005
+INFHIS        05  INF-CTES-Y-AHO-VN-LEEICMVLR REDEFINES                 CAV0005
+INFHIS                                   INF-CARTERA-VN-LEEICMVLR.      CAV0005
+INFHIS            07  VAL-CHEQ-PAGADOS-VN-LEEICMVLR PIC 9(11)  COMP-3.  CAV0005
+INFHIS            07  IND-CHEQ-PAGADOS-VN-LEEICMVLR PIC 9.              CAV0005
+INFHIS            07  CANT-CHEQ-PAG-VN-LEEICMVLR    PIC 9(3)   COMP-3.  CAV0005
+INFHIS            07  IND-CANT-CHE-PA-VN-LEEICMVLR  PIC 9.              CAV0005
+
+INFHIS     03 VEC-CALIFIC-VN-LEEICMVLR OCCURS 48 TIMES.                 CAV0005
+INFHIS        05  CALIFICACION-VN-LEEICMVLR         PIC X(01).          CAV0005
+INFHIS        05  V-IND-CALIFICACION-VN-LEEICMVLR   PIC 9.              CAV0005
+
+       01  FECHA-SIS-LEEICMVLR                    PIC X(08) VALUE ZEROS.
+       01  FECHA-SIS-R-LEEICMVLR REDEFINES FECHA-SIS-LEEICMVLR.
+           03 ANO-SIS-LEEICMVLR            PIC 9(04).
+           03 MES-SIS-LEEICMVLR            PIC 9(02).
+           03 DIA-SIS-LEEICMVLR            PIC 9(02).
+           
+       01  IND-ARCHIVO-LEEICMVLR                    PIC 9(01).
+       01  INDICADOR-VN-LEEICMVLR                   PIC 9(01).
+       01  INDICADOR-REASIG-LEEICMVLR               PIC 9(01).
+       01  IND-MCEROS-LEEICMVLR                     PIC 9(02).
+       01  SW-LECTURA-LEEICMVLR                     PIC 9(01).
+       
+       01  FEC-NOVEDAD-R-AUX-LEEICMVLR.
+           03 MES-NOVEDAD-R-AUX-LEEICMVLR        PIC 9(02) VALUE ZEROS.
+           03 ANO-NOVEDAD-R-AUX-LEEICMVLR        PIC 9(04) VALUE ZEROS.
+       
+       01  FEC-NOVEDAD-LEEICMVLR.
+           03 ANO-NOVEDAD-LEEICMVLR              PIC 9(04) VALUE ZEROS.
+           03 MES-NOVEDAD-LEEICMVLR              PIC 9(02) VALUE ZEROS.
+       
+       01  FEC-SITUACION-LEEICMVLR.
+           03 ANO-SITUACION-LEEICMVLR            PIC 9(04) VALUE ZEROS.
+           03 MES-SITUACION-LEEICMVLR            PIC 9(02) VALUE ZEROS.
+       
+       01  FEC-NOVEDAD-R-LEEICMVLR.
+           03 MES-NOVEDAD-R-LEEICMVLR            PIC 9(02) VALUE ZEROS.
+           03 ANO-NOVEDAD-R-LEEICMVLR            PIC 9(04) VALUE ZEROS.
+       
+       01  FEC-SITUACION-R-LEEICMVLR.
+           03 MES-SITUACION-R-LEEICMVLR          PIC 9(02) VALUE ZEROS.
+           03 ANO-SITUACION-R-LEEICMVLR          PIC 9(04) VALUE ZEROS.
+       
+       01  POSICION-NV-LEEICMVLR                 PIC 9(02).
+       01  POSICION-VN-LEEICMVLR                 PIC 9(02).
+       01  POS-VEC-ACT-LEEICMVLR                 PIC 9(02).
+       01  COR-VEC-ACT-LEEICMVLR                 PIC 9(02).
+       01  FEC-NOVEDAD-TEXT-LEEICMVLR            PIC X(04).
+       01  FEC-SITUACION-TEXT-LEEICMVLR          PIC X(06).
+       
+       01  MAES-FILE-WS-LEEICMVLR                PIC X(70).
+
+EHAXXX*                                                                 EHA0004
+EHAXXX 01  W-F-MMAA-LEEICMVLR                    PIC  9(04).            EHA0004
+EHAXXX 01  W-FECHA-AUX-LEEICMVLR     PIC  9(06)  VALUE  ZEROS.          EHA0004
+EHAXXX 01                            REDEFINES  W-FECHA-AUX-LEEICMVLR.  EHA0004
+EHAXXX     03  W-MES-AUX-LEEICMVLR               PIC  9(02).            EHA0004
+EHAXXX     03  W-ANO-AUX-LEEICMVLR               PIC  9(04).            EHA0004
+EHAXXX 01  W-MESES-NOVEDAD-LEEICMVLR             PIC  9(04).            EHA0004
+EHAXXX 01  W-MESES-VALORES-LEEICMVLR             PIC  9(04).            EHA0004
+EHAXXX 01  MESES-MIGRADO-LEEICMVLR               PIC  9(04).            EHA0004
+EHAXXX*                                                                 EHA0004
+
+CAMCHK 01  IND-CRE-LEEICMVLR                     PIC 9(02).
+CAMCHK 01  VALOR-VECTOR-LEEICMVLR                PIC 9(02).
+CAMCHK 01  CONTADOR-POS-LEEICMVLR                PIC 9(02).
+CAMPAR 01  NUMMESES-LEEICMVLR                    PIC 9(02) VALUE ZEROS.
+CAMOPT 01  WS-MUEVE-CEROS-LEEICMVLR              PIC 9(01).             EHA0004
+
+CAMCHK 01  VECTOR-WS-LEEICMVLR.                                         EAL0003
+CAMCHK     03 VECTOR-W-LEEICMVLR.                                       EAL0003
+CAMCHK        05 VECTOR-W4-LEEICMVLR       PIC 9(12).                   EAL0003
+CAMCHK        05 VECTOR-W4-R-LEEICMVLR REDEFINES VECTOR-W4-LEEICMVLR    EAL0003
+CAMCHK                             OCCURS 12 TIMES PIC 9.               EAL0003
+CAMCHK        05 VECTOR-W3-LEEICMVLR       PIC 9(12).                   EAL0003
+CAMCHK        05 VECTOR-W3-R-LEEICMVLR REDEFINES VECTOR-W3-LEEICMVLR    EAL0003
+CAMCHK                             OCCURS 12 TIMES PIC 9.               EAL0003
+CAMCHK        05 VECTOR-W2-LEEICMVLR       PIC 9(12).                   EAL0003
+CAMCHK        05 VECTOR-W2-R-LEEICMVLR REDEFINES VECTOR-W2-LEEICMVLR    EAL0003
+CAMCHK                             OCCURS 12 TIMES PIC 9.               EAL0003
+CAMCHK        05 VECTOR-W1-LEEICMVLR       PIC 9(12).                   EAL0003
+CAMCHK        05 VECTOR-W1-R-LEEICMVLR REDEFINES VECTOR-W1-LEEICMVLR    EAL0003
+CAMCHK                             OCCURS 12 TIMES PIC 9.               EAL0003
+
+       01  VECTOR-WS-VN-LEEICMVLR.
+           03 VECTOR-W-VN-LEEICMVLR.
+              05 VECTOR-W4-VN-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W4-R-VN-LEEICMVLR REDEFINES
+                 VECTOR-W4-VN-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W3-VN-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W3-R-VN-LEEICMVLR REDEFINES
+                 VECTOR-W3-VN-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W2-VN-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W2-R-VN-LEEICMVLR REDEFINES
+                 VECTOR-W2-VN-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W1-VN-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W1-R-VN-LEEICMVLR REDEFINES
+                 VECTOR-W1-VN-LEEICMVLR OCCURS 12 TIMES PIC 9.
+                                   
+           03 VECTOR-W-R-VN-LEEICMVLR   REDEFINES VECTOR-W-VN-LEEICMVLR
+                                   OCCURS 48 TIMES PIC 9.
+       01  VECTOR-WS-NV-LEEICMVLR.
+           03 VECTOR-W-NV-LEEICMVLR.
+              05 VECTOR-W4-NV-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W4-R-NV-LEEICMVLR REDEFINES
+                 VECTOR-W4-NV-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W3-NV-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W3-R-NV-LEEICMVLR REDEFINES
+                 VECTOR-W3-NV-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W2-NV-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W2-R-NV-LEEICMVLR REDEFINES
+                 VECTOR-W2-NV-LEEICMVLR OCCURS 12 TIMES PIC 9.
+              05 VECTOR-W1-NV-LEEICMVLR        PIC 9(12).
+              05 VECTOR-W1-R-NV-LEEICMVLR REDEFINES
+                 VECTOR-W1-NV-LEEICMVLR OCCURS 12 TIMES PIC 9.
+                                   
+           03 VECTOR-W-R-NV-LEEICMVLR   REDEFINES VECTOR-W-NV-LEEICMVLR
+                                   OCCURS 48 TIMES PIC 9.
+      *
+       01  IND-VEC-VN-LEEICMVLR           PIC 9(02) VALUE ZEROS.
+       01  IND-VEC-NV-LEEICMVLR           PIC 9(02) VALUE ZEROS.
+       01  POS-ICMCRE-LEEICMVLR           PIC 9(02) VALUE ZEROS.
+INFHIS 01  IND-TMP-LEEICMVLR              PIC 9(05) VALUE ZEROS.        CAV0005
+INFHIS 01  VAR-AMBIENTE-LEEICMVLR         PIC X(10) VALUE "FECHA_CONT". CAV0005
+INFHIS 01  FECHA-CONT-LEEICMVLR           PIC X(8)  VALUE SPACES.       CAV0005
+INFHIS 01  SW-FCH-VAR-AMB-LEEICMVLR       PIC 9     VALUE 0.            CAV0005
+      *
+       01  FEC-SITUACION-MESES-LEEICMVLR  PIC 9(05) VALUE ZEROS.
+       01  FEC-NOVEDAD-MESES-LEEICMVLR    PIC 9(05) VALUE ZEROS.
+ICMVLR*                                                                 EAL0002
+ICMVLR 01 RES-FILE-DETAILS-ICMVLR.                                      EAL0002
+ICMVLR    03 RES-FILE-SIZE-ICMVLR             PIC X(8)  COMP-X.         EAL0002
+ICMVLR    03 RES-FILE-DATE-ICMVLR.                                      EAL0002
+ICMVLR       05 RES-FILE-DAY-ICMVLR           PIC X     COMP-X.         EAL0002
+ICMVLR       05 RES-FILE-MONTH-ICMVLR         PIC X     COMP-X.         EAL0002
+ICMVLR       05 RES-FILE-YEAR-ICMVLR          PIC X(2)  COMP-X.         EAL0002
+ICMVLR    03 RES-FILE-TIME-ICMVLR.                                      EAL0002
+ICMVLR       05 RES-FILE-HH-ICMVLR            PIC X     COMP-X.         EAL0002
+ICMVLR       05 RES-FILE-MM-ICMVLR            PIC X     COMP-X.         EAL0002
+ICMVLR       05 RES-FILE-SS-ICMVLR            PIC X     COMP-X.         EAL0002
+ICMVLR       05 RES-FILE-CC-ICMVLR            PIC X     COMP-X.         EAL0002
+ICMVLR 01 FILE-RES-CODE-ICMVLR                PIC X     COMP-X.         EAL0002
+CAMOPT*                                                                 EHA0004
+CAMOPT 01 WS-VALORES-N01-LEEICMVLR.                                     EHA0004
+CAMOPT    03  WS-TIPO-ID-LEEICMVLR              PIC 9.                  EHA0004
+CAMOPT    03  WS-NUM-ID-LEEICMVLR               PIC 9(11).              EHA0004
+CAMOPT    03  WS-COD-SUS-LEEICMVLR              PIC 9(06).              EHA0004
+CAMOPT    03  WS-COD-CTA-LEEICMVLR              PIC 99.                 EHA0004
+CAMOPT    03  WS-NUM-CTA-LEEICMVLR              PIC X(18).              EHA0004
+CAMOPT    03 WS-VALORES-LEEICMVLR            OCCURS  12  TIMES.         EHA0004
+CAMOPT       05  WS-CUOTA-LEEICMVLR             PIC 9(11) COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-CUOTA-LEEICMVLR       PIC 9      VALUE 1.     EHA0004
+CAMOPT       05  WS-SALDO-LEEICMVLR             PIC 9(11) COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-SALDO-LEEICMVLR       PIC 9      VALUE 1.     EHA0004
+CAMOPT       05  WS-SALDO-MORA-LEEICMVLR        PIC 9(11) COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-SALDO-MORA-LEEICMVLR  PIC 9      VALUE 1.     EHA0004
+CAMOPT       05  WS-VAL-INICIAL-LEEICMVLR       PIC 9(11) COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-VAL-INIC-LEEICMVLR    PIC 9      VALUE 1.     EHA0004
+CAMOPT       05  WS-SALDO-DISP-LEEICMVLR        PIC 9(11) COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-SALDO-DISP-LEEICMVLR  PIC 9      VALUE 1.     EHA0004
+CAMOPT       05  WS-MOROSIDAD-LEEICMVLR         PIC 9(3)  COMP-3        EHA0004
+CAMOPT                                                     VALUE ZEROS. EHA0004
+CAMOPT       05  WS-V-IND-MOROSIDAD-LEEICMVLR   PIC 9      VALUE 1.     EHA0004
+REMARK* CAMPOS CREADOS PARA INFORMACION DE CUENTAS CTES Y AHORROS
+INFHIS*SE CAMBIA EL ORDEN DEL REDEFINE CON RESPECTO AL ICMVLR.FD PARA   CAV0005
+INFHIS*INICIALIZAR LOS VALORES CON RESPECTO A LOS REGISTROS DE CARTERA  CAV0005
+INFHIS*LOS DE ICMCHK SE INICIALIZAN DESPUES DE LA INSTRUCCION  MOVE     CAV0005
+INFHIS       05  WS-INF-CARTERA-LEEICMVLR.                              CAV0005
+INFHIS           07  WS-FECHA-PAGO-LEEICMVLR        PIC 9(06) COMP-3    CAV0005
+INFHIS                                                     VALUE ZEROS. CAV0005
+INFHIS           07  WS-V-IND-FECHA-PAGO-LEEICMVLR  PIC 9 VALUE 1.      CAV0005
+INFHIS           07  WS-FECHA-LIM-PAGO-LEEICMVLR    PIC 9(06) COMP-3    CAV0005
+INFHIS                                                     VALUE ZEROS. CAV0005
+INFHIS           07  WS-V-IND-FEC-LIM-PAG-LEEICMVLR PIC 9 VALUE 1.      CAV0005
+INFHIS*      05  WS-INF-CTES-Y-AHO-LEEICMVLR.                           CAV0005
+INFHIS*          07  WS-VAL-CHEQ-PAGADOS-LEEICMVLR  PIC 9(11) COMP-3    CAV0005
+INFHIS*                                                    VALUE ZEROS. CAV0005
+INFHIS*          07  WS-IND-CHEQ-PAGADOS-LEEICMVLR  PIC 9  VALUE 1.     CAV0005
+INFHIS*          07  WS-CANT-CHEQ-PAG-LEEICMVLR     PIC 9(3)  COMP-3    CAV0005
+INFHIS*                                                    VALUE ZEROS. CAV0005
+INFHIS*          07  WS-INDCANT-CHEQ-PAG-LEEICMVLR  PIC 9  VALUE 1.     CAV0005
+CAMOPT    03  WS-CODIGO-DANE-LEEICMVLR          PIC 9(8) COMP-3.        EHA0004
+CAMOPT    03  WS-CIUDAD-RADICACION-LEEICMVLR    PIC X(30).              EHA0004
+CAMOPT    03  WS-OFICINA-RADICACION-LEEICMVLR   PIC X(30).              EHA0004
+CAMOPT    03  WS-MIGRADO-UNIFICADO-LEEICMVLR    PIC X(01).              EHA0004
+INFHIS    03  WS-VECTOR-CALIFIC-LEEICMVLR OCCURS 12 TIMES.              CAV0005
+INFHIS        05  WS-CALIFICACION-LEEICMVLR       PIC X(01) VALUE ZEROS.CAV0005
+INFHIS        05  WS-V-IND-CALIFICACION-LEEICMVLR PIC 9 VALUE 1.        CAV0005
+INFHIS    03  FILLER                            PIC X(26).              CAV0005
+INFHIS*   03  FILLER                            PIC X(50).              CAV0005
+

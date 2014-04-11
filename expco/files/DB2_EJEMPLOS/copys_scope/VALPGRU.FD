@@ -1,0 +1,16 @@
+******* VALPGRU-fd.v03.0001
+   **** VALPGRU.03.001
+REMARK*Proceso de calificacion de maestros ampliados
+REMARK*Parametros de grupos de campos con calificacion y peso maximo
+REMARK*por grupo, dependiendo del producto a que correspondan
+REMARK*Se han definido maximo tres grupos de campos
+REMARK*El tipo de grupo corresponde a: 1-cartera  2-Tarjeta de credito
+REMARK*3-Cta. corriente
+036300*----------------------------------------------------------------*
+       FD  VALPGRU.
+       01  REG-VALPGRU.
+           03 NUM-PRODU-VALPGRU                PIC 9.
+           03 NUM-GRUPO-VALPGRU                PIC 9.
+           03 NUM-CALIF-VALPGRU                PIC 9(3).
+           03 POR-PESO-VALPGRU                 PIC 99V99.
+           03 FILLER-VALPGRU                   PIC X(30).

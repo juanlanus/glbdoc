@@ -1,0 +1,33 @@
+REMARK*FRAINQ.v01.003.
+      *----------------------------------------------------------------*
+      *ESTRUCTURA DE ARCHIVO DE PREGUNTAS EVIDENTE FRAINQ.DAT
+REMARK*******************************************************************
+REMARK* RMB0002   * PROD01: SE CREAN CAMPOS DE HABILIDAD DE PREGUNTA POR
+REMARK* R.MARTINEZ*         CADA PRODUCTO USADO (1 A 20 )
+REMARK* ENE.2006  *
+REMARK*******************************************************************
+REMARK* GJC0003   * BILL01: INDICA SI LA PREGUNTA ES DE BILLETERA O FUERA
+REMARK* G.JIMENEZ           DE BILLETERA
+REMARK* SEPT/2006 * TOTPR1: SE CONTABILIZA CUANTAS PREGUNTAS SE HICIERON  
+REMARK*           *         EN EL ULTIMO MES.             
+REMARK*******************************************************************
+       FD FRAINQ.
+          01 REG-FRAINQ.
+             02 SEQ-FRAINQ                 PIC 9(03).
+             02 FILLER                     PIC X(01).
+             02 TEXTO-FRAINQ.  
+                04  CODPRE-FRAINQ          PIC X(09).
+                04  FILLER                 PIC X(04).
+                04  PESO-FRAINQ            PIC 9(01).
+                04  FILLER                 PIC X(04).
+                04  CONFIABLE-FRAINQ       PIC 9(01).
+                04  FILLER                 PIC X(04).
+                04  NOCASCARA-FRAINQ       PIC 9(01).
+                04  FILLER                 PIC X(01).
+                04  FACILIDAD-FRAINQ       PIC 9(02)V9(02).
+                04  TEXTO-FRAINQ-2         PIC X(27).
+PROD01          04  FILLER OCCURS 20 TIMES.                             RMB0002 
+PROD01              05  HABILITADA-FRAINQ  PIC 9(1).                    RMB0002 
+BILL01          04  BILLETERA-FRAINQ       PIC 9(1). *>0=Bill,1=OUT,2=C GJC0003
+TOTPR1          04  TOT-PREG-FRAINQ        PIC 9(8).                    GJC0003
+             02 FILLER PIC X(100).

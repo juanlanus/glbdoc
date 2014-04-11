@@ -1,0 +1,44 @@
+      *PE-MORA-HOY.PROC.v.01.0001.
+      *------------------------------------------------------------------*
+      *                                                                  *
+      *   COPY MORAS ACTUALES  STANDARD  VERSION  SEP/2004               *
+      *                                                                  *
+      *------------------------------------------------------------------*
+      * COPY Verifica las MORAS ACTUALES SEGUN CODIGO DE NOVEDAD.        *
+      *------------------------------------------------------------------*
+
+           IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 12
+              ADD 1 TO W-MORAS-30-ACT
+           ELSE
+              IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 13
+                 ADD 1 TO W-MORAS-60-ACT
+              ELSE
+                 IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 14
+                    ADD 1 TO W-MORAS-90-ACT
+                 ELSE
+                    IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 15
+                       ADD 1 TO W-MORAS-120-ACT
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+      *------------------------------------------------------------------*
+           IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 01
+              ADD   1  TO  W-ACU-CREDITO-DIA
+           ELSE
+              IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 08
+                 ADD  1  TO   V-TDC-CAN-MM
+              ELSE
+                 IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 10
+                    ADD    1   TO    V-CAR-RECUPERA
+                 ELSE
+                    IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 09
+                       ADD   1   TO    V-CAR-CASTIGA
+                    ELSE
+                       IF TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 11
+                          ADD   1   TO    V-DUD-RECAUDO
+                       END-IF
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF.

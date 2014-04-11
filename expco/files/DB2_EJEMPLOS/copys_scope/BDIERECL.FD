@@ -1,0 +1,33 @@
+REMARK* BDIERECL-FD.v.0001
+      ********************************************
+      *  ARCHIVO DE RECLAMOS
+      ********************************************
+
+       FD BDIERECL.
+       01 BDIERECL-REGISTRO.
+          02 BDIERECL-LLAVE.
+             03 BDIERECL-TIP-ID           PIC 9(1).
+             03 BDIERECL-NUM-ID           PIC 9(11).
+             03 BDIERECL-FEC-CORTE        PIC 9(8).
+             03 BDIERECL-TIP-ENTID        PIC 9(2).
+             03 BDIERECL-COD-ENTID        PIC 9(6).
+             03 BDIERECL-MONEDA           PIC X(1).
+             03 BDIERECL-TIP-DEUDA        PIC X(1).
+             03 BDIERECL-CALIFICA         PIC X(1).
+             03 BDIERECL-GARANTIA         PIC X(1).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-MONEDA-NUE          PIC X(1).
+          02 BDIERECL-TIP-DEUD-NUE        PIC X(1).
+          02 BDIERECL-CALIFICA-NUE        PIC X(1).
+          02 BDIERECL-GARANTIA-NUE        PIC X(1).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-VALOR               PIC S9(14).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-INTERES             PIC S9(14).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-CONTING             PIC S9(14).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-CANTIDAD            PIC S9(3).
+          02 FILLER                       PIC X(1).
+          02 BDIERECL-IND-BLOQ            PIC S9(1).
+

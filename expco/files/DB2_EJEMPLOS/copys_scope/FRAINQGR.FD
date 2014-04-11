@@ -1,0 +1,15 @@
+REMARK*FRAINQGR.v01.001.
+REMARK*----------------------------------------------------------------*
+REMARK*ESTRUCTURA DE ARCHIVO DE PREGUNTAS GRUPAL EVIDENTE FRAINQGR.DAT
+REMARK*******************************************************************
+NVAPRE FD FRAINQGR.
+NVAPRE    01 REG-FRAINQGR.
+NVAPRE       02 SEQ-FRAINQGR               PIC 9(03).
+NVAPRE       02 FILLER                     PIC X(01).
+NVAPRE       02 CODPRE-FRAINQGR            PIC X(09).
+NVAPRE       02 FILLER                     PIC X(01).
+NVAPRE       02 IND-DISTRAC-FRAINQGR       PIC 9(01).
+NVAPRE       02 FILLER                     PIC X(01).
+NVAPRE       02 COD-SUS-FRAINQGR           PIC 9(06).
+NVAPRE       02 FILLER                     PIC X(01).
+NVAPRE       02 NOM-SUS-FRAINQGR           PIC X(30).

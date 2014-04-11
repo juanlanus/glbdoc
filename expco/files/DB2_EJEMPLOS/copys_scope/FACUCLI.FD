@@ -1,0 +1,51 @@
+      * FACUCLI-FD.v.0002.
+      * Maestro de clientes DATACREDITO.
+      *----------------------------------------------------------------*
+      * FAC0002 * AMPLI1 * INCLUSION DE CAMPO PARA CONTINGENCIA
+      * ENE.27/2003      *
+      *----------------------------------------------------------------*
+       FD FACUCLI.
+       01 REG-FACUCLI.
+          03 LLAVE-FACUCLI.
+             05 NIT-FACUCLI                  PIC 9(11).
+          03 NOM-CORTO-FACUCLI               PIC X(15).
+          03 NOM-REPLEGAL-FACUCLI            PIC X(45).
+          03 NUM-ID-REPLEGAL-FACUCLI         PIC 9(11) COMP-3.
+          03 DES-DIR-FACUCLI                 PIC X(35).
+          03 DES-CIUDAD-FACUCLI              PIC X(15).
+          03 NUM-TEL-FACUCLI                 PIC 9(10) COMP-3.
+          03 NUM-SOLICIT-FACUCLI             PIC X(10).
+          03 TIP-REGIMEN-FACUCLI             PIC X.
+          03 IND-AUTORETEN-FACUCLI           PIC X.
+          03 IND-RETEN-IVA-FACUCLI           PIC X.
+          03 IND-LIQ-ICA-FACUCLI             PIC X.
+          03 TIP-SECTOR-FACUCLI              PIC X.
+          03 TIP-PLAN-FACUCLI                PIC X.
+          03 TIP-FACTURAC-FACUCLI            PIC X.
+          03 NOM-CONTAC-FACUCLI              PIC X(45).
+          03 NUM-TEL-CONTAC-FACUCLI          PIC 9(10) COMP-3.
+          03 NUM-FAX-CONTAC-FACUCLI          PIC 9(10) COMP-3.
+          03 COD-CIU-CONTAC-FACUCLI          PIC 9(03) COMP-3.
+          03 DIR-MAIL-CONTAC-FACUCLI         PIC X(30).
+          03 COD-EJECUT-CTA-FACUCLI          PIC 9(2)  COMP-3.
+          03 FEC-INGRESO-FACUCLI             PIC 9(8)  COMP-3.
+          03 FEC-RETIRO-FACUCLI              PIC 9(8)  COMP-3.
+          03 NUM-CONTRATO-FACUCLI            PIC 9(10) COMP-3.
+          03 FEC-FIR-CONTRAT-FACUCLI         PIC 9(8)  COMP-3.
+          03 TIP-CLIENTE-FACUCLI             PIC X.
+          03 IND-ESTADO-FACUCLI              PIC 9.
+          03 COD-GRUPO-FACT-FACUCLI          PIC 9(3)  COMP-3.
+          03 COD-SUBCTA-FAC-FACUCLI          PIC 9(4)  COMP-3.
+          03 VAL-CUOTA-AFLCION-FACUCLI       PIC 9(10) COMP-3.
+          03 COD-CENTRO-COBRO-FACUCLI        PIC 9(2)  COMP-3.
+          03 COD-CENTRO-PAGO-FACUCLI         PIC 9(2)  COMP-3.
+          03 NOM-ENVIO-FACT-FACUCLI          PIC X(45).
+          03 DES-CARGO-ENVIO-FACUCLI         PIC X(30).
+          03 DES-DIVIS-ENVIO-FACUCLI         PIC X(30).
+          03 DES-CIU-ENVIO-FACUCLI           PIC X(15).
+          03 NUM-TEL-ENVIO-FACUCLI           PIC 9(10) COMP-3.
+          03 DES-DIR-ENVIO-FACUCLI           PIC X(35).
+          03 DIR-MAIL-ENVIO-FACUCLI          PIC X(30).
+          03 FEC-ACTUALIZA-FACUCLI           PIC 9(8) COMP-3.
+AMPLI1    03 CONTINGENCIA-FACUCLI            PIC 9.                     FAC0002
+AMPLI1    03 FILLER                          PIC X(19).                 FAC0002

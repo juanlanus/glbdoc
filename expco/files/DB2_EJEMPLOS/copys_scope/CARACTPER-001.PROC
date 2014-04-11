@@ -1,0 +1,452 @@
+REMARK*CARACTPER-001.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 001
+REMARK*    HELM BANK
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-001.
+            ADD 1 TO I-VAR-PER
+            MOVE "01NUM049CT001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(01NUM049CT001) TO L-AUX
+            MOVE 01NUM049CT001(1:L-AUX)   TO 
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "02ACP999TO001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(02ACP999TO001) TO L-AUX
+            MOVE 02ACP999TO001(1:L-AUX)   TO 
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "02MOR999TO001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(02MOR999TO001) TO L-AUX
+            MOVE 02MOR999TO001(1:L-AUX)   TO 
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "02MOR998TO001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(02MOR998TO001) TO L-AUX
+            MOVE 02MOR998TO001(1:L-AUX)   TO 
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "02MOR997TO001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(02MOR997TO001) TO L-AUX
+            MOVE 02MOR997TO001(1:L-AUX)   TO 
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "02MOR996TO001" TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(02MOR996TO001) TO L-AUX
+            MOVE 02MOR996TO001(1:L-AUX)   TO 
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            *>
+            ADD 1 TO I-VAR-PER
+            MOVE "99END001"      TO NOMBRE-VAR-PER(I-VAR-PER)
+            MOVE FUNCTION LENGTH(99END001)      TO L-AUX
+            MOVE 99END001     (1:L-AUX)   TO 
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-01.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-06.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 01    *
+REMARK*     PARA HELM BANK
+REMARK******************************************************************
+            MOVE "-99"  TO 00NUM049CT001(1:3).
+            MOVE "-99"  TO 00ACP999XX001(1:3).
+            MOVE "-99"  TO 00MOR999OT001(1:3).       
+            MOVE "-99"  TO 00MOR998OT001(1:3).       
+            MOVE "-99"  TO 00MOR997OT001(1:3).       
+            MOVE "-99"  TO 00MOR996OT001(1:3).       
+            MOVE "  -1" TO 01NUM049CT001(1:4).
+            MOVE "  -1" TO 01ACP999RO001(1:4)
+            MOVE "  -1" TO 01ACP999IN001(1:4)
+            MOVE "  -1" TO 01ACP999VE001(1:4)
+            MOVE "  -1" TO 01ACP999HP001(1:4)
+            MOVE "  -1" TO 01ACP999OT001(1:4)
+            MOVE "  -1" TO 01ACP999CC001(1:4)
+            MOVE "  -1" TO 01ACP999CO001(1:4)
+            MOVE "  -1" TO 01ACP999AH001(1:4)
+            MOVE "  -1" TO 01ACP999CT001(1:4)
+            MOVE "  -1" TO 01ACP999OT001(1:4)
+            MOVE "  -1" TO 01MOR999OT001(1:4)
+            MOVE "  -1" TO 01MOR998OT001(1:4)
+            MOVE "  -1" TO 01MOR997OT001(1:4)
+            MOVE "  -1" TO 01MOR996OT001(1:4)
+            . 
+       2249-PROCESE-CARCT-00NUM-EXT-01.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-01.
+REMARK*    PERSONALIZACION # 01 DE CARACTERISTICAS PAR HELM BANK
+REMARK******************************************************************
+REMARK*    CALCULO 00NUM049 SIN ESTADO 07 EN NEGATIVO CC o AH
+           MOVE " -1"   TO 00NUM049CT001(1:3).
+           IF (00NUMPTF = "CT" )
+              MOVE 0 TO 00NUM049CT001
+              IF NOV-REPORT-ABD06 = 02 OR 06 OR
+                 ADJETIVO-ABD06 = 2 OR 3
+                 MOVE 1 TO 00NUM049CT001
+              END-IF
+           END-IF.
+      *
+           IF (00NUMPTF = "CT" )
+              IF 00NUM049CT001 NUMERIC    
+                 IF 01NUM049CT001 NOT NUMERIC
+                    MOVE ZEROS TO 01NUM049CT001
+                 END-IF
+              IF 00NUM049CT001 = 1        
+                 ADD 1 TO 01NUM049CT001
+              END-IF
+           END-IF.
+      *
+       2249-PROCESE-CARCT-00MOR-EXT-01.
+REMARK*****************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-01.
+REMARK*   VALORES PARA CARACTERISTICAS 00MOR999XX001 A 00MOR996XX01     
+REMARK*   PARA EL PORTAFOLIO ESPECIAL DE OT
+REMARK*00MOR999XX001** PRODUCTO CON MORA   30  EN LOS ULTIMOS 12 MESES  
+REMARK*00MOR998XX001** PRODUCTO CON MORA   60  EN LOS ULTIMOS 12 MESES  
+REMARK*00MOR997XX001** PRODUCTO CON MORA   90  EN LOS ULTIMOS 12 MESES  
+REMARK*00MOR996XX001** PRODUCTO CON MORA >=120 EN LOS ULTIMOS 12 MESES  
+REMARK*****************************************************************
+           MOVE 12 TO P-CARACT    
+           MOVE ZEROS TO MFLAG-CARACT NFLAG-CARACT MORA-CARACT          
+           MOVE " -1"  TO 00MOR999OT001(1:3).       
+           MOVE " -1"  TO 00MOR998OT001(1:3).       
+           MOVE " -1"  TO 00MOR997OT001(1:3).       
+           MOVE " -1"  TO 00MOR996OT001(1:3).       
+           IF COD-PORTAF-CARACT = "OT" AND 
+              (COD-CTA-ABD07 = 04 OR 44 OR 45 )          
+            MOVE ZEROS TO 00MOR999OT001 00MOR998OT001                   
+            MOVE ZEROS TO 00MOR997OT001 00MOR996OT001                   
+            IF FECHA-APERT-CARACT > ZEROS                               
+             IF (MESES-MADUR-CARACT + 1) > 0                            
+              IF MESES-DESAC-CARACT <= P-CARACT                         
+                  COMPUTE I-CARACT = (48 - P-CARACT) + 1                
+                  PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL            
+                          J-CARACT > P-CARACT                           
+                    IF V-NOR-CARACT(I-CARACT:1) = 1                     
+                       ADD 1 TO 00MOR999OT001                           
+                    END-IF                                              
+                    IF V-NOR-CARACT(I-CARACT:1) = 2                     
+                       ADD 1 TO 00MOR998OT001                           
+                    END-IF                                              
+                    IF V-NOR-CARACT(I-CARACT:1) = 3                     
+                       ADD 1 TO 00MOR997OT001                           
+                    END-IF                                              
+                    IF V-NOR-CARACT(I-CARACT:1) >= 4                    
+                       ADD 1 TO 00MOR996OT001                           
+                    END-IF                                              
+                    ADD 1 TO I-CARACT                                   
+                  END-PERFORM                                           
+              ELSE                                                      
+                MOVE " -4" TO 00MOR999OT001(1:3)                        
+                MOVE " -4" TO 00MOR998OT001(1:3)                        
+                MOVE " -4" TO 00MOR997OT001(1:3)                        
+                MOVE " -4" TO 00MOR996OT001(1:3)                        
+              END-IF                                                    
+             ELSE                                                       
+              MOVE " -3" TO 00MOR999OT001(1:3)                          
+              MOVE " -3" TO 00MOR998OT001(1:3)                          
+              MOVE " -3" TO 00MOR997OT001(1:3)                          
+              MOVE " -3" TO 00MOR996OT001(1:3)                          
+             END-IF                                                     
+            ELSE                                                        
+             MOVE " -2" TO 00MOR999OT001(1:3)                           
+             MOVE " -2" TO 00MOR998OT001(1:3)                           
+             MOVE " -2" TO 00MOR997OT001(1:3)                           
+             MOVE " -2" TO 00MOR996OT001(1:3)                           
+            END-IF                                                      
+           END-IF.                                                      
+      ****************CALCULOS DE MOR01 ******************************* 
+      *** 01MOR999XX01*** NUMERO DE MORAS 30 EN LOS ULTIMOS 12 MESES    
+           IF FUNCTION NUMVAL (00MOR999OT001(1:3)) >= 0                 
+              IF FUNCTION NUMVAL (01MOR999OT001(1:4)) < 0               
+                 MOVE ZEROS TO 01MOR999OT001                            
+              END-IF                                                    
+              COMPUTE 01MOR999OT001 =                                   
+                      01MOR999OT001 + 00MOR999OT001                     
+           ELSE                                                         
+              IF FUNCTION NUMVAL (01MOR999OT001(1:4)) < 0               
+               IF FUNCTION NUMVAL(00MOR999OT001(1:3)) <                 
+                  FUNCTION NUMVAL(01MOR999OT001(2:3))                   
+                 MOVE " " TO 01MOR999OT001(1:1)                         
+                 MOVE 00MOR999OT001(1:3) TO                             
+                                01MOR999OT001(2:3)                      
+               END-IF                                                   
+             END-IF                                                     
+           END-IF                                                       
+      *** 01MOR998XX01*** NUMERO DE MORAS 60 EN LOS ULTIMOS 12 MESES    
+           IF FUNCTION NUMVAL (00MOR998OT001(1:3)) >= 0                 
+              IF FUNCTION NUMVAL (01MOR998OT001(1:4)) < 0               
+                 MOVE ZEROS TO 01MOR998OT001                            
+              END-IF                                                    
+              COMPUTE 01MOR998OT001 =                                   
+                      01MOR998OT001 + 00MOR998OT001                     
+           ELSE                                                         
+              IF FUNCTION NUMVAL (01MOR998OT001(1:4)) < 0               
+               IF FUNCTION NUMVAL(00MOR998OT001(1:3)) <                 
+                  FUNCTION NUMVAL(01MOR998OT001(2:3))                   
+                 MOVE " " TO 01MOR998OT001(1:1)                         
+                 MOVE 00MOR998OT001(1:3) TO                             
+                                 01MOR998OT001(2:3)                     
+               END-IF                                                   
+             END-IF                                                     
+           END-IF                                                       
+      *** 01MOR997XX01*** NUMERO DE MORAS 90 EN LOS ULTIMOS 12 MESES    
+           IF FUNCTION NUMVAL (00MOR997OT001(1:3)) >= 0                 
+              IF FUNCTION NUMVAL (01MOR997OT001(1:4)) < 0               
+                 MOVE ZEROS TO 01MOR997OT001                            
+              END-IF                                                    
+              COMPUTE 01MOR997OT001 =                                   
+                      01MOR997OT001 + 00MOR997OT001                     
+           ELSE                                                         
+              IF FUNCTION NUMVAL (01MOR997OT001(1:4)) < 0               
+               IF FUNCTION NUMVAL(00MOR997OT001(1:3)) <                 
+                  FUNCTION NUMVAL(01MOR997OT001(2:3))                   
+                 MOVE " " TO 01MOR997OT001(1:1)                         
+                 MOVE 00MOR997OT001(1:3) TO                             
+                                 01MOR997OT001(2:3)                     
+               END-IF                                                   
+             END-IF                                                     
+           END-IF                                                       
+      *** 01MOR996XX01*** NUMERO DE MORAS 120 EN LOS ULTIMOS 12 MESES   
+           IF FUNCTION NUMVAL (00MOR996OT001(1:3)) >= 0                 
+              IF FUNCTION NUMVAL (01MOR996OT001(1:4)) < 0               
+                 MOVE ZEROS TO 01MOR996OT001                            
+              END-IF                                                    
+              COMPUTE 01MOR996OT001 =                                   
+                      01MOR996OT001 + 00MOR996OT001                     
+           ELSE                                                         
+              IF FUNCTION NUMVAL (01MOR996OT001(1:4)) < 0               
+               IF FUNCTION NUMVAL(00MOR996OT001(1:3)) <                 
+                  FUNCTION NUMVAL(01MOR996OT001(2:3))                   
+                 MOVE " " TO 01MOR996OT001(1:1)                         
+                 MOVE 00MOR996OT001(1:3) TO                             
+                                 01MOR996OT001(2:3)                     
+               END-IF                                                   
+             END-IF                                                     
+           END-IF
+           .
+       2249-PROCESE-CARCT-00ACP-EXT-01.
+REMARK*********************************************************************
+REMARK*2249-PROCESE-CARCT-00ACP-EXT-01.
+REMARK*    CALCULO 00ACP999 EXPERIENCIA DE 12 MESES O MAS
+REMARK**********************************************************************
+           MOVE " -1" TO 00ACP999XX001(1:3)
+           IF (00NUMPTF = "RO" OR "IN" OR "VE" OR "HP")
+              MOVE 0 TO 00ACP999XX001
+              IF FECHA-APERT-CARACT = 0
+                 MOVE " -2" TO 00ACP999XX001(1:3)
+              ELSE
+                 IF  FECHA-APERT-CARACT > RUN-DATE-CARACT
+                     MOVE " -3" TO 00ACP999XX001(1:3)
+                 ELSE
+                    IF REG-ABIERTO-CARACT = 1
+                       IF  MESES-MADUR-CARACT >= 12
+                           MOVE 1 TO 00ACP999XX001
+                       ELSE
+                           MOVE " -4" TO 00ACP999XX001(1:3)
+                       END-IF
+                    END-IF
+                    IF REG-CERRADO-CARACT = 1
+                       IF  MESES-NOVAP-CARACT >= 12
+                           MOVE 1 TO 00ACP999XX001
+                       ELSE
+                           MOVE " -4" TO 00ACP999XX001(1:3)
+                       END-IF
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF.
+      *
+           IF (00NUMPTF = "RO" OR "IN" OR "VE" OR "HP")
+              IF 00ACP999XX001 NUMERIC
+                 IF 01ACP999XX001(IND-PORTAF-CARACT) NOT NUMERIC
+                    MOVE ZEROS TO 01ACP999XX001(IND-PORTAF-CARACT)
+                 END-IF
+                 IF 00ACP999XX001 = 1
+                    ADD 1 TO 01ACP999XX001(IND-PORTAF-CARACT)
+                 END-IF
+              ELSE
+                 IF 01ACP999XX001(IND-PORTAF-CARACT) NOT NUMERIC
+                    IF 00ACP999XX001(3:1) >
+                       01ACP999XX001(IND-PORTAF-CARACT)(4:1)
+                       MOVE 00ACP999XX001(3:1) TO
+                            01ACP999XX001(IND-PORTAF-CARACT)(4:1)
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           .
+       2649-PROCESE-CARACT-02XX-EXT-01.
+REMARK****************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-01.
+REMARK**   02ACP999TO001 *** # PRODUCTOS A 12 MESES PERSONALIZACION 01
+REMARK****************************************************************
+           MOVE "  -1" TO 02ACP999TO001(1:4)
+           PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9  
+             IF R-CARACT = 1 OR 2 OR 3 OR 4          
+                IF 01ACP999XX001(R-CARACT) NUMERIC
+                   IF 02ACP999TO001 NOT NUMERIC
+                      MOVE ZEROS TO 02ACP999TO001
+                   END-IF
+                   COMPUTE 02ACP999TO001 = 02ACP999TO001 +
+                           01ACP999XX001(R-CARACT)
+                ELSE
+                   IF 02ACP999TO001 NOT NUMERIC
+                      IF 01ACP999XX001(R-CARACT)(4:1) >
+                         02ACP999TO001(4:1) 
+                         MOVE 01ACP999XX001(R-CARACT)(4:1) TO
+                              02ACP999TO001(4:1) 
+                      END-IF
+                   END-IF
+                END-IF
+             END-IF
+           END-PERFORM.
+      **   02MOR999TO001 *** # MORAS de  30 EN ULTIMOS 12 MESES       
+           MOVE "  -1" TO 02MOR999TO001(1:4)
+           PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9  
+             IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 6 OR 7
+                IF 01MOR109(R-CARACT) NUMERIC
+                   IF 02MOR999TO001 NOT NUMERIC
+                      MOVE ZEROS TO 02MOR999TO001
+                   END-IF
+                   COMPUTE 02MOR999TO001 = 02MOR999TO001 +
+                           01MOR109(R-CARACT)
+                ELSE
+                   IF 02MOR999TO001 NOT NUMERIC
+                      IF 01MOR109(R-CARACT)(4:1) >
+                         02MOR999TO001(4:1) 
+                         MOVE 01MOR109(R-CARACT)(4:1) TO
+                              02MOR999TO001(4:1) 
+                      END-IF
+                   END-IF
+                END-IF
+             END-IF
+           END-PERFORM.
+           IF 01MOR999OT001 NUMERIC
+              IF 02MOR999TO001 NOT NUMERIC
+                 MOVE ZEROS TO 02MOR999TO001
+              END-IF
+              COMPUTE 02MOR999TO001 = 02MOR999TO001 +
+                      01MOR999OT001
+           ELSE
+              IF 02MOR999TO001 NOT NUMERIC
+                 IF 01MOR999OT001(4:1) >
+                    02MOR999TO001(4:1) 
+                    MOVE 01MOR999OT001(4:1) TO
+                         02MOR999TO001(4:1) 
+                 END-IF
+              END-IF
+           END-IF.
+      **   02MOR998TO001 *** # MORAS de  60 EN ULTIMOS 12 MESES
+           MOVE "  -1" TO 02MOR998TO001(1:4)
+           PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9
+             IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 6 OR 7
+                IF 01MOR110(R-CARACT) NUMERIC
+                   IF 02MOR998TO001 NOT NUMERIC
+                      MOVE ZEROS TO 02MOR998TO001
+                   END-IF
+                   COMPUTE 02MOR998TO001 = 02MOR998TO001 +
+                           01MOR110(R-CARACT)
+                ELSE
+                   IF 02MOR998TO001 NOT NUMERIC
+                      IF 01MOR110(R-CARACT)(4:1) >
+                         02MOR998TO001(4:1)
+                         MOVE 01MOR110(R-CARACT)(4:1) TO
+                              02MOR998TO001(4:1)
+                      END-IF
+                   END-IF
+                END-IF
+             END-IF
+           END-PERFORM.
+           IF 01MOR998OT001 NUMERIC
+              IF 02MOR998TO001 NOT NUMERIC
+                 MOVE ZEROS TO 02MOR998TO001
+              END-IF
+              COMPUTE 02MOR998TO001 = 02MOR998TO001 +
+                      01MOR998OT001
+           ELSE
+              IF 02MOR998TO001 NOT NUMERIC
+                 IF 01MOR998OT001(4:1) >
+                    02MOR998TO001(4:1)
+                    MOVE 01MOR998OT001(4:1) TO
+                         02MOR998TO001(4:1)
+                 END-IF
+              END-IF
+           END-IF.
+      **   02MOR997TO001 *** # MORAS de  90 EN ULTIMOS 12 MESES
+           MOVE "  -1" TO 02MOR997TO001(1:4)
+           PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9
+             IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 6 OR 7
+                IF 01MOR111(R-CARACT) NUMERIC
+                   IF 02MOR997TO001 NOT NUMERIC
+                      MOVE ZEROS TO 02MOR997TO001
+                   END-IF
+                   COMPUTE 02MOR997TO001 = 02MOR997TO001 +
+                           01MOR111(R-CARACT)
+                ELSE
+                   IF 02MOR997TO001 NOT NUMERIC
+                      IF 01MOR111(R-CARACT)(4:1) >
+                         02MOR997TO001(4:1)
+                         MOVE 01MOR111(R-CARACT)(4:1) TO
+                              02MOR997TO001(4:1)
+                      END-IF
+                   END-IF
+                END-IF
+             END-IF
+           END-PERFORM.
+           IF 01MOR997OT001 NUMERIC
+              IF 02MOR997TO001 NOT NUMERIC
+                 MOVE ZEROS TO 02MOR997TO001
+              END-IF
+              COMPUTE 02MOR997TO001 = 02MOR997TO001 +
+                      01MOR997OT001
+           ELSE
+              IF 02MOR997TO001 NOT NUMERIC
+                 IF 01MOR997OT001(4:1) >
+                    02MOR997TO001(4:1)
+                    MOVE 01MOR997OT001(4:1) TO
+                         02MOR997TO001(4:1)
+                 END-IF
+              END-IF
+           END-IF.
+      **   02MOR996TO001 *** # MORAS de 120 EN ULTIMOS 12 MESES
+           MOVE "  -1" TO 02MOR996TO001(1:4)
+           PERFORM VARYING R-CARACT FROM 1 BY 1 UNTIL R-CARACT > 9
+             IF R-CARACT = 1 OR 2 OR 3 OR 4 OR 6 OR 7
+                IF 01MOR112(R-CARACT) NUMERIC
+                   IF 02MOR996TO001 NOT NUMERIC
+                      MOVE ZEROS TO 02MOR996TO001
+                   END-IF
+                   COMPUTE 02MOR996TO001 = 02MOR996TO001 +
+                           01MOR112(R-CARACT)
+                ELSE
+                   IF 02MOR996TO001 NOT NUMERIC
+                      IF 01MOR112(R-CARACT)(4:1) >
+                         02MOR996TO001(4:1)
+                         MOVE 01MOR112(R-CARACT)(4:1) TO
+                              02MOR996TO001(4:1)
+                      END-IF
+                   END-IF
+                END-IF
+             END-IF
+           END-PERFORM.
+           IF 01MOR996OT001 NUMERIC
+              IF 02MOR996TO001 NOT NUMERIC
+                 MOVE ZEROS TO 02MOR996TO001
+              END-IF
+              COMPUTE 02MOR996TO001 = 02MOR996TO001 +
+                      01MOR996OT001
+           ELSE
+              IF 02MOR996TO001 NOT NUMERIC
+                 IF 01MOR996OT001(4:1) >
+                    02MOR996TO001(4:1)
+                    MOVE 01MOR996OT001(4:1) TO
+                         02MOR996TO001(4:1)
+                 END-IF
+              END-IF
+           END-IF
+           .           

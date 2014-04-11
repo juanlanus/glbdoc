@@ -1,0 +1,276 @@
+REMARK* VALVLR-PROC.0004
+REMARK*****************************************************************
+REMARK* ESTE COPY CONTIENE LAS RUTINAS PARA DETERMINAR SI LOS VALORES *
+REMARK* SE DEBEN O NO PRESENTAR COMO REPORTADOS                       *
+REMARK*****************************************************************
+REMARK* FAC0002     * MAPBIT - SE ADICIONA MANEJO DE MAPA DE BITS     *
+REMARK* FLOR ANGELA *                                                 *
+REMARK* CUADROS     *                                                 *
+REMARK* VHF0002     * VLNORE - SE VERIFICA QUE EXISTAN LOS CUATRO     *
+REMARK* VICTOR HUGO *          VALORES DESPLEGABLES EN EL REPORTE DE  *
+REMARK* FORERO      *          LO CONTRARIO SE TRATA LA CUENTA COMO   *
+REMARK* MAY.28/2002 *          SIN VALORES REPORTADOS. SI LOS VALORES *
+REMARK*             *          SON ANTES DEL MAPA DE BITS Y NO        *
+REMARK*             *          CORRESPONDEN A LAS FECHAS VALIDAS, SE  *
+REMARK*             *          VERIFICA EL VALOR INICIAL SI ES > 0 SE *
+REMARK*             *          DESPLIEGA DE LO CONTRARIO NINGUNO      *
+REMARK*****************************************************************
+REMARK* RMB0003     * COLP02 - SE MANEJAN LAS 16 OCURRENCIAS DEL      *
+REMARK* R. MARTINEZ.*          MAPA DE BITS                           *
+REMARK* JUN.15/06   *                                                 *
+REMARK*****************************************************************
+REMARK* ABB0004     * CPYVLR - SE LEE MAPA DE BITS PARA CUENTAS NO    *
+REMARK* ALBEIRO B.  *          ACTIVAS                                *
+REMARK* SEP.21/11   *                                                 *
+REMARK* VHF0004     * NOVEXT - SE DUPLICA LA RUTINA PARA USO DE       *
+REMARK* VICTOR HUGO *          NOVEDAT EXTENDIDO                      *
+REMARK* FORERO      *                                                 *
+REMARK* ENE.27/2012 *                                                 *
+REMARK*****************************************************************
+
+VALVAL 32000-PROCESAR-VALORES.
+REMARK*****************************************************************
+REMARK*32000-PROCESAR-VALORES.                                        *
+REMARK*    ESTA RUTINA SE ENCARGA DE DETERMINAR SI SE DEBEN MOSTRAR   *
+REMARK*    VALORES Y SI ESTOS ESTAN ACTUALIZADOS O NO                 *
+REMARK*****************************************************************
+MAPBIT     INITIALIZE VECTOR-VALORES-VALVLR IND-VALORES-VALVLR.         FAC0002 
+VALVAL     IF (NOV-REPORT-ABD07 = 01 OR 45 OR 47 OR
+VALVAL        (NOV-REPORT-ABD07 > 12 AND NOV-REPORT-ABD07 < 42 )) AND 
+VALVAL        IND-AMPLIACION-ABD02 = 5 AND
+VALVAL        FECHA-ACTUALIZ-VALOR-ABD07 > 0
+VALVAL        MOVE 1 TO IND-VALORES-VALVLR
+VALVAL        MOVE FEC-NOVEDAD-ABD07 TO FEC-4-MA-VALVLR
+VALVAL        IF ANO-4-MA-VALVLR > 60
+VALVAL           MOVE 19 TO SIG-6-AM-VALVLR
+VALVAL        ELSE
+VALVAL           MOVE 20 TO SIG-6-AM-VALVLR
+VALVAL        END-IF
+VALVAL        MOVE ANO-4-MA-VALVLR TO ANO-6-AM-VALVLR   
+VALVAL        MOVE MES-4-MA-VALVLR TO MES-6-AM-VALVLR
+VALVAL        MOVE FEC-6-AM-VALVLR TO FEC-NOVEDAD-AUX-VALVLR
+VALVAL        MOVE FECHA-ACTUALIZ-VALOR-ABD07 TO FEC-6-MA-VALVLR
+VALVAL        MOVE SIG-6-MA-VALVLR  TO SIG-6-AM-VALVLR
+VALVAL        MOVE ANO2-6-MA-VALVLR  TO ANO-6-AM-VALVLR
+VALVAL        MOVE MES-6-MA-VALVLR  TO MES-6-AM-VALVLR
+VALVAL        MOVE FEC-6-AM-VALVLR  TO FECHA-ACT-VALOR-AUX-VALVLR
+VALVAL        MOVE F-ULT-ACT-ABD02 TO FEC-4-MA-VALVLR
+VALVAL        IF ANO-4-MA-VALVLR > 60
+VALVAL           MOVE 19       TO SIG-6-AM-VALVLR
+VALVAL        ELSE
+VALVAL           MOVE 20       TO SIG-6-AM-VALVLR
+VALVAL        END-IF
+VALVAL        MOVE ANO-4-MA-VALVLR    TO ANO-6-AM-VALVLR
+VALVAL        MOVE MES-4-MA-VALVLR    TO MES-6-AM-VALVLR
+VALVAL        MOVE FEC-6-AM-VALVLR  TO F-ULT-ACT-AUX-VALVLR
+VALVAL        MOVE FECHA-SITUACION-ABD07 TO FEC-6-MA-VALVLR
+VALVAL        MOVE SIG-6-MA-VALVLR  TO SIG-6-AM-VALVLR
+VALVAL        MOVE ANO2-6-MA-VALVLR  TO ANO-6-AM-VALVLR
+VALVAL        MOVE MES-6-MA-VALVLR  TO MES-6-AM-VALVLR
+VALVAL        MOVE FEC-6-AM-VALVLR  TO FECHA-SITUACION-AUX-VALVLR
+MAPBIT        IF IND-MAPA-BITS-VLR-ABD07 <> 9                           FAC0002 
+VALVAL           IF NOV-REPORT-ABD07 = 01 OR
+VALVAL              (NOV-REPORT-ABD07 > 12 AND NOV-REPORT-ABD07 < 17)
+VALVAL              IF (FEC-NOVEDAD-AUX-VALVLR <  200108 AND
+VALVAL                  FEC-NOVEDAD-AUX-VALVLR <= 
+VALVAL                  FECHA-ACT-VALOR-AUX-VALVLR) OR
+VALVAL                 (FEC-NOVEDAD-AUX-VALVLR >= 200108 AND 
+VALVAL                  FEC-NOVEDAD-AUX-VALVLR >= 
+VALVAL                  FECHA-ACT-VALOR-AUX-VALVLR)
+VALVAL                  MOVE VECTOR-ACTIVADO-VALVLR TO
+VALVAL                       VECTOR-VALORES-VALVLR
+VALVAL              ELSE
+VLNORE                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0002 
+VLNORE                    VALOR-INICIAL-ABD07 > 0                       VHF0002 
+VLNORE                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0002 
+VLNORE                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0002 
+VLNORE                 ELSE                                             VHF0002 
+VLNORE                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0002 
+VLNORE                 END-IF                                           VHF0002 
+VALVAL              END-IF
+VALVAL           END-IF
+VALVAL           IF (NOV-REPORT-ABD07 > 16 AND NOV-REPORT-ABD07 < 42)
+VALVAL              IF (FEC-NOVEDAD-AUX-VALVLR < 200108 AND
+VALVAL                  FEC-NOVEDAD-AUX-VALVLR = 
+VALVAL                  FECHA-ACT-VALOR-AUX-VALVLR) OR
+VALVAL                 (FEC-NOVEDAD-AUX-VALVLR >= 200108 AND
+VALVAL                  FEC-NOVEDAD-AUX-VALVLR >=
+VALVAL                  FECHA-ACT-VALOR-AUX-VALVLR)
+VALVAL                  MOVE VECTOR-ACTIVADO-VALVLR TO
+VALVAL                       VECTOR-VALORES-VALVLR
+VALVAL              ELSE
+VLNORE                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0002 
+VLNORE                    VALOR-INICIAL-ABD07 > 0                       VHF0002 
+VLNORE                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0002 
+VLNORE                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0002 
+VLNORE                 ELSE                                             VHF0002 
+VLNORE                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0002 
+VLNORE                 END-IF                                           VHF0002 
+VALVAL              END-IF
+VALVAL           END-IF
+VALVAL           IF NOV-REPORT-ABD07 = 45 OR 47
+VALVAL              IF FEC-NOVEDAD-AUX-VALVLR <= 
+VALVAL                 FECHA-ACT-VALOR-AUX-VALVLR OR
+VALVAL                 F-ULT-ACT-AUX-VALVLR = 
+VALVAL                 FECHA-SITUACION-AUX-VALVLR
+VALVAL                 MOVE VECTOR-ACTIVADO-VALVLR TO 
+VALVAL                      VECTOR-VALORES-VALVLR
+VALVAL              ELSE
+VLNORE                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0002 
+VLNORE                    VALOR-INICIAL-ABD07 > 0                       VHF0002 
+VLNORE                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0002 
+VLNORE                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0002 
+VLNORE                 ELSE                                             VHF0002 
+VLNORE                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0002 
+VLNORE                 END-IF                                           VHF0002 
+VALVAL              END-IF
+VALVAL           END-IF
+VALVAL        ELSE
+VALVAL           PERFORM 33000-LEER-BITMAP-VALORES
+VALVAL        END-IF
+VALVAL     END-IF
+VLNORE     IF IND-VALORES-VALVLR = 1                                    VHF0002 
+REMARK***     SE VERIFICA QUE POR LO MENOS UNO DE LOS CUATRO VALORES QUE
+REMARK***     SE DESPLIEGAN EN EL REPORTE HAYA SIDO REPORTADO DE LO
+REMARK***     CONTRARIO NO SE MUESTRAN VALORES PARA LA CUENTA
+VLNORE        IF VEC-VALOR-VALVLR (01) = 0 AND                          VHF0002 
+VLNORE           VEC-VALOR-VALVLR (02) = 0 AND                          VHF0002 
+VLNORE           VEC-VALOR-VALVLR (03) = 0 AND                          VHF0002 
+VLNORE           VEC-VALOR-VALVLR (05) = 0                              VHF0002 
+VLNORE           MOVE 0 TO IND-VALORES-VALVLR                           VHF0002 
+VLNORE        END-IF                                                    VHF0002 
+VLNORE     END-IF.                                                      VHF0002 
+
+NOVEXT 32500-PROCESAR-VALORES-EXT.                                      VHF0004
+NOVEXT***************************************************************** VHF0004
+NOVEXT*32500-PROCESAR-VALORES-EXT.                                    * VHF0004
+NOVEXT*    ESTA RUTINA SE ENCARGA DE DETERMINAR SI SE DEBEN MOSTRAR   * VHF0004
+NOVEXT*    VALORES Y SI ESTOS ESTAN ACTUALIZADOS O NO PARA NOVEDAT    * VHF0004
+NOVEXT*    EXTENDIDO                                                  * VHF0004
+NOVEXT***************************************************************** VHF0004
+NOVEXT     INITIALIZE VECTOR-VALORES-VALVLR IND-VALORES-VALVLR.         VHF0004
+NOVEXT     IF (NOV-REPORT-ABD07 = 01 OR 45 OR 47 OR                     VHF0004
+NOVEXT        (NOV-REPORT-ABD07 > 12 AND NOV-REPORT-ABD07 < 42 )) AND   VHF0004
+NOVEXT        IND-AMPLIACION-ABD02 = 5 AND                              VHF0004
+NOVEXT        FECHA-ACTUALIZ-VALOR-ABD07 > 0                            VHF0004
+NOVEXT        MOVE 1 TO IND-VALORES-VALVLR                              VHF0004
+NOVEXT        MOVE FEC-NOVEDAD-ABD07 TO FEC-4-MA-VALVLR                 VHF0004
+NOVEXT        IF ANO-4-MA-VALVLR > 60                                   VHF0004
+NOVEXT           MOVE 19 TO SIG-6-AM-VALVLR                             VHF0004
+NOVEXT        ELSE                                                      VHF0004
+NOVEXT           MOVE 20 TO SIG-6-AM-VALVLR                             VHF0004
+NOVEXT        END-IF                                                    VHF0004
+NOVEXT        MOVE ANO-4-MA-VALVLR TO ANO-6-AM-VALVLR                   VHF0004
+NOVEXT        MOVE MES-4-MA-VALVLR TO MES-6-AM-VALVLR                   VHF0004
+NOVEXT        MOVE FEC-6-AM-VALVLR TO FEC-NOVEDAD-AUX-VALVLR            VHF0004
+NOVEXT        MOVE FECHA-ACTUALIZ-VALOR-ABD07 TO FEC-6-MA-VALVLR        VHF0004
+NOVEXT        MOVE SIG-6-MA-VALVLR  TO SIG-6-AM-VALVLR                  VHF0004
+NOVEXT        MOVE ANO2-6-MA-VALVLR  TO ANO-6-AM-VALVLR                 VHF0004
+NOVEXT        MOVE MES-6-MA-VALVLR  TO MES-6-AM-VALVLR                  VHF0004
+NOVEXT        MOVE FEC-6-AM-VALVLR  TO FECHA-ACT-VALOR-AUX-VALVLR       VHF0004
+NOVEXT        MOVE F-ULT-ACT-ABD02 TO FEC-4-MA-VALVLR                   VHF0004
+NOVEXT        IF ANO-4-MA-VALVLR > 60                                   VHF0004
+NOVEXT           MOVE 19       TO SIG-6-AM-VALVLR                       VHF0004
+NOVEXT        ELSE                                                      VHF0004
+NOVEXT           MOVE 20       TO SIG-6-AM-VALVLR                       VHF0004
+NOVEXT        END-IF                                                    VHF0004
+NOVEXT        MOVE ANO-4-MA-VALVLR    TO ANO-6-AM-VALVLR                VHF0004
+NOVEXT        MOVE MES-4-MA-VALVLR    TO MES-6-AM-VALVLR                VHF0004
+NOVEXT        MOVE FEC-6-AM-VALVLR  TO F-ULT-ACT-AUX-VALVLR             VHF0004
+NOVEXT        MOVE FECHA-SITUACION-ABD07 TO FEC-6-MA-VALVLR             VHF0004
+NOVEXT        MOVE SIG-6-MA-VALVLR  TO SIG-6-AM-VALVLR                  VHF0004
+NOVEXT        MOVE ANO2-6-MA-VALVLR  TO ANO-6-AM-VALVLR                 VHF0004
+NOVEXT        MOVE MES-6-MA-VALVLR  TO MES-6-AM-VALVLR                  VHF0004
+NOVEXT        MOVE FEC-6-AM-VALVLR  TO FECHA-SITUACION-AUX-VALVLR       VHF0004
+NOVEXT        IF IND-MAPA-BITS-VLR-ABD07 <> 9                           VHF0004
+NOVEXT           IF NOV-REPORT-ABD07 = 01 OR                            VHF0004
+NOVEXT              (NOV-REPORT-ABD07 > 12 AND NOV-REPORT-ABD07 < 17)   VHF0004
+NOVEXT              IF (FEC-NOVEDAD-AUX-VALVLR <  200108 AND            VHF0004
+NOVEXT                  FEC-NOVEDAD-AUX-VALVLR <=                       VHF0004
+NOVEXT                  FECHA-ACT-VALOR-AUX-VALVLR) OR                  VHF0004
+NOVEXT                 (FEC-NOVEDAD-AUX-VALVLR >= 200108 AND            VHF0004
+NOVEXT                  FEC-NOVEDAD-AUX-VALVLR >=                       VHF0004
+NOVEXT                  FECHA-ACT-VALOR-AUX-VALVLR)                     VHF0004
+NOVEXT                  MOVE VECTOR-ACTIVADO-VALVLR TO                  VHF0004
+NOVEXT                       VECTOR-VALORES-VALVLR                      VHF0004
+NOVEXT              ELSE                                                VHF0004
+NOVEXT                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0004
+NOVEXT                    VALOR-INICIAL-ABD07 > 0                       VHF0004
+NOVEXT                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0004
+NOVEXT                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0004
+NOVEXT                 ELSE                                             VHF0004
+NOVEXT                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0004
+NOVEXT                 END-IF                                           VHF0004
+NOVEXT              END-IF                                              VHF0004
+NOVEXT           END-IF                                                 VHF0004
+NOVEXT           IF (NOV-REPORT-ABD07 > 16 AND NOV-REPORT-ABD07 < 42)   VHF0004
+NOVEXT              IF (FEC-NOVEDAD-AUX-VALVLR < 200108 AND             VHF0004
+NOVEXT                  FEC-NOVEDAD-AUX-VALVLR =                        VHF0004
+NOVEXT                  FECHA-ACT-VALOR-AUX-VALVLR) OR                  VHF0004
+NOVEXT                 (FEC-NOVEDAD-AUX-VALVLR >= 200108 AND            VHF0004
+NOVEXT                  FEC-NOVEDAD-AUX-VALVLR >=                       VHF0004
+NOVEXT                  FECHA-ACT-VALOR-AUX-VALVLR)                     VHF0004
+NOVEXT                  MOVE VECTOR-ACTIVADO-VALVLR TO                  VHF0004
+NOVEXT                       VECTOR-VALORES-VALVLR                      VHF0004
+NOVEXT              ELSE                                                VHF0004
+NOVEXT                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0004
+NOVEXT                    VALOR-INICIAL-ABD07 > 0                       VHF0004
+NOVEXT                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0004
+NOVEXT                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0004
+NOVEXT                 ELSE                                             VHF0004
+NOVEXT                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0004
+NOVEXT                 END-IF                                           VHF0004
+NOVEXT              END-IF                                              VHF0004
+NOVEXT           END-IF                                                 VHF0004
+NOVEXT           IF NOV-REPORT-ABD07 = 45 OR 47                         VHF0004
+NOVEXT              IF FEC-NOVEDAD-AUX-VALVLR <=                        VHF0004
+NOVEXT                 FECHA-ACT-VALOR-AUX-VALVLR OR                    VHF0004
+NOVEXT                 F-ULT-ACT-AUX-VALVLR =                           VHF0004
+NOVEXT                 FECHA-SITUACION-AUX-VALVLR                       VHF0004
+NOVEXT                 MOVE VECTOR-ACTIVADO-VALVLR TO                   VHF0004
+NOVEXT                      VECTOR-VALORES-VALVLR                       VHF0004
+NOVEXT              ELSE                                                VHF0004
+NOVEXT                 IF VALOR-INICIAL-ABD07 NUMERIC AND               VHF0004
+NOVEXT                    VALOR-INICIAL-ABD07 > 0                       VHF0004
+NOVEXT                    INITIALIZE VECTOR-VALORES-VALVLR              VHF0004
+NOVEXT                    MOVE 1 TO VEC-VALOR-VALVLR (02)               VHF0004
+NOVEXT                 ELSE                                             VHF0004
+NOVEXT                    MOVE 0 TO IND-VALORES-VALVLR                  VHF0004
+NOVEXT                 END-IF                                           VHF0004
+NOVEXT              END-IF                                              VHF0004
+NOVEXT           END-IF                                                 VHF0004
+NOVEXT        ELSE                                                      VHF0004
+NOVEXT           PERFORM 33000-LEER-BITMAP-VALORES                      VHF0004
+NOVEXT        END-IF                                                    VHF0004
+CPYVLR     ELSE                                                         ABB0004
+CPYVLR        PERFORM 33000-LEER-BITMAP-VALORES                         ABB0004
+NOVEXT     END-IF                                                       VHF0004
+NOVEXT     IF IND-VALORES-VALVLR = 1                                    VHF0004
+NOVEXT***     SE VERIFICA QUE POR LO MENOS UNO DE LOS CUATRO VALORES QUEVHF0004
+NOVEXT***     SE DESPLIEGAN EN EL REPORTE HAYA SIDO REPORTADO DE LO     VHF0004
+NOVEXT***     CONTRARIO NO SE MUESTRAN VALORES PARA LA CUENTA           VHF0004
+NOVEXT        IF VEC-VALOR-VALVLR (01) = 0 AND                          VHF0004
+NOVEXT           VEC-VALOR-VALVLR (02) = 0 AND                          VHF0004
+NOVEXT           VEC-VALOR-VALVLR (03) = 0 AND                          VHF0004
+NOVEXT           VEC-VALOR-VALVLR (05) = 0                              VHF0004
+NOVEXT           MOVE 0 TO IND-VALORES-VALVLR                           VHF0004
+NOVEXT        END-IF                                                    VHF0004
+NOVEXT     END-IF.                                                      VHF0004
+
+MAPBIT 33000-LEER-BITMAP-VALORES.                                       FAC0002 
+REMARK******************************************************************
+REMARK*33000-LEER-BITMAP-VALORES.                                      *
+REMARK*   RUTINA QUE TOMA LA VARIABLE MAPA-BITS-VLR-ABD07 Y LA PASA AL *
+REMARK*   VECTOR DE VALORES PARA PODER PROCESAR EL BIT DE CADA VALOR   *
+REMARK******************************************************************
+MAPBIT    INITIALIZE VARIABLES-UTLBIT VECTOR-VALORES-VALVLR             FAC0002 
+MAPBIT    MOVE MAPA-BITS-VLR-ABD07 TO INPUT-STR-UTLBIT                  FAC0002 
+MAPBIT    MOVE 2 TO INPUT-LEN-UTLBIT                                    FAC0002 
+MAPBIT    PERFORM VARYING FLAG-VALVLR FROM 1 BY 1 UNTIL                 FAC0002 
+COLP02            FLAG-VALVLR > 16                                      RMB0003 
+MAPBIT       INITIALIZE OUTPUT-ERR-UTLBIT OUTPUT-VAL-UTLBIT             FAC0002 
+MAPBIT                  INPUT-VAL-UTLBIT                                FAC0002 
+MAPBIT       MOVE FLAG-VALVLR TO INPUT-FLA-UTLBIT                       FAC0002 
+MAPBIT       PERFORM 0001-VALOR-FLAG-UTLBIT                             FAC0002 
+MAPBIT       MOVE OUTPUT-VAL-UTLBIT TO VEC-VALOR-VALVLR(FLAG-VALVLR)    FAC0002 
+MAPBIT    END-PERFORM.                                                  FAC0002 

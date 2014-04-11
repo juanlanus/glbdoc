@@ -1,0 +1,458 @@
+      *ICMVLR-FD.v.01.0002
+      ******************************************************************        
+      * ARCHIVO HISTORICO DE VALORES DE CUENTAS DE CARTERA. ALMACENA 12         
+      * MESES DONDE LA POSICION 1 CORRESPONDE A ENERO Y 12 A DICIEMBRE
+REMARK******************************************************************
+REMARK*INDICADORES:                                                    *
+REMARK*    0 : VALORES REPORTADOS.                                     *
+REMARK*    1 : VALORES NO REPORTADOS O INICIALIZADO.                   *
+REMARK*    2 : CADUCIDAD.                                              *
+REMARK*    3 : INHIBIDO
+REMARK*    9 : SALTO DE INFORMACION.                                   *
+REMARK******************************************************************
+      * CAV0002     * INFHIS - SE REDEFINEN CAMPOS DE CTAS CTES PARA   *
+      * C. VELASCO. *          GUARDAR INFORMACION HISTORICA DE CARTERA*
+      * 19/SEP/2011.*          Y SE ADICIONA VECTOR DE CALIFICACIONES  *
+      ******************************************************************
+       FD  ICMVLR.
+       01  REG-ICMVLR.
+           03 LLAVE-ICMVLR.
+              07  TIPO-ID-ICMVLR              PIC 9.
+              07  NUM-ID-ICMVLR               PIC 9(11).
+              07  COD-SUS-ICMVLR              PIC 9(06).
+              07  COD-CTA-ICMVLR              PIC 99.
+              07  NUM-CTA-ICMVLR              PIC X(18).
+           03 VALORES-ICMVLR            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR.
+              05  V-IND-CUOTA-ICMVLR          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR.
+
+              05  SALDO-ICMVLR                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR.
+              05  V-IND-SALDO-ICMVLR          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR.
+
+              05  SALDO-MORA-ICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR.
+              05  V-IND-SALDO-MORA-ICMVLR     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR.
+
+              05  VAL-INICIAL-ICMVLR          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR.
+              05  V-IND-VAL-INIC-ICMVLR       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR.
+
+              05  SALDO-DISP-ICMVLR           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR.
+              05  V-IND-SALDO-DISP-ICMVLR     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR.
+
+              05  MOROSIDAD-ICMVLR            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR.
+              05  V-IND-MOROSIDAD-ICMVLR      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR.                                CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR     PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR   PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR        PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR  PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR REDEFINES INF-CTES-Y-AHO-ICMVLR.   CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR     PIC 9(06) COMP-3. *>AAMMDD  CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR     PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR PIC 9(06) COMP-3. *>AAMMDD  CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR PIC 9.                CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-VALVLR.
+              05  CODIGO-DANE-ICMVLR          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR OCCURS 12 TIMES.                    CAV0002
+INFHIS        05  CALIFICACION-ICMVLR         PIC X(01).                CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR   PIC 9.                    CAV0002
+INFHIS     03  FILLER                         PIC X(26).                CAV0002
+INFHIS*    03  FILLER                         PIC X(50).                CAV0002
+      *
+      *
+       FD  ICMVLR2.
+       01  REG-ICMVLR2.
+           03 LLAVE-ICMVLR2.
+              07  TIPO-ID-ICMVLR2              PIC 9.
+              07  NUM-ID-ICMVLR2               PIC 9(11).
+              07  COD-SUS-ICMVLR2              PIC 9(06).
+              07  COD-CTA-ICMVLR2              PIC 99.
+              07  NUM-CTA-ICMVLR2              PIC X(18).
+           03 VALORES-ICMVLR2            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR2                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR2     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR2.
+              05  V-IND-CUOTA-ICMVLR2          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR2   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR2.
+
+              05  SALDO-ICMVLR2                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR2     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR2.
+              05  V-IND-SALDO-ICMVLR2          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR2   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR2.
+
+              05  SALDO-MORA-ICMVLR2           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR2   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR2.
+              05  V-IND-SALDO-MORA-ICMVLR2     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR2 PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR2.
+
+              05  VAL-INICIAL-ICMVLR2          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR2    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR2.
+              05  V-IND-VAL-INIC-ICMVLR2       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR2  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR2.
+
+              05  SALDO-DISP-ICMVLR2           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR2     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR2.
+              05  V-IND-SALDO-DISP-ICMVLR2     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR2   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR2.
+
+              05  MOROSIDAD-ICMVLR2            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR2       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR2.
+              05  V-IND-MOROSIDAD-ICMVLR2      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR2 PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR2.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR2.                               CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR2    PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR2  PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR2       PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR2 PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR2 REDEFINES INF-CTES-Y-AHO-ICMVLR2. CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR2     PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR2    PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR2 PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR2 PIC 9.               CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-ICMVLR2.
+              05  CODIGO-DANE-ICMVLR2          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR2    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR2   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR2        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR2 OCCURS 12 TIMES.                   CAV0002
+INFHIS        05  CALIFICACION-ICMVLR2         PIC X(01).               CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR2   PIC 9.                   CAV0002
+INFHIS     03  FILLER                          PIC X(26).               CAV0002
+INFHIS*    03  FILLER                          PIC X(50).               CAV0002
+      *
+      *
+       FD  ICMVLR3.
+       01  REG-ICMVLR3.
+           03 LLAVE-ICMVLR3.
+              07  TIPO-ID-ICMVLR3              PIC 9.
+              07  NUM-ID-ICMVLR3               PIC 9(11).
+              07  COD-SUS-ICMVLR3              PIC 9(06).
+              07  COD-CTA-ICMVLR3              PIC 99.
+              07  NUM-CTA-ICMVLR3              PIC X(18).
+           03 VALORES-ICMVLR3            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR3                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR3     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR3.
+              05  V-IND-CUOTA-ICMVLR3          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR3   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR3.
+
+              05  SALDO-ICMVLR3                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR3     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR3.
+              05  V-IND-SALDO-ICMVLR3          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR3   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR3.
+
+              05  SALDO-MORA-ICMVLR3           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR3   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR3.
+              05  V-IND-SALDO-MORA-ICMVLR3     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR3 PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR3.
+
+              05  VAL-INICIAL-ICMVLR3          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR3    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR3.
+              05  V-IND-VAL-INIC-ICMVLR3       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR3  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR3.
+
+              05  SALDO-DISP-ICMVLR3           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR3     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR3.
+              05  V-IND-SALDO-DISP-ICMVLR3     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR3   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR3.
+
+              05  MOROSIDAD-ICMVLR3            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR3       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR3.
+              05  V-IND-MOROSIDAD-ICMVLR3      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR3 PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR3.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR3.                               CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR3    PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR3  PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR3       PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR3 PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR3 REDEFINES INF-CTES-Y-AHO-ICMVLR3. CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR3     PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR3    PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR3 PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR3 PIC 9.               CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-ICMVLR3.
+              05  CODIGO-DANE-ICMVLR3          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR3    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR3   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR3        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR3 OCCURS 12 TIMES.                   CAV0002
+INFHIS        05  CALIFICACION-ICMVLR3         PIC X(01).               CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR3   PIC 9.                   CAV0002
+INFHIS     03  FILLER                          PIC X(26).               CAV0002
+INFHIS*    03  FILLER                          PIC X(50).               CAV0002
+      *
+      *
+       FD  ICMVLR4.
+       01  REG-ICMVLR4.
+           03 LLAVE-ICMVLR4.
+              07  TIPO-ID-ICMVLR4              PIC 9.
+              07  NUM-ID-ICMVLR4               PIC 9(11).
+              07  COD-SUS-ICMVLR4              PIC 9(06).
+              07  COD-CTA-ICMVLR4              PIC 99.
+              07  NUM-CTA-ICMVLR4              PIC X(18).
+           03 VALORES-ICMVLR4            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR4                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR4     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR4.
+              05  V-IND-CUOTA-ICMVLR4          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR4   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR4.
+
+              05  SALDO-ICMVLR4                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR4     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR4.
+              05  V-IND-SALDO-ICMVLR4          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR4   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR4.
+
+              05  SALDO-MORA-ICMVLR4           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR4   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR4.
+              05  V-IND-SALDO-MORA-ICMVLR4     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR4 PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR4.
+
+              05  VAL-INICIAL-ICMVLR4          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR4    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR4.
+              05  V-IND-VAL-INIC-ICMVLR4       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR4  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR4.
+
+              05  SALDO-DISP-ICMVLR4           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR4     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR4.
+              05  V-IND-SALDO-DISP-ICMVLR4     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR4   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR4.
+
+              05  MOROSIDAD-ICMVLR4            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR4       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR4.
+              05  V-IND-MOROSIDAD-ICMVLR4      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR4 PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR4.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR4.                               CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR4    PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR4  PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR4       PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR4 PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR4 REDEFINES INF-CTES-Y-AHO-ICMVLR4. CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR4     PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR4    PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR4 PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR4 PIC 9.               CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-ICMVLR4.
+              05  CODIGO-DANE-ICMVLR4          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR4    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR4   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR4        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR4 OCCURS 12 TIMES.                   CAV0002
+INFHIS        05  CALIFICACION-ICMVLR4         PIC X(01).               CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR4   PIC 9.                   CAV0002
+INFHIS     03  FILLER                          PIC X(26).               CAV0002
+INFHIS*    03  FILLER                          PIC X(50).               CAV0002
+      *
+      *
+       FD  ICMVLR5.
+       01  REG-ICMVLR5.
+           03 LLAVE-ICMVLR5.
+              07  TIPO-ID-ICMVLR5              PIC 9.
+              07  NUM-ID-ICMVLR5               PIC 9(11).
+              07  COD-SUS-ICMVLR5              PIC 9(06).
+              07  COD-CTA-ICMVLR5              PIC 99.
+              07  NUM-CTA-ICMVLR5              PIC X(18).
+           03 VALORES-ICMVLR5            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR5                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR5     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR5.
+              05  V-IND-CUOTA-ICMVLR5          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR5   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR5.
+
+              05  SALDO-ICMVLR5                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR5     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR5.
+              05  V-IND-SALDO-ICMVLR5          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR5   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR5.
+
+              05  SALDO-MORA-ICMVLR5           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR5   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR5.
+              05  V-IND-SALDO-MORA-ICMVLR5     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR5 PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR5.
+
+              05  VAL-INICIAL-ICMVLR5          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR5    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR5.
+              05  V-IND-VAL-INIC-ICMVLR5       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR5  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR5.
+
+              05  SALDO-DISP-ICMVLR5           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR5     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR5.
+              05  V-IND-SALDO-DISP-ICMVLR5     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR5   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR5.
+
+              05  MOROSIDAD-ICMVLR5            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR5       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR5.
+              05  V-IND-MOROSIDAD-ICMVLR5      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR5 PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR5.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR5.                               CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR5    PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR5  PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR5       PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR5 PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR5 REDEFINES INF-CTES-Y-AHO-ICMVLR5. CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR5     PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR5    PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR5 PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR5 PIC 9.               CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-ICMVLR5.
+              05  CODIGO-DANE-ICMVLR5          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR5    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR5   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR5        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR5 OCCURS 12 TIMES.                   CAV0002
+INFHIS        05  CALIFICACION-ICMVLR5         PIC X(01).               CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR5   PIC 9.                   CAV0002
+INFHIS     03  FILLER                          PIC X(26).               CAV0002
+INFHIS*    03  FILLER                          PIC X(50).               CAV0002
+      *
+      *
+       FD  ICMVLR6.
+       01  REG-ICMVLR6.
+           03 LLAVE-ICMVLR6.
+              07  TIPO-ID-ICMVLR6              PIC 9.
+              07  NUM-ID-ICMVLR6               PIC 9(11).
+              07  COD-SUS-ICMVLR6              PIC 9(06).
+              07  COD-CTA-ICMVLR6              PIC 99.
+              07  NUM-CTA-ICMVLR6              PIC X(18).
+           03 VALORES-ICMVLR6            OCCURS  12  TIMES.
+              05  CUOTA-ICMVLR6                PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-EFEC-ICMVLR6     PIC 9(11)  COMP-3
+                  REDEFINES                   CUOTA-ICMVLR6.
+              05  V-IND-CUOTA-ICMVLR6          PIC 9.
+              05  V-IND-DEBITOS-EFEC-ICMVLR6   PIC 9
+                  REDEFINES                   V-IND-CUOTA-ICMVLR6.
+
+              05  SALDO-ICMVLR6                PIC 9(11)  COMP-3.
+              05  VAL-CREDITO-EFEC-ICMVLR6     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-ICMVLR6.
+              05  V-IND-SALDO-ICMVLR6          PIC 9.
+              05  V-IND-CREDITO-EFEC-ICMVLR6   PIC 9
+                  REDEFINES                   V-IND-SALDO-ICMVLR6.
+
+              05  SALDO-MORA-ICMVLR6           PIC 9(11)  COMP-3.
+              05  VAL-DEBITOS-TRANSF-ICMVLR6   PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-MORA-ICMVLR6.
+              05  V-IND-SALDO-MORA-ICMVLR6     PIC 9.
+              05  V-IND-DEBITOS-TRANSF-ICMVLR6 PIC 9
+                  REDEFINES                   V-IND-SALDO-MORA-ICMVLR6.
+
+              05  VAL-INICIAL-ICMVLR6          PIC 9(11)  COMP-3.
+              05  VAL-CREDIT-TRANSF-ICMVLR6    PIC 9(11)  COMP-3
+                  REDEFINES                   VAL-INICIAL-ICMVLR6.
+              05  V-IND-VAL-INIC-ICMVLR6       PIC 9.
+              05  V-IND-CREDIT-TRANSF-ICMVLR6  PIC 9
+                  REDEFINES                   V-IND-VAL-INIC-ICMVLR6.
+
+              05  SALDO-DISP-ICMVLR6           PIC 9(11)  COMP-3.
+              05  VAL-CHEQ-DEVUELT-ICMVLR6     PIC 9(11)  COMP-3
+                  REDEFINES                   SALDO-DISP-ICMVLR6.
+              05  V-IND-SALDO-DISP-ICMVLR6     PIC 9.
+              05  V-IND-CHEQ-DEVUELT-ICMVLR6   PIC 9
+                  REDEFINES                   V-IND-SALDO-DISP-ICMVLR6.
+
+              05  MOROSIDAD-ICMVLR6            PIC 9(3) COMP-3. *> MESES
+              05  CANT-CHEQ-DEVU-ICMVLR6       PIC 9(3) COMP-3
+                  REDEFINES                   MOROSIDAD-ICMVLR6.
+              05  V-IND-MOROSIDAD-ICMVLR6      PIC 9.
+              05  V-IND-CANT-CHEQ-DEVU-ICMVLR6 PIC 9
+                  REDEFINES V-IND-MOROSIDAD-ICMVLR6.
+INFHIS        05  INF-CTES-Y-AHO-ICMVLR6.                               CAV0002
+INFHIS            07  VAL-CHEQ-PAGADOS-ICMVLR6    PIC 9(11)  COMP-3.    CAV0002
+INFHIS            07  V-IND-CHEQ-PAGADOS-ICMVLR6  PIC 9.                CAV0002
+INFHIS            07  CANT-CHEQ-PAG-ICMVLR6       PIC 9(3)   COMP-3.    CAV0002
+INFHIS            07  V-IND-CANT-CHEQ-PAG-ICMVLR6 PIC 9.                CAV0002
+INFHIS        05  INF-CARTERA-ICMVLR6 REDEFINES INF-CTES-Y-AHO-ICMVLR6. CAV0002
+INFHIS            07  FECHA-PAGO-ICMVLR6     PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-PAGO-ICMVLR6    PIC 9.                CAV0002
+INFHIS            07  FECHA-LIM-PAGO-ICMVLR6 PIC 9(06) COMP-3. *>AAMMDD CAV0002
+INFHIS            07  V-IND-FECHA-LIM-PAGO-ICMVLR6 PIC 9.               CAV0002
+REMARK* LOS 2 SIGUIENTES CAMPOS NO ESTAN EN EL VECTOR YA QUE NO SON
+REMARK* CAMPOS CAMBIANTES
+           03 CAMPOS-UBICACION-CUENTA-ICMVLR6.
+              05  CODIGO-DANE-ICMVLR6          PIC 9(8) COMP-3.
+              05  CIUDAD-RADICACION-ICMVLR6    PIC X(30).      
+              05  OFICINA-RADICACION-ICMVLR6   PIC X(30).      
+           03 MIGRADO-UNIFICADO-ICMVLR6        PIC X(01).
+INFHIS     03 VECTOR-CALIFIC-ICMVLR6 OCCURS 12 TIMES.                   CAV0002
+INFHIS        05  CALIFICACION-ICMVLR6         PIC X(01).               CAV0002
+INFHIS        05  V-IND-CALIFICACION-ICMVLR6   PIC 9.                   CAV0002
+INFHIS     03  FILLER                          PIC X(26).               CAV0002
+INFHIS*    03  FILLER                          PIC X(50).               CAV0002

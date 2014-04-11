@@ -1,0 +1,134 @@
+******* EST012.V.02.003
+******* ARCHIVO MAESTRO ENTREGADO POR EL SUSCRIPTOR EN EL MES
+******* INMEDIATAMENTE ANTERIOR
+013400******************************************************************
+013500 FD  ANTERI
+013700     BLOCK CONTAINS 40 RECORDS.
+014000 01  REG1-ANTERIOR.
+014100     03  COD-SUSCRIPTOR-CEROS-ANTERIOR   PIC 9(18).
+014200     03  COD-SUSCRIPTOR-ANTERIOR         PIC X(6).
+014300     03  COD-TIP-CUENTA-ANTERIOR         PIC X(2).
+014400     03  FECHA-NOVEDADES-ANTERIOR.
+014500         05 MES-NOVEDADES-ANTERIOR       PIC 99.
+               05 SIG-NOVEDADES-ANTERIOR       PIC 99.
+014600         05 ANO-NOVEDADES-ANTERIOR       PIC 99.
+           03  FECHA-NOVEDADES-ANTERIOR-M                                AMPINF5
+                       REDEFINES FECHA-NOVEDADES-ANTERIOR.               AMPINF5
+               05 SIG-NOVEDADES-ANTERIOR-M     PIC 99.                   AMPINF5
+               05 ANO-NOVEDADES-ANTERIOR-M     PIC 99.                   AMPINF5
+               05 MES-NOVEDADES-ANTERIOR-M     PIC 99.                   AMPINF5
+           03  IND-MILENIO-ANTERIOR            PIC X.                    AMPINF
+           03  IND-VALORES-MIL-ANTERIOR        PIC X.                    AMPINF9
+014700     03  FILLER                          PIC X(326).               AMPINF9
+014800 01  REG2-ANTERIOR.
+014900     03  NUM-CTA-ANTERIOR                PIC X(18).
+           03  NUM-CTA16-ANTERIOR REDEFINES NUM-CTA-ANTERIOR.            AMPINF
+               05 NUM-CTA-VEN-ANTERIOR         PIC 9(16).                AMPINF
+               05 GARANTE-VEN-ANTERIOR         PIC 99.                   AMPINF
+015000     03  NUM-ID-ANTERIOR                 PIC 9(11).
+015100     03  NOMBRE-ANTERIOR                 PIC X(45).
+015200     03  FECHA-NAC-ANTERIOR.                                       AMPINF
+015500         05 MES-NAC-ANTERIOR             PIC 9(2).                 AMPINF 
+               05 SIG-NAC-ANTERIOR             PIC 9(2).                 AMPINF
+015600         05 ANO-NAC-ANTERIOR             PIC 9(2).                 AMPINF
+           03  FECHA-NAC-ANTERIOR-M                                      AMPINF5
+                       REDEFINES FECHA-NAC-ANTERIOR.                     AMPINF5
+               05 SIG-NAC-ANTERIOR-M           PIC 99.                   AMPINF5
+               05 ANO-NAC-ANTERIOR-M           PIC 99.                   AMPINF5
+014600         05 MES-NAC-ANTERIOR-M           PIC 99.                   AMPINF5
+015300     03  FECHA-APERT-ANTERIOR.                                     AMPINF
+015500         05 MES-APE-ANTERIOR             PIC 9(2).                 AMPINF
+               05 SIG-APE-ANTERIOR             PIC 9(2).                 AMPINF
+015600         05 ANO-APE-ANTERIOR             PIC 9(2).                 AMPINF
+           03  FECHA-APERT-ANTERIOR-M                                    AMPINF5
+                       REDEFINES FECHA-APERT-ANTERIOR.                   AMPINF5
+               05 SIG-APE-ANTERIOR-M           PIC 99.                   AMPINF5
+               05 ANO-APE-ANTERIOR-M           PIC 99.                   AMPINF5
+               05 MES-APE-ANTERIOR-M           PIC 99.                   AMPINF5
+015400     03  FECHA-VENC-ANTERIOR.
+015500         05 MES-VENC-ANTERIOR            PIC 9(2).                 AMPINF
+               05 SIG-VENC-ANTERIOR            PIC 9(2).                 AMPINF
+015600         05 ANO-VENC-ANTERIOR            PIC 9(2).                 AMPINF
+           03  FECHA-VENC-ANTERIOR-M                                     AMPINF5
+                       REDEFINES FECHA-VENC-ANTERIOR.                    AMPINF5
+               05 SIG-VENC-ANTERIOR-M          PIC 99.                   AMPINF5
+               05 ANO-VENC-ANTERIOR-M          PIC 99.                   AMPINF5
+               05 MES-VENC-ANTERIOR-M          PIC 99.                   AMPINF5
+015700     03  VALOR-CUOTA-MES-ANTERIOR        PIC 9(10).                AMPINF
+015800     03  NOVEDAD-ANTERIOR                PIC 9(2).                 AMPINF
+015900     03  ADJETIVO-ANTERIOR-1             PIC 99.
+016000     03  TIPO-IDEN-ANTERIOR              PIC 9.
+      *    INFORMACION ENDEUDAMIENTO GLOBAL                              AMPINF
+           03  VALOR-INICIAL-ANTERIOR          PIC 9(10).                AMPINF
+           03  VALOR-SALDO-DEUDA-ANTERIOR      PIC 9(10).                AMPINF
+           03  VALOR-SALDO-MORA-ANTERIOR       PIC 9(10).                AMPINF
+           03  VALOR-DISPONIBLE-ANTERIOR       PIC 9(10).                AMPINF
+           03  TIPO-MONEDA-ANTERIOR            PIC 9.                    AMPINF
+           03  TIPO-OBLIGACION-ANTERIOR        PIC 9.                    AMPINF
+           03  TIPO-GARANTIA-ANTERIOR          PIC 9.                    AMPINF
+           03  CALIFICACION-ANTERIOR           PIC X.                    AMPINF
+      *    INFORMACION ADICIONAL PERSONAL                                AMPINF
+           03  CIUDAD-RESIDENCIA-ANTERIOR      PIC X(15).                AMPINF
+           03  DIREC-RESIDENCIA-ANTERIOR       PIC X(30).                AMPINF
+           03  TELEF-RESIDENCIA-ANTERIOR       PIC 9(10).                AMPINF
+           03  CIUDAD-LABORAL-ANTERIOR         PIC X(15).                AMPINF
+           03  TELEF-LABORAL-ANTERIOR          PIC 9(10).                AMPINF
+           03  CIUDAD-CORRESP-ANTERIOR         PIC X(15).                AMPINF
+           03  DIREC-CORRESP-ANTERIOR          PIC X(30).                AMPINF
+           03  CIIU-ANTERIOR                   PIC 9(6).                 AMPINF
+      *    INFORMACION ADICIONAL HABITO DE PAGO                          AMPINF
+           03  TOTAL-CUOTAS-ANTERIOR           PIC 9(3).                 AMPINF
+           03  CUOTAS-CANCELADAS-ANTERIOR      PIC 9(3).                 AMPINF
+           03  CUOTAS-EN-MORA-ANTERIOR         PIC 9(3).                 AMPINF
+           03  FECHA-DE-PAGO-ANTERIOR.                                   AMPINF
+               05 DIA-DE-PAGO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 MES-DE-PAGO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 SIG-DE-PAGO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 ANO-DE-PAGO-ANTERIOR         PIC 9(2).                 AMPINF
+           03  FECHA-DE-PAGO-ANTERIOR-M                                  AMPINF5
+                       REDEFINES FECHA-DE-PAGO-ANTERIOR.                 AMPINF5
+               05 SIG-DE-PAGO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 ANO-DE-PAGO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 MES-DE-PAGO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 DIA-DE-PAGO-ANTERIOR-M       PIC 99.                   AMPINF5
+           03  OFICINA-RADICACION-ANTERIOR     PIC X(15).                AMPINF
+           03  CIUDAD-RADICACION-ANTERIOR      PIC X(15).                AMPINF
+           03  FORMA-DE-PAGO-ANTERIOR          PIC 9.                    AMPINF
+           03  PERIODICIDAD-DE-PAGO-ANTERIOR   PIC 9.                    AMPINF
+           03  MOROSIDAD-ANTERIOR              PIC 9(3).                 MOROSI
+           03  FECHA-DE-CORTE-ANTERIOR.                                  AMPINF
+               05 DIA-DE-CORTE-ANTERIOR        PIC 9(2).                 AMPINF
+               05 MES-DE-CORTE-ANTERIOR        PIC 9(2).                 AMPINF
+               05 SIG-DE-CORTE-ANTERIOR        PIC 9(2).                 AMPINF
+               05 ANO-DE-CORTE-ANTERIOR        PIC 9(2).                 AMPINF
+           03  FECHA-DE-CORTE-ANTERIOR                                   AMPINF5
+                       REDEFINES FECHA-DE-CORTE-ANTERIOR.                AMPINF5
+               05 SIG-CORTE-ANTERIOR-M         PIC 99.                   AMPINF5
+               05 ANO-CORTE-ANTERIOR-M         PIC 99.                   AMPINF5
+               05 MES-CORTE-ANTERIOR-M         PIC 99.                   AMPINF5
+               05 DIA-CORTE-ANTERIOR-M         PIC 99.                   AMPINF5
+           03  IND-CORRECCION-ANTERIOR         PIC 9.                    AMPINF
+           03  GARANTE-ANTERIOR                PIC 9(2).                 AMPINF
+           03  ESTRATO-ANTERIOR                PIC 9.                    AMPINF
+      *    ESPACIO DE USO FUTURO                                         AMPINF
+           03  FILLER                          PIC X(14).                AMPINF
+016300 01  REG3-ANTERIOR.                                                AMPINF
+           03  IDENTIFICADOR-ANTERIOR          PIC X(18).                AMPINF
+           03  FECHA-PROCESO-ANTERIOR.                                   AMPINF
+               05 DIA-PROCESO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 MES-PROCESO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 SIG-PROCESO-ANTERIOR         PIC 9(2).                 AMPINF
+               05 ANO-PROCESO-ANTERIOR         PIC 9(2).                 AMPINF
+           03  FECHA-PROCESO-ANTERIOR-M                                  AMPINF5
+                       REDEFINES FECHA-PROCESO-ANTERIOR.                 AMPINF5
+               05 SIG-PROCESO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 ANO-PROCESO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 MES-PROCESO-ANTERIOR-M       PIC 99.                   AMPINF5
+               05 DIA-PROCESO-ANTERIOR-M       PIC 99.                   AMPINF5
+           03  NUM-REGISTROS-ANTERIOR          PIC 9(8).                 AMPINF
+           03  SUMA-NOVEDADES-ANTERIOR         PIC 9(8).                 AMPINF
+016500     03  FILLER                          PIC X(318).               AMPINF
+016300 01  REG4-ANTERIOR.
+016400     03  DATOS-REPORTADOS-ANTERIOR       PIC X(107).
+016500     03  FILLER                          PIC X(253).
+016600******************************************************************

@@ -1,0 +1,243 @@
+REMARK*CARACTPER-034.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 034
+REMARK*    METROTEL           
+REMARK******************************************************************
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-034.
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO034" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO034) TO L-AUX
+               MOVE 02MOR998TO034(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM998TO034" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM998TO034) TO L-AUX
+               MOVE 02NUM998TO034(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01MOR999OT034" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01MOR999OT034) TO L-AUX
+               MOVE 01MOR999OT034(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999OT034" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999OT034) TO L-AUX
+               MOVE 01END999OT034(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01NUM999OT034" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01NUM999OT034) TO L-AUX
+               MOVE 01NUM999OT034(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               .
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-34.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-34.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 34    *
+REMARK*     PARA METROTEL.                                             *
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-34-NIVEL-01-NUM
+             MOVE ALL "  -1" TO PER-34-NIVEL-01-MOR
+             MOVE ALL "         -1" TO PER-34-NIVEL-01-END
+             PERFORM  9999-CARAC-GENERALES.
+
+       2249-PROCESE-CARCT-00NUM-EXT-34.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-34.                                *
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00NUM Y 01NUM     *
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+            MOVE ALL "  -1" TO PER-34-NIVEL-00-NUM
+REMARK*** 00NUM999OT034 *** # OBLIG CASTIGO CON SALDO > 0 SEC REAL
+            IF COD-PORTAF-CARACT = "OT"        
+               MOVE ZEROS TO 00NUM999OT034
+               IF REG-ABIERTO-CARACT = 1 
+                  IF FECHA-ESTADO-CARACT > ZEROS AND
+                     ACT-DATE-CARACT > ZEROS
+                     IF MESES-DESAC-CARACT <= 3
+                        IF NOV-REPORT-ABD07 = 45 AND
+                           (VEC-SALDO-CARACT(I13) > 0 AND
+                            VEC-IND-SLD-CARACT(I13) = 0 )
+                           MOVE 1 TO 00NUM999OT034
+                        END-IF
+                     ELSE
+                        MOVE "  -4" TO 00NUM999OT034(1:4)
+                     END-IF
+                  ELSE
+                     MOVE "  -3" TO 00NUM999OT034(1:4)
+                  END-IF
+               ELSE
+                  MOVE "  -2" TO 00NUM999OT034(1:4)
+               END-IF
+            END-IF
+REMARK*** 00NUM998TO034 *** # OBLIG RECUPERADAS ULT 12 MESES PORT TO
+            MOVE ZEROS TO 00NUM998TO034
+            IF MESES-DESAC-CARACT <= 12
+               IF NOV-REPORT-ABD07 = 46
+                  MOVE 1 TO 00NUM998TO034
+               END-IF
+            ELSE
+               MOVE "  -4" TO 00NUM998TO034(1:4)
+            END-IF
+REMARK*** 01NUM999OT034 *** # OBLIG CASTIGO CON SALDO > 0 SEC REAL
+           IF FUNCTION NUMVAL(00NUM999OT034(1:4)) >= 0
+              IF FUNCTION NUMVAL(01NUM999OT034(1:4)) < 0
+                 MOVE ZEROS TO 01NUM999OT034
+              END-IF
+              COMPUTE 01NUM999OT034 = 01NUM999OT034 + 00NUM999OT034
+           ELSE
+              IF FUNCTION NUMVAL(01NUM999OT034(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999OT034(1:4)) <
+                  FUNCTION NUMVAL(01NUM999OT034(1:4))
+                  MOVE 00NUM999OT034(1:4) TO 01NUM999OT034(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02NUM998TO034 *** # OBLIG RECUPERADAS ULT 12 MESES PORT TO
+           IF FUNCTION NUMVAL(00NUM998TO034(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM998TO034(1:4)) < 0
+                 MOVE ZEROS TO 02NUM998TO034
+              END-IF
+              COMPUTE 02NUM998TO034 = 02NUM998TO034 + 00NUM998TO034
+           ELSE
+              IF FUNCTION NUMVAL(02NUM998TO034(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM998TO034(1:4)) <
+                  FUNCTION NUMVAL(02NUM998TO034(1:4))
+                  MOVE 00NUM998TO034(1:4) TO 02NUM998TO034(1:4)
+               END-IF
+              END-IF
+           END-IF
+         END-IF.
+
+       2249-PROCESE-CARCT-00MOR-EXT-34.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-34.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 00MOR,02MOR 
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-34-NIVEL-00-MOR
+REMARK*** 00MOR999OT034 *** # MORAS HASTA 120 ANTIGUEDAD MENOR 1 AÑO     
+          MOVE 0 TO P-CARACT
+          IF COD-PORTAF-CARACT = "OT"        
+             MOVE ZEROS TO 00MOR999OT034
+             IF REG-ABIERTO-CARACT = 1
+                IF MESES-DESAC-CARACT <= 3 AND      
+                   MESES-MADUR-CARACT < 12
+                   IF MESES-DESAC-CARACT < 0
+                      MOVE 0 TO P-CARACT
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT
+                   END-IF
+                   IF V-NOR-CARACT(49 - P-CARACT:1) = 1 OR 2 OR 3 OR 4
+                      MOVE 1 TO 00MOR999OT034
+                   END-IF
+                ELSE
+                   MOVE "  -4" TO 00MOR999OT034(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR999OT034(1:4)
+             END-IF
+          END-IF
+REMARK*** 00MOR998TO034 *** # MORAS > 120 OBLIG CERRADAS ULT 12 MESES   
+          IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                 "CC" OR "OT" OR "CO"
+             MOVE ZEROS TO 00MOR998TO034
+             IF REG-CERRADO-CARACT = 1
+                IF MESES-DESAC-CARACT <= 12
+                   PERFORM VARYING J-CARACT FROM 37 BY 1 UNTIL
+                       J-CARACT > 48 
+                       IF V-NOR-CARACT(J-CARACT:1) = 4 AND
+                          V-NOR-CARACT(J-CARACT - 1:1) = 4
+                          ADD 1 TO 00MOR998TO034  
+                       END-IF
+                   END-PERFORM
+                ELSE
+                   MOVE "  -4" TO 00MOR998TO034(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00MOR998TO034(1:4)
+             END-IF
+          END-IF
+REMARK*** 01MOR999OT034 *** # MORAS HASTA 120 ANTIGUEDAD MENOR 1 AÑO     
+           IF FUNCTION NUMVAL(00MOR999OT034(1:4)) >= 0
+              IF FUNCTION NUMVAL(01MOR999OT034(1:4)) < 0
+                 MOVE ZEROS TO 01MOR999OT034
+              END-IF
+              COMPUTE 01MOR999OT034 = 01MOR999OT034 + 00MOR999OT034
+           ELSE
+              IF FUNCTION NUMVAL(01MOR999OT034(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999OT034(1:4)) <
+                  FUNCTION NUMVAL(01MOR999OT034(1:4))
+                  MOVE 00MOR999OT034(1:4) TO 01MOR999OT034(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02MOR998TO034 *** # MORAS > 120 OBLIG CERRADAS ULT 12 MESES   
+           IF FUNCTION NUMVAL(00MOR998TO034(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO034(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO034
+              END-IF
+              COMPUTE 02MOR998TO034 = 02MOR998TO034 + 00MOR998TO034
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO034(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO034(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO034(1:4))
+                  MOVE 00MOR998TO034(1:4) TO 02MOR998TO034(1:4)
+               END-IF
+              END-IF
+           END-IF.
+
+       2749-PROCESE-CARCT-00END-EXT-34.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-34.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00END Y 02END METROTEL
+REMARK******************************************************************
+          MOVE ALL "         -1" TO PER-34-NIVEL-00-END
+REMARK*** 00END999OT034 *** SUMA SALDOS MORAS HASTA 120 MENOR 1 AÑO     
+          MOVE 0 TO P-CARACT
+          IF COD-PORTAF-CARACT = "OT"
+             MOVE ZEROS TO 00END999OT034
+             IF REG-ABIERTO-CARACT = 1
+                IF MESES-DESAC-CARACT <= 3 AND 
+                   MESES-MADUR-CARACT < 12
+                   IF MESES-DESAC-CARACT < 0
+                      MOVE 0 TO P-CARACT
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT
+                   END-IF
+                   IF (VEC-SALDO-CARACT(I13) >= 0 AND
+                       VEC-IND-SLD-CARACT(I13) = 0 )
+                      IF V-NOR-CARACT(49 - P-CARACT:1) = 1 OR 2 OR
+                                                         3 OR 4
+                         MOVE VEC-SALDO-CARACT(I13) TO 00END999OT034
+                      END-IF
+                   ELSE
+                      MOVE "        -88" TO 00END999OT034(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -4" TO 00END999OT034(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999OT034(1:11)
+             END-IF
+          END-IF
+REMARK*** 01END999OT034 *** SUMA SALDOS MORAS HASTA 120 MENOR 1 AÑO     
+           IF FUNCTION NUMVAL(00END999OT034(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END999OT034(1:11)) < 0
+                 MOVE ZEROS TO 01END999OT034
+              END-IF
+              COMPUTE 01END999OT034 = 01END999OT034 + 00END999OT034
+           ELSE
+              IF FUNCTION NUMVAL(01END999OT034(1:11)) < 0
+               IF FUNCTION NUMVAL(00END999OT034(1:11)) <
+                  FUNCTION NUMVAL(01END999OT034(1:11))
+                  MOVE 00END999OT034(1:11) TO 01END999OT034(1:11)
+               END-IF
+              END-IF
+           END-IF.

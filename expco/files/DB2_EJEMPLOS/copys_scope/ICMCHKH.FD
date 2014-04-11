@@ -1,0 +1,46 @@
+      * ICMCHKH.-FD.v.0001
+      * MAESTRO QUE ALMACENA LAS CUENTAS CORRIENTES Y CUENTAS DE AHORRO
+      * REPORTADAS POR LOS DIFERENTES SUSCRIPTORES PASADAS A HISTORICO
+      *----------------------------------------------------------------*
+REMARK******************************************************************
+       FD  MAESTRO-ICMCHKH.
+       01  COMPLETO-ICMCHKH.
+           03  LLAVE-MAES-ICMCHKH.
+               05  LLAVE-MAES-ICMCHKH-PRI.
+                   07  TIPO-ID-ICMCHKH      PIC 9.
+                   07  NUM-ID-ICMCHKH       PIC 9(11).
+               05  LLAVE-MAES-ICMCHKH-ALT.
+                   07  COD-SUS-ICMCHKH      PIC 9(6).
+                   07  COD-CTA-ICMCHKH      PIC 99.
+                   07  NUM-CTA-ICMCHKH      PIC X(18).
+           03  IND-BLOQUEO-ICMCHKH          PIC 9     COMP-3.
+           03  FECHA-APERT-ICMCHKH          PIC 9(4)  COMP-3.
+           03  CALIFIC-ICMCHKH              PIC 9     COMP-3.
+           03  TIP-CALIFIC-ICMCHKH          PIC 9     COMP-3.
+           03  NOV-REPORT-ICMCHKH           PIC 99    COMP-3.
+           03  FEC-NOVEDAD-ICMCHKH          PIC 9(4)  COMP-3.
+           03  NUM-EMBARGO-ICMCHKH          PIC 99    COMP-3.
+           03  FEC-ULT-EMB-ICMCHKH          PIC 9(4)  COMP-3.
+           03  ADJETIVO-ICMCHKH             PIC 9     COMP-3.
+           03  FEC-ADJETIVO-ICMCHKH         PIC 9(4)  COMP-3.
+           03  ART15-ICMCHKH                PIC 9     COMP-3.
+           03  IND-MODIFICACION-ICMCHKH     PIC 9     COMP-3
+               REDEFINES     ART15-ICMCHKH.
+           03  RECLAMO-ICMCHKH              PIC 9(5)  COMP-3.
+           03  RECLAMO-ICMCHKH-RR REDEFINES RECLAMO-ICMCHKH
+                                            PIC 9(3).
+           03  RECLAMO-ICMCHKH-R  REDEFINES RECLAMO-ICMCHKH.
+               05 IND-RECLAMO-ICMCHKH       PIC 9(01).
+               05 REG-LOCK-ICMCHKH          PIC 9(01).
+               05 FILLER-RECLAMO-ICMCHKH    PIC 9(01).
+           03  CONSECUTIVO-ICMCHKH          PIC 99     COMP-3.
+           03  OFICINA-ICMCHKH              PIC X(15).
+           03  CIUDAD-ICMCHKH               PIC X(6).
+           03  FEC-NOVANT-ICMCHKH           PIC 9(4)   COMP-3.
+           03  FECHA-ACTUALIZ-VALOR-ICMCHKH PIC 9(4)   COMP-3
+               REDEFINES FEC-NOVANT-ICMCHKH.
+           03  NOVANT-ICMCHKH               PIC 9(2)   COMP-3.
+           03  IND-SOBREGIRO-ICMCHKH        PIC 9(1).
+           03  COD-EST-TITUL-ICMCHKH        PIC 9(1).
+           03  CALIFICACION-ICMCHKH         PIC 9(1).
+           03  FILLER-ICMCHKH               PIC X(1).

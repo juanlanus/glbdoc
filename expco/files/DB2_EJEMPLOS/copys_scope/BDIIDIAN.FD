@@ -1,0 +1,29 @@
+      * BDIIDIAN.v.03.0003
+      *==================================================================
+      * MAESTRO DE PERSONAS JURIDICAS NACIONALES Y EXTRANJERAS REPORTADAS
+      * POR LA DIAN
+      *==================================================================
+      * FAC0002 * INCIIU* INCLUSION DE CODIGO DE ACTIVIDAD ECONOMICA- CIIU
+      * JUL.17/2003 * Y FECHA DE INSCRIPCION
+      *==================================================================
+      * CAV0003 * INDMOD* INCLUSION DE FECHA-CREACION,FECHA-MODIFCACION E
+      * C. VELASCO  * INDICADOR MODIFICACION: A-ARCHIVO DIAN, 
+      * OCT/25/2007 * C-COMUNICACION DIAN, S-SOLICTUD CAS.
+      *==================================================================
+       FD  BDIIDIAN.
+       01  REG-BDIIDIAN.
+           03 LLAVE-BDIIDIAN.
+              05 NITS-BDIIDIAN            PIC X(11).
+              05 NITS-R-BDIIDIAN REDEFINES NITS-BDIIDIAN
+                                          PIC 9(11).
+           03 DIGITO-CONTROL-BDIIDIAN     PIC X(01).
+           03 DESCRIPCION1-BDIIDIAN       PIC X(80).
+           03 DESCRIPCION1-BDIIDIAN-R REDEFINES DESCRIPCION1-BDIIDIAN.
+              05 DESCRIPCION-BDIIDIAN     PIC X(79).
+              05 ESTADO-BDIIDIAN          PIC 9.
+INCIIU     03 COD-CIIU-BDIIDIAN           PIC 9(4).                     FAC0002
+INCIIU     03 FEC-INSCRIP-BDIIDIAN        PIC 9(8).                     FAC0002
+INDMOD     03 FECHA-CREAC-BDIIDIAN        PIC 9(8).                     CAV0003 
+INDMOD     03 FECHA-MODIF-BDIIDIAN        PIC 9(8).                     CAV0003 
+INDMOD     03 IND-MODIF-BDIIDIAN          PIC X(1).                     CAV0003 
+INDMOD     03 FILLER-BDIIDIAN             PIC X(19).                    CAV0003 

@@ -1,0 +1,101 @@
+      * ICBDIR0001-FD.V01.007.
+      * MAESTRO DE DIRECCIONES POR CUENTA EXTRACTADO DE LAS REPORTADAS        
+      * POR LOS DIFERENTES SUSCRIPTORES
+REMARK******************************************************************
+REMARK* FAC0002      * AMPDIR: SE REORGANIZA Y AMPLIA LA ESTRUCTURA DEL
+REMARK* F.CUADROS C. * MAESTRO DE DIRECCIONES POR ENTRADA DE MAESTROS DE 
+REMARK* FEB.15/2006  * DATACLIENTES.
+REMARK******************************************************************
+REMARK* VHF0003      * RCNCER - SE CREAN FLAGS PARA INDICAR SI UNA     *
+REMARK* VICTOR HUGO  *          DIRECCION ESTA CERTIFICADA POR LA      *
+REMARK* FORERO       *          DIVISION DE DOCUMENTOS. TAMBIEN SE     * 
+REMARK* JUL.11/2006  *          CREARON CAMPOS QUE INDICAN SI LA       *
+REMARK*              *          DIRECCION FUE GEOREFERENCIADA.         *
+REMARK******************************************************************
+REMARK* CAV0004      * BDACSV - INCLUIR INDICADOR PARA DETERMINAR SI   *
+REMARK* C VELASCO    *          EL REGISTRO CORRESPONDE A UNA CUENTA   *
+REMARK* AGO/27/2007  *          SIN VALIDAR IDENTIFICACION             *
+REMARK******************************************************************
+REMARK* VHF0005     * FASEII - DENTRO DE LA OPTIMIZACION DE RECONOCER *
+REMARK* VICTOR HUGO  *          SE ADICIONAN FECHAS INDEPENDIENTES PARA*
+REMARK* FORERO       *          CADA TIPO DE DATOS DE LOCALIZACION     *
+REMARK* JUL.25/2008  *                                                 *
+REMARK******************************************************************
+REMARK* RMB0006      * DANE01 - INCLUIR LOS CODIGOS DANE EN LAS CIUDADE*
+REMARK* R MARTINEZ   *          S DE RESICENCIA,LABORAL Y CORRESPONDENC*
+REMARK* SEP/07/2011  *          CIA.                                   *
+REMARK******************************************************************
+REMARK* CAV0007      * FLAGCM - INCLUIR UN FLAG POR CADA CAMPO PARA    *
+REMARK* C.VELASCO    *          IDENTIFICAR CUANDO ESTABA VACIO Y SE   *
+REMARK* OCT/25/2012  *          ACTUALIZO.                             *
+REMARK******************************************************************
+       FD  MAESTRO-DIRECC.
+       01  REG-DIRECC.           
+           03  LLAVE-DIRECC.               
+               05  LLAVE-PRI-DIRECC.
+                   07  TIPO-ID-DIRECC    PIC 9(01).
+AMPDIR             07  NUM-ID-DIRECC     PIC 9(13).                     FAC0002 
+               05  LLAVE-ALT-DIRECC.
+                   07  COD-SUS-DIRECC    PIC 9(06).
+                   07  COD-CTA-DIRECC    PIC 9(02).
+                   07  NUM-CTA-DIRECC    PIC X(18).
+AMPDIR     03  FECAPE-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+AMPDIR     03  FECCRE-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+AMPDIR     03  FECACT-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+AMPDIR     03  CIURES-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DPTRES-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DIRRES-DIRECC             PIC X(60).                     FAC0002 
+AMPDIR     03  TELRES-DIRECC             PIC 9(12) COMP-3.              FAC0002 
+AMPDIR     03  FECRES-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+FASEII     03  FECDRES-DIRECC REDEFINES FECRES-DIRECC PIC 9(06) COMP-3. VHF0005
+AMPDIR     03  CIULAB-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DPTLAB-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DIRLAB-DIRECC             PIC X(60).                     FAC0002 
+AMPDIR     03  TELLAB-DIRECC             PIC 9(12) COMP-3.              FAC0002 
+AMPDIR     03  FECLAB-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+FASEII     03  FECDLAB-DIRECC REDEFINES FECLAB-DIRECC PIC 9(06) COMP-3. VHF0005
+AMPDIR     03  CIUCOR-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DPTCOR-DIRECC             PIC X(20).                     FAC0002 
+AMPDIR     03  DIRCOR-DIRECC             PIC X(60).                     FAC0002 
+AMPDIR     03  FECCOR-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+FASEII     03  FECDCOR-DIRECC REDEFINES FECCOR-DIRECC PIC 9(06) COMP-3. VHF0005
+AMPDIR     03  E-MAIL-DIRECC             PIC X(40).                     FAC0002 
+AMPDIR     03  TELCEL-DIRECC             PIC 9(12) COMP-3.              FAC0002 
+AMPDIR     03  FECOTR-DIRECC             PIC 9(06) COMP-3.              FAC0002 
+FASEII     03  FECCEL-DIRECC REDEFINES FECOTR-DIRECC PIC 9(06) COMP-3.  VHF0005
+AMPDIR     03  FECULT-DIRECC             PIC 9(06) COMP-3.              FAC0002
+RCNCER***  LOS POSIBLES VALORES DE LOS SEIS SIGUIENTES CAMPOS SON       VHF0003
+RCNCER***  DE ACUERDO AL TIPO DE DIRECCION(RES-RESIDENCIAL, LAB-LABORAL,VHF0003
+RCNCER***  COR-CORRESPONDENCIA)                                         VHF0003
+RCNCER***     CER???-DIRECC:                                            VHF0003
+RCNCER***        0 - DIRECCION NO HA SIDO CERTIFICADA                   VHF0003
+RCNCER***        1 - DIRECCION FUE CERTIFICADA EXITOSAMENTE             VHF0003
+RCNCER***        2 - DIRECCION CERTIFICADA SIN EXITO                    VHF0003
+RCNCER***     ADI???-DIRECC:                                            VHF0003
+RCNCER***       00 - DIRECCION NO HA SIDO GEOREFERENCIADA               VHF0003
+RCNCER***       01 - DIRECCION FUE GEOREFERENCIADA EXITOSAMENTE         VHF0003
+RCNCER***       02 - DIRECCION GEOREFERENCIADA SIN EXITO                VHF0003
+RCNCER     03  CERRES-DIRECC             PIC 9(01).                     VHF0003
+RCNCER     03  ADIRES-DIRECC             PIC 9(02).                     VHF0003
+RCNCER     03  CERLAB-DIRECC             PIC 9(01).                     VHF0003
+RCNCER     03  ADILAB-DIRECC             PIC 9(02).                     VHF0003
+RCNCER     03  CERCOR-DIRECC             PIC 9(01).                     VHF0003
+RCNCER     03  ADICOR-DIRECC             PIC 9(02).                     VHF0003
+BDACSV     03  INDCSV-DIRECC             PIC 9(01).                     CAV0004 
+FASEII     03  FECTRES-DIRECC            PIC 9(06) COMP-3.              VHF0005
+FASEII     03  FECTLAB-DIRECC            PIC 9(06) COMP-3.              VHF0005
+FASEII     03  FECMAIL-DIRECC            PIC 9(06) COMP-3.              VHF0005
+FASEII*    03  FILLER-DIRECC             PIC X(40).                     VHF0005
+DANE01*    03  FILLER-DIRECC             PIC X(28).                     RMB0006
+DANE01     03  CODDANE-RES-DIRECC        PIC 9(08) COMP-3.              RMB0006
+DANE01     03  CODDANE-LAB-DIRECC        PIC 9(08) COMP-3.              RMB0006
+DANE01     03  CODDANE-COR-DIRECC        PIC 9(08) COMP-3.              RMB0006
+FLAGCM     03  FLAG-DIRRES-DIRECC        PIC X.                         CAV0007
+FLAGCM     03  FLAG-TELRES-DIRECC        PIC X.                         CAV0007
+FLAGCM     03  FLAG-DIRLAB-DIRECC        PIC X.                         CAV0007
+FLAGCM     03  FLAG-TELLAB-DIRECC        PIC X.                         CAV0007
+FLAGCM     03  FLAG-DIRCOR-DIRECC        PIC X.                         CAV0007
+FLAGCM     03  FLAG-CELULAR-DIRECC       PIC X.                         CAV0007
+FLAGCM     03  FLAG-EMAIL-DIRECC         PIC X.                         CAV0007
+FLAGCM*    03  FILLER-DIRECC             PIC X(13).                     CAV0007
+FLAGCM     03  FILLER-DIRECC             PIC X(06).                     CAV0007

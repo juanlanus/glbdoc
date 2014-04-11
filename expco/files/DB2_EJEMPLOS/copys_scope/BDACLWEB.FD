@@ -1,0 +1,13 @@
+      **BDACLWEB-FD.v03.001
+      ********************************************************
+      * ESTRUCTURA DE ARCHIVO DE CLAVES WEB
+      ********************************************************
+       FD  CLAVES-WEB.
+       01  REG-CLAVE-WEB.
+           03 LLAVE-CLAVE-WEB.
+              05 TIP-ID-WEB               PIC 9.
+              05 NUM-ID-WEB               PIC 9(11).
+           03 CLAVE-WEB                   PIC X(10).
+           03 ESTADO-WEB                  PIC 9(01).
+           03 FECHA-WEB                   PIC 9(8).
+      *----------------------------------------------------------------*

@@ -1,0 +1,648 @@
+      * AMNISTIA-PROC.v.0011
+REMARK* ********************************************************************
+REMARK* CONJUNTO DE RUTINAS CREADO PARA APLICAR LA AMNISTIA SEGUN LA LEY 510
+REMARK* ARTICULO 114 DE 1999. SEGUN LA CUAL A LAS PERSONAS QUE SE PONGAN
+REMARK* AL DIA ENTRE AGOSTO DE 1999 Y EBRERO DEL ANO 2000 SE LES PERDONA
+REMARK* LA MOROSIDAD HACIA ATRAS HASTA QUE SE ENCUENTRE EL PRIMER COMPOR-       
+REMARK* TAMIENTO NORMAL O DESCONOCIDO. LA APLICACION DE LA AMNISTIA SE HACE
+REMARK* ENMASCARANDO LA INFORMACION
+REMARK**********************************************************************
+REMARK* GJC0004     * LA LEY DE APLICACION DE AMNISTIA SE AMPLIA HASTA 
+REMARK* GRACIELA J  * JUNIO DEL ANO 2000.
+REMARK* FEB.14/2000 *
+REMARK**********************************************************************
+REMARK* GJC0005     * CREACION DE VARIABLES PARA LAS FECHAS LIMITE DE APLI
+REMARK* GRACIELA J  * CACION DE AMNISTIA POR INCLUSION DE NUEVA LEY ARTICULO
+REMARK* ABR.06/2000 * 52 DE LA LEY 546 DE 1999
+REMARK**********************************************************************
+REMARK* RMB0006     * A LAS OBLIGACIONES CON ESTADOS 03 Y 46 QUE SE AMNIS-
+REMARK* R.MARTINEZ  * TIAN SE LES APLICA CADUCIDADES. (PERDON DE MORAS A LOS
+REMARK* MAY.30/2000 * DOS ANOS DE OCURRIDAS)   
+REMARK*             * SE DEJA QUE LA AMNISTIA PERDONE SOLO HASTA MAYO/2000
+REMARK**********************************************************************
+REMARK* GCJ0007     * SE DEJA QUE LA AMNISTIA PERDONE HASTA EL MES DE JUNIO
+REMARK* G.JIMENEZ   * DEL ANO 2000.                                         
+REMARK* AGO.02/2000 *                          
+REMARK**********************************************************************
+REMARK* G.JIMENEZ   * PARA LAS CUENTAS QUE SE AMNISTIAN QUE TIENEN AJETIVOS 
+REMARK* OCT.11/2000 * DIFERENTES A FALLECIDOS, ESTOS SE PERDONAN SI LA 
+REMARK*             * FECHA DE ESTE ES MENOR A LA MAXIMA DE AMNISTIA
+REMARK**********************************************************************
+REMARK* GJC0008     * PARA LAS CUENTAS QUE SE AMNISTIAN Y TIENEN ADJETIVOS 
+REMARK* G.JIMENEZ   * ESTOS SOLO SE PERDONARAN SI SU FECHA DE REPORTE ESTA  
+REMARK* OCT.11/2000 * ENTRE LAS FECHAS QUE SE PERDONAN EN LA CUENTA     
+REMARK**********************************************************************
+REMARK* RMB0009     * SE DEJA LA RUTINA PARA TODA APLICACION DE LEY.
+REMARK* R.MARTINEZ  * ALIVIO: RUTINA PARA APLICAR LEY 716 DE 2001
+REMARK* FEB/2002    * HISTOR: RUTINA QUE LEYENDO EL VECTOR RECALCULA EL
+REMARK*             *         ESTADO
+REMARK**********************************************************************
+REMARK* GJC0010     * SE MODIFICA LA APLICACION DE LEY 716 de 2001 ASI:
+REMARK* G.JIMENEZ   * COMO LA LEY SE CAYO EL ALIVIO YA NO APLICA HASTA 
+REMARK* SEP/2002    * DICIEMBRE DE 2002 SINO HASTA AGOSTO.  ALIV01     
+REMARK**********************************************************************
+REMARK* VHF0011     * LEY002 - SE IMPLEMENTAN CAMBIOS PARA LEY, EN     *
+REMARK* VICTOR HUGO *          PARTICULAR LOS CAMBIOS DE LO RELACIONADO*
+REMARK* FORERO      *          CON 48 MESES DE HISTORIA                *
+REMARK* MAY.09/2008 *                                                  *
+REMARK******************************************************************
+REMARK
+REMARK*14-1-CARGAR-MATRIZ-AMNISTIA.
+REMARK* RUTINA ENCARGADA DE CARGAR EN MEMORIA LA MATRIZ DE RECONSTRUCCION
+REMARK* HISTORICA. DEBE INVOCARSE AL PRINCIPIO DEL PROGRAMA QUE APLIQUE
+REMARK* AMNISTIA.
+REMARK**********************************************************************
+INICIO 14-1-CARGAR-MATRIZ-AMNISTIA.
+INICIO     OPEN INPUT CADUCIDADES.
+INICIO     READ CADUCIDADES AT END MOVE 1 TO FIN-MATRIZ-AMNI.
+INICIO     MOVE 1 TO I.
+INICIO     PERFORM UNTIL FIN-MATRIZ-AMNI = 1
+INICIO        MOVE 1 TO J 
+INICIO        PERFORM UNTIL J > 5
+INICIO           IF J > 1 
+INICIO              SUBTRACT 1 FROM J GIVING K
+INICIO           ELSE 
+INICIO             MOVE 5 TO K
+INICIO           END-IF
+INICIO           MOVE ESTADOS-CADU(J) TO MATRIZ-AMNI(I,K)
+INICIO           ADD 1 TO J      
+INICIO        END-PERFORM
+INICIO        MOVE MORA-CADU TO V-NOVEDAD-AMNI(I)
+INICIO        MOVE MORA-MAX-CADU TO V-MORMAX-AMNI (I)
+INICIO        MOVE NOMBRE-CADU   TO V-NOMBRE-AMNI (I)
+              MOVE MORA-CADU   TO V-MORA-AMNI (I)
+**********    IF I > 0 AND < 13 OR  I = 49
+              IF I = 1 OR = 3 OR = 5 OR = 6
+                 MOVE 5       TO V-MORA-AMNI (I)
+              END-IF
+INICIO        ADD 1 TO I 
+INICIO        READ CADUCIDADES AT END MOVE 1 TO FIN-MATRIZ-AMNI
+INICIO     END-PERFORM.
+INICIO     CLOSE CADUCIDADES.
+REMARK*******************************************************************
+REMARK* 14-2-APLICAR-AMNISTIA.
+REMARK* IDENTIFICA LOS DIRERENTES TIPOS DE PERDONES QUE DEBE APLICAR SEGUN
+REMARK* SE APLIQUE LA LEY 510/99 O 546/99 (DACIONES Y REESTRUCTURACIONES)
+REMARK********************************************************************
+       14-2-APLICAR-AMNISTIA.
+           MOVE FEC-NOVEDAD-ABD07 TO FEC-MM-AA-AMNI  
+DATOS      IF FEC-MM-AA-AMNI (3:2) > 60
+DATOS         MOVE 19 TO SIGLO-AMNI       
+DATOS      ELSE    
+DATOS         MOVE 20 TO SIGLO-AMNI      
+DATOS      END-IF
+DATOS      MOVE FEC-MM-AA-AMNI (1:2)  TO MES-AMNI
+DATOS      MOVE FEC-MM-AA-AMNI (3:2)  TO ANO-AMNI
+dacion     IF FORMA-PAGO-TOTAL-ABD07 = 5 AND FECHA-AMNI > 199701 AND    GJC0005 
+dacion        (TIPO-OBLIGACION-ABD07 = 3 OR COD-CTA-ABD07 = 13)         GJC0005 
+dacion        MOVE FECHA-AMNI TO FECHA-1-AMNI                           GJC0005 
+dacion        IF MES-1-AMNI = 12                                        GJC0005 
+dacion           MOVE "01" TO MES-1-AMNI                                GJC0005 
+dacion           IF ANO-1-AMNI = 99                                     GJC0005 
+dacion              ADD 1 TO SIGLO-1-AMNI                               GJC0005 
+dacion           END-IF                                                 GJC0005 
+dacion           ADD 1 TO ANO-1-AMNI                                    GJC0005 
+dacion        ELSE                                                      GJC0005 
+dacion           ADD 1         TO MES-1-AMNI                            GJC0005 
+dacion        END-IF                                                    GJC0005 
+dacion        MOVE FECHA-1-AMNI  TO FEC-LIM-SUP-AMNI                    GJC0005 
+dacion        MOVE FECHA-AMNI    TO FEC-LIM-SUP-1-AMNI                  GJC0005 
+dacion        MOVE 196102        TO FEC-LIM-INF-AMNI                    GJC0005 
+dacion        MOVE 196101        TO FEC-LIM-INF-1-AMNI                  GJC0005 
+dacion        PERFORM 14-2-1-APLICAR-AMNISTIA                           GJC0005 
+dacion     ELSE                                                         GJC0005 
+              MOVE 200007        TO FEC-LIM-SUP-AMNI                    GJC0007 
+              MOVE 200006        TO FEC-LIM-SUP-1-AMNI                  GJC0007 
+              MOVE 199908        TO FEC-LIM-INF-AMNI                    GJC0005 
+              MOVE 199907        TO FEC-LIM-INF-1-AMNI                  GJC0005 
+              PERFORM 14-2-1-APLICAR-AMNISTIA                           GJC0005 
+dacion        IF NOV-REPORT2-ABD07 = 1 AND FECHA-SITUACION-ABD07 > 0    GJC0005 
+dacion           AND (TIPO-OBLIGACION-ABD07 = 3 OR COD-CTA-ABD07 = 13)  GJC0005 
+dacion           MOVE FECHA-SITUACION-ABD07 TO FECHA-SITUACION-AMNI     GJC0005 
+dacion           MOVE FECHA-SITUACION-AMNI(1:2) TO MES-LIM-SUP-AMNI     GJC0005 
+dacion           MOVE FECHA-SITUACION-AMNI(3:2) TO SIGLO-LIM-SUP-AMNI   GJC0005 
+dacion           MOVE FECHA-SITUACION-AMNI(5:2) TO ANO-LIM-SUP-AMNI     GJC0005 
+dacion           MOVE FEC-LIM-SUP-AMNI TO FECHA-1-AMNI                  GJC0005 
+dacion                                    FEC-LIM-SUP-1-AMNI            GJC0005 
+dacion           IF MES-1-AMNI = 12                                     GJC0005 
+dacion              MOVE "01" TO MES-1-AMNI                             GJC0005 
+dacion              IF ANO-1-AMNI = 99                                  GJC0005 
+dacion                 ADD 1 TO SIGLO-1-AMNI                            GJC0005 
+dacion              END-IF                                              GJC0005 
+dacion              ADD 1 TO ANO-1-AMNI                                 GJC0005 
+dacion           ELSE                                                   GJC0005 
+dacion              ADD 1         TO MES-1-AMNI                         GJC0005 
+dacion           END-IF                                                 GJC0005 
+dacion           MOVE FECHA-1-AMNI TO FEC-LIM-SUP-AMNI                  GJC0005 
+dacion           MOVE 196102     TO FEC-LIM-INF-AMNI                    GJC0005 
+dacion           MOVE 196101     TO FEC-LIM-INF-1-AMNI                  GJC0005 
+dacion           PERFORM 14-2-1-APLICAR-AMNISTIA                        GJC0005 
+dacion        END-IF                                                    GJC0005 
+dacion     END-IF.                                                      GJC0005 
+REMARK*******************************************************************
+REMARK* 14-2-1-APLICAR-AMNISTIA.
+REMARK* RECIBE LA INFORMACION DE UN REGISTRO PARA VERIFICAR SI SE DEBE
+REMARK* AMNISTIAR O NO. OBTIENE LA FECHA DE NOVEDAD, EL ESTADO ACTUAL
+REMARK* Y ORGANIZA LOS VECTORES DEJANDO EN LA PRIMERA POSICION LA INFOR-
+REMARK* MACION MAS RECIENTE. LLAMA A LAS RUTINAS QUE AMNISTIAN Y SEGUN EL
+REMARK* RESULTADO CAMBIA LA INFORMACION DEL REGISTRO PARA QUE EL PROGRAMA
+REMARK* PUEDA MOSTRAR LA INFORMACION ENMASCARADA
+REMARK********************************************************************
+       14-2-1-APLICAR-AMNISTIA.                                         GJC0005 
+DATOS      MOVE NOV-REPORT-ABD07  TO ESTADO-AMNI ESTADO-FIN-AMNI
+           MOVE ESTADO-MES-ABD07  TO VECTOR1-AMNI
+           MOVE VECTOR-2-ABD07    TO VECTOR2-AMNI   
+DATOS      MOVE 1 TO I 
+DATOS      MOVE 12 TO J
+DATOS      PERFORM UNTIL J = 0   
+DATOS        MOVE VECTOR1-AMNI (J:1) TO VECTOR-AMNI (I:1)
+DATOS        ADD 1 TO I
+DATOS        SUBTRACT 1 FROM J 
+DATOS      END-PERFORM
+DATOS      MOVE 12 TO J
+DATOS      PERFORM UNTIL J = 0   
+DATOS        MOVE VECTOR2-AMNI (J:1) TO VECTOR-AMNI (I:1)
+DATOS        ADD 1 TO I
+DATOS        SUBTRACT 1 FROM J 
+DATOS      END-PERFORM
+PROCES     MOVE 0 TO ANM .
+PROCES     MOVE 0 TO MES-MORA-MAX-AMNI
+PROCES     MOVE FECHA-AMNI  TO FECHA-INI-AMNI.
+PROCES     MOVE ESTADO-AMNI TO      ESTADO-FIN-AMNI
+PROCES*    IF FECHA-AMNI < 199908 OR ESTADO-AMNI  = 01
+ ROCES     IF FECHA-AMNI < FEC-LIM-INF-AMNI OR ESTADO-AMNI  = 01        GJC0005 
+                                  OR ESTADO-AMNI = 08          
+PROCES        MOVE 0 TO ANM
+PROCES     ELSE                       
+PROCES*       IF FECHA-AMNI < 200003                       
+PROCES*       IF FECHA-AMNI < 200007                                     GJC0004
+ ROCES        IF FECHA-AMNI < FEC-LIM-SUP-AMNI                          GJC0005 
+PROCES           MOVE 1 TO I                    
+PROCES           PERFORM 14-3-MIRAR-SIAMNISTIA               
+PROCES        ELSE    
+PROCES           MOVE 1 TO I                    
+PROCES*          PERFORM 14-4-ADDUNOTOI UNTIL FECHA-AMNI = 200002
+PROCES*          PERFORM 14-4-ADDUNOTOI UNTIL FECHA-AMNI = 200006        GJC0004
+ ROCES           PERFORM 14-4-ADDUNOTOI UNTIL                           GJC0005 
+                              FECHA-AMNI = FEC-LIM-SUP-1-AMNI           GJC0005 
+                                              OR I > 25
+PROCES           IF I < 26
+PROCES              PERFORM 14-3-MIRAR-SIAMNISTIA               
+PROCES           END-IF
+PROCES        END-IF
+PROCES     END-IF.                
+PROCES     IF ANM = 1
+PROCES        PERFORM 14-5-NUEVA-NOVEDAD
+PROCES        PERFORM 14-6-CALCULO-FECHAMX
+              MOVE FEC-MEN-ADJ-ABD07 TO F-MA-AUX-AMNI                   GJC0007 
+              IF F-MA-ANO-AUX-AMNI  > 60                                GJC0007 
+                 MOVE 19 TO F-AM-SIG-AUX-AMNI                           GJC0007 
+              ELSE                                                      GJC0007 
+                 MOVE 20 TO F-AM-SIG-AUX-AMNI                           GJC0007 
+              END-IF                                                    GJC0007 
+              MOVE F-MA-ANO-AUX-AMNI   TO F-AM-ANO-AUX-AMNI             GJC0007 
+              MOVE F-MA-MES-AUX-AMNI   TO F-AM-MES-AUX-AMNI             GJC0007 
+              IF ADJETIVO1-ABD07 > 1 AND                                GJC0007 
+ ************    F-AM-AUX-AMNI < FEC-LIM-SUP-1-AMNI                     GJC0008 
+                 (F-AM-AUX-AMNI >= FEC-ULT-AMNI AND                     GJC0008 
+                  F-AM-AUX-AMNI <= FEC-PRIM-AMNI)                       GJC0008 
+                 MOVE 0        TO ADJETIVO1-ABD07                       GJC0007 
+              END-IF
+              MOVE FEC-MAY-ADJ-ABD07 TO F-MA-AUX-AMNI                   GJC0007 
+              IF F-MA-ANO-AUX-AMNI  > 60                                GJC0007 
+                 MOVE 19 TO F-AM-SIG-AUX-AMNI                           GJC0007 
+              ELSE                                                      GJC0007 
+                 MOVE 20 TO F-AM-SIG-AUX-AMNI                           GJC0007 
+              END-IF                                                    GJC0007 
+              MOVE F-MA-ANO-AUX-AMNI   TO F-AM-ANO-AUX-AMNI             GJC0007 
+              MOVE F-MA-MES-AUX-AMNI   TO F-AM-MES-AUX-AMNI             GJC0007 
+              IF ADJETIVO2-ABD07 > 1 AND                                GJC0007 
+ *************   F-AM-AUX-AMNI < FEC-LIM-SUP-1-AMNI                     GJC0008 
+                 (F-AM-AUX-AMNI >= FEC-ULT-AMNI AND                     GJC0008 
+                  F-AM-AUX-AMNI <= FEC-PRIM-AMNI)                       GJC0008 
+                     MOVE 0        TO ADJETIVO2-ABD07                   GJC0007 
+              END-IF
+              IF ADJETIVO3-ABD07 > 1 AND                                GJC0007 
+ *************   F-AM-AUX-AMNI < FEC-LIM-SUP-1-AMNI                     GJC0008 
+                 (F-AM-AUX-AMNI >= FEC-ULT-AMNI AND                     GJC0008 
+                  F-AM-AUX-AMNI <= FEC-PRIM-AMNI)                       GJC0008 
+                     MOVE 0        TO ADJETIVO3-ABD07                   GJC0007 
+              END-IF
+PROCES     END-IF.
+PROCES     PERFORM 14-7-CASOS-ESPECIALES.
+RESULT     MOVE ESTADO-FIN-AMNI  TO   NOV-REPORT-ABD07
+RESULT     MOVE 1 TO I 
+RESULT     MOVE 12 TO J
+RESULT     PERFORM UNTIL J = 0   
+RESULT        MOVE VECTOR-AMNI(I:1) TO  VECTOR1-AMNI (J:1) 
+RESULT        ADD 1 TO I
+RESULT        SUBTRACT 1 FROM J 
+RESULT     END-PERFORM.
+RESULT     MOVE 12 TO J
+RESULT     PERFORM UNTIL J = 0   
+RESULT       MOVE VECTOR-AMNI(I:1) TO  VECTOR2-AMNI (J:1) 
+RESULT       ADD 1 TO I
+RESULT       SUBTRACT 1 FROM J 
+RESULT     END-PERFORM.
+           MOVE VECTOR1-AMNI TO ESTADO-MES-ABD07.
+           MOVE VECTOR2-AMNI TO VECTOR-2-ABD07.
+PROCES     IF ANM = 1
+              MOVE 6 TO TIP-CALIFIC-ABD07
+           END-IF.
+REMARK**********************************************************************
+REMARK*14-3-MIRAR-SI-AMNISTIA
+REMARK* VERIFICA SI SOBRE LA OBLIGACION RECIBIDA SE DEBE APLICAR AMNISTIA
+REMARK**********************************************************************
+MIRAR  14-3-MIRAR-SIAMNISTIA.
+MIRAR      MOVE V-MORA-AMNI(ESTADO-AMNI) TO EST-HIST-AMNI.
+           MOVE ZEROS TO FEC-PRIM-AMNI FEC-ULT-AMNI                     GJC0008 
+MIRAR *    PERFORM UNTIL I > 25 OR FECHA-AMNI < 199908
+ IRAR      PERFORM UNTIL I > 25 OR FECHA-AMNI < FEC-LIM-INF-AMNI        GJC0005 
+MIRAR        IF V-VECTOR-AMNI(I) = "5" OR "8"
+MIRAR           PERFORM 14-4-ADDUNOTOI   
+MIRAR           MOVE 0 TO FIN-AMNI
+MIRAR           PERFORM UNTIL FIN-AMNI = 1 OR I > 25
+MIRAR              IF V-VECTOR-AMNI(I) > "0" AND < "5" 
+MIRAR                 MOVE 1 TO ANM
+MIRAR                 MOVE "8" TO V-VECTOR-AMNI(I) 
+                      IF FEC-PRIM-AMNI = 0                              GJC0008 
+                         MOVE FECHA-AMNI TO FEC-PRIM-AMNI               GJC0008 
+                      END-IF                                            GJC0008 
+                      MOVE FECHA-AMNI TO FEC-ULT-AMNI                   GJC0008 
+MIRAR                 PERFORM 14-4-ADDUNOTOI
+MIRAR              ELSE   
+      *               IF V-VECTOR-AMNI(I) = "9" AND FECHA-AMNI > 199907 
+                      IF V-VECTOR-AMNI(I) = "9" AND                     GJC0005 
+                         FECHA-AMNI > FEC-LIM-INF-1-AMNI                GJC0005 
+                         PERFORM 14-4-ADDUNOTOI
+                      ELSE
+                         MOVE 1 TO FIN-AMNI 
+                      END-IF
+                   END-IF
+MIRAR           END-PERFORM
+MIRAR         ELSE
+MIRAR            PERFORM 14-4-ADDUNOTOI
+MIRAR         END-IF
+MIRAR      END-PERFORM.
+REMARK********************************************************************
+REMARK* 14-4-ADDUNOTOI
+REMARK* RETROCEDE UN MES EN EL TIEMPO TENIENDO EN CUENTA EL CAMBIO DE ANO
+REMARK* Y SI LA INFORMACION VALIDA DEL VECTOR HA TERMINADO, FINALIZA LA
+REMARK* REVISION DE AMNISTIA SOBRE EL VECTOR
+REMARK********************************************************************
+ADDTOI 14-4-ADDUNOTOI.
+ADDTOI     ADD 1 TO I
+ADDTOI     SUBTRACT 1 FROM MES-AMNI
+ADDTOI     IF MES-AMNI = 0
+ADDTOI        MOVE 12 TO MES-AMNI
+ADDTOI        SUBTRACT 1 FROM ANO-T-AMNI
+ADDTOI     END-IF.
+ADDTOI     IF I < 26 
+ADDTOI        IF V-VECTOR-AMNI(I) = "0"
+ADDTOI          MOVE 26 TO I
+ADDTOI        END-IF
+ADDTOI     END-IF.
+REMARK*******************************************************************
+REMARK* 14-5-NUEVA-NOVEDAD.
+REMARK* CON EL VECTOR DE COMPORTAMIENTO PERDONADO Y SEGUN LA NOVEDAD REPOR
+REMARK* TADA INICIALMENTE, CALCULA CON LA MATRIZ DE RECONSTRUCCION HISTO-   
+REMARK* RICA LA NUEVA NOVEDAD DE LA OBLIGACION
+REMARK*******************************************************************
+NEWNOV 14-5-NUEVA-NOVEDAD.
+           MOVE 0 TO NUM-MORAS30-ABD07  
+           MOVE 0 TO MORA-MAXIMA-ABD07
+           MOVE 0 TO FECHA-MORA-MAXIMA-ABD07 
+NEWNOV     MOVE 01 TO ESTADO-INI-AMNI
+NEWNOV     MOVE 25 TO I.
+NEWNOV     PERFORM UNTIL I = 0 
+NEWNOV         MOVE V-VECTOR-AMNI(I) TO J
+NEWNOV         IF J = 1
+NEWNOV            ADD 1 TO NUM-MORAS30-ABD07
+NEWNOV         END-IF
+NEWNOV         IF J < 5 AND J > MORA-MAXIMA-ABD07
+NEWNOV            MOVE I TO MES-MORA-MAX-AMNI
+NEWNOV            MOVE J TO MORA-MAXIMA-ABD07
+NEWNOV         END-IF
+NEWNOV         IF I = 1 
+NEWNOV            IF (ESTADO-AMNI > 12 AND < 42) OR ESTADO-AMNI = 01
+NEWNOV               MOVE V-NOVEDAD-AMNI(ESTADO-AMNI) TO ESTADO-FIN-AMNI
+NEWNOV               MOVE MATRIZ-AMNI(ESTADO-INI-AMNI,ESTADO-FIN-AMNI) 
+NEWNOV                               TO ESTADO-FIN-AMNI
+NEWNOV            ELSE 
+NEWNOV               IF ESTADO-AMNI > 07 AND < 13 
+NEWNOV                  COMPUTE ESTADO-FIN-AMNI = 
+                                08 + MORA-MAXIMA-ABD07     
+NEWNOV               ELSE
+NEWNOV                  MOVE ESTADO-AMNI TO ESTADO-FIN-AMNI
+NEWNOV               END-IF
+NEWNOV            END-IF
+NEWNOV         ELSE
+NEWNOV            IF J > 0 AND J < 6
+NEWNOV               MOVE MATRIZ-AMNI(ESTADO-INI-AMNI,J) TO
+                          ESTADO-INI-AMNI
+NEWNOV            END-IF
+NEWNOV         END-IF
+NEWNOV         SUBTRACT 1 FROM I 
+NEWNOV     END-PERFORM.
+REMARK******************************************************************
+REMARK*14-6-CALCULO-FECHAMX.
+REMARK* CON EL VECTOR YA PERDONADO, CALCULA LA NUEVA FECHA DE MORA MAXIMA
+REMARK*******************************************************************
+FECHMX 14-6-CALCULO-FECHAMX.
+FECHMX     IF MES-MORA-MAX-AMNI > 0
+FECHMX        MOVE FECHA-INI-AMNI TO FECHA-AMNI
+FECHMX        MOVE 1 TO I 
+FECHMX        PERFORM 14-4-ADDUNOTOI UNTIL I = MES-MORA-MAX-AMNI 
+OJO*****SE DEBE CONTROLAR SI I SE PASA de 25  ********************
+FECHMX        MOVE ANO-T-AMNI TO FEC-MM-AAAA-AMNI (3:4) 
+FECHMX        MOVE MES-AMNI   TO FEC-MM-AAAA-AMNI (1:2) 
+              MOVE FEC-MM-AAAA-AMNI  TO FECHA-MORA-MAXIMA-ABD07
+FECHMX     END-IF.
+REMARK******************************************************************
+REMARK* 14-7-CASOS-ESPECIALES.
+REMARK* PARA LOS CASOS ESPECIALES OBTIENE EL NUEVO ESTADO DE LA OBLIGACION
+REMARK*******************************************************************
+ESPECI 14-7-CASOS-ESPECIALES.
+ESPECI*    IF (ESTADO-FIN-AMNI = 46 OR 03) AND (FECHA-INI-AMNI < 200003 
+ESPECI*    IF (ESTADO-FIN-AMNI = 46 OR 03) AND (FECHA-INI-AMNI < 200007  GJC0004
+ESPECI*                       AND FECHA-INI-AMNI > 199907)
+ SPECI     IF (ESTADO-FIN-AMNI = 46 OR 03) AND                          GJC0005 
+ SPECI        (FECHA-INI-AMNI < FEC-LIM-SUP-AMNI AND                    GJC0005 
+               FECHA-INI-AMNI > FEC-LIM-INF-1-AMNI)                     GJC0005 
+ESPECI         MOVE 1 TO ANM
+ESPECI         IF COD-CTA-ABD07 = 02 AND ESTADO-FIN-AMNI = 46
+                  IF MORA-MAXIMA-ABD07 > 0                              RMB0006 
+                     PERFORM 14-2-APLICAR-CADUCIDAD2ANOS                RMB0006 
+                  END-IF                                                RMB0006 
+ESPECI            MOVE 05 TO ESTADO-FIN-AMNI
+ESPECI         END-IF
+ESPECI         IF COD-CTA-ABD07 = 02 AND ESTADO-FIN-AMNI = 03
+                  IF MORA-MAXIMA-ABD07 > 0                              RMB0006 
+                     PERFORM 14-2-APLICAR-CADUCIDAD2ANOS                RMB0006 
+                  END-IF                                                RMB0006 
+ESPECI            MOVE 06 TO ESTADO-FIN-AMNI
+ESPECI         END-IF
+ESPECI         IF COD-CTA-ABD07 <> 02 AND ESTADO-FIN-AMNI = 46
+                  IF MORA-MAXIMA-ABD07 > 0                              RMB0006 
+                     PERFORM 14-2-APLICAR-CADUCIDAD2ANOS                RMB0006 
+                  END-IF                                                RMB0006 
+ESPECI            COMPUTE ESTADO-FIN-AMNI = 08 + MORA-MAXIMA-ABD07 
+ESPECI         END-IF
+ESPECI     END-IF.
+       14-2-APLICAR-CADUCIDAD2ANOS.                                     RMB0006 
+           MOVE 0 TO MORA-MAXIMA-ABD07.                                 RMB0006 
+           MOVE FEC-NOVEDAD-ABD07 TO FEC-MM-AA-AMNI  .                  RMB0006 
+ ATOS      IF FEC-MM-AA-AMNI (3:2) > 60                                 RMB0006 
+ ATOS         MOVE 19 TO SIGLO-AMNI                                     RMB0006 
+ ATOS      ELSE                                                         RMB0006 
+ ATOS         MOVE 20 TO SIGLO-AMNI                                     RMB0006 
+ ATOS      END-IF.                                                      RMB0006 
+ ATOS      MOVE FEC-MM-AA-AMNI (1:2)  TO MES-AMNI.                      RMB0006 
+ ATOS      MOVE FEC-MM-AA-AMNI (3:2)  TO ANO-AMNI.                      RMB0006 
+ ATOS      IF FECHA-HOY (1:6) > FECHA-AMNI                              RMB0006 
+ ATOS          COMPUTE I = (ANO-HOY * 12 + MES-HOY ) -                  RMB0006 
+ ATOS                      (ANO-T-AMNI * 12 + MES-AMNI)                 RMB0006 
+ ATOS          IF I < 24                                                RMB0006 
+ ATOS             COMPUTE I = 24 - I                                    RMB0006 
+ ATOS          ELSE                                                     RMB0006 
+ ATOS             MOVE 0 TO I                                           RMB0006 
+ ATOS          END-IF                                                   RMB0006 
+ ATOS       ELSE                                                        RMB0006 
+ ATOS          MOVE 24 TO I                                             RMB0006 
+ ATOS       END-IF.                                                     RMB0006 
+ ATOS       MOVE 24  TO J.                                              RMB0006 
+ ATOS       PERFORM UNTIL J = 0                                         RMB0006 
+ ATOS          IF J >= I                                                RMB0006 
+ ATOS             IF VECTOR-AMNI(J:1) > "0" AND < "5"                   RMB0006 
+ ATOS                MOVE "9" TO VECTOR-AMNI(J:1)                       RMB0006 
+ ATOS             END-IF                                                RMB0006 
+ ATOS          ELSE                                                     RMB0006 
+ ATOS             IF VECTOR-AMNI(J:1) > "0" AND < "5"                   RMB0006 
+ ATOS                MOVE VECTOR-AMNI(J:1) TO FIN-AMNI(1:1)             RMB0006 
+ ATOS                IF FIN-AMNI > MORA-MAXIMA-ABD07                    RMB0006 
+ ATOS                   MOVE FIN-AMNI TO MORA-MAXIMA-ABD07              RMB0006 
+ ATOS                END-IF                                             RMB0006 
+ ATOS             END-IF                                                RMB0006 
+ ATOS          END-IF                                                   RMB0006 
+ ATOS          SUBTRACT 1 FROM J                                        RMB0006 
+ ATOS       END-PERFORM.                                                RMB0006 
+REMARK******************************************************************
+REMARK*14-716-ALIVIAR-UNA-CUENTA.                                      *
+REMARK* RUTINA PARA SABER SI UNA CUENTA TIENE DERECHO A LA APLICACION  *
+REMARK* DEL ALIVIO DADO POR LA LEY 716 de 2001 DECRETO 181             *
+REMARK******************************************************************
+ALIVIO 14-716-ALIVIAR-UNA-CUENTA.                                       RMB0009
+ALIVIO     MOVE 0 TO PAGO-EN-2002-ALV.                                  RMB0009
+ALIVIO     MOVE FEC-NOVEDAD-ABD07 TO FEC-MM-AA-AMNI.                    RMB0009
+ALIVIO     IF FEC-MM-AA-AMNI (3:2) > 60                                 RMB0009
+ALIVIO        MOVE 19 TO SIGLO-AMNI                                     RMB0009
+ALIVIO     ELSE                                                         RMB0009
+ALIVIO        MOVE 20 TO SIGLO-AMNI                                     RMB0009
+ALIVIO     END-IF .                                                     RMB0009
+ALIVIO     MOVE FEC-MM-AA-AMNI (1:2)  TO MES-AMNI.                      RMB0009
+ALIVIO     MOVE FEC-MM-AA-AMNI (3:2)  TO ANO-AMNI.                      RMB0009
+ALIVIO     IF MORA-MAXIMA-ABD07 > 0                                     RMB0009
+ALIVIO        MOVE ZEROS TO HISTORIA-TOTAL-AMNI                         RMB0009
+ALIVIO        MOVE V-NOVEDAD-AMNI(NOV-REPORT-ABD07) TO EST-HIST-AMNI    RMB0009
+ALIVIO        IF FECHA-AMNI > 200112                                    RMB0009
+ALIVIO           MOVE ESTADO-MES-ABD07  TO VECTOR1-AMNI                 RMB0009
+ALIVIO           MOVE VECTOR-2-ABD07    TO VECTOR2-AMNI                 RMB0009
+ALIVIO           MOVE 1 TO I                                            RMB0009
+ALIVIO           MOVE 12 TO J                                           RMB0009
+ALIVIO           PERFORM UNTIL J = 0                                    RMB0009
+ALIVIO             MOVE VECTOR1-AMNI (J:1) TO VECTOR-AMNI (I:1)         RMB0009
+ALIVIO             ADD 1 TO I                                           RMB0009
+ALIVIO             SUBTRACT 1 FROM J                                    RMB0009
+ALIVIO           END-PERFORM                                            RMB0009
+ALIVIO           MOVE 12 TO J                                           RMB0009
+ALIVIO           PERFORM UNTIL J = 0                                    RMB0009
+ALIVIO             MOVE VECTOR2-AMNI (J:1) TO VECTOR-AMNI (I:1)         RMB0009
+ALIVIO             ADD 1 TO I                                           RMB0009
+ALIVIO             SUBTRACT 1 FROM J                                    RMB0009
+ALIVIO           END-PERFORM                                            RMB0009
+ALIVIO           MOVE 1 TO I                                            RMB0009
+ALIVIO           PERFORM UNTIL I > 25 OR FECHA-AMNI = 200112            RMB0009
+ALIV01             IF V-VECTOR-AMNI(I) = 5 AND FECHA-AMNI < 200209      GJC0010
+ALIVIO                MOVE FECHA-AMNI TO FEC-PAGO-ALV                   RMB0009
+ALIVIO                MOVE I TO POS-PARTIR-ALV                          RMB0009
+ALIVIO                MOVE 1 TO PAGO-EN-2002-ALV                        RMB0009
+ALIVIO             END-IF                                               RMB0009
+ALIVIO             SUBTRACT 1 FROM MES-AMNI                             RMB0009
+ALIVIO             IF MES-AMNI = 0                                      RMB0009
+ALIVIO                MOVE 12 TO MES-AMNI                               RMB0009
+ALIVIO                SUBTRACT 1 FROM ANO-AMNI                          RMB0009
+ALIVIO             END-IF                                               RMB0009
+ALIVIO             ADD 1 TO I                                           RMB0009
+ALIVIO           END-PERFORM                                            RMB0009
+ALIVIO           IF I <= 25                                             RMB0009
+ALIVIO*             SE BUSCA MOROSIDAD ATRAS SI EN DICEMBRE HAY "-"     RMB0009
+ALIVIO              PERFORM UNTIL I >= 25 OR V-VECTOR-AMNI(I) < 6       RMB0009
+ALIVIO                 ADD 1 TO I                                       RMB0009
+ALIVIO              END-PERFORM                                         RMB0009
+ALIVIO              IF V-VECTOR-AMNI(I) > 0 AND < 5                     RMB0009
+ALIVIO                 ADD 1 TO CTAS-POR-ALIVIAR-ALV                    RMB0009
+ALIVIO                 IF PAGO-EN-2002-ALV NOT = 1                      RMB0009
+ALIVIO                    MOVE 1 TO ALIVIO-NEGADO-ALV                   RMB0009
+ALIVIO                 ELSE                                             RMB0009
+ALIVIO                    MOVE CTAS-TOT-ALV  TO                         RMB0009
+ALIVIO                         V-NUMCTA-ALV(CTAS-POR-ALIVIAR-ALV)       RMB0009
+ALIVIO                    MOVE POS-PARTIR-ALV TO                        RMB0009
+ALIVIO                         V-PARTIR-ALV(CTAS-POR-ALIVIAR-ALV)       RMB0009
+ALIVIO                    MOVE FEC-PAGO-ALV TO                          RMB0009
+ALIVIO                         V-FECNOV-ALV(CTAS-POR-ALIVIAR-ALV)       RMB0009
+ALIVIO                 END-IF                                           RMB0009
+ALIVIO              END-IF                                              RMB0009
+ALIVIO           END-IF                                                 RMB0009
+ALIVIO        ELSE                                                      RMB0009
+ALIVIO*******    IF ( V-NOVEDAD-AMNI(NOV-REPORT-ABD07) = 5 AND          RMB0009
+ALIVIO*******       FECHA-AMNI = 200112 )  OR                           RMB0009
+ALIVIO*******       V-MORA-AVL(NOV-REPORT-ABD07) = 9                    RMB0009
+ALIVIO******* SE ADMITEN LAS CUENTAS QUE ESTAN ALDIA Y SON DEL 2001     RMB0009
+ALIVIO           IF  V-NOVEDAD-AMNI(NOV-REPORT-ABD07) = 5               RMB0009
+ALIVIO                NEXT SENTENCE                                     RMB0009
+ALIVIO           ELSE                                                   RMB0009
+ALIVIO              MOVE 1 TO ALIVIO-NEGADO-ALV                         RMB0009
+ALIVIO           END-IF                                                 RMB0009
+ALIVIO        END-IF                                                    RMB0009
+ALIVIO     ELSE                                                         RMB0009
+ALIVIO******* IF V-MORA-AVL (NOV-REPORT-ABD07) NOT = 9 AND              RMB0009
+ALIVIO*******       FECHA-AMNI < 200112                                 RMB0009
+ALIVIO******* SE ADMITEN LAS CUENTAS QUE ESTAN ALDIA Y SON DEL 2001     RMB0009
+ALIVIO        IF V-NOVEDAD-AMNI(NOV-REPORT-ABD07) NOT = 5               RMB0009
+ALIVIO              MOVE 1 TO ALIVIO-NEGADO-ALV                         RMB0009
+ALIVIO        END-IF                                                    RMB0009
+ALIVIO     END-IF.                                                      RMB0009
+REMARK******************************************************************RMB0009
+REMARK* 14-2-1-RECONSTURCCION-HISTORIA.                                 RMB0009
+REMARK* VOLTEA LOS VECTORES Y LLAMA A LAS RUTINAS QUE RECALCULAN EL ESTARMB0009
+REMARK* DEJANDO FINALMENTE LOS VECTORES COMO DEBEN QUEDAR               RMB0009
+REMARK******************************************************************RMB0009
+HISTOR 14-2-1-RECONSTRUCCION-HISTORIA.                                  RMB0009
+HISTOR     MOVE 0 TO MES-MORA-MAX-AMNI.                                 RMB0009
+HISTOR     MOVE 0 TO VECTOR1-AMNI VECTOR2-AMNI.                         RMB0009
+HISTOR     MOVE NOV-REPORT-ABD07  TO ESTADO-AMNI ESTADO-FIN-AMNI        RMB0009
+HISTOR     MOVE ESTADO-MES-ABD07  TO VECTOR1-AMNI                       RMB0009
+HISTOR     MOVE VECTOR-2-ABD07    TO VECTOR2-AMNI                       RMB0009
+HISTOR     MOVE FEC-NOVEDAD-ABD07 TO FEC-MM-AA-AMNI                     RMB0009
+HISTOR     IF FEC-MM-AA-AMNI (3:2) > 60                                 RMB0009
+HISTOR        MOVE 19 TO SIGLO-AMNI                                     RMB0009
+HISTOR     ELSE                                                         RMB0009
+HISTOR        MOVE 20 TO SIGLO-AMNI                                     RMB0009
+HISTOR     END-IF                                                       RMB0009
+HISTOR     MOVE FEC-MM-AA-AMNI (1:2)  TO MES-AMNI                       RMB0009
+HISTOR     MOVE FEC-MM-AA-AMNI (3:2)  TO ANO-AMNI                       RMB0009
+HISTOR     MOVE FECHA-AMNI  TO FECHA-INI-AMNI.                          RMB0009
+HISTOR     MOVE V-MORA-AMNI(ESTADO-AMNI) TO EST-HIST-AMNI.              RMB0009
+HISTOR     MOVE 1 TO I                                                  RMB0009
+HISTOR     MOVE 12 TO J                                                 RMB0009
+HISTOR     PERFORM UNTIL J = 0                                          RMB0009
+HISTOR       MOVE VECTOR1-AMNI (J:1) TO VECTOR-AMNI (I:1)               RMB0009
+HISTOR       ADD 1 TO I                                                 RMB0009
+HISTOR       SUBTRACT 1 FROM J                                          RMB0009
+HISTOR     END-PERFORM                                                  RMB0009
+HISTOR     MOVE 12 TO J                                                 RMB0009
+HISTOR     PERFORM UNTIL J = 0                                          RMB0009
+HISTOR       MOVE VECTOR2-AMNI (J:1) TO VECTOR-AMNI (I:1)               RMB0009
+HISTOR       ADD 1 TO I                                                 RMB0009
+HISTOR       SUBTRACT 1 FROM J                                          RMB0009
+HISTOR     END-PERFORM                                                  RMB0009
+HISTOR     PERFORM 14-5-NUEVA-NOVEDAD                                   RMB0009
+HISTOR     PERFORM 14-6-CALCULO-FECHAMX                                 RMB0009
+HISTOR     MOVE ESTADO-FIN-AMNI  TO   NOV-REPORT-ABD07.                 RMB0009
+
+LEY002 15-2-1-RECONSTRUCCION-HISTOR-48.                                 VHF0011 
+REMARK******************************************************************VHF0011
+REMARK*15-2-1-RECONSTRUCCION-HISTOR-48.                                *VHF0011
+REMARK*    MANIPULA LOS VECTORES PARA CALCULAR LOS VALORES DE 48 MESES *VHF0011
+REMARK*    TALES COMO EL ESTADO, LA FECHA DE ACTUALIZACIÓN, LA MORA    *VHF0011
+REMARK*    MAXIMA Y LA FECHA DE LA MISMA                               *VHF0011
+REMARK******************************************************************VHF0011
+LEY002     MOVE 0 TO MES-MORA-MAX-AMNI.                                 VHF0011 
+LEY002     MOVE 0 TO VECTOR1-AMNI                                       VHF0011 
+LEY002               VECTOR2-AMNI                                       VHF0011 
+LEY002               VECTOR3-AMNI                                       VHF0011 
+LEY002               VECTOR4-AMNI                                       VHF0011 
+LEY002     MOVE NOV-REPORT-R-ABD07  TO ESTADO-AMNI                      VHF0011 
+LEY002                                 ESTADO-FIN-AMNI                  VHF0011 
+LEY002     MOVE ESTADO-MES-ABD07    TO VECTOR1-AMNI                     VHF0011 
+LEY002     MOVE VECTOR-2-ABD07      TO VECTOR2-AMNI                     VHF0011 
+LEY002     MOVE VECTOR-HIS-3-ABD07  TO VECTOR3-AMNI                     VHF0011 
+LEY002     MOVE VECTOR-HIS-4-ABD07  TO VECTOR4-AMNI                     VHF0011 
+LEY002     MOVE FEC-NOVEDAD-R-ABD07 TO FEC-MM-AA-AMNI                   VHF0011 
+LEY002     IF FEC-MM-AA-AMNI (3:2) > 60                                 VHF0011 
+LEY002        MOVE 19 TO SIGLO-AMNI                                     VHF0011 
+LEY002     ELSE                                                         VHF0011 
+LEY002        MOVE 20 TO SIGLO-AMNI                                     VHF0011 
+LEY002     END-IF                                                       VHF0011 
+LEY002     MOVE FEC-MM-AA-AMNI (1:2)  TO MES-AMNI                       VHF0011 
+LEY002     MOVE FEC-MM-AA-AMNI (3:2)  TO ANO-AMNI                       VHF0011 
+LEY002     MOVE FECHA-AMNI  TO FECHA-INI-AMNI.                          VHF0011 
+LEY002     MOVE V-MORA-AMNI(ESTADO-AMNI) TO EST-HIST-AMNI.              VHF0011 
+LEY002     MOVE 1 TO I                                                  VHF0011 
+LEY002     MOVE 12 TO J                                                 VHF0011 
+LEY002     PERFORM UNTIL J = 0                                          VHF0011 
+LEY002       MOVE VECTOR1-AMNI (J:1) TO VECTOR-AMNI-48 (I:1)            VHF0011 
+LEY002       ADD 1 TO I                                                 VHF0011 
+LEY002       SUBTRACT 1 FROM J                                          VHF0011 
+LEY002     END-PERFORM                                                  VHF0011 
+LEY002     MOVE 12 TO J                                                 VHF0011 
+LEY002     PERFORM UNTIL J = 0                                          VHF0011 
+LEY002       MOVE VECTOR2-AMNI (J:1) TO VECTOR-AMNI-48 (I:1)            VHF0011 
+LEY002       ADD 1 TO I                                                 VHF0011 
+LEY002       SUBTRACT 1 FROM J                                          VHF0011 
+LEY002     END-PERFORM                                                  VHF0011 
+LEY002     MOVE 12 TO J                                                 VHF0011 
+LEY002     PERFORM UNTIL J = 0                                          VHF0011 
+LEY002       MOVE VECTOR3-AMNI (J:1) TO VECTOR-AMNI-48 (I:1)            VHF0011 
+LEY002       ADD 1 TO I                                                 VHF0011 
+LEY002       SUBTRACT 1 FROM J                                          VHF0011 
+LEY002     END-PERFORM                                                  VHF0011 
+LEY002     MOVE 12 TO J                                                 VHF0011 
+LEY002     PERFORM UNTIL J = 0                                          VHF0011 
+LEY002       MOVE VECTOR4-AMNI (J:1) TO VECTOR-AMNI-48 (I:1)            VHF0011 
+LEY002       ADD 1 TO I                                                 VHF0011 
+LEY002       SUBTRACT 1 FROM J                                          VHF0011 
+LEY002     END-PERFORM                                                  VHF0011 
+LEY002     PERFORM 15-5-NUEVA-NOVEDAD-48                                VHF0011 
+LEY002     MOVE ESTADO-FIN-AMNI  TO   NOV-REPORT-R-ABD07.               VHF0011 
+
+LEY002 15-5-NUEVA-NOVEDAD-48.                                           VHF0011 
+REMARK******************************************************************VHF0011
+REMARK*15-5-NUEVA-NOVEDAD-48.                                          *VHF0011
+REMARK*    CON EL VECTOR DE COMPORTAMIENTO COMPLETO Y SEGUN LA NOVEDAD *VHF0011
+REMARK*    DE 48 MESES REPORTADA INICIALMENTE, CALCULA CON LA MATRIZ DE*VHF0011
+REMARK*    RECONSTRUCCION HISTORICA LA NUEVA NOVEDAD 48 DE LA OBLIGACIO*VHF0011
+REMARK******************************************************************VHF0011
+LEY002     MOVE 0  TO MORA-MAXIMA-R-ABD07                               VHF0011 
+LEY002     MOVE 01 TO ESTADO-INI-AMNI                                   VHF0011 
+LEY002     MOVE 49 TO I.                                                VHF0011 
+REMARK***  SOLO SE UTILIZAN 48 POSICIONES DEL VECTOR TOTAL YA QUE LA LEYVHF0011
+REMARK***  SOLO PERMITE MANTENER 4 AÑOS DE HISTORIA                     VHF0011
+LEY002     PERFORM UNTIL I = 0                                          VHF0011 
+LEY002         MOVE V-VECTOR-AMNI-48 (I) TO J                           VHF0011 
+LEY002         IF J < 5 AND J > MORA-MAXIMA-R-ABD07                     VHF0011 
+LEY002            MOVE I TO MES-MORA-MAX-AMNI                           VHF0011 
+LEY002            MOVE J TO MORA-MAXIMA-R-ABD07                         VHF0011 
+LEY002         END-IF                                                   VHF0011 
+LEY002         IF I = 1                                                 VHF0011 
+LEY002            IF (ESTADO-AMNI > 12 AND < 42) OR ESTADO-AMNI = 01    VHF0011 
+LEY002               MOVE V-NOVEDAD-AMNI(ESTADO-AMNI) TO ESTADO-FIN-AMNIVHF0011 
+LEY002               MOVE MATRIZ-AMNI(ESTADO-INI-AMNI,ESTADO-FIN-AMNI)  VHF0011 
+LEY002                               TO ESTADO-FIN-AMNI                 VHF0011 
+LEY002            ELSE                                                  VHF0011 
+LEY002               IF ESTADO-AMNI > 07 AND < 13                       VHF0011 
+LEY002                  COMPUTE ESTADO-FIN-AMNI =                       VHF0011 
+LEY002                          08 + MORA-MAXIMA-R-ABD07                VHF0011 
+LEY002               ELSE                                               VHF0011 
+LEY002                  MOVE ESTADO-AMNI TO ESTADO-FIN-AMNI             VHF0011 
+LEY002               END-IF                                             VHF0011 
+LEY002            END-IF                                                VHF0011 
+LEY002         ELSE                                                     VHF0011 
+LEY002            IF J > 0 AND J < 6                                    VHF0011 
+LEY002               MOVE MATRIZ-AMNI(ESTADO-INI-AMNI,J) TO             VHF0011 
+LEY002                    ESTADO-INI-AMNI                               VHF0011 
+LEY002            END-IF                                                VHF0011 
+LEY002         END-IF                                                   VHF0011 
+LEY002         SUBTRACT 1 FROM I                                        VHF0011 
+LEY002     END-PERFORM.                                                 VHF0011 
+

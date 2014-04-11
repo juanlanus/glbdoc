@@ -1,0 +1,32 @@
+******* ACTALOG-fd.v.0003
+   **** ACTALOG.v01.003
+REMARK*ALMACENAMIENTO DE LOG DE ACTUALIZACION PARA CONTROL DE TIEMPOS
+036300*----------------------------------------------------------------*
+REMARK*FAC0002    *INCLUSION DE VARIABLE PARA EQUIPO DONDE DE EJECUTA
+REMARK*F.CUADROS  *EL PROCESO Y VARIABLE PARA SABER TRANSFERENCIA DE   
+REMARK*ABR.15.2002* EQUIPO PRODUCCION LINEA A EQUIPO PRODUCCION BATCH
+036300*----------------------------------------------------------------*
+REMARK*FAC0003    *MOD003*MODIFICACION PARA INCLUIR INDICADOR DE RETORNO
+REMARK*F.CUADROS  *DEL PROCESO. 00-Sin errores  01-Con errores
+REMARK*MAR.26.2003* 
+036300*----------------------------------------------------------------*
+
+       FD  ACTALOG.
+       01  REG-ACTALOG.
+           03 LLAVE-ACTALOG.
+              05 NOM-PROGRAMA-ACTALOG          PIC X(10).
+              05 FEC-PROCESO-ACTALOG           PIC 9(08).
+              05 NUM-CONSEC-ACTALOG            PIC 9(4).
+           03 HOR-INI-ACTALOG                  PIC 9(6).
+           03 FEC-FIN-ACTALOG                  PIC 9(08).
+           03 HOR-FIN-ACTALOG                  PIC 9(6).
+           03 RES-REG-ACTALOG                  PIC X(50).
+           03 RES-REG-ACTALOG-R REDEFINES RES-REG-ACTALOG.
+              05 COD-SUS-ACTALOG               PIC X(6).
+              05 FEC-CORTE-ACTALOG             PIC X(6).
+              05 TIP-PROCESO-ACTALOG           PIC X.
+MOD003        05 TOT-REG-ACTALOG               PIC 9(10).               FAC0003
+              05 NOM-EQUIPO-ACTALOG            PIC X(10).
+              05 IND-TRANSFER-ACTALOG          PIC X(1).
+MOD003        05 IND-RETORNO-ACTALOG           PIC 9(2).                FAC0003
+MOD003        05 FILLER1-ACTALOG               PIC X(14).               FAC0003

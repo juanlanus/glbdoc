@@ -1,0 +1,13 @@
+REMARK*UTLDEBUG-FD.0001
+REMARK********************************************************************
+REAMRK* ARCHIVO PARA GRABAR LA INFORMACION GENERADA CUANDO UN PROGRAMA SE
+REMARK* PONE EN ESTADO DE DEBUGGER
+REAMRK********************************************************************
+       FD  UTLDEBUG.
+       01  REG-UTLDEBUG.
+           03 MODO-UTLDEBUG           PIC X(05).
+           03 FECHA-UTLDEBUG          PIC 9(14).
+           03 HORING-UTLDEBUG         PIC 9(05).
+           03 HORENT-UTLDEBUG         PIC 9(05).
+           03 HORSAL-UTLDEBUG         PIC 9(05).
+           03 DATOS-UTLDEBUG          PIC X(1440).

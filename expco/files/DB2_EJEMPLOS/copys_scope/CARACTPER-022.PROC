@@ -1,0 +1,743 @@
+REMARK*CARACTPER-022.PROC.v.0005.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 022 *
+REMARK*    PARA FINESA                                                 *
+REMARK******************************************************************
+REMARK* IMS0001    | CQ6485 - SE CREA PERSONALIZACION  # 22            *
+REMARK* JUL.12.2012|          PARA FINESA                              *
+REMARK* M.SALAMANCA|                                                   *
+REMARK******************************************************************
+REMARK* IMS0002    | CQ7309 - SE SOLICITA AGREGAR UN OR PARA LAS       *
+REMARK* AGO.29.2012|          CARACTERISTICAS END998 Y END999          *
+REMARK* M.SALAMANCA|                                                   *
+REMARK******************************************************************
+REMARK* IMS0003    | CQ6485 - SE AGREGAN LAS CARACTERISTICAS           *
+REMARK* SEP.13.2012|          AÑO, MES, DIA Y SALARIO MINIMO.          *
+REMARK* M.SALAMANCA|                                                   *
+REMARK******************************************************************
+REMARK* IMS0004    | CQ9579 - SE REALIZA AJUSTE A LAS CARACTERISTICAS  *
+REMARK* 12/01/2013 |          END998 Y END999.                         *
+REMARK* M.SALAMANCA|                                                   *
+REMARK******************************************************************
+REMARK* STT0005    | R12048 - SE REALIZA AJUSTE A LAS CARACTERISTICAS  *
+REMARK* 14/05/2013 |          END MOR Y INQ  CQ12048                   *
+REMARK* L.GOMEZ    |                                                   *
+REMARK******************************************************************
+             
+       0000-LLENAR-VEC-PERSONALIZ-022.
+REMARK*----------------------------------------------------------------*
+REMARK*0000-LLENAR-VEC-PERSONALIZ-022                                  *
+REMARK*       SE LLENA EN VECTOR PARA LA PERSONALIZACION FINESA        *   
+REMARK*----------------------------------------------------------------*
+      
+      * 1   - AÑO EXPEDICION CEDULA                                                              
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01DEM999_022 "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01DEM999_022) TO L-AUX              
+               MOVE  01DEM999_022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+                                   
+      * 2   - MES EXPEDICION CEDULA                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01DEM998_022 "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01DEM998_022) TO L-AUX              
+               MOVE  01DEM998_022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+                                                 
+      * 3   - CUOTAS CREDITOS                                                                  
+               ADD   1                 TO  I-VAR-PER                          
+               MOVE "02END999TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)          
+               MOVE  FUNCTION LENGTH(02END999TO022) TO L-AUX                    
+               MOVE  02END999TO022(1:L-AUX)  TO                                 
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 4   - CUOTAS TDC                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01END998RO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01END998RO022) TO L-AUX              
+               MOVE  01END998RO022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 5   - CONSULTAS PREVIAS                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01INQ999_022 "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01INQ999_022) TO L-AUX              
+               MOVE  01INQ999_022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 6   - AÑO/MES MAYOR ACUMULADO DE CONSULTAS                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "01INQ998_022 "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(01INQ998_022) TO L-AUX              
+               MOVE  01INQ998_022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 7   - MORA 30 TDC ULTIMOS 24 MESES                                                                  
+               ADD   1                 TO  I-VAR-PER                          
+               MOVE "01MOR999RO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)          
+               MOVE  FUNCTION LENGTH(01MOR999RO022) TO L-AUX                    
+               MOVE  01MOR999RO022(1:L-AUX)  TO                                 
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 8   - MORA 30 CARTERA ULT 24 MESES                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "02MOR998TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(02MOR998TO022) TO L-AUX              
+               MOVE  02MOR998TO022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 9   - MORA 60 CARTERA ULT 24 MESES                                                            
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "02MOR997TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(02MOR997TO022) TO L-AUX              
+               MOVE  02MOR997TO022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 10  - MORA 90 CARTERA CERRADA ULT 24 MESES                                                             
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "02MOR996TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(02MOR996TO022) TO L-AUX              
+               MOVE  02MOR996TO022(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      
+      * 11  - PRODUCTOS EN MORA A LA FECHA                                                                 
+               ADD   1                 TO  I-VAR-PER                          
+               MOVE "02MOR995TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)          
+               MOVE  FUNCTION LENGTH(02MOR995TO022) TO L-AUX                    
+               MOVE  02MOR995TO022(1:L-AUX)  TO                                 
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+
+CQ6485* 12  - AÑO ACTUAL                                                IMS0003
+CQ6485         ADD   1                 TO  I-VAR-PER                    IMS0003
+CQ6485         MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0003
+CQ6485         MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              IMS0003
+CQ6485         MOVE  00DEM031000(1:L-AUX)  TO                           IMS0003
+CQ6485                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0003
+CQ6485                                                                  IMS0003
+CQ6485* 13  - MES ACTUAL                                                IMS0003
+CQ6485         ADD   1                 TO  I-VAR-PER                    IMS0003
+CQ6485         MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0003
+CQ6485         MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              IMS0003
+CQ6485         MOVE  00DEM032000(1:L-AUX)  TO                           IMS0003
+CQ6485                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0003
+CQ6485                                                                  IMS0003
+CQ6485* 14  - DIA ACTUAL                                                IMS0003
+CQ6485         ADD   1                 TO  I-VAR-PER                    IMS0003
+CQ6485         MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0003
+CQ6485         MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX              IMS0003
+CQ6485         MOVE  00DEM033000(1:L-AUX)  TO                           IMS0003
+CQ6485                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0003
+CQ6485                                                                  IMS0003
+CQ6485* 15  - SALARIO MINIMO VIGENTE LEGAL                              IMS0003
+CQ6485         ADD   1                 TO  I-VAR-PER                    IMS0003
+CQ6485         MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0003
+CQ6485         MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              IMS0003
+CQ6485         MOVE  00DEM034000(1:L-AUX)  TO                           IMS0003
+CQ6485                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0003
+R12048* 16  - CUOTAS CREDITOS OTRAS MODALIDADES DE PAGO                 STT0005
+R12048         ADD   1                 TO  I-VAR-PER                    STT0005
+R12048         MOVE "02END997TO022"  TO  NOMBRE-VAR-PER(I-VAR-PER)      STT0005
+R12048         MOVE  FUNCTION LENGTH(02END997TO022) TO L-AUX            STT0005
+R12048         MOVE  02END997TO022(1:L-AUX)  TO                         STT0005
+R12048                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      STT0005
+            .
+            
+       0000-INICIALIZAR-CARAC-EXT-22.
+REMARK*----------------------------------------------------------------*
+REMARK*               0000-INICIALIZAR-CARAC-EXT-22                    *
+REMARK*   SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION FINESA    *
+REMARK*----------------------------------------------------------------*  
+          
+           MOVE ZEROS             TO PER-22-NIVEL-01-DEM
+           MOVE ALL "         -1" TO PER-22-NIVEL-01-END
+           MOVE ALL        "  -1" TO PER-22-NIVEL-01-INQ-04
+           MOVE ALL      "    -1" TO PER-22-NIVEL-01-INQ-06
+           MOVE ALL        "  -1" TO PER-22-NIVEL-01-MOR 
+           MOVE ZEROS             TO PER-22-NIVEL-01-INQ-TMP
+           PERFORM VARYING INQ-I FROM 1 BY 1 UNTIL INQ-I > 7
+             MOVE ZEROS           TO INQ-HUELLA(INQ-I)
+             MOVE ZEROS           TO INQ-FECHA(INQ-I)
+           END-PERFORM     
+           PERFORM 9999-CARAC-GENERALES-22
+CQ6485     PERFORM 9999-CARAC-GENERALES                                 IMS0003
+            .
+            
+       9999-CARAC-GENERALES-22.
+REMARK*----------------------------------------------------------------*
+REMARK*                 9999-CARAC-GENERALES-22                        *
+REMARK*      SE CALCULAN CARACTERISTICAS GENERALES PARA FINESA         *
+REMARK*----------------------------------------------------------------*   
+      * SE LEE BDIIREGI PORQUE NO SE PUEDE DETERMINAR SI EN LA LECTURA
+      * DE CARACT.PROC EXISTE O NO LA IDENTIFICACION EN BDIIREGI
+           IF TIPO-ID-CARACT = 1
+              INITIALIZE LLAVE-BDIIREGI
+              MOVE TIPO-ID-CARACT TO TIPO-ID-BDIIREGI
+              MOVE NRO-ID-CARACT  TO CEDULA-BDIIREGI
+              READ BDIIREGI WITH IGNORE LOCK
+                   INVALID KEY
+                      MOVE ZEROS               TO 01DEM999_022
+                      MOVE ZEROS               TO 01DEM998_022
+              END-READ
+           END-IF
+
+REMARK**** 01DEM999_022 *** AÑO DE EXPEDICION DE CEDULA
+            IF FECHA-EXPEDI-BDIIREGI > ZEROS
+               MOVE FECHA-EXPEDI-BDIIREGI(1:4) TO 01DEM999_022
+            END-IF
+            
+REMARK**** 01DEM998_022 *** MES DE EXPEDICION DE CEDULA
+            IF FECHA-EXPEDI-BDIIREGI > ZEROS
+               MOVE FECHA-EXPEDI-BDIIREGI(5:2) TO 01DEM998_022
+            END-IF
+            .
+            
+       2249-PROCESE-CARCT-00MOR-EXT-22.
+REMARK*----------------------------------------------------------------*
+REMARK*               2249-PROCESE-CARCT-00MOR-EXT-22                  *
+REMARK*         SE CALCULAN CARACTERISTICAS MOR PARA FINESA            *
+REMARK*----------------------------------------------------------------*
+            MOVE ALL "  -1"          TO PER-22-NIVEL-00-MOR
+R12048      MOVE COD-SUS-ABD07        TO WS-CODSUS-22                   STT0005
+REMARK**** 00MOR999RO022 *** # DE MORAS 30 TDC ULTIMOS 24 MESES
+           MOVE 0 TO P-CARACT                                        
+           IF COD-CTA-ABD07 = 02
+             MOVE ZEROS          TO 00MOR999RO022(1:4)
+             IF REG-ABIERTO-CARACT = 1
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3
+                   IF MESES-DESAC-CARACT < 0                       
+                      MOVE 0 TO P-CARACT                           
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT          
+                   END-IF                                          
+                   COMPUTE I-CARACT = (48 - P-CARACT - 23 )        
+                   PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                         J-CARACT > ( 48 - P-CARACT )              
+                      IF V-NOR-CARACT(J-CARACT:1) = 1                
+                         COMPUTE 00MOR999RO022 = 00MOR999RO022 + 1    
+                      END-IF                                          
+                   END-PERFORM                                     
+                 ELSE                                               
+                    MOVE "  -4" TO 00MOR999RO022(1:4)               
+                 END-IF                                             
+               ELSE                                                  
+                  MOVE "  -3" TO 00MOR999RO022(1:4)                  
+               END-IF                                                
+             ELSE                                                     
+                MOVE "  -2" TO 00MOR999RO022(1:4)                     
+             END-IF                                                   
+           END-IF                                                      
+REMARK**** 00MOR998TO022 *** # DE MORAS 30 CARTERA ULT 24 MESES
+           MOVE 0 TO P-CARACT                                        
+R12048*    IF COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR       STT0005
+R12048*                       17 OR 18 OR 27 OR 48 OR 49                STT0005
+R12048     IF (COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR      STT0005
+R12048                        17 OR 18 OR 27 OR 48 OR 49) OR            STT0005
+R12048        (COD-SUS-ABD07(1:2) = 04 OR 20 OR 45) OR                  STT0005
+R12048        CLIENTE-FINESA                                            STT0005
+             MOVE ZEROS          TO 00MOR998TO022(1:4)
+             IF REG-ABIERTO-CARACT = 1
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3
+                   IF MESES-DESAC-CARACT < 0                       
+                      MOVE 0 TO P-CARACT                           
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT          
+                   END-IF                                          
+                   COMPUTE I-CARACT = (48 - P-CARACT - 23 )        
+                   PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                         J-CARACT > ( 48 - P-CARACT )              
+                      IF V-NOR-CARACT(J-CARACT:1) = 1                
+                         COMPUTE 00MOR998TO022 = 00MOR998TO022 + 1    
+                      END-IF                                          
+                   END-PERFORM                                     
+                 ELSE                                               
+                    MOVE "  -4" TO 00MOR998TO022(1:4)               
+                 END-IF                                             
+               ELSE                                                  
+                  MOVE "  -3" TO 00MOR998TO022(1:4)                  
+               END-IF                                                
+             ELSE                                                     
+                MOVE "  -2" TO 00MOR998TO022(1:4)                     
+             END-IF                                                   
+           END-IF                                                      
+REMARK**** 00MOR997TO022 *** # DE MORAS 60 CARTERA ULT 24 MESES
+           MOVE 0 TO P-CARACT                                        
+R12048*    IF COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR       STT0005
+R12048*                       17 OR 18 OR 27 OR 48 OR 49                STT0005
+R12048     IF (COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR      STT0005
+R12048                        17 OR 18 OR 27 OR 48 OR 49) OR            STT0005
+R12048        (COD-SUS-ABD07(1:2) = 04 OR 20 OR 45) OR                  STT0005
+R12048        CLIENTE-FINESA                                            STT0005
+             MOVE ZEROS          TO 00MOR997TO022(1:4)
+             IF REG-ABIERTO-CARACT = 1
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3
+                   IF MESES-DESAC-CARACT < 0                       
+                      MOVE 0 TO P-CARACT                           
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT          
+                   END-IF                                          
+                   COMPUTE I-CARACT = (48 - P-CARACT - 23 )        
+                   PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                         J-CARACT > ( 48 - P-CARACT )              
+                      IF V-NOR-CARACT(J-CARACT:1) = 2                
+                         COMPUTE 00MOR997TO022 = 00MOR997TO022 + 1    
+                      END-IF                                          
+                   END-PERFORM                                     
+                 ELSE                                               
+                    MOVE "  -4" TO 00MOR997TO022(1:4)               
+                 END-IF                                             
+               ELSE                                                  
+                  MOVE "  -3" TO 00MOR997TO022(1:4)                  
+               END-IF                                                
+             ELSE                                                     
+                MOVE "  -2" TO 00MOR997TO022(1:4)                     
+             END-IF                                                   
+           END-IF                                                      
+REMARK**** 00MOR996TO022 *** # DE MORAS 90 CARTERA CERRADA ULT 24 MESES
+           MOVE 0 TO P-CARACT                                        
+R12048*    IF COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR       STT0005
+R12048*                       17 OR 18 OR 27 OR 48 OR 49                STT0005
+R12048     IF (COD-CTA-ABD07 = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR      STT0005
+R12048                        17 OR 18 OR 27 OR 48 OR 49) OR            STT0005
+R12048        (COD-SUS-ABD07(1:2) = 04 OR 20 OR 45) OR                  STT0005
+R12048        CLIENTE-FINESA                                            STT0005
+             MOVE ZEROS          TO 00MOR996TO022(1:4)
+             IF REG-CERRADO-CARACT = 1  AND  GARANTE-ABD07 = 0
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 24
+                   IF MESES-DESAC-CARACT < 0                       
+                      MOVE 0 TO P-CARACT                           
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT          
+                   END-IF                                          
+                   COMPUTE I-CARACT = (48 - P-CARACT - 23 )        
+                   PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                         J-CARACT > ( 48 - P-CARACT )              
+                      IF V-NOR-CARACT(J-CARACT:1) >= 3                
+                         COMPUTE 00MOR996TO022 = 00MOR996TO022 + 1    
+                      END-IF                                          
+                   END-PERFORM                                     
+                 ELSE                                               
+                    MOVE "  -4" TO 00MOR996TO022(1:4)               
+                 END-IF                                             
+               ELSE                                                  
+                  MOVE "  -3" TO 00MOR996TO022(1:4)                  
+               END-IF                                                
+             ELSE                                                     
+                MOVE "  -2" TO 00MOR996TO022(1:4)                     
+             END-IF                                                   
+           END-IF                                                      
+REMARK**** 00MOR995TO022 *** # DE PRODUCTOS EN MORA A LA FECHA                                        
+R12048*    IF COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 13 OR       STT0005
+R12048*                       14 OR 17 OR 18 OR 27 OR 48 OR 49          STT0005
+R12048     IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 06 OR 07 OR 13 OR      STT0005
+R12048                     14 OR 17 OR 18 OR 27 OR 48 OR 49) OR         STT0005
+R12048        (COD-SUS-ABD07(1:2) = 04 OR 20 OR 45) OR                  STT0005
+R12048        CLIENTE-FINESA                                            STT0005
+             MOVE ZEROS          TO 00MOR995TO022(1:4)
+             IF REG-ABIERTO-CARACT = 1
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3
+                   IF (NOV-REPORT-ABD07 > 12 AND < 42) OR
+                      (NOV-REPORT-ABD07 = 45 OR 47)
+                      COMPUTE 00MOR995TO022 = 00MOR995TO022 + 1    
+                   END-IF                                     
+                 ELSE                                               
+                    MOVE "  -4" TO 00MOR995TO022(1:4)               
+                 END-IF                                             
+               ELSE                                                  
+                  MOVE "  -3" TO 00MOR995TO022(1:4)                  
+               END-IF                                                
+             ELSE                                                     
+                MOVE "  -2" TO 00MOR995TO022(1:4)                     
+             END-IF                                                   
+           END-IF                                                      
+REMARK**** 01MOR999RO022 *** # DE MORAS 30 TDC ULTIMOS 24 MESES
+           IF FUNCTION NUMVAL(00MOR999RO022(1:4)) >= 0
+              IF FUNCTION NUMVAL(01MOR999RO022(1:4)) < 0
+                 MOVE ZEROS TO 01MOR999RO022
+              END-IF
+              COMPUTE 01MOR999RO022 = 01MOR999RO022 + 00MOR999RO022
+           ELSE
+              IF FUNCTION NUMVAL(01MOR999RO022(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999RO022(1:4)) <
+                  FUNCTION NUMVAL(01MOR999RO022(1:4))
+                  MOVE 00MOR999RO022(1:4) TO 01MOR999RO022(1:4)
+               END-IF         
+              END-IF
+           END-IF
+REMARK**** 02MOR998TO022 *** # DE MORAS 30 CARTERA ULT 24 MESES
+           IF FUNCTION NUMVAL(00MOR998TO022(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998TO022(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998TO022
+              END-IF
+              COMPUTE 02MOR998TO022 = 02MOR998TO022 + 00MOR998TO022
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998TO022(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998TO022(1:4)) <
+                  FUNCTION NUMVAL(02MOR998TO022(1:4))
+                  MOVE 00MOR998TO022(1:4) TO 02MOR998TO022(1:4)
+               END-IF         
+              END-IF
+           END-IF
+REMARK**** 02MOR997TO022 *** # DE MORAS 60 CARTERA ULT 24 MESES
+           IF FUNCTION NUMVAL(00MOR997TO022(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR997TO022(1:4)) < 0
+                 MOVE ZEROS TO 02MOR997TO022
+              END-IF
+              COMPUTE 02MOR997TO022 = 02MOR997TO022 + 00MOR997TO022
+           ELSE
+              IF FUNCTION NUMVAL(02MOR997TO022(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997TO022(1:4)) <
+                  FUNCTION NUMVAL(02MOR997TO022(1:4))
+                  MOVE 00MOR997TO022(1:4) TO 02MOR997TO022(1:4)
+               END-IF         
+              END-IF
+           END-IF
+REMARK**** 02MOR996TO022 *** # DE MORAS 90 CARTERA CERRADA ULT 24 MESES
+           IF FUNCTION NUMVAL(00MOR996TO022(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR996TO022(1:4)) < 0
+                 MOVE ZEROS TO 02MOR996TO022
+              END-IF
+              COMPUTE 02MOR996TO022 = 02MOR996TO022 + 00MOR996TO022
+           ELSE
+              IF FUNCTION NUMVAL(02MOR996TO022(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR996TO022(1:4)) <
+                  FUNCTION NUMVAL(02MOR996TO022(1:4))
+                  MOVE 00MOR996TO022(1:4) TO 02MOR996TO022(1:4)
+               END-IF         
+              END-IF
+           END-IF
+REMARK**** 02MOR995TO022 *** # DE PRODUCTOS EN MORA A LA FECHA
+           IF FUNCTION NUMVAL(00MOR995TO022(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR995TO022(1:4)) < 0
+                 MOVE ZEROS TO 02MOR995TO022
+              END-IF
+              COMPUTE 02MOR995TO022 = 02MOR995TO022 + 00MOR995TO022
+           ELSE
+              IF FUNCTION NUMVAL(02MOR995TO022(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR995TO022(1:4)) <
+                  FUNCTION NUMVAL(02MOR995TO022(1:4))
+                  MOVE 00MOR995TO022(1:4) TO 02MOR995TO022(1:4)
+               END-IF         
+              END-IF
+           END-IF
+            .
+            
+       2249-PROCESE-CARCT-00END-EXT-22.
+REMARK*----------------------------------------------------------------*
+REMARK*               2249-PROCESE-CARCT-00END-EXT-22                  *
+REMARK*         SE CALCULAN CARACTERISTICAS END PARA FINESA            *
+REMARK*----------------------------------------------------------------*
+            MOVE ALL "         -1"    TO PER-22-NIVEL-00-END
+            MOVE ZEROS                TO PER-22-NIVEL-00-END-TMP
+R12048      MOVE COD-SUS-ABD07        TO WS-CODSUS-22                   STT0005
+REMARK**** 00END999TO022 *** SUMA DE CUOTAS DE CREDITOS
+           IF (COD-CTA-ABD07 = 03 OR 04 OR 05 OR 06 OR 07 OR 13 OR
+R12048*                        14 OR 17 OR 18 OR 27 OR 45 OR 49) OR     IMS0005
+R12048                   14 OR 17 OR 18 OR 20 OR 27 OR 45 OR 49) OR     IMS0005
+R12048        (CLIENTE-FINESA   AND   COD-CTA-ABD07 <> 48)              IMS0005
+             MOVE ZEROS          TO 00END999TO022(1:11)
+R12048                              ENDPLAZO022                         IMS0005
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+CQ9579          AND PERIODICIDAD-PAGO-ABD07 = 1                         IMS0004
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3    
+CQ7309*            IF (VEC-CUOTA-CARACT(I13)  >= 0 AND                  IMS0002
+CQ7309             IF (VEC-CUOTA-CARACT(I13)  >  0 AND                  IMS0002
+R12048*                VEC-IND-CUO-CARACT(I13) = 0 )                    STT0005
+R12048                 VEC-IND-CUO-CARACT(I13) = 0 ) AND                IMS0005
+R12048                (VEC-SALDO-CARACT(I13)  >                         IMS0005
+R12048                 VEC-CUOTA-CARACT(I13)  AND                       IMS0005
+R12048                 VEC-IND-SLD-CARACT(I13) = 0 )                    IMS0005
+CQ9579*               MOVE VEC-CUOTA-CARACT(I13) TO 00END999TO022(1:11) IMS0004
+CQ9579                MOVE VEC-CUOTA-CARACT(I13) TO 00END999CUO22(1:11) IMS0004
+                   ELSE
+CQ7309*              IF ((VEC-CUOTA-CARACT(I13) NOT NUMERIC) AND        IMS0002
+CQ7309               IF (VEC-CUOTA-CARACT(I13) NOT NUMERIC  OR          IMS0002
+CQ7309                   VEC-CUOTA-CARACT(I13)   = 0)        AND        IMS0002
+                        (VEC-SALDO-CARACT(I13)  >= 0         AND 
+                         VEC-IND-SLD-CARACT(I13) = 0)                             
+                       IF MESES-VENAP-CARACT > 0 AND <= 180
+                         MOVE MESES-VENAP-CARACT   TO ENDPLAZO022
+                       ELSE
+                         MOVE 48                   TO ENDPLAZO022
+                       END-IF
+CQ9579*                COMPUTE 00END999TO022 ROUNDED =                  IMS0004
+CQ9579                 COMPUTE 00END999CUO22 ROUNDED =                  IMS0004
+                            VEC-SALDO-CARACT(I13) *       
+                           (( 0.016 * ((1 + 0.016) ** ENDPLAZO022)) / 
+                           ((((1 + 0.016) ** ENDPLAZO022 )) - 1))
+                     ELSE
+                       MOVE "        -88"      TO 00END999TO022(1:11)
+                     END-IF
+                   END-IF
+CQ9579            IF 00END999TO022 >= ZEROS                             IMS0004
+CQ9579             COMPUTE 00END999REL22 ROUNDED =                      IMS0004
+CQ9579            VEC-SALDO-CARACT(I13) / FUNCTION NUMVAL(00END999CUO22)IMS0004
+CQ9579             IF FUNCTION NUMVAL(00END999REL22) <                  IMS0004
+CQ9579                FUNCTION NUMVAL(WS-0P85-22)    OR                 IMS0004
+CQ9579                FUNCTION NUMVAL(00END999REL22) >                  IMS0004
+CQ9579                FUNCTION NUMVAL(WS-1P15-22)                       IMS0004
+CQ9579                MOVE 00END999CUO22(1:11) TO 00END999TO022(1:11)   IMS0004
+CQ9579             END-IF                                               IMS0004
+CQ9579            END-IF                                                IMS0004
+CQ9579*            IF VEC-SALDO-CARACT(I13) = 00END999TO022(1:11) AND   IMS0004
+CQ9579*               VEC-IND-SLD-CARACT(I13) = 0                       IMS0004
+CQ9579*               MOVE ZEROS               TO 00END999TO022(1:11)   IMS0004
+CQ9579*            END-IF                                               IMS0004
+                 ELSE
+                   MOVE "         -4"          TO 00END999TO022(1:11)
+                 END-IF
+               ELSE
+                 MOVE "         -3"            TO 00END999TO022(1:11)
+               END-IF
+             ELSE
+               MOVE "         -2"              TO 00END999TO022(1:11)
+             END-IF
+           END-IF
+REMARK**** 00END998RO022 *** SUMA DE CUOTAS DE TDC
+           IF COD-CTA-ABD07 = 02
+             MOVE ZEROS          TO 00END998RO022(1:11)
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+               IF FECHA-ESTADO-CARACT > ZEROS AND                  
+                 ACT-DATE-CARACT      > ZEROS                          
+                 IF MESES-DESAC-CARACT <= 3    
+CQ7309*            IF (VEC-CUOTA-CARACT(I13)  >= 0 AND                  IMS0002
+CQ7309             IF (VEC-CUOTA-CARACT(I13)  >  0 AND                  IMS0002
+R12048*                VEC-IND-CUO-CARACT(I13) = 0 )                    STT0005
+R12048                 VEC-IND-CUO-CARACT(I13) = 0 )  AND               IMS0005
+R12048                (VEC-SALDO-CARACT(I13)  >                         IMS0005
+R12048                 VEC-CUOTA-CARACT(I13)  AND                       IMS0005
+R12048                 VEC-IND-SLD-CARACT(I13) = 0 )                    IMS0005
+CQ9579*               MOVE VEC-CUOTA-CARACT(I13) TO 00END998RO022(1:11) IMS0004
+CQ9579                MOVE VEC-CUOTA-CARACT(I13) TO 00END998CUO22(1:11) IMS0004
+                   ELSE
+CQ7309*              IF ((VEC-CUOTA-CARACT(I13) NOT NUMERIC) AND        IMS0002
+CQ7309               IF (VEC-CUOTA-CARACT(I13) NOT NUMERIC  OR          IMS0002
+CQ7309                   VEC-CUOTA-CARACT(I13)   = 0)        AND        IMS0002
+                        (VEC-SALDO-CARACT(I13)  >= 0         AND 
+                         VEC-IND-SLD-CARACT(I13) = 0)
+CQ9579*                 COMPUTE 00END998RO022 ROUNDED =                 IMS0004
+CQ9579                  COMPUTE 00END998CUO22 ROUNDED =                 IMS0004
+                                VEC-SALDO-CARACT(I13) *       
+                               (( 0.02 * ((1 + 0.02) ** 12)) / 
+                               ((((1 + 0.02) ** 12 )) - 1))
+                     ELSE
+                       MOVE "        -88"      TO 00END998RO022(1:11)
+                     END-IF
+                   END-IF
+CQ9579            IF 00END998RO022 >= ZEROS                             IMS0004
+CQ9579             COMPUTE 00END998REL22 ROUNDED =                      IMS0004
+CQ9579            VEC-SALDO-CARACT(I13) / FUNCTION NUMVAL(00END998CUO22)IMS0004
+CQ9579             IF FUNCTION NUMVAL(00END998REL22) <                  IMS0004
+CQ9579                FUNCTION NUMVAL(WS-0P85-22)    OR                 IMS0004
+CQ9579                FUNCTION NUMVAL(00END998REL22) >                  IMS0004
+CQ9579                FUNCTION NUMVAL(WS-1P15-22)                       IMS0004
+CQ9579                MOVE 00END998CUO22(1:11) TO 00END998RO022(1:11)   IMS0004
+CQ9579             END-IF                                               IMS0004
+CQ9579            END-IF                                                IMS0004
+CQ9579*            IF VEC-SALDO-CARACT(I13) = 00END998RO022(1:11) AND   IMS0004
+CQ9579*               VEC-IND-SLD-CARACT(I13) = 0                       IMS0004
+CQ9579*               MOVE ZEROS               TO 00END998RO022(1:11)   IMS0004
+CQ9579*            END-IF                                               IMS0004
+                 ELSE
+                   MOVE "         -4"          TO 00END998RO022(1:11)
+                 END-IF
+               ELSE
+                 MOVE "         -3"            TO 00END998RO022(1:11)
+               END-IF
+             ELSE
+               MOVE "         -2"              TO 00END998RO022(1:11)
+             END-IF
+           END-IF
+REMARK**** 00END997TO022 *** CUOTA TOTAL OTRAS MODALIDADES DE PAGO
+R12048     IF ((COD-CTA-ABD07 = 03 OR 04 OR 05 OR 06 OR 07 OR 13 OR     STT0005
+R12048                   14 OR 17 OR 18 OR 20 OR 27 OR 45 OR 49) OR     IMS0005
+R12048        (CLIENTE-FINESA   AND   COD-CTA-ABD07 <> 48))     AND     IMS0005
+R12048        (PERIODICIDAD-PAGO-ABD07  <> 1)                           STT0005
+R12048       MOVE ZEROS          TO 00END997TO022(1:11)                 STT0005
+R12048                              ENDPLAZO022                         IMS0005
+R12048       IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0            STT0005
+R12048         IF FECHA-ESTADO-CARACT > ZEROS AND                       STT0005
+R12048           ACT-DATE-CARACT      > ZEROS                           STT0005
+R12048           IF MESES-DESAC-CARACT <= 3                             STT0005
+R12048             IF (VEC-CUOTA-CARACT(I13)   > 0 AND                  IMS0005
+R12048                 VEC-IND-CUO-CARACT(I13) = 0 )  AND               IMS0005
+R12048                (VEC-SALDO-CARACT(I13)  >                         IMS0005
+R12048                 VEC-CUOTA-CARACT(I13)  AND                       IMS0005
+R12048                 VEC-IND-SLD-CARACT(I13) = 0)                     IMS0005
+R12048                MOVE VEC-CUOTA-CARACT(I13) TO 00END997CUO22(1:11) STT0005
+R12048             ELSE                                                 STT0005
+R12048               IF (VEC-CUOTA-CARACT(I13) NOT NUMERIC  OR          STT0005
+R12048                   VEC-CUOTA-CARACT(I13)   = 0)        AND        STT0005
+R12048                  (VEC-SALDO-CARACT(I13)  >= 0         AND        STT0005
+R12048                   VEC-IND-SLD-CARACT(I13) = 0)                   STT0005
+R12048                 IF MESES-VENAP-CARACT > 0 AND <= 180             STT0005
+R12048                   MOVE MESES-VENAP-CARACT   TO ENDPLAZO022       STT0005
+R12048                 ELSE                                             STT0005
+R12048                   MOVE 48                   TO ENDPLAZO022       STT0005
+R12048                 END-IF                                           STT0005
+R12048                  COMPUTE 00END997CUO22 ROUNDED =                 STT0005
+R12048                        VEC-SALDO-CARACT(I13) *                   STT0005
+R12048                       (( 0.016 * ((1 + 0.016) ** ENDPLAZO022)) / STT0005
+R12048                       ((((1 + 0.016) ** ENDPLAZO022 )) - 1))     STT0005
+R12048               ELSE                                               STT0005
+R12048                 MOVE "        -88"      TO 00END997TO022(1:11)   STT0005
+R12048               END-IF                                             STT0005
+R12048             END-IF                                               STT0005
+R12048            IF 00END997TO022 >= ZEROS                             STT0005
+R12048             COMPUTE 00END997REL22 ROUNDED =                      STT0005
+R12048            VEC-SALDO-CARACT(I13) / FUNCTION NUMVAL(00END997CUO22)STT0005
+R12048             IF FUNCTION NUMVAL(00END997REL22) <                  STT0005
+R12048                FUNCTION NUMVAL(WS-0P85-22)    OR                 STT0005
+R12048                FUNCTION NUMVAL(00END997REL22) >                  STT0005
+R12048                FUNCTION NUMVAL(WS-1P15-22)                       STT0005
+R12048                MOVE 00END997CUO22(1:11) TO 00END997TO022(1:11)   STT0005
+R12048             END-IF                                               STT0005
+R12048            END-IF                                                STT0005
+R12048           ELSE                                                   STT0005
+R12048             MOVE "         -4"          TO 00END997TO022(1:11)   STT0005
+R12048           END-IF                                                 STT0005
+R12048         ELSE                                                     STT0005
+R12048           MOVE "         -3"            TO 00END997TO022(1:11)   STT0005
+R12048         END-IF                                                   STT0005
+R12048       ELSE                                                       STT0005
+R12048         MOVE "         -2"              TO 00END997TO022(1:11)   STT0005
+R12048       END-IF                                                     STT0005
+R12048     END-IF                                                       STT0005
+
+RWMARK****
+REMARK**** 02END999TO022 *** SUMA DE CUOTAS DE CREDITOS
+           IF FUNCTION NUMVAL(00END999TO022(1:11)) >= 0
+              IF FUNCTION NUMVAL(02END999TO022(1:11)) < 0
+                 MOVE ZEROS TO 02END999TO022
+              END-IF
+              COMPUTE 02END999TO022 ROUNDED = 
+                      FUNCTION NUMVAL(02END999TO022(1:11)) + 
+                      FUNCTION NUMVAL(00END999TO022(1:11))
+           ELSE
+              IF FUNCTION NUMVAL(02END999TO022(1:11)) < 0
+               IF FUNCTION NUMVAL(00END999TO022(1:11)) <
+                  FUNCTION NUMVAL(02END999TO022(1:11))
+                  MOVE 00END999TO022(1:11) TO 02END999TO022(1:11)
+               END-IF         
+              END-IF
+           END-IF
+REMARK**** 01END998RO022 *** SUMA DE CUOTAS DE TDC
+           IF FUNCTION NUMVAL(00END998RO022(1:11)) >= 0
+              IF FUNCTION NUMVAL(01END998RO022(1:11)) < 0
+                 MOVE ZEROS TO 01END998RO022
+              END-IF
+              COMPUTE 01END998RO022 ROUNDED =
+                      FUNCTION NUMVAL(01END998RO022(1:11)) +
+                      FUNCTION NUMVAL(00END998RO022(1:11))
+           ELSE
+              IF FUNCTION NUMVAL(01END998RO022(1:11)) < 0
+               IF FUNCTION NUMVAL(00END998RO022(1:11)) <
+                  FUNCTION NUMVAL(01END998RO022(1:11))
+                  MOVE 00END998RO022(1:11) TO 01END998RO022(1:11)
+               END-IF         
+              END-IF
+           END-IF
+RWMARK****
+REMARK**** 02END997TO022 *** SUMA DE CUOTAS DE CREDITOS OTRA PERIODICIDAD
+R12048     IF FUNCTION NUMVAL(00END997TO022(1:11)) >= 0                 STT0005
+R12048        IF FUNCTION NUMVAL(02END997TO022(1:11)) < 0               STT0005
+R12048           MOVE ZEROS TO 02END997TO022                            STT0005
+R12048        END-IF                                                    STT0005
+R12048        COMPUTE 02END997TO022 ROUNDED =                           STT0005
+R12048                FUNCTION NUMVAL(02END997TO022(1:11)) +            STT0005
+R12048                FUNCTION NUMVAL(00END997TO022(1:11))              STT0005
+R12048     ELSE                                                         STT0005
+R12048        IF FUNCTION NUMVAL(02END997TO022(1:11)) < 0               STT0005
+R12048         IF FUNCTION NUMVAL(00END997TO022(1:11)) <                STT0005
+R12048            FUNCTION NUMVAL(02END997TO022(1:11))                  STT0005
+R12048            MOVE 00END997TO022(1:11) TO 02END997TO022(1:11)       STT0005
+R12048         END-IF                                                   STT0005
+R12048        END-IF                                                    STT0005
+R12048     END-IF                                                       STT0005
+            .
+            
+       4249-PROCESE-CARCT-00INQ-EXT-22.
+REMARK*----------------------------------------------------------------*
+REMARK*               4249-PROCESE-CARCT-00INQ-EXT-22                  *
+REMARK*         SE CALCULAN CARACTERISTICAS INQ PARA FINESA            *
+REMARK*----------------------------------------------------------------*
+             MOVE   "  -1"              TO 00INQ999_022(1:4)
+             MOVE "    -1"              TO 00INQ998_022(1:6)
+             MOVE ZEROS                 TO COD-SUSCRIP-TMP
+REMARK**** 00INQ999_022 *** # CONSULTAS PREVIAS ULTIMOS 6 MESES
+            MOVE COD-SUSCRIP-IND(1:2)   TO COD-SUSCRIP-TMP
+R12048      MOVE COD-SUSCRIP-IND        TO WS-CODSUS-22                 STT0005
+R12048*     IF COD-SUSCRIP-TMP = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR    STT0005
+R12048*                          17 OR 18 OR 27 OR 48 OR 49             STT0005
+R12048      IF (COD-SUSCRIP-TMP = 03 OR 05 OR 06 OR 07 OR 13 OR 14 OR   STT0005
+R12048               17 OR 18 OR 27 OR 48 OR 49)                        STT0005
+R12048      OR (COD-SUSCRIP-TMP =  04 OR 20 OR 45) OR                   STT0005
+R12048         CLIENTE-FINESA                                           STT0005
+              MOVE ZEROS           TO 00INQ999_022
+              IF MESES-CONST-CARACT >= 0 AND <= 6 
+                 MOVE 1            TO 00INQ999_022
+              END-IF
+            END-IF 
+REMARK**** 00INQ998_022 *** AÑO/MES MAYOR ACUMULADO CONSULTAS ULT 6 M
+            IF COD-SUSCRIP-IND <> 990001   AND
+               COD-SUSCRIP-IND <> 990003   AND
+               COD-SUSCRIP-IND <> 990005
+              PERFORM VARYING INQ-I FROM 1 BY 1 UNTIL INQ-I > 7
+                IF (MESES-CONST-CARACT + 1) = INQ-I
+                  MOVE ZEROS               TO 00INQ998_022(1:6)   
+                  COMPUTE INQ-HUELLA(INQ-I) = INQ-HUELLA(INQ-I) + 1
+                  MOVE SIG-ANO-CONS-CARACT TO INQ-FECHA(INQ-I)(1:4)
+                  MOVE MES-CONS-CARACT     TO INQ-FECHA(INQ-I)(5:2)
+                END-IF
+              END-PERFORM
+              PERFORM VARYING INQ-I FROM 1 BY 1 UNTIL INQ-I > 7
+                IF (INQ-HUELLA(INQ-I)  > INQ998HUELLA   AND
+                    INQ-FECHA(INQ-I)   > ZEROS)         OR
+                   (INQ-HUELLA(INQ-I)  = INQ998HUELLA   AND
+                    INQ-FECHA(INQ-I)   > 01INQ998_022   AND
+                    INQ-FECHA(INQ-I)   > ZEROS)
+                  MOVE INQ-HUELLA(INQ-I)     TO INQ998HUELLA
+                  MOVE INQ-FECHA(INQ-I)      TO 00INQ998_022
+                END-IF                                    
+              END-PERFORM
+            END-IF
+REMARK**** 01INQ999_022 *** # CONSULTAS PREVIAS ULTIMOS 6 MESES
+           IF FUNCTION NUMVAL(00INQ999_022(1:4)) >= 0
+              IF FUNCTION NUMVAL(01INQ999_022(1:4)) < 0
+                 MOVE ZEROS TO 01INQ999_022
+              END-IF
+              COMPUTE 01INQ999_022 = 01INQ999_022 + 00INQ999_022
+           ELSE
+              IF FUNCTION NUMVAL(01INQ999_022(1:4)) < 0
+               IF FUNCTION NUMVAL(00INQ999_022(1:4)) <
+                  FUNCTION NUMVAL(01INQ999_022(1:4))
+                  MOVE 00INQ999_022(1:4) TO 01INQ999_022(1:4)
+               END-IF                         
+              END-IF
+           END-IF
+REMARK**** 01INQ998_022 *** AÑO/MES MAYOR ACUMULADO CONSULTAS ULT 6 M
+           IF FUNCTION NUMVAL(00INQ998_022(1:6)) > 0
+              IF FUNCTION NUMVAL(01INQ998_022(1:6)) < 0
+                 MOVE ZEROS TO 01INQ998_022
+              END-IF
+              MOVE 00INQ998_022(1:6) TO 01INQ998_022(1:6)
+           ELSE
+              IF FUNCTION NUMVAL(01INQ998_022(1:6)) < 0
+               IF FUNCTION NUMVAL(00INQ998_022(1:6)) <
+                  FUNCTION NUMVAL(01INQ998_022(1:6))
+                  MOVE 00INQ998_022(1:6) TO 01INQ998_022(1:6)
+               END-IF         
+              END-IF
+           END-IF
+            .

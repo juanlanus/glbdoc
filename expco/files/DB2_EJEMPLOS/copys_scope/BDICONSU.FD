@@ -1,0 +1,15 @@
+REMARK* BDICONSU-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE ALMACENA  LA INFORMACION DE
+REMARK* DE LOS CONSULADOS PARA VALIDAR EN EL PROCESO DE ACTUALIZACION
+REMARK* DEL MAESTRO DE LA REGISTRADURIA.        
+REMARK* PAIS-ISO3 CODIGO ISO DEL PAIS DE 3 POSICIONES         
+REMARK* PAIS-REGIS CODIGO DEL PAIS ENVIADO POR LA REGISTRADURIA        
+REMARK******************************************************************
+       FD  BDICONSU.        
+       01  REG-BDICONSU.        
+           03 SECUENC-BDICONSU         PIC 9(03).        
+           03 PAIS-BDICONSU            PIC X(30).        
+           03 CIUDAD-BDICONSU          PIC X(30).        
+           03 PAIS-ISO3-BDICONSU       PIC X(03).        
+           03 PAIS-REGIS-BDICONSU      PIC X(03).        

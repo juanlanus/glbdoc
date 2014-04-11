@@ -1,0 +1,42 @@
+******* BDACUE-fd.v.01.0001
+   **** BDACUE.v.01.001
+REMARK*ARCHIVO TIPOS DE CUENTA VS. NOVEDADES Y ADJETIVOS VALIDOS
+      *----------------------------------------------------------------*
+      *-TABLA CON 10 OCURRENCIAS QUE CORRESPONDEN A CAMPOS DEL MAESTRO
+      * RESUMIDO CON RANGO DE VALORES INICIAL Y FINAL PARA VALIDACION
+      * TAB-RANGOS: EL ORDEN DE LOS CAMPOS ALMACENADOS ES CUOTA-MES,
+      * VALOR-INICIAL, SALDO-DEUDA, SALDO-MORA, VALOR-DISPONIBLE, CUOTAS-
+      * CANCELADAS, CUOTAS-EN-MORA, 3 OCURRENCIAS PARA USO FUTURO
+      * IND-SECTOR-BDACUE: F-FINANCIERO, C-COOPERATIVO, R-REAL
+      *-TABLA CON 15 INDICADORES DE LOS CAMPOS CONTENIDOS EN EL MAPA DE
+      * BITS; VALOR=0 SI NO APLICA VALOR=1 SI APLICA AL TIPO DE CUENTA.
+      *-CAMPOS CONTROL0X USADOS COMO DELIMITADORES.
+      *----------------------------------------------------------------*
+REMARK* GJC0002    * NEWACT- PARA NUEVA ACTUALIZACION LOS ADJETIVOS
+REAMRK* G JIMENEZ  *         VAN DE 1 A 9. SE DEFINE NUEVA TABLA DE
+REMARK* 21-07-2009 *         ADJETIVOS VALIDOS
+REMARK*****************************************************************
+       FD  BDACUE.
+       01  REG-BDACUE.
+           03  TIP-CTA-BDACUE               PIC 9(2).
+           03  DES-CORTA-BDACUE             PIC X(3).
+           03  DES-LARGA-BDACUE             PIC X(21).
+           03  DES-COMPLETA-BDACUE          PIC X(30).
+           03  CONTROL01-BDACUE             PIC X(01).
+           03  IND-NOV-BDACUE OCCURS 35     PIC 9(1).
+           03  CONTROL02-BDACUE             PIC X(01).
+           03  IND-ADJ-BDACUE OCCURS 31     PIC 9(2).
+           03  CONTROL03-BDACUE             PIC X(01).
+           03  IND-SECTOR-BDACUE            PIC X(1).
+           03  CONTROL04-BDACUE             PIC X(01).
+           03  TAB-RANGOS-BDACUE OCCURS 10.
+               04 VAL-INI-BDACUE            PIC 9(10).
+               04 VAL-FIN-BDACUE            PIC 9(10).
+           03  CONTROL05-BDACUE             PIC X(01).
+           03  TAB-IND-VAL-BDACUE.            
+               04 VEC-IND-VAL-BDACUE OCCURS 15 TIMES PIC 9.
+           03  CONTROL06-BDACUE             PIC X(01).
+NEWACT     03  IND-ADJ-NWACT-BDACUE OCCURS 9 TIMES                      GJC0002
+NEWACT                                      PIC 9.                      GJC0002
+NEWACT     03  CONTROL07-BDACUE             PIC X(1).                   GJC0002
+NEWACT     03  FILLER-BDACUE                PIC X(40).                  GJC0002

@@ -1,0 +1,12 @@
+REMARK*DIREST-FD.v.0002
+REMARK******************************************************************
+REMARK* ARCHIVO DE ESTANDARIZACION DE DIRECCIONES                      *
+REMARK******************************************************************
+      * RMB0002   * AMPL01 : SE AMPLIO LA ESTRUCTURA PARA ADMITIR CO-  *
+      * SEPT/2006 *          MENTARIOS Y FECHAS DE ACTULIZACION        *
+      ******************************************************************
+       FD  DIREST.      
+       01  REG-DIREST.
+           03  DIR-ORIG-DIREST         PIC X(20).
+           03  DIR-ESTAN-DIREST        PIC X(10).
+AMPL01     03  FILLER                  PIC X(100).                      RMB0002

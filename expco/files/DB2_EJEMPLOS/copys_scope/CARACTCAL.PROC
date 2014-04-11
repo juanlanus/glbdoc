@@ -1,0 +1,2009 @@
+REMARK*CARACTCAL.PROC.v.01.0002.
+      ******************************************************************
+      * DLM0002    | CQ3078 - DEJAR DISPONIBLE LAS VARIABLES DE INSUMO *
+      * 20-SEP-2011|   PARA DECISOR DE CITI:  INCOME ESTIMATOR, CUSTOM *
+      * DARIO LASSO|   SCORE Y DEBT BOURDEN. REQ. 3078.                *
+      *            |   NUM-PERSO-CARACT=03 - Citibank.                 *
+      ******************************************************************
+REMARK************************************************************************
+REMARK*    CALCULO DE LAS CALCULOS        PERSONALIZADAS
+REMARK*************************************************************************
+       1000-INICIAR-CARACTCAL.
+REMARK*********************************************************************
+REMARK*1000-INICIAR-CARACTCAL.
+REMARK*    RUTINA QUE PERMITE INICIALIZAR LAS VARIABLES DE CALCULOS PERSONA
+REMARK*    LIZADOS
+REMARK*********************************************************************
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 1000-INICIAR-CARACTCAL-01
+           END-IF.
+CQ3078     IF  NUM-PERSO-CARACT  =  03                                  DLM0002
+CQ3078       PERFORM  1000-INICIAR-CARACTCAL-03                         DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+       1000-INICIAR-CARACTCAL-01.
+REMARK**********************************************************************
+REMARK*1000-INICIAR-CARACTCAL-01.
+REMARK*    INICIALIZACION VARIABLES CALCULO PERSONALIZADO MODALIDAD 01
+REMARK**********************************************************************
+           MOVE "          -1"   TO CUOTATDC-CAL01(1:12).
+           MOVE "          -1"   TO CUOTACBR-CAL01(1:12).
+           MOVE "          -1"   TO CUOTACAV-CAL01(1:12).
+           MOVE "          -1"   TO CUOTAOTR-CAL01(1:12).
+           MOVE 0                TO NFLAGTDC-CAL01.   
+           MOVE 0                TO NFLAGCBR-CAL01.   
+           MOVE 0                TO NFLAGCAV-CAL01.   
+           MOVE 0                TO NFLAGOTR-CAL01.   
+       1000-PROCESE-CARACTCAL.
+REMARK**********************************************************************
+REMARK*1000-PROCESE-CARACTCAL.
+REMARK*    RUTINA QUE PERMITE PROCESAR CADA REGISTRO DE CREDITO (NIVEL 00)
+REMARK*    PARA REALIZAR LOS CALCULOS NECESARIOS A NIVEL DE CUENTA
+REMARK**********************************************************************
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 1000-VAR-CAL-PER-01                      
+           END-IF.
+      $    IF WRITECARAC = "SI"
+              PERFORM 9000-WRITE-CARACT-00CAL
+      $    END
+CQ3078     IF  NUM-PERSO-CARACT          = 03                           DLM0002
+CQ3078       PERFORM  1000-VAR-CAL-PER-03                               DLM0002
+CQ3078     END-IF.                                                      DLM0002
+
+           EXIT.
+       1000-FINAL-CARACTCAL.
+REMARK*********************************************************************
+REMARK*1000-FINAL-CARACTCAL.
+REMARK*    RUTINA QUE PERMIE CONSOLIDAR EL PROCESO DE CADA CUENTA PARA
+REMARK*    DAR EL RESULTADO FINAL 
+REMARK*********************************************************************
+           IF NUM-PERSO-CARACT           = 01
+              PERFORM 1000-FINAL-CARACTCAL-01
+           END-IF.
+CQ3078     IF  NUM-PERSO-CARACT          = 03                           DLM0002
+CQ3078       PERFORM  0068-VALORES-MISSING                              DLM0002
+CQ3078       PERFORM  0069-TRANSFORMAR-VARIABLES                        DLM0002
+CQ3078       PERFORM  1000-FINAL-CARACTCAL-03                           DLM0002
+CQ3078     END-IF.                                                      DLM0002
+       1000-VAR-CAL-PER-01.
+REMARK*********************************************************************
+REMARK*1000-VAR-CAL-PER-01.
+REMARK*    FILTRO INICIAL PARA EL GCALCULO DEL GASTO FINANCIERO 
+REMARK*********************************************************************
+           INITIALIZE 00END005N 00END007N 00END008N TASA-CAL01 
+                      PLAZO-CAL01 POR-CAL01 
+           IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                  "CC" OR "OT" 
+              IF REG-ABIERTO-CARACT = 1 AND IND-BLOQUEO-ABD07 = 0
+                 PERFORM 1100-VAR-CAL-PER-TIPCTA-01
+              END-IF
+           END-IF.
+       1100-VAR-CAL-PER-TIPCTA-01.
+REMARK********************************************************************
+REMARK*1100-VAR-CAL-PER-TIPCTA-01.
+REMARK*    CONVERSION DE VARIABLES, CALCULOS GLOBALES Y DISCRIMINACION
+REMARK*    DE ACUERDO AL TIPO DE CUENTA APLICANDO LA POLITICA PROPIA
+REMARK********************************************************************
+      *    MOVE FUNCTION NUMVAL (00END005) TO 00END005N
+      *    MOVE FUNCTION NUMVAL (00END007) TO 00END007N
+      *    MOVE FUNCTION NUMVAL (00END008) TO 00END008N
+      *    MOVE ANO-ACT-DATE-CARACT TO ANO-NOV-SMLMV-CARACT
+      *    PERFORM 2206-BUSCAR-SMLMV
+      *    IF 00END005N > 0
+      *       COMPUTE 00END005N = 
+      *            00END005N * VLR-SMLMV-CARACT(J-SMLMV-CARACT)
+      *    END-IF.
+      *    IF 00END007N > 0
+      *       COMPUTE 00END007N = 
+      *            00END007N * VLR-SMLMV-CARACT(J-SMLMV-CARACT)
+      *    END-IF.
+      *    IF 00END008N > 0
+      *       COMPUTE 00END008N = 
+      *            00END008N * VLR-SMLMV-CARACT(J-SMLMV-CARACT)
+      *    END-IF.
+           IF SW-LECTURA-LEEICMVLR = 1                  
+               IF IND-CUOTA-NV-LEEICMVLR(1) = 0  
+                  COMPUTE 00END007N = CUOTA-NV-LEEICMVLR(1) * 1000
+               ELSE
+                  MOVE -1                          TO 00END007N
+               END-IF
+               IF IND-SALDO-NV-LEEICMVLR(1) = 0  
+                  COMPUTE 00END005N = SALDO-NV-LEEICMVLR(1)  * 1000
+               ELSE
+                  MOVE -1                          TO 00END005N
+               END-IF
+               IF IND-VAL-INIC-NV-LEEICMVLR(1) = 0  
+                  COMPUTE 00END008N = 
+                                 VAL-INICIAL-NV-LEEICMVLR(1) * 1000
+               ELSE
+                  MOVE -1                          TO 00END008N
+               END-IF
+           ELSE
+               MOVE -1   TO 00END007N 00END005N 00END008N
+           END-IF.
+           MOVE 0.0 TO POR-CAL01
+           IF 00END008N  > 0
+              IF 00END008N <= 2000000               
+                 MOVE 0.6 TO POR-CAL01
+              ELSE
+                 IF 00END008N <= 10000000               
+                    MOVE 0.45 TO POR-CAL01
+                 ELSE
+                    IF 00END008N <= 20000000               
+                       MOVE 0.30 TO POR-CAL01
+                    ELSE
+                       MOVE 0.20 TO POR-CAL01
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF.
+           IF COD-CTA-ABD07 = 02
+              PERFORM 1110-VAR-CAL-PER-TIPCTA02-01
+           END-IF.
+           IF COD-CTA-ABD07 = 03
+              PERFORM 1110-VAR-CAL-PER-TIPCTA03-01
+           END-IF.
+           IF COD-CTA-ABD07 = 13
+              PERFORM 1110-VAR-CAL-PER-TIPCTA13-01
+           END-IF.
+           IF COD-CTA-ABD07 = 05 OR 06 OR 27 OR 04 OR 45 OR
+                              18 OR 14 OR 46 OR 33 OR 07 
+              PERFORM 1110-VAR-CAL-PER-TIPCTA99-01
+           END-IF.
+       1110-VAR-CAL-PER-TIPCTA02-01.
+REMARK*******************************************************************
+REMARK*1110-VAR-CAL-PER-TIPCTA02-01.
+REMARK*    CALCULO DEL GASTO FINANCIERO PARA TARJETA DE CREDITO
+REMARK*******************************************************************
+           MOVE 0.021 TO TASA-CAL01.
+           MOVE 24    TO PLAZO-CAL01.
+           IF 00END005N > 0  
+              IF CUOTATDC-CAL01 NOT NUMERIC
+                 MOVE ZEROS    TO CUOTATDC-CAL01
+              END-IF
+              MOVE 1 TO NFLAGTDC-CAL01 
+              COMPUTE CUOTATDC-CAL01 ROUNDED = CUOTATDC-CAL01 +
+                (00END005N * TASA-CAL01 * 
+                (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+           ELSE
+              IF 00END008N > 0
+                 IF CUOTATDC-CAL01 NOT NUMERIC
+                    MOVE ZEROS    TO CUOTATDC-CAL01
+                 END-IF
+                 MOVE 1 TO NFLAGTDC-CAL01 
+                 COMPUTE CUOTATDC-CAL01 ROUNDED = CUOTATDC-CAL01 +
+                   (00END008N * POR-CAL01 * TASA-CAL01 * 
+                   (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                   ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+              END-IF
+           END-IF.
+           IF NFLAGTDC-CAL01 = 0                                    
+              MOVE "         -88" TO CUOTATDC-CAL01(1:12)
+           END-IF.
+       1110-VAR-CAL-PER-TIPCTA03-01.
+REMARK*******************************************************************
+REMARK*1110-VAR-CAL-PER-TIPCTA03-01.
+REMARK*    CALCULO DEL GASTO FINANCIERO PARA ROTATITOS            
+REMARK*******************************************************************
+           MOVE 0.021 TO TASA-CAL01.
+           MOVE 60    TO PLAZO-CAL01.
+           IF 00END007N  > 0 *> CUOTA
+              IF CUOTACBR-CAL01 NOT NUMERIC
+                 MOVE ZEROS    TO CUOTACBR-CAL01
+              END-IF
+              MOVE 1 TO NFLAGCBR-CAL01 
+              ADD 00END007N TO CUOTACBR-CAL01
+           ELSE
+              IF 00END005N  > 0 *> SALDO
+                 IF CUOTACBR-CAL01 NOT NUMERIC
+                    MOVE ZEROS    TO CUOTACBR-CAL01
+                 END-IF
+                 MOVE 1 TO NFLAGCBR-CAL01 
+                 COMPUTE CUOTACBR-CAL01 ROUNDED = CUOTACBR-CAL01 +
+                   (00END005N * TASA-CAL01 * 
+                          (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                   ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+              ELSE
+                 IF 00END008N  > 0  *> CUPO
+                    IF CUOTACBR-CAL01 NOT NUMERIC
+                       MOVE ZEROS    TO CUOTACBR-CAL01
+                    END-IF
+                    MOVE 1 TO NFLAGCBR-CAL01 
+                    COMPUTE CUOTACBR-CAL01 ROUNDED = CUOTACBR-CAL01 +
+                   (00END008N * POR-CAL01 * TASA-CAL01 * 
+                          (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                   ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+                 END-IF
+              END-IF
+           END-IF.
+           IF NFLAGCBR-CAL01 = 0                                    
+              MOVE "         -88" TO CUOTACBR-CAL01(1:12)
+           END-IF.
+       1110-VAR-CAL-PER-TIPCTA13-01.
+REMARK*******************************************************************
+REMARK*1110-VAR-CAL-PER-TIPCTA13-01.
+REMARK*    CALCULO DEL GASTO FINANCIERO PARA HIPOTECARIOS         
+REMARK*******************************************************************
+           MOVE 0.01  TO TASA-CAL01.
+           IF 00END007N  > 0 *> CUOTA
+              IF CUOTACAV-CAL01 NOT NUMERIC
+                 MOVE ZEROS    TO CUOTACAV-CAL01
+              END-IF
+              MOVE 1 TO NFLAGCAV-CAL01
+              ADD 00END007N TO CUOTACAV-CAL01
+           ELSE
+              MOVE MESES-VENAP-CARACT TO PLAZO-CAL01       
+              IF 00END008N  > 0 AND PLAZO-CAL01 > 0 *> CUPO 
+                 AND 00END005N > 0 *> SOLO SI TIENE SALDO TOMA CUPO
+                 IF CUOTACAV-CAL01 NOT NUMERIC
+                    MOVE ZEROS    TO CUOTACAV-CAL01
+                 END-IF
+                 MOVE 1 TO NFLAGCAV-CAL01
+                 COMPUTE CUOTACAV-CAL01 ROUNDED = CUOTACAV-CAL01 +
+                   (00END008N * TASA-CAL01 *
+                          (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                   ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+              END-IF
+           END-IF.
+           IF NFLAGCAV-CAL01 = 0
+              MOVE "         -88" TO CUOTACAV-CAL01(1:12)
+           END-IF.
+       1110-VAR-CAL-PER-TIPCTA99-01.
+REMARK*******************************************************************
+REMARK*1110-VAR-CAL-PER-TIPCTA99-01.
+REMARK*    CALCULO DEL GASTO FINANCIERO PARA OTROS TIPOS DE CREDITOS
+REMARK*******************************************************************
+           MOVE 0.021 TO TASA-CAL01.
+           IF 00END007N  > 0 *> CUOTA
+              IF CUOTAOTR-CAL01 NOT NUMERIC
+                 MOVE ZEROS    TO CUOTAOTR-CAL01
+              END-IF
+              MOVE 1 TO NFLAGOTR-CAL01
+              ADD 00END007N TO CUOTAOTR-CAL01
+           ELSE
+              MOVE MESES-VENAP-CARACT TO PLAZO-CAL01
+              IF 00END008N  > 0 AND PLAZO-CAL01 > 0  *> CUPO 
+                 AND 00END005N > 0 *> SOLO SI TIENE SALDO TOMA CUPO
+                 IF CUOTAOTR-CAL01 NOT NUMERIC
+                    MOVE ZEROS    TO CUOTAOTR-CAL01
+                 END-IF
+                 MOVE 1 TO NFLAGOTR-CAL01
+                 COMPUTE CUOTAOTR-CAL01 ROUNDED = CUOTAOTR-CAL01 +
+                (00END008N * TASA-CAL01 *
+                       (1 + TASA-CAL01 ) ** PLAZO-CAL01) /
+                ((((1 + TASA-CAL01 ) ** PLAZO-CAL01)) - 1)
+              END-IF
+           END-IF.
+           IF NFLAGOTR-CAL01 = 0
+              MOVE "         -88" TO CUOTAOTR-CAL01(1:12)
+           END-IF.
+       1000-FINAL-CARACTCAL-01.
+REMARK******************************************************************
+REMARK*1000-FINAL-CARACTCAL-01.
+REMARK*    CONSOLIDACION FINAL DEL CALCULO DEL GASTO FINANCIERO
+REMARK*    COLOCADO EN LA VARIABLE CALCULADA 99END001
+REMARK******************************************************************
+           IF CUOTATDC-CAL01 <= 0 AND CUOTACBR-CAL01 <= 0 AND
+              CUOTACAV-CAL01 <= 0 AND CUOTAOTR-CAL01 <= 0 
+              MOVE "          -1" TO 99END001(1:12)
+           ELSE
+              MOVE ZEROS          TO 99END001
+              IF CUOTATDC-CAL01 > 0
+                 ADD CUOTATDC-CAL01 TO 99END001
+              END-IF
+              IF CUOTACBR-CAL01 > 0
+                 ADD CUOTACBR-CAL01 TO 99END001
+              END-IF
+              IF CUOTACAV-CAL01 > 0
+                 ADD CUOTACAV-CAL01 TO 99END001
+              END-IF
+              IF CUOTAOTR-CAL01 > 0
+                 ADD CUOTAOTR-CAL01 TO 99END001
+              END-IF
+           END-IF.
+CQ3078*                                                                 DLM0002
+CQ3078 1000-VAR-CAL-PER-03.                                             DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078*1000-VAR-CAL-PER-03.                                             DLM0002
+CQ3078*  FILTRO INICIAL PARA EL CALCULO DE VARIABLES CITIBANK POR REGISTDLM0002
+CQ3078******************************************************************DLM0002
+CQ3078     MOVE  1                     TO  SW-ICMCRE-CARACT             DLM0002
+CQ3078     PERFORM  7500-ANALIZA-VECTOR-HIST-CARACT                     DLM0002
+CQ3078     IF  NUM-CTA-ABD07(17:1) = "C"  OR                            DLM0002
+CQ3078         NUM-CTA-ABD07(17:1) = "c"  OR                            DLM0002
+CQ3078        (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND          DLM0002
+CQ3078         (IND-AMPLIACION-ABD02 = 5 OR 2))                         DLM0002
+CQ3078       MOVE  1                   TO  SW-CODEUDOR-CARACT           DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       MOVE  0                   TO  SW-CODEUDOR-CARACT           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       DLM0002
+CQ3078       IF  W-CLASE-CTA (COD-CTA-ABD07) = 1                        DLM0002
+CQ3078         ADD   1                 TO   W2-NUM-OBL-1                DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-CODEUDOR-CARACT  =  1                               DLM0002
+CQ3078         IF  W-CLASE-CTA (COD-CTA-ABD07) = 5                      DLM0002
+CQ3078           ADD   1               TO   W2-NUM-COD-5                DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  W-CLASE-CTA (COD-CTA-ABD07) = 2                        DLM0002
+CQ3078        ADD   1                  TO  W2-CERRADAS-2                DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) = 05 OR 06 ORDLM0002
+CQ3078                                     08 OR 09 OR 10 OR 11 OR 12   DLM0002
+CQ3078         IF  W-CLASE-CTA (COD-CTA-ABD07) = 5                      DLM0002
+CQ3078           ADD   1               TO  W1-CANVOL-5                  DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         IF  CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) = 03       DLM0002
+CQ3078           IF  W-CLASE-CTA (COD-CTA-ABD07) = 5                    DLM0002
+CQ3078             ADD   1             TO  W2-CAN-MM-5                  DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  W-CLASE-CTA (COD-CTA-ABD07) = 3                          DLM0002
+CQ3078       IF  FECHA-APERT-CARACT < W1-FEC-MENOR-3                    DLM0002
+CQ3078         MOVE  FECHA-APERT-CARACT TO  W1-FEC-MENOR-3              DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  W-CLASE-CTA (COD-CTA-ABD07) = 4                          DLM0002
+CQ3078       IF  FECHA-APERT-CARACT < W2-FEC-MENOR-4                    DLM0002
+CQ3078         MOVE  FECHA-APERT-CARACT TO W2-FEC-MENOR-4               DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  W-CLASE-CTA (COD-CTA-ABD07) = 5                          DLM0002
+CQ3078       IF  FECHA-APERT-CARACT < W1-FEC-MENOR-5                    DLM0002
+CQ3078         MOVE  FECHA-APERT-CARACT TO W1-FEC-MENOR-5               DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078     IF  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 01        DLM0002
+CQ3078       IF W-CLASE-CTA (COD-CTA-ABD07) = 1                         DLM0002
+CQ3078         ADD 1                   TO W1-ALDIA-1                    DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     INITIALIZE  W-VALORES-REPORTADOS                             DLM0002
+CQ3078     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 01         DLM0002
+CQ3078      IF  SW-LECTURA-LEEICMVLR = 1                                DLM0002
+CQ3078       IF  IND-VAL-INIC-NV-LEEICMVLR(1) = 0                       DLM0002
+CQ3078         MOVE  VAL-INICIAL-NV-LEEICMVLR(1) TO  W-CUP              DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  1                 TO  W-CUP-NOINF                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  IND-SALDO-NV-LEEICMVLR (1) = 0                         DLM0002
+CQ3078         MOVE  SALDO-NV-LEEICMVLR(1) TO  W-SAL                    DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  1                 TO  W-SAL-NOINF                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  IND-SALDO-MORA-NV-LEEICMVLR (1) = 0                    DLM0002
+CQ3078         MOVE  SALDO-MORA-NV-LEEICMVLR(1) TO  W-MOR               DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  1                 TO  W-MOR-NOINF                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  IND-CUOTA-NV-LEEICMVLR (1) = 0                         DLM0002
+CQ3078         MOVE  CUOTA-NV-LEEICMVLR(1) TO  W-CUO                    DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  1                 TO  W-CUO-NOINF                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078                                                                  DLM0002
+CQ3078       IF (W-CUP-NOINF = 0 AND W-CUP > 0) OR                      DLM0002
+CQ3078          (W-SAL-NOINF = 0 AND W-SAL > 0) OR                      DLM0002
+CQ3078          (W-MOR-NOINF = 0 AND W-MOR > 0) OR                      DLM0002
+CQ3078          (W-CUO-NOINF = 0 AND W-CUO > 0)                         DLM0002
+CQ3078         MOVE  1                 TO  SW-VALORES                   DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  0                 TO  SW-LECTURA-LEEICMVLR         DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-LECTURA-LEEICMVLR = 1                               DLM0002
+CQ3078         IF  IND-VAL-INIC-NV-LEEICMVLR (1) = 0                    DLM0002
+CQ3078           IF  W-CLASE-CTA (COD-CTA-ABD07) = 2                    DLM0002
+CQ3078             ADD   VAL-INICIAL-NV-LEEICMVLR(1) TO  W1-VALOR-INI-2 DLM0002
+CQ3078             ADD   VAL-INICIAL-NV-LEEICMVLR(1) TO  W2-VALOR-INI-2 DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF W-CLASE-CTA (COD-CTA-ABD07) = 5                     DLM0002
+CQ3078             ADD   VAL-INICIAL-NV-LEEICMVLR(1) TO  W1-VALOR-INI-5 DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF IND-SALDO-NV-LEEICMVLR (1) = 0                        DLM0002
+CQ3078           IF W-CLASE-CTA (COD-CTA-ABD07) = 5                     DLM0002
+CQ3078             ADD   SALDO-NV-LEEICMVLR(1)  TO  W1-SALDOS-5         DLM0002
+CQ3078             ADD   SALDO-NV-LEEICMVLR(1)  TO  W2-SALDOS-5         DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF IND-SALDO-MORA-NV-LEEICMVLR (1) = 0                   DLM0002
+CQ3078           IF NOV-REPORT-ABD07  = 01 OR 13 OR 14 OR 15 OR 16      DLM0002
+CQ3078             MOVE  ZEROS         TO SALDO-MORA-NV-LEEICMVLR(1)    DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           ADD   SALDO-MORA-NV-LEEICMVLR(1) TO  W1-MORA           DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078      END-IF                                                      DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     MOVE WS-ESTADO-MES-1-CARACT TO ESTADO-MES-IMP-CARACT         DLM0002
+CQ3078     IF  NIT-SUSCRIP-S-ABD02 <> 860003020                         DLM0002
+CQ3078       MOVE  ZEROS               TO  SW-CRITERIO-A                DLM0002
+CQ3078       MOVE  ZEROS               TO  WS-MESES-NOVEDAD             DLM0002
+CQ3078       MOVE  NIT-SUSCRIP-S-ABD02 TO  WOR-NIT-CARACT               DLM0002
+CQ3078       MOVE  FECHA-APERT-CARACT  TO  W-FEC-APERTURA               DLM0002
+CQ3078       COMPUTE  WS-MESES-LIBROS  =                                DLM0002
+CQ3078         ((ANO-CURRENT-DATE-CARACT * 12 + MES-CURRENT-DATE-CARACT)DLM0002
+CQ3078        - (W-ANO-APERTURA * 12 + W-MES-APERTURA))                 DLM0002
+CQ3078       COMPUTE  WS-MESES-NOVEDAD  =                               DLM0002
+CQ3078         ((ANO-CURRENT-DATE-CARACT * 12 + MES-CURRENT-DATE-CARACT)DLM0002
+CQ3078        - (SIG-ANO-NOV-CARACT * 12 + MES-NOV-CARACT))             DLM0002
+CQ3078       IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       DLM0002
+CQ3078         ADD 1                   TO  WS-TOTAL-CAR-ACTIVAS         DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         ADD 1                   TO  WS-TOTAL-CAR-CERRADAS        DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF (CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) >= 13 AND    DLM0002
+CQ3078       <= 45) OR (CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) = 47  DLM0002
+CQ3078       OR 01)                                                     DLM0002
+CQ3078         MOVE  1                 TO  SW-CRITERIO-A                DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-CRITERIO-A  =  1                                    DLM0002
+CQ3078         MOVE  ZEROS             TO  SW-NO-OPEN-F                 DLM0002
+CQ3078         ADD   1                 TO  WS-NRO-CRITERIO-A            DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-CRITERIO-A  =  1  AND  COD-CTA-ABD07  =  02         DLM0002
+CQ3078         ADD   1                 TO  W-NUM-TDC                    DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  COD-CTA-ABD07  =  02                                   DLM0002
+CQ3078         ADD   1                 TO    W-TOT-TDC                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-CRITERIO-A  =  1                                    DLM0002
+CQ3078         IF  COD-CTA-ABD07  = (05  OR  06  OR  27  OR  18  OR     DLM0002
+CQ3078                               07  OR  46  OR  44)                DLM0002
+CQ3078           ADD   1               TO  W-NUM-CONSUMO                DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF (CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) >=  02  AND  DLM0002
+CQ3078           CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) <=  12)  OR  DLM0002
+CQ3078           CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07)  =  46 OR 49 DLM0002
+CQ3078         IF  COD-CTA-ABD07  =  02 OR 06 OR 27 OR 13 OR            DLM0002
+CQ3078                               15 OR 16 OR 04 OR 05 OR 18 OR      DLM0002
+CQ3078                               07 OR 46 OR 44 OR 45               DLM0002
+CQ3078           ADD   1               TO  WS-NUM-CLOS-TOTAL            DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  COD-CTA-ABD07  =  02  OR  06  OR  27  OR  13  OR       DLM0002
+CQ3078                             15  OR  16  OR  04  OR  05  OR       DLM0002
+CQ3078                             18  OR  07  OR  46  OR  44  OR  45   DLM0002
+CQ3078         MOVE  1                 TO  SW-CFP                       DLM0002
+CQ3078         IF  SW-CRITERIO-A  =  1                                  DLM0002
+CQ3078           ADD   1               TO  WS-OPEN-TOT                  DLM0002
+CQ3078           IF  COD-CTA-ABD07  =   02                              DLM0002
+CQ3078             ADD   1             TO  WS-CC-TOT                    DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             ADD   1             TO  WS-NONCC-TOT                 DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  SW-CODEUDOR-CARACT  =  ZEROS                         DLM0002
+CQ3078           IF (CARACT-TAB-NOV-CART-COD(NOV-REPORT-ABD07) >=       DLM0002
+CQ3078               17  AND  <=  41)                                   DLM0002
+CQ3078             ADD   1             TO  WS-NUMDELQ-O-I-TOTAL         DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF  SW-CRITERIO-A  =  1                                DLM0002
+CQ3078             IF  WS-MESES-LIBROS       >  WS-MOBMAX               DLM0002
+CQ3078                 MOVE  WS-MESES-LIBROS      TO WS-MOBMAX          DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             COMPUTE  WS-VECES  =  12                             DLM0002
+CQ3078             MOVE  ZEROS         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078             PERFORM  VARYING  CARACT-W-INDICE  FROM  1  BY 1     DLM0002
+CQ3078                        UNTIL  CARACT-W-INDICE  >  WS-VECES       DLM0002
+CQ3078                IF (E-MES-IMP-CARACT(1)  >  0  AND                DLM0002
+CQ3078                    E-MES-IMP-CARACT(1)  <  5)                    DLM0002
+CQ3078                  MOVE  CARACT-W-INDICE TO  CARACT-W-INDICE-K     DLM0002
+CQ3078                  MOVE  50       TO  CARACT-W-INDICE              DLM0002
+CQ3078                END-IF                                            DLM0002
+CQ3078             END-PERFORM                                          DLM0002
+CQ3078             IF MORA-MAXIMA-ABD07 > 0 AND CARACT-W-INDICE-K = ZERODLM0002
+CQ3078               MOVE  13          TO  CARACT-W-INDICE-K            DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  CARACT-W-INDICE-K  >  ZEROS                      DLM0002
+CQ3078               IF  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = DLM0002
+CQ3078                   09 OR 11                                       DLM0002
+CQ3078                 COMPUTE  WS-MS-DELQ  =  WS-MESES-NOVCCDR +       DLM0002
+CQ3078                          CARACT-W-INDICE-K                       DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 COMPUTE  WS-MS-DELQ  =  WS-MESES-NOVEDAD +       DLM0002
+CQ3078                          CARACT-W-INDICE-K                       DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  WS-MS-DELQ  <  WS-MIN-MS-DELQ  OR                DLM0002
+CQ3078                 WS-MIN-MS-DELQ  =  ZEROS                         DLM0002
+CQ3078               MOVE  WS-MS-DELQ  TO  WS-MIN-MS-DELQ               DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  COD-CTA-ABD07  =  13  OR  15  OR  16                   DLM0002
+CQ3078         MOVE  1                   TO  SW-MORT                    DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  WS-MESES-LIBROS  >  WS-MAXMOB                          DLM0002
+CQ3078         MOVE  WS-MESES-LIBROS      TO WS-MAXMOB                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-CODEUDOR-CARACT  =  ZEROS                           DLM0002
+CQ3078         IF  COD-CTA-ABD07  =  02 OR 06 OR 27 OR 13 OR 15 OR      DLM0002
+CQ3078                               16 OR 04 OR 05 OR 18 OR 07 OR      DLM0002
+CQ3078                               46 OR 44 OR 45                     DLM0002
+CQ3078           ADD   1                  TO  WS-NUM-MINMOB-I-TOTAL     DLM0002
+CQ3078           IF WS-MINMOB-I-TOTAL = 0 AND WS-MESES-LIBROS      > 0  DLM0002
+CQ3078              MOVE WS-MESES-LIBROS      TO WS-MINMOB-I-TOTAL      DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF  WS-MESES-LIBROS       <  WS-MINMOB-I-TOTAL     *>RFDLM0002
+CQ3078             MOVE  WS-MESES-LIBROS  TO  WS-MINMOB-I-TOTAL     *>RFDLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-LECTURA-LEEICMVLR = 1  AND                          DLM0002
+CQ3078         ((IND-CUOTA-NV-LEEICMVLR(1)  =  0  AND                   DLM0002
+CQ3078           CUOTA-NV-LEEICMVLR(1)  >  0)      OR                   DLM0002
+CQ3078          (IND-VAL-INIC-NV-LEEICMVLR(1) = 0 AND                   DLM0002
+CQ3078           VAL-INICIAL-NV-LEEICMVLR(1)  > 0) OR                   DLM0002
+CQ3078          (IND-SALDO-NV-LEEICMVLR(1)  =  0  AND                   DLM0002
+CQ3078           SALDO-NV-LEEICMVLR(1)  >  0)      OR                   DLM0002
+CQ3078          (IND-SALDO-MORA-NV-LEEICMVLR(1) = 0 AND                 DLM0002
+CQ3078           SALDO-MORA-NV-LEEICMVLR(1) > 0))                       DLM0002
+CQ3078         IF  IND-VAL-INIC-NV-LEEICMVLR(1) = 1                     DLM0002
+CQ3078***DLM   AND  VEC-VALOR-VALVLR(16) = 1                            DLM0002
+CQ3078           MOVE  0               TO  IND-VAL-INIC-NV-LEEICMVLR(1) DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  SW-LECTURA-LEEICMVLR  =  1  AND                        DLM0002
+CQ3078           CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1      DLM0002
+CQ3078         IF  IND-CUOTA-NV-LEEICMVLR(1)  =  0                      DLM0002
+CQ3078           COMPUTE  WS-ACU-CUOTAS = WS-ACU-CUOTAS +               DLM0002
+CQ3078                    (CUOTA-NV-LEEICMVLR(1) *  1000)               DLM0002
+CQ3078           IF  COD-CTA-ABD07  =  23  OR  24                       DLM0002
+CQ3078             COMPUTE  WS-ACU-CUOTA-TEL  =  WS-ACU-CUOTA-TEL  +    DLM0002
+CQ3078                     (CUOTA-NV-LEEICMVLR(1)   *  1000)            DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  IND-VAL-INIC-NV-LEEICMVLR(1) = 0                     DLM0002
+CQ3078           IF  COD-CTA-ABD07  =  02                               DLM0002
+CQ3078             IF  SW-CODEUDOR-CARACT = 0 AND SW-CRITERIO-A  = 1    DLM0002
+CQ3078               COMPUTE WS-ACU-INI-ROTA-TITU =                     DLM0002
+CQ3078                 WS-ACU-INI-ROTA-TITU +                           DLM0002
+CQ3078                (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF  SW-CODEUDOR-CARACT  =  0  AND SW-CRITERIO-A  =  1  DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 05                               DLM0002
+CQ3078               COMPUTE WS-ACU-INI-CAB = WS-ACU-INI-CAB +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 06 OR 27                         DLM0002
+CQ3078               COMPUTE WS-ACU-INI-CAC = WS-ACU-INI-CAC +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 18                               DLM0002
+CQ3078               COMPUTE WS-ACU-INI-CCF = WS-ACU-INI-CCF +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 07                               DLM0002
+CQ3078               COMPUTE WS-ACU-INI-COF = WS-ACU-INI-COF +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 46                               DLM0002
+CQ3078               COMPUTE WS-ACU-INI-CON = WS-ACU-INI-CON +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 44                               DLM0002
+CQ3078               COMPUTE WS-ACU-INI-SFI = WS-ACU-INI-SFI +          DLM0002
+CQ3078                      (VAL-INICIAL-NV-LEEICMVLR(1) *  1000)       DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  IND-SALDO-NV-LEEICMVLR(1) = 0                        DLM0002
+CQ3078           COMPUTE  WS-ACU-SLDOS-FIN  =   WS-ACU-SLDOS-FIN  +     DLM0002
+CQ3078                   (SALDO-NV-LEEICMVLR(1) * 1000)                 DLM0002
+CQ3078           IF  SW-CODEUDOR-CARACT  =  0  AND SW-CRITERIO-A  =  1  DLM0002
+CQ3078             IF COD-CTA-ABD07  =  02                              DLM0002
+CQ3078               COMPUTE  WS-ACU-SLD-ROTA-TITU  =                   DLM0002
+CQ3078                        WS-ACU-SLD-ROTA-TITU +                    DLM0002
+CQ3078                       (SALDO-NV-LEEICMVLR(1)  * 1000)            DLM0002
+CQ3078               IF  WS-ACU-SLD-ROTA-TITU > 0 AND                   DLM0002
+CQ3078                   WS-ACU-INI-ROTA-TITU > 0                       DLM0002
+CQ3078                 COMPUTE  WS-UTILIZACION = WS-ACU-SLD-ROTA-TITU / DLM0002
+CQ3078                                           WS-ACU-INI-ROTA-TITU   DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 MOVE  -1        TO  WS-UTILIZACION               DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  WS-UTILIZACION  >  WS-UTILMAX-O-I-CC           DLM0002
+CQ3078                 MOVE  WS-UTILIZACION                             DLM0002
+CQ3078                                 TO  WS-UTILMAX-O-I-CC            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 05                               DLM0002
+CQ3078               COMPUTE  WS-ACU-SLD-CAB  = WS-ACU-SLD-CAB  +       DLM0002
+CQ3078                       (SALDO-NV-LEEICMVLR(1) * 1000)             DLM0002
+CQ3078               IF  WS-ACU-SLD-CAB > 0 AND WS-ACU-INI-CAB > 0      DLM0002
+CQ3078                 COMPUTE WS-USO-CAB = WS-ACU-SLD-CAB /            DLM0002
+CQ3078                                        WS-ACU-INI-CAB            DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 MOVE -1          TO  WS-USO-CAB                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  WS-USO-CAB  >  WS-MAX-CAB                      DLM0002
+CQ3078                 MOVE  WS-USO-CAB TO  WS-MAX-CAB                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 06 OR 27                         DLM0002
+CQ3078               COMPUTE  WS-ACU-SLD-CAC  = WS-ACU-SLD-CAC  +       DLM0002
+CQ3078                       (SALDO-NV-LEEICMVLR(1) * 1000)             DLM0002
+CQ3078               IF  WS-ACU-SLD-CAC > 0 AND WS-ACU-INI-CAC > 0      DLM0002
+CQ3078                 COMPUTE WS-USO-CAC = WS-ACU-SLD-CAC /            DLM0002
+CQ3078                                      WS-ACU-INI-CAC              DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 MOVE -1          TO  WS-USO-CAC                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  WS-USO-CAC  >  WS-MAX-CAC                      DLM0002
+CQ3078                 MOVE  WS-USO-CAC TO  WS-MAX-CAC                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 18                               DLM0002
+CQ3078                 COMPUTE  WS-ACU-SLD-CCF  = WS-ACU-SLD-CCF  +     DLM0002
+CQ3078                         (SALDO-NV-LEEICMVLR(1) * 1000)           DLM0002
+CQ3078                 IF  WS-ACU-SLD-CCF > 0 AND WS-ACU-INI-CCF > 0    DLM0002
+CQ3078                   COMPUTE WS-USO-CCF = WS-ACU-SLD-CCF /          DLM0002
+CQ3078                                        WS-ACU-INI-CCF            DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   MOVE -1          TO  WS-USO-CCF                DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078                 IF  WS-USO-CCF  >  WS-MAX-CCF                    DLM0002
+CQ3078                   MOVE  WS-USO-CCF TO  WS-MAX-CCF                DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 07                               DLM0002
+CQ3078                 COMPUTE  WS-ACU-SLD-COF  = WS-ACU-SLD-COF  +     DLM0002
+CQ3078                         (SALDO-NV-LEEICMVLR(1) * 1000)           DLM0002
+CQ3078                 IF  WS-ACU-SLD-COF > 0 AND WS-ACU-INI-COF > 0    DLM0002
+CQ3078                   COMPUTE WS-USO-COF = WS-ACU-SLD-COF /          DLM0002
+CQ3078                                        WS-ACU-INI-COF            DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   MOVE -1             TO  WS-USO-COF             DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078                 IF  WS-USO-COF  >  WS-MAX-COF                    DLM0002
+CQ3078                   MOVE  WS-USO-COF TO  WS-MAX-COF                DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 46                               DLM0002
+CQ3078               COMPUTE  WS-ACU-SLD-CON  = WS-ACU-SLD-CON  +       DLM0002
+CQ3078                        (VALOR-SALDO-DEUDAM-ABD07  *  1000)       DLM0002
+CQ3078               IF  WS-ACU-SLD-CON > 0 AND WS-ACU-INI-CON > 0      DLM0002
+CQ3078                 COMPUTE WS-USO-CON = WS-ACU-SLD-CON /            DLM0002
+CQ3078                                      WS-ACU-INI-CON              DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 MOVE -1          TO  WS-USO-CON                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  WS-USO-CON  >  WS-MAX-CON                      DLM0002
+CQ3078                 MOVE  WS-USO-CON TO  WS-MAX-CON                  DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07 = 44                               DLM0002
+CQ3078                 COMPUTE  WS-ACU-SLD-SFI  = WS-ACU-SLD-SFI  +     DLM0002
+CQ3078                         (SALDO-NV-LEEICMVLR(1) * 1000)           DLM0002
+CQ3078                 IF  WS-ACU-SLD-SFI > 0 AND WS-ACU-INI-SFI > 0    DLM0002
+CQ3078                   COMPUTE WS-USO-SFI = WS-ACU-SLD-SFI /          DLM0002
+CQ3078                                        WS-ACU-INI-SFI            DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   MOVE -1          TO  WS-USO-SFI                DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078                 IF  WS-USO-SFI  >  WS-MAX-SFI                    DLM0002
+CQ3078                   MOVE  WS-USO-SFI TO  WS-MAX-SFI                DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF  SW-CRITERIO-A  =  1                                DLM0002
+CQ3078             IF  COD-CTA-ABD07  =  02                             DLM0002
+CQ3078               COMPUTE  WS-ACU-SLD-ROTA-TODO  =                   DLM0002
+CQ3078                        WS-ACU-SLD-ROTA-TODO +                    DLM0002
+CQ3078                       (SALDO-NV-LEEICMVLR(1) * 1000)             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  IND-SALDO-MORA-NV-LEEICMVLR(1) = 0                   DLM0002
+CQ3078           IF  SW-CODEUDOR-CARACT  =  1                           DLM0002
+CQ3078             COMPUTE  W-ACU-MORA-CODEU  =  W-ACU-MORA-CODEU  +    DLM0002
+CQ3078                      SALDO-MORA-NV-LEEICMVLR(1)                  DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             COMPUTE  W-ACU-MORA  =  W-ACU-MORA  +                DLM0002
+CQ3078                      SALDO-MORA-NV-LEEICMVLR(1)                  DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       EVALUATE  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)     DLM0002
+CQ3078          WHEN  09     *>  CARTERA CASTIGADA.                     DLM0002
+CQ3078            MOVE  1               TO  SW-DESCALIFICA              DLM0002
+CQ3078          WHEN  10     *>  CARTERA RECUPERADA.                    DLM0002
+CQ3078            MOVE  1               TO  SW-DESCALIFICA              DLM0002
+CQ3078          WHEN  11     *>  DUDOSO RECAUDO.                        DLM0002
+CQ3078            MOVE  1               TO  SW-DESCALIFICA              DLM0002
+CQ3078          WHEN  15     *>  MORA 120                               DLM0002
+CQ3078            MOVE  1               TO  SW-DESCALIFICA              DLM0002
+CQ3078       END-EVALUATE                                               DLM0002
+CQ3078       IF  SW-CRITERIO-A  =  1                                    DLM0002
+CQ3078         IF  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) =       DLM0002
+CQ3078             09 OR 11                                             DLM0002
+CQ3078           MOVE  WS-MESES-NOVEDAD TO  WS-MESES-NOVCCDR            DLM0002
+CQ3078           COMPUTE  WS-VECES  =  12  -  WS-MESES-NOVCCDR          DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078           COMPUTE  WS-VECES  =  12  -  WS-MESES-NOVEDAD          DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         PERFORM  VARYING  CARACT-W-INDICE  FROM  1  BY 1         DLM0002
+CQ3078                    UNTIL  CARACT-W-INDICE  >  WS-VECES           DLM0002
+CQ3078           IF  E-MES-IMP-CARACT(1)  >  0  AND                     DLM0002
+CQ3078               E-MES-IMP-CARACT(1)  <  5                          DLM0002
+CQ3078             ADD   1             TO  WS-EVER30P12                 DLM0002
+CQ3078             MOVE  50            TO  CARACT-W-INDICE              DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-PERFORM                                              DLM0002
+CQ3078         IF  COD-CTA-ABD07  =  02 OR 06 OR 27 OR 13 OR 15 OR 16 ORDLM0002
+CQ3078                               16 OR 04 OR 05 OR 18 OR 07 OR 46 ORDLM0002
+CQ3078                               44 OR 45                           DLM0002
+CQ3078           PERFORM  VARYING  CARACT-W-INDICE  FROM  1  BY 1       DLM0002
+CQ3078                      UNTIL  CARACT-W-INDICE  >  WS-VECES         DLM0002
+CQ3078                 IF  E-MES-IMP-CARACT(1)  >  1  AND               DLM0002
+CQ3078                     E-MES-IMP-CARACT(1)  <  5                    DLM0002
+CQ3078                   ADD   1            TO  WS-EVER60P12            DLM0002
+CQ3078                   MOVE  50           TO  CARACT-W-INDICE         DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078           END-PERFORM                                            DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  SW-CODEUDOR-CARACT  =  ZEROS                         DLM0002
+CQ3078           IF  COD-CTA-ABD07  =  23  OR  24                       DLM0002
+CQ3078             PERFORM  VARYING  CARACT-W-INDICE  FROM  1  BY 1     DLM0002
+CQ3078                        UNTIL  CARACT-W-INDICE  >  WS-VECES       DLM0002
+CQ3078                IF  E-MES-IMP-CARACT(1)  >  0  AND                DLM0002
+CQ3078                    E-MES-IMP-CARACT(1)  <  5                     DLM0002
+CQ3078                  ADD   1        TO  WS-TIMES-30P12-COMU          DLM0002
+CQ3078                END-IF                                            DLM0002
+CQ3078             END-PERFORM                                          DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             IF  COD-CTA-ABD07  =   02  OR  06  OR  27  OR        DLM0002
+CQ3078                             13  OR 15  OR  16  OR  04  OR  05  ORDLM0002
+CQ3078                             18  OR 07  OR  46  OR  44  OR  45    DLM0002
+CQ3078               IF  MESES-MADUR-CARACT  <= 12  AND                 DLM0002
+CQ3078                   MESES-MADUR-CARACT  >  0                       DLM0002
+CQ3078                 ADD   1         TO  WS-MOB12-O-I-TOTAL           DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  COD-CTA-ABD07  =  02                             DLM0002
+CQ3078               IF  WS-MOBMAX-O-I-CC = ZERO                        DLM0002
+CQ3078                 MOVE  WS-MESES-NOVEDAD                           DLM0002
+CQ3078                                 TO  WS-MOBMAX-O-I-CC             DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  WS-MESES-NOVEDAD > WS-MOBMAX-O-I-CC  AND       DLM0002
+CQ3078                   WS-MOBMAX-O-I-CC > ZERO                        DLM0002
+CQ3078                 MOVE  WS-MESES-NOVEDAD                           DLM0002
+CQ3078                                 TO  WS-MOBMAX-O-I-CC             DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078         IF  COD-CTA-ABD07  =  02                                 DLM0002
+CQ3078           MOVE  ZEROS           TO  CARACT-W-INDICE-K            DLM0002
+CQ3078*          *************************************************      DLM0002
+CQ3078*          | Blanco=0  | "-"=9,6,7 | "N"=5     | "n" = 8   |      DLM0002
+CQ3078*          *************************************************      DLM0002
+CQ3078           IF  E-MES-IMP-CARACT(1)  =  0  OR 9 OR 6 OR 7          DLM0002
+CQ3078             COMPUTE  CARACT-W-INDICE-K  =  0                     DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             IF  E-MES-IMP-CARACT(1)  =  5  OR 8 OR 1             DLM0002
+CQ3078               IF  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = DLM0002
+CQ3078                   09 OR 11                                       DLM0002
+CQ3078                 IF  WS-FECHA-ACT-CCDR <> FECHA-ESTADO-CARACT     DLM0002
+CQ3078                   NEXT SENTENCE                                  DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   COMPUTE  CARACT-W-INDICE-K  =  1  +            DLM0002
+CQ3078                            WS-MESES-NOVEDAD                      DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 COMPUTE  CARACT-W-INDICE-K  =  1  +              DLM0002
+CQ3078                          WS-MESES-NOVEDAD                        DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             ELSE                                                 DLM0002
+CQ3078               IF (E-MES-IMP-CARACT(1)  >  1  AND                 DLM0002
+CQ3078                   E-MES-IMP-CARACT(1)  <  5)                     DLM0002
+CQ3078                 IF  CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) DLM0002
+CQ3078                     = 09 OR 11                                   DLM0002
+CQ3078                   IF  WS-FECHA-ACT-CCDR <> WS-MESES-NOVEDAD      DLM0002
+CQ3078                     NEXT SENTENCE                                DLM0002
+CQ3078                   ELSE                                           DLM0002
+CQ3078                     COMPUTE  CARACT-W-INDICE-K  =                DLM0002
+CQ3078                       FUNCTION NUMVAL(E-MES-IMP-CARACT(1))  +    DLM0002
+CQ3078                       WS-MESES-NOVEDAD                           DLM0002
+CQ3078                   END-IF                                         DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   COMPUTE  CARACT-W-INDICE-K  =                  DLM0002
+CQ3078                       FUNCTION NUMVAL(E-MES-IMP-CARACT(1))  +    DLM0002
+CQ3078                       WS-MESES-NOVEDAD                           DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           IF  (CARACT-W-INDICE-K  >  ZEROS  AND                  DLM0002
+CQ3078                CARACT-W-INDICE-K  <  WS-MLSP)  OR                DLM0002
+CQ3078               (WS-MLSP  =  ZEROS  AND  CARACT-W-INDICE-K > ZEROS)DLM0002
+CQ3078             MOVE  CARACT-W-INDICE-K TO  WS-MLSP                  DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     .                                                            DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 1000-INICIAR-CARACTCAL-03.                                       DLM0002
+CQ3078     INITIALIZE  VARIABLES-99-PER03.                              DLM0002
+CQ3078     MOVE  999999                TO  W1-FEC-MENOR-3               DLM0002
+CQ3078     MOVE  999999                TO  W1-FEC-MENOR-5               DLM0002
+CQ3078     MOVE  999999                TO  W2-FEC-MENOR-4.              DLM0002
+CQ3078     MOVE  ZEROS                 TO  TABLA-SUSCRIPTORES           DLM0002
+CQ3078                                     TABLA-SUSCRIPTORES1.         DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0068-VALORES-MISSING.                                            DLM0002
+CQ3078     IF  TIPO-ID-CARACT = 1 OR 4                                  DLM0002
+CQ3078       IF  00DEM006  =  0                                         DLM0002
+CQ3078         MOVE 1                  TO  W-GENERO                     DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         IF 00DEM006 = 1                                          DLM0002
+CQ3078           MOVE 2                TO  W-GENERO                     DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078           MOVE -999             TO  W-GENERO                     DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF  W-GENERO = 1                                           DLM0002
+CQ3078         MOVE  1                 TO  DUMMY1-GENERO-1              DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  ZERO              TO  DUMMY1-GENERO-1              DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF W-GENERO = 2                                            DLM0002
+CQ3078         MOVE  1                 TO  DUMMY1-GENERO-2              DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         MOVE  ZERO              TO  DUMMY1-GENERO-2              DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       EVALUATE  00DEM003                                         DLM0002
+CQ3078          WHEN  18 THRU 21                                        DLM0002
+CQ3078            MOVE  1              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  22 THRU 28                                        DLM0002
+CQ3078            MOVE  2              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  29 THRU 35                                        DLM0002
+CQ3078            MOVE  3              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  36 THRU 45                                        DLM0002
+CQ3078            MOVE  4              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  46 THRU 55                                        DLM0002
+CQ3078            MOVE  5              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  56 THRU 65                                        DLM0002
+CQ3078            MOVE  6              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  66 THRU 99999999                                  DLM0002
+CQ3078            MOVE  7              TO  W-RANGO-EDAD                 DLM0002
+CQ3078          WHEN  ANY                                               DLM0002
+CQ3078            MOVE  -999           TO  W-RANGO-EDAD                 DLM0002
+CQ3078       END-EVALUATE                                               DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078     MOVE    ZEROS            TO  W-MESES-APE                     DLM0002
+CQ3078     IF W1-FEC-MENOR-3 = 999999                                   DLM0002
+CQ3078        MOVE ZERO             TO W1-FEC-MENOR-3                   DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE  W1-FEC-MENOR-3  TO  W-FEC-APERTURA                  DLM0002
+CQ3078        COMPUTE W-MESES-APE =                                     DLM0002
+CQ3078         ((ANO-CURRENT-DATE-CARACT * 12 + MES-CURRENT-DATE-CARACT)DLM0002
+CQ3078        - (W-ANO-APERTURA * 12 + W-MES-APERTURA))                 DLM0002
+CQ3078        MOVE W-MESES-APE      TO  W1-ANTIG-3                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     MOVE    ZEROS            TO  W-MESES-APE                     DLM0002
+CQ3078     IF W2-FEC-MENOR-4 = 999999                                   DLM0002
+CQ3078        MOVE ZERO             TO  W2-FEC-MENOR-4                  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE  W2-FEC-MENOR-4  TO  W-FEC-APERTURA                  DLM0002
+CQ3078        COMPUTE W-MESES-APE =                                     DLM0002
+CQ3078         ((ANO-CURRENT-DATE-CARACT * 12 + MES-CURRENT-DATE-CARACT)DLM0002
+CQ3078        - (W-ANO-APERTURA * 12 + W-MES-APERTURA))                 DLM0002
+CQ3078        MOVE W-MESES-APE      TO  W2-ANTIG-4                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     MOVE    ZEROS            TO  W-MESES-APE                     DLM0002
+CQ3078     IF W1-FEC-MENOR-5 = 999999                                   DLM0002
+CQ3078        MOVE ZERO             TO  W1-FEC-MENOR-5                  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE  W1-FEC-MENOR-5  TO  W-FEC-APERTURA                  DLM0002
+CQ3078        COMPUTE  W-MESES-APE  =                                   DLM0002
+CQ3078         ((ANO-CURRENT-DATE-CARACT * 12 + MES-CURRENT-DATE-CARACT)DLM0002
+CQ3078        - (W-ANO-APERTURA * 12 + W-MES-APERTURA))                 DLM0002
+CQ3078        MOVE W-MESES-APE      TO  W1-ANTIG-5                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-VALOR-INI-5 > ZERO                                     DLM0002
+CQ3078        COMPUTE W1-USO-TDC = W1-SALDOS-5 / W1-VALOR-INI-5         DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF (FUNCTION NUMVAL(01NUM002AH)  +                           DLM0002
+CQ3078         FUNCTION NUMVAL(01NUM002CT)  +                           DLM0002
+CQ3078         FUNCTION NUMVAL(01NUM005AH)  +                           DLM0002
+CQ3078         FUNCTION NUMVAL(01NUM005CT)) > 0                         DLM0002
+CQ3078       MOVE  1                   TO  SW-ICMCHK-CARACT             DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078     IF SW-ICMCHK-CARACT = ZERO                                   DLM0002
+CQ3078*       MOVE -999                TO  W1-CCB-ACTIVAS               DLM0002
+CQ3078        MOVE -999                TO  W2-NUM-ENT-CCB               DLM0002
+CQ3078        MOVE -999                TO  W2-AHO-ACTIVAS               DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-MORA = ZERO                                            DLM0002
+CQ3078        MOVE ZERO                TO  W1-SALDO-MORA                DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE 1                   TO  W1-SALDO-MORA                DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  FUNCTION NUMVAL(01INQ002(1:4))  >  ZERO                  DLM0002
+CQ3078       MOVE  1                   TO  SW-CONSULTA-CARACT           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  SW-CONSULTA-CARACT = ZERO                                DLM0002
+CQ3078       MOVE -999                 TO  W2-CONSULTAS                 DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF SW-ICMCRE-CARACT = ZERO                                   DLM0002
+CQ3078        MOVE -999                TO  W1-CANVOL-5                  DLM0002
+CQ3078        MOVE -999                TO  W1-ALDIA-1                   DLM0002
+CQ3078        MOVE -999                TO  W1-VALOR-INI-2               DLM0002
+CQ3078        MOVE -999                TO  W1-USO-TDC                   DLM0002
+CQ3078        MOVE -999                TO  W1-VALOR-INI-5               DLM0002
+CQ3078        MOVE -999                TO  W1-ANTIG-3                   DLM0002
+CQ3078        MOVE -999                TO  W1-ANTIG-5                   DLM0002
+CQ3078        MOVE -999                TO  W1-NUM-OBL-CAV               DLM0002
+CQ3078        MOVE -999                TO  W1-SALDO-MORA                DLM0002
+CQ3078        MOVE -999                TO  W2-NUM-OBL-1                 DLM0002
+CQ3078        MOVE -999                TO  W2-NUM-COD-5                 DLM0002
+CQ3078        MOVE -999                TO  W2-CERRADAS-2                DLM0002
+CQ3078        MOVE -999                TO  W2-VALOR-INI-2               DLM0002
+CQ3078        MOVE -999                TO  W2-SALDOS-5                  DLM0002
+CQ3078        MOVE -999                TO  W2-ANTIG-4                   DLM0002
+CQ3078        MOVE -999                TO  W2-CAN-MM-5                  DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     .                                                            DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0069-TRANSFORMAR-VARIABLES.                                      DLM0002
+CQ3078     EVALUATE W1-VALOR-INI-2                                      DLM0002
+CQ3078        WHEN ZERO       MOVE 13359.72683 TO T1-VALOR-INI-2        DLM0002
+CQ3078        WHEN -999       MOVE 8103.083928 TO T1-VALOR-INI-2        DLM0002
+CQ3078        WHEN >= 300000  MOVE 300000      TO T1-VALOR-INI-2        DLM0002
+CQ3078        WHEN ANY        MOVE W1-VALOR-INI-2 TO T1-VALOR-INI-2     DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T1-VALOR-INI-2 = FUNCTION LOG (T1-VALOR-INI-2)       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W1-CANVOL-5 > 3                                           DLM0002
+CQ3078        MOVE 3          TO W1-CANVOL-5                            DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W1-ALDIA-1 > 3                                            DLM0002
+CQ3078        MOVE 3          TO W1-ALDIA-1                             DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W1-VALOR-INI-5                                      DLM0002
+CQ3078        WHEN ZERO         MOVE 2700      TO T1-VALOR-INI-5        DLM0002
+CQ3078        WHEN -999         MOVE 1096      TO T1-VALOR-INI-5        DLM0002
+CQ3078        WHEN >= 189400.7  MOVE 189400.7  TO T1-VALOR-INI-5        DLM0002
+CQ3078        WHEN ANY        MOVE W1-VALOR-INI-5 TO T1-VALOR-INI-5     DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T1-VALOR-INI-5 = FUNCTION LOG (T1-VALOR-INI-5)       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W1-USO-TDC                                          DLM0002
+CQ3078        WHEN ZERO         MOVE 0.4       TO T1-USO-TDC            DLM0002
+CQ3078        WHEN -999         MOVE 0.7       TO T1-USO-TDC            DLM0002
+CQ3078        WHEN >= 0.7       MOVE 0.7       TO T1-USO-TDC            DLM0002
+CQ3078        WHEN ANY          MOVE W1-USO-TDC TO T1-USO-TDC           DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W1-ANTIG-3                                          DLM0002
+CQ3078        WHEN ZERO         MOVE 66.68633104 TO T1-ANTIG-3          DLM0002
+CQ3078        WHEN -999         MOVE 7.389056099 TO T1-ANTIG-3          DLM0002
+CQ3078        WHEN >= 193       MOVE 193         TO T1-ANTIG-3          DLM0002
+CQ3078        WHEN ANY          MOVE W1-ANTIG-3  TO T1-ANTIG-3          DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T1-ANTIG-3 = FUNCTION LOG (T1-ANTIG-3)               DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W1-ANTIG-5                                          DLM0002
+CQ3078        WHEN ZERO         MOVE 27.11263892 TO T1-ANTIG-5          DLM0002
+CQ3078        WHEN -999         MOVE 7.389056099 TO T1-ANTIG-5          DLM0002
+CQ3078        WHEN >= 313       MOVE 313         TO T1-ANTIG-5          DLM0002
+CQ3078        WHEN ANY          MOVE W1-ANTIG-5  TO T1-ANTIG-5          DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T1-ANTIG-5 = FUNCTION LOG (T1-ANTIG-5)               DLM0002
+CQ3078     IF FUNCTION NUMVAL(01NUM001HP)  >  ZEROS                     DLM0002
+CQ3078       MOVE FUNCTION NUMVAL(01NUM001HP) TO  W1-NUM-OBL-CAV        DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-NUM-OBL-CAV = -999                                     DLM0002
+CQ3078        MOVE -2         TO W1-NUM-OBL-CAV                         DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W-RANGO-EDAD                                        DLM0002
+CQ3078        WHEN 1     MOVE 19.5 TO W-EDAD                            DLM0002
+CQ3078        WHEN 2     MOVE 25   TO W-EDAD                            DLM0002
+CQ3078        WHEN 3     MOVE 32   TO W-EDAD                            DLM0002
+CQ3078        WHEN 4     MOVE 40.5 TO W-EDAD                            DLM0002
+CQ3078        WHEN 5     MOVE 50.5 TO W-EDAD                            DLM0002
+CQ3078        WHEN 6     MOVE 60.5 TO W-EDAD                            DLM0002
+CQ3078        WHEN 7     MOVE 73   TO W-EDAD                            DLM0002
+CQ3078     END-EVALUATE.                                                DLM0002
+CQ3078                                                                  DLM0002
+CQ3078******* MODELO 2 **************                                   DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-NUM-ENT-CCB > 3                                        DLM0002
+CQ3078        MOVE 3          TO W2-NUM-ENT-CCB                         DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-OBL-1 > 3                                          DLM0002
+CQ3078        MOVE 3          TO W2-NUM-OBL-1                           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-COD-5 > 3                                          DLM0002
+CQ3078        MOVE 3          TO W2-NUM-COD-5                           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CERRADAS-2 > 3                                         DLM0002
+CQ3078        MOVE 3          TO W2-CERRADAS-2                          DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     EVALUATE W2-VALOR-INI-2                                      DLM0002
+CQ3078        WHEN ZERO       MOVE 13359.72683 TO T2-VALOR-INI-2        DLM0002
+CQ3078        WHEN -999       MOVE 8103.083928 TO T2-VALOR-INI-2        DLM0002
+CQ3078        WHEN >= 300000  MOVE 300000      TO T2-VALOR-INI-2        DLM0002
+CQ3078        WHEN ANY        MOVE W2-VALOR-INI-2 TO T2-VALOR-INI-2     DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T2-VALOR-INI-2 = FUNCTION LOG (T2-VALOR-INI-2)       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W2-SALDOS-5                                         DLM0002
+CQ3078        WHEN ZERO       MOVE 1096.633158 TO T2-SALDOS-5           DLM0002
+CQ3078        WHEN -999       MOVE  403.428    TO T2-SALDOS-5           DLM0002
+CQ3078        WHEN >= 22843   MOVE 22843       TO T2-SALDOS-5           DLM0002
+CQ3078        WHEN ANY        MOVE W2-SALDOS-5 TO T2-SALDOS-5           DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T2-SALDOS-5 = FUNCTION LOG (T2-SALDOS-5)             DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     EVALUATE W2-ANTIG-4                                          DLM0002
+CQ3078        WHEN ZERO         MOVE -1.18334    TO T2-ANTIG-4          DLM0002
+CQ3078        WHEN -999         MOVE -2.62571    TO T2-ANTIG-4          DLM0002
+CQ3078        WHEN >= 313       MOVE 313         TO T2-ANTIG-4          DLM0002
+CQ3078        WHEN ANY          MOVE W2-ANTIG-4  TO T2-ANTIG-4          DLM0002
+CQ3078     END-EVALUATE                                                 DLM0002
+CQ3078     COMPUTE T2-ANTIG-4 = FUNCTION LOG (T2-ANTIG-4)               DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-CONSULTAS > 3                                          DLM0002
+CQ3078        MOVE 3          TO W2-CONSULTAS                           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CAN-MM-5 > 3                                           DLM0002
+CQ3078        MOVE 1          TO W2-CAN-MM-5                            DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     .                                                            DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 1000-FINAL-CARACTCAL-03.                                         DLM0002
+CQ3078***  IF  W1-CCB-ACTIVAS = 1 OR T1-VALOR-INI-5 > 9.0938065557      DLM0002
+CQ3078     IF  01NUM002CT > 0 OR T1-VALOR-INI-5 > 9.0938065557          DLM0002
+CQ3078       MOVE  1                   TO  SLD-GRUPO-1                  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078***    IF  W1-CCB-ACTIVAS = ZERO OR T1-VALOR-INI-5 < 7.901007052  DLM0002
+CQ3078       IF  01NUM002CT = ZERO OR T1-VALOR-INI-5 < 7.901007052      DLM0002
+CQ3078         MOVE  2                 TO  SLD-GRUPO-1                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  W2-AHO-ACTIVAS = 1 OR T1-VALOR-INI-5 <= 9.0938065557     DLM0002
+CQ3078       MOVE  1                   TO  SLD-GRUPO-2                  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       MOVE  2                   TO  SLD-GRUPO-2                  DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     PERFORM  0074-VARIABLES-DUMMY-MODELO1                        DLM0002
+CQ3078     PERFORM  0075-PONDERAR-VARIABLES-MODELO1                     DLM0002
+CQ3078     PERFORM  0074-VARIABLES-DUMMY-MODELO2                        DLM0002
+CQ3078     PERFORM  0075-PONDERAR-VARIABLES-MODELO2                     DLM0002
+CQ3078     COMPUTE  W1-XX  =  W1-INTERCEPTO + W-GENERO-1 + W-GENERO-2   DLM0002
+CQ3078                    +  W-CCBACT-0  + W-CCBACT-1   + T1-VALOR-INI-2DLM0002
+CQ3078                    +  W-CANVOL5-999 + W-CANVOL5-0 + W-CANVOL5-1  DLM0002
+CQ3078                    +  W-CANVOL5-2 + W-CANVOL5-3   + W-ALDIA1-999 DLM0002
+CQ3078                    +  W-ALDIA1-0  + W-ALDIA1-1    + W-ALDIA1-2   DLM0002
+CQ3078                    +  W-ALDIA1-3                                 DLM0002
+CQ3078                    +  T1-USO-TDC + W-EDAD     + T1-VALOR-INI-5   DLM0002
+CQ3078                    +  T1-ANTIG-3 + T1-ANTIG-5 + W-MORA-999       DLM0002
+CQ3078                    +  W-MORA-0   + W-MORA-1                      DLM0002
+CQ3078                    +  W1-NUM-OBL-CAV                             DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE  W1-SCORE =                                          DLM0002
+CQ3078              1 / (1 + (2.71828182845904 ** (-1 * W1-XX)))        DLM0002
+CQ3078     MOVE  W1-SCORE              TO  SLD-SCORE-1                  DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE  W2-XX  = W2-INTERCEPTO                              DLM0002
+CQ3078                   +  W-ENTCCB-999 + W-ENTCCB-0    + W-ENTCCB-1   DLM0002
+CQ3078                   +  W-ENTCCB-2   + W-ENTCCB-3    + W-NUMOBL1-999DLM0002
+CQ3078                   +  W-NUMOBL1-0  + W-NUMOBL1-1   + W-NUMOBL1-2  DLM0002
+CQ3078                   +  W-NUMOBL1-3  + W-NUMCOD5-999 + W-NUMCOD5-0  DLM0002
+CQ3078                   +  W-NUMCOD5-1  + W-NUMCOD5-2   + W-NUMCOD5-3  DLM0002
+CQ3078                   +  W-CERRA2-999 + W-CERRA2-0  + W-CERRA2-1     DLM0002
+CQ3078                   +  W-CERRA2-2   + W-CERRA2-3  + T2-VALOR-INI-2 DLM0002
+CQ3078                   +  T2-SALDOS-5  + T2-ANTIG-4  + W-NUMCONS-999  DLM0002
+CQ3078                   +  W-NUMCONS-1  + W-NUMCONS-2 + W-NUMCONS-3    DLM0002
+CQ3078                   +  W-AHOACT-999 + W-AHOACT-0  + W-AHOACT-1     DLM0002
+CQ3078                   +  W-CANMM5-999 + W-CANMM5-0  + W-CANMM5-1     DLM0002
+CQ3078                   +  W-CANMM5-2   + W-CANMM5-3                   DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE  W2-SCORE =                                          DLM0002
+CQ3078              1 / (1 + (2.71828182845904 ** (-1 * W2-XX)))        DLM0002
+CQ3078     MOVE  W2-SCORE              TO  SLD-SCORE-2                  DLM0002
+CQ3078     IF  TIPO-ID-CARACT = 4                                       DLM0002
+CQ3078       MOVE  -998                TO  SLD-GRUPO-1                  DLM0002
+CQ3078       MOVE  -998                TO  SLD-GRUPO-2                  DLM0002
+CQ3078       MOVE  -998                TO  SLD-SCORE-1                  DLM0002
+CQ3078       MOVE  -998                TO  SLD-SCORE-2                  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  SW-ICMCRE-CARACT  =  ZERO                              DLM0002
+CQ3078         MOVE  -999              TO  SLD-GRUPO-1                  DLM0002
+CQ3078         MOVE  -999              TO  SLD-GRUPO-2                  DLM0002
+CQ3078         MOVE  -999              TO  SLD-SCORE-1                  DLM0002
+CQ3078         MOVE  -999              TO  SLD-SCORE-2                  DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF  SW-NO-OPEN-F = 0 AND WS-MAXMOB >= 12 AND SW-CFP = 1      DLM0002
+CQ3078       MOVE "K"                  TO  WS-CLASIF-SCO-CARACT *>THICK DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       MOVE "N"                  TO  WS-CLASIF-SCO-CARACT *>THIN  DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078     IF  WS-OPEN-TOT  >  ZEROS  AND                               DLM0002
+CQ3078         WS-NONCC-TOT >  ZEROS  AND                               DLM0002
+CQ3078         WS-CC-TOT    =  ZEROS                                    DLM0002
+CQ3078       MOVE  1                 TO  SW-ONLY-CONS-OPEN              DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W-NUM-TDC > 0                                             DLM0002
+CQ3078       IF WS-ACU-SLD-ROTA-TITU = 0 OR  WS-ACU-INI-ROTA-TITU = 0   DLM0002
+CQ3078          MOVE  ZERO           TO  WS-UTIL-O-I-CC                 DLM0002
+CQ3078          MOVE  -1             TO  WS-UTILMAX-O-I-CC              DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078          COMPUTE  WS-UTIL-O-I-CC  = (WS-ACU-SLD-ROTA-TITU  / *>  DLM0002
+CQ3078                                      WS-ACU-INI-ROTA-TITU)       DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078       IF WS-UTILMAX-O-I-CC > 1                                   DLM0002
+CQ3078          MOVE 1               TO  SW-OVER-LIMIT-CC               DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078          MOVE  -1             TO  WS-UTIL-O-I-CC                 DLM0002
+CQ3078          MOVE  -1             TO  WS-UTILMAX-O-I-CC              DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W-NUM-CONSUMO > 0                                         DLM0002
+CQ3078        IF  WS-UTILMAX-O-I-CONS = 0                               DLM0002
+CQ3078            MOVE -1            TO  WS-UTILMAX-O-I-CONS            DLM0002
+CQ3078        END-IF                                                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078            MOVE -1            TO  WS-UTILMAX-O-I-CONS            DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  WS-ACU-SLD-ROTA-TODO  <=  ZEROS  OR WS-MLSP  <=  2       DLM0002
+CQ3078        MOVE  1                 TO  WS-MLSPAY-CC *>BAL0-L2*>RF.1  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE  2                 TO  WS-MLSPAY-CC *>NOT-L2 *>RF.1  DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  W-TOT-TDC = 0                                            DLM0002
+CQ3078        MOVE  3                 TO  WS-MLSPAY-CC *>NO-CC  *>RF.1  DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF WS-NUM-MINMOB-I-TOTAL = 0                                 DLM0002
+CQ3078        MOVE -1                   TO  WS-MINMOB-I-TOTAL           DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     MOVE FUNCTION MAX(WS-MAX-CAB, WS-MAX-CAC, WS-MAX-CCF,        DLM0002
+CQ3078          WS-MAX-COF, WS-MAX-CON, WS-MAX-SFI)                     DLM0002
+CQ3078                               TO WS-UTILMAX-O-I-CONS    *>RF.17  DLM0002
+CQ3078     IF  WS-MOBMAX  >  12  AND                                    DLM0002
+CQ3078        (WS-MIN-MS-DELQ  >  12  OR  WS-MIN-MS-DELQ  =  ZERO)      DLM0002
+CQ3078       MOVE  1                 TO  SW-LONG-HIST-NO-DELQ  *>RF.21  DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       MOVE  0                 TO  SW-LONG-HIST-NO-DELQ  *>RF.21  DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF WS-TOTAL-CAR-ACTIVAS = 0 AND WS-TOTAL-CAR-CERRADAS = 0    DLM0002
+CQ3078        IF W-ACU-NRO-CTACTEAHO = ZERO                             DLM0002
+CQ3078          MOVE 1                 TO  WS-THIN,  WS-THICK           DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078          MOVE 2                 TO  WS-THIN,  WS-THICK           DLM0002
+CQ3078        END-IF                                                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        PERFORM  1060-CALCULAR-THICK-THIN                         DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0075-PONDERAR-VARIABLES-MODELO1.                                 DLM0002
+CQ3078     MOVE -13.078419        TO W1-INTERCEPTO                      DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-GENERO-1     = DUMMY1-GENERO-1 * 0.48537921        DLM0002
+CQ3078     COMPUTE W-GENERO-2     = DUMMY1-GENERO-2 * ZERO              DLM0002
+CQ3078     COMPUTE W-CCBACT-0     = DUMMY1-CCBACT-0 * -0.26169423       DLM0002
+CQ3078     COMPUTE W-CCBACT-1     = DUMMY1-CCBACT-1 * ZERO              DLM0002
+CQ3078     COMPUTE T1-VALOR-INI-2 = T1-VALOR-INI-2  * 0.40450811        DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-CANVOL5-999  = DUMMY1-CANVOL5-999 * -0.72051544    DLM0002
+CQ3078     COMPUTE W-CANVOL5-0    = DUMMY1-CANVOL5-0   * -0.44495538    DLM0002
+CQ3078     COMPUTE W-CANVOL5-1    = DUMMY1-CANVOL5-1   * -0.26786077    DLM0002
+CQ3078     COMPUTE W-CANVOL5-2    = DUMMY1-CANVOL5-2   * -0.14959631    DLM0002
+CQ3078     COMPUTE W-CANVOL5-3    = DUMMY1-CANVOL5-3   * ZERO           DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-ALDIA1-999   = DUMMY1-ALDIA1-999 * ZERO            DLM0002
+CQ3078     COMPUTE W-ALDIA1-0     = DUMMY1-ALDIA1-0   * -1.2449592      DLM0002
+CQ3078     COMPUTE W-ALDIA1-1     = DUMMY1-ALDIA1-1   * -0.79039922     DLM0002
+CQ3078     COMPUTE W-ALDIA1-2     = DUMMY1-ALDIA1-2   * -0.4190593      DLM0002
+CQ3078     COMPUTE W-ALDIA1-3     = DUMMY1-ALDIA1-3   * ZERO            DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE T1-USO-TDC     = T1-USO-TDC      * -0.6951732        DLM0002
+CQ3078     COMPUTE W-EDAD         = W-EDAD          * 0.02716164        DLM0002
+CQ3078     COMPUTE T1-VALOR-INI-5 = T1-VALOR-INI-5  * 0.57380884        DLM0002
+CQ3078     COMPUTE T1-ANTIG-3     = T1-ANTIG-3      * 0.22531878        DLM0002
+CQ3078     COMPUTE T1-ANTIG-5     = T1-ANTIG-5      * 0.33672249        DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-MORA-999     = DUMMY1-MORA-999 * ZERO              DLM0002
+CQ3078     COMPUTE W-MORA-0       = DUMMY1-MORA-0   * 0.81478651        DLM0002
+CQ3078     COMPUTE W-MORA-1       = DUMMY1-MORA-1   * ZERO              DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W1-NUM-OBL-CAV = W1-NUM-OBL-CAV  * 0.0683655.        DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0074-VARIABLES-DUMMY-MODELO2.                                    DLM0002
+CQ3078     IF W2-NUM-ENT-CCB = ZERO                                     DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-ENTCCB-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-ENTCCB-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-ENT-CCB = 1                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-ENTCCB-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-ENTCCB-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-ENT-CCB = 2                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-ENTCCB-2                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-ENTCCB-2                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-ENT-CCB = 3                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-ENTCCB-3                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-ENTCCB-3                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-ENT-CCB = -999                                     DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-ENTCCB-999                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-ENTCCB-999                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-NUM-OBL-1 = ZERO                                       DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMOBL1-0                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMOBL1-0                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-OBL-1 = 1                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMOBL1-1                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMOBL1-1                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-OBL-1 = 2                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMOBL1-2                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMOBL1-2                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-OBL-1 = 3                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMOBL1-3                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMOBL1-3                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-OBL-1 = -999                                       DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMOBL1-999                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMOBL1-999                    DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-NUM-COD-5 = ZERO                                       DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCOD5-0                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCOD5-0                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-COD-5 = 1                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCOD5-1                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCOD5-1                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-COD-5 = 2                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCOD5-2                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCOD5-2                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-COD-5 = 3                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCOD5-3                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCOD5-3                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-NUM-COD-5 = -999                                       DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCOD5-999                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCOD5-999                    DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-CERRADAS-2 = ZERO                                      DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CERRA2-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CERRA2-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CERRADAS-2 = 1                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CERRA2-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CERRA2-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CERRADAS-2 = 2                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CERRA2-2                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CERRA2-2                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CERRADAS-2 = 3                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CERRA2-3                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CERRA2-3                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CERRADAS-2 = -999                                      DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CERRA2-999                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CERRA2-999                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-CONSULTAS = 1                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCONS-1                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCONS-1                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CONSULTAS = 2                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCONS-2                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCONS-2                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CONSULTAS = 3                                          DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCONS-3                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCONS-3                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CONSULTAS = -999                                       DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-NUMCONS-999                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-NUMCONS-999                    DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-AHO-ACTIVAS = ZERO                                     DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-AHOACT-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-AHOACT-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-AHO-ACTIVAS = 1                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-AHOACT-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-AHOACT-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-AHO-ACTIVAS = -999                                     DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-AHOACT-999                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-AHOACT-999                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W2-CAN-MM-5 = ZERO                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CANMM5-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CANMM5-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CAN-MM-5 = 1                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CANMM5-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CANMM5-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CAN-MM-5 = 2                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CANMM5-2                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CANMM5-2                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CAN-MM-5 = 3                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CANMM5-3                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CANMM5-3                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W2-CAN-MM-5 = -999                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY2-CANMM5-999                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY2-CANMM5-999                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0075-PONDERAR-VARIABLES-MODELO2.                                 DLM0002
+CQ3078     MOVE -10.583589               TO  W2-INTERCEPTO              DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-ENTCCB-999 = DUMMY2-ENTCCB-999 * ZERO              DLM0002
+CQ3078     COMPUTE W-ENTCCB-0   = DUMMY2-ENTCCB-0   * -1.15878651       DLM0002
+CQ3078     COMPUTE W-ENTCCB-1   = DUMMY2-ENTCCB-1   * -0.69523267       DLM0002
+CQ3078     COMPUTE W-ENTCCB-2   = DUMMY2-ENTCCB-2   * -0.39172456       DLM0002
+CQ3078     COMPUTE W-ENTCCB-3   = DUMMY2-ENTCCB-3   * -0.44321593       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-NUMOBL1-999 = DUMMY2-NUMOBL1-999 * ZERO            DLM0002
+CQ3078     COMPUTE W-NUMOBL1-0   = DUMMY2-NUMOBL1-0   * -0.84577534     DLM0002
+CQ3078     COMPUTE W-NUMOBL1-1   = DUMMY2-NUMOBL1-1   * -0.39938526     DLM0002
+CQ3078     COMPUTE W-NUMOBL1-2   = DUMMY2-NUMOBL1-2   * -0.05114789     DLM0002
+CQ3078     COMPUTE W-NUMOBL1-3   = DUMMY2-NUMOBL1-3   *  0.49686985     DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-NUMCOD5-999 = DUMMY2-NUMCOD5-999 * ZERO            DLM0002
+CQ3078     COMPUTE W-NUMCOD5-0   = DUMMY2-NUMCOD5-0   *  2.29021532     DLM0002
+CQ3078     COMPUTE W-NUMCOD5-1   = DUMMY2-NUMCOD5-1   *  1.43003589     DLM0002
+CQ3078     COMPUTE W-NUMCOD5-2   = DUMMY2-NUMCOD5-2   * -0.53472456     DLM0002
+CQ3078     COMPUTE W-NUMCOD5-3   = DUMMY2-NUMCOD5-3   *  ZERO           DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-CERRA2-999  = DUMMY2-CERRA2-999 * ZERO             DLM0002
+CQ3078     COMPUTE W-CERRA2-0    = DUMMY2-CERRA2-0   * -0.62454862      DLM0002
+CQ3078     COMPUTE W-CERRA2-1    = DUMMY2-CERRA2-1   * -0.12188264      DLM0002
+CQ3078     COMPUTE W-CERRA2-2    = DUMMY2-CERRA2-2   * -0.13376548      DLM0002
+CQ3078     COMPUTE W-CERRA2-3    = DUMMY2-CERRA2-3   *  ZERO            DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE T2-VALOR-INI-2 = T2-VALOR-INI-2 * 0.59212356         DLM0002
+CQ3078     COMPUTE T2-SALDOS-5    = T2-SALDOS-5    * 0.00005469         DLM0002
+CQ3078     COMPUTE T2-ANTIG-4     = T2-ANTIG-4     * -0.00045637        DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-NUMCONS-999  = DUMMY2-NUMCONS-999 * ZERO           DLM0002
+CQ3078     COMPUTE W-NUMCONS-1    = DUMMY2-NUMCONS-1   *  1.47765429    DLM0002
+CQ3078     COMPUTE W-NUMCONS-2    = DUMMY2-NUMCONS-2   *  1.69197391    DLM0002
+CQ3078     COMPUTE W-NUMCONS-3    = DUMMY2-NUMCONS-3   *  1.46332837    DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-AHOACT-999   = DUMMY2-AHOACT-999 * ZERO            DLM0002
+CQ3078     COMPUTE W-AHOACT-0     = DUMMY2-AHOACT-0   *  0.11512389     DLM0002
+CQ3078     COMPUTE W-AHOACT-1     = DUMMY2-AHOACT-1   * ZERO            DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     COMPUTE W-CANMM5-999   = DUMMY2-CANMM5-999 * ZERO            DLM0002
+CQ3078     COMPUTE W-CANMM5-0     = DUMMY2-CANMM5-0   *  2.02255698     DLM0002
+CQ3078     COMPUTE W-CANMM5-1     = DUMMY2-CANMM5-1   *  0.80394569     DLM0002
+CQ3078     COMPUTE W-CANMM5-2     = DUMMY2-CANMM5-2   *  0.36981490     DLM0002
+CQ3078     COMPUTE W-CANMM5-3     = DUMMY2-CANMM5-3   *  ZERO.          DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 1000-PROCESE-00NUM-CARACTCAL.                                    DLM0002
+CQ3078     IF  NUM-PERSO-CARACT  =  03                                  DLM0002
+CQ3078       IF (00NUMPTF = "CT" OR 00NUMPTF = "AH")                    DLM0002
+CQ3078         ADD   1                 TO  W-ACU-NRO-CTACTEAHO          DLM0002
+CQ3078         IF  CARACT-TAB-NOV-CTAC-COD(NOV-REPORT-ABD06) = 01       DLM0002
+CQ3078           IF  COD-SUS-ABD06(1:2)  =  01                          DLM0002
+CQ3078             MOVE  1             TO  W1-CCB-ACTIVAS               DLM0002
+CQ3078             PERFORM VARYING CARACT-W-INDICE FROM 1 BY 1          DLM0002
+CQ3078                       UNTIL CARACT-W-INDICE  >  99               DLM0002
+CQ3078               IF  NIT-SUSCRIP-S-ABD02  =                         DLM0002
+CQ3078                   CARACT-W-NIT-TABLA(CARACT-W-INDICE)            DLM0002
+CQ3078                 MOVE  1         TO  SW-NITS-CARACT               DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-PERFORM                                          DLM0002
+CQ3078             IF  CARACT-W-INDICE  >=  99                          DLM0002
+CQ3078               ADD   1           TO  CARACT-W-INDICE-J            DLM0002
+CQ3078             ELSE                                                 DLM0002
+CQ3078               COMPUTE  CARACT-W-INDICE-J = CARACT-W-INDICE + 1   DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078             IF  SW-NITS-CARACT <> 1                              DLM0002
+CQ3078               MOVE  NIT-SUSCRIP-S-ABD02   TO                     DLM0002
+CQ3078                     CARACT-W-NIT-TABLA(CARACT-W-INDICE-J)        DLM0002
+CQ3078               ADD   1           TO  W2-NUM-ENT-CCB               DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             MOVE  1             TO   W2-AHO-ACTIVAS              DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 1000-PROCESE-00INQ-CARACTCAL.                                    DLM0002
+CQ3078     IF  TABLA-SUSCRIPTORES   =  ZEROS  AND                       DLM0002
+CQ3078         TABLA-SUSCRIPTORES1  =  ZEROS                            DLM0002
+CQ3078       MOVE  1                   TO  CARACT-W-INDICE-J            DLM0002
+CQ3078                                     CARACT-W-INDICE-K            DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  NUM-PERSO-CARACT  =  03                                  DLM0002
+CQ3078       IF  RAZCON-IND  NOT =  22                                  DLM0002
+CQ3078       AND RAZCON-IND  NOT =  23                                  DLM0002
+CQ3078         MOVE  NIT-SUSCRIP-S-ABD02 TO  WOR-NIT-CARACT             DLM0002
+CQ3078         MOVE  MES-CONS-CARACT     TO  WK-MES-CONSULTA-CARACT     DLM0002
+CQ3078         IF  COD-SUSCRIP-IND  <  800000 OR                        DLM0002
+CQ3078             COD-SUSCRIP-IND  =  990005                           DLM0002
+CQ3078           IF  COD-SUSCRIP-IND <> 020046 AND                      DLM0002
+CQ3078               COD-SUSCRIP-IND <> 050046                          DLM0002
+CQ3078             MOVE  0            TO  SW-SEEK1                      DLM0002
+CQ3078             PERFORM VARYING CARACT-W-INDICE FROM 1 BY 1          DLM0002
+CQ3078                       UNTIL CARACT-W-INDICE > 9000               DLM0002
+CQ3078                IF  TSUS-KEY1(CARACT-W-INDICE)  =                 DLM0002
+CQ3078                    NIT-SUSCRIP-S-ABD02                           DLM0002
+CQ3078                  MOVE 1         TO  SW-SEEK1                     DLM0002
+CQ3078                  MOVE 9001      TO  CARACT-W-INDICE              DLM0002
+CQ3078                ELSE                                              DLM0002
+CQ3078                  IF  TSUS-KEY1(CARACT-W-INDICE)  =  ZEROS        DLM0002
+CQ3078                    MOVE 9001    TO  CARACT-W-INDICE              DLM0002
+CQ3078                  END-IF                                          DLM0002
+CQ3078                END-IF                                            DLM0002
+CQ3078             END-PERFORM                                          DLM0002
+CQ3078             IF  SW-SEEK1 = ZERO                                  DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 01 AND WK-ENERO        DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 02 AND WK-FEBRERO      DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 03 AND WK-MARZO        DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 04 AND WK-ABRIL        DLM0002
+CQ3078                  ADD   1        TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 05 AND WK-MAYO         DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 06 AND WK-JUNIO        DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 07 AND WK-JULIO        DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 08 AND WK-AGOSTO       DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 09 AND WK-SEPTIEMBRE   DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 10 AND WK-OCTUBRE      DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 11 AND WK-NOVIEMBRE    DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078               IF  FECHA-RUN-CARACT(5:2) = 12 AND WK-DICIEMBRE    DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-90        DLM0002
+CQ3078                 MOVE NIT-SUSCRIP-S-ABD02                         DLM0002
+CQ3078                                 TO  TSUS-KEY1(CARACT-W-INDICE-K) DLM0002
+CQ3078                 ADD   1         TO  CARACT-W-INDICE-K            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078           ADD   1               TO  W-TOT-CONSULTAS              DLM0002
+CQ3078           IF  COD-SUSCRIP-IND <> 020046 AND                      DLM0002
+CQ3078               COD-SUSCRIP-IND <> 050046                          DLM0002
+CQ3078             MOVE  0            TO  SW-SEEK                       DLM0002
+CQ3078             PERFORM VARYING CARACT-W-INDICE FROM 1 BY 1          DLM0002
+CQ3078                       UNTIL CARACT-W-INDICE > 9000               DLM0002
+CQ3078                IF TSUS-KEY(CARACT-W-INDICE) = NIT-SUSCRIP-S-ABD02DLM0002
+CQ3078                  MOVE  1       TO  SW-SEEK                       DLM0002
+CQ3078                  MOVE  9001    TO  CARACT-W-INDICE               DLM0002
+CQ3078                ELSE                                              DLM0002
+CQ3078                  IF  TSUS-KEY(CARACT-W-INDICE)  =  ZEROS         DLM0002
+CQ3078                    MOVE  9001  TO  CARACT-W-INDICE               DLM0002
+CQ3078                  END-IF                                          DLM0002
+CQ3078                END-IF                                            DLM0002
+CQ3078             END-PERFORM                                          DLM0002
+CQ3078             IF  SW-SEEK = ZERO                                   DLM0002
+CQ3078               IF (FECHA-RUN-CARACT(5:2) = 01 AND WK-ENE) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 02 AND WK-FEB) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 03 AND WK-MAR) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 04 AND WK-ABR) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 05 AND WK-MAY) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 06 AND WK-JUN) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 07 AND WK-JUL) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 08 AND WK-AGO) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 09 AND WK-SEP) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 10 AND WK-OCT) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 11 AND WK-NOV) OR      DLM0002
+CQ3078                  (FECHA-RUN-CARACT(5:2) = 12 AND WK-DIC)         DLM0002
+CQ3078                 ADD   1         TO  W-TOT-CONS-NO-CITI-180       DLM0002
+CQ3078                 MOVE  NIT-SUSCRIP-S-ABD02                        DLM0002
+CQ3078                                 TO  TSUS-KEY(CARACT-W-INDICE-J)  DLM0002
+CQ3078                 ADD     1       TO  CARACT-W-INDICE-J            DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 1060-CALCULAR-THICK-THIN.                                        DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078*                   *VARIABLE THICK.*                            *DLM0002
+CQ3078*                   *****************                            *DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078      COMPUTE  WS-THICK  =  590                                   DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  = 0 OR -1                       DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK - 48                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  = 1                             DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK + 0                        DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  = 2                             DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK - 24                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  = 3                             DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK - 48                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  = 4                             DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK - 72                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  W-TOT-CONS-NO-CITI-180  >= 5                            DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK - 96.                      DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 0                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 1                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 16                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 2                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 32                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 3                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 48                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 4                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 64                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  = 5                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 79                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-MOB12-O-I-TOTAL  >= 6                                DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 95.                     DLM0002
+CQ3078      IF  WS-NUMDELQ-O-I-TOTAL  = 0                               DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  +  0                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-NUMDELQ-O-I-TOTAL  = 1                               DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 79                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-NUMDELQ-O-I-TOTAL  >= 2                              DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 158.                    DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  = -1                                    DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 29                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  = 0                                     DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 0.2                                  DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 51                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 0.4                                  DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 28                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 0.7                                  DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 1                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 0.85                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 26                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 1.0                                  DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 43                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  <= 1.05                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 54                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  WS-UTIL-O-I-CC  >  1.05                                 DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  - 57.                     DLM0002
+CQ3078      IF  SW-LONG-HIST-NO-DELQ  = 0                               DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078        IF  SW-LONG-HIST-NO-DELQ  = 1                             DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  + 43.                   DLM0002
+CQ3078      IF  WS-MOBMAX-O-I-CC  = -1 OR 0                             DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK + 18                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078       IF  WS-MOBMAX-O-I-CC  <= 5                                 DLM0002
+CQ3078         COMPUTE  WS-THICK  =  WS-THICK + 3                       DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078        IF  WS-MOBMAX-O-I-CC  <= 11                               DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK + 8                      DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078         IF  WS-MOBMAX-O-I-CC  <= 23                              DLM0002
+CQ3078           COMPUTE  WS-THICK  =  WS-THICK + 16                    DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078          IF  WS-MOBMAX-O-I-CC  <= 47                             DLM0002
+CQ3078            COMPUTE  WS-THICK  =  WS-THICK + 32                   DLM0002
+CQ3078          ELSE                                                    DLM0002
+CQ3078           IF  WS-MOBMAX-O-I-CC  <= 71                            DLM0002
+CQ3078             COMPUTE  WS-THICK  =  WS-THICK + 55                  DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078           IF  WS-MOBMAX-O-I-CC  >= 72                            DLM0002
+CQ3078             COMPUTE  WS-THICK  =  WS-THICK + 69.                 DLM0002
+CQ3078      IF  WS-MLSPAY-CC  = 0                                       DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078        IF  WS-MLSPAY-CC  = 2                                     DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  - 29                    DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078          IF  WS-MLSPAY-CC  = 1                                   DLM0002
+CQ3078            COMPUTE  WS-THICK  =  WS-THICK  + 25.                 DLM0002
+CQ3078      IF  WS-TIMES-30P12-COMU  = 0                                DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078        IF  WS-TIMES-30P12-COMU  = 1                              DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  - 32                    DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078          IF  WS-TIMES-30P12-COMU  >= 2                           DLM0002
+CQ3078            COMPUTE  WS-THICK  =  WS-THICK  - 63.                 DLM0002
+CQ3078      IF  WS-UTILMAX-O-I-CONS  = 0                                DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078       IF  WS-UTILMAX-O-I-CONS  <= 0.4                            DLM0002
+CQ3078         COMPUTE  WS-THICK  =  WS-THICK  + 13                     DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078        IF  WS-UTILMAX-O-I-CONS  <= 0.75                          DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  - 9                     DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078         IF  WS-UTILMAX-O-I-CONS  <= 0.90                         DLM0002
+CQ3078           COMPUTE  WS-THICK  =  WS-THICK  - 22                   DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078          IF  WS-UTILMAX-O-I-CONS  <= 0.95                        DLM0002
+CQ3078             COMPUTE  WS-THICK  =  WS-THICK  - 28                 DLM0002
+CQ3078          ELSE                                                    DLM0002
+CQ3078           IF  WS-UTILMAX-O-I-CONS  < 1.0                         DLM0002
+CQ3078             COMPUTE  WS-THICK  =  WS-THICK  - 30                 DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078            IF  WS-UTILMAX-O-I-CONS  >= 1.0                       DLM0002
+CQ3078              COMPUTE  WS-THICK  =  WS-THICK  - 32.               DLM0002
+CQ3078      IF  WS-NUM-CLOS-TOTAL  = 0                                  DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK +  0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078       IF  WS-NUM-CLOS-TOTAL  = 1                                 DLM0002
+CQ3078         COMPUTE  WS-THICK  =  WS-THICK +  6                      DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078        IF  WS-NUM-CLOS-TOTAL  = 2                                DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK +  13                    DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078         IF  WS-NUM-CLOS-TOTAL  <= 4                              DLM0002
+CQ3078           COMPUTE  WS-THICK  =  WS-THICK +  22                   DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078          IF  WS-NUM-CLOS-TOTAL  >= 5                             DLM0002
+CQ3078            COMPUTE  WS-THICK  =  WS-THICK +  32.                 DLM0002
+CQ3078      IF  WS-EVER60P12  > 0                                       DLM0002
+CQ3078          MOVE 1       TO WS-EVER60P12                            DLM0002
+CQ3078      END-IF                                                      DLM0002
+CQ3078      IF  WS-EVER60P12  = 0                                       DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  - 49.                   DLM0002
+CQ3078      IF  SW-OVER-LIMIT-CC  = 0                                   DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  + 0                       DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078        IF  SW-OVER-LIMIT-CC  = 1                                 DLM0002
+CQ3078          COMPUTE  WS-THICK  =  WS-THICK  - 25.                   DLM0002
+CQ3078      IF  SW-MORT  = 0                                            DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  +  0                      DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078      IF  SW-MORT  = 1                                            DLM0002
+CQ3078        COMPUTE  WS-THICK  =  WS-THICK  +  11.                    DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078*                   * VARIABLE THIN.*                            *DLM0002
+CQ3078*                   *****************                            *DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078     COMPUTE  WS-THIN  =  612                                     DLM0002
+CQ3078     IF  WS-UTILMAX-O-I-CC  = 0 OR -1                             DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN  + 0                          DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  WS-UTILMAX-O-I-CC  = 0                                 DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  + 0                        DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         IF  WS-UTILMAX-O-I-CC  >=  0 AND <= 0.2                  DLM0002
+CQ3078           COMPUTE  WS-THIN  =  WS-THIN  + 0                      DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078           IF  WS-UTILMAX-O-I-CC  >   0.2 AND <= 0.50             DLM0002
+CQ3078             COMPUTE  WS-THIN  =  WS-THIN  - 34                   DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             IF  WS-UTILMAX-O-I-CC  >   0.50 AND <= 0.80          DLM0002
+CQ3078               COMPUTE  WS-THIN  =  WS-THIN  - 75                 DLM0002
+CQ3078             ELSE                                                 DLM0002
+CQ3078               IF  WS-UTILMAX-O-I-CC  >   0.80 AND <= 0.95        DLM0002
+CQ3078                 COMPUTE  WS-THIN  =  WS-THIN  - 105              DLM0002
+CQ3078               ELSE                                               DLM0002
+CQ3078                 IF  WS-UTILMAX-O-I-CC  >   0.95 AND <= 1.0       DLM0002
+CQ3078                   COMPUTE  WS-THIN  =  WS-THIN  - 117            DLM0002
+CQ3078                 ELSE                                             DLM0002
+CQ3078                   IF  WS-UTILMAX-O-I-CC  >   1.0                 DLM0002
+CQ3078                     COMPUTE  WS-THIN  =  WS-THIN  - 129          DLM0002
+CQ3078                   END-IF                                         DLM0002
+CQ3078                 END-IF                                           DLM0002
+CQ3078               END-IF                                             DLM0002
+CQ3078             END-IF                                               DLM0002
+CQ3078           END-IF                                                 DLM0002
+CQ3078         END-IF                                                   DLM0002
+CQ3078       END-IF                                                     DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078     IF  W-TOT-CONS-NO-CITI-90  = 0 OR -1                         DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN - 41                          DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  W-TOT-CONS-NO-CITI-90  = 1                             DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  + 0                        DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078         IF  W-TOT-CONS-NO-CITI-90  = 2                           DLM0002
+CQ3078           COMPUTE  WS-THIN  =  WS-THIN  - 41                     DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078           IF  W-TOT-CONS-NO-CITI-90  = 3                         DLM0002
+CQ3078             COMPUTE  WS-THIN  =  WS-THIN  - 81                   DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078             IF  W-TOT-CONS-NO-CITI-90  >= 4                      DLM0002
+CQ3078               COMPUTE  WS-THIN  =  WS-THIN  - 121.               DLM0002
+CQ3078     IF  SW-ONLY-CONS-OPEN  = 0                                   DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN  + 0                          DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  SW-ONLY-CONS-OPEN  = 1                                 DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  - 84.                      DLM0002
+CQ3078     IF  WS-EVER30P12  > 0                                        DLM0002
+CQ3078         MOVE 1       TO WS-EVER30P12                             DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF  WS-EVER30P12  = 0                                        DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN  + 0                          DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  WS-EVER30P12  = 1                                      DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  - 68.                      DLM0002
+CQ3078     IF  SW-NO-OPEN-F  = 0                                        DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN  + 0                          DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078       IF  SW-NO-OPEN-F  = 1                                      DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  - 43.                      DLM0002
+CQ3078     IF  WS-MINMOB-I-TOTAL  =  -1                                 DLM0002
+CQ3078       COMPUTE  WS-THIN  =  WS-THIN  + 48                         DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078      IF  WS-MINMOB-I-TOTAL  = 0                                  DLM0002
+CQ3078        COMPUTE  WS-THIN  =  WS-THIN  + 0                         DLM0002
+CQ3078      ELSE                                                        DLM0002
+CQ3078       IF  WS-MINMOB-I-TOTAL  = 1                                 DLM0002
+CQ3078         COMPUTE  WS-THIN  =  WS-THIN  + 8                        DLM0002
+CQ3078       ELSE                                                       DLM0002
+CQ3078        IF  WS-MINMOB-I-TOTAL  = 2                                DLM0002
+CQ3078          COMPUTE  WS-THIN  =  WS-THIN  + 16                      DLM0002
+CQ3078        ELSE                                                      DLM0002
+CQ3078         IF  WS-MINMOB-I-TOTAL  = 3                               DLM0002
+CQ3078           COMPUTE  WS-THIN  =  WS-THIN  + 24                     DLM0002
+CQ3078         ELSE                                                     DLM0002
+CQ3078          IF  WS-MINMOB-I-TOTAL  = 4                              DLM0002
+CQ3078            COMPUTE  WS-THIN  =  WS-THIN  + 32                    DLM0002
+CQ3078          ELSE                                                    DLM0002
+CQ3078           IF  WS-MINMOB-I-TOTAL  = 5                             DLM0002
+CQ3078             COMPUTE  WS-THIN  =  WS-THIN  + 40                   DLM0002
+CQ3078           ELSE                                                   DLM0002
+CQ3078            IF  WS-MINMOB-I-TOTAL  >= 6                           DLM0002
+CQ3078              COMPUTE  WS-THIN  =  WS-THIN  + 48.                 DLM0002
+CQ3078                                                                  DLM0002
+CQ3078***  IF  SLDA-P01-PERS-CARGO  >  ZEROS                            DLM0002
+CQ3078***    COMPUTE  WS-THIN  =  WS-THIN  -  30                        DLM0002
+CQ3078***  END-IF                                                       DLM0002
+CQ3078***  IF  SLDA-P02-SECT-ECONO  =  4  OR  17                        DLM0002
+CQ3078***    COMPUTE  WS-THIN  =  WS-THIN  -  56                        DLM0002
+CQ3078***  END-IF                                                       DLM0002
+CQ3078***  IF  SLDA-P03-TIPO-VIVI  =  1                                 DLM0002
+CQ3078***    COMPUTE  WS-THIN  =  WS-THIN  +  30                        DLM0002
+CQ3078***  END-IF                                                       DLM0002
+CQ3078***  IF  SLDA-P04-TIPO-EMPLE  =  1  OR  7                         DLM0002
+CQ3078***    COMPUTE  WS-THIN  =  WS-THIN  -  21                        DLM0002
+CQ3078***  END-IF.                                                      DLM0002
+CQ3078     .                                                            DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 0074-VARIABLES-DUMMY-MODELO1.                                    DLM0002
+CQ3078     IF W-GENERO = 1                                              DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-GENERO-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-GENERO-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W-GENERO = 2                                              DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-GENERO-2                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-GENERO-2                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078***  IF W1-CCB-ACTIVAS = ZERO                                     DLM0002
+CQ3078     IF 01NUM002CT = ZERO                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CCBACT-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CCBACT-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078***  IF W1-CCB-ACTIVAS = 1                                        DLM0002
+CQ3078     IF 01NUM002CT = 1                                            DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CCBACT-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CCBACT-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W1-CANVOL-5 = -999                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CANVOL5-999                    DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CANVOL5-999                    DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-CANVOL-5 = ZERO                                        DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CANVOL5-0                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CANVOL5-0                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-CANVOL-5 = 1                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CANVOL5-1                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CANVOL5-1                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-CANVOL-5 = 2                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CANVOL5-2                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CANVOL5-2                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-CANVOL-5 = 3                                           DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-CANVOL5-3                      DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-CANVOL5-3                      DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W1-ALDIA-1 = -999                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-ALDIA1-999                     DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-ALDIA1-999                     DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-ALDIA-1 = ZERO                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-ALDIA1-0                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-ALDIA1-0                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-ALDIA-1 = 1                                            DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-ALDIA1-1                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-ALDIA1-1                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-ALDIA-1 = 2                                            DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-ALDIA1-2                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-ALDIA1-2                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-ALDIA-1 = 3                                            DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-ALDIA1-3                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-ALDIA1-3                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078                                                                  DLM0002
+CQ3078     IF W1-SALDO-MORA = -999                                      DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-MORA-999                       DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-MORA-999                       DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-SALDO-MORA = ZERO                                      DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-MORA-0                         DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-MORA-0                         DLM0002
+CQ3078     END-IF                                                       DLM0002
+CQ3078     IF W1-SALDO-MORA = 1                                         DLM0002
+CQ3078        MOVE 1          TO  DUMMY1-MORA-1                         DLM0002
+CQ3078     ELSE                                                         DLM0002
+CQ3078        MOVE ZERO       TO  DUMMY1-MORA-1                         DLM0002
+CQ3078     END-IF.                                                      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 7500-ANALIZA-VECTOR-HIST-CARACT.                                 DLM0002
+CQ3078     MOVE  ZEROS                 TO  WS-ESTADO-MES-CARACT.        DLM0002
+CQ3078     MOVE  ESTADO-MES-ABD07      TO  WS-ESTADO-MES-CARACT.        DLM0002
+CQ3078     MOVE  ZEROS                 TO  ESTADO-MES-IMP-CARACT.       DLM0002
+CQ3078     PERFORM 7600-MESES-CARACT VARYING CARACT-W-INDICE            DLM0002
+CQ3078        FROM 1 BY 1 UNTIL CARACT-W-INDICE = 13.                   DLM0002
+CQ3078     MOVE  ESTADO-MES-IMP-CARACT TO  WS-ESTADO-MES-1-CARACT.      DLM0002
+CQ3078     MOVE  ZEROS                 TO  WS-ESTADO-MES-CARACT.        DLM0002
+CQ3078     MOVE  VECTOR-2-ABD07        TO  WS-ESTADO-MES-CARACT.        DLM0002
+CQ3078     MOVE  ZEROS                 TO  ESTADO-MES-IMP-CARACT.       DLM0002
+CQ3078     PERFORM 7600-MESES-CARACT VARYING CARACT-W-INDICE            DLM0002
+CQ3078        FROM 1 BY 1 UNTIL CARACT-W-INDICE = 13.                   DLM0002
+CQ3078     MOVE  ESTADO-MES-IMP-CARACT TO  WS-ESTADO-MES-2-CARACT.      DLM0002
+CQ3078*                                                                 DLM0002
+CQ3078 7600-MESES-CARACT.                                               DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078*7600-MESES-CARACT                                               *DLM0002
+CQ3078* SE RECORRE EL VECTOR DE COMPORTAMIENTO MOVIENDO LOS CAMPOS DE  *DLM0002
+CQ3078* ACUERDO AL REPORTE DERECHA A IZQUIERDA.                        *DLM0002
+CQ3078******************************************************************DLM0002
+CQ3078     SUBTRACT CARACT-W-INDICE FROM 13 GIVING CARACT-W-INDICE-J.   DLM0002
+CQ3078     MOVE WS-MES-CARACT(CARACT-W-INDICE)                          DLM0002
+CQ3078                          TO E-MES-IMP-CARACT(CARACT-W-INDICE-J). DLM0002
+CQ3078*                                                                 DLM0002

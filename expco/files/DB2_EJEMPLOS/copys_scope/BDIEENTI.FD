@@ -1,0 +1,19 @@
+REMARK* BDIEENTI-FD.v.0002
+      ******************************************************************
+      * JGR0002     * NITENT - SE COMPARTE EL CAMPO NOMBRE DE LA       *
+      * JAIRO GOMEZ.*          ENTIDAD, PARA PORDER GRABAR EL NUMERO   *
+      *             *          DE NIT DE LA ENTIDAD REPORTANTE         *
+      * 09/ENE/2008 *                                                  *
+      ******************************************************************
+      ********************************************
+      *  MAESTRO DE ENTIDADES SUPERINTENDENCIA
+      ********************************************
+
+       FD BDIEENTI.
+       01 BDIEENTI-REGISTRO.
+          03 BDIEENTI-LLAVE.
+             05 BDIEENTI-TIP-ENTID        PIC 9(2).
+             05 BDIEENTI-COD-ENTID        PIC 9(6).
+          03 BDIEENTI-NOM-ENTID.
+NITENT       05 BDIEENTI-NOMBRE           PIC X(29).                     JGR0002
+NITENT       05 BDIEENTI-NIT-ENTID        PIC 9(11).                     JGR0002

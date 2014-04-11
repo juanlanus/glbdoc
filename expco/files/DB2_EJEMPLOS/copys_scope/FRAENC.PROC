@@ -1,0 +1,138 @@
+REMARK* FRAENC.PROC.v.0001
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* LOS MENSAJES ADICIONALES EL LOS CUESTIONARIOS DE EVIDENTE
+       0001-CARGAR-PREGUNTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-CARGAR-PREGUNTA-FRAENC.
+REMARK* ESTA RUTINA CARGA EN MEMORIA LA INFORMACION DEL ARCHIVO FRAENC
+REMARK* LO QUE SON COMENTARIOS "##" SE ELIMINAN
+REMARK******************************************************************
+           MOVE 0 TO FIN-FRAENC.
+           OPEN INPUT FRAENC. 
+           MOVE ZEROS TO TABLA-FRAENC.
+           READ FRAENC AT END MOVE 1 TO FIN-FRAENC.
+           MOVE 1 TO I-FRAENC
+           PERFORM UNTIL FIN-FRAENC = 1 OR I-FRAENC > 1000
+             IF REG-FRAENC(1:2) <> "##"
+                MOVE REG-FRAENC TO V-FRAENC(I-FRAENC)
+                ADD 1 TO I-FRAENC
+             END-IF
+             READ FRAENC AT END MOVE 1 TO FIN-FRAENC
+             END-READ
+           END-PERFORM.
+           CLOSE FRAENC.
+       0001-HACER-PREGUNTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-HACER-PREGUNTA-FRAENC.
+REMARK*    SE RECORRE EL ARREGLO EN MEMORIA BUSCANDO LAS PREGUNTAS POR
+REMARK*    ADICIONAR AL CUESTIONARIO
+REMARK******************************************************************
+           IF PAR-PREADI <> ZEROS 
+              MOVE 1 TO I-FRAENC
+              PERFORM UNTIL I-FRAENC > 1000 OR NIT-FRAENC(I-FRAENC) = 0
+                 PERFORM UNTIL I-FRAENC > 1000 OR 
+                               NIT-FRAENC(I-FRAENC) = 0 OR
+                               (NIT-FRAENC(I-FRAENC) = PAR-NUMNIT AND
+                                TIPREG-FRAENC(I-FRAENC) = 99      AND
+                                NUMENC-FRAENC(I-FRAENC) = PAR-PREADI) 
+                    ADD 1 TO I-FRAENC
+                 END-PERFORM
+                 IF NIT-FRAENC(I-FRAENC) = PAR-NUMNIT
+                    MOVE NUMENC-FRAENC(I-FRAENC) TO NUMENC-FRAENC-AUX
+                    MOVE NUMPRE-FRAENC(I-FRAENC) TO NUMPRE-FRAENC-AUX
+                    MOVE CODPRE-FRAENC-AUX       TO CODPRE-FRAENC-ACTUAL
+                    MOVE I-FRAENC TO NO-LOOP-FRAENC
+                    PERFORM 0001-ARMAR-PREGUNTA-FRAENC
+                    IF HAY-01-FRAENC = 1 AND
+                       HAY-02-FRAENC >= 2       
+                       ADD 1 TO ELE-I
+                    END-IF
+                    IF I-FRAENC = NO-LOOP-FRAENC *> NO DEJAR LOOP INFNITO
+                       ADD 1 TO I-FRAENC
+                    END-IF
+                 END-IF
+              END-PERFORM
+           END-IF.
+       0001-ARMAR-PREGUNTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-ARMAR-PREGUNTA-FRAENC.
+REMARK*    INSERTA LA PREGUNTA EN EL ARREGLO DE PREGUNTAS POR HACER DE
+REMARK*    ACUEDO AL PROTOCOLO DE EVIDENTE
+REMARK******************************************************************
+           MOVE 0 TO HAY-01-FRAENC.
+           MOVE 0 TO HAY-02-FRAENC.
+           PERFORM UNTIL NIT-FRAENC(I-FRAENC)    <> PAR-NUMNIT OR
+                         CODPRE-FRAENC-ACTUAL    <> CODPRE-FRAENC-AUX OR
+                         I-FRAENC > 1000 OR HAY-02-FRAENC > 10 
+              EVALUATE TIPREG-FRAENC(I-FRAENC)
+                WHEN 99
+                  MOVE "999000000"             TO CODPRE-ELEPRE(ELE-I)
+                  MOVE NUMENC-FRAENC(I-FRAENC) TO 
+                                             CODPRE-ELEPRE(ELE-I)(4:3)
+                  MOVE NUMPRE-FRAENC(I-FRAENC) TO 
+                                             CODPRE-ELEPRE(ELE-I)(7:3)
+                  MOVE "ADICIONAL"       TO  LLAEST-ELEPRE(ELE-I)
+                  MOVE 0                 TO  NOCASCARA-ELEPRE(ELE-I)
+*                 SE ASUME QUE YA EXISTE. LA RUTINA QUE REGRABA EL
+*                 FRAPREU SI DA INVALID KEY HACE UN WRITE,FUNCIONA
+                  MOVE 1                 TO  EXISTE-ELEPRE(ELE-I)
+                  MOVE 0                 TO  PESO-ELEPRE(ELE-I)
+                  MOVE 0                 TO  RESPOK-ELEPRE(ELE-I)
+                WHEN 01
+                  ADD 1 TO HAY-01-FRAENC
+                  MOVE TEXTO-FRAENC(I-FRAENC) TO TEXPRE-ELEPRE(ELE-I)
+                WHEN 02
+                  ADD 1 TO HAY-02-FRAENC
+                  MOVE TEXTO-FRAENC(I-FRAENC) TO 
+                       TEXOPC-ELEPRE(ELE-I,HAY-02-FRAENC)
+              END-EVALUATE 
+              ADD 1 TO I-FRAENC
+              IF TIPREG-FRAENC(I-FRAENC) = 99                 
+                 MOVE NUMENC-FRAENC(I-FRAENC) TO NUMENC-FRAENC-AUX
+                 MOVE NUMPRE-FRAENC(I-FRAENC) TO NUMPRE-FRAENC-AUX
+              END-IF
+           END-PERFORM.
+       0001-EVALUAR-PREGUNTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-EVALUAR-PREGUNTA-FRAENC.
+REMARK*    SE VERIFICA QUE LA PREGUNTA SEA DE TIPO "ADICIONAL"
+REMARK******************************************************************
+           IF LLAEST-FRAPREU = "ADICIONAL"
+              MOVE 9 TO HAY-FRAPREU
+           END-IF.
+       0001-GUARDAR-RESPUESTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-GUARDAR-RESPUESTA-FRAENC.
+REMARK*    SE GUARDA EN MEMORIA LAS RESPUESTAS DADAS A LA PREGUNTAS 
+REMARK*    ADICIONALES Y SE REVERSA LOS CAMPOS COMO SI ESTA RESPUESTA
+REMARK*    NO HUBIESE LLEGADO.
+REMARK******************************************************************
+           IF RES-FRAENC = 0
+              MOVE SPACES TO INF-FRALOG-FRAENC
+           END-IF.
+           ADD 1 TO RES-FRAENC.
+           MOVE CODPRE-FRAPREU TO CODPRE-FRALOG-FRAENC(RES-FRAENC).
+           MOVE V-RES(I)       TO RESPUS-FRALOG-FRAENC(RES-FRAENC).
+           MOVE CODPRE-FRAPREU TO DTH01-RSPSTS-CODPRE.
+           MOVE 9 TO DTH01-RSPSTS-VALRES. *> NI BUENA NI MALA
+           MOVE V-RES(I) TO DTH01-RSPSTS-RESPOK. *> LA QUE CONTESTARON
+           MOVE I TO I-FRAENC
+           PERFORM UNTIL V-RES(I-FRAENC) = 0 OR I-FRAENC > 170
+              MOVE V-RES(I-FRAENC + 1) TO V-RES(I-FRAENC)
+              MOVE V-PRE(I-FRAENC + 1) TO V-PRE(I-FRAENC)
+              ADD 1 TO I-FRAENC 
+           END-PERFORM.
+           MOVE SPACES TO NUMPRE-FRALOG(I)(1:3)
+           SUBTRACT 1 FROM TOT-RESP.
+           SUBTRACT 1 FROM I.          
+       0001-REGISTRAR-RESPUESTA-FRAENC.
+REMARK******************************************************************
+REMARK*0001-LLEGA-RESPUESTA-FRAENC.
+REMARK*    DEJA EL RASTRO EN EL FRALOG DE LA RESPUESTA DADA A LA PREGUNTA
+REMARK*    ENVIADA DE CAPTURA DE INFORMACION
+REMARK******************************************************************
+           IF PAR-PREADI <> ZEROS AND RES-FRAENC > 0
+              MOVE INF-FRALOG-FRAENC TO INF-FRALOG
+              MOVE "ADCNAL"     TO TRANSACCION-FRALOG
+              PERFORM 8020-GRABAR-FRALOG   
+           END-IF.

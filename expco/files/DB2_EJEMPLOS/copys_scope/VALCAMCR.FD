@@ -1,0 +1,14 @@
+******* VALCAMCR-FD.v.0001
+REMARK*Parametros de campos del maestro resumido ampliado 
+REMARK*con su descripcion para cartera
+REMARK*El campo IND-CMPLEY-VALCAMCR se usa para dalidar que si el campo
+REMARK*es de ley y es correcto se actualice aunque se encuentre apagado
+036300*----------------------------------------------------------------*
+       FD  VALCAMCR.
+       01  REG-VALCAMCR.
+           03 NUM-CAMPO-VALCAMCR               PIC 9(2).
+           03 DES-CAMPO-VALCAMCR               PIC X(45).
+NHC002     03 CAMPO-LEY-VALCAMCR.
+NHC002        05 IND-CMPLEY-VALCAMCR           PIC X(01).
+NHC002        05 DES-CMPLEY-VALCAMCR           PIC X(09).
+NHC002     03 FILLER-VALCAMCR                  PIC X(20).

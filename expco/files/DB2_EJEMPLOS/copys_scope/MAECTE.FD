@@ -1,0 +1,141 @@
+      * MAECTE.FD.v.02.003        
+      * MAESTRO DEL MES ACTUAL ENTREGADO POR UN SUSCRIPTOR EN PARTICULAR        
+      ******************************************************************        
+REMARK* CBIT03      * ICN31N-NEW*  MODIFICACION DEL ARCHIVO ACTUAL1 PARA     
+REMARK* MAY./2009   * QUE INCLUYA NUEVO DISEÑO Y QUEDE SOLO PARA CUENTA 
+REMARK*             * CORRIENTE.
+      ******************************************************************        
+REMARK* GJC0002     * NIVEL1: POR EQUIVOCACIÓN LA REDEFINICIÓN DE LA FECHA 
+REMARK* G.JIMENEZ   * DE LA NOVEDAT NO TENIA NIVEL DEFINIDO. SE DEJA EN
+REMARK* OCT/2009    * EN NIVEL 3
+REMARK******************************************************************
+REMARK* CAV0003     * CALDYT - SE ADICIONA CAMPO TOTAL-REGISTROS-CIC06 *
+REMARK* 25-SEP-2012 *          EN EL REGISTRO1 PARA GUARDAR DESDE LA   *
+REMARK* C.VELASCO   *          CALIFICACION EL TOTAL DE REG DEL ARCHIVO*
+REMARK******************************************************************
+       FD  ACTUAL1        
+           BLOCK CONTAINS 40 RECORDS.        
+       01  REG-LARGO-CIC06                    PIC X(800).                       
+       01  REGISTRO1-CIC06.        
+           03  COD-SUSCRIPTOR-CEROS-CIC06     PIC X(18).        
+           03  COD-SUSCRIPTOR-CIC06           PIC 9(6).        
+           03  COD-TIP-CUENTA-CIC06           PIC 9(2).        
+           03  FECHA-NOVEDADES-CIC06          PIC X(8).        
+           03  FECHA-NOVEDADES-CIC06-R REDEFINES FECHA-NOVEDADES-CIC06.        
+               05 SIG-NOVEDADES-CIC06         PIC 99.        
+               05 ANO-NOVEDADES-CIC06         PIC 99.        
+               05 MES-NOVEDADES-CIC06         PIC 99.        
+               05 DIA-NOVEDADES-CIC06         PIC 99.        
+           03  IND-MILENIO-CIC06              PIC X.                            
+           03  IND-VALORES-MIL-CIC06          PIC X.                            
+CALDYT     03  IND-TIPO-ENTREGA-CIC06         PIC X.                    CAV0003
+CALDYT     03  FEC-INI-REPOR-CIC06            PIC 9(8).                 CAV0003
+CALDYT     03  FEC-INI-REPOR-CIC06-R REDEFINES FEC-INI-REPOR-CIC06.     CAV0003
+CALDYT         05 SIG-INI-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 ANO-INI-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 MES-INI-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 DIA-INI-REP-CIC06           PIC 99.                   CAV0003
+CALDYT     03  FEC-FIN-REPOR-CIC06            PIC 9(8).                 CAV0003
+CALDYT     03  FEC-FIN-REPOR-CIC06-R REDEFINES FEC-FIN-REPOR-CIC06.     CAV0003
+CALDYT         05 SIG-FIN-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 ANO-FIN-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 MES-FIN-REP-CIC06           PIC 99.                   CAV0003
+CALDYT         05 DIA-FIN-REP-CIC06           PIC 99.                   CAV0003
+CALDYT     03  RESTO-REG1                     PIC X(747).               CAV0003
+           03  FILLER-CIC06-R REDEFINES RESTO-REG1.                             
+CALDYT         05  FILLER-CIC06-R1            PIC X(644).               CAV0003
+CALDYT         05  TOTAL-REGISTROS-CIC06      PIC 9(10).                CAV0003
+               05  FECHA-RECEPCION-CIC06      PIC 9(8).                         
+               05  CALIFIC-DIRRES-CIC06       PIC 999V99.                       
+               05  CALIFIC-DIRLAB-CIC06       PIC 999V99.                       
+               05  CALIFIC-DIRCOR-CIC06       PIC 999V99.                       
+               05  CALIFIC-TOTDIR-CIC06       PIC 999V99.                       
+               05  TOTAL-REGDIR-CIC06         PIC 9(8).                         
+               05  CALIFIC-FINAL-CIC06        PIC 999V99.                       
+               05  CALIFIC-GRUPO1-CIC06       PIC 999V99.                       
+               05  CALIFIC-GRUPO2-CIC06       PIC 999V99.                       
+               05  CALIFIC-GRUPO3-CIC06       PIC 999V99.                       
+               05  CALIFIC-TOTAL-CIC06        PIC 999V99.                       
+               05  FECHA-CALIFIC-CIC06        PIC 9(8).                         
+               05  NUM-SEGURIDAD-CIC06        PIC 9(4).                         
+               05  IND-PROG-CALIFIC-CIC06     PIC X(02).                        
+               05  IND-CONVERSION-CIC06       PIC X(01).                        
+               05  FILLER-CIC06               PIC X(02).                        
+               05  IND-VISOR-CIC06            PIC X(15).                        
+       01  REGISTRO2-CIC06.        
+           03  TIPO-IDEN-CIC06                PIC 9.        
+           03  NUM-ID-CIC06                   PIC 9(11).        
+           03  NUM-CTA-CIC06                  PIC X(18).        
+           03  NUM-CTA16-CIC06    REDEFINES NUM-CTA-CIC06.                      
+               05 NUM-CTA-VEN-CIC06           PIC 9(16).                        
+               05 GARANTE-VEN-CIC06           PIC 99.                           
+           03  NOMBRE-COMP-CIC06              PIC X(45).        
+           03  SIT-TITULAR-CIC06              PIC 9.        
+           03  FECHA-APERT-CIC06              PIC X(08).        
+           03  FECHA-APERT-CIC06-R REDEFINES FECHA-APERT-CIC06.        
+               05 S-FAPE                      PIC 9(2).        
+               05 A-FAPE                      PIC 9(2).        
+               05 M-FAPE                      PIC 9(2).        
+               05 D-FAPE                      PIC 9(2).        
+           03  NOVEDAD-CIC06                  PIC 9(2).        
+           03  FECHA-NOV-CIC06                PIC X(08).        
+NIVEL1     03  FECHA-NOV-CIC06-R REDEFINES FECHA-NOV-CIC06.             GJC0002
+               05 S-FNOV                      PIC 9(2).        
+               05 A-FNOV                      PIC 9(2).        
+               05 M-FNOV                      PIC 9(2).        
+               05 D-FNOV                      PIC 9(2).        
+           03  ADJETIVO-ACTUAL-1              PIC 9.        
+           03  TIPO-MONEDA-CIC06              PIC 9.                            
+      *    03  CALIFICACION-CIC06             PIC 9.                            
+      	   03  CALIFICACION-CIC06             PIC X.                             
+           03  CLASE-CTA-CIC06                PIC 9.        
+           03  IND-SOBREGIRO-CIC06            PIC 9.        
+           03  TOT-DEBI-EFEC-CIC06            PIC 9(11).        
+           03  TOT-CRED-EFEC-CIC06            PIC 9(11).        
+           03  TOT-DEBI-TRANS-CIC06           PIC 9(11).        
+           03  TOT-CRED-TRANS-CIC06           PIC 9(11).        
+           03  CANT-CHEQ-DEV-CIC06            PIC 9(3).        
+           03  CANT-CHEQ-PAG-CIC06            PIC 9(3).        
+           03  VLR-TOT-CHEQ-DEV-CIC06         PIC 9(11).        
+           03  VLR-TOT-CHEQ-PAG-CIC06         PIC 9(11).        
+           03  CUPO-SOBREG-AUTO-CIC06         PIC 9(11).        
+           03  DIAS-SOBREG-AUTO-CIC06         PIC 9(3).        
+           03  FECHA-CUPO-CIC06               PIC X(8).        
+           03  FECHA-CUPO-CIC06-R REDEFINES  FECHA-CUPO-CIC06.        
+               05 S-FCUPO                     PIC 9(2).        
+               05 A-FCUPO                     PIC 9(2).        
+               05 M-FCUPO                     PIC 9(2).        
+               05 D-FCUPO                     PIC 9(2).        
+           03  OFICINA-RADICACION-CIC06       PIC X(30).                        
+           03  CIUDAD-RADICACION-CIC06        PIC X(30).                        
+           03  COD-DANE-CIU-RADI-CIC06        PIC 9(8).        
+           03  CIUDAD-RESIDENCIA-CIC06        PIC X(20).                        
+           03  COD-DANE-CIU-RESI-CIC06        PIC 9(8).        
+           03  DEPARTAMENTO-RESI-CIC06        PIC X(20).        
+           03  DIREC-RESIDENCIA-CIC06         PIC X(60).                        
+           03  TELEF-RESIDENCIA-CIC06         PIC 9(12).                        
+           03  CIUDAD-LABORAL-CIC06           PIC X(20).                        
+           03  COD-DANE-CIU-LABO-CIC06        PIC 9(8).        
+           03  DEPARTAMENTO-LABO-CIC06        PIC X(20).        
+           03  DIREC-LABORAL-CIC06            PIC X(60).        
+           03  TELEF-LABORAL-CIC06            PIC 9(12).                        
+           03  CIUDAD-CORRESP-CIC06           PIC X(20).                        
+           03  COD-DANE-CIU-CORR-CIC06        PIC 9(8).        
+           03  DEPARTAMENTO-CORR-CIC06        PIC X(20).        
+           03  DIREC-CORRESP-CIC06            PIC X(60).                        
+           03  CORREO-ELECT-CIC06             PIC X(60).        
+           03  TELEF-CELULAR-CIC06            PIC 9(12).        
+           03  RESTO-REG2                     PIC X(119).                       
+       01  REGISTRO3-CIC06.                                                     
+           03  IDENTIFICADOR-CIC06            PIC X(18).                        
+           03  FECHA-PROCESO-CIC06            PIC X(8).                         
+           03  FECHA-PROCESO-CIC06-R REDEFINES FECHA-PROCESO-CIC06.        
+               05 SIG-PROCESO-CIC06           PIC 9(2).                         
+               05 ANO-PROCESO-CIC06           PIC 9(2).                         
+               05 MES-PROCESO-CIC06           PIC 9(2).                         
+               05 DIA-PROCESO-CIC06           PIC 9(2).                         
+           03  NUM-REGISTROS-CIC06            PIC 9(8).                         
+           03  SUMA-NOVEDADES-CIC06           PIC 9(8).                         
+           03 RESTO-REG3                      PIC X(758).                       
+      ******************************************************************        
+              

@@ -1,0 +1,20 @@
+******* ACTPESP-fd.v.0001
+   **** ACTPESP.v01.001
+REMARK*Parametros matriz de estados vs. novedades para cartera
+REMARK*Proceso de validacion y actualizacion
+REMARK*Solamente para los CASOS ESPECIALES (CS) QUE VIENEN EN LA
+REMARK*MATRIZ DE ESTADOS DE CARTERA (ACTPCAR)
+REMARK*Por cada uno de los estados que aplican a casos especiales, 
+REMARK*pueden llegar novedades diferentes dependiendo de la mora maxima
+REMARK*Las novedades que pueden llegar son : 01, 05, 06, 07, 08, 09
+REMARK*existen 8 ocurrencias en el campo NUM-MORA-ACTPESP
+REMARK*de las cuales se utilizan 6 por cada mora entre 0-120 y por
+REMARK*cada una de las anteriores novedades respectivamente
+REMARK*las dos ultimas ocurrencias se dejan para posible ampliacion
+036300*----------------------------------------------------------------*
+       FD  ACTPESP.
+       01  REG-ACTPESP.
+           03 NUM-ESTADO-ACTPESP               PIC 9(2).
+           03 NUM-NOVEDAD-LLEGA-ACTPEST        PIC 9(2).
+           03 NUM-MORA-ACTPESP OCCURS 8        PIC 9(2).
+           03 FILLER-ACTPESP                   PIC X(60).

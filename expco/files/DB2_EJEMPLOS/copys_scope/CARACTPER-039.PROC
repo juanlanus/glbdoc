@@ -1,0 +1,258 @@
+REMARK*CARACTPER-039.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 039 *
+REMARK*    PARA ALCA                                                   *
+REMARK******************************************************************
+      * IMS0001     | R11027 - VERSION INICIAL CARACTERISTICAS         *
+      * 11-ABR-2013 |          PERSONALIZADAS PARA ALCA.               *
+      * M.SALAMANCA |                                     REQ. CQ11027 *
+      ******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-039.
+      * 1
+           ADD 1 TO I-VAR-PER
+           MOVE "01END999RO039"   TO NOMBRE-VAR-PER(I-VAR-PER)
+           MOVE FUNCTION LENGTH(01END999RO039) TO L-AUX
+           MOVE 01END999RO039(1:L-AUX)         TO
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 2
+           ADD 1 TO I-VAR-PER
+           MOVE "01END998RO039"   TO NOMBRE-VAR-PER(I-VAR-PER)
+           MOVE FUNCTION LENGTH(01END998RO039) TO L-AUX
+           MOVE 01END998RO039(1:L-AUX)         TO
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 3
+           ADD 1 TO I-VAR-PER
+           MOVE "01INQ999_039"    TO NOMBRE-VAR-PER(I-VAR-PER)
+           MOVE FUNCTION LENGTH(01INQ999_039)  TO L-AUX
+           MOVE 01INQ999_039(1:L-AUX)          TO
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 4
+           ADD 1 TO I-VAR-PER
+           MOVE "02NUM999TO039"   TO NOMBRE-VAR-PER(I-VAR-PER)
+           MOVE FUNCTION LENGTH(02NUM999TO039) TO L-AUX
+           MOVE 02NUM999TO039(1:L-AUX)         TO
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+      * 5
+           ADD 1 TO I-VAR-PER
+           MOVE "02NUM998TO039"   TO NOMBRE-VAR-PER(I-VAR-PER)
+           MOVE FUNCTION LENGTH(02NUM998TO039) TO L-AUX
+           MOVE 02NUM998TO039(1:L-AUX)         TO
+                               VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+           .
+
+       0000-INICIALIZAR-CARAC-EXT-39.
+      ******************************************************************
+      *0000-INICIALIZAR-CARAC-EXT-39.                                  *
+      *     SE INICIALIZAN LAS CARACTERISTICAS NIVEL 01 Y 02 DE ALCA   *
+      ******************************************************************
+
+           MOVE ALL        "  -1"  TO PER-39-NIVEL-02-NUM
+                                      PER-39-NIVEL-01-INQ
+           MOVE ALL "         -1"  TO PER-39-NIVEL-01-END
+           .
+
+       2249-PROCESE-CARCT-00NUM-EXT-39.
+      ******************************************************************
+      *2249-PROCESE-CARCT-00NUM-EXT-39.                                *
+      *     CALCULO CARACTERISTICAS DE NIVEL 00NUM Y 02NUM ALCA        *
+      ******************************************************************
+
+           MOVE ALL        "  -1"  TO PER-39-NIVEL-00-NUM
+
+      *** 00NUM999TO039 *** # OBLIG VIGENTES CON GRUPO ALCA COMO TITULAR
+           IF NIT-SUSCRIP-S-ABD02 = 800060530 OR   *> Alca
+                                    802000282 OR   *> Creciunion
+                                    900123215      *> Coomulfonse
+              MOVE ZEROS TO 00NUM999TO039
+              IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0
+                 IF FECHA-ESTADO-CARACT  > ZEROS AND
+                    ACT-DATE-CARACT      > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE  1     TO 00NUM999TO039
+                    ELSE
+                       MOVE "  -4" TO 00NUM999TO039(1:4)
+                    END-IF
+                 ELSE
+                    MOVE "  -3" TO 00NUM999TO039(1:4)
+                 END-IF
+              ELSE
+                 MOVE "  -2" TO 00NUM999TO039(1:4)
+              END-IF
+           END-IF
+
+      *** 00NUM998TO039 *** # OBLIG VIGENTES CON GRUPO ALCA COMO CODEUDOR
+           IF NIT-SUSCRIP-S-ABD02 = 800060530 OR   *> Alca
+                                    802000282 OR   *> Creciunion
+                                    900123215      *> Coomulfonse
+              MOVE ZEROS TO 00NUM998TO039
+              IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 <> 0
+                 IF FECHA-ESTADO-CARACT  > ZEROS AND
+                    ACT-DATE-CARACT      > ZEROS
+                    IF MESES-DESAC-CARACT <= 3
+                       MOVE  1     TO 00NUM998TO039
+                    ELSE
+                       MOVE "  -4" TO 00NUM998TO039(1:4)
+                    END-IF
+                 ELSE
+                    MOVE "  -3" TO 00NUM998TO039(1:4)
+                 END-IF
+              ELSE
+                 MOVE "  -2" TO 00NUM998TO039(1:4)
+              END-IF
+           END-IF
+
+      *** 00NUM999TO039 *** # OBLIG VIGENTES CON GRUPO ALCA COMO TITULAR
+           IF FUNCTION NUMVAL(00NUM999TO039(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM999TO039(1:4)) < 0
+                 MOVE ZEROS TO 02NUM999TO039
+              END-IF
+              COMPUTE 02NUM999TO039 = 02NUM999TO039 + 00NUM999TO039
+           ELSE
+              IF FUNCTION NUMVAL(02NUM999TO039(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM999TO039(1:4)) <
+                  FUNCTION NUMVAL(02NUM999TO039(1:4))
+                  MOVE 00NUM999TO039(1:4) TO 02NUM999TO039(1:4)
+               END-IF
+              END-IF
+           END-IF
+
+      *** 02NUM998TO039 *** # OBLIG VIGENTES CON GRUPO ALCA COMO CODEUDOR
+           IF FUNCTION NUMVAL(00NUM998TO039(1:4)) >= 0
+              IF FUNCTION NUMVAL(02NUM998TO039(1:4)) < 0
+                 MOVE ZEROS TO 02NUM998TO039
+              END-IF
+              COMPUTE 02NUM998TO039 = 02NUM998TO039 + 00NUM998TO039
+           ELSE
+              IF FUNCTION NUMVAL(02NUM998TO039(1:4)) < 0
+               IF FUNCTION NUMVAL(00NUM998TO039(1:4)) <
+                  FUNCTION NUMVAL(02NUM998TO039(1:4))
+                  MOVE 00NUM998TO039(1:4) TO 02NUM998TO039(1:4)
+               END-IF
+              END-IF
+           END-IF
+           .
+
+       2249-PROCESE-CARCT-00END-EXT-39.
+      ******************************************************************
+      *2249-PROCESE-CARCT-00END-EXT-39.                                *
+      *     CALCULO CARACTERISTICAS DE NIVEL 00END Y 01END ALCA        *
+      ******************************************************************
+
+           MOVE ALL "         -1"  TO PER-39-NIVEL-00-END
+
+      *** 00END999RO039 *** SALDO TOTAL TDC VIGENTES COMO TITULAR
+          IF COD-CTA-ABD07 = 02
+             MOVE ZEROS   TO  00END999RO039
+             IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT  > ZEROS AND
+                   ACT-DATE-CARACT      > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-SALDO-CARACT(I13)  >= 0 AND
+                          VEC-IND-SLD-CARACT(I13) = 0 )
+                         MOVE VEC-SALDO-CARACT(I13) TO 00END999RO039
+                      ELSE
+                         MOVE "        -88" TO 00END999RO039(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END999RO039(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END999RO039(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END999RO039(1:11)
+             END-IF
+          END-IF
+
+      *** 00END998RO039 *** CUPO TOTAL TDC VIGENTES COMO TITULAR
+          IF COD-CTA-ABD07 = 02
+             MOVE ZEROS   TO  00END998RO039
+             IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT  > ZEROS AND
+                   ACT-DATE-CARACT      > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-INICIAL-CARACT(I13) >= 0 AND
+                          VEC-IND-INI-CARACT(I13)  = 0 )
+                         MOVE VEC-INICIAL-CARACT(I13) TO 00END998RO039
+                      ELSE
+                         MOVE "        -88" TO 00END998RO039(1:11)
+                      END-IF
+                   ELSE
+                      MOVE "         -4" TO 00END998RO039(1:11)
+                   END-IF
+                ELSE
+                   MOVE "         -3" TO 00END998RO039(1:11)
+                END-IF
+             ELSE
+                MOVE "         -2" TO 00END998RO039(1:11)
+             END-IF
+          END-IF
+
+      *** 01END999RO039 *** SALDO TOTAL TDC VIGENTES COMO TITULAR
+          IF FUNCTION NUMVAL(00END999RO039(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END999RO039(1:11)) < 0
+                MOVE ZEROS TO 01END999RO039
+             END-IF
+             COMPUTE 01END999RO039 = 
+                     FUNCTION NUMVAL(01END999RO039) +
+                     FUNCTION NUMVAL(00END999RO039)
+          ELSE
+             IF FUNCTION NUMVAL(01END999RO039(1:11)) < 0
+              IF FUNCTION NUMVAL(00END999RO039(1:11)) <
+                 FUNCTION NUMVAL(01END999RO039(1:11))
+                 MOVE 00END999RO039(1:11) TO 01END999RO039(1:11)
+              END-IF
+             END-IF
+          END-IF
+
+      *** 00END998RO039 *** CUPO TOTAL TDC VIGENTES COMO TITULAR
+          IF FUNCTION NUMVAL(00END998RO039(1:11)) >= 0
+             IF FUNCTION NUMVAL(01END998RO039(1:11)) < 0
+                MOVE ZEROS TO 01END998RO039
+             END-IF
+             COMPUTE 01END998RO039 = 
+                     FUNCTION NUMVAL(01END998RO039) +
+                     FUNCTION NUMVAL(00END998RO039)
+          ELSE
+             IF FUNCTION NUMVAL(01END998RO039(1:11)) < 0
+              IF FUNCTION NUMVAL(00END998RO039(1:11)) <
+                 FUNCTION NUMVAL(01END998RO039(1:11))
+                 MOVE 00END998RO039(1:11) TO 01END998RO039(1:11)
+              END-IF
+             END-IF
+          END-IF
+           .
+
+       4249-PROCESE-CARCT-00INQ-EXT-39.
+      ******************************************************************
+      *4249-PROCESE-CARCT-00INQ-EXT-39.                                *
+      *     CALCULO CARACTERISTICAS DE NIVEL 00INQ Y 01INQ ALCA        *
+      ******************************************************************
+
+           MOVE ALL        "  -1"  TO PER-39-NIVEL-00-INQ
+
+      *** 00INQ999_039 *** # CONSULTAS ULTIMOS 6 MESES GRUPO ALCA
+           IF NIT-SUSCRIP-S-ABD02 = 800060530 OR   *> Alca
+                                    802000282 OR   *> Creciunion
+                                    900123215      *> Coomulfonse
+              MOVE ZEROS TO 00INQ999_039
+              IF MESES-CONST-CARACT >= 0 AND <= 6
+                 MOVE 1 TO 00INQ999_039
+              END-IF
+           END-IF
+
+      *** 01INQ999_039 *** # CONSULTAS ULTIMOS 6 MESES GRUPO ALCA
+           IF FUNCTION NUMVAL(00INQ999_039(1:4)) >= 0
+              IF FUNCTION NUMVAL(01INQ999_039(1:4)) < 0
+                 MOVE ZEROS TO 01INQ999_039
+              END-IF
+              COMPUTE 01INQ999_039 = 01INQ999_039 + 00INQ999_039
+           ELSE
+              IF FUNCTION NUMVAL(01INQ999_039(1:4)) < 0
+               IF FUNCTION NUMVAL(00INQ999_039(1:4)) <
+                  FUNCTION NUMVAL(01INQ999_039(1:4))
+                  MOVE 00INQ999_039(1:4) TO 01INQ999_039(1:4)
+               END-IF
+              END-IF
+           END-IF
+           .

@@ -1,0 +1,1394 @@
+REMARK*VARIABLESDAV.ROC.v.0001.
+      ******************************************************************
+      *  Requerimiento  Creación de variables para Logs Davivienda
+      *       VERSION:  23/01/2012 07:33:08 p.m.
+      ******************************************************************
+      * Se deben crear las variables que están en la estructura
+      *    del archivo adjunto:
+      *
+      * 1. Se deben tener en cuenta las siguientes reglas generales
+      *    para el cálculo de las variables que se deben generar:
+      *
+      *    - Solo aplican obligaciones como titular.
+      *    - Tipo de cartera Cancelado mas reciente
+      *      (Davivienda/ Otras entidades):
+      *      fecha de cancelación Ò se debe calcular de la siguiente
+      *      manera
+      *
+      *      Debe buscar la fecha de cancelación del tipo de cartera
+      *      dentro de los últimos 36 meses del más reciente al más
+      *      antiguo, una vez encontrado debe validar que ese tipo
+      *      de cartera haya tenido por lo menos 12 meses
+      *      de vigencia. Si no encontró ninguna obligación
+      *      que cumpla con la  anterior condición  entonces
+      *      debe tomar la cuenta más reciente de cancelación
+      *      (fecha novedad - fecha apertura).
+      *
+      *    - Si se refiere a otras entidades no debe incluir
+      *      a Davivienda
+      *    - El formato de fecha debe ser año mes AAAAMM.
+      *
+      *
+      ******************************************************************
+      *-----------------------------------------------------------------
+      *  Inicializa campos de fechas para calcular la mas antigua
+      *-----------------------------------------------------------------
+       0050-INITIAL-FECH-VIG.
+           MOVE 999999   TO  W-APE-ANTIG-AHO-VIG-DAV
+                             W-APE-ANTIG-CTE-VIG-DAV
+                             W-APE-ANTIG-CAB-VIG-DAV
+                             W-APE-ANTIG-CAV-VIG-DAV
+                             W-APE-ANTIG-CBR-VIG-DAV
+                             W-APE-ANTIG-TDC-VIG-DAV
+                             W-APE-ANTIG-CCL-VIG-DAV
+                             W-APE-ANTIG-CCF-VIG-DAV
+                             W-APE-ANTIG-AHO-VIG-OTRAS
+                             W-APE-ANTIG-CTE-VIG-OTRAS
+                             W-APE-ANTIG-CAB-VIG-OTRAS
+                             W-APE-ANTIG-CAC-VIG-OTRAS
+                             W-APE-ANTIG-CAF-VIG-OTRAS
+                             W-APE-ANTIG-CAU-VIG-OTRAS
+                             W-APE-ANTIG-CCF-VIG-OTRAS
+                             W-APE-ANTIG-CAV-VIG-OTRAS
+                             W-APE-ANTIG-CBR-VIG-OTRAS
+                             W-APE-ANTIG-CCC-VIG-OTRAS
+                             W-APE-ANTIG-CDB-VIG-OTRAS
+                             W-APE-ANTIG-COF-VIG-OTRAS
+                             W-APE-ANTIG-EDU-VIG-OTRAS
+                             W-APE-ANTIG-SFI-VIG-OTRAS
+                             W-APE-ANTIG-TDC-VIG-OTRAS
+                             W-APE-ANTIG-CCL-VIG-OTRAS
+                             W-APE-ANTIG-CFE-VIG-OTRAS
+                             W-APE-ANTIG-CSA-VIG-OTRAS
+                             W-APE-ANTIG-FUN-VIG-OTRAS
+           INITIALIZE  W-FECHAS-CANC-RECI
+           INITIALIZE  W-FECHAS-ULTIMAS
+           .
+      *------------------------------------------------------*
+      *   CALCULAR MESES DESDE LA FECHA DE NOVEDAD           *
+      *------------------------------------------------------*
+       0200-CONVERTIR-FECHA-NOV.
+            INITIALIZE  W-VARIABLES-SWTCH
+            MOVE  W-MES-AUX-3        TO  W-FMILENIO-MES
+            MOVE  W-ANO-AUX-3        TO  W-FMILENIO-ANIO
+            IF W-ANO-AUX-3   > 60
+               MOVE 19               TO  W-FMILENIO-SIGLO
+            ELSE
+               MOVE 20               TO  W-FMILENIO-SIGLO
+            END-IF
+            MOVE  W-FECHA-MILENIO    TO  W-FEC-NOVEDAD-2
+            IF SW-BASE = 1
+               IF TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 0
+                  PERFORM 250-FECHA-CANCELADA-CAR
+               END-IF
+            ELSE
+               PERFORM 260-FECHA-CANCELADA-CTE
+            END-IF
+            .
+      *------------------------------------------------------*
+      *   CANCELACION ULTIMOS 36 MESES   CARTERA             *
+      *------------------------------------------------------*
+       250-FECHA-CANCELADA-CAR.
+           MOVE    ZEROS       TO  W-MESES-CAN
+           COMPUTE W-MESES-CAN =
+                  (W-ANO-HOY-2 * 12 + W-MES-HOY-2) -
+                  (W-ANO-NOV-2 * 12 + W-MES-NOV-2)
+           IF W-MESES-CAN <= 36
+              IF NIT-SUSCRIP-S-ABD02 = 00860034313
+                 EVALUATE COD-CTA-ABD07
+                     WHEN = 05  MOVE  1  TO SW-CAN-CAB-DAV
+                     WHEN = 13  MOVE  1  TO SW-CAN-CAV-DAV
+                     WHEN = 03  MOVE  1  TO SW-CAN-CBR-DAV
+                     WHEN = 02  MOVE  1  TO SW-CAN-TDC-DAV
+                     WHEN = 14  MOVE  1  TO SW-CAN-CCL-DAV
+                     WHEN = 18  MOVE  1  TO SW-CAN-CCF-DAV
+                 END-EVALUATE
+              ELSE
+                 EVALUATE COD-CTA-ABD07
+                     WHEN = 05  MOVE  1  TO SW-CAN-CAB-OTRAS
+                     WHEN = 06  MOVE  1  TO SW-CAN-CAC-OTRAS
+                     WHEN = 27  MOVE  1  TO SW-CAN-CAC-OTRAS
+                     WHEN = 17  MOVE  1  TO SW-CAN-CAF-OTRAS
+                     WHEN = 04  MOVE  1  TO SW-CAN-CAU-OTRAS
+                     WHEN = 45  MOVE  1  TO SW-CAN-CAU-OTRAS
+                     WHEN = 13  MOVE  1  TO SW-CAN-CAV-OTRAS
+                     WHEN = 03  MOVE  1  TO SW-CAN-CBR-OTRAS
+                     WHEN = 15  MOVE  1  TO SW-CAN-CCC-OTRAS
+                     WHEN = 18  MOVE  1  TO SW-CAN-CCF-OTRAS
+                     WHEN = 26  MOVE  1  TO SW-CAN-CDB-OTRAS
+                     WHEN = 07  MOVE  1  TO SW-CAN-COF-OTRAS
+                     WHEN = 43  MOVE  1  TO SW-CAN-EDU-OTRAS
+                     WHEN = 44  MOVE  1  TO SW-CAN-SFI-OTRAS
+                     WHEN = 02  MOVE  1  TO SW-CAN-TDC-OTRAS
+                     WHEN = 14  MOVE  1  TO SW-CAN-CCL-OTRAS
+                     WHEN = 08  MOVE  1  TO SW-CAN-CFE-OTRAS
+                     WHEN = 33  MOVE  1  TO SW-CAN-CSA-OTRAS
+                     WHEN = 36  MOVE  1  TO SW-CAN-FUN-OTRAS
+                 END-EVALUATE
+              END-IF
+           END-IF
+           .
+      *------------------------------------------------------*
+      *   CANCELACION ULTIMOS 36 MESES   CTAS CORRIENTES     *
+      *------------------------------------------------------*
+       260-FECHA-CANCELADA-CTE.
+           IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+              NEXT SENTENCE
+           ELSE
+              MOVE    ZEROS       TO  W-MESES-CAN
+              COMPUTE W-MESES-CAN =
+                     (W-ANO-HOY-2 * 12 + W-MES-HOY-2) -
+                     (W-ANO-NOV-2 * 12 + W-MES-NOV-2)
+              IF W-MESES-CAN <= 36
+                 IF NIT-SUSCRIP-S-ABD02 = 00860034313
+                    IF W-TIPOCTA-HC = 01
+                        MOVE  1  TO SW-CAN-CTE-DAV
+                    ELSE
+                        MOVE  1  TO SW-CAN-AHO-DAV
+                    END-IF
+                 ELSE
+                    IF W-TIPOCTA-HC = 01
+                        MOVE  1  TO SW-CAN-CTE-OTRAS
+                    ELSE
+                        MOVE  1  TO SW-CAN-AHO-OTRAS
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           .
+      *-------------------------------------------------*
+      * CONVERSION FECHA APERTURA
+      *-------------------------------------------------*
+       0300-CONVERTIR-FECHA-APE.
+            MOVE  W-MES-AUX-3       TO  W-FMILENIO-MES
+            MOVE  W-ANO-AUX-3       TO  W-FMILENIO-ANIO
+            IF W-ANO-AUX-3   > 60
+               MOVE 19              TO  W-FMILENIO-SIGLO
+            ELSE
+               MOVE 20              TO  W-FMILENIO-SIGLO
+            END-IF
+            MOVE  W-FECHA-MILENIO   TO  W-FEC-APERTURA
+            IF SW-BASE = 1
+               IF TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 0
+                  PERFORM 350-FECHA-VIGENCIA-CAR
+               END-IF
+            ELSE
+               PERFORM 360-FECHA-VIGENCIA-CTE
+            END-IF.
+
+      *------------------------------------------------------*
+      *   VIGENCIA MINIMA DE 12 MESES  CARTERA               *
+      *------------------------------------------------------*
+       350-FECHA-VIGENCIA-CAR.
+           MOVE    ZEROS       TO  W-MESES-VIG
+           COMPUTE W-MESES-VIG =
+                  (W-ANO-NOV-2 * 12 + W-MES-NOV-2) -
+                  (W-ANO-APER * 12 + W-MES-APER)
+           IF W-MESES-VIG >= 12
+              IF NIT-SUSCRIP-S-ABD02 = 00860034313
+                 EVALUATE COD-CTA-ABD07
+                     WHEN = 05  MOVE  1  TO SW-APE-CAB-DAV
+                     WHEN = 13  MOVE  1  TO SW-APE-CAV-DAV
+                     WHEN = 03  MOVE  1  TO SW-APE-CBR-DAV
+                     WHEN = 02  MOVE  1  TO SW-APE-TDC-DAV
+                     WHEN = 14  MOVE  1  TO SW-APE-CCL-DAV
+                     WHEN = 18  MOVE  1  TO SW-APE-CCF-DAV
+                 END-EVALUATE
+              ELSE
+                 EVALUATE COD-CTA-ABD07
+                     WHEN = 05  MOVE  1  TO SW-APE-CAB-OTRAS
+                     WHEN = 06  MOVE  1  TO SW-APE-CAC-OTRAS
+                     WHEN = 27  MOVE  1  TO SW-APE-CAC-OTRAS
+                     WHEN = 17  MOVE  1  TO SW-APE-CAF-OTRAS
+                     WHEN = 04  MOVE  1  TO SW-APE-CAU-OTRAS
+                     WHEN = 45  MOVE  1  TO SW-APE-CAU-OTRAS
+                     WHEN = 13  MOVE  1  TO SW-APE-CAV-OTRAS
+                     WHEN = 03  MOVE  1  TO SW-APE-CBR-OTRAS
+                     WHEN = 15  MOVE  1  TO SW-APE-CCC-OTRAS
+                     WHEN = 18  MOVE  1  TO SW-APE-CCF-OTRAS
+                     WHEN = 26  MOVE  1  TO SW-APE-CDB-OTRAS
+                     WHEN = 07  MOVE  1  TO SW-APE-COF-OTRAS
+                     WHEN = 43  MOVE  1  TO SW-APE-EDU-OTRAS
+                     WHEN = 44  MOVE  1  TO SW-APE-SFI-OTRAS
+                     WHEN = 02  MOVE  1  TO SW-APE-TDC-OTRAS
+                     WHEN = 14  MOVE  1  TO SW-APE-CCL-OTRAS
+                     WHEN = 08  MOVE  1  TO SW-APE-CFE-OTRAS
+                     WHEN = 33  MOVE  1  TO SW-APE-CSA-OTRAS
+                     WHEN = 36  MOVE  1  TO SW-APE-FUN-OTRAS
+                 END-EVALUATE
+              END-IF
+           END-IF
+           .
+      *------------------------------------------------------*
+      *   VIGENCIA MINIMA DE 12 MESES  CTAS CORRIENTES       *
+      *------------------------------------------------------*
+       360-FECHA-VIGENCIA-CTE.
+           IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+              NEXT SENTENCE
+           ELSE
+              MOVE    ZEROS       TO  W-MESES-VIG
+              COMPUTE W-MESES-VIG =
+                     (W-ANO-NOV-2 * 12 + W-MES-NOV-2) -
+                     (W-ANO-APER * 12 + W-MES-APER)
+               IF W-MESES-VIG >= 12
+                  IF NIT-SUSCRIP-S-ABD02 = 00860034313
+                    IF W-TIPOCTA-HC = 01
+                        MOVE  1  TO SW-APE-CTE-DAV
+                    ELSE
+                        MOVE  1  TO SW-APE-AHO-DAV
+                    END-IF
+                 ELSE
+                    IF W-TIPOCTA-HC = 01
+                        MOVE  1  TO SW-APE-CTE-OTRAS
+                    ELSE
+                        MOVE  1  TO SW-APE-AHO-OTRAS
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           .
+      *-----------------------------------------------*
+       0400-CTAS-AHO-CTES-DAV.
+      *-----------------------------------------------*
+           IF W-TIPOCTA-HC = 01
+              IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+                 IF W-FEC-APERTURA < W-APE-ANTIG-CTE-VIG-DAV
+                    MOVE  W-FEC-APERTURA TO W-APE-ANTIG-CTE-VIG-DAV
+                 END-IF
+              ELSE
+                 IF SW-CAN-CTE-DAV = 1 AND SW-APE-CTE-DAV = 1
+                    IF W-FEC-NOVEDAD-2 > W-CAN-CTE-CANC-RECI-DAV
+                       MOVE  W-FEC-APERTURA TO
+                                       W-APE-CTE-CANC-RECI-DAV
+                       MOVE  W-FEC-NOVEDAD-2  TO
+                                       W-CAN-CTE-CANC-RECI-DAV
+                    END-IF
+                 ELSE
+                    IF W-FEC-NOVEDAD-2 > W-CTE-CANC-ULT-DAV
+                       MOVE  W-FEC-NOVEDAD-2  TO W-CTE-CANC-ULT-DAV
+                       MOVE  W-FEC-APERTURA TO W-CTE-APER-ULT-DAV
+                    END-IF
+                 END-IF
+              END-IF
+           ELSE
+              IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+                 IF W-FEC-APERTURA < W-APE-ANTIG-AHO-VIG-DAV
+                    MOVE  W-FEC-APERTURA TO W-APE-ANTIG-AHO-VIG-DAV
+                 END-IF
+              ELSE
+                 IF SW-CAN-AHO-DAV = 1 AND SW-APE-AHO-DAV = 1
+                    IF W-FEC-NOVEDAD-2 > W-CAN-AHO-CANC-RECI-DAV
+                       MOVE  W-FEC-APERTURA TO
+                                       W-APE-AHO-CANC-RECI-DAV
+                       MOVE  W-FEC-NOVEDAD-2  TO
+                                       W-CAN-AHO-CANC-RECI-DAV
+                    END-IF
+                 ELSE
+                    IF W-FEC-NOVEDAD-2 > W-AHO-CANC-ULT-DAV
+                       MOVE  W-FEC-NOVEDAD-2  TO W-AHO-CANC-ULT-DAV
+                       MOVE  W-FEC-APERTURA TO W-AHO-APER-ULT-DAV
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF.
+
+      *-----------------------------------------------*
+       0500-CTAS-AHO-CTES-OTROS.
+      *-----------------------------------------------*
+           IF W-TIPOCTA-HC = 01
+              IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+                 IF W-FEC-APERTURA < W-APE-ANTIG-CTE-VIG-OTRAS
+                    MOVE  W-FEC-APERTURA TO W-APE-ANTIG-CTE-VIG-OTRAS
+                 END-IF
+              ELSE
+                 IF SW-CAN-CTE-OTRAS = 1 AND SW-APE-CTE-OTRAS = 1
+                    IF W-FEC-NOVEDAD-2 > W-CAN-CTE-CANC-RECI-OTRAS
+                       MOVE  W-FEC-NOVEDAD-2  TO
+                                       W-CAN-CTE-CANC-RECI-OTRAS
+                       MOVE  W-FEC-APERTURA TO
+                                       W-APE-CTE-CANC-RECI-OTRAS
+                    END-IF
+                 ELSE
+                    IF W-FEC-NOVEDAD-2 > W-CTE-CANC-ULT-OTRAS
+                       MOVE  W-FEC-NOVEDAD-2  TO W-CTE-CANC-ULT-OTRAS
+                       MOVE  W-FEC-APERTURA TO W-CTE-APER-ULT-OTRAS
+                    END-IF
+                 END-IF
+              END-IF
+           ELSE
+              IF TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 30 OR 35
+                 IF W-FEC-APERTURA < W-APE-ANTIG-AHO-VIG-OTRAS
+                    MOVE  W-FEC-APERTURA TO W-APE-ANTIG-AHO-VIG-OTRAS
+                 END-IF
+              ELSE
+                 IF SW-CAN-AHO-OTRAS = 1 AND SW-APE-AHO-OTRAS = 1
+                    IF W-FEC-NOVEDAD-2 > W-CAN-AHO-CANC-RECI-OTRAS
+                       MOVE  W-FEC-NOVEDAD-2  TO
+                                       W-CAN-AHO-CANC-RECI-OTRAS
+                       MOVE  W-FEC-APERTURA TO
+                                       W-APE-AHO-CANC-RECI-OTRAS
+                    END-IF
+                 ELSE
+                    IF W-FEC-NOVEDAD-2 > W-AHO-CANC-ULT-OTRAS
+                       MOVE  W-FEC-NOVEDAD-2  TO W-AHO-CANC-ULT-OTRAS
+                       MOVE  W-FEC-APERTURA TO W-AHO-APER-ULT-OTRAS
+                    END-IF
+                 END-IF
+              END-IF
+           END-IF
+           .
+      *-----------------------------------------------*
+       0700-TIPO-CTAS-DAV.
+      *-----------------------------------------------*
+           IF TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1
+              EVALUATE COD-CTA-ABD07
+                  WHEN = 05
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAB-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAB-VIG-DAV
+                       END-IF
+                  WHEN = 13
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAV-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAV-VIG-DAV
+                       END-IF
+                  WHEN = 03
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CBR-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CBR-VIG-DAV
+                       END-IF
+                  WHEN = 02
+                       IF W-FEC-APERTURA < W-APE-ANTIG-TDC-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-TDC-VIG-DAV
+                       END-IF
+                  WHEN = 14
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CCL-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CCL-VIG-DAV
+                       END-IF
+                  WHEN = 18
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CCF-VIG-DAV
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CCF-VIG-DAV
+                       END-IF
+              END-EVALUATE
+           ELSE
+              EVALUATE COD-CTA-ABD07
+                  WHEN = 05
+                      IF SW-CAN-CAB-DAV = 1 AND SW-APE-CAB-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAB-CANC-RECI-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CAB-CANC-RECI-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CAB-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAB-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAB-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-CAB-APER-ULT-DAV
+                         END-IF
+                      END-IF
+                  WHEN = 13
+                      IF SW-CAN-CAV-DAV = 1 AND SW-APE-CAV-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAV-CANC-RECI-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CAV-CANC-RECI-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CAV-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAV-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAV-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-CAV-APER-ULT-DAV
+                         END-IF
+                      END-IF
+                  WHEN = 03
+                      IF SW-CAN-CBR-DAV = 1 AND SW-APE-CBR-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CBR-CANC-RECI-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CBR-CANC-RECI-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CBR-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CBR-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CBR-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-CBR-APER-ULT-DAV
+                         END-IF
+                      END-IF
+                  WHEN = 02
+                      IF SW-CAN-TDC-DAV = 1 AND SW-APE-TDC-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-TDC-CANC-RECI-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-TDC-CANC-RECI-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-TDC-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-TDC-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-TDC-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-TDC-APER-ULT-DAV
+                         END-IF
+                      END-IF
+                  WHEN = 14
+                      IF SW-CAN-CCL-DAV = 1 AND SW-APE-CCL-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CCL-CANC-RECI-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CCL-CANC-RECI-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CCL-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CCL-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CCL-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-CCL-APER-ULT-DAV
+                         END-IF
+                      END-IF
+                  WHEN = 18
+                      IF SW-CAN-CCF-DAV = 1 AND SW-APE-CCF-DAV = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CCF-CANC-RECI-DAV
+                             MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CCF-CANC-RECI-DAV
+                             MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CCF-CANC-RECI-DAV
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CCF-CANC-ULT-DAV
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CCF-CANC-ULT-DAV
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-CCF-APER-ULT-DAV
+                         END-IF
+                      END-IF
+              END-EVALUATE
+           END-IF.
+
+      *-----------------------------------------------*
+       0800-TIPO-CTAS-OTROS.
+      *-----------------------------------------------*
+           IF TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1
+              PERFORM  0850-OBLIG-VIG-TIPO-CTA
+           ELSE
+              PERFORM  0900-OBLIG-CAN-TIPO-CTA
+           END-IF.
+      *-----------------------------------------------*
+       0850-OBLIG-VIG-TIPO-CTA.
+      *-----------------------------------------------*
+           EVALUATE COD-CTA-ABD07
+                  WHEN = 05
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAB-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAB-VIG-OTRAS
+                       END-IF
+                  WHEN = 06 OR 27
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAC-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAC-VIG-OTRAS
+                       END-IF
+                  WHEN = 17
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAF-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAF-VIG-OTRAS
+                       END-IF
+                  WHEN = 04  OR 45
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAU-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAU-VIG-OTRAS
+                       END-IF
+                  WHEN = 18
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CCF-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CCF-VIG-OTRAS
+                       END-IF
+                  WHEN = 13
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CAV-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CAV-VIG-OTRAS
+                       END-IF
+                  WHEN = 03
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CBR-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CBR-VIG-OTRAS
+                       END-IF
+                  WHEN = 15
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CCC-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CCC-VIG-OTRAS
+                       END-IF
+                  WHEN = 26
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CDB-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CDB-VIG-OTRAS
+                       END-IF
+                  WHEN = 07
+                       IF W-FEC-APERTURA < W-APE-ANTIG-COF-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-COF-VIG-OTRAS
+                       END-IF
+                  WHEN = 43
+                       IF W-FEC-APERTURA < W-APE-ANTIG-EDU-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-EDU-VIG-OTRAS
+                       END-IF
+                  WHEN = 44
+                       IF W-FEC-APERTURA < W-APE-ANTIG-SFI-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-SFI-VIG-OTRAS
+                       END-IF
+                  WHEN = 02
+                       IF W-FEC-APERTURA < W-APE-ANTIG-TDC-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-TDC-VIG-OTRAS
+                       END-IF
+                  WHEN = 14
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CCL-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CCL-VIG-OTRAS
+                       END-IF
+                  WHEN = 08
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CFE-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CFE-VIG-OTRAS
+                       END-IF
+                  WHEN = 33
+                       IF W-FEC-APERTURA < W-APE-ANTIG-CSA-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-CSA-VIG-OTRAS
+                       END-IF
+                  WHEN = 36
+                       IF W-FEC-APERTURA < W-APE-ANTIG-FUN-VIG-OTRAS
+                          MOVE  W-FEC-APERTURA TO
+                                           W-APE-ANTIG-FUN-VIG-OTRAS
+                       END-IF
+           END-EVALUATE.           
+      *-----------------------------------------------*
+       0900-OBLIG-CAN-TIPO-CTA.
+      *-----------------------------------------------*
+            EVALUATE COD-CTA-ABD07
+                WHEN = 05
+                      IF SW-CAN-CAB-OTRAS = 1 AND
+                         SW-APE-CAB-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAB-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CAB-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CAB-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAB-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAB-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CAB-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                WHEN = 06  OR  27
+                      IF SW-CAN-CAC-OTRAS = 1 AND
+                         SW-APE-CAC-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAC-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                            W-CAN-CAC-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                            W-APE-CAC-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CAC-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 17
+                      IF SW-CAN-CAF-OTRAS = 1 AND
+                         SW-APE-CAF-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CAF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CAF-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CAF-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 04  OR  45
+                      IF SW-CAN-CAU-OTRAS = 1 AND
+                         SW-APE-CAU-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAU-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CAU-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CAU-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAU-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAU-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CAU-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 13
+                      IF SW-CAN-CAV-OTRAS = 1 AND
+                         SW-APE-CAV-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CAV-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CAV-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CAV-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CAV-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAV-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CAV-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 03
+                      IF SW-CAN-CBR-OTRAS = 1 AND
+                         SW-APE-CBR-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CBR-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CBR-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CBR-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CBR-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CBR-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CBR-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 15
+                      IF SW-CAN-CCC-OTRAS = 1 AND
+                         SW-APE-CCC-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CCC-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CCC-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CCC-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CCC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CCC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CCC-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 18
+                      IF SW-CAN-CCF-OTRAS = 1 AND
+                         SW-APE-CCF-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CCF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CCF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CCF-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CCF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CCF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CCF-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 26
+                      IF SW-CAN-CDB-OTRAS = 1 AND
+                         SW-APE-CDB-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CDB-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CDB-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CDB-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CDB-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CDB-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CDB-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 07
+                      IF SW-CAN-COF-OTRAS = 1 AND
+                         SW-APE-COF-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-COF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-COF-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-COF-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-COF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-COF-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-COF-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 43
+                      IF SW-CAN-EDU-OTRAS = 1 AND
+                         SW-APE-EDU-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-EDU-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-EDU-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-EDU-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-EDU-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-EDU-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-EDU-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 44
+                      IF SW-CAN-SFI-OTRAS = 1 AND
+                         SW-APE-SFI-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-SFI-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-SFI-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-SFI-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-SFI-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-SFI-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-SFI-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 02
+                      IF SW-CAN-TDC-OTRAS = 1 AND
+                         SW-APE-TDC-OTRAS = 1
+                        IF W-FEC-NOVEDAD-2 > W-CAN-TDC-CANC-RECI-OTRAS
+                           MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-TDC-CANC-RECI-OTRAS
+                           MOVE  W-FEC-APERTURA  TO
+                                         W-APE-TDC-CANC-RECI-OTRAS
+                        END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-TDC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-TDC-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-TDC-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 14
+                      IF SW-CAN-CCL-OTRAS = 1 AND
+                         SW-APE-CCL-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CCL-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CCL-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CCL-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CCL-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CCL-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CCL-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 08
+                      IF SW-CAN-CFE-OTRAS = 1 AND
+                         SW-APE-CFE-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CFE-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CFE-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CFE-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CFE-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CFE-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CFE-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 33
+                      IF SW-CAN-CSA-OTRAS = 1 AND
+                         SW-APE-CSA-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-CSA-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-CSA-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-CSA-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-CSA-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CSA-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-CSA-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+                  WHEN = 36
+                      IF SW-CAN-FUN-OTRAS = 1 AND
+                         SW-APE-FUN-OTRAS = 1
+                         IF W-FEC-NOVEDAD-2 > W-CAN-FUN-CANC-RECI-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-CAN-FUN-CANC-RECI-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-APE-FUN-CANC-RECI-OTRAS
+                         END-IF
+                      ELSE
+                         IF W-FEC-NOVEDAD-2 > W-FUN-CANC-ULT-OTRAS
+                            MOVE  W-FEC-NOVEDAD-2   TO
+                                         W-FUN-CANC-ULT-OTRAS
+                            MOVE  W-FEC-APERTURA  TO
+                                         W-FUN-APER-ULT-OTRAS
+                         END-IF
+                      END-IF
+            END-EVALUATE
+            .
+      *
+       9500-COPIAR-VARIABLES-DAV.
+      *----------------------------------------------------------------*
+      *   Fecha Apertura mas antigua  Vigente Davivienda
+      *----------------------------------------------------------------*
+            IF W-APE-ANTIG-AHO-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-AHO-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-AHO-VIG-DAV TO
+                    F-APE-ANTIG-AHO-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CTE-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CTE-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CTE-VIG-DAV TO
+                    F-APE-ANTIG-CTE-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CAB-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAB-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CAB-VIG-DAV TO
+                    F-APE-ANTIG-CAB-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CAV-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAV-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CAV-VIG-DAV TO
+                    F-APE-ANTIG-CAV-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CBR-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CBR-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CBR-VIG-DAV TO
+                    F-APE-ANTIG-CBR-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-TDC-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-TDC-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-TDC-VIG-DAV TO
+                    F-APE-ANTIG-TDC-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CCL-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CCL-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CCL-VIG-DAV TO
+                    F-APE-ANTIG-CCL-VIG-DAV
+            END-IF
+            IF W-APE-ANTIG-CCF-VIG-DAV = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CCF-VIG-DAV
+            ELSE
+               MOVE W-APE-ANTIG-CCF-VIG-DAV TO
+                    F-APE-ANTIG-CCF-VIG-DAV
+            END-IF
+      *----------------------------------------------------------------*
+      *   Fecha Apertura mas antigua Vigente Otras Entidades
+      *----------------------------------------------------------------*
+            IF W-APE-ANTIG-AHO-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-AHO-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-AHO-VIG-OTRAS TO
+                    F-APE-ANTIG-AHO-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CTE-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CTE-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CTE-VIG-OTRAS TO
+                    F-APE-ANTIG-CTE-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CAB-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAB-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CAB-VIG-OTRAS TO
+                    F-APE-ANTIG-CAB-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CAC-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAC-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CAC-VIG-OTRAS TO
+                    F-APE-ANTIG-CAC-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CAF-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAF-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CAF-VIG-OTRAS TO
+                    F-APE-ANTIG-CAF-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CAU-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAU-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CAU-VIG-OTRAS TO
+                    F-APE-ANTIG-CAU-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CCF-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CCF-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CCF-VIG-OTRAS TO
+                    F-APE-ANTIG-CCF-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CAV-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CAV-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CAV-VIG-OTRAS TO
+                    F-APE-ANTIG-CAV-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CBR-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CBR-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CBR-VIG-OTRAS TO
+                    F-APE-ANTIG-CBR-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CCC-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CCC-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CCC-VIG-OTRAS TO
+                    F-APE-ANTIG-CCC-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CDB-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CDB-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CDB-VIG-OTRAS TO
+                    F-APE-ANTIG-CDB-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-COF-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-COF-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-COF-VIG-OTRAS TO
+                    F-APE-ANTIG-COF-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-EDU-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-EDU-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-EDU-VIG-OTRAS TO
+                    F-APE-ANTIG-EDU-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-SFI-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-SFI-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-SFI-VIG-OTRAS TO
+                    F-APE-ANTIG-SFI-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-TDC-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-TDC-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-TDC-VIG-OTRAS TO
+                    F-APE-ANTIG-TDC-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CCL-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CCL-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CCL-VIG-OTRAS TO
+                    F-APE-ANTIG-CCL-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CFE-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CFE-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CFE-VIG-OTRAS TO
+                    F-APE-ANTIG-CFE-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-CSA-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-CSA-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-CSA-VIG-OTRAS TO
+                    F-APE-ANTIG-CSA-VIG-OTRAS
+            END-IF
+            IF W-APE-ANTIG-FUN-VIG-OTRAS = 999999
+               MOVE ZEROS TO F-APE-ANTIG-FUN-VIG-OTRAS
+            ELSE
+               MOVE W-APE-ANTIG-FUN-VIG-OTRAS TO
+                    F-APE-ANTIG-FUN-VIG-OTRAS
+            END-IF
+      *----------------------------------------------------------------*
+      *   CTAS cancelada más reciente Davivienda: Fecha de Apertura
+      *                                           Fecha de Cancelación
+      *----------------------------------------------------------------*
+           IF W-CAN-AHO-CANC-RECI-DAV = ZEROS
+              MOVE W-AHO-CANC-ULT-DAV  TO F-CAN-AHO-CANC-RECI-DAV
+              MOVE W-AHO-APER-ULT-DAV  TO F-APE-AHO-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-AHO-CANC-RECI-DAV TO F-CAN-AHO-CANC-RECI-DAV
+              MOVE W-APE-AHO-CANC-RECI-DAV TO F-APE-AHO-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CTE-CANC-RECI-DAV = ZEROS
+              MOVE W-CTE-CANC-ULT-DAV  TO F-CAN-CTE-CANC-RECI-DAV
+              MOVE W-CTE-APER-ULT-DAV  TO F-APE-CTE-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CTE-CANC-RECI-DAV TO F-CAN-CTE-CANC-RECI-DAV
+              MOVE W-APE-CTE-CANC-RECI-DAV TO F-APE-CTE-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CAB-CANC-RECI-DAV = ZEROS
+              MOVE W-CAB-CANC-ULT-DAV  TO F-CAN-CAB-CANC-RECI-DAV
+              MOVE W-CAB-APER-ULT-DAV  TO F-APE-CAB-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CAB-CANC-RECI-DAV TO F-CAN-CAB-CANC-RECI-DAV
+              MOVE W-APE-CAB-CANC-RECI-DAV TO F-APE-CAB-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CAV-CANC-RECI-DAV = ZEROS
+              MOVE W-CAV-CANC-ULT-DAV  TO F-CAN-CAV-CANC-RECI-DAV
+              MOVE W-CAV-APER-ULT-DAV  TO F-APE-CAV-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CAV-CANC-RECI-DAV TO F-CAN-CAV-CANC-RECI-DAV
+              MOVE W-APE-CAV-CANC-RECI-DAV TO F-APE-CAV-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CBR-CANC-RECI-DAV = ZEROS
+              MOVE W-CBR-CANC-ULT-DAV  TO F-CAN-CBR-CANC-RECI-DAV
+              MOVE W-CBR-APER-ULT-DAV  TO F-APE-CBR-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CBR-CANC-RECI-DAV TO F-CAN-CBR-CANC-RECI-DAV
+              MOVE W-APE-CBR-CANC-RECI-DAV TO F-APE-CBR-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-TDC-CANC-RECI-DAV = ZEROS
+              MOVE W-TDC-CANC-ULT-DAV  TO F-CAN-TDC-CANC-RECI-DAV
+              MOVE W-TDC-APER-ULT-DAV  TO F-APE-TDC-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-TDC-CANC-RECI-DAV TO F-CAN-TDC-CANC-RECI-DAV
+              MOVE W-APE-TDC-CANC-RECI-DAV TO F-APE-TDC-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CCL-CANC-RECI-DAV = ZEROS
+              MOVE W-CCL-CANC-ULT-DAV  TO F-CAN-CCL-CANC-RECI-DAV
+              MOVE W-CCL-APER-ULT-DAV  TO F-APE-CCL-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CCL-CANC-RECI-DAV TO F-CAN-CCL-CANC-RECI-DAV
+              MOVE W-APE-CCL-CANC-RECI-DAV TO F-APE-CCL-CANC-RECI-DAV
+           END-IF
+           IF W-CAN-CCF-CANC-RECI-DAV = ZEROS
+              MOVE W-CCF-CANC-ULT-DAV  TO F-CAN-CCF-CANC-RECI-DAV
+              MOVE W-CCF-APER-ULT-DAV  TO F-APE-CCF-CANC-RECI-DAV
+           ELSE
+              MOVE W-CAN-CCF-CANC-RECI-DAV TO F-CAN-CCF-CANC-RECI-DAV
+              MOVE W-APE-CCF-CANC-RECI-DAV TO F-APE-CCF-CANC-RECI-DAV
+           END-IF
+      *----------------------------------------------------------------*
+      *   CTAS cancelada más reciente Otras entidades:Fecha de Apertura
+      *                                           Fecha de Cancelación
+      *----------------------------------------------------------------*
+           IF W-CAN-AHO-CANC-RECI-OTRAS = ZEROS
+              MOVE W-AHO-CANC-ULT-OTRAS  TO F-CAN-AHO-CANC-RECI-OTRAS
+              MOVE W-AHO-APER-ULT-OTRAS  TO F-APE-AHO-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-AHO-CANC-RECI-OTRAS TO
+                                            F-CAN-AHO-CANC-RECI-OTRAS
+              MOVE W-APE-AHO-CANC-RECI-OTRAS TO
+                                            F-APE-AHO-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CTE-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CTE-CANC-ULT-OTRAS  TO F-CAN-CTE-CANC-RECI-OTRAS
+              MOVE W-CTE-APER-ULT-OTRAS  TO F-APE-CTE-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CTE-CANC-RECI-OTRAS TO
+                                            F-CAN-CTE-CANC-RECI-OTRAS
+              MOVE W-APE-CTE-CANC-RECI-OTRAS TO
+                                            F-APE-CTE-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CAB-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CAB-CANC-ULT-OTRAS  TO
+                   F-CAN-CAB-CANC-RECI-OTRAS
+              MOVE W-CAB-APER-ULT-OTRAS  TO
+                   F-APE-CAB-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CAB-CANC-RECI-OTRAS TO
+                   F-CAN-CAB-CANC-RECI-OTRAS
+              MOVE W-APE-CAB-CANC-RECI-OTRAS TO
+                   F-APE-CAB-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CAC-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CAC-CANC-ULT-OTRAS  TO
+                   F-CAN-CAC-CANC-RECI-OTRAS
+              MOVE W-CAC-APER-ULT-OTRAS  TO
+                   F-APE-CAC-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CAC-CANC-RECI-OTRAS TO
+                   F-CAN-CAC-CANC-RECI-OTRAS
+              MOVE W-APE-CAC-CANC-RECI-OTRAS TO
+                   F-APE-CAC-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CAF-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CAF-CANC-ULT-OTRAS  TO
+                   F-CAN-CAF-CANC-RECI-OTRAS
+              MOVE W-CAF-APER-ULT-OTRAS  TO
+                   F-APE-CAF-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CAF-CANC-RECI-OTRAS TO
+                   F-CAN-CAF-CANC-RECI-OTRAS
+              MOVE W-APE-CAF-CANC-RECI-OTRAS TO
+                   F-APE-CAF-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CAU-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CAU-CANC-ULT-OTRAS  TO
+                   F-CAN-CAU-CANC-RECI-OTRAS
+              MOVE W-CAU-APER-ULT-OTRAS  TO
+                   F-APE-CAU-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CAU-CANC-RECI-OTRAS TO
+                   F-CAN-CAU-CANC-RECI-OTRAS
+              MOVE W-APE-CAU-CANC-RECI-OTRAS TO
+                   F-APE-CAU-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CAV-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CAV-CANC-ULT-OTRAS  TO
+                   F-CAN-CAV-CANC-RECI-OTRAS
+              MOVE W-CAV-APER-ULT-OTRAS  TO
+                   F-APE-CAV-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CAV-CANC-RECI-OTRAS TO
+                   F-CAN-CAV-CANC-RECI-OTRAS
+              MOVE W-APE-CAV-CANC-RECI-OTRAS TO
+                   F-APE-CAV-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CBR-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CBR-CANC-ULT-OTRAS  TO
+                   F-CAN-CBR-CANC-RECI-OTRAS
+              MOVE W-CBR-APER-ULT-OTRAS  TO
+                   F-APE-CBR-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CBR-CANC-RECI-OTRAS TO
+                   F-CAN-CBR-CANC-RECI-OTRAS
+              MOVE W-APE-CBR-CANC-RECI-OTRAS TO
+                   F-APE-CBR-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CCC-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CCC-CANC-ULT-OTRAS  TO
+                   F-CAN-CCC-CANC-RECI-OTRAS
+              MOVE W-CCC-APER-ULT-OTRAS  TO
+                   F-APE-CCC-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CCC-CANC-RECI-OTRAS TO
+                   F-CAN-CCC-CANC-RECI-OTRAS
+              MOVE W-APE-CCC-CANC-RECI-OTRAS TO
+                   F-APE-CCC-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CCF-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CCF-CANC-ULT-OTRAS  TO
+                   F-CAN-CCF-CANC-RECI-OTRAS
+              MOVE W-CCF-APER-ULT-OTRAS  TO
+                   F-APE-CCF-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CCF-CANC-RECI-OTRAS TO
+                   F-CAN-CCF-CANC-RECI-OTRAS
+              MOVE W-APE-CCF-CANC-RECI-OTRAS TO
+                   F-APE-CCF-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CDB-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CDB-CANC-ULT-OTRAS  TO
+                   F-CAN-CDB-CANC-RECI-OTRAS
+              MOVE W-CDB-APER-ULT-OTRAS  TO
+                   F-APE-CDB-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CDB-CANC-RECI-OTRAS TO
+                   F-CAN-CDB-CANC-RECI-OTRAS
+              MOVE W-APE-CDB-CANC-RECI-OTRAS TO
+                   F-APE-CDB-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-COF-CANC-RECI-OTRAS = ZEROS
+              MOVE W-COF-CANC-ULT-OTRAS  TO
+                   F-CAN-COF-CANC-RECI-OTRAS
+              MOVE W-COF-APER-ULT-OTRAS  TO
+                   F-APE-COF-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-COF-CANC-RECI-OTRAS TO
+                   F-CAN-COF-CANC-RECI-OTRAS
+              MOVE W-APE-COF-CANC-RECI-OTRAS TO
+                   F-APE-COF-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-EDU-CANC-RECI-OTRAS = ZEROS
+              MOVE W-EDU-CANC-ULT-OTRAS  TO
+                   F-CAN-EDU-CANC-RECI-OTRAS
+              MOVE W-EDU-APER-ULT-OTRAS  TO
+                   F-APE-EDU-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-EDU-CANC-RECI-OTRAS TO
+                   F-CAN-EDU-CANC-RECI-OTRAS
+              MOVE W-APE-EDU-CANC-RECI-OTRAS TO
+                   F-APE-EDU-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-SFI-CANC-RECI-OTRAS = ZEROS
+              MOVE W-SFI-CANC-ULT-OTRAS  TO
+                   F-CAN-SFI-CANC-RECI-OTRAS
+              MOVE W-SFI-APER-ULT-OTRAS  TO
+                   F-APE-SFI-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-SFI-CANC-RECI-OTRAS TO
+                   F-CAN-SFI-CANC-RECI-OTRAS
+              MOVE W-APE-SFI-CANC-RECI-OTRAS TO
+                   F-APE-SFI-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-TDC-CANC-RECI-OTRAS = ZEROS
+              MOVE W-TDC-CANC-ULT-OTRAS  TO
+                   F-CAN-TDC-CANC-RECI-OTRAS
+              MOVE W-TDC-APER-ULT-OTRAS  TO
+                   F-APE-TDC-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-TDC-CANC-RECI-OTRAS TO
+                   F-CAN-TDC-CANC-RECI-OTRAS
+              MOVE W-APE-TDC-CANC-RECI-OTRAS TO
+                   F-APE-TDC-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CCL-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CCL-CANC-ULT-OTRAS  TO
+                   F-CAN-CCL-CANC-RECI-OTRAS
+              MOVE W-CCL-APER-ULT-OTRAS  TO
+                   F-APE-CCL-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CCL-CANC-RECI-OTRAS TO
+                   F-CAN-CCL-CANC-RECI-OTRAS
+              MOVE W-APE-CCL-CANC-RECI-OTRAS TO
+                   F-APE-CCL-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CFE-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CFE-CANC-ULT-OTRAS  TO
+                   F-CAN-CFE-CANC-RECI-OTRAS
+              MOVE W-CFE-APER-ULT-OTRAS  TO
+                   F-APE-CFE-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CFE-CANC-RECI-OTRAS TO
+                   F-CAN-CFE-CANC-RECI-OTRAS
+              MOVE W-APE-CFE-CANC-RECI-OTRAS TO
+                   F-APE-CFE-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-CSA-CANC-RECI-OTRAS = ZEROS
+              MOVE W-CSA-CANC-ULT-OTRAS  TO
+                   F-CAN-CSA-CANC-RECI-OTRAS
+              MOVE W-CSA-APER-ULT-OTRAS  TO
+                   F-APE-CSA-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-CSA-CANC-RECI-OTRAS TO
+                   F-CAN-CSA-CANC-RECI-OTRAS
+              MOVE W-APE-CSA-CANC-RECI-OTRAS TO
+                   F-APE-CSA-CANC-RECI-OTRAS
+           END-IF
+           IF W-CAN-FUN-CANC-RECI-OTRAS = ZEROS
+              MOVE W-FUN-CANC-ULT-OTRAS  TO
+                   F-CAN-FUN-CANC-RECI-OTRAS
+              MOVE W-FUN-APER-ULT-OTRAS  TO
+                   F-APE-FUN-CANC-RECI-OTRAS
+           ELSE
+              MOVE W-CAN-FUN-CANC-RECI-OTRAS TO
+                   F-CAN-FUN-CANC-RECI-OTRAS
+              MOVE W-APE-FUN-CANC-RECI-OTRAS TO
+                   F-APE-FUN-CANC-RECI-OTRAS
+           END-IF
+           MOVE   ";"  TO  CHAR-03 CHAR-04
+           MOVE   ";"  TO  CHAR-05 CHAR-06 CHAR-07 CHAR-08
+           MOVE   ";"  TO  CHAR-09 CHAR-10 CHAR-11 CHAR-12
+           MOVE   ";"  TO  CHAR-13 CHAR-14 CHAR-15 CHAR-16
+           MOVE   ";"  TO  CHAR-17 CHAR-18 CHAR-19 CHAR-20
+           MOVE   ";"  TO  CHAR-21 CHAR-22 CHAR-23 CHAR-24
+           MOVE   ";"  TO  CHAR-25 CHAR-26 CHAR-27 CHAR-28
+           MOVE   ";"  TO  CHAR-29 CHAR-30 CHAR-31 CHAR-32
+           MOVE   ";"  TO  CHAR-33 CHAR-34 CHAR-35 CHAR-36
+           MOVE   ";"  TO  CHAR-37 CHAR-38 CHAR-39 CHAR-40
+           MOVE   ";"  TO  CHAR-41 CHAR-42 CHAR-43 CHAR-44
+           MOVE   ";"  TO  CHAR-45 CHAR-46 CHAR-47 CHAR-48
+           MOVE   ";"  TO  CHAR-49 CHAR-50 CHAR-51 CHAR-52
+           MOVE   ";"  TO  CHAR-53 CHAR-54 CHAR-55 CHAR-56
+           MOVE   ";"  TO  CHAR-57 CHAR-58 CHAR-59 CHAR-60
+           MOVE   ";"  TO  CHAR-61 CHAR-62 CHAR-63 CHAR-64
+           MOVE   ";"  TO  CHAR-65 CHAR-66 CHAR-67 CHAR-68
+           MOVE   ";"  TO  CHAR-69 CHAR-70 CHAR-71 CHAR-72
+           MOVE   ";"  TO  CHAR-73 CHAR-74 CHAR-75 CHAR-76
+           MOVE   ";"  TO  CHAR-77 CHAR-78 CHAR-79 CHAR-80
+           MOVE   ";"  TO  CHAR-81 CHAR-82 CHAR-83
+           .
+           
+       9600-EVALUAR-CTACTE-DAV.
+           MOVE  ZEROS             TO  W-FECHA-AUX-3
+           MOVE FEC-NOVEDAD-ABD06  TO  W-FECHA-AUX-3
+           PERFORM  0200-CONVERTIR-FECHA-NOV
+           MOVE  ZEROS             TO  W-FECHA-AUX-3
+           MOVE FECHA-APERT-ABD06  TO  W-FECHA-AUX-3
+           PERFORM  0300-CONVERTIR-FECHA-APE
+           MOVE COD-SUS-ABD06  TO  W-SUSCRIPTOR-2
+           IF NIT-SUSCRIP-S-ABD02 = 00860034313
+              PERFORM 0400-CTAS-AHO-CTES-DAV
+           ELSE
+              PERFORM 0500-CTAS-AHO-CTES-OTROS
+           END-IF
+           .
+           
+       9700-EVALUAR-CARTERA-DAV.
+           PERFORM  0650-EVALUAR-CODEUDOR
+           IF SW-CODEUDOR = 0
+              IF COD-CTA-ABD07 = 02 OR
+                 COD-SUS-ABD07 = 240033 OR 080001
+                 PERFORM 0660-EVALUAR-PRODUCTO
+              END-IF
+              MOVE  ZEROS             TO  W-FECHA-AUX-3
+              MOVE FEC-NOVEDAD-ABD07  TO  W-FECHA-AUX-3
+              PERFORM  0200-CONVERTIR-FECHA-NOV
+              MOVE  ZEROS             TO  W-FECHA-AUX-3
+              MOVE FECHA-APERT-ABD07  TO  W-FECHA-AUX-3
+              PERFORM  0300-CONVERTIR-FECHA-APE
+              IF NIT-SUSCRIP-S-ABD02 = 00860034313
+                 PERFORM 0700-TIPO-CTAS-DAV
+              ELSE
+                 PERFORM 0800-TIPO-CTAS-OTROS
+              END-IF
+           END-IF       
+           .
+      *----------------------------------------------------------------*
+      * RECATEGORIZA EL PRODUCTO DEPENDIENDO DEL SUSCRIPTOR            *
+      *----------------------------------------------------------------*
+       0660-EVALUAR-PRODUCTO.
+            IF COD-SUS-ABD07 = 020151 OR 020167 OR 020370
+               MOVE   11  TO  COD-CTA-ABD07
+            ELSE
+               IF COD-SUS-ABD07 = 020055 OR 020007
+                  MOVE   03  TO  COD-CTA-ABD07
+               ELSE
+                  IF COD-SUS-ABD07 = 240033
+                     MOVE   23  TO  COD-CTA-ABD07
+                  END-IF
+              END-IF
+           END-IF.
+      *----------------------------------------------------------------*
+      *                    REVISA CODEUDOR                             *
+      *----------------------------------------------------------------*
+       0650-EVALUAR-CODEUDOR.
+            MOVE  ZEROS        TO SW-CODEUDOR
+            MOVE NUM-CTA-ABD07 TO TEM-NRO-CTA
+            IF TEM-NRO-CTA-C17 = "C" OR "c"
+               MOVE  1 TO  SW-CODEUDOR
+            ELSE
+               IF GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8
+                  MOVE  1  TO  SW-CODEUDOR
+               END-IF
+            END-IF.           

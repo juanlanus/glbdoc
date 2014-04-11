@@ -1,0 +1,30 @@
+      * ICBPER-FD.v.0004
+      * MAESTRO DE PERSONAS NACIONALES Y EXTRANJERAS Y DE PERSONAS
+      * JURIDICAS QUE TIENE INFORMACION EN LA BASE DE DATOS
+REMARK******************************************************************
+REAMRK*GJC0004   * BLQTUT: CAMPO PARA APLICACION DE BLOQUEO DE IMFORMACION
+REMARK*G.JIMENEZ * DE LA IDENTIFICACION POR TUTELA PERDIDA
+REAMRK*SEPT.18/03*
+REMARK******************************************************************
+019900 FD  MAESTRO-PERSON.
+020000*    MASTER FILE OF PERSONS, TYPE = 1
+020100 01  COMPLETO-ABD05.
+020200     03  LLAVE-MAES-PERSON.
+020300         05  TIPO-ID-ABD05       PIC 9.
+020400         05  NUM-ID-ABD05        PIC 9(11).
+020700     03  RAZONSOCIAL-ABD05.
+020800         05  PR-APELLIDO-ABD05   PIC X(15).
+020900         05  SG-APELLIDO-ABD05   PIC X(15).
+021000         05  NOMBRE-ABD05        PIC X(15).
+           03  INF-ADICIONAL-ABD05.                                      AMPLIA
+               05  TELEF-RESIDENCIA-ABD05   PIC 9(10)  COMP-3.           AMPLIA
+               05  TELEF-LABORAL-ABD05      PIC 9(10)  COMP-3.           AMPLIA
+               05  DIREC-RESIDENCIA-ABD05   PIC X(40).                   AMPLIA
+               05  DIREC-LABORAL-ABD05      PIC X(40).                   AMPLIA
+               05  CONSECUTIVO-ABD05        PIC 99     COMP-3.           VMATCH
+               05  FLAG-ABD05               PIC 99     COMP-3.           VMATCH
+               05  ESTADO-CIVIL-ABD05       PIC 9      COMP-3.           VMATCH
+               05  HITS-ABD05               PIC 9      COMP-3.           VMATCH
+               05  FECHA-NACIMIENTO-ABD05   PIC 9(6)   COMP-3.           VMATCH
+BLQTUT         05  BLOQUEO-TUTELA-ABD05     PIC X(1).                   GJC0004 
+BLQTUT         05  FILLER-ABD05             PIC X(4).                   GJC0004 

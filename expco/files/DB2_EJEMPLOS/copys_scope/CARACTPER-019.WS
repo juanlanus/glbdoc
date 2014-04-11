@@ -1,0 +1,3 @@
+REMARK*CARACTPER-019.WS.v.0001.
+        01 PERSONALIZACION-19.
+           05 00DEM999019                PIC 9(01). 

@@ -1,0 +1,36 @@
+REMARK*CARACTPER-019.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 019 *
+REMARK*    PARA TELEFONICA TELECOM.                                    *
+REMARK******************************************************************
+      ******************************************************************
+      * IMS0001    | CQ5728 - Telefonica Telecom.                      *
+      * 08-MAY-2012|    REQ. CQ. 5728.                                 *
+      * M.SALAMANCA|                                                   *
+      ******************************************************************
+      * CO00DEM999019 = Tipo Identificacion    PIC 9(01).              *
+      ******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-019.  
+      * 1                                                               
+               ADD   1                 TO  I-VAR-PER                    
+               MOVE "00DEM999019    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    
+               MOVE  FUNCTION LENGTH(00DEM999019) TO L-AUX              
+               MOVE  00DEM999019(1:L-AUX)  TO                           
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)             
+            .
+       0000-INICIALIZAR-CARAC-EXT-19.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-19.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 19  *
+REMARK*----------------------------------------------------------------*  
+           MOVE ZEROS TO 00DEM999019  
+           PERFORM 9999-CARACT-TELECOM
+           .               
+       9999-CARACT-TELECOM. 
+REMARK*----------------------------------------------------------------*
+REMARK*9999-CARACT-TELECOM.                                            *
+REMARK*      BUSCA CARACTERISTICAS DE TELECOM                          *
+REMARK*----------------------------------------------------------------*
+      * 1. TIPO DE IDENTIFICACION
+           MOVE TIPO-ID-CARACT          TO  00DEM999019
+           .

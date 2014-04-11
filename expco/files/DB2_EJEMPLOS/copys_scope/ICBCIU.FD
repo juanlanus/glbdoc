@@ -1,0 +1,9 @@
+022400*----------------------------------------------------------------*
+      * EST021.v.02.002
+022600*    MAESTRO DE CIUDADES Y  SU REGIONALE  ASOCIADA 
+022500 FD  ABD14.       
+022700 01  COMPLETO-ABD14.
+022800     03  SEC-CIUDAD-ABD14          PIC 9(3).
+022810     03  DES-CORTA-ABD14           PIC X(3).
+022900     03  NOMBRE-ABD14              PIC X(30).
+023000     03  REGIONAL-ABD14            PIC 9(3). 

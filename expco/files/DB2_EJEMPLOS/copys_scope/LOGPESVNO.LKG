@@ -1,0 +1,28 @@
+      *LOGPESVNO-LK.v.00001
+      ************************************************************
+      *P.VARGAS   *CQ6271  LINKAGE PARA TRANSFERENCIA            *
+      *SEP/2012   *                                              *
+      ************************************************************
+       01  LOGPESVNO-LK.  
+           05 LLAVE1-LOGPESVNO-LK.
+              07 ARCHI-LOGPESVNO-LK       PIC   X(40).
+              07 TIPPRO-LOGPESVNO-LK      PIC   X(01).
+           05 LLAVE2-LOGPESVNO-LK.        
+              07 NUMOP-LOGPESVNO-LK       PIC   9(12).
+           05 LLAVE3-LOGPESVNO-LK.        
+              07 FECPRO-LOGPESVNO-LK      PIC   9(08).
+              07 HORPRO-LOGPESVNO-LK      PIC   9(04).
+           05 DATA-LOGPESVNO-LK.          
+              07 LEIDOS-LOGPESVNO-LK      PIC   9(12).
+              07 TIPO5-LOGPESVNO-LK       PIC   9(12).
+              07 TIPO6-LOGPESVNO-LK       PIC   9(12).
+              07 TIPO7-LOGPESVNO-LK       PIC   9(12).
+              07 TIPO5PJ-LOGPESVNO-LK     PIC   9(12).             
+              07 CONPRO-LOGPESVNO-LK      PIC   9(05).
+              07 ESTADO-LOGPESVNO-LK      PIC   X(01).
+              07 TARIFA-LOGPESVNO-LK      PIC   9(12).
+              07 VALORPJ-LOGPESVNO-LK     PIC   9(12).
+              07 PROGRAM-LOGPESVNO-LK     PIC   X(30).
+              07 FILLER                   PIC   X(100).
+       01  TRANSAC-STATUS-LK              PIC   X(02).
+

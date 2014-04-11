@@ -1,0 +1,58 @@
+REMARK* MAECLI-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO MAESTRO DE REPORTE DE CLIENTES          *
+REMARK******************************************************************
+       FD  MAECLI.
+       01  REG-MAECLI.
+           03  REGISTRO-MAECLI                     PIC  X(350).
+           03  REG-RED-CAB-MAECLI   REDEFINES  REGISTRO-MAECLI.
+               05 CAB-IND-REG-MAECLI               PIC  X(018).
+               05 CAB-COD-SUBSC-MAECLI             PIC  9(006).
+               05 CAB-FECHA-CORTE-MAECLI           PIC  9(008).
+               05 CAB-FECHA-CORTE-MAECLI-R REDEFINES 
+	                         CAB-FECHA-CORTE-MAECLI.
+	          07 CAB-SIG-FEC-CORTE-MAECLI      PIC  9(002).
+		  07 CAB-ANO-FEC-CORTE-MAECLI      PIC  9(002).
+		  07 CAB-MES-FEC-CORTE-MAECLI      PIC  9(002).
+		  07 CAB-DIA-FEC-CORTE-MAECLI      PIC  9(002).
+	       05 CAB-NIT-ENTIDAD-MAECLI           PIC  9(011).
+               05 CAB-FILLER-MAECLI                PIC  X(307).
+           03  REG-RED-DET-MAECLI   REDEFINES  REGISTRO-MAECLI.
+               05 DET-TIPO-ID-MAECLI               PIC  9(001).
+               05 DET-NUM-ID-MAECLI                PIC  9(011).
+               05 DET-NOMBRE-MAECLI                PIC  X(045).
+               05 DET-FECHA-EXP-DOC-MAECLI         PIC  9(008).
+               05 DET-LUGAR-EXP-DOC-MAECLI         PIC  9(008).
+               05 DET-FECHA-NACIM-MAECLI           PIC  9(008).
+               05 DET-ACTIV-ECONOM-MAECLI          PIC  9(002).
+               05 DET-CIIU-MAECLI                  PIC  9(004).
+               05 DET-ESTRATO-MAECLI               PIC  9(002).
+               05 DET-PERS-A-CARGO-MAECLI          PIC  9(006).
+               05 DET-FEC-ACTU-PER-MAECLI          PIC  9(008).
+               05 DET-ESTADO-CIVIL-MAECLI          PIC  9(002).
+               05 DET-FEC-ACTU-EST-MAECLI          PIC  9(008).
+               05 DET-NIVEL-ESTUDI-MAECLI          PIC  9(002).
+               05 DET-FEC-ACTU-NIV-MAECLI          PIC  9(008).
+               05 DET-INGRESOS-MAECLI              PIC  9(013).
+               05 DET-FEC-ACTU-ING-MAECLI          PIC  9(008).
+               05 DET-ACTIVOS-MAECLI               PIC  9(013).
+               05 DET-PASIVOS-MAECLI               PIC  9(013).
+               05 DET-FEC-CORTE-BALANCE-MAECLI     PIC  9(008).
+               05 DET-NUM-NIT-EMPLEADOR-MAECLI     PIC  9(011).
+               05 DET-EMPLEADOR-MAECLI             PIC  X(045).
+               05 DET-FEC-INGRESO-EMPRESA-MAECLI   PIC  9(008).
+               05 DET-FEC-ACTU-EMP-MAECLI          PIC  9(008).
+               05 DET-TIPO-CONTRATO-MAECLI         PIC  9(001).
+               05 DET-FEC-ACTU-CONTR-MAECLI        PIC  9(008).
+               05 DET-OPER-INTERNAL-MAECLI         PIC  9(001).
+               05 DET-FEC-ACTU-OPER-MAECLI         PIC  9(008).
+               05 DET-COD-ESTADO-TITULAR-MAECLI    PIC  9(001).
+               05 DET-FUERZA-MAYOR-MAECLI          PIC  9(001).
+               05 DET-FEC-REP-FUERZA-MAYOR-MAECLI  PIC  9(008).
+               05 DET-FILLER-MAECLI                PIC  X(072).
+           03  REG-RED-CON-MAECLI   REDEFINES  REGISTRO-MAECLI.
+               05 CON-IND-REG-MAECLI	           PIC  X(018).
+               05 CON-FECHA-PROCESO-MAECLI         PIC  9(008).
+               05 CON-NUM-REG-MAECLI               PIC  9(008).
+	       05 CON-SUMA-REGIDE-MAECLI	   PIC  9(018).
+               05 CON-FILLER-MAECLI                PIC  X(298).

@@ -1,0 +1,199 @@
+REMARK* DTRLLAK.PROC.v.0006
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS QUE SE DEBEN MANEJAR 
+REMARK* CUANDO CUALQUIER PROGRAMA REALIZA UNA RENUMERACION O ELIMINACION
+REMARK* DE CUENTAS CORRIENTES
+REMARK* SIEMPRE DEBE INVOCARSE PRIMERO EL PROCEDIMIENTO DE BORRAR Y DEPUES
+REMARK* EL DE CREAR EL NUEVO REGISTRO
+REMARK*******************************************************************
+REMARK* GJC0002   * PARA LOS RECLAMOS YA CERRADOS SOLO SE CREA EL REGISTRO
+REMARK* G.JIMENEZ * EN EL ARCHIVO PUENTE SI ESTA BLOQUEADO
+REMARK* 2001/12/26*
+REMARK*******************************************************************
+REMARK* FAC0003    * MOD003*OPTIMIZACION RUTINA EXCLUYENDO ANIDAMIENTOS
+REMARK* F.CUADROS  * DENTRO DE INSTRUCCIONES DE LECTURA Y ESCRITURA DE
+REMARK* JUL.02/2003* ARCHIVOS
+REMARK*            * DATCIU* REDEFINICION DE CAMPO RECLAMO PARA NOVEDAT
+REMARK*******************************************************************
+REMARK* FAC0004    * DATCI2 * CORRECCION DE LLAVE A MOSTRAR SI HAY ERROR
+REMARK* F.CUADROS  * DURANTE LA INSTRUCCION WRITE DTRLLA.
+REMARK* SEP.22/2003*
+REMARK*******************************************************************
+REMARK* FAC0005    * GRABLQ * REVISANDO EL ARTICULO 15, EL INDICADOR DE
+REMARK* F.CUADROS  * RECLAMO Y EL INDICADOR DE BLOQUEO SE DECIDE QUE
+REMARK* DIC.04/2003* REGISTROS DEBEN SER GRABADOS EN EL ARCHIVO DTRLLA
+REMARK*******************************************************************
+REMARK* FAC0006    * RCLM01 * SE ELIMINA LOGICA QUE MANEJA SISTEMA ANTERIOR
+REMARK* F.CUADROS C* DE RECLAMOS DATARECLAMOS
+REMARK* NOV.25/2005*
+REMARK*******************************************************************
+DTRLLA 0001-DELETE-ABD06-DTRLLA.   
+REMARK*******************************************************************
+REMARK*0001-DELETE-ABD06-DTRLLA.   
+REMARK* SE ELIMINA EL REGISTRO DEL MAESTRO, SI TIENE UN RECLAMO EN CURSO
+REMARK* SE LLENA EL REGISTRO PUENTE Y SE INDICA ESTO CON UN FLAG
+REMARK*      PARAMETROS DE ENTRADA :
+REMARK*                 PROGRAMA-DTRLLA  NOMBRE DEL PROGRAMA RENUMERADOR
+REMARK*                 COMPLETO-ABD06   REGISTRO COMPLETO ABD06
+REMARK*              WS-TIPO-EJE-DTRLLA  EN R O EN F INDICANDO SI ES UNA
+REMARK*                                  EJECUCION REAL O FALSA
+REMARK*      SALIDA:
+REMARK*              WS-ERROR-DTRLLA 1 SI HUBO ERROR EN EL DELETE
+REMARK*              WS-GENERAR-PUENTE-DTRLLA  SI SE DEBE CREAR EL PUENTE
+REMARK*******************************************************************
+           MOVE 0 TO WS-ERROR-DTRLLA WS-GENERAR-PUENTE-DTRLLA.
+           IF WS-TIPO-EJE-DTRLLA = "R"
+              DELETE MAESTRO-CHECK                               
+                 INVALID KEY                 
+                    MOVE 1 TO WS-ERROR-DTRLLA
+MOD003        END-DELETE                                                FAC0003 
+MOD003*          NOT INVALID KEY                                        FAC0003 
+MOD003        IF WS-ERROR-DTRLLA = 0                                    FAC0003 
+GRABLQ           IF (ART15-ABD06 = 5 OR 6) OR (ART15-ABD06 = 7 AND      FAC0005
+GRABLQ              IND-BLOQUEO-ABD06 = 5) OR                           FAC0005
+GRABLQ              (IND-RECLAMO-ABD06 NUMERIC AND                      FAC0005
+GRABLQ              ((IND-RECLAMO-ABD06 = 1 OR 2 OR 3) OR               FAC0005
+GRABLQ              (IND-RECLAMO-ABD06 = 4 AND IND-BLOQUEO-ABD06 = 5))) FAC0005
+RCLM01           OR IND-RECLAMO-ABD07 = 4 OR ART15-ABD07 = 7            FAC0006 
+                     MOVE 1                 TO WS-GENERAR-PUENTE-DTRLLA
+                     MOVE LLAVE-MAES-CHECK  TO LLAVE-ANT-DTRLLA
+DATCI2*              MOVE SPACES            TO LLAVE-ACT-DTRLLA         FAC0004
+DATCI2               INITIALIZE LLAVE-ACT-DTRLLA                        FAC0004
+                     MOVE ART15-ABD06       TO ART15-DTRLLA
+DATCIU               IF IND-RECLAMO-ABD06 NUMERIC AND                   FAC0003 
+DATCIU                  IND-RECLAMO-ABD06 > 0                           FAC0003 
+DATCIU                  MOVE IND-RECLAMO-ABD06 TO IND-RECLAMO-DTRLLA    FAC0003 
+DATCIU               ELSE                                               FAC0003 
+                     MOVE RECLAMO-ABD06     TO RECLAMO-DTRLLA
+DATCIU               END-IF                                             FAC0003 
+                     MOVE FUNCTION CURRENT-DATE(1:8)  TO 
+                          AAAAMMDD-REN-DTRLLA(1:8)
+                     MOVE ZEROS             TO AAAAMMDD-CIEREC-DTRLLA
+                     MOVE WS-PROGRAMA-DTRLLA   TO PROGRAMA-DTRLLA
+                     WRITE REG-DTRLLA                          
+                           INVALID KEY                           
+                             DISPLAY "PUENTE YA EXISTE EN WRITE"              
+DATCI2*                      DISPLAY "LLAVE=",LLAVE-ACT-DTRLLA          FAC0004
+DATCI2                       DISPLAY "LLAVE=",LLAVE-ANT-DTRLLA          FAC0004
+                             ADD 1 TO WS-WRIMAL-DTRLLA
+                           NOT INVALID KEY
+                             ADD 1 TO WS-WRIOK-DTRLLA
+                     END-WRITE
+                  END-IF
+MOD003        END-IF                                                    FAC0003 
+MOD003*       END-DELETE                                                FAC0003 
+           ELSE
+GRABLQ        IF (ART15-ABD06 = 5 OR 6) OR                              FAC0005
+GRABLQ           (ART15-ABD06 = 7 AND IND-BLOQUEO-ABD06 = 5) OR         FAC0005
+GRABLQ           (IND-RECLAMO-ABD06 NUMERIC AND                         FAC0005
+GRABLQ           ((IND-RECLAMO-ABD06 = 1 OR 2 OR 3) OR                  FAC0005
+GRABLQ           (IND-RECLAMO-ABD06 = 4 AND IND-BLOQUEO-ABD06 = 5)))    FAC0005
+DATCIU           MOVE 1 TO WS-GENERAR-PUENTE-DTRLLA                     FAC0003 
+                 ADD 1 TO WS-WRIOK-DTRLLA
+              END-IF
+           END-IF.
+       0001-WRITE-ABD06-DTRLLA.   
+REMARK******************************************************************
+REMARK*0001-WRITE-ABD06-DTRLLA.   
+REMARK* SE GRABA EL REGISTRO DEL MAESTRO DE CUENTAS CORRIENTES, SI EL FLAG 
+REMARK* DE PUENTE ESTA PRENDIDO SE GENERA EL REGISTRO DE RELACION  
+REMARK*      PARAMETROS DE ENTRADA :
+REMARK*                 WS-GENERAR-PUENTE-DTRLLA  SI SE DEBE CREAR EL PUENTE
+REMARK*                 COMPLETO-ABD06   REGISTRO COMPLETO ABD06
+REMARK*      SALIDA:
+REMARK*                 WS-ERROR-DTRLLA 1 SI HUBO ERROR EN EL WRITE
+REMARK*                 WS-REGMAL-DTRLLA  NUMERO DE REGISTROS PUNTES MAL
+REMARK*                 WS-REGOK-DTRLLA   NUMERO DE REGISTROS PUNTES OK
+REMARK********************************************************************
+           MOVE 0 TO WS-ERROR-DTRLLA .
+DTRLLA     IF WS-TIPO-EJE-DTRLLA = "R"
+              WRITE COMPLETO-ABD06                             
+                INVALID KEY                 
+                   MOVE 1 TO WS-ERROR-DTRLLA
+MOD003        END-WRITE                                                 FAC0003 
+MOD003*         NOT INVALID KEY                                         FAC0003 
+MOD003          IF WS-ERROR-DTRLLA = 0                                  FAC0003 
+                   IF WS-GENERAR-PUENTE-DTRLLA = 1
+                     MOVE LLAVE-MAES-CHECK  TO LLAVE-ACT-DTRLLA
+                     REWRITE REG-DTRLLA                          
+                           INVALID KEY                           
+                             DISPLAY "PUENTE NO EXISTE EN REWRITE"              
+                             DISPLAY "LLAVE=",LLAVE-ACT-DTRLLA
+                             ADD 1 TO WS-REWMAL-DTRLLA
+                           NOT INVALID KEY
+                             ADD 1 TO WS-REWOK-DTRLLA
+                     END-REWRITE
+RCLM01*************  IF ART15-ABD06 = 8                                 FAC0006 
+RCLM01*************     MOVE 02               TO TIP-CTA-COM            FAC0006 
+RCLM01*************     MOVE LLAVE-ANT-DTRLLA TO NUM-CTA-COM            FAC0006 
+RCLM01*************     MOVE 0 TO WS-ERROR-RECLACOM                     FAC0006 
+RCLM01*************     READ RECLACOM INVALID KEY                       FAC0006 
+RCLM01*************          DISPLAY "REGISTRO CON REC=8 SIN RECLACOM"  FAC0006 
+RCLM01*************          DISPLAY "LLAVE=",LLAVE-RECLACOM            FAC0006 
+RCLM01*************          ADD 1 TO WS-REGMALCOM-DTRLLA               FAC0006 
+RCLM01*************          MOVE 1 TO WS-ERROR-RECLACOM                FAC0006 
+RCLM01*************     END-READ                                        FAC0006 
+RCLM01*************     NOT INVALID KEY                                 FAC0006 
+RCLM01*************     IF WS-ERROR-RECLACOM = 0                        FAC0006 
+RCLM01*************          MOVE LLAVE-ACT-DTRLLA TO NUM-CTA-COM       FAC0006 
+RCLM01*************          WRITE REG-RECLACOM INVALID KEY             FAC0006 
+RCLM01*************             DISPLAY "REGISTRO CON REC=8 DUPLICADO " FAC0006 
+RCLM01*************             DISPLAY "LLAVE=",LLAVE-RECLACOM         FAC0006 
+RCLM01*************             ADD 1 TO WS-REGMALCOM-DTRLLA            FAC0006 
+RCLM01*************             MOVE 1 TO WS-ERROR-RECLACOM             FAC0006 
+RCLM01*************          NOT INVALID KEY                            FAC0006 
+RCLM01*************              MOVE LLAVE-ANT-DTRLLA TO NUM-CTA-COM   FAC0006 
+RCLM01*************          END-WRITE                                  FAC0006 
+RCLM01*************          IF WS-ERROR-RECLACOM = 0                   FAC0006 
+RCLM01*************              DELETE RECLACOM INVALID KEY            FAC0006 
+RCLM01*************                 DISPLAY "ERROR DELETE RECLACOM"     FAC0006 
+RCLM01*************                 DISPLAY "LLAVE=",LLAVE-RECLACOM     FAC0006 
+RCLM01*************              END-DELETE                             FAC0006 
+RCLM01*************          END-IF                                     FAC0006 
+RCLM01*************          END-WRITE                                  FAC0006 
+RCLM01*************     END-READ                                        FAC0006 
+RCLM01*************     END-IF                                          FAC0006 
+RCLM01*************  END-IF                                             FAC0006 
+                  END-IF
+MOD003          END-IF                                                  FAC0003 
+MOD003*       END-WRITE                                                 FAC0003 
+DTRLLA     ELSE
+DTRLLA        ADD 1 TO WS-REWOK-DTRLLA
+DTRLLA     END-IF.
+REMARK 0001-RESULTADOS-DTRLLA-ABD06..
+REMARK******************************************************************
+REMARK*0001-RESULTADOS-DTRLLA.
+REMARK* HACE DISPLAY DE LOS CONTADORES DE LA EJECUCION DE BORRADOS Y
+REMARK* ESCRITURA DE NUEVOS REGISTROS CON LLAVE DIFERENTE. CREADOS
+REMARK* SOLO PARA CUENTAS CON RECLAMOS VIGENTES EN ARCHIVO PUENTE
+REMARK******************************************************************
+           DISPLAY
+           "ESTADISTICAS DE ARCHIVO PUENTE PARA DATARECLAMOS ICMCHK"
+           IF WS-WRIOK-DTRLLA > 0
+              DISPLAY 
+              "  SE ESCRIBIERON EN ARCHIVO PUENTE " WS-WRIOK-DTRLLA
+                      " REGISTROS"
+           ELSE
+              DISPLAY "  NO SE ESCRIBIERON REGISTROS EN ARCHIVO PUENTE"
+           END-IF.
+           IF WS-WRIMAL-DTRLLA > 0
+              DISPLAY
+              "  ERRORES AL ESCRIBIR ARCHIVO PUENTE " WS-WRIMAL-DTRLLA
+                      " REGISTROS"
+           ELSE
+              DISPLAY
+              "  NO HUBO ERRORES AL ESCRIBIR EN ARCHIVO PUENTE"
+          END-IF.
+           IF WS-REWOK-DTRLLA > 0
+              DISPLAY "  SE REESCRIBIERON EN ARCHIVO PUENTE "
+                  WS-REWOK-DTRLLA " REGISTROS"
+           ELSE
+              DISPLAY 
+                 "  NO SE REESCRIBIERON REGISTROS EN ARCHIVO PUENTE"
+           END-IF.
+           IF WS-REWMAL-DTRLLA > 0
+              DISPLAY " ERRORES AL REESCRIBIR ARCHIVO PUENTE "
+                      WS-WRIOK-DTRLLA " REGISTROS"
+           ELSE
+             DISPLAY "  NO HUBO ERRORES AL REESCRIBIR EN ARCHIVO PUENTE"
+           END-IF.
+           DISPLAY "FIN ESTADISTICAS ICMCHK".

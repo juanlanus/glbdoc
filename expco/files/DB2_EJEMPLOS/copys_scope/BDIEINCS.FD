@@ -1,0 +1,8 @@
+REMARK* BDIEINCS-FD.v.0001
+      **********************************************
+      *  AUXILIAR PARA INFORME DE INCONSISTENCIAS  *
+      **********************************************
+
+       FD BDIEINCS.
+       01 BDIEINCS-REGISTRO            PIC X(80).
+

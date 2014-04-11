@@ -1,0 +1,16 @@
+      * BDANOM.FD.v.01.0001
+      *=================================================================
+      * ESTRUCTURA DEL ARCHIVO DE NOMBRES EXTRACTADOS DE LA REGIS
+      *=================================================================
+      *
+      *================================================================*=
+       FD  BDANOM.
+       01  REG-BDANOM.
+           03 LLAVE-BDANOM             PIC X(16).
+           03 FLAGS-BDANOM.
+              04 FLAG-NOM1-BDANOM         PIC 9.
+              04 FLAG-NOM2-BDANOM         PIC 9.
+              04 FLAG-APE1-BDANOM         PIC 9.
+              04 FLAG-APE2-BDANOM         PIC 9.
+           03 NOMBRES-BDANOM              PIC 9(7).
+           03 APELLIDOS-BDANOM            PIC 9(7).

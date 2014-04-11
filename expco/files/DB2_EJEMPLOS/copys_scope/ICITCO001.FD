@@ -1,0 +1,27 @@
+      * ICITCO001-FD.v.0003
+
+      * ESTE ARCHIVO CONTIENE LOS INDICES DEL ARCHIVO ICBTCO PARA GENERACION
+      * DE ESTADISTICAS EN LINEA. lO GENERA EL PROGRAMA ICGCON Y LO LEE EL
+      * PROGRAMA ICGTRA
+      * LOG DE CONSULTAS REALIZADAS EN LA BASE DE DATOS
+      **************************************************************************
+      * NDG0002    * MULSRV : SE CAMBIA LA ESTRUCTURA DE RELATIVO A INDEXADO   *
+      * N.DUARTE   *          POR IMPLEMENTACION VARIAS INSTANCIAS DEL ICGCON. *
+      * 01/06/2011 *                                                           *
+      **************************************************************************
+      * FARF003    * MULSR2 : SE CAMBIA EL CAMPO SECUENCIA-ICITICO DE NUMERICO *
+      * F.RODRIGUEZ*          A ALFANUMERICO PORA LA BUSQUEDA POR LLAVE EN EL  *
+      * 16/06/2011 *          ICBTCO                                                 *
+      **************************************************************************
+      
+       FD ICITCO.
+       01 REG-ICITCO.
+           02 LLAVE-ICITCO.
+MULSRV        03 NUM-SRV-ICITCO      PIC 9(03).                         NDG0002
+MULSRV        03 RESTO-ICITCO        PIC 9(07).                         NDG0002
+           02 BUFFER-ICITCO OCCURS 1000 TIMES.
+MULSR2*       03 SECUENCIA-ICITCO    PIC 9(08) COMP-3.                  FARF003
+MULSR2        03 SECUENCIA-ICITCO    PIC X(08).                         FARF003
+              03 CODIGO-ICITCO       PIC 9(06) COMP-3.
+              03 CLAVE-ICITCO        PIC X(05).
+              03 FECHA-ICITCO        PIC 9(08) COMP-3.

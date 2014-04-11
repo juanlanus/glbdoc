@@ -1,0 +1,130 @@
+REMARK*CARACTPER-021.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 021
+REMARK*    PARA ETB
+REMARK******************************************************************
+REMARK* EHA0001     | CQ5863 - VERSION INICIAL DEL COPY                *
+REMARK* 13-JUN-2012 |          REQ 5863.                               *
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-021.
+            ADD 1 TO I-VAR-PER        
+            MOVE "RELACION-ETB " TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(RELACION-ETB ) TO L-AUX        
+            MOVE RELACION-ETB(1:L-AUX)      TO        
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+            ADD 1 TO I-VAR-PER        
+            MOVE "FACTOR3-2-ETB" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(FACTOR3-2-ETB) TO L-AUX        
+            MOVE FACTOR3-2-ETB(1:L-AUX)      TO        
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+            ADD 1 TO I-VAR-PER        
+            MOVE "MOR001-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(MOR001-ETB   ) TO L-AUX        
+            MOVE MOR001-ETB(1:L-AUX)      TO        
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR002-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR002-ETB   ) TO L-AUX                     
+            MOVE MOR002-ETB(1:L-AUX)      TO                              
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR046-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR046-ETB   ) TO L-AUX                     
+            MOVE MOR046-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR075-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR075-ETB   ) TO L-AUX                     
+            MOVE MOR075-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR076-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR076-ETB   ) TO L-AUX                     
+            MOVE MOR076-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR077-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR077-ETB   ) TO L-AUX                     
+            MOVE MOR077-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "MOR078-ETB   " TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(MOR078-ETB   ) TO L-AUX                     
+            MOVE MOR078-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "SEGMENTO-ETB" TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(SEGMENTO-ETB) TO L-AUX                     
+            MOVE SEGMENTO-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "SOLI02-ETB" TO NOMBRE-VAR-PER(I-VAR-PER)                
+            MOVE FUNCTION LENGTH(SOLI02-ETB) TO L-AUX                     
+            MOVE SOLI02-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "SUSPE02-ETB" TO NOMBRE-VAR-PER(I-VAR-PER)                 
+            MOVE FUNCTION LENGTH(SUSPE02-ETB) TO L-AUX                     
+            MOVE SUSPE02-ETB(1:L-AUX)      TO                               
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)              
+                                                                             
+            ADD 1 TO I-VAR-PER                                               
+            MOVE "IND-ENC-ETB" TO NOMBRE-VAR-PER(I-VAR-PER)         
+            MOVE FUNCTION LENGTH(IND-ENC-ETB) TO L-AUX              
+            MOVE IND-ENC-ETB(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+            .        
+              
+       0000-INICIALIZAR-CARAC-EXT-21.                                           
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-21.                                   
+REMARK*    SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 21      
+REMARK******************************************************************
+              MOVE ZEROS   TO RELACION-ETB        
+                              FACTOR3-2-ETB        
+                              MOR001-ETB        
+                              MOR002-ETB        
+                              MOR046-ETB        
+                              MOR075-ETB        
+                              MOR076-ETB        
+                              MOR077-ETB        
+                              MOR078-ETB        
+                              SOLI02-ETB        
+                              SUSPE02-ETB
+                              IND-ENC-ETB
+      *                       IND-REGISTRO-ENCONTRADO-ETB        
+              MOVE "NO APLICA" TO SEGMENTO-ETB        
+              .        
+        
+       2649-PROCESE-CARACT-02XX-EXT-21.                                         
+REMARK****************************************************************  
+REMARK*2649-PROCESE-CARACT-02XX-EXT-21.                                 
+REMARK**   99END002TO00 PEOR CALIFICACION ULTIMO TRIMESTRE              
+REMARK****************************************************************  
+      *                                                                         
+      * SE CALCULA LA VARIABLE IND-ENC-ETB                      
+      *                                                                         
+           PERFORM 5200-LEA-INDEX-VARPROPIAS-ETB                                
+           IF IND-ENC-ETB = 1                                   
+              MOVE VARPROPIAS-RELACION-ETB  TO RELACION-ETB        
+              MOVE VARPROPIAS-FACTOR3-2-ETB TO FACTOR3-2-ETB        
+              MOVE VARPROPIAS-MOR001-ETB    TO MOR001-ETB        
+              MOVE VARPROPIAS-MOR002-ETB    TO MOR002-ETB        
+              MOVE VARPROPIAS-MOR046-ETB    TO MOR046-ETB        
+              MOVE VARPROPIAS-MOR075-ETB    TO MOR075-ETB        
+              MOVE VARPROPIAS-MOR076-ETB    TO MOR076-ETB        
+              MOVE VARPROPIAS-MOR077-ETB    TO MOR077-ETB        
+              MOVE VARPROPIAS-MOR078-ETB    TO MOR078-ETB        
+              MOVE VARPROPIAS-SEGMENTO-ETB  TO SEGMENTO-ETB        
+              MOVE VARPROPIAS-SOLI02-ETB    TO SOLI02-ETB        
+              MOVE VARPROPIAS-SUSPE02-ETB   TO SUSPE02-ETB        
+           END-IF                                                               
+           .        

@@ -1,0 +1,11 @@
+      * BDIIMREG.v.01.0001
+      *=================================================================
+      * ESTRUCTURA DEL ARCHIVO DE INDICADORES DE MODIFICACIÓN PARA LA 
+      * REGISTRADURÍA
+      *=================================================================
+       FD  BDIIMREG.
+       01  REG-BDIIMREG.
+           03  IND-MOD-BDIIMREG        PIC X(01).
+           03  DES-MOD-BDIIMREG        PIC X(18).
+           03  FILLER-BDIIMREG         PIC X(61).
+      *----------------------------------------------------------------*

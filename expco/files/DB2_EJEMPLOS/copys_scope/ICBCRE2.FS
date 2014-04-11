@@ -1,0 +1,15 @@
+      * ICBCRE2.FS.v.01.001
+      * MAESTRO DE OBLIGACIONES DE CARTERA Y TARJETA DE CREDITO REPORTADAS
+      * POR LOS DIFERENTES SUSCRIPTORES UTILIZADO POR CARACTERISTICAS PARA
+      * LEER INFORMACION DE VECTORES NO EMPALMADOS (VECTOR 3 y 4).
+       $SET IDXFORMAT"8"        
+              
+           SELECT MAESTRO-CREDIT-2        
+                  ASSIGN       TO W-NOM-ICMCRE2        
+                  ORGANIZATION IS INDEXED        
+                  ACCESS MODE  IS DYNAMIC        
+                  RECORD KEY   IS LLAVE-MAES-CREDIT-2        
+      *           ALTERNATE RECORD KEY IS LLAVE-MAES-CREDIT-ALT-2        
+                  LOCK MODE IS MANUAL WITH LOCK ON RECORD.        
+              
+       $SET IDXFORMAT"0"        

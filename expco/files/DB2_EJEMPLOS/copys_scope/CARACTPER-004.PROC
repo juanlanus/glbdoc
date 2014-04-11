@@ -1,0 +1,2195 @@
+REMARK*CARACTPER-004.PROC.v.0005.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 004
+REMARK*    PARA EL BANCO COLPATRIA
+REMARK******************************************************************
+REMARK* CAV0002     | CQ5341 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 28-MAR-2012 |          EN LA SOLICITUD 5341.                   *
+REMARK* 18-MAY-2012 | CQ5926 - INCLUSION ARCHIVO RETENCION CUPOS       *
+REMARK******************************************************************
+REMARK* EHA0003     | CQ6105 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 29-MAY-2012 |          EN LA SOLICITUD 6105.                   *
+REMARK******************************************************************
+REMARK* EHA0004     | CQ7215 - SE INCLUYE VALIDACION PARA QUE NO TOME  *
+REMARK* 16-AGO-2012 |          OBLIGACIONES CERRADAS Y FRENADAS        *
+REMARK******************************************************************
+REMARK* IMS0005     | CQ7215 - SE INCLUYE ARCHIVO DE PARAMETROS PARA   *
+REMARK* 18-SEP-2012 |          EVITAR VALORES QUEMADOS EN EL CODIGO.   *
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-004.
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "01NUM017     " TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(01NUM017     ) TO L-AUX             
+            MOVE 01NUM017(1:L-AUX)      TO                           
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99END002TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            IF 99END002TO00 = SPACES                                 
+               MOVE "T" TO 99END002TO00                              
+            END-IF                                                   
+            MOVE FUNCTION LENGTH(99END002TO00 ) TO L-AUX             
+            MOVE 99END002TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "01END999TC004" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(01END999TC004) TO L-AUX             
+            MOVE 01END999TC004(1:L-AUX)      TO                      
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "01END998TC004" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(01END998TC004) TO L-AUX             
+            MOVE 01END998TC004(1:L-AUX)      TO                      
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM007TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM007TO12 ) TO L-AUX             
+            MOVE 99DEM007TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM001EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM001EX61 ) TO L-AUX             
+            MOVE 99DEM001EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM002TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM002TO00 ) TO L-AUX             
+            MOVE 99DEM002TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM003TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM003TO12 ) TO L-AUX             
+            MOVE 99DEM003TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM002EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM002EX61 ) TO L-AUX             
+            MOVE 99DEM002EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99END004TO13" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99END004TO13 ) TO L-AUX             
+            MOVE 99END004TO13(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99END020EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99END020EX61 ) TO L-AUX             
+            MOVE 99END020EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "04END020TO50" TO NOMBRE-VAR-PER(I-VAR-PER)         
+            MOVE FUNCTION LENGTH(04END020TO50 ) TO L-AUX             
+            MOVE 04END020TO50(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99END022EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99END022EX61 ) TO L-AUX             
+            MOVE 99END022EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99EXP003TC00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99EXP003TC00 ) TO L-AUX             
+            MOVE 99EXP003TC00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99EXP003TO07" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99EXP003TO07 ) TO L-AUX             
+            MOVE 99EXP003TO07(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR001EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR001EX61 ) TO L-AUX             
+            MOVE 99MOR001EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR001TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR001TO00 ) TO L-AUX             
+            MOVE 99MOR001TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR002EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR002EX61 ) TO L-AUX             
+            MOVE 99MOR002EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR003EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR003EX61 ) TO L-AUX             
+            MOVE 99MOR003EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR007TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR007TO12 ) TO L-AUX             
+            MOVE 99MOR007TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR008EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR008EX61 ) TO L-AUX             
+            MOVE 99MOR008EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR008TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR008TO12 ) TO L-AUX             
+            MOVE 99MOR008TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR009EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR009EX61 ) TO L-AUX             
+            MOVE 99MOR009EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR009TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR009TO12 ) TO L-AUX             
+            MOVE 99MOR009TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR016TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR016TO12 ) TO L-AUX             
+            MOVE 99MOR016TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR028EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR028EX61 ) TO L-AUX             
+            MOVE 99MOR028EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR028EX04" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR028EX04 ) TO L-AUX             
+            MOVE 99MOR028EX04(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99NUM005TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99NUM005TO00 ) TO L-AUX             
+            MOVE 99NUM005TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM004TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM004TO00 ) TO L-AUX             
+            MOVE 99DEM004TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM001TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM001TO00 ) TO L-AUX             
+            MOVE 99DEM001TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM006TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM006TO00 ) TO L-AUX             
+            MOVE 99DEM006TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99DEM008TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99DEM008TO00 ) TO L-AUX             
+            MOVE 99DEM008TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR004EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR004EX61 ) TO L-AUX             
+            MOVE 99MOR004EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR005EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR005EX61 ) TO L-AUX             
+            MOVE 99MOR005EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR006EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR006EX61 ) TO L-AUX             
+            MOVE 99MOR006EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR007EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR007EX61 ) TO L-AUX             
+            MOVE 99MOR007EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR011TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR011TO12 ) TO L-AUX             
+            MOVE 99MOR011TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR013TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR013TO12 ) TO L-AUX             
+            MOVE 99MOR013TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR014TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR014TO12 ) TO L-AUX             
+            MOVE 99MOR014TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR015TO12" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR015TO12 ) TO L-AUX             
+            MOVE 99MOR015TO12(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99EXP002EX61" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99EXP002EX61 ) TO L-AUX             
+            MOVE 99EXP002EX61(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99EXP045EX04" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99EXP045EX04 ) TO L-AUX             
+            MOVE 99EXP045EX04(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "NODESEADOSCOLP" TO NOMBRE-VAR-PER(I-VAR-PER)       
+            MOVE FUNCTION LENGTH(SW-NODESEADOS-COLP ) TO L-AUX       
+            MOVE SW-NODESEADOS-COLP(1:L-AUX)      TO                 
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR002TO00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR002TO00 ) TO L-AUX             
+            MOVE 99MOR002TO00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99MOR010TC00" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99MOR010TC00 ) TO L-AUX             
+            MOVE 99MOR010TC00(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+            ADD 1 TO I-VAR-PER                                       
+            MOVE "D99END019TO13" TO NOMBRE-VAR-PER(I-VAR-PER)        
+            MOVE FUNCTION LENGTH(99END019TO13 ) TO L-AUX             
+            MOVE 99END019TO13(1:L-AUX)      TO                       
+                                VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      
+                                                                     
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "01END999I1004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(01END999I1004) TO L-AUX                CAV0002
+CQ5341      MOVE 01END999I1004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "01END999RO004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(01END999RO004) TO L-AUX                CAV0002
+CQ5341      MOVE 01END999RO004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "01END998I1004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(01END998I1004) TO L-AUX                CAV0002
+CQ5341      MOVE 01END998I1004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "01END998RO004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(01END998RO004) TO L-AUX                CAV0002
+CQ5341      MOVE 01END998RO004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "01END998MX004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(01END998MX004) TO L-AUX                CAV0002
+CQ5341      MOVE 01END998MX004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5341      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5341      MOVE "02END999TO004" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5341      MOVE FUNCTION LENGTH(02END999TO004) TO L-AUX                CAV0002
+CQ5341      MOVE 02END999TO004(1:L-AUX)      TO                         CAV0002
+CQ5341                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5926      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5926      MOVE "PER04EXISTREG" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5926      MOVE FUNCTION LENGTH(PER04-IND-REG-ENC) TO L-AUX            CAV0002
+CQ5926      MOVE PER04-IND-REG-ENC(1:L-AUX)      TO                     CAV0002
+CQ5926                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5926      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5926      MOVE "PER04AUMCUPO1" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5926      MOVE FUNCTION LENGTH(PER04-AUMENTO-CUPO) TO L-AUX           CAV0002
+CQ5926      MOVE PER04-AUMENTO-CUPO(1:L-AUX)      TO                    CAV0002
+CQ5926                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ5926      ADD 1 TO I-VAR-PER                                          CAV0002
+CQ5926      MOVE "PER04AUMCUPO2" TO NOMBRE-VAR-PER(I-VAR-PER)           CAV0002
+CQ5926      MOVE FUNCTION LENGTH(PER04-AUMENTO-CUPO2) TO L-AUX          CAV0002
+CQ5926      MOVE PER04-AUMENTO-CUPO2(1:L-AUX)      TO                   CAV0002
+CQ5926                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         CAV0002
+
+CQ6105      ADD 1 TO I-VAR-PER                                          EHA0003
+CQ6105      MOVE "SUMACUPOTDC61" TO NOMBRE-VAR-PER(I-VAR-PER)           EHA0003
+CQ6105      MOVE FUNCTION LENGTH(SUMA-CUPOS-TDC-61) TO L-AUX            EHA0003
+CQ6105      MOVE SUMA-CUPOS-TDC-61(1:L-AUX)      TO                     EHA0003
+CQ6105                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         EHA0003
+CQ6105*                                                                 EHA0003
+CQ6105      ADD 1 TO I-VAR-PER                                          EHA0003
+CQ6105      MOVE "SUMACUPOCBR61" TO NOMBRE-VAR-PER(I-VAR-PER)           EHA0003
+CQ6105      MOVE FUNCTION LENGTH(SUMA-CUPOS-CBR-61) TO L-AUX            EHA0003
+CQ6105      MOVE SUMA-CUPOS-CBR-61(1:L-AUX)      TO                     EHA0003
+CQ6105                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         EHA0003
+CQ6105*                                                                 EHA0003
+CQ6105      ADD 1 TO I-VAR-PER                                          EHA0003
+CQ6105      MOVE "SUMACUPOOTR61" TO NOMBRE-VAR-PER(I-VAR-PER)           EHA0003
+CQ6105      MOVE FUNCTION LENGTH(SUMA-CUPOS-OTR-61) TO L-AUX            EHA0003
+CQ6105      MOVE SUMA-CUPOS-OTR-61(1:L-AUX)      TO                     EHA0003
+CQ6105                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         EHA0003
+CQ6105*                                                                 EHA0003
+CQ6105      ADD 1 TO I-VAR-PER                                          EHA0003
+CQ6105      MOVE "INDICADORBUI  " TO NOMBRE-VAR-PER(I-VAR-PER)          EHA0003
+CQ6105      MOVE FUNCTION LENGTH(SW-INDICADOR-BUI   ) TO L-AUX          EHA0003
+CQ6105      MOVE SW-INDICADOR-BUI(1:L-AUX)      TO                      EHA0003
+CQ6105                          VAL-VAR-PER(I-VAR-PER)(1:L-AUX)         EHA0003
+            .
+
+       0000-INICIALIZAR-CARAC-EXT-04.                                   
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-04.                                   
+REMARK*    SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 04      
+REMARK******************************************************************
+              MOVE ZEROS   TO 01NUM017                                  
+                              01END999TC004                             
+                              01END998TC004                             
+                              99DEM007TO12                              
+                              99DEM001EX61                              
+                              99DEM002TO00                              
+                              99DEM003TO12                              
+                              99DEM002EX61                              
+                              99END004TO13                              
+                              99END020EX61                              
+                              04END020TO50                              
+                              99END022EX61                              
+                              99EXP003TC00                              
+                              99EXP003TO07                              
+                              99MOR001EX61                              
+                              99MOR001TO00                              
+                              99MOR002EX61                              
+                              99MOR002TO00                              
+                              99MOR003EX61                              
+                              99MOR007TO12                              
+                              99MOR008EX61                              
+                              99MOR008TO12                              
+                              99MOR009EX61                              
+                              99MOR009TO12                              
+                              99MOR016TO12                              
+                              99MOR028EX61                              
+                              99MOR028EX04                              
+                              99MOR010TC00                              
+                              99END019TO13                              
+                              99NUM005TO00                              
+                              99DEM004TO00                              
+                              99DEM001TO00                              
+                              99DEM006TO00                              
+                              99MOR011TO12                              
+                              99MOR013TO12                              
+                              99MOR014TO12                              
+                              99MOR015TO12                              
+                              99MOR004EX61                              
+                              99MOR005EX61                              
+                              99MOR006EX61                              
+                              99MOR007EX61                              
+                              99EXP002EX61                              
+                              99EXP045EX04                              
+                              SW-NODESEADOS-COLP                        
+CQ6105                        SUMA-CUPOS-TDC-61                         EHA0003
+CQ6105                        SUMA-CUPOS-CBR-61                         EHA0003
+CQ6105                        SUMA-CUPOS-OTR-61                         EHA0003
+              MOVE 5       TO 99DEM008TO00                              
+              MOVE "T"     TO 99END002TO00
+CQ6105        MOVE "N"     TO SW-INDICADOR-BUI                          EHA0003
+CQ5341        MOVE "         -1" TO 01END999I1004(1:11)                 CAV0002
+CQ5341                    01END999RO004(1:11) 01END998I1004(1:11)       CAV0002
+CQ5341                    01END998RO004(1:11) 01END998MX004(1:11)       CAV0002
+CQ5341        MOVE "         -2" TO 02END999TO004(1:11)                 CAV0002
+CQ7215        PERFORM 4600-CARGAR-PARAM-COLP                            IMS0005
+              .
+CQ7215 4600-CARGAR-PARAM-COLP.                                          IMS0005
+REMARK******************************************************************IMS0005
+REMARK*4600-CARGAR-PARAM-COLP.                                          IMS0005
+REMARK*    SE CARGAN PARAMETROS DEL ARCHIVO PARAM-ICGD61.DAT            IMS0005
+REMARK******************************************************************IMS0005
+CQ7215        MOVE "55010000"       TO TMP-LLAVE-D61                    IMS0005
+CQ7215        PERFORM 4600-LEA-SECUENCIAL-PAR-ICGD61                    IMS0005
+CQ7215        MOVE PAR-VAL-INT-D61  TO TMP-VAL-INT-D61                  IMS0005
+CQ7215        .                                                         IMS0005
+       2249-PROCESE-CARCT-00NUM-EXT-04.                                 
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-04.                                 
+REMARK*    PERSONALIZACION # 04 DE CARACTERISTICAS PARA COLPATRIA       
+REMARK******************************************************************
+REMARK*    CALCULO 01NUM017                                             
+             IF 00NUM017 = 1                                            
+                 IF 01NUM017 NOT NUMERIC                                
+                    MOVE ZEROS TO 01NUM017                              
+                 END-IF                                                 
+                 ADD 1 TO 01NUM017                                      
+             END-IF
+CQ7215       IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                      EHA0004
+      *    CALCULO 99DEM007TO12 NO LOCALIZADAS SECTOR FINANCIERO        
+             IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT" 
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                 CONTINUE                                               
+              ELSE *> PRINCIPAL                                         
+                 IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR     
+                     07  OR  02  OR  15  OR  46  OR  14  OR  05  OR     
+                     08  OR  17  OR  04  OR  45  OR  44  OR  06  OR     
+                     27  OR  33  OR  48  OR  49                         
+                     IF ADJETIVO1-ABD07 = 3 OR    *>  No Localizado     
+                        ADJETIVO2-ABD07 = 3 OR                          
+                        ADJETIVO3-ABD07 = 3                             
+                        ADD  1  TO  99DEM007TO12                        
+                     END-IF                                             
+                 END-IF                                                 
+              END-IF                                                    
+             END-IF                                                     
+      *    CALCULO 99DEM001EX61 NO LOCALIZADAS SECTOR REAL              
+             IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT" 
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                 CONTINUE                                               
+              ELSE *> PRINCIPAL                                         
+                IF  COD-CTA-ABD07   =  13  OR  03  OR  18  OR  16  OR   
+                  07  OR  02  OR  15  OR  46  OR  14  OR  05  OR        
+                  08  OR  17  OR  04  OR  45  OR  44  OR  06  OR        
+                  27  OR  33  OR  48  OR  49                            
+                  CONTINUE                                              
+                ELSE                                                    
+                   IF ADJETIVO1-ABD07 = 3 OR    *>  No Localizado       
+                      ADJETIVO2-ABD07 = 3 OR                            
+                      ADJETIVO3-ABD07 = 3                               
+                      ADD  1  TO  99DEM001EX61                          
+                   END-IF                                               
+                END-IF                                                  
+              END-IF                                                    
+             END-IF                                                     
+      *    CALCULO 99DEM002TO00 CTAS. CORRIENTES CON ADJETIVO FALLECIDO 
+             IF COD-PORTAF-CARACT = "AH" OR "CT" *> CTAS. CTES. Y AHO.  
+                IF ADJETIVO-ABD06 > ZEROS                               
+                   ADD   1   TO  99DEM002TO00                           
+                END-IF                                                  
+             END-IF                                                     
+      *    CALCULO 99DEM003TO12 FALLECIDOS SECTOR FINANCIERO            
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                 NUM-CTA-ABD07(17:1) = "c"  OR                          
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR            
+                CONTINUE                                                
+             ELSE *> PRINCIPAL                                          
+               IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR       
+                 07  OR  02  OR  15  OR  46  OR  14  OR  05  OR         
+                 08  OR  17  OR  04  OR  45  OR  44  OR  06  OR         
+                 27  OR  33  OR  48  OR  49                             
+                   IF ADJETIVO1-ABD07 = 1 OR    *>  Fallecido           
+                      ADJETIVO2-ABD07 = 1 OR                            
+                      ADJETIVO3-ABD07 = 1                               
+                      ADD  1  TO  99DEM003TO12                          
+                   END-IF                                               
+               END-IF                                                   
+             END-IF                                                     
+      *    CALCULO 99DEM002EX61 FALLECIDOS SECTOR REAL                  
+             IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT" 
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                 CONTINUE                                               
+              ELSE *> PRINCIPAL                                         
+                IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR      
+                  07  OR  02  OR  15  OR  46  OR  14  OR  05  OR        
+                  08  OR  17  OR  04  OR  45  OR  44  OR  06  OR        
+                  27  OR  33  OR  48  OR  49                            
+                  CONTINUE                                              
+                ELSE *> SECTOR REAL                                     
+                   IF ADJETIVO1-ABD07 = 1 OR    *>  Fallecido           
+                      ADJETIVO2-ABD07 = 1 OR                            
+                      ADJETIVO3-ABD07 = 1                               
+                      ADD  1  TO  99DEM002EX61                          
+                   END-IF                                               
+                END-IF                                                  
+              END-IF                                                    
+             END-IF                                                     
+      *                                                                 
+      * CALCULO VARIABLE 99MOR001TO00 CANCELADAS MAL MANEJO             
+            IF COD-PORTAF-CARACT = "AH" OR "CT" *> CTAS. CTES. Y AHO.   
+                IF CARACT-TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06) = 31    
+                  ADD   1               TO  99MOR001TO00                
+                END-IF                                                  
+            ELSE                                                        
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                 CONTINUE                                               
+              ELSE *> PRINCIPAL                                         
+                IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 08    
+                  ADD   1               TO  99MOR001TO00                
+                END-IF                                                  
+              END-IF                                                    
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR002EX61 DUDOSO RECAUDO SECTOR REAL        
+            IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"  
+             IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+                IF  NUM-CTA-ABD07(17:1) = "C"  OR                       
+                    NUM-CTA-ABD07(17:1) = "c"  OR                       
+                   (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND     
+                   (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR         
+                   CONTINUE                                             
+                ELSE *> PRINCIPAL                                       
+                   IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR   
+                       07  OR  02  OR  15  OR  46  OR  14  OR  05  OR   
+                       08  OR  17  OR  04  OR  45  OR  44  OR  06  OR   
+                       27  OR  33  OR  48  OR  49                       
+                     CONTINUE                                           
+                   ELSE *> SECTOR REAL                                  
+                   EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)
+                            WHEN 11                                     
+                                 ADD  1  TO  99MOR002EX61               
+                      END-EVALUATE                                      
+                   END-IF                                               
+                END-IF                                                  
+             END-IF                                                     
+            END-IF                                                      
+      * CALCULO VARIABLE 99MOR002TO00 CTAS. CORRIENTES Y AHO EMBARGADAS 
+            IF COD-PORTAF-CARACT = "AH" OR COD-PORTAF-CARACT = "CT"     
+             IF CARACT-TAB-NOV-CTAC-CODINT(NOV-REPORT-ABD06)  =  33     
+                ADD   1      TO  99MOR002TO00                           
+             END-IF                                                     
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR003EX61 CARTERA RECUPERADA SEC. REAL      
+      *                                                                 
+            IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"  
+             IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) <> 1      
+                IF  NUM-CTA-ABD07(17:1) = "C"  OR                       
+                    NUM-CTA-ABD07(17:1) = "c"  OR                       
+                   (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND     
+                   (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR         
+                   CONTINUE                                             
+                ELSE *> PRINCIPAL                                       
+                   IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR   
+                       07  OR  02  OR  15  OR  46  OR  14  OR  05  OR   
+                       08  OR  17  OR  04  OR  45  OR  44  OR  06  OR   
+                       27  OR  33  OR  48  OR  49                       
+                     CONTINUE                                           
+                   ELSE *> SECTOR REAL                                  
+                      IF MESES-DESAC-CARACT <= 12                       
+                  EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) 
+                               WHEN 10                                  
+                                    ADD  1  TO  99MOR003EX61            
+                         END-EVALUATE                                   
+                      END-IF                                            
+                   END-IF                                               
+                END-IF                                                  
+             END-IF                                                     
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR007TO12 CARTERA CASTIGADA SEC. FINANCIERO 
+      *                                                                 
+            IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"  
+             IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+                IF  NUM-CTA-ABD07(17:1) = "C"  OR                       
+                    NUM-CTA-ABD07(17:1) = "c"  OR                       
+                   (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND     
+                   (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR         
+                   CONTINUE                                             
+                ELSE *> PRINCIPAL                                       
+                 IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR     
+                     07  OR  02  OR  15  OR  46  OR  14  OR  05  OR     
+                     08  OR  17  OR  04  OR  45  OR  44  OR  06  OR     
+                     27  OR  33  OR  48  OR  49                         
+                  EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) 
+                          WHEN 09                                       
+                               ADD  1  TO  99MOR007TO12                 
+                    END-EVALUATE                                        
+                 END-IF                                                 
+                END-IF                                                  
+             END-IF                                                     
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR008EX61 CTA. COBRADOS SEC. REAL           
+      *                                                                 
+            IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"  
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                 NUM-CTA-ABD07(17:1) = "c"  OR                          
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR            
+                CONTINUE                                                
+             ELSE *> PRINCIPAL                                          
+                IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR      
+                    07  OR  02  OR  15  OR  46  OR  14  OR  05  OR      
+                    08  OR  17  OR  04  OR  45  OR  44  OR  06  OR      
+                    27  OR  33  OR  48  OR  49                          
+                  CONTINUE                                              
+                ELSE *> SECTOR REAL                                     
+                   IF ADJETIVO1-ABD07 = 2 OR    *>   Cuenta en Cobrador 
+                      ADJETIVO2-ABD07 = 2 OR                            
+                      ADJETIVO3-ABD07 = 2                               
+                      ADD  1  TO 99MOR008EX61                           
+                   END-IF                                               
+                END-IF                                                  
+             END-IF                                                     
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR008TO12 DUDOSO RECAUDO SEC. FINANCIERO    
+      *                                                                 
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1        
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                  (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND      
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                  CONTINUE                                              
+               ELSE *> PRINCIPAL                                        
+                  IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR    
+                      07  OR  02  OR  15  OR  46  OR  14  OR  05  OR    
+                      08  OR  17  OR  04  OR  45  OR  44  OR  06  OR    
+                      27  OR  33  OR  48  OR  49                        
+                  EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) 
+                           WHEN 11                                      
+                                ADD  1  TO  99MOR008TO12                
+                     END-EVALUATE                                       
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR009EX61 MORAS VIGENTES SALODO > 50000     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                  (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND      
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                  CONTINUE                                              
+               ELSE *> PRINCIPAL                                        
+                  IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR    
+                      07  OR  02  OR  15  OR  46  OR  14  OR  05  OR    
+                      08  OR  17  OR  04  OR  45  OR  44  OR  06  OR    
+                      27  OR  33  OR  48  OR  49                        
+                    CONTINUE                                            
+                  ELSE *> SECTOR REAL                                   
+                   IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 15 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 14 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 13 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 12 
+                      IF SW-LECTURA-LEEICMVLR = 1 AND                   
+                         IND-SALDO-MORA-NV-LEEICMVLR(1) = 0             
+                         IF SALDO-MORA-NV-LEEICMVLR(1) > 70             
+                             MOVE 1 TO 99MOR009EX61                     
+                         END-IF                                         
+                      END-IF                                            
+                   END-IF                                               
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR009TO12 RECUPERADAS SECTOR FINANCIERO     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) <> 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                  (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND      
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                  CONTINUE                                              
+               ELSE *> PRINCIPAL                                        
+                  IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR    
+                      07  OR  02  OR  15  OR  46  OR  14  OR  05  OR    
+                      08  OR  17  OR  04  OR  45  OR  44  OR  06  OR    
+                      27  OR  33  OR  48  OR  49                        
+                     IF MESES-DESAC-CARACT <= 12                        
+                  EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) 
+                              WHEN 10                                   
+                                   ADD  1  TO  99MOR009TO12             
+                        END-EVALUATE                                    
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR016TO12 CTA. COBRADOR SECTOR FINANCIERO   
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+                NUM-CTA-ABD07(17:1) = "c"  OR                           
+               (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND         
+               (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR             
+                CONTINUE                                                
+            ELSE *> PRINCIPAL                                           
+               IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR       
+                   07  OR  02  OR  15  OR  46  OR  14  OR  05  OR       
+                   08  OR  17  OR  04  OR  45  OR  44  OR  06  OR       
+                   27  OR  33  OR  48  OR  49                           
+                  IF ADJETIVO1-ABD07 = 2 OR    *>   Cuenta en Cobrador  
+                     ADJETIVO2-ABD07 = 2 OR                             
+                     ADJETIVO3-ABD07 = 2                                
+                     ADD  1  TO  99MOR016TO12                           
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR028EX61 M. VIGENTES CON S. MORA > 50000   
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+             IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1      
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                  CONTINUE                                              
+              ELSE *> PRINCIPAL                                         
+                 IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR     
+                     07  OR  02  OR  15  OR  46  OR  14  OR  05  OR     
+                     08  OR  17  OR  04  OR  45  OR  44  OR  06  OR     
+                     27  OR  33  OR  48  OR  49                         
+                   IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 15 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 14 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 13 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 12 
+                       IF SW-LECTURA-LEEICMVLR = 1 AND                  
+                         IND-SALDO-MORA-NV-LEEICMVLR(1) = 0             
+                         IF SALDO-MORA-NV-LEEICMVLR(1) > 50             
+                              MOVE 1 TO 99MOR028EX61                    
+                         END-IF                                         
+                       END-IF                                           
+                   END-IF                                               
+                 END-IF                                                 
+              END-IF                                                    
+             END-IF                                                     
+           END-IF                                                       
+      *                                                                 
+      *                                                                 
+      * CALCULO VARIABLE 99MOR028EX04 M. VIGENTES CON S. MORA > 70000   
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+             IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1      
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                  CONTINUE                                              
+              ELSE *> PRINCIPAL                                         
+                 IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR     
+                     07  OR  02  OR  15  OR  46  OR  14  OR  05  OR     
+                     08  OR  17  OR  04  OR  45  OR  44  OR  06  OR     
+                     27  OR  33  OR  48  OR  49                         
+                   IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 15 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 14 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 13 
+                   OR CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07) = 12 
+                       IF SW-LECTURA-LEEICMVLR = 1 AND                  
+                         IND-SALDO-MORA-NV-LEEICMVLR(1) = 0             
+                         IF SALDO-MORA-NV-LEEICMVLR(1) > 70             
+                              MOVE 1 TO 99MOR028EX04                    
+                         END-IF                                         
+                       END-IF                                           
+                   END-IF                                               
+                 END-IF                                                 
+              END-IF                                                    
+             END-IF                                                     
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR010TC00 CANCELADAS MAL MANEJO             
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) <> 1       
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR           
+                  CONTINUE                                              
+             ELSE *> PRINCIPAL                                          
+               EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                     WHEN 08                                            
+                          ADD  1  TO  99MOR010TC00                      
+               END-EVALUATE                                             
+             END-IF                                                     
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99END019TO13 SALDO MORA SECTOR REAL            
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+                NUM-CTA-ABD07(17:1) = "c"  OR                           
+               (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND         
+               (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR             
+                CONTINUE                                                
+            ELSE *> PRINCIPAL                                           
+               IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR       
+                   07  OR  02  OR  15  OR  46  OR  14  OR  05  OR       
+                   08  OR  17  OR  04  OR  45  OR  44  OR  06  OR       
+                   27  OR  33  OR  48  OR  49                           
+                 CONTINUE                                               
+               ELSE *> SECTOR REAL                                      
+                  IF SW-LECTURA-LEEICMVLR = 1                           
+      * SE ACUMULA SALDO MORA                                           
+                     IF IND-SALDO-MORA-NV-LEEICMVLR(1) = 0              
+                        ADD SALDO-MORA-NV-LEEICMVLR(1) TO               
+                            99END019TO13                                
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO DE LA VARIABLE 99NUM005TO00 OBLIGACIONES CERRADAS       
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) <> 1       
+               ADD 1 TO 99NUM005TO00                                    
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO DE LA VARIABLE 99DEM008TO00 TIPO DE CLIENTE             
+      *                                                                 
+      * si entra por FINCRE-CARDEC = 0 tiene obligaciones es tipo 1     
+            IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"  
+               AND 99DEM008TO00 = 5                                     
+               MOVE 1 TO 99DEM008TO00                                   
+            END-IF                                                      
+      * si entra por FINCHK-CARDEC = 0 tiene cuentas es tipo 1 sin desem
+            IF COD-PORTAF-CARACT = "AH" AND COD-PORTAF-CARACT = "CT"    
+               AND 99DEM008TO00 = 5                                     
+               MOVE 2 TO 99DEM008TO00                                   
+            END-IF                                                      
+      *                                                                 
+      * SE CALCULA LA VARIABLE 99MOR004EX61 MORAS HIS. 30 SEC. REAL     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                  IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR            
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49                                             
+                   CONTINUE                                             
+                  ELSE                                                  
+                     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                                                     = 12 *> MORA 30    
+                        ADD 1 TO 99MOR004EX61                           
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * SE CALCULA LA VARIABLE 99MOR005EX61 MORAS HIS. 60 SEC. REAL     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49                                             
+                   CONTINUE                                             
+                 ELSE                                                   
+                    IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)     
+                                                     = 13 *> MORA 60    
+                       ADD 1 TO 99MOR005EX61                            
+                    END-IF                                              
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * SE CALCULA LA VARIABLE 99MOR006EX61 MORAS HIS. 90 SEC. REAL     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49                                             
+                   CONTINUE                                             
+                 ELSE                                                   
+                    IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)     
+                                                     = 14 *> MORA 90    
+                        ADD 1 TO 99MOR006EX61                           
+                     END-IF                                             
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * SE CALCULA LA VARIABLE 99MOR007EX61 MORAS HIS. 120 SEC. REAL    
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49                                             
+                   CONTINUE *> FINANCIERO                               
+                 ELSE *> REAL                                           
+                   IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)      
+                                                    = 15 *> MORA 120    
+                       ADD 1 TO 99MOR007EX61                            
+                   END-IF                                               
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR011TO12 MORAS HIS. 30 SEC. FINANCIERO     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49  *> FINANCIERO                              
+                     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                                                     = 12 *> MORA 30    
+                        ADD 1 TO 99MOR011TO12                           
+                     END-IF                                             
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR013TO12 MORAS HIS. 60 SEC. FINANCIERO     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49  *> FINANCIERO                              
+                     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                                                     = 13 *> MORA 60    
+                        ADD 1 TO 99MOR013TO12                           
+                     END-IF                                             
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR014TO12 MORAS HIS. 90 SEC. FINANCIERO     
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49  *> FINANCIERO                              
+                     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                                                     = 14 *> MORA 90    
+                        ADD 1 TO 99MOR014TO12                           
+                     END-IF                                             
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99MOR014TO12 MORAS HIS. 120 SEC. FINANCIERO    
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1       
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                  (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR          
+                   CONTINUE                                             
+               ELSE *> PRINCIPAL                                        
+                 IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR             
+                   07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR            
+                   17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR            
+                   48 OR 49  *> FINANCIERO                              
+                     IF CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)    
+                                                     = 15 *> MORA 120   
+                        ADD 1 TO 99MOR015TO12                           
+                     END-IF                                             
+                 END-IF                                                 
+               END-IF                                                   
+            END-IF                                                      
+           END-IF                                                       
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+              PERFORM 7500-ANALIZA-VECTOR-HIST-CARACT                   
+              PERFORM CARACT-RECORRER-VEC-MORAS-HIS                     
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99EXP002EX61 EXPERIENCIA FINANCIERA            
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+            IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+                NUM-CTA-ABD07(17:1) = "c"  OR                           
+             (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND           
+               (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR             
+                CONTINUE                                                
+            ELSE *> PRINCIPAL                                           
+               IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR               
+                07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR               
+                17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR               
+                48 OR 49  *> FINANCIERO                                 
+                  IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1 
+                     ADD 1 TO 99EXP002EX61                              
+                  ELSE                                                  
+                     IF MESES-DESAC-CARACT <= 24                        
+                        IF MORAS30-99EXP002EX61  <= 6 AND               
+                           MORAS60-99EXP002EX61  <= 1 AND               
+                           MORAS90-99EXP002EX61   = 0 AND               
+                           MORAS120-99EXP002EX61  = 0                   
+                           ADD 1 TO 99EXP002EX61                        
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+            MOVE ZEROS TO MORAS30-99EXP002EX61                          
+                          MORAS60-99EXP002EX61                          
+                          MORAS90-99EXP002EX61                          
+                          MORAS120-99EXP002EX61                         
+           END-IF                                                       
+      *                                                                 
+      * CALCULO VARIABLE 99EXP045EX04 NUMERO DE CUENTAS DEL  SECTOR REAL
+      *                                                                 
+           IF COD-PORTAF-CARACT <> "AH" AND COD-PORTAF-CARACT <> "CT"   
+      *     IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+      *         NUM-CTA-ABD07(17:1) = "c"  OR                           
+      *      (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND           
+      *        (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR             
+      *         CONTINUE                                                
+      *     ELSE *> PRINCIPAL                                           
+               IF COD-CTA-ABD07 = 42    OR    30    OR    09 OR         
+                                  24    OR    31    OR    35 OR         
+                                  21    OR    32    OR    39 OR         
+                                  41    OR    10    OR    40 OR         
+                                  29    OR    19    OR    47 OR         
+                                  43    OR    34    OR    22 OR         
+                                  36    OR    25    OR    38 OR         
+                                  37    OR    12    OR    23 OR         
+                                  11                                    
+                  IF CARACT-TAB-VIGENTES-CARTERA (NOV-REPORT-ABD07) = 1 
+                     ADD 1 TO 99EXP045EX04                              
+                  ELSE                                                  
+                     IF MESES-DESAC-CARACT <= 12                        
+                        ADD 1 TO 99EXP045EX04                           
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+      *     END-IF                                                      
+           END-IF
+CQ7215     END-IF *> FRENADAS                                           EHA0004
+           .
+       CARACT-RECORRER-VEC-MORAS-HIS.                                   
+REMARK***************************************************************** 
+REMARK*CARACT-RECORRER-VEC-MORAS-HIS.                                   
+REMARK*    SE MIRA SI PARA ALGUNA PERSONALIZACION HAY QUE REALIZAR CALCU
+REMARK*    PARA LA TIPOLOGIA MOR.                                       
+REMARK***************************************************************** 
+CQ7215      IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                       EHA0004
+            MOVE    ZEROS     TO  WS-VECES                              
+            MOVE WS-ESTADO-MES-1-CARACT TO ESTADO-MES-IMP-CARACT        
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1        
+               MOVE   12   TO   WS-VECES                                
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "5" BY "N"      
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "9" BY "-"      
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "6" BY "-"      
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "7" BY "-"      
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "8" BY "N"      
+               INSPECT ESTADO-MES-IMP-CARACT                            
+                                         REPLACING  ALL "0" BY " "      
+               PERFORM VARYING CARACT-W-INDICE FROM 1 BY 1 UNTIL        
+                                           CARACT-W-INDICE >  WS-VECES  
+                  EVALUATE E-MES-IMP-CARACT(CARACT-W-INDICE)            
+                     WHEN = "1" *> MORAS 30 DIAS                        
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR 07 OR 
+                        02 OR 15 OR 46 OR 14 OR 05 OR 08 OR 17 OR 04 OR 
+                        45 OR 44 OR 06 OR 27 OR 33 OR 48 OR 49          
+                        IF CARACT-W-INDICE <= 11                        
+                           ADD  1  TO  99MOR011TO12                     
+                        END-IF                                          
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                           CONTINUE                                     
+                          ELSE                                          
+                               IF CARACT-W-INDICE <= 11                 
+                                  ADD  1  TO  99MOR004EX61              
+                               END-IF                                   
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                     WHEN = "2" *> MORAS 60 DIAS                        
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                            IF CARACT-W-INDICE <= 11                    
+                               ADD  1  TO  99MOR013TO12                 
+                            END-IF                                      
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                        CONTINUE                                        
+                       ELSE                                             
+                            IF CARACT-W-INDICE <= 11                    
+                               ADD  1  TO  99MOR005EX61                 
+                            END-IF                                      
+                         END-IF                                         
+                      END-IF                                            
+      *                                                                 
+                     WHEN = "3"  *> MORAS 90 DIAS                       
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                            IF CARACT-W-INDICE <= 11                    
+                               ADD  1  TO  99MOR014TO12                 
+                            END-IF                                      
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                        CONTINUE                                        
+                       ELSE                                             
+                         IF CARACT-W-INDICE <= 11                       
+                            ADD  1  TO  99MOR006EX61                    
+                         END-IF                                         
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                     WHEN = "4" *> MORA 120 DIAS                        
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                            IF CARACT-W-INDICE <= 11                    
+                               ADD  1  TO  99MOR015TO12                 
+                            END-IF                                      
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                      IF  NUM-CTA-ABD07(17:1) = "C"  OR                 
+                          NUM-CTA-ABD07(17:1) = "c"  OR                 
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                         (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR   
+                          CONTINUE                                      
+                      ELSE *> PRINCIPAL                                 
+                       IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR       
+                        07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR       
+                        17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR       
+                        48 OR 49                                        
+                        CONTINUE                                        
+                       ELSE                                             
+                        IF CARACT-W-INDICE <= 11                        
+                           ADD  1  TO  99MOR007EX61                     
+                        END-IF                                          
+                       END-IF                                           
+                      END-IF                                            
+      *                                                                 
+                     WHEN = "N" *> AL DIA                               
+                     WHEN = "-"                                         
+                      CONTINUE                                          
+                  END-EVALUATE                                          
+               END-PERFORM                                              
+            ELSE                                                        
+               IF MESES-DESAC-CARACT <= 12                              
+                  COMPUTE  WS-VECES = 12 - MESES-DESAC-CARACT           
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "5" BY "N"   
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "9" BY "-"   
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "6" BY "-"   
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "7" BY "-"   
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "8" BY "N"   
+                  INSPECT ESTADO-MES-IMP-CARACT                         
+                                            REPLACING  ALL "0" BY " "   
+                  PERFORM VARYING CARACT-W-INDICE FROM 1 BY 1 UNTIL     
+                                             CARACT-W-INDICE > WS-VECES 
+                     EVALUATE E-MES-IMP-CARACT(CARACT-W-INDICE)         
+                        WHEN = "1" *> MORAS 30 DIAS                     
+      *                                                                 
+                         IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR     
+                          07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR     
+                          17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR     
+                          48 OR 49                                      
+                            IF  NUM-CTA-ABD07(17:1) = "C"  OR           
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                            ELSE *> PRINCIPAL                           
+                               ADD 1 TO MORAS30-99EXP002EX61            
+                            END-IF                                      
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                             ADD  1  TO  99MOR011TO12                   
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                           CONTINUE                                     
+                          ELSE                                          
+                               ADD  1  TO  99MOR004EX61                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                        WHEN = "2"                                      
+      *                                                                 
+                         IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR     
+                          07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR     
+                          17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR     
+                          48 OR 49                                      
+                            IF  NUM-CTA-ABD07(17:1) = "C"  OR           
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                            ELSE *> PRINCIPAL                           
+                               ADD 1 TO MORAS60-99EXP002EX61            
+                            END-IF                                      
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                               ADD  1  TO  99MOR013TO12                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                           CONTINUE                                     
+                          ELSE                                          
+                               ADD  1  TO  99MOR005EX61                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                        WHEN = "3" *> MORA 90 DIAS                      
+      *                                                                 
+                         IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR     
+                          07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR     
+                          17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR     
+                          48 OR 49                                      
+                            IF  NUM-CTA-ABD07(17:1) = "C"  OR           
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                            ELSE *> PRINCIPAL                           
+                               ADD 1 TO MORAS90-99EXP002EX61            
+                            END-IF                                      
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                               ADD  1  TO  99MOR014TO12                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                           CONTINUE                                     
+                          ELSE                                          
+                               ADD  1  TO  99MOR006EX61                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                        WHEN = "4" *> MORA 120 DIAS                     
+      *                                                                 
+                         IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR     
+                          07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR     
+                          17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR     
+                          48 OR 49                                      
+                            IF  NUM-CTA-ABD07(17:1) = "C"  OR           
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                            ELSE *> PRINCIPAL                           
+                               ADD 1 TO MORAS120-99EXP002EX61           
+                            END-IF                                      
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                             ADD  1  TO  99MOR015TO12                   
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                         IF  NUM-CTA-ABD07(17:1) = "C"  OR              
+                             NUM-CTA-ABD07(17:1) = "c"  OR              
+                       (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND 
+                          (IND-AMPLIACION-ABD02 = 5 OR 2)) *> CODEUDOR  
+                             CONTINUE                                   
+                         ELSE *> PRINCIPAL                              
+                          IF COD-CTA-ABD07 = 13 OR 03 OR 18 OR 16 OR    
+                           07 OR 02 OR 15 OR 46 OR 14 OR 05 OR 08 OR    
+                           17 OR 04 OR 45 OR 44 OR 06 OR 27 OR 33 OR    
+                           48 OR 49                                     
+                           CONTINUE                                     
+                          ELSE                                          
+                               ADD  1  TO  99MOR007EX61                 
+                          END-IF                                        
+                         END-IF                                         
+      *                                                                 
+                        WHEN = "N"  *> AL DIA                           
+                        WHEN = "-"                                      
+                           CONTINUE                                     
+                     END-EVALUATE                                       
+                  END-PERFORM                                           
+               END-IF                                                   
+            END-IF
+CQ7215      END-IF *> FRENADAS                                          EHA0004
+            .
+       2649-PROCESE-CARACT-02XX-EXT-04.                                 
+REMARK****************************************************************  
+REMARK*2649-PROCESE-CARACT-02XX-EXT-04.                                 
+REMARK**   99END002TO00 PEOR CALIFICACION ULTIMO TRIMESTRE              
+REMARK****************************************************************  
+REMARK*-----------------------------------------------------------------
+REMARK* VERIFICA EL ENDEUDAMIENTO Y CALIFICA                            
+REMARK*-----------------------------------------------------------------
+           INITIALIZE BDIEMSUP-LLAVE W-FECHA-SUP                        
+           MOVE  ZEROS                 TO  SW-LECTURA-CARACT            
+           MOVE  TIPO-ID-CARACT        TO  BDIEMSUP-TIP-ID              
+           MOVE  NRO-ID-CARACT         TO  BDIEMSUP-NUM-ID              
+           START  BDIEMSUP KEY  >=  BDIEMSUP-LLAVE                      
+             INVALID KEY                                                
+                MOVE  1                TO  SW-LECTURA-CARACT            
+           END-START                                                    
+           IF  SW-LECTURA-CARACT  =  0                                  
+             PERFORM  0330-READ-NEXT-ENDEUDA                            
+           END-IF
+      * SE CALCULA LA VARIABLE 99DEM004TO00 EDAD                        
+           MOVE 00DEM003 TO 99DEM004TO00                                
+      * SE CALCULA LA VARIABLE 99DEM001TO00 ESTADO DE VIDA              
+           MOVE ESTADO-VIG-BDIIREGI TO 99DEM001TO00                     
+      *                                                                 
+      * SE CALCULA LA VARIABLE 99DEM006TO00 FECHA DE EXPEDICION         
+      *                                                                 
+           MOVE  ZEROS                 TO  99DEM006TO00                 
+           IF FECHA-EXPEDI-BDIIREGI <> ZEROS                            
+              MOVE  FECHA-EXPEDI-BDIIREGI TO  99DEM006TO00              
+           END-IF                                                       
+      *                                                                 
+      * SE CALCULA LA VARIABLE NO DESEADOS COLPATRIA                    
+      *                                                                 
+           PERFORM 5200-LEA-INDEX-CLIENTCOLP                            
+
+CQ5926* SE CALCULAN VARIABLES RETENCION CUPOS COLPATRIA                 CAV0002
+CQ5926     MOVE ZEROS TO PER04-IND-REG-ENC PER04-AUMENTO-CUPO           CAV0002
+CQ5926                   PER04-AUMENTO-CUPO2                            CAV0002
+CQ5926     PERFORM 5200-LEA-INDEX-CUP-COLPATRIA                         CAV0002
+CQ5926     IF PER04-IND-REG-ENC = 1                                     CAV0002
+CQ5926        MOVE RETENCION-AUM-CUP1-COLP TO PER04-AUMENTO-CUPO        CAV0002         
+CQ5926        MOVE RETENCION-AUM-CUP2-COLP TO PER04-AUMENTO-CUPO2       CAV0002
+CQ5926*       DISPLAY "OK COLP : " REG-RETENCION-CUP-COLP               CAV0002
+CQ5926     END-IF                                                       CAV0002
+           .
+RQXXXX*----------------------------------------------------------------*
+RQXXXX* READ INDEXD ENDEUDAMIENTO                                      *
+RQXXXX*----------------------------------------------------------------*
+       0330-READ-NEXT-ENDEUDA.                                          
+           READ  BDIEMSUP NEXT RECORD                                   
+              AT END                                                    
+                MOVE  9                TO  BDIEMSUP-TIP-ID              
+           END-READ                                                     
+           PERFORM  UNTIL  BDIEMSUP-TIP-ID  NOT =  TIPO-ID-CARACT OR    
+                           BDIEMSUP-NUM-ID  NOT =  NRO-ID-CARACT OR     
+                           SW-LECTURA-CARACT = 1                        
+            IF BDIEMSUP-IND-BLOQ IS NOT NUMERIC                         
+               MOVE 0      TO BDIEMSUP-IND-BLOQ                         
+            END-IF                                                      
+            IF BDIEMSUP-IND-BLOQ NOT = 1                                
+               MOVE ZEROS           TO IND-E                            
+               IF BDIEMSUP-FECHA > ZEROS                                
+                   PERFORM VARYING IND-E FROM 1 BY 1 UNTIL IND-E > 8    
+                           IF BDIEMSUP-CALIFICA =                       
+                                              CARACT-TAB-END-COD(IND-E) 
+                              IF BDIEMSUP-FECHA > W-FECHA-SUP           
+                                 MOVE BDIEMSUP-FECHA    TO W-FECHA-SUP  
+                                 MOVE BDIEMSUP-CALIFICA TO 99END002TO00 
+                              END-IF                                    
+                              IF BDIEMSUP-FECHA = W-FECHA-SUP           
+                                 IF BDIEMSUP-CALIFICA > 99END002TO00    
+                                    MOVE BDIEMSUP-CALIFICA              
+                                                        TO 99END002TO00 
+                                 END-IF                                 
+                              END-IF                                    
+                              ADD  7   TO  IND-E                        
+                           END-IF                                       
+                   END-PERFORM                                          
+               END-IF                                                   
+            END-IF                                                      
+            READ BDIEMSUP NEXT RECORD                                   
+                   AT END                                               
+                     MOVE 9 TO BDIEMSUP-TIP-ID                          
+                     MOVE 1 TO SW-LECTURA-CARACT                        
+            END-READ                                                    
+           END-PERFORM                                                  
+           .
+       2249-PROCESE-CARCT-00END-EXT-04.                                 
+RQXXXX******************************************************************
+RQXXXX*2249-PROCESE-CARCT-00END-EXT-04.                                 
+RQXXXX*    PERSONALIZACION # 04 DE CARACTERISTICAS PARA COLPATRIA       
+RQXXXX******************************************************************
+CQ5341     MOVE "         -1" TO 00END999I1004(1:11)                    CAV0002
+CQ5341           00END999RO004(1:11) 00END998I1004(1:11)                CAV0002
+CQ5341           00END998RO004(1:11) 00END998MX004(1:11)                CAV0002
+CQ5341     MOVE "         -2" TO 00END999TO004(1:11)                    CAV0002
+CQ7215      IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                       EHA0004
+RQXXXX* CALCULO VARIABLE 01END999TC004 OBLIGACIONES ABIERTAS            
+            IF COD-CTA-ABD07 = 02 *> TDC                                
+              IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1 *>   
+               IF SW-LECTURA-LEEICMVLR = 1
+                IF IND-VAL-INIC-NV-LEEICMVLR(1) = 0 *> VALOR REPORTADO  
+                   IF VAL-INICIAL-NV-LEEICMVLR(1) > 01END999TC004       
+                      MOVE VAL-INICIAL-NV-LEEICMVLR(1) TO               
+                           01END999TC004                                
+                   END-IF                                               
+                END-IF
+               END-IF                                                   
+              END-IF                                                    
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 01END998TC004 OBLIGACIONES CERRADAS            
+      *                                                                 
+            IF COD-CTA-ABD07 = 02 *> TDC                                
+              IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) <> 1 *>  
+               IF SW-LECTURA-LEEICMVLR = 1
+                IF IND-VAL-INIC-NV-LEEICMVLR(1) = 0 *> VALOR REPORTADO  
+                   IF VAL-INICIAL-NV-LEEICMVLR(1) > 01END998TC004       
+                      MOVE VAL-INICIAL-NV-LEEICMVLR(1) TO               
+                           01END998TC004                                
+                   END-IF                                               
+                END-IF
+               END-IF                                                   
+              END-IF                                                    
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99END004TO13 TOTAL CUOTAS SECTOR REAL          
+      *                                                                 
+            IF  CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+              IF  NUM-CTA-ABD07(17:1) = "C"  OR                         
+                  NUM-CTA-ABD07(17:1) = "c"  OR                         
+                 (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND       
+                 (IND-AMPLIACION-ABD02 = 5 OR 2))                       
+                CONTINUE *> CODEUDOR                                    
+              ELSE *> TITULAR                                           
+               IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR       
+                 07  OR  02  OR  15  OR  46  OR  14  OR  05  OR         
+                 08  OR  17  OR  04  OR  45  OR  44  OR  06  OR         
+                 27  OR  33  OR  48  OR  49                             
+                 CONTINUE                                               
+               ELSE *> SECTOR REAL                                      
+                 IF SW-LECTURA-LEEICMVLR = 1 *> ENCONTRO VALORES        
+                  IF  IND-CUOTA-NV-LEEICMVLR(1) = 0 *> CUOTA REPORTADA  
+                      COMPUTE  99END004TO13  =  99END004TO13 +          
+                                                CUOTA-NV-LEEICMVLR(1)   
+                  END-IF                                                
+                 END-IF                                                 
+               END-IF                                                   
+              END-IF                                                    
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99END020EX61 TOTAL CUOTAS SECTOR FINANCIERO    
+      *                                                                 
+            IF  CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                 NUM-CTA-ABD07(17:1) = "c"  OR                          
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                (IND-AMPLIACION-ABD02 = 5 OR 2))                        
+               CONTINUE *> CODEUDOR                                     
+             ELSE *> TITULAR                                            
+              IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR        
+                07  OR  02  OR  15  OR  46  OR  14  OR  05  OR          
+                08  OR  17  OR  04  OR  45  OR  44  OR  06  OR          
+                27  OR  33  OR  48  OR  49                              
+                IF SW-LECTURA-LEEICMVLR = 1                             
+                  IF COD-CTA-ABD07 = 02 OR COD-CTA-ABD07 = 03           
+      * SI ES TDC O ROTATIVO SE MUEVE LA CUANTIA A CERO PARA QUE LA     
+      * CUOTA SE CALCULE SIEMPRE.                                       
+                    MOVE ZEROS TO CUOTA-NV-LEEICMVLR(1)                 
+                 END-IF                                                 
+                 IF  IND-CUOTA-NV-LEEICMVLR(1) = 0  AND *> CUOTAS       
+                     CUOTA-NV-LEEICMVLR(1)  >  ZEROS                    
+                     EVALUATE PERIODICIDAD-PAGO-ABD07                   
+                        WHEN 1 *> MENSUAL                               
+                           CONTINUE                                     
+                        WHEN 2 *> BIMESTRAL                             
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 2    
+                        WHEN 3 *> TRIMESTRAL                            
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 3    
+                        WHEN 4 *> SEMESTRAL                             
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 6    
+                        WHEN 5 *> ANUAL                                 
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 12   
+                        WHEN 6 *> AL VENCIMIENTO                        
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) /      
+                                           MESES-VENAP-CARACT           
+                     END-EVALUATE                                       
+                     ADD CUOTA-NV-LEEICMVLR(1) TO 99END020EX61          
+                 ELSE                                                   
+                   IF  IND-VAL-INIC-NV-LEEICMVLR(1)  =  0  *> CUPO      
+                     EVALUATE  COD-CTA-ABD07                            
+                       WHEN 02 *> TDC                                   
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                                (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0087) /
+                      (1 - (1 / ((1 + 0.0087) ** 24)))                  
+      *                                                                 
+                       WHEN 03 *> ROTATIVOS                             
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                                (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0087) /
+                      (1 - (1 / ((1 + 0.0087) ** 36)))                  
+      *                                                                 
+                       WHEN 13 *> CAV                                   
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                      (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0087) /          
+                     (1 - (1 / ((1 + 0.0087) **                         
+                                          MESES-VENAP-CARACT)))         
+      *                                                                 
+                       WHEN OTHER                                       
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                      (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0087) /          
+                      (1 - (1 / ((1 + 0.0087) **                        
+                                          MESES-VENAP-CARACT)))         
+                     END-EVALUATE                                       
+                     ADD   CUOTA-NV-LEEICMVLR(1) TO 99END020EX61        
+                   END-IF                                               
+                 END-IF                                                 
+               END-IF                                                   
+              END-IF                                                    
+             END-IF                                                     
+            END-IF       
+CQ6105*                                                                 EHA0003
+CQ6105* CALCULO VARIABLES SUMACUPOTDC61 SUMACUPOCBR61 SUMACUPOOTR61     EHA0003
+CQ6105*                                                                 EHA0003
+CQ6105      IF  CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       EHA0003
+CQ6105       IF  NUM-CTA-ABD07(17:1) = "C"  OR                          EHA0003
+CQ6105           NUM-CTA-ABD07(17:1) = "c"  OR                          EHA0003
+CQ6105          (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        EHA0003
+CQ6105          (IND-AMPLIACION-ABD02 = 5 OR 2))                        EHA0003
+CQ6105         CONTINUE *> CODEUDOR                                     EHA0003
+CQ6105       ELSE *> TITULAR                                            EHA0003
+CQ6105        IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR        EHA0003
+CQ6105          07  OR  02  OR  15  OR  46  OR  14  OR  05  OR          EHA0003
+CQ6105          08  OR  17  OR  04  OR  45  OR  44  OR  06  OR          EHA0003
+CQ6105          27  OR  33  OR  48  OR  49                              EHA0003
+CQ7215          MOVE  COD-CTA-ABD07 TO  W-CTA-BDCUE                     EHA0004
+CQ7215          PERFORM 32000-PROCESAR-VALORES                          EHA0004
+CQ7215          PERFORM 33000-PROCESAR-BDACUE                           EHA0004
+CQ7215          IF IND-VALORES-VALVLR   = 1                             EHA0004
+CQ6105**        IF SW-LECTURA-LEEICMVLR = 1                             EHA0003
+CQ6105           IF COD-CTA-ABD07 = 02 OR COD-CTA-ABD07 = 03            EHA0003
+CQ6105* SI ES TDC O ROTATIVO SE MUEVE LA CUANTIA A CERO PARA QUE LA     EHA0003
+CQ6105* CUOTA SE CALCULE SIEMPRE.                                       EHA0003
+CQ6105               EVALUATE  COD-CTA-ABD07                            EHA0003
+CQ6105                 WHEN 02 *> TDC                                   EHA0003
+CQ7215                  IF VEC-VALOR-VALVLR(2) = 1 *> CUPO              EHA0004
+CQ6105                   COMPUTE SUMA-CUPOS-TDC-61 = SUMA-CUPOS-TDC-61 +EHA0003
+CQ6105                                 VALOR-INICIAL-ABD07              EHA0003
+CQ7215                  END-IF                                          EHA0004
+CQ6105*                                                                 EHA0003
+CQ6105                 WHEN 03 *> ROTATIVOS                             EHA0003
+CQ7215                  IF VEC-VALOR-VALVLR(2) = 1 *> CUPO              EHA0004
+CQ6105                   COMPUTE SUMA-CUPOS-CBR-61 = SUMA-CUPOS-CBR-61 +EHA0003
+CQ6105                                 VALOR-INICIAL-ABD07              EHA0003
+CQ7215                  END-IF                                          EHA0004
+CQ6105               END-EVALUATE                                       EHA0003
+CQ6105*                                                                 EHA0003
+CQ7215               MOVE ZEROS TO CUANTIA-ABD07                        EHA0004
+CQ6105           END-IF                                                 EHA0003
+CQ7215           IF  VEC-VALOR-VALVLR (1) = 1  AND *> CUOTAS            EHA0004
+CQ7215               CUANTIA-ABD07  >  ZEROS                            EHA0004
+CQ6105               EVALUATE PERIODICIDAD-PAGO-ABD07                   EHA0003
+CQ6105                  WHEN 1 *> MENSUAL                               EHA0003
+CQ6105                     CONTINUE                                     EHA0003
+CQ6105                  WHEN 2 *> BIMESTRAL                             EHA0003
+CQ7215                     COMPUTE CUANTIA-ABD07 =                      EHA0004
+CQ7215                                     CUANTIA-ABD07 / 2            EHA0004
+CQ6105                  WHEN 3 *> TRIMESTRAL                            EHA0003
+CQ6105                     COMPUTE CUANTIA-ABD07 =                      EHA0003
+CQ6105                                     CUANTIA-ABD07 / 3            EHA0003
+CQ6105                  WHEN 4 *> SEMESTRAL                             EHA0003
+CQ6105                     COMPUTE CUANTIA-ABD07 =                      EHA0003
+CQ6105                                     CUANTIA-ABD07 / 6            EHA0003
+CQ6105                  WHEN 5 *> ANUAL                                 EHA0003
+CQ6105                     COMPUTE CUANTIA-ABD07 =                      EHA0003
+CQ6105                                     CUANTIA-ABD07 / 12           EHA0003
+CQ6105                  WHEN 6 *> AL VENCIMIENTO                        EHA0003
+CQ6105                     COMPUTE CUANTIA-ABD07 =                      EHA0003
+CQ6105                                     CUANTIA-ABD07 /              EHA0003
+CQ6105                                     MESES-VENAP-CARACT           EHA0003
+CQ6105               END-EVALUATE                                       EHA0003
+CQ6105               ADD CUANTIA-ABD07 TO SUMA-CUPOS-OTR-61             EHA0003
+CQ6105           ELSE                                                   EHA0003
+CQ6105            IF COD-CTA-ABD07 <> 02 AND COD-CTA-ABD07 <> 03        EHA0003
+CQ6105             IF  VEC-VALOR-VALVLR(2)  =  1  *> CUPO               EHA0003
+CQ6105               EVALUATE  COD-CTA-ABD07                            EHA0003
+CQ6105                 WHEN 13 *> CAV                                   EHA0003
+CQ6105                   COMPUTE CUANTIA-ABD07 =                        EHA0003
+CQ7215*CQ6105         (VALOR-INICIAL-ABD07 * 0.0229) /                  IMS0005
+CQ7215*CQ6105        (1 - (1 / ((1 + 0.0229) **                         IMS0005
+CQ7215                (VALOR-INICIAL-ABD07 * TMP-VAL-INT-D61) /         IMS0005
+CQ7215               (1 - (1 / ((1 + TMP-VAL-INT-D61) **                IMS0005
+CQ6105                                    MESES-VENAP-CARACT)))         EHA0003
+CQ6105*                                                                 EHA0003
+CQ6105                 WHEN OTHER                                       EHA0003
+CQ6105                   COMPUTE CUANTIA-ABD07 =                        EHA0003
+CQ7215*CQ6105         (VALOR-INICIAL-ABD07 * 0.0229) /                  IMS0005
+CQ7215*CQ6105         (1 - (1 / ((1 + 0.0229) **                        IMS0005
+CQ7215                (VALOR-INICIAL-ABD07 * TMP-VAL-INT-D61) /         IMS0005
+CQ7215                (1 - (1 / ((1 + TMP-VAL-INT-D61) **               IMS0005
+CQ6105                                    MESES-VENAP-CARACT)))         EHA0003
+CQ6105               END-EVALUATE                                       EHA0003
+CQ6105               ADD   CUANTIA-ABD07 TO SUMA-CUPOS-OTR-61           EHA0003
+CQ6105             END-IF                                               EHA0003
+CQ6105            END-IF                                                EHA0003
+CQ6105           END-IF                                                 EHA0003
+CQ6105         END-IF                                                   EHA0003
+CQ6105        END-IF                                                    EHA0003
+CQ6105       END-IF                                                     EHA0003
+CQ6105      END-IF                                                      EHA0003
+      *                                                                 
+      *                                                                 
+      * CALCULO VARIABLE 04END020TO50 T CUOTAS SEC. FINANCIERO TASA 2.14
+      *                                                                 
+            IF  CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                 NUM-CTA-ABD07(17:1) = "c"  OR                          
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                (IND-AMPLIACION-ABD02 = 5 OR 2))                        
+               CONTINUE *> CODEUDOR                                     
+             ELSE *> TITULAR                                            
+              IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR        
+                07  OR  02  OR  15  OR  46  OR  14  OR  05  OR          
+                08  OR  17  OR  04  OR  45  OR  44  OR  06  OR          
+                27  OR  33  OR  48  OR  49                              
+                IF SW-LECTURA-LEEICMVLR = 1                             
+                  IF COD-CTA-ABD07 = 02 OR COD-CTA-ABD07 = 03           
+      * SI ES TDC O ROTATIVO SE MUEVE LA CUANTIA A CERO PARA QUE LA     
+      * CUOTA SE CALCULE SIEMPRE.                                       
+                    MOVE ZEROS TO CUOTA-NV-LEEICMVLR(1)                 
+                 END-IF                                                 
+                 IF  IND-CUOTA-NV-LEEICMVLR(1) = 0  AND *> CUOTAS       
+                     CUOTA-NV-LEEICMVLR(1)  >  ZEROS                    
+                     EVALUATE PERIODICIDAD-PAGO-ABD07                   
+                        WHEN 1 *> MENSUAL                               
+                           CONTINUE                                     
+                        WHEN 2 *> BIMESTRAL                             
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 2    
+                        WHEN 3 *> TRIMESTRAL                            
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 3    
+                        WHEN 4 *> SEMESTRAL                             
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 6    
+                        WHEN 5 *> ANUAL                                 
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) / 12   
+                        WHEN 6 *> AL VENCIMIENTO                        
+                           COMPUTE CUOTA-NV-LEEICMVLR(1) =              
+                                           CUOTA-NV-LEEICMVLR(1) /      
+                                           MESES-VENAP-CARACT           
+                     END-EVALUATE                                       
+                     ADD CUOTA-NV-LEEICMVLR(1) TO 04END020TO50          
+                 ELSE                                                   
+                   IF  IND-VAL-INIC-NV-LEEICMVLR(1)  =  0  *> CUPO      
+                     EVALUATE  COD-CTA-ABD07                            
+                       WHEN 02 *> TDC                                   
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                                (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0214) /
+                      (1 - (1 / ((1 + 0.0214) ** 24)))                  
+      *                                                                 
+                       WHEN 03 *> ROTATIVOS                             
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                                (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0214) /
+                      (1 - (1 / ((1 + 0.0214) ** 36)))                  
+      *                                                                 
+                       WHEN 13 *> CAV                                   
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                      (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0214) /          
+                     (1 - (1 / ((1 + 0.0214) **                         
+                                          MESES-VENAP-CARACT)))         
+      *                                                                 
+                       WHEN OTHER                                       
+                         COMPUTE CUOTA-NV-LEEICMVLR(1) =                
+                      (VAL-INICIAL-NV-LEEICMVLR(1) * 0.0214) /          
+                      (1 - (1 / ((1 + 0.0214) **                        
+                                          MESES-VENAP-CARACT)))         
+                     END-EVALUATE                                       
+                     ADD   CUOTA-NV-LEEICMVLR(1) TO 04END020TO50        
+                   END-IF                                               
+                 END-IF                                                 
+               END-IF                                                   
+              END-IF                                                    
+             END-IF                                                     
+            END-IF
+CQ7215      END-IF *> FRENADAS                                          EHA0004
+      *                                                                 
+CQ5341* CALCULO CARACTERISTICAS SEGUN SOLICITUD 5341                    CAV0002
+CQ5341***  INSUMO: VECTOR NORMALIZADO DE VALORES VSA                    CAV0002
+CQ5341***  00END999I1004 *** MAXIMO CUPO INICIAL CAB                    CAV0002
+CQ5341***  00END998I1004 *** TOTAL  CUPO INICIAL CAB                    CAV0002
+CQ5341     IF COD-CTA-ABD07 = 05                                        CAV0002
+CQ5341        MOVE ZEROS TO 00END999I1004 00END998I1004                 CAV0002
+CQ5341        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0002
+CQ5341           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0002
+CQ5341              ACT-DATE-CARACT > ZEROS                             CAV0002
+CQ5341              IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0       CAV0002
+CQ5341                 IF VEC-INICIAL-CARACT(I13) <> "          -"      CAV0002
+CQ5341                    MOVE VEC-INICIAL-CARACT(I13) TO 00END999I1004 CAV0002
+CQ5341                    MOVE VEC-INICIAL-CARACT(I13) TO 00END998I1004 CAV0002
+CQ5341                 ELSE                                             CAV0002
+CQ5341                    MOVE "        -88" TO 00END999I1004(1:11)     CAV0002
+CQ5341                    MOVE "        -88" TO 00END998I1004(1:11)     CAV0002
+CQ5341                 END-IF                                           CAV0002
+CQ5341              ELSE                                                CAV0002
+CQ5341                 MOVE "         -4" TO 00END999I1004(1:11)        CAV0002
+CQ5341                 MOVE "         -4" TO 00END998I1004(1:11)        CAV0002
+CQ5341              END-IF                                              CAV0002
+CQ5341           ELSE                                                   CAV0002
+CQ5341              MOVE "         -3" TO 00END999I1004(1:11)           CAV0002
+CQ5341              MOVE "         -3" TO 00END998I1004(1:11)           CAV0002
+CQ5341           END-IF                                                 CAV0002
+CQ5341        ELSE                                                      CAV0002
+CQ5341           MOVE "         -2" TO 00END999I1004(1:11)              CAV0002
+CQ5341           MOVE "         -2" TO 00END998I1004(1:11)              CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+
+CQ5341***  00END999RO004 *** MAXIMO CUPO INICIAL TDC                    CAV0002
+CQ5341***  00END998RO004 *** TOTAL  CUPO INICIAL TDC                    CAV0002
+CQ5341     IF COD-CTA-ABD07 = 02                                        CAV0002
+CQ5341        MOVE ZEROS TO 00END999RO004 00END998RO004                 CAV0002
+CQ5341        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0002
+CQ5341           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0002
+CQ5341              ACT-DATE-CARACT > ZEROS                             CAV0002
+CQ5341              IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0       CAV0002
+CQ5341                 IF VEC-INICIAL-CARACT(I13) <> "          -"      CAV0002
+CQ5341                    MOVE VEC-INICIAL-CARACT(I13) TO 00END999RO004 CAV0002
+CQ5341                    MOVE VEC-INICIAL-CARACT(I13) TO 00END998RO004 CAV0002
+CQ5341                 ELSE                                             CAV0002
+CQ5341                    MOVE "        -88" TO 00END999RO004(1:11)     CAV0002
+CQ5341                    MOVE "        -88" TO 00END998RO004(1:11)     CAV0002
+CQ5341                 END-IF                                           CAV0002
+CQ5341              ELSE                                                CAV0002
+CQ5341                 MOVE "         -4" TO 00END999RO004(1:11)        CAV0002
+CQ5341                 MOVE "         -4" TO 00END998RO004(1:11)        CAV0002
+CQ5341              END-IF                                              CAV0002
+CQ5341           ELSE                                                   CAV0002
+CQ5341              MOVE "         -3" TO 00END999RO004(1:11)           CAV0002
+CQ5341              MOVE "         -3" TO 00END998RO004(1:11)           CAV0002
+CQ5341           END-IF                                                 CAV0002
+CQ5341        ELSE                                                      CAV0002
+CQ5341           MOVE "         -2" TO 00END999RO004(1:11)              CAV0002
+CQ5341           MOVE "         -2" TO 00END998RO004(1:11)              CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+
+CQ5341***  00END998MX004 *** TOTAL  CUPO INICIAL FINANC                 CAV0002
+CQ5341     IF COD-CTA-ABD07 = (02 OR 03 OR 05 OR 07 OR                  CAV0002
+CQ5341                         13 OR 14 OR 18 OR 20)                    CAV0002
+CQ5341        MOVE ZEROS TO 00END998MX004                               CAV0002
+CQ5341        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0002
+CQ5341           IF FECHA-ESTADO-CARACT > ZEROS AND                     CAV0002
+CQ5341              ACT-DATE-CARACT > ZEROS                             CAV0002
+CQ5341              IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0       CAV0002
+CQ5341                 IF VEC-INICIAL-CARACT(I13) <> "          -"      CAV0002
+CQ5341                    MOVE VEC-INICIAL-CARACT(I13) TO 00END998MX004 CAV0002
+CQ5341                 ELSE                                             CAV0002
+CQ5341                    MOVE "        -88" TO 00END998MX004(1:11)     CAV0002
+CQ5341                 END-IF                                           CAV0002
+CQ5341              ELSE                                                CAV0002
+CQ5341                 MOVE "         -4" TO 00END998MX004(1:11)        CAV0002
+CQ5341              END-IF                                              CAV0002
+CQ5341           ELSE                                                   CAV0002
+CQ5341              MOVE "         -3" TO 00END998MX004(1:11)           CAV0002
+CQ5341           END-IF                                                 CAV0002
+CQ5341        ELSE                                                      CAV0002
+CQ5341           MOVE "         -2" TO 00END998MX004(1:11)              CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+
+CQ5341***  00END999TO004 *** TOTAL  CUOTA INDIVIDUO                     CAV0002
+CQ5341     IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0              CAV0002
+CQ5341        IF FECHA-ESTADO-CARACT > ZEROS AND                        CAV0002
+CQ5341           ACT-DATE-CARACT > ZEROS                                CAV0002
+CQ5341           IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0          CAV0002
+CQ5341              IF VEC-CUOTA-CARACT(I13) <> "          -"           CAV0002
+CQ5341                 MOVE VEC-CUOTA-CARACT(I13) TO 00END999TO004      CAV0002
+CQ5341              ELSE                                                CAV0002
+CQ5341                 MOVE "        -88" TO 00END999TO004(1:11)        CAV0002
+CQ5341              END-IF                                              CAV0002
+CQ5341           ELSE                                                   CAV0002
+CQ5341              MOVE "         -4" TO 00END999TO004(1:11)           CAV0002
+CQ5341              END-IF                                              CAV0002
+CQ5341        ELSE                                                      CAV0002
+CQ5341           MOVE "         -3" TO 00END999TO004(1:11)              CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+
+CQ5341***  01END999I1004 *** MAXIMO CUPO INICIAL CAB                    CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END999I1004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(01END999I1004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 01END999I1004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        IF 00END999I1004 > 01END999I1004                          CAV0002
+CQ5341           MOVE 00END999I1004 TO 01END999I1004                    CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(01END999I1004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END999I1004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(01END999I1004(1:11))                 CAV0002
+CQ5341             MOVE 00END999I1004(1:11) TO 01END999I1004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+CQ5341***  01END999RO004 *** MAXIMO CUPO INICIAL TDC                    CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END999RO004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(01END999RO004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 01END999RO004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        IF 00END999RO004 > 01END999RO004                          CAV0002
+CQ5341           MOVE 00END999RO004 TO 01END999RO004                    CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(01END999RO004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END999RO004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(01END999RO004(1:11))                 CAV0002
+CQ5341             MOVE 00END999RO004(1:11) TO 01END999RO004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+CQ5341***  01END998I1004 *** TOTAL  CUPO INICIAL CAB                    CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END998I1004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(01END998I1004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 01END998I1004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        COMPUTE 01END998I1004 = 01END998I1004 + 00END998I1004     CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(01END998I1004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END998I1004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(01END998I1004(1:11))                 CAV0002
+CQ5341             MOVE 00END998I1004(1:11) TO 01END998I1004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+CQ5341***  01END998RO004 *** TOTAL  CUPO INICIAL TDC                    CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END998RO004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(01END998RO004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 01END998RO004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        COMPUTE 01END998RO004 = 01END998RO004 + 00END998RO004     CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(01END998RO004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END998RO004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(01END998RO004(1:11))                 CAV0002
+CQ5341             MOVE 00END998RO004(1:11) TO 01END998RO004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+CQ5341***  01END998MX004 *** TOTAL  CUPO INICIAL FINANCIERO             CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END998MX004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(01END998MX004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 01END998MX004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        COMPUTE 01END998MX004 = 01END998MX004 + 00END998MX004     CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(01END998MX004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END998MX004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(01END998MX004(1:11))                 CAV0002
+CQ5341             MOVE 00END998MX004(1:11) TO 01END998MX004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+CQ5341***  02END999TO004 *** TOTAL  CUOTA INDIVIDUO                     CAV0002
+CQ5341     IF FUNCTION NUMVAL(00END999TO004(1:11)) >= 0                 CAV0002
+CQ5341        IF FUNCTION NUMVAL(02END999TO004(1:11)) < 0               CAV0002
+CQ5341           MOVE ZEROS TO 02END999TO004                            CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341        COMPUTE 02END999TO004 = 02END999TO004 + 00END999TO004     CAV0002
+CQ5341     ELSE                                                         CAV0002
+CQ5341       IF FUNCTION NUMVAL(02END999TO004(1:11)) < 0                CAV0002
+CQ5341          IF FUNCTION NUMVAL(00END999TO004(1:11)) <               CAV0002
+CQ5341             FUNCTION NUMVAL(02END999TO004(1:11))                 CAV0002
+CQ5341             MOVE 00END999TO004(1:11) TO 02END999TO004(1:11)      CAV0002
+CQ5341          END-IF                                                  CAV0002
+CQ5341        END-IF                                                    CAV0002
+CQ5341     END-IF                                                       CAV0002
+
+CQ7215      IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                       EHA0004
+      * CALCULO VARIABLE 99END022EX61 TOTAL SALDOS SECTOR FINANCIEROS   
+      *                                                                 
+            IF  CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1       
+             IF  NUM-CTA-ABD07(17:1) = "C"  OR                          
+                 NUM-CTA-ABD07(17:1) = "c"  OR                          
+                (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND        
+                (IND-AMPLIACION-ABD02 = 5 OR 2))                        
+               CONTINUE *> CODEUDOR                                     
+             ELSE *> TITULAR                                            
+      * SE ESTABLECE EL TOTAL SALDOS DEL SECTOR FINANCIERO              
+               IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR       
+                   07  OR  02  OR  15  OR  46  OR  14  OR  05  OR       
+                   08  OR  17  OR  04  OR  45  OR  44  OR  06  OR       
+                   27  OR  33  OR  48  OR  49                           
+                 IF SW-LECTURA-LEEICMVLR = 1                            
+                   IF IND-SALDO-NV-LEEICMVLR(1) = 0  AND *> SALDO DEUDA 
+                      SALDO-NV-LEEICMVLR(1)  >  ZEROS                   
+                    ADD SALDO-NV-LEEICMVLR(1) TO 99END022EX61           
+                   END-IF                                               
+                 END-IF                                                 
+               END-IF                                                   
+             END-IF                                                     
+            END-IF                                                      
+      * CALCULO VARIABLE 99EXP003TC00 ANTIGUEDAD TDC EN MESES           
+            IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+                NUM-CTA-ABD07(17:1) = "c"  OR                           
+               (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND         
+               (IND-AMPLIACION-ABD02 = 5 OR 2))                         
+              CONTINUE *> CODEUDOR                                      
+            ELSE *> TITULAR                                             
+             IF  COD-CTA-ABD07  =  02  AND                              
+                 CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1  AND 
+                 MESES-MADUR-CARACT  >  99EXP003TC00
+CQ7215           IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                  EHA0004
+                    MOVE MESES-MADUR-CARACT TO 99EXP003TC00
+CQ7215           END-IF                                                 EHA0004
+             END-IF                                                     
+            END-IF                                                      
+      * CALCULO VARIABLE 99EXP003TO07 ANTIGUEDAD CONSUMO EN MESES       
+            IF  NUM-CTA-ABD07(17:1) = "C"  OR                           
+                NUM-CTA-ABD07(17:1) = "c"  OR                           
+               (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND         
+               (IND-AMPLIACION-ABD02 = 5 OR 2))                         
+              CONTINUE *> CODEUDOR                                      
+            ELSE *> TITULAR                                             
+             IF (COD-CTA-ABD07  = 05 OR 03)  AND                        
+                 CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1      
+                 IF MESES-MADUR-CARACT  >  99EXP003TO07
+CQ7215            IF IND-BLOQUEO-ABD07 <> 7 *> FRENADAS                 EHA0004
+                    MOVE MESES-MADUR-CARACT TO 99EXP003TO07
+CQ7215            END-IF                                                EHA0004
+                 END-IF                                                 
+             END-IF                                                     
+            END-IF                                                      
+      *                                                                 
+      * CALCULO VARIABLE 99MOR001EX61 CASTIGOS SECTOR REAL              
+            IF CARACT-TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1        
+               IF  NUM-CTA-ABD07(17:1) = "C"  OR                        
+                   NUM-CTA-ABD07(17:1) = "c"  OR                        
+                  (GARANTE-ABD07 > ZEROS AND GARANTE-ABD07 < 8 AND      
+                  (IND-AMPLIACION-ABD02 = 5 OR 2))                      
+                  CONTINUE *> CODEUDOR                                  
+               ELSE *> TITULAR                                          
+                IF  COD-CTA-ABD07 = 13  OR  03  OR  18  OR  16  OR      
+                    07  OR  02  OR  15  OR  46  OR  14  OR  05  OR      
+                    08  OR  17  OR  04  OR  45  OR  44  OR  06  OR      
+                    27  OR  33  OR  48  OR  49                          
+                    CONTINUE                                            
+                ELSE                                                    
+                   EVALUATE CARACT-TAB-NOV-CART-CODINT(NOV-REPORT-ABD07)
+                         WHEN 09                                        
+                              ADD  1  TO  99MOR001EX61                  
+                   END-EVALUATE                                         
+                END-IF                                                  
+               END-IF                                                   
+            END-IF
+CQ7215      END-IF *> FRENADAS                                          EHA0004
+            .                                                                      

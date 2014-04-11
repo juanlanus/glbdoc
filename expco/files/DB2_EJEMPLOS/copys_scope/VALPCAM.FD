@@ -1,0 +1,10 @@
+******* VALPCAM-fd.v.0001
+   **** VALPCAM.v03.001
+REMARK*Parametros de campos del maestro resumido ampliado 
+REMARK*con su descripcion
+036300*----------------------------------------------------------------*
+       FD  VALPCAM.
+       01  REG-VALPCAM.
+           03 NUM-CAMPO-VALPCAM                PIC 9(2).
+           03 DES-CAMPO-VALPCAM                PIC X(45).
+           03 FILLER                           PIC X(30).

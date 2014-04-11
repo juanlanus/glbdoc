@@ -1,0 +1,7 @@
+REMARK* BDIEINFO-FD.v.0001
+      *******************************************
+      *  AUXILIAR PARA INFORME DE RESULTADOS    *
+      *******************************************
+       FD BDIEINFO.
+       01 BDIEINFO-REGISTRO            PIC X(80).
+

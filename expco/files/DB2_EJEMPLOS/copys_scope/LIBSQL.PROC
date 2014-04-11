@@ -1,0 +1,1663 @@
+REMARK*LIBSQL-PROC.0004
+REMARK******************************************************************
+REMARK* FUNCIONES QUE EJECUTAN INSTRUCCIONES SQL A UNA BASE DE DATOS   *
+REMARK******************************************************************
+REMARK* VHF0002     * NOVDB2 - MODIFICACIONES PARA NOVEDAT EN DB2      *
+REMARK* VICTOR HUGO *                                                  *
+REMARK* FORERO      *                                                  *
+REMARK* MAY.31/2007 *                                                  *
+REMARK******************************************************************
+REMARK* VHF0003     * PRUAUT - SE MODIFICA EL NOMBRE DE LOG GENÉRICO   *
+REMARK* VICTOR HUGO *          POR UNO QUE SE MANEJE POR PROGRAMA E    *
+REMARK* FORERO      *          INCLUYA FECHA Y HORA PARA PRUEBAS       *
+REMARK* JUN.06/2008 *          AUTOMATICAS                             *
+REMARK******************************************************************
+REMARK* NDG0004     * CONSQL - SE INCLUYE LOGICA PARA UTILIZAR DE FOR- *
+REMARK* N.DUARTE    *          MA INDEPENDIENTE EL ARCHIVO LIBSQL-CF   *
+REMARK* 11/02/2010  *          PARA LEER LOS PARAMETROS DE CONEXION A  *
+REMARK*             *          LA BASE DE DATOS DB2.                   *
+REMARK*             *                                                  *
+REMARK******************************************************************
+
+       70000-EJECUTAR-SQL-LIBSQL.         
+REMARK******************************************************************
+REMARK*70000-EJECUTAR-SQL-LIBSQL.                                      *
+REMARK*    FUNCION QUE EJECUTA INSTRUCCIONES SQL DIFERENTES DE SELECT  *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSTRS-BD-LIBSQL  - CADENA DE INSTRUCCIONES SQL A        *
+REMARK*                           EJECUTAR. MAXIMO TAMANO DE           *
+REMARK*                           LA CADENA 50000                      *
+REMARK*       INDERR-INS-LIBSQL - INDICA SI HUBO ERROR EN GENERACION DE*
+REMARK*                           CADENA DE INSTRUCCIONES              *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       INSERR-BD-LIBSQL  - INSTRUCCION QUE GENERO ERROR SI LO   *
+REMARK*                           HUBO                                 *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK***     SE CAPTURA NOMBRE DE LA FUNCION
+              MOVE "70000-EJECUTAR-SQL-LIBSQL" TO FUNCION-LIBSQL
+REMARK***     SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+              ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK***     SE GRABA INICIO DE TRANSACCION EN EL LOG
+              MOVE "INICIO DE TRANSACCION" TO DESTRA-LIBSQL
+              MOVE SPACES TO VALTRA-LIBSQL
+              PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK***     SE CAPTURA TIEMPO DE INCIO DE TRANSACCION
+              MOVE 1 TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+REMARK***     SE CAPTURA TIEMPO DE PREPARACION DE CADENA
+              MOVE 2 TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           INITIALIZE CODRET-BD-LIBSQL
+                      INSERR-BD-LIBSQL
+                      DESERR-BD-LIBSQL
+                      RETORNO-LIBSQL
+REMARK*    SE COMPRUEBA LA CONEXION
+           PERFORM 80300-VERIF-CONEXION-LIBSQL
+           IF CODRET-BD-LIBSQL <> 0
+              MOVE 1 TO RETORNO-LIBSQL
+           END-IF
+REMARK**   SE VERIFICA SI HA HABIDO ERROR EN LA CONSTRUCCION DE LA 
+REMARK**   CADENA DE INSTRUCCIONES
+           IF RETORNO-LIBSQL = 0
+              IF INDERR-INS-LIBSQL = 0
+REMARK**         SE QUITA "|" AL COMIENZO DE LA CADENA DE INSTRUCCIONES
+                 MOVE SPACES TO INSTRS-BD-LIBSQL (1:1)
+              ELSE
+                 MOVE 995 TO SQLCODE
+                 INITIALIZE MFSQLMESSAGETEXT
+                 STRING 
+                    "NO SE PUDO ARMAR EXITOSAMENTE LA" DELIMITED BY SIZE 
+                    " CADENA DE INSTRUCCIONES PARA LA" DELIMITED BY SIZE
+                    " TRANSACCION"                     DELIMITED BY SIZE
+                    INTO MFSQLMESSAGETEXT
+                 MOVE 0 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE DETERMINA LONGITUD TOTAL DE LA CADENA
+              INITIALIZE LONCON-LIBSQL
+              INSPECT INSTRS-BD-LIBSQL TALLYING LONCON-LIBSQL
+                      FOR CHARACTERS BEFORE "||"
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN LOG TIEMPO DE PREPARACION DE CADENA
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE CADENA" TO  DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF
+REMARK*       EJECUTAR LAS INSTRUCCIONES SQL EN LA BASE DE DATOS
+              MOVE 1 TO I-LIBSQL
+              PERFORM UNTIL I-LIBSQL > LONCON-LIBSQL OR 
+                            RETORNO-LIBSQL <> 0
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE CAPTURA EL INICIO DE ARMADO DE INSTRUCCION
+                    MOVE 2 TO IND-TIEMPO-LIBSQL
+                    PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+                 END-IF
+REMARK*          SE PROCESA LA CADENA CON LAS INSTRUCCIONES SQL
+                 MOVE 1 TO J-LIBSQL
+                 INITIALIZE SQLGEN-BD-LIBSQL
+                            INSSQL-BD-LIBSQL
+                 PERFORM UNTIL INSTRS-BD-LIBSQL (I-LIBSQL:1) = "|" OR 
+                               RETORNO-LIBSQL <> 0 OR
+                               I-LIBSQL > LONCON-LIBSQL
+REMARK*             SE PROCESA CADA INSTRUCCION DELIMITADA POR "|" 
+                    MOVE INSTRS-BD-LIBSQL (I-LIBSQL:1)
+                         TO INSSQL-BD-LIBSQL (J-LIBSQL:1)
+                    ADD 1 TO J-LIBSQL
+                    ADD 1 TO I-LIBSQL
+                    IF I-LIBSQL > MAXCADENA-LIBSQL OR 
+                       J-LIBSQL > MAXINSTR-LIBSQL
+                       MOVE 994 TO SQLCODE
+                       INITIALIZE MFSQLMESSAGETEXT
+                       STRING 
+                          "LONGITUD MAXIMA DE INSTRUCCION "
+                                                     DELIMITED BY SIZE 
+                          "O DE CADENA DE INSTRUCCIONES "  
+                                                     DELIMITED BY SIZE
+                          "EXCEDIDA "                DELIMITED BY SIZE
+                          INTO MFSQLMESSAGETEXT
+                       MOVE 0 TO IND-BD-LIBSQL
+                       PERFORM 90100-PR-ERROR-LIBSQL
+                       MOVE 1 TO RETORNO-LIBSQL
+                    END-IF
+                 END-PERFORM
+                 IF RETORNO-LIBSQL = 0
+REMARK*             SE LLENA LA VARIABLE QUE UTILIZARA EL EXECUTE DE  
+REMARK*             ACUERDO A COMO LA EXIJE DB2
+                    MOVE INSSQL-BD-LIBSQL (1:J-LIBSQL) 
+                         TO SQLGEN-VAL-LIBSQL
+                    MOVE J-LIBSQL TO SQLGEN-LEN-LIBSQL
+                    IF DEBUG-LIBSQL = "SI"
+REMARK*                SE GRABA EN LOG INSTRUCCION EN PROCESO
+PRUAUT                 MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL          VHF0003
+                       MOVE SQLGEN-VAL-LIBSQL TO VALTRA-LIBSQL
+                       PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK*                SE GRABA EN LOG TIEMPO DE ARMADO DE INSTRUCCION
+                       MOVE  2  TO IND-TIEMPO-LIBSQL
+                       MOVE "ARMADO DE INSTRUCCION"  TO DESTRA-LIBSQL
+                       PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+                    END-IF
+                    PERFORM 80200-PROC-INS-LIBSQL
+                    IF RETORNO-LIBSQL = 0 
+                       IF I-LIBSQL <= LONCON-LIBSQL
+                          ADD 1 TO I-LIBSQL
+                          IF I-LIBSQL >= MAXCADENA-LIBSQL
+                             MOVE 994 TO SQLCODE
+                             INITIALIZE MFSQLMESSAGETEXT
+                             STRING 
+                                "LONGITUD MAXIMA DE CADENA DE "
+                                                     DELIMITED BY SIZE 
+                                "INSTRUCCIONES EXCEDIDA"  
+                                                     DELIMITED BY SIZE
+                                INTO MFSQLMESSAGETEXT
+                             MOVE 2 TO IND-BD-LIBSQL
+                             PERFORM 90100-PR-ERROR-LIBSQL
+                             MOVE 1 TO RETORNO-LIBSQL
+                          END-IF
+                       END-IF
+                    ELSE
+                       MOVE SQLGEN-VAL-LIBSQL TO INSERR-BD-LIBSQL
+                    END-IF
+                 END-IF
+              END-PERFORM
+           END-IF
+           IF RETORNO-LIBSQL = 0 
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE CAPTURA INICIO DE COMMIT PARA TRANSACCION
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       SE ACTUALIZA LA BASE DE DATOS
+              EXEC SQL
+                   COMMIT
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG TIEMPO DE COMMIT            
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "COMMIT DE TRANSACCION" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF
+           ELSE
+              PERFORM 90300-ACTUALIZAR-LOG-LIBSQL
+           END-IF
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN EL LOG EL TIEMPO DE TRANSACCION
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              MOVE "TOTAL TRANSACCION" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+           END-IF.
+
+       70100-CONSULTA-SQL-LIBSQL.        
+REMARK******************************************************************
+REMARK*70100-CONSULTA-SQL-LIBSQL.                                      *
+REMARK*    FUNCION PARA SELECT DE RESPUESTA DE UNA SOLA COLUMNA Y UNA  *
+REMARK*    SOLA FILA. ESTA COLUMNA PUEDE SER LA CONCATENACION DE VARIAS*
+REMARK*    COLUMNAS DE LA TABLA.                                       *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSSQL-BD-LIBSQL  - INSTRUCCION SELECT A EJECUTAR. TAMANO*
+REMARK*                           MAXIMO 2000                          *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       INDRES-BD-LIBSQL  - INDICA EN QUE VARIABLE               *
+REMARK*                           RESSEL-BD-LIBSQL ESTA LA RESPUESTA A *
+REMARK*                           LA CONSULTA. SI SE TIENE CERTEZA DEL *
+REMARK*                           TIPO DE DATO RECIBIDO SE PUEDE OBVIAR*
+REMARK*                           EL USO DE ESTE CAMPO                 *
+REMARK*       RESSEL-NN-LIBSQL  - RESULTADO DEL QUERY. NN CORRESPONDE  *
+REMARK*                           AL INDICADOR INDRES-BD-LIBSQL. PARA  *
+REMARK*                           UTILIZAR LA INFORMACION SE DEBE      *
+REMARK*                           VER LA ESTRUCTURA DE LA              *
+REMARK*                           RESSEL-NN-LIBSQL CORRESPONDIENTE EN  *
+REMARK*                           EL COPY LIBSQL.WS                    *
+REMARK*       NULDAT-LIBSQL     - INDICA SI SE DEBE VERIFICAR (<> 0) EL*
+REMARK*                           INDICADOR DE NULO, CASO EN EL CUAL SE*
+REMARK*                           UTILIZA EN CONJUNCION CON            *
+REMARK*                           IND-NULL-LIBSQL. SI SE CONCOCE CON   *
+REMARK*                           CERTEZA LA NATURALEZA DEL CAMPO      *
+REMARK*                           RETORNADO SE PUEDE OBVIAR EL USO DE  *
+REMARK*                           ESTE CAMPO.                          *
+REMARK*       IND-NULL-LIBSQL   - SOLO APLICA A CAMPOS QUE PERMITEN    *
+REMARK*                           NULOS. SI SU VALOR ES -1 INDICA QUE  * 
+REMARK*                           EL CAMPO RETORNADO POR LA CONSULTA   *
+REMARK*                           FUE NULO. SI SE CONOCE LA NATURALEZA *
+REMARK*                           DEL CAMPO RETORNADO SE PUEDE UTILIZAR*
+REMARK*                           DIRECTAMENTE, SI NO ES ASI SE DEBE   *
+REMARK*                           UTILIZAR SI EL CAMPO NULDAT-LIBSQL ES*
+REMARK*                           <> 0.                                *
+REMARK*       INSERR-BD-LIBSQL  - INSTRUCCION QUE GENERO ERROR SI LO   *
+REMARK*                           HUBO                                 *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK***     SE CAPTURA NOMBRE DE LA FUNCION
+              MOVE "70100-CONSULTA-SQL-LIBSQL" TO FUNCION-LIBSQL
+REMARK***     SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+              ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK***     SE GRABA INICIO DE SELECT EN EL LOG
+PRUAUT        MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL                   VHF0003
+              MOVE INSSQL-BD-LIBSQL TO VALTRA-LIBSQL
+              PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK***     SE CAPTURA TIEMPO DE INCIO DE SELECT
+              MOVE 1 TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+REMARK*       SE CAPTURA INICIO DE LA PREPARACION DEL PREPARE
+              MOVE  2  TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           INITIALIZE CODRET-BD-LIBSQL
+                      RETORNO-LIBSQL
+                      RESSEL-BD-LIBSQL
+                      RESREA-07-LIBSQL
+                      RESDOU-07-LIBSQL
+                      NULDAT-LIBSQL
+                      IND-NULL-LIBSQL
+                      INSERR-BD-LIBSQL
+                      DESERR-BD-LIBSQL
+                      CONSUL-BD-LIBSQL
+           MOVE 1 TO CONSUL-LEN-LIBSQL
+           STRING INSSQL-BD-LIBSQL  DELIMITED BY "     "
+             INTO CONSUL-VAL-LIBSQL POINTER CONSUL-LEN-LIBSQL
+           MOVE INSSQL-BD-LIBSQL TO INSERR-BD-LIBSQL
+REMARK*    SE COMPRUEBA LA CONEXION
+           PERFORM 80300-VERIF-CONEXION-LIBSQL
+           IF CODRET-BD-LIBSQL <> 0
+              MOVE 1 TO RETORNO-LIBSQL
+           END-IF
+REMARK*    SE PREPARA LA CONSULTA
+           IF RETORNO-LIBSQL = 0
+              MOVE 1 TO SQLN
+              COMPUTE SQLDABC = 16 + 44 * SQLN
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DE PREPARACION DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL PREPARE
+                 MOVE 2 TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+              EXEC SQL
+                   PREPARE CONSUL_LIBSQL INTO :SQLDA
+                                         FROM :CONSUL-BD-LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA PREPARACION DE LA CONSULTA
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE DETERMINA EL TIPO DE DATO A RECIBIR, ADICIONALMENTE
+REMARK*       SE DETERMINA SI EL CAMPO PERMITE O NO NULO: TIPO DE DATO
+REMARK*       PAR NO PERMITE NULO, EL IMPAR SI (POR DEFINICION) 
+              INITIALIZE TIPDAT-LIBSQL
+                         NULDAT-LIBSQL
+              MOVE SQLTYPE (1) TO TIPDAT-LIBSQL
+              DIVIDE TIPDAT-LIBSQL BY 2 
+                     GIVING I-LIBSQL REMAINDER NULDAT-LIBSQL
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG TIEMPO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+REMARK*       SE DECLARA UN CURSOR PARA LA CONSULTA
+              EXEC SQL
+                   DECLARE CONSUL_C_LIBSQL CURSOR FOR CONSUL_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA DECLARACION DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARACION DE OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+REMARK*       EJECUTAR EL SELECT A LA BASE DE DATOS MEDIANTE LA 
+REMARK*       APERTURA DEL CURSOR
+              EXEC SQL
+                   OPEN CONSUL_C_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA APERTURA DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE PREPARA LO NECESARIO PARA RECUPERAR EL RESULTADO 
+REMARK*       DE LA CONSULTA
+REMARK*       EL PRIMER PASO ES DETERMINAR EL TIPO DE DATO
+              SEARCH ALL T-TIPDAT-LIBSQL
+                 AT END
+                    MOVE 0 TO I-LIBSQL
+                 WHEN COD-TIPDAT-LIBSQL (I-CODDAT) = TIPDAT-LIBSQL
+                    SET  I-LIBSQL TO I-CODDAT
+              END-SEARCH
+REMARK*       DE ACUERDO AL TIPO DE DATO SE ASIGNA LA DIRECCION DE 
+REMARK*       LA VARIABLE QUE RECIBIRA EL RESULTADO DE LA CONSULTA.
+REMARK*       LOS TIPOS DE DATOS DIFERENTES SON FLOAT, DOUBLE O REAL,
+REMARK*       LOS DEMAS SE RECIBEN EN RESSEL-DB-LIBSQL Y SE DEBEN
+REMARK*       INTERPRETAR CON LA REDEFINICION ADECUADA
+              IF I-LIBSQL > 0
+                 EVALUATE COD-TIPDAT-LIBSQL  (I-LIBSQL)
+                    WHEN 480 THRU 481
+REMARK***              DADO QUE EL CODIGO DE REAL Y DOUBLE ES EL MISMO 
+REMARK***              LA UNICA FORMA DE DIFERENCIARLOS ES POR LA
+REMARK***              LONGITUD, REAL ES DE LONGITUD 4 Y DOUBLE DE 8
+                       IF SQLLEN (1) = 4
+                          SET SQLDATA(1) TO ADDRESS OF RESREA-07-LIBSQL
+                       ELSE
+                          SET SQLDATA(1) TO ADDRESS OF RESDOU-07-LIBSQL
+                       END-IF
+                    WHEN OTHER
+                       SET SQLDATA(1) TO ADDRESS OF RESSEL-BD-LIBSQL
+                 END-EVALUATE
+              ELSE
+                 MOVE 999 TO SQLCODE
+                 MOVE "TIPO DE DATO INVALIDO PARA DB2"
+                      TO MFSQLMESSAGETEXT
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE CAPTURA EL INDICE DE LA ESTRUCTURA A UTILIZAR PARA
+REMARK*       RECIBIR LA CONSULTA
+              MOVE EST-TIPDAT-LIBSQL (I-LIBSQL) TO INDRES-BD-LIBSQL
+REMARK*       SE ASIGNA LA VARIABLE QUE RECIBE EL INDICADOR DE NULO
+              SET SQLIND (1) TO ADDRESS OF IND-NULL-LIBSQL
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARCION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE FETCH" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       SE OBTIENEN LOS RESULTADO DE LA CONSULTA
+              EXEC SQL
+                   FETCH CONSUL_C_LIBSQL USING DESCRIPTOR :SQLDA
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL FETCH      
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "FETCH" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PROCESAR RESULTADO   
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF 
+              IF SQLCODE = 0
+                 IF NULDAT-LIBSQL = 0 OR 
+                   (NULDAT-LIBSQL <> 0 AND IND-NULL-LIBSQL <> -1)
+                    EVALUATE COD-TIPDAT-LIBSQL (I-LIBSQL)
+                       WHEN 480 THRU 481
+REMARK***                 MEDIANTE LA LONGITUD SE DETERMINA CUAL 
+REMARK***                 VARIABLE SE DEBE MOVER A LA ESTRUCTURA DE
+REMARK***                 RESPUESTA: 4 - REAL   8 - DOUBLE
+                          IF SQLLEN (1) = 4
+                             MOVE RESREA-07-LIBSQL TO RESSEL-07-LIBSQL
+                          ELSE
+                             MOVE RESDOU-07-LIBSQL TO RESSEL-07-LIBSQL
+                          END-IF
+                    END-EVALUATE
+                 END-IF
+              ELSE
+                 IF SQLCODE <> 100
+REMARK*             HUBO FALLO EN LA LECTURA DE INFORMACION
+                    MOVE 1 TO IND-BD-LIBSQL
+                    PERFORM 90100-PR-ERROR-LIBSQL
+                    MOVE 1 TO RETORNO-LIBSQL
+                 END-IF
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DE PROCESAR RESULTADO
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PROCESAR RESULTADO" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF 
+              MOVE SQLCODE TO CODRET-BD-LIBSQL
+                              CODRET-ED-LIBSQL
+REMARK*       SE CIERRA EL CURSOR
+              EXEC SQL
+                   CLOSE CONSUL_C_LIBSQL
+              END-EXEC
+REMARK*       SE FINALIZA LA TRANSACCION
+              EXEC SQL
+                   COMMIT
+              END-EXEC
+           ELSE
+              PERFORM 90300-ACTUALIZAR-LOG-LIBSQL
+           END-IF
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN EL LOG EL TIEMPO DE SELECT
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              MOVE "TOTAL SELECT" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+           END-IF.
+
+       70200-CONSUL01-SQL-LIBSQL.        
+REMARK******************************************************************
+REMARK*70200-CONSUL01-SQL-LIBSQL.                                      *
+REMARK*    FUNCION PARA SELECT DE UN CAMPO DE MULTIPLES REGISTROS EL   *
+REMARK*    UNICO CAMPO PUEDE SER CONCATENACION DE VARIOS CAMPOS, LA    *
+REMARK*    SALIDA QUEDA EN UN ARCHIVO TEMPORAL                         *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSSQL-BD-LIBSQL  - INSTRUCCION SELECT A EJECUTAR. TAMANO*
+REMARK*                           MAXIMO 2000                          *
+REMARK*       TITLE-LIBSQL      - RUTA Y NOMBRE DEL ARCHIVO EN EL CUAL *
+REMARK*                           SE DESEA EL RESULTADO DE LA CONSULTA *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       INDRES-BD-LIBSQL  - INDICA EN QUE FORMATO DE             *
+REMARK*                           RESSEL-BD-LIBSQL ESTA LA RESPUESTA A *
+REMARK*                           LA CONSULTA. SI SE TIENE CERTEZA DEL *
+REMARK*                           TIPO DE DATO RECIBIDO SE PUEDE OBVIAR*
+REMARK*                           EL USO DE ESTE CAMPO                 *
+REMARK*       INSERR-BD-LIBSQL  - INSTRUCCION QUE GENERO ERROR SI LO   *
+REMARK*                           HUBO                                 *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK***     SE CAPTURA NOMBRE DE LA FUNCION
+              MOVE "70200-CONSUL01-SQL-LIBSQL" TO FUNCION-LIBSQL
+REMARK***     SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+              ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK***     SE GRABA INICIO DE SELECT EN EL LOG
+PRUAUT        MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL                   VHF0003
+              MOVE INSSQL-BD-LIBSQL TO VALTRA-LIBSQL
+              PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK***     SE CAPTURA TIEMPO DE INCIO DE SELECT
+              MOVE 1 TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+REMARK*       SE CAPTURA INICIO DE LA PREPARACION DEL PREPARE
+              MOVE  2  TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           INITIALIZE CODRET-BD-LIBSQL
+                      RETORNO-LIBSQL
+                      RESSEL-BD-LIBSQL
+                      RESREA-07-LIBSQL
+                      RESDOU-07-LIBSQL
+                      NULDAT-LIBSQL
+                      IND-NULL-LIBSQL
+                      INSERR-BD-LIBSQL
+                      DESERR-BD-LIBSQL
+                      I-LIBSQL
+                      K-LIBSQL
+                      CONS01-BD-LIBSQL
+           MOVE 1 TO CONS01-LEN-LIBSQL
+           STRING INSSQL-BD-LIBSQL  DELIMITED BY "     "
+             INTO CONS01-VAL-LIBSQL POINTER CONS01-LEN-LIBSQL
+           MOVE INSSQL-BD-LIBSQL TO INSERR-BD-LIBSQL
+REMARK*    SE ABRE ARCHIVO QUE RECIBIRA EL RESULTADO DE LA CONSULTA
+           OPEN OUTPUT LIBSQL
+REMARK*    SE COMPRUEBA LA CONEXION
+           PERFORM 80300-VERIF-CONEXION-LIBSQL
+           IF CODRET-BD-LIBSQL <> 0
+              MOVE 1 TO RETORNO-LIBSQL
+           END-IF
+REMARK*    SE PREPARA LA CONSULTA
+           IF RETORNO-LIBSQL = 0
+              MOVE 1 TO SQLN
+              COMPUTE SQLDABC = 16 + 44 * SQLN
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DE PREPARACION DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL PREPARE
+                 MOVE 2 TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              EXEC SQL
+                   PREPARE CONS01_LIBSQL INTO :SQLDA
+                                         FROM :CONS01-BD-LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA PREPARACION DE LA CONSULTA
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE DETERMINA EL TIPO DE DATO A RECIBIR, ADICIONALMENTE
+REMARK*       SE DETERMINA SI EL CAMPO PERMITE O NO NULO: TIPO DE DATO
+REMARK*       PAR NO PERMITE NULO, EL IMPAR SI (POR DEFINICION)
+              INITIALIZE TIPDAT-LIBSQL
+                         NULDAT-LIBSQL
+              MOVE SQLTYPE (1) TO TIPDAT-LIBSQL
+              DIVIDE TIPDAT-LIBSQL BY 2 
+                     GIVING K-LIBSQL REMAINDER NULDAT-LIBSQL
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG TIEMPO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       SE DECLARA UN CURSOR PARA LA CONSULTA
+              EXEC SQL
+                   DECLARE CONS01_C_LIBSQL CURSOR FOR CONS01_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA DECLARACION DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARACION DE OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       EJECUTAR EL SELECT A LA BASE DE DATOS MEDIANTE LA 
+REMARK*       APERTURA DEL CURSOR
+              EXEC SQL
+                   OPEN CONS01_C_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA APERTURA DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE PREPARA LO NECESARIO PARA RECUPERAR EL RESULTADO
+REMARK*       DE LA CONSULTA
+REMARK*       EL PRIMER PASO ES DETERMINAR EL TIPO DE DATO
+              SEARCH ALL T-TIPDAT-LIBSQL
+                 AT END
+                    MOVE 0 TO K-LIBSQL
+                 WHEN COD-TIPDAT-LIBSQL (I-CODDAT) = TIPDAT-LIBSQL
+                    SET  K-LIBSQL TO I-CODDAT
+              END-SEARCH
+REMARK*       DE ACUERDO AL TIPO DE DATO SE ASIGNA LA DIRECCION DE
+REMARK*       LA VARIABLE QUE RECIBIRA EL RESULTADO DE LA CONSULTA.
+REMARK*       LOS TIPOS DE DATOS DIFERENTES SON FLOAT, DOUBLE O REAL,
+REMARK*       LOS DEMAS SE RECIBEN EN RESSEL-DB-LIBSQL Y SE DEBEN
+REMARK*       INTERPRETAR CON LA REDEFINICION ADECUADA
+              IF K-LIBSQL > 0
+                 EVALUATE COD-TIPDAT-LIBSQL (K-LIBSQL)
+                    WHEN 480 THRU 481
+REMARK***              DADO QUE EL CODIGO DE REAL Y DOUBLE ES EL MISMO
+REMARK***              LA UNICA FORMA DE DIFERENCIARLOS ES POR LA,
+REMARK***              LONGITUD REAL ES DE LONGITUD 4 Y DOUBLE DE 8
+                       IF SQLLEN (1) = 4
+                          SET SQLDATA(1) TO ADDRESS OF RESREA-07-LIBSQL
+                       ELSE
+                          SET SQLDATA(1) TO ADDRESS OF RESDOU-07-LIBSQL
+                       END-IF
+                    WHEN OTHER
+                       SET SQLDATA(1) TO ADDRESS OF RESSEL-BD-LIBSQL
+                 END-EVALUATE
+              ELSE
+                 MOVE 999 TO SQLCODE
+                 MOVE "TIPO DE DATO INVALIDO PARA DB2"
+                      TO MFSQLMESSAGETEXT
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE CAPTURA EL INDICE DE LA ESTRUCTURA A UTILIZAR PARA
+REMARK*       RECIBIR LA CONSULTA
+              MOVE EST-TIPDAT-LIBSQL (K-LIBSQL) TO INDRES-BD-LIBSQL
+REMARK*       SE RECUPERA EL RESULTADO DE LA CONSULTA
+REMARK*       SE ASIGNA LA VARIABLE QUE RECIBE EL INDICADOR DE NULO
+              SET SQLIND (1) TO ADDRESS OF IND-NULL-LIBSQL
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARCION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE FETCH" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF
+              PERFORM UNTIL SQLCODE <> 0 OR RETORNO-LIBSQL <> 0
+                 INITIALIZE RESSEL-BD-LIBSQL
+                            RESREA-07-LIBSQL
+                            RESDOU-07-LIBSQL
+                            IND-NULL-LIBSQL
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE CAPTURA INICIO DE FETCH
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+                 END-IF
+                 EXEC SQL
+                      FETCH CONS01_C_LIBSQL USING DESCRIPTOR :SQLDA
+                 END-EXEC
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE GRABA EN EL LOG EL TIEMPO DEL FETCH
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    MOVE "FETCH" TO DESTRA-LIBSQL
+                    PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*             SE CAPTURA INICIO DE PROCESAR RESULTADO
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+                 END-IF
+                 IF SQLCODE = 0
+                    IF NULDAT-LIBSQL = 0 OR 
+                      (NULDAT-LIBSQL <> 0 AND IND-NULL-LIBSQL <> -1)
+                       ADD 1 TO I-LIBSQL
+                       EVALUATE COD-TIPDAT-LIBSQL (K-LIBSQL)
+                          WHEN 480 THRU 481
+REMARK***                 MEDIANTE LA LONGITUD SE DETERMINA CUAL 
+REMARK***                 VARIABLE SE DEBE MOVER A LA ESTRUCTURA DE
+REMARK***                 RESPUESTA: 4 - REAL   8 - DOUBLE
+                          IF SQLLEN (1) = 4
+                             MOVE RESREA-07-LIBSQL TO RESSEL-07-LIBSQL
+                          ELSE
+                             MOVE RESDOU-07-LIBSQL TO RESSEL-07-LIBSQL
+                          END-IF
+                       END-EVALUATE
+                       MOVE RESSEL-BD-LIBSQL TO REG-LIBSQL
+                       WRITE REG-LIBSQL
+                    END-IF
+                 ELSE  
+                    IF SQLCODE = 100
+REMARK*                LLEGO AL FINAL DE LOS REGISTROS CONSULTADOS
+                       IF I-LIBSQL = 0
+REMARK*                   NO HUBO NINGUN REGISTRO PARA LA CONSULTA
+                          MOVE SQLCODE TO CODRET-BD-LIBSQL
+                                          CODRET-ED-LIBSQL
+                       END-IF
+                    ELSE
+REMARK*                HUBO FALLO EN LA LECTURA DE INFORMACION
+                       MOVE 1 TO IND-BD-LIBSQL
+                       PERFORM 90100-PR-ERROR-LIBSQL
+                       MOVE 1 TO RETORNO-LIBSQL
+                    END-IF
+                 END-IF
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE GRABA EN EL LOG EL TIEMPO DE PROCESAR RESULTADO
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    MOVE "PROCESAR RESULTADO" TO DESTRA-LIBSQL
+                    PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+                 END-IF
+              END-PERFORM
+           END-IF
+           CLOSE LIBSQL
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE CIERRA EL CURSOR
+              EXEC SQL
+                   CLOSE CONS01_C_LIBSQL
+              END-EXEC
+REMARK*       SE FINALIZA LA TRANSACCION
+              EXEC SQL
+                   COMMIT
+              END-EXEC
+           ELSE
+              PERFORM 90300-ACTUALIZAR-LOG-LIBSQL
+           END-IF
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN EL LOG EL TIEMPO DE SELECT
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              MOVE "TOTAL SELECT" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+           END-IF.
+
+       70300-CONING-SQL-LIBSQL.        
+REMARK******************************************************************
+REMARK*70300-CONING-SQL-LIBSQL.                                        *
+REMARK*    FUNCION PARA SELECT DE NRO_CONSECUTIVO, COD_INGRESO Y ESTADO*
+REMARK*    DE TABLA DE MODIFICACIONES DE BASE DE DATOS NOVEDAT         *
+REMARK*    EXCLUSIVAMENTE                                              *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSSQL-BD-LIBSQL  - INSTRUCCION SELECT A EJECUTAR. TAMANO*
+REMARK*                           MAXIMO 2000                          *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       NUMREG-BD-LIBSQL  - NUMERO DE REGISTROS RETORNADOS POR EL*
+REMARK*                           SELECT                               *
+REMARK*       DATREG-BD-LIBSQL  - ARREGLO QUE CONTIENE NUMERO, CODIGO  *
+REMARK*                           DE INGRESO Y ESTADO DE RECLAMOS      *
+REMARK*                           ASOCIADOS A UN PROCESO EN BATCH. SE  *
+REMARK*                           PROCESAN MAXIMO 5 REGISTROS          *
+REMARK*       INSERR-BD-LIBSQL  - INSTRUCCION QUE GENERO ERROR SI LO   *
+REMARK*                           HUBO                                 *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK***     SE CAPTURA NOMBRE DE LA FUNCION
+              MOVE "70300-CONING-SQL-LIBSQL" TO FUNCION-LIBSQL
+REMARK***     SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+              ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK***     SE GRABA INICIO DE SELECT EN EL LOG
+PRUAUT        MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL                   VHF0003
+              MOVE INSSQL-BD-LIBSQL TO VALTRA-LIBSQL
+              PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK***     SE CAPTURA TIEMPO DE INCIO DE SELECT
+              MOVE 1 TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+REMARK*       SE CAPTURA INICIO DE LA PREPARACION DEL PREPARE
+              MOVE  2  TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           INITIALIZE CODRET-BD-LIBSQL
+                      NUMREG-BD-LIBSQL
+                      DATREG-BD-LIBSQL
+                      INSERR-BD-LIBSQL
+                      DESERR-BD-LIBSQL
+                      RETORNO-LIBSQL
+                      NROCON-BD-LIBSQL
+                      CODING-BD-LIBSQL
+                      CODEST-BD-LIBSQL
+                      IND-NULL-LIBSQL
+                      CONING-BD-LIBSQL
+           MOVE 1 TO CONING-LEN-LIBSQL
+           STRING INSSQL-BD-LIBSQL  DELIMITED BY "     "
+             INTO CONING-VAL-LIBSQL POINTER CONING-LEN-LIBSQL
+           MOVE INSSQL-BD-LIBSQL TO INSERR-BD-LIBSQL
+REMARK*    SE COMPRUEBA LA CONEXION
+           PERFORM 80300-VERIF-CONEXION-LIBSQL
+           IF CODRET-BD-LIBSQL <> 0
+              MOVE 1 TO RETORNO-LIBSQL
+           END-IF
+REMARK*    SE PREPARA LA CONSULTA
+           IF RETORNO-LIBSQL = 0
+              MOVE 3 TO SQLN
+              COMPUTE SQLDABC = 16 + 44 * SQLN
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DE PREPARACION DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL PREPARE
+                 MOVE 2 TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              EXEC SQL
+                   PREPARE CONING_LIBSQL INTO :SQLDA
+                                         FROM :CONING-BD-LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL PREPARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA PREPARACION DE LA CONSULTA
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG TIEMPO DE PREPARACION DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DEL DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       SE DECLARA UN CURSOR PARA LA CONSULTA
+              EXEC SQL
+                  DECLARE CONING_LIBSQL CURSOR FOR CONING_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL DECLARE
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "DECLARE" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA DECLARACION DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARACION DE OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       EJECUTAR EL SELECT A LA BASE DE DATOS MEDIANTE LA 
+REMARK*       APERTURA DEL CURSOR
+              EXEC SQL
+                   OPEN CONING_LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL OPEN CURSOR
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "OPEN CURSOR" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DE PREPARACION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+REMARK*          HUBO FALLO EN LA APERTURA DEL CURSOR
+                 MOVE 1 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+                 MOVE 1 TO RETORNO-LIBSQL
+              END-IF
+           END-IF
+           IF RETORNO-LIBSQL = 0
+REMARK*       SE RECUPERA EL RESULTADO DE LA CONSULTA
+              SET SQLDATA (1) TO ADDRESS OF CODING-BD-LIBSQL
+              SET SQLDATA (2) TO ADDRESS OF NROCON-BD-LIBSQL
+              SET SQLDATA (3) TO ADDRESS OF CODEST-BD-LIBSQL
+              SET SQLIND (3) TO ADDRESS OF IND-NULL-LIBSQL
+              MOVE 0 TO I-LIBSQL
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          GRABA EN EL LOG TIEMPO DE PREPARCION DE FETCH
+                 MOVE  2  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE FETCH" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF
+              PERFORM UNTIL SQLCODE <> 0 OR RETORNO-LIBSQL <> 0 OR
+                            I-LIBSQL > 5
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE CAPTURA INICIO DE FETCH
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+                 END-IF
+                 EXEC SQL
+                      FETCH CONING_LIBSQL USING DESCRIPTOR :SQLDA
+                 END-EXEC
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE GRABA EN EL LOG EL TIEMPO DEL FETCH
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    MOVE "FETCH" TO DESTRA-LIBSQL
+                    PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*             SE CAPTURA INICIO DE PROCESAR RESULTADO
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+                 END-IF
+                 IF SQLCODE = 0
+                    ADD 1 TO I-LIBSQL
+                    MOVE NROCON-BD-LIBSQL TO NROCON-LIBSQL (I-LIBSQL)
+NOVDB2              MOVE CODING-BD-LIBSQL TO CODING-LIBSQL (I-LIBSQL)   VHF0002
+                    IF IND-NULL-LIBSQL = -1
+                       MOVE NROCON-BD-LIBSQL TO NROCON-ED-LIBSQL
+                       MOVE 998 TO SQLCODE
+                       INITIALIZE MFSQLMESSAGETEXT
+                       STRING 
+                          "ERROR:NULO EN CAMPO COD_ESTADO" 
+                                                   DELIMITED BY SIZE 
+                          " DE MODIFICACION. "     DELIMITED BY SIZE
+                          NROCON-ED-LIBSQL         DELIMITED BY SIZE
+                          "-"                      DELIMITED BY SIZE
+                          CODING-BD-LIBSQL         DELIMITED BY SIZE
+                          INTO MFSQLMESSAGETEXT
+                       MOVE 1 TO IND-BD-LIBSQL
+                       PERFORM 90100-PR-ERROR-LIBSQL
+                       MOVE 1 TO RETORNO-LIBSQL
+                    ELSE
+NOVDB2                 MOVE CODEST-BD-LIBSQL TO CODEST-LIBSQL (I-LIBSQL)VHF0002
+                    END-IF
+                 ELSE  
+                    IF SQLCODE = 100
+REMARK*                LLEGO AL FINAL DE LOS REGISTROS CONSULTADOS
+                       IF I-LIBSQL = 0
+REMARK*                   NO HUBO NINGUN REGISTRO PARA LA CONSULTA
+                          MOVE SQLCODE TO CODRET-BD-LIBSQL
+                                          CODRET-ED-LIBSQL
+                       END-IF
+                    ELSE
+REMARK*                HUBO FALLO EN LA LECTURA DE INFORMACION
+                       MOVE 1 TO IND-BD-LIBSQL
+                       PERFORM 90100-PR-ERROR-LIBSQL
+                       MOVE 1 TO RETORNO-LIBSQL
+                    END-IF
+                 END-IF
+                 IF DEBUG-LIBSQL = "SI"
+REMARK*             SE GRABA EN EL LOG EL TIEMPO DE PROCESAR RESULTADO
+                    MOVE  2  TO IND-TIEMPO-LIBSQL
+                    MOVE "PROCESAR RESULTADO" TO DESTRA-LIBSQL
+                    PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+                 END-IF
+              END-PERFORM
+           END-IF
+           IF RETORNO-LIBSQL = 0
+              MOVE I-LIBSQL TO NUMREG-BD-LIBSQL
+REMARK*       SE CIERRA EL CURSOR
+              EXEC SQL
+                   CLOSE CONING_LIBSQL
+              END-EXEC
+REMARK*       SE FINALIZA LA TRANSACCION
+              EXEC SQL
+                   COMMIT
+              END-EXEC
+           ELSE
+              PERFORM 90300-ACTUALIZAR-LOG-LIBSQL
+           END-IF
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN EL LOG EL TIEMPO DE SELECT
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              MOVE "TOTAL SELECT" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+           END-IF.
+
+       70400-ACTIVAR-BD-LIBSQL.           
+REMARK******************************************************************
+REMARK*70400-ACTIVAR-BD-LIBSQL.                                        *
+REMARK*    FUNCION PARA ACTIVAR O DESACTIVAR LA CONEXION A LA BD       *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INDACT-BD-LIBSQL  - INDICA SI SE DESEA ACTIVAR ("SI"), O *
+REMARK*                           DESACTIVAR ("NO") LA CONEXION A LA BD*
+REMARK*       VARAMB-BD-LIBSQL  - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           INITIALIZE CODRET-BD-LIBSQL
+                      DESERR-BD-LIBSQL
+           IF INDACT-BD-LIBSQL = "SI"
+              PERFORM 80100-CONNECT-BD-LIBSQL 
+              IF CODRET-BD-LIBSQL <> 0
+                 PERFORM 80000-DISCONNECT-BD-LIBSQL
+                 PERFORM 80100-CONNECT-BD-LIBSQL 
+              END-IF
+           ELSE
+              PERFORM 80000-DISCONNECT-BD-LIBSQL
+           END-IF.
+
+       80000-DISCONNECT-BD-LIBSQL.
+REMARK******************************************************************
+REMARK*80000-DISCONNECT-BD-LIBSQL.                                     *
+REMARK*    FUNCION PARA HACER DISCONNECT DE LA BD                      *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           SIEMPRE RETORNA 0.                   *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK***     SE CAPTURA NOMBRE DE LA FUNCION
+              MOVE "80000-DISCONNECT-BD-LIBSQL" TO FUNCION-LIBSQL
+REMARK***     SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+              ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK***     SE GRABA INICIO DE DISCONNECT EN LOG
+PRUAUT        MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL                   VHF0003
+              MOVE "DISCONNECT"  TO VALTRA-LIBSQL
+              PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+REMARK*       SE CAPTURA INICIO DE DISCONNECT
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           MOVE 0 TO CODRET-BD-LIBSQL
+                     CODRET-ED-LIBSQL
+           EXEC SQL 
+                DISCONNECT CURRENT
+           END-EXEC 
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN EL LOG EL TIEMPO DE DISCONNECT
+              MOVE  1  TO IND-TIEMPO-LIBSQL
+              MOVE "TOTAL DISCONNECT" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              CLOSE DEBUG-ARCH-LIBSQL
+           END-IF.
+
+       80100-CONNECT-BD-LIBSQL.           
+REMARK******************************************************************
+REMARK*80100-CONNECT-BD-LIBSQL.                                        *
+REMARK*    FUNCION QUE HACE CONNECT A LA BD                            *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+REMARK***  SE ORDENA LA TABLA DE TIPOS DE DATOS
+           SORT T-TIPDAT-LIBSQL
+REMARK***  SE CAPTURA NOMBRE DE LA FUNCION
+           MOVE "80100-CONNECT-BD-LIBSQL" TO FUNCION-LIBSQL
+REMARK***  SE OBTIENE EL IDENTIFICADOR PARA LA TRANSACCION
+           ADD 1 TO IDENTIF-TR-LIBSQL
+REMARK*    SE CAPTURA INICIO DE PREPARACION DE CONNECT
+           MOVE  1  TO IND-TIEMPO-LIBSQL
+           PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           MOVE 0 TO SQLCODE
+REMARK*    LA SIGUIENTE INSTRUCCION ES PARA INDICAR QUE EL ARCHIVO DE
+REMARK*    CONFIGURACION POR DEFECTO SE ABRIO EXITOSAMENTE
+           MOVE 1 TO I-LIBSQL
+REMARK*    SE DETERMINAN LOS VALORES DE BD, USUARIO Y PASSWORD PARA 
+REMARK*    CONEXION A LA BD
+REMARK*    SE OBTIENE EL NOMBRE DEL ARCHIVO QUE CONTIENE LOS VALORES A
+REMARK*    BUSCAR
+           DISPLAY VAR-AMB-BD-LIBSQL UPON ENVIRONMENT-NAME
+           ACCEPT VAL-AMB-BD-LIBSQL FROM ENVIRONMENT-VALUE
+           IF VAL-AMB-BD-LIBSQL = SPACES
+              MOVE 998 TO SQLCODE
+              INITIALIZE MFSQLMESSAGETEXT
+              STRING
+                 "VARIABLE DE AMBIENTE "            DELIMITED BY SIZE
+                  VAR-AMB-BD-LIBSQL                 DELIMITED BY "  "
+                 " PARA UBICACION DE ARCHIVO DE "   DELIMITED BY SIZE
+                 "CONFIGURACION NO ESTABLECIDA "    DELIMITED BY SIZE
+                 INTO MFSQLMESSAGETEXT
+              MOVE 0 TO IND-BD-LIBSQL
+              PERFORM 90100-PR-ERROR-LIBSQL
+           END-IF
+           IF SQLCODE = 0
+REMARK*       SE ABRE EL ARCHIVO QUE CONTIENE LOS DATOS DE CONEXION
+CONSQL        MOVE VAL-AMB-BD-LIBSQL TO TITLE-LIBSQL-CF                 NDG0004
+CONSQL        OPEN INPUT LIBSQL-CF                                      NDG0004
+CONSQL        IF FILE-STATUS-LIBSQL-CF <> "00"                          NDG0004
+REMARK*          LA SIGUIENTE INSTRUCCION INDICA QUE EL ARCHIVO DE 
+REMARK*          CONFIGURACION NO SE ABRIO EXITOSAMENTE
+                 MOVE 0 TO I-LIBSQL
+                 MOVE 997 TO SQLCODE
+                 INITIALIZE MFSQLMESSAGETEXT
+                 STRING 
+                    "ERROR "                        DELIMITED BY SIZE
+CONSQL              FILE-STATUS-LIBSQL-CF           DELIMITED BY SIZE   NDG0004
+                    " ABRIENDO ARCHIVO DE "         DELIMITED BY SIZE
+                    "CONFIGURACION "                DELIMITED BY SIZE
+                    VAL-AMB-BD-LIBSQL               DELIMITED BY "  "
+                    " PARA CONEXION A LA BD NO "    DELIMITED BY SIZE
+                    "ENCONTRADO"                    DELIMITED BY SIZE
+                    INTO MFSQLMESSAGETEXT  
+                 MOVE 0 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+              END-IF
+           END-IF
+           IF SQLCODE = 0
+REMARK*       SE LEE CADA UNO DE LOS DATOS PARA CONEXION POR DEFUALT SE
+REMARK*       ASUME QUE NO HAY FIN DE ARCHIVO
+CONSQL        MOVE 0 TO FDA-LIBSQL-CF                                   NDG0004
+CONSQL        READ LIBSQL-CF                                            NDG0004
+                 AT END
+                    MOVE 996 TO SQLCODE
+                    INITIALIZE MFSQLMESSAGETEXT
+                    STRING 
+                       "ARCHIVO DE CONFIGURACION "  DELIMITED BY SIZE
+                        VAL-AMB-BD-LIBSQL           DELIMITED BY "  "
+                       " INCOMPLETO"                DELIMITED BY SIZE
+                       INTO MFSQLMESSAGETEXT  
+                    MOVE 0 TO IND-BD-LIBSQL
+                    PERFORM 90100-PR-ERROR-LIBSQL
+REMARK*             SE INDICA FIN DE ARCHIVO 
+CONSQL              MOVE 1 TO FDA-LIBSQL-CF                             NDG0004
+              END-READ
+           END-IF
+           IF SQLCODE = 0
+              INITIALIZE NOMBRE-BD-LIBSQL
+                         USUARIO-BD-LIBSQL
+                         CLAVE-BD-LIBSQL
+              MOVE "NO"  TO DEBUG-LIBSQL
+REMARK*       SE RECORRE EL ARCHIVO DE CONFIGURACION
+CONSQL        PERFORM UNTIL FDA-LIBSQL-CF = 1                           NDG0004
+                 INITIALIZE NOMPAR-LIBSQL
+                            VALPAR-LIBSQL
+REMARK*          SE DETERMINA EL PARAMETRO LEIDO, PARA ELLO SE HACE    
+REMARK*          UNSTRING POR EL CARACTER @ YA QUE CADA PARAMETRO TIENE
+REMARK*          FORMATO @NOMBRE_PARAMETRO
+CONSQL           UNSTRING REG-LIBSQL-CF DELIMITED BY ALL"@" OR "="      NDG0004
+                     INTO AUX-LIBSQL NOMPAR-LIBSQL
+REMARK*          SI SE DETERMINO EL PARAMETRO A PROCESAR SE OBTIENE SU
+REMARK*          VALOR
+                 IF NOMPAR-LIBSQL <> SPACES
+REMARK*             EL VALOR DE CADA PARAMETRO SE ENCUENTRA ENCERRADO 
+REMARK*             ENTRE COMILLA SENCILLA, PARA OBTENER SU VALOR SE 
+REMARK*             HACE UNSTRING UTILIZANDO ESE CARACTER DELIMITADOR
+CONSQL              UNSTRING REG-LIBSQL-CF DELIMITED BY ALL "'"         NDG0004
+                        INTO AUX-LIBSQL VALPAR-LIBSQL
+REMARK*             SI SE OBTUVO EL VALOR DEL PARAMETRO SE CAPTURA EN SU
+REMARK*             CAMPO RESPECTIVO
+                    IF VALPAR-LIBSQL <> SPACES
+                       EVALUATE NOMPAR-LIBSQL
+                          WHEN "BaseDatos "
+                             MOVE VALPAR-LIBSQL TO NOMBRE-BD-LIBSQL
+                          WHEN "Usuario   "
+                             MOVE VALPAR-LIBSQL TO USUARIO-BD-LIBSQL
+                          WHEN "Clave     "
+                             MOVE VALPAR-LIBSQL TO CLAVE-BD-LIBSQL
+                          WHEN "Debug     "
+                             MOVE VALPAR-LIBSQL TO DEBUG-LIBSQL
+                       END-EVALUATE
+                    END-IF
+                 END-IF
+CONSQL           READ LIBSQL-CF                                         NDG0004
+                    AT END
+CONSQL                 MOVE 1 TO FDA-LIBSQL-CF                          NDG0004
+                 END-READ
+              END-PERFORM
+REMARK*       SE DETERMINA SI SE OBTUVIERON LOS PARAMETROS NECESARIOS
+REMARK*       PARA CONEXION
+              IF NOMBRE-BD-LIBSQL = SPACES OR 
+                 USUARIO-BD-LIBSQL = SPACES OR CLAVE-BD-LIBSQL = SPACES
+                 MOVE 993 TO SQLCODE
+                 INITIALIZE MFSQLMESSAGETEXT
+                 STRING 
+                    "FALTA ALGUN PARAMETRO EN (" DELIMITED BY SIZE
+                     VAL-AMB-BD-LIBSQL           DELIMITED BY "  "
+                    ") PARA CONEXION A LA BD "   DELIMITED BY SIZE
+                    INTO MFSQLMESSAGETEXT  
+                 MOVE 0 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+              END-IF
+           END-IF
+           IF SQLCODE = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SI SE RECIBIO PARAMETRO DE DEBUG ACTIVADO SE ABRE EL 
+REMARK*          ARCHIVO PARA INICIO DE GRABACION DE LOG
+REMARK*          SE DEFINE EL NOMBRE DEL LOG                            VHF0003
+PRUAUT           INITIALIZE TITLE-SQLLOG-LIBSQL                         VHF0003
+PRUAUT           STRING "$TEMPORALES/"               DELIMITED BY SIZE  VHF0003
+PRUAUT                  "SQLLOG."                    DELIMITED BY SIZE  VHF0003
+PRUAUT                  PROGRAMA-LIBSQL              DELIMITED BY " "   VHF0003
+PRUAUT                  "."                          DELIMITED BY SIZE  VHF0003
+PRUAUT                  FUNCTION CURRENT-DATE (1:14) DELIMITED BY SIZE  VHF0003
+PRUAUT              INTO TITLE-SQLLOG-LIBSQL                            VHF0003
+PRUAUT           END-STRING                                             VHF0003
+PRUAUT           OPEN OUTPUT DEBUG-ARCH-LIBSQL                          VHF0003
+REMARK*          SE GRABA INICIO DE CONNECT EL LOG
+PRUAUT           MOVE "INSTRUCCION : "  TO DESTRA-LIBSQL                VHF0003
+                 MOVE "CONNECT"    TO VALTRA-LIBSQL
+                 PERFORM 90600-GRABAR-DEBUG-TRA-LIBSQL
+              END-IF
+           END-IF
+REMARK*    SE CIERRA EL ARCHIVO DE CONFIGURACION SIEMPRE Y CUANDO
+REMARK*    SE HAYA ABIERTO EXITOSAMENTE
+           IF I-LIBSQL = 1
+CONSQL        CLOSE LIBSQL-CF                                           NDG0004
+           END-IF
+           IF SQLCODE = 0
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN LOG TIEMPO DE PREPARACION DE CONNECT 
+                 MOVE  1  TO IND-TIEMPO-LIBSQL
+                 MOVE "PREPARACION DE CONNECT" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+REMARK*          SE CAPTURA INICIO DEL CONNECT
+                 MOVE 1 TO IND-TIEMPO-LIBSQL
+                 PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+              END-IF
+REMARK*       SE EJECUTA EL CONNECT
+              EXEC SQL 
+                   CONNECT TO :NOMBRE-BD-LIBSQL
+                         USER :USUARIO-BD-LIBSQL
+                        USING :CLAVE-BD-LIBSQL
+              END-EXEC
+              IF DEBUG-LIBSQL = "SI"
+REMARK*          SE GRABA EN EL LOG EL TIEMPO DEL CONNECT
+                 MOVE  1  TO IND-TIEMPO-LIBSQL
+                 MOVE "CONNECT" TO DESTRA-LIBSQL
+                 PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+              END-IF
+              IF SQLCODE <> 0
+                 MOVE 0 TO IND-BD-LIBSQL
+                 PERFORM 90100-PR-ERROR-LIBSQL
+              ELSE
+                 MOVE SQLCODE TO CODRET-BD-LIBSQL
+                                 CODRET-ED-LIBSQL
+              END-IF
+           END-IF
+           IF CODRET-BD-LIBSQL <> 0
+              PERFORM 90300-ACTUALIZAR-LOG-LIBSQL
+           END-IF.
+
+       80200-PROC-INS-LIBSQL.             
+REMARK******************************************************************
+REMARK*80200-PROC-INS-LIBSQL.                                          *
+REMARK*    FUNCION QUE EJECUTA INSTRUCCIONES SQL INDIVIDUALES          *
+REMARK*    DIFERENTES DE SELECT                                        *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSSQL-BD-LIBSQL  - INSTRUCCION SELECT A EJECUTAR. TAMANO*
+REMARK*                           MAXIMO 2000                          *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK******************************************************************
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE CAPTURA TIEMPO DE INICIO DE EXECUTE          
+              MOVE  2  TO IND-TIEMPO-LIBSQL
+              PERFORM 90500-CAPTURAR-HORINI-LIBSQL
+           END-IF
+           EXEC SQL
+                EXECUTE IMMEDIATE :SQLGEN-BD-LIBSQL
+           END-EXEC
+           IF DEBUG-LIBSQL = "SI"
+REMARK*       SE GRABA EN LOG TIEMPO DE EJECUCION DE INSTRUCCION
+              MOVE  2  TO IND-TIEMPO-LIBSQL
+              MOVE "EXECUTE INMEDIATE" TO DESTRA-LIBSQL
+              PERFORM 90700-GRABAR-DEBUG-TIEM-LIBSQL
+           END-IF
+           IF SQLCODE <> 0 
+              MOVE 2 TO IND-BD-LIBSQL
+              PERFORM 90100-PR-ERROR-LIBSQL
+              MOVE 1 TO RETORNO-LIBSQL
+           END-IF.
+
+       80300-VERIF-CONEXION-LIBSQL.       
+REMARK******************************************************************
+REMARK*80300-VERIF-CONEXION-LIBSQL.                                    *
+REMARK*    VERIFICA EL ESTADO ACTUAL DE LA CONEXION MEDIANTE UN COMMIT,*
+REMARK*    SI HAY ERROR SE EJECUTA UN DISCONNECT Y SE REINTENTA EL     *
+REMARK*    CONNECT
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HACE EL      *
+REMARK*                           LLAMADO                              *
+REMARK*       VAR-AMB-BD-LIBSQL - CONTIENE EL NOMBRE DE LA VARIABLE DE *
+REMARK*                           AMBIENTE DONDE SE ENCUENTRA LA       *
+REMARK*                           UBICACION DEL ARCHIVO DE             *
+REMARK*                           CONFIGURACION PARA CONEXION A LA BD  *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       CODRET-ED-LIBSQL  - CODRET-BD-LIBSQL EDITADO PARA DISPLAY*
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+REMARK**   SE VERIFICA LA CONEXION, PARA ELLO SE EJECUTA UN COMMIT
+           EXEC SQL
+                COMMIT
+           END-EXEC
+           IF SQLCODE <> 0
+REMARK**      SI HUBO ERROR SE ASUME QUE LA CONEXION FALLO, SE REINTENTA
+              PERFORM 80000-DISCONNECT-BD-LIBSQL
+              PERFORM 80100-CONNECT-BD-LIBSQL
+           END-IF.
+           
+       90100-PR-ERROR-LIBSQL.             
+REMARK******************************************************************
+REMARK*90100-PR-ERROR-LIBSQL.                                          *
+REMARK*    FUNCION PARA PROCESAR ERRORES GENERADOS POR LAS DIFERENTES  *
+REMARK*    FUNCIONES DE LA LIBRERIA.                                   *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       IND-BD-LIBSQL     - INDICADOR PARA REALIZAR COMMIT O     *
+REMARK*                           ROLLBACK SEGUN LA OPERACION ACTUAL:  *
+REMARK*                           0 - NO HACER NADA                    *
+REMARK*                           1 - COMMIT                           *
+REMARK*                           2 - ROLLBACK                         *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO RESULTADO DE LA OPERACION.    *
+REMARK*                           GENERALMENTE CORRESPONDE AL CODIGO   *
+REMARK*                           SQL RETORNADO POR DB2, EN OCASIONES  *
+REMARK*                           CORRESPONDE A CODIGOS DE ERROR       *
+REMARK*                           PROPIOS DE LA APLICACION             *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DE ERROR SI LO HUBO      *
+REMARK******************************************************************
+           MOVE MFSQLMESSAGETEXT TO DESERR-BD-LIBSQL
+           MOVE SQLCODE  TO CODRET-BD-LIBSQL
+                            CODRET-ED-LIBSQL
+           IF IND-BD-LIBSQL = 1
+              EXEC SQL
+                   COMMIT
+              END-EXEC
+           ELSE
+              IF IND-BD-LIBSQL = 2
+                 EXEC SQL
+                      ROLLBACK
+                 END-EXEC
+              END-IF
+           END-IF.
+
+       90200-INICIALIZAR-INS-LIBSQL.
+REMARK******************************************************************
+REMARK*90200-INICIALIZAR-INS-LIBSQL                                    *
+REMARK*    FUNCION PARA INICIALIZAR CADENA DE INSTRUCCIONES E INDICADOR*
+REMARK*    DE ERROR EN ENCADENAMIENTO DE CADENA                        *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       INSTRS-BD-LIBSQL  - CADENA DE INSTRUCCIONES VACIA        *
+REMARK*       INDERR-INS-LIBSQL - INDICADOR DE ERROR DE ARMADO DE      *
+REMARK*                           CADENA DE INSTRUCCIONES EXITOSO      *
+REMARK******************************************************************
+           MOVE "||"  TO INSTRS-BD-LIBSQL
+           MOVE 0 TO INDERR-INS-LIBSQL.
+
+       90300-ACTUALIZAR-LOG-LIBSQL.
+REMARK******************************************************************
+REMARK*90300-ACTUALIZAR-LOG-LIBSQL.                                    *
+REMARK*    FUNCION ENCARGADA DE ACTUALIZAR EL LOG DE ERRORES GENERADOS *
+REMARK*    POR INSTRUCCIONES SQL. SE GRABA EL REGISTRO EN ARCHIVO      *
+REMARK*    DTCTRA                                                      *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       CODRET-BD-LIBSQL  - CODIGO DE ERROR GENERADO POR LA      *
+REMARK*                           FUNCION SQL                          *
+REMARK*       PROGRAMA-LIBSQL   - NOMBRE DEL PROGRAMA QUE HIZO EL      *
+REMARK*                           LLAMADO A LA FUNCION                 *
+REMARK*       INSERR-BD-LIBSQL  - INSTRUCCION QUE GENERO EL ERROR. SI  *
+REMARK*                           EL CONCEPTO NO APLICA DEBE ESTAR EN  *
+REMARK*                           BLANCO                               *
+REMARK*       DESERR-BD-LIBSQL  - DESCRIPCION DEL ERROR GENERADO       *
+REMARK******************************************************************
+           OPEN I-O DTCTRA
+           MOVE 99999999 TO LLAVE-DTCTRA
+           START DTCTRA KEY <= LLAVE-DTCTRA
+              INVALID KEY
+                 MOVE 0 TO LLAVE-DTCTRA
+              NOT INVALID KEY
+                 READ DTCTRA PREVIOUS RECORD
+                    AT END
+                       MOVE 0 TO LLAVE-DTCTRA
+                 END-READ
+           END-START
+           ADD  1 TO LLAVE-DTCTRA
+           MOVE 0 TO ESTADO-DTCTRA
+           MOVE CODRET-BD-LIBSQL TO CODERR-DTCTRA
+           MOVE PROGRAMA-LIBSQL  TO PROGRAMA-DTCTRA
+           MOVE INSERR-BD-LIBSQL TO INSTRUCCION-DTCTRA
+           MOVE DESERR-BD-LIBSQL TO DESERR-DTCTRA
+           MOVE FUNCTION CURRENT-DATE (1:8) TO FECHA-DTCTRA
+           MOVE FUNCTION CURRENT-DATE (9:6) TO HORA-DTCTRA
+           WRITE REG-DTCTRA
+           CLOSE DTCTRA.
+
+       90400-CONCATENAR-INSTR-LIBSQL.
+REMARK******************************************************************
+REMARK*90400-CONCATENAR-INSTR-LIBSQL.                                  *
+REMARK*    ESTA RUTINA SE ENCARGA CONCATENAR UNA INSTRUCCION A LA      *
+REMARK*    CADENA DE INSTRUCCIONES CONTROLANDO SU TAMANO MAXIMO. PARA  *
+REMARK*    ESTO SE VERIFICA EL TAMANO ACTUAL Y EL DE LA INSTRUCCION A  *
+REMARK*    CONCATENAR SU ADICION NO DEBER SER MAYOR A 50.000 CARACTERES*
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       INSSQL-BD-LIBSQL  - INSTRUCCION SELECT A EJECUTAR. TAMANO*
+REMARK*                           MAXIMO 2000                          *
+REMARK*       INSTRS-BD-LIBSQL  - CADENA ACTUAL DE INSTRUCCIONES SQL   *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       INSTRS-BD-LIBSQL  - CADENA DE INSTRUCCIONES SQL A        *
+REMARK*                           EJECUTAR ACTUALIZADA                 *
+REMARK******************************************************************
+           IF INDERR-INS-LIBSQL = 0
+              INITIALIZE LONCON-LIBSQL
+              INSPECT INSTRS-BD-LIBSQL TALLYING LONCON-LIBSQL
+                      FOR CHARACTERS BEFORE "||"
+              INITIALIZE K-LIBSQL
+              INSPECT INSSQL-BD-LIBSQL TALLYING  K-LIBSQL
+                      FOR CHARACTERS BEFORE "||"
+              COMPUTE LONCON-LIBSQL = LONCON-LIBSQL + K-LIBSQL
+              IF LONCON-LIBSQL > MAXCADENA-LIBSQL
+                 MOVE 1 TO INDERR-INS-LIBSQL
+              ELSE
+                 STRING
+                    INSTRS-BD-LIBSQL             DELIMITED BY "||"
+                    "|"                          DELIMITED BY SIZE
+                    INSSQL-BD-LIBSQL             DELIMITED BY "||"
+                    "||"                         DELIMITED BY SIZE
+                    INTO INSTRS-BD-LIBSQL
+                 END-STRING
+              END-IF
+           END-IF.
+
+       90500-CAPTURAR-HORINI-LIBSQL.
+REMARK******************************************************************
+REMARK*90500-CAPTURAR-HORINI-LIBSQL.                                   *
+REMARK*    ESTA RUTINA CAPTURA LA HORA ACTUAL EN CENTESIMAS DE SEGUNDO *
+REMARK*    Y LA DEJA COMO HORA DE INICIO EN EL ELEMENTO INDICADO.      *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       IND-TIEMPO-LIBSQL - INDICE DEL ELEMENTO EN EL QUE SE     *
+REMARK*                           SE DESEA LA HORA ACTUAL              *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       TIEMPO-INI-LIBSQL (IND-TIEMPO-LIBSQL)                    *
+REMARK*                         - HORA ACTUAL CONVERTIDA A CENTESIMAS  *
+REMARK******************************************************************
+           MOVE FUNCTION CURRENT-DATE (9:8) TO HORA-LIBSQL
+           COMPUTE 
+              TIEMPO-INI-LIBSQL (IND-TIEMPO-LIBSQL)
+                                 = HOR-LIBSQL * 60 * 60 * 100
+                                 + MIN-LIBSQL * 60 * 100
+                                 + SEG-LIBSQL * 100
+                                 + CEN-LIBSQL.
+
+       90600-GRABAR-DEBUG-TRA-LIBSQL.
+REMARK******************************************************************
+REMARK*90600-GRABAR-DEBUG-TRA-LIBSQL.                                  *
+REMARK*    ESTA FUNCION SE ENCARGA DE GRABAR EN EL LOG DE MODO DEBUG   *
+REMARK*    EL TITULO DE UNA SESION                                     *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       IDENTIF-TR-LIBSQL - IDENTIFICA LA TRANSACCION ACTUAL     *
+REMARK*       PROGRAM-LIBSQL    - CONTIENE EL NOMBRE DEL PROGRAMA QUE  *
+REMARK*                           INVOCO LA FUNCION                    *
+REMARK*       DESTRA-LIBSQL     - TITULO DE LA SESION A GRABAR         *
+REMARK*       VALTRA-LIBSQL     - NOMBRE DE LA SESION A GRABAR         *
+REMARK******************************************************************
+           INITIALIZE REG-DEBUG-LIBSQL
+           STRING 
+              FUNCTION CURRENT-DATE(1:4)    DELIMITED BY SIZE
+              "/"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(5:2)    DELIMITED BY SIZE
+              "/"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(7:2)    DELIMITED BY SIZE
+              " "                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(9:2)    DELIMITED BY SIZE
+              ":"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(11:2)   DELIMITED BY SIZE
+              ":"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(13:2)   DELIMITED BY SIZE
+              "."                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(15:2)   DELIMITED BY SIZE
+              " "                           DELIMITED BY SIZE
+              " ("                          DELIMITED BY SIZE
+              IDENTIF-TR-LIBSQL             DELIMITED BY SIZE
+              ") "                          DELIMITED BY SIZE
+              PROGRAMA-LIBSQL               DELIMITED BY "    "
+              "["                           DELIMITED BY SIZE
+              FUNCION-LIBSQL                DELIMITED BY "    "
+              "] "                          DELIMITED BY SIZE
+              DESTRA-LIBSQL                 DELIMITED BY "    "
+              VALTRA-LIBSQL                 DELIMITED BY "    "
+              INTO REG-DEBUG-LIBSQL
+           WRITE REG-DEBUG-LIBSQL.
+
+       90700-GRABAR-DEBUG-TIEM-LIBSQL.
+REMARK******************************************************************
+REMARK*90700-GRABAR-DEBUG-TIEM-LIBSQL.                                 *
+REMARK*    FUNCION ENCARGADA DE GRABAR EN EL LOG DE MODO DEBUG EL      *
+REMARK*    TIEMPO UTILIZADO POR DETERMINADA OPERACION                  *
+REMARK*    PARAMETROS DE ENTRADA                                       *
+REMARK*       IND-TIEMPO-LIBSQL - INDICE DEL ELEMENTO EN EL QUE SE     *
+REMARK*                           SE DESEA EL TIEMPO TOTAL CONSUMIDO   *
+REMARK*       IDENTIF-TR-LIBSQL - IDENTIFICA LA TRANSACCION ACTUAL     *
+REMARK*       PROGRAM-LIBSQL    - CONTIENE EL NOMBRE DEL PROGRAMA QUE  *
+REMARK*                           INVOCO LA FUNCION                    *
+REMARK*       DESTRA-LIBSQL     - TITULO DE LA OPERACION MEDIDA        *
+REMARK*    PARAMETROS DE SALIDA                                        *
+REMARK*       TIEMPO-FIN-LIBSQL (IND-TIEMPO-LIBSQL)                    *
+REMARK*                         - HORA ACTUAL CONVERTIDA A CENTESIMAS  *
+REMARK*       TIEMPO-LIBSQL (IND-TIEMPO-LIBSQL)                        *
+REMARK*                         - TIEMPO EN CENTESIMAS CONSUMIDO POR LA*
+REMARK*                           OPERACION ACTUAL                     *
+REMARK******************************************************************
+           MOVE FUNCTION CURRENT-DATE (9:8) TO HORA-LIBSQL
+           COMPUTE TIEMPO-FIN-LIBSQL (IND-TIEMPO-LIBSQL)
+                                     = HOR-LIBSQL * 60 * 60 * 100
+                                     + MIN-LIBSQL * 60 * 100
+                                     + SEG-LIBSQL * 100
+                                     + CEN-LIBSQL.
+           COMPUTE TIEMPO-LIBSQL (IND-TIEMPO-LIBSQL) 
+                                 = TIEMPO-FIN-LIBSQL (IND-TIEMPO-LIBSQL)
+                                 - TIEMPO-INI-LIBSQL (IND-TIEMPO-LIBSQL)
+           INITIALIZE REG-DEBUG-LIBSQL
+           STRING 
+              FUNCTION CURRENT-DATE(1:4)    DELIMITED BY SIZE
+              "/"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(5:2)    DELIMITED BY SIZE
+              "/"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(7:2)    DELIMITED BY SIZE
+              " "                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(9:2)    DELIMITED BY SIZE
+              ":"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(11:2)   DELIMITED BY SIZE
+              ":"                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(13:2)   DELIMITED BY SIZE
+              "."                           DELIMITED BY SIZE
+              FUNCTION CURRENT-DATE(15:2)   DELIMITED BY SIZE
+              " "                           DELIMITED BY SIZE
+              " ("                          DELIMITED BY SIZE
+              IDENTIF-TR-LIBSQL             DELIMITED BY SIZE
+              ") "                          DELIMITED BY SIZE
+              PROGRAMA-LIBSQL               DELIMITED BY "    "
+              "["                           DELIMITED BY SIZE
+              FUNCION-LIBSQL                DELIMITED BY "    "
+              "] "                          DELIMITED BY SIZE
+              DESTRA-LIBSQL                 DELIMITED BY "    "
+              " : "                         DELIMITED BY SIZE
+              TIEMPO-LIBSQL (IND-TIEMPO-LIBSQL)
+                                            DELIMITED BY SIZE
+              " centesimas"                 DELIMITED BY SIZE
+              INTO REG-DEBUG-LIBSQL
+           WRITE REG-DEBUG-LIBSQL.

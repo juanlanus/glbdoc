@@ -1,0 +1,213 @@
+      * RECHIST-PROC.v.0002        
+REMARK* ********************************************************************
+REMARK* RUTINA PARA RECONSTRUCCIÓN HISTÓRICA Y CÁLCULO DE LA MORA MÁXIMA
+REMARK* PARÁMETROS DE ENTRADA:                                           
+REMARK*         NOV-ENT-RECHIST, VECTOR1-RECHIST, VECTOR2-RECHIST,
+REMARK*         VECTOR3-RECHIST, VECTOR4-RECHIST,
+REMARK*         FEC-NOV-RECHIST
+REMARK* PARÁMETROS DE SALIDA:                                           
+REMARK*         MORMAX-RECHIST, NUM-MOR30-RECHIST,
+REMARK*         FEC-MORMAX-RECHIST, NOV-SAL-RECHIST,
+REMARK*         NOV48-SAL-RECHIST FEC-NOV48-RECHIST,
+REMARK*         MORMAX48-RECHIST NUM-MOR30-48-RECHIST,
+REMARK*         FEC-MORMAX48-RECHIST
+REMARK* ********************************************************************
+REMARK* CAV0002    * NOVD48 - MANEJO DE NOVEDAD, MORA MAXIMA, NUM-MOR30*
+REMARK*                       FEC-MORMAX48                             *
+REMARK* FEB.10/2009* NOVE48 - CON RESPECTO AL VECTOR DE 48 POSICIONES  *
+REMARK******************************************************************
+       50000-RECONSTRUCCION-HISTORIA.                                 
+REMARK******************************************************************
+REMARK*50000-RECONSTRUCCION-HISTORIA.         
+REMARK*VOLTEA LOS VECTORES Y LLAMA A LAS RUTINAS QUE RECALCULAN EL ESTADO
+REMARK*DEJANDO FINALMENTE LOS VECTORES COMO DEBEN QUEDAR              
+REMARK******************************************************************
+NOVE48     MOVE 0 TO MES-MORA-MAX-RECHIST MES-MORA-MAX48-RECHIST.       CAV0002
+NOVE48     INITIALIZE FEC-MORMAX-RECHIST FEC-MORMAX48-RECHIST.          CAV0002
+NOVD48     INITIALIZE VECTOR-H4-RECHIST VECTOR-H3-RECHIST               CAV0002
+NOVD48                VECTOR-H2-RECHIST VECTOR-H1-RECHIST               CAV0002
+           MOVE NOV-ENT-RECHIST  TO ESTADO-RECHIST ESTADO-FIN-RECHIST  
+           MOVE FEC-NOV-RECHIST TO  FEC-MM-AA-RECHIST              
+           IF FEC-MM-AA-RECHIST (3:2) > 60                         
+              MOVE 19 TO SIGLO-RECHIST                            
+           ELSE                                                  
+              MOVE 20 TO SIGLO-RECHIST                          
+           END-IF                                              
+           MOVE FEC-MM-AA-RECHIST (1:2)  TO MES-RECHIST        
+           MOVE FEC-MM-AA-RECHIST (3:2)  TO ANO-RECHIST       
+           MOVE FECHA-RECHIST  TO FECHA-INI-RECHIST.         
+           MOVE V-MORA-RECHIST(ESTADO-RECHIST) TO EST-HIST-RECHIST.   
+NOVD48     MOVE VECTOR4-RECHIST TO VECTOR-H4-RECHIST                    CAV0002
+NOVD48     MOVE VECTOR3-RECHIST TO VECTOR-H3-RECHIST                    CAV0002
+NOVD48     MOVE VECTOR2-RECHIST TO VECTOR-H2-RECHIST                    CAV0002
+NOVD48     MOVE VECTOR1-RECHIST TO VECTOR-H1-RECHIST                    CAV0002
+NOVD48*    MOVE 1 TO I                                                  CAV0002
+NOVD48*    MOVE 12 TO J                                                 CAV0002
+NOVD48*    PERFORM UNTIL J = 0                                          CAV0002
+NOVD48*      MOVE VECTOR1-RECHIST (J:1) TO VECTOR-RECHIST (I:1)         CAV0002
+NOVD48*      ADD 1 TO I                                                 CAV0002
+NOVD48*      SUBTRACT 1 FROM J                                          CAV0002
+NOVD48*    END-PERFORM                                                  CAV0002
+NOVD48*    MOVE 12 TO J                                                 CAV0002
+NOVD48*    PERFORM UNTIL J = 0                                          CAV0002
+NOVD48*      MOVE VECTOR2-RECHIST (J:1) TO VECTOR-RECHIST (I:1)         CAV0002
+NOVD48*      ADD 1 TO I                                                 CAV0002
+NOVD48*      SUBTRACT 1 FROM J                                          CAV0002
+NOVD48*    END-PERFORM                                                  CAV0002
+           PERFORM 50500-NUEVA-NOVEDAD                         
+           PERFORM 50600-CALCULO-FECHAMX                      
+NOVD48     MOVE ESTADO-FIN-RECHIST TO NOV-SAL-RECHIST                   CAV0002
+NOVD48     MOVE FEC-NOV-RECHIST    TO FEC-NOV48-RECHIST                 CAV0002
+NOVD48     MOVE ESTADO-FIN48-RECHIST TO NOV48-SAL-RECHIST.              CAV0002
+              
+        50500-NUEVA-NOVEDAD.
+REMARK******************************************************************
+REMARK* 50500-NUEVA-NOVEDAD.
+REMARK* CON EL VECTOR DE COMPORTAMIENTO PERDONADO Y SEGÚN LA NOVEDAD   
+REMARK* ACTUAL, CALCULA CON LA MATRIZ DE RECONSTRUCCIÓN HISTÓRICA
+REMARK* LA NUEVA NOVEDAD DE LA OBLIGACIÓN
+REMARK******************************************************************
+NOVE48     MOVE 0 TO NUM-MOR30-RECHIST NUM-MOR30-48-RECHIST             CAV0002
+NOVD48     MOVE 0 TO MORMAX-RECHIST MORMAX48-RECHIST                    CAV0002
+NOVE48     MOVE 0 TO FEC-MORMAX-RECHIST FEC-MORMAX48-RECHIST            CAV0002
+NOVD48     MOVE 01 TO ESTADO-INI-RECHIST ESTADO-INI48-RECHIST           CAV0002
+NOVD48*    MOVE 25 TO I.                                                CAV0002
+NOVD48*    PERFORM UNTIL I = 0                                          CAV0002
+NOVE48     PERFORM VARYING I-RECHIST FROM 1 BY 1 UNTIL I-RECHIST > 49   CAV0002
+NOVE48      MOVE V-VECTOR-RECHIST(I-RECHIST) TO J-RECHIST               CAV0002
+NOVE48      IF J-RECHIST < 5 AND J-RECHIST > MORMAX48-RECHIST           CAV0002
+NOVE48         COMPUTE  MES-MORA-MAX48-RECHIST = (49 - I-RECHIST) + 1   CAV0002
+NOVE48         MOVE J-RECHIST TO MORMAX48-RECHIST                       CAV0002
+NOVD48      END-IF        
+NOVE48      IF J-RECHIST = 1                                            CAV0002
+NOVE48         ADD 1 TO NUM-MOR30-48-RECHIST                            CAV0002
+NOVE48      END-IF                                                      CAV0002
+NOVE48      IF I-RECHIST > 24                                           CAV0002
+NOVE48       IF J-RECHIST = 1                                           CAV0002
+                ADD 1 TO NUM-MOR30-RECHIST        
+             END-IF        
+NOVE48       IF J-RECHIST < 5 AND J-RECHIST > MORMAX-RECHIST            CAV0002
+NOVD48*         MOVE I TO MES-MORA-MAX-RECHIST                          CAV0002
+NOVE48          COMPUTE  MES-MORA-MAX-RECHIST = (49 - I-RECHIST) + 1    CAV0002
+NOVE48          MOVE J-RECHIST TO MORMAX-RECHIST                        CAV0002
+             END-IF        
+NOVD48      END-IF                                                      CAV0002
+NOVE48       IF I-RECHIST = 49                                          CAV0002
+                IF (ESTADO-RECHIST > 12 AND < 42) OR 
+                   ESTADO-RECHIST = 01        
+                   MOVE V-NOVEDAD-RECHIST(ESTADO-RECHIST) TO 
+                   ESTADO-FIN-RECHIST 
+                   MOVE 
+                   MATRIZ-RECHIST(ESTADO-INI-RECHIST,ESTADO-FIN-RECHIST) 
+                                 TO ESTADO-FIN-RECHIST        
+NOVD48             MOVE V-NOVEDAD-RECHIST(ESTADO-RECHIST) TO            CAV0002
+NOVD48                  ESTADO-FIN48-RECHIST                            CAV0002
+NOVD48             MOVE MATRIZ-RECHIST(ESTADO-INI48-RECHIST,            CAV0002
+NOVD48                  ESTADO-FIN48-RECHIST) TO ESTADO-FIN48-RECHIST   CAV0002
+                ELSE         
+                   IF ESTADO-RECHIST > 07 AND < 13         
+                      COMPUTE ESTADO-FIN-RECHIST =         
+                              08 + MORMAX-RECHIST             
+NOVD48                COMPUTE ESTADO-FIN48-RECHIST =                    CAV0002
+NOVD48                        08 + MORMAX48-RECHIST                     CAV0002
+                   ELSE        
+                      MOVE ESTADO-RECHIST TO ESTADO-FIN-RECHIST        
+NOVD48                MOVE ESTADO-RECHIST TO ESTADO-FIN48-RECHIST       CAV0002
+                   END-IF        
+                END-IF        
+             ELSE 
+NOVE48         IF J-RECHIST = 7 OR 8                                    CAV0002
+NOVE48            MOVE 5 TO J-RECHIST                                   CAV0002
+NOVD48         END-IF                                                   CAV0002
+NOVE48         IF J-RECHIST > 0 AND J-RECHIST < 6                       CAV0002
+NOVE48           MOVE MATRIZ-RECHIST(ESTADO-INI48-RECHIST,J-RECHIST) TO CAV0002 
+NOVD48                ESTADO-INI48-RECHIST                              CAV0002
+NOVD48         END-IF                                                   CAV0002
+NOVE48         IF I-RECHIST > 24                                        CAV0002
+NOVE48          IF J-RECHIST > 0 AND J-RECHIST < 6                      CAV0002
+NOVE48             MOVE MATRIZ-RECHIST(ESTADO-INI-RECHIST,J-RECHIST) TO CAV0002
+                        ESTADO-INI-RECHIST        
+                END-IF        
+NOVD48         END-IF                                                   CAV0002
+             END-IF        
+NOVD48*      SUBTRACT 1 FROM I                                          CAV0002
+           END-PERFORM.        
+
+       50600-CALCULO-FECHAMX.
+REMARK******************************************************************
+REMARK*50600-CALCULO-FECHAMX.
+REMARK* CON EL VECTOR YA PERDONADO, CALCULA LA NUEVA FECHA DE MORA 
+REMARK* MÁXIMA PARA VECTOR DE 24 y 48 POSICIONES
+REMARK******************************************************************
+           IF MES-MORA-MAX-RECHIST > 0        
+              MOVE FECHA-INI-RECHIST TO FECHA-RECHIST        
+NOVE48        MOVE 1 TO I-RECHIST                                       CAV0002
+NOVE48        PERFORM 51000-ADDUNOTOI UNTIL                             CAV0002
+NOVE48                I-RECHIST = MES-MORA-MAX-RECHIST                  CAV0002
+      **SE DEBE CONTROLAR SI I SE PASA de 25  ********************
+              MOVE ANO-T-RECHIST TO FEC-MM-AAAA-RECHIST (3:4)         
+              MOVE MES-RECHIST   TO FEC-MM-AAAA-RECHIST (1:2)         
+              MOVE FEC-MM-AAAA-RECHIST  TO FEC-MORMAX-RECHIST        
+NOVE48     END-IF                                                       CAV0002
+NOVE48     IF MES-MORA-MAX48-RECHIST > 0                                CAV0002 
+NOVE48        MOVE FECHA-INI-RECHIST TO FECHA-RECHIST                   CAV0002
+NOVE48        MOVE 1 TO I-RECHIST                                       CAV0002
+NOVE48        PERFORM 51000-ADDUNOTOI UNTIL                             CAV0002
+NOVE48                      I-RECHIST = MES-MORA-MAX48-RECHIST          CAV0002
+NOVE48        MOVE ANO-T-RECHIST TO FEC-MM-AAAA-RECHIST (3:4)           CAV0002
+NOVE48        MOVE MES-RECHIST   TO FEC-MM-AAAA-RECHIST (1:2)           CAV0002
+NOVE48        MOVE FEC-MM-AAAA-RECHIST  TO FEC-MORMAX48-RECHIST         CAV0002
+NOVE48     END-IF.        
+
+       51000-ADDUNOTOI.
+REMARK********************************************************************
+REMARK*51000-ADDUNOTOI.
+REMARK* RETROCEDE UN MES EN EL TIEMPO TENIENDO EN CUENTA EL CAMBIO DE AÑO
+REMARK* Y SI LA INFORMACIÓN VALIDA DEL VECTOR HA TERMINADO, FINALIZA LA
+REMARK* REVISIÓN DE CADUCIDAD SOBRE EL VECTOR
+REMARK********************************************************************
+           ADD 1 TO I-RECHIST
+           SUBTRACT 1 FROM MES-RECHIST
+           IF MES-RECHIST = 0
+              MOVE 12 TO MES-RECHIST
+              SUBTRACT 1 FROM ANO-T-RECHIST
+           END-IF.
+NOVD48*    IF I < 26                                                    CAV0002
+NOVD48*       IF V-VECTOR-RECHIST(50 - I) = "0"                         CAV0002
+NOVD48*         MOVE 26 TO I                                            CAV0002
+NOVD48*       END-IF                                                    CAV0002
+NOVD48*    END-IF.                                                      CAV0002
+
+       60000-CARGAR-MATRIZ-CADUCIDADES.        
+REMARK******************************************************************
+REMARK*60000-CARGAR-MATRIZ-CADUCIDADES.
+REMARK*RUTINA ENCARGADA DE CARGAR EN MEMORIA LA MATRIZ DE CADUCIDADES.
+REMARK*DEBE INVOCARSE AL PRINCIPIO DEL PROGRAMA QUE APLIQUE
+REMARK*CADUCIDADES.
+REMARK******************************************************************
+           OPEN INPUT CADUCIDADES.        
+           READ CADUCIDADES AT END MOVE 1 TO FIN-MATRIZ-RECHIST.        
+NOVE48     MOVE 1 TO I-RECHIST.                                         CAV0002
+           PERFORM UNTIL FIN-MATRIZ-RECHIST = 1        
+NOVE48        MOVE 1 TO J-RECHIST                                       CAV0002
+NOVE48        PERFORM UNTIL J-RECHIST > 5                               CAV0002
+NOVE48           IF J-RECHIST > 1                                       CAV0002
+NOVE48              SUBTRACT 1 FROM J-RECHIST GIVING K-RECHIST          CAV0002
+                 ELSE         
+NOVE48             MOVE 5 TO K-RECHIST                                  CAV0002
+                 END-IF        
+NOVE48           MOVE ESTADOS-CADU(J-RECHIST) TO                        CAV0002
+NOVE48                          MATRIZ-RECHIST(I-RECHIST,K-RECHIST)     CAV0002
+NOVE48           ADD 1 TO J-RECHIST                                     CAV0002
+              END-PERFORM        
+NOVE48        MOVE MORA-CADU TO V-NOVEDAD-RECHIST(I-RECHIST)            CAV0002
+NOVE48        MOVE MORA-MAX-CADU TO V-MORMAX-RECHIST (I-RECHIST)        CAV0002
+NOVE48        MOVE NOMBRE-CADU TO V-NOMBRE-RECHIST (I-RECHIST)          CAV0002 
+NOVE48        MOVE MORA-CADU TO V-MORA-RECHIST (I-RECHIST)              CAV0002
+NOVE48        IF I-RECHIST = 1 OR = 3 OR = 5 OR = 6                     CAV0002
+NOVE48           MOVE 5 TO V-MORA-RECHIST (I-RECHIST)                   CAV0002
+              END-IF        
+NOVE48        ADD 1 TO I-RECHIST                                        CAV0002
+              READ CADUCIDADES AT END MOVE 1 TO FIN-MATRIZ-RECHIST     
+           END-PERFORM.        
+           CLOSE CADUCIDADES.        

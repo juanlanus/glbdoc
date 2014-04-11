@@ -1,0 +1,17 @@
+******* VALPGRUT-FD.v01.0001
+REMARK*Proceso de calificacion de maestros ampliados
+REMARK*Parametros de grupos de campos con calificacion y peso maximo
+REMARK*por grupo, dependiendo del producto a que correspondan
+REMARK*Se han definido maximo tres grupos de campos
+REMARK*El NUM de PRODU corresponde a: 
+REMARK* 1-Cta. corriente 
+REMARK* 2-Tarjeta de credito
+REMARK* 3-Cartera  
+REMARK*----------------------------------------------------------------*
+       FD  VALPGRUT.
+       01  REG-VALPGRUT.
+           03 NUM-PRODU-VALPGRUT               PIC 9.
+           03 NUM-GRUPO-VALPGRUT               PIC 9.
+           03 NUM-CALIF-VALPGRUT               PIC 9(3).
+           03 POR-PESO-VALPGRUT                PIC 99V99.
+           03 FILLER-VALPGRUT                  PIC X(30).

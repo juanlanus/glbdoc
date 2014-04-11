@@ -1,0 +1,19 @@
+REMARK*DIRCON-FD.v.0001
+REMARK******************************************************************
+REMARK* ARCHIVO DE HUELLAS DE CONSULTA DE DIRECCIONES                  *
+REMARK******************************************************************
+       FD  DIRCON.      
+       01  REG-DIRCON.
+           03  COD-SUSCRIP-DIRCON      PIC 9(06).
+           03  FEC-CONSUL-DIRCON.  
+               05 ANO-DIRCON           PIC 9(04).
+               05 MES-DIRCON           PIC 9(02).
+               05 DIA-DIRCON           PIC 9(02).
+           03  LLAVE-DIRCON.
+               05 TIP-ID-DIRCON        PIC 9(01).
+               05 NUM-ID-DIRCON        PIC 9(11).
+               05 CONSECUTIVO-DIRCON   PIC 9(02).
+           03  CIUDAD-CONS-DIRCON      PIC 9(03).
+           03  OFICINA-CONS-DIRCON     PIC X(15).
+           03  NUM-CONS-DIRCON         PIC 9(02).                          
+           03  FILLER-DIRCON           PIC X(12).                       

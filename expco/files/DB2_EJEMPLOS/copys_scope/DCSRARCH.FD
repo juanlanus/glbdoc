@@ -1,0 +1,228 @@
+      * DCSRARCH.FD.v.01.0020.
+REMARK******************************************************************
+REMARK*    FS PARA EL MANEJO DE ARCHIVOS EXTERNOS EN DECISOR.          *
+REMARK******************************************************************
+REMARK* EHA0002     *RQ3237  - SE INCLUYE ARCHIVO NO DESEADOS PARA     *
+REMARK* SEP-26-2011 *          COLPATRIA VEHICULOS.                    *
+REMARK******************************************************************
+REMARK* CIG0003     | RQ3132 - SE INCLUYE EL ARCHIVO DE NO DESEADOS    *
+REMARK* 09-28-2011  |          BBVA.                                   *
+REMARK******************************************************************
+REMARK* DLM0004     | CQ3459 - INCLUSION DE CUATRO (4) VARIABLES EN    *
+REMARK* DARIO LASSO |   DECISOR + EN EL ARCHIVO $DATOS/citidat.prn.DAT *
+REMARK* 21-OCT-2011 |   REQ. CQ 3459.                                  *
+REMARK******************************************************************
+REMARK* CAV0005     | RQ3449 - SE INCLUYE EL ARCHIVO DE NO DESEADOS    *
+REMARK* 16-NOV-2011 |          BCSC.                                   *
+REMARK******************************************************************
+REMARK* CIG0006     | RQ3921 - SE INCLUYE EL ARCHIVO PARA EL CITIBANK  *
+REMARK* 29-NOV-2011 |                                                  *
+REMARK******************************************************************
+REMARK* EHA0007     | RQ3909 - SE INCLUYE ARCHIVO DE GIROS Y FINANZAS  *
+REMARK* 03-DIC-2011 |                                                  *
+REMARK******************************************************************
+REMARK* EHA0008     | RQ4070 - SE INCLUYE ARCHIVO DE BANCO DE BOGOTA   *
+REMARK* 22-DIC-2011 |          REQ.4070                                *
+REMARK******************************************************************
+REMARK* CAV0009     | RQ5926 - SE INCLUYE ARCHIVO DE BANCO COLPATRIA   *
+REMARK* 16-MAY-2012 |          RETENCION CUPOS                         *
+REMARK******************************************************************
+REMARK* EHA0010     | CQ6105 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 29-MAY-2012 |          EN LA SOLICITUD 6105.                   *
+REMARK******************************************************************
+REMARK* IMS0011     | CQ5863 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 15-AGO-2012 |          EN LA SOLICITUD 5863. ETB.              *
+REMARK******************************************************************
+REMARK* IMS0012     | CQ7065 - SE INCLUYE ARCHIVO DE SUSCRIPTORES PARA *
+REMARK* 05-SEP-2012 |          JURISCOOP.                              *
+REMARK******************************************************************
+REMARK* IMS0013     | CQ7064 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 17-AGO-2012 |          EN LA SOLICITUD 7064. DAVIVIENDA        *
+REMARK******************************************************************
+REMARK* IMS0014     | CQ7215 - SE INCLUYE ARCHIVO DE PARAMETROS PARA   *
+REMARK* 18-SEP-2012 |          PERSONALIZACION DE COLPATRIA.           *
+REMARK******************************************************************
+REMARK* CAV0015     | CQ8189 - SE INCLUYE ARCHIVO DE UVR Y TASAS PARA  *
+REMARK* 26-OCT-2012 |          FONDO NACIONAL DEL AHORRO.              *
+REMARK******************************************************************
+REMARK* CAV0016     | CQ8603 - SE INCLUYE ARCHIVO DE CLIENTES FERIA    *
+REMARK* 31-OCT-2012 |          PARA CITI PER 003.                      *
+REMARK******************************************************************
+REMARK* IMS0017     | CQ9050 - SE INCLUYE ARCHIVO DE PARAMETROS PARA   *
+REMARK* 17-DIC-2012 |          CARACTERISTICAS DE DAVIVIENDA.          *
+REMARK******************************************************************
+REMARK* CAV0018     | CQ9566 - SE INCLUYEN ARCHIVOS DE EMPLEADOS  Y    *
+REMARK* 22-ENE-2013 |          CUOTAS X MILLON PARA DAVIVIENDA.        *
+REMARK******************************************************************
+REMARK* IMS0019     | R10704 - SE AGREGA CAMPO PARA EL ARCHIVO         *
+REMARK* 26-FEB-2013 |          CITICLIFERIA.                   CQ10704 *
+REMARK******************************************************************
+REMARK* STT0020     | R11058 - SE INCLUYE ARCHIVO CREDITITULOS         *
+REMARK* 22-ABR-2013 |                                                  *
+REMARK******************************************************************
+      * ARCHIVO DE CALIFICACIONES CITIBANK.
+      * $DATOS/citidat.prn.DAT
+       FD  CLIENTCITI.
+       01  REG-CLIENTCITI.
+         03  CLTCIT-NUME-ID.
+           05  CLTCIT-TIP-ID           PIC  9(01)  VALUE  ZEROS.
+           05  CLTCIT-NRO-ID           PIC  9(11)  VALUE  ZEROS.
+         03  CLTCIT-EVALUACION         PIC  X(01)  VALUE  SPACES.
+         03  CLTCIT-CLIENTE            PIC  X(01)  VALUE  SPACES.
+CQ3459   03  CLTCIT-TIPO-EMPLEO        PIC  9(01)  VALUE  ZEROS.        DLM0004
+CQ3459***  1=Independiente, 2=Empleado.                                 DLM0004
+CQ3459   03  CLTCIT-FECHA-ULT-SOL      PIC  9(08)  VALUE  ZEROS.        DLM0004
+CQ3459***  Fecha Ultima Solicitud en formato YYYYMMDD.                  DLM0004
+CQ3459   03  CLTCIT-INGRESO-VAL        PIC  9(12)  VALUE  ZEROS.        DLM0004
+CQ3459***  Valor Ingreso numérico de formato entero.                    DLM0004
+RQ3237*                                                                 EHA0002
+RQ3237 FD  NODESEADOS-COLP.                                             EHA0002
+RQ3237 01  REG-NODESEADOS-COLP.                                         EHA0002
+RQ3237   03  NODESE-NUME-ID-COLP.                                       EHA0002
+RQ3237     05  NODESE-TIP-ID-COLP      PIC  9(01).                      EHA0002
+RQ3237     05  NODESE-NRO-ID-COLP      PIC  9(11).                      EHA0002
+CQ6105   03  NODESE-INDICADOR-BUI      PIC  X(01)  VALUE  SPACES.       EHA0010
+RQ3237*                                                                 EHA0002
+RQ3132 FD  NODESEADOS-BBVA.                                             CIG0003
+RQ3132 01  REG-NODESEADOS-BBVA.                                         CIG0003
+RQ3132   03  NODESE-NUME-ID-BBVA.                                       CIG0003
+RQ3132     05  NODESE-TIP-ID-BBVA      PIC  9(01).                      CIG0003
+RQ3132     05  NODESE-NRO-ID-BBVA      PIC  9(15).                      CIG0003
+RQ3132   03  NODESE-DIGIDEN-BBVA       PIC  9(01).                      CIG0003
+RQ3132   03  NODESE-ANTIG-BBVA         PIC  9(02).                      CIG0003
+RQ3132   03  NODESE-DOMICILIA-BBVA     PIC  X(01).                      CIG0003
+RQ3132   03  NODESE-SIGNO-BBVA         PIC  X(01).                      CIG0003
+RQ3132   03  RECIPROCIDAD-ENT-BBVA     PIC  9(13).                      CIG0003
+RQ3132   03  RECIPROCIDAD-FILLER-BBVA  PIC  X(01).                      CIG0003
+RQ3132   03  RECIPROCIDAD-DEC-BBVA     PIC  9(02).                      CIG0003
+RQ3132*                                                                 CIG0003
+RQ3449 FD  NODESEADOS-BCSC.                                             CAV0005
+RQ3449 01  REG-NODESEADOS-BCSC.                                         CAV0005
+RQ3449   03  NODESE-NUME-ID-BCSC.                                       CAV0005
+RQ3449     05  NODESE-TIP-ID-BCSC      PIC  9(01).                      CAV0005
+RQ3449     05  NODESE-NRO-ID-BCSC      PIC  9(11).                      CAV0005
+RQ3449*                                                                 CAV0005
+RQ3909 FD  NODESEADOS-GYF.                                              EHA0007
+RQ3909 01  REG-NODESEADOS-GYF.                                          EHA0007
+RQ3909   03  NODESE-NUME-ID-GYF.                                        EHA0007
+RQ3909     05  NODESE-TIP-ID-GYF      PIC  9(01).                       EHA0007
+RQ3909     05  NODESE-NRO-ID-GYF      PIC  9(11).                       EHA0007
+RQ3909   03  NODESE-NOMBRE-GYF        PIC  X(45).                       EHA0007
+RQ3909*                                                                 EHA0007
+RQ3921 FD  TABFACTOR-C.                                                 CIG0006
+RQ3921 01  REG-TABFACTOR-C             PIC  X(12).                      CIG0006
+CQ5220*
+CQ5220 FD  TABSUSCR-C.
+CQ5220 01  REG-TABSUSCR-C              PIC X(12).
+CQ7065*                                                                 IMS0012
+CQ7065 FD  TABSUSCR-JUR.                                                IMS0012
+CQ7065 01  REG-TABSUSCR-JUR            PIC X(12).                       IMS0012
+RQ4070*                                                                 EHA0008
+RQ4070 FD  NODESEADOS-BCOBOG.                                           EHA0008
+RQ4070 01  REG-NODESEADOS-BCOBOG.                                       EHA0008
+RQ4070   03  NODESE-NUME-ID-BCOBOG.                                     EHA0008
+RQ4070     05  NODESE-TIP-ID-BCOBOG    PIC  9(01).                      EHA0008
+RQ4070     05  NODESE-NRO-ID-BCOBOG    PIC  9(11).                      EHA0008
+RQ4070   03  NODESE-CALIF-BCOBOG       PIC  9(02).                      EHA0008
+RQ4070*                                                                 EHA0008
+RQ5926 FD  RETENCION-CUP-COLP.                                          CAV0009
+RQ5926 01  REG-RETENCION-CUP-COLP.                                      CAV0009
+RQ5926   03  RETENCION-CUP-ID-COLP.                                     CAV0009
+RQ5926     05  RETENCION-CUP-TIP-ID-COLP    PIC  9(01).                 CAV0009
+RQ5926     05  RETENCION-CUP-NRO-ID-COLP    PIC  9(11).                 CAV0009
+RQ5926   03  RETENCION-AUM-CUP1-COLP        PIC  9(03)V99.              CAV0009
+RQ5926   03  RETENCION-AUM-CUP2-COLP        PIC  9(03)V99.              CAV0009
+RQ5926*                                                                 CAV0009
+CQ5863 FD  VARPROPIAS-ETB.                                              IMS0011
+CQ5863 01  REG-VARPROPIAS-ETB.                                          IMS0011
+CQ5863   03  VARPROPIAS-NUME-ID-ETB.                                    IMS0011
+CQ5863     05  VARPROPIAS-TIP-ID-ETB      PIC  9(01).                   IMS0011
+CQ5863     05  VARPROPIAS-NRO-ID-ETB      PIC  9(11).                   IMS0011
+CQ5863   03  VARPROPIAS-RELACION-ETB      PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-FACTOR3-2-ETB     PIC  9(09)V9(02).             IMS0011
+CQ5863   03  VARPROPIAS-MOR001-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR002-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR046-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR075-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR076-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR077-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-MOR078-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-SEGMENTO-ETB      PIC  X(10).                   IMS0011
+CQ5863   03  VARPROPIAS-SOLI02-ETB        PIC  9(03).                   IMS0011
+CQ5863   03  VARPROPIAS-SUSPE02-ETB       PIC  9(03).                   IMS0011
+CQ5863*                                                                 IMS0011
+CQ7064 FD  NODESEADOS-DAV.                                              IMS0013
+CQ7064 01  REG-NODESEADOS-DAV.                                          IMS0013
+CQ7064     03 NODESE-NUME-ID-DAV.                                       IMS0013
+CQ7064        05 NODESE-TIP-ID-DAV        PIC  9(01).                   IMS0013
+CQ7064        05 NODESE-NRO-ID-DAV        PIC  9(11).                   IMS0013
+CQ7064*                                                                 IMS0013
+CQ7064 FD  VIP-DAV.                                                     IMS0013
+CQ7064 01  REG-VIP-DAV.                                                 IMS0013
+CQ7064     03 VIP-NUME-ID-DAV.                                          IMS0013
+CQ7064        05 VIP-TIP-ID-DAV           PIC  9(01).                   IMS0013
+CQ7064        05 VIP-NRO-ID-DAV           PIC  9(11).                   IMS0013
+CQ7064*                                                                 IMS0013
+CQ7215 FD  PAR-ICGD61.                                                  IMS0014
+CQ7215 01  REG-PAR-D61.                                                 IMS0014
+CQ7215   03  PAR-LLAVE-D61.                                             IMS0014
+CQ7215     05  PAR-CAMPO-D61            PIC  9(02).                     IMS0014
+CQ7215     05  PAR-POSI-D61             PIC  9(02).                     IMS0014
+CQ7215     05  PAR-MODELO-D61           PIC  9(04).                     IMS0014
+CQ7215   03  PAR-VALOR-D61              PIC  9(03)V9(02).               IMS0014
+CQ7215   03                      REDEFINES  PAR-VALOR-D61.              IMS0014
+CQ7215     05  PAR-VAL-INT-D61          PIC  9(01)V9(04).               IMS0014
+CQ7215*                                                                 IMS0014
+CQ8189 FD FNAUVRTASA.                                                   CAV0015
+CQ8189 01 REG-FNAUVRTASA.                                               CAV0015
+CQ8189    03 LLAVE-FNAUVRTASA.                                          CAV0015
+CQ8189       05 AAAA-FNAUVRTASA         PIC 9(04).                      CAV0015
+CQ8189       05 MES-FNAUVRTASA          PIC 9(02).                      CAV0015
+CQ8189       05 DIA-FNAUVRTASA          PIC 9(02).                      CAV0015
+CQ8189    03 VLR-UVR-FNAUVRTASA         PIC 9(05)V9999.                 CAV0015
+CQ8189    03 VLR-TAS-FNAUVRTASA         PIC 9(05)V9999.                 CAV0015
+CQ8189*                                                                 CAV0015
+CQ8603 FD CITICLIFERIA.                                                 CAV0016
+CQ8603 01 REG-CITICLIFERIA.                                             CAV0016
+CQ8603    03 LLAVE-CITICLIFERIA.                                        CAV0016
+CQ8603       05 TIP-ID-CITICLIFERIA     PIC 9(01).                      CAV0016
+CQ8603       05 NUM-ID-CITICLIFERIA     PIC 9(11).                      CAV0016
+CQ8603    03 FLG-AGE-CITICLIFERIA       PIC X(02).                      CAV0016
+CQ8603    03 TIP-PRS-CITICLIFERIA       PIC X(15).                      CAV0016
+CQ8603    03 SHELL-ON-CITICLIFERIA      PIC X(02).                      CAV0016
+CQ8603    03 OFERTA-CITICLIFERIA        PIC 9(15).                      CAV0016
+R10704    03 TM-CITICLIFERIA            PIC X(02).                      IMS0019
+R11058*                                                                 STT0020
+R11058 FD CREDITITULOS.                                                 STT0020
+R11058 01 REG-CREDITITULOS.                                             STT0020
+R11058    03 LLAVE-CREDITITULOS.                                        STT0020
+R11058       05 TIP-ID-CREDITITULOS     PIC 9(01).                      STT0020
+R11058       05 NUM-ID-CREDITITULOS     PIC 9(11).                      STT0020
+R11058       05 TIP-TI-CREDITITULOS     PIC 9(01).                      STT0020
+R11058    03 PORC-ATR-CREDITITULOS      PIC 9(03).                      STT0020
+R11058    03 MAX-ATR-CREDITITULOS       PIC 9(05).                      STT0020
+R11058    03 DIAS-NOP-CREDITITULOS      PIC 9(05).                      STT0020
+CQ8603*                                                                 CAV0016
+CQ9050 FD  PAR-CARACT-DAV.                                              IMS0017
+CQ9050 01  REG-PAR-DAV.                                                 IMS0017
+CQ9050   03  PAR-LLAVE-DAV.                                             IMS0017
+CQ9050     05  PAR-CAMPO-DAV            PIC  9(02).                     IMS0017
+CQ9050     05  PAR-POSI-DAV             PIC  9(02).                     IMS0017
+CQ9050   03  PAR-VALOR-DAV              PIC  999.99999.                 IMS0017
+CQ9050   03                      REDEFINES  PAR-VALOR-DAV.              IMS0017
+CQ9050     05  PAR-VAL-ENT-DAV          PIC  9(03).                     IMS0017
+CQ9050     05  PAR-FIL-ENT-DAV          PIC  X.                         IMS0017
+CQ9050     05  PAR-VAL-DEC-DAV          PIC  9(05).                     IMS0017
+CQ9050*                                                                 IMS0017
+CQ9566 FD  EMPLEADOS-DAV.                                               CAV0018
+CQ9566 01  REG-EMPLEADOS-DAV.                                           CAV0018
+CQ9566     03 EMPLE-NUME-ID-DAV.                                        CAV0018
+CQ9566        05 EMPLEA-TIP-ID-DAV      PIC  9(01).                     CAV0018
+CQ9566        05 EMPLEA-NRO-ID-DAV      PIC  9(11).                     CAV0018
+CQ9566*                                                                 CAV0018
+CQ9566 FD  CUO-X-MLL-DAV.                                               CAV0018
+CQ9566 01  REG-CUO-X-MLL-DAV.                                           CAV0018
+CQ9566     03 CUXM-TIP-CRED-DAV         PIC  9(02).                     CAV0018
+CQ9566     03 CUXM-DES-CRED-DAV         PIC  X(12).                     CAV0018
+CQ9566     03 CUXM-CUO-MILL-DAV         PIC 9(04)V9(05).                CAV0018
+CQ9566*                                                                 CAV0018

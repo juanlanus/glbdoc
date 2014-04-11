@@ -1,0 +1,1302 @@
+REMARK*CARACTPER-010.PROC.v.0002.
+CQ3990******************************************************************DLM0002
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 010
+CQ3990*    PARA BANCO PICHINCHA.                                        DLM0002
+REMARK******************************************************************
+      ******************************************************************
+      * DLM0002    | CQ3990 - Banco Pichincha . CAST 172.              *
+      * 02-ENE-2012|    REQ. CQ. 3990.                                 *
+      * DARIO LASSO|                                                   *
+      ******************************************************************
+CQ3990** Caracteristicas:                                               DLM0002
+CQ3990*-1 Tipología NUM : Nivel 01                                      DLM0002
+CQ3990* CO01NUM999XX010 = Número de productos Abiertas - Tarjeta de CrédDLM0002
+CQ3990* CO01NUM998XX010 = Número de productos Cerrados - Tarjeta de CrédDLM0002
+CQ3990*-2 Tipología END : Nivel 01                                      DLM0002
+CQ3990* CO01END999XX010 = Cupo Total a la fecha - Tarjeta de Crédito AbiDLM0002
+CQ3990* CO01END998XX010 = Cupo Total a la fecha - Tarjeta de Crédito CerDLM0002
+CQ3990* CO01END997XX010 = Saldo Total a la fecha - Tarjeta de Crédito AbDLM0002
+CQ3990* CO01END996XX010 = Saldo en mora a la fecha - Tarjeta de Crédito DLM0002
+CQ3990* CO01END995XX010 = Cupo Total a la fecha - Tarjeta de Crédito AbiDLM0002
+CQ3990* CO01END994XX010 = Saldo Total a la fecha - Tarjeta de Crédito AbDLM0002
+CQ3990* CO01END993XX010 = Saldo Mora a la fecha - Tarjeta de Crédito AbiDLM0002
+CQ3990* CO01END992XX010 = Cuota Mensual a la fecha - Tarjeta de Crédito DLM0002
+CQ3990* CO01END991XX010 = Cupo Total a la fecha - Portafolio Abiertas soDLM0002
+CQ3990* CO01END990XX010 = Saldo Total a la fecha - Portafolio Abiertas sDLM0002
+CQ3990* CO01END989XX010 = Saldo Mora a la fecha Portafolio Abiertas soloDLM0002
+CQ3990* CO01END988XX010 = Cuota Mensual a la fecha - Portafolio AbiertasDLM0002
+CQ3990*-3 Tipología END : Nivel 02                                      DLM0002
+CQ3990* CO02END991TO010 = Cupo Total a la fecha - Portafolio Abiertas soDLM0002
+CQ3990* CO02END990TO010 = Saldo Total a la fecha - Portafolio Abiertas sDLM0002
+CQ3990* CO02END989TO010 = Saldo en Mora Total a la fecha - Portafolio AbDLM0002
+CQ3990* CO02END988TO010 = Cuota Total a la fecha - Portafolio Abiertas sDLM0002
+CQ3990*                                                                 DLM0002
+       0000-LLENAR-VEC-PERSONALIZ-010.                 
+CQ3990* 1                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01NUM999RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01NUM999RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01NUM999RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 2                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01NUM998RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01NUM998RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01NUM998RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 3                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END999RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END999RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END999RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 4                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END998RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END998RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END998RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 5                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END997RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END997RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END997RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 6                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END996RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END996RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END996RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 7                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END995RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END995RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END995RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 8                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END994RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END994RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END994RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 9                                                               DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END993RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END993RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END993RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 10                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END992RO01010"  TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END992RO01010) TO L-AUX          DLM0002
+CQ3990         MOVE  01END992RO01010(1:L-AUX)  TO                       DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 11                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END991HP010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END991HP010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END991HP010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 12                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END991IN010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END991IN010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END991IN010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 13                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END991RO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END991RO010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END991RO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 14                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END991VE010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END991VE010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END991VE010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 15                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END990HP010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END990HP010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END990HP010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 16                                                              DLM0002
+CQ3990                                                                  DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END990IN010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END990IN010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END990IN010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 17                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END990RO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END990RO010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END990RO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 18                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END990VE010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END990VE010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END990VE010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 19                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END989HP010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END989HP010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END989HP010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 20                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END989IN010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END989IN010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END989IN010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 21                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END989RO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END989RO010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END989RO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 22                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END989VE010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END989VE010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END989VE010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 23                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END988HP010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END988HP010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END988HP010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 24                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END988IN010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END988IN010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END988IN010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 25                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END988RO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END988RO010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END988RO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 26                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "01END988VE010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(01END988VE010) TO L-AUX            DLM0002
+CQ3990         MOVE  01END988VE010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 27                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "02END991TO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(02END991TO010) TO L-AUX            DLM0002
+CQ3990         MOVE  02END991TO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 28                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "02END990TO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(02END990TO010) TO L-AUX            DLM0002
+CQ3990         MOVE  02END990TO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 29                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "02END989TO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(02END989TO010) TO L-AUX            DLM0002
+CQ3990         MOVE  02END989TO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+CQ3990* 30                                                              DLM0002
+CQ3990         ADD   1                 TO  I-VAR-PER                    DLM0002
+CQ3990         MOVE "02END988TO010"    TO  NOMBRE-VAR-PER(I-VAR-PER)    DLM0002
+CQ3990         MOVE  FUNCTION LENGTH(02END988TO010) TO L-AUX            DLM0002
+CQ3990         MOVE  02END988TO010(1:L-AUX)  TO                         DLM0002
+CQ3990                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      DLM0002
+            .
+       0000-INICIALIZAR-CARAC-EXT-10.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-10.                                  *
+REMARK*       SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 10  *
+REMARK*----------------------------------------------------------------*   
+CQ3990     MOVE  ALL  "  -1"           TO  PER-10-NIVEL-01-NUM          DLM0002
+CQ3990     MOVE  ALL  "         -1"    TO  PER-10-NIVEL-01-END          DLM0002
+CQ3990     MOVE  ALL  "         -1"    TO  PER-10-NIVEL-02-END          DLM0002
+CQ3990     .                                                            DLM0002
+CQ3990*                                                                 DLM0002
+CQ3990 2249-PROCESE-CARCT-00NUM-EXT-10.                                 DLM0002
+CQ3990     IF  COD-CTA-ABD07  =  02                                     DLM0002
+CQ3990       IF  REG-ABIERTO-CARACT  =  1      *> REGISTROS ABIERTOS    DLM0002
+CQ3990         IF  FUNCTION NUMVAL(01NUM998RO01010(1:4))  <=  ZEROS  ANDDLM0002
+CQ3990             FUNCTION NUMVAL(01NUM998RO01010(1:4))  >  -2         DLM0002
+CQ3990           MOVE "  -2"             TO  01NUM998RO01010(1:4)       DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990         IF  FUNCTION NUMVAL(01END998RO01010(1:11))  <   ZEROS ANDDLM0002
+CQ3990             FUNCTION NUMVAL(01END998RO01010(1:11))  >  -2        DLM0002
+CQ3990           MOVE "         -2"      TO  01END998RO01010(1:11)      DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990         IF  FECHA-APERT-CARACT  IS  NUMERIC  AND                 DLM0002
+CQ3990             FECHA-APERT-CARACT  >=  ZERO                         DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01NUM999RO01010(1:4))  <=  ZEROS   DLM0002
+CQ3990             MOVE  ZEROS         TO  01NUM999RO01010              DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           ADD   1               TO  01NUM999RO01010              DLM0002
+CQ3990         ELSE                                                     DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01NUM999RO01010(1:4))  <=  0  AND  DLM0002
+CQ3990               FUNCTION NUMVAL(01NUM999RO01010(1:4))  >  -3       DLM0002
+CQ3990             MOVE "  -3"         TO  01NUM999RO01010(1:4)         DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990         IF  FECHA-ESTADO-CARACT  >  ZEROS  AND                   DLM0002
+CQ3990             ACT-DATE-CARACT      >  ZEROS                        DLM0002
+CQ3990           IF (FECHA-ESTADO-CARACT - ACT-DATE-CARACT) >=  0       DLM0002
+CQ3990             IF  VEC-INICIAL-CARACT(I13) >=  ZEROS  AND           DLM0002
+CQ3990                 VEC-IND-INI-CARACT(I13)  =  0                    DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END999RO01010(1:11)) <= ZEROSDLM0002
+CQ3990                 MOVE  ZEROS        TO  01END999RO01010           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               ADD   VEC-INICIAL-CARACT(I13) TO 01END999RO01010   DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END995RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS        TO  01END995RO01010         DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD   VEC-INICIAL-CARACT(I13) TO 01END995RO01010 DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END999RO01010(1:11)) <  0 ANDDLM0002
+CQ3990                   FUNCTION NUMVAL(01END999RO01010(1:11))  >  -88 DLM0002
+CQ3990                 MOVE "        -88" TO 01END999RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END995RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS        TO  01END995RO01010         DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD   VEC-INICIAL-CARACT(I13) TO 01END995RO01010 DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  VEC-SALDO-CARACT(I13) >=  ZEROS  AND             DLM0002
+CQ3990                 VEC-IND-SLD-CARACT(I13)  =  0                    DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END997RO01010(1:11)) <= ZEROSDLM0002
+CQ3990                 MOVE  ZEROS        TO  01END997RO01010           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               ADD   VEC-SALDO-CARACT(I13) TO 01END997RO01010     DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END994RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS      TO  01END994RO01010           DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD   VEC-SALDO-CARACT(I13) TO 01END994RO01010   DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END997RO01010(1:11)) <  0 ANDDLM0002
+CQ3990                   FUNCTION NUMVAL(01END997RO01010(1:11))  >  -88 DLM0002
+CQ3990                 MOVE "        -88" TO 01END997RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END994RO01010(1:11)) <  0  DLM0002
+CQ3990                 AND FUNCTION NUMVAL(01END994RO01010(1:11)) > -88 DLM0002
+CQ3990                   MOVE "        -88" TO 01END994RO01010(1:11)    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  VEC-SALDOMOR-CARACT(I13) >=  ZEROS  AND          DLM0002
+CQ3990                 VEC-IND-SLDM-CARACT(I13)  =  0                   DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END996RO01010(1:11)) <= ZEROSDLM0002
+CQ3990                 MOVE  ZEROS        TO  01END996RO01010           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               ADD   VEC-SALDOMOR-CARACT(I13) TO 01END996RO01010  DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END993RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS      TO  01END993RO01010           DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD   VEC-SALDOMOR-CARACT(I13) TO 01END993RO01010DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END996RO01010(1:11)) <  0 ANDDLM0002
+CQ3990                   FUNCTION NUMVAL(01END996RO01010(1:11))  >  -88 DLM0002
+CQ3990                 MOVE "        -88" TO 01END996RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END993RO01010(1:11)) <  0  DLM0002
+CQ3990                 AND FUNCTION NUMVAL(01END993RO01010(1:11)) > -88 DLM0002
+CQ3990                   MOVE "        -88" TO 01END993RO01010(1:11)    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  VEC-CUOTA-CARACT(I13) >=  ZEROS  AND             DLM0002
+CQ3990                 VEC-IND-CUO-CARACT(I13)  =  0                    DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END992RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS      TO  01END992RO01010           DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD   VEC-CUOTA-CARACT(I13) TO 01END992RO01010   DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  NIT-SUSCRIP-S-ABD02  =  890200756              DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END992RO01010(1:11)) <  0  DLM0002
+CQ3990                 AND FUNCTION NUMVAL(01END992RO01010(1:11)) > -88 DLM0002
+CQ3990                   MOVE "        -88" TO 01END992RO01010(1:11)    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           ELSE                                                   DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END999RO01010(1:11))  <  0 AND DLM0002
+CQ3990                 FUNCTION NUMVAL(01END999RO01010(1:11))  >  -4    DLM0002
+CQ3990               MOVE "         -4"   TO 01END999RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END997RO01010(1:11))  <  0 AND DLM0002
+CQ3990                 FUNCTION NUMVAL(01END997RO01010(1:11))  >  -4    DLM0002
+CQ3990               MOVE "         -4"   TO 01END997RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END996RO01010(1:11))  <  0 AND DLM0002
+CQ3990                 FUNCTION NUMVAL(01END996RO01010(1:11))  >  -4    DLM0002
+CQ3990               MOVE "         -4"   TO 01END996RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  NIT-SUSCRIP-S-ABD02  =  890200756                DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END995RO01010(1:11))  <  0   DLM0002
+CQ3990               AND FUNCTION NUMVAL(01END995RO01010(1:11))  >  -4  DLM0002
+CQ3990                 MOVE "         -4" TO 01END995RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END994RO01010(1:11))  <  0   DLM0002
+CQ3990               AND FUNCTION NUMVAL(01END994RO01010(1:11))  >  -4  DLM0002
+CQ3990                 MOVE "         -4" TO 01END994RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END993RO01010(1:11))  <  0   DLM0002
+CQ3990               AND FUNCTION NUMVAL(01END993RO01010(1:11))  > -4   DLM0002
+CQ3990                 MOVE "         -4" TO 01END993RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END992RO01010(1:11))  <  0   DLM0002
+CQ3990               AND FUNCTION NUMVAL(01END992RO01010(1:11))  > -4   DLM0002
+CQ3990                 MOVE "         -4" TO 01END992RO01010(1:11)      DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         ELSE                                                     DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END999RO01010(1:11))  <  0  AND  DLM0002
+CQ3990               FUNCTION NUMVAL(01END999RO01010(1:11))  >  -3      DLM0002
+CQ3990             MOVE "  -3"            TO  01NUM999RO01010(1:04)     DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END997RO01010(1:11))  <  0  AND  DLM0002
+CQ3990               FUNCTION NUMVAL(01END997RO01010(1:11))  >  -3      DLM0002
+CQ3990             MOVE "         -3"     TO  01END997RO01010(1:11)     DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END996RO01010(1:11))  <  0  AND  DLM0002
+CQ3990               FUNCTION NUMVAL(01END996RO01010(1:11))  >  -3      DLM0002
+CQ3990             MOVE "         -3"     TO  01END996RO01010(1:11)     DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  NIT-SUSCRIP-S-ABD02  =  890200756                  DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END995RO01010(1:11)) <  0 AND  DLM0002
+CQ3990                 FUNCTION NUMVAL(01END995RO01010(1:11)) >  -3     DLM0002
+CQ3990               MOVE "         -3"   TO  01END995RO01010(1:11)     DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END994RO01010(1:11)) <  0 AND  DLM0002
+CQ3990                 FUNCTION NUMVAL(01END994RO01010(1:11)) >  -3     DLM0002
+CQ3990               MOVE "         -3"   TO  01END994RO01010(1:11)     DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END993RO01010(1:11)) <  0 AND  DLM0002
+CQ3990                 FUNCTION NUMVAL(01END993RO01010(1:11)) >  -3     DLM0002
+CQ3990               MOVE "         -3"   TO  01END993RO01010(1:11)     DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END992RO01010(1:11)) <  0 AND  DLM0002
+CQ3990                 FUNCTION NUMVAL(01END992RO01010(1:11)) >  -3     DLM0002
+CQ3990               MOVE "         -3"   TO  01END992RO01010(1:11)     DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990       ELSE                                                       DLM0002
+CQ3990         IF  REG-CERRADO-CARACT = 1      *> REGISTROS CERRADOS    DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01NUM999RO01010(1:4)) <= ZEROS AND DLM0002
+CQ3990               FUNCTION NUMVAL(01NUM999RO01010(1:4)) >  -2        DLM0002
+CQ3990             MOVE "  -2"         TO  01NUM999RO01010(1:4)         DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END999RO01010(1:11)) <  ZEROS ANDDLM0002
+CQ3990               FUNCTION NUMVAL(01END999RO01010(1:11)) >  -2       DLM0002
+CQ3990             MOVE "         -2"  TO  01END999RO01010(1:11)        DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END997RO01010(1:11)) <  ZEROS ANDDLM0002
+CQ3990               FUNCTION NUMVAL(01END997RO01010(1:11)) >  -2       DLM0002
+CQ3990             MOVE "         -2"  TO  01END997RO01010(1:11)        DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FUNCTION NUMVAL(01END996RO01010(1:11)) <  ZEROS ANDDLM0002
+CQ3990               FUNCTION NUMVAL(01END996RO01010(1:11)) >  -2       DLM0002
+CQ3990             MOVE "         -2"  TO  01END996RO01010(1:11)        DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  NIT-SUSCRIP-S-ABD02  =  890200756                  DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END995RO01010(1:11)) <  ZEROS  DLM0002
+CQ3990             AND FUNCTION NUMVAL(01END995RO01010(1:11)) >  -2     DLM0002
+CQ3990               MOVE "         -2"  TO  01END995RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END994RO01010(1:11))  <   ZEROSDLM0002
+CQ3990             AND FUNCTION NUMVAL(01END994RO01010(1:11))  >  -2    DLM0002
+CQ3990               MOVE "         -2"  TO  01END994RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END993RO01010(1:11))  <   ZEROSDLM0002
+CQ3990             AND FUNCTION NUMVAL(01END993RO01010(1:11))  >  -2    DLM0002
+CQ3990               MOVE "         -2"  TO  01END993RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END992RO01010(1:11))  <   ZEROSDLM0002
+CQ3990             AND FUNCTION NUMVAL(01END992RO01010(1:11))  >  -2    DLM0002
+CQ3990               MOVE "         -2"  TO  01END992RO01010(1:11)      DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF   MESES-DESAC-CARACT <=  48                         DLM0002
+CQ3990             IF  FECHA-APERT-CARACT  IS  NUMERIC  AND             DLM0002
+CQ3990                 FECHA-APERT-CARACT  >=  ZERO                     DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01NUM998RO01010(1:4)) <= ZEROS DLM0002
+CQ3990                 MOVE  ZEROS         TO  01NUM998RO01010          DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990               ADD   1               TO  01NUM998RO01010          DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01NUM999RO01010(1:4)) <= 0 AND DLM0002
+CQ3990                   FUNCTION NUMVAL(01NUM999RO01010(1:4))  >  -3   DLM0002
+CQ3990                 MOVE  "  -3"        TO  01NUM998RO01010(1:4)     DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           ELSE                                                   DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01NUM998RO01010(1:4)) <= 0 AND   DLM0002
+CQ3990                 FUNCTION NUMVAL(01NUM998RO01010(1:4)) >  -4      DLM0002
+CQ3990               MOVE  "  -4"          TO  01NUM998RO01010(1:4)     DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990           IF  FECHA-APERT-CARACT  IS  NUMERIC  AND               DLM0002
+CQ3990               FECHA-APERT-CARACT  >=  ZERO                       DLM0002
+CQ3990             IF   MESES-DESAC-CARACT <=  48                       DLM0002
+CQ3990               IF  VEC-INICIAL-CARACT(I13) >=  ZEROS  AND         DLM0002
+CQ3990                   VEC-IND-INI-CARACT(I13)  =  0                  DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END998RO01010(1:11)) <= 0  DLM0002
+CQ3990                   MOVE  ZEROS        TO  01END998RO01010         DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 ADD VEC-INICIAL-CARACT(I13) TO 01END998RO01010   DLM0002
+CQ3990               ELSE                                               DLM0002
+CQ3990                 IF  FUNCTION NUMVAL(01END998RO01010(1:11)) <  0  DLM0002
+CQ3990                 AND FUNCTION NUMVAL(01END998RO01010(1:11)) > -88 DLM0002
+CQ3990                   MOVE "        -88"  TO 01END998RO01010(1:11)   DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               IF  FUNCTION NUMVAL(01END998RO01010(1:11)) <  0    DLM0002
+CQ3990               AND FUNCTION NUMVAL(01END998RO01010(1:11))  >  -4  DLM0002
+CQ3990                 MOVE "         -4"   TO 01END998RO01010(1:11)    DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           ELSE                                                   DLM0002
+CQ3990             IF  FUNCTION NUMVAL(01END998RO01010(1:11)) <  0 AND  DLM0002
+CQ3990                 FUNCTION NUMVAL(01END998RO01010(1:11))  >  -3    DLM0002
+CQ3990               MOVE "         -3"     TO  01END998RO01010(1:11)   DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990       END-IF                                                     DLM0002
+CQ3990     ELSE                                                         DLM0002
+CQ3990       IF COD-PORTAF-CARACT = "HP" OR "IN" OR "RO" OR "VE"        DLM0002
+CQ3990         IF  REG-ABIERTO-CARACT  =  1      *> REGISTROS ABIERTOS  DLM0002
+CQ3990           IF  NIT-SUSCRIP-S-ABD02  =  890200756                  DLM0002
+CQ3990             IF  FECHA-ESTADO-CARACT  >  ZEROS  AND               DLM0002
+CQ3990                 ACT-DATE-CARACT      >  ZEROS                    DLM0002
+CQ3990               IF (FECHA-ESTADO-CARACT - ACT-DATE-CARACT) >=  0   DLM0002
+CQ3990                 IF  VEC-INICIAL-CARACT(I13) >=  ZEROS  AND       DLM0002
+CQ3990                     VEC-IND-INI-CARACT(I13)  =  0                DLM0002
+CQ3990                   EVALUATE  COD-PORTAF-CARACT                    DLM0002
+CQ3990                    WHEN  "HP"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991HP010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END991HP010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-INICIAL-CARACT(I13) TO 01END991HP010 DLM0002
+CQ3990                    WHEN  "IN"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991IN010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END991IN010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-INICIAL-CARACT(I13) TO 01END991IN010 DLM0002
+CQ3990                    WHEN  "RO"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991RO010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END991RO010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-INICIAL-CARACT(I13) TO 01END991RO010 DLM0002
+CQ3990                    WHEN  "VE"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991VE010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END991VE010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-INICIAL-CARACT(I13) TO 01END991VE010 DLM0002
+CQ3990                   END-EVALUATE                                   DLM0002
+CQ3990                   IF FUNCTION NUMVAL(02END991TO010(1:11)) < ZEROS
+CQ3990                     MOVE ZEROS          TO 02END991TO010
+CQ3990                   END-IF
+CQ3990                   ADD VEC-INICIAL-CARACT(I13) TO 02END991TO010   DLM0002
+CQ3990                 ELSE                                             DLM0002
+CQ3990                  EVALUATE  COD-PORTAF-CARACT                     DLM0002
+CQ3990                   WHEN  "HP"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END991HP010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END991HP010(1:11)) > -88DLM0002
+CQ3990                     MOVE "        -88" TO 01END991HP010(1:11)    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "IN"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END991IN010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END991IN010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END991IN010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "RO"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END991RO010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END991RO010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END991RO010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "VE"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END991VE010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END991VE010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END991VE010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                  END-EVALUATE                                    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 IF  VEC-SALDO-CARACT(I13) >=  ZEROS  AND         DLM0002
+CQ3990                     VEC-IND-SLD-CARACT(I13)  =  0                DLM0002
+CQ3990                   EVALUATE  COD-PORTAF-CARACT                    DLM0002
+CQ3990                    WHEN  "HP"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990HP010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END990HP010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDO-CARACT(I13) TO 01END990HP010   DLM0002
+CQ3990                    WHEN  "IN"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990IN010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END990IN010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDO-CARACT(I13) TO 01END990IN010   DLM0002
+CQ3990                    WHEN  "RO"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990RO010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END990RO010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDO-CARACT(I13) TO 01END990RO010   DLM0002
+CQ3990                    WHEN  "VE"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990VE010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END990VE010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDO-CARACT(I13) TO 01END990VE010   DLM0002
+CQ3990                   END-EVALUATE                                   DLM0002
+CQ3990                   IF FUNCTION NUMVAL(02END990TO010(1:11)) < ZEROS
+CQ3990                      MOVE ZEROS             TO 02END990TO010
+CQ3990                   END-IF
+CQ3990                   ADD VEC-SALDO-CARACT(I13) TO 02END990TO010     DLM0002
+CQ3990                 ELSE                                             DLM0002
+CQ3990                  EVALUATE  COD-PORTAF-CARACT                     DLM0002
+CQ3990                   WHEN  "HP"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END990HP010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END990HP010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END990HP010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "IN"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END990IN010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END990IN010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END990IN010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "RO"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END990RO010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END990RO010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END990RO010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "VE"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END990VE010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END990VE010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END990VE010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                  END-EVALUATE                                    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 IF  VEC-SALDOMOR-CARACT(I13) >=  ZEROS  AND      DLM0002
+CQ3990                     VEC-IND-SLDM-CARACT(I13)  =  0               DLM0002
+CQ3990                   EVALUATE  COD-PORTAF-CARACT                    DLM0002
+CQ3990                    WHEN  "HP"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989HP010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END989HP010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDOMOR-CARACT(I13) TO 01END989HP010DLM0002
+CQ3990                    WHEN  "IN"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989IN010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END989IN010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDOMOR-CARACT(I13) TO 01END989IN010DLM0002
+CQ3990                    WHEN  "RO"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989RO010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END989RO010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDOMOR-CARACT(I13) TO 01END989RO010DLM0002
+CQ3990                    WHEN  "VE"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989VE010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END989VE010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-SALDOMOR-CARACT(I13) TO 01END989VE010DLM0002
+CQ3990                   END-EVALUATE                                   DLM0002
+CQ3990                   IF FUNCTION NUMVAL(02END989TO010(1:11)) < ZEROS
+CQ3990                      MOVE ZEROS             TO 02END989TO010
+CQ3990                   END-IF
+CQ3990                   ADD VEC-SALDOMOR-CARACT(I13) TO 02END989TO010  DLM0002
+CQ3990                 ELSE                                             DLM0002
+CQ3990                  EVALUATE  COD-PORTAF-CARACT                     DLM0002
+CQ3990                   WHEN  "HP"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END989HP010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END989HP010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END989HP010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "IN"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END989IN010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END989IN010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END989IN010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "RO"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END989RO010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END989RO010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END989RO010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "VE"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END989VE010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END989VE010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END989VE010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                  END-EVALUATE                                    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990                 IF  VEC-CUOTA-CARACT(I13) >=  ZEROS  AND         DLM0002
+CQ3990                     VEC-IND-CUO-CARACT(I13)  =  0                DLM0002
+CQ3990                   EVALUATE  COD-PORTAF-CARACT                    DLM0002
+CQ3990                    WHEN  "HP"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988HP010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END988HP010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-CUOTA-CARACT(I13) TO 01END988HP010   DLM0002
+CQ3990                    WHEN  "IN"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988IN010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END988IN010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-CUOTA-CARACT(I13) TO 01END988IN010   DLM0002
+CQ3990                    WHEN  "RO"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988RO010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END988RO010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-CUOTA-CARACT(I13) TO 01END988RO010   DLM0002
+CQ3990                    WHEN  "VE"                                    DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988VE010(1:11)) <= 0DLM0002
+CQ3990                       MOVE  ZEROS        TO  01END988VE010       DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                     ADD VEC-CUOTA-CARACT(I13) TO 01END988VE010   DLM0002
+CQ3990                   END-EVALUATE                                   DLM0002
+CQ3990                   IF FUNCTION NUMVAL(02END988TO010(1:11)) < ZEROS
+CQ3990                      MOVE ZEROS             TO 02END988TO010
+CQ3990                   END-IF
+CQ3990                   ADD VEC-CUOTA-CARACT(I13)   TO 02END988TO010   DLM0002
+CQ3990                 ELSE                                             DLM0002
+CQ3990                  EVALUATE  COD-PORTAF-CARACT                     DLM0002
+CQ3990                   WHEN  "HP"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END988HP010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END988HP010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END988HP010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "IN"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END988IN010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END988IN010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END988IN010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "RO"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END988RO010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END988RO010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END988RO010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                   WHEN  "VE"                                     DLM0002
+CQ3990                    IF  FUNCTION NUMVAL(01END988VE010(1:11)) <  0 DLM0002
+CQ3990                    AND FUNCTION NUMVAL(01END988VE010(1:11)) > -88DLM0002
+CQ3990                      MOVE "        -88" TO 01END988VE010(1:11)   DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "        -88" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                    END-IF                                        DLM0002
+CQ3990                  END-EVALUATE                                    DLM0002
+CQ3990                 END-IF                                           DLM0002
+CQ3990               ELSE                                               DLM0002
+CQ3990                 EVALUATE  COD-PORTAF-CARACT                      DLM0002
+CQ3990                  WHEN  "HP"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991HP010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END991HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "IN"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991IN010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END991IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "RO"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991RO010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END991RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "VE"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991VE010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END991VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 END-EVALUATE                                     DLM0002
+CQ3990                 EVALUATE  COD-PORTAF-CARACT                      DLM0002
+CQ3990                  WHEN  "HP"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990HP010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END990HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "IN"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990IN010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END990IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "RO"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990RO010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END990RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "VE"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990VE010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END990VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 END-EVALUATE                                     DLM0002
+CQ3990                 EVALUATE  COD-PORTAF-CARACT                      DLM0002
+CQ3990                  WHEN  "HP"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989HP010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END989HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "IN"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989IN010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END989IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "RO"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989RO010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END989RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "VE"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989VE010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END989VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 END-EVALUATE                                     DLM0002
+CQ3990                 EVALUATE  COD-PORTAF-CARACT                      DLM0002
+CQ3990                  WHEN  "HP"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988HP010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END988HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "IN"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988IN010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END988IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "RO"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988RO010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END988RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                  WHEN  "VE"                                      DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988VE010(1:11)) > -4  DLM0002
+CQ3990                     MOVE "         -4"   TO 01END988VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -4" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 END-EVALUATE                                     DLM0002
+CQ3990               END-IF                                             DLM0002
+CQ3990             ELSE                                                 DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991HP010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END991HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991IN010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END991IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991RO010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END991RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991VE010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END991VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990HP010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END990HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990IN010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END990IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990RO010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END990RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990VE010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END990VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989HP010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END989HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989IN010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END989IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989RO010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END989RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989VE010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END989VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988HP010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END988HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988IN010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END988IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988RO010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END988RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988VE010(1:11)) > -3  DLM0002
+CQ3990                     MOVE "         -3"   TO 01END988VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -3" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         ELSE                                                     DLM0002
+CQ3990           IF  REG-CERRADO-CARACT = 1      *> REGISTROS CERRADOS  DLM0002
+CQ3990             IF  NIT-SUSCRIP-S-ABD02  =  890200756                DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991HP010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END991HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991IN010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END991IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991RO010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END991RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END991VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END991VE010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END991VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END991VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END991TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END991TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990HP010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END990HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990IN010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END990IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990RO010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END990RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END990VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END990VE010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END990VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END990VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END990TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END990TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989HP010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END989HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989IN010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END989IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989RO010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END989RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END989VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END989VE010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END989VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END989VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END989TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END989TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990               EVALUATE  COD-PORTAF-CARACT                        DLM0002
+CQ3990                 WHEN  "HP"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988HP010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988HP010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END988HP010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988HP010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "IN"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988IN010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988IN010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END988IN010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988IN010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "RO"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988RO010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988RO010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END988RO010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988RO010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990                 WHEN  "VE"                                       DLM0002
+CQ3990                   IF  FUNCTION NUMVAL(01END988VE010(1:11)) <  0  DLM0002
+CQ3990                   AND FUNCTION NUMVAL(01END988VE010(1:11)) > -2  DLM0002
+CQ3990                     MOVE "         -2"   TO 01END988VE010(1:11)  DLM0002
+CQ3990                     IF  FUNCTION NUMVAL(01END988VE010(1:11)) <   DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) AND DLM0002
+CQ3990                         FUNCTION NUMVAL(02END988TO010(1:11)) < 0 DLM0002
+CQ3990                       MOVE "         -2" TO 02END988TO010(1:11)  DLM0002
+CQ3990                     END-IF                                       DLM0002
+CQ3990                   END-IF                                         DLM0002
+CQ3990               END-EVALUATE                                       DLM0002
+CQ3990             END-IF                                               DLM0002
+CQ3990           END-IF                                                 DLM0002
+CQ3990         END-IF                                                   DLM0002
+CQ3990       END-IF                                                     DLM0002
+CQ3990     END-IF                                                       DLM0002
+CQ3990     .                                                            DLM0002
+CQ3990*                                                                 DLM0002

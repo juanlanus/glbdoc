@@ -1,0 +1,42 @@
+REMARK* CALIDLOG-FD.v.0002
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE ALMACENA POR FECHA LA INFORMACION DE
+REMARK* LOS PROGRAMAS UNIX DE CALIDAD EJECUTADOS (LOG DE EJECUCION)
+REAMRK* TIPOS MAESTRO: ICMCRE= MAESTRO DE CARTERA ICMCRE
+REMARK*                ICMCHK= MAESTRO DE CUENTAS CORRIENTE ICMCHK
+REMARK* TIPOS DE ACCION M = MODIFICACION B = BLOQUEO D = DESBLOQUEO
+REMARK*                 E = ELIMINACION
+REMARK******************************************************************
+REMARK* CAV0002    | LOGCAL - SE ADICONAN LOS CAMPOS: HORA, USUSARIO,  *
+REMARK* NOV.05/2008|     REQUERIMIENTO Y LOS CAMPOS SEPARADOS POR ";"  *
+REMARK******************************************************************
+       FD  CALIDLOG.
+       01  REG-CALIDLOG.
+           03 FECHA-CALIDLOG           PIC 9(08).
+LOGCAL     03 SEP1-CALIDLOG            PIC X.                           CAV0002
+LOGCAL     03 HORA-CALIDLOG            PIC 9(06).                       CAV0002
+LOGCAL     03 SEP2-CALIDLOG            PIC X.                           CAV0002
+LOGCAL     03 USUARIO-CALIDLOG         PIC X(10).                       CAV0002
+LOGCAL     03 SEP3-CALIDLOG            PIC X.                           CAV0002
+LOGCAL     03 NUM-REQ-CALIDLOG         PIC X(10).                       CAV0002
+LOGCAL     03 SEP4-CALIDLOG            PIC X.                           CAV0002
+           03 COD-SUS-CALIDLOG         PIC X(06).
+LOGCAL     03 SEP5-CALIDLOG            PIC X.                           CAV0002
+           03 PROGRAM-CALIDLOG         PIC X(10).
+LOGCAL     03 SEP6-CALIDLOG            PIC X.                           CAV0002
+           03 TIPO-ACCION-CALIDLOG     PIC X(02).
+LOGCAL     03 SEP7-CALIDLOG            PIC X.                           CAV0002
+           03 MAESTRO-CALIDLOG         PIC X(06).
+LOGCAL     03 SEP8-CALIDLOG            PIC X.                           CAV0002
+           03 REG-LEIDOS-CALIDLOG      PIC 9(08).
+LOGCAL     03 SEP9-CALIDLOG            PIC X.                           CAV0002
+           03 REG-PROCESA-CALIDLOG     PIC 9(08).
+LOGCAL     03 SEP10-CALIDLOG           PIC X.                           CAV0002
+           03 REG-NOEXIST-CALIDLOG     PIC 9(08).
+LOGCAL     03 SEP11-CALIDLOG           PIC X.                           CAV0002
+           03 REG-IGUAL-CALIDLOG       PIC 9(08).
+LOGCAL     03 SEP12-CALIDLOG           PIC X.                           CAV0002
+           03 REG-RECLAMO-CALIDLOG     PIC 9(08). 
+LOGCAL     03 SEP13-CALIDLOG           PIC X.                           CAV0002
+           03 REG-OTROS-CALIDLOG       PIC 9(08).
+LOGCAL     03 SEP14-CALIDLOG           PIC X.                           CAV0002

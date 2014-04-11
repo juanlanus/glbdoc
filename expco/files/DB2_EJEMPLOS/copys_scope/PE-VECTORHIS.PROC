@@ -1,0 +1,218 @@
+      *PE-VECTORHIS.PROC.v.01.0001.
+      *------------------------------------------------------------------*
+      *
+      *   COPY  VERSION  OCT/2004
+      *
+      *------------------------------------------------------------------*
+      * COPY Verifica las novedades de ctasctes y califica                    *
+      *------------------------------------------------------------------*
+REMARK******************************************************************
+REMARK*  INTERCAMBIA EL VECTOR DEL ESTADO-MES Y COMPLETA EL VECTOR SI  *
+REMARK*  LA FECHA DE ACTUALIZACION ES MAYOR QUE LA FECHA DE LA ULTIMA  *
+REMARK*  NOVEDAD DE LA CUENTA                                          *
+REMARK******************************************************************
+
+173600     MOVE ZEROS            TO WS-ESTADO-MES.
+173700     MOVE ESTADO-MES-ABD07 TO WS-ESTADO-MES.
+173800     MOVE ZEROS            TO ESTADO-MES-IMP.
+173900     PERFORM 7600-MESES VARYING I FROM 1 BY 1 UNTIL I = 13.
+NEWCTA     MOVE ESTADO-MES-IMP   TO WS-ESTADO-MES-1.
+NEWCTA     MOVE ZEROS            TO WS-ESTADO-MES.
+NEWCTA     MOVE VECTOR-2-ABD07   TO WS-ESTADO-MES.
+NEWCTA     MOVE ZEROS  TO ESTADO-MES-IMP.
+NEWCTA     PERFORM 7600-MESES VARYING I FROM 1 BY 1 UNTIL I = 13.
+NEWCTA     MOVE ESTADO-MES-IMP   TO WS-ESTADO-MES-2.
+174100     MOVE COD-SUS-ABD07    TO COD-SUSCRIP-AUX.
+174200     PERFORM 7700-BUS-SUSCR.
+NEWCTA     MOVE WS-ESTADO-MES-1 TO ESTADO-MES-IMP.
+NORMAL     MOVE ESTADO-MES-IMP  TO VECTOR-S        
+           INSPECT ESTADO-MES-IMP REPLACING ALL "0" BY SPACES.
+           INSPECT ESTADO-MES-IMP REPLACING ALL "5" BY "N".
+           INSPECT ESTADO-MES-IMP REPLACING ALL "9" BY "-".
+           IF NUEVO = 1
+              INSPECT ESTADO-MES-IMP REPLACING ALL "6" BY "-"           
+              INSPECT ESTADO-MES-IMP REPLACING ALL "7" BY "-"           
+              INSPECT ESTADO-MES-IMP REPLACING ALL "8" BY "n"           
+           ELSE
+              INSPECT ESTADO-MES-IMP REPLACING ALL "6" BY "-"           
+              INSPECT ESTADO-MES-IMP REPLACING ALL "7" BY "-"           
+              INSPECT ESTADO-MES-IMP REPLACING ALL "8" BY "n"           
+           END-IF.
+ALFABE     MOVE ESTADO-MES-IMP  TO VECTOR-S-12
+           MOVE WS-ESTADO-MES-2 TO ESTADO-MES-IMP.
+NORMAL     MOVE ESTADO-MES-IMP  TO S48-VEC   
+           INSPECT ESTADO-MES-IMP REPLACING ALL "0" BY SPACES.
+           INSPECT ESTADO-MES-IMP REPLACING ALL "5" BY "N".
+           INSPECT ESTADO-MES-IMP REPLACING ALL "9" BY "-".
+           INSPECT ESTADO-MES-IMP REPLACING ALL "6" BY "-".             
+           INSPECT ESTADO-MES-IMP REPLACING ALL "7" BY "-".                    
+           INSPECT ESTADO-MES-IMP REPLACING ALL "8" BY "n".
+ALFABE     MOVE ESTADO-MES-IMP  TO S48-VEC-12
+           MOVE VECTOR-S        TO W-MORAS-HISTORICAS-V.
+
+174800 7600-MESES.
+REMARK******************************************************************
+REMARK*7600-MESES.
+REMARK* SE RECORRE EL VECTOR DE COMPORTAMIENTO MOVIENDO LOS CAMPOS DE  *
+REMARK* ACUERDO AL REPORTE DERECHA A IZQUIERDA.                        *
+REMARK******************************************************************
+174900     SUBTRACT I FROM 13 GIVING J.
+175000     MOVE WS-MES ( I ) TO E-MES-IMP ( J ).
+175200 7700-BUS-SUSCR.
+REMARK******************************************************************
+REMARK*7700-BUS-SUSCR.
+REMARK* SE BUSCA LA FECHA DE ULTIMA ACTUALIZACION DEL SUSCRIPTOR Y SE  *
+REMARK* PROCEDE A REALIZAR CORRIMIENTOS EN CASO DE ESTAR AL DIA        *
+REMARK******************************************************************
+175300     PERFORM 6600-LECT-SUSCR.
+175400     IF ENCONTRO = 0
+000000        MOVE 1 TO IND-BLOQUEO-ABD07
+175700     ELSE
+175800         PERFORM 7800-COMP-VEC.
+175900 7800-COMP-VEC.
+REMARK*****************************************************************
+REMARK*7800-COMP-VEC.
+REMARK*  SE COMPARAN LAS FECHAS DE ULTIMA NOVEDAD E INGRESO DEL SUSCR.*
+REMARK*  DANDO ASI EL NUMERO DE POSICIONES DEL VECTOR. EN CASO DE QUE *
+REMARK*  LA ULTIMA NOVEDAD SEA 01 O 13 O 14 O 15 O 16 SE LE AUMENTAN
+REMARK*  LAS POSICIONES DE NORMALIDAD QUE FALTAN HASTA LA FECHA DE LA *
+REMARK*  ULTIMA ACTUALIZACION DEL SUSCRIPTOR.                         *
+REMARK*****************************************************************
+vmlg       MOVE 1 TO FIN-CHECK
+176700     IF F-UACT-2 = 0
+176800        MOVE F-ING-2 TO F-UACT-2.
+176900     IF FIN-CHECK = 1
+177000        MOVE FECHA-APERT-ABD07 TO F-APE-07
+177100     ELSE
+177200        MOVE FECHA-APERT-ABD06 TO F-APE-07.
+177300     IF FIN-CHECK = 1
+177400        MOVE FEC-NOVEDAD-ABD07 TO F-NOV-07
+177500     ELSE
+177600        MOVE FEC-NOVEDAD-ABD06 TO F-NOV-07.
+           MOVE A-APE-07             TO ANO-2000                        ANO2000
+           PERFORM 7800-CONVERSION-INPUT-2000                           ANO2000
+           MOVE ANO-2000             TO A-APE-07                        ANO2000
+           MOVE A-NOV-07             TO ANO-2000                        ANO2000
+           PERFORM 7800-CONVERSION-INPUT-2000                           ANO2000
+           MOVE ANO-2000             TO A-NOV-07                        ANO2000
+           MOVE A-ING-02             TO ANO-2000                        ANO2000
+           PERFORM 7800-CONVERSION-INPUT-2000                           ANO2000
+           MOVE ANO-2000             TO A-ING-02                        ANO2000
+           MOVE A-UACT-02            TO ANO-2000                        ANO2000
+           PERFORM 7800-CONVERSION-INPUT-2000                           ANO2000
+           MOVE ANO-2000             TO A-UACT-02                       ANO2000
+177700     COMPUTE  F-APE-7 = A-APE-07 * 12 + M-APE-07.
+177800     COMPUTE  F-NOV-7 = A-NOV-07 * 12 + M-NOV-07.
+177900     COMPUTE  F-ING-2 = A-ING-02 * 12 + M-ING-02.
+178000     COMPUTE  F-UACT-2 = A-UACT-02 * 12 + M-UACT-02.
+178100     IF F-APE-7 < F-ING-2
+178200        MOVE  F-ING-2 TO F-VIEJ
+178300     ELSE
+178400        MOVE F-APE-7 TO F-VIEJ.
+178500     IF (F-NOV-7 > F-VIEJ)
+178600     OR (F-NOV-7 = F-VIEJ)
+178700        COMPUTE TIV = F-NOV-7 - F-VIEJ
+178800     ELSE
+178900        MOVE 0 TO TIV.  
+      * OJO LO SIGUIENTE ARREGLA CUANDO DA NEGATIVA LA RESTA !!!!!!
+      * ES UNA INCONSISTENCIA EN LA BD POR FEC-NOVEDAD < FEC-INGRESO
+           ADD 1 to tiv giving n 
+NEWCTA     perform varying i from n by 1 until i > 24
+NEWCTA       IF i < 13
+NEWCTA         MOVE "0" TO WS-ESTADO-MES-1(I:1)
+NEWCTA       ELSE
+NEWCTA         COMPUTE J = I - 12   
+NEWCTA         MOVE "0" TO WS-ESTADO-MES-2(J:1)
+NEWCTA       END-IF
+           end-perform
+179000     IF (F-UACT-2 > F-VIEJ)
+179100     OR (F-UACT-2 = F-VIEJ)
+179200        COMPUTE TFV = F-UACT-2 - F-VIEJ + 1
+179300     ELSE
+179500        MOVE 0 TO TFV.
+179600     IF TFV > TIV
+179700        COMPUTE N = TFV - TIV - 1
+179800     ELSE
+179900        MOVE 0 TO N.
+           MOVE A-APE-07             TO ANO-2000                        ANO2000
+           PERFORM 7900-CONVERSION-OUTPUT-2000                          ANO2000
+           MOVE ANO-2000             TO A-APE-07                        ANO2000
+           MOVE A-NOV-07             TO ANO-2000                        ANO2000
+           PERFORM 7900-CONVERSION-OUTPUT-2000                          ANO2000
+           MOVE ANO-2000             TO A-NOV-07                        ANO2000
+           MOVE A-ING-02             TO ANO-2000                        ANO2000
+           PERFORM 7900-CONVERSION-OUTPUT-2000                          ANO2000
+           MOVE ANO-2000             TO A-ING-02                        ANO2000
+           MOVE A-UACT-02            TO ANO-2000                        ANO2000
+           PERFORM 7900-CONVERSION-OUTPUT-2000                          ANO2000
+           MOVE ANO-2000             TO A-UACT-02                       ANO2000
+ARRAVE     IF (NOV-REPORT-ABD07 = 01 OR 13 OR 14 OR 16 OR 15) AND
+ARRAVE        (ARRASTRE = 1)
+181400        MOVE CINCO TO RELLENO
+181500        MOVE F-UACT-02 TO F-AUX
+181600        MOVE F-AUX TO FEC-NOV-S
+NEWCTA        IF N > 24 
+NEWCTA           MOVE 25 TO N
+NEWCTA        END-IF
+181700        PERFORM  7900-ADICION N TIMES
+           END-IF.
+182600*
+182700 7900-ADICION.
+REMARK*****************************************************************
+REMARK*7900-ADICION.
+REMARK*  SE ADICIONA UNA N (NORMAL) AL VECTOR POR CADA VEZ QUE SE     *
+REMARK*  LLAMA ESTA RUTINA.                                           *
+REMARK*                                                               *
+REMARK*****************************************************************
+182800     MOVE ZEROS           TO WS-EST-MES.
+NEWCTA     MOVE WS-ESTADO-MES-1 TO WS-MESES-VIEJ.
+183000     MOVE RELLENO         TO WS-MES-NUEV.
+NEWCTA     MOVE WS-MESES-NUEV   TO WS-ESTADO-MES-1.
+NEWCTA     MOVE WS-MES-VIEJ     TO WS-MES-NUEV.
+NEWCTA     MOVE WS-ESTADO-MES-2 TO WS-MESES-VIEJ.
+NEWCTA     MOVE WS-MESES-NUEV   TO WS-ESTADO-MES-2. 
+157000 6600-LECT-SUSCR.
+REMARK*****************************************************************
+REMARK*6600-LECT-SUSCR.
+REMARK*  SE LEE LA TABLA DE SUSCRIPTORES Y SE ASIGNAN LAS FECHAS DE   *
+REMARK*  INGRESO Y ULTIMA ACTUALIZACION DEL SUSCRIPTOR.               *
+REMARK*                                                               *
+REMARK*****************************************************************
+157100     MOVE COD-SUSCRIP-AUX TO COD-SUSCRIP-ABD02.
+157200     MOVE 1 TO ENCONTRO.
+ARRAVE     READ SUSCRIPTOR IGNORE LOCK INVALID KEY
+157400          MOVE 0 TO ENCONTRO
+                MOVE 0 TO IND-COR-ABD02.
+           IF ENCONTRO NOT = 0  
+              IF IND-COR-ABD02 = 1 OR 2 
+                 MOVE NOM-COR1-ABD02 TO NOM-COR-AUX
+                 MOVE NOM-COR2-ABD02 TO NOM-COR-AUX2
+              ELSE
+                 MOVE SPACES TO NOM-COR-AUX
+                 MOVE COD-SUSCRIP-ABD02 TO NOM-COR-AUXN
+              END-IF 
+157600        MOVE FECHA-ING-ABD02 TO F-ING-02
+157700        MOVE F-ULT-ACT-ABD02 TO F-UACT-02.
+
+       7900-CONVERSION-OUTPUT-2000.                                     ANO2000
+REMARK******************************************************************
+REMARK*7900-CONVERSION-OUTPUT-2000.                                     ANO2000
+REMARK* RUTINA ESTANDAR PARA Y2K, METODO WINDOW ANO 61. CONVERSION DESPUES
+REMARK* DE LA OPERACION ENTRE FECHAS.                                  * 
+REMARK******************************************************************
+           IF ANO-2000                  <  39                           ANO2000
+              ADD 61                    TO   ANO-2000                   ANO2000
+           ELSE
+              SUBTRACT 39               FROM ANO-2000.                  ANO2000
+
+       7800-CONVERSION-INPUT-2000.                                      ANO2000
+REMARK******************************************************************
+REMARK*7800-CONVERSION-INPUT-2000.                                      ANO2000
+REMARK* RUTINA ESTANDAR PARA Y2K, METODO WINDOW ANO 61. CONVERSION ANTES
+REMARK* DE LA OPERACION ENTRE FECHAS.                                  * 
+REMARK******************************************************************
+           IF ANO-2000                  >  61                           ANO2000
+              SUBTRACT 61               FROM ANO-2000                   ANO2000
+           ELSE                                                         ANO2000
+              ADD 39                    TO   ANO-2000.                  ANO2000
+

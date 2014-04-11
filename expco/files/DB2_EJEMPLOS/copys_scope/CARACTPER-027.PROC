@@ -1,0 +1,1069 @@
+REMARK*CARACTPER-027.PROC.v.00002
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 027
+REMARK*    PARA GMAC            
+REMARK******************************************************************
+      * CAV0002    | R10122 - GMAC  CQ-10122                           *
+      * 07-FEB-2013|          INCLUSION NUEVSA CARACTERISTICAS         *
+      * C.VELASCO  |          01NUM998 y 02MOR992                      *
+      ******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-027.                 
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM031000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX
+               MOVE  00DEM031000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM032000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX
+               MOVE  00DEM032000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM033000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX
+               MOVE  00DEM033000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO  I-VAR-PER
+               MOVE "00DEM034000"  TO  NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX
+               MOVE  00DEM034000(1:L-AUX)  TO
+                                   VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXP998TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXP998TO027) TO L-AUX
+               MOVE 02EXP998TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01END999RO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01END999RO027) TO L-AUX
+               MOVE 01END999RO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999TO027) TO L-AUX
+               MOVE 02MOR999TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02EXP999TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02EXP999TO027) TO L-AUX
+               MOVE 02EXP999TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998TO027) TO L-AUX
+               MOVE 02MOR998TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997TO027) TO L-AUX
+               MOVE 02MOR997TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ998TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ998TO027) TO L-AUX
+               MOVE 01INQ998TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR994TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR994TO027) TO L-AUX
+               MOVE 02MOR994TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END999TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END999TO027) TO L-AUX
+               MOVE 02END999TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996TO027) TO L-AUX
+               MOVE 02MOR996TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR993TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR993TO027) TO L-AUX
+               MOVE 02MOR993TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "01INQ999TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(01INQ999TO027) TO L-AUX
+               MOVE 01INQ999TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02NUM999TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02NUM999TO027) TO L-AUX
+               MOVE 02NUM999TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX).
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END998TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END998TO027) TO L-AUX
+               MOVE 02END998TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END997TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END997TO027) TO L-AUX
+               MOVE 02END997TO027(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR995TO027" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR995TO027) TO L-AUX
+               MOVE 02MOR995TO027(1:L-AUX)   TO
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998RO027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998RO027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998RO027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998VE027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998VE027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998VE027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998HP027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998HP027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998HP027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998IN027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998IN027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998IN027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998CC027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998CC027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998CC027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "01NUM998OT027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(01NUM998OT027) TO L-AUX             CAV0002
+R10122         MOVE 01NUM998OT027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0002
+R10122         *>                                                       CAV0002
+R10122         ADD 1 TO I-VAR-PER                                       CAV0002
+R10122         MOVE "02MOR992TO027" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0002
+R10122         MOVE FUNCTION LENGTH(02MOR992TO027) TO L-AUX             CAV0002
+R10122         MOVE 02MOR992TO027(1:L-AUX)   TO                         CAV0002
+R10122                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX).      CAV0002
+                                              
+       0000-INICIALIZAR-CARAC-EXT-27.                                   
+REMARK*----------------------------------------------------------------*
+REMARK*0000-INICIALIZAR-CARAC-EXT-27.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 27    *
+REMARK*     PARA GMAC                                                  *
+REMARK*----------------------------------------------------------------*
+             PERFORM  9999-CARAC-GENERALES
+             MOVE ZEROS           TO 00NUMTOTCTA027 00NUM24MCTA027
+             MOVE ALL "       -1" TO PER-27-NIVEL-02-NUM
+             MOVE ALL "  -1"      TO PER-27-NIVEL-02-MOR
+             MOVE "       -1"     TO 02MOR999TO027(1:9)
+             MOVE ALL "  -1"      TO PER-27-NIVEL-02-EXP
+             MOVE ALL "  -1"      TO PER-27-NIVEL-01-INQ 
+             MOVE ALL "  -1"      TO PER-27-NIVEL-00-INQ
+             MOVE "       -1"     TO 01END999RO027(1:9) 
+                                  02END999TO027(1:9) 02END998TO027(1:9)
+             MOVE "  -1"          TO 02END997TO027(1:4)
+             MOVE ZEROS           TO PER-27-END-TMP PER-27-MOR-TMP
+R10122       MOVE ALL "  -1"      TO PER-27-NIVEL-01NUM4                CAV0002
+R10122       MOVE "  -2"          TO 02MOR992TO027(1:4)                 CAV0002
+             MOVE ZEROS           TO PER-27-INQ-TMP.
+                                                                 
+       2249-PROCESE-CARCT-00NUM-EXT-27.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-27.
+REMARK*     CALCULO CARACTERISTICAS 00NUM, 02NUM PARA GMAC     
+REMARK******************************************************************
+         IF (COD-PORTAF-CARACT <> "AH" AND <> "CT")
+          MOVE ALL "       -1" TO PER-27-NIVEL-00-NUM
+R10122    MOVE ALL "  -1"      TO PER-27-NIVEL-00NUM4                   CAV0002
+REMARK*** 00NUM999TO027 *** PORCENTAJE CUENTAS ULTIMOS 24 MESES       
+          IF GARANTE-ABD07 = 0
+             MOVE ZEROS TO 00NUM999TO027
+             IF FECHA-ESTADO-CARACT > ZEROS AND ACT-DATE-CARACT > ZEROS
+                ADD 1 TO 00NUMTOTCTA027
+                IF MESES-MADUR-CARACT <= 24
+                   ADD 1 TO 00NUM24MCTA027
+                END-IF
+             ELSE
+                MOVE "       -3" TO 00NUM999TO027(1:9)
+             END-IF
+          ELSE
+             MOVE "       -2" TO 00NUM999TO027(1:9)
+          END-IF
+REMARK*** 00NUM998RO027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT RO
+R10122    IF COD-PORTAF-CARACT = "RO"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998RO027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998RO027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998RO027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998IN027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT IN
+R10122    IF COD-PORTAF-CARACT = "IN"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998IN027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998IN027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998IN027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998VE027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT VE
+R10122    IF COD-PORTAF-CARACT = "VE"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998VE027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998VE027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998VE027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998HP027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT HP
+R10122    IF COD-PORTAF-CARACT = "HP"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998HP027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998HP027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998HP027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998CC027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT CC
+R10122    IF COD-PORTAF-CARACT = "CC"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998CC027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998CC027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998CC027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998OT027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT OT
+R10122    IF COD-PORTAF-CARACT = "OT"                                   CAV0002
+R10122       MOVE ZEROS TO 00NUM998OT027                                CAV0002
+R10122       IF MESES-DESAC-CARACT <= 24                                CAV0002
+R10122          IF NOV-REPORT-ABD07 = 46                                CAV0002
+R10122             MOVE 1 TO 00NUM998OT027                              CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       ELSE                                                       CAV0002
+R10122          MOVE "  -2" TO 00NUM998OT027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+          IF FUNCTION NUMVAL(00NUM999TO027(1:9)) >= 0
+             IF FUNCTION NUMVAL(02NUM999TO027(1:9)) < 0
+                MOVE ZEROS TO 02NUM999TO027
+             END-IF
+          ELSE
+             IF FUNCTION NUMVAL(02NUM999TO027(1:9)) < 0
+                IF FUNCTION NUMVAL(00NUM999TO027(1:9)) <
+                   FUNCTION NUMVAL(02NUM999TO027(1:9))
+                   MOVE 00NUM999TO027(1:9) TO 02NUM999TO027(1:9)
+                END-IF
+             END-IF
+          END-IF
+REMARK*** 01NUM998RO027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT RO
+R10122    IF FUNCTION NUMVAL(00NUM998RO027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998RO027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998RO027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998RO027 = 01NUM998RO027 + 00NUM998RO027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998RO027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998RO027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998RO027(1:4))                  CAV0002
+R10122             MOVE 00NUM998RO027(1:4) TO 01NUM998RO027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 01NUM998IN027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT IN
+R10122    IF FUNCTION NUMVAL(00NUM998IN027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998IN027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998IN027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998IN027 = 01NUM998IN027 + 00NUM998IN027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998IN027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998IN027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998IN027(1:4))                  CAV0002
+R10122             MOVE 00NUM998IN027(1:4) TO 01NUM998IN027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 01NUM998VE027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT VE
+R10122    IF FUNCTION NUMVAL(00NUM998VE027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998VE027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998VE027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998VE027 = 01NUM998VE027 + 00NUM998VE027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998VE027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998VE027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998VE027(1:4))                  CAV0002
+R10122             MOVE 00NUM998VE027(1:4) TO 01NUM998VE027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998HP027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT HP
+R10122    IF FUNCTION NUMVAL(00NUM998HP027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998HP027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998HP027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998HP027 = 01NUM998HP027 + 00NUM998HP027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998HP027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998HP027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998HP027(1:4))                  CAV0002
+R10122             MOVE 00NUM998HP027(1:4) TO 01NUM998HP027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998CC027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT CC
+R10122    IF FUNCTION NUMVAL(00NUM998CC027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998CC027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998CC027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998CC027 = 01NUM998CC027 + 00NUM998CC027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998CC027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998CC027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998CC027(1:4))                  CAV0002
+R10122             MOVE 00NUM998CC027(1:4) TO 01NUM998CC027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK*** 00NUM998OT027 *** # CARTERA RECUPERADA ULT 24 MESSE PORT OT
+R10122    IF FUNCTION NUMVAL(00NUM998OT027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998OT027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 01NUM998OT027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       COMPUTE 01NUM998OT027 = 01NUM998OT027 + 00NUM998OT027      CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(01NUM998OT027(1:4)) < 0                 CAV0002
+R10122          IF FUNCTION NUMVAL(00NUM998OT027(1:4)) <                CAV0002
+R10122             FUNCTION NUMVAL(01NUM998OT027(1:4))                  CAV0002
+R10122             MOVE 00NUM998OT027(1:4) TO 01NUM998OT027(1:4)        CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF
+         END-IF.
+                         
+       2749-PROCESE-CARCT-00END-EXT-27.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-27.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00END Y 02END GMAC     
+REMARK******************************************************************
+          MOVE "       -1" TO 00END999RO027(1:9) 00END999TO027(1:9)
+                              00END998TO027(1:9)
+          MOVE "  -1" TO 00END997TO027(1:4)
+REMARK*** 00END999RO027 *** PORCENTAJE UTILIZACION TDC
+          IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END999RO027
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF ((VEC-INICIAL-CARACT(I13) > 0 AND
+                         VEC-INICIAL-CARACT(I13) <> "          -") AND
+                           VEC-IND-INI-CARACT(I13) = 0 ) AND 
+                         (VEC-SALDO-CARACT(I13) <> "          -" AND
+                          VEC-IND-SLD-CARACT(I13) = 0 )
+                          COMPUTE TOT-END-UTI-027 = TOT-END-UTI-027 + 
+                             VEC-SALDO-CARACT(I13) /
+                                       VEC-INICIAL-CARACT(I13)
+                          ADD 1 TO TOT-END-CTN-027
+                      ELSE
+                         MOVE "      -88" TO 00END999RO027(1:9)
+                      END-IF
+                   ELSE
+                      MOVE "       -4" TO 00END999RO027(1:9)
+                   END-IF
+                ELSE
+                   MOVE "       -3" TO 00END999RO027(1:9)
+                END-IF
+             ELSE
+                MOVE "       -2" TO 00END999RO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 00END999TO027 *** PORCENTAJE UTILIZACION TOTAL
+          IF (COD-CTA-ABD07 <> 4 AND <> 15 AND <> 16 AND <> 19) AND
+             (COD-CTA-ABD07 < 8  OR > 12) AND
+             (COD-CTA-ABD07 < 21 OR > 26) AND
+             (COD-CTA-ABD07 < 28 OR > 47)
+             MOVE ZEROS TO 00END999TO027
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-ESTADO-CARACT > ZEROS AND
+                   ACT-DATE-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF (VEC-INICIAL-CARACT(I13) <> "          -" AND
+                          VEC-IND-INI-CARACT(I13) = 0 ) AND
+                         (VEC-SALDO-CARACT(I13) <> "          -" AND
+                          VEC-IND-SLD-CARACT(I13) = 0 )
+                          COMPUTE TOT-END-SLD-027 = TOT-END-SLD-027 + 
+                                  VEC-SALDO-CARACT(I13)
+                          COMPUTE TOT-END-CUP-027 = TOT-END-CUP-027 + 
+                                  VEC-INICIAL-CARACT(I13)
+                          MOVE ZEROS TO 02END999TO027
+                      ELSE
+                         MOVE "      -88" TO 00END999TO027(1:9)
+                      END-IF
+                   ELSE
+                      MOVE "       -4" TO 00END999TO027(1:9)
+                   END-IF
+                ELSE
+                   MOVE "       -3" TO 00END999TO027(1:9)
+                END-IF
+             ELSE
+                MOVE "       -2" TO 00END999TO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 00END998TO027 *** PORCENTAJE SALDO ALTO 
+          IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                 "CC" OR "OT" OR "CO"
+            MOVE ZEROS TO 00END998TO027
+           IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+             IF FECHA-ESTADO-CARACT > ZEROS AND
+                ACT-DATE-CARACT > ZEROS
+                IF MESES-DESAC-CARACT <= 3
+                 IF (VEC-INICIAL-CARACT(I13) <> 0 AND
+                     VEC-INICIAL-CARACT(I13) <> "          -" AND
+                     VEC-IND-INI-CARACT(I13) = 0 ) AND
+                    (VEC-SALDO-CARACT(I13) <> "          -" AND
+                     VEC-IND-SLD-CARACT(I13) = 0 )
+                     IF VEC-SALDO-CARACT(I13) = 0
+                        MOVE ZEROS TO 02END998TO027
+                     END-IF
+                     IF SLD-END-ALT-027 < VEC-SALDO-CARACT(I13)
+                        MOVE VEC-SALDO-CARACT(I13) TO SLD-END-ALT-027
+                        MOVE VEC-INICIAL-CARACT(I13) TO CUP-END-ALT-027
+                     END-IF
+                 ELSE
+                    MOVE "      -88" TO 00END998TO027(1:9)
+                 END-IF
+                ELSE
+                   MOVE "       -4" TO 00END998TO027(1:9)
+                END-IF
+             ELSE
+                MOVE "       -3" TO 00END998TO027(1:9)
+             END-IF
+           ELSE
+             MOVE "       -2" TO 00END998TO027(1:9)
+           END-IF
+          END-IF
+REMARK*** 00END997TO027 *** CREDITOS ABIERTOS     
+          IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+             MOVE ZEROS TO 00END997TO027
+             IF FECHA-ESTADO-CARACT > ZEROS AND ACT-DATE-CARACT > ZEROS
+                IF MESES-DESAC-CARACT <= 3
+                   IF (VEC-INICIAL-CARACT(I13) > 600 AND
+                       VEC-IND-INI-CARACT(I13) = 0 )
+                      MOVE 1 TO 00END997TO027
+                   END-IF
+                ELSE
+                   MOVE "  -4" TO 00END997TO027(1:4)
+                END-IF
+             ELSE
+                MOVE "  -3" TO 00END997TO027(1:4)
+             END-IF
+          ELSE
+             MOVE "  -2" TO 00END997TO027(1:4)
+          END-IF
+REMARK*
+REMARK*** 01END999RO027 *** PORCENTAJE UTILIZACION TDC
+          IF FUNCTION NUMVAL(01END999RO027(1:9)) < 0
+             IF FUNCTION NUMVAL(00END999RO027(1:9)) <
+                FUNCTION NUMVAL(01END999RO027(1:9))
+                MOVE 00END999RO027(1:9) TO 01END999RO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 02END999TO027 *** PORCENTAJE UTILIZACION TOTAL
+          IF FUNCTION NUMVAL(02END999TO027(1:9)) < 0
+             IF FUNCTION NUMVAL(00END999TO027(1:9)) <
+                FUNCTION NUMVAL(02END999TO027(1:9))
+                MOVE 00END999TO027(1:9) TO 02END999TO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 02END998TO027 *** PORCENTAJE SALDO ALTO
+          IF FUNCTION NUMVAL(02END998TO027(1:9)) < 0
+             IF FUNCTION NUMVAL(00END998TO027(1:9)) <
+                FUNCTION NUMVAL(02END998TO027(1:9))
+                MOVE 00END998TO027(1:9) TO 02END998TO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 02END997TO027 *** CREDITOS ABIERTOS
+          IF FUNCTION NUMVAL(00END997TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02END997TO027(1:4)) < 0
+                MOVE ZEROS TO 02END997TO027
+             END-IF
+             COMPUTE 02END997TO027 = 02END997TO027 + 00END997TO027
+          ELSE
+             IF FUNCTION NUMVAL(02END997TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00END997TO027(1:4)) <
+                 FUNCTION NUMVAL(02END997TO027(1:4))
+                 MOVE 00END997TO027(1:4) TO 02END997TO027(1:4)
+              END-IF         
+             END-IF
+          END-IF.
+
+       2249-PROCESE-CARCT-00EXP-EXT-27.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00EXP-EXT-27.
+REMARK*     CALCULO CARACTERISTICAS DE NIVEL 00EXP Y 02EXP GMAC     
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-27-NIVEL-00-EXP
+REMARK*** 00EXP999TO027 *** MESES CUENTA ANTIGUA
+          IF ((COD-CTA-ABD07 = 02 OR 03 OR 05 OR 07 OR 13 OR 14 OR
+                              17 OR 18 OR 20 OR 48 OR 49) OR
+              (COD-CTA-ABD07 = 06 OR 27)) AND COD-PORTAF-CARACT <> "HP"
+             MOVE ZEROS TO 00EXP999TO027
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-APERT-CARACT  > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS AND
+                   FECHA-ESTADO-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3 
+                      IF MESES-MADUR-CARACT >= 0
+                         MOVE MESES-MADUR-CARACT TO 00EXP999TO027
+                       END-IF
+                   ELSE
+                      MOVE "  -4" TO 00EXP999TO027(1:4)
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00EXP999TO027(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00EXP999TO027(1:4)
+             END-IF
+          END-IF
+REMARK*** 00EXP998TO027 *** MESES CREDITO DE VEHICULOS
+REMARK*** SEGUN DEFINICION ICGS49
+          IF COD-SUS-ABD07 = 180036 OR 180015 OR 180110 OR 180007 OR
+                             040076 OR 180035 OR 180005 OR 180151 OR
+                             040131 OR 180004 OR 180052 OR 180171 OR
+                             180114
+             MOVE ZEROS TO 00EXP998TO027
+             IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0
+                IF FECHA-APERT-CARACT  > ZEROS AND
+                   ACT-DATE-CARACT     > ZEROS AND
+                   FECHA-ESTADO-CARACT > ZEROS
+                   IF MESES-DESAC-CARACT <= 3
+                      IF MESES-MADUR-CARACT >= 0
+                         MOVE MESES-MADUR-CARACT TO 00EXP998TO027
+                       END-IF
+                   ELSE
+                      MOVE "  -4" TO 00EXP998TO027(1:4)
+                   END-IF
+                ELSE
+                   MOVE "  -3" TO 00EXP998TO027(1:4)
+                END-IF
+             ELSE
+                MOVE "  -2" TO 00EXP998TO027(1:4)
+             END-IF
+          END-IF
+REMARK*** 02EXP999TO027 *** MESES CUENTA ANTIGUA                           
+           IF FUNCTION NUMVAL(00EXP999TO027(1:4)) >= 0
+              IF FUNCTION NUMVAL(02EXP999TO027(1:4)) < 0
+                 MOVE ZEROS TO 02EXP999TO027
+              END-IF
+              IF 00EXP999TO027 > 02EXP999TO027
+                 MOVE 00EXP999TO027 TO 02EXP999TO027
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02EXP999TO027(1:4)) < 0
+               IF FUNCTION NUMVAL(00EXP999TO027(1:4)) <
+                  FUNCTION NUMVAL(02EXP999TO027(1:4))
+                  MOVE 00EXP999TO027(1:4) TO 02EXP999TO027(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 02EXP998TO027 *** MESES CREDITO DE VEHICULOS
+           IF FUNCTION NUMVAL(00EXP998TO027(1:4)) >= 0
+              IF FUNCTION NUMVAL(02EXP998TO027(1:4)) < 0
+                 MOVE ZEROS TO 02EXP998TO027
+              END-IF
+              IF 00EXP998TO027 > 02EXP998TO027
+                 MOVE 00EXP998TO027 TO 02EXP998TO027
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02EXP998TO027(1:4)) < 0
+               IF FUNCTION NUMVAL(00EXP998TO027(1:4)) <
+                  FUNCTION NUMVAL(02EXP998TO027(1:4))
+                  MOVE 00EXP998TO027(1:4) TO 02EXP998TO027(1:4)
+               END-IF
+              END-IF
+           END-IF.
+
+       2249-PROCESE-CARCT-00MOR-EXT-27.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-27.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 00MOR,02MOR GMAC     
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-27-NIVEL-00-MOR
+          MOVE "       -1" TO 00MOR999TO027(1:9)
+R10122    MOVE "  -2"     TO 00MOR992TO027(1:4)                         CAV0002
+REMARK*** 00MOR999TO027 *** PORCENTAJE DE CREDITOS SIN MORA        
+          MOVE 0 TO P-CARACT Z-CARACT
+          IF (COD-CTA-ABD07 <> 4 AND <> 15 AND <> 16 AND <> 19) AND
+             (COD-CTA-ABD07 < 8  OR > 12) AND
+             (COD-CTA-ABD07 < 21 OR > 26) AND
+             (COD-CTA-ABD07 < 28 OR > 47)
+             MOVE ZEROS TO 00MOR999TO027
+             IF GARANTE-ABD07 = 0
+              IF FECHA-ESTADO-CARACT > ZEROS AND
+                 ACT-DATE-CARACT > ZEROS
+               IF ((REG-ABIERTO-CARACT = 1 AND 
+                    MESES-DESAC-CARACT <= 3) OR
+                  (REG-CERRADO-CARACT = 1 AND 
+                   MESES-DESAC-CARACT <= 48))
+                   ADD 1 TO TOT-MOR-CTA-027
+                   IF MESES-DESAC-CARACT < 0
+                      MOVE 0 TO P-CARACT
+                   ELSE
+                      MOVE MESES-DESAC-CARACT TO P-CARACT
+                   END-IF
+                   COMPUTE Z-CARACT = (49 - P-CARACT )
+                   MOVE ZEROS TO NUM-MOR-CTA-027
+                   PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL 
+                       J-CARACT > ( 49 - P-CARACT )
+                       IF V-NOR-CARACT(J-CARACT:1) = 0 OR "."
+                          ADD 1 TO NUM-MOR-CTA-027
+                       END-IF
+                   END-PERFORM
+                   IF Z-CARACT = NUM-MOR-CTA-027
+                      ADD 1 TO DIA-MOR-CTA-027
+                   END-IF
+               ELSE
+                  MOVE "       -4" TO 00MOR999TO027(1:9)
+               END-IF
+              ELSE
+                 MOVE "       -3" TO 00MOR999TO027(1:9)
+              END-IF
+             ELSE
+                MOVE "       -2" TO 00MOR999TO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 00MOR998TO027 *** NUMERO DE MORAS MAYORES O IGUALES A 120 DIAS
+          MOVE 0 TO P-CARACT
+          IF GARANTE-ABD07 = 0
+           MOVE ZEROS TO 00MOR998TO027
+           IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+            IF ((REG-ABIERTO-CARACT = 1 AND MESES-DESAC-CARACT <= 3) OR 
+                (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12))
+               IF MESES-DESAC-CARACT < 0              
+                  MOVE 0 TO P-CARACT                  
+               ELSE                                   
+                  MOVE MESES-DESAC-CARACT TO P-CARACT 
+               END-IF                                 
+               COMPUTE I-CARACT = (49 - P-CARACT - 11)
+               PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL 
+                       J-CARACT > ( 49 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) >= 4
+                     COMPUTE 00MOR998TO027 = 00MOR998TO027 + 1
+                  END-IF
+               END-PERFORM
+            ELSE
+               MOVE "  -4" TO 00MOR998TO027(1:4)
+            END-IF
+           ELSE
+              MOVE "  -3" TO 00MOR998TO027(1:4)
+           END-IF
+          ELSE
+             MOVE "  -2" TO 00MOR998TO027(1:4)
+          END-IF
+REMARK*** 00MOR997TO027 *** NUMERO DE MORAS IGUALES A 30 DIAS         
+          MOVE 0 TO P-CARACT
+          IF GARANTE-ABD07 = 0
+           MOVE ZEROS TO 00MOR997TO027
+           IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+            IF ((REG-ABIERTO-CARACT = 1 AND MESES-DESAC-CARACT <= 3) OR
+                (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12))
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT - 11)
+               PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                       J-CARACT > ( 49 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 1
+                     COMPUTE 00MOR997TO027 = 00MOR997TO027 + 1
+                  END-IF
+               END-PERFORM
+            ELSE
+               MOVE "  -4" TO 00MOR997TO027(1:4)
+            END-IF
+           ELSE
+              MOVE "  -3" TO 00MOR997TO027(1:4)
+           END-IF
+          ELSE
+             MOVE "  -2" TO 00MOR997TO027(1:4)
+          END-IF
+REMARK*** 00MOR996TO027 *** NUM MORAS 90 DIAS ULTIMOS 24 MESES        
+          MOVE 0 TO P-CARACT
+          IF GARANTE-ABD07 = 0
+           MOVE ZEROS TO 00MOR996TO027
+           IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+            IF ((REG-ABIERTO-CARACT = 1 AND MESES-DESAC-CARACT <= 3) OR
+                (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 24))
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT - 23)
+               PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                       J-CARACT > ( 49 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 3
+                     COMPUTE 00MOR996TO027 = 00MOR996TO027 + 1
+                  END-IF
+               END-PERFORM
+            ELSE
+               MOVE "  -4" TO 00MOR996TO027(1:4)
+            END-IF
+           ELSE
+              MOVE "  -3" TO 00MOR996TO027(1:4)
+           END-IF
+          ELSE
+             MOVE "  -2" TO 00MOR996TO027(1:4)
+          END-IF
+REMARK*** 00MOR995TO027 *** NUM MORAS 90 DIAS ULTIMOS 12 MESES
+          MOVE 0 TO P-CARACT
+          IF GARANTE-ABD07 = 0
+           MOVE ZEROS TO 00MOR995TO027
+           IF FECHA-ESTADO-CARACT > ZEROS AND RUN-DATE-CARACT > ZEROS
+            IF ((REG-ABIERTO-CARACT = 1 AND MESES-DESAC-CARACT <= 3) OR
+                (REG-CERRADO-CARACT = 1 AND MESES-DESAC-CARACT <= 12))
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT - 11)
+               PERFORM VARYING J-CARACT FROM I-CARACT BY 1 UNTIL
+                       J-CARACT > ( 49 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 3
+                     COMPUTE 00MOR995TO027 = 00MOR995TO027 + 1
+                  END-IF
+               END-PERFORM
+            ELSE
+               MOVE "  -4" TO 00MOR995TO027(1:4)
+            END-IF
+           ELSE
+              MOVE "  -3" TO 00MOR995TO027(1:4)
+           END-IF
+          ELSE
+             MOVE "  -2" TO 00MOR995TO027(1:4)
+          END-IF
+REMARK*** 00MOR994TO027 *** CUENTAS EN RECUPERACION               
+          IF GARANTE-ABD07 = 0
+             MOVE ZEROS TO 00MOR994TO027
+             IF NOV-REPORT-ABD07 = 45 OR 46 OR 47 OR
+                ADJETIVO1-ABD07 = 2 OR ADJETIVO2-ABD07 = 2 OR
+                ADJETIVO3-ABD07 = 2
+                MOVE 1 TO 00MOR994TO027
+             END-IF
+          ELSE
+             MOVE "  -2" TO 00MOR994TO027(1:4)
+          END-IF
+REMARK*** 00MOR993TO027 *** PRODUCTOS SIN MORA                    
+          MOVE 0 TO P-CARACT Z-CARACT
+          IF (COD-CTA-ABD07 = 02 OR 03 OR 05 OR 07 OR 13 OR 14 OR
+                              17 OR 18 OR 20 OR 48 OR 49) OR
+             (COD-CTA-ABD07 = 06 OR 27)
+           MOVE ZEROS TO 00MOR993TO027
+           IF (REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0)
+            IF FECHA-ESTADO-CARACT > ZEROS AND ACT-DATE-CARACT > ZEROS
+             IF (MESES-DESAC-CARACT <= 3 AND MESES-MADUR-CARACT >= 12)
+               IF MESES-DESAC-CARACT < 0
+                  MOVE 0 TO P-CARACT
+               ELSE
+                  MOVE MESES-DESAC-CARACT TO P-CARACT
+               END-IF
+               COMPUTE I-CARACT = (49 - P-CARACT )
+               PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL
+                       J-CARACT > ( 49 - P-CARACT )
+                  IF V-NOR-CARACT(J-CARACT:1) = 0 OR "."
+                     COMPUTE Z-CARACT = Z-CARACT + 1
+                  END-IF
+               END-PERFORM
+               IF Z-CARACT = I-CARACT
+                  MOVE 1 TO 00MOR993TO027
+               END-IF
+             ELSE
+                MOVE "  -4" TO 00MOR993TO027(1:4)
+             END-IF
+            ELSE
+               MOVE "  -3" TO 00MOR993TO027(1:4)
+            END-IF
+           ELSE
+              MOVE "  -2" TO 00MOR993TO027(1:4)
+           END-IF
+          END-IF   
+REMARK*** 00MOR992TO027 *** MORA MAXIMA CON LA ENTIDAD GMAC
+R10122    MOVE 0 TO P-CARACT Z-CARACT 00MOR992TMP027                    CAV0002
+R10122    IF (NIT-SUSCRIP-S-ABD02 = 860029396 AND GARANTE-ABD07 = 0)    CAV0002
+R10122       MOVE ZEROS TO 00MOR992TO027                                CAV0002
+R10122       PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL J-CARACT > 49   CAV0002
+R10122          MOVE ZEROS TO 00MOR992TMP027                            CAV0002
+R10122          IF J-CARACT > 1                                         CAV0002
+R10122             IF V-NOR-CARACT(J-CARACT - 1:1) = "."                CAV0002
+R10122                MOVE 0 TO P-CARACT                                CAV0002
+R10122             ELSE                                                 CAV0002
+R10122                MOVE V-NOR-CARACT(J-CARACT - 1:1) TO P-CARACT     CAV0002
+R10122             END-IF                                               CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = "."                       CAV0002
+R10122             COMPUTE Z-CARACT = Z-CARACT + 1                      CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = 0 OR 1 OR 2 OR 3          CAV0002
+R10122             MOVE V-NOR-CARACT(J-CARACT:1) TO 00MOR992TMP027      CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = 4 AND P-CARACT <> 4       CAV0002
+R10122             MOVE 4 TO 00MOR992TMP027                             CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = 4 AND P-CARACT = 4        CAV0002
+R10122             MOVE 5 TO 00MOR992TMP027                             CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = 7                         CAV0002
+R10122             MOVE 6 TO 00MOR992TMP027                             CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF V-NOR-CARACT(J-CARACT:1) = 6                         CAV0002
+R10122             MOVE 7 TO 00MOR992TMP027                             CAV0002
+R10122          END-IF                                                  CAV0002
+R10122          IF 00MOR992TMP027 > 00MOR992TO027                       CAV0002
+R10122             MOVE 00MOR992TMP027 TO 00MOR992TO027                 CAV0002
+R10122          END-IF                                                  CAV0002
+R10122       END-PERFORM                                                CAV0002
+R10122       IF Z-CARACT >= 49                                          CAV0002
+R10122          MOVE " -88" TO 00MOR992TO027(1:4)                       CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF                                                        CAV0002
+REMARK***
+REMARK*** 02MOR999TO027 *** PORCENTAJE DE CREDITOS SIN MORA                 
+          IF FUNCTION NUMVAL(02MOR999TO027(1:9)) < 0
+             IF FUNCTION NUMVAL(00MOR999TO027(1:9)) <
+                FUNCTION NUMVAL(02MOR999TO027(1:9))
+                MOVE 00MOR999TO027(1:9) TO 02MOR999TO027(1:9)
+             END-IF
+          END-IF
+REMARK*** 02MOR998TO027 *** NUMERO DE MORAS MAYORES O IGUALES A 120 DIAS
+          IF FUNCTION NUMVAL(00MOR998TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR998TO027(1:4)) < 0
+                MOVE ZEROS TO 02MOR998TO027
+             END-IF
+             COMPUTE 02MOR998TO027 = 02MOR998TO027 + 00MOR998TO027
+          ELSE
+             IF FUNCTION NUMVAL(02MOR998TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR998TO027(1:4)) <
+                 FUNCTION NUMVAL(02MOR998TO027(1:4))
+                 MOVE 00MOR998TO027(1:4) TO 02MOR998TO027(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 02MOR997TO027 *** NUMERO DE MORAS IGUALES A 30 DIAS        
+          IF FUNCTION NUMVAL(00MOR997TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR997TO027(1:4)) < 0
+                MOVE ZEROS TO 02MOR997TO027
+             END-IF
+             COMPUTE 02MOR997TO027 = 02MOR997TO027 + 00MOR997TO027
+          ELSE
+            IF FUNCTION NUMVAL(02MOR997TO027(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997TO027(1:4)) <
+                  FUNCTION NUMVAL(02MOR997TO027(1:4))
+                  MOVE 00MOR997TO027(1:4) TO 02MOR997TO027(1:4)
+               END-IF
+            END-IF
+          END-IF
+REMARK*** 02MOR996TO027 *** NUM MORAS 90 DIAS ULTIMOS 24 MESES       
+          IF FUNCTION NUMVAL(00MOR996TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR996TO027(1:4)) < 0
+                MOVE  ZEROS TO 02MOR996TO027                       
+             END-IF
+             COMPUTE 02MOR996TO027 = 02MOR996TO027 + 00MOR996TO027
+          ELSE
+             IF FUNCTION NUMVAL(02MOR996TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR996TO027(1:4)) <
+                 FUNCTION NUMVAL(02MOR996TO027(1:4))
+                 MOVE 00MOR996TO027(1:4) TO 02MOR996TO027(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 02MOR995TO027 *** NUM MORAS 90 DIAS ULTIMOS 12 MESES        
+          IF FUNCTION NUMVAL(00MOR995TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR995TO027(1:4)) < 0
+                MOVE ZEROS TO 02MOR995TO027
+             END-IF
+             COMPUTE 02MOR995TO027 = 02MOR995TO027 + 00MOR995TO027
+          ELSE
+             IF FUNCTION NUMVAL(02MOR995TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR995TO027(1:4)) <
+                 FUNCTION NUMVAL(02MOR995TO027(1:4))
+                 MOVE 00MOR995TO027(1:4) TO 02MOR995TO027(1:4)
+              END-IF
+             END-IF
+          END-IF                  
+REMARK*** 02MOR994TO027 *** CUENTAS EN RECUPERACION
+          IF FUNCTION NUMVAL(00MOR994TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR994TO027(1:4)) < 0
+                MOVE ZEROS TO 02MOR994TO027
+             END-IF
+             COMPUTE 02MOR994TO027 = 02MOR994TO027 + 00MOR994TO027
+          ELSE
+             IF FUNCTION NUMVAL(02MOR994TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR994TO027(1:4)) <
+                 FUNCTION NUMVAL(02MOR994TO027(1:4))
+                 MOVE 00MOR994TO027(1:4) TO 02MOR994TO027(1:4)
+              END-IF
+             END-IF
+          END-IF
+REMARK*** 02MOR993TO027 *** PRODUCTOS SIN MORA
+          IF FUNCTION NUMVAL(00MOR993TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(02MOR993TO027(1:4)) < 0
+                MOVE ZEROS TO 02MOR993TO027
+             END-IF
+             COMPUTE 02MOR993TO027 = 02MOR993TO027 + 00MOR993TO027
+          ELSE
+             IF FUNCTION NUMVAL(02MOR993TO027(1:4)) < 0
+              IF FUNCTION NUMVAL(00MOR993TO027(1:4)) <
+                 FUNCTION NUMVAL(02MOR993TO027(1:4))
+                 MOVE 00MOR993TO027(1:4) TO 02MOR993TO027(1:4)
+              END-IF
+             END-IF
+R10122    END-IF                                                        CAV0002
+REMARK*** 02MOR992TO027 *** MORA MAXIMA CON LA ENTIDAD GMAC
+R10122    IF FUNCTION NUMVAL(00MOR992TO027(1:4)) >= 0                   CAV0002
+R10122       IF FUNCTION NUMVAL(02MOR992TO027(1:4)) < 0                 CAV0002
+R10122          MOVE ZEROS TO 02MOR992TO027                             CAV0002
+R10122       END-IF                                                     CAV0002
+R10122       IF 00MOR992TO027 > 02MOR992TO027                           CAV0002
+R10122          MOVE 00MOR992TO027 TO 02MOR992TO027                     CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    ELSE                                                          CAV0002
+R10122       IF FUNCTION NUMVAL(02MOR992TO027(1:4)) < 0                 CAV0002
+R10122        IF FUNCTION NUMVAL(00MOR992TO027(1:4)) <                  CAV0002
+R10122           FUNCTION NUMVAL(02MOR992TO027(1:4))                    CAV0002
+R10122           MOVE 00MOR992TO027(1:4) TO 02MOR992TO027(1:4)          CAV0002
+R10122        END-IF                                                    CAV0002
+R10122       END-IF                                                     CAV0002
+R10122    END-IF.                                                       CAV0002
+
+       4249-PROCESE-CARCT-00INQ-EXT-27.
+REMARK******************************************************************
+REMARK*4249-PROCESE-CARCT-00INQ-EXT-27.
+REMARK*     CALCULO CARACTERISTICAS NIVEL 01INQ
+REMARK******************************************************************
+          MOVE ZEROS TO 00INQ999TO027 00INQ998TO027
+REMARK*** 00INQ999TO027*** CONSULTAS ULTIMOS 6 MESES SECTORIZADO
+          IF (COD-SUSCRIP-IND(1:2) = 02 OR 03 OR 05 OR 06 OR 07 OR 13 OR
+                               14 OR 17 OR 18 OR 20 OR 27 OR 48 OR  49)
+             IF MESES-CONST-CARACT >= 0 AND <= 6
+               PERFORM VARYING I-CARACT FROM 1 BY 1 UNTIL I-CARACT > 50 
+                IF TABLS-NIT-INQ-027(I-CARACT) = NIT-SUSCRIP-S-ABD02
+                   MOVE 51 TO I-CARACT
+                ELSE 
+                 IF TABLS-NIT-INQ-027(I-CARACT) = ZEROS
+                    MOVE NIT-SUSCRIP-S-ABD02 TO 
+                         TABLS-NIT-INQ-027(I-CARACT)
+                    MOVE 1 TO 00INQ999TO027
+                    MOVE 51 TO I-CARACT
+                 END-IF
+                END-IF
+               END-PERFORM
+             END-IF
+          END-IF
+REMARK*** 00INQ998TO027*** CONSULTAS ULTIMOS 6 MESES 
+          IF (COD-SUSCRIP-IND <> 990003 AND <> 990001 AND
+                       <> 990005) AND MESES-CONST-CARACT >= 0 AND <= 6
+             PERFORM VARYING I-CARACT FROM 1 BY 1 UNTIL I-CARACT > 50
+                IF TABL-NIT-INQ-027(I-CARACT) = NIT-SUSCRIP-S-ABD02
+                   MOVE 51 TO I-CARACT
+                ELSE
+                 IF TABL-NIT-INQ-027(I-CARACT) = ZEROS
+                    MOVE NIT-SUSCRIP-S-ABD02 TO
+                         TABL-NIT-INQ-027(I-CARACT)
+                    MOVE 1 TO 00INQ998TO027
+                    MOVE 51 TO I-CARACT
+                 END-IF
+                END-IF
+             END-PERFORM
+          END-IF
+REMARK*** 01INQ999TO027*** CONSULTAS ULTIMOS 6 MESES SECTORIZADO
+          IF FUNCTION NUMVAL(00INQ999TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ999TO027(1:4)) < 0
+                MOVE ZEROS TO 01INQ999TO027
+             END-IF
+             COMPUTE 01INQ999TO027 = 01INQ999TO027 + 00INQ999TO027
+          END-IF
+REMARK*** 01INQ998TO027*** CONSULTAS ULTIMOS 6 MESES 
+          IF FUNCTION NUMVAL(00INQ998TO027(1:4)) >= 0
+             IF FUNCTION NUMVAL(01INQ998TO027(1:4)) < 0
+                MOVE ZEROS TO 01INQ998TO027
+             END-IF
+             COMPUTE 01INQ998TO027 = 01INQ998TO027 + 00INQ998TO027
+          END-IF.
+
+       2649-PROCESE-CARACT-02XX-EXT-27.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-27.
+REMARK*     CALULO CARACTERISTICAS DESPUES DE LEER TODOS LOS REGISTOS
+REMARK******************************************************************
+REMARK*** 00NUM999TO027 *** PORCENTAJE CUENTAS ULTIMOS 24 MESES
+          IF 00NUMTOTCTA027 > 0 AND 00NUM24MCTA027 > 0
+             MOVE ZEROS TO 02NUM999TO027
+             COMPUTE 02NUM999TO027 = 
+                     (00NUM24MCTA027 / 00NUMTOTCTA027)
+          END-IF.
+REMARK*** 00END999RO027 *** PORCENTAJE UTILIZACION TDC
+          IF TOT-END-CTN-027 > 0
+             MOVE ZEROS TO 01END999RO027
+             COMPUTE 01END999RO027 = 
+                     (TOT-END-UTI-027 / TOT-END-CTN-027)
+          END-IF.
+REMARK*** 02END999TO027 *** PORCENTAJE UTILIZACION TOTAL
+          IF TOT-END-SLD-027 > 0 AND TOT-END-CUP-027 > 0
+             MOVE ZEROS TO 02END999TO027
+             COMPUTE 02END999TO027 =
+                     (TOT-END-SLD-027 / TOT-END-CUP-027)
+          END-IF. 
+REMARK*** 02END998TO027 *** PORCENTAJE SALDO ALTO
+          IF CUP-END-ALT-027 > 0
+             MOVE ZEROS TO 02END998TO027
+             COMPUTE 02END998TO027 = 
+                     (SLD-END-ALT-027 / CUP-END-ALT-027)
+          END-IF.
+REMARK*** 02MOR999TO027 *** PORCENTAJE DE CREDITOS SIN MORA
+          IF TOT-MOR-CTA-027 > 0
+             MOVE ZEROS TO 02MOR999TO027
+             COMPUTE 02MOR999TO027 =
+                     (DIA-MOR-CTA-027 / TOT-MOR-CTA-027)
+          END-IF.
+REMARK******************************************************************

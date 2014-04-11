@@ -1,0 +1,35 @@
+REMARK* FRAPREU-FD.v.0001
+REMARK* ARCHIVO QUE REGISTRA CADA UNA DE LAS PREGUNTAS REALIZADAS POR EVIDENTE
+REMARK* POR CADA IDENTIFICACION
+       FD  FRAPREU.
+       01  REG-FRAPREU.
+           03  LLAVE-FRAPREU.
+               04 TIP-ID-FRAPREU       PIC 9.
+               04 NUM-ID-FRAPREU       PIC 9(11).
+               04 NIT-FRAPREU          PIC 9(11).                       
+               04 PRODUCTO-FRAPREU     PIC 9(03).                       
+               04 LLAPRE-FRAPREU.
+                  05 LLAEST-FRAPREU    PIC X(40).
+                  05 CODPRE-FRAPREU.
+                     06 ESTRUCURA-FRAPREU PIC 9(03).
+                     06 CAMPO-FRAPREU     PIC 9(03).
+                     06 PREGUNTA-FRAPREU  PIC 9(03).
+           03  DATOS-FRAPREU.
+               04  FORMULARIO-FRAPREU      PIC 9(08).
+               04  NUMPRE-FRAPREU          PIC 9(03).
+               04  FECFOR-FRAPREU          PIC 9(08).                   
+               04  RESPOK-FRAPREU          PIC 9(02).
+               04  TIPRES-FRAPREU          PIC 9(02).
+               04  PESO-FRAPREU            PIC 9(02).
+               04  NOCASCARA-FRAPREU       PIC X.
+               04  RIESGO-FRAPREU          PIC 9.                       
+               04  OBLIGATORIA-FRAPREU     PIC 9. *>1=OBLI,0=NO OBLIG   
+               04  CODSUS-FRAPREU          PIC 9(06).                   
+               04  FILLER-FRAPREU          PIC 9(07).                   
+           03  DATOS-CTRL-INTENTOS REDEFINES DATOS-FRAPREU.             
+               04 CED-ING-FRAPREU            PIC 9(11).                 
+               04 FECHA-ING-FRAPREU          PIC 9(8).                  
+               04 CONT-ANO-FRAPREU           PIC 9(3).                  
+               04 CONT-MES-FRAPREU           PIC 9(3).                  
+               04 CONT-DIA-FRAPREU           PIC 9(3).                  
+               04 FILLER1-FRAPREU            PIC X(13).                 

@@ -1,0 +1,22 @@
+REMARK* BDIEAPER-FD.v.0001
+      *******************************************************
+      ***AUXILIAR DE NOMBRES Y NITS PARA APERTURAS BDIEMSUP**
+      *******************************************************
+       FD BDIEAPER.
+       01 BDIEAPER-REGISTRO.
+          03 BDIEAPER-TIP-ID              PIC 9(1).
+          03 BDIEAPER-NUM-ID              PIC 9(11).
+          03 BDIEAPER-COD-SUSCRIPTOR      PIC 9(06).
+          03 BDIEAPER-TIP-CTA             PIC 9(2).
+          03 BDIEAPER-NUMERO-CTA          PIC X(18).
+          03 BDIEAPER-NOMB-EMPRESA        PIC X(45).
+          03 BDIEAPER-FECHA-NAC           PIC 9(04).
+          03 BDIEAPER-FECHA-APER          PIC 9(04).
+          03 BDIEAPER-FECHA-VENC          PIC 9(04).
+          03 BDIEAPER-FECHA-NOVEDAD       PIC 9(04).
+          03 BDIEAPER-CUANTIA             PIC 9(05).
+          03 BDIEAPER-NOVEDAD             PIC 9(02).
+          03 BDIEAPER-ADJETIVO            PIC 9(02).
+          03 BDIEAPER-CLASE-ACTUAL        PIC 9(1).
+          03 BDIEAPER-COD-RECH            PIC X(1).
+

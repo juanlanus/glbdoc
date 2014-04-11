@@ -1,0 +1,26 @@
+      * ICMCHQ.-FD.v.0002
+      * MAESTRO QUE ALMACENA  INFORMACION COMPLEMENTARIA DE 
+      * LAS CUENTAS CORRIENTES Y CUENTAS DE AHORRO
+REMARK******************************************************************
+REMARK* CAV0002     * NHC002 - SE CREA FECHA DE ACTUALIZACION DE VA-   *
+REMARK* C. VELASCO  *          LORES PARA PODER DARLE BUEN MANEJO A LAS*
+REMARK* 04/ENE/2010 *          CUENTAS INACTIVAS                       *
+REMARK******************************************************************
+       FD  ICMCHQ.
+       01  REGISTRO-ICMCHQ.
+           03 LLAVE-MAES-ICMCHQ.
+              07 TIPO-ID-ICMCHQ           PIC 9.
+              07 NUM-ID-ICMCHQ            PIC 9(11).
+              07 COD-SUS-ICMCHQ           PIC 9(6).
+              07 COD-CTA-ICMCHQ           PIC 99.
+              07 NUM-CTA-ICMCHQ           PIC X(18).
+           03 CLASE-CTA-ICMCHQ            PIC 9(1).
+           03 FECHA-APERT-ICMCHQ          PIC 9(8)  COMP-3.
+           03 FECHA-ADJET-ICMCHQ          PIC 9(8)  COMP-3.
+           03 FECHA-ESTAD-ICMCHQ          PIC 9(8)  COMP-3.
+           03 TIPO-MONEDA-ICMCHQ          PIC 9.
+           03 CUPO-SOBREG-AUT-ICMCHQ      PIC 9(11) COMP-3.
+           03 DIAS-SOBREG-AUT-ICMCHQ      PIC 9(3).
+           03 FCH-CUPODIAS-SOBREG-ICMCHQ  PIC 9(8)  COMP-3. 
+NHC002     03 FECHA-ACTUALIZ-VALOR-ICMCHQ PIC 9(8)  COMP-3.             CAV0002
+NHC002     03 FILLER                      PIC X(45).                    CAV0002

@@ -1,0 +1,59 @@
+REMARK* BDIEMSUP-FD.v.0005
+      *-------------------------------------------
+      *  MAESTRO CON INFORMACION SUPERINTENDENCIA
+      *-------------------------------------------
+REMARK******************************************************************
+REMARK* GJC0002   * MICROC: SE ADICIONA VARIABLE DE SUBTIPO DE DEUDA QUE
+REMARK* G.JIMENEZ * PERMITE IDENTIFICAR LOS MICROCREDITOS Y LAS
+REMARK* JUN./2003 * FIDUCIAS.
+REMARK******************************************************************
+REMARK* RMB0003   * DRP001: SE ADICIONA CAMPO PARA CALCULAR CAMBIO EN   
+REMARK* R.MARTINEZ* EL REGISTRO Y ACTUALIZAR EL DRP                    
+REMARK* DIC./2007 * 
+REMARK******************************************************************
+REMARK* VHF0004     * GARANT - SE MODIFICA FILLER PARA GUARDAR         *
+REMARK* VICTOR HUGO *          INFORMACION DE GARANTIAS                *
+REMARK* FORERO      *                                                  *
+REMARK* SEP.24/2009 *                                                  *
+REMARK******************************************************************
+REMARK* LAG0005     * TIPGAR - BDIEMSUP-TIPGAR SE DEJA ALFANUMERICO    *
+REMARK* VICTOR HUGO *          PARA DEJAR "A" CUANDO VEGA 10, "B"      *
+REMARK* FORERO      *          CUANDA VENGA 11 Y "C" CUANDO VENGA 12   *
+REMARK* SEP.24/2009 *                                                  *
+REMARK******************************************************************
+       FD BDIEMSUP.
+       01 BDIEMSUP-REGISTRO.
+          03 BDIEMSUP-LLAVE.
+             05 BDIEMSUP-TIP-ID           PIC 9(1).
+             05 BDIEMSUP-NUM-ID           PIC 9(11).
+             05 BDIEMSUP-FECHA            PIC 9(8).
+             05 BDIEMSUP-TIP-ENTID        PIC 9(2).
+             05 BDIEMSUP-COD-ENTID        PIC 9(6).
+             05 BDIEMSUP-MONEDA           PIC X(1).
+             05 BDIEMSUP-TIP-DEUDA        PIC X(1).
+             05 BDIEMSUP-CALIFICA         PIC X(1).
+             05 BDIEMSUP-GARANTIA         PIC X(1).
+          03 BDIEMSUP-ENCABEZADO.
+             05 BDIEMSUP-DESCRIP          PIC X(45).
+             05 BDIEMSUP-CIIU             PIC 9(4).
+             05 BDIEMSUP-FEC-APERT        PIC 9(8).
+MICROC       05 BDIEMSUP-SUBTIPO-DEUDA    PIC X.                        GJC0002 
+MICROC       05 FILLER                    PIC X(6).                     GJC0002 
+          03 BDIEMSUP-ITEMS REDEFINES BDIEMSUP-ENCABEZADO.
+             05 BDIEMSUP-VALOR            PIC S9(14)  COMP-3.
+             05 BDIEMSUP-INTERES          PIC S9(14)  COMP-3.
+             05 BDIEMSUP-CONTING          PIC S9(14)  COMP-3.
+             05 BDIEMSUP-CANTIDAD         PIC 9(3)    COMP-3.
+             05 BDIEMSUP-IND-BLOQ         PIC 9(1)    COMP-3.
+             05 BDIEMSUP-ART-15           PIC 9(2)    COMP-3.
+             05 BDIEMSUP-FEC-ART-15       PIC 9(8)    COMP-3.
+             05 BDIEMSUP-FEC-ACTUALIZ     PIC 9(8)    COMP-3.
+             05 BDIEMSUP-ART-15-CTI       PIC 9(2)    COMP-3.
+             05 BDIEMSUP-FEC-ART-15-CTI   PIC 9(8)    COMP-3.
+             05 BDIEMSUP-NUM-RECLAMO      PIC 9(5)    COMP-3.
+GARANT       05 FILLER-X                  PIC X(14).                    VHF0004
+GARANT       05 BDIEMSUP-GAR              REDEFINES FILLER-X.           VHF0004
+GARANT          07 BDIEMSUP-VLRGAR        PIC S9(14)  COMP-3.           VHF0004
+TIPGAR          07 BDIEMSUP-TIPGAR        PIC X(1).                     LAG0005
+GARANT          07 BDIEMSUP-FECGAR        PIC S9(8)   COMP-3.           VHF0004
+GARANT       05 BDIEMSUP-DRP              PIC X(01).                    VHF0004 

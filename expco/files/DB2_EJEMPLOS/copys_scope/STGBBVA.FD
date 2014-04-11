@@ -1,0 +1,16 @@
+      * STGBBVA.FD.v.0001
+      * MAESTRO QUE ALMACENA  INFORMACION COMPLEMENTARIA DE
+      * LOS NUMEROS DE TARJETAS DE CREDITO BBVA    
+REMARK******************************************************************
+       FD MAESIND-TARJETAS.
+       01 REG-MAESIND-TARJETAS.
+           03 LLAVE-TARJETAS.
+              05 NUM-CTA-TARJETAS             PIC X(20).
+           03 NUM-TARJ-TARJETAS               PIC X(18).
+           03 FEC-ALTA-TARJETAS               PIC 9(08).
+           03 FEC-VENC-TARJETAS               PIC 9(08).
+           03 FEC-BAJA-TARJETAS               PIC 9(08).
+           03 IND-SIT-TARJETAS                PIC 9(01).
+           03 BLQ-PREV-TARJETAS               PIC X(02).
+           03 COD-RET-TARJETAS                PIC X(02).
+

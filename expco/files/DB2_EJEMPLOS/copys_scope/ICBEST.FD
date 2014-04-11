@@ -1,0 +1,30 @@
+      * EST038.v.02.002
+REMARK* ARCHIVO ESTADISTICO DE CONSULTAS GENERADAS A TRAVES DEL PROGRAMA
+REMARK* ICGCON
+032800*----------------------------------------------------------------*
+032900 FD  ESTADIS.  
+033200 01  REG-ESPECIAL-INDEX.
+000000     03  LLAVE-EST. 
+033600         05  FECHA               PIC 9(6).
+000000     03  CONTADORES-EST.
+033300         05  T-BOGOTA                PIC 9(6).
+033400         05  T-CALI                  PIC 9(6).
+033410         05  T-MEDELLIN              PIC 9(6).
+033500         05  T-BARRANQUILLA          PIC 9(6).
+033700         05  T-BUCARAMANGA           PIC 9(6).
+033900         05  T-IBAGUE                PIC 9(6).
+034000         05  T-PEREIRA               PIC 9(6).
+034100         05  T-ERRADA                PIC 9(6).
+034200         05  TIPO1                   PIC 9(6).
+034300         05  TIPO2                   PIC 9(6).
+034400         05  TIPO3                   PIC 9(6).
+034500         05  TIPO4                   PIC 9(6).
+034500         05  TIPO5                   PIC 9(6).
+034500         05  TIPO6                   PIC 9(6).
+034500         05  TIPO7                   PIC 9(6).
+000000         05  PERSONAS-NATUR          PIC 9(7).
+000000         05  PERSONAS-JURID          PIC 9(7).
+000000         05  CUENTAS-CTES            PIC 9(7).  
+000000         05  CARTERA                 PIC 9(7).
+000000         05  BLOQUEOS-CTAS-CTES      PIC 9(6).
+000000         05  BLOQUEOS-CARTERAS       PIC 9(6).

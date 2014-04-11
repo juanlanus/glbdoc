@@ -1,0 +1,9 @@
+REMARK* BDINDIAN-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA ARCHIVO DE NOMBRES DE DIAN                          *
+REMARK******************************************************************
+       FD BDINDIAN.
+       01 REG-BDINDIAN.
+          03 LLAVE-BDINDIAN.                                
+             05 TEXTO-BDINDIAN           PIC X(15).
+             05 SEC-BDINDIAN             PIC 9(11).

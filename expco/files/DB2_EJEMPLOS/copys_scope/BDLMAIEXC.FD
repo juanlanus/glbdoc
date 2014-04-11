@@ -1,0 +1,18 @@
+REMARK*BDLMAIEXC-FD.v.0001
+REMARK******************************************************************
+REMARK* ARCHIVO DE EXCLUSIONES PARA MAILS                              *
+REMARK******************************************************************
+      *
+      ******************************************************************
+REMARK******************************************************************
+REMARK* RGH0001       * MOD001 - ESTANDARIZACION NOMBRE DE VARIABLES   *
+REMARK* R. GALVIS H.  *          CON SUFIJO                            *
+REMARK* ENE. 01/2010  *                                                *
+REMARK* INTERSCHEMES. *                                                *
+REMARK******************************************************************
+       FD  BDLMAIEXC.
+       01  REG-BDLMAIEXC.
+           03  LLAVE-BDLMAIEXC.
+MOD001*        05  MAIL-EXCLU              PIC X(60).                   RGH0001
+               05  MAIL-EXCLU-BDLMAIEXC    PIC X(60).
+

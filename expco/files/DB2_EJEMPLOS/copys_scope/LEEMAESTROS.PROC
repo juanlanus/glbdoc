@@ -1,0 +1,403 @@
+REMARK* LEEMAESTROS.PROC.v.0004                                         
+REMARK* ESTE COPY CONTIENE CADA UNA DE LAS RUTINAS PROPIAS DEL MANEJO DE
+REMARK* DE LECTURA DE ICMCRE E ICMCHK PARA EL MANEJO DE REGIS Y DE LA      
+REMARK* AMNISTIA DE ACUERDO A LA LEY DE HABEAS DATA.
+REMARK******************************************************************
+REMARK* GJC0002   * LEY002 SE INCLUYE APLICACION DE ARTICULO 13, PERDON*
+REMARK* G. JIMENEZ* AL DOBLE DEL TIEMPO DE LA MORA, SE APLICA ANTES DE *
+REMARK* EN 29/2009* AMNISTIA, A LA CUAL YA PUEDE ENTRAR PERDONADO EL RE*
+REMARK*           * GISTRO                                             *
+REMARK*           * NOV048 SE RECALCULA LA NOVEDAD EN 24 SI ASI LO SOLI*
+REMARK*           *        CITA EL PROGRAMA, EL DEFAULT ES 48
+REAMRK******************************************************************
+REMARK* GJC0003   * BBVA01 SE INCLUYE LOGICA QUE BLOQUEA LAS CUETAS DE *
+REMARK* G. JIMENEZ*        BBVA SI EL SW DE ELIMINAR ESTA EN 1. ESTO   *
+REMARK* AGOST/2009*        TANTO PARA CUENTAS CORRIENTES COMO PARA     *  
+REMARK*           *        CARTERA                                     *
+REAMRK******************************************************************
+REMARK* GJC0004   * NEWBL1 PARA CUENTA SIN VALIDAR SE INCLUYE EL TIPO  *
+REMARK* G. JIMENEZ*        DE BLOQUEO 7 Y 8                            * 
+REMARK* OCTUB/2011*        TANTO PARA CUENTAS CORRIENTES COMO PARA     *  
+REMARK*           *        EL MAESTRO DE CARTERA                       *
+REAMRK******************************************************************
+      $SET CONSTANT HACERMATCH"NO"
+      $SET CONSTANT AMNISTIA21"NO"
+
+MATCH1$IF HACERMATCH = "SI"
+MATCH1$DISPLAY "........COMPILANDO LEEMAESTROS CON MATCH **********
+MATCH1$ELSE
+MATCH1$DISPLAY "........COMPILANDO LEEMAESTROS SIN MATCH **********
+MATCH1$END
+
+MATCH1$IF AMNISTIA21 = "SI"
+MATCH1$DISPLAY "........COMPILANDO LEEMAESTROS CON AMNISTIA *******
+MATCH1$ELSE
+MATCH1$DISPLAY "...... .COMPILANDO LEEMAESTROS SIN AMNISTIA *******
+MATCH1$END
+
+       COPY BDAMATCH.PROC. 
+       COPY AMNISTIA21.PROC.                                
+       COPY VALNOM.PROC.
+
+       0500-ASIGNA-ID-ICMCRE-START.
+REMARK******************************************************************
+REMARK*0500-ASIGNA-ID-ICMCRE-START.
+REMARK******************************************************************
+              MOVE TIPO-ID-ABD07 TO TIPO-ID-LEEMSTRS
+              MOVE NUM-ID-ABD07  TO NRO-ID-LEEMSTRS.
+
+       0600-ASIGNA-ID-ICMCHK-START.
+REMARK******************************************************************
+REMARK*0600-ASIGNA-ID-ICMCHK-START.
+REMARK******************************************************************
+              MOVE TIPO-ID-ABD06 TO TIPO-ID-LEEMSTRS
+              MOVE NUM-ID-ABD06  TO NRO-ID-LEEMSTRS.
+
+       1000-LEE-ICMCRE-SECUENCIAL.
+REMARK******************************************************************
+REMARK*1000-LEE-ICMCRE-SECUENCIAL.
+REMARK*    LEEE MAESTRO ICMCRE EN FORMA SECUENCIAL Y VALIDA EL FIN DE
+REMARK*    ARCHIVO: 
+REMARK*    SW-LECTURA-MAESTROS  0: LECTURA OK
+REMARK*                         1: LECTURA CON ERROR O FIN ARCHIVO
+REMARK* OJO LA INSTRUCCION (ADD 0 TO SW-LECTURA-MAESTROS) SE REALIZA
+REMARK* PARA EVITAR ERROR DE COMPILACION POR EL END-IF DESPUES DE $END
+REMARK******************************************************************
+           MOVE 0 TO SW-LECTURA-MAESTROS
+           READ MAESTRO-CREDIT NEXT RECORD IGNORE LOCK AT END 
+                MOVE 1 TO SW-LECTURA-MAESTROS
+           END-READ
+           IF SW-LECTURA-MAESTROS = 0
+            IF (TIPO-ID-ABD07 = TIPO-ID-LEEMSTRS AND
+                NUM-ID-ABD07  = NRO-ID-LEEMSTRS) OR
+                (TIPO-ID-LEEMSTRS = ZEROS AND
+                 NRO-ID-LEEMSTRS  = ZEROS)
+      $       IF HACERMATCH = "SI"
+                IF HACERMATCH-LEEMSTRS = 1 
+                 IF TIPO-ID-ABD07 <> TIP-IDE-ANT-LEEMSTRS OR
+                    NUM-ID-ABD07  <> NUM-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO IDE-TIPO-BDAMATCH
+                    MOVE 0 TO TIP-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO NUM-IDE-ANT-LEEMSTRS
+NEWBL1              IF (IND-BLOQUEO-ABD07 = 7 OR 8 OR 9)  AND           GJC0004
+NEWBL1                                 CONSECUTIVO-ABD07 = 01           GJC0004
+                       PERFORM 7000-GUARDAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD07 TO TIP-IDE-INPUT-BDAMATCH
+                       MOVE NUM-ID-ABD07  TO NUM-IDE-INPUT-BDAMATCH
+                       PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+                       PERFORM 8000-RECUPERAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD07 TO TIP-IDE-ANT-LEEMSTRS
+                       MOVE NUM-ID-ABD07  TO NUM-IDE-ANT-LEEMSTRS
+                    END-IF
+                 END-IF
+                END-IF
+      $       END
+BBVA01        IF SW-ELIMINA-BBVA-LEEMSTRS = 1                           GJC0003
+BBVA01           IF COD-SUS-ABD07 = 020050 OR 030050 OR                 GJC0003
+BBVA01                              050050 OR 130050                    GJC0003
+BBVA01              MOVE 4 TO IND-BLOQUEO-ABD07                         GJC0003
+BBVA01           END-IF                                                 GJC0003
+BBVA01        END-IF                                                    GJC0003
+      $       IF AMNISTIA21 = "SI"
+                 IF AMNISTIA21-LEEMSTRS = 1
+                    PERFORM 200700-AMNISTIA-CLIENTES
+REMARK* SE REPITE LOGICA DE BBVA POR LO QUE AL FINAL DE AMNISTIA-CLIENES
+REMARK* VUELVE A LEER EL ICMCRE PARA VOLVER A POSICIONARSE EN LA CUENTA LEIDA
+BBVA01              IF SW-ELIMINA-BBVA-LEEMSTRS = 1                     GJC0003
+BBVA01                 IF COD-SUS-ABD07 = 020050 OR 030050 OR           GJC0003
+BBVA01                                    050050 OR 130050              GJC0003
+BBVA01                    MOVE 4 TO IND-BLOQUEO-ABD07                   GJC0003
+BBVA01                 END-IF                                           GJC0003
+BBVA01              END-IF                                              GJC0003
+                 END-IF
+LEY002           IF SW-ART13-AMNIST21 = 1                               GJC0002
+LEY002              IF IDE-TIPO-BDAMATCH = 1                            GJC0002
+LEY002                 IF HACERMATCH-LEEMSTRS = 1                       GJC0002
+LEY002                    PERFORM 8000-U-VER-CTAABD07-BDAMATCH          GJC0002
+LEY002                 END-IF                                           GJC0002
+LEY002              END-IF                                              GJC0002
+LEY002              PERFORM 200900-APLICAR-ART13-REGISTRO               GJC0002
+LEY002           END-IF                                                 GJC0002
+      $       END
+              IF SW-AMNIST21 = 1
+LEY002           IF IDE-TIPO-BDAMATCH = 1                               GJC0002
+LEY002              IF HACERMATCH-LEEMSTRS = 1                          GJC0002
+LEY002                 PERFORM 8000-U-VER-CTAABD07-BDAMATCH             GJC0002
+LEY002              END-IF                                              GJC0002
+LEY002           END-IF                                                 GJC0002
+LEY002           IF AMNISTIA21-LEEMSTRS = 1                             GJC0002
+LEY002              PERFORM 200850-AMNISTIA-REGISTROS                   GJC0002
+LEY002*             ELSE                                                GJC0002
+LEY002*                PERFORM 200850-AMNISTIA-REGISTROS                GJC0002
+LEY002*             END-IF                                              GJC0002
+                 END-IF
+              ELSE
+                 IF IDE-TIPO-BDAMATCH = 1
+                    IF HACERMATCH-LEEMSTRS = 1
+                       PERFORM 8000-U-VER-CTAABD07-BDAMATCH
+                    END-IF
+                 END-IF
+              END-IF
+              
+            END-IF
+NOV048      IF SW-NOV-48-LEEMSTRS = 0  *>                               GJC0002
+NOV048         MOVE ZEROS TO VECTOR-HIS-3-ABD07                         GJC0002
+NOV048                       VECTOR-HIS-4-ABD07                         GJC0002
+NOV048           MOVE VECTOR-HIS-1-ABD07 TO VECTOR-1-CTA-AMNIST21       GJC0002
+NOV048           MOVE VECTOR-HIS-2-ABD07 TO VECTOR-2-CTA-AMNIST21       GJC0002
+NOV048           MOVE ZEROS TO VECTOR-3-CTA-AMNIST21                    GJC0002
+NOV048           MOVE ZEROS TO VECTOR-4-CTA-AMNIST21                    GJC0002
+NOV048     MOVE NOV-CART-MORA-AMNIST21(NOV-REPORT-ABD07) TO             GJC0002
+NOV048          MOR-EST-CTA-AMNIST21                                    GJC0002
+NOV048        PERFORM 500000-RECONSTRUCCION-HISTORIA                    GJC0002
+NOV048      END-IF                                                      GJC0002
+           END-IF.
+BBVA01     MOVE 0 TO SW-ELIMINA-BBVA-LEEMSTRS.                          GJC0003
+
+       2000-LEE-ICMCRE-DINAMICO.
+REMARK******************************************************************
+REMARK*2000-LEE-ICMCRE-DINAMICO.
+REMARK*    LEEE MAESTRO ICMCRE EN FORMA DIMANICA Y VALIDA EL INVALID KEY
+REMARK*    DEL ARCHIVO: 
+REMARK*    SW-LECTURA-MAESTROS  0: LECTURA OK
+REMARK*                         1: LECTURA CON ERROR 
+REMARK******************************************************************
+           MOVE 0 TO SW-LECTURA-MAESTROS
+           READ MAESTRO-CREDIT IGNORE LOCK INVALID KEY
+                MOVE 1 TO SW-LECTURA-MAESTROS
+           END-READ
+           IF SW-LECTURA-MAESTROS = 0
+      $       IF HACERMATCH = "SI"
+                IF HACERMATCH-LEEMSTRS = 1 
+                 IF TIPO-ID-ABD07 <> TIP-IDE-ANT-LEEMSTRS OR
+                    NUM-ID-ABD07  <> NUM-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO IDE-TIPO-BDAMATCH
+                    MOVE 0 TO TIP-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO NUM-IDE-ANT-LEEMSTRS
+NEWBL1              IF (IND-BLOQUEO-ABD07 = 7 OR 8 OR 9)  AND           GJC0004
+NEWBL1                                 CONSECUTIVO-ABD07 = 01           GJC0004
+                       PERFORM 7000-GUARDAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD07 TO TIP-IDE-INPUT-BDAMATCH
+                       MOVE NUM-ID-ABD07  TO NUM-IDE-INPUT-BDAMATCH
+                       PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+                       PERFORM 8000-RECUPERAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD07 TO TIP-IDE-ANT-LEEMSTRS
+                       MOVE NUM-ID-ABD07  TO NUM-IDE-ANT-LEEMSTRS
+                    END-IF
+                 END-IF
+               END-IF
+      $       END
+BBVA01        IF SW-ELIMINA-BBVA-LEEMSTRS = 1                           GJC0003
+BBVA01           IF COD-SUS-ABD07 = 020050 OR 030050 OR                 GJC0003
+BBVA01                              050050 OR 130050                    GJC0003
+BBVA01              MOVE 4 TO IND-BLOQUEO-ABD07                         GJC0003
+BBVA01           END-IF                                                 GJC0003
+BBVA01        END-IF                                                    GJC0003
+      $       IF AMNISTIA21 = "SI"
+                 IF AMNISTIA21-LEEMSTRS = 1
+                    PERFORM 200700-AMNISTIA-CLIENTES
+REMARK* SE REPITE LOGICA DE BBVA POR LO QUE AL FINAL DE AMNISTIA-CLIENES
+REMARK* VUELVE A LEER EL ICMCRE PARA VOLVER A POSICIONARSE EN LA CUENTA LEIDA
+BBVA01              IF SW-ELIMINA-BBVA-LEEMSTRS = 1                     GJC0003
+BBVA01                 IF COD-SUS-ABD07 = 020050 OR 030050 OR           GJC0003
+BBVA01                                    050050 OR 130050              GJC0003
+BBVA01                    MOVE 4 TO IND-BLOQUEO-ABD07                   GJC0003
+BBVA01                 END-IF                                           GJC0003
+BBVA01              END-IF                                              GJC0003
+                 END-IF
+LEY002           IF SW-ART13-AMNIST21 = 1                               GJC0002
+LEY002              IF IDE-TIPO-BDAMATCH = 1                            GJC0002
+LEY002                 IF HACERMATCH-LEEMSTRS = 1                       GJC0002
+LEY002                    PERFORM 8000-U-VER-CTAABD07-BDAMATCH          GJC0002
+LEY002                 END-IF                                           GJC0002
+LEY002              END-IF                                              GJC0002
+LEY002              PERFORM 200900-APLICAR-ART13-REGISTRO               GJC0002
+LEY002           END-IF                                                 GJC0002
+      $       END
+              IF SW-AMNIST21 = 1
+LEY002           IF IDE-TIPO-BDAMATCH = 1                               GJC0002
+LEY002              IF HACERMATCH-LEEMSTRS = 1                          GJC0002
+LEY002                 PERFORM 8000-U-VER-CTAABD07-BDAMATCH             GJC0002
+LEY002              END-IF                                              GJC0002
+LEY002           END-IF                                                 GJC0002
+LEY002           IF AMNISTIA21-LEEMSTRS = 1                             GJC0002
+LEY002              PERFORM 200850-AMNISTIA-REGISTROS                   GJC0002
+LEY002*             ELSE                                                GJC0002
+LEY002*                PERFORM 200850-AMNISTIA-REGISTROS                GJC0002
+LEY002*             END-IF                                              GJC0002
+                 END-IF
+              ELSE
+                 IF IDE-TIPO-BDAMATCH = 1
+                    IF HACERMATCH-LEEMSTRS = 1
+                       PERFORM 8000-U-VER-CTAABD07-BDAMATCH
+                    END-IF
+                 END-IF
+              END-IF
+NOV048        IF SW-NOV-48-LEEMSTRS = 0                                 GJC0002
+NOV048           MOVE ZEROS TO VECTOR-HIS-3-ABD07                       GJC0002
+NOV048                       VECTOR-HIS-4-ABD07                         GJC0002
+NOV048           MOVE VECTOR-HIS-1-ABD07 TO VECTOR-1-CTA-AMNIST21       GJC0002
+NOV048           MOVE VECTOR-HIS-2-ABD07 TO VECTOR-2-CTA-AMNIST21       GJC0002
+NOV048           MOVE ZEROS TO VECTOR-3-CTA-AMNIST21                    GJC0002
+NOV048           MOVE ZEROS TO VECTOR-4-CTA-AMNIST21                    GJC0002
+NOV048     MOVE NOV-CART-MORA-AMNIST21(NOV-REPORT-ABD07) TO             GJC0002
+NOV048          MOR-EST-CTA-AMNIST21                                    GJC0002
+NOV048          PERFORM 500000-RECONSTRUCCION-HISTORIA                  GJC0002
+NOV048        END-IF                                                    GJC0002
+           END-IF.
+BBVA01     MOVE 0 TO SW-ELIMINA-BBVA-LEEMSTRS.                          GJC0003
+
+       3000-LEE-ICMCHK-SECUENCIAL.
+REMARK******************************************************************
+REMARK*3000-LEE-ICMCHK-SECUENCIAL.
+REMARK*    LEEE MAESTRO ICMCHK EN FORMA SECUENCIAL Y VALIDA EL FIN DE
+REMARK*    ARCHIVO: 
+REMARK*    SW-LECTURA-MAESTROS  0: LECTURA OK
+REMARK*                         1: LECTURA CON ERROR O FIN ARCHIVO
+REMARK******************************************************************
+           MOVE 0 TO SW-LECTURA-MAESTROS
+           READ MAESTRO-CHECK NEXT RECORD IGNORE LOCK AT END
+                MOVE 1 TO SW-LECTURA-MAESTROS
+           END-READ
+           IF SW-LECTURA-MAESTROS = 0
+CAVS        IF (TIPO-ID-ABD06 = TIPO-ID-LEEMSTRS AND
+CAVS            NUM-ID-ABD06  = NRO-ID-LEEMSTRS) OR
+CAVS            (TIPO-ID-LEEMSTRS = ZEROS AND
+CAVS             NRO-ID-LEEMSTRS  = ZEROS)
+      $       IF HACERMATCH = "SI"
+                IF HACERMATCH-LEEMSTRS = 1 
+                 IF TIPO-ID-ABD06 <> TIP-IDE-ANT-LEEMSTRS OR
+                    NUM-ID-ABD06  <> NUM-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO IDE-TIPO-BDAMATCH
+                    MOVE 0 TO TIP-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO NUM-IDE-ANT-LEEMSTRS
+NEWBL1              IF (IND-BLOQUEO-ABD06 = 7 OR 8 OR 9)  AND           GJC0004
+NEWBL1                                 CONSECUTIVO-ABD06 = 01           GJC0004
+                       PERFORM 7000-GUARDAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD06 TO TIP-IDE-INPUT-BDAMATCH
+                       MOVE NUM-ID-ABD06  TO NUM-IDE-INPUT-BDAMATCH
+                       PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+                       PERFORM 8000-RECUPERAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD06 TO TIP-IDE-ANT-LEEMSTRS
+                       MOVE NUM-ID-ABD06  TO NUM-IDE-ANT-LEEMSTRS
+                    END-IF
+                 END-IF
+                 IF IDE-TIPO-BDAMATCH = 1
+                    IF HACERMATCH-LEEMSTRS = 1
+                       PERFORM 8000-U-VER-CTAABD06-BDAMATCH
+                    END-IF
+                 END-IF
+                END-IF
+      $       END
+BBVA01        IF SW-ELIMINA-BBVA-LEEMSTRS = 1                           GJC0003
+BBVA01           IF COD-SUS-ABD06 = 010050                              GJC0003
+BBVA01              MOVE 4 TO IND-BLOQUEO-ABD06                         GJC0003
+BBVA01           END-IF                                                 GJC0003
+BBVA01        END-IF                                                    GJC0003
+              ADD 0 TO SW-LECTURA-MAESTROS
+            END-IF
+           END-IF.
+BBVA01     MOVE 0 TO SW-ELIMINA-BBVA-LEEMSTRS.                          GJC0003
+
+       4000-LEE-ICMCHK-DINAMICO.
+REMARK******************************************************************
+REMARK*4000-LEE-ICMCHK-DINAMICO.
+REMARK*    LEEE MAESTRO ICMCHK EN FORMA DIMANICA Y VALIDA EL INVALID KEY
+REMARK*    DEL ARCHIVO: 
+REMARK*    SW-LECTURA-MAESTROS  0: LECTURA OK
+REMARK*                         1: LECTURA CON ERROR 
+REMARK******************************************************************
+           MOVE 0 TO SW-LECTURA-MAESTROS
+           READ MAESTRO-CHECK IGNORE LOCK INVALID KEY
+                MOVE 1 TO SW-LECTURA-MAESTROS
+           END-READ
+           IF SW-LECTURA-MAESTROS = 0
+      $       IF HACERMATCH = "SI"
+                IF HACERMATCH-LEEMSTRS = 1 
+                 IF TIPO-ID-ABD06 <> TIP-IDE-ANT-LEEMSTRS OR
+                    NUM-ID-ABD06  <> NUM-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO TIP-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO NUM-IDE-ANT-LEEMSTRS
+                    MOVE 0 TO IDE-TIPO-BDAMATCH
+NEWBL1              IF (IND-BLOQUEO-ABD06 = 7 OR 8 OR 9)  AND           GJC0004
+NEWBL1                                 CONSECUTIVO-ABD06 = 01           GJC0004
+                       PERFORM 7000-GUARDAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD06 TO TIP-IDE-INPUT-BDAMATCH
+                       MOVE NUM-ID-ABD06  TO NUM-IDE-INPUT-BDAMATCH
+                       PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+                       PERFORM 8000-RECUPERAR-REG-INICIALES
+                       MOVE TIPO-ID-ABD06 TO TIP-IDE-ANT-LEEMSTRS
+                       MOVE NUM-ID-ABD06  TO NUM-IDE-ANT-LEEMSTRS
+                    END-IF
+                 END-IF
+                 IF IDE-TIPO-BDAMATCH = 1
+                    IF HACERMATCH-LEEMSTRS = 1
+                       PERFORM 8000-U-VER-CTAABD06-BDAMATCH
+                    END-IF
+                 END-IF
+                END-IF
+      $       END
+              ADD 0 TO SW-LECTURA-MAESTROS
+BBVA01        IF SW-ELIMINA-BBVA-LEEMSTRS = 1                           GJC0003
+BBVA01           IF COD-SUS-ABD06 = 010050                              GJC0003
+BBVA01              MOVE 4 TO IND-BLOQUEO-ABD06                         GJC0003
+BBVA01           END-IF                                                 GJC0003
+BBVA01        END-IF                                                    GJC0003
+           END-IF.
+BBVA01     MOVE 0 TO SW-ELIMINA-BBVA-LEEMSTRS.                          GJC0003
+
+       7000-GUARDAR-REG-INICIALES.
+REMARK******************************************************************
+REMARK*7000-GUARDAR-REGISTROS-INICIALES.
+REMARK*    GUARDA LOS REGISTROS QUE TENIA LEIDOS CADA PROGRAMA ANTES DE
+REMARK*    EJECUTAR LA RUTINA DE CUENTAS SIN VALIDAR  
+REMARK******************************************************************
+            MOVE SPACES TO REG-ICMCRE-LEEMSTRS REG-ICMCHK-LEEMSTRS
+                           REG-ICBSUS-LEEMSTRS REG-ICBDIR-LEEMSTRS
+            MOVE COMPLETO-ABD07  TO REG-ICMCRE-LEEMSTRS
+            MOVE COMPLETO-ABD06  TO REG-ICMCHK-LEEMSTRS
+            MOVE REG-SUSCRIPTOR  TO REG-ICBSUS-LEEMSTRS
+            MOVE REG-DIRECC      TO REG-ICBDIR-LEEMSTRS.
+
+       8000-RECUPERAR-REG-INICIALES.
+REMARK******************************************************************
+REMARK*8000-RECUPERA-REGISTROS-INICIALES.
+REMARK*    RECUPERA LOS REGISTROS QUE TENIA LEIDOS CADA PROGRAMA ANTES 
+REMARK*    DE EJECUTAR LA RUTINA DE CUENTAS SIN VALIDAR
+REMARK******************************************************************
+            IF COMPLETO-ABD07  <> REG-ICMCRE-LEEMSTRS AND
+               REG-ICMCRE-LEEMSTRS <> SPACES
+               MOVE REG-ICMCRE-LEEMSTRS TO COMPLETO-ABD07
+               START MAESTRO-CREDIT KEY = LLAVE-MAES-CREDIT
+                     NOT INVALID KEY  
+                     READ MAESTRO-CREDIT NEXT RECORD IGNORE LOCK
+                     END-READ
+               END-START
+            END-IF
+            IF COMPLETO-ABD06  <> REG-ICMCHK-LEEMSTRS AND
+               REG-ICMCHK-LEEMSTRS <> SPACES
+               MOVE REG-ICMCHK-LEEMSTRS TO COMPLETO-ABD06
+               START MAESTRO-CHECK  KEY = LLAVE-MAES-CHECK
+                     NOT INVALID KEY
+                     READ MAESTRO-CHECK NEXT RECORD IGNORE LOCK
+                     END-READ
+               END-START
+            END-IF
+            IF REG-SUSCRIPTOR  <> REG-ICBSUS-LEEMSTRS AND
+               REG-ICBSUS-LEEMSTRS <> SPACES
+               MOVE REG-ICBSUS-LEEMSTRS TO REG-SUSCRIPTOR
+               START SUSCRIPTOR KEY = LLAVE-SUSCRIP
+                     NOT INVALID KEY
+                     READ SUSCRIPTOR NEXT RECORD IGNORE LOCK
+                     END-READ
+               END-START
+            END-IF
+            IF REG-DIRECC      <> REG-ICBDIR-LEEMSTRS AND
+               REG-ICBDIR-LEEMSTRS <> SPACES
+               MOVE REG-ICBDIR-LEEMSTRS TO REG-DIRECC
+               START MAESTRO-DIRECC KEY = LLAVE-DIRECC
+                     NOT INVALID KEY
+                     READ MAESTRO-DIRECC NEXT RECORD IGNORE LOCK
+                     END-READ
+               END-START
+            END-IF.

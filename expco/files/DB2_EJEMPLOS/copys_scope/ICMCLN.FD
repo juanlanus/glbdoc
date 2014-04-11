@@ -1,0 +1,59 @@
+      * ICMCLN.-FD.v.0002
+      * MAESTRO QUE ALMACENA  INFORMACION DEL CLIENTE 
+REMARK******************************************************************
+      * CAV0002     * AJCIIU - SE ADICIONA EL CAMPO FECHA-ACT-CIIU     *
+      * C.VELASCO.  *          PARA SABER CUANDO SE ACTUALIZO EL CIIU  *
+      * 19/SEP/2011 *                                                  *
+      ******************************************************************
+       FD  MAESTRO-ICMCLN.
+       01  COMPLETO-ICMCLN.
+           03 LLAVE-MAES-ICMCLN.
+              07 TIPO-ID-ICMCLN       PIC 9.
+              07 NUM-ID-ICMCLN        PIC 9(11).
+              07 NIT-SUSCRIP-ICMCLN   PIC 9(11).
+              07 COD-SUS-ICMCLN       PIC 9(6).
+           03 NOMBRE-CLI-ICMCLN       PIC X(45).
+           03 FECHA-NACIM-ICMCLN      PIC 9(8)  COMP-3.
+REMARK***  SE REDEFINE PARA PERSONA JURIDICA
+           03 FECHA-CONST-ICMCLN     REDEFINES FECHA-NACIM-ICMCLN
+                                      PIC 9(8)  COMP-3.
+           03 FECHA-EXP-DOC-ICMCLN    PIC 9(8)  COMP-3.
+           03 COD-DANE-EXP-DOC-ICMCLN PIC 9(8)  COMP-3.
+           03 ACTIV-ECONOM-ICMCLN     PIC 9(2).
+           03 FEC-ACTU-ACTIV-ICMCLN   PIC 9(08) COMP-3.
+           03 ESTRATO-ICMCLN          PIC 9(2).
+           03 PERS-A-CARGO-ICMCLN     PIC 9(6).
+REMARK***  SE REDEFINE PARA PERSONA JURIDICA
+           03 NUMERO-EMPL-ICMCLN     REDEFINES PERS-A-CARGO-ICMCLN
+                                      PIC 9(6).
+           03 FEC-ACTU-PER-ICMCLN     PIC 9(8)  COMP-3.
+           03 GENERO-ICMCLN           PIC 9(1).
+           03 FEC-ACTU-GEN-ICMCLN     PIC 9(8)  COMP-3.
+           03 ESTADO-CIVIL-ICMCLN     PIC 9(2).
+           03 FEC-ACTU-EST-ICMCLN     PIC 9(8)  COMP-3.
+           03 NIVEL-ESTUDI-ICMCLN     PIC 9(2).
+           03 FEC-ACTU-NIV-ICMCLN     PIC 9(8)  COMP-3.
+           03 INGRESOS-ICMCLN         PIC 9(13) COMP-3.
+           03 FEC-ACTU-ING-ICMCLN     PIC 9(8)  COMP-3.
+           03 NIT-EMPLEADOR-ICMCLN    PIC 9(11) COMP-3.
+           03 EMPLEADOR-ICMCLN        PIC X(45).
+           03 FECHA-INGR-EMP-ICMCLN   PIC 9(8)  COMP-3.
+           03 FEC-ACTU-EMP-ICMCLN     PIC 9(8)  COMP-3.
+           03 TIPO-CONTRATO-ICMCLN    PIC 9.
+           03 FEC-ACTU-CONTR-ICMCLN   PIC 9(8)  COMP-3.
+           03 OPER-INTERNAL-ICMCLN    PIC 9.
+           03 FEC-ACTU-OPER-ICMCLN    PIC 9(8)  COMP-3.
+           03 COD-EST-TIT-ICMCLN      PIC 9.
+           03 FUERZA-MAYOR-ICMCLN     PIC 9.
+           03 FEC-ACTU-FUERZ-ICMCLN   PIC 9(8)  COMP-3.
+           03 IND-BLOQUEO-ICMCLN      PIC 9.
+           03 FECHA-CREA-ICMCLN       PIC 9(8)  COMP-3.
+           03 FECHA-ULT-ACT-ICMCLN    PIC 9(8)  COMP-3.
+           03 CIIU-ICMCLN             PIC 9(4).
+           03 VALOR-ACTIVOS-ICMCLN    PIC 9(13) COMP-3..
+           03 VALOR-PASIVOS-ICMCLN    PIC 9(13) COMP-3..
+           03 FECHA-CORTE-ICMCLN      PIC 9(08) COMP-3.
+           03 IND-CSV-ICMCLN          PIC 9.
+AJCIIU     03 FECHA-ACT-CIIU-ICMCLN   PIC 9(08) COMP-3.                 CAV0002
+AJCIIU     03 FILLER                  PIC X(65).                        CAV0002
+AJCIIU*    03 FILLER                  PIC X(70).                        CAV0002

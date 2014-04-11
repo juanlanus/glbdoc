@@ -1,0 +1,12 @@
+******* VALERRCT-FD.v.0001
+REMARK*Parametros de errores por cada campo del maestro reumido ampliado
+REMARK*Proceso de validacion para Cuentas Corrientes
+036300*----------------------------------------------------------------*
+       FD  VALERRCT.
+       01  REG-VALERRCT.
+           03 NUM-CAMPO-VALERRCT                PIC 9(2).
+           03 COD-ERROR-VALERRCT                PIC 9(2).
+           03 DES-ERROR-VALERRCT                PIC X(60).
+           03 IND-ACTUALIZA-VALERRCT            PIC X.
+           03 FILLER-VALERRCT                   PIC X(15).
+

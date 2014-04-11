@@ -1,0 +1,11 @@
+      * ICBSES-FD.v.0001
+      * ARCHIVO DE SESIONES ASOCIADAS A LOS PROCESOS DEL ICGCON     
+      *----------------------------------------------------------------*
+       FD  SESION.
+       01  REG-ICBSES.
+           03  LLAVE-ICBSES.
+               05  NUM-ICBSES          PIC 9(3).
+           03  FECHA-ICBSES            PIC 9(8).
+           03  HORA-ICBSES             PIC 9(8).
+           03  CLAVE-ICBSES            PIC X(5).
+

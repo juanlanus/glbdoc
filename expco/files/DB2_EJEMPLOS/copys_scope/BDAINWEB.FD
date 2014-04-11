@@ -1,0 +1,23 @@
+      *BDAINWEB-FD.v03.001
+      *----------------------------------------------------------------*
+      *ESTRUCTURA DE CLAVES WEB PARA INTERFASE CON COMUNICACIONES e
+      *IMPRESION DE SOBREFLEX
+      *----------------------------------------------------------------*
+       FD  CLAVES-WEB-SAL.
+       01  REG-CLAVE-WEB-SAL.
+           03 NUM-ID-WEB-SAL              PIC 9(11).
+           03 FILLER                      PIC X.
+           03 CLAVE-WEB-SAL               PIC X(10).
+           03 FILLER                      PIC X.
+           03 ESTADO-WEB-SAL              PIC X(01).
+           03 FILLER                      PIC X.
+           03 NOM-SUS-WEB-SAL             PIC X(40).
+           03 FILLER                      PIC X.
+           03 NOM-CLAVE-WEB-SAL           PIC X(24).
+           03 FILLER                      PIC X.
+           03 COD-REG-WEB-SAL             PIC X(03).
+           03 FILLER                      PIC X.
+           03 NOM-OFI-WEB-SAL             PIC X(15).
+           03 FILLER                      PIC X.
+           03 NOM-CIU-WEB-SAL             PIC X(15).
+      *----------------------------------------------------------------*

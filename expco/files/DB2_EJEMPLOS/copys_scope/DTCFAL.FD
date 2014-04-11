@@ -1,0 +1,14 @@
+REMARK* DTCFAL-FD.v.0001
+REMARK******************************************************************
+REMARK* ESTRUCTURA DEL ARCHIVO QUE CONTIENE LAS ULTIMAS TRAMAS         *
+REMARK* RECIBIDAS POR EL SERVIDOR ICGMDF ANTES DE BAJAR YA SEA NORMAL  *
+REMARK* O ANORMALMENTE                                                 *
+REMARK******************************************************************
+       FD  DTCFAL.
+       01  REG-DTCFAL.
+           03 USUARIO-DTCFAL         PIC 9(11).
+           03 CLAVE-DTCFAL           PIC X(05).
+           03 FECHA-DTCFAL           PIC 9(08).
+           03 HORA-DTCFAL            PIC 9(06).
+           03 PROGRAM-DTCFAL         PIC X(10).
+           03 TRAMA-DTCFAL           PIC X(80).

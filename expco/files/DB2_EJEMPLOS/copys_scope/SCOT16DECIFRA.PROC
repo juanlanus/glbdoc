@@ -1,0 +1,112 @@
+      * SCOT16DECIFRA-PROC.v.0001        
+      $SET CONSTANT HACERMATCH"NO"                                              
+      $IF HACERMATCH = "SI"                                                     
+      $DISPLAY "......COMPILANDO SCOT16DESCIFR CON MATCH **********             
+      $ELSE                                                                     
+      $DISPLAY "......COMPILANDO SCOT16DESCIFR SIN MATCH **********             
+      $END  
+
+      $SET CONSTANT AMNISTIA21"SI"
+
+      $IF AMNISTIA21 = "SI"
+
+      $DISPLAY "......COMPILANDO SCOT16DESCIFR CON AMNISTIA21******
+
+      $ELSE
+
+      $DISPLAY "......COMPILANDO SCOT16DESCIFR SIN AMNISTIA21******
+
+      $END
+
+      ******          REVISADO MEJORAMIENTO OPERATIVO     **************        
+REMARK**********************************************************************
+REMARK* RUTINA QUE PERIMTE RECORRER LAS ESTRUCTURAS DE DATACREDITO PARA    O
+REMARK* CALCULAR El SCORE DESCIFRA.                                        *
+REMARK**********************************************************************
+       5000-TRU-SCORING-TOTAL-DECIFRA.             
+REMARK******************************************************************
+REMARK*5000-TRU-SCORING-TOTAL-DECIFRA.     
+REMARK* SE INICIALIZAN TODAS LAS VARIABLES INVOLUCRADAS EN EL MODELO, SE   *
+REMARK* PROCEDE A CALCULAR LAS CARACTERISTICAS DE LA PERSONA, RECORRIENDO  *
+REMARK* CARTERA,ENDEUDAMIENTO,CONSULTAS,CUENTAS CORRIENTES Y  REGISTRADURIA*
+REMARK* SE CONSOLIDA FINALMENTE LAS VARIABLES CALCULANDO LOS VALORES (-)   *
+REMARK* DE ACUERDO A LAS ESPECIFICACIONES. FINALMENTE SE CALCULA EL SCORE  *
+REMARK* CON BASE A LAS CARACTERISTICAS HALLADAS                            *
+REMARK* AUNQUE LAS RAZONES ADVESAS SE CALCULARON. SE DEJAN EN CEROS.
+REMARK******************************************************************
+            INITIALIZE LLAVE-MAES-CREDIT.        
+            MOVE NUM-ID-ALE TO  NUM-ID-ABD07          
+            MOVE TIP-ID-ALE TO  TIPO-ID-ABD07          
+            MOVE 0 TO FIN-CAR.        
+ARTI13      MOVE SW-NOV-48-LEEMSTRS  TO SW-NOV-48-AUX                   
+ARTI13      MOVE 0 TO SW-NOV-48-LEEMSTRS  *>ELIMINAR SI SCORE TOM 48MESES
+            PERFORM 0500-ASIGNA-ID-ICMCRE-START.                                
+            START MAESTRO-CREDIT KEY > LLAVE-MAES-CREDIT        
+               INVALID KEY MOVE 1 TO FIN-CAR           
+               NOT INVALID KEY         
+                  PERFORM  1000-LEE-ICMCRE-SECUENCIAL                           
+                  IF  SW-LECTURA-MAESTROS  =  1                                 
+                    MOVE  1         TO  FIN-CAR                                 
+                  END-IF                                                        
+            END-START.        
+            MOVE NUM-ID-ALE   TO CEDULA-ANT         
+            MOVE TIP-ID-ALE   TO TIP-ID-ANT         
+            PERFORM 5000-TRU-BUS-CRBSCCOT UNTIL         
+                      NUM-ID-ABD07 NOT = CEDULA-ANT         
+                  OR  TIPO-ID-ABD07 NOT = TIP-ID-ANT OR FIN-CAR = 1.        
+ARTI13      MOVE  SW-NOV-48-AUX           TO SW-NOV-48-LEEMSTRS 
+            INITIALIZE BDIEMSUP-LLAVE.                                          
+            MOVE TIP-ID-ANT TO BDIEMSUP-TIP-ID.                                 
+            MOVE CEDULA-ANT TO BDIEMSUP-NUM-ID.                                 
+            MOVE ULTIMO-TRI TO BDIEMSUP-FECHA.                                  
+            MOVE ULTIMO-TRI TO ULTIMO-TRI-AUX.                                  
+            MOVE 0 TO FIN-MSUP.        
+            START BDIEMSUP KEY <= BDIEMSUP-LLAVE                                
+               INVALID KEY MOVE 1 TO FIN-MSUP        
+               NOT INVALID KEY         
+                  READ BDIEMSUP PREVIOUS RECORD AT END                          
+                       MOVE 1 TO FIN-MSUP        
+                  NOT AT END         
+                      IF BDIEMSUP-FECHA > 0                                     
+                         MOVE BDIEMSUP-FECHA TO ULTIMO-TRI                      
+                      END-IF            
+                  END-READ        
+            END-START.        
+            PERFORM 5000-TRU-BUS-GDXXX UNTIL TIP-ID-ANT         
+               NOT = BDIEMSUP-TIP-ID OR CEDULA-ANT NOT =                        
+                     BDIEMSUP-NUM-ID OR                                         
+               FIN-MSUP = 1 OR BDIEMSUP-FECHA(1:6) NOT =                        
+                     ULTIMO-TRI(1:6).        
+            MOVE ULTIMO-TRI-AUX TO ULTIMO-TRI.                                  
+            INITIALIZE LLAVE-INDEX.        
+            MOVE TIP-ID-ANT TO TIP-ID-IND.         
+            MOVE CEDULA-ANT TO NUM-ID-IND.           
+            MOVE 0 TO FIN-CON.        
+            START INDEXADO KEY > LLAVE-INDEX        
+               INVALID KEY MOVE 1 TO FIN-CON         
+               NOT INVALID KEY         
+                  READ INDEXADO NEXT RECORD WITH IGNORE LOCK                    
+                       AT END                                                   
+                       MOVE 1 TO FIN-CON            
+                  END-READ        
+            END-START.        
+            PERFORM 5000-TRU-BUS-IQXXX UNTIL TIP-ID-ANT         
+               NOT = TIP-ID-IND  OR CEDULA-ANT NOT = NUM-ID-IND  OR        
+               FIN-CON  = 1.        
+            INITIALIZE LLAVE-MAES-CHECK.        
+            MOVE TIP-ID-ANT TO TIPO-ID-ABD06        
+            MOVE CEDULA-ANT TO NUM-ID-ABD06.         
+            MOVE 0 TO FIN-CHK.        
+            PERFORM 0600-ASIGNA-ID-ICMCHK-START.                                
+            START MAESTRO-CHECK KEY > LLAVE-MAES-CHECK        
+               INVALID KEY MOVE 1 TO FIN-CHK         
+               NOT INVALID KEY         
+                  PERFORM  3000-LEE-ICMCHK-SECUENCIAL                           
+                  IF  SW-LECTURA-MAESTROS  =  1                                 
+                    MOVE 1 TO FIN-CHK                                           
+                  END-IF                                                        
+            END-START.        
+            PERFORM 5000-TRU-BUS-CKXXX UNTIL TIP-ID-ANT         
+               NOT = TIPO-ID-ABD06 OR CEDULA-ANT NOT = NUM-ID-ABD06 OR        
+               FIN-CHK  = 1.        
+            PERFORM 5000-TRU-USU-FINSCO.        

@@ -1,0 +1,77 @@
+REMARK* UTLDEBUG-PROC.00001
+REMARK******************************************************************
+REMARK* RUTINAS ENCARGADAS DEL MANEJO DE DEBUGGER DE LOS PROGRAMAS DE LINEA
+REMARK* ACTIVACION, DESACTIVACION Y ESCRITURA
+REMARK******************************************************************
+       2050-PROCESAR-DEBUGGER.
+REMARK******************************************************************
+REMARK*2050-PROCESAR-DEBUGGER.                                         *
+REMARK*    SE RECIBE UNA ORDEN PARA ACTIVAR O DESACTIVAR EL DEBUGER    *
+REMARK******************************************************************
+           IF IND-DEBUG-UTLDEBUG = 1 
+              MOVE 0 TO IND-DEBUG-UTLDEBUG
+              MOVE "DEBUG DESACTIVADO !*" TO AREA-OUTPUT
+              CLOSE UTLDEBUG
+           ELSE
+              MOVE 1 TO IND-DEBUG-UTLDEBUG
+              OPEN OUTPUT UTLDEBUG
+              MOVE AREA-INPUT(13:50) TO LIN-AUX-UTLDEBUG
+              UNSTRING LINEA-AUX-UTLDEBUG DELIMITED BY ALL " "
+                       INTO AUXILIAR-UTLDEBUG LIN-DEBUG-UTLDEBUG
+REMARK*       SI NO SE RECIBE EL NUMERO DE TRANSACCIONES A MONITOREAR SE
+REMARK*       TOMA POR DEFECTO 1000
+              IF LIN-DEBUG-UTLDEBUG NOT NUMERIC
+                 MOVE 1000 TO LIN-DEBUG-UTLDEBUG
+              END-IF
+              MOVE 0 TO CON-DEBUG-UTLDEBUG
+              MOVE "DEBUGER ACTIVADO !*" TO AREA-OUTPUT
+           END-IF
+           MOVE 1 TO IND-CTA
+           PERFORM 10900-ENVIA-CRCR.
+
+        70000-ENTRADA-DEBUGGER.
+REMARK*********************************************************************
+REMARK* 70000-ENTRADA-DEBUGGER
+REMARK* RUTINA PARA GRABAR EN DEBUGGER LA INFORMACIÓN QUE INGRESA AL
+REMARK* REMARK PARA SER PROCESADA
+REMARK*********************************************************************
+           IF IND-DEBUG-UTLDEBUG = 1 
+              ADD 1 TO CON-DEBUG-UTLDEBUG
+              IF CON-DEBUG-UTLDEBUG > LIN-DEBUG-UTLDEBUG
+                 CLOSE UTLDEBUG
+                 MOVE 0 TO IND-DEBUG-UTLDEBUG
+              ELSE
+                 MOVE "ENT:" TO MODO-UTLDEBUG
+                 MOVE TEXTO TO DATOS-UTLDEBUG
+                 MOVE FUNCTION CURRENT-DATE (1:14) TO FECHA-UTLDEBUG
+                 MOVE HEADER-FILLER TO HORING-UTLDEBUG  
+                 MOVE FUNCTION CURRENT-DATE (9:6) 
+                      TO HORA-AUX-UTLDEBUG 
+                 COMPUTE HORENT-UTLDEBUG  = HOR-AUX-UTLDEBUG 
+                                          * 3600
+                                          + MIN-AUX-UTLDEBUG * 60 
+                                          + SEG-AUX-UTLDEBUG
+                 MOVE HORENT-UTLDEBUG TO HORA-SEG-ENTRADA-UTLDEBUG 
+                 MOVE 0 TO HORSAL-UTLDEBUG                      
+                 WRITE REG-UTLDEBUG
+              END-IF
+           END-IF.
+
+        80000-SALIDA-DEBUGGER.
+REMARK*********************************************************************
+REMARK* 80000-SALIDA-DEBUGGER 
+REMARK* RUTINA PARA GRABAR EN DEBUGGER LA INFORMACION QUE SALE YA    
+REMARK* PROCESADA DEL SISTEMA       
+REMARK*********************************************************************
+           IF IND-DEBUG-UTLDEBUG = 1 AND AREA-OUTPUT <> SPACES
+              MOVE "SAL:" TO MODO-UTLDEBUG
+              MOVE AREA-OUTPUT TO DATOS-UTLDEBUG
+              MOVE FUNCTION CURRENT-DATE (1:14) TO FECHA-UTLDEBUG
+              MOVE HEADER-FILLER TO HORING-UTLDEBUG            
+              MOVE HORA-SEG-ENTRADA-UTLDEBUG TO HORENT-UTLDEBUG
+              MOVE FUNCTION CURRENT-DATE (9:6) TO HORA-AUX-UTLDEBUG 
+              COMPUTE HORSAL-UTLDEBUG = HOR-AUX-UTLDEBUG * 3600    
+                                      + MIN-AUX-UTLDEBUG * 60     
+                                      + SEG-AUX-UTLDEBUG         
+              WRITE REG-UTLDEBUG
+           END-IF.

@@ -1,0 +1,93 @@
+      * FRALOG-FD.v.0010
+      * ARCHIVO DE LOG DE TRANSACCIONES REALIZADAS CON PROGRAMA ICGFRA 
+REMARK******************************************************************
+REMARK* GJC0002   * EVDNTE: SE CREAN CAMPOS PARA MANEJO DE FACTURACION DE 
+REMARK* GJIMENEZ  * EVIDENTE
+REMARK* ABR/2005  *
+REMARK******************************************************************
+REMARK* GJC0003   * BILL01: POR CADA PREGUNTA SE IDENTIFICA SI ES DE BILLE-
+REMARK* GJIMENEZ  * TERA O NO Y TAMBIEN SE IDENTIFICA EL CODIGO DEL 
+REMARK* SEPT/2006 * SUSCRIPTOR DE LA PRGUNTA
+REMARK******************************************************************
+REMARK* GJC0004   * CTRCTO: SE INCLUYE CAMPO PARA ALMACENAR EL CENTRO DE   
+REMARK* GJIMENEZ  * COSTO DONDE SE ORIGINA LA TRANSACCION            
+REMARK* NOV/2006  * 
+REMARK******************************************************************
+REMARK* VHF0005     * EVDNT2 - SE INCLUYEN DENTRO DEL FRALOG LOS CAMPOS*
+REMARK* VICTOR HUGO *          SCORE Y REACCESO GENERADOS POR EVIDENTE2*
+REMARK* FORERO      *                                                  *  
+REMARK* DIC.11/2007 *                                                  *
+REMARK******************************************************************
+REMARK* ABB0006     * REDOP3 - SE INCLUYEN DENTRO DEL FRALOG EL CAMPO  *
+REMARK* ALBEIRO     *          SEGMTO PARA MANEJO DE NUEVAS REDES      *
+REMARK* BERNAL      *          DE BANCOS (F) TELCOS(T) OTRAS(O)        *  
+REMARK* MARZO 2009  *                                                  * 
+REMARK******************************************************************
+REMARK* ABB0007     * CSV001 - SE INCLUYEN DENTRO DEL FRALOG EL CAMPO  *
+REMARK* ALBEIRO     *          BDACSV PARA INDICAR SI LA VALIDACION    *
+REMARK* BERNAL      *          DE IDENTIFICACION SE HIZO CON BDACSV    *  
+REMARK* AGOSTO 2009 *          VALORES:S o N                           * 
+REMARK******************************************************************
+REMARK* ABB0008     * ALERT1: SE INCLUYE MARCA PARA IDENTIFICAR SI LA  *
+REMARK* ALBEIRO B.  *         CONSULTA FUE ALERTADA                    *
+REMARK* AGOSTO 2010 *         0=NO APLICA                              *
+REMARK*             *         1=CUESTIONARIO GENERADO Y ALERTADO       *
+REMARK*             *         2=CUESTIONARIO NO GENERADO POR ALERTA    *
+REMARK*             *         3=NO ALERTADO                            *
+REMARK*             *         4=SISTEMA ALERTAS INACTIVO               *
+REMARK******************************************************************
+REMARK* ABB0009     * POK100: SE INCLUYE MARCA PARA IDENTIFICAR SI LA  *
+REMARK* ALBEIRO B.  *         CONSULTA FUE APROBADA POR RESPUESTA OK   *
+REMARK* NOV-2010    *         DE TODAS LAS PREGUNTAS                   *
+REMARK* NOV-2010    *         S=SI                                     *
+REMARK******************************************************************
+REMARK* RMB0010    * PRO001: MANEJO DE PRODUCTO ALFANUMERICAMENTES. SE
+REMARK* R.MARTINEZ *         REDEFINEN CAMPOS A PIC X
+REMARK* ABR./2013  *
+REMARK******************************************************************
+       FD  FRALOG.
+       01  REG-FRALOG.
+           02  TIPIDE-FRALOG            PIC 9.
+           02  NUMIDE-FRALOG            PIC 9(11).
+           02  TRANSACCION-FRALOG       PIC X(06).
+           02  FECHA-FRALOG             PIC 9(14).
+           02  TIPCON-FRALOG            PIC 9(02).
+           02  SUBCON-FRALOG            PIC 9(02).
+           02  FORMULARIO-FRALOG        PIC 9(8).
+           02  PUNTAJE-PORC-FRALOG      PIC 9(03).
+           02  PUNTAJE-PESO-FRALOG      PIC 9(03).
+           02  RIESGO-FRALOG            PIC 9(2).
+           02  FECFIN-FRALOG            PIC 9(14).           
+           02  PRODUCTO-FRALOG          PIC 9(03).            
+PRO001     02  PRODUCTO-FRALOG-RE REDEFINES PRODUCTO-FRALOG.            RMB0010
+PRO001         03 FILLER                PIC X(01).                      RMB0010
+PRO001         03 PRODUCTO-FRALOG-R     PIC X(02).                      RMB0010
+           02  SUB-PRODUCTO-FRALOG      PIC 9(03).
+PRO001     02  SUB-PRODUCTO-FRALOG-RE REDEFINES SUB-PRODUCTO-FRALOG.    RMB0010
+PRO001         03 FILLER                PIC X(01).                      RMB0010
+PRO001         03 SUB-PRODUCTO-FRALOG-R PIC X(02).                      RMB0010
+           02  NUMNIT-SUS-FRALOG        PIC 9(11).
+           02  TIPIDE-SUS-FRALOG        PIC 9(01).
+           02  NUMIDE-SUS-FRALOG        PIC 9(11).
+EVDNTE     02  COBRABLE-FRALOG          PIC 9.                          GJC0002 
+EVDNTE     02  FACTURAR-FRALOG          PIC 9.                          GJC0002 
+CTRCTO     02  CENTRO-COSTO-FRALOG      PIC 9(06).                      GJC0004
+EVDNT2     02  SCORE-FRALOG             PIC 9(03).                      VHF0005
+EVDNT2     02  REACCESO-FRALOG          PIC 9(01).                      VHF0005
+REDOP3     02  SEGMTO-FRALOG            PIC X(01).                      ABB0006
+CSV001     02  BDACSV-FRALOG            PIC X(01).                      ABB0007
+ALERT1     02  ALERTA-FRALOG            PIC X(01).                      ABB0008
+POK100     02  POK100-FRALOG            PIC X(01).                      ABB0009
+POK100     02  FILLER0-FRALOG           PIC X(04).                      ABB0009
+           02  INF-FRALOG.
+              03  PREGUN-FRALOG  OCCURS 170 TIMES.
+                 04 FILLER-FRALOG             PIC X(1).
+                 04 NUMPRE-FRALOG             PIC 9(03).
+BILL01           04 CODSUS-FRALOG             PIC 9(6).                 GJC0003 
+BILL01           04 BILLETERA-FRALOG          PIC X.                    GJC0003 
+                 04 CODPRE-FRALOG             PIC X(9).
+                 04 CASCARA-FRALOG            PIC X.
+                 04 PESO-FRALOG               PIC 9(01).       
+                 04 RESPOK-FRALOG             PIC 9(02).
+                 04 RESPUS-FRALOG             PIC 9(02).
+           02  FILLER1-FRALOG              PIC X(1).

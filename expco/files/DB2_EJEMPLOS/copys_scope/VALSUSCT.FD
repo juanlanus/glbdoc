@@ -1,0 +1,42 @@
+******* VALSUSCT-FD.v01.0001
+******* ARCHIVO ESTADISTICO GENERADO POR EL PROGRAMA CALIFICADOR VALCCAL
+******* DURANTE EL PROCESO DE VALIDACION
+******* La ocurrencia 31 para novedades, contiene el total de adjetivo 60
+******* La ocurrencia 32 para novedades, contiene el total de adjetivo 61
+******* La ocurrencia 33 para novedades, contiene el total de nov. erradas
+******* La ocurrencia 34 para novedades, contiene total adjetivos errados
+******* La ocurrencia 41 para campos, contiene el total de registros
+      *----------------------------------------------------------------*
+CBIT05* OBJETIVO    * AUMENTAR A 81 EL NUMERO DE OCCURRENCIAS DE LAS 
+CBIT05*             * VARIABLES REPORTADAS.
+CBIT05* AUTOR       * CONTACT & BUSINESS IT - CBIT03 
+CBIT05* FECHA       * JUNIO DE 2009
+      *------------------------------------------------
+       FD  VALSUSCT.  
+       01  REG-VALSUSCT.
+           03  LLAVE-VALSUSCT.
+               05  COD-SUSCRIP-VALSUSCT       PIC 9(6).
+           03  NUM-CONSEC-VALSUSCT            PIC 9(4).
+           03  RESTO-REG-VALSUSCT.
+               05  IND-MILES-VALSUSCT         PIC X.
+               05  TOT-NOVEDAD-MESACT-VALSUSCT-R.
+                   07 TOT-NOV-MESACT-VALSUSCT OCCURS 2.                        
+                      09 TOT-NOVEDAD-MESACT-VALSUSCT  OCCURS 34                
+                                             PIC 9(8) COMP-3.
+               05  TOT-CAMPO-MESACT-VALSUSCT-R.
+                   07 TOT-CAM-MESACT-VALSUSCT OCCURS 2.                        
+                      09 TOT-CAMPO-MESACT-VALSUSCT  OCCURS 81                  
+                                             PIC 9(8) COMP-3.
+               05  FECHA-MESACT-VALSUSCT      OCCURS 2                         
+                                             PIC 9(6)  COMP-3.                
+               05  TOT-NOVEDAD-MESANT-VALSUSCT-R.
+                   07 TOT-NOV-MESANT-VALSUSCT OCCURS 2.                        
+                      09 TOT-NOVEDAD-MESANT-VALSUSCT  OCCURS 34 
+                                             PIC 9(8) COMP-3.
+               05  TOT-CAMPO-MESANT-VALSUSCT-R.
+                   07 TOT-CAM-MESANT-VALSUSCT OCCURS 2.                        
+                      09 TOT-CAMPO-MESANT-VALSUSCT  OCCURS 81                  
+                                             PIC 9(8) COMP-3.
+               05  FECHA-MESANT-VALSUSCT      OCCURS 2                         
+                                             PIC 9(6)  COMP-3.                
+               05  FILLER-VALSUSCT           PIC X(20).

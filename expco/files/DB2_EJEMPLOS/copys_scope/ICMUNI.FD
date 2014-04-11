@@ -1,0 +1,9 @@
+******* EST031.v.02.002
+      * NOMBRES DE LOS DIFERENTES MUNICIPIOS DEL PAIS
+       FD  MUNICIPIOS.
+       01  REG-MUNICIPIOS.
+           03 NOMBRE-MUNI                 PIC X(24).
+           03 LLAVE-MUNI.
+              05 CODIGO-DEP               PIC 9(2).
+              05 CODIGO-MUNI              PIC 9(3).
+           03 SECUENCIA-MUNI              PIC 9(5).

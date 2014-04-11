@@ -1,0 +1,10 @@
+******* ACTPCRU-fd.v.0001
+   **** ACTPCRU.v01.001
+REMARK*Parametros matriz de estados vs. novedades para cartera
+REMARK*Proceso de validacion y actualizacion para cruces con
+REMARK*SALTOS RAROS. por ejemplo de estado AL DIA A CARTERA RECUPERADA
+036300*----------------------------------------------------------------*
+       FD  ACTPCRU.
+       01  REG-ACTPCRU.
+           03 NUM-NOVEDAD-ACTPCRU OCCURS 30    PIC 9(01).
+           03 FILLER-ACTPCRU                   PIC X(50).

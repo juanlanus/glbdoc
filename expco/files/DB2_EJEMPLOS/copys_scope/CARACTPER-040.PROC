@@ -1,0 +1,867 @@
+REMARK*CARACTPER-040.PROC.v.0001.                                       
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 040 *
+REMARK*    SERFINANSA                                                  *
+REMARK******************************************************************
+REMARK* IMS0001    | R11508 - SE AGREGAN NUEVAS CARACTERISTICAS        *
+REMARK* 04-ABR-2013|                                                   *
+REMARK* M.SALAMANCA|                                           CQ11508 *
+REMARK******************************************************************
+                                                                        
+       0000-LLENAR-VEC-PERSONALIZ-040.                                  
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END999RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END999RO040) TO L-AUX             
+               MOVE 01END999RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END998RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END998RO040) TO L-AUX             
+               MOVE 01END998RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END997RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END997RO040) TO L-AUX             
+               MOVE 01END997RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END996RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END996RO040) TO L-AUX             
+               MOVE 01END996RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END995RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END995RO040) TO L-AUX             
+               MOVE 01END995RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END994RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END994RO040) TO L-AUX             
+               MOVE 01END994RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END993RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END993RO040) TO L-AUX             
+               MOVE 01END993RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END992RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END992RO040) TO L-AUX             
+               MOVE 01END992RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END991RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END991RO040) TO L-AUX             
+               MOVE 01END991RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END990RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END990RO040) TO L-AUX             
+               MOVE 01END990RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01END989RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01END989RO040) TO L-AUX             
+               MOVE 01END989RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+                                                                        
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01NUM999RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01NUM999RO040) TO L-AUX             
+               MOVE 01NUM999RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01NUM998RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01NUM998RO040) TO L-AUX             
+               MOVE 01NUM998RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01NUM997RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01NUM997RO040) TO L-AUX             
+               MOVE 01NUM997RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01EXP999RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01EXP999RO040) TO L-AUX             
+               MOVE 01EXP999RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01EXP998RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01EXP998RO040) TO L-AUX             
+               MOVE 01EXP998RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01EXP997RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01EXP997RO040) TO L-AUX             
+               MOVE 01EXP997RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+               ADD 1 TO I-VAR-PER                                       
+               MOVE "01EXP996RO040" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01EXP996RO040) TO L-AUX             
+               MOVE 01EXP996RO040(1:L-AUX)   TO                         
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       
+              .                                                         
+       0000-INICIALIZAR-CARAC-EXT-40.                                   
+REMARK******************************************************************
+REMARK**0000-INICIALIZAR-CARAC-EXT-40.                                  
+REMARK**     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 16    
+REMARK**     PARA SERFINANSA                                            
+REMARK******************************************************************
+                                                                        
+             MOVE ZEROS TO 01NUM999RO040  01NUM998RO040  01NUM997RO040  
+                           01END999RO040  01END997RO040  01END996RO040  
+                           01END995RO040  01END994RO040  01END993RO040  
+                           01END992RO040  01END991RO040  01END990RO040  
+                           01END989RO040                                
+             MOVE 99999999999          TO  01END998RO040                
+             MOVE ALL "  -1"           TO  PER-40-NIVEL-01-EXP          
+             MOVE ZEROS                TO  VARIABLES-PER-040            
+             .                                                          
+                                                                        
+REMARK*                                                                 
+       2249-PROCESE-CARCT-00NUM-EXT-40.                                 
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00NUM-EXT-40.                                 
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01NUM Y 02NUM PARA 
+REMARK*     SERFINANSA                                                  
+REMARK******************************************************************
+           IF (COD-PORTAF-CARACT <> "AH" AND <> "CT") *> 20130509
+           MOVE COD-SUS-ABD07   TO  PER-40-COD-SUS-SRF
+                                                     
+      *    01NUM999RO040: TDC NO SERFINANSA - AL FINAL EVALUA RO-01FLAG 
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF              
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           
+                 ADD 1 TO 01NUM999RO040                                 
+              END-IF                                                    
+           END-IF
+           
+      *    01NUM998RO040: TDC CON SERFINANSA - AL FINAL EVALUA RO-01FLAG
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF            
+              MOVE 1 TO RO-01FLAG-040-J                                 
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           
+                 ADD 1 TO 01NUM998RO040                                 
+              END-IF                                                    
+           END-IF
+           
+      *     01NUM997RO040: TDC NO SERFINANSA ABIERTAS ULTIMO AÑO        
+      *       AL FINAL SE EVALOUAN LOS FLAGS                            
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF              
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           
+                 MOVE 1 TO RO-01OPFLAG-040-N                            
+                 IF RUN-DATE-CARACT > 0 AND FECHA-APERT-CARACT > 0      
+                    MOVE 1 TO RO-01DFLAG-040-N                          
+                    IF MESES-MADUR-CARACT <= 12                         
+                       ADD 1 TO 01NUM997RO040                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      *                                                                 
+           .                                                            
+       2249-PROCESE-CARCT-00END-EXT-40.                                 
+      ******************************************************************
+      *2249-PROCESE-CARCT-00END-EXT-16.                                 
+      *     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01END PARA         
+      *     SERFINANSA                                                  
+      ******************************************************************
+           IF (COD-PORTAF-CARACT <> "AH" AND <> "CT") *> 20130509
+           MOVE COD-SUS-ABD07   TO  PER-40-COD-SUS-SRF                      
+      * CO01END999XX040 . Cupo TDC Mayor Mercado diferentes a SERFINANSA
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF        
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT     > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-INICIAL-CARACT(I13) IS NUMERIC            
+                          MOVE 1 TO RO-01FFLAG-040-INI-N                
+                          IF VEC-INICIAL-CARACT(I13) > 01END999RO040    
+                             MOVE VEC-INICIAL-CARACT(I13) TO            
+                                                       01END999RO040    
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END998XX040  Cupo TDC Menor Mercado diferentes a SERFINANSA 
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF    
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-INICIAL-CARACT(I13) IS NUMERIC            
+                          MOVE 1 TO RO-01FFLAG-040-INI-N                
+                          IF VEC-INICIAL-CARACT(I13) < 01END998RO040    
+                             MOVE VEC-INICIAL-CARACT(I13) TO            
+                                                       01END998RO040    
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END997XX040 . Suma saldos TDC diferentes a SERFINANSA       
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF         
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-SALDO-CARACT(I13) IS NUMERIC              
+                          MOVE 1 TO RO-01FFLAG-040-SDO-N                
+                          IF VEC-SALDO-CARACT(I13)   >= 0               
+                             COMPUTE 01END997RO040 = 01END997RO040 +    
+                                      VEC-SALDO-CARACT(I13)             
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END996XX040 . Suma cupos  TDC diferentes a SERFINANSA       
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF        
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-INICIAL-CARACT(I13) IS NUMERIC            
+                          MOVE 1 TO RO-01FFLAG-040-INI-N                
+                          IF VEC-INICIAL-CARACT(I13) >= 0               
+                             COMPUTE 01END996RO040 = 01END996RO040 +    
+                                      VEC-INICIAL-CARACT(I13)           
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END995XX040 . Suma cuotas TDC diferentes a SERFINANSA       
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF   
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-CUOTA-CARACT(I13) IS NUMERIC              
+                          MOVE 1 TO RO-01FFLAG-040-CUO-N                
+                          IF VEC-CUOTA-CARACT(I13)   >= 0               
+                             COMPUTE 01END995RO040 = 01END995RO040 +    
+                                      VEC-CUOTA-CARACT(I13)             
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END994XX040 . Suma saldo mora TDC diferentes a SERFINANSA   
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF         
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-NE                           
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-SALDOMOR-CARACT(I13) IS NUMERIC           
+                          MOVE 1 TO RO-01FFLAG-040-MOR-N                
+                          IF VEC-SALDOMOR-CARACT(I13)   >= 0            
+                             COMPUTE 01END994RO040 = 01END994RO040 +    
+                                      VEC-SALDOMOR-CARACT(I13)          
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END993XX040 . Suma saldos TDC  SERFINANSA                   
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF         
+              MOVE 1 TO RO-01FLAG-040-J                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-J                            
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-J-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-J-END                   
+                       IF VEC-IND-SLD-CARACT(I13) = 0                   
+                          MOVE 1 TO RO-01FFLAG-040-SDO-J                
+                          IF VEC-SALDO-CARACT(I13)   >= 0               
+                             COMPUTE 01END993RO040 = 01END993RO040 +    
+                                      VEC-SALDO-CARACT(I13)             
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END992XX040 . Suma cupos  TDC  SERFINANSA                   
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF            
+              MOVE 1 TO RO-01FLAG-040-J                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-J                            
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-J-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-J-END                   
+                       IF VEC-IND-INI-CARACT(I13) = 0                   
+                          MOVE 1 TO RO-01FFLAG-040-INI-J                
+                          IF VEC-INICIAL-CARACT(I13) >= 0               
+                             COMPUTE 01END992RO040 = 01END992RO040 +    
+                                      VEC-INICIAL-CARACT(I13)           
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END991XX040 . Suma cuotas TDC  SERFINANSA                   
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF         
+              MOVE 1 TO RO-01FLAG-040-J                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-J                            
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-J-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-J-END                   
+                       IF VEC-IND-CUO-CARACT(I13) = 0                   
+                          MOVE 1 TO RO-01FFLAG-040-CUO-J                
+                          IF VEC-CUOTA-CARACT(I13)   >= 0               
+                             COMPUTE 01END991RO040 = 01END991RO040 +    
+                                      VEC-CUOTA-CARACT(I13)             
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END990XX040 . Suma saldo mora TDC SERFINANSA                
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF         
+              MOVE 1 TO RO-01FLAG-040-J                                 
+              IF REG-ABIERTO-CARACT = 1                                 
+                 MOVE 1 TO RO-01OPFLAG-040-J                            
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-J-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-J-END                   
+                       IF VEC-SALDOMOR-CARACT(I13) IS NUMERIC           
+                          MOVE 1 TO RO-01FFLAG-040-MOR-J                
+                          IF VEC-SALDOMOR-CARACT(I13)   >= 0            
+                             COMPUTE 01END990RO040 = 01END990RO040 +    
+                                      VEC-SALDOMOR-CARACT(I13)          
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+      * CO01END989XX040 . Numero de TDC dif. SERFINANSA con utiliz>90%  
+           IF COD-CTA-ABD07 = 02 AND  NOT COD-SUS-SRF            
+              MOVE 1 TO RO-01FLAG-040-N                                 
+              IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           
+                 MOVE 1 TO RO-01OPFLAG-040-N                            
+                 IF RUN-DATE-CARACT    > ZEROS AND                      
+                    FECHA-ESTADO-CARACT > ZEROS                         
+                    MOVE 1 TO RO-01DFLAG-040-N-END                      
+                    IF MESES-DESAC-CARACT <= 3                          
+                       MOVE 1 TO RO-01VFLAG-040-N-END                   
+                       IF VEC-INICIAL-CARACT(I13) >  0 AND              
+                          VEC-SALDO-CARACT(I13) IS NUMERIC              
+                          MOVE 1 TO RO-01FFLAG-040-991-N                
+                          IF VEC-INICIAL-CARACT(I13) >  0 AND           
+                             VEC-SALDO-CARACT(I13) >= 0                 
+                             COMPUTE UTILIZ-JURISC =                    
+                                VEC-SALDO-CARACT(I13) /                 
+                                     VEC-INICIAL-CARACT(I13)            
+                             IF UTILIZ-JURISC > 0.9                     
+                                ADD 1 TO 01END989RO040                  
+                             END-IF                                     
+                          END-IF                                        
+                       END-IF                                           
+                    END-IF                                              
+                 END-IF                                                 
+              END-IF                                                    
+           END-IF                                                       
+           .                                                            
+                                                                        
+       2649-PROCESE-CARACT-02XX-EXT-40.                                 
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-40.                                 
+REMARK*    SE ESTABLECEN LAS CARACTERISTICAS DEFINITIVAS AL FINAL DEL   
+REMARK*    PROCESO DE LAS CUENTAS DE CADA CEDULA                        
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------* 
+REMARK* *-------------------------------------------------------------* 
+                                                                        
+      * CO01NUM999XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE " -1" TO 01NUM999XX040                              
+            END-IF                                                      
+                                                                        
+      * CO01NUM998XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-J = 0                                      
+               MOVE " -1" TO 01NUM998XX040                              
+            END-IF                                                      
+                                                                        
+      * CO01NUM997XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE " -1" TO 01NUM997XX040                              
+            ELSE                                                        
+               IF RO-01OPFLAG-040-N = 0                                 
+                  MOVE " -2" TO 01NUM997XX040                           
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N = 0                               
+                     MOVE " -3" TO 01NUM997XX040                        
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END999XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END999XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END999XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END999XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END999XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-INI-N = 0                     
+                           MOVE "        -88" TO 01END999XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END998XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END998XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END998XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END998XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END998XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-INI-N = 0                     
+                           MOVE "        -88" TO 01END998XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END997XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END997XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END997XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END997XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END997XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-SDO-N = 0                     
+                           MOVE "        -88" TO 01END997XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END996XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END996XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END996XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END996XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END996XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-INI-N = 0                     
+                           MOVE "        -88" TO 01END996XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END995XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END995XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END995XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END995XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END995XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-CUO-N = 0                     
+                           MOVE "        -88" TO 01END995XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END994XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE "         -1" TO 01END994XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-NE    = 0                             
+                  MOVE "         -2" TO 01END994XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE "         -3" TO 01END994XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE "         -4" TO 01END994XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-MOR-N = 0                     
+                           MOVE "        -88" TO 01END994XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END993XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-J = 0                                      
+               MOVE "         -1" TO 01END993XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-J     = 0                             
+                  MOVE "         -2" TO 01END993XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-J-END = 0                           
+                     MOVE "         -3" TO 01END993XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-J-END = 0                        
+                        MOVE "         -4" TO 01END993XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-SDO-J = 0                     
+                           MOVE "        -88" TO 01END993XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END992XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-J = 0                                      
+               MOVE "         -1" TO 01END992XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-J     = 0                             
+                  MOVE "         -2" TO 01END992XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-J-END = 0                           
+                     MOVE "         -3" TO 01END992XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-J-END = 0                        
+                        MOVE "         -4" TO 01END992XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-INI-J = 0                     
+                           MOVE "        -88" TO 01END992XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END991XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-J = 0                                      
+               MOVE "         -1" TO 01END991XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-J     = 0                             
+                  MOVE "         -2" TO 01END991XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-J-END = 0                           
+                     MOVE "         -3" TO 01END991XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-J-END = 0                        
+                        MOVE "         -4" TO 01END991XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-CUO-J = 0                     
+                           MOVE "        -88" TO 01END991XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END990XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-J = 0                                      
+               MOVE "         -1" TO 01END990XX040                      
+            ELSE                                                        
+               IF RO-01OPFLAG-040-J     = 0                             
+                  MOVE "         -2" TO 01END990XX040                   
+               ELSE                                                     
+                  IF RO-01DFLAG-040-J-END = 0                           
+                     MOVE "         -3" TO 01END990XX040                
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-J-END = 0                        
+                        MOVE "         -4" TO 01END990XX040             
+                     ELSE                                               
+                        IF RO-01FFLAG-040-MOR-J = 0                     
+                           MOVE "        -88" TO 01END990XX040          
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+                                                                        
+      * CO01END989XX040.                                                
+      *                                                                 
+            IF RO-01FLAG-040-N = 0                                      
+               MOVE " -1" TO 01END989XX040                              
+            ELSE                                                        
+               IF RO-01OPFLAG-040-N     = 0                             
+                  MOVE " -2" TO 01END989XX040                           
+               ELSE                                                     
+                  IF RO-01DFLAG-040-N-END = 0                           
+                     MOVE " -3" TO 01END989XX040                        
+                  ELSE                                                  
+                     IF RO-01VFLAG-040-N-END = 0                        
+                        MOVE " -4" TO 01END989XX040                     
+                     ELSE                                               
+                        IF RO-01FFLAG-040-991-N = 0                     
+                           MOVE "-88" TO 01END989XX040                  
+                        END-IF                                          
+                     END-IF                                             
+                  END-IF                                                
+               END-IF                                                   
+            END-IF                                                      
+            .                                                           
+                                                                        
+       2249-PROCESE-CARCT-00EXP-EXT-40.                                 
+      ******************************************************************
+      *2249-PROCESE-CARCT-00EXP-EXT-40.                                 
+      *     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 01END EXT PARA     
+      *     SERFINANSA                                                  
+      ******************************************************************
+           IF (COD-PORTAF-CARACT <> "AH" AND <> "CT") *> 20130509
+            MOVE COD-SUS-ABD07   TO  PER-40-COD-SUS-SRF                     
+            MOVE ALL "  -1"           TO  PER-40-NIVEL-00-EXP           
+      *                                                                 
+      *** 00EXP999RO040 *** MESES TDC ABIERTA MAS ANTIG SIN SERFINANSA  
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF       
+             MOVE ZEROS  TO  00EXP999RO040                              
+             IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0          
+                IF FECHA-APERT-CARACT   > ZEROS AND                     
+                   FECHA-ESTADO-CARACT  > ZEROS AND                     
+                   ACT-DATE-CARACT      > ZEROS                         
+                   IF MESES-DESAC-CARACT <= 3                           
+                      IF MESES-MADUR-CARACT >= 0                        
+                         MOVE MESES-MADUR-CARACT TO 00EXP999RO040       
+                      END-IF                                            
+                   ELSE                                                 
+                      MOVE "  -4" TO 00EXP999RO040(1:4)                 
+                   END-IF                                               
+                ELSE                                                    
+                   MOVE "  -3" TO 00EXP999RO040(1:4)                    
+                END-IF                                                  
+             ELSE                                                       
+                MOVE "  -2" TO 00EXP999RO040(1:4)                       
+             END-IF                                                     
+           END-IF                                                       
+                                                                        
+      *** 00EXP998RO040 *** MESES TDC ABI Y CER MAS ANTIG SIN SERFINANSA
+           IF COD-CTA-ABD07 = 02 AND NOT COD-SUS-SRF         
+             MOVE ZEROS  TO  00EXP998RO040                              
+             IF GARANTE-ABD07 = 0                                       
+                IF FECHA-APERT-CARACT   > ZEROS AND                     
+                   FECHA-ESTADO-CARACT  > ZEROS AND                     
+                   ACT-DATE-CARACT      > ZEROS                         
+                   IF (REG-ABIERTO-CARACT = 1  AND                      
+                       MESES-DESAC-CARACT <= 3)  OR                     
+                       REG-ABIERTO-CARACT = 0                           
+                       IF REG-ABIERTO-CARACT = 1                        
+130509*                   MOVE MESES-MADUR-CARACT  TO 00EXP998TO023     
+130509                    MOVE MESES-MADUR-CARACT  TO 00EXP998RO040     
+                       ELSE                                             
+130509*                   MOVE MESES-NOVAP-CARACT  TO 00EXP998TO023     
+130509                    MOVE MESES-NOVAP-CARACT  TO 00EXP998RO040    
+                       END-IF                                           
+                   ELSE                                                 
+                      MOVE "  -4" TO 00EXP998RO040(1:4)                 
+                   END-IF                                               
+                ELSE                                                    
+                   MOVE "  -3" TO 00EXP998RO040(1:4)                    
+                END-IF                                                  
+             ELSE                                                       
+                MOVE "  -2" TO 00EXP998RO040(1:4)                       
+             END-IF                                                     
+           END-IF                                                       
+                                                                        
+      *** 00EXP997RO040 *** MESES TDC ABIERTA MAS ANTIG DE SERFINANSA   
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF          
+             MOVE ZEROS  TO  00EXP997RO040                              
+             IF REG-ABIERTO-CARACT = 1  AND  GARANTE-ABD07 = 0          
+                IF FECHA-APERT-CARACT   > ZEROS AND                     
+                   FECHA-ESTADO-CARACT  > ZEROS AND                     
+                   ACT-DATE-CARACT      > ZEROS                         
+                   IF MESES-DESAC-CARACT <= 3                           
+                      IF MESES-MADUR-CARACT >= 0                        
+                         MOVE MESES-MADUR-CARACT TO 00EXP997RO040       
+                      END-IF                                            
+                   ELSE                                                 
+                      MOVE "  -4" TO 00EXP997RO040(1:4)                 
+                   END-IF                                               
+                ELSE                                                    
+                   MOVE "  -3" TO 00EXP997RO040(1:4)                    
+                END-IF                                                  
+             ELSE                                                       
+                MOVE "  -2" TO 00EXP997RO040(1:4)                       
+             END-IF                                                     
+           END-IF                                                       
+                                                                        
+      *** 00EXP996RO040 *** MESES TDC ABI Y CER MAS ANTIG DE SERFINANSA 
+           IF COD-CTA-ABD07 = 02 AND COD-SUS-SRF           
+             MOVE ZEROS  TO  00EXP996RO040                              
+             IF GARANTE-ABD07 = 0                                       
+                IF FECHA-APERT-CARACT   > ZEROS AND                     
+                   FECHA-ESTADO-CARACT  > ZEROS AND                     
+                   ACT-DATE-CARACT      > ZEROS                         
+                   IF (REG-ABIERTO-CARACT = 1  AND                      
+                       MESES-DESAC-CARACT <= 3)  OR                     
+                       REG-ABIERTO-CARACT = 0                           
+                       IF REG-ABIERTO-CARACT = 1                        
+                          MOVE MESES-MADUR-CARACT  TO 00EXP996RO040     
+                       ELSE                                             
+                          MOVE MESES-NOVAP-CARACT  TO 00EXP996RO040     
+                       END-IF                                           
+                   ELSE                                                 
+                      MOVE "  -4" TO 00EXP996RO040(1:4)                 
+                   END-IF                                               
+                ELSE                                                    
+                   MOVE "  -3" TO 00EXP996RO040(1:4)                    
+                END-IF                                                  
+             ELSE                                                       
+                MOVE "  -2" TO 00EXP996RO040(1:4)                       
+             END-IF                                                     
+           END-IF                                                       
+                                                                        
+      *** 01EXP999RO040 *** MESES TDC ABIERTA MAS ANTIG SIN SERFINANSA  
+           IF FUNCTION NUMVAL(00EXP999RO040) >= 0                       
+              IF FUNCTION NUMVAL(01EXP999RO040(1:4)) < 0                
+                 MOVE ZEROS TO 01EXP999RO040                            
+              END-IF                                                    
+              IF FUNCTION NUMVAL(01EXP999RO040(1:4)) <                  
+                 FUNCTION NUMVAL(00EXP999RO040(1:4))                    
+                 MOVE 00EXP999RO040(1:4) TO 01EXP999RO040(1:4)          
+              END-IF                                                    
+           ELSE                                                         
+              IF FUNCTION NUMVAL(01EXP999RO040(1:4)) < 0                
+               IF FUNCTION NUMVAL(00EXP999RO040(1:4)) <                 
+                  FUNCTION NUMVAL(01EXP999RO040(1:4))                   
+                  MOVE 00EXP999RO040(1:4) TO 01EXP999RO040(1:4)         
+               END-IF                                                   
+              END-IF                                                    
+           END-IF                                                       
+                                                                        
+      *** 01EXP998RO040 *** MESES TDC ABI Y CER MAS ANTIG SIN SERFINANSA
+           IF FUNCTION NUMVAL(00EXP998RO040) >= 0                       
+              IF FUNCTION NUMVAL(01EXP998RO040(1:4)) < 0                
+                 MOVE ZEROS TO 01EXP998RO040                            
+              END-IF                                                    
+              IF FUNCTION NUMVAL(01EXP998RO040(1:4)) <                  
+                 FUNCTION NUMVAL(00EXP998RO040(1:4))                    
+                 MOVE 00EXP998RO040(1:4) TO 01EXP998RO040(1:4)          
+              END-IF                                                    
+           ELSE                                                         
+              IF FUNCTION NUMVAL(01EXP998RO040(1:4)) < 0                
+               IF FUNCTION NUMVAL(00EXP998RO040(1:4)) <                 
+                  FUNCTION NUMVAL(01EXP998RO040(1:4))                   
+                  MOVE 00EXP998RO040(1:4) TO 01EXP998RO040(1:4)         
+               END-IF                                                   
+              END-IF                                                    
+           END-IF                                                       
+                                                                        
+      *** 01EXP997RO040 *** MESES TDC ABIERTA MAS ANTIG DE SERFINANSA   
+           IF FUNCTION NUMVAL(00EXP997RO040) >= 0                       
+              IF FUNCTION NUMVAL(01EXP997RO040(1:4)) < 0                
+                 MOVE ZEROS TO 01EXP997RO040                            
+              END-IF                                                    
+              IF FUNCTION NUMVAL(01EXP997RO040(1:4)) <                  
+                 FUNCTION NUMVAL(00EXP997RO040(1:4))                    
+                 MOVE 00EXP997RO040(1:4) TO 01EXP997RO040(1:4)          
+              END-IF                                                    
+           ELSE                                                         
+              IF FUNCTION NUMVAL(01EXP997RO040(1:4)) < 0                
+               IF FUNCTION NUMVAL(00EXP997RO040(1:4)) <                 
+                  FUNCTION NUMVAL(01EXP997RO040(1:4))                   
+                  MOVE 00EXP997RO040(1:4) TO 01EXP997RO040(1:4)         
+               END-IF                                                   
+              END-IF                                                    
+           END-IF                                                       
+                                                                        
+      *** 01EXP996RO040 *** MESES TDC ABI Y CER MAS ANTIG DE SERFINANSA 
+           IF FUNCTION NUMVAL(00EXP996RO040) >= 0                       
+              IF FUNCTION NUMVAL(01EXP996RO040(1:4)) < 0                
+                 MOVE ZEROS TO 01EXP996RO040                            
+              END-IF                                                    
+              IF FUNCTION NUMVAL(01EXP996RO040(1:4)) <                  
+                 FUNCTION NUMVAL(00EXP996RO040(1:4))                    
+                 MOVE 00EXP996RO040(1:4) TO 01EXP996RO040(1:4)          
+              END-IF                                                    
+           ELSE                                                         
+              IF FUNCTION NUMVAL(01EXP996RO040(1:4)) < 0                
+               IF FUNCTION NUMVAL(00EXP996RO040(1:4)) <                 
+                  FUNCTION NUMVAL(01EXP996RO040(1:4))                   
+                  MOVE 00EXP996RO040(1:4) TO 01EXP996RO040(1:4)         
+               END-IF                                                   
+              END-IF                                                    
+           END-IF                                                       
+            .                                                           

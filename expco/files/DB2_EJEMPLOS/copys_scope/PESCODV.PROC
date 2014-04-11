@@ -1,0 +1,497 @@
+REMARK*PESCODV.PROC.V.01.0001
+REMARK******************************************************************
+REMARK*                 SCORE - DAVIVIENDA                             *
+REMARK******************************************************************
+REMARK* SE CREA UN SCOR PARA QUE SEAN UTILIZADOS EN LOS DIFERENTES PROG*
+REMARK* DE DAVIVIENDA COMO: ICGD49.CBL - ICGD22.CBL - ICGD12.CBL       *
+REMARK*                     ICGD40.CBL - ICGD25.CBL - ICGD60.CBL       *
+REMARK******************************************************************
+REMARK*                     LOG DE MODIFICACIONES                      *
+REMARK*----------------------------------------------------------------*
+REMARK*  ANALISTA                        DESCRIPCION                   *
+REMARK* ------------- * ---------------------------------------------- * 
+REMARK******************************************************************
+REMARK* JCH0001    | DESARROLLO DEL PROGRAMA.                          *
+REMARK* 14-AGO-2012|   REQ. CQ. 6559.                                  *
+REMARK* JIMENA CH. |                                                   *
+REMARK******************************************************************
+ACIEAA*SCORE PREDICTIVO "ACIERTA  A"
+
+      ******************************************************************
+      *1000-ABRIR-PARAMETRO-DAV.                                      
+      *     ABRIR Y CARGAR VALORES DEL ARCHIVO DE PARAMETROS DAVIVIENDA                                                                     
+      ******************************************************************            
+       1000-ABRIR-PARAMETRO-DAV.
+           MOVE  1                     TO  DAVISC-TRABAJO
+           MOVE  ZEROS                 TO  SW-CARGUES-DAVI
+           OPEN  INPUT  PARAMDAVI
+           IF  W-STATUS-DAV1  NOT =  ZEROS
+             IF  W-STATUS-DAV-2  =  9
+               MOVE  W-STATUS-DAV-3    TO   DAVISC-TRABAJO
+               STRING
+                "PESCODV:*ERR* ARCH PAR DAVIVIENDA-" DELIMITED BY SIZE
+                 DAVISC-TRABAJO                       DELIMITED BY SIZE
+                                    INTO  WK-DV-ERROR
+               END-STRING
+             ELSE
+               STRING       
+                "PESCODV: *ERR* ARCH PARAM DAVIENDA" DELIMITED BY SIZE
+                   W-STATUS-DAV1                     DELIMITED BY SIZE
+                                    INTO  WK-DV-ERROR
+               END-STRING
+             END-IF
+           ELSE
+             PERFORM  UNTIL  SW-CARGUE-DAVI  =  5  OR  6
+               READ  PARAMDAVI
+                 AT END
+                    MOVE  5            TO  SW-CARGUE-DAVI
+                 NOT AT  END
+                    PERFORM  1100-EVALUE-CAMPO
+               END-READ
+             END-PERFORM
+             IF  SW-PAR-DAV-55  =  ZEROS
+               DISPLAY "PARAMETRO RANGOS ACIERTA CON PONDERACION"
+             END-IF
+             IF  SW-PAR-DAV-56  =  ZEROS
+               DISPLAY "PARAMETRO RANGOS ANTIGUEDAD:CON PONDERACION"
+             END-IF        
+             IF  SW-PAR-DAV-57  =  ZEROS
+               DISPLAY "PARAMETRO PUNTAJE CLIENTE - PRODUCTO"
+             END-IF
+             IF  SW-PAR-DAV-58  =  ZEROS
+               DISPLAY "PARAMETRO PESO VARIABLES"
+             END-IF
+             IF  SW-PAR-DAV-59  =  ZEROS
+               DISPLAY "PARAMETRO SEGMENTO SEGUN SCORE"
+             END-IF
+             IF  SW-PAR-DAV-55  NOT =  ALL "1" 
+              OR SW-PAR-DAV-56  NOT =  ALL "1"
+              OR SW-PAR-DAV-57  NOT =  ALL "1"
+              OR SW-PAR-DAV-58  NOT =  ALL "1" 
+              OR SW-PAR-DAV-59  NOT =  ALL "1"
+               MOVE  SPACES            TO   MENSAJE-EMAIL
+               STRING
+                 "PESCODV:*VERIFICAR CARGUES.     "  DELIMITED BY SIZE
+                                     INTO  MENSAJE-EMAIL
+               END-STRING
+               CALL "SYSTEM"        USING  COMANDO-EMAIL
+             END-IF
+      *** PARAMETRO 55.
+              PERFORM  VARYING  DAVISC-TRABAJO  FROM  1  BY  1
+               UNTIL  DAVISC-TRABAJO  >  4
+               DISPLAY " PARAMETRO: "
+                       TAB-RANGO-FIN(DAVISC-TRABAJO)
+                       " - "  TAB-RANGO-PUNT(DAVISC-TRABAJO)
+                       " - "  TAB-RANGO-PUNT(DAVISC-TRABAJO)
+              END-PERFORM
+      *** PARAMETRO 56.
+              PERFORM  VARYING  DAVISC-TRABAJO  FROM  1  BY  1
+               UNTIL  DAVISC-TRABAJO  >  4
+               DISPLAY " PARAMETRO: "
+                        TAB-ANTIG-FIN(DAVISC-TRABAJO)
+                       " - "  TAB-ANTIG-PUNT(DAVISC-TRABAJO)
+                       " - "  TAB-ANTIG-PUNT(DAVISC-TRABAJO)
+              END-PERFORM
+      *** PARAMETRO 57.
+              PERFORM  VARYING  DAVISC-TRABAJO  FROM  1  BY  1
+               UNTIL  DAVISC-TRABAJO  >  5
+               DISPLAY " PARAMETRO: "
+                        TAB-CLIEN-DESC-PRODU(DAVISC-TRABAJO)
+                       " - "  TAB-CLIEN-TASA-PRODU(DAVISC-TRABAJO)
+                       " - "  TAB-CLIEN-TASA-PRODU(DAVISC-TRABAJO)
+              END-PERFORM
+      *** PARAMETRO 58.
+              PERFORM  VARYING  DAVISC-TRABAJO  FROM  1  BY  1
+               UNTIL  DAVISC-TRABAJO  >  3
+               DISPLAY " PARAMETRO: " 
+                        TAB-PESO-DESC-VARIA(DAVISC-TRABAJO)
+                       " - "  TAB-PESO-TASA-VARIA(DAVISC-TRABAJO)
+                       " - "  TAB-PESO-TASA-VARIA(DAVISC-TRABAJO)
+              END-PERFORM
+      *** PARAMETRO 59.
+              PERFORM  VARYING  DAVISC-TRABAJO  FROM  1  BY  1
+               UNTIL  DAVISC-TRABAJO  >  1
+               DISPLAY " PARAMETRO: "
+                        TAB-PESO-DES-SCORE(DAVISC-TRABAJO)
+                       " - "  TAB-PESO-VAL-SCORE(DAVISC-TRABAJO)
+                       " - "  TAB-PESO-VAL-SCORE(DAVISC-TRABAJO)
+              END-PERFORM
+           END-IF
+           CLOSE PARAMDAVI
+      *     
+           MOVE TAB-PESO-TASA-VARIA(1)  TO DV-X
+           MOVE TAB-PESO-TASA-VARIA(2)  TO DV-Y
+           MOVE TAB-PESO-TASA-VARIA(3)  TO DV-W.           
+      *
+       1000-CARGAR-PARAMETRO.
+           PERFORM  1000-ABRIR-PARAMETRO-DAV
+           PERFORM  1100-CALCULOS-GENERAL.
+
+       1100-EVALUE-CAMPO.
+           ADD   1                     TO  DAVISC-CONTADOR
+           EVALUATE  PAR-CAMPO-DV
+             WHEN  55             
+               MOVE  1                 TO  SW-PAR-DAV-55
+               IF  PAR-POSI-DV  NOT  NUMERIC  OR
+                   PAR-POSI-DV  <  1 OR > 4
+                 STRING
+                   "PESCODV: *ERR* OPCION NO VALIDA-CAMPO 55."
+                                                      DELIMITED BY SIZE
+                    PAR-POSI-DV                        DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+                 END-STRING
+                 DISPLAY  WK-DV-ERROR
+                 MOVE  6               TO  SW-CARGUE-DAVI
+               ELSE
+                 IF   TAB-RANGO-FIN(PAR-POSI-DV)  NOT =  SPACES
+                     DISPLAY "PESCODV: ANTES= "
+                               TAB-RANGO-FIN(PAR-POSI-DV)
+                             " "
+                              TAB-RANGO-PUNT(PAR-POSI-DV)
+                             " ACTUALIZADO CON: "  PAR-VALOR-DAV
+                     MOVE  PAR-VALOR-DAV
+                                   TO TAB-RANGO-PUNT(PAR-POSI-DV)
+                 END-IF
+               END-IF
+             WHEN  56
+               MOVE  1                 TO  SW-PAR-DAV-56
+               IF  PAR-POSI-DV  NOT  NUMERIC  OR
+                   PAR-POSI-DV  <  1  OR > 4
+                 STRING
+                   "PESCODV: *ERR* OPCION NO VALIDA-CAMPO 56."
+                                                      DELIMITED BY SIZE
+                    PAR-POSI-DV                        DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+                 END-STRING
+                 DISPLAY  WK-DV-ERROR
+                 MOVE  6               TO  SW-CARGUE-DAVI
+               ELSE
+                 IF  TAB-ANTIG-FIN(PAR-POSI-DV)  NOT =  SPACES
+                     DISPLAY "PESCODV: ANTES= "
+                              TAB-ANTIG-FIN(PAR-POSI-DV)
+                             " "
+                              TAB-ANTIG-PUNT(PAR-POSI-DV)
+                             " ACTUALIZADO CON: "  PAR-VALOR-DAV
+                     MOVE  PAR-VALOR-DAV
+                                   TO TAB-ANTIG-PUNT(PAR-POSI-DV)
+                 END-IF
+               END-IF
+             WHEN  57
+               MOVE  1                 TO  SW-PAR-DAV-57
+               IF  PAR-POSI-DV  NOT  NUMERIC  OR
+                   PAR-POSI-DV  <  1  OR > 6
+                 STRING
+                   "PESCODV: *ERR* OPCION NO VALIDA-CAMPO 57."
+                                                      DELIMITED BY SIZE
+                    PAR-POSI-DV                        DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+                 END-STRING
+                 DISPLAY  WK-DV-ERROR
+                 MOVE  6               TO  SW-CARGUE-DAVI
+               ELSE
+                 IF  TAB-CLIEN-DESC-PRODU(PAR-POSI-DV)  NOT =  SPACES
+                     DISPLAY "PESCODV: ANTES= "
+                              TAB-CLIEN-DESC-PRODU(PAR-POSI-DV)
+                             " "
+                              TAB-CLIEN-TASA-PRODU(PAR-POSI-DV)
+                             " ACTUALIZADO CON: "  PAR-VALOR-DAV
+                     MOVE  PAR-VALOR-DAV
+                                   TO TAB-CLIEN-TASA-PRODU(PAR-POSI-DV)
+                 END-IF
+               END-IF
+             WHEN  58
+               MOVE  1                 TO  SW-PAR-DAV-58
+               IF  PAR-POSI-DV  NOT  NUMERIC  OR
+                   PAR-POSI-DV  <  1  OR > 4
+                 STRING
+                   "PESCODV: *ERR* OPCION NO VALIDA-CAMPO 58."
+                                                      DELIMITED BY SIZE
+                    PAR-POSI-DV                        DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+                 END-STRING
+                 DISPLAY  WK-DV-ERROR
+                 MOVE  6               TO  SW-CARGUE-DAVI
+               ELSE
+                 IF  TAB-PESO-DESC-VARIA(PAR-POSI-DV)  NOT =  SPACES
+                     DISPLAY "PESCODV: ANTES= "
+                              TAB-PESO-DESC-VARIA(PAR-POSI-DV)
+                             " "
+                              TAB-PESO-TASA-VARIA(PAR-POSI-DV)
+                             " ACTUALIZADO CON: "  PAR-VALOR-DAV
+                     MOVE  PAR-VALOR-DAV
+                                   TO TAB-PESO-TASA-VARIA(PAR-POSI-DV)
+                 END-IF
+               END-IF
+             WHEN  59
+               MOVE  1                 TO  SW-PAR-DAV-59
+               IF  PAR-POSI-DV  NOT  NUMERIC  OR
+                   PAR-POSI-DV  <  1  OR > 2
+                 STRING
+                   "PESCODV: *ERR* OPCION NO VALIDA-CAMPO 59."
+                                                      DELIMITED BY SIZE
+                    PAR-POSI-DV                        DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+                 END-STRING
+                 DISPLAY  WK-DV-ERROR
+                 MOVE  6               TO  SW-CARGUE-DAVI
+               ELSE
+                 IF  TAB-PESO-DESC-VARIA(PAR-POSI-DV)  NOT =  SPACES
+                     DISPLAY "PESCODV: ANTES= "
+                              TAB-PESO-DESC-VARIA(PAR-POSI-DV)
+                             " "
+                              TAB-PESO-TASA-VARIA(PAR-POSI-DV)
+                             " ACTUALIZADO CON: "  PAR-VALOR-DAV
+                     MOVE  PAR-VALOR-DAV
+                                   TO TAB-PESO-TASA-VARIA(PAR-POSI-DV)
+                 END-IF
+               END-IF
+             WHEN  OTHER
+               STRING
+                "PESCODV: *ERR* NO EXISTE PARAMETRO"  DELIMITED BY SIZE
+                 PAR-CAMPO-DV                         DELIMITED BY SIZE
+                " REGISTRO: "                         DELIMITED BY SIZE
+                 DAVISC-CONTADOR                      DELIMITED BY SIZE
+                                     INTO  WK-DV-ERROR
+               END-STRING
+           END-EVALUATE.
+      *
+       1100-CALCULOS-GENERAL.
+REMARK*SE CALCULA EL ACIERTA +
+            MOVE  ENT-TIPO-ID          TO  TIP-ID-ALE
+            MOVE  ENT-NUME-ID          TO  NUM-ID-ALE
+            MOVE  FUNCTION CURRENT-DATE(1:6) TO  FECHA-RUN-DATE
+            MOVE  FUNCTION CURRENT-DATE(1:8) TO  ULTIMO-TRI
+            MOVE  PARAM-SCORE          TO  TIP-SCO-GENERICO
+            IF  PARAM-SCORE  =  4
+              MOVE  A-SCORE            TO  SCORE-SLD
+                                           TEM-SCORE
+              MOVE  A-ADVERSE-RAZON(1)   TO  RAZON1-SLD
+              MOVE  A-ADVERSE-RAZON(2)   TO  RAZON2-SLD
+              MOVE  A-ADVERSE-RAZON(3)   TO  RAZON3-SLD
+              MOVE  A-ADVERSE-RAZON(4)   TO  RAZON4-SLD
+            ELSE
+              IF  PARAM-SCORE  =  67
+                MOVE FUNCTION CURRENT-DATE(1:6) TO FECHA-RUN-CARACT
+                MOVE 1 TO GEN-NUM-CARACT
+                              GEN-INQ-CARACT GEN-MOR-CARACT
+                              GEN-EXP-CARACT GEN-DEM-CARACT
+                              GEN-ACP-CARACT GEN-END-CARACT
+                MOVE ENT-TIPO-ID  TO TIPO-ID-CARACT
+                MOVE ENT-NUME-ID  TO NRO-ID-CARACT
+                PERFORM 5000-CALCULAR-CAR-SCORE-USAHD
+                MOVE  SCORE-USAHD        TO  SCORE-SLD  TEM-SCORE
+                MOVE  ADVERSE-RAZON-USAHD(1) TO RAZON1-SLD
+                MOVE  ADVERSE-RAZON-USAHD(2) TO RAZON2-SLD
+                MOVE  ADVERSE-RAZON-USAHD(3) TO RAZON3-SLD
+                MOVE  ADVERSE-RAZON-USAHD(4) TO RAZON4-SLD
+                PERFORM  VARYING IND-J FROM 1 BY 1
+                  UNTIL  IND-J > 4 OR CUAL-PRO-EXT(IND-J) =  ZEROS
+                END-PERFORM
+                IF  SCORE-SLD > ZEROS
+                  MOVE "PRO"           TO  OTRO-PRO-EXT
+                  MOVE  67             TO  CUAL-PRO-EXT(IND-J)
+                END-IF
+              END-IF
+            END-IF
+           PERFORM  1200-GENERAR-DATOS-LOG-DAV.
+           
+      ******************************************************************
+      *1200-GENERAR-DATOS-LOG-DAV.                                      
+      *     ABRIR Y CARGAR VALORES DEL ARCHIVO DE PARAMETROS DAVIVIENDA                                                                     
+      ******************************************************************
+       1200-GENERAR-DATOS-LOG-DAV.
+REMARK*ANTIGUEDAD EN EL SECTOR FINANCIERO
+           PERFORM  1300-BUSCA-ANT-SF
+REMARK*CLIENTE DAVIVIENDA
+           PERFORM  1400-BUSCA-CLIE-DAV
+REMARK*PRODUCTOS SECTOR FINANCIERO
+           PERFORM  1500-BUSCA-PROD-SF.          
+      *
+       1200-CALCULAR-SCORE.
+           MOVE  SCORE-SLD    TO   DV-SCORE-SLD
+           PERFORM VARYING DV-SC  FROM  1  BY 1  UNTIL DV-SC > 04
+            IF DV-SC = 1
+               MOVE TAB-RANGO-INI(DV-SC)  TO DV-TASA-INI1
+               MOVE TAB-RANGO-FIN(DV-SC)  TO DV-TASA-FIN1
+               MOVE TAB-RANGO-PUNT(DV-SC) TO DV-PUNT-AC1
+            ELSE
+              IF DV-SC = 2
+                 MOVE TAB-RANGO-INI(DV-SC)  TO DV-TASA-INI2
+                 MOVE TAB-RANGO-FIN(DV-SC)  TO DV-TASA-FIN2
+                 MOVE TAB-RANGO-PUNT(DV-SC) TO DV-PUNT-AC2
+              ELSE
+                IF DV-SC = 3              
+                   MOVE TAB-RANGO-INI(DV-SC)  TO DV-TASA-INI3
+                   MOVE TAB-RANGO-FIN(DV-SC)  TO DV-TASA-FIN3
+                   MOVE TAB-RANGO-PUNT(DV-SC) TO DV-PUNT-AC3
+                ELSE              
+                     MOVE TAB-RANGO-INI(DV-SC)  TO DV-TASA-INI4
+                     MOVE TAB-RANGO-FIN(DV-SC)  TO DV-TASA-FIN4
+                     MOVE TAB-RANGO-PUNT(DV-SC) TO DV-PUNT-AC4                   
+                END-IF
+              END-IF              
+            END-IF
+           END-PERFORM
+      *    
+           IF (DV-SCORE-SLD >= DV-TASA-INI1) AND
+               (DV-SCORE-SLD <= DV-TASA-FIN1)
+              MOVE DV-PUNT-AC1        TO  DV-TASA-ACIERTA
+           ELSE
+             IF (DV-SCORE-SLD >= DV-TASA-INI2) AND
+                (DV-SCORE-SLD <= DV-TASA-FIN2)
+                MOVE DV-PUNT-AC2        TO  DV-TASA-ACIERTA
+             ELSE
+               IF (DV-SCORE-SLD >= DV-TASA-INI3) AND
+                   (DV-SCORE-SLD <= DV-TASA-FIN3)
+                  MOVE DV-PUNT-AC3        TO  DV-TASA-ACIERTA
+               ELSE
+                 IF (DV-SCORE-SLD >= DV-TASA-INI4) AND
+                     (DV-SCORE-SLD <= DV-TASA-FIN4)
+                    MOVE DV-PUNT-AC4        TO  DV-TASA-ACIERTA
+                 ELSE                    
+                    MOVE ZEROES     TO   DV-TASA-ACIERTA
+                 END-IF                    
+               END-IF
+             END-IF
+           END-IF.
+      *
+       1300-BUSCA-ANT-SF.
+           IF TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1
+              AND SW-CODEUDOR  =  0
+                 ADD 1              TO    DV-CONT-ANTI
+                 MOVE  FECHA-APERT-ABD06   TO  W-FECHA-AUX
+                 MOVE  W-MES-AUX           TO  W-FMILENIO-MES
+                 MOVE  W-ANO-AUX           TO  W-FMILENIO-ANIO
+                 MOVE  30                  TO  W-FMILENIO-DIA
+                 IF  W-ANO-AUX  >  61
+                   MOVE  19                TO  W-FMILENIO-SIGLO
+                 ELSE
+                   MOVE  20                TO  W-FMILENIO-SIGLO
+                 END-IF
+                 COMPUTE  W-MESES-ANTIGUEDAD  =
+                     ((W-ANIO-HOY      * 12) + W-MES-HOY) -
+                     ((W-FMILENIO-SSAA * 12) + W-FMILENIO-MES)
+                 MOVE W-MESES-ANTIGUEDAD   TO  DV-MES-ANTIGUE
+           END-IF
+           PERFORM VARYING DV-SC  FROM  1  BY 1  UNTIL DV-SC > 04
+            IF DV-SC = 1
+               MOVE TAB-ANTIG-INI(DV-SC)  TO DV-ANTI-INI1
+               MOVE TAB-ANTIG-FIN(DV-SC)  TO DV-ANTI-FIN1
+               MOVE TAB-ANTIG-PUNT(DV-SC) TO DV-ANTI-AC1
+            ELSE
+              IF DV-SC = 2
+                 MOVE TAB-ANTIG-INI(DV-SC)  TO DV-ANTI-INI2
+                 MOVE TAB-ANTIG-FIN(DV-SC)  TO DV-ANTI-FIN2
+                 MOVE TAB-ANTIG-PUNT(DV-SC) TO DV-ANTI-AC2
+              ELSE        
+                IF DV-SC = 3              
+                   MOVE TAB-ANTIG-INI(DV-SC)  TO DV-ANTI-INI3
+                   MOVE TAB-ANTIG-FIN(DV-SC)  TO DV-ANTI-FIN3
+                   MOVE TAB-ANTIG-PUNT(DV-SC) TO DV-ANTI-AC3
+                ELSE                   
+                   MOVE TAB-ANTIG-INI(DV-SC)  TO DV-ANTI-INI4
+                   MOVE TAB-ANTIG-FIN(DV-SC)  TO DV-ANTI-FIN4
+                   MOVE TAB-ANTIG-PUNT(DV-SC) TO DV-ANTI-AC4
+                END-IF   
+              END-IF
+            END-IF
+           END-PERFORM.
+      *
+       1400-BUSCA-MES-ANTIGUO.
+           IF (DV-MES-ANTIGUE  >= DV-ANTI-INI1) AND
+               (DV-MES-ANTIGUE <= DV-ANTI-FIN1)
+              MOVE DV-ANTI-AC1        TO  DV-ANTIG-PUNT
+           ELSE
+             IF (DV-MES-ANTIGUE >= DV-ANTI-INI2) AND
+                (DV-MES-ANTIGUE <= DV-ANTI-FIN2)
+                MOVE DV-ANTI-AC2        TO  DV-ANTIG-PUNT
+             ELSE
+               IF (DV-MES-ANTIGUE >= DV-ANTI-INI3) AND
+                  (DV-MES-ANTIGUE <= DV-ANTI-FIN3)
+                  MOVE DV-ANTI-AC3        TO  DV-ANTIG-PUNT
+               ELSE                  
+                 IF (DV-MES-ANTIGUE >= DV-ANTI-INI4) AND
+                    (DV-MES-ANTIGUE <= DV-ANTI-FIN4)
+                    MOVE DV-ANTI-AC4        TO  DV-ANTIG-PUNT                  
+                 ELSE
+                    MOVE ZEROES     TO   DV-ANTIG-PUNT
+                 END-IF
+               END-IF               
+             END-IF
+           END-IF.
+      *
+       1400-BUSCA-CLIE-DAV.       
+           ADD 1           TO    DV-CONT-CLIE
+           MOVE "N"            TO  SW-CLTE-DAVIENDA
+           IF  TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1
+             IF  SW-CODEUDOR  =  ZEROS
+                  MOVE "S"         TO  SW-CLTE-DAVIENDA
+             END-IF
+           ELSE
+             IF  SW-CODEUDOR  =  ZEROS       AND
+                 W-MESES-NOV         <=  36  AND
+                 W-MESES-ANTIGUEDAD  >=  12
+               MOVE "S"            TO  SW-CLTE-DAVIENDA
+             END-IF
+           END-IF.
+      *
+       1500-BUSCA-PROD-SF.
+           IF TAB-VIGENTES-CARTERA(NOV-REPORT-ABD07) = 1
+              IF COD-CTA-ABD07 = 13
+                  MOVE  1      TO  SW-SI-GAR-DAVI
+                  MOVE "GARANTIA"  TO DV-PRODUCTO
+              ELSE                            
+                IF (COD-CTA-ABD07 = 02 OR 03 OR 04 OR 45 OR
+                                 05 OR 06 OR 27 OR 07 OR
+                                 08 OR 13 OR 14 OR 18 OR
+                                 26 OR 33 OR 28 OR 43 OR
+                                 44 OR 48) AND
+                                 DV-PRODUCTO <> "GARANTIA" 
+                  MOVE 1    TO  SW-NO-GAR-DAVI
+                  MOVE "NO GARANTIA"  TO DV-PRODUCTO
+                END-IF                
+              END-IF
+           END-IF.
+      *
+       1500-INICI-VAR-DAVIENDA.
+           MOVE ZEROS TO SW-SI-GAR-DAVI  SW-NO-GAR-DAVI  SW-NO-PROD-DAVI
+           MOVE SPACES     TO SW-CLTE-DAVIENDA
+           MOVE 1    TO  SW-NO-PROD-DAVI                                
+           MOVE "NO PRODUCTOS"  TO DV-PRODUCTO.                                 
+      
+      *
+       1600-CALC-SEGMENTO.
+           MOVE ZEROS  TO DV-X1 DV-X2 DV-X3
+           MOVE DV-TASA-ACIERTA  TO DV-X1
+           MOVE DV-ANTIG-PUNT    TO DV-X2
+      *                       
+           IF SW-CLTE-DAVIENDA = "S" AND SW-SI-GAR-DAVI = 1
+              MOVE TAB-CLIEN-TASA-PRODU(1)  TO DV-X3
+           ELSE
+             IF SW-CLTE-DAVIENDA = "S" AND SW-NO-GAR-DAVI = 1
+                MOVE TAB-CLIEN-TASA-PRODU(2)  TO DV-X3
+             ELSE
+               IF SW-CLTE-DAVIENDA = "N" AND SW-SI-GAR-DAVI = 1
+                   MOVE TAB-CLIEN-TASA-PRODU(3)  TO DV-X3
+               ELSE
+                 IF  SW-CLTE-DAVIENDA = "N" AND SW-NO-GAR-DAVI = 1
+                     MOVE TAB-CLIEN-TASA-PRODU(4)  TO DV-X3
+                 ELSE
+                   IF SW-CLTE-DAVIENDA = "N" AND SW-NO-PROD-DAVI = 1
+                      MOVE TAB-CLIEN-TASA-PRODU(5)  TO DV-X3
+                   END-IF
+                 END-IF
+               END-IF
+             END-IF
+           END-IF
+      *     
+           COMPUTE DV-SCORE-FINAL = ((DV-X) * (DV-X1) +
+                               (DV-Y) * (DV-X2) +
+                               (DV-W) * (DV-X3))
+           COMPUTE   DV-SCORE ROUNDED = DV-SCORE-FINAL 
+      *
+           IF DV-SCORE >=  TAB-PESO-VAL-SCORE(1)
+              MOVE 1     TO DV-SEGMENTO
+           ELSE
+              MOVE 0     TO DV-SEGMENTO
+           END-IF.

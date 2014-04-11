@@ -1,0 +1,1303 @@
+REMARK*CARACTPER-006.PROC.v.0005.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 006
+REMARK*    BANCO CAJA SOCIAL
+REMARK******************************************************************
+REMARK* EHA0002     * RQ4022 - SE INCLUYE LOGICA PARA VARIBLES POR     *
+REMARK* DIC/2011    *          DEMANDA. REQ 4022.                      *
+REMARK******************************************************************
+REMARK* CAV0003     * RQ5522 - SE INCLUYEN CARACTERISTICAS TIPOLOGIA   *
+REMARK* ABR/2012    *          EXP NIVEL 02.                           *
+REMARK******************************************************************
+REMARK* IMS0004     * RQ6437 - SE INCLUYEN CARACTERISTICAS CURRENT DATE*
+REMARK* JUN/2012    * RQ6260   SALARIO MINIMO Y NUMERO DE TRANSACCION  *
+REMARK* M.SALAMANCA *          MOTOR.   CQ6437 Y 6260.                 *
+REMARK******************************************************************
+REMARK* CAV0004     * RQ6505 - SE INCLUYEN CARACTERISTICAS TIPOLOGIA   *
+REMARK* JUN/2012    *          END 02END989FI006.                      *
+REMARK******************************************************************
+REMARK* IMS0005     * CQ6726 - SE TOMA CARACTERISTICA ESTANDARD Y SE   *
+REMARK* JUL/2012    *          MUESTRA COMO PERSONALIZADA.             *
+REMARK* M.SALAMANCA *                            CQ6726                *
+REMARK******************************************************************
+REMARK* DLM0005     * CQ6726 - AJUSTES.                                *
+REMARK* JUL-2012    *   REQ. CQ. 6726.                                 *
+REMARK* DARIO LASSO *                                                  *
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-006.
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR999FI006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR999FI006) TO L-AUX
+               MOVE 02MOR999FI006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR998FI006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR998FI006) TO L-AUX
+               MOVE 02MOR998FI006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR997FI006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR997FI006) TO L-AUX
+               MOVE 02MOR997FI006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR996FI006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR996FI006) TO L-AUX
+               MOVE 02MOR996FI006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR995CC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR995CC006) TO L-AUX
+               MOVE 02MOR995CC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR994CC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR994CC006) TO L-AUX
+               MOVE 02MOR994CC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR993CC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR993CC006) TO L-AUX
+               MOVE 02MOR993CC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR992CC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR992CC006) TO L-AUX
+               MOVE 02MOR992CC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR991OT006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR991OT006) TO L-AUX
+               MOVE 02MOR991OT006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR990OT006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR990OT006) TO L-AUX
+               MOVE 02MOR990OT006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR989OT006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR989OT006) TO L-AUX
+               MOVE 02MOR989OT006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR988OT006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR988OT006) TO L-AUX
+               MOVE 02MOR988OT006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR987CO006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR987CO006) TO L-AUX
+               MOVE 02MOR987CO006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR986CO006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR986CO006) TO L-AUX
+               MOVE 02MOR986CO006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR985CO006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR985CO006) TO L-AUX
+               MOVE 02MOR985CO006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02MOR984CO006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02MOR984CO006) TO L-AUX
+               MOVE 02MOR984CO006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END999FI006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END999FI006) TO L-AUX
+               MOVE 02END999FI006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END998TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END998TC006) TO L-AUX
+               MOVE 02END998TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END997RO006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END997RO006) TO L-AUX
+               MOVE 02END997RO006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END996HP006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END996HP006) TO L-AUX
+               MOVE 02END996HP006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END995IN006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END995IN006) TO L-AUX
+               MOVE 02END995IN006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END994TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END994TC006) TO L-AUX
+               MOVE 02END994TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END993TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END993TC006) TO L-AUX
+               MOVE 02END993TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END992TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END992TC006) TO L-AUX
+               MOVE 02END992TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END991TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END991TC006) TO L-AUX
+               MOVE 02END991TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "02END990TC006" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(02END990TC006) TO L-AUX
+               MOVE 02END990TC006(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+RQ5522         *>                                                       CAV0003
+RQ5522         ADD 1 TO I-VAR-PER                                       CAV0003
+RQ5522         MOVE "02EXP999TO006" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+RQ5522         MOVE FUNCTION LENGTH(02EXP999TO006) TO L-AUX             CAV0003
+RQ5522         MOVE 02EXP999TO006(1:L-AUX)   TO                         CAV0003
+RQ5522                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+RQ5522         *>                                                       CAV0003
+RQ5522         ADD 1 TO I-VAR-PER                                       CAV0003
+RQ5522         MOVE "02EXP998TO006" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+RQ5522         MOVE FUNCTION LENGTH(02EXP998TO006) TO L-AUX             CAV0003
+RQ5522         MOVE 02EXP998TO006(1:L-AUX)   TO                         CAV0003
+RQ5522                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+RQ5522         *>                                                       CAV0003
+RQ5522         ADD 1 TO I-VAR-PER                                       CAV0003
+RQ5522         MOVE "02EXP997TO006" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+RQ5522         MOVE FUNCTION LENGTH(02EXP997TO006) TO L-AUX             CAV0003
+RQ5522         MOVE 02EXP997TO006(1:L-AUX)   TO                         CAV0003
+RQ5522                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+RQ5522         *>                                                       CAV0003
+RQ5522         ADD 1 TO I-VAR-PER                                       CAV0003
+RQ5522         MOVE "02EXP996TO006" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0003
+RQ5522         MOVE FUNCTION LENGTH(02EXP996TO006) TO L-AUX             CAV0003
+RQ5522         MOVE 02EXP996TO006(1:L-AUX)   TO                         CAV0003
+RQ5522                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0003
+               *>
+               ADD 1 TO I-VAR-PER
+               MOVE "NODESEADOSBCSC" TO NOMBRE-VAR-PER(I-VAR-PER)
+               MOVE FUNCTION LENGTH(NODESEADOSBCSC) TO L-AUX
+               MOVE NODESEADOSBCSC(1:L-AUX)   TO
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)
+RQ4022         *> MONTO A OTORGAR                                       EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "POSIBLEOTORGAR" TO NOMBRE-VAR-PER(I-VAR-PER)       EHA0002
+RQ4022         MOVE FUNCTION LENGTH(MONTO-OTORGAR) TO L-AUX             EHA0002
+RQ4022         MOVE MONTO-OTORGAR(1:L-AUX)   TO                         EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> PLAZO                                                 EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "PLAZO" TO NOMBRE-VAR-PER(I-VAR-PER)                EHA0002
+RQ4022         MOVE FUNCTION LENGTH(PLAZO) TO L-AUX                     EHA0002
+RQ4022         MOVE PLAZO(1:L-AUX)   TO                                 EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> TASA CREDITO VIVIENDA                                 EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "TCVIVIENDA" TO NOMBRE-VAR-PER(I-VAR-PER)           EHA0002
+RQ4022         MOVE FUNCTION LENGTH(TASA-VIVIENDA) TO L-AUX             EHA0002
+RQ4022         MOVE TASA-VIVIENDA(1:L-AUX)   TO                         EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> NUMERO CONSULTAS DECISOR                              EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "NCONSDECISOR" TO NOMBRE-VAR-PER(I-VAR-PER)         EHA0002
+RQ4022         MOVE FUNCTION LENGTH(NROCONSDECISOR) TO L-AUX            EHA0002
+RQ4022         MOVE NROCONSDECISOR(1:L-AUX)   TO                        EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> SISTEMA AMORTIZACION                                  EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "SAMORTIZACION" TO NOMBRE-VAR-PER(I-VAR-PER)        EHA0002
+CQ6726         MOVE FUNCTION LENGTH(SIS-AMORT(11:1)) TO L-AUX           DLM0005
+CQ6726         MOVE SIS-AMORT(11:L-AUX)   TO                            DLM0005
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> PERFIL OTORGAMIENTO ANTERIOR                          EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "OTORGANTERIOR" TO NOMBRE-VAR-PER(I-VAR-PER)        EHA0002
+RQ4022         MOVE FUNCTION LENGTH(PERFIL-OTORGAMIENTO) TO L-AUX       EHA0002
+RQ4022         MOVE PERFIL-OTORGAMIENTO(1:L-AUX)   TO                   EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> DECISION ANTERIOR                                     EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "DANTERIOR" TO NOMBRE-VAR-PER(I-VAR-PER)            EHA0002
+RQ4022         MOVE FUNCTION LENGTH(DECISION-ANTERIOR) TO L-AUX         EHA0002
+RQ4022         MOVE DECISION-ANTERIOR(1:L-AUX)   TO                     EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> RESPUESTA ANTERIOR                                    EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "RANTERIOR" TO NOMBRE-VAR-PER(I-VAR-PER)            EHA0002
+RQ4022         MOVE FUNCTION LENGTH(RES-ANTERIOR) TO L-AUX              EHA0002
+RQ4022         MOVE RES-ANTERIOR(1:L-AUX)   TO                          EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ4022         *> FECHA RESPUESTA                                       EHA0002
+RQ4022         ADD 1 TO I-VAR-PER                                       EHA0002
+RQ4022         MOVE "FRESPUESTA" TO NOMBRE-VAR-PER(I-VAR-PER)           EHA0002
+RQ4022         MOVE FUNCTION LENGTH(FEC-RESPUESTA) TO L-AUX             EHA0002
+RQ4022         MOVE FEC-RESPUESTA(1:L-AUX)   TO                         EHA0002
+RQ4022                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       EHA0002
+RQ6437         ADD   1                 TO  I-VAR-PER                    IMS0004
+RQ6437         MOVE "00DEM031000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0004
+RQ6437         MOVE  FUNCTION LENGTH(00DEM031000) TO L-AUX              IMS0004
+RQ6437         MOVE  00DEM031000(1:L-AUX)  TO                           IMS0004
+RQ6437                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+RQ6437                                                                  IMS0004
+RQ6437         ADD   1                 TO  I-VAR-PER                    IMS0004
+RQ6437         MOVE "00DEM032000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0004
+RQ6437         MOVE  FUNCTION LENGTH(00DEM032000) TO L-AUX              IMS0004
+RQ6437         MOVE  00DEM032000(1:L-AUX)  TO                           IMS0004
+RQ6437                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+RQ6437                                                                  IMS0004
+RQ6437         ADD   1                 TO  I-VAR-PER                    IMS0004
+RQ6437         MOVE "00DEM033000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0004
+RQ6437         MOVE  FUNCTION LENGTH(00DEM033000) TO L-AUX              IMS0004
+RQ6437         MOVE  00DEM033000(1:L-AUX)  TO                           IMS0004
+RQ6437                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+RQ6437                                                                  IMS0004
+RQ6437         ADD   1                 TO  I-VAR-PER                    IMS0004
+RQ6437         MOVE "00DEM034000    "  TO  NOMBRE-VAR-PER(I-VAR-PER)    IMS0004
+RQ6437         MOVE  FUNCTION LENGTH(00DEM034000) TO L-AUX              IMS0004
+RQ6437         MOVE  00DEM034000(1:L-AUX)  TO                           IMS0004
+RQ6437                             VAL-VAR-PER(I-VAR-PER)(1:L-AUX)      IMS0004
+RQ6505         *>                                                       CAV0004
+RQ6505         ADD 1 TO I-VAR-PER                                       CAV0004
+RQ6505         MOVE "02END989FI006" TO NOMBRE-VAR-PER(I-VAR-PER)        CAV0004
+RQ6505         MOVE FUNCTION LENGTH(02END989FI006) TO L-AUX             CAV0004
+RQ6505         MOVE 02END989FI006(1:L-AUX)   TO                         CAV0004
+RQ6505                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       CAV0004
+RQ6260         *> NUMERO MAXIMO ID DECISOR                              IMS0004
+RQ6260         ADD 1 TO I-VAR-PER                                       IMS0004
+RQ6260         MOVE "NMAXID"       TO NOMBRE-VAR-PER(I-VAR-PER)         IMS0004
+RQ6260         MOVE FUNCTION LENGTH(WS-MAX-ID-PER)  TO L-AUX            IMS0004
+RQ6260         MOVE WS-MAX-ID-PER(1:L-AUX)   TO                         IMS0004
+RQ6260                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0004
+CQ6726         *>                                                       IMS0005
+CQ6726         MOVE 01END005(4)(1:11)    TO 02END988HP006(1:11)         IMS0005
+CQ6726         ADD 1 TO I-VAR-PER                                       IMS0005
+CQ6726         MOVE "02END988HP006" TO NOMBRE-VAR-PER(I-VAR-PER)        IMS0005
+CQ6726         MOVE FUNCTION LENGTH(02END988HP006)  TO L-AUX            IMS0005
+CQ6726         MOVE 02END988HP006(1:L-AUX)   TO                         IMS0005
+CQ6726                            VAL-VAR-PER(I-VAR-PER)(1:L-AUX)       IMS0005
+RQ4022         .                                                        EHA0002
+
+REMARK 0000-INICIALIZAR-CARAC-EXT-06.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-06.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 06    *
+REMARK*     PARA BANCO CAJA SOCIAL
+REMARK******************************************************************
+             MOVE ALL "  -1" TO PER-06-NIVEL-02-MOR
+             MOVE ALL "         -1" TO PER-06-NIVEL-02-END
+             MOVE ZEROS TO 02ENDV999FI006 02ENDV998TC006 02ENDV997RO006
+                           02ENDV996HP006 02ENDV995IN006 02ENDV994TC006
+                           02ENDV993TC006 02ENDV992TC006 02ENDV991TC006
+RQ6505                     02ENDV990TC006 02ENDV989FI006                CAV0004
+RQ5522       MOVE "  -1" TO 02EXP999TO006(1:4) 02EXP998TO006(1:4)       CAV0003
+RQ5522       MOVE  999   TO 02EXP997TO006 02EXP996TO006                 CAV0003
+RQ4022       MOVE ZEROS TO MONTO-OTORGAR PLAZO TASA-VIVIENDA            EHA0002
+RQ4022                     NROCONSDECISOR FEC-RESPUESTA RES-ANTERIOR    EHA0002
+RQ6260                     WS-MAX-ID-PER                                IMS0004
+RQ6260*      MOVE ALL "-"   TO SIS-AMORT                                IMS0004
+RQ6260       MOVE     "0"   TO SIS-AMORT(11:1)                          IMS0004
+RQ4022       MOVE SPACES    TO PERFIL-OTORGAMIENTO DECISION-ANTERIOR    EHA0002
+RQ4022       MOVE "NA"      TO PERFIL-OTORGAMIENTO DECISION-ANTERIOR    EHA0002
+             MOVE ZEROS TO NODESEADOSBCSC.
+             
+RQ6437       PERFORM  9999-CARAC-GENERALES.                             IMS0004
+
+       2249-PROCESE-CARCT-00MOR-EXT-06.
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00MOR-EXT-06.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00MOR Y 02MOR BCSC
+REMARK******************************************************************
+          MOVE ALL "  -1" TO PER-06-NIVEL-00-MOR 
+                             PER-06-NIVEL-00-MOR-TMP
+REMARK*** INSUMO:CARACTERISTICAS USA:
+REMARK*** 00MOR999FI006 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+REMARK*** 00MOR998FI006 *** MORA HISTORICA DE  60 EN ULTIMOS 12 MESES
+REMARK*** 00MOR997FI006 *** MORA HISTORICA DE  90 EN ULTIMOS 12 MESES
+REMARK*** 00MOR996FI006 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+REMARK*    DISPLAY LLAVE-MAES-CREDIT " " COD-PORTAF-CARACT " "
+REMARK*            NOV-REPORT-ABD07 " "FECHA-ESTADO-CARACT " " 
+REMARK*            V-NOR-CARACT             
+           MOVE 12 TO P-CARACT
+           IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" OR
+                                  "CC" OR "OT" OR "CO"
+            MOVE ZEROS TO 00MOR109006 00MOR110006 
+                          00MOR111006 00MOR112006
+            IF FECHA-APERT-CARACT > ZEROS
+             IF (MESES-MADUR-CARACT) > 0
+              IF (MESES-NOVAP-CARACT + 1) >= (P-CARACT/3)
+                  COMPUTE I-CARACT = (48 - P-CARACT) + 1
+                  PERFORM VARYING J-CARACT FROM 1 BY 1 UNTIL
+                          J-CARACT > P-CARACT
+                    IF V-NOR-CARACT(I-CARACT:1) = 1
+                       ADD 1 TO 00MOR109006
+                    END-IF
+                    IF V-NOR-CARACT(I-CARACT:1) = 2
+                       ADD 1 TO 00MOR110006
+                    END-IF
+                    IF V-NOR-CARACT(I-CARACT:1) = 3
+                       ADD 1 TO 00MOR111006
+                    END-IF
+                    IF V-NOR-CARACT(I-CARACT:1) >= 4
+                       ADD 1 TO 00MOR112006
+                    END-IF
+                    ADD 1 TO I-CARACT
+                  END-PERFORM
+              ELSE
+                MOVE "  -4" TO 00MOR109006(1:4)
+                MOVE "  -4" TO 00MOR110006(1:4)
+                MOVE "  -4" TO 00MOR111006(1:4)
+                MOVE "  -4" TO 00MOR112006(1:4)
+              END-IF
+             ELSE
+              MOVE "  -3" TO 00MOR109006(1:4)
+              MOVE "  -3" TO 00MOR110006(1:4)
+              MOVE "  -3" TO 00MOR111006(1:4)
+              MOVE "  -3" TO 00MOR112006(1:4)
+             END-IF
+            ELSE
+             MOVE "  -2" TO 00MOR109006(1:4)
+             MOVE "  -2" TO 00MOR110006(1:4)
+             MOVE "  -2" TO 00MOR111006(1:4)
+             MOVE "  -2" TO 00MOR112006(1:4)
+            END-IF
+           END-IF 
+           IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" OR "HP" 
+            MOVE ZEROS TO 00MOR999FI006 00MOR998FI006 00MOR997FI006 
+                          00MOR996FI006
+            IF FUNCTION NUMVAL(00MOR109006(1:4)) >= 0
+               MOVE 00MOR109006 TO 00MOR999FI006
+            ELSE
+               MOVE 00MOR109006(1:4) TO 00MOR999FI006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR110006(1:4)) >= 0
+               MOVE 00MOR110006 TO 00MOR998FI006
+            ELSE
+               MOVE 00MOR110006(1:4) TO 00MOR998FI006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR111006(1:4)) >= 0
+               MOVE 00MOR111006 TO 00MOR997FI006
+            ELSE
+               MOVE 00MOR111006(1:4) TO 00MOR997FI006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR112006(1:4)) >= 0
+               MOVE 00MOR112006 TO 00MOR996FI006
+            ELSE
+               MOVE 00MOR112006(1:4) TO 00MOR996FI006(1:4)
+            END-IF
+           END-IF
+REMARK***  02MOR999FI006 *** MAX # MORAS DE  30 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR999FI006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR999FI006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR999FI006
+              END-IF
+              IF 00MOR999FI006 > 02MOR999FI006
+                 MOVE 00MOR999FI006 TO 02MOR999FI006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR999FI006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR999FI006(1:4)) <
+                  FUNCTION NUMVAL(02MOR999FI006(1:4))
+                  MOVE 00MOR999FI006(1:4) TO 02MOR999FI006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR998FI006 *** MAX # MORAS DE  60 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR998FI006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR998FI006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR998FI006
+              END-IF
+              IF 00MOR998FI006 > 02MOR998FI006
+                 MOVE 00MOR998FI006 TO 02MOR998FI006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR998FI006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR998FI006(1:4)) <
+                  FUNCTION NUMVAL(02MOR998FI006(1:4))
+                  MOVE 00MOR998FI006(1:4) TO 02MOR998FI006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR997FI006 *** MAX # MORAS DE  90 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR997FI006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR997FI006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR997FI006
+              END-IF
+              IF 00MOR997FI006 > 02MOR997FI006
+                 MOVE 00MOR997FI006 TO 02MOR997FI006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR997FI006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR997FI006(1:4)) <
+                  FUNCTION NUMVAL(02MOR997FI006(1:4))
+                  MOVE 00MOR997FI006(1:4) TO 02MOR997FI006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR996FI006 *** MAX # MORAS DE 120 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR996FI006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR996FI006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR996FI006
+              END-IF
+              IF 00MOR996FI006 > 02MOR996FI006
+                 MOVE 00MOR996FI006 TO 02MOR996FI006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR996FI006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR996FI006(1:4)) <
+                  FUNCTION NUMVAL(02MOR996FI006(1:4))
+                  MOVE 00MOR996FI006(1:4) TO 02MOR996FI006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 00MOR995CC006 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+REMARK*** 00MOR994CC006 *** MORA HISTORICA DE  60 EN ULTIMOS 12 MESES
+REMARK*** 00MOR993CC006 *** MORA HISTORICA DE  90 EN ULTIMOS 12 MESES
+REMARK*** 00MOR992CC006 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+           IF COD-PORTAF-CARACT = "CC"
+            MOVE ZEROS TO 00MOR995CC006 00MOR994CC006 00MOR993CC006
+                          00MOR992CC006
+            IF FUNCTION NUMVAL(00MOR109006(1:4)) >= 0
+               MOVE 00MOR109006 TO 00MOR995CC006
+            ELSE
+               MOVE 00MOR109006(1:4) TO 00MOR995CC006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR110006(1:4)) >= 0
+               MOVE 00MOR110006 TO 00MOR994CC006
+            ELSE
+               MOVE 00MOR110006(1:4) TO 00MOR994CC006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR111006(1:4)) >= 0
+               MOVE 00MOR111006 TO 00MOR993CC006
+            ELSE
+               MOVE 00MOR111006(1:4) TO 00MOR993CC006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR112006(1:4)) >= 0
+               MOVE 00MOR112006 TO 00MOR992CC006
+            ELSE
+               MOVE 00MOR112006(1:4) TO 00MOR992CC006(1:4)
+            END-IF
+           END-IF
+REMARK***  02MOR995CC006 *** MAX # MORAS DE  30 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR995CC006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR995CC006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR995CC006
+              END-IF
+              IF 00MOR995CC006 > 02MOR995CC006
+                 MOVE 00MOR995CC006 TO 02MOR995CC006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR995CC006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR995CC006(1:4)) <
+                  FUNCTION NUMVAL(02MOR995CC006(1:4))
+                  MOVE 00MOR995CC006(1:4) TO 02MOR995CC006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR994CC006 *** MAX # MORAS DE  60 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR994CC006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR994CC006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR994CC006
+              END-IF
+              IF 00MOR994CC006 > 02MOR994CC006
+                 MOVE 00MOR994CC006 TO 02MOR994CC006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR994CC006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR994CC006(1:4)) <
+                  FUNCTION NUMVAL(02MOR994CC006(1:4))
+                  MOVE 00MOR994CC006(1:4) TO 02MOR994CC006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR993CC006 *** MAX # MORAS DE  90 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR993CC006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR993CC006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR993CC006
+              END-IF
+              IF 00MOR993CC006 > 02MOR993CC006
+                 MOVE 00MOR993CC006 TO 02MOR993CC006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR993CC006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR993CC006(1:4)) <
+                  FUNCTION NUMVAL(02MOR993CC006(1:4))
+                  MOVE 00MOR993CC006(1:4) TO 02MOR993CC006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR992CC006 *** MAX # MORAS DE 120 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR992CC006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR992CC006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR992CC006
+              END-IF
+              IF 00MOR992CC006 > 02MOR992CC006
+                 MOVE 00MOR992CC006 TO 02MOR992CC006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR992CC006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR992CC006(1:4)) <
+                  FUNCTION NUMVAL(02MOR992CC006(1:4))
+                  MOVE 00MOR992CC006(1:4) TO 02MOR992CC006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 00MOR991OT006 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+REMARK*** 00MOR990OT006 *** MORA HISTORICA DE  60 EN ULTIMOS 12 MESES
+REMARK*** 00MOR989OT006 *** MORA HISTORICA DE  90 EN ULTIMOS 12 MESES
+REMARK*** 00MOR988OT006 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+           IF COD-PORTAF-CARACT = "OT"
+            MOVE ZEROS TO 00MOR991OT006 00MOR990OT006 00MOR989OT006
+                          00MOR988OT006
+            IF FUNCTION NUMVAL(00MOR109006(1:4)) >= 0
+               MOVE 00MOR109006 TO 00MOR991OT006
+            ELSE
+               MOVE 00MOR109006(1:4) TO 00MOR991OT006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR110006(1:4)) >= 0
+               MOVE 00MOR110006 TO 00MOR990OT006
+            ELSE
+               MOVE 00MOR110006(1:4) TO 00MOR990OT006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR111006(1:4)) >= 0
+               MOVE 00MOR111006 TO 00MOR989OT006
+            ELSE
+               MOVE 00MOR111006(1:4) TO 00MOR989OT006(1:4)
+            END-IF
+            IF FUNCTION NUMVAL(00MOR112006(1:4)) >= 0
+               MOVE 00MOR112006 TO 00MOR988OT006
+            ELSE
+               MOVE 00MOR112006(1:4) TO 00MOR988OT006(1:4)
+            END-IF
+           END-IF
+REMARK***  02MOR991OT006 *** MAX # MORAS DE  30 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR991OT006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR991OT006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR991OT006
+              END-IF
+              IF 00MOR991OT006 > 02MOR991OT006
+                 MOVE 00MOR991OT006 TO 02MOR991OT006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR991OT006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR991OT006(1:4)) <
+                  FUNCTION NUMVAL(02MOR991OT006(1:4))
+                  MOVE 00MOR991OT006(1:4) TO 02MOR991OT006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR990OT006 *** MAX # MORAS DE  60 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR990OT006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR990OT006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR990OT006
+              END-IF
+              IF 00MOR990OT006 > 02MOR990OT006
+                 MOVE 00MOR990OT006 TO 02MOR990OT006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR990OT006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR990OT006(1:4)) <
+                  FUNCTION NUMVAL(02MOR990OT006(1:4))
+                  MOVE 00MOR990OT006(1:4) TO 02MOR990OT006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR989OT006 *** MAX # MORAS DE  90 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR989OT006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR989OT006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR989OT006
+              END-IF
+              IF 00MOR989OT006 > 02MOR989OT006
+                 MOVE 00MOR989OT006 TO 02MOR989OT006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR989OT006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR989OT006(1:4)) <
+                  FUNCTION NUMVAL(02MOR989OT006(1:4))
+                  MOVE 00MOR989OT006(1:4) TO 02MOR989OT006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR988OT006 *** MAX # MORAS DE 120 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR988OT006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR988OT006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR988OT006
+              END-IF
+              IF 00MOR988OT006 > 02MOR988OT006
+                 MOVE 00MOR988OT006 TO 02MOR988OT006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR988OT006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR988OT006(1:4)) <
+                  FUNCTION NUMVAL(02MOR988OT006(1:4))
+                  MOVE 00MOR988OT006(1:4) TO 02MOR988OT006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK*** 00MOR987CO006 *** MORA HISTORICA DE  30 EN ULTIMOS 12 MESES
+REMARK*** 00MOR986CO006 *** MORA HISTORICA DE  60 EN ULTIMOS 12 MESES
+REMARK*** 00MOR985CO006 *** MORA HISTORICA DE  90 EN ULTIMOS 12 MESES
+REMARK*** 00MOR984CO006 *** MORA HISTORICA DE 120 EN ULTIMOS 12 MESES
+REMARK*** CUANDO EL VALOR USA ES " -2" ERROR FECHA APERTURA SE CAMBIA
+REMARK*** POR "  -3" PARA LA PERSONALIZACION DE BCSC
+           IF COD-PORTAF-CARACT = "CO"
+            IF REG-ABIERTO-CARACT = 1
+               MOVE ZEROS TO 00MOR987CO006 00MOR986CO006 00MOR985CO006
+                             00MOR984CO006
+               IF FUNCTION NUMVAL(00MOR109006(1:4)) >= 0
+                  MOVE 00MOR109006 TO 00MOR987CO006
+               ELSE
+                  IF 00MOR109006(1:4) = "  -2"
+                     MOVE "  -3" TO 00MOR987CO006(1:4)
+                  ELSE
+                     MOVE 00MOR109006(1:4) TO 00MOR987CO006(1:4)
+                  END-IF
+               END-IF
+               IF FUNCTION NUMVAL(00MOR110006(1:4)) >= 0
+                  MOVE 00MOR110006 TO 00MOR986CO006
+               ELSE
+                  IF 00MOR110006(1:4) = "  -2"
+                     MOVE "  -3" TO 00MOR986CO006(1:4)
+                  ELSE
+                     MOVE 00MOR110006(1:4) TO 00MOR986CO006(1:4)
+                  END-IF
+               END-IF
+               IF FUNCTION NUMVAL(00MOR111006(1:4)) >= 0
+                  MOVE 00MOR111006 TO 00MOR985CO006
+               ELSE
+                  IF 00MOR111006(1:4) = "  -2"
+                     MOVE "  -3" TO 00MOR985CO006(1:4)
+                  ELSE
+                     MOVE 00MOR111006(1:4) TO 00MOR985CO006(1:4)
+                  END-IF
+               END-IF
+               IF FUNCTION NUMVAL(00MOR112006(1:4)) >= 0
+                  MOVE 00MOR112006 TO 00MOR984CO006
+               ELSE
+                  IF 00MOR112006(1:4) = "  -2"
+                     MOVE "  -3" TO 00MOR984CO006(1:4)
+                  ELSE
+                     MOVE 00MOR112006(1:4) TO 00MOR984CO006(1:4)
+                  END-IF
+               END-IF
+            ELSE
+               MOVE "  -2" TO 00MOR987CO006(1:4)
+               MOVE "  -2" TO 00MOR986CO006(1:4)
+               MOVE "  -2" TO 00MOR985CO006(1:4)
+               MOVE "  -2" TO 00MOR984CO006(1:4)
+            END-IF
+           END-IF
+REMARK***  02MOR987CO006 *** MAX # MORAS DE  30 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR987CO006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR987CO006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR987CO006
+              END-IF
+              IF 00MOR987CO006 > 02MOR987CO006
+                 MOVE 00MOR987CO006 TO 02MOR987CO006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR987CO006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR987CO006(1:4)) <
+                  FUNCTION NUMVAL(02MOR987CO006(1:4))
+                  MOVE 00MOR987CO006(1:4) TO 02MOR987CO006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR986CO006 *** MAX # MORAS DE  60 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR986CO006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR986CO006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR986CO006
+              END-IF
+              IF 00MOR986CO006 > 02MOR986CO006
+                 MOVE 00MOR986CO006 TO 02MOR986CO006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR986CO006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR986CO006(1:4)) <
+                  FUNCTION NUMVAL(02MOR986CO006(1:4))
+                  MOVE 00MOR986CO006(1:4) TO 02MOR986CO006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR985CO006 *** MAX # MORAS DE  90 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR985CO006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR985CO006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR985CO006
+              END-IF
+              IF 00MOR985CO006 > 02MOR985CO006
+                 MOVE 00MOR985CO006 TO 02MOR985CO006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR985CO006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR985CO006(1:4)) <
+                  FUNCTION NUMVAL(02MOR985CO006(1:4))
+                  MOVE 00MOR985CO006(1:4) TO 02MOR985CO006(1:4)
+               END-IF
+              END-IF
+           END-IF
+REMARK***  02MOR984CO006 *** MAX # MORAS DE 120 EN ULTIMOS 12 MESES
+           IF FUNCTION NUMVAL(00MOR984CO006(1:4)) >= 0
+              IF FUNCTION NUMVAL(02MOR984CO006(1:4)) < 0
+                 MOVE ZEROS TO 02MOR984CO006
+              END-IF
+              IF 00MOR984CO006 > 02MOR984CO006
+                 MOVE 00MOR984CO006 TO 02MOR984CO006
+              END-IF
+           ELSE
+              IF FUNCTION NUMVAL(02MOR984CO006(1:4)) < 0
+               IF FUNCTION NUMVAL(00MOR984CO006(1:4)) <
+                  FUNCTION NUMVAL(02MOR984CO006(1:4))
+                  MOVE 00MOR984CO006(1:4) TO 02MOR984CO006(1:4)
+               END-IF
+              END-IF
+           END-IF.
+
+       2749-PROCESE-CARCT-00END-EXT-06.
+REMARK******************************************************************
+REMARK*2749-PROCESE-CARCT-00END-EXT-06.
+REMARK*     SE CALCULAN LAS CARACTERISTICAS DE NIVEL 00END Y 02END BCSC
+REMARK******************************************************************
+           MOVE ALL "         -1" TO PER-06-NIVEL-00-END
+           MOVE ALL "         -1" TO PER-06-NIVEL-00-END-TMP
+           MOVE ZEROS TO 00ENDVCUOTA006 00ENDVCUPOS006 00ENDVSALDO006
+REMARK***  INSUMO: VECTOR NORMALISADO DE VALORES USA
+REMARK*    DISPLAY LLAVE-MAES-CREDIT " " COD-PORTAF-CARACT " "
+REMARK*            NOV-REPORT-ABD07 " "FECHA-ESTADO-CARACT " "
+REMARK*            VEC-CUOTA-CARACT(I13) " " 
+REMARK*            VEC-INICIAL-CARACT(I13) " "
+REMARK*            VEC-SALDO-CARACT(I13) " " 
+              IF REG-ABIERTO-CARACT = 1
+                 IF FECHA-ESTADO-CARACT > ZEROS AND
+                    ACT-DATE-CARACT > ZEROS                            
+                    IF FECHA-ESTADO-CARACT - ACT-DATE-CARACT >= 0      
+                       IF VEC-CUOTA-CARACT(I13) >= ZEROS AND           
+                          VEC-IND-CUO-CARACT(I13) = 0                  
+                          MOVE VEC-CUOTA-CARACT(I13) TO 00ENDVCUOTA006
+                                                        00ENDCUOTA006
+                       ELSE
+                         IF VEC-CUOTA-CARACT(I13) NOT NUMERIC          
+                          MOVE "        -88" TO 00ENDCUOTA006(1:11)
+                         END-IF
+                       END-IF
+                       IF VEC-INICIAL-CARACT(I13) >= ZEROS AND         
+                          VEC-IND-INI-CARACT(I13) = 0                  
+                         MOVE VEC-INICIAL-CARACT(I13) TO 00ENDVCUPOS006
+                                                         00ENDCUPOS006
+                       ELSE
+                         IF VEC-INICIAL-CARACT(I13) NOT NUMERIC        
+                          MOVE "        -88" TO 00ENDCUPOS006(1:11)
+                         END-IF
+                       END-IF
+                       IF VEC-SALDO-CARACT(I13) >= ZEROS AND
+                          VEC-IND-SLD-CARACT(I13) = 0
+                          MOVE VEC-SALDO-CARACT(I13) TO 00ENDVSALDO006
+                                                        00ENDSALDO006
+                       ELSE
+                         IF VEC-SALDO-CARACT(I13) NOT NUMERIC
+                          MOVE "        -88" TO 00ENDSALDO006(1:11)
+                         END-IF
+                       END-IF
+                    ELSE
+                       MOVE "         -4" TO 00ENDCUOTA006(1:11)
+                       MOVE "         -4" TO 00ENDCUPOS006(1:11)
+                       MOVE "         -4" TO 00ENDSALDO006(1:11)
+                    END-IF
+                 ELSE
+                    MOVE "         -3" TO 00ENDCUOTA006(1:11)
+                    MOVE "         -3" TO 00ENDCUPOS006(1:11)
+                    MOVE "         -3" TO 00ENDSALDO006(1:11)
+                 END-IF
+              ELSE
+                 MOVE "         -2" TO 00ENDCUOTA006(1:11)
+                 MOVE "         -2" TO 00ENDCUPOS006(1:11)
+                 MOVE "         -2" TO 00ENDSALDO006(1:11)
+              END-IF
+REMARK***  02END999FI006 *** CUOTAS CREDITO CON OTRAS ENTIDADES
+           IF NIT-SUSCRIP-S-ABD02 <> 860007335
+            IF COD-PORTAF-CARACT = "RO" OR "IN" OR "VE"
+             MOVE ZEROS TO 00END999FI006
+             MOVE 00ENDCUOTA006(1:11) TO 00END999FI006(1:11)
+             IF FUNCTION NUMVAL(00END999FI006(1:11)) >= 0
+                COMPUTE 02ENDV999FI006 = 02ENDV999FI006 + 00ENDVCUOTA006
+                MOVE 02ENDV999FI006 TO 02END999FI006 
+             ELSE
+              IF FUNCTION NUMVAL(02END999FI006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END999FI006(1:11)) <
+                   FUNCTION NUMVAL(02END999FI006(1:11))
+                   MOVE 00END999FI006(1:11) TO 02END999FI006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END998TC006 *** CUOTAS TARJETAS BANCO CAJA SOCIAL 
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END998TC006
+             MOVE 00ENDCUOTA006(1:11) TO 00END998TC006(1:11)
+             IF FUNCTION NUMVAL(00END998TC006(1:11)) >= 0
+                COMPUTE 02ENDV998TC006 = 02ENDV998TC006 + 00ENDVCUOTA006
+                MOVE 02ENDV998TC006 TO 02END998TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END998TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END998TC006(1:11)) <
+                   FUNCTION NUMVAL(02END998TC006(1:11))
+                   MOVE 00END998TC006(1:11) TO 02END998TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END997RO006 *** CUOTAS BANCO CAJA SOCIAL RO_01
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 03 OR 48
+             MOVE ZEROS TO 00END997RO006
+             MOVE 00ENDCUOTA006(1:11) TO 00END997RO006(1:11)
+             IF FUNCTION NUMVAL(00END997RO006(1:11)) >= 0
+                COMPUTE 02ENDV997RO006 = 02ENDV997RO006 + 00ENDVCUOTA006
+                MOVE 02ENDV997RO006 TO 02END997RO006
+             ELSE
+              IF FUNCTION NUMVAL(02END997RO006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END997RO006(1:11)) <
+                   FUNCTION NUMVAL(02END997RO006(1:11))
+                   MOVE 00END997RO006(1:11) TO 02END997RO006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END996HP006 *** CUOTAS BANCO CAJA SOCIAL HP_01
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 13
+             MOVE ZEROS TO 00END996HP006
+             MOVE 00ENDCUOTA006(1:11) TO 00END996HP006(1:11)
+             IF FUNCTION NUMVAL(00END996HP006(1:11)) >= 0
+                COMPUTE 02ENDV996HP006 = 02ENDV996HP006 + 00ENDVCUOTA006
+                MOVE 02ENDV996HP006 TO 02END996HP006
+             ELSE
+              IF FUNCTION NUMVAL(02END996HP006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END996HP006(1:11)) <
+                   FUNCTION NUMVAL(02END996HP006(1:11))
+                   MOVE 00END996HP006(1:11) TO 02END996HP006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END995IN006 *** CUOTAS CREDITO CON OTRAS ENTIDADES
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 05
+             MOVE ZEROS TO 00END995IN006
+             MOVE 00ENDCUOTA006(1:11) TO 00END995IN006(1:11)
+             IF FUNCTION NUMVAL(00END995IN006(1:11)) >= 0
+                COMPUTE 02ENDV995IN006 = 02ENDV995IN006 + 00ENDVCUOTA006
+                MOVE 02ENDV995IN006 TO 02END995IN006
+             ELSE
+              IF FUNCTION NUMVAL(02END995IN006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END995IN006(1:11)) <
+                   FUNCTION NUMVAL(02END995IN006(1:11))
+                   MOVE 00END995IN006(1:11) TO 02END995IN006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END994TC006 *** CUPOS TARJETAS SIN BANCO CAJA SOCIAL
+           IF NIT-SUSCRIP-S-ABD02 <> 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END994TC006
+             MOVE 00ENDCUPOS006(1:11) TO 00END994TC006(1:11)
+             IF FUNCTION NUMVAL(00END994TC006(1:11)) >= 0
+                COMPUTE 02ENDV994TC006 = 02ENDV994TC006 + 00ENDVCUPOS006
+                MOVE 02ENDV994TC006 TO 02END994TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END994TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END994TC006(1:11)) <
+                   FUNCTION NUMVAL(02END994TC006(1:11))
+                   MOVE 00END994TC006(1:11) TO 02END994TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END993TC006 *** SALDOS TARJETAS SIN BANCO CAJA SOCIAL
+           IF NIT-SUSCRIP-S-ABD02 <> 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END993TC006
+             MOVE 00ENDSALDO006(1:11) TO 00END993TC006(1:11)
+             IF FUNCTION NUMVAL(00END993TC006(1:11)) >= 0
+                COMPUTE 02ENDV993TC006 = 02ENDV993TC006 + 00ENDVSALDO006
+                MOVE 02ENDV993TC006 TO 02END993TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END993TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END993TC006(1:11)) <
+                   FUNCTION NUMVAL(02END993TC006(1:11))
+                   MOVE 00END993TC006(1:11) TO 02END993TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END992TC006 *** CUOTAS TARJETAS SIN BANCO CAJA SOCIAL
+           IF NIT-SUSCRIP-S-ABD02 <> 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END992TC006
+             MOVE 00ENDCUOTA006(1:11) TO 00END992TC006(1:11)
+             IF FUNCTION NUMVAL(00END992TC006(1:11)) >= 0
+                COMPUTE 02ENDV992TC006 = 02ENDV992TC006 + 00ENDVCUOTA006
+                MOVE 02ENDV992TC006 TO 02END992TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END992TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END992TC006(1:11)) <
+                   FUNCTION NUMVAL(02END992TC006(1:11))
+                   MOVE 00END992TC006(1:11) TO 02END992TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END991TC006 *** CUPOS TARJETAS BANCO CAJA SOCIAL
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END991TC006
+             MOVE 00ENDCUPOS006(1:11) TO 00END991TC006(1:11)
+             IF FUNCTION NUMVAL(00END991TC006(1:11)) >= 0
+                COMPUTE 02ENDV991TC006 = 02ENDV991TC006 + 00ENDVCUPOS006
+                MOVE 02ENDV991TC006 TO 02END991TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END991TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END991TC006(1:11)) <
+                   FUNCTION NUMVAL(02END991TC006(1:11))
+                   MOVE 00END991TC006(1:11) TO 02END991TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+           END-IF
+REMARK***  02END990TC006 *** SALDOS TARJETAS BANCO CAJA SOCIAL
+           IF NIT-SUSCRIP-S-ABD02 = 860007335
+            IF COD-CTA-ABD07 = 02
+             MOVE ZEROS TO 00END990TC006
+             MOVE 00ENDSALDO006(1:11) TO 00END990TC006(1:11)
+             IF FUNCTION NUMVAL(00END990TC006(1:11)) >= 0
+                COMPUTE 02ENDV990TC006 = 02ENDV990TC006 + 00ENDVSALDO006
+                MOVE 02ENDV990TC006 TO 02END990TC006
+             ELSE
+              IF FUNCTION NUMVAL(02END990TC006(1:11)) < 0
+                IF FUNCTION NUMVAL(00END990TC006(1:11)) <
+                   FUNCTION NUMVAL(02END990TC006(1:11))
+                   MOVE 00END990TC006(1:11) TO 02END990TC006(1:11)
+                END-IF
+              END-IF
+             END-IF
+            END-IF
+RQ6505     END-IF                                                       CAV0004
+REMARK***  02END989FI006 *** CUOTAS CREDITO CON OTRAS ENTIDADES SIN TDC
+RQ6505     IF NIT-SUSCRIP-S-ABD02 <> 860007335                          CAV0004
+RQ6505      IF (COD-PORTAF-CARACT = "RO" OR "IN" OR "VE" ) AND          CAV0004
+RQ6505          COD-CTA-ABD07 <> 02                                     CAV0004
+RQ6505       MOVE ZEROS TO 00END989FI006                                CAV0004
+RQ6505       MOVE 00ENDCUOTA006(1:11) TO 00END989FI006(1:11)            CAV0004
+RQ6505       IF FUNCTION NUMVAL(00END989FI006(1:11)) >= 0               CAV0004
+RQ6505          COMPUTE 02ENDV989FI006 = 02ENDV989FI006 + 00ENDVCUOTA006CAV0004
+RQ6505          MOVE 02ENDV989FI006 TO 02END989FI006                    CAV0004
+RQ6505       ELSE                                                       CAV0004
+RQ6505        IF FUNCTION NUMVAL(02END989FI006(1:11)) < 0               CAV0004
+RQ6505          IF FUNCTION NUMVAL(00END989FI006(1:11)) <               CAV0004
+RQ6505             FUNCTION NUMVAL(02END989FI006(1:11))                 CAV0004
+RQ6505             MOVE 00END989FI006(1:11) TO 02END989FI006(1:11)      CAV0004
+RQ6505          END-IF                                                  CAV0004
+RQ6505        END-IF                                                    CAV0004
+RQ6505       END-IF                                                     CAV0004
+RQ6505      END-IF                                                      CAV0004
+RQ6505     END-IF.                                                      CAV0004
+
+RQ5522 2249-PROCESE-CARCT-00EXP-EXT-06.                                 CAV0003
+REMARK******************************************************************
+REMARK*2249-PROCESE-CARCT-00EXP-EXT-06.
+REMARK*   CALCULO CARACTERISTICAS TIPOLOGIA EXP PERSONALIZACION 06 BCSC
+REMARK******************************************************************
+RQ5522     MOVE "  -1" TO 00EXP999TO006(1:4) 00EXP998TO006(1:4)         CAV0003
+RQ5522                    00EXP997TO006(1:4) 00EXP996TO006(1:4)         CAV0003
+REMARK***  00EXP999TO006 *** EXPERIENCIA FINANCIERA BCO CAJA SOCIAL
+RQ5522     IF COD-PORTAF-CARACT = ("RO" OR "IN" OR "VE" OR "HP") AND    CAV0003
+RQ5522        NIT-SUSCRIP-S-ABD02 = 860007335                           CAV0003
+RQ5522        MOVE ZEROS TO 00EXP999TO006                               CAV0003
+RQ5522        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0003
+RQ5522           IF ACT-DATE-CARACT > ZEROS AND                         CAV0003
+RQ5522              FECHA-ESTADO-CARACT > ZEROS                         CAV0003
+RQ5522              IF MESES-DESAC-CARACT <= 3                          CAV0003
+RQ5522                 MOVE MESES-MADUR-CARACT TO 00EXP999TO006         CAV0003
+RQ5522              ELSE                                                CAV0003
+RQ5522                 MOVE "  -4" TO 00EXP999TO006(1:4)                CAV0003
+RQ5522              END-IF                                              CAV0003
+RQ5522           ELSE                                                   CAV0003
+RQ5522              MOVE "  -3" TO 00EXP999TO006(1:4)                   CAV0003
+RQ5522           END-IF                                                 CAV0003
+RQ5522        ELSE                                                      CAV0003
+RQ5522           MOVE "  -2" TO 00EXP999TO006(1:4)                      CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  00EXP998TO006 *** EXPERIENCIA FINANC EXCUIDO BCO CAJA SOCIAL
+RQ5522     IF COD-PORTAF-CARACT = ("RO" OR "IN" OR "VE" OR "HP") AND    CAV0003
+RQ5522        NIT-SUSCRIP-S-ABD02 <> 860007335                          CAV0003
+RQ5522        MOVE ZEROS TO 00EXP998TO006                               CAV0003
+RQ5522        IF REG-ABIERTO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0003
+RQ5522           IF ACT-DATE-CARACT > ZEROS AND                         CAV0003
+RQ5522              FECHA-ESTADO-CARACT > ZEROS                         CAV0003
+RQ5522              IF MESES-DESAC-CARACT <= 3                          CAV0003
+RQ5522                 MOVE MESES-MADUR-CARACT TO 00EXP998TO006         CAV0003
+RQ5522              ELSE                                                CAV0003
+RQ5522                 MOVE "  -4" TO 00EXP998TO006(1:4)                CAV0003
+RQ5522              END-IF                                              CAV0003
+RQ5522           ELSE                                                   CAV0003
+RQ5522              MOVE "  -3" TO 00EXP998TO006(1:4)                   CAV0003
+RQ5522           END-IF                                                 CAV0003
+RQ5522        ELSE                                                      CAV0003
+RQ5522           MOVE "  -2" TO 00EXP998TO006(1:4)                      CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  00EXP997TO006 *** ULTIMA EXPERIENCIA FINANC BCSC CERRADAS
+RQ5522     IF COD-PORTAF-CARACT = ("RO" OR "IN" OR "VE" OR "HP") AND    CAV0003
+RQ5522        NIT-SUSCRIP-S-ABD02 = 860007335                           CAV0003
+RQ5522        MOVE 999 TO 00EXP997TO006                                 CAV0003
+RQ5522        IF REG-CERRADO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0003
+RQ5522           IF ACT-DATE-CARACT > ZEROS AND                         CAV0003
+RQ5522              FECHA-ESTADO-CARACT > ZEROS                         CAV0003
+RQ5522              MOVE MESES-DESAC-CARACT TO 00EXP997TO006            CAV0003
+RQ5522           ELSE                                                   CAV0003
+RQ5522              MOVE "  -3" TO 00EXP997TO006(1:4)                   CAV0003
+RQ5522           END-IF                                                 CAV0003
+RQ5522        ELSE                                                      CAV0003
+RQ5522           MOVE "  -2" TO 00EXP997TO006(1:4)                      CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  00EXP996TO006 *** ULTIMA EXPERIENCIA FINANC EXCLUIDO BCSC CER
+RQ5522     IF COD-PORTAF-CARACT = ("RO" OR "IN" OR "VE" OR "HP") AND    CAV0003
+RQ5522        NIT-SUSCRIP-S-ABD02 <> 860007335                          CAV0003
+RQ5522        MOVE 999 TO 00EXP996TO006                                 CAV0003
+RQ5522        IF REG-CERRADO-CARACT = 1 AND GARANTE-ABD07 = 0           CAV0003
+RQ5522           IF ACT-DATE-CARACT > ZEROS AND                         CAV0003
+RQ5522              FECHA-ESTADO-CARACT > ZEROS                         CAV0003
+RQ5522              MOVE MESES-DESAC-CARACT TO 00EXP996TO006            CAV0003
+RQ5522           ELSE                                                   CAV0003
+RQ5522              MOVE "  -3" TO 00EXP996TO006(1:4)                   CAV0003
+RQ5522           END-IF                                                 CAV0003
+RQ5522        ELSE                                                      CAV0003
+RQ5522           MOVE "  -2" TO 00EXP996TO006(1:4)                      CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  02END988HP006 *** ESTANDARD A PERSONALIZADA                  IMS0005
+CQ6726*    MOVE CO01END005HP         TO 02END988HP006                   IMS0005
+CQ6726     MOVE 01END005(4)          TO 02END988HP006                   IMS0005
+REMARK***  02EXP999TO006 *** EXPERIENCIA FINANCIERA BCO CAJA SOCIAL
+RQ5522     IF FUNCTION NUMVAL(00EXP999TO006(1:4)) >= 0                  CAV0003
+RQ5522        IF FUNCTION NUMVAL(02EXP999TO006(1:4)) < 0                CAV0003
+RQ5522           MOVE ZEROS TO 02EXP999TO006                            CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522        IF 00EXP999TO006 > 02EXP999TO006                          CAV0003
+RQ5522           MOVE 00EXP999TO006 TO 02EXP999TO006                    CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     ELSE                                                         CAV0003
+RQ5522       IF FUNCTION NUMVAL(02EXP999TO006(1:4)) < 0                 CAV0003
+RQ5522          IF FUNCTION NUMVAL(00EXP999TO006(1:4)) <                CAV0003
+RQ5522             FUNCTION NUMVAL(02EXP999TO006(1:4))                  CAV0003
+RQ5522             MOVE 00EXP999TO006(1:4) TO 02EXP999TO006(1:4)        CAV0003
+RQ5522          END-IF                                                  CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  02EXP998TO006 *** EXPERIENCIA FINANC EXCUIDO BCO CAJA SOCIAL
+RQ5522     IF FUNCTION NUMVAL(00EXP998TO006(1:4)) >= 0                  CAV0003
+RQ5522        IF FUNCTION NUMVAL(02EXP998TO006(1:4)) < 0                CAV0003
+RQ5522           MOVE ZEROS TO 02EXP998TO006                            CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522        IF 00EXP998TO006 > 02EXP998TO006                          CAV0003
+RQ5522           MOVE 00EXP998TO006 TO 02EXP998TO006                    CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     ELSE                                                         CAV0003
+RQ5522       IF FUNCTION NUMVAL(02EXP998TO006(1:4)) < 0                 CAV0003
+RQ5522          IF FUNCTION NUMVAL(00EXP998TO006(1:4)) <                CAV0003
+RQ5522             FUNCTION NUMVAL(02EXP998TO006(1:4))                  CAV0003
+RQ5522             MOVE 00EXP998TO006(1:4) TO 02EXP998TO006(1:4)        CAV0003
+RQ5522          END-IF                                                  CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  02EXP997TO006 *** ULTIMA EXPERIENCIA FINANC BCSC CERRADAS
+RQ5522     IF FUNCTION NUMVAL(00EXP997TO006(1:4)) >= 0                  CAV0003
+RQ5522        IF FUNCTION NUMVAL(02EXP997TO006(1:4)) < 0                CAV0003
+RQ5522           MOVE 999 TO 02EXP997TO006                              CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522        IF 00EXP997TO006 < 02EXP997TO006                          CAV0003
+RQ5522           MOVE 00EXP997TO006 TO 02EXP997TO006                    CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     ELSE                                                         CAV0003
+RQ5522       IF FUNCTION NUMVAL(02EXP997TO006(1:4)) < 0 OR = 999        CAV0003
+RQ5522          IF FUNCTION NUMVAL(00EXP997TO006(1:4)) <                CAV0003
+RQ5522             FUNCTION NUMVAL(02EXP997TO006(1:4))                  CAV0003
+RQ5522             MOVE 00EXP997TO006(1:4) TO 02EXP997TO006(1:4)        CAV0003
+RQ5522          END-IF                                                  CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF                                                       CAV0003
+REMARK***  02EXP996TO006 *** ULTIMA EXPERIENCIA FINANC EXCLUIDO BCSC CER
+RQ5522     IF FUNCTION NUMVAL(00EXP996TO006(1:4)) >= 0                  CAV0003
+RQ5522        IF FUNCTION NUMVAL(02EXP996TO006(1:4)) < 0                CAV0003
+RQ5522           MOVE 999 TO 02EXP996TO006                              CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522        IF 00EXP996TO006 < 02EXP996TO006                          CAV0003
+RQ5522           MOVE 00EXP996TO006 TO 02EXP996TO006                    CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     ELSE                                                         CAV0003
+RQ5522       IF FUNCTION NUMVAL(02EXP996TO006(1:4)) < 0 OR = 999        CAV0003
+RQ5522          IF FUNCTION NUMVAL(00EXP996TO006(1:4)) <                CAV0003
+RQ5522             FUNCTION NUMVAL(02EXP996TO006(1:4))                  CAV0003
+RQ5522             MOVE 00EXP996TO006(1:4) TO 02EXP996TO006(1:4)        CAV0003
+RQ5522          END-IF                                                  CAV0003
+RQ5522        END-IF                                                    CAV0003
+RQ5522     END-IF.                                                      CAV0003
+
+       2649-PROCESE-CARACT-02XX-EXT-06.
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-06.
+REMARK*    CONSULTA DE CARACTERISTICAS EN EL ARCHIVO DE NO DESEADOS BCSC
+REMARK******************************************************************
+RQ4022******************************************************************EHA0002
+RQ4022*   SE INCLUYE RUTINA PARA OBTENER VARIABLES POR DEMANDA         *EHA0002
+RQ4022******************************************************************EHA0002
+RQ4022*    MOVE VALOR-NROIDEUSU                TO BDD-NROIDEUSU         EHA0002
+RQ4022*    MOVE NUM-ID                         TO BDD-IDECLIE           EHA0002
+RQ4022*    MOVE "vivienda"                     TO BDD-ESTRATEGIA        EHA0002
+RQ4022*    PERFORM 3450-LLAMAR-CONSULTA-BDD                             EHA0002
+RQ4022     MOVE 1 TO I-JAVA02-PER                                       EHA0002
+RQ4022     MOVE "MontoPosibleOtorgar_"  TO VAR-COMP-DEMANDA-PER06(1)    EHA0002
+RQ4022     MOVE "Plazo_"                TO VAR-COMP-DEMANDA-PER06(2)    EHA0002
+RQ4022     MOVE "TasaCreditoViviendaEA" TO VAR-COMP-DEMANDA-PER06(3)    EHA0002
+RQ4022*    MOVE "CONSULT_ID"            TO VAR-COMP-DEMANDA-PER06(4)    EHA0002
+RQ4022     MOVE "NroConsDecisor"        TO VAR-COMP-DEMANDA-PER06(4)    EHA0002
+CQ6726*    MOVE "SistemaAmortizacion"   TO VAR-COMP-DEMANDA-PER06(5)    DLM0005
+CQ6726*    MOVE "AmAnt"                 TO VAR-COMP-DEMANDA-PER06(5)    DLM0005
+CQ6726     MOVE "PagoAmortiza"          TO VAR-COMP-DEMANDA-PER06(5)    DLM0005
+RQ4022     MOVE "EXEC_TIME_F"           TO VAR-COMP-DEMANDA-PER06(6)    EHA0002
+RQ4022     MOVE "PerfilOtorgamiento_"   TO VAR-COMP-DEMANDA-PER06(7)    EHA0002
+RQ4022     MOVE "DECISION"              TO VAR-COMP-DEMANDA-PER06(8)    EHA0002
+RQ6260     MOVE "MAX_ID"                TO VAR-COMP-DEMANDA-PER06(9)    IMS0004
+RQ4022     PERFORM UNTIL I-JAVA02-PER > J-JAVA02-PER                    EHA0002
+RQ6260      IF BDD-CAR-NOM-PER(I-JAVA02-PER)(1:06) =                    IMS0004
+RQ6260         VAR-COMP-DEMANDA-PER06(9)                                IMS0004
+CQ6726*RQ6260  STRING                                                   DLM0005
+CQ6726*RQ6260     BDD-CAR-VAL-PER(I-JAVA02-PER)      DELIMITED    BY " "DLM0005
+CQ6726*RQ6260     INTO WS-MAX-ID-PER                                    DLM0005
+CQ6726*RQ6260  END-STRING                                               DLM0005
+CQ6726         MOVE FUNCTION NUMVAL(BDD-CAR-VAL-PER(I-JAVA02-PER))      DLM0005
+CQ6726                                 TO WS-MAX-ID-PER                 DLM0005
+RQ6260      END-IF                                                      IMS0004
+RQ4022      IF BDD-CAR-NOM-PER(I-JAVA02-PER)(1:11) =                    EHA0002
+RQ4022         VAR-COMP-DEMANDA-PER06(6)                                EHA0002
+RQ4022         STRING                                                   EHA0002
+RQ4022            BDD-CAR-VAL-PER(I-JAVA02-PER)      DELIMITED    BY " "EHA0002
+RQ4022            INTO FEC-RESPUESTA-AUX                                EHA0002
+RQ4022         END-STRING                                               EHA0002
+RQ4022      END-IF                                                      EHA0002
+RQ4022      IF FEC-RESPUESTA <= FEC-RESPUESTA-AUX                       EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(11:20) =                  EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(1)                               EHA0002
+RQ4022          MOVE 1                  TO RES-ANTERIOR                 EHA0002
+RQ4022             MOVE FUNCTION NUMVAL(BDD-CAR-VAL-PER(I-JAVA02-PER))  EHA0002
+RQ4022             TO MONTO-OTORGAR                                     EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(9:6) =                    EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(2)                               EHA0002
+RQ4022          MOVE FUNCTION NUMVAL(BDD-CAR-VAL-PER(I-JAVA02-PER))     EHA0002
+RQ4022             TO PLAZO                                             EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(9:21) =                   EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(3)                               EHA0002
+RQ4022          MOVE FUNCTION NUMVAL(BDD-CAR-VAL-PER(I-JAVA02-PER))     EHA0002
+RQ4022             TO TASA-VIVIENDA                                     EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022*      IF BDD-CAR-NOM-PER(I-JAVA02-PER)(1:10) =                   EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(11:14) =                  EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(4)                               EHA0002
+RQ4022          MOVE FUNCTION NUMVAL(BDD-CAR-VAL-PER(I-JAVA02-PER))     EHA0002
+RQ4022             TO NROCONSDECISOR                                    EHA0002
+RQ4022       END-IF                                                     EHA0002
+CQ6726*      IF BDD-CAR-NOM-PER(I-JAVA02-PER)(9:19) =                   DLM0005
+CQ6726       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(11:12) =                  DLM0005
+CQ6726          VAR-COMP-DEMANDA-PER06(5)                               DLM0005
+CQ6726          STRING                                                  DLM0005
+CQ6726             BDD-CAR-VAL-PER(I-JAVA02-PER)    DELIMITED    BY "  "DLM0005
+CQ6726                               INTO  SIS-AMORT(11:1)              DLM0005
+CQ6726          END-STRING                                              DLM0005
+CQ6726       END-IF                                                     DLM0005
+CQ6726*      IF BDD-CAR-NOM-PER(I-JAVA02-PER)(11:05) =                  DLM0005
+CQ6726*         VAR-COMP-DEMANDA-PER06(5)                               DLM0005
+CQ6726*         STRING                                                  DLM0005
+CQ6726*            BDD-CAR-VAL-PER(I-JAVA02-PER)    DELIMITED    BY "  "DLM0005
+CQ6726*            INTO SIS-AMORT                                       DLM0005
+CQ6726*         END-STRING                                              DLM0005
+CQ6726*      END-IF                                                     DLM0005
+RQ4022*                                                                 EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(1:11) =                   EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(6)                               EHA0002
+RQ4022          STRING                                                  EHA0002
+RQ4022             BDD-CAR-VAL-PER(I-JAVA02-PER)    DELIMITED    BY "  "EHA0002
+RQ4022             INTO FEC-RESPUESTA                                   EHA0002
+RQ4022          END-STRING                                              EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022*                                                                 EHA0002
+RQ4022*                                                                 EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(11:19) =                  EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(7)                               EHA0002
+RQ4022          STRING                                                  EHA0002
+RQ4022             BDD-CAR-VAL-PER(I-JAVA02-PER)    DELIMITED    BY "  "EHA0002
+RQ4022             INTO PERFIL-OTORGAMIENTO                             EHA0002
+RQ4022          END-STRING                                              EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022*                                                                 EHA0002
+RQ4022*                                                                 EHA0002
+RQ4022       IF BDD-CAR-NOM-PER(I-JAVA02-PER)(1:8) =                    EHA0002
+RQ4022          VAR-COMP-DEMANDA-PER06(8)                               EHA0002
+RQ4022          STRING                                                  EHA0002
+RQ4022             BDD-CAR-VAL-PER(I-JAVA02-PER)    DELIMITED    BY "  "EHA0002
+RQ4022             INTO DECISION-ANTERIOR                               EHA0002
+RQ4022          END-STRING                                              EHA0002
+RQ4022       END-IF                                                     EHA0002
+RQ4022*                                                                 EHA0002
+RQ4022      END-IF                                                      EHA0002
+RQ4022*     DISPLAY                                                     EHA0002
+RQ4022*     I-JAVA02-PER " " BDD-CAR-NOM-PER(I-JAVA02-PER) "="          EHA0002
+RQ4022*                  BDD-CAR-VAL-PER(I-JAVA02-PER)EHA0002           EHA0002
+RQ4022      ADD 1 TO I-JAVA02-PER                                       EHA0002
+RQ4022     END-PERFORM                                                  EHA0002
+                                                                        
+      ******************************************************************
+           PERFORM 5200-LEA-INDEX-CLIENTBCSC.

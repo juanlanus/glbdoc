@@ -1,0 +1,18 @@
+REMARK* BDINCCB-FD.v.0002
+REMARK* ARCHIVO DE NOMBRES DE CAMARA DE COMERCIO DE BOGOTA
+REMARK******************************************************************
+REMARK* VHF0002     * SE MODIFICA LA LLAVE DE ARCHIVO PARA INCLUIR EL  *
+REMARK* VICTOR HUGO * NUMERO DE LA MATRICULA Y EVITAR QUE LOS NOMBRES  *
+REMARK* FORERO      * REPORTADOS CON EL MISMO NIT NO SE GENEREN        *
+REMARK* FEB.18/2002 *                                                  *
+REMARK******************************************************************
+       FD BDINCCB.
+       01 REG-BDINCCB.
+          03 LLAVE-BDINCCB.
+             05 TEXTO-BDINCCB            PIC X(15).
+             05 IDENTIDAD-BDINCCB.
+                07 TIP-IDE-BDINCCB       PIC 9(01).
+                07 NUM-IDE-BDINCCB       PIC 9(11).
+                07 ALTERNA-BDINCCB       PIC X(10).                     VHF0002
+          03 NOMBRE-BDINCCB              PIC X(45).
+          03 FILLER                      PIC X(18).                     VHF0002

@@ -1,0 +1,54 @@
+      * FRABDU.FD.v.0002
+      * BASE DE DATOS UNIVERSAL DE PREGUNTAS
+      * REPORTADAS POR LOS DIFERENTES SUSCRIPTORES
+      ******************************************************************
+      * ABB0001     * FRABDU - VERSION INICIAL                         *
+      * ALBEIRO     *                                                  *
+      * BERNAL      *                                                  *
+      * ENE.2011    *                                                  *
+      ******************************************************************
+      * FARF001     * REGTIP - SE ADICIONA EL TIPO DE REGISTRO 0 Y EL  *
+      * F.RODRIGUEZ *          CAMPO NOMBRE DEL PROCESO                *
+      * Abr.05/2011 *                                                  *
+      ******************************************************************
+       FD  FRABDU.
+       01  REG-FRABDU.              
+           03  LLAVE-FRABDU.              
+               05  TIPIDE-FRABDU         PIC 9(01).
+               05  NUMIDE-FRABDU         PIC 9(11).
+               05  LLAVE-FRABDU-ALT.          
+                   07  NITSUS-FRABDU     PIC 9(11).
+                   07  CODPRE-FRABDU     PIC 9(09).
+                   07  TIPREG-FRABDU     PIC 9(01).
+                   07  CONSEC-FRABDU     PIC 9(03).
+REGTIP     03  NOMPRO-FRABDU             PIC X(09).                     FARF001
+           03  DATA-FRABDU               PIC X(80).                     
+REGTIP     03  TIPO0-FRABDU REDEFINES DATA-FRABDU.                      FARF001
+REGTIP*            COMPARTE INFORMACION P=PROPIO,C=CLUB,T=TODOS         FARF001
+REGTIP         05  COMPARTE-FRABDU       PIC X(01).                     FARF001
+REGTIP         05  FILLER                PIC X(79).                     FARF001
+           03  TIPO1-FRABDU REDEFINES DATA-FRABDU.
+               05  FECREA-FRABDU         PIC 9(08).
+               05  FECACT-FRABDU         PIC 9(08).
+               05  FECUTL-FRABDU         PIC 9(08).
+               05  FECEXP-FRABDU         PIC 9(08).
+               05  CLUB-FRABDU           PIC X(01). *> S=SI,N=NO
+               05  FILLER                PIC X(47).
+           03  TIPO2-FRABDU REDEFINES DATA-FRABDU.
+               05  TEXTO-FRABDU          PIC X(80).
+           03  TIPO3-FRABDU REDEFINES DATA-FRABDU.
+      *            TIPO DE DISTRACTOR:SU=SUSCRIPTORES, CI=CUDADES, ...  
+               05  TIPDIS-FRABDU         PIC X(02).
+      *            CLASE DE DISTRACTOR:R=OK,D=DISTRACTOR,U=ULTIMO
+               05  CLADIS-FRABDU         PIC X(01).
+               05  DISTRA-FRABDU         PIC X(77).
+           03  TIPO4-FRABDU REDEFINES DATA-FRABDU.
+               05  EXCPR1-FRABDU         PIC 9(09).
+               05  EXCPR2-FRABDU         PIC 9(09).
+               05  EXCPR3-FRABDU         PIC 9(09).
+               05  EXCPR4-FRABDU         PIC 9(09).
+               05  EXCPR5-FRABDU         PIC 9(09).
+               05  EXCPR6-FRABDU         PIC 9(09).
+               05  EXCPR7-FRABDU         PIC 9(09).
+               05  EXCPR8-FRABDU         PIC 9(09).
+               05  FILLER4-FRABDU        PIC X(08).

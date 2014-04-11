@@ -1,0 +1,46 @@
+REMARK* BDIEREES-FD.v.0001
+      ************************************************************
+      *  MAESTRO DE REESTRUCTURACIONES ENVIADA POR LAS ENTIDADES *
+      ************************************************************
+
+       FD BDIEREES.
+       01 BDIEREES-REGISTRO.
+          02 BDIEREES-LLAVE.
+             03  BDIEREES-TIPO-ID     PIC 9(01).
+             03  BDIEREES-NUM-ID      PIC 9(11).
+             03  BDIEREES-TIP-ENTID   PIC 9(02).
+             03  BDIEREES-COD-ENTID   PIC 9(06).
+      *   codigo entidad asignado por la super
+             03  BDIEREES-CTA         PIC X(18).
+             03  BDIEREES-FECHA       PIC 9(06).
+          02 BDIEREES-MOD-CTA         PIC X(2).
+      *   modalidad de la cuenta
+      *        1 = Vivienda
+      *        2 = Consumo
+      *        3 = Microcredito
+      *        4 = Comercial
+          02 BDIEREES-FECHA-INI       PIC 9(08).
+          02 BDIEREES-FECHA-FIN       PIC 9(08).
+          02 BDIEREES-MONTO           PIC 9(17).
+          02 BDIEREES-VECES           PIC 9(02).
+          02 BDIEREES-CALIFICACION    PIC 9(01).
+      *   Calificacion del credito a la fecha de corte
+      *        1 = Categoria A
+      *        2 = Categoria B
+      *        3 = Categoria C
+      *        4 = Categoria D
+      *        5 = Categoria E
+      *        6 = Redescuento
+          02 BDIEREES-PER-GR-C        PIC X(05).
+          02 BDIEREES-PER-GR-I        PIC X(05).
+          02 BDIEREES-FACTOR          PIC X.
+      *   Condicion Principal que fue modificada
+      *        1 = Tasa
+      *        2 = Plazo
+      *        3 = Titular
+      *        4 = Intereses capitalizados
+      *        5 = Otro factor
+          02 BDIEREES-NIT-ENTID       PIC 9(11).
+          02 BDIEREES-COD-SUS         PIC 9(06).
+          02 FILLER                   PIC X(30).
+

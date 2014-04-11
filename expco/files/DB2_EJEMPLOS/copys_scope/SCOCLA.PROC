@@ -1,0 +1,92 @@
+REMARK*SCOCLA-PROC.v.0003
+REMARK******************************************************************
+REMARK*RMB0002   * WAP001 * SE CORRIGE PROBLEMA POR NO INICIALIZAR     *
+REMARK*R.MARTINEZ*          LA LLAVE Y SE QUEDA PEGADA INFORMACION     *
+REMARK*21ABR2005 *                                                     *
+REMARK******************************************************************
+REMARK* CIG0003    | RECSCO  - AJUSTE PARA LA RECLASIFICACION DEL VALOR*
+REMARK* C. GAONA   |           (NUMERICO) ENTREGADO POR EL SCORE.      *
+REMARK* 20-04-2011 |                                                   *
+REMARK******************************************************************
+       2400-BUSCAR-CLASIF-SCOCLA.
+REMARK******************************************************************
+REMARK*2400-BUSCA-CLASIF-SCOCLA
+REAMRK*ESTA RUTINA RECIBE LOS PARAMETROS PARA BUSCAR SI EL SCORE
+REAMRK*TIENE RECLASIFICAION Y CON EL PUNTAJE SACAR LA CALIFICACION
+REAMRK*SE DEBE RECIBIR LOS SIGUIENTES PARAMETROS
+REMARK*       1.- EL CODIGO DE SUSCRIPTOR   (CODSUS-SCOCLA)
+REMARK*       2.- TIPO DE SCORE             (TIPSCO-SCOCLA)
+REAMRK*       3.- LA TABLA                  (CODSCO-SCOCLA)
+REMARK*       4.- PUNTAJE EN                (PUNTAJ-SCOCLA)
+REAMRK*
+REAMRK*SE DEVUELVE LOS SIGUIENTES PARAMETROS:
+REAMRK*       1.- LA LETRA DE CALIFICACION  (IDEEVA-SCOCLA)
+REAMRK*       2.- LA DESCRIPCION            (DESEVA-SCOCLA)
+REAMRK*       4.- INDICE DONDE SE ENCONTRO  (INDSUB-SCOCLA)
+REAMRK*       3.- FLAG QUE INDICA           (OCURRE-SCOCLA)
+REAMRK*              1 -  NO SE TIENE RECLASIFICAICON
+REAMRK*              0 -  TIENE RECLASIFIACION
+RECSCO*              2 -  TIENE RECLASIFICACION EN EL SCORE
+RECSCO*      5.  DESEVA-SCOCLA(6:3) SCORE RECLASIFICADO     
+REMARK******************************************************************
+           INITIALIZE IDEEVA-SCOCLA DESEVA-SCOCLA
+WAP001                OCURRE-SCOCLA FIN-ARCHIVO-SCOCLA LLAVE-SCODTB     RMB0002
+           OPEN INPUT SCODTB
+           MOVE   CODSUS-SCOCLA     TO   CODSUS-SCODTB
+           MOVE   TIPSCO-SCOCLA     TO   TIPSCO-SCODTB
+           MOVE   CODSCO-SCOCLA     TO   CODSCO-SCODTB
+           MOVE   15                TO   SUBTAB-SCODTB SUBTAB-SCOCLA
+           START SCODTB  KEY >= LLAVE-SCODTB
+                INVALID KEY
+                   MOVE  1   TO  OCURRE-SCOCLA
+                NOT INVALID KEY
+                   MOVE  0   TO  OCURRE-SCOCLA
+           END-START
+           IF OCURRE-SCOCLA = 0
+              MOVE  1   TO  OCURRE-SCOCLA
+              PERFORM UNTIL FIN-ARCHIVO-SCOCLA  = 1
+                READ SCODTB  NEXT RECORD
+                   AT END
+                      MOVE   1    TO    FIN-ARCHIVO-SCOCLA
+                   NOT END
+                    IF LLAVE-SCODTB(1:11)  =  REG-SCOCLA
+                       IF PUNTAJ-SCOCLA >= RANINI-SCODTB AND
+                          PUNTAJ-SCOCLA <= RANFIN-SCODTB
+                             MOVE RECLAS-SCODTB  TO  RECLAS-SCOCLA
+                             MOVE 0             TO  OCURRE-SCOCLA
+                             MOVE 1             TO  FIN-ARCHIVO-SCOCLA
+                       END-IF
+                    ELSE
+                      IF LLAVE-SCODTB(1:11)  >  REG-SCOCLA
+                         MOVE   1    TO    FIN-ARCHIVO-SCOCLA
+                      END-IF
+                    END-IF
+                END-READ
+              END-PERFORM
+           END-IF
+           IF OCURRE-SCOCLA = 0 
+             MOVE   CODSUS-SCOCLA     TO   CODSUS-SCODTB
+             MOVE   TIPSCO-SCOCLA     TO   TIPSCO-SCODTB
+             MOVE   CODSCO-SCOCLA     TO   CODSCO-SCODTB
+             MOVE 01             TO    SUBTAB-SCODTB SUBTAB-SCOCLA
+             MOVE RECLAS-SCOCLA  TO    INDSUB-SCODTB INDSUB-SCOCLA
+             READ SCODTB  KEY IS LLAVE-SCODTB
+                INVALID KEY
+                   MOVE  "NO EXISTE" TO DESEVA-SCOCLA
+                   MOVE  "-"         TO IDEEVA-SCOCLA
+                NOT INVALID KEY
+RECSCO             IF DESEVA-SCODTB(1:5) = "SCORE"                      CIG0003
+RECSCO                IF DESEVA-SCODTB(6:3) NUMERIC                     CIG0003
+RECSCO                   MOVE 2 TO OCURRE-SCOCLA                        CIG0003
+RECSCO                ELSE                                              CIG0003
+RECSCO                   MOVE 1 TO OCURRE-SCOCLA                        CIG0003
+RECSCO                END-IF                                            CIG0003
+RECSCO             END-IF                                               CIG0003
+                   MOVE  DESEVA-SCODTB  TO  DESEVA-SCOCLA
+                   MOVE  IDEEVA-SCODTB  TO  IDEEVA-SCOCLA
+                   MOVE  INDSUB-SCODTB  TO  INDSUB-SCOCLA
+             END-READ
+           END-IF
+           CLOSE SCODTB
+           .
+      *-----------------------------------------------------------------

@@ -1,0 +1,71 @@
+REMARK* SCODTB-FD.v.00022
+REMARK* LONGITUD DEL REGISTO : 60
+REMARK* COPY PARA EL ARCHIVO DEL ESQUEMA DE PARAMETROS DE EVALUACION
+REMARK* PARA SCORING DATACREDITO. COMPRENDE CUATRO TIPOS DE REGISTRO
+REMARK* DE  ACUERDO A LA TABLA O  ARCHIVO AL QUE HAGA REFERENCIA  EL
+REMARK* PARAMETRO EN EVALUACION.
+REMARK******************************************************************
+      *NDG0002   * RECLA : REGISTRO PARA EL MANEJO DE LA TABAL DE
+      *          *         RECLASIFICACION. SE BASA EN CREAR UN RANGO
+      *          *         INICIAL, RANGO FINAL Y EL CODIGO DE RECLASI-
+      *          *         FICACION QUE ESTA DADO POR EL INDICE DE
+      *          *         DONDE VIENE + EL INDICE ACTUAL DE RECLASIF.
+      *          *
+      *          *
+      ******************************************************************
+       FD SCODTB.
+REMARK*   REGISTRO GENERAL
+       01 REG-SCODTB.
+          03 LLAVE-SCODTB.
+             05 CODSUS-SCODTB         PIC 9(06).
+             05 TIPSCO-SCODTB         PIC 9(01).
+             05 CODSCO-SCODTB         PIC 9(02).
+             05 SUBTAB-SCODTB         PIC 9(02).
+             05 INDSUB-SCODTB         PIC 9(02).
+          03 INDBLO-SCODTB            PIC 9(01).
+          03 TIPTAB-SCODTB            PIC 9(01).
+          03 FILLER                   PIC X(45).
+REMARK*   REGISTRO PARA TABLA DE TIPOS DE EVALUACION
+       01 TEVA-SCODTB.
+          03 FILLER                   PIC X(15).
+          03 IDEEVA-SCODTB            PIC X(01).
+          03 DESEVA-SCODTB            PIC X(10).
+          03 FILLER                   PIC X(06).
+          03 MINEVA-SCODTB            PIC 9(10).
+          03 DEFEVA-SCODTB            PIC 9(03).
+          03 FILLER                   PIC X(15).
+REMARK*   REGISTRO PARA TABLA DE TIPOS DE CUENTA
+       01 TCTA-SCODTB.
+          03 FILLER                   PIC X(29).
+          03 PESCTA-SCODTB            PIC 9(03).
+          03 MINCTA-SCODTB            PIC 9(10).
+          03 PSNCTA-SCODTB            PIC 9(03).
+          03 FILLER                   PIC X(15).
+REMARK*   REGISTRO PARA TABLA DE CALIFICACIONES
+       01 TCAL-SCODTB.
+          03 FILLER                   PIC X(25).
+          03 NOTCAL-SCODTB            PIC S9(02)V9(02).
+          03 EVACAL-SCODTB            PIC 9(03).
+          03 MAXCAL-SCODTB            PIC 9(10).
+          03 ESNCAL-SCODTB            PIC 9(03).
+          03 FILLER                   PIC X(15).
+REMARK*   REGISTRO PARA ARCHIVO DE PARAMETROS
+       01 APAR-SCODTB.
+          03 FILLER                   PIC X(15).
+          03 VALPAR-SCODTB            PIC X(45).
+REMARK*   REGISTRO PARA TABLA DE ESTADOS
+       01 TEST-SCODTB.
+          03 FILLER                   PIC X(29).
+          03 ACTEST-SCODTB            PIC 9(03).
+          03 FILLER                   PIC X(10).
+          03 HISEST-SCODTB            PIC 9(03).
+          03 FILLER                   PIC X(15).
+REMARK*   REGISTRO PARA TABLA DE RECLASIFICACION.
+RECLA  01 RECLA-SCODTB.                                                  NDG0002
+RECLA     03 FILLER                   PIC X(15).                         NDG0002
+RECLA     03 RANINI-SCODTB            PIC S9(3)V9(2).                    NDG0002
+RECLA     03 RANFIN-SCODTB            PIC S9(3)V9(2).                    NDG0002
+RECLA     03 CLASIF-SCODTB            PIC 9(03).                         NDG0002
+RECLA     03 RECLAS-SCODTB            PIC 9(03).                         NDG0002
+RECLA     03 RECRAZ-SCODTB            PIC X(04).                         NDG0002
+RECLA     03 FILLER                   PIC X(25).                         NDG0002

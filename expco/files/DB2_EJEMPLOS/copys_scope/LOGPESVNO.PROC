@@ -1,0 +1,17 @@
+      *LOGPESVNO.PROC.v.00001
+      ************************************************************
+      *P.VARGAS   *CQ6271  LOG TRANSACCIONES PESVNO              *
+      *SEP/2012   *                                              *
+      ************************************************************
+       1000-UPDATE-LOGPESVNO.
+              MOVE W-ENT-NOMBRE      TO ARCHI-LOGPESVNO-WK       
+              MOVE 999999999999      TO NUMOP-LOGPESVNO-WK       
+              MOVE REG-LEIDOS        TO LEIDOS-LOGPESVNO-WK      
+              MOVE W-CONT-TIPO-5     TO TIPO5-LOGPESVNO-WK       
+              MOVE W-CONT-TIPO-6     TO TIPO6-LOGPESVNO-WK       
+              MOVE W-CONT-TIPO-7     TO TIPO7-LOGPESVNO-WK       
+              MOVE W-CONT-TIPO-5-PJ  TO TIPO5PJ-LOGPESVNO-WK     
+              CALL "LOGPESVNO" USING  LOGPESVNO-WK TRANSAC-STATUS-WK
+              DISPLAY "TRANSAC-STATUS-WK: " TRANSAC-STATUS-WK
+              .
+

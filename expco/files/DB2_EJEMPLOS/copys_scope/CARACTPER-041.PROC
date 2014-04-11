@@ -1,0 +1,85 @@
+REMARK*CARACTPER-041.PROC.v.0001.
+REMARK******************************************************************
+REMARK*    CALCULO DE LAS CARACTERSITICAS PERSONALIZADAS SECUENCIA 041
+REMARK*    CREDITITULOS       
+REMARK******************************************************************
+       0000-LLENAR-VEC-PERSONALIZ-041.        
+               ADD   1                 TO  I-VAR-PER                            
+               MOVE "01DEM999-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM999-041) TO L-AUX        
+               MOVE 01DEM999-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM998-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM998-041) TO L-AUX        
+               MOVE 01DEM998-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM997-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM997-041) TO L-AUX        
+               MOVE 01DEM997-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM996-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM996-041) TO L-AUX        
+               MOVE 01DEM996-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM995-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM995-041) TO L-AUX        
+               MOVE 01DEM995-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM994-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM994-041) TO L-AUX        
+               MOVE 01DEM994-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+               ADD 1 TO I-VAR-PER        
+               MOVE "01DEM993-041" TO NOMBRE-VAR-PER(I-VAR-PER)        
+               MOVE FUNCTION LENGTH(01DEM993-041) TO L-AUX        
+               MOVE 01DEM993-041(1:L-AUX)   TO        
+                                  VAL-VAR-PER(I-VAR-PER)(1:L-AUX)        
+                                          
+               .        
+               *>        
+REMARK 0000-INICIALIZAR-CARAC-EXT-41.
+REMARK******************************************************************
+REMARK*0000-INICIALIZAR-CARAC-EXT-41.                                  *
+REMARK*     SE INICIALIZAN LAS VARIABLES DE LA PERSONALIZACION # 03    *
+REMARK*     PARA CITIBANK          
+REMARK******************************************************************
+             MOVE ZEROS TO PER-41-NIVEL-01-DEM        
+             .        
+              
+              
+              
+              
+       2649-PROCESE-CARACT-02XX-EXT-41.        
+REMARK******************************************************************
+REMARK*2649-PROCESE-CARACT-02XX-EXT-41.
+REMARK*    SE MIRA SI HAY ALGO PERSONALIZADO PARA NIVEL 02     
+REMARK******************************************************************
+REMARK* *-------------------------------------------------------------*
+REMARK* 10 Tipología DEM . Nivel 02
+REMARK* *-------------------------------------------------------------*
+REMARK* HACE LA LECTURA DE CONSULTAS PARA CREDITITULOS
+            INITIALIZE W-TIPDEU-CREDITITULOS                                    
+            MOVE 1 TO W-TIPDEU-CREDITITULOS         
+            PERFORM 5200-LEA-INDEX-CREDITITULOS                                 
+            IF SW-EXIST-CREDITITULOS = 1                                        
+               MOVE DIAS-NOP-CREDITITULOS TO 01DEM998-041                       
+               MOVE MAX-ATR-CREDITITULOS  TO 01DEM996-041                       
+               MOVE PORC-ATR-CREDITITULOS TO 01DEM995-041                       
+               MOVE 1                     TO 01DEM993-041                       
+            END-IF                                                              
+            INITIALIZE W-TIPDEU-CREDITITULOS                                    
+            MOVE 2 TO W-TIPDEU-CREDITITULOS         
+            PERFORM 5200-LEA-INDEX-CREDITITULOS                                 
+            IF SW-EXIST-CREDITITULOS = 1                                        
+               MOVE DIAS-NOP-CREDITITULOS TO 01DEM999-041                       
+               MOVE MAX-ATR-CREDITITULOS  TO 01DEM997-041                       
+               MOVE PORC-ATR-CREDITITULOS TO 01DEM994-041                       
+               MOVE 1                     TO 01DEM993-041                       
+            END-IF                                                              
+           .        
+              

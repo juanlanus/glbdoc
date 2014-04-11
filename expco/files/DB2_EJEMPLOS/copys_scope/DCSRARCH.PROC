@@ -1,0 +1,462 @@
+      *DCSRARCH.PROC.v.01.0020.
+      ******************************************************************
+      *PROCESO PARA ABRIR/CERRAR/LEER ARCHIVOS EXTERNOS PARA DECISOR.  *
+      ******************************************************************
+      * EHA0002     *RQ3237  - SE INCLUYE ARCHIVO NO DESEADOS PARA     *
+      * SEP-26-2011 *          COLPATRIA VEHICULOS.                    *
+      ******************************************************************
+REMARK* CIG0003     | RQ3132 - SE INCLUYE EL ARCHIVO DE NO DESEADOS    *
+REMARK* 09-28-2011  |          BBVA.                                   *
+REMARK******************************************************************
+REMARK* CAV0004     | RQ3449 - SE INCLUYE EL ARCHIVO DE NO DESEADOS    *
+REMARK* 16-NOV-2011 |          BCSC.                                   *
+REMARK******************************************************************
+REMARK* EHA0005     | RQ3609 - SE ELIMINAN LOS LLAMADOS A ARCHIVOS     *
+REMARK* 01-DIC-2011 |          DIFERENTES A COLPATRIA.                 *
+REMARK******************************************************************
+REMARK* EHA0006     | RQ3909 - SE INCLUYE ARCHIVO DE GIROS Y FINANZAS  *
+REMARK* 03-DIC-2011 |                                                  *
+REMARK******************************************************************
+REMARK* EHA0007     | RQ4070 - SE INCLUYE ARCHIVO DE BANCO DE BOGOTA   *
+REMARK* 22-DIC-2011 |          REQ.4070                                *
+REMARK******************************************************************
+REMARK* NDG0008     | ACCITI - SE HABILITA LA TECTURA DEL ARCHIVO DE   *
+REMARK* 01-JUN-2012 |          CITI BANK.                              *
+REMARK******************************************************************
+REMARK*----------------------------------------------------------------*
+REMARK* CAV0009     | RQ5926 - SE INCLUYE ARCHIVO DE BANCO COLPATRIA   *
+REMARK* 16-MAY-2012 |          RETENCION CUPOS                         *
+REMARK******************************************************************
+REMARK* EHA0010     | CQ6105 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 29-MAY-2012 |          EN LA SOLICITUD 6105.                   *
+REMARK******************************************************************
+REMARK* IMS0011     | CQ5863 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 15-AGO-2012 |          EN LA SOLICITUD 5863. ETB.              *
+REMARK******************************************************************
+REMARK* IMS0012     | CQ7064 - SE INCLUYE LAS CARACTERSITICAS DEFINIDAS*
+REMARK* 17-AGO-2012 |          EN LA SOLICITUD 7064. DAVIVIENDA        *
+REMARK******************************************************************
+REMARK* IMS0013     | CQ7215 - SE INCLUYE ARCHIVO DE PARAMETROS PARA   *
+REMARK* 18-SEP-2012 |          PERSONALIZACION DE COLPATRIA.           *
+REMARK******************************************************************
+REMARK* IMS0014     | CQ7833 - APERTURA, CIERRE Y LECTURA DEL ARCHIVO  *
+REMARK* 25-SEP-2012 |          NO DESEADOS DE BCSC ESTABA COMENTARIADO,*
+REMARK*             |          SE QUITA COMENTARIO PARA QUE LO PROCESE.*
+REMARK******************************************************************
+REMARK* CAV0015     | CQ8189 - SE INCLUYE ARCHIVO DE UVR Y TASAS PARA  *
+REMARK* 26-OCT-2012 |          FONDO NACIONAL DEL AHORRO.              *
+REMARK******************************************************************
+REMARK* CAV0016     | CQ8603 - SE INCLUYE ARCHIVO DE CLIENTES FERIA    *
+REMARK* 31-OCT-2012 |          PARA CITI PER 003.                      *
+REMARK******************************************************************
+REMARK* IMS0017     | CQ8984 - SE ABRE ARCHIVO DE FNA COMO I-O PARA    *
+REMARK* 20-NOV-2012 |     QUE PERMITA SER ACTUALIZADO CON ICGKAR ARRIBA*
+REMARK******************************************************************
+REMARK* IMS0018     | CQ9050 - SE INCLUYE ARCHIVO DE PARAMETROS PARA   *
+REMARK* 17-DIC-2012 |          CARACTERISTICAS DE DAVIVIENDA.          *
+REMARK******************************************************************
+REMARK* CAV0019     | CQ9566 - SE INCLUYEN ARCHIVOS DE EMPLEADOS  Y    *
+REMARK* 22-ENE-2013 |          CUOTAS X MILLON PARA DAVIVIENDA.        *
+REMARK******************************************************************
+REMARK* STT0020     | R11058 - SE INCLUYE ARCHIVO CREDITITULOS         *
+REMARK* 22-ABR-2013 |                                                  *
+REMARK******************************************************************
+      *
+       1000-ABRIR-DCSRARCH.
+RQ3237*                                                                 EHA0002
+RQ3237     OPEN  INPUT  NODESEADOS-COLP                                 EHA0002
+RQ4070     OPEN  INPUT  NODESEADOS-BCOBOG                               EHA0007
+RQ5926     OPEN  INPUT  RETENCION-CUP-COLP                              CAV0009
+RQ3609*    OPEN  INPUT  NODESEADOS-BBVA                                 EHA0005
+CQ7833*RQ3609* OPEN  INPUT  NODESEADOS-BCSC                             IMS0014
+CQ7833     OPEN  INPUT  NODESEADOS-BCSC                                 IMS0014
+ACCITI     OPEN  INPUT  CLIENTCITI                                      NDG0008
+CQ5863     OPEN  INPUT  VARPROPIAS-ETB                                  IMS0011
+CQ7064     OPEN  INPUT  NODESEADOS-DAV                                  IMS0012
+CQ7064     OPEN  INPUT  VIP-DAV                                         IMS0012
+CQ7215     OPEN  INPUT  PAR-ICGD61                                      IMS0013
+CQ8984*CQ8189 OPEN  INPUT  FNAUVRTASA                                   IMS0017
+CQ8984     OPEN  I-O    FNAUVRTASA                                      IMS0017
+R11058     OPEN  INPUT  CREDITITULOS                                    STT0020
+CQ8603     OPEN  INPUT  CITICLIFERIA                                    CAV0016
+CQ9050     OPEN  INPUT  PAR-CARACT-DAV                                  IMS0018
+RQ3909     OPEN  INPUT  NODESEADOS-GYF.                                 EHA0006
+CQ9550     MOVE  0     TO  W-FIN-PARAM-DAV                              IMS0018
+CQ9566     OPEN  INPUT  EMPLEADOS-DAV                                   CAV0019
+CQ9566     OPEN  INPUT  CUO-X-MLL-DAV                                   CAV0019
+ACCITI     IF W-STATUS-ENT-DCSRARCH  =  35                              NDG0008
+ACCITI        DISPLAY "**ERROR** CLIENTES CITI no existe!!"             NDG0008
+ACCITI        STOP RUN                                                  NDG0008
+ACCITI     ELSE                                                         NDG0008
+ACCITI       IF W-STATUS-ENT-9-DCSRARCH  =  9                           NDG0008
+ACCITI         DISPLAY "**ERROR** Idx CLIENTES CITI - 9..."             NDG0008
+ACCITI                            W-STATUS-ENT-X-DCSRARCH               NDG0008
+ACCITI         STOP  RUN                                                NDG0008
+ACCITI       ELSE                                                       NDG0008
+ACCITI         IF W-STATUS-ENT-DCSRARCH  NOT =  ZEROS                   NDG0008
+ACCITI           DISPLAY "**ERROR** CLIENTES CITI: "                    NDG0008
+ACCITI                    W-STATUS-ENT-DCSRARCH                         NDG0008
+ACCITI           STOP  RUN                                              NDG0008
+ACCITI         END-IF                                                   NDG0008
+ACCITI       END-IF                                                     NDG0008
+ACCITI     END-IF.                                                      NDG0008
+      *
+       1000-CERRAR-DCSRARCH.
+RQ3609     CLOSE  CLIENTCITI                                            EHA0005
+RQ3237     CLOSE  NODESEADOS-COLP                                       EHA0002
+RQ4070     CLOSE  NODESEADOS-BCOBOG                                     EHA0007
+RQ5926     CLOSE  RETENCION-CUP-COLP                                    CAV0009
+RQ3609*    CLOSE  NODESEADOS-BBVA                                       EHA0005
+CQ7833*RQ3609* CLOSE  NODESEADOS-BCSC                                   IMS0014
+CQ7833     CLOSE  NODESEADOS-BCSC                                       IMS0014
+RQ3909     CLOSE  NODESEADOS-GYF                                        EHA0006
+CQ5863     CLOSE  VARPROPIAS-ETB                                        IMS0011
+CQ7064     CLOSE  NODESEADOS-DAV                                        IMS0012
+CQ7064     CLOSE  VIP-DAV                                               IMS0012
+CQ7215     CLOSE  PAR-ICGD61                                            IMS0013
+CQ8189     CLOSE  FNAUVRTASA                                            CAV0015
+CQ8603     CLOSE  CITICLIFERIA                                          CAV0016
+CQ9050     CLOSE  PAR-CARACT-DAV                                        IMS0018
+CQ9566     CLOSE  EMPLEADOS-DAV                                         CAV0019
+CQ9566     CLOSE  CUO-X-MLL-DAV                                         CAV0019
+           .
+      *
+       5200-LEA-INDEX-CLIENTCITI.
+ACCITI     INITIALIZE  REG-CLIENTCITI.                                  NDG0008
+ACCITI     MOVE  TIPO-ID-CARACT        TO  CLTCIT-TIP-ID                NDG0008
+ACCITI     MOVE  NRO-ID-CARACT         TO  CLTCIT-NRO-ID                NDG0008
+ACCITI     MOVE  ZEROS                 TO  SW-CLIENTCITI-DCSRARCH       NDG0008
+ACCITI     READ  CLIENTCITI  IGNORE LOCK                                NDG0008
+ACCITI        INVALID KEY                                               NDG0008
+ACCITI          IF  W-STATUS-ENT-9-DCSRARCH  =  9                       NDG0008
+ACCITI            DISPLAY  PROGRAMA-EMAIL(1:7)                          NDG0008
+ACCITI                    " *ERR* ARCHIVO CLIENTES CITI  9..."          NDG0008
+ACCITI                     W-STATUS-ENT-X-DCSRARCH                      NDG0008
+ACCITI          ELSE                                                    NDG0008
+ACCITI            IF  W-STATUS-ENT-DCSRARCH  NOT =  23                  NDG0008
+ACCITI              DISPLAY  PROGRAMA-EMAIL(1:7)                        NDG0008
+ACCITI              DISPLAY " *ERR* ARCHIVO CLIENTES CITI  "            NDG0008
+ACCITI                       W-STATUS-ENT-DCSRARCH                      NDG0008
+ACCITI            END-IF                                                NDG0008
+ACCITI          END-IF                                                  NDG0008
+ACCITI        NOT INVALID KEY                                           NDG0008
+ACCITI           MOVE  1               TO  SW-CLIENTCITI-DCSRARCH       NDG0008
+ACCITI     END-READ.                                                    NDG0008
+ACCITI     IF  SW-CLIENTCITI-DCSRARCH  =  1  AND                        NDG0008
+ACCITI         CLTCIT-CLIENTE  =  "N"                                   NDG0008
+ACCITI       MOVE  ZEROS               TO  SW-CLIENTCITI-DCSRARCH       NDG0008
+ACCITI     END-IF.                                                      NDG0008
+      *
+RQ3237 5200-LEA-INDEX-CLIENTCOLP.                                       EHA0002
+RQ3237     MOVE  TIPO-ID-CARACT        TO  NODESE-TIP-ID-COLP           EHA0002
+RQ3237     MOVE  NRO-ID-CARACT         TO  NODESE-NRO-ID-COLP           EHA0002
+RQ3237     READ  NODESEADOS-COLP  IGNORE LOCK                           EHA0002
+RQ3237        INVALID KEY                                               EHA0002
+RQ3237          IF  W-STATUS-ENT-9-COLP  =  9                           EHA0002
+RQ3237            DISPLAY "*ERR* ARCHIVO NO DESEADOS COLPATRIA   9..."  EHA0002
+RQ3237                    W-STATUS-ENT-X-COLP                           EHA0002
+RQ3237          ELSE                                                    EHA0002
+RQ3237            IF  W-STATUS-ENT-COLP  NOT =  23                      EHA0002
+RQ3237              DISPLAY "*ERR* ARCHIVO NO DESEADOS COLPATRIA    "   EHA0002
+RQ3237                    W-STATUS-ENT-COLP                             EHA0002
+RQ3237            END-IF                                                EHA0002
+RQ3237          END-IF                                                  EHA0002
+RQ3237        NOT INVALID KEY                                           EHA0002
+RQ3237           MOVE  1                    TO  SW-NODESEADOS-COLP      EHA0002
+CQ6105           MOVE  NODESE-INDICADOR-BUI TO  SW-INDICADOR-BUI        EHA0010
+RQ3237     END-READ.                                                    EHA0002
+RQ3132*                                                                 CIG0003
+RQ3132 5200-LEA-INDEX-CLIENTBBVA.                                       CIG0003
+RQ3609*    INITIALIZE REG-NODESEADOS-BBVA                               EHA0005
+RQ3609*    MOVE  TIPO-ID-CARACT        TO NODESE-TIP-ID-BBVA            EHA0005
+RQ3609*    MOVE  NRO-ID-CARACT         TO NODESE-NRO-ID-BBVA            EHA0005
+RQ3609*    READ NODESEADOS-BBVA   IGNORE LOCK                           EHA0005
+RQ3609*       INVALID KEY                                               EHA0005
+RQ3609*         IF  W-STATUS-ENT-9-BBVA  =  9                           EHA0005
+RQ3609*           DISPLAY "*ERR* ARCHIVO NO DESEADOS BBVA        9..."  EHA0005
+RQ3609*                   W-STATUS-ENT-X-BBVA                           EHA0005
+RQ3609*         ELSE                                                    EHA0005
+RQ3609*           IF  W-STATUS-ENT-BBVA  NOT =  23                      EHA0005
+RQ3609*             DISPLAY "*ERR* ARCHIVO NO DESEADOS BBVA          "  EHA0005
+RQ3609*                   W-STATUS-ENT-BBVA                             EHA0005
+RQ3609*           END-IF                                                EHA0005
+RQ3609*         END-IF                                                  EHA0005
+RQ3609*       NOT INVALID KEY                                           EHA0005
+RQ3609*          MOVE  1               TO  SW-NODESEADOS-BBVA           EHA0005
+RQ3609*    END-READ                                                     EHA0005
+RQ3609*    .                                                            EHA0005
+RQ3132*                                                                 CIG0003
+RQ3449 5200-LEA-INDEX-CLIENTBCSC.                                       CAV0004
+CQ7833     INITIALIZE REG-NODESEADOS-BCSC                               IMS0014
+CQ7833     MOVE  TIPO-ID-CARACT        TO NODESE-TIP-ID-BCSC            IMS0014
+CQ7833     MOVE  NRO-ID-CARACT         TO NODESE-NRO-ID-BCSC            IMS0014
+CQ7833     READ NODESEADOS-BCSC   IGNORE LOCK                           IMS0014
+CQ7833        INVALID KEY                                               IMS0014
+CQ7833          IF  W-STATUS-ENT-9-BCSC  =  9                           IMS0014
+CQ7833            DISPLAY "*ERR* ARCHIVO NO DESEADOS BCSC        9..."  IMS0014
+CQ7833                    W-STATUS-ENT-X-BCSC                           IMS0014
+CQ7833          ELSE                                                    IMS0014
+CQ7833            IF  W-STATUS-ENT-BCSC  NOT =  23                      IMS0014
+CQ7833              DISPLAY "*ERR* ARCHIVO NO DESEADOS BCSC          "  IMS0014
+CQ7833                    W-STATUS-ENT-BCSC                             IMS0014
+CQ7833            END-IF                                                IMS0014
+CQ7833          END-IF                                                  IMS0014
+CQ7833        NOT INVALID KEY                                           IMS0014
+CQ7833           MOVE  1               TO  NODESEADOSBCSC               IMS0014
+CQ7833     END-READ.                                                    IMS0014
+CQ7833*                                                                 IMS0014
+CQ7833*RQ3609* INITIALIZE REG-NODESEADOS-BCSC                           IMS0014
+CQ7833*RQ3609* MOVE  TIPO-ID-CARACT        TO NODESE-TIP-ID-BCSC        IMS0014
+CQ7833*RQ3609* MOVE  NRO-ID-CARACT         TO NODESE-NRO-ID-BCSC        IMS0014
+CQ7833*RQ3609* READ NODESEADOS-BCSC   IGNORE LOCK                       IMS0014
+CQ7833*RQ3609*  INVALID KEY                                             IMS0014
+CQ7833*RQ3609*   IF  W-STATUS-ENT-9-BCSC  =  9                          IMS0014
+CQ7833*RQ3609*    DISPLAY "*ERR* ARCHIVO NO DESEADOS BCSC        9..."  IMS0014
+CQ7833*RQ3609*               W-STATUS-ENT-X-BCSC                        IMS0014
+CQ7833*RQ3609*   ELSE                                                   IMS0014
+CQ7833*RQ3609*    IF  W-STATUS-ENT-BCSC  NOT =  23                      IMS0014
+CQ7833*RQ3609*     DISPLAY "*ERR* ARCHIVO NO DESEADOS BCSC          "   IMS0014
+CQ7833*RQ3609*              W-STATUS-ENT-BCSC                           IMS0014
+CQ7833*RQ3609*    END-IF                                                IMS0014
+CQ7833*RQ3609*   END-IF                                                 IMS0014
+CQ7833*RQ3609*  NOT INVALID KEY                                         IMS0014
+CQ7833*RQ3609*    MOVE  1               TO  NODESEADOSBCSC              IMS0014
+CQ7833*RQ3609* END-READ.                                                IMS0014
+CQ7833*RQ3449*                                                          IMS0014
+RQ3909 5200-LEA-INDEX-CLIENTGYF.                                        EHA0006
+RQ3909     INITIALIZE REG-NODESEADOS-GYF                                EHA0006
+RQ3909     MOVE  TIPO-ID-CARACT        TO NODESE-TIP-ID-GYF             EHA0006
+RQ3909     MOVE  NRO-ID-CARACT         TO NODESE-NRO-ID-GYF             EHA0006
+RQ3909     READ NODESEADOS-GYF    IGNORE LOCK                           EHA0006
+RQ3909        INVALID KEY                                               EHA0006
+RQ3909          IF  W-STATUS-ENT-9-GYF   =  9                           EHA0006
+RQ3909            DISPLAY "*ERR* ARCHIVO NO DESEADOS GYF         9..."  EHA0006
+RQ3909                    W-STATUS-ENT-X-GYF                            EHA0006
+RQ3909          ELSE                                                    EHA0006
+RQ3909            IF  W-STATUS-ENT-GYF   NOT =  23                      EHA0006
+RQ3909              DISPLAY "*ERR* ARCHIVO NO DESEADOS GYF           "  EHA0006
+RQ3909                    W-STATUS-ENT-GYF                              EHA0006
+RQ3909            END-IF                                                EHA0006
+RQ3909          END-IF                                                  EHA0006
+RQ3909        NOT INVALID KEY                                           EHA0006
+RQ3909           MOVE  1               TO  01DEM999009                  EHA0006
+RQ3909     END-READ.                                                    EHA0006
+RQ3909                                                                  EHA0006
+RQ4070*                                                                 EHA0007
+RQ4070 5200-LEA-INDEX-CLIENTBCOBOG.                                     EHA0007
+RQ4070     MOVE  TIPO-ID-CARACT        TO  NODESE-TIP-ID-BCOBOG         EHA0007
+RQ4070     MOVE  NRO-ID-CARACT         TO  NODESE-NRO-ID-BCOBOG         EHA0007
+RQ4070     MOVE  ZEROS                 TO  01DEM99908                   EHA0007
+RQ4070     READ  NODESEADOS-BCOBOG  IGNORE LOCK                         EHA0007
+RQ4070        INVALID KEY                                               EHA0007
+RQ4070          IF  W-STATUS-ENT-9-BCOBOG  =  9                         EHA0007
+RQ4070            DISPLAY "*ERR* ARCHIVO NO DESEADOS BCO. BOGOTA 9..."  EHA0007
+RQ4070                    W-STATUS-ENT-X-BCOBOG                         EHA0007
+RQ4070          ELSE                                                    EHA0007
+RQ4070            IF  W-STATUS-ENT-BCOBOG  NOT =  23                    EHA0007
+RQ4070              DISPLAY "*ERR* ARCHIVO NO DESEADOS BCO. BOGOTA  "   EHA0007
+RQ4070                    W-STATUS-ENT-BCOBOG                           EHA0007
+RQ4070            END-IF                                                EHA0007
+RQ4070          END-IF                                                  EHA0007
+RQ4070        NOT INVALID KEY                                           EHA0007
+RQ4070           MOVE  NODESE-CALIF-BCOBOG TO  01DEM99908               EHA0007
+RQ4070     END-READ.                                                    EHA0007
+RQ4070*                                                                 EHA0007
+RQ5926 5200-LEA-INDEX-CUP-COLPATRIA.                                    CAV0009
+RQ5926     MOVE  TIPO-ID-CARACT        TO  RETENCION-CUP-TIP-ID-COLP    CAV0009
+RQ5926     MOVE  NRO-ID-CARACT         TO  RETENCION-CUP-NRO-ID-COLP    CAV0009
+RQ5926     READ  RETENCION-CUP-COLP  IGNORE LOCK                        CAV0009
+RQ5926        INVALID KEY                                               CAV0009
+RQ5926          IF  W-STATUS-ENT-9-CUP-COLP = 9                         CAV0009
+RQ5926            DISPLAY "*ERR* ARCHIVO RETENCION-CUP-COLPATRIA 9..."  CAV0009
+RQ5926                    W-STATUS-ENT-X-CUP-COLP                       CAV0009
+RQ5926          ELSE                                                    CAV0009
+RQ5926            IF  W-STATUS-ENT-CUP-COLP  NOT =  23                  CAV0009
+RQ5926              DISPLAY "*ERR* ARCHIVO RETENCION-CUP-COLPATRIA  "   CAV0009
+RQ5926                    W-STATUS-ENT-CUP-COLP                         CAV0009
+RQ5926            END-IF                                                CAV0009
+RQ5926          END-IF                                                  CAV0009
+RQ5926        NOT INVALID KEY                                           CAV0009
+RQ5926           MOVE  1               TO  PER04-IND-REG-ENC            CAV0009
+RQ5926     END-READ.                                                    CAV0009
+RQ5926*                                                                 CAV0009
+CQ5863 5200-LEA-INDEX-VARPROPIAS-ETB.                                   IMS0011
+CQ5863     MOVE  TIPO-ID-CARACT        TO  VARPROPIAS-TIP-ID-ETB        IMS0011
+CQ5863     MOVE  NRO-ID-CARACT         TO  VARPROPIAS-NRO-ID-ETB        IMS0011
+CQ5863     READ  VARPROPIAS-ETB  IGNORE LOCK                            IMS0011
+CQ5863        INVALID KEY                                               IMS0011
+CQ5863          IF  W-STATUS-ENT-9-VP-ETB = 9                           IMS0011
+CQ5863            DISPLAY "*ERR* ARCHIVO VARPROPIAS-ETB 9..."           IMS0011
+CQ5863                    W-STATUS-ENT-X-VP-ETB                         IMS0011
+CQ5863          ELSE                                                    IMS0011
+CQ5863            IF  W-STATUS-ENT-VP-ETB  NOT =  23                    IMS0011
+CQ5863              DISPLAY "*ERR* ARCHIVO VARPROPIAS-ETB"              IMS0011
+CQ5863                    W-STATUS-ENT-VP-ETB                           IMS0011
+CQ5863            END-IF                                                IMS0011
+CQ5863          END-IF                                                  IMS0011
+CQ5863        NOT INVALID KEY                                           IMS0011
+CQ5863           MOVE  1           TO  IND-ENC-ETB                      IMS0011
+CQ5863     END-READ.                                                    IMS0011
+CQ5863*                                                                 IMS0011
+CQ7064 4600-LEA-INDEX-NODESEADOS-DAV.                                   IMS0012
+CQ7064      MOVE  TIPO-ID-CARACT     TO  NODESE-TIP-ID-DAV              IMS0012
+CQ7064      MOVE  NRO-ID-CARACT      TO  NODESE-NRO-ID-DAV              IMS0012
+CQ7064      READ  NODESEADOS-DAV IGNORE LOCK  INVALID KEY               IMS0012
+CQ7064            IF W-STATUS-ENT-9-DAV  =  9                           IMS0012
+CQ7064              DISPLAY "*ERR* ARCHIVO NO DESEADOS DAV 9.."         IMS0012
+CQ7064                              W-STATUS-ENT-X-DAV                  IMS0012
+CQ7064            ELSE                                                  IMS0012
+CQ7064               IF W-STATUS-ENT-DAV  NOT =  23                     IMS0012
+CQ7064                 DISPLAY "*ERR* ARCHIVO NO DESEADOS DAV "         IMS0012
+CQ7064                                W-STATUS-ENT-DAV                  IMS0012
+CQ7064               END-IF                                             IMS0012
+CQ7064            END-IF                                                IMS0012
+CQ7064        NOT INVALID KEY                                           IMS0012
+CQ7064            MOVE  "1"     TO  SW-NODESEADOS-DAV                   IMS0012
+CQ7064     END-READ.                                                    IMS0012
+CQ7064*                                                                 IMS0012
+CQ7064 4600-LEA-INDEX-VIP-DAV.                                          IMS0012
+CQ7064      MOVE  TIPO-ID-CARACT     TO  VIP-TIP-ID-DAV                 IMS0012
+CQ7064      MOVE  NRO-ID-CARACT      TO  VIP-NRO-ID-DAV                 IMS0012
+CQ7064      READ  VIP-DAV IGNORE LOCK  INVALID KEY                      IMS0012
+CQ7064            IF W-STATUS-VIP-9-DAV  =  9                           IMS0012
+CQ7064              DISPLAY "*ERR* ARCHIVO VIP DAV 9.."                 IMS0012
+CQ7064                              W-STATUS-VIP-X-DAV                  IMS0012
+CQ7064            ELSE                                                  IMS0012
+CQ7064               IF W-STATUS-VIP-DAV  NOT =  23                     IMS0012
+CQ7064                 DISPLAY "*ERR* ARCHIVO VIP DAV "                 IMS0012
+CQ7064                                W-STATUS-VIP-DAV                  IMS0012
+CQ7064               END-IF                                             IMS0012
+CQ7064            END-IF                                                IMS0012
+CQ7064        NOT INVALID KEY                                           IMS0012
+CQ7064            MOVE  "1"     TO  SW-VIP-DAV                          IMS0012
+CQ7064     END-READ.                                                    IMS0012
+CQ7064*                                                                 IMS0012
+CQ7215 4600-LEA-SECUENCIAL-PAR-ICGD61.                                  IMS0013
+CQ7215     IF W-STATUS-ICGD61 = ZEROS                                   IMS0013
+CQ7215        PERFORM  UNTIL  PAR-LLAVE-D61 = TMP-LLAVE-D61             IMS0013
+CQ7215          READ  PAR-ICGD61                                        IMS0013
+CQ7215            AT END                                                IMS0013
+CQ7215              DISPLAY " > NO SE ENCONTRO PARAMETROS PARAM-ICGD61" IMS0013
+CQ7215            NOT AT  END                                           IMS0013
+CQ7215              CONTINUE                                            IMS0013
+CQ7215          END-READ                                                IMS0013
+CQ7215        END-PERFORM                                               IMS0013
+CQ7215     ELSE                                                         IMS0013
+CQ7215        DISPLAY " *** ERROR ABRIENDO ARCHIVO PARAM-ICGD61 *** "   IMS0013
+CQ7215                                          W-STATUS-ICGD61         IMS0013
+CQ7215     END-IF.                                                      IMS0013
+CQ7215*                                                                 IMS0013
+CQ8603 5200-LEA-INDEX-CITICLIFERIA.                                     CAV0016
+CQ8603     INITIALIZE REG-CITICLIFERIA                                  CAV0016
+CQ8603     MOVE  ZEROS                 TO  SW-EXIST-CITICLIFERIA        CAV0016
+CQ8603     MOVE  TIPO-ID-CARACT        TO  TIP-ID-CITICLIFERIA          CAV0016
+CQ8603     MOVE  NRO-ID-CARACT         TO  NUM-ID-CITICLIFERIA          CAV0016
+CQ8603     READ  CITICLIFERIA  IGNORE LOCK                              CAV0016
+CQ8603        INVALID KEY                                               CAV0016
+CQ8603          IF W-STATUS-9-CITIFER  = 9                              CAV0016
+CQ8603            DISPLAY  " *ERR* ARCHIVO CITI FERIA  9..."            CAV0016
+CQ8603                     W-STATUS-X-CITIFER                           CAV0016
+CQ8603          ELSE                                                    CAV0016
+CQ8603            IF  W-STATUS-CITICLIFERIA  NOT =  23                  CAV0016
+CQ8603              DISPLAY " *ERR* ARCHIVO CITI FERIA "                CAV0016
+CQ8603                       W-STATUS-CITICLIFERIA                      CAV0016
+CQ8603            END-IF                                                CAV0016
+CQ8603          END-IF                                                  CAV0016
+CQ8603        NOT INVALID KEY                                           CAV0016
+CQ8603           MOVE  1               TO  SW-EXIST-CITICLIFERIA        CAV0016
+CQ8603     END-READ.                                                    CAV0016
+R11058*                                                                 STT0020
+R11058 5200-LEA-INDEX-CREDITITULOS.                                     STT0020
+R11058     INITIALIZE REG-CREDITITULOS                                  STT0020
+R11058     MOVE  ZEROS                 TO  SW-EXIST-CREDITITULOS        STT0020
+R11058     MOVE  TIPO-ID-CARACT        TO  TIP-ID-CREDITITULOS          STT0020
+R11058     MOVE  NRO-ID-CARACT         TO  NUM-ID-CREDITITULOS          STT0020
+R11058     MOVE  W-TIPDEU-CREDITITULOS TO  TIP-TI-CREDITITULOS          STT0020
+R11058     READ  CREDITITULOS  IGNORE LOCK                              STT0020
+R11058        INVALID KEY                                               STT0020
+R11058          IF W-STATUS-9-CREDITITUL = 9                            STT0020
+R11058            DISPLAY  " *ERR* ARCHIVO CREDITITULOS 9..."           STT0020
+R11058                     W-STATUS-X-CREDITITUL                        STT0020
+R11058          ELSE                                                    STT0020
+R11058            IF  W-STATUS-CREDITITULOS  NOT =  23                  STT0020
+R11058              DISPLAY " *ERR* ARCHIVO CREDITITULOS "              STT0020
+R11058                       W-STATUS-CREDITITULOS                      STT0020
+R11058            END-IF                                                STT0020
+R11058          END-IF                                                  STT0020
+R11058        NOT INVALID KEY                                           STT0020
+R11058           MOVE  1               TO  SW-EXIST-CREDITITULOS        STT0020
+R11058     END-READ.                                                    STT0020
+CQ8603*                                                                 CAV0016
+CQ9050 4600-LEA-SEC-PAR-CARACT-DAV.                                     IMS0018
+CQ9050     IF W-STATUS-PAR-DAV = ZEROS OR W-STATUS-PAR-DAV = 10         IMS0018
+CQ9050        PERFORM  UNTIL  W-FIN-PARAM-DAV = 1                       IMS0018
+CQ9050          READ  PAR-CARACT-DAV                                    IMS0018
+CQ9050            AT END                                                IMS0018
+CQ9050              MOVE 1   TO   W-FIN-PARAM-DAV                       IMS0018
+CQ9050            NOT AT  END                                           IMS0018
+CQ9050              EVALUATE PAR-CAMPO-DAV                              IMS0018
+CQ9550                WHEN 1                                            IMS0018
+CQ9550                  MOVE PAR-VALOR-DAV TO                           IMS0018
+CQ9550                                 TAB-CUO-MILL-25(PAR-POSI-DAV)    IMS0018
+CQ9550                WHEN 2                                            IMS0018
+CQ9550                  MOVE PAR-VALOR-DAV TO                           IMS0018
+CQ9550                                 TAB-FAC-VAL-25(PAR-POSI-DAV)     IMS0018
+CQ9550                WHEN 3                                            IMS0018
+CQ9550                  MOVE PAR-VAL-ENT-DAV(2:2) TO NUM-CUO-ROT        IMS0018
+CQ9550              END-EVALUATE                                        IMS0018
+CQ9550          END-READ                                                IMS0018
+CQ9550        END-PERFORM                                               IMS0018
+CQ9050     ELSE                                                         IMS0018
+CQ9050       DISPLAY " *** ERROR ABRIENDO ARCHIVO PARAM-CARACT-DAV *** "IMS0018
+CQ9050                                          W-STATUS-PAR-DAV        IMS0018
+CQ9050        STOP RUN                                                  IMS0018
+CQ9050     END-IF.                                                      IMS0018
+CQ9050*                                                                 IMS0018
+CQ9566 5200-LEA-INDEX-EMPLAEDO-DAV.                                     CAV0019
+CQ9566     INITIALIZE REG-EMPLEADOS-DAV SW-EMPL-DAV                     CAV0019
+CQ9566     MOVE  TIPO-ID-CARACT        TO EMPLEA-TIP-ID-DAV             CAV0019
+CQ9566     MOVE  NRO-ID-CARACT         TO EMPLEA-NRO-ID-DAV             CAV0019
+CQ9566     READ EMPLEADOS-DAV     IGNORE LOCK                           CAV0019
+CQ9566        INVALID KEY                                               CAV0019
+CQ9566          IF  W-STATUS-EMPL-9-DAV  =  9                           CAV0019
+CQ9566            DISPLAY "*ERR* ARCHIVO EMPLEADOS DAVIVIENDA    9..."  CAV0019
+CQ9566                    W-STATUS-EMPL-X-DAV                           CAV0019
+CQ9566          ELSE                                                    CAV0019
+CQ9566            IF  W-STATUS-EMPL-DAV  NOT =  23                      CAV0019
+CQ9566              DISPLAY "*ERR* ARCHIVO EMPLEADOS DAVIVIENDA      "  CAV0019
+CQ9566                    W-STATUS-EMPL-DAV                             CAV0019
+CQ9566            END-IF                                                CAV0019
+CQ9566          END-IF                                                  CAV0019
+CQ9566        NOT INVALID KEY                                           CAV0019
+CQ9566           MOVE  1               TO  SW-EMPL-DAV                  CAV0019
+CQ9566     END-READ.                                                    CAV0019
+CQ9566*                                                                 CAV0019
+CQ9566 4600-LEA-SEC-PAR-CUOXMLL-DAV.                                    CAV0019
+CQ9566*******  LA TABLA EN MEMORIA SOLO TIENE 8 OCURRENCIAS **********  CAV0019
+CQ9566     IF W-FIN-CUOXM-DAV = 0                                       CAV0019
+CQ9566        INITIALIZE TABLA-CUO-X-MILLON-25R                         CAV0019
+CQ9566     END-IF                                                       CAV0019
+CQ9566     IF W-STATUS-CUXM-DAV = ZEROS OR W-STATUS-CUXM-DAV = 10       CAV0019
+CQ9566        PERFORM  UNTIL  W-FIN-CUOXM-DAV = 1                       CAV0019
+CQ9566          READ CUO-X-MLL-DAV  AT END                              CAV0019
+CQ9566               MOVE 1 TO  W-FIN-CUOXM-DAV                         CAV0019
+CQ9566          END-READ                                                CAV0019
+CQ9566          IF W-FIN-CUOXM-DAV = 0                                  CAV0019
+CQ9566           IF W-IND-CUOXM-DAV < 9                                 CAV0019
+CQ9566             ADD 1 TO W-IND-CUOXM-DAV                             CAV0019
+CQ9566             MOVE CUXM-TIP-CRED-DAV TO                            CAV0019
+CQ9566                               TAB-TIP-CRED-25R(W-IND-CUOXM-DAV)  CAV0019
+CQ9566             MOVE CUXM-DES-CRED-DAV TO                            CAV0019
+CQ9566                               TAB-DES-CRED-25R(W-IND-CUOXM-DAV)  CAV0019
+CQ9566             MOVE CUXM-CUO-MILL-DAV TO                            CAV0019
+CQ9566                               TAB-CUO-MILL-25R(W-IND-CUOXM-DAV)  CAV0019
+CQ9566           END-IF                                                 CAV0019
+CQ9566          END-IF                                                  CAV0019
+CQ9566        END-PERFORM                                               CAV0019
+CQ9566     ELSE                                                         CAV0019
+CQ9566       DISPLAY " *** ERROR ABRIENDO ARCHIVO CUO-X-MLL-DAV   *** " CAV0019
+CQ9566                                          W-STATUS-CUXM-DAV       CAV0019
+CQ9566       STOP RUN                                                   CAV0019
+CQ9566     END-IF.                                                      CAV0019
+CQ9566*                                                                 CAV0019

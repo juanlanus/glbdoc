@@ -1,0 +1,55 @@
+      * FRABDV.FD.v.0001
+      * BASE DE DATOS UNIVERSAL DE PREGUNTAS
+      * REPORTADAS POR LOS DIFERENTES SUSCRIPTORES
+      ******************************************************************
+      * ABB0001     * FRABDV - VERSION INICIAL                         *
+      * ALBEIRO     *          ESTRUCTURA PARA GENERAR FRABDU.NEW      *
+      * BERNAL      *                                                  *
+      * ENE.2011    *                                                  *
+      ******************************************************************
+      * FARF001     * REGTIP - SE ADICIONA EL TIPO DE REGISTRO 0 Y EL  *
+      * F.RODRIGUEZ *          CAMPO NOMBRE DEL PROCESO                *
+      * Abr.04/2011 *                                                  *
+      ******************************************************************
+      
+       FD  FRABDV.
+       01  REG-FRABDV.              
+           03  LLAVE-FRABDV.              
+               05  TIPIDE-FRABDV         PIC 9(01).
+               05  NUMIDE-FRABDV         PIC 9(11).
+               05  LLAVE-FRABDV-ALT.          
+                   07  NITSUS-FRABDV     PIC 9(11).
+                   07  CODPRE-FRABDV     PIC 9(09).
+                   07  TIPREG-FRABDV     PIC 9(01).
+                   07  CONSEC-FRABDV     PIC 9(03).
+REGTIP     03  NOMPRO-FRABDV             PIC X(09).                     FARF001                   
+           03  DATA-FRABDV               PIC X(80).
+REGTIP     03  TIPO0-FRABDV REDEFINES DATA-FRABDV.                      FARF001
+REGTIP*            COMPARTE INFORMACION P=PROPIO,C=CLUB,T=TODOS         FARF001
+REGTIP         05  COMPARTE-FRABDV       PIC X(01).                     FARF001
+REGTIP         05  FILLER                PIC X(79).                     FARF001
+           03  TIPO1-FRABDV REDEFINES DATA-FRABDV.
+               05  FECREA-FRABDV         PIC 9(08).
+               05  FECACT-FRABDV         PIC 9(08).
+               05  FECUTL-FRABDV         PIC 9(08).
+               05  FECEXP-FRABDV         PIC 9(08).
+               05  CLUB-FRABDV           PIC X(01). *> S=SI,N=NO
+               05  FILLER                PIC X(47).
+           03  TIPO2-FRABDV REDEFINES DATA-FRABDV.
+               05  TEXTO-FRABDV          PIC X(80).
+           03  TIPO3-FRABDV REDEFINES DATA-FRABDV.
+      *            TIPO DE DISTRACTOR:SU=SUSCRIPTORES, CI=CUDADES, ...  
+               05  TIPDIS-FRABDV         PIC X(02).
+      *            CLASE DE DISTRACTOR:R=OK,D=DISTRACTOR,U=ULTIMO
+               05  CLADIS-FRABDV         PIC X(01).
+               05  DISTRA-FRABDV         PIC X(77).
+           03  TIPO4-FRABDV REDEFINES DATA-FRABDV.
+               05  EXCPR1-FRABDV         PIC 9(09).
+               05  EXCPR2-FRABDV         PIC 9(09).
+               05  EXCPR3-FRABDV         PIC 9(09).
+               05  EXCPR4-FRABDV         PIC 9(09).
+               05  EXCPR5-FRABDV         PIC 9(09).
+               05  EXCPR6-FRABDV         PIC 9(09).
+               05  EXCPR7-FRABDV         PIC 9(09).
+               05  EXCPR8-FRABDV         PIC 9(09).
+               05  FILLER4-FRABDV        PIC X(08).

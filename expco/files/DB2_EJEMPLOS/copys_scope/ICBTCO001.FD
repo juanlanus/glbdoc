@@ -1,0 +1,128 @@
+      * ICBTCO-FD.v.0016
+      * LOG DE CONSULTAS REALIZADAS EN LA BASE DE DATOS
+042500******************************************************************
+042600*         SECUENCIAL : CONTIENE LAS CONSULTAS ERRADAS            *
+042700*                      TIPO DIFERENTE DE 1                       *
+      * FAC0003    * AMPLIACION DEL ICBTCO                             *
+      * MAR.28/2000* SE ADICIONAN LA HORA DE LA CONSULTA, EL TIPO DE   *
+      * F.CUADROS  * SCORING y UN FILLER PARA USO FUTURO               *
+042800******************************************************************
+      * GJC0004    * SE CAMBIA EL NOMBRE A LA VARIABLE TIPO SCOR COMO  *
+      * ABR.27/2000* TABLA DE SCOR, AMPLIANDO EL CAMPO A 10 POSICIONES *
+      * GRACIELA J.* ESTO PARA PERMITOR EL MANEJO DE HASTA 10 SCOR     *
+042800******************************************************************
+      * GJC0005    * SE CREA NUEVO CAMPO PARA MARCAR LAS TRANSACCINES  *
+      * JUN.19/2000* HECHAS CON PREPAGOS.                              *
+      * GRACIELA J.*                                                   *
+042800******************************************************************
+      * RMB0006    * SE CREA NUEVO CAMPO REG-ROUTER-SEC PARA IDENTIFI- *
+      * SEP.25/2000* CAR EL ORIGEN DE LAS TRANSACCIONES                *
+      * R.MARTINEZ.*                                                   *
+042800******************************************************************
+      * RMB0007    * SE CREA NUEVO CAMPO PREDICTA-SEC PARA INCLUIR LA  *
+      * OCT.30/2000*CALIFICACION DE PREDICTA O CLASIFICACION DE D*CIFRA*
+      * R.MARTINEZ.* SE CREA COMO CAMPO COMP-3                         *
+042800******************************************************************
+      * GJC0008    * SE REDISTRIBUYE EL REGISTRO PARA ELIMINAR CAMPOS   *
+      * NOV.30/2000* DEFINIDOS COMP-3. SE MUEVE CALIFICACION A ZONA-FAC*
+      * G.JIMENEZ  * Y ZONA FAC A PREDICTA   PERO EN DOS POSICIONES    *
+042800******************************************************************
+REMARK*VHF0009     * SE REDEFINE CAMPO PRIVILEGIO PARA PODER USAR LOS  *
+REMARK*VICTOR HUGO * DOS CARACTERES QUE LO CONFORMAN EN FORMA          *
+REMARK*FORERO      * INDEPENDIENTE, EL PRIMERO PARA EL SUBPRIVILEGIO Y *
+REMARK*JUL.29/2002 * EL SEGUNDO PARA PRIVILEGIO.
+REMARK******************************************************************
+REMARK*GJC0010     * SE AMPLIA ESTRUCTURA DEL ARCHIVO PARA GUARDAR     *
+REMARK*GRACIELA J. * LA CALIFICACION DE D*CIFRA Y SE DEJA FILLER DE 50 *
+REMARK*ENE.20/2003 * POSICIONES.                 
+REMARK******************************************************************
+REMARK*RMB0011     * SE AUMENTAN LOS CAMPOS DE LAS PRIMERAS 4 RAZONES  *
+REMARK*   DES001   * PARA EL SCORE   DE D*CIFRA                        *
+REMARK*ABR.28/2003 *                                                   *
+REMARK******************************************************************
+REMARK*GJC0012     * REDEFI: SE REDEFINEN CAMPOS DE PREDICTA Y D*CIFRA *
+REMARK*G.JIMENEZ   *                                                   *
+REMARK*SEP.17/2003 *                                                   *
+REMARK******************************************************************
+REMARK*RMB0013     * ERRSEN : SE AGREGA CAMPO ERROR-SEND QUE REGISTRA 
+REMARK*R.MARTINEZ  * SI HUBO ALGUN ERROR EN EL ENVIO DE LA RESPUESTA           *
+REMARK*MAY.31/2006 *                                                   *
+REMARK******************************************************************
+REMARK*RMB0014     * DMND01 : SE AGREGA CAMPO PARA INDICAR SI SE RECIBIO
+REMARK*R.MARTINEZ  * PARAMETRO DE LEY O REGISTRADURIA POR DEMANDA              *
+REMARK*FEB./2009   *                                                   *
+REMARK******************************************************************
+REMARK*GJC0015     * RET001 : SE CREAN CAMPOS PARA IDENTIFICAR PLENAMENTE
+REMARK*G.JIMENEZ   * HORA DE INGRESO Y SALIDA DE LA TRANSACCION Y MAYOR        *
+REMARK*JUN./2010   * TIEMPO EN ENVÍO DE RESPUESTA. SE RENOMBRA UN CAMPO*
+REMARK*            * Y SE CREA EL MISMO NUEVAMENTE
+REMARK******************************************************************
+      * NDG0016    * MULSRV : SE REDEFINE LA LLAVE PARA MANEJAR LITERAL*
+      * N.DUARTE   *          PARA CADA SERVIDOR Y LOS NUMEROS DENTRO  *
+      * 16/05/2011 *          DEL REGISTRO PARA SEGUIMIENTO Y CONTROL. *
+      *            *                                                   *
+      * GJC0016    * TIMPRO : NUEVO CAMPO PARA GUARDAR EL TIEMPO DE    *
+      *            *          PROCESO DE UN SCORE EXTERNO              *
+      *            *                                                   *
+      ******************************************************************
+042900 FD  SECUENCIAL.
+043700 01  REG-SEC.
+043710     03 LLAVE-SEC                     PIC 9(8).
+043720     03 RESTO-SEC.
+043800        05 COD-SUSCRIP-SEC            PIC 9(6) . 
+043900        05 FEC-CONSUL-SEC             PIC 9(6) . 
+044000        05 TIP-ID-SEC                 PIC 9    .
+044100        05 NUM-ID-SEC                 PIC 9(11).
+044200        05 NUM-TERM-SEC               PIC 9(4) . 
+044300        05 COBRA-SEC                  PIC 9    . 
+044400        05 PRIVI-SEC                  PIC 99   .
+              05 PRIVI-SEC-R                REDEFINES PRIVI-SEC.        VHF0009
+                 07 SBPRIV-SEC              PIC X(01).                  VHF0009
+                 07 PRIV-SEC                PIC 9(01).                  VHF0009
+044500        05 COD-CLAVE-SEC              PIC 99   . 
+044600        05 CLAVE-AUT-SEC              PIC X(3).
+044700        05 TIP-CON-SEC                PIC 9    .
+004710        05 PRODU-SEC                  PIC 99   .
+              05 CIUDAD-CONS-SEC            PIC 9(3).
+              05 PREDICTA-SEC               PIC 9(3).                   GJC0008 
+REDEFI        05 PREDICTA-R-SEC REDEFINES PREDICTA-SEC.                 GJC0012 
+REDEFI           07 CLAS-SCORE-SEC          PIC X.                      GJC0012 
+REDEFI           07 FILLER-SCORE-SEC        PIC X(2).                   GJC0012 
+              05 REGIONAL-COMIS-SEC         PIC 9(3).
+              05 HORA-SEC                   PIC 9(6).                   FAC0003 
+              05 TABLA-SCOR-SEC             PIC 9(10).                  GJC0004 
+              05 TABLA-SCOR-SEC-R REDEFINES TABLA-SCOR-SEC.             GJC0004 
+                 07 TAB-SCOR-SEC            PIC 9 OCCURS 10 TIMES.      GJC0004 
+REDEFI*       PARA PAGO NORMAL = N, PARA PREPAGO = P                    GJC0012 
+              05 TIPO-PAGO-SEC              PIC X.                      GJC0005
+REMARK*          REG-ROUTER= 0 AL 9, MUESTRAN REGIONAL, "X" NO SE SABE
+BENT01        05 REG-ROUTER-SEC             PIC X.                      RMB0006
+              05 ZONA-FAC-SEC               PIC 9(2).                   GJC0008 
+              05 ZONA-FAC-R REDEFINES ZONA-FAC-SEC.                     GJC0008 
+ ************    FORMATO: D=DATAHOST NUEVO d= DATAHOST VIEJO            GJC0008 
+ ************             R=REPORTE NUEVO  r= REPORTE VIEJO             GJC0008 
+                 07 FORMATO-VER-SEC         PIC X.                      GJC0008 
+ ************    VISOR: DATAWIN: w=UTLIMA VERSION, W=OTRA VERSION       GJC0008 
+ ************           DATACRED: d=UTLIMA VERSION, D=OTRA VERSION      GJC0008 
+ ************           DATARED: r=UTLIMA VERSION R=OTRA VERSION        GJC0008 
+ ************           O=VISOR NO IDENTIFICADO, I=INTERACTIVO, B=BATCH GJC0008 
+                 07 VISOR-SEC               PIC X.                      GJC0008 
+AMPLI1        05 CALIFICACION-DES-SEC       PIC S9(3)V99.               GJC0010
+REDEFI        05 CALIFICACION-SCORE-SEC REDEFINES CALIFICACION-DES-SEC  GJC0012 
+REDEFI                                      PIC S9(3)V99.               GJC0012 
+DES001        05 RAZONES-DESCIFRA-SEC.                                  RMB0011
+DES001           06 RAZDES-0001-SEC         PIC X(04).                  RMB0011
+DES001           06 RAZDES-0002-SEC         PIC X(04).                  RMB0011
+DES001           06 RAZDES-0003-SEC         PIC X(04).                  RMB0011
+DES001           06 RAZDES-0004-SEC         PIC X(04).                  RMB0011
+REDEFI        05 RAZONES-SCORE-SEC REDEFINES RAZONES-DESCIFRA-SEC       GJC0012 
+REDEFI                             OCCURS 4 TIMES PIC X(4).             GJC0012 
+RET001        05 CSV-SEC                    PIC X(1). *> 7=7A5 8=CSV    GJC0015
+DMND01        05 DEMANDAHOST-SEC            PIC X(1). *>1=LEY,2=REGI    RMB0014
+RET001        05 ERROR-SEND-SEC             PIC X(2). *> CODIGO CCI     GJC0015
+RET001        05 DELTA-MAYOR-SEND-SEC       PIC 9(4). *> SC(SEGUND-CENT)GJC0015
+RET001        05 HORA-FIN-SEC               PIC 9(6).                   GJC0015
+MULSRV        05 SESION-SEC                 PIC 9(02).                  NDG0016
+MULSRV        05 EJECUCION-SEC              PIC 9(03).                  NDG0016
+TIMPRO        05 TIEMPO-SCORE-SEC           PIC 9(02).                  NDG0016
+MULSRV        05 FILLER-SEC                 PIC X(13).                  NDG0016

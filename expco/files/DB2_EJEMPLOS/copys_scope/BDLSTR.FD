@@ -1,0 +1,11 @@
+      * BDLSTR-fd.v01.001.
+      * MAESTRO DE ESTRATOS HISTORICOS   
+      *----------------------------------------------------------------*
+       FD  BDLSTR.               
+       01  REG-BDLSTR.           
+           03  LLAVE-BDLSTR.               
+               07  TIPIDE-BDLSTR     PIC 9(01).
+               07  NUMIDE-BDLSTR     PIC 9(11).
+           03  FECACT-BDLSTR             PIC 9(06).           
+           03  VECTOR-BDLSTR             PIC X(60).           
+           03  EST-ANTIGUO-BDLSTR        PIC X(01).

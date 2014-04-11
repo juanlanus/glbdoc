@@ -1,0 +1,12 @@
+REMARK* BDIEFACT-FD.v.0001
+      **************************************************
+      *  MAESTRO DE ENTIDADES CON FECHA DE ACTUALIZACION
+      **************************************************
+
+       FD BDIEFACT.
+       01 BDIEFACT-REGISTRO.
+          03 BDIEFACT-LLAVE.
+             05 BDIEFACT-TIP-ENTID        PIC 9(2).
+             05 BDIEFACT-COD-ENTID        PIC 9(6).
+          03 BDIEFACT-FECHA-ENTID         PIC 9(08).
+          03 FILLER                       PIC X(50).

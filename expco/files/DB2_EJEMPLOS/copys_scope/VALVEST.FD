@@ -1,0 +1,79 @@
+******* VALVEST-fd.v.0007
+   **** VALVEST.v03.007
+036300*----------------------------------------------------------------*
+REMARK*Estadisticos generados durante los procesos de validacion y
+REMARK*actualizacion de datacredito. Contiene el total reportado
+REMARK*por cada novedad. 
+REMARK*La ocurrencia 31 contiene total por adjetivo 60
+REMARK*La ocurrencia 32 contiene total por adjetivo 61
+REMARK*LA OCURRENCIA 33 CONTIENE TOTAL NOVEDADES erradas
+REMARK*La ocurrencia 34, contiene total ADJETIVOS errados
+REAMRK*Se tienen estadisticos para novedades que ingresan por el 
+REMARK*actualizador tanto para aperturas como para movimientos
+REMARK*Contiene Estadistico de errores por cada campo reportado
+REMARK*y total de registros errados que no se actualizaron
+************************************************************************
+REMARK* FAC0002   * MODIFICACION DE LA FECHA DE MAESTRO A 8 DIGITOS
+************************************************************************
+REMARK* F.CUADROS * REQCAL* INCLUSION TOTAL REG. DUPLICADOS, INDICADORES
+REMARK* FAC0003   * DE ALERTAS: 1-APERTURAS, 2-ERRADOS, 3-ACTUALIZACION
+REMARK* NOV.11/03 * Y 4-MODIFICADOS+NO.MODIFICADOS (CTRL. DE CALIDAD)
+REMARK* JUN.11/04 * VALORES: 1-ALERTADO 0-NO ALERTADO
+************************************************************************
+REMARK* F.CUADROS * RCNCER* OPTIMIZACIÓN PRODUCTO RECONOCER. INCLUSIÓN DE
+REMARK* FAC0004   * CAMPOS PARA GESTIÓN DE ACTUALIZACIÓN DE DIRECCIONES
+REMARK* JUL.14/06 * 
+************************************************************************
+REMARK* F.CUADROS * FECREC* AMPLIACIÓN DE LA ESTRUCTURA. INCLUSIÓN DE LA 
+REMARK* FAC0005   * FECHA DE RECEPCIÓN DEL MAESTRO RESUMIDO.                    
+REMARK* SEP.15/06 * 
+************************************************************************
+REMARK* CAV0006    * BDACSV: TOTAL DE APERTURAS CUANDO LA IDENTIFICACION
+REMARK* JUL.10/2007*         NO EXISTE EN LAS BASES DE DATOS OFICIALES
+REMARK* C.VELASCO  *         REGIS,DAS,DIAN Y NOMBRE NO COINCIDE CON BD. 
+************************************************************************
+REMARK* CAV0007    * INDVAL: SE ADICIONA EL INDICADOR DE VALORES EN     
+REMARK* OCT.26/2009*         MILES PARA PODER ALERTAR EN CADA PROCESO 
+REMARK* C.VELASCO  *         DE VALIDACION.
+************************************************************************
+       FD  VALVEST.
+       01  REG-VALVEST.
+           03 LLAVE-VALVEST.
+              05 COD-SUSCRIP-VALVEST           PIC 9(6).
+              05 FEC-MAESTRO-VALVEST           PIC 9(8).                FAC0002
+              05 IND-TIPOPROC-VALVEST          PIC X(1).
+           03 TOT-NOV-REPACT-VALVEST OCCURS 34 PIC 9(8) COMP-3.
+           03 TOT-NOV-INGACT-VALVEST OCCURS 34. 
+              05 TOT-NOV-APEACT-VALVEST        PIC 9(8) COMP-3.
+              05 TOT-NOV-MOVACT-VALVEST        PIC 9(8) COMP-3.
+           03 TOT-ERR-CAM-VALVEST OCCURS 40. 
+              05 TOT-ERR-CAMPO-VALVEST         PIC 9(8) COMP-3.
+           03 TOT-APE-MAESTRO-VALVEST          PIC 9(8) COMP-3.
+           03 TOT-MOV-MAESTRO-VALVEST          PIC 9(8) COMP-3.
+           03 TOT-REG-MAESTRO-VALVEST          PIC 9(8) COMP-3.
+           03 TOT-REG-ERRADOS-VALVEST          PIC 9(8) COMP-3.
+           03 POR-CAL-FINAL-VALVEST            PIC 999V99.
+           03 POR-CAL-TOTAL-VALVEST            PIC 999V99.
+           03 FEC-ACT-VALOR-VALVEST            PIC 9(6) COMP-3.
+           03 TOT-REG-BD-VALVEST               PIC 9(8) COMP-3.
+           03 TOT-REG-FREDIA-VALVEST           PIC 9(8) COMP-3.
+           03 TOT-REG-FREMOR-VALVEST           PIC 9(8) COMP-3.
+           03 TOT-REG-FRENEG-VALVEST           PIC 9(8) COMP-3.
+           03 TOT-REG-TERMIN-VALVEST           PIC 9(8) COMP-3.
+           03 FEC-PROCESO-VALVEST              PIC 9(8).
+           03 IND-ESTADO-VALVEST               PIC X.
+REQCAL     03 TOT-DUPLIC-VALVEST               PIC 9(8) COMP-3.         FAC0003
+REQCAL     03 IND-ALERTAS-VALVEST OCCURS 4     PIC 9.                   FAC0003
+RCNCER     03 TOT-REG-DIRECC-VALVEST           PIC 9(8)   COMP-3.       FAC0004 
+RCNCER     03 POR-CAL-TOTDIR-VALVEST           PIC 999V99 COMP-3.       FAC0004 
+RCNCER     03 POR-CAL-RESDIR-VALVEST           PIC 999V99 COMP-3.       FAC0004 
+RCNCER     03 POR-CAL-LABDIR-VALVEST           PIC 999V99 COMP-3.       FAC0004 
+RCNCER     03 POR-CAL-CORDIR-VALVEST           PIC 999V99 COMP-3.       FAC0004 
+RCNCER     03 IND-EST-ARCDIR-VALVEST           PIC X.                   FAC0004 
+FECREC     03 FEC-RECEPCION-VALVEST            PIC 9(8) COMP-3.         FAC0004 
+BDACSV     03 TOT-APE-CSVID-VALVEST            PIC 9(8) COMP-3.         CAV0006 
+BDACSV     03 TOT-APE-CSVNM-VALVEST            PIC 9(8) COMP-3.         CAV0006 
+BDACSV     03 TOT-DBL-CSVID-VALVEST            PIC 9(8) COMP-3.         CAV0006 
+BDACSV     03 TOT-DBL-CSVNM-VALVEST            PIC 9(8) COMP-3.         CAV0006 
+INDVAL     03 IND-VAL-MILES-VALVEST            PIC X.                   CAV0007
+INDVAL     03 FILLER-VALVEST                   PIC X(29).               CAV0007 
