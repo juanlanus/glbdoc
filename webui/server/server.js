@@ -39,7 +39,7 @@ app.use(
   function( req, res ) { 
     console.log( 'grading requested' );
     console.log( req.body );
-    res.json( '200', { grade: 100 } );
+    res.json( '200', { student: 'JL', grade: 100 } );
   }
   );
 app.use( '/webui', express.static(path.join(__dirname, '..')) );
