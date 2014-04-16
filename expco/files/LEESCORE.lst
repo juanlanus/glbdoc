@@ -1,4 +1,4 @@
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   1
+* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   1
 * /d/iccol/desarrollo/fuentes/LEESCORE.CBL
 * Options: int("LEESCORE.int") anim csi verbose reentrant nolist anim
 *          db2(db=INGR_PR1 pass=icgssopb.IcgssB06 version=icdgd
@@ -58,8 +58,6 @@
     11******************************************************************
     12* ESTE PROGRAMA PERMITE ACCEDER LOS DATOS DE LA BASE DE DATOS DE *
     13* SCORE                                                          *
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   2
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL
     14******************************************************************
     15 DATE-WRITTEN.
     16 DATE-COMPILED. 10-Apr-14 11:44.
@@ -118,8 +116,6 @@
     69     05  SQLERRP         PIC X(8).
     70     05  SQLERRD         PIC S9(9) COMP-5 OCCURS 6 VALUE 0.
     71     05  SQLWARN.
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   3
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/opt/mfocus/des/cobol/cpylib/sqlca.c
     72         10  SQLWARN0    PIC X.
     73         10  SQLWARN1    PIC X.
     74         10  SQLWARN2    PIC X.
@@ -178,8 +174,6 @@
    127 01 PRIVILEGIO               PIC X(20) VALUE SPACES.
    128*** INDICADORAS
    129****************
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   4
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         pylib/sqlca.c
    130 01 IND-SEC-ENT                 PIC 9(01) VALUE ZEROS.
    131*** CONTADORES
    132***************
@@ -238,8 +232,6 @@
    185     03  Signature.
    186         05  CCIsign             PIC X(6).
    187         05  CCItype             PIC X(8).
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   5
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/d/iccol/desarrollo/copys/CCIWS.CPY)
    188         05  CCIversn            PIC X(6).
    189     03  CCIcaltab               USAGE POINTER.
    190  01 COD-RETORNO-CONTROLTCP      PIC X(2) VALUE SPACES.           RMB0002
@@ -298,8 +290,6 @@
    243     03  HORA-SIS               PIC  9(08).
    244     03  HORA-SIS-R  REDEFINES  HORA-SIS.
    245         05  HORA-S             PIC  9(02).
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   6
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL (/d/iccol/desarrollo/copys/PE-TIME.WS
    246         05  MINU-S             PIC  9(02).
    247         05  SEGU-S             PIC  9(02).
    248         05  DESE-S             PIC  9(02).
@@ -358,8 +348,6 @@
    301     DISPLAY "                                                "
    302     DISPLAY "************************************************"
    303     DISPLAY "*PROGRAMA PARA BUSCAR REGISTROS EN LA TABLA    *"
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   7
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    304     DISPLAY "*REGISTRO.SCORE DE FORMA ALEATORIA             *"
    305     DISPLAY "************************************************"
    306     DISPLAY "*                                              *"
@@ -418,8 +406,6 @@
    359******************************************************************
    360*2000-LEER-SECUENCIAL-ENTRADA.
    361*LECTURA ARCHIVO SECUENCIAL CON REGISTROS DE FORMA ALEATORIA
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   8
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    362******************************************************************
    363 2000-LEER-SECUENCIAL-ENTRADA.
    364     READ SECUENCIAL-ENTRADA NEXT RECORD
@@ -478,8 +464,6 @@
    419* DINAMICOS Y DE ADQUIEREN TODAS LAS CREDENCIALES PARA CONECTARSE
    420* A LAS BASES DE DATOS
    421******************************************************************
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page   9
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    422     EXEC SQL
    423         declare vcurs cursor for dynamic_sql
    424     END-EXEC
@@ -538,8 +522,6 @@
    477                 sqlerrmc
    478          INTO AREA-MSG
    479          PERFORM 9600-ABLOCAR
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  10
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    480     END-IF.
    481     PERFORM 1000-CLOSEVCURS.
    482
@@ -598,8 +580,6 @@
    535*****************************************************************
    536*1000-SETCONNECTION-XXXX-DL1.
    537*    SE SELECCIONA LA BASE DE DATOS A UTILIZAR EN LOS QUERYS DADO
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  11
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    538*    QUE HAY VARIAS ABIERTAS SIMULTANEAMENTE
    539*****************************************************************
    540     exec sql
@@ -658,8 +638,6 @@
    593                sqlcode-I
    594                sqlerrmc
    595     end-if.
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  12
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    596     PERFORM 1000-DISCONNECT.
    597 1000-DISCONNECT.
    598****************************************************************
@@ -718,8 +696,6 @@
    652                sqlerrmc
    653          INTO AREA-MSG
    654          PERFORM 9600-ABLOCAR
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  13
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    655     end-if.
    656 9600-ABLOCAR.
    657******************************************************************
@@ -778,8 +754,6 @@
    710******************************************************************
    711*1000-BIND-RUTSQL.
    712*    SE REALIZA EL BIND DINAMICO PARA UNA BASE DE DATOS. SE CREA
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  14
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    713*    UN ARCHIVO CON LAS INSTRUCCINES DB2 Y SE MANDA A EJECUTAR.
    714*    ESTO SE REALIZA CON LAS CREDENCIALES EXTRACTADAS DE LA
    715*    TABLA DE CONEXIONES
@@ -838,8 +812,6 @@
    768        WS-PROGRAMA DELIMITED BY SIZE
    769        ".bnd"
    770        " ACTION REPLACE REPLVER V8 RETAIN YES "
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  15
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    771        "COLLECTION COBOLAPP "
    772     INTO REG-BIND.
    773     WRITE REG-BIND.
@@ -898,8 +870,6 @@
    826*         C1   USUARIO (RESPUESTA DEL QUERY)
    827*         C2   PASSWOR (RESPUESTA DEL QUERY)
    828*         C3   ALIAS   (RESPUESTA DEL QUERY)
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  16
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    829*****************************************************************
    830     MOVE SPACES TO WS-DYN-QUERY-TXT.
    831     MOVE 1 TO WS-DYN-QUERY-LEN.
@@ -958,8 +928,6 @@
    884         fetch vcurs into :C1,:C2,:C3
    885     END-EXEC
    886     IF sqlcode not = 0
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  17
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    887          MOVE SQLCODE TO sqlcode-I
    888          DISPLAY "Error: cannot fetch   ",
    889                 WS-ALIAS," "
@@ -1018,8 +986,6 @@
    942******************************************************************
    943*6000-CERRAR-ARCHIVOS.
    944*SE CIERRAN LOS ARCHIVOS QUE SE UTILIZAN EN EL PROGRAMA
-* Micro Focus Server Express         V5.1 revision 000 10-Apr-14 11:44 Page  18
-* /d/iccol/desarrollo/fuentes/LEESCORE.CBL                         ys/PE-TIME.WS
    945******************************************************************
    946 6000-CERRAR-ARCHIVOS.
    947
