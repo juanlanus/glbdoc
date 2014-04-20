@@ -19,60 +19,60 @@ REMARK******************************************************************
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
 
-           SELECT BIND-arc ASSIGN TO DISK       BIND-title
-               ORGANIZATION IS LINE SEQUENTIAL.
+           select BIND-arc assign to disk       BIND-title
+               organization is line sequential.
 
-           SELECT SECENT
-               ASSIGN TO DISK                   SEC-ENT-TITLE
-               ORGANIZATION IS LINE SEQUENTIAL
-               ACCESS MODE IS SEQUENTIAL
-               FILE STATUS IS COD-RET-ENT
-               LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+           select CLAVES-file
+               assign to disk                   CLAVES-title
+               organization is line sequential
+               access mode is sequential
+               file status is CLAVES-fs
+               lock mode is manual with lock on record.
 
-           SELECT OPTIONAL SECSAL
-               ASSIGN TO DISK                   SEC-SAL-TITLE
-               ORGANIZATION IS LINE SEQUENTIAL
-               ACCESS MODE IS SEQUENTIAL
-               FILE STATUS IS COD-RET-SAL
-               LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+           select OPTIONAL LEIDOS-file
+               assign to disk                   LEIDOS-title
+               organization is line sequential
+               access mode is sequential
+               file status is LEIDOS-fs
+               lock mode is manual with lock on record.
 
-          SELECT OPTIONAL REPSAL
-               ASSIGN TO DISK                   REP-SAL-TITLE
-               ORGANIZATION IS LINE SEQUENTIAL
-               ACCESS MODE IS SEQUENTIAL
-               FILE STATUS IS COD-RET-REPSAL
-               LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+          select OPTIONAL REPSAL-file
+               assign to disk                   REPSAL-title
+               organization is line sequential
+               access mode is sequential
+               file status is REPSAL-fs
+               lock mode is manual with lock on record.
 
       *-----------------------------------------------------------------
        DATA DIVISION.
        FILE SECTION.
 
            FD BIND-arc.
-           01 BIND-reg                  PIC X(500).
+           01 BIND-reg                  pic x(500).
 
-           FD SECENT.
-           01 REG-SEC-ENT.
-              02 ENT-TIP-ID             PIC 9(01).
-              02 ENT-NUM-ID             PIC 9(11).
+           FD CLAVES-file.
+           01 CLAVES-reg.
+              02 CLAVES-tipoid          pic 9(01).
+              02 CLAVES-numid           pic 9(11).
 
-           FD SECSAL.
-           01 REG-SEC-SAL.
-              02 SAL-TIP-ID             PIC X(01).
-              02 SAL-NUM-ID             PIC X(11).
-              02 SAL-FECHA              PIC X(10).
-              02 SAL-SCORE              PIC 9(03).
-              02 SAL-EXCLUSION          PIC 9(02).
-              02 SAL-SEGMENTO           PIC 9(01).
+           FD LEIDOS-file.
+           01 LEIDOS-reg.
+              02 LEIDOS-tipoid          pic x(01).
+              02 LEIDOS-numid           pic x(11).
+              02 LEIDOS-fecha           pic x(10).
+              02 LEIDOS-score           pic 9(03).
+              02 LEIDOS-exclusion       pic 9(02).
+              02 LEIDOS-segmento        pic 9(01).
 
-           FD REPSAL.
-           01 REG-REP-SAL.
-              02 REPSAL-TIP-ID          PIC X(01).
-              02 REPSAL-NUM-ID          PIC X(11).
-              02 REPSAL-DESCRIPCION     PIC X(40).
-              02 REPSAL-FECHAI-PG       pic x(10).
-              02 REPSAL-HORAI-PG        pic x(8).
-              02 REPSAL-FECHAF-PG       pic x(10).
-              02 REPSAL-HORAF-PG        pic x(8).
+           FD REPSAL-file.
+           01 REPSAL-reg.
+              02 REPSAL-tipoid          pic x(01).
+              02 REPSAL-numid           pic x(11).
+              02 REPSAL-descripcion     pic x(40).
+              02 REPSAL-fechai-pg       pic x(10).
+              02 REPSAL-horai-pg        pic x(8).
+              02 REPSAL-fechaf-pg       pic x(10).
+              02 REPSAL-horaf-pg        pic x(8).
 
       *-----------------------------------------------------------------
        WORKING-STORAGE SECTION.
@@ -80,58 +80,61 @@ REMARK******************************************************************
       *  Include the SQL Communications Area. This includes the
       *  definitions of SQLCODE, etc
        exec sql include sqlca end-exec
-       01 SQLCODE-I                     PIC 9(08).
-      *    host variables para columnas de la tabla SCORE
-       01  SCORE-tipoid                 PIC X.
-       01  SCORE-numid                  PIC X(11).
-       01  SCORE-fecha                  PIC X(10).
-       01  SCORE-score                  PIC X(3).
-       01  SCORE-exclusion              PIC X(2).
-       01  SCORE-segmento               PIC X.
+       01 SQLCODE-I                     pic -(9).
+      * host variables para columnas de la tabla SCORE
+       01  SCORE-tipoid                 pic x.
+       01  SCORE-numid                  pic x(11).
+       01  SCORE-fecha                  pic x(10).
+       01  SCORE-score                  pic x(3).
+       01  SCORE-exclusion              pic x(2).
+       01  SCORE-segmento               pic x.
 
-       01 COD-RET-ENT                   PIC X(2) VALUE ZEROS.
-       01 COD-RET-SAL                   PIC X(2) VALUE ZEROS.
-       01 COD-RET-REPSAL                PIC X(2) VALUE ZEROS.
-       01 SEC-ENT-TITLE PIC X(80) VALUE "$TEMPORALES/SCOREENT".
-       01 SEC-SAL-TITLE PIC X(80) VALUE "$TEMPORALES/SCORESAL".
-       01 REP-SAL-TITLE PIC X(80) VALUE "$TEMPORALES/REPSCSAL".
-       01 BIND-title                PIC X(80) VALUE SPACES.
+      * nombre del programa
+       01 WS-PROGRAMA                   pic x(06) value spaces.
 
-       01 BIND-reg-connect              PIC X(100) VALUE SPACES.
-       01 BIND-reg-quit                 PIC X(100) VALUE SPACES.
-       01 WS-PROGRAMA                   PIC X(06) VALUE SPACES.
-      *    nombre del programa
-       01 WS-ARCHIVO                    PIC X(70) VALUE SPACES.
-       01 WS-ALIAS                      PIC X(15).
-      *    db user and pssword
-       01 WS-USR                        PIC X(15).
-       01 WS-PASS                       PIC X(18).
+      * file-statuses y titles de los archivos
+       01 CLAVES-fs                     pic x(2) value zeros.
+       01 LEIDOS-fs                     pic x(2) value zeros.
+       01 REPSAL-fs                     pic x(2) value zeros.
+       01 CLAVES-title pic x(80) value "$TEMPORALES/SCOREENT".
+       01 LEIDOS-title pic x(80) value "$TEMPORALES/SCORESAL".
+       01 REPSAL-title pic x(80) value "$TEMPORALES/REPSCSAL".
 
-       01 int-col                       PIC S9(4) comp-5.
+      * datos del archivito BIND
+       01 BIND-title                    pic x(80) value spaces.
+       01 BIND-reg-connect              pic x(100) value spaces.
+       01 BIND-reg-quit                 pic x(100) value spaces.
 
-       01 COMANDO                       PIC X(40) VALUE SPACES.
+      * datos de la base de datos
+       01 DB-alias                      pic x(15).
+       01 BD-usr                        pic x(15).
+       01 BD-pass                       pic x(18).
 
-REMARK*** CONTADORES
-       01  W-LEIDOS                     PIC  9(12) VALUE ZEROS.
-       01  W-GRABADOS                   PIC  9(12) VALUE ZEROS.
-       01  W-EDIT-CONTADOR              PIC ZZZ,ZZZ,ZZZ,ZZZ.
+       01 int-col                       pic S9(4) comp-5.
+
+       01 COMANDO                       pic x(40) value spaces.
+
+      * Contadores de registros
+       01  CONT-claves                  pic 9(12) value zeros.
+       01  CONT-cursores                pic 9(12) value zeros.
+       01  CONT-filas                   pic 9(12) value zeros.
+       01  CONT-edit                    pic ZZZ,ZZZ,ZZZ,ZZZ.
 
        01 VARIABLES-GENERALES.
           03  Spa100                    pic x(100) value spaces. 
-          03 AREA-MSG                   PIC X(80) VALUE SPACES.
-          03 I-XX                       PIC 9(2) VALUE 0.
-          03 AREA-OUTPUT                PIC X(1900).
-          03 FILLER  REDEFINES AREA-OUTPUT.
-             05 V-OUTPUT                PIC X(80) OCCURS 24 TIMES.
-          03 IND-RMB                    PIC 9(3) VALUE 0.
-          03 ETX                        PIC X VALUE X'03'.
-          03 IND-CTA                    PIC 9(2) VALUE 1.
+          03 AREA-MSG                   pic x(80) value spaces.
+          03 I-XX                       pic 9(2) value 0.
+          03 AREA-OUTPUT                pic x(1900).
+          03 filler redefines AREA-OUTPUT.
+             05 V-OUTPUT                pic x(80) occurs 24 times.
+          03 IND-RMB                    pic 9(3) value 0.
+          03 ETX                        pic x value X'03'.
+          03 IND-CTA                    pic 9(2) value 1.
           COPY "CCIWS.CPY".
           COPY PE-TIME.WS.
 
-       01 TEXTO-COMANDO.
-          02 T-COMANDO                  PIC X(100).
-          02 FILLER                     PIC X VALUE X'00'.
+      * Comandos de shell (terminados con un x'00')
+       01 CMD-comando                   pic x(101) value all x'00'.
 
 REMARK******************************************************************
 REMARK PROCEDURE DIVISION.
@@ -140,49 +143,46 @@ REMARK 0000-PROGRAMA-PRINCIPAL.
 REMARK******************************************************************
 REMARK*0000-PROGRAMA-PRINCIPAL.
 REMARK******************************************************************
-           DISPLAY "                                                "
-           DISPLAY "************************************************"
-           DISPLAY "* Prueba de performance de lectura de la tabla *"
-           DISPLAY "* REGISTRO.SCORE usando cursores con claves    *"
-           DISPLAY "* con claves parciales aleatorias              *"
-           DISPLAY "************************************************"
-           DISPLAY "*                                              *"
-           DISPLAY "*           PROGRAMA : TESDB2.CBL              *"
-           DISPLAY "*                                              *"
-           DISPLAY "************************************************"
-           DISPLAY "                                                "
-           PERFORM 7777-CONTROL-TIEMPO
-           DISPLAY " Inicio Proceso : " FECHA-PG " " HORA-PG
+           display "                                                "
+           display "************************************************"
+           display "* Prueba de performance de lectura de la tabla *"
+           display "* REGISTRO.SCORE usando cursores con claves    *"
+           display "* con claves parciales aleatorias              *"
+           display "************************************************"
+           display "*                                              *"
+           display "*           PROGRAMA : TESDB2.CBL              *"
+           display "*                                              *"
+           display "************************************************"
+           display "                                                "
+           perform 7777-CONTROL-TIEMPO
+           display " Inicio Proceso : " FECHA-PG " " HORA-PG
       *
-           MOVE "TESDB2" TO WS-PROGRAMA
-           PERFORM 1000-ABRIR-ARCHIVOS
-           PERFORM 2000-PROCESO-REGISTRO UNTIL COD-RET-ENT not = '00'
-           PERFORM 6000-FINALIZAR
-           STOP RUN.
+           move "TESDB2" to WS-PROGRAMA
+           perform 1000-ABRIR-ARCHIVOS
+           perform 2000-PROCESO-REGISTRO UNTIL CLAVES-fs not = '00'
+           perform 6000-FINALIZAR
+           stop run.
 
        1000-ABRIR-ARCHIVOS.
 REMARK******************************************************************
 REMARK*1000-ABRIR-ARCHIVOS.
 REMARK******************************************************************
-           OPEN INPUT SECENT
-           IF COD-RET-ENT NOT = "00"
-              DISPLAY "Error Abriendo el Archivo SECUENCIAL ENTRADA"
-              COD-RET-ENT
-              STOP RUN
-           END-IF
-           OPEN OUTPUT SECSAL
-           IF COD-RET-SAL NOT = "00"
-              DISPLAY "Error Abriendo el Archivo SECUENCIAL SALIDA"
-              COD-RET-SAL
-              STOP RUN
-           END-IF
-           OPEN OUTPUT REPSAL
-           IF COD-RET-REPSAL NOT = "00"
-              DISPLAY "Error Abriendo el Archivo REPORTE SALIDA"
-              COD-RET-REPSAL
-              STOP RUN
-           END-IF
-           PERFORM 1001-INICIAR-BASEDEDATOS.
+           OPEN INPUT CLAVES-file
+           if CLAVES-fs not = "00"
+              display "Error Abriendo el Archivo CLAVES fs:" CLAVES-fs
+              stop run
+           end-if
+           OPEN OUTPUT LEIDOS-file
+           if LEIDOS-fs not = "00"
+              display "Error abriendo archivo LEIDOS fs:" LEIDOS-fs
+              stop run
+           end-if
+           open output REPSAL-file
+           if REPSAL-fs not = "00"
+              display "Error abriendo el archivo REPSAL fs:" REPSAL-fs
+              stop run
+           end-if
+           perform 1001-INICIAR-BASEDEDATOS.
 
        2000-PROCESO-REGISTRO.
       ******************************************************************
@@ -190,18 +190,18 @@ REMARK******************************************************************
       * Lectura archivo secuencial con IDs SCORE en orden aleatorio 
       * y de los registros de la tabla SCORE que tienen ese ID
       ******************************************************************
-           READ SECENT NEXT RECORD
-           evaluate COD-RET-ENT 
+           read CLAVES-file next record
+           evaluate CLAVES-fs 
            when "00"
       *       lectura OK: lee los regs correspondientes en tabla SCORE
-              ADD 1 TO W-LEIDOS
-              PERFORM 3000-LEER-BD
+              add 1 to CONT-claves
+              perform 3000-LEER-BD
            when "10"
       *        EOF: termina
                continue
            when else
       *        error: mensaje y terminación del programa
-               display "Error en lectura de SEC-ENT fs=" COD-RET-ENT
+               display "Error en lectura de CLAVES fs=" CLAVES-fs
                perform 6000-FINALIZAR
                stop run
            end-evaluate.
@@ -211,18 +211,18 @@ REMARK****************************************************************
 REMARK*3000-LEER-BD.
 REMARK*  Lee registros base de datos SCORE con la clave del input
 REMARK****************************************************************
-           PERFORM 7777-CONTROL-TIEMPO
-           INITIALIZE REG-REP-SAL
-           MOVE FECHA-PG TO REPSAL-FECHAI-PG
-           MOVE HORA-PG TO REPSAL-HORAI-PG
-           MOVE "BUSCAR REGISTRO TABLA" TO REPSAL-DESCRIPCION
+           perform 7777-CONTROL-TIEMPO
+           initialize REPSAL-reg
+           move FECHA-PG to REPSAL-fechai-pg
+           move HORA-PG to REPSAL-horai-pg
+           move "BUSCAR REGISTRO TABLA" to REPSAL-descripcion
       *
-           PERFORM 7777-CONTROL-TIEMPO
-           MOVE FECHA-PG                 TO REPSAL-FECHAF-PG
-           MOVE HORA-PG                  TO REPSAL-HORAF-PG
-           PERFORM 5000-GRABAR-REPSAL
+           perform 7777-CONTROL-TIEMPO
+           move FECHA-PG                 to REPSAL-fechaf-pg
+           move HORA-PG                  to REPSAL-horaf-pg
+           perform 5000-GRABAR-REPSAL
       *
-           PERFORM 3000-BUSCAR-REG-SCORE.
+           perform 3000-BUSCAR-REG-SCORE.
  
        1001-INICIAR-BASEDEDATOS.
       ******************************************************************
@@ -232,118 +232,128 @@ REMARK****************************************************************
       * Declara el cursor para los registros de la tabla SCORE
       ******************************************************************
       *    obtiene las credenciales
-           MOVE "lstxclde" TO WS-USR
-           MOVE "LstxcD8" TO WS-PASS
-           MOVE "LIST_DL1" TO WS-ALIAS
-      *    bind del programa WS-PROGRAMA contra la base WS-ALIAS 
-           PERFORM 1000-BIND-RUTSQL
+           move "lstxclde" to BD-usr
+           move "LstxcD8" to BD-pass
+           move "LIST_DL1" to DB-alias
+      *    bind del programa WS-PROGRAMA contra la base DB-alias 
+           perform 1000-BIND-RUTSQL
 
-      *    connect a la base de datos: primeto elige la conexión que va
+      *    connect a la base de datos: primero elige la conexión que va
       *    a usar, luego conecta con las credenciales del proceso
-           PERFORM 1002-SETCONNECTION-XXXX-DL1
-           EXEC SQL
-                CONNECT TO :WS-ALIAS USER :WS-USR USING :WS-PASS
-           END-EXEC
+           perform 1002-SETCONNECTION-XXXX-DL1
+           exec sql
+                CONNECT to :DB-alias USER :BD-usr USING :BD-pass
+           end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                DISPLAY "Error: cannot connect " WS-ALIAS
+                move SQLCODE to sqlcode-I
+                display "Error: cannot connect " DB-alias
                 sqlcode-I sqlerrmc
            end-if.
 
       *    preparación del cursor para la tabla SCORE: posiciona para
       *    leer las filas de un (TIPOID, NUMID) por fecha
-           EXEC SQL
+           exec sql
                declare vcurs cursor for 
-               SELECT FECHA, SCORE, EXCLUSION, SEGMENTO
-               FROM REGISTRO.SCORE
-               WHERE TIPOID = :SCORE-tipoid AND NUMID = :SCORE-numid
-               FOR READ ONLY
-           END-EXEC
+               select FECHA, SCORE, EXCLUSION, SEGMENTO
+               from REGISTRO.SCORE
+               where TIPOID = :SCORE-tipoid and NUMID = :SCORE-numid
+               for read only with UR
+           end-exec
            if sqlcode not = 0
                display "Error: cannot declare cursor SQLCODE:" sqlcode
                display sqlerrmc
                stop run
            end-if
-           PERFORM 1000-CONECTARSE-A-LAS-BDS.
+           perform 1000-CONECTARSE-A-LAS-BDS.
 
        3000-BUSCAR-REG-SCORE.
-REMARK*******************************************************************
+REMARK******************************************************************
 REMARK*3000-BUSCAR-REG-SCORE.
 REMARK*    SE REALIZA EL SELECT EN LA BASE DE DATOS Y SE RECUPERAN LOS
 REMARK*    DATOS
-REMARK*******************************************************************
-           PERFORM 7777-CONTROL-TIEMPO
-           INITIALIZE REG-REP-SAL
-           MOVE FECHA-PG TO REPSAL-FECHAI-PG
-           MOVE HORA-PG TO REPSAL-HORAI-PG
-           MOVE "SELECT BD - RECUPERAR DATOS" TO REPSAL-DESCRIPCION
+REMARK******************************************************************
+           perform 7777-CONTROL-TIEMPO
+           initialize REPSAL-reg
+           move FECHA-PG to REPSAL-fechai-pg
+           move HORA-PG to REPSAL-horai-pg
+           move "SELECT BD - RECUPERAR DATOS" to REPSAL-descripcion
       *    inicia el cursor para una nueva clave
-           move ENT-TIP-ID to SCORE-tipoid 
-           move ENT-NUM-ID to SCORE-numid
-           EXEC SQL
+           move CLAVES-tipoid to SCORE-tipoid 
+           move CLAVES-numid to SCORE-numid
+           exec sql
                open vcurs
-           END-EXEC
+           end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                display "Error: cannot open SCOPE cursor " WS-ALIAS
+                move SQLCODE to sqlcode-I
+                display "Error: cannot open SCOPE cursor " DB-alias
                 sqlcode-I sqlerrmc
-           end-if.
+           end-if
 
-           INITIALIZE SCORE-fecha SCORE-score SCORE-exclusion 
+           initialize SCORE-fecha SCORE-score SCORE-exclusion 
            SCORE-segmento
-           EXEC SQL
+           exec sql
                fetch vcurs into :SCORE-fecha, :SCORE-score,
                :SCORE-exclusion, :SCORE-segmento
-           END-EXEC
+           end-exec
            if sqlcode = 100
-               display "NO HAY SCORES PARA " ENT-TIP-ID " " SCORE-tipoid 
-               SCORE-numid
-           END-IF.
-           PERFORM UNTIL SQLCODE NOT = 0
-              PERFORM 5000-GRABAR-SALIDA
-              PERFORM 7777-CONTROL-TIEMPO
-              MOVE FECHA-PG TO REPSAL-FECHAF-PG
-              MOVE HORA-PG TO REPSAL-HORAF-PG
-              PERFORM 5000-GRABAR-REPSAL
+               display "NO HAY SCORES PARA " CLAVES-tipoid
+               " " SCORE-tipoid SCORE-numid
+           end-if
+           perform until SQLCODE not = 0
+              add 1 to CONT-filas
+              perform 5000-GRABAR-LEIDOS
+              perform 7777-CONTROL-TIEMPO
+              move FECHA-PG to REPSAL-fechaf-pg
+              move HORA-PG to REPSAL-horaf-pg
+              perform 5000-GRABAR-REPSAL
       *       avanza al próximo registro del cursor
-              EXEC SQL
+              exec sql
                  fetch vcurs into :SCORE-fecha, :SCORE-score,
                  :SCORE-exclusion, :SCORE-segmento
-              END-EXEC
-           END-PERFORM
+              end-exec
+           end-perform
       *    si terminó con error lo publica
            if sqlcode not = 100
-                MOVE SQLCODE TO sqlcode-I
-                display "Error: cannot fetch " WS-ALIAS sqlcode-I
-                sqlerrmc 
-           END-IF
-           PERFORM 1000-CLOSEVCURS.
+               move SQLCODE to sqlcode-I
+               display "Error: cannot fetch " DB-alias sqlcode-I
+               sqlerrmc 
+           end-if
+      *    close del cursor
+           exec sql
+               close vcurs
+           end-exec
+           if sqlcode not = 0
+                move SQLCODE to sqlcode-I
+                string "Error: cannot close cursor " DB-alias
+                sqlcode-I sqlerrmc into AREA-MSG
+                display AREA-MSG
+           end-if.
 
-       5000-GRABAR-SALIDA.
+
+       5000-GRABAR-LEIDOS.
       ******************************************************************
-      *5000-GRABAR-SALIDA.
-      *GRABAR ARCHIVO SECUENCIAL SALIDA CON REGISTROS ENCONTRADOS EN BD
+      *5000-GRABAR-LEIDOS.
+      * Graba un registro en arch LEIDOS por cada clave hallada en la
+      * base de datos
       ******************************************************************
-           INITIALIZE REG-SEC-SAL
-           MOVE SCORE-tipoid TO SAL-TIP-ID
-           MOVE SCORE-numid TO SAL-NUM-ID
-           MOVE SCORE-fecha TO SAL-FECHA
-           MOVE SCORE-score TO SAL-SCORE
-           MOVE SCORE-exclusion TO SAL-EXCLUSION
-           MOVE SCORE-segmento TO SAL-SEGMENTO
-           ADD 1 TO W-GRABADOS
-           WRITE REG-SEC-SAL.
+           initialize LEIDOS-reg
+           move SCORE-tipoid to LEIDOS-tipoid
+           move SCORE-numid to LEIDOS-numid
+           move SCORE-fecha to LEIDOS-fecha
+           move SCORE-score to LEIDOS-score
+           move SCORE-exclusion to LEIDOS-exclusion
+           move SCORE-segmento to LEIDOS-segmento
+           add 1 to CONT-cursores
+           write LEIDOS-reg.
 
        5000-GRABAR-REPSAL.
       ******************************************************************
       *5000-GRABAR-REPSAL.
       *GRABAR ARCHIVO SECUENCIAL REPORTE DE SALIDA PARA MEDIR TIEMPOS
       ******************************************************************
-           MOVE ENT-TIP-ID                TO REPSAL-TIP-ID
-           MOVE ENT-NUM-ID                TO REPSAL-NUM-ID
-           WRITE REG-REP-SAL
-           END-WRITE.
-
+           move CLAVES-tipoid to REPSAL-tipoid
+           move CLAVES-numid to REPSAL-numid
+           write REPSAL-reg.
 
        1000-CONECTARSE-A-LAS-BDS.
 REMARK******************************************************************
@@ -351,12 +361,12 @@ REMARK*1000-CONECTARSE-A-LAS-BDS.
 REMARK*    CON LAS CREDENCIALES LEIDAS DE LA TABLA CONEXION SE REALIZAN
 REMARK*    TODAS LAS CONEXIONES A LAS BD QUE USA EL PROGRAMA
 REMARK******************************************************************
-           EXEC SQL
-                CONNECT TO :WS-ALIAS USER :WS-USR USING :WS-PASS
-           END-EXEC
+           exec sql
+                connect to :DB-alias user :BD-usr using :BD-pass
+           end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                DISPLAY "Error: cannot connect " WS-ALIAS
+                move SQLCODE to sqlcode-I
+                display "Error: cannot connect to " DB-alias
                 sqlcode-I sqlerrmc
            end-if.
 
@@ -367,52 +377,37 @@ REMARK* Selecciona la base de datos a utilizar en los querys dado
 REMARK* que hay varias abiertas simultaneamente
 REMARK*****************************************************************
            exec sql
-             SET CONNECTION :WS-ALIAS
+             set connection :DB-alias
            end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                STRING "Error: cannot set connect " WS-ALIAS
-                sqlcode-I sqlerrmc INTO AREA-MSG
+                move SQLCODE to sqlcode-I
+                string "Error: cannot set connect " DB-alias
+                sqlcode-I sqlerrmc into AREA-MSG
                 display AREA-MSG
            end-if.
 REMARK*   PROCEDIMIENTO PARA VERIFICAR TAKE OVER O FALLA EN LA CONEXION
 REMARK*   CON LA BASE DE DATOS; SE REALIZA UN COMMIT PARA VERIFICAR SI
 REMARK*   EXISTE LA CONEXION CON LA BASE DE DATOS. SI HAY PROBLEMA
 REMARK*   SE INTENTA DE NUEVO LA RECONEXION
-           EXEC SQL commit END-EXEC
-           IF SQLCODE NOT = 0
-                MOVE SQLCODE TO sqlcode-I
-                DISPLAY "Error: cannot commit  " WS-ALIAS
+           exec sql commit end-exec
+           if SQLCODE not = 0
+                move SQLCODE to sqlcode-I
+                display "Error: cannot commit  " DB-alias
                 sqlcode-I sqlerrmc
-                DISPLAY "SE PROCEDE A DESCONECTAR" WS-ALIAS
-                EXEC SQL disconnect :WS-ALIAS END-EXEC
+                display "SE PROCEDE A DESCONECTAR" DB-alias
+                exec sql disconnect :DB-alias end-exec
                 if sqlcode not = 0
-                    MOVE SQLCODE TO sqlcode-I
-                    DISPLAY "Error: cannot disconnect " WS-ALIAS
+                    move SQLCODE to sqlcode-I
+                    display "Error: cannot disconnect " DB-alias
                     sqlcode-I sqlerrmc
                 end-if
-                DISPLAY "SE PROCEDE A CONECTAR DE NUEVO" WS-ALIAS
+                display "SE PROCEDE A CONECTAR DE NUEVO" DB-alias
                 1002-SETCONNECTION-XXXX-DL1
-                IF sqlcode = 0
-                   DISPLAY "RECONEXION EXITOSA!!!" WS-ALIAS
+                if sqlcode = 0
+                   display "RECONEXION EXITOSA!!!" DB-alias
                 ELSE
-                   DISPLAY "FALLA EN RECONEXION!!!!" WS-ALIAS
-                END-IF
-           END-IF.
-
-       1000-CLOSEVCURS.
-REMARK****************************************************************
-REMARK*1000-CLOSEVCURS.
-REMARK*    SE REALIZA LA FUNCION ESTANDAR DE CERRAR EL CURSOR
-REMARK****************************************************************
-           EXEC SQL
-               close vcurs
-           END-EXEC
-           if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                STRING "Error: cannot close cursor " WS-ALIAS
-                sqlcode-I sqlerrmc INTO AREA-MSG
-                display AREA-MSG
+                   display "FALLA EN RECONEXION!!!!" DB-alias
+                end-if
            end-if.
 
 REMARK***************************RUTINAS PARA ADQUIRIR CREDENCIALES ****
@@ -423,114 +418,86 @@ REMARK* Se realiza el bind dinamico para una base de datos. Se crea
 REMARK* un archivo con las instruccines DB2 y se manda a ejecutar.
 REMARK* Parametros:
 REMARK*    WS-PROGRAMA
-REMARK*    WS-ALIAS
-REMARK*    WS-USR
-REMARK*    WS-PASS
+REMARK*    DB-alias
+REMARK*    BD-usr
+REMARK*    BD-pass
 REMARK******************************************************************
       * Se usa un archivito para poner los comandos de shell
-           STRING "$TEMPORALES/" WS-PROGRAMA DELIMITED SIZE ".BIND"
-           Spa100 INTO BIND-title
-           OPEN OUTPUT BIND-arc
+           string "$TEMPORALES/" WS-PROGRAMA delimited size ".BIND"
+           Spa100 into BIND-title
+           open output BIND-arc
+           move spaces to BIND-reg
       * Creacion del paquete (por si no estaba)
       *    connect
-           MOVE SPACES TO BIND-reg.
-           STRING "db2 CONNECT TO " WS-ALIAS DELIMITED BY "  "
-           " USER " WS-USR DELIMITED BY "  "
-           " USING " WS-PASS  DELIMITED BY "  "
-           Spa100 INTO BIND-reg
-           WRITE BIND-reg.
-           MOVE BIND-reg TO BIND-reg-connect.
+           string "db2 CONNECT to " DB-alias delimited by "  "
+           " USER " BD-usr delimited by "  "
+           " USING " BD-pass delimited by "  "
+           Spa100 into BIND-reg-connect
+           write BIND-reg from BIND-reg-connect
+      *    control: $HCOBND debe estar
+           move "HCOBND" to VAR-AMBIENTE
+           display VAR-AMBIENTE upon environment-name
+           accept VAR-AMBIENTE from ENVIRONMENT-VALUE
+           if VAR-AMBIENTE = "HCOBND"
+              display "No se ha fijado: $HCOBND!!!!! "
+              stop run
+           end-if
       *    bind - add collection
-           MOVE "HCOBND" TO VAR-AMBIENTE.
-           DISPLAY VAR-AMBIENTE UPON ENVIRONMENT-NAME.
-           ACCEPT VAR-AMBIENTE FROM ENVIRONMENT-VALUE.
-           IF VAR-AMBIENTE = "HCOBND"
-              DISPLAY "No se ha fijado: $HCOBND!!!!! "
-              STOP RUN
-           ELSE
-              MOVE SPACES TO WS-ARCHIVO
-              STRING
-                 VAR-AMBIENTE DELIMITED BY "  "
-                 WS-PROGRAMA DELIMITED BY SIZE
-                 ".bnd"
-              Spa100 INTO WS-ARCHIVO
-           END-IF.
-           MOVE SPACES TO BIND-reg.
-           STRING "db2 bind $HCOBND/"
-              WS-PROGRAMA DELIMITED BY SIZE
-              ".bnd"
-              " ACTION ADD COLLECTION COBOLAPP "
-           Spa100 INTO BIND-reg.
-           WRITE BIND-reg.
+           string "db2 bind $HCOBND/" WS-PROGRAMA delimited size ".bnd"
+           " ACTION ADD COLLECTION COBOLAPP " Spa100 into BIND-reg
+           write BIND-reg
       *    quit
-           MOVE "db2 quit" TO BIND-reg.
-           WRITE BIND-reg.
-           MOVE BIND-reg TO BIND-reg-quit.
-REMARK*    REALIZAR LA ACTUALIZACION DEL PAQUETE
+           move "db2 quit" to BIND-reg-quit
+           write BIND-reg from BIND-reg-quit
+REMARK* Actualizacion del paquete
       *    connect
-           WRITE BIND-reg FROM BIND-reg-connect.
+           write BIND-reg FROM BIND-reg-connect.
       *    bind
-           MOVE SPACES TO BIND-reg.
-           STRING "db2 bind $HCOBND/"
-              WS-PROGRAMA DELIMITED BY SIZE
-              ".bnd"
-              " ACTION REPLACE REPLVER V8 RETAIN YES "
-              "COLLECTION COBOLAPP "
-           Spa100 INTO BIND-reg.
-           WRITE BIND-reg.
+           string "db2 bind $HCOBND/" WS-PROGRAMA delimited by SIZE
+           ".bnd" " ACTION REPLACE REPLVER V8 RETAIN YES "
+           "COLLECTION COBOLAPP " Spa100 into BIND-reg
+           write BIND-reg
       *    quit
-           WRITE BIND-reg FROM BIND-reg-quit.
-           CLOSE BIND-arc.
-REMARK*    SE MANDA A EJECUTAR LA MACRO
-      *    chmod para que sea ejecutable
-           STRING "chmod +x $TEMPORALES/" WS-PROGRAMA DELIMITED SIZE
-           ".BIND " X'00' Spa100 INTO TEXTO-COMANDO
-           CALL "SYSTEM" USING TEXTO-COMANDO.
-      *    ejecución del comando
-           STRING "$TEMPORALES/" WS-PROGRAMA DELIMITED BY SIZE
-           ".BIND " X'00' Spa100 INTO TEXTO-COMANDO
-           CALL "SYSTEM" USING TEXTO-COMANDO.
-      *    SPS?
-           IF I-XX > 0
-              MOVE SPACES TO WS-ARCHIVO
-              STRING "cp $TEMPORALES/" WS-PROGRAMA DELIMITED BY SIZE
-              ".BIND $TEMPORALES/RMBBIND" I-XX DELIMITED SIZE
-              X'00' Spa100 INTO TEXTO-COMANDO
-              CALL "SYSTEM" USING TEXTO-COMANDO
-              ADD 1 TO I-XX
-           END-IF.
-      *    eliminación del comandito
-           STRING "rm $TEMPORALES/" WS-PROGRAMA DELIMITED SIZE ".BIND "
-           X'00' Spa100 INTO TEXTO-COMANDO
-           CALL "SYSTEM" USING TEXTO-COMANDO.
+           write BIND-reg FROM BIND-reg-quit
+           close BIND-arc
+REMARK*    chmod y ejecución de los comandos DB2 del archivito BIND
+           string "chmod +x $TEMPORALES/" WS-PROGRAMA delimited size
+           ".BIND " X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando
+           string "$TEMPORALES/" WS-PROGRAMA delimited by size
+           ".BIND " X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando
+      * Eliminación del comandito
+           string "rm $TEMPORALES/" WS-PROGRAMA delimited size ".BIND "
+           X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando.
 
        6000-FINALIZAR.
       ****************************************************************
       *6000-FINALIZAR
       * Muestra contadores de registros, cierra archivos y base
       ****************************************************************
-           MOVE W-LEIDOS TO W-EDIT-CONTADOR
-           DISPLAY "Claves leídas ......... " W-EDIT-CONTADOR
-           MOVE W-GRABADOS TO W-EDIT-CONTADOR
-           DISPLAY "Claves procesadas OK ......... " W-EDIT-CONTADOR.
+           move CONT-claves to CONT-edit
+           display "Claves leídas ......... " CONT-edit
+           move CONT-cursores to CONT-edit
+           display "Claves procesadas OK ......... " CONT-edit
+           perform 7777-CONTROL-TIEMPO
+           display " Fin Proceso : " FECHA-PG " " HORA-PG
       *
-           PERFORM 7777-CONTROL-TIEMPO
-           DISPLAY " Fin Proceso : " FECHA-PG " " HORA-PG.
-      *
-           CLOSE SECENT SECSAL.
+           close CLAVES-file LEIDOS-file REPSAL-file
 
       *    Cierra la conexion con la base de datos
-           EXEC SQL commit END-EXEC
+           exec sql commit end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                DISPLAY "Error: cannot commit  " WS-ALIAS
-                sqlcode-I sqlerrmc
+               move SQLCODE to sqlcode-I
+               display "Error: cannot commit " DB-alias
+               sqlcode-I sqlerrmc
            end-if
-           EXEC SQL disconnect :WS-ALIAS END-EXEC
+           exec sql disconnect :DB-alias end-exec
            if sqlcode not = 0
-                MOVE SQLCODE TO sqlcode-I
-                DISPLAY "Error: cannot discon  " WS-ALIAS
-                sqlcode-I sqlerrmc
+               move SQLCODE to sqlcode-I
+               display "Error: cannot disconnect " DB-alias
+               sqlcode-I sqlerrmc
            end-if.
 
        7777-CONTROL-TIEMPO.
@@ -538,12 +505,12 @@ REMARK*    SE MANDA A EJECUTAR LA MACRO
       *7777-CONTROL-TIEMPO
       * Obtiene y edita la fecha y la hora del sistema
       ****************************************************************
-           ACCEPT FECHA-S FROM DATE
-           ACCEPT HORA-SIS FROM TIME
-           MOVE HORA-S TO HORA-P
-           MOVE MINU-S TO MINU-P
-           MOVE SEGU-S TO SEGU-P
-           MOVE 20 TO ANIO-SIG1
-           MOVE ANIO-S TO ANIO-P
-           MOVE MESE-S TO MESE-P
-           MOVE DIAS-S TO DIAS-P.
+           accept FECHA-S from date
+           accept HORA-SIS from time
+           move HORA-S to HORA-P
+           move MINU-S to MINU-P
+           move SEGU-S to SEGU-P
+           move 20 to ANIO-SIG1
+           move ANIO-S to ANIO-P
+           move MESE-S to MESE-P
+           move DIAS-S to DIAS-P.
