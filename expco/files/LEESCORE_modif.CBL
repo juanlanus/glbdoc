@@ -194,7 +194,9 @@ REMARK******************************************************************
            display " Fecha Inicio Proceso : " FECHA-PG
            display " Hora  Inicio Proceso : " HORA-PG
       *
-           move "LSCORE" to WS-PROGRAMA
+           rove "LSCORE" to WS-PROGRAMA
+           move "'DESARROL'" to WS-AMBIENTE-INI
+      *
            perform 1000-ABRIR-ARCHIVOS
            perform 2000-PROCESO-LECTURA UNTIL IND-SEC-ENT = 1
            perform 6000-CERRAR-ARCHIVOS
