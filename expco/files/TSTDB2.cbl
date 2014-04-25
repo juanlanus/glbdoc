@@ -2,6 +2,7 @@
       $SET db2(connect=2)
       $set db2(BIND COLLECTION=COBOLAPP)
       $set db2(FORMAT=LOC VERSION=V8)
+      $set LIST NOANIM
       * TESDB2.v.02.0001
 
        IDENTIFICATION DIVISION.
@@ -60,9 +61,9 @@
               02 LEIDOS-tipoid          pic x(01).
               02 LEIDOS-numid           pic x(11).
               02 LEIDOS-fecha           pic x(10).
-              02 LEIDOS-score           pic 9(03).
-              02 LEIDOS-exclusion       pic 9(02).
-              02 LEIDOS-segmento        pic 9(01).
+              02 LEIDOS-score           pic x(03).
+              02 LEIDOS-exclusion       pic x(02).
+              02 LEIDOS-segmento        pic x(01).
 
            FD REPSAL-file.
            01 REPSAL-reg.
@@ -133,7 +134,7 @@
            display "************************************************"
            display "* Prueba de performance de lectura de la tabla *"
            display "* REGISTRO.SCORE usando cursores con claves    *"
-           display "* con claves parciales aleatorias              *"
+           display "* parciales aleatorias                         *"
            display "************************************************"
            display "*                                              *"
            display "*           PROGRAMA : TSTDB2.CBL              *"
@@ -149,6 +150,7 @@
            stop run.
 
        1000-ABRIR-ARCHIVOS.
+      *    display '1000-ABRIR-ARCHIVOS'
       ******************************************************************
       *1000-ABRIR-ARCHIVOS.
       ******************************************************************
@@ -170,6 +172,7 @@
            perform 1001-INICIAR-BASEDEDATOS.
 
        2000-PROCESO-CLAVE.
+      *    display '2000-PROCESO-CLAVE'.
       ******************************************************************
       *2000-PROCESO-CLAVE.
       * Lectura archivo secuencial con claves SCORE en orden aleatorio 
@@ -203,6 +206,7 @@
            end-evaluate.
 
        1001-INICIAR-BASEDEDATOS.
+      *    display '1001-INICIAR-BASEDEDATOS'
       ******************************************************************
       *1001-INICIAR-BASEDEDATOS.
       * Establece una connection con la base de datos DB2 determinada
@@ -241,6 +245,7 @@
            end-if.
 
        3000-LEER-REG-SCORE.
+      *    display '3000-LEER-REG-SCORE'
       ******************************************************************
       *3000-LEER-REG-SCORE.
       * Usando un cursor se leen los registros de SCORE correspondientes
@@ -300,6 +305,7 @@
            end-if.
 
        5000-GRABAR-LEIDOS.
+      *    display '5000-GRABAR-LEIDOS'
       ******************************************************************
       *5000-GRABAR-LEIDOS.
       * Graba un registro en arch LEIDOS por cada fia leída de SCORES
@@ -314,6 +320,7 @@
            write LEIDOS-reg.
 
        5000-GRABAR-REPSAL.
+      *    display '5000-GRABAR-REPSAL'
       ******************************************************************
       *5000-GRABAR-REPSAL.
       * Graba reporte de salida para medir tiempos
@@ -323,6 +330,7 @@
            write REPSAL-reg.
 
        1000-BIND-RUTSQL.
+      *    display '1000-BIND-RUTSQL'
       ******************************************************************
       *1000-BIND-RUTSQL.
       * Se realiza el bind dinamico para una base de datos. Se crea
@@ -384,6 +392,7 @@
            call "SYSTEM" using CMD-comando.
 
        6000-FINALIZAR.
+      *    display '6000-FINALIZAR'
       ****************************************************************
       *6000-FINALIZAR
       * Muestra contadores de registros, cierra archivos y base
@@ -400,14 +409,16 @@
            close CLAVES-file LEIDOS-file REPSAL-file
 
       *    Cierra la conexion con la base de datos
-           exec sql connect reset end-exec
-           if sqlcode not = 0
-               move SQLCODE to sqlcode-I
-               display "Error: cannot disconnect " DB-alias
-               sqlcode-I sqlerrmc
-           end-if.
+      *    exec sql connect reset end-exec
+      *    if sqlcode not = 0
+      *        move SQLCODE to sqlcode-I
+      *        display "Error: cannot disconnect " DB-alias
+      *        sqlcode-I sqlerrmc
+      *    end-if
+           .
 
        7777-CONTROL-TIEMPO.
+      *    display '7777-CONTROL-TIEMPO'
       ****************************************************************
       *7777-CONTROL-TIEMPO
       * Obtiene y edita la fecha y la hora del sistema
@@ -421,3 +432,4 @@
            move ANIO-S to ANIO-P
            move MESE-S to MESE-P
            move DIAS-S to DIAS-P.
+

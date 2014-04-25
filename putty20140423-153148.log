@@ -1,0 +1,233 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.04.23 15:31:48 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed Apr 23 13:22:13 2014 from 172.16.10.78
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+[H[J
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ echo
+
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ co
+icdgd@[7mcodes[m /d/iccol/desarrollo/copys
+$ sdiff -w 162 CARACTPER-029.WS-V02 CARACTPER-029.WS
+REMARK*CARACTPER-029.WS.v.0002.                                                 |  REMARK*CARACTPER-029.WS.v.0003.
+REMARK******************************************************************           REMARK******************************************************************
+REMARK*DEFINICION DE CARACTERISTICAS PESONALIZADAS PARA RIPLEY                     REMARK*DEFINICION DE CARACTERISTICAS PESONALIZADAS PARA RIPLEY
+REMARK******************************************************************           REMARK******************************************************************
+      * IMS0002    | R12047 - Se agregan caracteristicas END, NUM y EXP*                 * IMS0002    | R12047 - Se agregan caracteristicas END, NUM y EXP*
+      * 17-MAY-2013|    REQ. CQ. 12047.                                *                 * 17-MAY-2013|    REQ. CQ. 12047.                                *
+      * M.SALAMANCA|                                                   *                 * M.SALAMANCA|                                                   *
+      ******************************************************************                 ******************************************************************
+                                                                                >        * STT0003    | R18908 - Se agrega caracteristica 01NUM996R1029   *
+                                                                                >        * 21-ABR-2014|    REQ. CQ. 18908.                                *
+                                                                                >        * LUIS GOMEZ |                                                   *
+                                                                                >        ******************************************************************
+        01 PERSONALIZACION-29.                                                             01 PERSONALIZACION-29.
+           02 PER-29-NIVEL-00-NUM.                                                            02 PER-29-NIVEL-00-NUM.
+              03 00NUM999TO029          PIC 9(4).                                                03 00NUM999TO029          PIC 9(4).
+R12047        03 00NUM998RO029          PIC 9(4).                       IMS00      R12047        03 00NUM998RO029          PIC 9(4).                       I
+R12047        03 00NUM997RO029          PIC 9(4).                       IMS00      R12047        03 00NUM997RO029          PIC 9(4).                       I
+R12047        03 00NUM996RO029          PIC 9(4).                       IMS00      R12047        03 00NUM996RO029          PIC 9(4).                       I
+R12047        03 00NUM995TO029          PIC 9(4).                       IMS00      R12047        03 00NUM995TO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-00-END-11.                                   IMS00      R12047     02 PER-29-NIVEL-00-END-11.                                   I
+R12047        03 00END999RO029          PIC 9(11).                      IMS00      R12047        03 00END999RO029          PIC 9(11).                      I
+R12047        03 00END998RO029          PIC 9(11).                      IMS00      R12047        03 00END998RO029          PIC 9(11).                      I
+R12047        03 00END997RO029          PIC 9(11).                      IMS00      R12047        03 00END997RO029          PIC 9(11).                      I
+R12047        03 00END996RO029          PIC 9(11).                      IMS00      R12047        03 00END996RO029          PIC 9(11).                      I
+R12047        03 00END995RO029          PIC 9(11).                      IMS00      R12047        03 00END995RO029          PIC 9(11).                      I
+R12047        03 00END994RO029          PIC 9(11).                      IMS00      R12047        03 00END994RO029          PIC 9(11).                      I
+R12047        03 00END993RO029          PIC 9(11).                      IMS00      R12047        03 00END993RO029          PIC 9(11).                      I
+R12047        03 00END992RO029          PIC 9(11).                      IMS00      R12047        03 00END992RO029          PIC 9(11).                      I
+R12047        03 00END991RO029          PIC 9(11).                      IMS00      R12047        03 00END991RO029          PIC 9(11).                      I
+R12047        03 00END990RO029          PIC 9(11).                      IMS00      R12047        03 00END990RO029          PIC 9(11).                      I
+
+R12047     02 PER-29-NIVEL-00-END-04.                                   IMS00      R12047     02 PER-29-NIVEL-00-END-04.                                   I
+R12047        03 00END989RO029          PIC 9(4).                       IMS00      R12047        03 00END989RO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-00-EXP.                                      IMS00      R12047     02 PER-29-NIVEL-00-EXP.                                      I
+R12047        03 00EXP999RO029          PIC 9(4).                       IMS00      R12047        03 00EXP999RO029          PIC 9(4).                       I
+R12047        03 00EXP998RO029          PIC 9(4).                       IMS00      R12047        03 00EXP998RO029          PIC 9(4).                       I
+R12047        03 00EXP997RO029          PIC 9(4).                       IMS00      R12047        03 00EXP997RO029          PIC 9(4).                       I
+R12047        03 00EXP996RO029          PIC 9(4).                       IMS00      R12047        03 00EXP996RO029          PIC 9(4).                       I
+R12047        03 00EXP995TO029          PIC 9(4).                       IMS00      R12047        03 00EXP995TO029          PIC 9(4).                       I
+R12047        03 00EXP994TO029          PIC 9(4).                       IMS00      R12047        03 00EXP994TO029          PIC 9(4).                       I
+
+           02 PER-29-NIVEL-02-NUM.                                                            02 PER-29-NIVEL-02-NUM.
+              03 02NUM999TO029          PIC 9(4).                                                03 02NUM999TO029          PIC 9(4).
+R12047        03 01NUM998RO029          PIC 9(4).                       IMS00      R12047        03 01NUM998RO029          PIC 9(4).                       I
+R12047        03 01NUM997RO029          PIC 9(4).                       IMS00      R12047        03 01NUM997RO029          PIC 9(4).                       I
+R12047        03 01NUM996RO029          PIC 9(4).                       IMS00      R12047        03 01NUM996RO029          PIC 9(4).                       I
+R12047        03 02NUM995TO029          PIC 9(4).                       IMS00      R12047        03 02NUM995TO029          PIC 9(4).                       I
+                                                                                >  R18908        03 01NUM996R1029          PIC 9(3).                       S
+
+R12047     02 PER-29-NIVEL-01-END-11.                                   IMS00      R12047     02 PER-29-NIVEL-01-END-11.                                   I
+R12047        03 01END999RO029          PIC 9(11).                      IMS00      R12047        03 01END999RO029          PIC 9(11).                      I
+R12047        03 01END998RO029          PIC 9(11).                      IMS00      R12047        03 01END998RO029          PIC 9(11).                      I
+R12047        03 01END997RO029          PIC 9(11).                      IMS00      R12047        03 01END997RO029          PIC 9(11).                      I
+R12047        03 01END996RO029          PIC 9(11).                      IMS00      R12047        03 01END996RO029          PIC 9(11).                      I
+R12047        03 01END995RO029          PIC 9(11).                      IMS00      R12047        03 01END995RO029          PIC 9(11).                      I
+R12047        03 01END994RO029          PIC 9(11).                      IMS00      R12047        03 01END994RO029          PIC 9(11).                      I
+R12047        03 01END993RO029          PIC 9(11).                      IMS00      R12047        03 01END993RO029          PIC 9(11).                      I
+R12047        03 01END992RO029          PIC 9(11).                      IMS00      R12047        03 01END992RO029          PIC 9(11).                      I
+R12047        03 01END991RO029          PIC 9(11).                      IMS00      R12047        03 01END991RO029          PIC 9(11).                      I
+R12047        03 01END990RO029          PIC 9(11).                      IMS00      R12047        03 01END990RO029          PIC 9(11).                      I
+
+R12047     02 PER-29-NIVEL-01-END-04.                                   IMS00      R12047     02 PER-29-NIVEL-01-END-04.                                   I
+R12047        03 01END989RO029          PIC 9(4).                       IMS00      R12047        03 01END989RO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-01-EXP.                                      IMS00      R12047     02 PER-29-NIVEL-01-EXP.                                      I
+R12047        03 01EXP999RO029          PIC 9(4).                       IMS00      R12047        03 01EXP999RO029          PIC 9(4).                       I
+R12047        03 01EXP998RO029          PIC 9(4).                       IMS00      R12047        03 01EXP998RO029          PIC 9(4).                       I
+R12047        03 01EXP997RO029          PIC 9(4).                       IMS00      R12047        03 01EXP997RO029          PIC 9(4).                       I
+R12047        03 01EXP996RO029          PIC 9(4).                       IMS00      R12047        03 01EXP996RO029          PIC 9(4).                       I
+R12047        03 02EXP995TO029          PIC 9(4).                       IMS00      R12047        03 02EXP995TO029          PIC 9(4).                       I
+R12047        03 02EXP994TO029          PIC 9(4).                       IMS00      R12047        03 02EXP994TO029          PIC 9(4).                       I
+
+R12047     02 PER-29-COD-SUS-RPL       PIC 999999 VALUE ZEROS.          IMS00      R12047     02 PER-29-COD-SUS-RPL       PIC 999999 VALUE ZEROS.          I
+R12047        88 COD-SUS-RPL           VALUE 020030.                    IMS00      R12047        88 COD-SUS-RPL           VALUE 020030.                    I
+
+R12047     02 PER-29-VAR-TRAB.                                                     R12047     02 PER-29-VAR-TRAB.
+R12047        03 UTL-RPL               PIC 9(03)V9(04) VALUE ZEROS.     IMS00      R12047        03 UTL-RPL               PIC 9(03)V9(04) VALUE ZEROS.     I
+R12047        03 AUX-EST-ORG           PIC 9(04).                       IMS00      R12047        03 AUX-EST-ORG           PIC 9(04).                       I
+R12047        03 AUX-FEC-EST-ORG.                                       IMS00      R12047        03 AUX-FEC-EST-ORG.                                       I
+R12047           05 ANO-FEC-EST-ORG    PIC 9(04).                       IMS00      R12047           05 ANO-FEC-EST-ORG    PIC 9(04).                       I
+R12047           05 MES-FEC-EST-ORG    PIC 9(02).                       IMS00      R12047           05 MES-FEC-EST-ORG    PIC 9(02).                       I
+icdgd@[7mcodes[m /d/iccol/desarrollo/copys
+$ 
+icdgd@[7mcodes[m /d/iccol/desarrollo/copys
+$ 
+icdgd@[7mcodes[m /d/iccol/desarrollo/copys
+$ sdiff -w 162 CARACTPER-029.WS-V02 CARACTPER-029.WS                                                  sdiff -w 168 CARACTPER-029.WS-V02 CARACTPER-029.WS
+REMARK*CARACTPER-029.WS.v.0002.                                                    |  REMARK*CARACTPER-029.WS.v.0003.
+REMARK******************************************************************              REMARK******************************************************************
+REMARK*DEFINICION DE CARACTERISTICAS PESONALIZADAS PARA RIPLEY                        REMARK*DEFINICION DE CARACTERISTICAS PESONALIZADAS PARA RIPLEY
+REMARK******************************************************************              REMARK******************************************************************
+      * IMS0002    | R12047 - Se agregan caracteristicas END, NUM y EXP*                    * IMS0002    | R12047 - Se agregan caracteristicas END, NUM y EXP*
+      * 17-MAY-2013|    REQ. CQ. 12047.                                *                    * 17-MAY-2013|    REQ. CQ. 12047.                                *
+      * M.SALAMANCA|                                                   *                    * M.SALAMANCA|                                                   *
+      ******************************************************************                    ******************************************************************
+                                                                                   >        * STT0003    | R18908 - Se agrega caracteristica 01NUM996R1029   *
+                                                                                   >        * 21-ABR-2014|    REQ. CQ. 18908.                                *
+                                                                                   >        * LUIS GOMEZ |                                                   *
+                                                                                   >        ******************************************************************
+        01 PERSONALIZACION-29.                                                                01 PERSONALIZACION-29.
+           02 PER-29-NIVEL-00-NUM.                                                               02 PER-29-NIVEL-00-NUM.
+              03 00NUM999TO029          PIC 9(4).                                                   03 00NUM999TO029          PIC 9(4).
+R12047        03 00NUM998RO029          PIC 9(4).                       IMS0002       R12047        03 00NUM998RO029          PIC 9(4).                       I
+R12047        03 00NUM997RO029          PIC 9(4).                       IMS0002       R12047        03 00NUM997RO029          PIC 9(4).                       I
+R12047        03 00NUM996RO029          PIC 9(4).                       IMS0002       R12047        03 00NUM996RO029          PIC 9(4).                       I
+R12047        03 00NUM995TO029          PIC 9(4).                       IMS0002       R12047        03 00NUM995TO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-00-END-11.                                   IMS0002       R12047     02 PER-29-NIVEL-00-END-11.                                   I
+R12047        03 00END999RO029          PIC 9(11).                      IMS0002       R12047        03 00END999RO029          PIC 9(11).                      I
+R12047        03 00END998RO029          PIC 9(11).                      IMS0002       R12047        03 00END998RO029          PIC 9(11).                      I
+R12047        03 00END997RO029          PIC 9(11).                      IMS0002       R12047        03 00END997RO029          PIC 9(11).                      I
+R12047        03 00END996RO029          PIC 9(11).                      IMS0002       R12047        03 00END996RO029          PIC 9(11).                      I
+R12047        03 00END995RO029          PIC 9(11).                      IMS0002       R12047        03 00END995RO029          PIC 9(11).                      I
+R12047        03 00END994RO029          PIC 9(11).                      IMS0002       R12047        03 00END994RO029          PIC 9(11).                      I
+R12047        03 00END993RO029          PIC 9(11).                      IMS0002       R12047        03 00END993RO029          PIC 9(11).                      I
+R12047        03 00END992RO029          PIC 9(11).                      IMS0002       R12047        03 00END992RO029          PIC 9(11).                      I
+R12047        03 00END991RO029          PIC 9(11).                      IMS0002       R12047        03 00END991RO029          PIC 9(11).                      I
+R12047        03 00END990RO029          PIC 9(11).                      IMS0002       R12047        03 00END990RO029          PIC 9(11).                      I
+
+R12047     02 PER-29-NIVEL-00-END-04.                                   IMS0002       R12047     02 PER-29-NIVEL-00-END-04.                                   I
+R12047        03 00END989RO029          PIC 9(4).                       IMS0002       R12047        03 00END989RO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-00-EXP.                                      IMS0002       R12047     02 PER-29-NIVEL-00-EXP.                                      I
+R12047        03 00EXP999RO029          PIC 9(4).                       IMS0002       R12047        03 00EXP999RO029          PIC 9(4).                       I
+R12047        03 00EXP998RO029          PIC 9(4).                       IMS0002       R12047        03 00EXP998RO029          PIC 9(4).                       I
+R12047        03 00EXP997RO029          PIC 9(4).                       IMS0002       R12047        03 00EXP997RO029          PIC 9(4).                       I
+R12047        03 00EXP996RO029          PIC 9(4).                       IMS0002       R12047        03 00EXP996RO029          PIC 9(4).                       I
+R12047        03 00EXP995TO029          PIC 9(4).                       IMS0002       R12047        03 00EXP995TO029          PIC 9(4).                       I
+R12047        03 00EXP994TO029          PIC 9(4).                       IMS0002       R12047        03 00EXP994TO029          PIC 9(4).                       I
+
+           02 PER-29-NIVEL-02-NUM.                                                               02 PER-29-NIVEL-02-NUM.
+              03 02NUM999TO029          PIC 9(4).                                                   03 02NUM999TO029          PIC 9(4).
+R12047        03 01NUM998RO029          PIC 9(4).                       IMS0002       R12047        03 01NUM998RO029          PIC 9(4).                       I
+R12047        03 01NUM997RO029          PIC 9(4).                       IMS0002       R12047        03 01NUM997RO029          PIC 9(4).                       I
+R12047        03 01NUM996RO029          PIC 9(4).                       IMS0002       R12047        03 01NUM996RO029          PIC 9(4).                       I
+R12047        03 02NUM995TO029          PIC 9(4).                       IMS0002       R12047        03 02NUM995TO029          PIC 9(4).                       I
+                                                                                   >  R18908        03 01NUM996R1029          PIC 9(3).                       S
+
+R12047     02 PER-29-NIVEL-01-END-11.                                   IMS0002       R12047     02 PER-29-NIVEL-01-END-11.                                   I
+R12047        03 01END999RO029          PIC 9(11).                      IMS0002       R12047        03 01END999RO029          PIC 9(11).                      I
+R12047        03 01END998RO029          PIC 9(11).                      IMS0002       R12047        03 01END998RO029          PIC 9(11).                      I
+R12047        03 01END997RO029          PIC 9(11).                      IMS0002       R12047        03 01END997RO029          PIC 9(11).                      I
+R12047        03 01END996RO029          PIC 9(11).                      IMS0002       R12047        03 01END996RO029          PIC 9(11).                      I
+R12047        03 01END995RO029          PIC 9(11).                      IMS0002       R12047        03 01END995RO029          PIC 9(11).                      I
+R12047        03 01END994RO029          PIC 9(11).                      IMS0002       R12047        03 01END994RO029          PIC 9(11).                      I
+R12047        03 01END993RO029          PIC 9(11).                      IMS0002       R12047        03 01END993RO029          PIC 9(11).                      I
+R12047        03 01END992RO029          PIC 9(11).                      IMS0002       R12047        03 01END992RO029          PIC 9(11).                      I
+R12047        03 01END991RO029          PIC 9(11).                      IMS0002       R12047        03 01END991RO029          PIC 9(11).                      I
+R12047        03 01END990RO029          PIC 9(11).                      IMS0002       R12047        03 01END990RO029          PIC 9(11).                      I
+
+R12047     02 PER-29-NIVEL-01-END-04.                                   IMS0002       R12047     02 PER-29-NIVEL-01-END-04.                                   I
+R12047        03 01END989RO029          PIC 9(4).                       IMS0002       R12047        03 01END989RO029          PIC 9(4).                       I
+
+R12047     02 PER-29-NIVEL-01-EXP.                                      IMS0002       R12047     02 PER-29-NIVEL-01-EXP.                                      I
+R12047        03 01EXP999RO029          PIC 9(4).                       IMS0002       R12047        03 01EXP999RO029          PIC 9(4).                       I
+R12047        03 01EXP998RO029          PIC 9(4).                       IMS0002       R12047        03 01EXP998RO029          PIC 9(4).                       I
+R12047        03 01EXP997RO029          PIC 9(4).                       IMS0002       R12047        03 01EXP997RO029          PIC 9(4).                       I
+R12047        03 01EXP996RO029          PIC 9(4).                       IMS0002       R12047        03 01EXP996RO029          PIC 9(4).                       I
+R12047        03 02EXP995TO029          PIC 9(4).                       IMS0002       R12047        03 02EXP995TO029          PIC 9(4).                       I
+R12047        03 02EXP994TO029          PIC 9(4).                       IMS0002       R12047        03 02EXP994TO029          PIC 9(4).                       I
+
+R12047     02 PER-29-COD-SUS-RPL       PIC 999999 VALUE ZEROS.          IMS0002       R12047     02 PER-29-COD-SUS-RPL       PIC 999999 VALUE ZEROS.          I
+R12047        88 COD-SUS-RPL           VALUE 020030.                    IMS0002       R12047        88 COD-SUS-RPL           VALUE 020030.                    I
+
+R12047     02 PER-29-VAR-TRAB.                                                        R12047     02 PER-29-VAR-TRAB.
+R12047        03 UTL-RPL               PIC 9(03)V9(04) VALUE ZEROS.     IMS0002       R12047        03 UTL-RPL               PIC 9(03)V9(04) VALUE ZEROS.     I
+R12047        03 AUX-EST-ORG           PIC 9(04).                       IMS0002       R12047        03 AUX-EST-ORG           PIC 9(04).                       I
+R12047        03 AUX-FEC-EST-ORG.                                       IMS0002       R12047        03 AUX-FEC-EST-ORG.                                       I
+R12047           05 ANO-FEC-EST-ORG    PIC 9(04).                       IMS0002       R12047           05 ANO-FEC-EST-ORG    PIC 9(04).                       I
+R12047           05 MES-FEC-EST-ORG    PIC 9(02).                       IMS0002       R12047           05 MES-FEC-EST-ORG    PIC 9(02).                       I
+icdgd@[7mcodes[m /d/iccol/desarrollo/copys
+$ 
+shell will timeout in 60 seconds due to inactivity
+ksh: timed out waiting for input

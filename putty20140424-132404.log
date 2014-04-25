@@ -1,0 +1,383 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.04.24 13:24:04 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu Apr 24 08:45:45 2014 from 172.16.10.90
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ cd f
+ksh: f:  not found
+icdgd@codes /d/iccol/desarrollo
+$ . sh-camamb prunovedat
+icdgd@codes /d/iccol/desarrollo
+$ which  sh-camamb
+/d/iccol/desarrollo/macros/sh-camamb
+icdgd@codes /d/iccol/desarrollo
+$ cat /d/iccol/desarrollo/macros/sh-camamb
+# MACRO REVISADA PARA MILENIO -VHF
+# MAC008.v.0001
+# Se cambia el ambiente Datacredito en el directorio designado por el
+# parametro bajo $DATABASE, con base en los maestros extraidos mediante
+# el programa EXTRAE.CBL.  
+if [ ! -d $DATABASE/$1 ]; then
+   echo "ERROR:  Directorio ($DATABASE/$1) para nuevo ambiente no existe"
+else
+   if [ "$1" = "desnovedat" ]; then
+      export AMBIENTE="desarrollo"
+   else
+      if [ "$1" = "prunovedat" ]; then
+         export AMBIENTE="pruebas"
+      fi
+   fi
+   NUM_EJEC="002"
+   export NUM_EJEC
+   DBSUPER=$DATABASE/$1
+   export DBSUPER
+   dd_CEDULAS=$DATABASE/$1/CEDULAS
+   export dd_CEDULAS
+   dd_ICDAS=$DATABASE/$1/ICDAS
+   export dd_ICDAS
+   dd_ICDIAN=$DATABASE/$1/ICDIAN
+   export dd_ICDIAN
+   dd_REG01=$DATABASE/$1/REG01
+   export dd_REG01
+   dd_REG02=$DATABASE/$1/REG02
+   export dd_REG02
+   dd_REG03=$DATABASE/$1/REG03
+   export dd_REG03
+   dd_REG04=$DATABASE/$1/REG04
+   export dd_REG04
+   ICREGIS=$DATABASE/$1
+   export ICREGIS
+   AUDITOR=$DATABASE/$1
+   export AUDITOR
+   EXTFH=$DATABASE/$1/extfh.cfg
+   export EXTFH
+   SERV_CCI=DES-$1
+   export SERV_CCI
+   BD_NOVEDAT=$DATABASE/$1/BD_NOVEDAT.cfg
+   export BD_NOVEDAT
+   BD_SSO=$DATABASE/$1/BD_SSO.cfg      
+   export BD_SSO    
+   BD_EXTRACUPOS=$DATABASE/$1/BD_EXTRACUPOS.cfg
+   export BD_EXTRACUPOS
+   DB2_NOVEDAT=$DATABASE/$1/DB2_NOVEDAT_97.cfg
+   export DB2_NOVEDAT
+   DB2_EXTRACUPOS=$DATABASE/$1/DB2_EXTRACUPOS_97.cfg
+   export DB2_EXTRACUPOS
+   DB2_DATACIU2=$DATABASE/$1/DB2_DATACIU2_97.cfg
+   export DB2_DATACIU2
+   DIRECCIONES=$DATABASE/$1
+   export DIRECCIONES
+   DB2_SSO=$DATABASE/$1/DB2_SSO_97.cfg
+   export DB2_SSO
+   DB2_CONSUMIDOR=$DATABASE/$1/DB2_CONSUMIDOR_97.cfg
+   export DB2_CONSUMIDOR
+   export DB2_MOVILES=$DATABASE/$1/DB2_MOVILES_97.cfg
+   export DB2_ADMSSO=$DATABASE/$1/DB2_ADMSSO.cfg
+   export DB2_LISEXC=$DATABASE/$1/DB2_LISEXC.cfg
+   VALORES=$DATABASE/$1
+   export VALORES
+   SCORES=$DATABASE/$1
+   export SCORES
+   FRABDUVAL=$DATABASE/$1
+   export FRABDUVAL
+   FRABDUACT=$DATABASE/$1
+   export FRABDUACT
+   DATABASE=$DATABASE/$1
+   export DATABASE
+   export LOGS=$DATABASE
+   COBDB2=97
+   export COBDB2
+   sh-arma-classpath
+   . sh-classpath
+fi
+icdgd@codes /d/iccol/desarrollo
+$ ^E^Y^Y  
+icdgd@codes /d/iccol/desarrollo
+$ cd
+icdgd@codes /d/iccol/desarrollo
+$ ls *lst
+DTCBLQ.lst
+icdgd@codes /d/iccol/desarrollo
+$ cd ^?     te
+icdgd@codes /d/iccol/desarrollo/temporales
+$ ls *lst
+*lst: No such file or directory
+icdgd@codes /d/iccol/desarrollo/temporales
+$ fu
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ ls *lst
+CARACTPER-029-TEST.lst
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ ls -l *lst
+-rw-rw-r--   1 icdgd    icdatacr 6020835 Apr 24 10:28 CARACTPER-029-TEST.lst
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ rm CARACTPER-029-TEST.lst
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ ls *int
+ACTALEJUR.int               ICGD82-OLD.int
+ANT-BDLDI2.int              ICGD82.int
+AUDINDEREC.int              ICGD88V01.int
+AUDINDEST.int               ICGDD3FIX.int
+BDACSVFE.int                ICGDDE.int
+BDAMATCH.int                ICGDDELABRMB.int
+BDANOM.int                  ICGDI2PRUDIR.int
+BDAPLSUSRMB.int             ICGDIRBDLDI2.int
+BDASEPNOMNEW.int            ICGDIRDOMI.int
+bdiexent.int                ICGDIRPJV.int
+BDIEXENT.int                ICGDIRRMB.int
+BDLCERCT.int                ICGDIV.int
+BDLDI2BLQ.int               ICGDIVPJV.int
+BDLDI2CAR.int               ICGDIVRMB.int
+BDLDI2DES.int               ICGFRA.int
+BDLDI2FIX.int               ICGFRABDU.int
+BDLDI2FIX00.int             ICGFRAEXC.int
+BDLDI2NEW.int               ICGFRAfr.int
+BDLDIR.int                  ICGFRAPV.int
+BDLDIRECV21.int             ICGFRARMB.int
+BDLDIRESTRRMB.int           ICGFRARMB1.int
+BDLLDIRL.int                ICGFRARMB2.int
+BDLSTDMAI.int               ICGFRASEM.int
+BDLSTR.int                  ICGFRATBOX.int
+BDLUMAIL.int                ICGFRAv78.int
+BDLVCAL.int                 ICGFRAvSTT.int
+BDLVCALRMB.int              ICGFRAZZZ.int
+CAMDIS-MAECAR-MAEDIR.int    ICGFRV.int
+CARACTBC.int                ICGK02.int
+CARACTBCNEW.int             ICGKARDECISOR3.int
+CARACTBDL.int               ICGKARDESISOR3.int
+CARACTDIR.int               ICGKARDUMMYS.int
+CARACTNEW-GV.int            ICGKARPB.int
+CARACTPER-029-TEST.int      ICGLEY.int
+CARACTPER-PER09.int         ICGMONITOR.int
+CARACTPER-PER12-01.int      ICGMONITORNEW.int
+CARACTPER-PER18-CQ6439.int  ICGNHCT.int
+CARACTPER-PER22.int         ICGS06.int
+CARACTPER.int               ICGS06V38.int
+CARACTUSANEW.int            ICGS06V42.int
+CARACTUSAOPTI.int           ICGS07-ANT.int
+CARACTUSAPER.int            ICGS07-DAR.int
+CARACTUSAPERNOEL.int        ICGS07-PRU.int
+cavs-ofcn.int               ICGS07.int
+ccihsrvr.int                ICGS07V32.int
+CITSELPS.int                ICGS07V34.int
+CITSELPSv01.int             ICGS07V35-ALC3.int
+CTLCOPYMES.int              ICGS07V35-DAR.int
+CTLCOPYPWHC.int             ICGS10V20.int
+CTLIDXTDC.int               ICGS18.int
+CTLUTL01-N.int              ICGS18V08.int
+CTLUTL19.int                ICGS18V10.int
+CTLUTL24-N.int              ICGS22V06.int
+CTLUTL25.int                ICGS37V04.int
+DCSCEXT.int                 ICGS38V010-2012-07-27.int
+DEBORRAR.int                ICGS41.int
+DESEXT.int                  ICGS42-V04.int
+DIRDOC.int                  ICGS42-V06.int
+DOMIBATCH1.int              ICGS45.int
+DOMIBATCH2.int              ICGS46.int
+DOMIBATCH3.int              ICGS46V01.int
+DOMIBATCH4.int              ICGS46V02.int
+DOMIBATCHDEBUG.int          ICGS46V03.int
+EMACODINDEX.int             ICGS56.int
+EMACODPLANO.int             ICGS56V01.int
+ESTRATOS.int                ICGS56V02.int
+EXTRAE-PLANO.int            ICGS61D-V01.int
+EXTRAE.int                  ICGS62D-V01.int
+EXTRAESOLOCTAS.int          ICGS65.int
+FACSOPT.int                 ICGS66D.int
+FRAAINQ.int                 ICGS67V02.int
+FRAAUD.int                  ICGSOCK01.int
+FRAAUDNEW.int               ICGSOCK02.int
+FRAEMPRMB.int               ICGSOCKPR.int
+FRAGENRES.int               ICGSOCKVF.int
+FRALOGTIEMPOS.int           ICGSTRN02-20120409.int
+FRALOGTIEMPOSGJ.int         ICGSTRN02.int
+FRARED01.int                ICGSTRN02RMB.int
+GENARCVHF.int               ICGSTRN03.int
+GLBNTEXT.int                ICJBDLSTDCIU.int
+ICBTCODANIEL.int            ICJCAR-LEY.int
+ICBTCOSUS.int               ICJCAR.int
+ICGBOLITAS.int              ICJDIR.int
+ICGBOM.int                  ICJDIRFIX00.int
+ICGBUS.int                  ICJSCOHIS.int
+ICGCIT-V01.int              ICSACCONLOCK.int
+ICGCIT-V02.int              KAR000.int
+ICGCIT.int                  LEE-ICBTCO-JCMP.int
+ICGCON-COL-STRN.int         MODUSRREPO.int
+ICGCON.int                  PESVNOCSVBCS.int
+ICGCONCLON.int              PESVNOCSVSEGE.int
+ICGCONCOMB.int              PESVNOPEO.int
+ICGCONCOMB1.int             PLANTERA-ICBSUS.int
+ICGCONLOG.int               pru-pppp.int
+ICGCONPROALF.int            PRUDECHOS.int
+ICGCONPROALF4.int           PRUDECICG.int
+ICGCONPROD.int              PRUEBA.int
+ICGCONTCP.int               RMBAUDITARFAC.int
+ICGCPL-STT.int              RMBAYUDALEY.int
+ICGCPLPJ.int                RMBCANALES.int
+ICGCPLRMB.int               RMBCLAVES.int
+ICGD12.int                  RMBDB2A.int
+ICGD12V28.int               RMBESTCIIUS.int
+ICGD12V29.int               RMBGENVALREP.int
+ICGD12V32.int               RMBHUELLAS.int
+ICGD12V51.int               RMBHUELLASBATCH.int
+ICGD18V09.int               RMBICMCRE.int
+ICGD21V22.int               RMBICMCREBUSCA.int
+ICGD21V23.int               RMBJAVA.int
+ICGD21V24.int               RMBLOTES1.int
+ICGD21V35.int               RMBLOTES5.int
+ICGD22.int                  RMBMUESTRACTAS.int
+ICGD22V20.int               RMBPRUCALLSERV.int
+ICGD22V23.int               RMBPRUCCI.int
+ICGD22V25.int               RMBPRUCCI1.int
+ICGD22V27-T.int             RMBPRUCCICLI.int
+ICGD22V30.int               RMBPRUCCISERV.int
+ICGD25.int                  RMBPRUDECIFRA.int
+ICGD27.int                  RMBPRUEBASMER.int
+ICGD27V02.int               RMBPRUOBJSERV.int
+ICGD27V03.int               RMBREGIS.int
+ICGD34V14.int               RMBREVISAICMCRE.int
+ICGD35-X.int                RMBTAPAHUECOS.int
+ICGD35.int                  RMBTESTCCI.int
+ICGD36V05.int               RMBTESTHIJO.int
+ICGD37V04.int               RMBXDHOST.int
+ICGD37V05.int               RMBZEROS.int
+ICGD38.int                  SCOCOBNEW.int
+ICGD38V08.int               SCODAMIC.int
+ICGD38V09.int               SCODAMICNEW.int
+ICGD40V04.int               SCOTBATCHNUE.int
+ICGD40V05.int               SCOUKSNEW.int
+ICGD40V13.int               SCOUNW-V14.int
+ICGD40V16.int               SCOUNW.int
+ICGD40V24.int               SCOUNWAA.int
+ICGD43.int                  SCOUNWNEW.int
+ICGD44V06.int               SCOUSAAA.int
+ICGD46.int                  SCOUSAAANEW.int
+ICGD46V03.int               SCOUSAPI.int
+ICGD46V05.int               SCOUSAPIORI.int
+ICGD47.int                  TIEMPOTX.int
+ICGD47DLMV05UNI.int         UTL-PLANO-YANBAL.int
+ICGD47V01.int               UTLAUDSEND.int
+ICGD48.int                  UTLBAJ.int
+ICGD48V02.int               UTLBLQCTA.int
+ICGD48V03.int               UTLCARMALREGIS.int
+ICGD48V04.int               UTLCITREP.int
+ICGD48V05.int               UTLCLARANDOM.int
+ICGD48V06.int               UTLDATAUD-04-05-06.int
+ICGD48V11.int               UTLDIRCLI.int
+ICGD49.int                  UTLDIRESTR.int
+ICGD49V01.int               UTLDIRFIX.int
+ICGD49V03.int               UTLESDIR.int
+ICGD49V22.int               UTLESTCSV.int
+ICGD50.int                  UTLESTCSVCRE.int
+ICGD50V01.int               UTLESTCSVLIB.int
+ICGD50V02.int               UTLESTMIC.int
+ICGD50x.int                 UTLEXTPRU.int
+ICGD51V01.int               UTLMSUPPLANO.int
+ICGD51V04-PRU.int           UTLOGSCLPV-V01.int
+ICGD51V04.int               UTLOGSDECI-DAVI-v01.int
+ICGD56V01.int               UTLOGSDECI-DAVI-v03.int
+ICGD57V01.int               UTLOGSDECI-DAVI.int
+ICGD60.int                  UTLOGSDECI-PBANCOL-V09.int
+ICGD60V01.int               UTLOGSDECI-V02.int
+ICGD60V07.int               UTLOGSDECI-V09.int
+ICGD61D-V01.int             UTLPRUPROD-GJ.int
+ICGD61D-V02.int             UTLRECONS-VLR.int
+ICGD61D-V14.int             UTLSAN.int
+ICGD61D.int                 UTLSEC.int
+ICGD61DV15.int              UTLSEG.int
+ICGD62D-V01.int             UTLTUTELA.int
+ICGD62D.int                 UTLU-TRANS-COMCEL.int
+ICGD63-RECNEW.int           UTLUADDTCO.int
+ICGD63.int                  UTLUCLA27.int
+ICGD65D.int                 UTLUCTATOTCTAS.int
+ICGD67D-V01.int             UTLUEXTCSV-V03.int
+ICGD67D.int                 UTLUFACPJ.int
+ICGD68.int                  UTLULONGITUDES.int
+ICGD71.int                  UTLUMODCLA.int
+ICGD74-L.int                VALNOM.int
+ICGD78.int                  VHFTIEMPOS.int
+ICGD79.int
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ ls CARAC*int
+CARACTBC.int                CARACTPER-PER18-CQ6439.int
+CARACTBCNEW.int             CARACTPER-PER22.int
+CARACTBDL.int               CARACTPER.int
+CARACTDIR.int               CARACTUSANEW.int
+CARACTNEW-GV.int            CARACTUSAOPTI.int
+CARACTPER-029-TEST.int      CARACTUSAPER.int
+CARACTPER-PER09.int         CARACTUSAPERNOEL.int
+CARACTPER-PER12-01.int
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ ls -l CARAC*int
+-rw-rw-r--   1 icrmbd   icdatacr  248832 Jul 30  2010 CARACTBC.int
+-rw-rw-r--   1 icrmbd   icdatacr  264704 Jul 12  2011 CARACTBCNEW.int
+-rw-rw-r--   1 icrmbd   icdatacr  113408 Jan 18  2013 CARACTBDL.int
+-rw-rw-r--   1 icrmbd   icdatacr   80384 Sep 30  2010 CARACTDIR.int
+-rw-rw-r--   1 icjdld   icdatacr   82944 Feb 27  2012 CARACTNEW-GV.int
+-rw-rw-r--   1 icdgd    icdatacr 1244672 Apr 24 10:28 CARACTPER-029-TEST.int
+-rw-rw-r--   1 icehad   icdatacr  376832 Dec  9  2011 CARACTPER-PER09.int
+-rw-rw-r--   1 icjdld   icdatacr  492544 Jun  5  2012 CARACTPER-PER12-01.int
+-rw-rw-r--   1 icimsd   icdatacr  499456 Jun 26  2012 CARACTPER-PER18-CQ6439.int
+-rw-rw-r--   1 iccavd   icdatacr  527616 Aug  1  2012 CARACTPER-PER22.int
+-rw-rw-r--   1 icrmbd   icdatacr  268032 Aug  9  2011 CARACTPER.int
+-rw-rw-r--   1 icrmbd   icdatacr  287744 Mar 20  2013 CARACTUSANEW.int
+-rw-rw-r--   1 icrmbd   icdatacr  267264 Jul 18  2011 CARACTUSAOPTI.int
+-rw-rw-r--   1 icrmbd   icdatacr  278016 Jul 29  2011 CARACTUSAPER.int
+-rw-rw-r--   1 icrmbd   icdatacr  278528 Aug 22  2011 CARACTUSAPERNOEL.int
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ rm CARACTPER-029-TEST.int
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cd
+icdgd@codes /d/iccol/desarrollo
+$ which cobol
+no cobol in /usr/j2se/jre/sh /usr/j2se/sh /usr/j2se/bin /usr/j2se/jre/bin /opt/mfocus/des/cobol/lib /opt/mfocus/des/cobol/bin /usr/bin /bin /usr/bin /d/iccol/desarrollo/macros /d/iccol/desarrollo/utiles /opt/bin /usr/sbin /usr/lib /usr/ccs/bin /opt/SUNWspro/bin /usr/jdk/latest/bin /usr/local/bin /usr/j2se/bin /usr/openwin/bin . /export/home/db2inst1/sqllib/bin /export/home/db2inst1/sqllib/adm /export/home/db2inst1/sqllib/misc
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ ^D

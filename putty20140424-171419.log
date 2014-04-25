@@ -1,0 +1,3314 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.04.24 17:14:19 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu Apr 24 14:54:09 2014 from 172.16.10.117
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . sh-camamb prunovedat
+icdgd@codes /d/iccol/desarrollo
+$ ls /user    home/icdgd
+/home/icdgd: No such file or directory
+icdgd@codes /d/iccol/desarrollo
+$ ls /users
+/users: No such file or directory
+icdgd@codes /d/iccol/desarrollo
+$ ls /home
+icdgd@codes /d/iccol/desarrollo
+$ vi  cat .vimr  rc
+cat: cannot open .virc
+icdgd@codes /d/iccol/desarrollo
+$ cat .vi.rc
+cat: cannot open .vi.rc
+icdgd@codes /d/iccol/desarrollo
+$ cat vi.rc
+cat: cannot open vi.rc
+icdgd@codes /d/iccol/desarrollo
+$ vi
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:scriptnamesNo previous regular expression:scriptnamesNo previous regular expression:q!icdgd@codes /d/iccol/desarrollo
+$ fu
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cat .exrc
+cat: cannot open .exrc
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cd
+icdgd@codes /d/iccol/desarrollo
+$ cat .exrc
+cat: cannot open .exrc
+icdgd@codes /d/iccol/desarrollo
+$ vi .exrc
+".exrc" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" [New file]:set ignorecase
+:set nowrapscan".exrc" [New file] 2 lines, 32 characters icdgd@codes /d/iccol/desarrollo
+$ vi
+Not owner of .exrc or .exrc is group or world writable
+Error detected in .exrc.[Hit return to continue]
+
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo
+$ ls -l .exrc
+-rw-rw-r--   1 icdgd    icdatacr      32 Apr 24 15:21 .exrc
+icdgd@codes /d/iccol/desarrollo
+$ chmod .exrc 644^?^?             644 .exrc
+icdgd@codes /d/iccol/desarrollo
+$ vi
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~aaa aaa AAA aaa bbb aaa AAA:s/ /^^M/g6 substitutions aaa
+aaa
+AAA
+aaa
+bbb
+aaa
+AAA
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~/aaa
+/
+
+/
+
+
+///Address search hit BOTTOM without matching pattern:q!icdgd@codes /d/iccol/desarrollo
+$ exch $EXINIT
+ksh: exch:  not found
+icdgd@codes /d/iccol/desarrollo
+$ echo $EXINIT
+
+icdgd@codes /d/iccol/desarrollo
+$ fu
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ vi
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:set allnoautoindentnomodelinesnoshowmodeautoprintnonumbernoslowopennoautowritenonovicetabstop=8nobeautifynooptimizetaglength=0directory=/var/tmpparagraphs=IPLPPPQPP LIpplpipnppplpipbptags=tags /usr/lib/tagsnoedcompatibleprompttagstacknoerrorbellsnoreadonlyterm=vt220noexrcredrawnoterseflashremaptimeouthardtabs=8report=5ttytype=vt220ignorecasescroll=20warnnolispsections=NHSHH HUuhsh+cwindow=41nolistshell=/bin/kshnowrapscanmagicshiftwidth=8wrapmargin=0mesgnoshowmatchnowriteany[Hit return to continue] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/fuentes
+$ cd
+icdgd@codes /d/iccol/desarrollo
+$ vi .exrc
+".exrc" 2 lines, 32 characters :set ignorecase
+:set nowrapscan
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" 2 lines, 32 characters
+
+:set showmodeo
+:map ^?  ^^? ^^H
+::set showmatch
+.:set tabstop=4:w".exrc" 6 lines, 85 characters :hlshls: Not an editor command:set highlightsearchhighlightsearch: No such option - 'set all' gives all option values:set allnoautoindentnomodelinesnoshowmodeautoprintnonumbernoslowopennoautowritenonovicetabstop=8nobeautifynooptimizetaglength=0directory=/var/tmpparagraphs=IPLPPPQPP LIpplpipnppplpipbptags=tags /usr/lib/tagsnoedcompatibleprompttagstacknoerrorbellsnoreadonlyterm=vt220noexrcredrawnoterseflashremaptimeouthardtabs=8report=5ttytype=vt220ignorecasescroll=20warnnolispsections=NHSHH HUuhsh+cwindow=41nolistshell=/bin/kshnowrapscanmagicshiftwidth=8wrapmargin=0mesgnoshowmatchnowriteany[Hit return to continue] :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:set showmatch
+:set tabstop=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+::shiftwidth=4:set :w".exrc" 7 lines, 103 characters icdgd@codes /d/iccol/desarrollo
+$ vi .exrc
+".exrc" 7 lines, 103 characters :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" 7 lines, 103 characters    :set ignorecase:set ignorecase:set etet: No such option - 'set all' gives all option values:set expandtabsexpandtabs: No such option - 'set all' gives all option values:set allnoautoindentnomodelinesshowmodeautoprintnonumbernoslowopennoautowritenonovicetabstop=4nobeautifynooptimizetaglength=0directory=/var/tmpparagraphs=IPLPPPQPP LIpplpipnppplpipbptags=tags /usr/lib/tagsnoedcompatibleprompttagstacknoerrorbellsnoreadonlyterm=vt220noexrcredrawnoterseflashremaptimeouthardtabs=8report=5ttytype=vt220ignorecasescroll=20warnnolispsections=NHSHH HUuhsh+cwindow=41nolistshell=/bin/kshnowrapscanmagicshiftwidth=4wrapmargin=0mesgshowmatchnowriteany[Hit return to continue] :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+OPEN MODE:map ^^[[4~ $
+OPEN MODE:map ^^[[1~ 0
+OPEN MODE:map ^^[[6~ ^^F^^F
+OPEN MODE:map ^^[[5~ ^^B^^B".exrc" 11 lines, 153 characters icdgd@codes /d/iccol/desarrollo
+$ vi .exrc
+".exrc" 11 lines, 153 characters :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" 11 lines, 153 characters11 lines yanked:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more lines:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=411 more linesB
+APPEND MODE   ++++
+
+:set showmatchh   ++++:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H:map ^[[6~ ^F^FF   ++++
+B   ++++e   ++++
+:map ^? ^HH   ++++:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B   ++++:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B   ++++
+:set showmatch   ++++
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F   ++++
+:map ^[[5~ ^B^B   ++++
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode   ++++
+:map ^? ^H   ++++
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch:set ignorecase:set shiftwidth=4:set tabstop=4:set showmatch:map ^[[5~ ^B^B:map ^[[6~ ^F^F:map ^[[1~ 0:map ^[[4~ $:map ^? ^H:set showmode:set nowrapscan:set ignorecase:set shiftwidth=4:set tabstop=4:set showmatch:map ^[[5~ ^B^B   ++++:map ^[[6~ ^F^F   ++++:map ^[[1~ 0:map ^[[4~ $:map ^? ^H:set showmode:set nowrapscan:set ignorecase:set shiftwidth=4:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode   ++++
+:map ^? ^H   ++++
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B   ++++
+".exrc" [Modified] line 41 of 143 --28%-- :map ^[[6~ ^F^F
+:map ^[[5~ ^B^B   ++++
+:set showmatch   ++++
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F   ++++
+:map ^[[5~ ^B^B   ++++
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode   ++++
+:map ^? ^H   ++++
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+".exrc" [Modified] line 119 of 143 --83%-- H   ++++++++++++:q!icdgd@codes /d/iccol/desarrollo
+$ vi .exrc
+".exrc" 11 lines, 153 characters :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" 11 lines, 153 characters:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+:se:qicdgd@codes /d/iccol/desarrollo
+$ L vi .exrc
+".exrc" 11 lines, 153 characters :set ignorecase
+:set nowrapscan
+:set showmode
+:map ^? ^H
+:map ^[[4~ $
+:map ^[[1~ 0
+:map ^[[6~ ^F^F
+:map ^[[5~ ^B^B
+:set showmatch
+:set tabstop=4
+:set shiftwidth=4
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~".exrc" 11 lines, 153 characters:APPEND MODE::INSERT MODEREPLACE MODE:qNo write since last change (:quit! overrides):q!icdgd@codes /d/iccol/desarrollo
+$ echo $LD_LIBRARY_PATH
+/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+icdgd@codes /d/iccol/desarrollo
+$ uname
+SunOS
+icdgd@codes /d/iccol/desarrollo
+$ uname -a
+SunOS codes 5.10 Generic_148888-05 sun4u sparc SUNW,SPARC-Enterprise
+icdgd@codes /d/iccol/desarrollo
+$ man uname
+Reformatting page.  Please Wait... done
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+--More--(18%)
+     -s              Prints the name  of  the  operating  system.
+                     This is the default.
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+                     does not persist across reboots of the  sys-
+                     tem. Use sys-unconfig(1M) to change a host's
+                     name permanently.
+
+     -v              Prints the operating system version.
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+                          "unknown" in Solaris)
+
+                       +o  OEM# and  Origin#  (set  to  0  and  1,
+                          respectively)
+
+EXAMPLES
+     Example 1: Printing the OS name and release level
+
+     The following command:
+
+     example% uname -sr
+--More--(39%)
+     prints  the  operating  system  name  and   release   level,
+     separated by one <SPACE> character.
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that affect the execution of uname: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     SYSV3    This variable  is  used  to  override  the  default
+              behavior  of  uname.  This  is necessary to make it
+              possible for some INTERACTIVE UNIX Systems and  SCO
+              UNIX  programs  and  scripts to work properly. Many
+
+SunOS 5.10          Last change: 17 Sep 2003                    2
+
+User Commands                                            uname(1)
+
+              scripts use uname to determine the  SYSV3  type  or
+              the  version of the OS to ensure software is compa-
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+              string  will make uname print the following default
+              values:
+
+              nodename nodename 3.2 2 i386
+
+              The individual elements  that  uname  displays  can
+              also  be modified by setting SYSV3 in the following
+              format:
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+--More--(60%)                              -r option.
+
+              ver             Version number as displayed by  the
+                              -v option.
+
+              mach            Machine name  as  displayed  by  -m
+                              option.
+
+              Do not put spaces between the elements.  If an ele-
+              ment  is  omitted, the current system value will be
+              used.
+
+EXIT STATUS
+
+SunOS 5.10          Last change: 17 Sep 2003                    3
+
+User Commands                                            uname(1)
+
+     The following exit values are returned:
+
+     0        Successful completion.
+
+     >0       An error occurred.
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     arch(1), isalist(1), sys-unconfig(1M), sysinfo(2), uname(2),
+     nodename(4), attributes(5), environ(5), standards(5)
+
+--More--(79%)
+...back 1 page
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+                              -r option.
+
+              ver             Version number as displayed by  the
+                              -v option.
+
+              mach            Machine name  as  displayed  by  -m
+                              option.
+
+              Do not put spaces between the elements.  If an ele-
+              ment  is  omitted, the current system value will be
+              used.
+
+EXIT STATUS
+
+SunOS 5.10          Last change: 17 Sep 2003                    3
+
+User Commands                                            uname(1)
+
+     The following exit values are returned:
+
+     0        Successful completion.
+
+     >0       An error occurred.
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+--More--(73%)
+...back 1 page
+
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+              string  will make uname print the following default
+              values:
+
+              nodename nodename 3.2 2 i386
+
+              The individual elements  that  uname  displays  can
+              also  be modified by setting SYSV3 in the following
+              format:
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+                              -r option.
+
+              ver             Version number as displayed by  the
+                              -v option.
+
+              mach            Machine name  as  displayed  by  -m
+                              option.
+
+              Do not put spaces between the elements.  If an ele-
+              ment  is  omitted, the current system value will be
+              used.
+
+EXIT STATUS
+
+SunOS 5.10          Last change: 17 Sep 2003                    3
+
+User Commands                                            uname(1)
+
+     The following exit values are returned:
+
+     0        Successful completion.
+--More--(69%)
+...back 1 page
+
+
+SunOS 5.10          Last change: 17 Sep 2003                    2
+
+User Commands                                            uname(1)
+
+              scripts use uname to determine the  SYSV3  type  or
+              the  version of the OS to ensure software is compa-
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+              string  will make uname print the following default
+              values:
+
+              nodename nodename 3.2 2 i386
+
+              The individual elements  that  uname  displays  can
+              also  be modified by setting SYSV3 in the following
+              format:
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+                              -r option.
+
+              ver             Version number as displayed by  the
+                              -v option.
+
+              mach            Machine name  as  displayed  by  -m
+                              option.
+
+              Do not put spaces between the elements.  If an ele-
+              ment  is  omitted, the current system value will be
+              used.
+
+EXIT STATUS
+
+--More--(66%)
+...back 1 page
+
+     example% uname -sr
+
+     prints  the  operating  system  name  and   release   level,
+     separated by one <SPACE> character.
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that affect the execution of uname: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     SYSV3    This variable  is  used  to  override  the  default
+              behavior  of  uname.  This  is necessary to make it
+              possible for some INTERACTIVE UNIX Systems and  SCO
+              UNIX  programs  and  scripts to work properly. Many
+
+SunOS 5.10          Last change: 17 Sep 2003                    2
+
+User Commands                                            uname(1)
+
+              scripts use uname to determine the  SYSV3  type  or
+              the  version of the OS to ensure software is compa-
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+              string  will make uname print the following default
+              values:
+
+              nodename nodename 3.2 2 i386
+
+              The individual elements  that  uname  displays  can
+              also  be modified by setting SYSV3 in the following
+              format:
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+--More--(60%)
+...back 1 page
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+                          "unknown" in Solaris)
+
+                       +o  OEM# and  Origin#  (set  to  0  and  1,
+                          respectively)
+
+EXAMPLES
+     Example 1: Printing the OS name and release level
+
+     The following command:
+
+     example% uname -sr
+
+     prints  the  operating  system  name  and   release   level,
+     separated by one <SPACE> character.
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that affect the execution of uname: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     SYSV3    This variable  is  used  to  override  the  default
+              behavior  of  uname.  This  is necessary to make it
+              possible for some INTERACTIVE UNIX Systems and  SCO
+              UNIX  programs  and  scripts to work properly. Many
+
+SunOS 5.10          Last change: 17 Sep 2003                    2
+
+User Commands                                            uname(1)
+
+              scripts use uname to determine the  SYSV3  type  or
+              the  version of the OS to ensure software is compa-
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+--More--(51%)
+...back 1 page
+
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+                     does not persist across reboots of the  sys-
+                     tem. Use sys-unconfig(1M) to change a host's
+                     name permanently.
+
+     -v              Prints the operating system version.
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+                          "unknown" in Solaris)
+
+                       +o  OEM# and  Origin#  (set  to  0  and  1,
+                          respectively)
+
+EXAMPLES
+     Example 1: Printing the OS name and release level
+
+     The following command:
+
+     example% uname -sr
+
+     prints  the  operating  system  name  and   release   level,
+     separated by one <SPACE> character.
+
+--More--(40%)
+...back 1 page
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+     -s              Prints the name  of  the  operating  system.
+                     This is the default.
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+                     does not persist across reboots of the  sys-
+                     tem. Use sys-unconfig(1M) to change a host's
+                     name permanently.
+
+     -v              Prints the operating system version.
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+--More--(35%)
+...back 1 page
+
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+     -s              Prints the name  of  the  operating  system.
+                     This is the default.
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+--More--(27%)
+...back 1 page
+
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+--More--(18%)
+...back 1 page
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+     -s              Prints the name  of  the  operating  system.
+--More--(19%)
+...back 1 page
+
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+--More--(18%)
+...back 1 page
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+     -s              Prints the name  of  the  operating  system.
+--More--(19%)
+...back 1 page
+
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+--More--(18%)     -s              Prints the name  of  the  operating  system.
+                     This is the default.
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+                     does not persist across reboots of the  sys-
+                     tem. Use sys-unconfig(1M) to change a host's
+                     name permanently.
+
+     -v              Prints the operating system version.
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+                          "unknown" in Solaris)
+
+                       +o  OEM# and  Origin#  (set  to  0  and  1,
+                          respectively)
+
+EXAMPLES
+     Example 1: Printing the OS name and release level
+
+     The following command:
+
+     example% uname -sr
+
+--More--(39%)[1] + Stopped (SIGTSTP)        man uname
+icdgd@codes /d/iccol/desarrollo
+$ uname -v
+Generic_148888-05
+icdgd@codes /d/iccol/desarrollo
+$ uname -S^?      e -X
+System = SunOS
+Node = codes
+Release = 5.10
+KernelID = Generic_148888-05
+Machine = sun4u
+BusType = <unknown>
+Serial = <unknown>
+Users = <unknown>
+OEM# = 0
+Origin# = 1
+NumCPU = 4
+
+icdgd@codes /d/iccol/desarrollo
+$ uname -rp
+5.10 sparc
+icdgd@codes /d/iccol/desarrollo
+$ uname -r
+5.10
+icdgd@codes /d/iccol/desarrollo
+$ uname -p
+sparc
+icdgd@codes /d/iccol/desarrollo
+$ fg
+man uname
+--More--(39%)icdgd@codes /d/iccol/desarrollo
+$ cat /proc/version
+cat: cannot open /proc/version
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ fu
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ 
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ 
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cat TSTDB2
+cat: cannot open TSTDB2
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cat TSTDB2.cbl
+      $SET db2(db=INGR_DL1 pass=icgssode.IcgssD06,VALIDATE=RUN)
+      $SET db2(connect=2)
+      $set db2(BIND COLLECTION=COBOLAPP)
+      $set db2(FORMAT=LOC VERSION=V8)
+      $set LIST NOANIM
+      * TESDB2.v.02.0001
+
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.    TSTDB2.
+       AUTHOR.        GLOBANT.
+      ******************************************************************
+      * Medición de performance de lectura de la tabla SCORE
+      ******************************************************************
+       DATE-WRITTEN.
+       DATE-COMPILED.
+       CONFIGURATION SECTION.
+       SOURCE-COMPUTER. MICROFOCUS.
+       OBJECT-COMPUTER. MICROFOCUS.
+      *-----------------------------------------------------------------
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+
+           select BIND-arc assign to disk       BIND-title
+               organization is line sequential.
+
+           select CLAVES-file
+               assign to disk                   CLAVES-title
+               organization is line sequential
+               access mode is sequential
+               file status is CLAVES-fs
+               lock mode is manual with lock on record.
+
+           select OPTIONAL LEIDOS-file
+               assign to disk                   LEIDOS-title
+               organization is line sequential
+               access mode is sequential
+               file status is LEIDOS-fs
+               lock mode is manual with lock on record.
+
+          select OPTIONAL REPSAL-file
+               assign to disk                   REPSAL-title
+               organization is line sequential
+               access mode is sequential
+               file status is REPSAL-fs
+               lock mode is manual with lock on record.
+
+      *-----------------------------------------------------------------
+       DATA DIVISION.
+       FILE SECTION.
+
+           FD BIND-arc.
+           01 BIND-reg                  pic x(500).
+
+           FD CLAVES-file.
+           01 CLAVES-reg.
+              02 CLAVES-tipoid          pic 9(01).
+              02 CLAVES-numid           pic 9(11).
+
+           FD LEIDOS-file.
+           01 LEIDOS-reg.
+              02 LEIDOS-tipoid          pic x(01).
+              02 LEIDOS-numid           pic x(11).
+              02 LEIDOS-fecha           pic x(10).
+              02 LEIDOS-score           pic x(03).
+              02 LEIDOS-exclusion       pic x(02).
+              02 LEIDOS-segmento        pic x(01).
+
+           FD REPSAL-file.
+           01 REPSAL-reg.
+              02 REPSAL-tipoid          pic x(01).
+              02 REPSAL-numid           pic x(11).
+              02 REPSAL-descripcion     pic x(40).
+              02 REPSAL-fechai-pg       pic x(10).
+              02 REPSAL-horai-pg        pic x(8).
+              02 REPSAL-fechaf-pg       pic x(10).
+              02 REPSAL-horaf-pg        pic x(8).
+
+      *-----------------------------------------------------------------
+       WORKING-STORAGE SECTION.
+      *@DB2CFG_BD=DB2_SSO
+
+      * host variables para columnas de la tabla SCORE
+       01 SCORE-tipoid                  pic x.
+       01 SCORE-numid                   pic x(11).
+       01 SCORE-fecha                   pic x(10).
+       01 SCORE-score                   pic x(3).
+       01 SCORE-exclusion               pic x(2).
+       01 SCORE-segmento                pic x.
+
+      * nombre del programa
+       01 WS-PROGRAMA                   pic x(06) value "TSTDB2".
+
+      * file-statuses y titles de los archivos
+       01 CLAVES-fs                     pic x(2) value zeros.
+       01 LEIDOS-fs                     pic x(2) value zeros.
+       01 REPSAL-fs                     pic x(2) value zeros.
+       01 CLAVES-title pic x(80) value "$TEMPORALES/SCOREENT".
+       01 LEIDOS-title pic x(80) value "$TEMPORALES/SCORESAL".
+       01 REPSAL-title pic x(80) value "$TEMPORALES/REPSCSAL".
+
+      * datos del archivito BIND
+       01 BIND-title                    pic x(80) value spaces.
+       01 BIND-reg-connect              pic x(100) value spaces.
+       01 BIND-reg-quit                 pic x(100) value spaces.
+
+      * datos de la base de datos
+       exec sql include sqlca end-exec
+       01 SQLCODE-I                     pic -(9).
+       01 DB-alias                      pic x(15).
+       01 DB-usr                        pic x(15).
+       01 DB-pass                       pic x(18).
+
+      * Contadores de registros
+       01 CONT-claves                   pic 9(12) value zeros.
+       01 CONT-cursores                 pic 9(12) value zeros.
+       01 CONT-filas                    pic 9(12) value zeros.
+       01 CONT-edit                     pic ZZZ,ZZZ,ZZZ,ZZZ.
+
+           COPY "CCIWS.CPY".
+           COPY PE-TIME.WS.
+
+      * Comandos de shell (terminados con un x'00')
+       01 CMD-comando                   pic x(101) value all x'00'.
+       01 Spa100                        pic x(100) value spaces. 
+
+      ******************************************************************
+       PROCEDURE DIVISION.
+      ******************************************************************
+       0000-PROGRAMA-PRINCIPAL.
+      ******************************************************************
+      *0000-PROGRAMA-PRINCIPAL.
+      ******************************************************************
+           display "                                                "
+           display "************************************************"
+           display "* Prueba de performance de lectura de la tabla *"
+           display "* REGISTRO.SCORE usando cursores con claves    *"
+           display "* parciales aleatorias                         *"
+           display "************************************************"
+           display "*                                              *"
+           display "*           PROGRAMA : TSTDB2.CBL              *"
+           display "*                                              *"
+           display "************************************************"
+           display "                                                "
+           perform 7777-CONTROL-TIEMPO
+           display " Inicio Proceso : " FECHA-PG " " HORA-PG
+      *
+           perform 1000-ABRIR-ARCHIVOS
+           perform 2000-PROCESO-CLAVE UNTIL CLAVES-fs not = '00'
+           perform 6000-FINALIZAR
+           stop run.
+
+       1000-ABRIR-ARCHIVOS.
+      *    display '1000-ABRIR-ARCHIVOS'
+      ******************************************************************
+      *1000-ABRIR-ARCHIVOS.
+      ******************************************************************
+           open input CLAVES-file
+           if CLAVES-fs not = "00"
+              display "Error Abriendo el Archivo CLAVES fs:" CLAVES-fs
+              stop run
+           end-if
+           open output LEIDOS-file
+           if LEIDOS-fs not = "00"
+              display "Error abriendo archivo LEIDOS fs:" LEIDOS-fs
+              stop run
+           end-if
+           open output REPSAL-file
+           if REPSAL-fs not = "00"
+              display "Error abriendo el archivo REPSAL fs:" REPSAL-fs
+              stop run
+           end-if
+           perform 1001-INICIAR-BASEDEDATOS.
+
+       2000-PROCESO-CLAVE.
+      *    display '2000-PROCESO-CLAVE'.
+      ******************************************************************
+      *2000-PROCESO-CLAVE.
+      * Lectura archivo secuencial con claves SCORE en orden aleatorio 
+      * y de los registros de la tabla SCORE que tienen ese ID
+      ******************************************************************
+           read CLAVES-file next record
+           evaluate CLAVES-fs 
+           when "00"
+      *        lectura OK: lee los regs correspondientes en tabla SCORE
+               add 1 to CONT-claves
+               perform 7777-CONTROL-TIEMPO
+               initialize REPSAL-reg
+               move FECHA-PG to REPSAL-fechai-pg
+               move HORA-PG to REPSAL-horai-pg
+               move "BUSCAR REGISTRO TABLA" to REPSAL-descripcion
+               perform 7777-CONTROL-TIEMPO
+               move FECHA-PG to REPSAL-fechaf-pg
+               move HORA-PG to REPSAL-horaf-pg
+               perform 5000-GRABAR-REPSAL
+               perform 3000-LEER-REG-SCORE
+
+           when "10"
+      *        EOF: termina
+               continue
+
+           when other
+      *        error: mensaje y terminación del programa
+               display "Error en lectura de CLAVES fs=" CLAVES-fs
+               perform 6000-FINALIZAR
+               stop run
+           end-evaluate.
+
+       1001-INICIAR-BASEDEDATOS.
+      *    display '1001-INICIAR-BASEDEDATOS'
+      ******************************************************************
+      *1001-INICIAR-BASEDEDATOS.
+      * Establece una connection con la base de datos DB2 determinada
+      * por las credenciales de la corrida
+      * Declara el cursor para los registros de la tabla SCORE
+      ******************************************************************
+      *    obtiene las credenciales
+           move "lstxclde" to DB-usr
+           move "LstxcD8" to DB-pass
+           move "LIST_DL1" to DB-alias
+      *    bind del programa WS-PROGRAMA contra la base DB-alias 
+           perform 1000-BIND-RUTSQL
+      *    connect a la base de datos
+           exec sql
+                connect to :DB-alias user :DB-usr using :DB-pass
+           end-exec
+           if sqlcode not = 0
+               move SQLCODE to sqlcode-I
+               display "Error: cannot connect to " DB-alias
+               sqlcode-I sqlerrmc
+           end-if
+      *    declaración del cursor para la tabla SCORE: posiciona para
+      *    leer las filas de un (TIPOID, NUMID) por fecha
+           exec sql
+               declare SCORES cursor for 
+               select FECHA, SCORE, EXCLUSION, SEGMENTO
+               from REGISTRO.SCORE
+               where TIPOID = :SCORE-tipoid and NUMID = :SCORE-numid
+               order by FECHA
+               for read only with UR
+           end-exec
+           if sqlcode not = 0
+               display "Error: cannot declare cursor SQLCODE:" sqlcode
+               display sqlerrmc
+               stop run
+           end-if.
+
+       3000-LEER-REG-SCORE.
+      *    display '3000-LEER-REG-SCORE'
+      ******************************************************************
+      *3000-LEER-REG-SCORE.
+      * Usando un cursor se leen los registros de SCORE correspondientes
+      * a la clave leída en el archivo CLAVES
+      ******************************************************************
+           perform 7777-CONTROL-TIEMPO
+           initialize REPSAL-reg
+           move FECHA-PG to REPSAL-fechai-pg
+           move HORA-PG to REPSAL-horai-pg
+           move "SELECT BD - RECUPERAR DATOS" to REPSAL-descripcion
+      *    posiciona el cursor para la nueva clave
+           move CLAVES-tipoid to SCORE-tipoid 
+           move CLAVES-numid to SCORE-numid
+           exec sql open SCORES end-exec
+           if sqlcode not = 0
+               move SQLCODE to sqlcode-I
+               display "Error: cannot open SCORE cursor " DB-alias
+               sqlcode-I sqlerrmc
+           end-if
+      *    loop de lectura de los registros del cursor
+           initialize SCORE-fecha SCORE-score SCORE-exclusion 
+           SCORE-segmento
+           exec sql fetch SCORES into :SCORE-fecha, :SCORE-score,
+           :SCORE-exclusion, :SCORE-segmento end-exec
+           if sqlcode = 100
+               display "NO HAY SCORES PARA " CLAVES-tipoid
+               " " SCORE-tipoid SCORE-numid
+           else
+               add 1 to CONT-cursores
+               perform until SQLCODE not = 0
+                   add 1 to CONT-filas
+                   perform 5000-GRABAR-LEIDOS
+                   perform 7777-CONTROL-TIEMPO
+                   move FECHA-PG to REPSAL-fechaf-pg
+                   move HORA-PG to REPSAL-horaf-pg
+                   perform 5000-GRABAR-REPSAL
+      *            avanza al próximo registro del cursor
+                   initialize SCORE-fecha SCORE-score SCORE-exclusion 
+                   SCORE-segmento
+                   exec sql fetch SCORES into :SCORE-fecha,
+                   :SCORE-score, :SCORE-exclusion, :SCORE-segmento
+                   end-exec
+               end-perform
+           end-if
+      *    si hubo error lo publica
+           if sqlcode not = 100
+               move SQLCODE to sqlcode-I
+               display "Error: cannot fetch " DB-alias sqlcode-I
+               sqlerrmc 
+           end-if
+      *    close del cursor
+           exec sql close SCORES end-exec
+           if sqlcode not = 0
+               move SQLCODE to sqlcode-I
+               display "Error: cannot close cursor " DB-alias
+               sqlcode-I sqlerrmc 
+           end-if.
+
+       5000-GRABAR-LEIDOS.
+      *    display '5000-GRABAR-LEIDOS'
+      ******************************************************************
+      *5000-GRABAR-LEIDOS.
+      * Graba un registro en arch LEIDOS por cada fia leída de SCORES
+      ******************************************************************
+           initialize LEIDOS-reg
+           move SCORE-tipoid to LEIDOS-tipoid
+           move SCORE-numid to LEIDOS-numid
+           move SCORE-fecha to LEIDOS-fecha
+           move SCORE-score to LEIDOS-score
+           move SCORE-exclusion to LEIDOS-exclusion
+           move SCORE-segmento to LEIDOS-segmento
+           write LEIDOS-reg.
+
+       5000-GRABAR-REPSAL.
+      *    display '5000-GRABAR-REPSAL'
+      ******************************************************************
+      *5000-GRABAR-REPSAL.
+      * Graba reporte de salida para medir tiempos
+      ******************************************************************
+           move CLAVES-tipoid to REPSAL-tipoid
+           move CLAVES-numid to REPSAL-numid
+           write REPSAL-reg.
+
+       1000-BIND-RUTSQL.
+      *    display '1000-BIND-RUTSQL'
+      ******************************************************************
+      *1000-BIND-RUTSQL.
+      * Se realiza el bind dinamico para una base de datos. Se crea
+      * un archivo con las instruccines DB2 y se manda a ejecutar.
+      * Parametros:
+      *    WS-PROGRAMA
+      *    DB-alias
+      *    DB-usr
+      *    DB-pass
+      ******************************************************************
+      * Se usa un archivito para poner los comandos de shell
+           string "$TEMPORALES/" WS-PROGRAMA delimited size ".BIND"
+           Spa100 into BIND-title
+           open output BIND-arc
+           move spaces to BIND-reg
+      * Creacion del paquete (por si no estaba)
+      *    connect
+           string "db2 CONNECT to " DB-alias delimited by "  "
+           " USER " DB-usr delimited by "  "
+           " USING " DB-pass delimited by "  "
+           Spa100 into BIND-reg-connect
+           write BIND-reg from BIND-reg-connect
+      *    control: $HCOBND debe estar
+           move "HCOBND" to VAR-AMBIENTE
+           display VAR-AMBIENTE upon environment-name
+           accept VAR-AMBIENTE from ENVIRONMENT-VALUE
+           if VAR-AMBIENTE = "HCOBND"
+              display "No se ha fijado: $HCOBND!!!!! "
+              stop run
+           end-if
+      *    bind - add collection
+           string "db2 bind $HCOBND/" WS-PROGRAMA delimited size ".bnd"
+           " ACTION ADD COLLECTION COBOLAPP " Spa100 into BIND-reg
+           write BIND-reg
+      *    quit
+           move "db2 quit" to BIND-reg-quit
+           write BIND-reg from BIND-reg-quit
+      * Actualizacion del paquete
+      *    connect
+           write BIND-reg FROM BIND-reg-connect.
+      *    bind
+           string "db2 bind $HCOBND/" WS-PROGRAMA delimited by SIZE
+           ".bnd" " ACTION REPLACE REPLVER V8 RETAIN YES "
+           "COLLECTION COBOLAPP " Spa100 into BIND-reg
+           write BIND-reg
+      *    quit
+           write BIND-reg FROM BIND-reg-quit
+           close BIND-arc
+      *    chmod y ejecución de los comandos DB2 del archivito BIND
+           string "chmod +x $TEMPORALES/" WS-PROGRAMA delimited size
+           ".BIND " X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando
+           string "$TEMPORALES/" WS-PROGRAMA delimited by size
+           ".BIND " X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando
+      * Eliminación del comandito
+           string "rm $TEMPORALES/" WS-PROGRAMA delimited size ".BIND "
+           X'00' Spa100 into CMD-comando
+           call "SYSTEM" using CMD-comando.
+
+       6000-FINALIZAR.
+      *    display '6000-FINALIZAR'
+      ****************************************************************
+      *6000-FINALIZAR
+      * Muestra contadores de registros, cierra archivos y base
+      ****************************************************************
+           move CONT-claves to CONT-edit
+           display "Claves leídas ......... " CONT-edit
+           move CONT-cursores to CONT-edit
+           display "Cursores creados ............. " CONT-edit
+           move CONT-filas to CONT-edit
+           display "Filas de SCORE leídas ........ " CONT-edit
+           perform 7777-CONTROL-TIEMPO
+           display " Fin Proceso : " FECHA-PG " " HORA-PG
+      *
+           close CLAVES-file LEIDOS-file REPSAL-file
+
+      *    Cierra la conexion con la base de datos
+      *    exec sql connect reset end-exec
+      *    if sqlcode not = 0
+      *        move SQLCODE to sqlcode-I
+      *        display "Error: cannot disconnect " DB-alias
+      *        sqlcode-I sqlerrmc
+      *    end-if
+           .
+
+       7777-CONTROL-TIEMPO.
+      *    display '7777-CONTROL-TIEMPO'
+      ****************************************************************
+      *7777-CONTROL-TIEMPO
+      * Obtiene y edita la fecha y la hora del sistema
+      ****************************************************************
+           accept FECHA-S from date
+           accept HORA-SIS from time
+           move HORA-S to HORA-P
+           move MINU-S to MINU-P
+           move SEGU-S to SEGU-P
+           move 20 to ANIO-SIG1
+           move ANIO-S to ANIO-P
+           move MESE-S to MESE-P
+           move DIAS-S to DIAS-P.
+
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ 
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ 
+icdgd@codes /d/iccol/desarrollo/fuentes
+$ cd
+icdgd@codes /d/iccol/desarrollo
+$ ^^M  connect to LIST_DL1 user lstxclde using LstxcD8
+ksh: connect:  not found
+icdgd@codes /d/iccol/desarrollo
+$ db2 connect to LIST_DL1 user lstxclde using LstxcD8
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 9.7.7
+ SQL authorization ID   = LSTXCLDE
+ Local database alias   = LIST_DL1
+
+icdgd@codes /d/iccol/desarrollo
+$ set schema REGISTRO                   db2 set schema REGISTRO
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo
+$ db2 select        describe select * from syscat.schemas
+SQL0103N  The numeric literal "00DEM" is not valid.  SQLSTATE=42604
+icdgd@codes /d/iccol/desarrollo
+$ db2 describe select * from syscat.schema
+SQL0103N  The numeric literal "00DEM" is not valid.  SQLSTATE=42604
+icdgd@codes /d/iccol/desarrollo
+$ SQL0103N  The numeric literal "00DEM" is not valid.  SQLSTATE=42604                                                                   db2 " describe select * from syscat.schema"
+SQL0204N  "SYSCAT.SCHEMA" is an undefined name.  SQLSTATE=42704
+icdgd@codes /d/iccol/desarrollo
+$ db2 " describe select * from syscat.schemas"
+SQL0204N  "SYSCAT.SCHEMAS" is an undefined name.  SQLSTATE=42704
+icdgd@codes /d/iccol/desarrollo
+$ db2 " describe select * from syscat.schemata"
+
+ Column Information
+
+ Number of columns: 7
+
+ SQL type              Type length  Column name                     Name length
+ --------------------  -----------  ------------------------------  -----------
+ 448   VARCHAR                 128  SCHEMANAME                               10
+ 448   VARCHAR                 128  OWNER                                     5
+ 452   CHARACTER                 1  OWNERTYPE                                 9
+ 448   VARCHAR                 128  DEFINER                                   7
+ 452   CHARACTER                 1  DEFINERTYPE                              11
+ 392   TIMESTAMP                26  CREATE_TIME                              11
+ 449   VARCHAR                 254  REMARKS                                   7
+
+icdgd@codes /d/iccol/desarrollo
+$ db2 "select distinct SCHEMANAME from syscat.schemata"
+
+SCHEMANAME                                                                                                                      
+--------------------------------------------------------------------------------------------------------------------------------
+APOYO                                                                                                                           
+COBOLAPP                                                                                                                        
+CONTADORES                                                                                                                      
+DBADAT                                                                                                                          
+DESARROL                                                                                                                        
+HIS                                                                                                                             
+ICDFFD                                                                                                                          
+NULLID                                                                                                                          
+OPM                                                                                                                             
+PERFIL                                                                                                                          
+RECONOCER                                                                                                                       
+REGISTRO                                                                                                                        
+SGID                                                                                                                            
+SQLJ                                                                                                                            
+SUPER_SOCIEDADES                                                                                                                
+SYSCAT                                                                                                                          
+SYSFUN                                                                                                                          
+SYSIBM                                                                                                                          
+SYSIBMADM                                                                                                                       
+SYSIBMINTERNAL                                                                                                                  
+SYSIBMTS                                                                                                                        
+SYSPROC                                                                                                                         
+SYSPUBLIC                                                                                                                       
+SYSSTAT                                                                                                                         
+SYSTOOLS                                                                                                                        
+TERMINOS                                                                                                                        
+
+  26 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo
+$ db2 "SET SCHEMA TEST"
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo
+$ c^?   db2 "create table SCOREID (                           db2 "describe select * from registro.score"
+
+ Column Information
+
+ Number of columns: 6
+
+ SQL type              Type length  Column name                     Name length
+ --------------------  -----------  ------------------------------  -----------
+ 500   SMALLINT                  2  TIPOID                                    6
+ 492   BIGINT                    8  NUMID                                     5
+ 384   DATE                     10  FECHA                                     5
+ 497   INTEGER                   4  SCORE                                     5
+ 497   INTEGER                   4  EXCLUSION                                 9
+ 497   INTEGER                   4  SEGMENTO                                  8
+
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint, NUMID bigint) primary key (TIPOID, NUMID)"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "primary key" was found following "llint, NUMID 
+bigint)".  Expected tokens may include:  "<distribute_by>".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint not null, NUMID bigint not null) primary key (TIPOID, NUMID)"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "primary key" was found following "MID bigint 
+not null)".  Expected tokens may include:  "<distribute_by>".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint not null, NUMID bigint not null) primary key PK_SCOREID (TIPOID, NUMID)"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "primary key PK_SCOREID" was found following 
+"MID bigint not null)".  Expected tokens may include:  "<distribute_by>".  
+SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint not null, NUMID bigint not null primary key PK_SCOREID (TIPOID, NUMID))"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "PK_SCOREID" was found following "not null 
+primary key".  Expected tokens may include:  "REFERENCES".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint not null, NUMID bigint not null primary key (TIPOID, NUMID))"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "primary key" was found following "UMID bigint 
+not null".  Expected tokens may include:  ",".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo
+$ db2 "create table TEST.SCOREID ( TIPOID smallint not null, NUMID bigint not null, primary key (TIPOID, NUMID))"
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo
+$ te
+icdgd@codes /d/iccol/desarrollo/temporales
+$ ls SCORE*
+SCOREENT  SCORESAL
+icdgd@codes /d/iccol/desarrollo/temporales
+$ vi SCOREENT
+"SCOREENT" 238603 lines, 3101839 characters 200830018239
+200830090265
+200800018838
+200822005058
+200900178864
+200900205653
+200802012822
+200813007289
+200800183169
+200830031209
+200811015486
+200900052910
+200900275348
+200812002172
+200900055707
+200806001256
+200830031392
+200832005663
+200900217574
+200804004042
+200800213438
+200811030304
+200890480648
+200800108862
+200900055657
+200900120224
+200835001201
+200830502841
+200830034439
+200813005241
+200860000824
+200800088100
+200860513930
+200825002061
+200890322577
+200830021752
+200811003032
+200802021230
+200900262611
+200830082939
+200900060602"SCOREENT" 238603 lines, 3101839 characters:s/./.,.,00830018239200830018239:s/./&,2,00830018239200830018239:%s/./&,238603 substitutions 2,00830100854
+2,00820004564
+2,00900256301
+2,00812008149
+2,00830119285
+2,00900111300
+2,00812008249
+2,00800211673
+2,00814003465
+2,00900303619
+2,00900347374
+2,00802017334
+2,00900130447
+2,00811027740
+2,00900119708
+2,00900047632
+2,00800243657
+2,00821003454
+2,00806004636
+2,00900015798
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:file SCOREIDS"SCOREIDS" [Not edited] [Modified] line 238603 of 238603 --100%-- :w"SCOREIDS" [New file] 238603 lines, 3340442 characters :qicdgd@codes /d/iccol/desarrollo/temporales
+$ db2 load from /d/iccol/desarrollo/temporales/SCOREIDS of DEL into TEST.SCOREID
+SQL0104N  An unexpected token "into" was found following "DEL".  Expected 
+tokens may include:  "REMOTE".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo/temporales
+$  db2 load from /d/iccol/desarrollo/temporales/SCOREIDS of DEL replace 
+SQL0104N  An unexpected token "END-OF-STATEMENT" was found following 
+"REPLACE".  Expected tokens may include:  "RESETDICTIONARY".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 load from /d/iccol/desarrollo/temporales/SCOREIDS of DEL replace  into TEST.SCOREID
+SQL0552N  "LSTXCLDE" does not have the privilege to perform operation "LOAD".  
+SQLSTATE=42502
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 grant LOAD to LSTXCLDE
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0204N  "LOAD" is an undefined name.  SQLSTATE=42704
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 grant LOAD on LIST_DL1 to LSTXCLDE
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0204N  "TEST.LIST_DL1" is an undefined name.  SQLSTATE=42704
+icdgd@codes /d/iccol/desarrollo/temporales
+$ grant LOAD on TEST.SCOREID to LSTXCLDE
+ksh: grant:  not found
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2  grant LOAD on TEST.SCOREID to LSTXCLDE
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0557N  The specified combination of privileges cannot be granted or 
+revoked.  SQLSTATE=42852
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 grant LOAD on DATABASE to  LSTXCLDE
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0552N  "LSTXCLDE" does not have the privilege to perform operation "GRANT". 
+SQLSTATE=42502
+icdgd@codes /d/iccol/desarrollo/temporales
+$ vi scoreids^?          SCOREIDS
+"SCOREIDS" 238603 lines, 3340442 characters 2,00830018239
+2,00830090265
+2,00800018838
+2,00822005058
+2,00900178864
+2,00900205653
+2,00802012822
+2,00813007289
+2,00800183169
+2,00830031209
+2,00811015486
+2,00900052910
+2,00900275348
+2,00812002172
+2,00900055707
+2,00806001256
+2,00830031392
+2,00832005663
+2,00900217574
+2,00804004042
+2,00800213438
+2,00811030304
+2,00890480648
+2,00800108862
+2,00900055657
+2,00900120224
+2,00835001201
+2,00830502841
+2,00830034439
+2,00813005241
+2,00860000824
+2,00800088100
+2,00860513930
+2,00825002061
+2,00890322577
+2,00830021752
+2,00811003032
+2,00802021230
+2,00900262611
+2,00830082939
+2,00900060602"SCOREIDS" 238603 lines, 3340442 characters:%s/\(.\),\(.*\)/insert into TEST.SCOREID values(\1, \2)238603 substitutions insert into TEST.SCOREID values(2, 00830100854)
+insert into TEST.SCOREID values(2, 00820004564)
+insert into TEST.SCOREID values(2, 00900256301)
+insert into TEST.SCOREID values(2, 00812008149)
+insert into TEST.SCOREID values(2, 00830119285)
+insert into TEST.SCOREID values(2, 00900111300)
+insert into TEST.SCOREID values(2, 00812008249)
+insert into TEST.SCOREID values(2, 00800211673)
+insert into TEST.SCOREID values(2, 00814003465)
+insert into TEST.SCOREID values(2, 00900303619)
+insert into TEST.SCOREID values(2, 00900347374)
+insert into TEST.SCOREID values(2, 00802017334)
+insert into TEST.SCOREID values(2, 00900130447)
+insert into TEST.SCOREID values(2, 00811027740)
+insert into TEST.SCOREID values(2, 00900119708)
+insert into TEST.SCOREID values(2, 00900047632)
+insert into TEST.SCOREID values(2, 00800243657)
+insert into TEST.SCOREID values(2, 00821003454)
+insert into TEST.SCOREID values(2, 00806004636)
+insert into TEST.SCOREID values(2, 00900015798)
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~nsert into TEST.SCOREID values(2, 00900015798)u:w"SCOREIDS" 238603 lines, 11452944 characters [1] + Stopped (SIGTSTP)        vi SCOREIDS
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into TEST.SCOREID values(2, 00900015798)
+ksh: syntax error: `(' unexpected
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into TEST.SCOREID values 2, 333333333
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into TEST.SCOREID values (2, 333333)
+ksh: syntax error: `(' unexpected
+icdgd@codes /d/iccol/desarrollo/temporales
+$  db2 insert into TEST.SCOREID values 2, 333333333
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 describe select " from TEST.SCOREID
+> "
+SQL0104N  An unexpected token "." was found following "select  from TEST".  
+Expected tokens may include:  "FROM".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 describe select * from TEST.SCOREID
+SQL0103N  The numeric literal "1.log" is not valid.  SQLSTATE=42604
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "describe select * from TEST.SCOREID"
+
+ Column Information
+
+ Number of columns: 2
+
+ SQL type              Type length  Column name                     Name length
+ --------------------  -----------  ------------------------------  -----------
+ 500   SMALLINT                  2  TIPOID                                    6
+ 492   BIGINT                    8  NUMID                                     5
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into TEST.SCOREID(TIPOID, NUMID) values 2, 333333
+ksh: syntax error: `(' unexpected
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "insert into TEST.SCOREID (TIPOID, NUMID) values 2, 333333"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$  db2 "insert into TEST.SCOREID (TIPOID, NUMID) values 2, 333333;"
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token ";" was found following "ID) values 2, 333333".  
+Expected tokens may include:  "END-OF-STATEMENT".  SQLSTATE=42601
+icdgd@codes /d/iccol/desarrollo/temporales
+$  db2 "insert into TEST.SCOREID (TIPOID, NUMID) values 2, 333333 "
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$  db2 "insert into TEST.SCOREID (TIPOID, NUMID) values 2, 333333, 22
+> "
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$ set schema TEST
+icdgd@codes /d/iccol/desarrollo/temporales
+$ insert into SCOREID values 2, 33333
+ksh: insert:  not found
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into SCOREID values 2, 33333
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0117N  The number of values assigned is not the same as the number of 
+specified or implied columns or variables.  SQLSTATE=42802
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into SCOREID values (2, 33333)
+ksh: syntax error: `(' unexpected
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "insert into SCOREID values (2, 33333)"
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo/temporales
+$ insert into SCOREID values (2, 33333                                    db2
+(c) Copyright IBM Corporation 1993,2007
+Command Line Processor for DB2 Client 9.7.7
+
+You can issue database manager commands and SQL statements from the command 
+prompt. For example:
+    db2 => connect to sample
+    db2 => bind sample.bnd
+
+For general help, type: ?.
+For command help, type: ? command, where command can be
+the first few keywords of a database manager command. For example:
+ ? CATALOG DATABASE for help on the CATALOG DATABASE command
+ ? CATALOG          for help on all of the CATALOG commands.
+
+To exit db2 interactive mode, type QUIT at the command prompt. Outside 
+interactive mode, all commands must be prefixed with 'db2'.
+To list the current command option settings, type LIST COMMAND OPTIONS.
+
+For more detailed help, refer to the Online Reference Manual.
+
+db2 => insert into SCOREID values (2, 33333^?4)    4)
+DB20000I  The SQL command completed successfully.
+db2 => delete from SCOREID
+DB20000I  The SQL command completed successfully.
+db2 => quit
+DB20000I  The QUIT command completed successfully.
+icdgd@codes /d/iccol/desarrollo/temporales
+$ fg
+vi SCOREIDS
+insert into TEST.SCOREID values(2, 00830100854)
+insert into TEST.SCOREID values(2, 00820004564)
+insert into TEST.SCOREID values(2, 00900256301)
+insert into TEST.SCOREID values(2, 00812008149)
+insert into TEST.SCOREID values(2, 00830119285)
+insert into TEST.SCOREID values(2, 00900111300)
+insert into TEST.SCOREID values(2, 00812008249)
+insert into TEST.SCOREID values(2, 00800211673)
+insert into TEST.SCOREID values(2, 00814003465)
+insert into TEST.SCOREID values(2, 00900303619)
+insert into TEST.SCOREID values(2, 00900347374)
+insert into TEST.SCOREID values(2, 00802017334)
+insert into TEST.SCOREID values(2, 00900130447)
+insert into TEST.SCOREID values(2, 00811027740)
+insert into TEST.SCOREID values(2, 00900119708)
+insert into TEST.SCOREID values(2, 00900047632)
+insert into TEST.SCOREID values(2, 00800243657)
+insert into TEST.SCOREID values(2, 00821003454)
+insert into TEST.SCOREID values(2, 00806004636)
+insert into TEST.SCOREID values(2, 00900015798)
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~[1] + Stopped (SIGTSTP)        vi SCOREIDS
+icdgd@codes /d/iccol/desarrollo/temporales
+$ ^Z^?  
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "insert into TEST.SCOREID values(2, 00900015798)"
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 delete from SCOREID
+DB20000I  The SQL command completed successfully.
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 insert into TEST.SCOREID values(2, 00900015798)
+ksh: syntax error: `(' unexpected
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2
+(c) Copyright IBM Corporation 1993,2007
+Command Line Processor for DB2 Client 9.7.7
+
+You can issue database manager commands and SQL statements from the command 
+prompt. For example:
+    db2 => connect to sample
+    db2 => bind sample.bnd
+
+For general help, type: ?.
+For command help, type: ? command, where command can be
+the first few keywords of a database manager command. For example:
+ ? CATALOG DATABASE for help on the CATALOG DATABASE command
+ ? CATALOG          for help on all of the CATALOG commands.
+
+To exit db2 interactive mode, type QUIT at the command prompt. Outside 
+interactive mode, all commands must be prefixed with 'db2'.
+To list the current command option settings, type LIST COMMAND OPTIONS.
+
+For more detailed help, refer to the Online Reference Manual.
+
+db2 => insert into TEST.SCOREID values(2, 00900015798)
+DB20000I  The SQL command completed successfully.
+db2 => delete from SCOREID
+DB20000I  The SQL command completed successfully.
+db2 => ?
+ ACTIVATE DATABASE        GET CONTACTGROUPS          RECONCILE
+ ADD CONTACT              GET CONTACTS               RECOVER
+ ADD CONTACTGROUP         GET/UPDATE DB CFG          REDISTRIBUTE DB PARTITION
+ ADD DATALINKS MANAGER    GET/UPDATE DBM CFG         REFRESH LDAP
+ ADD DBPARTITIONNUM       GET DBM MONITOR SWITCHES   REGISTER LDAP
+ ADD XMLSCHEMA            GET DESCRIPTION FOR HEALTH REGISTER XMLSCHEMA
+ ARCHIVE LOG              GET NOTIFICATION LIST      REGISTER XSROBJECT
+ ATTACH                   GET HEALTH SNAPSHOT        REORG INDEXES/TABLE
+ AUTOCONFIGURE            GET INSTANCE               REORGCHK
+ BACKUP DATABASE          GET MONITOR SWITCHES       RESET ADMIN CFG
+ BIND                     GET RECOMMENDATIONS        RESET ALERT CFG
+ CATALOG APPC NODE        GET ROUTINE                RESET DB CFG
+ CATALOG APPN NODE        GET SNAPSHOT               RESET DBM CFG
+ CATALOG DATABASE         HELP                       RESET MONITOR
+ CATALOG DCS DATABASE     HISTORY                    RESTART DATABASE
+ CATALOG LDAP DATABASE    IMPORT                     RESTORE DATABASE
+ CATALOG LDAP NODE        INITIALIZE TAPE            REWIND TAPE
+ CATALOG LOCAL NODE       INSPECT                    ROLLFORWARD DATABASE
+ CATALOG NPIPE NODE       LIST ACTIVE DATABASES      RUNCMD
+ CATALOG NETBIOS NODE     LIST APPLICATIONS          RUNSTATS
+ CATALOG ODBC DATA SOURCE LIST COMMAND OPTIONS       SET CLIENT
+ CATALOG TCPIP NODE       LIST DATABASE DIRECTORY    SET RUNTIME DEGREE
+ CHANGE DATABASE COMMENT  LIST DB PARTITION GROUPS   SET TABLESPACE CONTAINERS
+ CHANGE ISOLATION LEVEL   LIST DATALINKS MANAGERS    SET TAPE POSITION
+ COMPLETE XMLSCHEMA       LIST DBPARTITIONNUMS       SET UTIL_IMPACT_PRIORITY
+ CREATE DATABASE          LIST DCS APPLICATIONS      SET WRITE
+ CREATE TOOLS CATALOG     LIST DCS DIRECTORY         START DATABASE MANAGER
+ DEACTIVATE DATABASE      LIST DRDA INDOUBT          START HADR
+ DECOMPOSE XML DOCUMENT   LIST HISTORY               STOP DATABASE MANAGER
+ DECOMPOSE XML DOCUMENTS  LIST INDOUBT TRANSACTIONS  STOP HADR
+ DEREGISTER               LIST NODE DIRECTORY        TAKEOVER HADR
+ DESCRIBE                 LIST ODBC DATA SOURCES     TERMINATE
+ DETACH                   LIST PACKAGES/TABLES       UNCATALOG DATABASE
+ DROP CONTACT             LIST TABLESPACE CONTAINERS UNCATALOG DCS DATABASE
+ DROP CONTACTGROUP        LIST TABLESPACES           UNCATALOG LDAP DATABASE
+ DROP DATABASE            LIST UTILITIES             UNCATALOG LDAP NODE
+ DROP DATALINKS MANAGER   LOAD                       UNCATALOG NODE
+ DROP DBPARTITIONNUM      LOAD QUERY                 UNCATALOG ODBC DATA
+ DROP TOOLS CATALOG       MIGRATE DATABASE           UNQUIESCE DATABASE
+ ECHO                     PING                       UNQUIESCE INSTANCE
+ EDIT                     PREP/PRECOMPILE            UPDATE ALERT CFG
+ EXPORT                   PRUNE HISTORY/LOGFILE      UPDATE COMMAND OPTIONS
+ FORCE APPLICATION        PUT ROUTINE                UPDATE CONTACT
+ GET/UPDATE ADMIN CFG     QUERY CLIENT               UPDATE CONTACTGROUP
+ GET ALERT CFG            QUIESCE DATABASE           UPDATE NOTIFICATION LIST
+ GET AUTHORIZATIONS       QUIESCE INSTANCE           UPDATE HISTORY
+ GET/UPDATE CLI CFG       QUIESCE TABLESPACES        UPDATE LDAP NODE
+ GET CONNECTION STATE     QUIT                       UPDATE MONITOR SWITCHES
+ GET CONTACTGROUP         REBIND                     XQUERY
+
+Note:  Some commands are operating system specific and may not be available.
+
+For further help:
+                  ? db2-command   - help for specified command
+                  ? OPTIONS       - help for all command options
+                  ? HELP          - help for reading help screens
+The preceding three options can be run as db2 <option> from an OS prompt.
+
+                  !db2ic          - DB2 Information Center (Windows only)
+This command can also be run as db2ic from an OS prompt.
+db2 => quit
+DB20000I  The QUIT command completed successfully.
+icdgd@codes /d/iccol/desarrollo/temporales
+$ fg
+vi SCOREIDS
+insert into TEST.SCOREID values(2, 00830100854)
+insert into TEST.SCOREID values(2, 00820004564)
+insert into TEST.SCOREID values(2, 00900256301)
+insert into TEST.SCOREID values(2, 00812008149)
+insert into TEST.SCOREID values(2, 00830119285)
+insert into TEST.SCOREID values(2, 00900111300)
+insert into TEST.SCOREID values(2, 00812008249)
+insert into TEST.SCOREID values(2, 00800211673)
+insert into TEST.SCOREID values(2, 00814003465)
+insert into TEST.SCOREID values(2, 00900303619)
+insert into TEST.SCOREID values(2, 00900347374)
+insert into TEST.SCOREID values(2, 00802017334)
+insert into TEST.SCOREID values(2, 00900130447)
+insert into TEST.SCOREID values(2, 00811027740)
+insert into TEST.SCOREID values(2, 00900119708)
+insert into TEST.SCOREID values(2, 00900047632)
+insert into TEST.SCOREID values(2, 00800243657)
+insert into TEST.SCOREID values(2, 00821003454)
+insert into TEST.SCOREID values(2, 00806004636)
+insert into TEST.SCOREID values(2, 00900015798)
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"SCOREIDS" line 238603 of 238603 --100%-- [1] + Stopped (SIGTSTP)        vi SCOREIDS
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 < score     SCOREIDS > SCOREIDS.log
+icdgd@codes /d/iccol/desarrollo/temporales
+$ quit
+ksh: quit:  not found
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 se^?    "select * from SC         count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ 
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ db2 "select count(*) from SCOREID"
+
+1          
+-----------
+     238603
+
+  1 record(s) selected.
+
+icdgd@codes /d/iccol/desarrollo/temporales
+$ ^DYou have stopped jobs
+icdgd@codes /d/iccol/desarrollo/temporales
+$ fg
+vi SCOREIDS
+insert into TEST.SCOREID values(2, 00830100854)
+insert into TEST.SCOREID values(2, 00820004564)
+insert into TEST.SCOREID values(2, 00900256301)
+insert into TEST.SCOREID values(2, 00812008149)
+insert into TEST.SCOREID values(2, 00830119285)
+insert into TEST.SCOREID values(2, 00900111300)
+insert into TEST.SCOREID values(2, 00812008249)
+insert into TEST.SCOREID values(2, 00800211673)
+insert into TEST.SCOREID values(2, 00814003465)
+insert into TEST.SCOREID values(2, 00900303619)
+insert into TEST.SCOREID values(2, 00900347374)
+insert into TEST.SCOREID values(2, 00802017334)
+insert into TEST.SCOREID values(2, 00900130447)
+insert into TEST.SCOREID values(2, 00811027740)
+insert into TEST.SCOREID values(2, 00900119708)
+insert into TEST.SCOREID values(2, 00900047632)
+insert into TEST.SCOREID values(2, 00800243657)
+insert into TEST.SCOREID values(2, 00821003454)
+insert into TEST.SCOREID values(2, 00806004636)
+insert into TEST.SCOREID values(2, 00900015798)
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/temporales
+$ ^D

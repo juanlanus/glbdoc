@@ -1,0 +1,222 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.04.25 14:19:18 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri Apr 25 10:08:55 2014 from 172.16.10.20
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ l a ^[  $ l a 
+"/tmp/sh10119.2" 1 line, 4 characters l a
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/tmp/sh10119.2" 1 line, 4 charactersl --a | grep " \."
+dd~"/tmp/sh10119.2" 1 line, 18 characters l -a | grep " \."
+drwxrwxr-x  41 icgjcd   icdatacr   53248 Apr 25 12:19 .
+drwxrwxr-x   4 icgjcd   icdatacr     512 Jan 30  2012 ..
+-rwxr-xr-x   1 root     root        2120 Feb 11 15:53 .aliases
+-rw-------   1 icamgd   icdatacr     217 Jan 15 09:49 .bash_history
+-rw-------   1 icfgcd   icdatacr       0 Jan 14  2013 .cvspass
+-rw-r--r--   1 icdgd    icdatacr     153 Apr 24 15:46 .exrchidden
+-rw-------   1 1446     icdatacr    3386 Apr  3 17:49 .history.icaerd
+-rw-------   1 icbuild  icprodd     3886 Apr 24 15:28 .history.icbuild
+-rw-------   1 iccard   icdatacr    2622 Nov 12 12:02 .history.iccard
+-rw-------   1 iccavd   icdatacr   18232 Apr 25 12:14 .history.iccavd
+-rw-------   1 iccigd   icdatacr    8318 Aug  4  2012 .history.iccigd
+-rw-------   1 icdffd   icdatacr   14056 Feb 16  2013 .history.icdffd
+-rw-------   1 icdgd    icdatacr   12200 Apr 25 12:20 .history.icdgd
+-rw-------   1 iceacd   icdatacr    8870 Apr 23 17:06 .history.iceacd
+-rw-------   1 icehad   icdatacr    8932 Apr 25 12:15 .history.icehad
+-rw-------   1 icejvd   icdatacr    6770 Apr 23 17:25 .history.icejvd
+-rw-------   1 icfacd   icdatacr    7376 Apr  7 15:31 .history.icfacd
+-rw-------   1 icfard   icdatacr   10288 Apr 24 16:13 .history.icfard
+-rw-------   1 icfgcd   icdatacr   10484 Apr 14 09:58 .history.icfgcd
+-rw-------   1 icfsgb   icdatacr     848 Nov 12 12:00 .history.icfsgb
+-rw-------   1 icgasd   icdatacr    7454 Apr 25 10:36 .history.icgasd
+-rw-------   1 icgavd   icdatacr    9352 Apr  3 16:55 .history.icgavd
+-rw-------   1 icgjcd   icdatacr    1910 Apr  7 18:21 .history.icgjcd
+-rw-------   1 ichabd   icdatacr     848 Nov 12 14:57 .history.ichabd
+-rw-------   1 ichbgb   icdatacr     848 Nov 12 11:56 .history.ichbgb
+-rw-------   1 ichdd    icdatacr   24800 Apr 21 16:22 .history.ichdd
+-rw-------   1 ichdgb   icdatacr     848 Nov 12 11:57 .history.ichdgb
+-rw-------   1 ichlgd   icdatacr    8300 Apr 24 17:58 .history.ichlgd
+-rw-------   1 1443     icdatacr     854 Feb 21 15:52 .history.ichqd
+-rw-------   1 icimsd   icdatacr   11018 Apr 25 10:19 .history.icimsd
+-rw-------   1 icjaad   icdatacr    7708 Apr 25 09:42 .history.icjaad
+-rw-------   1 icjamd   icdatacr    6630 Apr 22 03:58 .history.icjamd
+-rw-------   1 icjapd   icdatacr    6040 Apr 10 08:53 .history.icjapd
+-rw-------   1 icjcad   icdatacr   50976 Apr 23 10:19 .history.icjcad
+-rw-------   1 icjcld   icdatacr   13680 Apr 22 22:03 .history.icjcld
+-rw-------   1 icjcmd   icdatacr    7578 Dec  4 14:34 .history.icjcmd
+-rw-------   1 icjdld   icdatacr   10118 Apr 23 15:50 .history.icjdld
+-rw-------   1 icjfvd   icdatacr    5218 Apr 25 09:04 .history.icjfvd
+-rw-------   1 icjjmd   icdatacr    8050 Apr 22 16:41 .history.icjjmd
+-rw-------   1 icjjpd   icdatacr      31 Jan 15 10:08 .history.icjjpr
+-rw-------   1 icjmld   icdatacr   48962 Apr 21 13:45 .history.icjmld
+-rw-------   1 icjvd    icdatacr   19380 Feb 13  2013 .history.icjvd
+-rw-------   1 iclagd   icdatacr    9672 Apr 25 12:20 .history.iclagd
+-rw-------   1 icllsd   icdatacr   10400 Apr 23 11:52 .history.icllsd
+-rw-------   1 icmpmd   icdatacr   26792 Apr 21 11:56 .history.icmpmd
+-rw-------   1 icnudd   icdatacr    8340 Sep 30  2013 .history.icnudd
+-rw-------   1 1395     icdatacr    9576 Apr  3 17:41 .history.icpjvd
+-rw-------   1 icrai    icdatacr    6294 Apr 10 15:28 .history.icrai
+-rw-------   1 icrgd    icdatacr    8362 Apr 24 22:59 .history.icrgd
+-rw-------   1 icrmbd   icdatacr    9720 Apr 25 12:07 .history.icrmbd
+-rw-------   1 1473     icdatacr     416 Jan 27 09:51 .history.icrpgd
+-rw-------   1 icvhfd   icdatacr   24714 Apr 25 11:59 .history.icvhfd
+-rw-r--r--   1 root     root         849 Feb 11 15:51 .kshrc
+-rw-------   1 iccavd   icdatacr     205 Apr 11 11:08 .lesshst
+-rw-rw-r--   1 1395     icdatacr       0 Aug 12  2013 .log
+-rw-rw-r--   1 icehad   icdatacr     252 Feb 12 09:08 .LOG-X
+-rw-rw-r--   1 icgjcd   icdatacr      34 Feb 11 11:00 .mfcobolrc
+-rw-r--r--   1 root     root        7985 Feb 11 10:45 .profile
+-rw-r--r--   1 root     root        7617 Feb 10  2012 .profile.20120223
+-rw-r--r--   1 root     root        7718 Sep 24  2012 .profile.20121122
+-rw-r--r--   1 root     root        7793 Aug  2  2013 .profile.20130802
+-rw-r--r--   1 root     root        7908 Aug  2  2013 .profile.20130821
+-rw-r--r--   1 root     root        7887 Oct  9  2013 .profile.20131009
+-rw-r--r--   1 root     root        7985 Feb 11 10:45 .profile.20140320
+-rw-r--r--   1 root     root        7719 Nov 22  2012 .profile20130530
+-rw-------   1 icimsd   icdatacr     908 Feb 11 09:12 .sh_history
+drwx------   2 icjapd   icdatacr     512 Feb 24 22:05 .ssh
+-rw-------   1 icjapd   icdatacr      51 Apr 10 08:21 .Xauthority
+-rw-------   2 icdgd    icdatacr       0 Apr 25 09:52 .Xauthority-c
+-rw-------   2 icdgd    icdatacr       0 Apr 25 09:52 .Xauthority-l
+icdgd@codes /d/iccol/desarrollo
+$ cat .kshrc
+:
+#       @(#) kshrc 23.1 91/08/29
+#
+#       Copyright (C) 1990-1991 The Santa Cruz Operation, Inc.
+#               All Rights Reserved.
+#       The information in this file is provided for the exclusive use of
+#       the licensees of The Santa Cruz Operation, Inc.  Such users have the
+#       right to use, modify, and incorporate this code into other products
+#       for purposes authorized by the license agreement provided they include
+#       this notice and the associated copyright notice with any such product.
+#       The information in this file is provided "AS IS" without warranty.
+#
+# .kshrc        -- Commands executed by each Korn shell at startup
+#
+
+# If there is no VISUAL or EDITOR to deduce the desired edit
+#  mode from, assume vi(C)-style command line editting.
+if [ -z "$VISUAL" -a -z "$EDITOR" ]; then
+        set -o vi
+fi
+icdgd@codes /d/iccol/desarrollo
+$ set -o
+Current option settings
+allexport        off
+bgnice           on
+emacs            off
+errexit          off
+gmacs            off
+ignoreeof        off
+interactive      on
+keyword          off
+markdirs         off
+monitor          on
+noexec           off
+noclobber        on
+noglob           off
+nolog            off
+notify           off
+nounset          off
+privileged       off
+restricted       off
+trackall         off
+verbose          off
+vi               on
+viraw            off
+xtrace           off
+icdgd@codes /d/iccol/desarrollo
+$ l .exrc
+.exrc: No such file or directory
+icdgd@codes /d/iccol/desarrollo
+$ l .exrc*
+-rw-r--r--   1 icdgd    icdatacr     153 Apr 24 15:46 .exrchidden
+icdgd@codes /d/iccol/desarrollo
+$ 
+shell will timeout in 60 seconds due to inactivity
+ksh: timed out waiting for input

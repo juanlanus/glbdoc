@@ -1,0 +1,255 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.04.24 10:45:09 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu Apr 24 08:03:06 2014 from 172.16.10.89
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+[H[J
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ . sh-camamb prunovedat
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ env
+_=/usr/bin/env
+ICREGIS=/d/iccol/desarrollo/database/prunovedat
+FECHA_AMNI=20090111
+LC_MONETARY=en_US.ISO8859-15
+DB2_ADMSSO=/d/iccol/desarrollo/database/prunovedat/DB2_ADMSSO.cfg
+JH=/usr/j2se
+LC_TIME=en_US.ISO8859-15
+COBDB2=97
+DB2_LISEXC=/d/iccol/desarrollo/database/prunovedat/DB2_LISEXC.cfg
+DATOS=/d/iccol/desarrollo/datos
+VISUAL=vi
+VALORES=/d/iccol/desarrollo/database/prunovedat
+DBSUPER=/d/iccol/desarrollo/database/prunovedat
+SSH_TTY=/dev/pts/61
+ARCHTEMP=/d/iccol/desarrollo/archtemp
+CAL_ENT=/d/iccol/desarrollo/trabajo/calidad/entrada
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+normal=[m
+COBIDY=/d/iccol/desarrollo/animator
+JAVA_HOME_5=/usr/jdk/latest
+DB2_CONSUMIDOR=/d/iccol/desarrollo/database/prunovedat/DB2_CONSUMIDOR_97.cfg
+COLUMNS=80
+TEMPORALES=/d/iccol/desarrollo/temporales
+NUM_EJEC=002
+dd_ERROR_ICBNAP=/d/iccol/desarrollo/temporales/ERROR_ICBNAP
+DIRECCIONES=/d/iccol/desarrollo/database/prunovedat
+MAESTROS_ACT=/d/iccol/desarrollo/actualizacion/maestros-act
+HISTFILE=/d/iccol/desarrollo/.history.icdgd
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.:/d/iccol/desarrollo/jars/axis-ant.jar:/d/iccol/desarrollo/jars/axis.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.desarr.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.pruebas.jar:/d/iccol/desarrollo/jars/CobolCamaras1.jar:/d/iccol/desarrollo/jars/CobolCamarasBKPruebas1.jar:/d/iccol/desarrollo/jars/CobolFico.jar:/d/iccol/desarrollo/jars/CobolFicoBatch.jar:/d/iccol/desarrollo/jars/commons-discovery-0.2.jar:/d/iccol/desarrollo/jars/commons-discovery-0.4.jar:/d/iccol/desarrollo/jars/commons-discovery.jar:/d/iccol/desarrollo/jars/commons-logging-1.0.4.jar:/d/iccol/desarrollo/jars/commons-logging.jar:/d/iccol/desarrollo/jars/CupoPreaprobado.jar:/d/iccol/desarrollo/jars/db2jcc_license_cu.jar:/d/iccol/desarrollo/jars/db2jcc.jar:/d/iccol/desarrollo/jars/dc_util.pruebas.jar:/d/iccol/desarrollo/jars/dcSharedDataLib.jar:/d/iccol/desarrollo/jars/j2ee.jar:/d/iccol/desarrollo/jars/jaxen-core.jar:/d/iccol/desarrollo/jars/jaxen-jdom.jar:/d/iccol/desarrollo/jars/jaxrpc.jar:/d/iccol/desarrollo/jars/jdom.jar:/d/iccol/desarrollo/jars/log4j-1.2.8.jar:/d/iccol/desarrollo/jars/mail.jar:/d/iccol/desarrollo/jars/pepe.jar:/d/iccol/desarrollo/jars/reflection.util.1.4.jar:/d/iccol/desarrollo/jars/saaj.jar:/d/iccol/desarrollo/jars/saxpath.jar:/d/iccol/desarrollo/jars/sct.jar:/d/iccol/desarrollo/jars/Test.jar:/d/iccol/desarrollo/jars/wsdl4j-1.5.1.jar:/d/iccol/desarrollo/jars/xml.reflection.1.4.jar
+COBPATH=/d/iccol/desarrollo/objetos
+LOGNAME=icdgd
+PRESP_ENT=//d/iccol/desarrollo/especiales/entrada
+FRABDUACT=/d/iccol/desarrollo/database/prunovedat
+SORTCOMPRESS=5
+SORTSPACE=128M
+LISTADOS=/d/iccol/desarrollo/listados
+SCORES=/d/iccol/desarrollo/database/prunovedat
+AUDITOR=/d/iccol/desarrollo/database/prunovedat
+MAIL=/usr/mail/icdgd
+COBSW=
+MACROS=/d/iccol/desarrollo/macros
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+COBDIR=/opt/mfocus/des/cobol
+dd_ICDAS=/d/iccol/desarrollo/database/prunovedat/ICDAS
+COBOPT=
+PS1=$LOGNAME@${rev}$maquina${normal} $PWD
+$ 
+AMBIENTE=pruebas
+FUENTES=/d/iccol/desarrollo/fuentes
+maquina=codes
+DATABASE=/d/iccol/desarrollo/database/prunovedat
+DB2_EXTRACUPOS=/d/iccol/desarrollo/database/prunovedat/DB2_EXTRACUPOS_97.cfg
+MF=Compilacion
+ACTREG=/d/iccol/actreg
+TERMINALES=/d/iccol/desarrollo/terminales
+DB2_NOVEDAT=/d/iccol/desarrollo/database/prunovedat/DB2_NOVEDAT_97.cfg
+DB2_MOVILES=/d/iccol/desarrollo/database/prunovedat/DB2_MOVILES_97.cfg
+USER=icdgd
+FACTURACION=/d/iccol/desarrollo/temporales/facturacion
+dd_CEDULAS=/d/iccol/desarrollo/database/prunovedat/CEDULAS
+rev=[7m
+des=       1
+LC_MESSAGES=C
+HCOBND=/d/iccol/desarrollo/binds
+MFPLI_PRODUCT_DIR=/opt/mfocus/des/cobol
+LC_CTYPE=en_US.ISO8859-15
+JAR=/d/iccol/desarrollo/jars
+PRESP_SAL=//d/iccol/desarrollo/especiales/salida
+ICDB_AUX=/d/iccol/icdb_aux
+con=       0
+CVSROOT=:pserver:icdgd@localhost:/usr/local/cvsroot
+COBJVM=sun_142
+MBOX=/d/iccol/desarrollo/mbox.icdgd
+SHELL=/bin/ksh
+ICBAK=/d/iccol/icbak
+dd_ICDIAN=/d/iccol/desarrollo/database/prunovedat/ICDIAN
+CALIFICACION=/d/iccol/desarrollo/actualizacion/calificacion
+EXTFH=/d/iccol/desarrollo/database/prunovedat/extfh.cfg
+JAVA_HOME=/usr/j2se
+BD_EXTRACUPOS=/d/iccol/desarrollo/database/prunovedat/BD_EXTRACUPOS.cfg
+HISTSIZE=400
+LOGDIR=/d/iccol/desarrollo/database/logs
+run=       0
+TMOUT=1800
+LOGS=/d/iccol/desarrollo/database/prunovedat
+DB2_DATACIU2=/d/iccol/desarrollo/database/prunovedat/DB2_DATACIU2_97.cfg
+BD_NOVEDAT=/d/iccol/desarrollo/database/prunovedat/BD_NOVEDAT.cfg
+path_text=/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/jdk/latest/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+HOME=/d/iccol/desarrollo
+LC_COLLATE=en_US.ISO8859-15
+FRABDUVAL=/d/iccol/desarrollo/database/prunovedat
+dd_REG02=/d/iccol/desarrollo/database/prunovedat/REG02
+COPYS=/d/iccol/desarrollo/copys
+dd_REG03=/d/iccol/desarrollo/database/prunovedat/REG03
+LC_NUMERIC=en_US.ISO8859-15
+dd_REG01=/d/iccol/desarrollo/database/prunovedat/REG01
+DB2INSTANCE=db2inst1
+BDU=/d/iccol/desarrollo/database
+DB2_SSO=/d/iccol/desarrollo/database/prunovedat/DB2_SSO_97.cfg
+MAESTROS_VAL=/d/iccol/desarrollo/actualizacion/validacion/maestros-val
+SSH_CONNECTION=172.16.10.90 31492 172.24.2.206 22
+SSH_CLIENT=172.16.10.90 31492 22
+dd_REG04=/d/iccol/desarrollo/database/prunovedat/REG04
+TERM=vt220
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+COBMODE=32
+TTY=/dev/pts/61
+THREADS_FLAG=native
+UTILES=/d/iccol/desarrollo/utiles
+PWD=/d/iccol/desarrollo
+SERV_CCI=DES-prunovedat
+OBJETOS=/d/iccol/desarrollo/objetos
+bold=[1m
+TZ=America/Bogota
+VALIDACION=/d/iccol/desarrollo/actualizacion/validacion
+ENV=/d/iccol/desarrollo/.aliases
+CAL_SAL=/d/iccol/desarrollo/trabajo/calidad/salida
+COBCONFIG=/d/iccol/desarrollo/cobconfig
+GRUPOS=icdatacr descob cvs cvsproydocs
+BD_SSO=/d/iccol/desarrollo/database/prunovedat/BD_SSO.cfg
+ACTUALIZACION=/d/iccol/desarrollo/actualizacion/actualizacion
+TRABAJO=/d/iccol/desarrollo/trabajo
+JH_5=/usr/jdk/latest
+A__z="*TMOUT
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ which des-c-v
+/d/iccol/desarrollo/macros/des-c-v
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ cat /d/iccol/desarrollo/macros/des-c-v
+#   MACRO REVISADA PARA MILENIO - VHF
+#   MAC022.v.0003
+
+#   EL OBJETIVO DE LA MACRO ES COMPILAR LOS PROGRAMAS FUENTES COBOL SIN
+#   OMITIR LA VALIDACION DE DESBORDAMIENTO DE INDICES DE ARREGLOS
+#   NDG002  - INCLUIR EN LA LINEA DE COMPILACION LA DIRECTIVA SOURCEASM PARA
+#          QUE AL GENERA UN ERROR EN EJECUCICON GENERE LA LINEA EN EL MENSAJE
+#          QUE DESPLIEGA AL CANCELAR LA EJECCUCION.
+# MAYO/2013#SE INCLUYEN CAMBIOS PROPUESTOS POR GLOBANT COMPILANDO A 64 BITS
+# G.JIMENEZ#LOS QUE NO TIENE CCI Y AGREGANDO " -C sourceasm" EN EL COMANDO
+# v.0003   #DE COMPILACION, SE INDEPENDIZAN LA MACRO DE DESARROLLO Y LA DE
+#          #PRODUCCION
+echo "Ejecucion de la macro de compilacion cobol para desarrollo"
+OLDDIR=`pwd`
+cd ~/fuentes
+fte=$1
+
+if [ -s $fte.cbl ]; then
+   ext="cbl"
+elif [ -s $fte.CBL ]; then
+   ext="CBL" 
+elif [ -s $fte ]; then
+   ext=" "
+else
+   echo "**** ATENCION: EL ARCHIVO NO EXISTE " 
+   ext="N"
+fi
+if [ "$ext" != "N" ]; then
+   cd ~/objetos
+   if [ "$ext" != " " ]
+   then
+      fte=$fte.$ext
+   fi
+#######################################
+# Incorporado por Globant
+cci=`grep -ic CCI- ~/fuentes/$fte`
+if [ $cci == 0 ]; then
+        cob=cob64
+else
+        cob=cob
+fi
+# Fin incorporado por Globant
+#######################################
+
+####   if cob -uv  -P $2 $3 ~/fuentes/$fte 2> ~/fuentes/$fte.err; then 
+   if $cob -uv -g -P -C sourceasm $2 $3 ~/fuentes/$fte 2> ~/fuentes/$fte.err; then 
+      echo
+      echo ">>> DATACREDITO: TERMINO OK COMPILACION DE $fte" 
+      rm ~/fuentes/$fte.err
+   else 
+      echo
+      echo ">>> DATACREDITO: ** COMPILANDO $fte HUBO ERRORES..."
+      echo "** ESTAN EN EL ARCHIVO $fte.err\n"
+   fi
+fi
+cd $OLDDIR
+echo
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ 
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ cls
+[H[Jicdgd@[7mcodes[m /d/iccol/desarrollo
+$ eee^?^?       
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ 
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ ^[   $ 
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ qqq
+ksh: qqq:  not found
+icdgd@[7mcodes[m /d/iccol/desarrollo
+$ 
