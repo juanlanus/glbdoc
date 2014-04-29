@@ -1,0 +1,905 @@
+      * SCODASTB-PROC.v.0001
+REMARK************************************************************************
+REMARK* CONJUNTO DE RUTINAS QUE PERMITE CALCULAR EL SCORE GENERICO DE
+REMARK* STABILITY                                                          *
+REMARK* TIPOS DE LLAMADO :
+REMARK*   CON LOS SCORES HISTORICOS EN MEMORIA
+REMARK*       PERFORM 5000-CALCULAR-SCORE-DASTB.
+REMARK*       VARIABLES DE ENTRADA:  
+REMARK*         PUN-SCO-INPUT-DASTB SCORE CALCULADO O PUNTAJE
+REMARK*         EXC-SCO-INPUT-DASTB CODIGO DE EXCLUSION DEL SCORES
+REMARK*         TIP-SCO-INPUT-DASTB TIPO DE SCORE - PRODUCTO ICBPRO
+REMARK*         REL-SCO-INPUT-DASTB NUEVO O EXISTENTE (0,1) TIENE RELACION
+REMARK*         V-PUN-SCO-INPUT-DASTB(1 to 12)                          
+REMARK*         V-EXC-SCO-INPUT-DASTB(1 to 12)                          
+REMARK*   SIN SCORES HISTORICOS EN MEMORIA   
+REMARK*       PERFORM 5000-CALCULAR-HIS-SCORE-DASTB.
+REMARK*       VARIABLES DE ENTRADA:  
+REMARK*         TIP-IDE-INPUT-DASTB    TIPO DE IDE DEL CONSULTADO
+REMARK*         NUM-IDE-INPUT-DASTB   NUMERO DE IDE DEL CONSULTADO
+REMARK*         PUN-SCO-INPUT-DASTB SCORE CALCULADO O PUNTAJE
+REMARK*         EXC-SCO-INPUT-DASTB CODIGO DE EXCLUSION DEL SCORES
+REMARK*         TIP-SCO-INPUT-DASTB TIPO DE SCORE - PRODUCTO ICBPRO
+REMARK*         REL-SCO-INPUT-DASTB NUEVO O EXISTENTE (0,1) TIENE RELACION
+REMARK* SALIDAS
+REMARK*   EL CALCULO DEL SCORE SE ENTREGA EN LAS
+REMARK*   SIGUIENTES VARIABLES
+REMARK*      CLASN-OUTPUT-DASTB                  PIC 9(3).
+REMARK*      CLASA-OUTPUT-DASTB                  PIC X(2).
+REMARK*      CLASDA-OUTPUT-DASTB                 PIC X(2).
+REMARK*  ADICIONALMENTE SE ENTREGAN LAS RAZONES ADVERSAS Y EL SCORE-CARD
+REMARK*      ADVERSE-RAZON-DASTB OCCURS 4 TIMES PIC 9(02).
+REMARK*      SCORE-CARD-DASTB                   PIC 9(01).
+REMARK*
+REMARK**********************************************************************
+
+       5000-CALCULAR-HIS-SCORE-DASTB.
+REMARK**********************************************************************
+REMARK*5000-CALCULAR-HIS-SCORE-DASTB.
+REMARK* RUTINA QUE LLENA EL VECTOR INTERNO Y CALCULA EL STABILITY           
+REMARK**********************************************************************
+           IF TIP-IDE-INPUT-DASTB = 1 OR TIP-IDE-INPUT-DASTB  = 4 
+      *       LLENA DIRECTAMENTE LAS TABLAS DE SCORES
+      *       Y DE EXCLUSIONES EN LAS ESTRUCTURAS DE STABILITY
+              PERFORM 1000-CALCULAR-HIS-DASTB               
+              IF CON-EXCLUSION-DASTB = 0
+      *          CALCULA STABILITY ASUMIENDO QUE YA ESTA LLENO EL 
+      *          VECTOR INTERNO                                        
+                 PERFORM 5000-CALCULAR-SCORE-DASTB      
+              END-IF
+           ELSE                                     
+              PERFORM 5000A-INICIALIZAR-DASTB      
+              MOVE 1 TO CON-EXCLUSION-DASTB       
+              MOVE 70  TO  ADVERSE-RAZON-DASTB(1)
+              MOVE "Z" TO CLASA-OUTPUT-DASTB(1:1)
+              MOVE "Z" TO CLASDA-OUTPUT-DASTB(1:1)
+              MOVE 9   TO CLASN-OUTPUT-DASTB
+           END-IF.                              
+
+       5000-CALCULAR-SCORE-DASTB.
+REMARK**********************************************************************
+REMARK*5000-CALCULAR-SCORE-DASTB.
+REMARK* RUTINA QUE CALCULA EL STABILITY ASUMIENDO QUE YA ESTA LLENO EL 
+REMARK* VECTOR INTERNO                                        
+REMARK**********************************************************************
+           PERFORM 5000A-INICIALIZAR-DASTB.
+      *    DE ACUERDO A CARACTERISTICAS ESPECIFICAS SE EXAMINA SI ES UNA
+      *    PERSONA SUJETA A EXCLUSION EN EL CALCULO DE STABILITY    
+           PERFORM 5100-VER-EXCLUSIONES-DASTB
+           IF CON-EXCLUSION-DASTB = 0
+              PERFORM 5200-VER-SCORE-CARD-DASTB
+           END-IF.    
+
+       5000A-INICIALIZAR-DASTB.
+REMARK**********************************************************************
+REMARK*5000A-INICIALIZAR-DASTB.
+REMARK*    SE INICIALIZAN LAS VARIABLES INVOLUCRADAS EN LAS EXCLUSIONES Y
+REMARK*    CALCULO DE LA SEGMENTACION A APLICAR.
+REMARK**********************************************************************
+           INITIALIZE VARIABLES-WORK-DASTB.
+
+       5100-VER-EXCLUSIONES-DASTB.
+REMARK**********************************************************************
+REMARK*5100-VER-EXCLUSIONES-DASTB.
+REMARK* DE ACUERDO A CARACTERISTICAS ESPECIFICAS SE EXAMINA SI ES UNA
+REMARK* PERSONA SUJETA A EXCLUSION EN EL CALCULO DE STABILITY    
+REMARK**********************************************************************
+           *> CLIENTES TIPO ID 2 OR 3
+           IF TIP-IDE-INPUT-DASTB NOT = 1 AND 
+              TIP-IDE-INPUT-DASTB NOT = 4
+              MOVE 1 TO CON-EXCLUSION-DASTB 
+              MOVE 70  TO ADVERSE-RAZON-DASTB(1)  
+              MOVE "Z" TO CLASA-OUTPUT-DASTB(1:1)
+              MOVE "Z" TO CLASDA-OUTPUT-DASTB(1:1)
+              MOVE 9   TO CLASN-OUTPUT-DASTB
+           END-IF.
+           *> TIPO DE SCORE INVALIDO                                  
+           IF CON-EXCLUSION-DASTB = 0
+              IF TIP-SCO-INPUT-DASTB <> "67" AND 
+                 TIP-SCO-INPUT-DASTB <> "49" AND 
+                 TIP-SCO-INPUT-DASTB <> "47" AND 
+                 TIP-SCO-INPUT-DASTB <> "48" AND 
+                 TIP-SCO-INPUT-DASTB <> "95" AND 
+                 TIP-SCO-INPUT-DASTB <> "41" AND 
+                 TIP-SCO-INPUT-DASTB <> "45" 
+                   MOVE 1 TO CON-EXCLUSION-DASTB 
+                   MOVE 79  TO ADVERSE-RAZON-DASTB(1)  
+                   MOVE "Z" TO CLASA-OUTPUT-DASTB(1:1)
+                   MOVE "Z" TO CLASDA-OUTPUT-DASTB(1:1)
+                   MOVE 9   TO CLASN-OUTPUT-DASTB
+              END-IF               
+           END-IF.               
+           *> CLIENTES CON ALGUNA EXCLUSION DIFERENTE A 99 
+           IF CON-EXCLUSION-DASTB = 0
+              MOVE EXC-SCO-INPUT-DASTB TO 
+                   V-EXC-SCO-INPUT-DASTB(DIM-VEC-DASTB)
+              MOVE 1 TO I-DASTB
+              PERFORM UNTIL I-DASTB > DIM-VEC-DASTB 
+                IF V-EXC-SCO-INPUT-DASTB(I-DASTB) <> K-EXC-DASTB
+                   MOVE 1 TO CON-EXCLUSION-DASTB 
+                   MOVE 99  TO ADVERSE-RAZON-DASTB(1)  
+                   MOVE "Z" TO CLASA-OUTPUT-DASTB(1:1)
+                   MOVE "Z" TO CLASDA-OUTPUT-DASTB(1:1)
+                   MOVE 9   TO CLASN-OUTPUT-DASTB
+                END-IF
+                ADD 1 TO I-DASTB
+              END-PERFORM
+           END-IF.
+       5200-VER-SCORE-CARD-DASTB.
+REMARK**********************************************************************
+REMARK*5200-VER-SCORE-CARD-DASTB.
+REMARK*    SOLO HAY UN SCORE-CARD , SE CALCULAN SON CATEGORIAS , QUE      
+REMARK*    SE ASIMILARAN A SCORE-CARDS.               
+REMARK**********************************************************************
+           MOVE 99  TO  ADVERSE-RAZON-DASTB(1) .
+           PERFORM 5210-CALCULAR-CATEGORIA-DASTB.
+           PERFORM 5220-CALCULAR-INCREMENT-DASTB.
+           PERFORM 5230-CALCULAR-SUBCATEGO-DASTB.
+       5210-CALCULAR-CATEGORIA-DASTB.
+REMARK******************************************************************
+REMARK*5210-CALCULAR-CATEGORIA-DASTB.
+REMARK*    SE CALCULA LA CATEGORIA BASICA A,B,C CON BASE A LA DESVIACION
+REMARK*    ESTANDARD Y COMPARADO CON EL SCORE ACTUAL
+REMARK******************************************************************
+           MOVE 0 TO SUMA-DASTB.
+           MOVE 0 TO SUMACUAD-DASTB.
+           MOVE PUN-SCO-INPUT-DASTB TO 
+                V-PUN-SCO-INPUT-DASTB(DIM-VEC-DASTB).
+           MOVE 1 TO I-DASTB
+           PERFORM UNTIL I-DASTB > DIM-VEC-DASTB - 1
+             COMPUTE SUMA-DASTB = SUMA-DASTB + 
+                                  V-PUN-SCO-INPUT-DASTB(I-DASTB)
+             ADD 1 TO I-DASTB
+           END-PERFORM.
+           COMPUTE N-DASTB = DIM-VEC-DASTB - 1 .
+           COMPUTE PROMEDIO-DASTB = SUMA-DASTB / N-DASTB . 
+           MOVE 1 TO I-DASTB
+           PERFORM UNTIL I-DASTB > DIM-VEC-DASTB - 1
+             COMPUTE SUMACUAD-DASTB = SUMACUAD-DASTB + 
+              (V-PUN-SCO-INPUT-DASTB(I-DASTB) - PROMEDIO-DASTB) ** 2
+             ADD 1 TO I-DASTB
+           END-PERFORM.
+           COMPUTE VARIANZA-DASTB = SUMACUAD-DASTB / (N-DASTB - 1) .
+           COMPUTE LI-DASTB = PROMEDIO-DASTB -
+                   (2.201 * (VARIANZA-DASTB / N-DASTB) ** 0.5).
+           COMPUTE LS-DASTB = PROMEDIO-DASTB +
+                   (2.201 * (VARIANZA-DASTB / N-DASTB) ** 0.5).
+           MOVE V-PUN-SCO-INPUT-DASTB(DIM-VEC-DASTB) TO ULTIMO-DASTB.
+           IF ULTIMO-DASTB >= LI-DASTB OR ULTIMO-DASTB <= LS-DASTB
+              MOVE "A" TO CLASA-OUTPUT-DASTB(1:1)
+              MOVE 1   TO CLASN-OUTPUT-DASTB
+           END-IF  
+           IF ULTIMO-DASTB < LI-DASTB
+                 MOVE "C" TO CLASA-OUTPUT-DASTB(1:)
+                 MOVE 6   TO CLASN-OUTPUT-DASTB
+           END-IF.
+           IF ULTIMO-DASTB > LS-DASTB
+              MOVE "B" TO CLASA-OUTPUT-DASTB(1:)
+              MOVE 2   TO CLASN-OUTPUT-DASTB
+           END-IF.
+*
+       5220-CALCULAR-INCREMENT-DASTB.
+REMARK******************************************************************
+REMARK*5220-CALCULAR-INCREMENT-DASTB.
+REMARK*    SE CALCULAN LOS PROMEDIO DE INCREMENTOS O DECREMENTOS ENTRE
+REMARK*    MESES
+REMARK******************************************************************
+           MOVE 0 TO NUM-U-DASTB.
+           MOVE 0 TO NUM-D-DASTB.
+           MOVE 0 TO U-DASTB.
+           MOVE 0 TO D-DASTB.
+           MOVE 1 TO I-DASTB
+           PERFORM UNTIL I-DASTB > DIM-VEC-DASTB - 2
+             COMPUTE V-DIF-SCO-DASTB(I-DASTB) =
+                     V-PUN-SCO-INPUT-DASTB(I-DASTB) - 
+                     V-PUN-SCO-INPUT-DASTB(I-DASTB + 1)
+             MOVE V-DIF-SCO-DASTB(I-DASTB) TO DIF-ABS-DASTB
+             IF V-PUN-SCO-INPUT-DASTB(I-DASTB) < 
+                V-PUN-SCO-INPUT-DASTB(I-DASTB + 1) AND
+                DIF-ABS-DASTB > 5 
+                COMPUTE U-DASTB = U-DASTB + DIF-ABS-DASTB
+                ADD 1 TO NUM-U-DASTB
+             ELSE
+                IF V-PUN-SCO-INPUT-DASTB(I-DASTB) >=
+                   V-PUN-SCO-INPUT-DASTB(I-DASTB + 1) AND
+                   DIF-ABS-DASTB > 5 
+                   COMPUTE D-DASTB = D-DASTB + DIF-ABS-DASTB
+                   ADD 1 TO NUM-D-DASTB
+                END-IF
+             END-IF
+             ADD 1 TO I-DASTB
+           END-PERFORM.
+           IF NUM-D-DASTB > 0
+              COMPUTE D-DASTB = D-DASTB / NUM-D-DASTB
+           ELSE
+              MOVE 0 TO D-DASTB
+           END-IF.
+           IF NUM-U-DASTB > 0
+              COMPUTE U-DASTB = U-DASTB / NUM-U-DASTB
+           ELSE
+              MOVE 0 TO U-DASTB
+           END-IF.
+*
+       5230-CALCULAR-SUBCATEGO-DASTB.
+REMARK******************************************************************
+REMARK*5230-CALCULAR-SUBCATEGO-DASTB.
+REMARK*    DE ACUERDO AL TIPO DE SCORE SE REALIZA EL CALCULO DE LA
+REMARK*    SUBCATEGORIA
+REMARK******************************************************************
+           EVALUATE TIP-SCO-INPUT-DASTB
+              WHEN = "67" *> "Tipo score: ACIERTA+   "   
+                PERFORM 6100-MAS-ACIERTAA-DASTB
+              WHEN = "49" *> "Tipo score: ACIE-A-TELC"  
+                IF REL-SCO-INPUT-DASTB = 0
+                   PERFORM 6200-CC-NUEVO-ACIERTAA-DASTB
+                ELSE
+                   PERFORM 6200-CC-EXIST-ACIERTAA-DASTB
+                END-IF
+              WHEN = "47" *> "Tipo score: ACIE-A-DFGE" 
+                PERFORM 6300-PU-ACIERTAA-DASTB
+              WHEN = "48" *> "Tipo score: ACIE-A-DTRO"
+                IF REL-SCO-INPUT-DASTB = 0
+                   PERFORM 6400-TR-NUEVO-ACIERTAA-DASTB
+                ELSE
+                   PERFORM 6400-TR-EXIST-ACIERTAA-DASTB
+                END-IF
+              WHEN = "95" *> "Tipo score: ACIE-A-DINT"
+                PERFORM 6500-IN-ACIERTAA-DASTB
+              WHEN = "41" *> "Tipo score: ACIE-A-DHVT"
+                PERFORM 6600-HV-ACIERTAA-DASTB
+              WHEN = "45" *> "Tipo score: ACIE-A-DCOO"
+                IF REL-SCO-INPUT-DASTB = 0
+                   PERFORM 6700-CP-NUEVO-ACIERTAA-DASTB
+                ELSE
+                   PERFORM 6700-CP-EXIST-ACIERTAA-DASTB
+                END-IF
+           END-EVALUATE.
+       6100-MAS-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6100-MAS-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTA + PRODUCTO 67
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 1   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 28.4 
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 28.4   
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB = 0      
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 0 AND  
+                                                D-DASTB <= 25 
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 25     
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" 
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 16.6 AND U-DASTB < 28.5
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 28.5 AND U-DASTB < 58    
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 58                                
+                 MOVE "B3" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 13   AND D-DASTB < 25    
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 25   AND D-DASTB < 50.5  
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 50.5                              
+                 MOVE "C3" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6200-CC-NUEVO-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6200-CC-NUEVO-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  CC-NUEVO TELCOS PRODUCTO 49
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 2   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB =  0 
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0  AND
+                                                U-DASTB < 20
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB >= 20
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB = 0
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 0 AND
+                                                D-DASTB <= 30
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 30
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 20   AND U-DASTB < 29.3 
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 29.3  
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 17.5 AND D-DASTB < 30.8 
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 30.8  
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6200-CC-EXIST-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6200-CC-EXIST-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  CC-EXIST TELCOS PRODUCTO 49
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 3   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0 
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0  AND
+                                                U-DASTB < 22
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB >= 22
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB  = 0 
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 0  AND
+                                                D-DASTB <= 20 
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 20
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 22.5 AND U-DASTB < 33.4  
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 33.4  
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 20.25 AND D-DASTB < 34.4  
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 34.4   
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6300-PU-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6300-PU-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  PU-EXIST FINANC PRODUCTO 47
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 4   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 24   
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 24    
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                D-DASTB <= 15
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 15 AND
+                                                D-DASTB <= 28
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 28
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 16   AND U-DASTB < 24  
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 24   
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 28   AND D-DASTB < 44
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 44   
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6400-TR-NUEVO-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6400-TR-NUEVO-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  TR-NUEVO TDC    PRODUCTO 48
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 5   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 30    
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 30   
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                D-DASTB <= 14
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 14 AND
+                                                D-DASTB <= 28
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 28
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 20.5 AND U-DASTB < 30.5
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 30.5
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 14.6 AND D-DASTB < 28.7
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 28.7 
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6400-TR-EXIST-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6400-TR-EXIST-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  TR-EXIST TDC    PRODUCTO 48
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 6   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 29    
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 29   
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                D-DASTB <=  21
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 21 AND
+                                                D-DASTB <= 29
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 29
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 23   AND U-DASTB < 30   
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 30  
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 21.5 AND D-DASTB < 30
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 30 
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6500-IN-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6500-IN-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  NUE-EXIS INSTAL PRODUCTO 95
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 7   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 30.7
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 30.7 
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                D-DASTB <= 11
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 11 AND
+                                                D-DASTB <= 28
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 28
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 19   AND U-DASTB < 30.7 
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 30.7 
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 29   AND D-DASTB < 54.5
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 54.5 
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6600-HV-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6600-HV-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  NUE-EXIS VEHICU PRODUCTO 41
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 8   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB >= 0 AND
+                                                U-DASTB <= 18.5
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 18.5 AND
+                                                U-DASTB <= 32    
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 32   
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                D-DASTB <= 9.5 
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 9.5 AND
+                                                D-DASTB <= 28 
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 28
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 32   AND U-DASTB < 48   
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 48   
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 28.2 AND D-DASTB < 51.6
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 51.6 
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6700-CP-NUEVO-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6700-CP-NUEVO-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  CP-NUEVO COOPER PRODUCTO 45
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 9   TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB >= 0 AND
+                                                 U-DASTB <= 17
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 17 AND
+                                                U-DASTB <= 22    
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 22     
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB = 0
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 0 AND
+                                                D-DASTB <= 23
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 23 
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 22.6 AND U-DASTB < 31.4 
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 31.4 
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 23.2 AND D-DASTB < 33.5
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 33.5   
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       6700-CP-EXIST-ACIERTAA-DASTB.
+REMARK******************************************************************
+REMARK*6700-CP-EXIST-ACIERTAA-DASTB.
+REMARK*    CALCULO SUBCATEGORIA ACIERTAAA  CP-NUEVO COOPER PRODUCTO 45
+REMARK******************************************************************
+           MOVE CLASA-OUTPUT-DASTB TO CLASDA-OUTPUT-DASTB.
+           MOVE 10  TO  SCORE-CARD-DASTB.
+           IF U-DASTB = 0 AND D-DASTB = 0
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB = 0
+              MOVE "B1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 0 AND
+                                                U-DASTB <= 25
+              MOVE "B2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "B" AND U-DASTB > 25
+              MOVE "B3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB >= 0 AND
+                                                 D-DASTB <= 11
+              MOVE "C1" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 11 AND
+                                                D-DASTB <= 23
+              MOVE "C2" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "C" AND D-DASTB > 23
+              MOVE "C3" TO CLASDA-OUTPUT-DASTB
+           ELSE
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A"
+              MOVE "A " TO CLASDA-OUTPUT-DASTB
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB < U-DASTB
+              IF U-DASTB >= 25.3 AND U-DASTB < 39   
+                 MOVE "B1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF U-DASTB >= 39     
+                 MOVE "B2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+*
+           IF CLASDA-OUTPUT-DASTB(1:1) = "A" AND D-DASTB > U-DASTB
+              IF D-DASTB >= 23.3  AND D-DASTB < 39     
+                 MOVE "C1" TO CLASDA-OUTPUT-DASTB
+              END-IF
+              IF D-DASTB >= 39     
+                 MOVE "C2" TO CLASDA-OUTPUT-DASTB
+              END-IF
+           END-IF.
+           PERFORM 7100-MOVER-CLASFINAL-DASTB.
+       7100-MOVER-CLASFINAL-DASTB.
+REMARK************************************************************************
+REMARK*7100-MOVER-CLASFINAL-DASTB.
+REMARK*    SE COLOCA LA CLASIFICACION NUMERICA Y LA CLASIFICACION-INTERNA
+REMARK************************************************************************
+           MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB.
+           EVALUATE CLASDA-OUTPUT-DASTB
+              WHEN "A "
+                 MOVE 1 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "B1"
+                 MOVE 2 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "B2"
+                 MOVE 3 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "B3"
+                 MOVE 4 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "C1"
+                 MOVE 5 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "C2"
+                 MOVE 6 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN "C3"
+                 MOVE 7 TO CLASN-OUTPUT-DASTB 
+                 MOVE CLASDA-OUTPUT-DASTB TO CLASA-OUTPUT-DASTB
+              WHEN ANY         
+                 MOVE 8   TO CLASA-OUTPUT-DASTB
+           END-EVALUATE.
+       1000-CALCULAR-HIS-DASTB.
+REMARK****************************************************************
+REMARK*1000-CALCULAR-HIS-DASTB.
+REMARK*    AQUI SE DEBE LLENAR DIRECTAMENTE LAS TABLAS DE SCORES
+REMARK*    Y DE EXCLUSIONES EN LAS ESTRUCTURAS DE TRABAJOS DE STABILITY
+REMARK****************************************************************
+*          SE CURA EN SALUD CON LA FECHA
+           MOVE RUN-DATE-CARACT(1:6) TO FECHA-DASTB.
+           IF MES-DASTB > 12 OR  MES-DASTB  = 0
+              MOVE FUNCTION CURRENT-DATE(1:6) TO FECHA-DASTB
+           END-IF.
+*          VERIFICA CUAL ES EL ARCHIVO QUE DEBE ESTAR ABIERTO DE
+*          ACUERDO A LA FECHA DEL CALCULO
+           IF OPEN-BDSCOREHIS-DASTB = 1
+              IF ANO-ACT-TITLE-BDSCOREHIS <> FECHA-DASTB
+                 CLOSE BDSCOREHIS
+                 MOVE 0 TO OPEN-BDSCOREHIS-DASTB 
+              END-IF
+           END-IF.
+*          SI ESTABA CERRADO ABRE EL ARCHIVO DE SCORES HISTORICOS
+           IF OPEN-BDSCOREHIS-DASTB = 0
+              MOVE 1 TO OPEN-BDSCOREHIS-DASTB
+              MOVE FECHA-DASTB TO ANO-ACT-TITLE-BDSCOREHIS
+              MOVE FECHA-DASTB TO ANO-ANT-TITLE-BDSCOREHIS
+              SUBTRACT 1 FROM ANO-ANT-TITLE-BDSCOREHIS
+              OPEN INPUT BDSCOREHIS
+           END-IF.
+*          ARMA LA LLAVE PARA LEER EL ARCHIVO
+           MOVE TIP-IDE-INPUT-DASTB TO TIPIDE-BDSCOREHIS               
+           MOVE NUM-IDE-INPUT-DASTB TO NUMIDE-BDSCOREHIS               
+           MOVE TIP-SCO-INPUT-DASTB TO PROD-SCORE-BDSCOREHIS        
+           EVALUATE TIP-SCO-INPUT-DASTB
+              WHEN = "67" *> "Tipo score: ACIERTA+   "
+                MOVE 0 TO RELACION-BDSCOREHIS   
+              WHEN = "49" *> "Tipo score: ACIE-A-TELC"
+                MOVE REL-SCO-INPUT-DASTB TO RELACION-BDSCOREHIS                    
+              WHEN = "47" *> "Tipo score: ACIE-A-DFGE"
+                MOVE 0 TO RELACION-BDSCOREHIS   
+              WHEN = "48" *> "Tipo score: ACIE-A-DTRO"
+                MOVE REL-SCO-INPUT-DASTB TO RELACION-BDSCOREHIS                    
+              WHEN = "95" *> "Tipo score: ACIE-A-DINT"
+                MOVE 0 TO RELACION-BDSCOREHIS   
+              WHEN = "41" *> "Tipo score: ACIE-A-DHVT"
+                MOVE 0 TO RELACION-BDSCOREHIS   
+              WHEN = "45" *> "Tipo score: ACIE-A-DCOO"
+                MOVE REL-SCO-INPUT-DASTB TO RELACION-BDSCOREHIS                    
+              WHEN ANY
+                MOVE 0 TO RELACION-BDSCOREHIS   
+           END-EVALUATE.
+           MOVE IND-TEC-INPUT-DASTB TO IND-TEC-BDSCOREHIS
+           MOVE 0 TO CON-EXCLUSION-DASTB
+           READ BDSCOREHIS
+                INVALID KEY
+                   PERFORM 5000A-INICIALIZAR-DASTB
+                   MOVE 1   TO CON-EXCLUSION-DASTB
+                   MOVE 79  TO  ADVERSE-RAZON-DASTB(1)
+                   MOVE "Z" TO CLASA-OUTPUT-DASTB(1:1)
+                   MOVE "Z" TO CLASDA-OUTPUT-DASTB(1:1)
+                   MOVE 9   TO CLASN-OUTPUT-DASTB
+           END-READ
+*          SI HAY REGISTRO SE TRASLADAN LOS VALORES A LA ESTRUCTURA
+*          INTERNA DE TRABAJO
+           IF CON-EXCLUSION-DASTB = 0
+              MOVE MES-DASTB TO J-DASTB
+              MOVE 12        TO I-DASTB
+              PERFORM UNTIL I-DASTB = 0   
+                SUBTRACT 1 FROM J-DASTB
+                IF J-DASTB = 0
+                   MOVE 12 TO J-DASTB
+                END-IF
+                IF J-DASTB <  MES-DASTB
+                   MOVE VLR-SCORE-ACT-BDSCOREHIS(J-DASTB) TO
+                        V-PUN-SCO-INPUT-DASTB(I-DASTB)
+                   MOVE EXCL1-ACT-BDSCOREHIS(J-DASTB) TO
+                        V-EXC-SCO-INPUT-DASTB(I-DASTB)
+                ELSE
+                   MOVE VLR-SCORE-ANT-BDSCOREHIS(J-DASTB) TO
+                        V-PUN-SCO-INPUT-DASTB(I-DASTB)
+                   MOVE EXCL1-ANT-BDSCOREHIS(J-DASTB) TO
+                        V-EXC-SCO-INPUT-DASTB(I-DASTB)
+                END-IF
+                SUBTRACT 1 FROM I-DASTB
+              END-PERFORM
+            END-IF.
