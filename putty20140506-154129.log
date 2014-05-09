@@ -1,0 +1,1726 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.06 15:41:29 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Tue May  6 13:39:45 2014 from 172.16.10.12
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ vi viset
+"viset" 4 lines, 238 characters echo viset running
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 4 lines, 238 characters
+
+
+
+
+# Archivo por juan.lanus@globant.com
+
+# Hace lo siguiente: 
+
+
+# $# instrucciones:
+
+
+"  1- ejecutar al inicio de la sesión con "punto", as\055:as\055$i:
+
+
+
+#     . viset
+#
+
+#  2- efectos:
+#     establece la variable de entorno EXINIT (solamente mientras dure la sesio´n) ´n)$on
+#     con algunas opciones para el editor vide conveniencia il0w-
+ o^?^
+#     -algunas de las opciones, casicas$(casi) todas las "map", no funcionan todav\055av\055$ia
+#     -ejecuta el comando sh-cambamb prunovedat
+#
+#
+~"viset" 15 lines, 652 characters icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+icdgd@codes /d/iccol/desarrollo
+$ ^[[A  $ . viset$ vi viset$ 
+"viset" 15 lines, 652 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#
+#
+echo viset running
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 15 lines, 652 characters
+
+#APPEND MODE     -escribe "viset running"
+
+
+
+
+OPEN MODEecho $- " - " "$-":w"viset" 16 lines, 700 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+h  -  h
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+echo $- " - " "$-"
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~:w"viset" 15 lines, 681 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ echo $@
+prunovedat
+icdgd@codes /d/iccol/desarrollo
+$ echo $-
+ismC
+icdgd@codes /d/iccol/desarrollo
+$ echo $0 
+-ksh
+icdgd@codes /d/iccol/desarrollo
+$ echo "$0"
+-ksh
+icdgd@codes /d/iccol/desarrollo
+$ echo $_
+-ksh
+icdgd@codes /d/iccol/desarrollo
+$ echo /proc/cmdline
+/proc/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+OPEN MODEecho /proc/cmdline:w"viset" 16 lines, 700 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+/proc/cmdline
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo /proc/cmdline
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~eAPPEND MODE`echo `:w"viset" 16 lines, 702 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+viset[13]: /proc/cmdline:  not found
+
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo `/proc/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~[1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ cat /proc/cmdline
+cat: cannot open /proc/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ echo $$
+25875
+icdgd@codes /d/iccol/desarrollo
+$ ls /proc/*
+/proc/10035:
+/proc/10035: Permission denied
+
+/proc/10036:
+/proc/10036: Permission denied
+
+/proc/10044:
+/proc/10044: Permission denied
+
+/proc/10601:
+/proc/10601: Permission denied
+
+/proc/10877:
+/proc/10877: Permission denied
+
+/proc/10878:
+/proc/10878: Permission denied
+
+/proc/10966:
+/proc/10966: Permission denied
+
+/proc/10967:
+/proc/10967: Permission denied
+
+/proc/10984:
+/proc/10984: Permission denied
+
+/proc/11541:
+/proc/11541: Permission denied
+
+/proc/11542:
+/proc/11542: Permission denied
+
+/proc/11548:
+/proc/11548: Permission denied
+
+/proc/11846:
+/proc/11846: Permission denied
+
+/proc/12218:
+/proc/12218: Permission denied
+
+/proc/12219:
+/proc/12219: Permission denied
+
+/proc/12883:
+/proc/12883: Permission denied
+
+/proc/138:
+/proc/138: Permission denied
+
+/proc/13800:
+/proc/13800: Permission denied
+
+/proc/13879:
+/proc/13879: Permission denied
+
+/proc/13880:
+/proc/13880: Permission denied
+
+/proc/13890:
+/proc/13890: Permission denied
+
+/proc/14210:
+/proc/14210: Permission denied
+
+/proc/144:
+/proc/144: Permission denied
+
+/proc/145:
+/proc/145: Permission denied
+
+/proc/14520:
+/proc/14520: Permission denied
+
+/proc/14526:
+/proc/14526: Permission denied
+
+/proc/14527:
+/proc/14527: Permission denied
+
+/proc/14657:
+/proc/14657: Permission denied
+
+/proc/14664:
+/proc/14664: Permission denied
+
+/proc/14665:
+/proc/14665: Permission denied
+
+/proc/15199:
+/proc/15199: Permission denied
+
+/proc/15292:
+/proc/15292: Permission denied
+
+/proc/15295:
+/proc/15295: Permission denied
+
+/proc/15297:
+/proc/15297: Permission denied
+
+/proc/15298:
+/proc/15298: Permission denied
+
+/proc/15337:
+/proc/15337: Permission denied
+
+/proc/15343:
+/proc/15343: Permission denied
+
+/proc/15344:
+/proc/15344: Permission denied
+
+/proc/15430:
+/proc/15430: Permission denied
+
+/proc/15436:
+/proc/15436: Permission denied
+
+/proc/15437:
+/proc/15437: Permission denied
+
+/proc/16486:
+/proc/16486: Permission denied
+
+/proc/16821:
+/proc/16821: Permission denied
+
+/proc/16822:
+/proc/16822: Permission denied
+
+/proc/16827:
+/proc/16827: Permission denied
+
+/proc/16828:
+/proc/16828: Permission denied
+
+/proc/16838:
+/proc/16838: Permission denied
+
+/proc/17098:
+/proc/17098: Permission denied
+
+/proc/17104:
+/proc/17104: Permission denied
+
+/proc/17105:
+/proc/17105: Permission denied
+
+/proc/18324:
+/proc/18324: Permission denied
+
+/proc/18329:
+/proc/18329: Permission denied
+
+/proc/18330:
+/proc/18330: Permission denied
+
+/proc/1834:
+/proc/1834: Permission denied
+
+/proc/18392:
+/proc/18392: Permission denied
+
+/proc/18397:
+/proc/18397: Permission denied
+
+/proc/18615:
+/proc/18615: Permission denied
+
+/proc/18999:
+/proc/18999: Permission denied
+
+/proc/19170:
+/proc/19170: Permission denied
+
+/proc/19346:
+/proc/19346: Permission denied
+
+/proc/19347:
+/proc/19347: Permission denied
+
+/proc/19353:
+/proc/19353: Permission denied
+
+/proc/19915:
+/proc/19915: Permission denied
+
+/proc/19922:
+/proc/19922: Permission denied
+
+/proc/19923:
+/proc/19923: Permission denied
+
+/proc/19940:
+/proc/19940: Permission denied
+
+/proc/20193:
+/proc/20193: Permission denied
+
+/proc/20198:
+/proc/20198: Permission denied
+
+/proc/20199:
+/proc/20199: Permission denied
+
+/proc/20265:
+/proc/20265: Permission denied
+
+/proc/20401:
+/proc/20401: Permission denied
+
+/proc/20402:
+/proc/20402: Permission denied
+
+/proc/20419:
+/proc/20419: Permission denied
+
+/proc/20611:
+/proc/20611: Permission denied
+
+/proc/20616:
+/proc/20616: Permission denied
+
+/proc/20617:
+/proc/20617: Permission denied
+
+/proc/20745:
+/proc/20745: Permission denied
+
+/proc/20750:
+/proc/20750: Permission denied
+
+/proc/20832:
+/proc/20832: Permission denied
+
+/proc/20833:
+/proc/20833: Permission denied
+
+/proc/20840:
+/proc/20840: Permission denied
+
+/proc/20877:
+/proc/20877: Permission denied
+
+/proc/20878:
+/proc/20878: Permission denied
+
+/proc/21015:
+/proc/21015: Permission denied
+
+/proc/21016:
+/proc/21016: Permission denied
+
+/proc/21051:
+/proc/21051: Permission denied
+
+/proc/21178:
+/proc/21178: Permission denied
+
+/proc/21232:
+/proc/21232: Permission denied
+
+/proc/21234:
+/proc/21234: Permission denied
+
+/proc/21829:
+/proc/21829: Permission denied
+
+/proc/21835:
+/proc/21835: Permission denied
+
+/proc/21836:
+/proc/21836: Permission denied
+
+/proc/22135:
+/proc/22135: Permission denied
+
+/proc/22140:
+/proc/22140: Permission denied
+
+/proc/22141:
+/proc/22141: Permission denied
+
+/proc/22418:
+/proc/22418: Permission denied
+
+/proc/22449:
+/proc/22449: Permission denied
+
+/proc/22450:
+/proc/22450: Permission denied
+
+/proc/22456:
+/proc/22456: Permission denied
+
+/proc/22838:
+/proc/22838: Permission denied
+
+/proc/22845:
+/proc/22845: Permission denied
+
+/proc/22846:
+/proc/22846: Permission denied
+
+/proc/22977:
+/proc/22977: Permission denied
+
+/proc/22978:
+/proc/22978: Permission denied
+
+/proc/22984:
+/proc/22984: Permission denied
+
+/proc/23333:
+/proc/23333: Permission denied
+
+/proc/23334:
+/proc/23334: Permission denied
+
+/proc/23366:
+/proc/23366: Permission denied
+
+/proc/23912:
+/proc/23912: Permission denied
+
+/proc/24356:
+/proc/24356: Permission denied
+
+/proc/24915:
+/proc/24915: Permission denied
+
+/proc/2517:
+/proc/2517: Permission denied
+
+/proc/2518:
+/proc/2518: Permission denied
+
+/proc/25235:
+/proc/25235: Permission denied
+
+/proc/2528:
+/proc/2528: Permission denied
+
+/proc/25580:
+/proc/25580: Permission denied
+
+/proc/25581:
+/proc/25581: Permission denied
+
+/proc/25594:
+/proc/25594: Permission denied
+
+/proc/25868:
+/proc/25868: Permission denied
+
+/proc/25869:
+/proc/25869: Permission denied
+
+/proc/25875:
+as         ctl        lstatus    object     psinfo     status
+auxv       cwd        lusage     pagedata   rmap       usage
+contracts  fd         lwp        path       root       watch
+cred       lpsinfo    map        priv       sigact     xmap
+
+/proc/27183:
+/proc/27183: Permission denied
+
+/proc/27184:
+/proc/27184: Permission denied
+
+/proc/27191:
+/proc/27191: Permission denied
+
+/proc/27762:
+as         ctl        lstatus    object     psinfo     status
+auxv       cwd        lusage     pagedata   rmap       usage
+contracts  fd         lwp        path       root       watch
+cred       lpsinfo    map        priv       sigact     xmap
+
+/proc/27899:
+/proc/27899: Permission denied
+
+/proc/27900:
+/proc/27900: Permission denied
+
+/proc/27909:
+/proc/27909: Permission denied
+
+/proc/28063:
+/proc/28063: Permission denied
+
+/proc/28069:
+/proc/28069: Permission denied
+
+/proc/28070:
+/proc/28070: Permission denied
+
+/proc/28198:
+/proc/28198: Permission denied
+
+/proc/28274:
+/proc/28274: Permission denied
+
+/proc/28276:
+/proc/28276: Permission denied
+
+/proc/28278:
+/proc/28278: Permission denied
+
+/proc/28280:
+/proc/28280: Permission denied
+
+/proc/28282:
+/proc/28282: Permission denied
+
+/proc/29003:
+/proc/29003: Permission denied
+
+/proc/29004:
+/proc/29004: Permission denied
+
+/proc/29009:
+/proc/29009: Permission denied
+
+/proc/29134:
+/proc/29134: Permission denied
+
+/proc/29135:
+/proc/29135: Permission denied
+
+/proc/29151:
+/proc/29151: Permission denied
+
+/proc/29158:
+/proc/29158: Permission denied
+
+/proc/29162:
+/proc/29162: Permission denied
+
+/proc/2927:
+/proc/2927: Permission denied
+
+/proc/2929:
+/proc/2929: Permission denied
+
+/proc/2934:
+/proc/2934: Permission denied
+
+/proc/29406:
+/proc/29406: Permission denied
+
+/proc/2942:
+/proc/2942: Permission denied
+
+/proc/2943:
+/proc/2943: Permission denied
+
+/proc/2951:
+/proc/2951: Permission denied
+
+/proc/2961:
+/proc/2961: Permission denied
+
+/proc/2965:
+/proc/2965: Permission denied
+
+/proc/29860:
+/proc/29860: Permission denied
+
+/proc/29866:
+/proc/29866: Permission denied
+
+/proc/29867:
+/proc/29867: Permission denied
+
+/proc/29966:
+/proc/29966: Permission denied
+
+/proc/29967:
+/proc/29967: Permission denied
+
+/proc/29972:
+/proc/29972: Permission denied
+
+/proc/3589:
+/proc/3589: Permission denied
+
+/proc/3591:
+/proc/3591: Permission denied
+
+/proc/3593:
+/proc/3593: Permission denied
+
+/proc/3649:
+/proc/3649: Permission denied
+
+/proc/3663:
+/proc/3663: Permission denied
+
+/proc/3748:
+/proc/3748: Permission denied
+
+/proc/3772:
+/proc/3772: Permission denied
+
+/proc/3784:
+/proc/3784: Permission denied
+
+/proc/3792:
+/proc/3792: Permission denied
+
+/proc/3801:
+/proc/3801: Permission denied
+
+/proc/3802:
+/proc/3802: Permission denied
+
+/proc/3804:
+/proc/3804: Permission denied
+
+/proc/3818:
+/proc/3818: Permission denied
+
+/proc/3832:
+/proc/3832: Permission denied
+
+/proc/3845:
+/proc/3845: Permission denied
+
+/proc/3859:
+/proc/3859: Permission denied
+
+/proc/3879:
+/proc/3879: Permission denied
+
+/proc/3880:
+/proc/3880: Permission denied
+
+/proc/3881:
+/proc/3881: Permission denied
+
+/proc/3917:
+/proc/3917: Permission denied
+
+/proc/3921:
+/proc/3921: Permission denied
+
+/proc/4018:
+/proc/4018: Permission denied
+
+/proc/4020:
+/proc/4020: Permission denied
+
+/proc/4027:
+/proc/4027: Permission denied
+
+/proc/4041:
+/proc/4041: Permission denied
+
+/proc/4050:
+/proc/4050: Permission denied
+
+/proc/4052:
+/proc/4052: Permission denied
+
+/proc/4067:
+/proc/4067: Permission denied
+
+/proc/4095:
+/proc/4095: Permission denied
+
+/proc/4099:
+/proc/4099: Permission denied
+
+/proc/4106:
+/proc/4106: Permission denied
+
+/proc/4262:
+/proc/4262: Permission denied
+
+/proc/4263:
+/proc/4263: Permission denied
+
+/proc/4269:
+/proc/4269: Permission denied
+
+/proc/4519:
+/proc/4519: Permission denied
+
+/proc/4613:
+/proc/4613: Permission denied
+
+/proc/4617:
+/proc/4617: Permission denied
+
+/proc/4625:
+/proc/4625: Permission denied
+
+/proc/4668:
+/proc/4668: Permission denied
+
+/proc/4899:
+/proc/4899: Permission denied
+
+/proc/4905:
+/proc/4905: Permission denied
+
+/proc/4906:
+/proc/4906: Permission denied
+
+/proc/5000:
+/proc/5000: Permission denied
+
+/proc/5006:
+/proc/5006: Permission denied
+
+/proc/5007:
+/proc/5007: Permission denied
+
+/proc/5254:
+/proc/5254: Permission denied
+
+/proc/5260:
+/proc/5260: Permission denied
+
+/proc/5261:
+/proc/5261: Permission denied
+
+/proc/5269:
+/proc/5269: Permission denied
+
+/proc/5275:
+/proc/5275: Permission denied
+
+/proc/5276:
+/proc/5276: Permission denied
+
+/proc/5750:
+/proc/5750: Permission denied
+
+/proc/5751:
+/proc/5751: Permission denied
+
+/proc/5761:
+/proc/5761: Permission denied
+
+/proc/6080:
+/proc/6080: Permission denied
+
+/proc/7032:
+/proc/7032: Permission denied
+
+/proc/7038:
+/proc/7038: Permission denied
+
+/proc/7039:
+/proc/7039: Permission denied
+
+/proc/7356:
+/proc/7356: Permission denied
+
+/proc/7423:
+/proc/7423: Permission denied
+
+/proc/761:
+/proc/761: Permission denied
+
+/proc/766:
+/proc/766: Permission denied
+
+/proc/767:
+/proc/767: Permission denied
+
+/proc/8086:
+/proc/8086: Permission denied
+
+/proc/8092:
+/proc/8092: Permission denied
+
+/proc/8093:
+/proc/8093: Permission denied
+
+/proc/8186:
+/proc/8186: Permission denied
+
+/proc/8924:
+/proc/8924: Permission denied
+
+/proc/8933:
+/proc/8933: Permission denied
+
+/proc/8934:
+/proc/8934: Permission denied
+
+/proc/9325:
+/proc/9325: Permission denied
+
+/proc/9326:
+/proc/9326: Permission denied
+
+/proc/9333:
+/proc/9333: Permission denied
+
+/proc/9363:
+/proc/9363: Permission denied
+
+/proc/9372:
+/proc/9372: Permission denied
+
+/proc/9373:
+/proc/9373: Permission denied
+
+/proc/9796:
+/proc/9796: Permission denied
+
+/proc/9801:
+/proc/9801: Permission denied
+
+/proc/9802:
+/proc/9802: Permission denied
+
+/proc/9807:
+/proc/9807: Permission denied
+
+/proc/9812:
+/proc/9812: Permission denied
+
+/proc/9813:
+/proc/9813: Permission denied
+
+/proc/9818:
+/proc/9818: Permission denied
+
+/proc/9823:
+/proc/9823: Permission denied
+
+/proc/9824:
+/proc/9824: Permission denied
+
+/proc/9829:
+/proc/9829: Permission denied
+
+/proc/9834:
+/proc/9834: Permission denied
+
+/proc/9835:
+/proc/9835: Permission denied
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ ls /proc/*$ echo $$   $ 
+25875
+icdgd@codes /d/iccol/desarrollo
+$ ls /proc/25875/*
+/proc/25875/as         /proc/25875/lusage     /proc/25875/sigact
+/proc/25875/auxv       /proc/25875/map        /proc/25875/status
+/proc/25875/cred       /proc/25875/pagedata   /proc/25875/usage
+/proc/25875/ctl        /proc/25875/priv       /proc/25875/watch
+/proc/25875/lpsinfo    /proc/25875/psinfo     /proc/25875/xmap
+/proc/25875/lstatus    /proc/25875/rmap
+
+/proc/25875/contracts:
+
+/proc/25875/cwd:
+-PER12-01-00DEM
+*
+
+$TEMPORALES-ICGLEY.CON
+$TEMPORALES-ICGLEY.CON.idx
+001009001-COB-006.txt
+010047.20130131.T.DUPBDL
+100055300703
+17021.aif
+172.24.2.7
+20130715Formulario_0004
+20140312MiDataCredito.zip
+20609.aif
+27
+a
+actualizacion
+ALERTA_100005_1_BANCAMIA_X_GRUPOS.20131222
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140103.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140215.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140216.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140217.Z
+algo
+analistas
+ANALITICO1X.TXT
+animator
+archivos15Apr18Apr2013.zip
+archtemp
+arregla-maes
+auditor
+BD_EXTRACUPOS.h
+BD_NOVEDAT.h
+BD_SSO.h
+BDACSN
+BDACSN.idx
+BDIDAN
+BDIDAN.idx
+BDIDIN
+BDIDIN.idx
+BDIEGARJ.log
+BDIESN
+BDIESN01
+BDIIALEDB2.aif
+BDIILAN
+BDIILAN.idx
+BDIREN
+BDIREN01
+BDLDI2.PROC
+BDLDIM
+BDLDIRESTR-n.log
+BDLEST
+BDLLDIRL.SAL
+BDLLDIRL.SAL1
+BDLLDIRL.SAL2
+BDLPART
+BDLPART.idx
+binds
+borra2
+BORRAR.msg
+borrar.sh
+BSTRACE.XFH
+busq-dcifra
+c-cobdb2-use
+campes
+CARACTNEW.CBL
+cataloga
+cc
+cccc
+ccierr.log
+ced.txt
+ced1.txt
+ced3.txt
+ced5.txt
+ced5.txt-
+cedulas.log.idx
+cedulas.txt.dlm
+cgic.a
+cgic.h
+cgic107.tar.gz
+cgicobol1
+cgiesq
+change.log
+chequeo
+CITIBURO
+cobconfig
+cobconfig-icimsd
+cobconfig.20140320
+cobconfig.gav
+cobconfig.gjc
+cobconfig.ok
+cobconfig.pjv
+cobconfig.rmb
+cobconfig.vhf
+cobjrun32.20140228.core
+cobol-db2yyyy
+CobolFico.jar
+CobolFico.jar-ant
+CobolFico.jar1
+CobolFico.zip
+comp_conver16
+comp_conver32
+comp_conver64
+comp-pais
+copys
+copys-linea.zip
+copyscopy1.fd
+core
+CQ10461P3-PER36-02NUM
+CTLN97-BLQ.490028.SAL
+CTLN97.490028.SAL
+cvs-progr
+daevalxxx.txt
+daevalxxx.txt2
+DAP
+dar
+database
+datacas.log
+datacas.txt
+datos
+DATOSBBVA
+daviclientes.txt
+dcutil_old.jar
+dcutil.jar
+dead.letter
+deborrar1
+DecisorWS Logs 2701201401.55.zip
+demo
+demo.class
+demo.jar
+demo.java
+demo.txt
+deptos
+Desinstalar
+Desplegar
+Desplegar_pruebas
+Despliegue_Fallido
+direcciones
+DTCBLQ.20140319.core
+DTCBLQ.lst
+DTCCON
+DTCCON.idx
+DTCMDF.20140502.core
+env.txt
+especiales
+extfh-450.cfg
+extfh-pes.cfg
+extfh-pva.cfg
+extfh-pva201311.cfg
+extfh.cfg
+extfh.cfg-20121108
+extfh.cfg.20140320
+EXTRAE.20140303.core
+f0028.zipp
+facturacion1-5sept.txt
+file.txt.2014-02-18
+fuentes
+fuentes-especiales.zip
+fuentes-linea.zip
+gj1
+Hello_Word
+hs_err_pid19424.log
+hs_err_pid20875.log
+hs_err_pid27175.log
+hs_err_pid5611.log
+ICBCON
+ICBCON.idx
+iceprecol493.cbl
+icestd65vc-reloaded.aif
+ICGCON.20140407.core
+ICGCPL-CAV.aif
+ICGCPL.20140225.core
+ICGCPL.20140327.core
+ICGCPL.20140331.core
+ICGCPL.20140403.core
+ICGCPLPB.20140326.core
+ICGCPLPB.20140327.core
+ICGCPLPB.20140403.core
+ICGCPLPB.20140409.core
+ICGCPLPB.20140414.core
+ICGCPLPB.20140506.core
+ICGD12.aif
+ICGD12V54.aif
+ICGD22V37.aif
+ICGD25.aif
+ICGD27.aif
+ICGD40.aif
+ICGD60V12.aif
+ICGD67D.ipf
+ICGD67D.prf
+ICGD89V02.aif
+ICGDI2.aif
+ICGFPRPB.aif
+ICGFRP.20140228.core
+ICGFRPPB.20140224.core
+ICGFRPPB.20140226.core
+ICGFRPPB.20140303.core
+ICGFRPPB.20140319.core
+ICGFRR.20140228.core
+ICGFRR.aif
+ICGFRRPB.20140305.core
+ICGFRS.20140310.core
+ICGFRSPB.20140305.core
+ICGFRV.20140228.core
+ICGFRVPB.20140224.core
+ICGFRVPB.20140225.core
+ICGFRVPB.20140305.core
+ICGFRVPB.20140306.core
+ICGFVLPB.20140224.core
+ICGFVLPB.20140306.core
+ICGKAR.20140321.core
+ICGKAR.20140407.core
+ICGKAR.aif
+ICGKARPB.aif
+ICGKARPB.eje
+ICGMDF.20140303.core
+ICGMDF.20140313.core
+ICGMDF.20140320.core
+ICGS06.20140223.core
+ICGS07.aif
+ICGSSO.20140228.core
+ICJCAR.20140224.core
+ICMCREBANK.201301.log
+icregis
+icrgd
+icrpgd
+ides-dario
+IMSG-01.prn.log
+install_stb.sh
+jars
+journal.txt.001
+journal.txt.010
+lista-usu
+listados
+listbatch.txt
+listdemo.txt
+listservers.txt
+LOG-STRN-TIMESRV-20140221
+LOGTRANS-20130307-003
+LOGTRANS-20130319-001
+LOGTRANS-20130509-001
+LOGTRANS-20130527-001
+LOGTRANS-20130607-001
+LOGTRANS-20130625-001
+LOGTRANS-20130626-001
+LOGTRANS-20130723-001
+LOGTRANS-20130809-001
+LOGTRANS-20130823-001
+LOGTRANS-20140123-001
+LOGTRANS-20140123-002
+LOGTRANS-20140326-001
+macros
+macros-linea.zip
+mbox.icjamd
+METPAS01.aif
+mfpoll-172.24.2.206.txt
+monitoreo
+nohup.out
+objetos
+ori
+p15805-bbog.val-201404040809
+p15805-bbog.val-201404040810
+p15929580_72_SOLARIS64.zip
+pasa-archivos.sh
+pglbs-2
+pglbs-2-GLBLS-2
+pPER48.LOG
+ppppp
+prb
+prb.file
+pru10.val-20140307
+pru10.valcontrol
+pru101.val-201403071746
+prueba_desa
+rai
+Requerimiento-camaras.zip
+restore20140210
+rmbA
+RMBCURSOCCI.20140224.core
+RMBSERVCCITCP.20140320.core.001
+RMBSERVCCITCP.20140320.core.010
+RMBSERVCCITCP.20140326.core
+RMBSERVCCITCP.20140407.core
+salida.txt
+salida3.txt
+script1
+secretstuff
+setup_visualcobol_deveclipse_2.1_suse_x86_64
+sf
+SGID
+sh-CambioLeyendas.sh
+sh-CARACTNEW
+sh-ConsultaCamaras.log
+sh-MERCADO-COLMENA-CONS
+sol9-bfagent-7.1.1.3-0-0041-sparc-opt
+stt
+sxsecuritypack51.09_00_dev.tar.encr
+sxsecuritypack51.09_00_server.tar.encr
+Tablas_Parametros
+Tablas_Parametros_Produccion
+TBL-USER-UNICOS.TXT
+temporales
+TERAEN0
+terminales
+TESDB2.20140410.core
+testsftp.sh
+trabajo
+truss-969-icgcon
+usuarios
+utiles
+utiles-linea.zip
+UTLADEXT.20140322.core
+UTLADEXT.20140324.core
+UTLADEXT.20140404.core
+UTLESTACT.fecha
+UTLLISHUE.20140404.core
+utlucorcre.gnt
+UTLULONGITUDES.CBL
+viset
+XFHLOG
+xxyy.log
+
+/proc/25875/fd:
+0   1   2   61  63
+
+/proc/25875/lwp:
+1
+
+/proc/25875/object:
+a.out              ufs.85.100.425603  ufs.85.100.618502
+ufs.85.100.302941  ufs.85.100.618491
+
+/proc/25875/path:
+0                  61                 cwd                ufs.85.100.425603
+1                  63                 root               ufs.85.100.618491
+2                  a.out              ufs.85.100.302941  ufs.85.100.618502
+
+/proc/25875/root:
+a             dev           export        mbox          sbin
+admin         dicdb         hola          mnt           system
+aicsock       dicdbv        home          net           tmp
+bin           dicregis      icven         nohup.out     usr
+d             dicsuper      isus          opt           var
+despeciales   etc           kernel        platform
+despeciales2  explorer      lib           proc
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ k ls /proc/25875/*$ ls /proc/25875/ cmdline
+/proc/25875/cmdline: No such file or directory
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~echo `/proc/cmdline`echo  APPEND MODE/proc/25875/cmdline2587$CHANGE MODE$$:w"viset" 16 lines, 703 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+/proc/11062/cmdline
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo /proc/$$/cmdline
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~echo INSERT MODE``APPEND MODE echo eAPPEND MODE`:w"viset" 16 lines, 711 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ ^[[A  $ viset
+viset running
+/proc/11166/cmdline
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/proc/25875/cmdline
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo ` echo /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~OPEN MODE# esto muestra el comendo ejecutado, el plan es controlar que tenga el "." al
+OPEN MODE# comienzo para que se haga efectivo el cambio de ambiebnt^?^?/No previous regular expression$CHANGE MODEnte y los set"viset" 18 lines, 858 characters icdgd@codes /d/iccol/desarrollo
+$ fg
+ksh: fg: no such job
+icdgd@codes /d/iccol/desarrollo
+$ ^D

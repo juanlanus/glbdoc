@@ -1,0 +1,1368 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.08 17:26:02 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu May  8 11:37:59 2014 from 172.16.10.62
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+icdgd@codes /d/iccol/desarrollo
+$ !!
+ksh: !!:  not found
+icdgd@codes /d/iccol/desarrollo
+$ !vi
+ksh: !vi:  not found
+icdgd@codes /d/iccol/desarrollo
+$ vi viset
+"viset" 20 lines, 997 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 20 lines, 997 characters:qicdgd@codes /d/iccol/desarrollo
+$ !vi
+ksh: !vi:  not found
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ kk  !vi$ vi viset$ 
+"viset" 20 lines, 997 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 20 lines, 997 characters
+
+
+
+OPEN MODEecho $0:w"viset" 21 lines, 1005 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+viset
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~:w"viset" 20 lines, 997 characters :qicdgd@codes /d/iccol/desarrollo
+$ ^[  $ fgviset$ vi viset$ 
+"viset" 20 lines, 997 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 20 lines, 997 characters
+OPEN MODEecho $0 $*$CHANGE MODE "- "INSERT MODE echo 
+[1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - "$*
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~$CHANGE MODE ""APPEND MODE :w"viset" 21 lines, 1014 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+viset  - 
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+-ksh  -  prunovedat
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ -ksh  -  prunovedat^C
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - " $*
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+
+
+OPEN MODE# Cuando se ejecuta con el "+"^?
+# Cuando se ejecuta con el "+"^?~"+"^$CHANGE MODE." adelanta a$CHANGE MODEe -ksh  -  prunovedatBINSERT MODEescribe:
+-ksh  -  prunovedatINSERT MODE#    
+OPEN MODE# mientras que sin el punto escribe 
+OPEN MODE#    viset:w"viset" 25 lines, 1136 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+viset  - 
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+-ksh  -  prunovedat
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - " $*
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+# Cuando se ejecuta con el "." adelante escribe:
+#    -ksh  -  prunovedat
+# mientras que sin el punto escribe
+#    viset
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~tAPPEND MODE -
+OPEN MODE# La part\055cula "-ksh" se puede usar para detectar si se usó el ".", pero
+OPEN MODE# a lo major mREPLACE 1 CHAReejor APPEND MODEalguna variante de -ksh permite ejecutar el comendo comREPLACE 1 CHARaando APPEND MODEviset 
+APPEND MODE# directamente en el nivel actual de shell ...:w"viset" 28 lines, 1332 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+viset  - 
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+-ksh  -  prunovedat
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$    .   viset
+viset running
+-ksh  -  prunovedat
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ echo $PS1
+$LOGNAME@${rev}$maquina${normal} $PWD $
+icdgd@codes /d/iccol/desarrollo
+$ PS1=$PWD $ export PS1
+ksh: $:  not found
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ PS1=$PWD $ export PS1$                      $ PS1=$PWD $ export PS1$ echo $PS1            $ PS1=$PWD $ export PS1$ PS1="$PWD $ export PS1$ PS1="                  $ PS1=j"$PWD $ export PS1$ PS1="$PWD $" export PS1
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - " $*
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+# Cuando se ejecuta con el "." adelante escribe:
+#    -ksh  -  prunovedat
+# mientras que sin el punto escribe
+#    viset -
+# La part\055cula "-ksh" se puede usar para detectar si se usó el ".", pero
+# a lo mejor alguna variante de -ksh permite ejecutar el comando viset
+# directamente en el nivel actual de shell ...
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+
+OPEN MODE# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario)
+:
+ PS1="$PWD $" export PS10:w"viset" 31 lines, 1455 characters 
+
+
+echo $0 " - " $*echo $0:w"viset" 32 lines, 1463 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $. viset
+viset running
+-ksh  -  prunovedat
+-ksh
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - " $*
+echo $0
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# echo ` cat /proc/$$/cmdline`
+# Cuando se ejecuta con el "." adelante escribe:
+#    -ksh  -  prunovedat
+# mientras que sin el punto escribe
+#    viset -
+# La part\055cula "-ksh" se puede usar para detectar si se usó el ".", pero
+# a lo mejor alguna variante de -ksh permite ejecutar el comando viset
+# directamente en el nivel actual de shell ...
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario):
+PS1="$PWD $" export PS1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+
+~# echo ` cat /proc/$$/cmdline`
+
+
+
+
+
+
+OPEN MODE# comando:  PS1="$PWD $" export PS1::APPEND MODE echo $0 " - " $*
+a con el "." adelante escribe:$0APPEND MODE:
+
+h
+
+t
+tREPLACE 1 CHARii\05:w"viset" 33 lines, 1464 characters  line 25 of 33 --75%-- [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $banner "falta el ."
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $banner "debe ser : viset
+> "
+                                                                           #
+ #####   ######  #####   ######           ####   ######  #####            ###
+ #    #  #       #    #  #               #       #       #    #            #
+ #    #  #####   #####   #####            ####   #####   #    #
+ #    #  #       #    #  #                    #  #       #####             #
+ #    #  #       #    #  #               #    #  #       #   #            ###
+ #####   ######  #####   ######           ####   ######  #    #            #
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $banner "debe ser : viset^J"/d/iccol/desarrollo $banner "falta el ."        /d/iccol/desarrollo $banner " falta el ." falta el ."
+
+                 ######    ##    #        #####    ##            ######  #
+                 #        #  #   #          #     #  #           #       #
+                 #####   #    #  #          #    #    #          #####   #
+                 #       ######  #          #    ######          #       #
+                 #       #    #  #          #    #    #          #       #
+                 #       #    #  ######     #    #    #          ######  ######
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $banner "  falta el ."banner "debe ser : viset^J"/d/iccol/desarrollo $banner "falta el ."        /d/iccol/desarrollo $
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $ ######    ##    #        #####    ##            ######  #
+/d/iccol/desarrollo $ #        #  #   #          #     #  #           #       #
+/d/iccol/desarrollo $ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+/d/iccol/desarrollo $/d/iccol/desarrollo $ #       ######  #          #    ######          #       #                ###
+/d/iccol/desarrollo $/d/iccol/desarrollo $ #       #    #  #          #    #    #          #       #                ###
+/d/iccol/desarrollo $ #       #    #  ######     #    #    #          ######  ######           ###
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+echo $0 " - " $*
+echo $0
+# echo ` cat /proc/$$/cmdline`
+# esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+# NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+# process ids del shell y del comando, que deberian ser iguales
+# comando echo $0:
+# Cuando se ejecuta con el "." adelante escribe:
+#    -ksh
+# mientras que sin el punto escribe
+#    viset
+# La particula "-ksh" se puede usar para detectar si se usó el ".", pero
+# a lo mejor alguna variante de -ksh permite ejecutar el comando viset
+# directamente en el nivel actual de shell ...
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario):
+PS1="$PWD $" export PS1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~s s\055cula "-ksh" se puede usar para detectar si se usó el ".", perocula "-ksh" se puede usar para detectar si se usó el ".", peros s
+OPEN MODE
+OPEN MODE
+OPEN MODEAPPEND MODE ######    ##    #        #####    ##            ######  #
+APPEND MODE #        #  #   #          #     #  #           #       #
+APPEND MODE #####   #    #  #          #    #    #          #####   #
+APPEND MODE #       ######  #          #    ######          #       #                ###
+APPEND MODE #       #    #  #          #    #    #          #       #                ###
+APPEND MODE #       #    #  ######     #    #    #          ######  ######           ###
+APPEND MODEAPPEND MODE    :'i,'fs/.*/  echo "&"8 substitutions echo "  "
+  echo " ######    ##    #        #####    ##            ######  #"
+  echo " #        #  #   #          #     #  #    #"
+  echo " ##### #  #          #    #    #          #####   #"
+  echo " #       ######  #          #    ######   #        ###"
+  echo " #  #          #    #    #   #        ###"
+  echo "   #    #  ######     #    #    #        ######           ###"
+  echo "  "  
+
+
+
+echo $0
+OPEN MODE~OPEN MODE
+OPEN MODEif (test  APPEND MODE```echo $00`APPEND MODE==viset) 
+APPEND MODEthen
+OPEN MODEelse
+
+    echo viset running
+    echo $0 " - " $*
+    echo $0
+    # echo ` cat /proc/$$/cmdline`
+    # esto muestra el comando ejecutado, el plan es controlar que tenga el "." al
+    # comienzo para que se haga efectivo el cambio de ambiente y los set
+    # NO EN ESTE UNIX! debo buscar otra forma, como por ejemplo comparar los
+    # process ids del shell y del comando, que deberian ser iguales
+    # comando echo $0:
+    # Cuando se ejecuta con el "." adelante escribe:
+    #    -ksh
+    # mientras que sin el punto escribe
+    #    viset
+    # La particula "-ksh" se puede usar para detectar si se usó el ".", pero
+    # a lo mejor alguna variante de -ksh permite ejecutar el comando viset
+    # directamente en el nivel actual de shell ...
+    EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidt
+h=4 | map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+    export EXINIT
+    . sh-camamb prunovedat
+    # Achica el prompt a solo el directorio actual (OK mientras no cambio
+    # de máquina o de usuario):
+    PS1="$PWD $" export PS1
+
+
+23 lines >>ed
+OPEN MODEen$CHANGE MODEee$CHANGE MODEfi~$CHANGE MODE  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  
+  $  h=
+4 | map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B " 
+
+  $  
+  $  
+  $  
+  $  
+  $  OPEN MODE# si falta el "." al comienzo del comando escribe un banner y termina
+
+
+OPEN MODE  banner "falta el ."
+  ~
+~
+~
+~
+~
+~
+~
+~
+8 lines deleted
+  
+
+
+
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+15 lines changedINPUT MODE  # establece opciones de vi
+  | 4 | ma
+p ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "p ^? ^
+H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "H | ma
+p ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "p ^[[4
+~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "h =4 ~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+
+  
+OPEN MODE#^?~
+OPEN MODE  # setea el ambiente de desarrollo:w"viset" 27 lines, 987 characters l[1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $. viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if (test `echo $0`==viset)
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+if if if test `echo $0`==viset$CHANGE MODEecho:w"viset" 28 lines, 1000 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $. viset
+-ksh
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+if test `echo $0`==viset
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+if tes$CHANGE MODE[ APPEND MODE];:w"viset" 28 lines, 999 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $. viset
+-ksh
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+if [ `echo $0`==viset ];
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~INSERT MODE"":w"viset" 28 lines, 1001 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $. viset
+-ksh
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+if [ `echo $0`=="viset" ];
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~then
+~:w"viset" 27 lines, 1001 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $. viset
+-ksh
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+if [ `echo $0`=="viset" ]; then
+  banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~=$CHANGE MODE == if [ `echo $0` == "viset" ] theni$CHANGE MODEechoo `echo $0INSERT MODE(] the$CHANGE MODE)echo echo (APPEND MODE 
+echo ( `echo $0` == "viset" )echo 
+]REPLACE 1 CHAR
+then:w"viset" 30 lines, 1060 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+viset
+viset[15]: syntax error at line 15 : `(' unexpected
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+echo ( `echo $0` == "viset" )
+echo  `echo $0` == "viset"
+if [ `echo $0` == "viset" ]
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~:w"viset" 29 lines, 1030 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+viset
+viset == viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $. viset
+-ksh
+-ksh == viset
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+echo `echo $0`
+echo  `echo $0` == "viset"
+if [ `echo $0` == "viset" ]
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~
+~REPLACE 1 CHAR!!= "vise$CHANGE MODE-ksh:w"viset" 27 lines, 986 characters [1] + Stopped (SIGTSTP)        vi viset
+/d/iccol/desarrollo $viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+/d/iccol/desarrollo $. viset
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+/d/iccol/desarrollo $^DYou have stopped jobs
+/d/iccol/desarrollo $fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if [ `echo $0` != "-ksh" ]
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:q/d/iccol/desarrollo $^D

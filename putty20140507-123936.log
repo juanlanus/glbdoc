@@ -1,0 +1,1751 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.07 12:39:36 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed May  7 10:16:19 2014 from 172.16.10.31
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/proc/13724/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ ash
+ksh: ash:  not found
+icdgd@codes /d/iccol/desarrollo
+$ sh
+$LOGNAME@${rev}$maquina${normal} $PWD
+$ 
+$LOGNAME@${rev}$maquina${normal} $PWD
+$ ^Dicdgd@codes /d/iccol/desarrollo
+$ 
+icdgd@codes /d/iccol/desarrollo
+$ set
+ACTREG=/d/iccol/actreg
+ACTUALIZACION=/d/iccol/desarrollo/actualizacion/actualizacion
+AMBIENTE=pruebas
+ARCHTEMP=/d/iccol/desarrollo/archtemp
+ASLMFRETRY
+AUDITOR=/d/iccol/desarrollo/database/prunovedat
+BDU=/d/iccol/desarrollo/database
+BD_EXTRACUPOS=/d/iccol/desarrollo/database/prunovedat/BD_EXTRACUPOS.cfg
+BD_NOVEDAT=/d/iccol/desarrollo/database/prunovedat/BD_NOVEDAT.cfg
+BD_SSO=/d/iccol/desarrollo/database/prunovedat/BD_SSO.cfg
+CALIFICACION=/d/iccol/desarrollo/actualizacion/calificacion
+CAL_ENT=/d/iccol/desarrollo/trabajo/calidad/entrada
+CAL_SAL=/d/iccol/desarrollo/trabajo/calidad/salida
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.:/d/iccol/desarrollo/jars/axis-ant.jar:/d/iccol/desarrollo/jars/axis.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.desarr.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.jar:/d/iccol/desarrollo/jars/clienteServRegGenerico-2.0.pruebas.jar:/d/iccol/desarrollo/jars/CobolCamaras1.jar:/d/iccol/desarrollo/jars/CobolCamarasBKPruebas1.jar:/d/iccol/desarrollo/jars/CobolFico.jar:/d/iccol/desarrollo/jars/CobolFicoBatch.jar:/d/iccol/desarrollo/jars/commons-discovery-0.2.jar:/d/iccol/desarrollo/jars/commons-discovery-0.4.jar:/d/iccol/desarrollo/jars/commons-discovery.jar:/d/iccol/desarrollo/jars/commons-logging-1.0.4.jar:/d/iccol/desarrollo/jars/commons-logging.jar:/d/iccol/desarrollo/jars/CupoPreaprobado.jar:/d/iccol/desarrollo/jars/db2jcc_license_cu.jar:/d/iccol/desarrollo/jars/db2jcc.jar:/d/iccol/desarrollo/jars/dc_util.pruebas.jar:/d/iccol/desarrollo/jars/dcSharedDataLib.jar:/d/iccol/desarrollo/jars/j2ee.jar:/d/iccol/desarrollo/jars/jaxen-core.jar:/d/iccol/desarrollo/jars/jaxen-jdom.jar:/d/iccol/desarrollo/jars/jaxrpc.jar:/d/iccol/desarrollo/jars/jdom.jar:/d/iccol/desarrollo/jars/log4j-1.2.8.jar:/d/iccol/desarrollo/jars/mail.jar:/d/iccol/desarrollo/jars/pepe.jar:/d/iccol/desarrollo/jars/reflection.util.1.4.jar:/d/iccol/desarrollo/jars/saaj.jar:/d/iccol/desarrollo/jars/saxpath.jar:/d/iccol/desarrollo/jars/sct.jar:/d/iccol/desarrollo/jars/Test.jar:/d/iccol/desarrollo/jars/wsdl4j-1.5.1.jar:/d/iccol/desarrollo/jars/xml.reflection.1.4.jar
+COBCONFIG=/d/iccol/desarrollo/cobconfig
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+COBDB2=97
+COBDIR=/opt/mfocus/des/cobol
+COBIDY=/d/iccol/desarrollo/animator
+COBJVM=sun_142
+COBMODE=32
+COBOPT=''
+COBPATH=/d/iccol/desarrollo/objetos
+COBSJE_BIN=bin
+COBSJE_LIB=lib/sparc
+COBSW=''
+COLUMNS=80
+COPYS=/d/iccol/desarrollo/copys
+CUR_INSTHOME=/export/home/db2inst1
+CVSROOT=:pserver:icdgd@localhost:/usr/local/cvsroot
+DASWORKDIR=''
+DATABASE=/d/iccol/desarrollo/database/prunovedat
+DATOS=/d/iccol/desarrollo/datos
+DB2DIR=/opt/IBM/db2/V9.7
+DB2INSTANCE=db2inst1
+DB2_ADMSSO=/d/iccol/desarrollo/database/prunovedat/DB2_ADMSSO.cfg
+DB2_CONSUMIDOR=/d/iccol/desarrollo/database/prunovedat/DB2_CONSUMIDOR_97.cfg
+DB2_DATACIU2=/d/iccol/desarrollo/database/prunovedat/DB2_DATACIU2_97.cfg
+DB2_EXTRACUPOS=/d/iccol/desarrollo/database/prunovedat/DB2_EXTRACUPOS_97.cfg
+DB2_LISEXC=/d/iccol/desarrollo/database/prunovedat/DB2_LISEXC.cfg
+DB2_MOVILES=/d/iccol/desarrollo/database/prunovedat/DB2_MOVILES_97.cfg
+DB2_NOVEDAT=/d/iccol/desarrollo/database/prunovedat/DB2_NOVEDAT_97.cfg
+DB2_SSO=/d/iccol/desarrollo/database/prunovedat/DB2_SSO_97.cfg
+DBSUPER=/d/iccol/desarrollo/database/prunovedat
+DIRECCIONES=/d/iccol/desarrollo/database/prunovedat
+ENV=/d/iccol/desarrollo/.aliases
+ERRNO=2
+EXINIT='set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4 | map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B '
+EXTFH=/d/iccol/desarrollo/database/prunovedat/extfh.cfg
+FACTURACION=/d/iccol/desarrollo/temporales/facturacion
+FCEDIT=/bin/ed
+FECHA_AMNI=20090111
+FRABDUACT=/d/iccol/desarrollo/database/prunovedat
+FRABDUVAL=/d/iccol/desarrollo/database/prunovedat
+FUENTES=/d/iccol/desarrollo/fuentes
+GRUPOS='icdatacr descob cvs cvsproydocs'
+HCOBND=/d/iccol/desarrollo/binds
+HISTFILE=/d/iccol/desarrollo/.history.icdgd
+HISTSIZE=400
+HOME=/d/iccol/desarrollo
+ICBAK=/d/iccol/icbak
+ICDB_AUX=/d/iccol/icdb_aux
+ICREGIS=/d/iccol/desarrollo/database/prunovedat
+IFS='   
+'
+INSTHOME=/export/home/db2inst1
+JAR=/d/iccol/desarrollo/jars
+JAVA_HOME=/usr/j2se
+JAVA_HOME_5=/usr/jdk/latest
+JH=/usr/j2se
+JH_5=/usr/jdk/latest
+LC_COLLATE=en_US.ISO8859-15
+LC_CTYPE=en_US.ISO8859-15
+LC_MESSAGES=C
+LC_MONETARY=en_US.ISO8859-15
+LC_NUMERIC=en_US.ISO8859-15
+LC_TIME=en_US.ISO8859-15
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+LINENO=1
+LISTADOS=/d/iccol/desarrollo/listados
+LOGDIR=/d/iccol/desarrollo/database/logs
+LOGNAME=icdgd
+LOGS=/d/iccol/desarrollo/database/prunovedat
+MACROS=/d/iccol/desarrollo/macros
+MAESTROS_ACT=/d/iccol/desarrollo/actualizacion/maestros-act
+MAESTROS_VAL=/d/iccol/desarrollo/actualizacion/validacion/maestros-val
+MAIL=/usr/mail/icdgd
+MAILCHECK=600
+MBOX=/d/iccol/desarrollo/mbox.icdgd
+MF=Compilacion
+MFPLI_PRODUCT_DIR=/opt/mfocus/des/cobol
+NUM_EJEC=002
+OBJETOS=/d/iccol/desarrollo/objetos
+OLDPWD=/opt/mfocus/des/cobol/lib
+OPTIND=1
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+PPID=13718
+PRESP_ENT=//d/iccol/desarrollo/especiales/entrada
+PRESP_SAL=//d/iccol/desarrollo/especiales/salida
+PS1='$LOGNAME@${rev}$maquina${normal} $PWD
+$ '
+PS2='> '
+PS3='#? '
+PS4='+ '
+PWD=/d/iccol/desarrollo
+RANDOM=29530
+SCORES=/d/iccol/desarrollo/database/prunovedat
+SECONDS=605
+SERV_CCI=DES-prunovedat
+SHELL=/bin/ksh
+SORTCOMPRESS=5
+SORTSPACE=128M
+SSH_CLIENT='172.16.10.31 58437 22'
+SSH_CONNECTION='172.16.10.31 58437 172.24.2.206 22'
+SSH_TTY=/dev/pts/60
+TEMPORALES=/d/iccol/desarrollo/temporales
+TERM=vt220
+TERMINALES=/d/iccol/desarrollo/terminales
+THREADS_FLAG=native
+TMOUT=1800
+TRABAJO=/d/iccol/desarrollo/trabajo
+TTY=/dev/pts/60
+TZ=America/Bogota
+USER=icdgd
+UTILES=/d/iccol/desarrollo/utiles
+VALIDACION=/d/iccol/desarrollo/actualizacion/validacion
+VALORES=/d/iccol/desarrollo/database/prunovedat
+VENDOR=sun
+VISUAL=vi
+_=sh
+action=a
+bold=''
+con='       0'
+dd_CEDULAS=/d/iccol/desarrollo/database/prunovedat/CEDULAS
+dd_ERROR_ICBNAP=/d/iccol/desarrollo/temporales/ERROR_ICBNAP
+dd_ICDAS=/d/iccol/desarrollo/database/prunovedat/ICDAS
+dd_ICDIAN=/d/iccol/desarrollo/database/prunovedat/ICDIAN
+dd_REG01=/d/iccol/desarrollo/database/prunovedat/REG01
+dd_REG02=/d/iccol/desarrollo/database/prunovedat/REG02
+dd_REG03=/d/iccol/desarrollo/database/prunovedat/REG03
+dd_REG04=/d/iccol/desarrollo/database/prunovedat/REG04
+des='       1'
+host_name=codes
+maquina=codes
+normal=''
+path_text=/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/jdk/latest/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+rev=''
+run='       0'
+terminal=pts
+icdgd@codes /d/iccol/desarrollo
+$ echo "$rev"
+
+icdgd@codes /d/iccol/desarrollo
+$ co
+icdgd@codes /d/iccol/desarrollo/copys
+$ view BID   BDIIALE.FS
+"BDIIALE.FS" [Read only] 16 lines, 805 characters REMARK* BDIIALE-FS.v01.0001
+REMARK* MAESTRO DE ALERTAS REPORTADAS POR SUSCRIPTOTRES$SET CONSTANT SW-STATUS-BDIIALE"NO"SELECT BDIIALE
+ASSIGN TO DISK MAES-BDIIALE-TITLEORGANIZATION IS INDEXEDACCESS MODE IS DYNAMICRECORD KEY IS LLAVE-BDIIALE
+$IF SW-STATUS-BDIIALE = "NO"
+$DISPLAY ".............COMPILANDO BDIIALE SIN STATUS.........."
+$ELSE
+$DISPLAY ".............COMPILANDO BDIIALE CON STATUS.........."FILE STATUS IS EST-BDIIALE
+$END
+LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIALE.FS" [Read only] 16 lines, 805 charactersREPLACE MODEEMARK* BDIIALE-FS.v01.0001
+
+1REPLACE MODE
+1REMARK* MAESTRO DE ALERTAS REPORTADAS POR SUSCRIPTOTRES
+REPLACE MODE
+
+
+REPLACE MODE
+
+
+      $SET CONSTANT SW-STATUS-BDIIALE"NO"
+REPLACE MODE           SELECT BDIIALE
+REPLACE MODE                  ASSIGN TO DISK MAES-BDIIALE-TITLE
+REPLACE MODE                  ORGANIZATION IS INDEXED
+REPLACE MODE                  ACCESS MODE IS DYNAMIC
+REPLACE MODE                  RECORD KEY IS LLAVE-BDIIALE
+REPLACE MODE      $IF SW-STATUS-BDIIALE = "NO"
+REPLACE MODE      $DISPLAY ".............COMPILANDO BDIIALE SIN STATUS.........."
+REPLACE MODE      $ELSE
+REPLACE MODE      $DISPLAY ".............COMPILANDO BDIIALE CON STATUS.........."
+REPLACE MODE                  FILE STATUS IS EST-BDIIALE
+REPLACE MODE      $END
+REPLACE MODE                  LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+REPLACE MODEuREMARK* BDIIALE-FS.v01.0001
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+16 fewer lines:qNo write since last change (:quit! overrides):q!icdgd@codes /d/iccol/desarrollo/copys
+$ view BI DIIDAS.FS
+"BDIIDAS.FS" [Read only] 16 lines, 790 characters * BDIIDAS.v.03.0001*=====================================================================
+* ARCHIVO MAESTRO DE CEDULAS DE EXTRANJERIA, PROPORCIONADAS POR EL DAS
+*=====================================================================
+$SET CONSTANT SW-STATUS-BDIIDAS"NO"SELECT BDIIDAS ASSIGN TO DISK TITLE-BDIIDASORGANIZATION IS INDEXEDACCESS MODE IS DYNAMICRECORD KEY IS LLAVE-BDIIDAS
+$IF SW-STATUS-BDIIDAS = "NO"
+$DISPLAY ".............COMPILANDO BDIIDAS SIN STATUS.........."
+$ELSE
+$DISPLAY ".............COMPILANDO BDIIDAS CON STATUS.........."FILE STATUS IS COD-RETORNO-BDIIDAS
+$END
+LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIDAS.FS" [Read only] 16 lines, 790 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIDIAN.FS
+"BDIIDIAN.FS" [Read only] 17 lines, 822 characters * BDIIDIAN.v.03.0001*==================================================================
+REMARK* MAESTRO DE PERSONAS JURIDICAS NACIONALES Y EXTRANJERAS REPORTADAS
+REMARK* POR LA DIAN
+*==================================================================
+$SET CONSTANT SW-STATUS-BDIIDIAN"NO"SELECT BDIIDIAN ASSIGN TO DISK TITLE-BDIIDIANORGANIZATION IS INDEXEDACCESS MODE  IS DYNAMICRECORD KEY   IS LLAVE-BDIIDIAN
+$IF SW-STATUS-BDIIDIAN = "NO"
+$DISPLAY ".............COMPILANDO BDIIDIAN SIN STATUS.........."
+$ELSE
+$DISPLAY ".............COMPILANDO BDIIDIAN CON STATUS.........."FILE STATUS IS COD-RETORNO-BDIIDIAN
+$END
+LOCK MODE IS MANUAL WITH LOCK ON RECORD.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIDIAN.FS" [Read only] 17 lines, 822 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view COPY BDIIREGI.FS
+2 files to edit
+"COPY" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"COPY" [New file]:qa!qa: Not an editor command:q1 more file to edit:q!icdgd@codes /d/iccol/desarrollo/copys
+$ ^[  $ view COPY BDIIREGI.FS$ view OPY BDIIREGI.FS $ view PY BDIIREGI.FS $ view Y BDIIREGI.FS $ view  BDIIREGI.FS $ view 
+"BDIIREGI.FS" [Read only] 21 lines, 860 characters * BDIIREGI.v.03.0001*===============================================================
+* ESTRUCTURA DEL ARCHIVO ENTREGADO POR LA REGISTRADURIA NACIONAL
+*===============================================================
+$SET IDXFORMAT"8"$SET CONSTANT SW-STATUS-BDIIREGI"NO"SELECT BDIIREGI
+ASSIGN TO DISK TITLE-BDIIREGIORGANIZATION IS INDEXEDACCESS MODE IS DYNAMICRECORD KEY IS LLAVE-BDIIREGI
+$IF SW-STATUS-BDIIREGI = "NO"
+$DISPLAY ".............COMPILANDO BDIIREGI SIN STATUS.........."
+$ELSE
+$DISPLAY ".............COMPILANDO BDIIREGI CON STATUS.........."FILE STATUS IS COD-RETORNO-BDIIREGI
+$END
+LOCK MODE IS MANUAL WITH LOCK ON RECORD.$SET IDXFORMAT"0"
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIREGI.FS" [Read only] 21 lines, 860 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view 
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIREGI.FD
+"BDIIREGI.FD" [Read only] 69 lines, 4232 characters * BDIIREGI.v.03.0006*=================================================================
+* ESTRUCTURA DEL ARCHIVO ENTREGADO POR LA REGISTRADURIA NACIONAL
+*=================================================================
+REMARK* GJC0002   * BLQTUT * CAMPO PARA MARCAR LAS IDENDIFICACIONES
+REMARK* G.JIMENEZ * QUE HAN SIDO BLOQUEADAS POR TUTELAS PERDIDAS
+REMARK* SEPT.18/03*
+REMARK******************************************************************
+REMARK* FAC0003   * FECMOD * FECHA DE CREACION Y DE MODIFICACION DE LAS
+REMARK* F.CUADROS * IDENTIFICACIONES. ADEMAS INCLUSION DE INDICADOR CON
+REMARK* SEPT.16/05* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK** REGISTRADURIA, S-SOLICITUD INTERNA CAS.
+REMARK******************************************************************
+REMARK* GJC0004   * INDMOD * SE CREA CAMPO PARA DEJAR INDICADOR DE MOFI-
+REMARK* F.CUADROS * FICACIONES, QUEDA IGUAL QUE EN EL OTRO INDICADOR
+REMARK* ENERO/2007* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK** REGISTRADURIA, S-SOLICITUD INTERNA CAS T-TERCERO.
+REMARK******************************************************************
+REMARK* CAV0005   *CONSUL * SE ADICIONAN LOS CAMPOS PARA IDENTIFICAR
+REMARK* C.VELASCO *QUE LA CEDULA CORRESPONDE A UN CONSULADO Y EL CODIGO
+REMARK* ABRIL/2007*DEL CONSULADO ,ARCHIVO CONSULADOS.DAT, PAIS Y CIUDAD
+REMARK******************************************************************
+REMARK* CAV0006   *INDE01 * SE ADICIONAN LOS CAMPOS PARA IDENTIFICAR
+REMARK* C.VELASCO *SI EL REGISTRO CORRESPONDE A INDEPENDIENTE
+REMARK* SEPTI/2013*DE CAMARA C O BURO. (INDEPTES CON TIPO ID 9)
+REMARK*SE MARCA CAMPO IND-CREACION-BDIIREGI = "I"
+REMARK******************************************************************
+FD  BDIIREGI.
+01  REG-BDIIREGI.03  LLAVE-BDIIREGIPIC 9(12).03  LLAVE-BDIIREGI-RREDEFINES LLAVE-BDIIREGI.05  TIPO-ID-BDIIREGI    PIC 9.05  CEDULA-BDIIREGI     PIC 9(11).03  DES-NOMBRE1-BDIIREGI    PIC X(12).03  DES-NOMBRE2-BDIIREGI    PIC X(12).03  APELLIDO1-BDIIREGIPIC X(16).03  APELLIDO2-BDIIREGIPIC X(16).03  ESTADO-CIVIL-BDIIREGI   PIC 9.03  FECHA-EXPEDI-BDIIREGI.05  SIGLO-EXP-BDIIREGI  PIC 9(2).05  FECHA-EXP-BDIIREGI  PIC 9(6).03  INF-NUMERICA-BDIIREGI   PIC 9(7).03  INF-NUMERICA-BDIIREGI-R REDEFINES INF-NUMERICA-BDIIREGI.05 DEP-EXP-BDIIREGI     PIC 99.05 MUNIC-EXP-BDIIREGI   PIC 999.05 ESTADO-VIG-BDIIREGI  PIC 99.03  FECHA-NACIMNTO-BDIIREGI.05  SIGLO-NAC-BDIIREGI  PIC 9(2).05  FECHA-NAC-BDIIREGI  PIC 9(6)."BDIIREGI.FD" [Read only] 69 lines, 4232 characters05  FECHA-NAC-BDIIREGI  PIC 9(6).03  FECHA-EDICTO-BDIIREGI.05  SIGLO-EDI-BDIIREGI  PIC 9(2).05  FECHA-EDI-BDIIREGI  PIC 9(6).03  IND-SEXO-BDIIREGIPIC X.03  IND-ESTADO-BDIIREGI     PIC 9.03  NUM-RESOLUC-BDIIREGI    PIC 9(4).03  ANO-RESOLUC-BDIIREGI    PIC 9(2).
+BLQTUT     03  BLOQUEO-TUTELA-BDIIREGI PIC X(1).GJC0002
+FECMOD     03  FECHA-CREAC-BDIIREGI    PIC 9(8).FAC0003
+FECMOD     03  FECHA-MODIF-BDIIREGI    PIC 9(8).FAC0003
+FECMOD     03  IND-MODIF-BDIIREGIPIC X(1).FAC0003
+INDMOD     03  IND-CREACION-BDIIREGI REDEFINESGJC0004
+INDMODIND-MODIF-BDIIREGI PIC X(1).GJC0004
+INDMOD     03  IND-CAMBIO-BDIIREGI     PIC X(1).GJC0004
+CONSUL     03  IND-CONSULADO-BDIIREGI  PIC 9(1).CAV0005
+CONSUL     03  COD-CONSULADO-BDIIREGI  PIC 9(3).CAV0005
+INDE01     03  ES-IND-CAMARA-BDIIREGI  PIC 9(1).CAV0006
+INDE01     03  ES-IND-BURO-BDIIREGI    PIC 9(1).CAV0006
+INDE01     03  FILLER-BDIIREGIPIC X(27).CAV0006
+*----------------------------------------------------------------*
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~* BDIIREGI.v.03.0006*=================================================================
+* ESTRUCTURA DEL ARCHIVO ENTREGADO POR LA REGISTRADURIA NACIONAL
+*=================================================================
+REMARK* GJC0002   * BLQTUT * CAMPO PARA MARCAR LAS IDENDIFICACIONES
+REMARK* G.JIMENEZ * QUE HAN SIDO BLOQUEADAS POR TUTELAS PERDIDAS
+REMARK* SEPT.18/03*
+REMARK******************************************************************
+REMARK* FAC0003   * FECMOD * FECHA DE CREACION Y DE MODIFICACION DE LAS
+REMARK* F.CUADROS * IDENTIFICACIONES. ADEMAS INCLUSION DE INDICADOR CON
+REMARK* SEPT.16/05* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK** REGISTRADURIA, S-SOLICITUD INTERNA CAS.
+REMARK******************************************************************
+REMARK* GJC0004   * INDMOD * SE CREA CAMPO PARA DEJAR INDICADOR DE MOFI-
+REMARK* F.CUADROS * FICACIONES, QUEDA IGUAL QUE EN EL OTRO INDICADOR
+REMARK* ENERO/2007* LA FUENTE: A-ARCHIVO REGIS, C-COMUNICACION ESCRITA
+REMARK** REGISTRADURIA, S-SOLICITUD INTERNA CAS T-TERCERO.
+REMARK******************************************************************
+REMARK* CAV0005   *CONSUL * SE ADICIONAN LOS CAMPOS PARA IDENTIFICAR
+REMARK* C.VELASCO *QUE LA CEDULA CORRESPONDE A UN CONSULADO Y EL CODIGO
+REMARK* ABRIL/2007*DEL CONSULADO ,ARCHIVO CONSULADOS.DAT, PAIS Y CIUDAD
+REMARK******************************************************************
+REMARK* CAV0006   *INDE01 * SE ADICIONAN LOS CAMPOS PARA IDENTIFICAR
+REMARK* C.VELASCO *SI EL REGISTRO CORRESPONDE A INDEPENDIENTE
+REMARK* SEPTI/2013*DE CAMARA C O BURO. (INDEPTES CON TIPO ID 9)
+REMARK*SE MARCA CAMPO IND-CREACION-BDIIREGI = "I"
+REMARK******************************************************************
+FD  BDIIREGI.
+01  REG-BDIIREGI.03  LLAVE-BDIIREGIPIC 9(12).03  LLAVE-BDIIREGI-RREDEFINES LLAVE-BDIIREGI.05  TIPO-ID-BDIIREGI    PIC 9.05  CEDULA-BDIIREGI     PIC 9(11).03  DES-NOMBRE1-BDIIREGI    PIC X(12).03  DES-NOMBRE2-BDIIREGI    PIC X(12).03  APELLIDO1-BDIIREGIPIC X(16).03  APELLIDO2-BDIIREGIPIC X(16).03  ESTADO-CIVIL-BDIIREGI   PIC 9.03  FECHA-EXPEDI-BDIIREGI.05  SIGLO-EXP-BDIIREGI  PIC 9(2).05  FECHA-EXP-BDIIREGI  PIC 9(6).03  INF-NUMERICA-BDIIREGI   PIC 9(7).03  INF-NUMERICA-BDIIREGI-R REDEFINES INF-NUMERICA-BDIIREGI.05 DEP-EXP-BDIIREGI     PIC 99.05 MUNIC-EXP-BDIIREGI   PIC 999.05 ESTADO-VIG-BDIIREGI  PIC 99.03  FECHA-NACIMNTO-BDIIREGI.05  SIGLO-NAC-BDIIREGI  PIC 9(2).05  FECHA-NAC-BDIIREGI  PIC 9(6).
+03  FECHA-EDICTO-BDIIREGI.03  FECHA-EDICTO-BDIIREGI.05  SIGLO-EDI-BDIIREGI  PIC 9(2).05  FECHA-EDI-BDIIREGI  PIC 9(6).03  IND-SEXO-BDIIREGIPIC X.03  IND-ESTADO-BDIIREGI     PIC 9.03  NUM-RESOLUC-BDIIREGI    PIC 9(4).03  ANO-RESOLUC-BDIIREGI    PIC 9(2).
+BLQTUT     03  BLOQUEO-TUTELA-BDIIREGI PIC X(1).GJC0002
+FECMOD     03  FECHA-CREAC-BDIIREGI    PIC 9(8).FAC0003
+FECMOD     03  FECHA-MODIF-BDIIREGI    PIC 9(8).FAC0003
+FECMOD     03  IND-MODIF-BDIIREGIPIC X(1).FAC0003
+INDMOD     03  IND-CREACION-BDIIREGI REDEFINESGJC0004
+INDMODIND-MODIF-BDIIREGI PIC X(1).GJC0004
+INDMOD     03  IND-CAMBIO-BDIIREGI     PIC X(1).GJC0004
+CONSUL     03  IND-CONSULADO-BDIIREGI  PIC 9(1).CAV0005
+CONSUL     03  COD-CONSULADO-BDIIREGI  PIC 9(3).CAV0005
+INDE01     03  ES-IND-CAMARA-BDIIREGI  PIC 9(1).CAV0006
+INDE01     03  ES-IND-BURO-BDIIREGI    PIC 9(1).CAV0006
+INDE01     03  FILLER-BDIIREGIPIC X(27).CAV0006
+*----------------------------------------------------------------*
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIDIAN.FD
+"BDIIDIAN.FD" [Read only] 38 lines, 2403 characters * BDIIDIAN.v.03.0004*==================================================================
+* MAESTRO DE PERSONAS JURIDICAS NACIONALES Y EXTRANJERAS REPORTADAS
+* POR LA DIAN
+*==================================================================
+* FAC0002 * INCIIU* INCLUSION DE CODIGO DE ACTIVIDAD ECONOMICA- CIIU
+* JUL.17/2003 * Y FECHA DE INSCRIPCION
+*==================================================================
+* CAV0003 * INDMOD* INCLUSION DE FECHA-CREACION,FECHA-MODIFCACION E
+* C. VELASCO  * INDICADOR MODIFICACION: A-ARCHIVO DIAN,
+* OCT/25/2007 * C-COMUNICACION DIAN, S-SOLICTUD CAS.
+*==================================================================
+* RMB0004     * INDE01* INCLUSION DE MARCAS PARA :
+* R.MARTINEZ  *A)  ES CLIENTE DE EXPERIAN-DATACREDITO
+* SEP/20/2013 *B)  CLIENTE QUE VERA A LOS INDEPENDIENTES
+* C.VELASCO.  *SE CREA CAMPO FECHA-MODIF-INDE-BDIIDIAN
+*==================================================================
+FD  BDIIDIAN.
+01  REG-BDIIDIAN.03 LLAVE-BDIIDIAN.
+05 NITS-BDIIDIANPIC X(11).05 NITS-R-BDIIDIAN REDEFINES NITS-BDIIDIAN
+PIC 9(11).03 DIGITO-CONTROL-BDIIDIAN     PIC X(01).03 DESCRIPCION1-BDIIDIANPIC X(80).03 DESCRIPCION1-BDIIDIAN-R REDEFINES DESCRIPCION1-BDIIDIAN.05 DESCRIPCION-BDIIDIAN     PIC X(79).05 ESTADO-BDIIDIANPIC 9.
+INCIIU     03 COD-CIIU-BDIIDIANPIC 9(4).FAC0002
+INCIIU     03 FEC-INSCRIP-BDIIDIANPIC 9(8).FAC0002
+INDMOD     03 FECHA-CREAC-BDIIDIANPIC 9(8).CAV0003
+INDMOD     03 FECHA-MODIF-BDIIDIANPIC 9(8).CAV0003
+INDMOD     03 IND-MODIF-BDIIDIANPIC X(1).CAV0003
+INDE01     03 ES-CLIENTE-DATACR-BDIIDIAN  PIC X(1). *> S,NRMB0004
+INDE01     03 VE-INDEPENDIENTES-BDIIDIAN  PIC X(1). *> S,NRMB0004
+INDE01     03 FECHA-MODIF-INDE-BDIIDIAN   PIC 9(04). *> AAMMCAV0004
+INDE01*    03 FILLER-BDIIDIANPIC X(19).RMB0004
+INDE01     03 FILLER-BDIIDIANPIC X(13).CAV0004
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIDIAN.FD" [Read only] 38 lines, 2403 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIDAS.FD
+"BDIIDAS.FD" [Read only] 19 lines, 1129 characters * BDIIDAS.v.03.0002*====================================================================
+* ARCHIVO MAESTRO DE CEDULAS DE EXTRANJERIA SUMINISTRADAS POR EL DAS
+*====================================================================
+* CAV0002 * INDMOD* INCLUSION DE FECHA-CREACION FECHA MODIFCACION E
+* C. VELASCO  * INDICADOR MODIFICACION, A-ARCHIVO DAS,
+* OCT/25/2007 * C-COMUNICACION DAS, S-SOLICTUD CAS.
+*==================================================================
+FD  BDIIDAS.
+01  REG-BDIIDAS.
+03 LLAVE-BDIIDAS.
+05 TIPO-ID-BDIIDASPIC 9.05 NUM-ID-BDIIDASPIC 9(11).03 NACIO-BDIIDASPIC X(15).03 NOMBRE-BDIIDASPIC X(45).
+INDMOD     03 FECHA-CREAC-BDIIDASPIC 9(8).CAV0002
+INDMOD     03 FECHA-MODIF-BDIIDASPIC 9(8).CAV0002
+INDMOD     03 IND-MODIF-BDIIDASPIC X(1).CAV0002
+INDMOD     03 FILLER-BDIIDASPIC X(31).CAV0002
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIDAS.FD" [Read only] 19 lines, 1129 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ vire    ew BDIIALE.FD
+"BDIIALE.FD" [Read only] 30 lines, 1801 characters REMARK* BDIIALE-FD.v01.0003.
+REMARK* MAESTRO DE ALERTAS REPORTADAS POR SUSCRIPTORES
+REMARK*----------------------------------------------------------------*
+EMARK******************************************************************
+REMARK* RMB0003   * CIU001: SE INCLUYE EL CODIGO DE LA ALERTA DENTRO DE
+REMARK* R.MARTINEZ* LA LLAVE, SE CAMBIA LA LONGITUD DE LLAVE-SECUNDARIA
+REMARK* OCTUB/2006* Y SE MANEJAN ALERTAS DE TEXTO FIJO
+REMARK******************************************************************FD BDIIALE.
+01 REG-BDIIALE.02 LLAVE-BDIIALE.
+03 TIP-IDE-BDIIALEPIC 9(01).03 NUM-IDE-BDIIALEPIC 9(11).03 FUENTE-BDIIALEPIC 9(06).
+CIU00103 COD-ALERTA-BDIIALE     PIC 9(03).RMB0003
+CIU00103 LLASEC-BDIIALEPIC X(08).RMB000302 ENCABEZADO-BDIIALE.
+CIU00103 FEC-NOV-BDIIALEPIC 9(08).RMB0003
+CIU00103 FEC-VEN-BDIIALEPIC 9(08).RMB0003
+CIU00103 FEC-REP-BDIIALEPIC 9(08).RMB000303 BLOQUEO-BDIIALEPIC 9(01).
+CIU00103 FILLER-BDIIALEPIC X(10).RMB0003
+CIU00103 INF-DATAHOST-BDIIALE   PIC X(18).RMB0003
+CIU00103 LINEAS-BDIIALE.RMB0003
+CIU00104 LINEA1-BDIIALEPIC X(50).RMB0003
+CIU00104 LINEA2-BDIIALEPIC X(50).RMB0003
+CIU00103 FILLER REDEFINES LINEAS-BDIIALE.RMB0003
+CIU00104 DATOS-BDIIALEPIC X(100).RMB0003
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"BDIIALE.FD" [Read only] 30 lines, 1801 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIVIDE.WS
+"BDIIVIDE.WS" [Read only] 43 lines, 2686 characters REMARK*BDIIVIDE.WS.v03.0003.
+REMARK*VARIABLES PARA RUTINA DE VALIDACION DE IDENTIFICACIONES
+*----------------------------------------------------------------*
+* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR TIPO DE
+* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS.
+* FAC0002     * NUIP01 * ESTO SI NO VIENE CORRECTO EL TIPO-ID.
+*----------------------------------------------------------------*
+* F.CUADROS   * INCLUSION DE VALIDACION PARA TIPO-ID. = 2 y
+* JUL.19/2004 * QUITAR EL DIGITO DE CHEQUEO SI ES EL CASO.
+* FAC0003     *
+*----------------------------------------------------------------*
+01  NUM-ID-W-BDIIVIDE.
+NUIP02     03  NUM-ID-W11-BDIIVIDEPIC 9(11) VALUE ZEROS.     FAC0003
+NUIP02     03  NUM-ID-W11-R-BDIIVIDE REDEFINES NUM-ID-W11-BDIIVIDE.     FAC0003
+NUIP0205 NUM-ID-W10-BDIIVIDEPIC 9(10).FAC0003
+NUIP0205 RESTO-NUM-ID-BDIIVIDEPIC 9.FAC0003
+01  NOMBRES-AUX-W-BDIIVIDE.03 PRIMER-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.03 SEGUNDO-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.03 PRIMER-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.03 SEGUNDO-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.03 NOM-LEIDO-BDIIVIDEPIC X(65) VALUE SPACES.
+
+NUIP01 01 PARAMETROS-ENTRADA-BDIIVIDEPIC X(100) VALUE SPACES.   FAC0002
+01 PARAMETROS-ENTRADA-R-BDIIVIDE REDEFINES
+PARAMETROS-ENTRADA-BDIIVIDE.03 TIP-IDE-BDIIVIDEPIC X.03 NUM-IDE-BDIIVIDEPIC X(11) JUSTIFIED RIGHT.
+NUIP01     03 NUM-IDE-BDIIVIDE-R REDEFINES   NUM-IDE-BDIIVIDEFAC0002
+NUIP01PIC 9(11).FAC000203 NOMBRE-BDIIVIDEPIC X(65).03 SW-VERIFNOM-BDIIVIDEPIC 9.03 NUM-BLOQUES-BDIIVIDEPIC 9.
+NUIP01     03 SW-VALTIPID-BDIIVIDEPIC 9.FAC0002
+NUIP01     03 SW-ASGTIPID-BDIIVIDEPIC 9.FAC0002
+NUIP02     03 SW-DIGCHEQUEO-BDIIVIDEPIC 9.FAC0003
+NUIP02     03 FILLER-BDIIVIDEPIC X(18).FAC000301 PARAMETROS-SALIDA-BDIIVIDE.03 NOM-VAL-BDIIVIDEPIC X(65) VALUE SPACES.03 SW-ID-BDIIVIDEPIC 9 VALUE 0.03 SW-NOMBRES-BDIIVIDEPIC 9 VALUE 0.
+NUIP01    03 SW-TID-BDIIVIDEPIC 9 VALUE 0.FAC0002
+~
+~
+~
+~
+~
+~"BDIIVIDE.WS" [Read only] 43 lines, 2686 charactersREPLACE MODEEMARK*BDIIVIDE.WS.v03.0003.
+
+.REPLACE MODE
+.REMARK*VARIABLES PARA RUTINA DE VALIDACION DE IDENTIFICACIONES
+REPLACE MODE
+
+      *----------------------------------------------------------------*
+REPLACE MODE
+
+
+      * F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR TIPO DE
+REPLACE MODE      * JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS.
+REPLACE MODE      * FAC0002     * NUIP01 * ESTO SI NO VIENE CORRECTO EL TIPO-ID.
+REPLACE MODE      *----------------------------------------------------------------*
+REPLACE MODE      * F.CUADROS   * INCLUSION DE VALIDACION PARA TIPO-ID. = 2 y
+REPLACE MODE      * JUL.19/2004 * QUITAR EL DIGITO DE CHEQUEO SI ES EL CASO.
+REPLACE MODE      * FAC0003     *
+REPLACE MODE      *----------------------------------------------------------------*
+REPLACE MODE       01  NUM-ID-W-BDIIVIDE.
+REPLACE MODENUIP02     03  NUM-ID-W11-BDIIVIDE           PIC 9(11)(11) VALUE ZEROS.     FAC0003
+REPLACE MODENUIP02     03  NUM-ID-W11-R-BDIIVIDE REDEFINES NUM-ID-W11-BDIIVIDE.     FAC0003
+REPLACE MODENUIP02         05 NUM-ID-W10-BDIIVIDE        PIC 9(10)(10).                 FAC0003
+REPLACE MODENUIP02         05 RESTO-NUM-ID-BDIIVIDE      PIC 9.                     FAC0003
+REPLACE MODE       01  NOMBRES-AUX-W-BDIIVIDE.
+REPLACE MODE           03 PRIMER-APELLIDO-BDIIVIDE       PIC X(15)(15) VALUE SPACES.
+REPLACE MODE           03 SEGUNDO-APELLIDO-BDIIVIDE      PIC X(15)(15) VALUE SPACES.
+REPLACE MODE           03 PRIMER-NOMBRE-BDIIVIDE         PIC X(15)(15) VALUE SPACES.
+REPLACE MODE           03 SEGUNDO-NOMBRE-BDIIVIDE        PIC X(15)(15) VALUE SPACES.
+REPLACE MODE           03 NOM-LEIDO-BDIIVIDE             PIC X(65)(65) VALUE SPACES.
+REPLACE MODE
+REPLACE MODENUIP01 01 PARAMETROS-ENTRADA-BDIIVIDE        PIC X(100)(100) VALUE SPACES.   FAC0002
+REPLACE MODE       01 PARAMETROS-ENTRADA-R-BDIIVIDE REDEFINES
+REPLACE MODE                                            PARAMETROS-ENTRADA-BDIIVIDE.
+REPLACE MODE           03 TIP-IDE-BDIIVIDE               PIC X.
+REPLACE MODE           03 NUM-IDE-BDIIVIDE               PIC X(11)(11) JUSTIFIED RIGHT.
+REPLACE MODENUIP01     03 NUM-IDE-BDIIVIDE-R REDEFINES   NUM-IDE-BDIIVIDE           FAC0002
+REPLACE MODENUIP01                                       PIC 9(11)(11).                 FAC0002
+REPLACE MODE           03 NOMBRE-BDIIVIDE                PIC X(65)(65).
+REPLACE MODE           03 SW-VERIFNOM-BDIIVIDE           PIC 9.
+REPLACE MODE           03 NUM-BLOQUES-BDIIVIDE           PIC 9.
+REPLACE MODENUIP01     03 SW-VALTIPID-BDIIVIDE           PIC 9.                     FAC0002
+REPLACE MODENUIP01     03 SW-ASGTIPID-BDIIVIDE           PIC 9.                     FAC0002
+REPLACE MODENUIP02     03 SW-DIGCHEQUEO-BDIIVIDE         PIC 9.                     FAC0003
+REPLACE MODENUIP02     03 FILLER-BDIIVIDE                PIC X(18)(18).                 FAC0003
+REPLACE MODE
+REPLACE MODE       01 PARAMETROS-SALIDA-BDIIVIDE.
+REPLACE MODE          03 NOM-VAL-BDIIVIDE                PIC X(65)(65) VALUE SPACES.
+REPLACE MODE          03 SW-ID-BDIIVIDE                  PIC 9 VALUE 0.
+REPLACE MODE          03 SW-NOMBRES-BDIIVIDE             PIC 9 VALUE 0.
+REPLACE MODENUIP01    03 SW-TID-BDIIVIDE                 PIC 9 VALUE 0.             FAC0002
+REPLACE MODEREMARK*BDIIVIDE.WS.v03.0003.
+*----------------------------------------------------------------*
+* F.CUADROS   * INCLUSION DE VALIDACION PARA TIPO-ID. = 2 y
+* JUL.19/2004 * QUITAR EL DIGITO DE CHEQUEO SI ES EL CASO.
+* FAC0003     *
+*----------------------------------------------------------------*
+01  NUM-ID-W-BDIIVIDE.
+NUIP02     03  NUM-ID-W11-BDIIVIDEPIC 9(11) VALUE ZEROS.     FAC0003
+NUIP02     03  NUM-ID-W11-R-BDIIVIDE REDEFINES NUM-ID-W11-BDIIVIDE.     FAC0003
+NUIP0205 NUM-ID-W10-BDIIVIDEPIC 9(10).FAC0003
+NUIP0205 RESTO-NUM-ID-BDIIVIDEPIC 9.FAC0003
+01  NOMBRES-AUX-W-BDIIVIDE.03 PRIMER-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.03 SEGUNDO-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.03 PRIMER-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.03 SEGUNDO-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.03 NOM-LEIDO-BDIIVIDEPIC X(65) VALUE SPACES.
+
+NUIP01 01 PARAMETROS-ENTRADA-BDIIVIDEPIC X(100) VALUE SPACES.   FAC0002
+01 PARAMETROS-ENTRADA-R-BDIIVIDE REDEFINES
+PARAMETROS-ENTRADA-BDIIVIDE.03 TIP-IDE-BDIIVIDEPIC X.03 NUM-IDE-BDIIVIDEPIC X(11) JUSTIFIED RIGHT.
+NUIP01     03 NUM-IDE-BDIIVIDE-R REDEFINES   NUM-IDE-BDIIVIDEFAC0002
+NUIP01PIC 9(11).FAC000203 NOMBRE-BDIIVIDEPIC X(65).03 SW-VERIFNOM-BDIIVIDEPIC 9.03 NUM-BLOQUES-BDIIVIDEPIC 9.
+NUIP01     03 SW-VALTIPID-BDIIVIDEPIC 9.FAC0002
+NUIP01     03 SW-ASGTIPID-BDIIVIDEPIC 9.FAC0002
+NUIP02     03 SW-DIGCHEQUEO-BDIIVIDEPIC 9.FAC0003
+NUIP02     03 FILLER-BDIIVIDEPIC X(18).FAC000301 PARAMETROS-SALIDA-BDIIVIDE.03 NOM-VAL-BDIIVIDEPIC X(65) VALUE SPACES.03 SW-ID-BDIIVIDEPIC 9 VALUE 0.03 SW-NOMBRES-BDIIVIDEPIC 9 VALUE 0.
+NUIP01    03 SW-TID-BDIIVIDEPIC 9 VALUE 0.FAC0002
+~
+~
+~
+~
+~
+~
+43 fewer lines:qNo write since last change (:quit! overrides):q!icdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIALE.WS
+"BDIIALE.WS" [Read only] 81 lines, 5734 characters * BDIIALE-WS.v01.0007
+REMARK* VARIABLES RELACIONADAS CON LAS ALERTAS DEL SISTEMA
+REMARK**************************************************************************
+REMARK* RMB0002   * TIPALE: CREACION DE DIFERENTES TIPOS DE ALERTA, QUE SE
+REMARK* R.MARTINEZ* PUEDEN GENERAR SOBRE DIFERENTES TIPOS DE INFORMACION
+REMARK* ABRIL/2006* (ARCHIVOS)
+REMARK*************************************************************************
+REMARK* RMB0003   * CIU001: AJUSTES PARA MANEJO DE ALERTAS DE CIUDADANOS DE
+REMARK* R.MARTINEZ* COLOMBIA.
+REMARK* NOV./2006 *
+REMARK*************************************************************************
+REMARK* VHF0004     * REFCOM - SE AJUSTA EL TAMAO DE LAS LINEAS DE    *
+REMARK* VICTOR HUGO *DETALLE DE ALERTA YA QUE SU TAMAO*
+REMARK* FORERO*ESTABA DE 81 Y NO DE 80 QUE ES ESTANDAR *
+REMARK* OCT.29/2008 **
+REMARK******************************************************************
+REMARK* GJC0005     * LEY001 - SE CAMBIA EL GUIN INICIAL DE LA PRESENTACION
+REMARK* G.JIMENEZ   *DE LA ALEERTA POR UN ESPACIO EN BLANCO. ESTO
+REMARK* MARZO 2/2009*PARA EVITAR QUE SE INTERPRETE COMO ALGO
+REMARK**NEGATIVO
+remark******************************************************************
+REMARK* RMB0006     * INDE01 - SE AGREGA VARIABLE QUE INDICA QUE YA SE SABE
+REMARK* R.MARTINEZ  *QUE LA OTRA IDENTIFICACION TIENE CUENTAS
+REMARK* JUNIO 4/2013*PORQUE SE DETERMINO ANTES QUE ERA INDEPENDIENTE
+REMARK******************************************************************
+01 VARIABLES-BDIIALE.
+INDE01    02 ES-INDEPENDIENTE-BDIIALEPIC 9(01) VALUE 0.RMB0006
+INDE01    02 MIRO-SIES-INDEPENDIENTE-BDIIALE    PIC 9(01) VALUE 0.RMB0006
+CIU001    02 MAES-BDIIALE-TITLE    PIC X(20)RMB0003
+CIU001VALUE "$DATABASE/BDIIALE".RMB000302 EST-BDIIALEPIC X(02) VALUE "00".02 FIN-BDIIALEPIC 9(01) VALUE 0.
+TIPALE    02 PROCESAR-BDIIALEPIC 9(01) VALUE 0.RMB000202 CONT-LINEAS-BDIIALE   PIC 9(03) VALUE 0.02 ABIERTO-BDIIALEPIC 9(01) VALUE 0.02 TIP-IDE-AUX-BDIIALE   PIC 9(01) VALUE 0.02 NUM-IDE-AUX-BDIIALE   PIC 9(11) VALUE 0.
+REFCOM    02 MARCAR-ICBTCO-BDIIALE PIC 9(01) VALUE 0.VHF0004
+CIU001    02 FECHA-AUX-BDIIALE     PIC 9(08) VALUE 0.RMB0003
+CIU001    02 FECHA-NOV-AUX-BDIIALE PIC 9(08) VALUE 0.RMB0003
+CIU001    02 FECHA-VEN-AUX-BDIIALE PIC 9(08) VALUE 0.RMB0003
+CIU001    02 FECHA-REP-AUX-BDIIALE PIC 9(08) VALUE 0.RMB0003
+CIU001    02 FUENTE-AUX-BDIIALE    PIC 9(06) VALUE 0.RMB0003
+CIU001    02 NOMFUE1-AUX-BDIIALE   PIC X(14) VALUE SPACES.RMB0003
+CIU001    02 NOMFUE2-AUX-BDIIALE   PIC X(14) VALUE SPACES.RMB0003
+CIU001    02 CODALE-AUX-BDIIALE    PIC 9(03) VALUE 0.RMB0003
+CIU001    02 TIPALE-AUX-BDIIALE    PIC X(01) VALUE SPACES.RMB0003
+CIU001    02 TEXTO1-AUX-BDIIALE    PIC X(50) VALUE SPACES.RMB0003
+CIU001    02 TEXTO2-AUX-BDIIALE    PIC X(50) VALUE SPACES.RMB0003"BDIIALE.WS" [Read only] 81 lines, 5734 characters
+CIU001    02 INF-DATAHOST-AUX-BDIIALEPIC X(18) VALUE SPACES.RMB0003CIU001    02 INF-DATAHOST-AUX-BDIIALEPIC X(18) VALUE SPACES.RMB0003
+TIPALE    02 PAR-CODBLOALERPIC 9(1)  VALUE 1.RMB0002
+TIPALE    02 PAR-MSGBLOALERPIC X(60) VALUERMB0002
+TIPALE" ALERTA DADA POR LA ENTIDAD".RMB0002
+TIPALE 01 M-ALERTA.RMB0002
+TIPALE    03 V-ALERTA   OCCURS 40 TIMES PIC 9(02).RMB0002
+01 TITULOS-BDIIALE.02 FILLERPIC X(30) VALUE ALL "=".02 FILLER    PIC X(20) VALUE "==== [ ALERTAS ] ===".02 FILLERPIC X(30) VALUE ALL "=".02 FILLER    PIC X(20) VALUE "FUENTEFEC".02 FILLER    PIC X(20) VALUE "HADESCRIP".02 FILLER    PIC X(20) VALUE "CION".02 FILLER    PIC X(20) VALUE "".02 FILLERPIC X(80) VALUE ALL "=".
+CIU001 01 LINEA1-BDIIALE-TIT.RMB0003
+LEY001    02 RAYA-BDIIALEPIC X(01) VALUE " ".GJC0005
+CIU001    02 NOMFUE-LIN1-BDIIALE   PIC X(14) VALUE SPACES.RMB0003
+CIU001    02 FILLERPIC X(01) VALUE SPACES.RMB0003
+CIU001    02 FEC-NOV-LIN1-BDIIALE  PIC X(11) VALUE SPACES.RMB0003
+CIU001    02 FILLERPIC X(01) VALUE SPACES.RMB0003
+CIU001    02 TEXTO-LIN1-BDIIALE    PIC X(50) VALUE SPACES.RMB0003
+REFCOM    02 FILLERPIC X(02) VALUE SPACES.VHF0004
+CIU001 01 LINEA2-BDIIALE-TIT.RMB0003
+CIU001    02 FILLERPIC X(01) VALUE SPACES.RMB0003
+CIU001    02 NOMFUE-LIN2-BDIIALE   PIC X(14) VALUE SPACES.RMB0003
+CIU001    02 FILLERPIC X(01) VALUE SPACES.RMB0003
+CIU001    02 FILLERPIC X(11) VALUE SPACES.RMB0003
+CIU001    02 FILLERPIC X(01) VALUE SPACES.RMB0003
+CIU001    02 TEXTO-LIN2-BDIIALE    PIC X(50) VALUE SPACES.RMB0003
+REFCOM    02 FILLERPIC X(02) VALUE SPACES.VHF0004
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ view VALNOM.WS
+"VALNOM.WS" [Read only] 53 lines, 3266 characters ******* VALNOM-WS.v.0002
+******* DESCRIPCION DE CADA UNO DE LOS CAMPOS BASICOS E INDEPENDIENTES QUE
+******* UTILIZAN LAS RUTINAS DELDE NOMBRES DE LA RUTINA VALNOM.PROC
+*****************************************************************************
+REMARK* GJC0002    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
+REMARK* G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
+REMARK* MARZO/2003 *
+REMARK*************************************************************************
+01 VARIABLES-VALNOM.03 VECTOR-INPUT-VALNOM.04 VM-INPUT-VALNOM     OCCURS 20 TIMES .05 VMM-INPUT-VALNOM OCCURS 15 TIMES PIC X.03 VECTOR-OK-VALNOM.04 VM-OK-VALNOMOCCURS 20 TIMES.05 VMM-OK-VALNOM    OCCURS 15 TIMES PIC X.03 BLOQOK-AUX-VALNOMPIC 9(2).03 CADENA-VALNOM.
+04 FILLERPIC X(2) VALUE "A ".04 NOMBRE-AUX-VALNOMPIC X(65).04 FILLER REDEFINES NOMBRE-AUX-VALNOM.05 VNOM-AUX-VALNOM OCCURS 65 TIMES PIC X.03 BASURA-VALNOMPIC X(10).03 BLOQUES-INPUT-VALNOMPIC 9(2).03 NOMBRE-INPUT-VALNOMPIC X(65).03 FILLER REDEFINES NOMBRE-INPUT-VALNOM.05 V-NOMBRE-VALNOMPIC X OCCURS 65 TIMES.03 NOMBOK-INPUT-VALNOMPIC X(65).03 FILLER REDEFINES NOMBOK-INPUT-VALNOM.05 V-NOMBOK-VALNOMPIC X OCCURS 65 TIMES.03 TIP-ID-INPUT-VALNOMPIC 9(02).03 MATCH-OK-OUT-VALNOMPIC 9(01).03 A-VALNOMPIC 9(05).
+VALMEJ     03 I-VALNOMPIC 9(05).GJC0002
+VALMEJ     03 J-VALNOMPIC 9(05).GJC0002
+VALMEJ     03 K-VALNOMPIC 9(05).GJC0002
+VALMEJ     03 L-VALNOMPIC 9(05).GJC0002
+VALMEJ     03 M-VALNOMPIC 9(05).GJC000203 INI-VALNOMPIC 9(02).03 LON-VALNOMPIC 9(02).03 LETRAS-OK-VALNOMPIC 9(02).03 LETRAS-OK2-VALNOMPIC 9(02).03 TOTLET-OK-VALNOMPIC 9(02).03 TOTLET-INP-VALNOMPIC 9(02).03 PEDAZO-VALNOMPIC X(15).03 POR-TOT-VALNOMPIC 9(05).03 POR-INP-VALNOMPIC 9(05).03 APROX-TOT-VALNOMPIC 9(05).03 APROX-INP-VALNOMPIC 9(05).
+VALMEJ     03 VECTORES-VALNOM.GJC0002"VALNOM.WS" [Read only] 53 lines, 3266 charactersVALMEJ     03 VECTORES-VALNOM.GJC0002
+VALMEJ04 FILLEROCCURS 256 TIMES.GJC0002
+VALMEJ05 CONT-LET-INPUT-VALNOM PIC 9(2).GJC0002
+VALMEJ05 CONT-LET-OK-VALNOM    PIC 9(2).GJC0002
+VALMEJ     03 VAL-APELLIDO-VALNOMPIC 9.GJC0002
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qicdgd@codes /d/iccol/desarrollo/copys
+$ vire    we ICFILE.WS
+ksh: viwe:  not found
+icdgd@codes /d/iccol/desarrollo/copys
+$ view ICFILE.WS
+"ICFILE.WS" [Read only] 350 lines, 25866 characters REMARK* ICFILE-WS.v.0043.
+REMARK* COPY PARA DIRECCIONAR LOS ARCHIVOS.
+REMARK*****************************************************************
+REMARK* RMB0008     * SE ADICIONA NOMBRE DE ARCHIVO DE BASE DE DATOS
+REMARK*R.MARTINEZ   * UNIVERSAL.
+REMARK******************************************************************
+REMARK* VHF0009     * SE ADICIONA TABLA DE CIIUS*
+REMARK* VICTOR HUGO **
+REMARK* FORERO**
+REMARK* DIC.01/2000 **
+REMARK******************************************************************
+REMARK* VHF0010     * SE ADICIONAN COPYS PARA MANEJOS DE NOMBRES DE :  *
+REMARK* VICTOR HUGO * NOMCCB - CAMARA DE COMERCIO DE BOGOTA*
+REMARK* FORERO* NOMREG - REGISTRADURIA*
+REMARK* SEP.10/2001 * NOMDAS - DAS*
+REMARK** NMDIAN - DIAN*
+REMARK******************************************************************
+REMARK* VHF0011     * SE ADICIONAN NOMBRES DE ARCHIVO DE NOMBRES DE    *
+REMARK* VICTOR HUGO * BYINGTON*
+REMARK* FORERO**
+REMARK* FEB.18/2002 **
+REMARK******************************************************************
+REMARK* FAC0012     * BDIEND - SE ADICIONAN RUTAS DE ARCHIVOS PARA     *
+REMARK* F.CUADROS   * MANEJO DE ENDEUDAMIENTO GLOBAL*
+REMARK* SEP.04/2002 **
+REMARK* GJC0012     * DTCLOG - SE ADICIONA NOMBRE DEL ARCHIVO DE LOG DE*
+REMARK* G.JIMENEZ   * MODIFIFICACIONES EN LINEA Y DATACIUDADANOS*
+REMARK* OCT.29/2002 **
+REMARK******************************************************************
+REMARK* VHF0013     * ARCHIVOS ASOCIADOS CON SISTEMA DATACIUDADANOS    *
+REMARK* VICTOR HUGO * DTCING - ARCHIVO DE INGRESOS FALLIDOS*
+REMARK* FORERO* DTCFAL - MUESTRA LA ULTIMA TRANSACCION ANTES DE  *
+REMARK* ENE.16/2003 *LAS BAJADAS DEL SISTEMA NORMAL O ANORMAL*
+REMARK** DTCMDF - CONTIENE CONSECUTIVOS DE RADICACION Y   *
+REMARK**ENTRADA-ENTIDAD*
+REMARK** DTCTRA - LOG DE INSTRUCCIONES SQL FALLIDAS*
+REMARK* GJC0013     * BDL001 - NOMBRE DE ARCHIVO DE CLIENTES DE DIREC- *
+REMARK**CIONES Y TELEFONOS*
+REMARK** DTCABD - NOMBRE DE ARCHIVO DE MANEJO DE CAMBIOS  *
+REMARK**EN REGISTROS DE CARTERA Y CUENTAS CO-   *
+REMARK**RRIENTES CON RECLAMOS VIGENTES*
+REMARK******************************************************************
+REMARK* GJC0014     * DTCAB1 - NOMBRE DE ARCHIVO DE MANEJO DE CAMBIOS  *
+REMARK* G.JIMENEZ   *EN REGISTROS DE CARTERA Y CUENTAS CO-   *
+REMARK* ENE.16/2003 *RRIENTES CON RECLAMOS VIGENTES AJUSTE EN*
+REMARK**NOMBRE*
+REMARK******************************************************************
+REMARK* FAC0015     * WEB001 - INCLUSION DE NOMBRES DE ARCHIVOS PARA   *
+REMARK* F.CUADROS C.*MANEJO DE CLAVES WEB*"ICFILE.WS" [Read only] 350 lines, 25866 charactersrrREMARK* F.CUADROS C.*MANEJO DE CLAVES WEB*
+REMARK* FEB.14/2003 **
+REMARK******************************************************************
+REMARK* FAC0016     * MODBDI - INCLUSION DE NOMBRES DE ESTRUCTURAS DE  *
+REMARK* F.CUADROS C.*BDII: BASES DE DATOS DE IDENTIFICACION, *
+RMEARK* MAR.03/2003 *CON NUEVOS DISENOS.*
+REMARK******************************************************************
+REMARK* GJC0017     * DTCCOM - CREACION DEL ARCHIVO DE COMENTARIOS DEL *
+REMARK* G.JIMENEZ   *SISTEMA DE DATACIUDADANOS.*
+RMEARK* JUN.05/2003 **
+REMARK* VHF0017     * DTCNHB - DIRECCIONA ARCHIVO DE DIAS NO HABILES   *
+REMARK* VICTOR HUGO * ICDACT - SE ADICIONA NOMBRE DE ARCHIVO DE*
+REMARK* FORERO*ESTADISTICAS DE SUSCRIPTORES ICDACT     *
+REMARK******************************************************************
+REMARK* FAC0018     * MODDIR-  INCLUSION DE NOMBRES DE ESTRUCTURAS DE  *
+REMARK* F.CUADROS C.*ACTALOG Y VALVEST EN NUEVA RUTA*
+RMEARK* JUL.09/2003 *en $TRABAJO/logs*
+REMARK******************************************************************
+REMARK* GJC0019     * CONRAZ-  INCLUSION DE NOMBRE DE ESTRUCTURA CONRAZ*
+REMARK* G.JIMENEZ  .**
+RMEARK* SEP.11/2003 **
+REMARK******************************************************************
+REMARK* GJC0020     * FRAUDE - INCLUSION DE MANEJO DE ARCHIVO FRALOG   *
+REMARK* G.JIMENEZ  .**
+RMEARK* OCT.14/2004 **
+REMARK******************************************************************
+REMARK* GJC0021     * PRODUC - SE INCLUYE MANEJO DE ARCHIVO DE*
+REMARK* G.JIMENEZ   *PRODUCTOS*
+RMEARK* ABR/2005    **
+REMARK******************************************************************
+REMARK* FAC0022     * FRAUD2 - SE INCLUYE MANEJO DE ARCHIVO DE*
+REMARK* F.CUADROS   *FRAINQ.DAT*
+RMEARK* JUN.23/2005 **
+REMARK******************************************************************
+REMARK* FAC0023     * REPMIC - SE INCLUYE TITULO DE ARCHIVO*
+REMARK* F.CUADROS   *HISTORICO PARA MICROCREDITO*
+RMEARK* SEP.02/2005 **
+REMARK******************************************************************
+REMARK* FAC0023     * SUPT08 - INCLUSION DE TITULO DE MAESTRO DE*
+REMARK* F.CUADROS   *LA SUPERBANCARIA POR CAMBIO A FORMATO   *
+REMARK* OCT.28/2005 *TIPO 8*
+REMARK***
+REMARK******************************************************************
+REMARK* FAC0024     * LOGCAL - INCLUSION DE RUTA DE ARCHIVO DE LOGS    *
+REMARK* F.CUADROS   *PARA PROCESOS DEL AREA DE CALIDAD.*
+REMARK* OCT.17/2006 **
+REMARK******************************************************************
+REMARK* CAV0025     * NVAPRE - INCLUSION DE RUTA DE ARCHIVO DE*
+REMARK* F.CUADROS   *PREGUNTAS GRUPALES PARA FRAINQGR*REMARK* F.CUADROS   *PREGUNTAS GRUPALES PARA FRAINQGR*
+REMARK* SEP.11/2007 **
+REMARK******************************************************************
+REMARK* FLT0026     * BDSCOR - INCLUSION DE RUTA DE ARCHIVO DE*
+REMARK* F.LOZANO T. *SCORES MENSUALES.*
+REMARK* OCT.31/2007 **
+REMARK******************************************************************
+REMARK* CAV0027     * LOGCAL - INCLUSION DE RUTA DE ARCHIVO DE LOG     *
+REMARK* C.VELASCO   *DE LOS PROCESOS DE CALIDAD EJECUTADOS   *
+REMARK* MAR.05/2009 * LOGDRP - RUTA ARCHIVO PARA ACTUALIZAR DRP*
+REMARK******************************************************************
+REMARK* EAL0028     * ICMVLR - INCLUSION DE RUTA DE ARCHIVOS ICMVLR    *
+REMARK* E.ALVAREZ   *PARA PROCESAR 48 MESES DEL ARCHIVO*
+REMARK* JUN.19/2009 **
+REMARK******************************************************************
+REMARK* RGH0029     * MOD029 - MODIFICAR LONGUITUD DE VARIABLES*
+REMARK* R.GALVIS    *MAES-DIRECTORY ARCHIVOS ICMVLR*
+REMARK* JUL.09/2009 *DE 17 A 16 POSICIONES*
+REMARK** CHEQ01 - SE INCLUYE DEFINICION DE MAESTRO DE     *
+REMARK**CHEQUES*
+REMARK******************************************************************
+REMARK* VHF0030     * ICMCLN - INCLUSION DE RUTA DE NUEVO ARCHIVO DE   *
+REMARK* V.FORERO    *CLIENTES*
+REMARK* SEP.28/2009 **
+REMARK******************************************************************
+REMARK* CAV0031     * NHC002 - INCLUSION DE RUTA DE NUEVO ARCHIVO DE   *
+REMARK* C.VELASCO   *MARCAS PRIVADAS PARA TARJETAS*
+REMARK* OCT.09/2009 **
+REMARK******************************************************************
+REMARK* RGH0032* MOD032 - INCLUIR ARCHIVOS DE RECONOCER +*
+REMARK* R. GALVIS H.  *BDLDIRACE*
+REMARK* ENE. 01/2010  *BDLMAIEXC*
+REMARK* INTERSCHEMES. *BDLTELEXC*
+REMARK******************************************************************
+REMARK* LAG0033* SCOPRE - INCLUIR ARCHIVO SCOREPREC*
+REMARK* AGO. 02/2010  *BDLMAIEXC*
+REMARK* G.DESARROLLO  *BDLTELEXC*
+REMARK* GJC0033* FRZMYR - SE INCLUYE MANEJO DE ARCHIVO DE DES-  *
+REMARK* G.JIMENEZ     *PLAZADOS Y SECUESTRADOS - FUERZA MA-  *
+REMARK* OCT./2010     *YOR*
+REMARK******************************************************************
+REMARK* GJC0034* BDANOM - SE INCLUYE MANEJO DE ARCHIVO DE POR-  *
+REMARK* G.JIMENEZ     *CENTAJE DE NOMBRES Y APELLIDOS BDANOM *
+REMARK* FEB./2011     **
+REMARK******************************************************************
+REMARK* CAV0035* AJDANE - SE INCLUYE MANEJO DE ARCHIVO DANE DE  *
+REMARK* C.VELASCO     *CIUDADES,DEPARTEAMENTOS Y CABECERAS O *
+REMARK* ABR./2011     *CENTROS POBLADOS (DVPDANE)*
+REMARK******************************************************************REMARK******************************************************************
+REMARK* CAV0036* CARIND - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *CARACTERISTICAS USA PRECALCULADAS     *
+REMARK* MAY./2011     *TITLE-CARACT-IND*
+REMARK******************************************************************
+REMARK* FARF037* FRABDU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+REMARK* F.RODRIGUEZ   *DE DATOS UNIVERSAL DE PREGUNTAS*
+REMARK* JUN.22/2011   **
+REMARK******************************************************************
+REMARK* CAV0038* AJCIIU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+REMARK* C.VELASCO.    *HISTORICA DE CODIGOS CIIU Y ACTIVIDAD *
+REMARK* SEP.21/2011   *ECONOMICA*
+REMARK******************************************************************
+REMARK* CAV0039* MCREHI - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCREH QUE CONTIENE EL HISTORICO     *
+REMARK* JUN./2011     *DE REGISTRO CERRADOS > 5 AOS*
+REMARK******************************************************************
+REMARK* CAV0040* NUECMP - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCONTTRJ  CONTIENE LA RELACION DE   *
+REMARK* 09/ABR./2013  *CONTRATO-TARJETA PARA TIPO CTA = 02.  *
+REMARK******************************************************************
+REMARK* GJC0041* VALOR1 - REQUERIMIENTO 15452 CREACION PRODUCTO *
+REMARK* G.JIMENEZ     *VALORA. DEFINICION DE ARCHIVO QUE MA- *
+REMARK* 20/SEP./2013  *NEJA LOS COBROS EN 2 MOMENTOS, UN     *
+REMARK**QUE COBRA Y LOS OTROS NO
+REMARK******************************************************************
+REMARK* GLB0042* EVID03 - MEJORAS SISTEMA EVIDENTE*
+REMARK* GLOBANT*PROD00006585*
+REMARK* NOV-2013* SPRINT3*
+REMARK******************************************************************
+REMARK* JJM0043* SCORPJ - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK* J. MELGAREJO  *SCORE PJ.*
+REMARK* MAR-2014* SCOSTB - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK**SCORE STABILITY  (BDSCOREHIS)
+******************************************************************
+*
+040100 01  FILE-TITLES.
+BDU002     05  BDUUNI-TITLEPIC X(80) VALUE "$BDU/BDUUNI".RMB0008
+040200     05  NOMB-APEL-TITLE     PIC X(80) VALUE "$DATABASE/ICBNAP".
+040300     05  CLAVE-TITLEPIC X(80) VALUE "$DATABASE/ICBCLA".
+040500     05  TERM-TITLEPIC X(80) VALUE "$DATABASE/ICBTER".
+040600     05  MAES-PERSON-TITLE   PIC X(80) VALUE "$DATABASE/ICMPER".
+040600     05  MAES-CHECK-TITLE    PIC X(80) VALUE "$DATABASE/ICMCHK".
+040600     05  MAES-CREDIT-TITLE   PIC X(80) VALUE "$DATABASE/ICMCRE".
+ICGD06     05  MAES-MICROC-TITLE   PIC X(80) VALUE "$DATABASE/ICMMCR".  DLM0001
+CHEQ01     05  MAES-ICMCHQ-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHQ".  GJC0029
+041100     05  INDEXADO-TITLEPIC X(80) VALUE "$DATABASE/ICBCON".
+041200     05  SECUENCIAL-TITLE    PIC X(80) VALUE "$DATABASE/ICBTCO".
+041300     05  SUSCRIPTOR-TITLE    PIC X(80) VALUE "$DATABASE/ICBSUS"./SCORPJ/ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE5PIC X(63).EAL0028
+ICMVLREAL0028
+ICMVLR     05  MAES-ICMVLR-TITLE6.EAL0028
+MOD02907 MAES-DIRECTORY6PIC X(16) VALUERGH0029
+ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE6PIC X(63).EAL0028
+MOD032     05 TITLE-BDLDIRACE  PIC X(80) VALUE "$DATABASE/BDLDIRACE".   RGH0032
+MOD032     05 TITLE-BDLMAIEXC  PIC X(80) VALUE "$DATABASE/BDLMAIEXC".   RGH0032
+MOD032     05 TITLE-BDLTELEXC  PIC X(80) VALUE "$DATABASE/BDLTELEXC".   RGH0032
+BDANOM     05 TITLE-BDANOM     PIC X(80) VALUE "$DATABASE/BDANOM".GJC0034
+FRZMYR     05 TITLE-FRZMYR     PIC X(80) VALUE "$DATABASE/FRZMYR".GJC0033
+AJDANE     05 TITLE-DVPDANE    PIC X(80) VALUE "$DATABASE/DVPDANE.DAT". CAV0035
+CARIND     05 TITLE-CARACT-IND PIC X(80) VALUECAV0036
+CARIND"$DATABASE/CARACTUSA-INDCL".   CAV0036
+FRABDU     05 FRABDU-TITLE     PIC X(25) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU".     FARF037
+FRABDU     05 FRABDV-TITLE     PIC X(29) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU.NEW". FARF037
+AJCIIU     05 MAES-ICMHCIIU-TITLE PIC X(80) VALUE "$DATABASE/ICMHCIIU". CAV0038
+NUECMP     05 MAES-ICMCONTTRJ-TITLE PIC X(80) VALUECAV0040
+NUECMP"$DATABASE/ICMCONTTRJ".CAV0040
+VALOR1     05 TITLE-ICBCOB     PIC X(16) VALUE "$DATABASE/ICBCOB".GJC0041
+SCORPJ     05 TITLE-SCODAPJA   PIC X(37) VALUE "$DATABASE/SCODAPJA".    JJM0043
+SCOSTB 01 TITLE-BDSCOREHIS.JJM0043
+SCOSTB    02 FILLERPIC X(21) VALUE "$DATABASE/BDSCOREHIS.".   JJM0043
+SCOSTB    02 ANO-ANT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2013.JJM0043
+SCOSTB    02 FILLERPIC X(01) VALUE "-".JJM0043
+SCOSTB    02 ANO-ACT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2014.JJM0043
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~/Address search hit BOTTOM without matching pattern?REMARK* JUN.22/2011   **
+REMARK******************************************************************
+REMARK* CAV0038* AJCIIU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+REMARK* C.VELASCO.    *HISTORICA DE CODIGOS CIIU Y ACTIVIDAD *
+REMARK* SEP.21/2011   *ECONOMICA*
+REMARK******************************************************************
+REMARK* CAV0039* MCREHI - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCREH QUE CONTIENE EL HISTORICO     *
+REMARK* JUN./2011     *DE REGISTRO CERRADOS > 5 AOS*
+REMARK******************************************************************
+REMARK* CAV0040* NUECMP - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCONTTRJ  CONTIENE LA RELACION DE   *
+REMARK* 09/ABR./2013  *CONTRATO-TARJETA PARA TIPO CTA = 02.  *
+REMARK******************************************************************
+REMARK* GJC0041* VALOR1 - REQUERIMIENTO 15452 CREACION PRODUCTO *
+REMARK* G.JIMENEZ     *VALORA. DEFINICION DE ARCHIVO QUE MA- *
+REMARK* 20/SEP./2013  *NEJA LOS COBROS EN 2 MOMENTOS, UN     *
+REMARK**QUE COBRA Y LOS OTROS NO
+REMARK******************************************************************
+REMARK* GLB0042* EVID03 - MEJORAS SISTEMA EVIDENTE*
+REMARK* GLOBANT*PROD00006585*
+REMARK* NOV-2013* SPRINT3*
+REMARK******************************************************************
+REMARK* JJM0043* SCORPJ - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK* J. MELGAREJO  *SCORE PJ.*
+REMARK* MAR-2014* SCOSTB - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK**SCORE STABILITY  (BDSCOREHIS)
+******************************************************************
+*
+040100 01  FILE-TITLES.
+BDU002     05  BDUUNI-TITLEPIC X(80) VALUE "$BDU/BDUUNI".RMB0008
+040200     05  NOMB-APEL-TITLE     PIC X(80) VALUE "$DATABASE/ICBNAP".
+040300     05  CLAVE-TITLEPIC X(80) VALUE "$DATABASE/ICBCLA".
+040500     05  TERM-TITLEPIC X(80) VALUE "$DATABASE/ICBTER".
+040600     05  MAES-PERSON-TITLE   PIC X(80) VALUE "$DATABASE/ICMPER".
+040600     05  MAES-CHECK-TITLE    PIC X(80) VALUE "$DATABASE/ICMCHK".
+040600     05  MAES-CREDIT-TITLE   PIC X(80) VALUE "$DATABASE/ICMCRE".
+ICGD06     05  MAES-MICROC-TITLE   PIC X(80) VALUE "$DATABASE/ICMMCR".  DLM0001
+CHEQ01     05  MAES-ICMCHQ-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHQ".  GJC0029
+041100     05  INDEXADO-TITLEPIC X(80) VALUE "$DATABASE/ICBCON".
+041200     05  SECUENCIAL-TITLE    PIC X(80) VALUE "$DATABASE/ICBTCO".
+041300     05  SUSCRIPTOR-TITLE    PIC X(80) VALUE "$DATABASE/ICBSUS".
+041400     05  ARCHNITS-TITLEPIC X(80) VALUE "ICDIAN".
+NEWPRE     05  ARCHIVO-CLIENTE     PIC X(80) VALUE "$DATABASE/ICMCLI".
+ICMCLN     05  MAES-ICMCLN-TITLE   PIC X(80) VALUE "$DATABASE/ICMCLN".  VHF0030
+NEWPRE     05  ARCHIVO-PREPAGOS    PIC X(80) VALUE "$DATABASE/ICMPRE".
+NEWPRE     05  ARCHIVO-USUARIOS    PIC X(80) VALUE "$DATABASE/ICMUSU".
+SCODAT     05  TITLE-SCODTBPIC X(80) VALUE "$DATABASE/SCODTB".
+SECREA     05  TITLE-BDIRMAE1PIC X(80) VALUE "$DATABASE/BDIRMAE1"./ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE5PIC X(63).EAL0028
+ICMVLREAL0028
+ICMVLR     05  MAES-ICMVLR-TITLE6.EAL0028
+MOD02907 MAES-DIRECTORY6PIC X(16) VALUERGH0029
+ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE6PIC X(63).EAL0028
+MOD032     05 TITLE-BDLDIRACE  PIC X(80) VALUE "$DATABASE/BDLDIRACE".   RGH0032
+MOD032     05 TITLE-BDLMAIEXC  PIC X(80) VALUE "$DATABASE/BDLMAIEXC".   RGH0032
+MOD032     05 TITLE-BDLTELEXC  PIC X(80) VALUE "$DATABASE/BDLTELEXC".   RGH0032
+BDANOM     05 TITLE-BDANOM     PIC X(80) VALUE "$DATABASE/BDANOM".GJC0034
+FRZMYR     05 TITLE-FRZMYR     PIC X(80) VALUE "$DATABASE/FRZMYR".GJC0033
+AJDANE     05 TITLE-DVPDANE    PIC X(80) VALUE "$DATABASE/DVPDANE.DAT". CAV0035
+CARIND     05 TITLE-CARACT-IND PIC X(80) VALUECAV0036
+CARIND"$DATABASE/CARACTUSA-INDCL".   CAV0036
+FRABDU     05 FRABDU-TITLE     PIC X(25) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU".     FARF037
+FRABDU     05 FRABDV-TITLE     PIC X(29) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU.NEW". FARF037
+AJCIIU     05 MAES-ICMHCIIU-TITLE PIC X(80) VALUE "$DATABASE/ICMHCIIU". CAV0038
+NUECMP     05 MAES-ICMCONTTRJ-TITLE PIC X(80) VALUECAV0040
+NUECMP"$DATABASE/ICMCONTTRJ".CAV0040
+VALOR1     05 TITLE-ICBCOB     PIC X(16) VALUE "$DATABASE/ICBCOB".GJC0041
+SCORPJ     05 TITLE-SCODAPJA   PIC X(37) VALUE "$DATABASE/SCODAPJA".    JJM0043
+SCOSTB 01 TITLE-BDSCOREHIS.JJM0043
+SCOSTB    02 FILLERPIC X(21) VALUE "$DATABASE/BDSCOREHIS.".   JJM0043
+SCOSTB    02 ANO-ANT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2013.JJM0043
+SCOSTB    02 FILLERPIC X(01) VALUE "-".JJM0043
+SCOSTB    02 ANO-ACT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2014.JJM0043
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~?REMARK* JUN.22/2011   **
+REMARK******************************************************************
+REMARK* CAV0038* AJCIIU - SE INCLUYE MANEJO DE ARCHIVO DE BASE  *
+REMARK* C.VELASCO.    *HISTORICA DE CODIGOS CIIU Y ACTIVIDAD *
+REMARK* SEP.21/2011   *ECONOMICA*
+REMARK******************************************************************
+REMARK* CAV0039* MCREHI - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCREH QUE CONTIENE EL HISTORICO     *
+REMARK* JUN./2011     *DE REGISTRO CERRADOS > 5 AOS*
+REMARK******************************************************************
+REMARK* CAV0040* NUECMP - SE INCLUYE EL NOMBRE DEL ARCHIVO  DE  *
+REMARK* C.VELASCO     *ICMCONTTRJ  CONTIENE LA RELACION DE   *
+REMARK* 09/ABR./2013  *CONTRATO-TARJETA PARA TIPO CTA = 02.  *
+REMARK******************************************************************
+REMARK* GJC0041* VALOR1 - REQUERIMIENTO 15452 CREACION PRODUCTO *
+REMARK* G.JIMENEZ     *VALORA. DEFINICION DE ARCHIVO QUE MA- *
+REMARK* 20/SEP./2013  *NEJA LOS COBROS EN 2 MOMENTOS, UN     *
+REMARK**QUE COBRA Y LOS OTROS NO
+REMARK******************************************************************
+REMARK* GLB0042* EVID03 - MEJORAS SISTEMA EVIDENTE*
+REMARK* GLOBANT*PROD00006585*
+REMARK* NOV-2013* SPRINT3*
+REMARK******************************************************************
+REMARK* JJM0043* SCORPJ - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK* J. MELGAREJO  *SCORE PJ.*
+REMARK* MAR-2014* SCOSTB - SE INCLUYE UN NUEVO TITLE PARA EL     *
+REMARK**SCORE STABILITY  (BDSCOREHIS)
+******************************************************************
+*
+040100 01  FILE-TITLES.
+BDU002     05  BDUUNI-TITLEPIC X(80) VALUE "$BDU/BDUUNI".RMB0008
+040200     05  NOMB-APEL-TITLE     PIC X(80) VALUE "$DATABASE/ICBNAP".
+040300     05  CLAVE-TITLEPIC X(80) VALUE "$DATABASE/ICBCLA".
+040500     05  TERM-TITLEPIC X(80) VALUE "$DATABASE/ICBTER".
+040600     05  MAES-PERSON-TITLE   PIC X(80) VALUE "$DATABASE/ICMPER".
+040600     05  MAES-CHECK-TITLE    PIC X(80) VALUE "$DATABASE/ICMCHK".
+040600     05  MAES-CREDIT-TITLE   PIC X(80) VALUE "$DATABASE/ICMCRE".
+ICGD06     05  MAES-MICROC-TITLE   PIC X(80) VALUE "$DATABASE/ICMMCR".  DLM0001
+CHEQ01     05  MAES-ICMCHQ-TITLE   PIC X(80) VALUE "$DATABASE/ICMCHQ".  GJC0029
+041100     05  INDEXADO-TITLEPIC X(80) VALUE "$DATABASE/ICBCON".
+041200     05  SECUENCIAL-TITLE    PIC X(80) VALUE "$DATABASE/ICBTCO".
+041300     05  SUSCRIPTOR-TITLE    PIC X(80) VALUE "$DATABASE/ICBSUS".
+041400     05  ARCHNITS-TITLEPIC X(80) VALUE "ICDIAN".
+NEWPRE     05  ARCHIVO-CLIENTE     PIC X(80) VALUE "$DATABASE/ICMCLI".
+ICMCLN     05  MAES-ICMCLN-TITLE   PIC X(80) VALUE "$DATABASE/ICMCLN".  VHF0030
+NEWPRE     05  ARCHIVO-PREPAGOS    PIC X(80) VALUE "$DATABASE/ICMPRE".
+NEWPRE     05  ARCHIVO-USUARIOS    PIC X(80) VALUE "$DATABASE/ICMUSU".
+SCODAT     05  TITLE-SCODTBPIC X(80) VALUE "$DATABASE/SCODTB".
+SECREA     05  TITLE-BDIRMAE1PIC X(80) VALUE "$DATABASE/BDIRMAE1"./NUECMPICMVLREAL0028
+ICMVLR     05  MAES-ICMVLR-TITLE5.EAL0028
+MOD02907 MAES-DIRECTORY5PIC X(16) VALUERGH0029
+ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE5PIC X(63).EAL0028
+ICMVLREAL0028
+ICMVLR     05  MAES-ICMVLR-TITLE6.EAL0028
+MOD02907 MAES-DIRECTORY6PIC X(16) VALUERGH0029
+ICMVLR"$VALORES/ICMVLR-". EAL0028
+ICMVLR07 MAES-FILE6PIC X(63).EAL0028
+MOD032     05 TITLE-BDLDIRACE  PIC X(80) VALUE "$DATABASE/BDLDIRACE".   RGH0032
+MOD032     05 TITLE-BDLMAIEXC  PIC X(80) VALUE "$DATABASE/BDLMAIEXC".   RGH0032
+MOD032     05 TITLE-BDLTELEXC  PIC X(80) VALUE "$DATABASE/BDLTELEXC".   RGH0032
+BDANOM     05 TITLE-BDANOM     PIC X(80) VALUE "$DATABASE/BDANOM".GJC0034
+FRZMYR     05 TITLE-FRZMYR     PIC X(80) VALUE "$DATABASE/FRZMYR".GJC0033
+AJDANE     05 TITLE-DVPDANE    PIC X(80) VALUE "$DATABASE/DVPDANE.DAT". CAV0035
+CARIND     05 TITLE-CARACT-IND PIC X(80) VALUECAV0036
+CARIND"$DATABASE/CARACTUSA-INDCL".   CAV0036
+FRABDU     05 FRABDU-TITLE     PIC X(25) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU".     FARF037
+FRABDU     05 FRABDV-TITLE     PIC X(29) VALUEFARF037
+FRABDU"$VALORES/frabduact/FRABDU.NEW". FARF037
+AJCIIU     05 MAES-ICMHCIIU-TITLE PIC X(80) VALUE "$DATABASE/ICMHCIIU". CAV0038
+NUECMP     05 MAES-ICMCONTTRJ-TITLE PIC X(80) VALUECAV0040
+NUECMP"$DATABASE/ICMCONTTRJ".CAV0040
+VALOR1     05 TITLE-ICBCOB     PIC X(16) VALUE "$DATABASE/ICBCOB".GJC0041
+SCORPJ     05 TITLE-SCODAPJA   PIC X(37) VALUE "$DATABASE/SCODAPJA".    JJM0043
+SCOSTB 01 TITLE-BDSCOREHIS.JJM0043
+SCOSTB    02 FILLERPIC X(21) VALUE "$DATABASE/BDSCOREHIS.".   JJM0043
+SCOSTB    02 ANO-ANT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2013.JJM0043
+SCOSTB    02 FILLERPIC X(01) VALUE "-".JJM0043
+SCOSTB    02 ANO-ACT-TITLE-BDSCOREHIS  PIC 9(04) VALUE 2014.JJM0043
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~nn:qNo write since last change (:quit! overrides):q!icdgd@codes /d/iccol/desarrollo/copys
+$ view BDIIVIDE.PROC
+"BDIIVIDE.PROC" [Read only] 287 lines, 18386 characters REMARK*BDIIVIDE.PROC.v.03.0008
+REMARK******************************************************************
+REMARK*RUTINA DE VALIDACION DE IDENTIFICACIONES
+REMARK******************************************************************
+* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+REMARK******************************************************************
+* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+REMARK******************************************************************
+* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+* AGO.11/2004 * DIGITO DE CHEQUEO.
+* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+** CORRESPONDE AL RANGO.
+REMARK******************************************************************
+* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+REMARK******************************************************************
+* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN
+* OCT.19/2005 * RUTINA VALIDAR-TIPO-ID PARA NITS QUE SON NUIPS
+* FAC006C     *
+REMARK******************************************************************
+* C.VELASCO   * SE VUELVE A LA VERSION ANTES DE MODIFICAR LOS
+* JUL.12/2012 * RANGOS DE IDENTIFICACIONES,  LOS AJUSTES DE LA
+* CAV0008     * VERSION 07, IMPACTA APERTURAS Y PROCESOS ESPEC.
+REMARK******************************************************************
+80100-VALIDAR-IDENTIFICACION.
+REMARK*===================================*
+REMARK*80100-VALIDAR-IDENTIFICACION.
+REMARK* Valida el numero de identificacion contra las bases de datos
+REMARK* de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+REMARK* y verifica la coincidencia del nombre reportado
+REMARK*===================================*INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOMNOMBRES-AUX-W-BDIIVIDEINSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+NUIP01    IF SW-VERIFNOM-BDIIVIDE NOT NUMERICFAC0002
+NUIP01MOVE ZEROS TO SW-VERIFNOM-BDIIVIDEFAC0002
+NUIP01    END-IFFAC0002
+NUIP01    IF SW-ASGTIPID-BDIIVIDE NOT NUMERICFAC0002
+NUIP01MOVE ZEROS TO SW-ASGTIPID-BDIIVIDEFAC0002
+NUIP01    END-IFFAC0002
+NUIP01    IF SW-VALTIPID-BDIIVIDE NOT NUMERICFAC0002"BDIIVIDE.PROC" [Read only] 287 lines, 18386 characters/NUIP04/RANGO5NUM-IDE-BDIIVIDE-R  <  800000000) ORFAC0005
+NUIP01(NUM-IDE-BDIIVIDE-R >= 6000000000 ANDFAC0002
+RANGO5NUM-IDE-BDIIVIDE-R  <  8000000000)FAC0005
+NUIP01MOVE 3 TO TIP-IDE-BDIIVIDEFAC0002
+NUIP01ELSE MOVE 4 TO TIP-IDE-BDIIVIDEFAC0002
+NUIP01END-IF.FAC0002
+
+NUIP01 80400-VALIDAR-TIPO-ID.FAC0002
+REMARK*================================================================
+NUIP01*80400-VALIDAR-TIPO-ID.FAC0002
+NUIP01*VALIDACION DEL TIPO DE IDENTIFICACION DE ACUERDO AL RANGOFAC0002
+NUIP01*CONTENIDO EN EL NUMERO DE IDENTIFICACION. SE PREGUNTA AL REVES.  FAC0002
+NUIP01*PARAMETRO DE ENTRADA SW-VALTIPID-BDIVIIDE = 1;FAC0002
+NUIP01*RETORNA SW-TID-BDIIVIDE = 1 SI ESTA ERRADO.FAC0002
+REMARK*================================================================
+NUIP01    INITIALIZE PARAMETROS-SALIDA-BDIIVIDEFAC0002
+NUIP01    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"FAC0002
+NUIP01    EVALUATE TIP-IDE-BDIIVIDEFAC0002
+NUIP01WHEN 1FAC0002
+NUIP01IF NUM-IDE-BDIIVIDE-R > 9999999999FAC0002
+NUIP01MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+NUIP01END-IFFAC0002
+NUIP01WHEN 2FAC0002
+NUIP04IF NUM-IDE-BDIIVIDE-R >  9999999999 ORFAC006C
+RANGO5(NUM-IDE-BDIIVIDE-R <= 800000000 AND >= 600000000)FAC0005
+NUIP01MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+NUIP01END-IFFAC0002
+NUIP01WHEN 3FAC0002
+RANGO5IF NUM-IDE-BDIIVIDE-R > 800000000 OR < 600000000FAC0005
+NUIP01MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+NUIP01END-IFFAC0002
+NUIP01    END-EVALUATE.FAC0002
+
+NUIP03 80500-ELIMINAR-DIGITO-CHEQUEO.FAC0004
+REMARK*================================================================
+NUIP03*80500-ELIMINAR-DIGITO-CHEQUEO.FAC0004
+REMARK*Elimina el digito de chequeo y cambia el tipo de identificacion
+REMARK*de acuerdo a los rangos para tipo id = 2 y 3
+REMARK*================================================================
+NUIP03IF (NUM-IDE-BDIIVIDE-R >= 600000000 ANDFAC0004
+RANGO5NUM-IDE-BDIIVIDE-R  <  800000000) ORFAC0005
+NUIP03(NUM-IDE-BDIIVIDE-R >= 6000000000 ANDFAC0004
+RANGO5NUM-IDE-BDIIVIDE-R  < 8000000000)FAC0005
+NUIP03MOVE 3 TO TIP-IDE-BDIIVIDEFAC0004
+NUIP03END-IFFAC0004
+NUIP03IF (NUM-IDE-BDIIVIDE-R >= 800000000 ANDFAC0004
+RANGO5NUM-IDE-BDIIVIDE-R  <= 999999999) ORFAC0005
+NUIP03(NUM-IDE-BDIIVIDE-R >= 8000000000 ANDFAC0004
+RANGO5NUM-IDE-BDIIVIDE-R  <= 9999999999)FAC0005/Address search hit BOTTOM without matching pattern/Address search hit BOTTOM without matching pattern:qicdgd@codes /d/iccol/desarrollo/copys
+$ view VALNOM.PROC
+"VALNOM.PROC" [Read only] 420 lines, 24053 characters REMARK*VALNOM-PROC.v.0005
+REMARK******************************************************************
+REMARK* RUTINA CREADA PARA HACER LA VALIDACION DE NOMBRES CONTRA LOS
+REMARK* ARCHIVOS DE LA REGISTRADURIA, DIAN Y DAS, DEPENDIENDO DEL TIPO
+REMARK* DE IDENTIFICACION RECIBIDA.
+REMARK*    PARAMETROS
+REMARK*BLOQUES-INPUT-VALNOM - NUMERO DE BLOQUES A VALIDAR
+REMARK*NOMBRE-INPUT-VALNOM  - NOMBRE A VALIDAR
+REMARK*NOMBOK-INPUT-VALNOM  - NOMBRE CORRECTO CON EL QUE SE
+REMARK*DEBE COMPARAR NOMBRE-INPUT-VALNOM
+REMARK*TIP-ID-INPUT-VALNOM  - TIPO DE IDENTIFICACION A VALIDAR
+REMARK*    SALIDAS:
+REMARK*MATCH-OK-OUT-VALNOM  - 0-NO HUBO1-HUBO
+REMARK*******************************************************************
+REMARK* RMB0002   * VAL001: SE MEJORA LA VALIDACION DE NOMBRES EN PERSONAS
+REMARK* R.MARTINEZ* JURIDICAS
+REMARK* DIC.2002  *
+REMARK*******************************************************************
+REMARK* GJC0003    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
+REMARK* G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
+REMARK* MARZO/2003 * PARA CEDULAS, EL COMODIN QUE USUALMENTE CORRESPONDE A LA N
+REMARK** SOLO SE COMPARA CONTRA N O CONTRA BLANCOS
+REMARK*************************************************************************
+REMARK* GJC0004    * VALME1 :CON EL FIN DE AFINAR AUN MAS EL PROCESO DE VALIDA-
+REMARK* R.MARTINEZ * CION DE NOMBRES, EN EL MATCH A PROXIMADO DE PERSONAS NATU-
+REMARK* G.JIMENEZ  * RALES SE CAMBIA EL CALCULO FINAL PARA DETERMINAR SI UN BLO-
+REMARK* MARZO/2003 * QUE ES O NO VALIDO. PARA QUE UN NOMBRE QUE VENGA NUMERICO
+REMARK** NO SE CONVIERTA EN COMODIN, EN LAS SUSTITUCIONES POR *
+REMARK** SE VALIDA QUE EL CONTENIDO NO SEA NUMERICO.
+REMARK*************************************************************************
+REMARK* GJC0005    * VLNM01: LOS PROGRAMAS ABORTAN CUANDO ALGUNO DE LOS
+REMARK* G.JIMENEZ  *PARAMETROS DE UN SUBSTRING QUEDA EN 0 O EN
+REMARK* NOV/2005   *UN NUMERO MENOR QUE 0. EJ: NOMBRE(I:J) DONDE I O
+REMARK**J ES 0.
+REMARK*************************************************************************
+10000-MATCH-NOMBRES-VALNOM.
+REMARK******************************************************************
+REMARK*10000-MATCH-NOMBRE-VALNOM.
+REMARK* SE BUSCA DETERMINAR SI EL NOMBRE DE LA PERSONA CONSULTADA HACE
+REMARK*CON EL NOMBRE ENVIADO EN LA CONSULTA.
+REMARK******************************************************************MOVE 0 TO MATCH-OK-OUT-VALNOM.MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.IF TIP-ID-INPUT-VALNOM  = 2INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
+VAL001" S.A. " BY "",RMB0002
+VAL001"." BY " ", " LTDA " BY "",RMB0002
+VAL001" LIMITADA " BY "",RMB0002
+VAL001" CIA " BY "     ", " COMPA/IA " BY "",RMB0002"VALNOM.PROC" [Read only] 420 lines, 24053 characters:qicdgd@codes /d/iccol/desarrollo/copys
+$ 
+icdgd@codes /d/iccol/desarrollo/copys
+$ ^D

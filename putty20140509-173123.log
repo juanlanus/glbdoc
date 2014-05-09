@@ -1,0 +1,394 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.09 17:31:23 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May  9 10:10:41 2014 from 172.16.10.84
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ viset
+
+ ######    ##    #        #####    ##            ######  #
+ #        #  #   #          #     #  #           #       #
+ #####   #    #  #          #    #    #          #####   #
+ #       ######  #          #    ######          #       #                ###
+ #       #    #  #          #    #    #          #       #                ###
+ #       #    #  ######     #    #    #          ######  ######           ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo $ls
+-PER12-01-00DEM
+*
+
+$TEMPORALES-ICGLEY.CON
+$TEMPORALES-ICGLEY.CON.idx
+001009001-COB-006.txt
+010047.20130131.T.DUPBDL
+100055300703
+17021.aif
+172.24.2.7
+20130715Formulario_0004
+20140312MiDataCredito.zip
+20609.aif
+27
+a
+actualizacion
+ALERTA_100005_1_BANCAMIA_X_GRUPOS.20131222
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140103.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140215.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140216.Z
+ALERTA_100005_2_AV_VILLAS_X_ENTIDAD.20140217.Z
+algo
+analistas
+ANALITICO1X.TXT
+animator
+archivos15Apr18Apr2013.zip
+archtemp
+arregla-maes
+auditor
+BD_EXTRACUPOS.h
+BD_NOVEDAT.h
+BD_SSO.h
+BDACSN
+BDACSN.idx
+BDIDAN
+BDIDAN.idx
+BDIDIN
+BDIDIN.idx
+BDIEGARJ.log
+BDIESN
+BDIESN01
+BDIIALEDB2.aif
+BDIILAN
+BDIILAN.idx
+BDIREN
+BDIREN01
+BDLDI2.PROC
+BDLDIM
+BDLDIRESTR-n.log
+BDLEST
+BDLLDIRL.SAL
+BDLLDIRL.SAL1
+BDLLDIRL.SAL2
+BDLPART
+BDLPART.idx
+binds
+borra2
+BORRAR.msg
+borrar.sh
+BSTRACE.XFH
+busq-dcifra
+c-cobdb2-use
+campes
+CARACTNEW.CBL
+cataloga
+cc
+cccc
+ccierr.log
+ced.txt
+ced1.txt
+ced3.txt
+ced5.txt
+ced5.txt-
+cedulas.log.idx
+cedulas.txt.dlm
+cgic.a
+cgic.h
+cgic107.tar.gz
+cgicobol1
+cgiesq
+change.log
+chequeo
+CITIBURO
+cobconfig
+cobconfig-icimsd
+cobconfig.20140320
+cobconfig.gav
+cobconfig.gjc
+cobconfig.ok
+cobconfig.pjv
+cobconfig.rmb
+cobconfig.vhf
+cobjrun32.20140228.core
+cobol-db2yyyy
+CobolFico.jar
+CobolFico.jar-ant
+CobolFico.jar1
+CobolFico.zip
+comp_conver16
+comp_conver32
+comp_conver64
+comp-pais
+copys
+copys-linea.zip
+copyscopy1.fd
+core
+CQ10461P3-PER36-02NUM
+CTLN97-BLQ.490028.SAL
+CTLN97.490028.SAL
+cvs-progr
+daevalxxx.txt
+daevalxxx.txt2
+DAP
+dar
+database
+datacas.log
+datacas.txt
+datos
+DATOSBBVA
+daviclientes.txt
+dcutil_old.jar
+dcutil.jar
+dead.letter
+deborrar1
+DecisorWS Logs 2701201401.55.zip
+demo
+demo.class
+demo.jar
+demo.java
+demo.txt
+Dep-DatabaseReport.txt
+Dep-LicenseReport.txt
+deptos
+Desinstalar
+Desplegar
+Desplegar_pruebas
+Despliegue_Fallido
+Dev-DatabaseReport.txt
+Dev-LicenseReport.txt
+direcciones
+DTCBLQ.20140319.core
+DTCBLQ.lst
+DTCCON
+DTCCON.idx
+DTCMDF.20140502.core
+env.txt
+errs.txt
+especiales
+extfh-450.cfg
+extfh-pes.cfg
+extfh-pva.cfg
+extfh-pva201311.cfg
+extfh.cfg
+extfh.cfg-20121108
+extfh.cfg.20140320
+EXTRAE.20140303.core
+f0028.zipp
+facturacion1-5sept.txt
+file.txt.2014-02-18
+fuentes
+fuentes-especiales.zip
+fuentes-linea.zip
+gj1
+Hello_Word
+hs_err_pid19424.log
+hs_err_pid20875.log
+hs_err_pid27175.log
+hs_err_pid5611.log
+ICBCON
+ICBCON.idx
+iceprecol493.cbl
+icestd65vc-reloaded.aif
+ICGCON.20140407.core
+ICGCPL-CAV.aif
+ICGCPL.20140225.core
+ICGCPL.20140327.core
+ICGCPL.20140331.core
+ICGCPL.20140403.core
+ICGCPLPB.20140326.core
+ICGCPLPB.20140327.core
+ICGCPLPB.20140403.core
+ICGCPLPB.20140409.core
+ICGCPLPB.20140414.core
+ICGCPLPB.20140506.core
+ICGD12.aif
+ICGD12V54.aif
+ICGD22V37.aif
+ICGD25.aif
+ICGD27.aif
+ICGD40.aif
+ICGD60V12.aif
+ICGD67D.ipf
+ICGD67D.prf
+ICGD89V02.aif
+ICGDI2.aif
+ICGFPRPB.aif
+ICGFRP.20140228.core
+ICGFRP.20140508.core
+ICGFRPPB.20140224.core
+ICGFRPPB.20140226.core
+ICGFRPPB.20140303.core
+ICGFRPPB.20140319.core
+ICGFRPPB.20140508.core
+ICGFRR.20140228.core
+ICGFRR.20140508.core
+ICGFRR.aif
+ICGFRRPB.20140305.core
+ICGFRS.20140310.core
+ICGFRSPB.20140305.core
+ICGFRV.20140228.core
+ICGFRV.20140508.core
+ICGFRVPB.20140224.core
+ICGFRVPB.20140225.core
+ICGFRVPB.20140305.core
+ICGFRVPB.20140306.core
+ICGFVLPB.20140224.core
+ICGFVLPB.20140306.core
+ICGKAR.20140321.core
+ICGKAR.20140407.core
+ICGKAR.aif
+ICGKARPB.aif
+ICGKARPB.eje
+ICGMDF.20140303.core
+ICGMDF.20140313.core
+ICGMDF.20140320.core
+ICGS06.20140223.core
+ICGS07.aif
+ICGSSO.20140228.core
+ICJCAR.20140224.core
+ICMCREBANK.201301.log
+icregis
+icrgd
+icrpgd
+ides-dario
+IMSG-01.prn.log
+install_stb.sh
+jars
+journal.txt.001
+journal.txt.010
+lista-usu
+listados
+listbatch.txt
+listdemo.txt
+listservers.txt
+LOG-STRN-TIMESRV-20140221
+LOGTRANS-20130307-003
+LOGTRANS-20130319-001
+LOGTRANS-20130509-001
+LOGTRANS-20130527-001
+LOGTRANS-20130607-001
+LOGTRANS-20130625-001
+LOGTRANS-20130626-001
+LOGTRANS-20130723-001
+LOGTRANS-20130809-001
+LOGTRANS-20130823-001
+LOGTRANS-20140123-001
+LOGTRANS-20140123-002
+LOGTRANS-20140326-001
+macros
+macros-linea.zip
+mbox.icjamd
+METPAS01.aif
+mfpoll-172.24.2.206.txt
+mfpoll.txt
+monitoreo
+nohup.out
+objetos
+ori
+p15805-bbog.val-201404040809
+p15805-bbog.val-201404040810
+p15929580_72_SOLARIS64.zip
+pasa-archivos.sh
+pglbs-2
+pglbs-2-GLBLS-2
+pPER48.LOG
+ppppp
+prb
+prb.file
+pru10.val-20140307
+pru10.valcontrol
+pru101.val-201403071746
+prueba_desa
+rai
+Requerimiento-camaras.zip
+restore20140210
+rmbA
+RMBCURSOCCI.20140224.core
+RMBSERVCCITCP.20140320.core.001
+RMBSERVCCITCP.20140320.core.010
+RMBSERVCCITCP.20140326.core
+RMBSERVCCITCP.20140407.core
+salida.txt
+salida3.txt
+script1
+secretstuff
+setup_visualcobol_deveclipse_2.1_suse_x86_64
+sf
+SGID
+sh-CambioLeyendas.sh
+sh-CARACTNEW
+sh-ConsultaCamaras.log
+sh-MERCADO-COLMENA-CONS
+sol9-bfagent-7.1.1.3-0-0041-sparc-opt
+stt
+sxsecuritypack51.09_00_dev.tar.encr
+sxsecuritypack51.09_00_server.tar.encr
+Tablas_Parametros
+Tablas_Parametros_Produccion
+TBL-USER-UNICOS.TXT
+temporales
+TERAEN0
+terminales
+TESDB2.20140410.core
+testsftp.sh
+trabajo
+truss-969-icgcon
+usuarios
+utiles
+utiles-linea.zip
+UTLADEXT.20140322.core
+UTLADEXT.20140324.core
+UTLADEXT.20140404.core
+UTLESTACT.fecha
+UTLLISHUE.20140404.core
+utlucorcre.gnt
+UTLULONGITUDES.CBL
+viset
+XFHLOG
+xxyy.log
+/d/iccol/desarrollo $^D

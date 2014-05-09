@@ -1,0 +1,188 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.07 12:16:23 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed May  7 09:41:43 2014 from 172.16.10.31
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ man 3 exec
+No manual entry for 3.
+Reformatting page.  Please Wait... done
+
+User Commands                                             exec(1)
+
+NAME
+     exec, eval, source - shell  built-in  functions  to  execute
+     other commands
+
+SYNOPSIS
+  sh
+     exec [argument...]
+
+     eval [argument...]
+
+  csh
+     exec command
+
+     eval argument...
+
+     source [-h] name
+
+  ksh
+     *exec [arg...]
+
+     *eval [arg...]
+
+DESCRIPTION
+  sh
+     The exec command specified by the arguments is  executed  in
+     place   of  this  shell  without  creating  a  new  process.
+     Input/output arguments may appear and, if no other arguments
+     are given, cause the shell input/output to be modified.
+
+     The arguments to the eval built-in are read as input to  the
+     shell and the resulting command(s) executed.
+
+  csh
+     exec executes command in place of the current  shell,  which
+     terminates.
+
+     eval reads its arguments as input to the shell and  executes
+     the  resulting  command(s).  This is usually used to execute
+     commands generated as the result of command or variable sub-
+     stitution.
+
+     source reads commands from  name.  source  commands  may  be
+     nested,  but if they are nested too deeply the shell may run
+     out of file descriptors. An error in a sourced file  at  any
+     level terminates all nested source commands.
+--More--(33%)icdgd@codes /d/iccol/desarrollo
+$ set -o
+Current option settings
+allexport        off
+bgnice           on
+emacs            off
+errexit          off
+gmacs            off
+ignoreeof        off
+interactive      on
+keyword          off
+markdirs         off
+monitor          on
+noexec           off
+noclobber        on
+noglob           off
+nolog            off
+notify           off
+nounset          off
+privileged       off
+restricted       off
+trackall         off
+verbose          off
+vi               on
+viraw            off
+xtrace           off
+icdgd@codes /d/iccol/desarrollo
+$ ex
+:q
+icdgd@codes /d/iccol/desarrollo
+$ ex -V
+:q
+icdgd@codes /d/iccol/desarrollo
+$ echo $EXINIT
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/proc/7121/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ ex
+:q
+icdgd@codes /d/iccol/desarrollo
+$ ex 2> qqq.txt
+:set all
+noautoindent            nomodelines                     showmode
+autoprint               nonumber                        noslowopen
+noautowrite             nonovice                        tabstop=4
+nobeautify              nooptimize                      taglength=0
+directory=/var/tmp      paragraphs=IPLPPPQPP LIpplpipnppplpipbptags=tags /usr/lib/tags
+noedcompatible          prompt                          tagstack
+noerrorbells            noreadonly                      term=vt220
+noexrc                  redraw                          noterse
+flash                   remap                           timeout
+hardtabs=8              report=5                        ttytype=vt220
+ignorecase              scroll=4                        warn
+nolisp                  sections=NHSHH HUuhsh+c         window=8
+nolist                  shell=/bin/ksh                  nowrapscan
+magic                   shiftwidth=4                    wrapmargin=0
+mesg                    showmatch                       nowriteany
+:q
+icdgd@codes /d/iccol/desarrollo
+$ cat qqq.txt
+icdgd@codes /d/iccol/desarrollo
+$ rm qqq.txt
+icdgd@codes /d/iccol/desarrollo
+$ lsof icdgd
+ksh: lsof:  not found
+icdgd@codes /d/iccol/desarrollo
+$ exec 2> errs.txt
+vi salida.txt
+"salida.txt" 10 lines, 2732 characters Trying 172.24.2.7...
+Connected to 172.24.2.7.
+Escape character is '^]'.
+@
+@
+@
+@
+@"salida.txt" 10 lines, 2732 characters:q
+^D
+^C^C^C
+q
+^D^D^D^D^D^D^D^D^D^D
+^D^D^D
+:q!
+exit

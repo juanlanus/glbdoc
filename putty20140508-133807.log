@@ -1,0 +1,355 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.08 13:38:07 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed May  7 10:39:29 2014 from 172.16.10.31
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/proc/9245/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ vi viset
+"viset" 18 lines, 858 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comendo ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+echo ` echo /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 18 lines, 858 characters[1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$  echo /proc/$$/cmdline
+/proc/9245/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $  echo /proc/$$/cmdline$  echo  /proc/$$/cmdline$  echo ´/proc/$$/cmdline$  echo ´/proc/$$/cmdline´$  echo f´/proc/$$/cmdline´$  echo 
+´/proc/9245/cmdline´
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $  echo ´/proc/$$/cmdline´$  echo ``/proc/$$/cmdline`  e`$  echo `/proc/$$/cmdline` $  echo `
+ksh: /proc/9245/cmdline:  not found
+
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $  echo `/proc/$$/cmdline`$  echo `e/proc/$$/cmdline`$  echo `ec/proc/$$/cmdline`$  echo `ech/proc/$$/cmdline`$  echo `echo/proc/$$/cmdline`$  echo `echo /proc/$$/cmdline`$  echo `echo 
+/proc/9245/cmdline
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comendo ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+echo ` echo /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~echo ` echech$CHANGE MODEcat:w"viset" 18 lines, 857 characters [1] + Stopped (SIGTSTP)        vi viset
+icdgd@codes /d/iccol/desarrollo
+$ echo ` cat /proc/$$/cmdline`
+cat: cannot open /proc/9245/cmdline
+
+icdgd@codes /d/iccol/desarrollo
+$ viset
+viset running
+cat: cannot open /proc/10904/cmdline
+
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+icdgd@codes /d/iccol/desarrollo
+$ echo $$
+9245
+icdgd@codes /d/iccol/desarrollo
+$ ld^Hs ^H^[[D  $ ld^Hs ^H        
+icdgd@codes /d/iccol/desarrollo
+$ ls /proc/9245
+as         ctl        lstatus    object     psinfo     status
+auxv       cwd        lusage     pagedata   rmap       usage
+contracts  fd         lwp        path       root       watch
+cred       lpsinfo    map        priv       sigact     xmap
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ ls /proc/9245$ ls $ echo $$      $ els /proc/9245$ ls -/proc/9245$ ls -l/proc/9245$ ls -la/proc/9245$ ls -la /proc/9245$ ls -la 
+total 4894
+dr-x--x--x   5 icdgd    icdatacr     832 May  8 11:37 .
+dr-xr-xr-x 680 root     root      480032 May  8 11:45 ..
+-rw-------   1 icdgd    icdatacr 1998848 May  8 11:37 as
+-r--------   1 icdgd    icdatacr     152 May  8 11:37 auxv
+dr-x------   2 icdgd    icdatacr      32 May  8 11:37 contracts
+-r--------   1 icdgd    icdatacr      44 May  8 11:37 cred
+--w-------   1 icdgd    icdatacr       0 May  8 11:37 ctl
+lr-x------   1 icdgd    icdatacr       0 May  8 11:37 cwd -> 
+dr-x------   2 icdgd    icdatacr    2064 May  8 11:37 fd
+-r--r--r--   1 icdgd    icdatacr     120 May  8 11:37 lpsinfo
+-r--------   1 icdgd    icdatacr     912 May  8 11:37 lstatus
+-r--r--r--   1 icdgd    icdatacr     536 May  8 11:37 lusage
+dr-xr-xr-x   3 icdgd    icdatacr      64 May  8 11:37 lwp
+-r--------   1 icdgd    icdatacr    1728 May  8 11:38 map
+dr-x------   2 icdgd    icdatacr     544 May  8 11:37 object
+-r--------   1 icdgd    icdatacr    2096 May  8 11:37 pagedata
+dr-x------   2 icdgd    icdatacr    2608 May  8 11:37 path
+-r--------   1 icdgd    icdatacr      72 May  8 11:37 priv
+-r--r--r--   1 icdgd    icdatacr     336 May  8 11:37 psinfo
+-r--------   1 icdgd    icdatacr    1728 May  8 11:37 rmap
+lr-x------   1 icdgd    icdatacr       0 May  8 11:37 root -> 
+-r--------   1 icdgd    icdatacr    1536 May  8 11:37 sigact
+-r--------   1 icdgd    icdatacr    1232 May  8 11:37 status
+-r--r--r--   1 icdgd    icdatacr     256 May  8 11:37 usage
+-r--------   1 icdgd    icdatacr       0 May  8 11:37 watch
+-r--------   1 icdgd    icdatacr    2736 May  8 11:37 xmap
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ ls -la /proc/9245$  /proc/9245      $ c /proc/9245$ ca /proc/9245$ cat /proc/9245$ catt /proc/9245/auxv
+4     j>: {icdgd@codes /d/iccol/desarrollo
+$ PuTTY
+ksh: PuTTY:  not found
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ PuTTY$ cat /proc/9245/auxv$ Cat /proc/9245/auxv$ CAT $ cat /proc/9245/auxv$ cat /proc/9245/aux    contracts
+cat: input error on /proc/9245/contracts: Invalid argument
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/contracts$ cat /proc/9245/         cred
+eeeeksticdgd@codes /d/iccol/desarrollo
+$ PuTTYPuTTYPuTTY^[[D  $ PuTTYPuTTYPuTTY               
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/cred$ cat /proc/9245/    ctl
+cat: cannot open /proc/9245/ctl
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/ctl$ cat /proc/9245/   lpsinfo
+pSk21SkGTSicdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/lpsinfo$ cat /proc/9245/       lstatus
+        0kTSA6*icdgd@codes /d/iccol/desarrollo
+$ PuTTY^[[D  $ PuTTY     cat /proc/9245/lstatus$ cat /proc/9245/       lusage
+\9b`\}&y\9mP\}& &kUT8CDj\&76!r  0jicdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/lusage$ cat /proc/9245/lstatus$ cat /proc/9245/lpsinfo$ cat /proc/9245/ctl    $ cat /proc/9245/cred$ cat /proc/9245/contracts$ PuTTY                   $ cat /proc/9245/auxv$ ls -la /proc/9245  $ 
+total 4894
+dr-x--x--x   5 icdgd    icdatacr     832 May  8 11:37 .
+dr-xr-xr-x 675 root     root      480032 May  8 11:51 ..
+-rw-------   1 icdgd    icdatacr 1998848 May  8 11:37 as
+-r--------   1 icdgd    icdatacr     152 May  8 11:37 auxv
+dr-x------   2 icdgd    icdatacr      32 May  8 11:37 contracts
+-r--------   1 icdgd    icdatacr      44 May  8 11:37 cred
+--w-------   1 icdgd    icdatacr       0 May  8 11:37 ctl
+lr-x------   1 icdgd    icdatacr       0 May  8 11:37 cwd -> 
+dr-x------   2 icdgd    icdatacr    2064 May  8 11:37 fd
+-r--r--r--   1 icdgd    icdatacr     120 May  8 11:37 lpsinfo
+-r--------   1 icdgd    icdatacr     912 May  8 11:37 lstatus
+-r--r--r--   1 icdgd    icdatacr     536 May  8 11:37 lusage
+dr-xr-xr-x   3 icdgd    icdatacr      64 May  8 11:37 lwp
+-r--------   1 icdgd    icdatacr    1728 May  8 11:38 map
+dr-x------   2 icdgd    icdatacr     544 May  8 11:37 object
+-r--------   1 icdgd    icdatacr    2096 May  8 11:37 pagedata
+dr-x------   2 icdgd    icdatacr    2608 May  8 11:37 path
+-r--------   1 icdgd    icdatacr      72 May  8 11:37 priv
+-r--r--r--   1 icdgd    icdatacr     336 May  8 11:37 psinfo
+-r--------   1 icdgd    icdatacr    1728 May  8 11:37 rmap
+lr-x------   1 icdgd    icdatacr       0 May  8 11:37 root -> 
+-r--------   1 icdgd    icdatacr    1536 May  8 11:37 sigact
+-r--------   1 icdgd    icdatacr    1232 May  8 11:37 status
+-r--r--r--   1 icdgd    icdatacr     256 May  8 11:37 usage
+-r--------   1 icdgd    icdatacr       0 May  8 11:37 watch
+-r--------   1 icdgd    icdatacr    2736 May  8 11:37 xmap
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ ls -la /proc/9245$ ls -la /proc/924$ cat /proc/9245/lusage$ cat /proc/9245/      lwp
+cat: input error on /proc/9245/lwp: Invalid argument
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/lwp$ cat /proc/9245/   map
+ a.out   a.out  @W `ufs.85.100.302941 @ ufs.85.100.302941@   ufs.85.100.618491 4 ufs.85.100.618491  4 G 5 ufs.85.100.425603 6`G 7 G 8 F 9 F :ufs.85.100.618502 > G >@ufs.85.100.618502 ? O @f icdgd@codes /d/iccol/desarrollo
+$ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY^[[D  $ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY                                   
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/map$ cat /proc/9245/   priv
+(icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/priv$ cat /proc/9245/
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/priv$ cat /proc/9245/    psinfo
+$$$$ee`Sk.x      $S+ksh-ksh\7HSk21Sk       $TSicdgd@codes /d/iccol/desarrollo
+$ PuTTYPuTTYPuTTY^[[D  $ PuTTYPuTTYPuTTY               cat /proc/9245/psinfo$ cat /proc/9245/      rmap
+ a.out   a.out  @W `ufs.85.100.302941 @ ufs.85.100.302941@   ufs.85.100.618491 4 ufs.85.100.618491  4 G 5 ufs.85.100.425603 6`G 7 G 8 F 9 F :ufs.85.100.618502 > G >@ufs.85.100.618502 ? O @f icdgd@codes /d/iccol/desarrollo
+$ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY^[[D  $ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY                                   cat /proc/9245/rmap$ cat /proc/9245/    sigact
++D+D+D+D+D+D+D+D+D+D+D+D+D+D+Dicdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/sigact$ cat /proc/9245/      status
+        0$$$$B`@j',\7      0kTSj6*icdgd@codes /d/iccol/desarrollo
+$ PuTTY^[[D  $ PuTTY     cat /proc/9245/status$ cat /proc/9245/      watch
+icdgd@codes /d/iccol/desarrollo
+$ ^[  $ cat /proc/9245/watch$ cat /proc/9245/     xmap
+ a.out Tdf   a.out  Tdf @W  `ufs.85.100.302941 Td] @ ufs.85.100.302941@ Td]  ufs.85.100.618491 Td      o "ufs.85.100.618491 Td   o#ufs.85.100.618491 Td   o #`ufs.85.100.618491 Td        o$ ufs.85.100.618491  Td o& (@ufs.85.100.618491 Td        o) ufs.85.100.618491    Td        o ) ufs.85.100.618491         Td        o)`ufs.85.100.618491  Td        o * ufs.85.100.618491
+  Td        o*`ufs.85.100.618491
+ Td        o - ufs.85.100.618491  Td        o-`ufs.85.100.618491 Td        o . ufs.85.100.618491  Td        o2@ufs.85.100.618491 Td o 3 ufs.85.100.618491 Td  o4 ufs.85.100.618491  Td o 4 G  5 ufs.85.100.425603 Td~ 6@G  6@ @G 7 G  8 F  9 F  :ufs.85.100.618502 Td       p > G  >@ufs.85.100.618502 Td   p ? O  @f  icdgd@codes /d/iccol/desarrollo
+$ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY   ^[[D  $ PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY                                        <                                     TTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTY
+icdgd@codes /d/iccol/desarrollo
+$ fg
+vi viset
+# Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+echo viset running
+# esto muestra el comendo ejecutado, el plan es controlar que tenga el "." al
+# comienzo para que se haga efectivo el cambio de ambiente y los set
+echo ` cat /proc/$$/cmdline`
+EXINIT="set ignorecase | set nowrapscan | set showmode | set showmatch | set tabstop=4 | set shiftwidth=4
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+. sh-camamb prunovedat
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~REPLACE 1 CHARa
+
+OPEN MODE# NO EN ESTE UNIX! edebo bustar otra forma, como por ejemplo comparar los 
+OPEN MODE# process ids del shell y del comando, que deber\055an ser iguales
+INSERT MODE# UNIX! debo busREPLACE 1 CHARc
+, que deber\05REPLACE 1 CHARi"viset" 20 lines, 997 characters icdgd@codes /d/iccol/desarrollo
+$ ^D
