@@ -1,0 +1,1257 @@
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIREGI SIN status.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN status.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN status.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN status.........."
+* Total Messages:    52
+* Unrecoverable :     0                    Severe  :    52
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:       19772     Code:           0
+* Total Messages:    53
+* Unrecoverable :     0                    Severe  :    53
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:       19772     Code:           0
+* Total Messages:   406
+* Unrecoverable :     0                    Severe  :   406
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:         170     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO CARGAJUR.CBL.err
+
+
+-------------------------------------------------------------------------------------------
+* Rejected - OPT
+    23     file-status is JURAD-fs.
+* 131-S***************                                                 (   0)**
+**    Unrecognized phrase in SELECT clause
+    29     file-status is ERRS-fs.
+* 131-S***************                                                 (   1)**
+**    Unrecognized phrase in SELECT clause
+   200 FD JURAD.
+*  40-S********                                                        (   1)**
+**    Missing or illegal file name
+   208     03 JURAD-id-numero           redefines 03 JURAD-id-numeroX
+*  13-S*********************************************                   (   4)**
+**    User-name required
+   227 FD ERRS.
+*  40-S*******                                                         (   4)**
+**    Missing or illegal file name
+   536 FD SALIDA.  reemplazado por ERRS, hay referencias (pocas)
+*  12-S*********                                                       (   5)**
+**    Operand SALIDA is not declared
+* 205-S***********************                                         (  10)**
+**    RECORD missing or has zero size
+  1641     read JURAD
+*  40-S**************                                                  (  10)**
+**    Missing or illegal file name
+  1642     evaluate JURAD-fs
+*  12-S*********************                                           (  29)**
+**    Operand JURAD-FS is not declared
+  1647     when "10"
+* 563-S********                                                        (  29)**
+**    A "WHEN" phrase did not have a matching verb and was discarded.
+  1653         display "File status: " JURAD-fs
+*  12-S****************************************                        (  29)**
+**    Operand JURAD-FS is not declared
+  1657     when other
+* 563-S********                                                        (  29)**
+**    A "WHEN" phrase did not have a matching verb and was discarded.
+  1661         display "File status: " JURAD-fs
+*  12-S****************************************                        (  29)**
+**    Operand JURAD-FS is not declared
+  1665     end-evaluate.
+* 564-S****************                                                (  30)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1728     if JURAD-id-numero not > 0
+*  29-S**********************                                          (  30)**
+**    Not a data name
+  1730     end-if
+* 564-S**********                                                      (  31)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1754         VALIDACIONES-FECHAS
+*   5-S***************************                                     (  31)**
+**    User-name VALIDACIONES-FECHAS not unique
+  1757         VALIDACIONES-FECHAS
+*   5-S***************************                                     (  31)**
+**    User-name VALIDACIONES-FECHAS not unique
+  1759     if not ANO-VAL or not MES-VAL or not DIA-VAL
+*   5-S******************                                              (  31)**
+**    User-name ANO-VAL not unique
+  1761     end-if
+* 564-S**********                                                      (  31)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1763     if JURAD-embargos-vigentes not-numeric
+*  54-S******************************************                      (  31)**
+**    Class name required
+  1765     end-if
+* 564-S**********                                                      (  32)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1767     if JURAD-embargos-terminados not-numeric
+*  54-S********************************************                    (  32)**
+**    Class name required
+  1769     end-if
+* 564-S**********                                                      (  32)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1776         VALIDACIONES-FECHAS
+*   5-S***************************                                     (  32)**
+**    User-name VALIDACIONES-FECHAS not unique
+  1779         VALIDACIONES-FECHAS
+*   5-S***************************                                     (  32)**
+**    User-name VALIDACIONES-FECHAS not unique
+  1781     if not ANO-VAL or not MES-VAL or not DIA-VAL
+*   5-S******************                                              (  32)**
+**    User-name ANO-VAL not unique
+  1783     end-if.
+* 564-S**********                                                      (  32)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1792     move JURAD-id-numero to NUM-IDE-BDIIVIDE-R
+*  29-S************************                                        (  32)**
+**    Not a data name
+  1801         TIP-IDE-BDIIVIDE " num ide: " JURAD-id-numero
+*  29-S*****************************************************           (  32)**
+**    Not a data name
+  1829     move JURAD-id-numero to NUM-IDE-BDIIALE
+*  29-S************************                                        (  33)**
+**    Not a data name
+  1842     end-read
+* 564-S************                                                    (  33)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  1970     accept W-hora-inicio from time
+*  12-S************************                                        (  33)**
+**    Operand W-HORA-INICIO is not declared
+  1999     open input JURAD
+*  40-S********************                                            (  36)**
+**    Missing or illegal file name
+  2000     evaluate JURAD-fs
+*  12-S*********************                                           (  36)**
+**    Operand JURAD-FS is not declared
+  2003         when other
+* 368-S************                                                    (  36)**
+**    Exception phrase inappropriate
+  2006             display "File status: " JURAD-fs
+*  12-S********************************************                    (  36)**
+**    Operand JURAD-FS is not declared
+  2009     end-evaluate.
+* 564-S****************                                                (  36)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2014     open output ERRS
+*  40-S********************                                            (  36)**
+**    Missing or illegal file name
+  2015     evaluate ERRS-fs
+*  12-S********************                                            (  36)**
+**    Operand ERRS-FS is not declared
+  2018         when other
+* 368-S************                                                    (  37)**
+**    Exception phrase inappropriate
+  2021             display "File status: " ERRS-fs
+*  12-S*******************************************                     (  37)**
+**    Operand ERRS-FS is not declared
+  2024     end-evaluate.
+* 564-S****************                                                (  37)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2058     start BDIIALE key > LLAVE-SEQ invalid key
+*  12-S*********************************                               (  37)**
+**    Operand LLAVE-SEQ is not declared
+  2096     accept W-hora-fin from time.
+*  12-S*********************                                           (  37)**
+**    Operand W-HORA-FIN is not declared
+* 348-S*****************                                               (  38)**
+**    Procedure name 4900-GRABAR-ERROR undeclared, line 1702 (first usage)
+* 348-S***********************                                         (  38)**
+**    Procedure name 4500-ACTUALIZAR-BDIIALE undeclared, line 1704 (first usage)
+* 348-S*************************                                       (  38)**
+**    Procedure name 4400-GRABAR-REGISTROS-ERR undeclared, line 1711 (first usage)
+* 348-S****************************                                    (  39)**
+**    Procedure name 80100-VALIDAR-IDENTIFICACION undeclared, line 1796 (first usage)
+* 348-S****************                                                (  39)**
+**    Procedure name 1000-CARGA-TOTAL undeclared, line 1983 (first usage)
+* 348-S******************                                              (  39)**
+**    Procedure name 1000-ACTUALIZACION undeclared, line 1985 (first usage)
+  2152 00.
+*  13-S**                                                              (  39)**
+**    User-name required
+  2192 4400-GRABAR-REGISTROS-ERR.
+* 317-S*************************                                       (  39)**
+**    Incorrect structure of PROCEDURE DIVISION
+* 143-S*************************                                       (  40)**
+**    Unknown IDENTIFICATION DIVISION paragraph
+  2195     move M-ERRORES to SALIDA-errores.
+* 105-S********                                                        (  40)**
+**    PROGRAM-ID missing
+*  12-S******************                                              (  41)**
+**    Operand M-ERRORES is not declared
+  2196     move ";" to SALIDA-filler.
+*  12-S*****************************                                   (  41)**
+**    Operand SALIDA-FILLER is not declared
+  2197     move ENTRADA-reg to SALIDA-registro.
+*  12-S********************                                            (  41)**
+**    Operand ENTRADA-REG is not declared
+  2198     write SALIDA-reg.
+*  12-S********************                                            (  41)**
+**    Operand SALIDA-REG is not declared
+  2205     display "TIPO DE PROCESO             = "   COMANDO(1:10)
+*  12-S******************************************************          (  41)**
+**    Operand COMANDO is not declared
+  2206     display "DEMANDADOS LEIDOS           = " CONT-LEIDOS
+*  12-S********************************************************        (  41)**
+**    Operand CONT-LEIDOS is not declared
+  2207     display "  DEMANDADOS VALIDOS        = " CONT-REGISTROS-OK
+*  12-S**************************************************************  (  41)**
+**    Operand CONT-REGISTROS-OK is not declared
+  2208     display "    DEMANDADOS CREADOS      = " CONT-WRITE-OK
+*  12-S**********************************************************      (  41)**
+**    Operand CONT-WRITE-OK is not declared
+  2209     display "    DEMANDADOS ACTUALIZADOS = " CONT-REWRITE-OK
+*  12-S************************************************************    (  41)**
+**    Operand CONT-REWRITE-OK is not declared
+  2210     display "    DEMANDADOS ERR CREAR    = " CONT-WRITE-ERR
+*  12-S***********************************************************     (  41)**
+**    Operand CONT-WRITE-ERR is not declared
+  2211     display "    DEMANDADOS ERR ACTUALIZ = " CONT-REWRITE-ERR
+*  12-S*************************************************************   (  41)**
+**    Operand CONT-REWRITE-ERR is not declared
+  2212     display "  DEMANDADOS NO VALIDOS     = " CONT-REGISTROS-ERR
+*  12-S*************************************************************** (  41)**
+**    Operand CONT-REGISTROS-ERR is not declared
+  2255    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM
+*  12-S****************************************                        (  41)**
+**    Operand PARAMETROS-SALIDA-BDIIVIDE is not declared
+  2257    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+*  12-S***************************                                     (  42)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2258    IF SW-VERIFNOM-BDIIVIDE NOT NUMERIC                           FAC0002
+*  12-S**************************                                      (  42)**
+**    Operand SW-VERIFNOM-BDIIVIDE is not declared
+  2259       MOVE ZEROS TO SW-VERIFNOM-BDIIVIDE                         FAC0002
+*  12-S****************************************                        (  42)**
+**    Operand SW-VERIFNOM-BDIIVIDE is not declared
+  2260    END-IF                                                        FAC0002
+* 564-S*********                                                       (  42)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2261    IF SW-ASGTIPID-BDIIVIDE NOT NUMERIC                           FAC0002
+*  12-S**************************                                      (  42)**
+**    Operand SW-ASGTIPID-BDIIVIDE is not declared
+  2262       MOVE ZEROS TO SW-ASGTIPID-BDIIVIDE                         FAC0002
+*  12-S****************************************                        (  42)**
+**    Operand SW-ASGTIPID-BDIIVIDE is not declared
+  2263    END-IF                                                        FAC0002
+* 564-S*********                                                       (  42)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2264    IF SW-VALTIPID-BDIIVIDE NOT NUMERIC                           FAC0002
+*  12-S**************************                                      (  42)**
+**    Operand SW-VALTIPID-BDIIVIDE is not declared
+  2265       MOVE ZEROS TO SW-VALTIPID-BDIIVIDE                         FAC0002
+*  12-S****************************************                        (  42)**
+**    Operand SW-VALTIPID-BDIIVIDE is not declared
+  2266    END-IF                                                        FAC0002
+* 564-S*********                                                       (  43)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2267    IF SW-DIGCHEQUEO-BDIIVIDE NOT NUMERIC                         FAC0003
+*  12-S****************************                                    (  43)**
+**    Operand SW-DIGCHEQUEO-BDIIVIDE is not declared
+  2268       MOVE ZEROS TO SW-DIGCHEQUEO-BDIIVIDE                       FAC0003
+*  12-S******************************************                      (  43)**
+**    Operand SW-DIGCHEQUEO-BDIIVIDE is not declared
+  2269    END-IF                                                        FAC0003
+* 564-S*********                                                       (  43)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2270    IF NUM-IDE-BDIIVIDE IS NUMERIC AND NUM-IDE-BDIIVIDE <> ZEROS
+*  12-S**********************                                          (  43)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2271      IF SW-ASGTIPID-BDIIVIDE = 1                                 FAC0002
+*  12-S****************************                                    (  43)**
+**    Operand SW-ASGTIPID-BDIIVIDE is not declared
+  2273      END-IF                                                      FAC0002
+* 564-S***********                                                     (  43)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2274      IF SW-VALTIPID-BDIIVIDE = 1                                 FAC0002
+*  12-S****************************                                    (  43)**
+**    Operand SW-VALTIPID-BDIIVIDE is not declared
+  2276      END-IF                                                      FAC0002
+* 564-S***********                                                     (  43)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2277      IF SW-DIGCHEQUEO-BDIIVIDE = 1                               FAC0004
+*  12-S******************************                                  (  43)**
+**    Operand SW-DIGCHEQUEO-BDIIVIDE is not declared
+  2279      END-IF                                                      FAC0004
+* 564-S***********                                                     (  43)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2280      IF SW-VALTIPID-BDIIVIDE = 0 OR                              FAC0004
+*  12-S****************************                                    (  43)**
+**    Operand SW-VALTIPID-BDIIVIDE is not declared
+  2283       INITIALIZE NOM-VAL-BDIIVIDE
+*  12-S*********************************                               (  43)**
+**    Operand NOM-VAL-BDIIVIDE is not declared
+  2284       MOVE NOM-LEIDO-BDIIVIDE TO NOM-VAL-BDIIVIDE
+*  12-S*****************************                                   (  43)**
+**    Operand NOM-LEIDO-BDIIVIDE is not declared
+  2285       IF SW-VERIFNOM-BDIIVIDE = 1
+*  12-S*****************************                                   (  43)**
+**    Operand SW-VERIFNOM-BDIIVIDE is not declared
+  2286          MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOM
+*  12-S******************************                                  (  43)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2287          MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOM
+*  12-S*****************************                                   (  43)**
+**    Operand NOMBRE-BDIIVIDE is not declared
+  2288          MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOM
+*  12-S******************************                                  (  44)**
+**    Operand NOM-VAL-BDIIVIDE is not declared
+  2289          IF SW-ID-BDIIVIDE = 0
+*  12-S**************************                                      (  44)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2290             IF NUM-BLOQUES-BDIIVIDE NUMERIC AND
+*  12-S***********************************                             (  44)**
+**    Operand NUM-BLOQUES-BDIIVIDE is not declared
+  2292                MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
+*  12-S****************************************                        (  44)**
+**    Operand NUM-BLOQUES-BDIIVIDE is not declared
+  2293             ELSE IF TIP-ID-INPUT-VALNOM = 1
+*  12-S***************************************                         (  44)**
+**    Operand TIP-ID-INPUT-VALNOM is not declared
+  2294                     MOVE 2 TO BLOQUES-INPUT-VALNOM
+*  12-S**************************************************              (  44)**
+**    Operand BLOQUES-INPUT-VALNOM is not declared
+  2295                  ELSE MOVE 1 TO BLOQUES-INPUT-VALNOM
+*  12-S****************************************************            (  44)**
+**    Operand BLOQUES-INPUT-VALNOM is not declared
+  2296                  END-IF
+* 564-S***********************                                         (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2297             END-IF
+* 564-S******************                                              (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2299             IF MATCH-OK-OUT-VALNOM = 0
+*  12-S**********************************                              (  44)**
+**    Operand MATCH-OK-OUT-VALNOM is not declared
+  2300                MOVE 1 TO SW-NOMBRES-BDIIVIDE
+*  12-S********************************************                    (  44)**
+**    Operand SW-NOMBRES-BDIIVIDE is not declared
+  2301             END-IF
+* 564-S******************                                              (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2302          END-IF
+* 564-S***************                                                 (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2303       END-IF
+* 564-S************                                                    (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2304      ELSE IF SW-TID-BDIIVIDE = 1                                 FAC0002
+*  12-S****************************                                    (  44)**
+**    Operand SW-TID-BDIIVIDE is not declared
+  2305              MOVE 1 TO SW-ID-BDIIVIDE                            FAC0002
+*  12-S*************************************                           (  44)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2306           END-IF                                                 FAC0002
+* 564-S****************                                                (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2307      END-IF                                                      FAC0002
+* 564-S***********                                                     (  44)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2308    ELSE MOVE 1 TO SW-ID-BDIIVIDE
+*  12-S********************************                                (  44)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2309    END-IF.
+* 564-S*********                                                       (  45)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2319     EVALUATE TIP-IDE-BDIIVIDE
+*  12-S*****************************                                   (  45)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2322       WHEN 2
+* 368-S**********                                                      (  45)**
+**    Exception phrase inappropriate
+  2324       WHEN 3
+* 368-S**********                                                      (  45)**
+**    Exception phrase inappropriate
+  2326       WHEN 4
+* 368-S**********                                                      (  45)**
+**    Exception phrase inappropriate
+  2328       WHEN OTHER
+* 368-S**********                                                      (  45)**
+**    Exception phrase inappropriate
+  2329         MOVE 1 TO SW-ID-BDIIVIDE
+*  12-S********************************                                (  45)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2330     END-EVALUATE.
+* 564-S****************                                                (  45)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2338    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE TIP-IDE-BDIIVIDE        FAC0002
+*  12-S****************************************                        (  45)**
+**    Operand PARAMETROS-SALIDA-BDIIVIDE is not declared
+  2339    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"             FAC0002
+*  12-S***************************                                     (  45)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2340      IF (NUM-IDE-BDIIVIDE-R >= 1 AND                             FAC0002
+*  12-S***************************                                     (  45)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2344         MOVE 1 TO TIP-IDE-BDIIVIDE                               FAC0002
+*  12-S**********************************                              (  45)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2346        IF (NUM-IDE-BDIIVIDE-R >= 800000000 AND                   FAC0002
+*  12-S*****************************                                   (  46)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2350           MOVE 2 TO TIP-IDE-BDIIVIDE                             FAC0002
+*  12-S************************************                            (  46)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2356          IF (NUM-IDE-BDIIVIDE-R >= 600000000 AND                 FAC0002
+*  12-S*******************************                                 (  46)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2360             MOVE 3 TO TIP-IDE-BDIIVIDE                           FAC0002
+*  12-S**************************************                          (  46)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2361          ELSE MOVE 4 TO TIP-IDE-BDIIVIDE                         FAC0002
+*  12-S****************************************                        (  46)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2362          END-IF.                                                 FAC0002
+* 564-S***************                                                 (  46)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2372    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE                         FAC0002
+*  12-S****************************************                        (  46)**
+**    Operand PARAMETROS-SALIDA-BDIIVIDE is not declared
+  2373    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"             FAC0002
+*  12-S***************************                                     (  46)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2374    EVALUATE TIP-IDE-BDIIVIDE                                     FAC0002
+*  12-S****************************                                    (  46)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2376       IF NUM-IDE-BDIIVIDE-R > 9999999999                         FAC0002
+*  12-S***************************                                     (  46)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2377          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002
+*  12-S**********************************                              (  46)**
+**    Operand SW-TID-BDIIVIDE is not declared
+  2378       END-IF                                                     FAC0002
+* 564-S************                                                    (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2380       IF NUM-IDE-BDIIVIDE-R >  9999999999 OR                     FAC006C
+*  12-S***************************                                     (  47)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2382          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002
+*  12-S**********************************                              (  47)**
+**    Operand SW-TID-BDIIVIDE is not declared
+  2383       END-IF                                                     FAC0002
+* 564-S************                                                    (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2385       IF NUM-IDE-BDIIVIDE-R > 800000000 OR < 600000000           FAC0005
+*  12-S***************************                                     (  47)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2386          MOVE 1 TO SW-TID-BDIIVIDE                               FAC0002
+*  12-S**********************************                              (  47)**
+**    Operand SW-TID-BDIIVIDE is not declared
+  2387       END-IF                                                     FAC0002
+* 564-S************                                                    (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2388    END-EVALUATE.                                                 FAC0002
+* 564-S***************                                                 (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2396      IF (NUM-IDE-BDIIVIDE-R >= 600000000 AND                     FAC0004
+*  12-S***************************                                     (  47)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2400          MOVE 3 TO TIP-IDE-BDIIVIDE                              FAC0004
+*  12-S***********************************                             (  47)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2401      END-IF                                                      FAC0004
+* 564-S***********                                                     (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2402      IF (NUM-IDE-BDIIVIDE-R >= 800000000 AND                     FAC0004
+*  12-S***************************                                     (  47)**
+**    Operand NUM-IDE-BDIIVIDE-R is not declared
+  2406          MOVE 2 TO TIP-IDE-BDIIVIDE                              FAC0004
+*  12-S***********************************                             (  47)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2407      END-IF                                                      FAC0004
+* 564-S***********                                                     (  47)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2408      IF (TIP-IDE-BDIIVIDE = 2 AND                                FAC0004
+*  12-S*************************                                       (  48)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2415          MOVE NUM-IDE-BDIIVIDE TO NUM-ID-W11-BDIIVIDE            FAC0004
+*  12-S******************************                                  (  48)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2416          MOVE NUM-ID-W10-BDIIVIDE TO NUM-IDE-BDIIVIDE-R          FAC0004
+*  12-S*********************************                               (  48)**
+**    Operand NUM-ID-W10-BDIIVIDE is not declared
+  2417      END-IF                                                      FAC0004
+* 564-S***********                                                     (  48)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2418      INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0".          FAC0004
+*  12-S*****************************                                   (  48)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2426     MOVE NUM-IDE-BDIIVIDE TO CEDULA-BDIIREGI
+*  12-S*************************                                       (  48)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2427     MOVE TIP-IDE-BDIIVIDE TO TIPO-ID-BDIIREGI
+*  12-S*************************                                       (  48)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2428     READ BDIIREGI INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+*  12-S*****************                                               (  48)**
+**    Operand BDIIREGI is not declared
+*  12-S******************************************************          (  48)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2429     END-READ
+* 564-S************                                                    (  48)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2430     IF SW-ID-BDIIVIDE = 0
+*  12-S*********************                                           (  48)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2431        MOVE APELLIDO1-BDIIREGI TO PRIMER-APELLIDO-BDIIVIDE
+*  12-S******************************                                  (  48)**
+**    Operand APELLIDO1-BDIIREGI is not declared
+  2432        MOVE APELLIDO2-BDIIREGI TO SEGUNDO-APELLIDO-BDIIVIDE
+*  12-S******************************                                  (  48)**
+**    Operand APELLIDO2-BDIIREGI is not declared
+  2433        MOVE DES-NOMBRE2-BDIIREGI TO SEGUNDO-NOMBRE-BDIIVIDE
+*  12-S********************************                                (  48)**
+**    Operand DES-NOMBRE2-BDIIREGI is not declared
+  2434        MOVE DES-NOMBRE1-BDIIREGI TO PRIMER-NOMBRE-BDIIVIDE
+*  12-S********************************                                (  48)**
+**    Operand DES-NOMBRE1-BDIIREGI is not declared
+  2435        IF ESTADO-CIVIL-BDIIREGI = 0
+*  12-S*******************************                                 (  48)**
+**    Operand ESTADO-CIVIL-BDIIREGI is not declared
+  2437             SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
+*  12-S*************************************                           (  49)**
+**    Operand SEGUNDO-APELLIDO-BDIIVIDE is not declared
+  2444         END-IF
+* 564-S**************                                                  (  49)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2445         IF ESTADO-CIVIL-BDIIREGI = 1
+*  12-S********************************                                (  49)**
+**    Operand ESTADO-CIVIL-BDIIREGI is not declared
+  2449             SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
+*  12-S*************************************                           (  49)**
+**    Operand SEGUNDO-APELLIDO-BDIIVIDE is not declared
+  2456         END-IF
+* 564-S**************                                                  (  49)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2457         IF ESTADO-CIVIL-BDIIREGI = 2
+*  12-S********************************                                (  49)**
+**    Operand ESTADO-CIVIL-BDIIREGI is not declared
+  2461             SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
+*  12-S*************************************                           (  49)**
+**    Operand SEGUNDO-APELLIDO-BDIIVIDE is not declared
+  2468         END-IF
+* 564-S**************                                                  (  49)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2469         STRING PRIMER-APELLIDO-BDIIVIDE DELIMITED BY "  ",
+*  12-S***************************************                         (  49)**
+**    Operand PRIMER-APELLIDO-BDIIVIDE is not declared
+  2475         INSPECT NOM-VAL-BDIIVIDE REPLACING ALL "*" BY " "
+*  12-S********************************                                (  49)**
+**    Operand NOM-VAL-BDIIVIDE is not declared
+  2476         INSPECT NOM-VAL-BDIIVIDE REPLACING ALL ";" BY " "
+*  12-S********************************                                (  50)**
+**    Operand NOM-VAL-BDIIVIDE is not declared
+  2477         INITIALIZE NOM-LEIDO-BDIIVIDE
+*  12-S*************************************                           (  50)**
+**    Operand NOM-LEIDO-BDIIVIDE is not declared
+  2478         MOVE NOM-VAL-BDIIVIDE TO NOM-LEIDO-BDIIVIDE.
+*  12-S*****************************                                   (  50)**
+**    Operand NOM-VAL-BDIIVIDE is not declared
+  2485     MOVE NUM-IDE-BDIIVIDE TO NITS-R-BDIIDIAN
+*  12-S*************************                                       (  50)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2486     READ BDIIDIAN INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+*  12-S*****************                                               (  50)**
+**    Operand BDIIDIAN is not declared
+*  12-S******************************************************          (  50)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2487     END-READ
+* 564-S************                                                    (  50)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2488     IF SW-ID-BDIIVIDE = 0
+*  12-S*********************                                           (  50)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2489        MOVE DESCRIPCION-BDIIDIAN TO NOM-LEIDO-BDIIVIDE
+*  12-S********************************                                (  50)**
+**    Operand DESCRIPCION-BDIIDIAN is not declared
+  2490     END-IF.
+* 564-S**********                                                      (  50)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2497     MOVE NUM-IDE-BDIIVIDE TO NUM-ID-BDIIDAS
+*  12-S*************************                                       (  50)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+  2498     MOVE TIP-IDE-BDIIVIDE TO TIPO-ID-BDIIDAS
+*  12-S*************************                                       (  50)**
+**    Operand TIP-IDE-BDIIVIDE is not declared
+  2499     READ BDIIDAS INVALID KEY MOVE 1 TO SW-ID-BDIIVIDE
+*  12-S****************                                                (  50)**
+**    Operand BDIIDAS is not declared
+*  12-S*****************************************************           (  50)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2500     END-READ
+* 564-S************                                                    (  50)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2501     IF SW-ID-BDIIVIDE = 0
+*  12-S*********************                                           (  51)**
+**    Operand SW-ID-BDIIVIDE is not declared
+  2502        MOVE NOMBRE-BDIIDAS TO NOM-LEIDO-BDIIVIDE.
+*  12-S**************************                                      (  51)**
+**    Operand NOMBRE-BDIIDAS is not declared
+  2819     MOVE 0 TO MATCH-OK-OUT-VALNOM.
+*  12-S*********************************                               (  51)**
+**    Operand MATCH-OK-OUT-VALNOM is not declared
+  2820     MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
+*  12-S****************************                                    (  56)**
+**    Operand NOMBRE-INPUT-VALNOM is not declared
+  2821     IF TIP-ID-INPUT-VALNOM  = 2
+*  12-S**************************                                      (  56)**
+**    Operand TIP-ID-INPUT-VALNOM is not declared
+  2822         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
+*  12-S*********************************                               (  56)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2833         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
+*  12-S*********************************                               (  56)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2844         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003
+*  12-S*********************************                               (  57)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2848         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003
+*  12-S*********************************                               (  57)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2852         MOVE NOMBRE-AUX-VALNOM TO NOMBRE-INPUT-VALNOM
+*  12-S******************************                                  (  57)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2854        INSPECT CADENA-VALNOM    REPLACING ALL
+*  12-S****************************                                    (  57)**
+**    Operand CADENA-VALNOM is not declared
+  2860        INSPECT CADENA-VALNOM    REPLACING ALL                    RMB0002
+*  12-S****************************                                    (  57)**
+**    Operand CADENA-VALNOM is not declared
+  2866                PERFORM VARYING I-VALNOM FROM 1 BY 1
+*  12-S***************************************                         (  57)**
+**    Operand I-VALNOM is not declared
+  2868                  IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
+*  12-S***********************************                             (  57)**
+**    Operand VNOM-AUX-VALNOM is not declared
+  2870                     MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+*  12-S***********************************************                 (  57)**
+**    Operand VNOM-AUX-VALNOM is not declared
+  2871                  END-IF
+* 564-S***********************                                         (  57)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2872                END-PERFORM
+* 564-S**************************                                      (  57)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2873     END-IF.
+* 564-S**********                                                      (  58)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2874     MOVE SPACES TO VECTOR-INPUT-VALNOM.
+*  12-S**************************************                          (  58)**
+**    Operand VECTOR-INPUT-VALNOM is not declared
+  2875     UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO
+*  12-S**************************                                      (  58)**
+**    Operand CADENA-VALNOM is not declared
+  2888     MOVE NOMBOK-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
+*  12-S****************************                                    (  58)**
+**    Operand NOMBOK-INPUT-VALNOM is not declared
+  2889     IF TIP-ID-INPUT-VALNOM  NOT = 2
+*  12-S**************************                                      (  58)**
+**    Operand TIP-ID-INPUT-VALNOM is not declared
+  2890        INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
+*  12-S********************************                                (  58)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2894                PERFORM VARYING I-VALNOM FROM 1 BY 1
+*  12-S***************************************                         (  58)**
+**    Operand I-VALNOM is not declared
+  2896                  IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
+*  12-S***********************************                             (  58)**
+**    Operand VNOM-AUX-VALNOM is not declared
+  2898                     MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+*  12-S***********************************************                 (  58)**
+**    Operand VNOM-AUX-VALNOM is not declared
+  2899                  END-IF
+* 564-S***********************                                         (  58)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2900                END-PERFORM
+* 564-S**************************                                      (  58)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2902         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
+*  12-S*********************************                               (  58)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2913         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
+*  12-S*********************************                               (  58)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2924        INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                   GJC0003
+*  12-S********************************                                (  59)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2928         MOVE NOMBRE-AUX-VALNOM TO NOMBOK-INPUT-VALNOM
+*  12-S******************************                                  (  59)**
+**    Operand NOMBRE-AUX-VALNOM is not declared
+  2929     END-IF.
+* 564-S**********                                                      (  59)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2930     MOVE SPACES TO VECTOR-OK-VALNOM.
+*  12-S***********************************                             (  59)**
+**    Operand VECTOR-OK-VALNOM is not declared
+  2931     UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO
+*  12-S**************************                                      (  59)**
+**    Operand CADENA-VALNOM is not declared
+  2942     MOVE 1 TO I-VALNOM.
+*  12-S**********************                                          (  59)**
+**    Operand I-VALNOM is not declared
+  2943     MOVE 0 TO BLOQOK-AUX-VALNOM.
+*  12-S*******************************                                 (  59)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  2944     PERFORM UNTIL VM-INPUT-VALNOM(I-VALNOM) = SPACES
+*  12-S*********************************                               (  59)**
+**    Operand VM-INPUT-VALNOM is not declared
+  2945       MOVE 1 TO J-VALNOM
+*  12-S************************                                        (  59)**
+**    Operand J-VALNOM is not declared
+  2946       PERFORM UNTIL J-VALNOM > 20
+*  12-S****************************                                    (  60)**
+**    Operand J-VALNOM is not declared
+  2947         IF VM-INPUT-VALNOM(I-VALNOM) = VM-OK-VALNOM(J-VALNOM)
+*  12-S**************************                                      (  60)**
+**    Operand VM-INPUT-VALNOM is not declared
+  2948            ADD 1 TO BLOQOK-AUX-VALNOM
+*  12-S*************************************                           (  60)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  2949            MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+*  12-S**************************************                          (  60)**
+**    Operand VM-OK-VALNOM is not declared
+  2951            MOVE 21 TO J-VALNOM
+*  12-S******************************                                  (  60)**
+**    Operand J-VALNOM is not declared
+  2953            MOVE 0 TO M-VALNOM
+*  12-S*****************************                                   (  60)**
+**    Operand M-VALNOM is not declared
+  2954            INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOM
+*  12-S*******************************                                 (  60)**
+**    Operand VM-OK-VALNOM is not declared
+  2956            IF M-VALNOM >= 15
+*  12-S**********************                                          (  60)**
+**    Operand M-VALNOM is not declared
+  2957               MOVE 0 TO M-VALNOM
+*  12-S********************************                                (  60)**
+**    Operand M-VALNOM is not declared
+  2958               INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOM
+*  12-S**********************************                              (  60)**
+**    Operand VM-OK-VALNOM is not declared
+  2960            END-IF
+* 564-S*****************                                               (  60)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2961            IF M-VALNOM > 0 AND < 15 AND I-VALNOM < 20
+*  12-S**********************                                          (  60)**
+**    Operand M-VALNOM is not declared
+  2963               COMPUTE INI-VALNOM = M-VALNOM + 2
+*  12-S********************************                                (  60)**
+**    Operand INI-VALNOM is not declared
+  2964               COMPUTE LON-VALNOM = 14 - M-VALNOM
+*  12-S********************************                                (  60)**
+**    Operand LON-VALNOM is not declared
+  2965               MOVE VM-OK-VALNOM(J-VALNOM) TO PEDAZO-VALNOM
+*  12-S*******************************                                 (  60)**
+**    Operand VM-OK-VALNOM is not declared
+  2966               IF PEDAZO-VALNOM(INI-VALNOM:LON-VALNOM) =
+*  12-S******************************                                  (  60)**
+**    Operand PEDAZO-VALNOM is not declared
+  2970                  ADD 1 TO BLOQOK-AUX-VALNOM
+*  12-S*******************************************                     (  60)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  2971                  MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+*  12-S********************************************                    (  61)**
+**    Operand VM-OK-VALNOM is not declared
+  2973                  MOVE 21 TO J-VALNOM
+*  12-S************************************                            (  61)**
+**    Operand J-VALNOM is not declared
+  2974                  ADD 1 TO I-VALNOM
+*  12-S**********************************                              (  61)**
+**    Operand I-VALNOM is not declared
+  2975                  MOVE SPACES TO VM-INPUT-VALNOM(I-VALNOM)
+*  12-S***********************************************                 (  61)**
+**    Operand VM-INPUT-VALNOM is not declared
+  2976               END-IF
+* 564-S********************                                            (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2977            END-IF
+* 564-S*****************                                               (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2978         END-IF
+* 564-S**************                                                  (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2979         ADD 1 TO J-VALNOM
+*  12-S*************************                                       (  61)**
+**    Operand J-VALNOM is not declared
+  2980       END-PERFORM
+* 564-S*****************                                               (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2981       ADD 1 TO I-VALNOM
+*  12-S***********************                                         (  61)**
+**    Operand I-VALNOM is not declared
+  2982       IF I-VALNOM = 21
+*  12-S*****************                                               (  61)**
+**    Operand I-VALNOM is not declared
+  2984       END-IF
+* 564-S************                                                    (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2985     END-PERFORM.
+* 564-S***************                                                 (  61)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2986     IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOM
+*  12-S************************                                        (  61)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  2987        MOVE 1 TO MATCH-OK-OUT-VALNOM
+*  12-S************************************                            (  61)**
+**    Operand MATCH-OK-OUT-VALNOM is not declared
+  2989        IF TIP-ID-INPUT-VALNOM <> 2
+*  12-S*****************************                                   (  61)**
+**    Operand TIP-ID-INPUT-VALNOM is not declared
+  2991        ELSE
+* 562-S***********                                                     (  61)**
+**    An "ELSE" phrase did not have a matching IF and was discarded.
+  2993        END-IF
+* 564-S*************                                                   (  62)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2994        IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOM
+*  12-S***************************                                     (  62)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  2995           MOVE 1 TO MATCH-OK-OUT-VALNOM
+*  12-S***************************************                         (  62)**
+**    Operand MATCH-OK-OUT-VALNOM is not declared
+  2996        END-IF
+* 564-S*************                                                   (  62)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  2997     END-IF.
+* 564-S**********                                                      (  62)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3005     IF BLOQOK-AUX-VALNOM > 0
+*  12-S************************                                        (  62)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  3006        MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOM
+*  12-S**********************************                              (  62)**
+**    Operand APROX-TOT-VALNOM is not declared
+  3008        MOVE 70 TO APROX-TOT-VALNOM APROX-INP-VALNOM
+*  12-S**********************************                              (  62)**
+**    Operand APROX-TOT-VALNOM is not declared
+  3009     END-IF
+* 564-S**********                                                      (  62)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3010     MOVE 1 TO I-VALNOM.
+*  12-S**********************                                          (  62)**
+**    Operand I-VALNOM is not declared
+  3011     PERFORM UNTIL I-VALNOM > 10
+*  12-S**************************                                      (  62)**
+**    Operand I-VALNOM is not declared
+  3012       MOVE 1 TO J-VALNOM
+*  12-S************************                                        (  62)**
+**    Operand J-VALNOM is not declared
+  3013       PERFORM UNTIL J-VALNOM > 10
+*  12-S****************************                                    (  62)**
+**    Operand J-VALNOM is not declared
+  3014         MOVE 0 TO LETRAS-OK-VALNOM LETRAS-OK2-VALNOM
+*  12-S**********************************                              (  62)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3015         MOVE 1 TO K-VALNOM
+*  12-S**************************                                      (  62)**
+**    Operand K-VALNOM is not declared
+  3016         MOVE 1 TO L-VALNOM
+*  12-S**************************                                      (  62)**
+**    Operand L-VALNOM is not declared
+  3017         IF VM-INPUT-VALNOM(I-VALNOM) NOT = SPACES AND
+*  12-S**************************                                      (  62)**
+**    Operand VM-INPUT-VALNOM is not declared
+  3019            PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
+*  12-S*********************************                               (  63)**
+**    Operand K-VALNOM is not declared
+  3020              IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
+*  12-S********************************                                (  63)**
+**    Operand VMM-INPUT-VALNOM is not declared
+  3025                 IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACES
+*  12-S********************************                                (  63)**
+**    Operand VMM-OK-VALNOM is not declared
+  3026                    ADD 1 TO LETRAS-OK-VALNOM
+*  12-S********************************************                    (  63)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3027                    ADD 1 TO K-VALNOM
+*  12-S************************************                            (  63)**
+**    Operand K-VALNOM is not declared
+  3028                    ADD 1 TO L-VALNOM
+*  12-S************************************                            (  63)**
+**    Operand L-VALNOM is not declared
+  3030                    MOVE 19 TO K-VALNOM
+*  12-S**************************************                          (  63)**
+**    Operand K-VALNOM is not declared
+  3031                 END-IF
+* 564-S**********************                                          (  63)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3033                 ADD 1   TO K-VALNOM
+*  12-S***********************************                             (  63)**
+**    Operand K-VALNOM is not declared
+  3034                 IF K-VALNOM <= 15 AND L-VALNOM < 15
+*  12-S***************************                                     (  63)**
+**    Operand K-VALNOM is not declared
+  3035                    IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM + 1) =
+*  12-S**************************************                          (  63)**
+**    Operand VMM-INPUT-VALNOM is not declared
+  3037                       ADD 1 TO L-VALNOM
+*  12-S***************************************                         (  63)**
+**    Operand L-VALNOM is not declared
+  3038                    END-IF
+* 564-S*************************                                       (  63)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3039                 END-IF
+* 564-S**********************                                          (  63)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3040              END-IF
+* 564-S*******************                                             (  63)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3041            END-PERFORM
+* 564-S**********************                                          (  63)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3042            MOVE 1 TO K-VALNOM
+*  12-S*****************************                                   (  64)**
+**    Operand K-VALNOM is not declared
+  3043            MOVE 1 TO L-VALNOM
+*  12-S*****************************                                   (  64)**
+**    Operand L-VALNOM is not declared
+  3044            PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
+*  12-S*********************************                               (  64)**
+**    Operand K-VALNOM is not declared
+  3045              IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
+*  12-S********************************                                (  64)**
+**    Operand VMM-INPUT-VALNOM is not declared
+  3050                 IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT = SPACES
+*  12-S********************************                                (  64)**
+**    Operand VMM-OK-VALNOM is not declared
+  3051                    ADD 1 TO LETRAS-OK2-VALNOM
+*  12-S*********************************************                   (  64)**
+**    Operand LETRAS-OK2-VALNOM is not declared
+  3052                    ADD 1 TO K-VALNOM
+*  12-S************************************                            (  64)**
+**    Operand K-VALNOM is not declared
+  3053                    ADD 1 TO L-VALNOM
+*  12-S************************************                            (  64)**
+**    Operand L-VALNOM is not declared
+  3055                    MOVE 19 TO K-VALNOM
+*  12-S**************************************                          (  64)**
+**    Operand K-VALNOM is not declared
+  3056                 END-IF
+* 564-S**********************                                          (  64)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3058                 ADD 1   TO L-VALNOM
+*  12-S***********************************                             (  64)**
+**    Operand L-VALNOM is not declared
+  3059                 IF L-VALNOM <= 15 AND K-VALNOM < 15
+*  12-S***************************                                     (  64)**
+**    Operand L-VALNOM is not declared
+  3060                    IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
+*  12-S**************************************                          (  64)**
+**    Operand VMM-INPUT-VALNOM is not declared
+  3062                       ADD 1 TO K-VALNOM
+*  12-S***************************************                         (  64)**
+**    Operand K-VALNOM is not declared
+  3063                    END-IF
+* 564-S*************************                                       (  64)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3064                 END-IF
+* 564-S**********************                                          (  64)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3065              END-IF
+* 564-S*******************                                             (  64)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3066            END-PERFORM
+* 564-S**********************                                          (  65)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3067         END-IF
+* 564-S**************                                                  (  65)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3068         IF LETRAS-OK2-VALNOM > LETRAS-OK-VALNOM
+*  12-S****************************                                    (  65)**
+**    Operand LETRAS-OK2-VALNOM is not declared
+  3069            MOVE LETRAS-OK2-VALNOM TO LETRAS-OK-VALNOM
+*  12-S*********************************                               (  65)**
+**    Operand LETRAS-OK2-VALNOM is not declared
+  3070         END-IF
+* 564-S**************                                                  (  65)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3071         IF LETRAS-OK-VALNOM > 0
+*  12-S***************************                                     (  65)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3072            MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOM
+*  12-S**************************************                          (  65)**
+**    Operand TOTLET-INP-VALNOM is not declared
+  3073            INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYING
+*  12-S**********************************                              (  65)**
+**    Operand VM-INPUT-VALNOM is not declared
+  3076            INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYING
+*  12-S*******************************                                 (  65)**
+**    Operand VM-OK-VALNOM is not declared
+  3079            MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOM
+*  12-S***********************************                             (  65)**
+**    Operand POR-TOT-VALNOM is not declared
+  3080            IF TOTLET-OK-VALNOM >= 3
+*  12-S******************************                                  (  65)**
+**    Operand TOTLET-OK-VALNOM is not declared
+  3081               COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /
+*  12-S************************************                            (  65)**
+**    Operand POR-TOT-VALNOM is not declared
+  3083            END-IF
+* 564-S*****************                                               (  65)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3084            IF TOTLET-INP-VALNOM >= 3
+*  12-S*******************************                                 (  65)**
+**    Operand TOTLET-INP-VALNOM is not declared
+  3085               COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /
+*  12-S************************************                            (  65)**
+**    Operand POR-INP-VALNOM is not declared
+  3087            END-IF
+* 564-S*****************                                               (  65)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3088            IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOM
+*  12-S******************************                                  (  65)**
+**    Operand TOTLET-OK-VALNOM is not declared
+  3089               COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /
+*  12-S******************************                                  (  65)**
+**    Operand A-VALNOM is not declared
+  3092               COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /
+*  12-S******************************                                  (  66)**
+**    Operand A-VALNOM is not declared
+  3094            END-IF
+* 564-S*****************                                               (  66)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3095            IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=
+*  12-S******************************                                  (  66)**
+**    Operand POR-TOT-VALNOM is not declared
+  3105               ADD 1 TO BLOQOK-AUX-VALNOM
+*  12-S****************************************                        (  66)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  3106               MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+*  12-S*****************************************                       (  66)**
+**    Operand VM-OK-VALNOM is not declared
+  3108            END-IF
+* 564-S*****************                                               (  66)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3109         END-IF
+* 564-S**************                                                  (  66)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3110         ADD 1 TO J-VALNOM
+*  12-S*************************                                       (  66)**
+**    Operand J-VALNOM is not declared
+  3111       END-PERFORM
+* 564-S*****************                                               (  66)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3112       ADD 1 TO I-VALNOM
+*  12-S***********************                                         (  66)**
+**    Operand I-VALNOM is not declared
+  3113     END-PERFORM.
+* 564-S***************                                                 (  66)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3121   MOVE ZEROS TO TOTLET-INP-VALNOM
+*  12-S*********************************                               (  66)**
+**    Operand TOTLET-INP-VALNOM is not declared
+  3122   MOVE ZEROS TO LETRAS-OK2-VALNOM
+*  12-S*********************************                               (  67)**
+**    Operand LETRAS-OK2-VALNOM is not declared
+  3123    MOVE ZEROS TO A-VALNOM                                        GJC0003
+*  12-S*************************                                       (  67)**
+**    Operand A-VALNOM is not declared
+  3124   MOVE 1 TO K-VALNOM
+*  12-S********************                                            (  67)**
+**    Operand K-VALNOM is not declared
+  3125   PERFORM UNTIL K-VALNOM > 65
+*  12-S************************                                        (  67)**
+**    Operand K-VALNOM is not declared
+  3126     MOVE K-VALNOM  TO I-VALNOM
+*  12-S*****************                                               (  67)**
+**    Operand K-VALNOM is not declared
+  3127     MOVE 1       TO J-VALNOM
+*  12-S****************************                                    (  67)**
+**    Operand J-VALNOM is not declared
+  3128     MOVE ZEROS TO LETRAS-OK-VALNOM
+*  12-S**********************************                              (  67)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3129     PERFORM UNTIL J-VALNOM > 65 OR I-VALNOM > 65
+*  12-S**************************                                      (  67)**
+**    Operand J-VALNOM is not declared
+  3130        IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES AND
+*  12-S*************************                                       (  67)**
+**    Operand V-NOMBRE-VALNOM is not declared
+  3132           IF V-NOMBRE-VALNOM(I-VALNOM) =
+*  12-S****************************                                    (  67)**
+**    Operand V-NOMBRE-VALNOM is not declared
+  3134              ADD 1 TO LETRAS-OK-VALNOM
+*  12-S**************************************                          (  67)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3135              ADD 1 TO I-VALNOM
+*  12-S******************************                                  (  67)**
+**    Operand I-VALNOM is not declared
+  3136              ADD 1 TO J-VALNOM
+*  12-S******************************                                  (  67)**
+**    Operand J-VALNOM is not declared
+  3138              ADD 1 TO J-VALNOM
+*  12-S******************************                                  (  67)**
+**    Operand J-VALNOM is not declared
+  3139           END-IF
+* 564-S****************                                                (  67)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3141           ADD 1 TO I-VALNOM
+*  12-S***************************                                     (  67)**
+**    Operand I-VALNOM is not declared
+  3142        END-IF
+* 564-S*************                                                   (  67)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3143     END-PERFORM
+* 564-S***************                                                 (  67)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3144     IF LETRAS-OK-VALNOM > LETRAS-OK2-VALNOM
+*  12-S***********************                                         (  68)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3145        MOVE LETRAS-OK-VALNOM TO LETRAS-OK2-VALNOM
+*  12-S****************************                                    (  68)**
+**    Operand LETRAS-OK-VALNOM is not declared
+  3146     END-IF
+* 564-S**********                                                      (  68)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3147     ADD 1 TO K-VALNOM
+*  12-S*********************                                           (  68)**
+**    Operand K-VALNOM is not declared
+  3148   END-PERFORM.
+* 564-S*************                                                   (  68)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3149   MOVE 1 TO I-VALNOM
+*  12-S********************                                            (  68)**
+**    Operand I-VALNOM is not declared
+  3150   PERFORM UNTIL I-VALNOM > 65
+*  12-S************************                                        (  68)**
+**    Operand I-VALNOM is not declared
+  3151     IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES AND
+*  12-S**********************                                          (  68)**
+**    Operand V-NOMBRE-VALNOM is not declared
+  3153        ADD 1 TO TOTLET-INP-VALNOM
+*  12-S*********************************                               (  68)**
+**    Operand TOTLET-INP-VALNOM is not declared
+  3154     END-IF
+* 564-S**********                                                      (  68)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3155     ADD 1 TO I-VALNOM
+*  12-S*********************                                           (  68)**
+**    Operand I-VALNOM is not declared
+  3156   END-PERFORM.
+* 564-S*************                                                   (  68)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3157   COMPUTE A-VALNOM = LETRAS-OK2-VALNOM * 100 /
+*  12-S******************                                              (  68)**
+**    Operand A-VALNOM is not declared
+  3159   IF A-VALNOM >= 75
+*  12-S*************                                                   (  68)**
+**    Operand A-VALNOM is not declared
+  3160       ADD 1 TO BLOQOK-AUX-VALNOM
+*  12-S********************************                                (  68)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  3161   END-IF.
+* 564-S********                                                        (  68)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3162    MOVE 0 TO K-VALNOM                                            GJC0003
+*  12-S*********************                                           (  68)**
+**    Operand K-VALNOM is not declared
+  3163   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOM                    GJC0003
+*  12-S**********************                                          (  68)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  3164      INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOM                GJC0003
+*  12-S************************                                        (  68)**
+**    Operand A-VALNOM is not declared
+  3165      PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    GJC0003
+*  12-S*****************************                                   (  69)**
+**    Operand J-VALNOM is not declared
+  3166               IF V-NOMBRE-VALNOM(J-VALNOM) <> " "                GJC0003
+*  12-S********************************                                (  69)**
+**    Operand V-NOMBRE-VALNOM is not declared
+  3167                 MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     GJC0003
+*  12-S*************************************************               (  69)**
+**    Operand V-NOMBRE-VALNOM is not declared
+  3169                 ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)         GJC0003
+*  12-S**********************************************                  (  69)**
+**    Operand CONT-LET-INPUT-VALNOM is not declared
+  3170              END-IF                                              GJC0003
+* 564-S*******************                                             (  69)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3171               IF V-NOMBOK-VALNOM(J-VALNOM) <> " "                GJC0003
+*  12-S********************************                                (  69)**
+**    Operand V-NOMBOK-VALNOM is not declared
+  3172                 MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     GJC0003
+*  12-S*************************************************               (  69)**
+**    Operand V-NOMBOK-VALNOM is not declared
+  3174                 ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)            GJC0003
+*  12-S*******************************************                     (  69)**
+**    Operand CONT-LET-OK-VALNOM is not declared
+  3175              END-IF                                              GJC0003
+* 564-S*******************                                             (  69)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3176      END-PERFORM                                                 GJC0003
+* 564-S****************                                                (  69)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3177      MOVE 0 TO I-VALNOM                                          GJC0003
+*  12-S***********************                                         (  69)**
+**    Operand I-VALNOM is not declared
+  3178       PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  GJC0003
+*  12-S******************************                                  (  69)**
+**    Operand J-VALNOM is not declared
+  3179         IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0                     GJC0003
+*  12-S*****************************                                   (  69)**
+**    Operand CONT-LET-OK-VALNOM is not declared
+  3180            ADD 1 TO I-VALNOM                                     GJC0003
+*  12-S****************************                                    (  69)**
+**    Operand I-VALNOM is not declared
+  3181            IF CONT-LET-OK-VALNOM(J-VALNOM) <                     GJC0003
+*  12-S********************************                                (  69)**
+**    Operand CONT-LET-OK-VALNOM is not declared
+  3183               COMPUTE L-VALNOM = L-VALNOM + 100                  GJC0003
+*  12-S******************************                                  (  69)**
+**    Operand L-VALNOM is not declared
+  3185               COMPUTE L-VALNOM = L-VALNOM +                      GJC0003
+*  12-S******************************                                  (  69)**
+**    Operand L-VALNOM is not declared
+  3188            END-IF                                                GJC0003
+* 564-S*****************                                               (  69)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3189         END-IF                                                   GJC0003
+* 564-S**************                                                  (  70)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3190      END-PERFORM                                                 GJC0003
+* 564-S****************                                                (  70)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3191      COMPUTE K-VALNOM = L-VALNOM/I-VALNOM                        GJC0003
+*  12-S*********************                                           (  70)**
+**    Operand K-VALNOM is not declared
+  3192       IF (A-VALNOM >= 40 AND K-VALNOM > 80) OR                   GJC0003
+*  12-S******************                                              (  70)**
+**    Operand A-VALNOM is not declared
+  3195         ADD 1 TO BLOQOK-AUX-VALNOM                               GJC0003
+*  12-S**********************************                              (  70)**
+**    Operand BLOQOK-AUX-VALNOM is not declared
+  3196       END-IF                                                     GJC0003
+* 564-S************                                                    (  70)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3197   END-IF.                                                        GJC0003
+* 564-S********                                                        (  70)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+cob64: error(s) in compilation: /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+
+
+
+
