@@ -1,3 +1,4 @@
+      $SET LIST SETTING
        IDENTIFICATION DIVISION.
        PROGRAM-ID.    ACTALEJUR.
       ******************************************************************
@@ -7,7 +8,7 @@
       * los datos para actualizar BDIIALE, si tiene defecto lo graba en
       * el archivo ERRS.
       ******************************************************************
-       AUTHOR.        DATACREDITO.
+       AUTHOR.        Globant JL.
        DATE-WRITTEN.
        DATE-COMPILED.
        CONFIGURATION section.
@@ -100,7 +101,8 @@ c     *        lock mode is manual with lock on record.
 
       ******************************************************************
       ******************************************************************
-           copy BDIIALE.FS.
+           copy BDIIALE.FS replacing == on record.== by == on record
+              file status is EST-BDIIALE.==.
 c     * BDIIALE-FS.v01.0001
 c     * Maestro de alertas reportadas por suscriptotres
 c     * Suscriptores son bancos, financieras y otros clientes de
@@ -126,6 +128,7 @@ c     *        lock mode is manual with lock on record.
        FILE section.
 
       ******************************************************************
+      * Archivo de entrada con los datos de demandas y embargos de JURAD
       ******************************************************************
        FD JURAD.
        01  JURAD-reg.
@@ -136,7 +139,7 @@ c     *        lock mode is manual with lock on record.
            03 JURAD-id-tipo             pic x.
       *    Numero de identificacion
            03 JURAD-id-numeroX          pic x(11).
-           03 JURAD-id-numero           redefines 03 JURAD-id-numeroX
+           03 JURAD-id-numero           redefines JURAD-id-numeroX
                                         pic 9(11).
       *    Nombres y Apellidos
            03 JURAD-nombre              pic x(45).
@@ -175,6 +178,7 @@ c     *        lock mode is manual with lock on record.
            03                           pic x(41).
 
       ******************************************************************
+      * Archivo de salida con los registros defectuosos del arch JURAD
       ******************************************************************
        FD ERRS.
        01  ERRS-reg.
@@ -202,8 +206,8 @@ c     *        lock mode is manual with lock on record.
            03 ERRS-causa-rechazo        pic x(100).
 
       ******************************************************************
+      * Contiene los ids y nombres de personas
       ******************************************************************
-      * Contiene los ids de gente (personas) y otros datos personales
        copy BDIIREGI.FD.
 c     * BDIIREGI.v.03.0006
 c     ******************************************************************
@@ -252,12 +256,11 @@ c     *    03  ES-IND-BURO-BDIIREGI    pic 9(1).
 c     *    03  FILLER-BDIIREGI         pic X(27).
 
       ******************************************************************
+      * Maestro de personas juridicas nacionales y extranjeras reportada
+      * por la DIAN
       ******************************************************************
        copy BDIIDIAN.FD.
 c     * BDIIDIAN.v.03.0004
-c     ******************************************************************
-c     * Maestro de personas juridicas nacionales y extranjeras reportada
-c     * por la DIAN
 c     ******************************************************************
 c     *FD  BDIIDIAN.
 c     *01  REG-BDIIDIAN.
@@ -282,11 +285,10 @@ c     *    03 FILLER-BDIIDIAN             pic X(19).
 c     *    03 FILLER-BDIIDIAN             pic X(13).
 
       ******************************************************************
+      * Archivo maestro de cedulas de extranjeria suministrado por DAS
       ******************************************************************
        copy BDIIDAS.FD.
 c     * BDIIDAS.v.03.0002
-c     ******************************************************************
-c     * Archivo maestro de cedulas de extranjeria suministrado por DAS
 c     ******************************************************************
 c     *FD  BDIIDAS.
 c     *01  REG-BDIIDAS.
@@ -301,10 +303,10 @@ c     *    03 IND-MODIF-BDIIDAS            pic X(1).
 c     *    03 FILLER-BDIIDAS               pic X(31).
 
       ******************************************************************
+      * Maestro de alertas reportadas por suscriptores
       ******************************************************************
        copy BDIIALE.FD.
 c     * BDIIALE-FD.v01.0003.
-c     * Maestro de alertas reportadas por suscriptores
 c     *****************************************************************
 c     *FD BDIIALE.
 c     *01 REG-BDIIALE.
@@ -328,22 +330,14 @@ c     *      03 filler redefines LINEAS-BDIIALE.
 c     *         04 DATOS-BDIIALE       pic X(100).
 
       ******************************************************************
-      ******************************************************************
-       FD SALIDA.  reemplazado por ERRS, hay referencias (pocas)
-       01 SALIDA-reg.
-          02 SALIDA-errores              pic X(50).
-          02 SALIDA-filler               pic X(1).
-          02 SALIDA-registro             pic X(200).
-
-      ******************************************************************
-      ******************************************************************
        WORKING-STORAGE section.
+      ******************************************************************
 
       ******************************************************************
+      * Variables para rutina de validacion de identificaciones
       ******************************************************************
        copy BDIIVIDE.WS.
 c     *BDIIVIDE.WS.v03.0003.
-c     * Variables para rutina de validacion de identificaciones
 c     ******************************************************************
 c     *01  NUM-ID-W-BDIIVIDE.
 c     *    03  NUM-ID-W11-BDIIVIDE           pic 9(11) value zeros.
@@ -356,7 +350,7 @@ c     *    03 SEGUNDO-APELLIDO-BDIIVIDE      pic X(15) value spaces.
 c     *    03 PRIMER-NOMBRE-BDIIVIDE         pic X(15) value spaces.
 c     *    03 SEGUNDO-NOMBRE-BDIIVIDE        pic X(15) value spaces.
 c     *    03 NOM-LEIDO-BDIIVIDE             pic X(65) value spaces.
-c
+c     *
 c     *01 PARAMETROS-ENTRADA-BDIIVIDE        pic X(100) value spaces.
 c     *01 PARAMETROS-ENTRADA-R-BDIIVIDE redefines
 c     *                                     PARAMETROS-ENTRADA-BDIIVIDE.
@@ -371,7 +365,7 @@ c     *    03 SW-VALTIPID-BDIIVIDE           pic 9.
 c     *    03 SW-ASGTIPID-BDIIVIDE           pic 9.
 c     *    03 SW-DIGCHEQUEO-BDIIVIDE         pic 9.
 c     *    03 FILLER-BDIIVIDE                pic X(18).
-c
+c     *
 c     *01 PARAMETROS-SALIDA-BDIIVIDE.
 c     *   03 NOM-VAL-BDIIVIDE                pic X(65) value spaces.
 c     *   03 SW-ID-BDIIVIDE                  pic 9 value 0.
@@ -379,12 +373,10 @@ c     *   03 SW-NOMBRES-BDIIVIDE             pic 9 value 0.
 c     *   03 SW-TID-BDIIVIDE                 pic 9 value 0.
 
       ******************************************************************
+      * Variables relacionadas con las alertas del sistema
       ******************************************************************
        copy BDIIALE.WS.
 c     * BDIIALE-WS.v01.0007
-c     * Variables relacionadas con las alertas del sistema
-c     ******************************************************************
-c
 c     *01 VARIABLES-BDIIALE.
 c     *   02 ES-INDEPENDIENTE-BDIIALE           pic 9(01) value 0.
 c     *   02 MIRO-SIES-INDEPENDIENTE-BDIIALE    pic 9(01) value 0.
@@ -441,10 +433,11 @@ c     *   02 TEXTO-LIN2-BDIIALE    pic X(50) value spaces.
 c     *   02 filler                pic X(02) value spaces.
 c     *   02 TEXTO2-AUX-BDIIALE    pic X(50) value spaces.
 
+      ******************************************************************
+      * Datos para las rutinas de validación de nombres de VALNOM.PROC
+      ******************************************************************
        copy VALNOM.WS.
 c     * VALNOM-WS.v.0002
-c     * Datos para las rutinas de control de nombres de VALNOM.PROC
-c     ******************************************************************
 c     * 01 VARIABLES-VALNOM.
 c     *    03 VECTOR-INPUT-VALNOM.
 c     *      04 VM-INPUT-VALNOM     occurs 20 TIMES .
@@ -491,11 +484,13 @@ c     *          05 CONT-LET-INPUT-VALNOM pic 9(2).
 c     *          05 CONT-LET-OK-VALNOM    pic 9(2).
 c     *    03 VAL-APELLIDO-VALNOM         pic 9.
 
+      *****************************************************************
+      * Direcciones de los archivos en el file system
+      *****************************************************************
        copy ICFILE.WS.
 c     * ICFILE-WS.v.0040.
 c     * COPY PARA DIRECCIONAR LOS ARCHIVOS.
 c     *****************************************************************
-c
 c     *01  FILE-TITLES.
 c     *    05  BDUUNI-TITLE        pic X(80) value "$BDU/BDUUNI".
 c     *    05  NOMB-APEL-TITLE     pic X(80) value "$DATABASE/ICBNAP".
@@ -548,7 +543,7 @@ c     *                                "$DATABASE/FACUPAR.DAT".
 c     *    05 MAES-ICMCREH-TITLE   pic X(80) value "$DATABASE/ICMCREH".
 c     *    05 MAES-ICMCHKH-TITLE   pic X(80) value "$DATABASE/ICMCHKH".
 c     *    05 MAES-ICMCHQH-TITLE   pic X(80) value "$DATABASE/ICMCHQH".
-
+c     *
 c     *    05 TITLE-CIIU          pic X(80) value "$DATABASE/ICTCIIU".
 c     *    05 TITLE-BDINCCB       pic X(80) value "$ICREGIS/BDINCCB".
 c     *    05 TITLE-BDINREG       pic X(80) value "$ICREGIS/BDINREG".
@@ -618,27 +613,27 @@ c     *    05  MAES-ICMVLR-TITLE.
 c     *        07 MAES-DIRECTORY1       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
 c     *        07 MAES-FILE1            pic X(63).
-c
+c     *
 c     *    05  MAES-ICMVLR-TITLE2.
 c     *        07 MAES-DIRECTORY2       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
 c     *        07 MAES-FILE2            pic X(63).
-c
+c     *
 c     *    05  MAES-ICMVLR-TITLE3.
 c     *        07 MAES-DIRECTORY3       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
 c     *        07 MAES-FILE3            pic X(63).
-c
+c     *
 c     *    05  MAES-ICMVLR-TITLE4.
 c     *        07 MAES-DIRECTORY4       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
 c     *        07 MAES-FILE4            pic X(63).
-c
+c     *
 c     *    05  MAES-ICMVLR-TITLE5.
 c     *        07 MAES-DIRECTORY5       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
 c     *        07 MAES-FILE5            pic X(63).
-c
+c     *
 c     *    05  MAES-ICMVLR-TITLE6.
 c     *        07 MAES-DIRECTORY6       pic X(16) value
 c     *                                 "$VALORES/ICMVLR-".
@@ -666,18 +661,6 @@ c     *   02 ANO-ANT-TITLE-BDSCOREHIS  pic 9(04) value 2013.
 c     *   02 filler                    pic X(01) value "-".
 c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
 
-
-       01 INDICES.
-          03 I                          pic 9(5) value 0.
-          03 J                          pic 9(5) value 0.
-       01 CONTADORES.
-          03 CONT-LEIDOS                pic 9(10)  value 0.
-          03 CONT-WRITE-OK              pic 9(10)  value 0.
-          03 CONT-WRITE-ERR             pic 9(10)  value 0.
-          03 CONT-REWRITE-OK            pic 9(10)  value 0.
-          03 CONT-REWRITE-ERR           pic 9(10)  value 0.
-          03 CONT-REGISTROS-OK          pic 9(10)  value 0.
-          03 CONT-REGISTROS-ERR         pic 9(10)  value 0.
        01 LINEA1-AUX.
       * TIENE [&&&&&] DEMANDAS CERRADAS Y [&&&&&] ABIERTAS
           02 filler    pic X(29)
@@ -693,17 +676,9 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
        01 VARIABLES-GENERALES.
           03 real                       pic 9      value 0.
           03 FIN-ENTRADA                pic 9      value 0.
-          03 HAY-BDIIALE                pic 9      value 0.
           03 FECHA-PROCESO              pic 9(8)   value 0.
           03 FECHA-VENCIMIENTO          pic 9(8)   value 0.
           03 DIAS-DESDE-1600            pic 9(8)   value 0.
-       01 VALIDACIONES-FECHAS.
-          02 ANO-VAL-X                  pic 9(04).
-             88 ANO-VAL  value 1900 thru 2050.
-          02 MES-VAL-X                  pic 9(02).
-             88 MES-VAL  value 01   thru 12.
-          02 DIA-VAL-X                  pic 9(02).
-             88 DIA-VAL  value 01   thru 31.
        01 INF-DATAHOST-AUX.
           02 NUM-DEMA-VIG-AUX           pic 9(5).
           02 NUM-DEMA-TER-AUX           pic 9(5).
@@ -745,6 +720,15 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
 
       * Copia del ultimo reg de input, para mensajes (Ult reg: ...)
        01  JURAD-reg-anterior           pic x(100) value "(vacio)".
+       01  JURAD-fs                     pic xx value spaces.
+
+       01  ERRS-fs                      pic xx value spaces.
+
+      * Datos de demandas o embargos que van en el registro BDIIALE
+       01 D-datahost.
+           05 D-vigentes                pic 9(5).
+           05 D-terminados              pic 9(5).
+           05 D-fecha-ultima            pic x(8).
       ******************************************************************
       * Parametros iniciales, de la linea de comando
       * La linea de comando que contiene los parametros
@@ -752,12 +736,12 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
        01 P-parametros.
       *    Proceso real: contiene "SI" para activar 
       * TODO: fijo en "NO" para pruebas
-       01  P-proceso-real               pic xx value "NO".
+           03 P-proceso-real            pic xx value "NO".
            88 PROCESO-REAL              value "SI".
 
       *    Nombre del archivo de entrada JJJJJJaaaDDMMAAbbXX.txt
-       01 P-file-name                   pic x(80) value spaces.
-       01 P-file-name-R                 redefines P-file-name.
+           03 P-file-name               pic x(80) value spaces.
+           03 P-file-name-R             redefines P-file-name.
       *        JJJJJJ = Código de suscriptor JURAD en Experian
                05 P-cod-suscriptor      pic 9(6).
       *        aaa = Codificacion del producto ("100")
@@ -785,16 +769,29 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
            03  P-fecha-proceso-50YYYY   pic 9999.
            03                           pic x(4).
       ******************************************************************
-      * Contadores
+      * Datos para el reporte final
+       01 W-tiempo.
+           03 W-hora-inicio             pic 9(8).
+           03 W-hora-fin                pic 9(8).
        01 N-contadores.
-      *    Registros el el archivo de entrada
+      *    Registros en el archivo de entrada
            03 N-reg-leidos              pic 9(8) value zero.
       *    Registros procesados sin error
            03 N-reg-OK                  pic 9(8) value zero.
       *    Registros con error
            03 N-reg-con-error           pic 9(8) value zero.
-      *    Registros borrados previo al refresque total
-           03 N-reg-borrados            pic 9(8) value zero.
+      *    Alertas borradas previo al refresque total
+           03 N-ale-borradas            pic 9(8) value zero.
+      *    Alertas insertadas
+           03 N-ale-insertadas          pic 9(8) value zero.
+      *    Alertas modificadas
+           03 N-ale-modificadas         pic 9(8) value zero.
+      *    Alertas eliminadas
+           03 N-ale-eliminadas          pic 9(8) value zero.
+      *    Inserción de alerta existente
+           03 N-ale-ya-existe           pic 9(8) value zero.
+      *    Modificación o eliminación de alerta inexistente
+           03 N-ale-no-existe           pic 9(8) value zero.
 
       ******************************************************************
       * Armado de las lineas de alerta
@@ -811,7 +808,7 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                "TIENE &&& EMBARGOS CANCELADOS Y &&& VIGENTES      ".
                05 pic x(50) value
                "EL EMBARGO MAS RECIENTE SE INSTAURO EL [&&&&&&&&] ".
-               05 pic x(50) value high-values. <* end marker
+               05 pic x(50) value high-values. *< end marker
            03 LAend                     pic 999 comp value 0.
            03 LA-modelos2               redefines LA-modelos.
                05 LA-modelo             pic x(50) occurs 5 
@@ -923,41 +920,41 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
              88 MES-VAL  value 01   thru 12.
           02 DIA-VAL-X                   pic 9(02).
              88 DIA-VAL  value 01   thru 31.
-      ******************************************************************
+
+      /*****************************************************************
       ******************************************************************
        PROCEDURE DIVISION.
-
-      * 0000-PROGRAMA-PRINCIPAL
-      * 1000-CREARDEF
-      * 1000-PROCESAR-DEMANDAS
-      * 2000-ABRIR-ARCHIVOS
-      * 4000-PROCESAR-ENTRADA
-      * 4100-VALIDACIONES-BASICAS
-      * 4200-VALIDACION-OFICIALES
-      * 4300-MODIFICAR-BDIIALE
-      * 4310-CALCULAR-FECHAS
-      * 4320-ARMAR-TEXTO-ALERTA
-      * 4330-CREAR-BDIIALE
-      * 4340-ACTUALIZAR-BDIIALE
-      * 4400-GRABAR-REGISTROS-ERR
-      * 6000-SACAR-RESUMEN
-      * 80100-VALIDAR-IDENTIFICACION
-      * 80200-VALIDAR-ID
-      * 80300-ASIGNAR-TIPO-ID
-      * 80400-VALIDAR-TIPO-ID
-      * 80500-ELIMINAR-DIGITO-CHEQUEO
-      * 85010-UBICA-CEDULA
-      * 85020-UBICA-NIT
-      * 85030-UBICA-EXT
-      * 10000-MATCH-NOMBRES-VALNOM
-      * 10100-MATCH-APROXIMADO
-      * 10100-MATCH-APROX-EMPRESAS
+      *    0000-PROGRAMA-PRINCIPAL
+      *    4000-PROCESAR-REGISTRO
+      *    4000-PROCESAR-REGISTRO-2
+      *    4100-VALIDACION-FORMAL
+      *    4200-VALIDACION-SEMANTICA
+      *    4300-MODIFICAR-BDIIALE
+      *    4300-MODIFICAR-BDIIALE-DATOS
+      *    4300-MODIFICAR-BDIIALE-I
+      *    4300-MODIFICAR-BDIIALE-M
+      *    4300-MODIFICAR-BDIIALE-E
+      *    4333-LEER-BDIIALE-RANDOM
+      *    4333-GRABAR-BDIIALE
+      *    4333-REGRABAR-BDIIALE
+      *    4333-ELIMINAR-BDIIALE
+      *    4900-GRABAR-ERROR
+      *    4320-ARMAR-TEXTO-ALERTA
+      *    1000-RUTINA-INICIAL
+      *    1001-ELIMINAR-TODO
+      *    7000-RUTINA-FINAL
+      *    9000-CANCELAR-PROGRAMA
+      *    6000-SACAR-RESUMEN
 
 
        0000-PROGRAMA-PRINCIPAL.
       ******************************************************************
+      *    inicializa el ambiente y abre los archivos
            perform 1000-RUTINA-INICIAL
+      *    procesa cada uno de los registros del archivo JURAD hasta
+      *    encontrar el registro "T" de totales
            perform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"
+      *    cierra archivos y produce el reporte final
            perform 7000-RUTINA-FINAL
            goback.
 
@@ -971,8 +968,8 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
            evaluate JURAD-fs
            when "00"
       *        controla el reg y lo aplica si es OK
-               move JURAD-reg to JURAD-reg-anterior
                perform 4000-PROCESAR-REGISTRO-2
+               move JURAD-reg to JURAD-reg-anterior
            when "10"
       *        fin del archivo de input:
       *        esto es un error, no se encontro el registro "T" antes
@@ -980,17 +977,17 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                display "Falta el reg de totales del archivo JURAD "
                display "Nombre del archivo: " P-file-name
                display "File status: " JURAD-fs
-               display "Ultimo registro leido: "
+               display "Ultimo registro leido: " N-reg-leidos
                display JURAD-reg-anterior
-               perform 9000-CANCELAR-PROGRAMA *> no retorna
+               perform 9000-CANCELAR-PROGRAMA
            when other
       *        error de lectura: cancelacion del proceso
                display "Error en lectura del archivo JURAD "
                display "Nombre del archivo: " P-file-name
                display "File status: " JURAD-fs
-               display "Ultimo registro leido: "
+               display "Ultimo registro leido: " N-reg-leidos
                display JURAD-reg-anterior
-               perform 9000-CANCELAR-PROGRAMA *> no retorna
+               perform 9000-CANCELAR-PROGRAMA
            end-evaluate.
 
 
@@ -1084,11 +1081,11 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                call "PONERR" using "09" JURAD-reg E-errores
            end-if
       *    Numero de embargos vigentes
-           if JURAD-embargos-vigentes not-numeric
+           if JURAD-embargos-vigentes not numeric
                call "PONERR" using "10" JURAD-reg E-errores
            end-if
       *    Numero de embargos terminados
-           if JURAD-embargos-terminados not-numeric
+           if JURAD-embargos-terminados not numeric
                call "PONERR" using "11" JURAD-reg E-errores
            end-if
       *    Fecha ultimo embargo vigente YYMMDD
@@ -1139,71 +1136,138 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
 
        4300-MODIFICAR-BDIIALE.
       ******************************************************************
-      * Se impacta el archivo BDIIALE con una insercion, modificacion o 
-      * eliminacion segun el tipo de movimiento que se trate
+      * Se impacta el archivo BDIIALE con una o dos inserciones, 
+      * modificaciones o eliminaciones segun haya o no demandas y 
+      * embargos
       ******************************************************************
-c     *   02 LLAVE-BDIIALE.
-c     *      03 TIP-IDE-BDIIALE        pic 9(01).
-c     *      03 NUM-IDE-BDIIALE        pic 9(11).
-c     *      03 FUENTE-BDIIALE         pic 9(06).
-c     *      03 COD-ALERTA-BDIIALE     pic 9(03).
-c     *      03 LLASEC-BDIIALE         pic X(08).
+           initialize REG-BDIIALE
 
       *    si hay demandas
            if JURAD-demandas-vigentes > zero
            or JURAD-demandas-terminadas > zero 
                move "J001" to LLASEC-BDIIALE
-      >>>> ESTO es igual para J001 y J002 salvo INF-DATAHOST-BDIIALE
-               perform 4300-LEER-BDIIALE-RANDOM
-      *        procesa los tipos de movimiento I M E
-               evaluate JURAD-tipo-novedad
-               when "I"
-      *            carga todos los datos del registro
-                   initialize ENCABEZADO-BDIIALE
-                   move P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE
-                   FEC-REP-BDIIALE 
-                   move P-fecha-proceso-50YYYY to FEC-VEN-BDIIALE
-                   move 0 to BLOQUEO-BDIIALE
-      *            TODO: controlar que haya fecha, o siempre hay?
-                   string "00" JURAD-demandas-vigentes
-                   "00" JURAD-demandas-terminadas
-                   "20" JURAD-demandas-fecha-ultima
-                   delimited size into INF-DATAHOST-BDIIALE
-                   perform (insertar BDIIALE)
-               when "M"
-      *            reemplaza la fecha de reporte y los valores
-                   move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE 
-      *            TODO: controlar que haya fecha, o siempre hay?
-                   string "00" JURAD-demandas-vigentes
-                   "00" JURAD-demandas-terminadas
-                   "20" JURAD-demandas-fecha-ultima
-                   delimited size into INF-DATAHOST-BDIIALE
-                   perform (regrabar BDIIALE)
-               when "E"
-      *            elimina el registro
-                   perform (eliminar BDIIALE)
-               when other
-                   display "error de logica: tipo-novedad="
-                   JURAD-tipo-novedad " reg n°: " N-reg-leidos
-                   display "Registro de JURAD: " display JURAD-reg
-                   perform 9000-CANCELAR-PROGRAMA
-               end-evaluate
+      *        arma datos de demandas
+               move JURAD-demandas-vigentes to D-vigentes
+               move JURAD-demandas-terminadas to D-terminados
+               string "20" JURAD-demandas-fecha-ultima 
+               delimited size into D-fecha-ultima
+               perform 4300-MODIFICAR-BDIIALE-DATOS 
+           end-if.
 
-c     *   02 ENCABEZADO-BDIIALE.
-c     *      03 FEC-NOV-BDIIALE         pic 9(8).
-c     *      03 FEC-VEN-BDIIALE         pic 9(8).
-c     *      03 FEC-REP-BDIIALE         pic 9(8).
-c     *      03 BLOQUEO-BDIIALE         pic 9.
-c     *      03 FILLER-BDIIALE          pic X(10).
-c     *      03 INF-DATAHOST-BDIIALE    pic X(18).
-c     *      03 LINEAS-BDIIALE.
-c     *         04 LINEA1-BDIIALE       pic X(50).
-c     *         04 LINEA2-BDIIALE       pic X(50).
-c     *      03 filler redefines        LINEAS-BDIIALE.
-c     *         04 DATOS-BDIIALE        pic X(100).
+      *    si hay embargos
+           if JURAD-embargos-vigentes > zero
+           or JURAD-embargos-terminados > zero 
+               move "J002" to LLASEC-BDIIALE
+      *        arma datos de embargos
+               move JURAD-embargos-vigentes to D-vigentes
+               move JURAD-embargos-terminados to D-terminados
+               string "20" JURAD-embargos-fecha-ultimo
+               delimited size into D-fecha-ultima
+               perform 4300-MODIFICAR-BDIIALE-DATOS 
+           end-if.
 
 
-       4300-LEER-BDIIALE-RANDOM.
+
+       4300-MODIFICAR-BDIIALE-DATOS.
+      ******************************************************************
+      * Parte de la carga de datos en el registro BDIIALE y grabacion
+      * del mismo que es comun a demandas y embargos
+      * El dato LLASEC-BDIIALE ya tiene "J001" o "J002"
+      ******************************************************************
+      *    completa la clave e intenta leer la alerta, si se leyó OK
+      *    el file status de BDIIALE queda con "00"
+           perform 4333-LEER-BDIIALE-RANDOM
+
+      *    procesa segun el tipo de novedad I M E
+           evaluate JURAD-tipo-novedad
+           when "I"
+               perform 4300-MODIFICAR-BDIIALE-I
+           when "M"
+               perform 4300-MODIFICAR-BDIIALE-M
+           when "E"
+               perform 4300-MODIFICAR-BDIIALE-E
+           when other
+      *        esto es "imposible" por control de consistencia anterior
+               display "error de logica: tipo-novedad="
+               JURAD-tipo-novedad " reg n°: " N-reg-leidos
+               display "Registro de JURAD: " display JURAD-reg
+               perform 9000-CANCELAR-PROGRAMA
+           end-evaluate.
+
+
+       4300-MODIFICAR-BDIIALE-I.
+      ******************************************************************
+      * Inserción de una alerta nueva
+      * Si ya existía muestra un mensaje y continúa
+      ******************************************************************
+      *    si el registro existía es un error
+           if EST-BDIIALE = "00"
+               display "Insercion de alerta nueva que ya existe "
+               " key: " LLAVE-BDIIALE
+               display "Registro de input: "
+               display JURAD-reg
+               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
+               add 1 to N-ale-ya-existe
+           end-if
+
+      *    completa los datos del registro
+           initialize ENCABEZADO-BDIIALE
+           move P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE
+           FEC-REP-BDIIALE 
+           move P-fecha-proceso-50 to FEC-VEN-BDIIALE
+           move 0 to BLOQUEO-BDIIALE
+           move D-datahost to INF-DATAHOST-BDIIALE
+           perform 4320-ARMAR-TEXTO-ALERTA
+           if EST-BDIIALE = "00"
+               perform 4333-REGRABAR-BDIIALE
+           else
+               perform 4333-GRABAR-BDIIALE
+           end-if.
+
+
+       4300-MODIFICAR-BDIIALE-M.
+      ******************************************************************
+      * Modificación de una alerta existente
+      * Si no existía muestra un mensaje y continúa
+      ******************************************************************
+      *    si el registro no existía es un error
+           if EST-BDIIALE not = "00"
+               display "Modificación de alerta inexistente "
+               " key: " LLAVE-BDIIALE
+               display "Registro de input: "
+               display JURAD-reg
+               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
+               add 1 to N-ale-no-existe
+           end-if
+      *    reemplaza la fecha de reporte y los valores
+           move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE 
+           move D-datahost to INF-DATAHOST-BDIIALE
+           perform 4320-ARMAR-TEXTO-ALERTA
+           if EST-BDIIALE = "00"
+               perform 4333-REGRABAR-BDIIALE
+           else
+               perform 4333-GRABAR-BDIIALE
+           end-if.
+
+
+       4300-MODIFICAR-BDIIALE-E.
+      ******************************************************************
+      * Eliminación de una alerta
+      * Si no existía muestra un mensaje y continúa
+      ******************************************************************
+      *    elimina el registro
+           if EST-BDIIALE = "00"
+               perform 4333-ELIMINAR-BDIIALE
+           else
+               display "Eliminación de alerta inexistente "
+               " key: " LLAVE-BDIIALE
+               display "Registro de input: "
+               display JURAD-reg
+               add 1 to N-ale-no-existe
+           end-if.
+
+
+       4333-LEER-BDIIALE-RANDOM.
       ******************************************************************
       * Arma clave exacta y lee un registro de BDIIALE
       * Usa los datos del reg input, excepto LLASEC que esta precargado
@@ -1217,86 +1281,77 @@ c     *         04 DATOS-BDIIALE        pic X(100).
            read BDIIALE
            evaluate EST-BDIIALE
            when "00"
-               move 1 to HAY-BDIIALE
-           when "23"
-               move 0 to HAY-BDIIALE
+               continue
+           when "20" thru "29"
+               continue
            when other
                display "Error al leer BDIIALE fs: " EST-BDIIALE
                " key: " LLAVE-BDIIALE
                display "Ultimo registro procesado: "
                display JURAD-reg-anterior
                perform 9000-CANCELAR-PROGRAMA
-           end-read.
+           end-evaluate.
 
 
+       4333-GRABAR-BDIIALE.
+      ******************************************************************
+      * Inserta un registro nuevo en BDIIALE
+      ******************************************************************
+           write BDIIALE-reg
+           evaluate EST-BDIIALE
+           when "00"
+               add 1 to N-ale-insertadas
+           when other
+               display "Error al grabar BDIIALE fs: " EST-BDIIALE
+               " key: " LLAVE-BDIIALE
+               display "Registro BDIIALE: "
+               display REG-BDIIALE
+               perform 9000-CANCELAR-PROGRAMA
+           end-evaluate.
 
 
-      *    TODO: copiado del programa ejemplo, sin analizar
-           perform 4310-CALCULAR-FECHAS
-           perform 4320-ARMAR-TEXTO-ALERTA.
+       4333-REGRABAR-BDIIALE.
+      ******************************************************************
+      * Regraba un registro modificado en BDIIALE
+      ******************************************************************
+           rewrite BDIIALE-reg
+           evaluate EST-BDIIALE
+           when "00"
+               add 1 to N-ale-modificadas
+           when other
+               display "Error al regrabar BDIIALE fs: " EST-BDIIALE
+               " key: " LLAVE-BDIIALE
+               display "Registro BDIIALE: "
+               display REG-BDIIALE
+               perform 9000-CANCELAR-PROGRAMA
+           end-evaluate.
 
-      *    JURAD-tipo-novedad
 
+       4333-ELIMINAR-BDIIALE.
+      ******************************************************************
+      * Elimina un registro de BDIIALE
+      ******************************************************************
+           delete BDIIALE
+           evaluate EST-BDIIALE
+           when "00"
+               add 1 to N-ale-eliminadas
+           when other
+               display "Error al regrabar BDIIALE fs: " EST-BDIIALE
+               " key: " LLAVE-BDIIALE
+               display "Registro BDIIALE: "
+               display REG-BDIIALE
+               perform 9000-CANCELAR-PROGRAMA
+           end-evaluate.
 
-
-
-           if HAY-BDIIALE = 0
-               perform 4330-CREAR-BDIIALE
-           else
-               perform 4340-ACTUALIZAR-BDIIALE
-           end-if.
 
        4900-GRABAR-ERROR.
       ******************************************************************
       * El registro de JURAD tiene error: se graba en el archivo ERRS
       * con indicacion del error detectado
       ******************************************************************
-      * TODO: implementar la grabación del archivo ERRS
+      * TODO: >>>> implementar la grabación del archivo ERRS
            display "NO GRABA ERRS".
  
-
-       1000-CREARDEF.
-      ******************************************************************
-           move function CURRENT-DATE(1:8) to FECHA-PROCESO
-           move 0 to TIP-IDE-BDIIALE
-           move 0 to NUM-IDE-BDIIALE
-           move 000001 to FUENTE-BDIIALE
-           move 001 to COD-ALERTA-BDIIALE
-           move "a" to LLASEC-BDIIALE
-           move 1 to HAY-BDIIALE
-           read BDIIALE invalid key
-               move 0 to HAY-BDIIALE
-           end-read
-           if HAY-BDIIALE = 0
-               move "LA INDENTIFICACION NO TIENE NI HA TENIDO PROCESOS"
-               to LINEA1-BDIIALE
-               move "JUDICIALES REGISTRADOS" to LINEA2-BDIIALE
-               move FECHA-PROCESO to FEC-NOV-BDIIALE FEC-REP-BDIIALE
-               move 20501231 to FEC-VEN-BDIIALE
-               move 0 to BLOQUEO-BDIIALE
-               move zeros to INF-DATAHOST-AUX
-               move INF-DATAHOST-AUX to INF-DATAHOST-BDIIALE
-               move spaces to FILLER-BDIIALE
-               write REG-BDIIALE invalid key
-                   display "ERROR EN rewrite"
-               not invalid key
-                   display "ALERTA CREADA OK"
-               end-write
-           else
-               display "YA EXISTE LA ALERTA"
-           end-if.
-
-
-       4310-CALCULAR-FECHAS.
-      ****************************************************************
-      ****************************************************************
-           move function CURRENT-DATE (1:8) to FECHA-PROCESO
-           move function integer-of-date (FECHA-PROCESO)
-           to DIAS-DESDE-1600
-           add 360 to DIAS-DESDE-1600
-           move function date-of-integer (DIAS-DESDE-1600)
-           to FECHA-VENCIMIENTO.
-
 
        4320-ARMAR-TEXTO-ALERTA.
       ****************************************************************
@@ -1325,54 +1380,7 @@ c     *         04 DATOS-BDIIALE        pic X(100).
                string LA-parte(LAx, 9) LA-valor(9)
                string LA-parte(LAx, 10) LA-valor(10)
                delimited by high-value
-           end-if
-
-
-           move NUM-DEMA-VIG-INP to NUM-DEMA-VIG-AUX NUM-VIG-1
-           move NUM-DEMA-TER-INP to NUM-DEMA-TER-AUX NUM-TER-2
-           move FEC-DEMA-VIG-INP to FEC-DEMA-VIG-AUX FEC-VIG-1.
-
-
-       4330-CREAR-BDIIALE.
-      ****************************************************************
-      ****************************************************************
-           move FECHA-PROCESO to FEC-NOV-BDIIALE
-           FEC-REP-BDIIALE
-           move FECHA-VENCIMIENTO to FEC-VEN-BDIIALE
-           move 0 to BLOQUEO-BDIIALE
-           move INF-DATAHOST-AUX to INF-DATAHOST-BDIIALE
-           move spaces to FILLER-BDIIALE
-           move LINEA1-AUX to LINEA1-BDIIALE
-           move LINEA2-AUX to LINEA2-BDIIALE
-           if PROCESO-REAL
-               write REG-BDIIALE invalid key
-                   add 1 to CONT-WRITE-ERR
-               not invalid key
-                   add 1 to CONT-WRITE-OK
-               end-write
-           else
-               add 1 to CONT-WRITE-OK
            end-if.
-
-
-       4340-ACTUALIZAR-BDIIALE.
-      ****************************************************************
-      ****************************************************************
-           move FECHA-PROCESO to FEC-NOV-BDIIALE
-           move FECHA-VENCIMIENTO to FEC-VEN-BDIIALE
-           move INF-DATAHOST-AUX to INF-DATAHOST-BDIIALE
-           move LINEA1-AUX to LINEA1-BDIIALE
-           move LINEA2-AUX to LINEA2-BDIIALE
-           if real = 1
-               rewrite REG-BDIIALE invalid key
-                   add 1 to CONT-REWRITE-ERR
-               not invalid key
-                   add 1 to CONT-REWRITE-OK
-               end-rewrite
-           else
-               add 1 to CONT-REWRITE-OK
-           end-if.
-
 
 
        1000-RUTINA-INICIAL.
@@ -1422,7 +1430,7 @@ c     *         04 DATOS-BDIIALE        pic X(100).
            into P-fecha-proceso-YYYYMMDD
 
       * Calcula una decha 50 años posterior a la de proceso
-           move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-50YYYY
+           move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-50
            add 50 to P-fecha-proceso-50YYYY
 
       * Apertura del archivo de entrada
@@ -1506,8 +1514,9 @@ c     *         04 DATOS-BDIIALE        pic X(100).
            move zero to TIP-IDE-BDIIALE
            move zero to NUM-IDE-BDIIALE
            move P-cod-suscriptor to FUENTE-BDIIALE
-           move low-values to COD-ALERTA-BDIIALE LLASEC-BDIIALE
-           start BDIIALE key > LLAVE-SEQ invalid key
+           move zeros to COD-ALERTA-BDIIALE
+           move low-values to LLASEC-BDIIALE
+           start BDIIALE key > LLAVE-BDIIALE invalid key
       *        no hay registros
                exit paragraph
 
@@ -1521,13 +1530,13 @@ c     *         04 DATOS-BDIIALE        pic X(100).
       *                es un alerta de JURAD
                        delete BDIIALE
                        if EST-BDIIALE = "00"
-                           add 1 to N-reg-borrados
+                           add 1 to N-ale-borradas
                        else
       *                    error en la eliminacion
                            display "Error al eliminar un registro de "
                            "BDIIALE vaciando los datos"
                            display "Clave: " LLAVE-BDIIALE
-                           display "Reg borrados: " N-reg-borrados
+                           display "Reg borrados: " N-ale-borradas
                            perform 9000-CANCELAR-PROGRAMA
                        end-if
                    end-if
@@ -1543,7 +1552,7 @@ c     *         04 DATOS-BDIIALE        pic X(100).
                end-evaluate
            end-perform.
            display "Termino la eliminacion total de JURAD"
-           display "Reg borrados: " N-reg-borrados. 
+           display "Reg borrados: " N-ale-borradas. 
 
 
        7000-RUTINA-FINAL.
@@ -1562,8 +1571,13 @@ c     *         04 DATOS-BDIIALE        pic X(100).
            goback.
 
 
+           copy BDIIVIDE.PROC.
 
 
+           copy VALNOM.PROC.
+
+
+      /
        IDENTIFICATION DIVISION.
        PROGRAM-ID. PONERR.
       ******************************************************************
@@ -1605,7 +1619,7 @@ c     *         04 DATOS-BDIIALE        pic X(100).
 
       ******************************************************************
 
-       PROCEDURE DIVISION using cod-error reg-input E-errores
+       PROCEDURE DIVISION using cod-error reg-input E-errores.
        00.
       *    marca al reg actual como erroneo
            move "SI" to E-hay-error
@@ -1646,28 +1660,20 @@ c     *         04 DATOS-BDIIALE        pic X(100).
       ******************************************************************
       ******************************************************************
 
-       4400-GRABAR-REGISTROS-ERR.
-      ****************************************************************
-      ****************************************************************
-           move M-ERRORES to SALIDA-errores.
-           move ";" to SALIDA-filler.
-           move ENTRADA-reg to SALIDA-registro.
-           write SALIDA-reg.
 
-
-       6000-SACAR-RESUMEN.
+      *6000-SACAR-RESUMEN.
       ****************************************************************
       ****************************************************************
-           display "==============[ RESUMEN del PROCESO ]============"
-           display "TIPO DE PROCESO             = "   COMANDO(1:10)
-           display "DEMANDADOS LEIDOS           = " CONT-LEIDOS
-           display "  DEMANDADOS VALIDOS        = " CONT-REGISTROS-OK
-           display "    DEMANDADOS CREADOS      = " CONT-WRITE-OK
-           display "    DEMANDADOS ACTUALIZADOS = " CONT-REWRITE-OK
-           display "    DEMANDADOS ERR CREAR    = " CONT-WRITE-ERR
-           display "    DEMANDADOS ERR ACTUALIZ = " CONT-REWRITE-ERR
-           display "  DEMANDADOS NO VALIDOS     = " CONT-REGISTROS-ERR
-           display "=================================================".
+      *    display "==============[ RESUMEN del PROCESO ]============"
+      *    display "TIPO DE PROCESO             = "   COMANDO(1:10)
+      *    display "DEMANDADOS LEIDOS           = " CONT-LEIDOS
+      *    display "  DEMANDADOS VALIDOS        = " CONT-REGISTROS-OK
+      *    display "    DEMANDADOS CREADOS      = " CONT-WRITE-OK
+      *    display "    DEMANDADOS ACTUALIZADOS = " CONT-REWRITE-OK
+      *    display "    DEMANDADOS ERR CREAR    = " CONT-WRITE-ERR
+      *    display "    DEMANDADOS ERR ACTUALIZ = " CONT-REWRITE-ERR
+      *    display "  DEMANDADOS NO VALIDOS     = " CONT-REGISTROS-ERR
+      *    display "=================================================".
 
            copy BDIIVIDE.PROC.
 c     *BDIIVIDE.PROC.v.03.0006
