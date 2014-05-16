@@ -1,0 +1,799 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.15 19:30:34 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu May 15 16:07:06 2014 from 172.16.10.38
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo $pwd
+/d/iccol/desarrollo
+/d/iccol/desarrollo $fu
+/d/iccol/desarrollo $pwd
+/d/iccol/desarrollo/fuentes
+/d/iccol/desarrollo $vi CARGAJUR.lst
+"CARGAJUR.lst" 4737 lines, 270534 characters ^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page   1
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+* Options: int("CARGAJUR.int") anim csi verbose nolist sourceasm endp
+*list("CARGAJUR.lst")1$SET LIST SETTING
+* Setting: NOACCEPTREFRESH NOADV ALIGN"8" ALPHASTART"1" ALTER NOAMODE ANIM
+*NOANIMPREP ANS85 NOAPOST NOAREACHECK ARITHMETIC"MF" ASSIGN"DYNAMIC"
+*NOASSIGN-PRINTER NOAUTOLOCK NOBELL BOUND NOBRIEF NOBS2000 BWZSTAR
+*NOBYTEMODEMOVE CALLFH"EXTFH" NOCALLMCS NOCALLRECOVERY CALLSORT
+*"EXTSM" CANCEL CANCELLBR NOCHANGEMESSAGE CHARSET"ASCII" CHECKDIV
+*"ANSI" NOCHECKREFMOD NOCICS CICS-CPY NOCICSOPTIMIZE NOCMPR2
+*NOCOBFSTATCONV NOCOBIDY NOCOBOL370 COBOLDIR NOCOMP COMP-5"2" COMP-6
+*"2" NOCOMS85 CONFIRM NOCONVERTRET CONVSPACE COPYEXT",cbl,cpy"
+*NOCOPYLBR COPYLIST COPYLISTCOMMENT"1" CSI CURRENCY-SIGN"36"
+*CURRENT-DATE"MMDDYY" NODATA DATACOMPRESS"0" NODATA-CONTEXT DATE
+*DBCHECK DBCS"3" NODBCSSOSI DBSPACE DE-EDIT"2" DEFAULTBYTE"32"
+*NODEFAULTCALLS DETECTLOCK NODG DIALECT"MF" NODIRECTIVES-IN-COMMENTS
+*NODOSVS NODPCINSUBSCRIPT DYNAM NOEARLY-RELEASE ECHO NOECHOALL
+*NOEDITOR ENSUITE"0" NOENTCOBOL ERRFORMAT"1" ERRLIST"EMBED" NOERRQ
+*FASTSORT FCD3 NOFCDREG NOFDCLEAR NOFILESHARE FILETYPE"0" NOFLAG
+*NOFLAGAS NOFLAGCD NOFLAGEUC NOFLAGMIG NOFLAGQ FLAGSINEDIT NOFLAGSTD
+*NOFOLDCALLNAME NOFOLDCOPYNAME FORM"60" NOFP-ROUNDING
+*NOHOSTARITHMETIC NOHOSTCONTZERO NOHOST-NUMCOMPARE NOHOST-NUMMOVE
+*NOHOSTFD NOHOSTRW NOIBM-MS NOIBMCOMP IDXFORMAT"0" NOILGEN
+*IMPLICITSCOPE NOINDD INFORETURN"0" NOINITCALL INITPTR INT
+*"CARGAJUR.int" INTDATE"ANSI" INTLEVEL"5" IOCONV NOISO2002
+*NOIXNLSKEY NOIXNUMKEY KEEP-INT KEYCHECK KEYCOMPRESS"0" NOLIBRARIAN
+*NOLINE-COUNT LIST LISTPATH"" LISTWIDTH"80" LITVAL-SIZE"4" LOCKTYPE
+*"0" NOMAPNAME NOMAXERROR METHODDEFAULT"REFERENCE" MF"15" MFCOMMENT
+*NOMOVELENCHECK NOMS NOMVS NATIVE"ASCII" NONATIVEFLOATINGPOINT
+*NONCHAR NONEWBASENAME NONLS NSYMBOL"DBCS" NOODOOSVS NOODOSLIDE
+*NOOLDBLANKLINE NOOLDCOPY NOOLDINDEX NOOLDNEXTSENTENCE NOOLDREADINTO
+*NOOLDSTRMIX OOCTRL"-C-E-G-P+Q+R-S+W" OPTIONAL-FILE NOOS390 OSEXT""
+*NOOSVS NOOUTDD P64 NOPANVALET PERFORM-TYPE"MF" NOPREPLIST
+*NOPREPROCESS NOPRINT-EXT NOPROFILE NOPROGID-COMMENT
+*NOPROGID-INT-NAME NOPROTECT-LINKAGE PROTOTYPE"RELAXED" QUAL
+*QUALPROC NOQUERY QUOTE NORAWLIST NORDW RECMODE"F" NOREENTRANT NOREF
+*NOREFNO REMAINDER"1" REPORT-LINE"256" RESEQ NORETRYLOCK REWRITE-LS
+*NORM RTNCODE-SIZE"8" NORWHARDPAGE NOSAA SEG NOSEQCHK SEQUENTIAL
+*"RECORD" NOSERIAL SETTING"LINE" NOSHAREOUTDD NOSHOW-DIR SIGN"ASCII"
+*NOSIGNDISCARD NOSIGNFIXUP SORTTYPE"DFSORT" SOURCEFORMAT"FIXED"
+*SOURCETABSTOP"8" NOSPZERO NOSSRANGE STDERR NOSTICKY-LINKAGE
+*NOSTICKY-PERFORM SUPFF SWITCHTYPE"1" SYMBSTART"1" SYSPUNCH"132"
+*TERMPAGE TIME NOTRACE TRUNC"ANSI" NOTRUNCCALLNAME NOTRUNCCOPY
+*TRUNCINC"10" UNICODE"NATIVE" VERBOSE NOVSC2 WARNING"1" NOWB NOWB2
+*NOWB3 WEBSERVER"CGI" NOWRITELOCK NOWRITETHRU NOXOPEN NOXREF
+*NOZEROLENGTHFALSE NOZEROSEQ NOZWB2 IDENTIFICATION DIVISION.3 PROGRAM-ID.    ACTALEJUR.^"CARGAJUR.lst" 4737 lines, 270534 characters^/PARAMETROS-SALIDA-BDIIVIDE   584     03 PRIMER-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.585     03 SEGUNDO-APELLIDO-BDIIVIDEPIC X(15) VALUE SPACES.
+   586     03 PRIMER-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.
+   587     03 SEGUNDO-NOMBRE-BDIIVIDEPIC X(15) VALUE SPACES.
+   588     03 NOM-LEIDO-BDIIVIDEPIC X(65) VALUE SPACES.
+   589
+590 01 PARAMETROS-ENTRADA-BDIIVIDEPIC X(100) VALUE SPACES.   FAC0002
+   591 01 PARAMETROS-ENTRADA-R-BDIIVIDE REDEFINES
+   592PARAMETROS-ENTRADA-BDIIVIDE.
+   593     03 TIP-IDE-BDIIVIDEPIC X.
+   594     03 NUM-IDE-BDIIVIDEPIC X(11) JUSTIFIED RIGHT.
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  12
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.W
+   595     03 NUM-IDE-BDIIVIDE-R REDEFINES   NUM-IDE-BDIIVIDEFAC0002
+   596PIC 9(11).FAC0002
+   597     03 NOMBRE-BDIIVIDEPIC X(65).
+   598     03 SW-VERIFNOM-BDIIVIDEPIC 9.
+   599     03 NUM-BLOQUES-BDIIVIDEPIC 9.
+   600     03 SW-VALTIPID-BDIIVIDEPIC 9.FAC0002
+   601     03 SW-ASGTIPID-BDIIVIDEPIC 9.FAC0002
+   602     03 SW-DIGCHEQUEO-BDIIVIDEPIC 9.FAC0003
+   603     03 FILLER-BDIIVIDEPIC X(18).FAC0003
+   604
+605 01 PARAMETROS-SALIDA-BDIIVIDE.
+   606    03 NOM-VAL-BDIIVIDEPIC X(65) VALUE SPACES.
+   607    03 SW-ID-BDIIVIDEPIC 9 VALUE 0.
+   608    03 SW-NOMBRES-BDIIVIDEPIC 9 VALUE 0.
+   609    03 SW-TID-BDIIVIDEPIC 9 VALUE 0.FAC0002
+   610*BDIIVIDE.WS.v03.0003.
+   611******************************************************************
+   612*01  NUM-ID-W-BDIIVIDE.
+   613*    03  NUM-ID-W11-BDIIVIDEpic 9(11) value zeros.
+   614*    03  NUM-ID-W11-R-BDIIVIDE redefines NUM-ID-W11-BDIIVIDE.
+   615*05 NUM-ID-W10-BDIIVIDEpic 9(10).
+   616*05 RESTO-NUM-ID-BDIIVIDEpic 9.
+   617*01  NOMBRES-AUX-W-BDIIVIDE.
+   618*    03 PRIMER-APELLIDO-BDIIVIDEpic X(15) value spaces.
+   619*    03 SEGUNDO-APELLIDO-BDIIVIDEpic X(15) value spaces.
+   620*    03 PRIMER-NOMBRE-BDIIVIDEpic X(15) value spaces.
+   621*    03 SEGUNDO-NOMBRE-BDIIVIDEpic X(15) value spaces.
+   622*    03 NOM-LEIDO-BDIIVIDEpic X(65) value spaces.
+   623*
+624*01 PARAMETROS-ENTRADA-BDIIVIDEpic X(100) value spaces.
+   625*01 PARAMETROS-ENTRADA-R-BDIIVIDE redefines
+   626*PARAMETROS-ENTRADA-BDIIVIDE.
+   627*    03 TIP-IDE-BDIIVIDEpic X.
+   628*    03 NUM-IDE-BDIIVIDEpic X(11) JUSTIFIED right.
+   629*    03 NUM-IDE-BDIIVIDE-R redefines   NUM-IDE-BDIIVIDE
+   630*pic 9(11)./   631*    03 NOMBRE-BDIIVIDEpic X(65).
+632*    03 SW-VERIFNOM-BDIIVIDEpic 9.
+633*    03 NUM-BLOQUES-BDIIVIDEpic 9.
+634*    03 SW-VALTIPID-BDIIVIDEpic 9.
+635*    03 SW-ASGTIPID-BDIIVIDEpic 9.
+636*    03 SW-DIGCHEQUEO-BDIIVIDEpic 9.
+637*    03 FILLER-BDIIVIDEpic X(18).
+638*
+639*01 PARAMETROS-SALIDA-BDIIVIDE.
+/  2346******************************************************************
+  2347* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  43
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2348* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  2349* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  2350** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  2351******************************************************************
+  2352* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN
+  2353* OCT.19/2005 * RUTINA VALIDAR-TIPO-ID PARA NITS QUE SON NUIPS
+  2354* FAC006C     *
+  2355******************************************************************
+  2356* C.VELASCO   * SE VUELVE A LA VERSION ANTES DE MODIFICAR LOS
+  2357* JUL.12/2012 * RANGOS DE IDENTIFICACIONES,  LOS AJUSTES DE LA
+  2358* CAV0008     * VERSION 07, IMPACTA APERTURAS Y PROCESOS ESPEC.
+  2359******************************************************************
+  2360 80100-VALIDAR-IDENTIFICACION.
+  2361*===================================*
+  2362*80100-VALIDAR-IDENTIFICACION.
+  2363* Valida el numero de identificacion contra las bases de datos
+  2364* de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+  2365* y verifica la coincidencia del nombre reportado
+  2366*===================================*
+  2367    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM
+  2368NOMBRES-AUX-W-BDIIVIDE
+  2369    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+  2370    IF SW-VERIFNOM-BDIIVIDE NOT NUMERICFAC0002
+  2371MOVE ZEROS TO SW-VERIFNOM-BDIIVIDEFAC0002
+  2372    END-IFFAC0002
+  2373    IF SW-ASGTIPID-BDIIVIDE NOT NUMERICFAC0002
+  2374MOVE ZEROS TO SW-ASGTIPID-BDIIVIDEFAC0002
+  2375    END-IFFAC0002
+  2376    IF SW-VALTIPID-BDIIVIDE NOT NUMERICFAC0002
+  2377MOVE ZEROS TO SW-VALTIPID-BDIIVIDEFAC0002
+  2378    END-IFFAC0002
+  2379    IF SW-DIGCHEQUEO-BDIIVIDE NOT NUMERICFAC0003
+  2380MOVE ZEROS TO SW-DIGCHEQUEO-BDIIVIDEFAC0003
+  2381    END-IFFAC0003
+  2382    IF NUM-IDE-BDIIVIDE IS NUMERIC AND NUM-IDE-BDIIVIDE <> ZEROS
+  2383IF SW-ASGTIPID-BDIIVIDE = 1FAC0002
+  2384PERFORM 80300-ASIGNAR-TIPO-IDFAC0002
+  2385END-IFFAC0002
+  2386IF SW-VALTIPID-BDIIVIDE = 1FAC0002
+  2387PERFORM 80400-VALIDAR-TIPO-IDFAC0002
+  2388END-IFFAC0002
+  2389IF SW-DIGCHEQUEO-BDIIVIDE = 1FAC0004
+  2390PERFORM 80500-ELIMINAR-DIGITO-CHEQUEOFAC0004
+  2391END-IFFAC0004
+  2392IF SW-VALTIPID-BDIIVIDE = 0 ORFAC0004/  2427*con las BASES DE DATOS DE LA REGISTRADURIA, DAS, DIAN:
+  2428*BDIAREGI, BDIADAS, BDIADIAN respectivamente
+  2429*Dependiendo del tipo de identificacion
+  2430*===================================*
+  2431     EVALUATE TIP-IDE-BDIIVIDE
+  2432WHEN 1
+  2433PERFORM 85010-UBICA-CEDULA
+  2434WHEN 2
+  2435PERFORM 85020-UBICA-NIT
+  2436WHEN 3
+  2437PERFORM 85020-UBICA-NIT
+  2438WHEN 4
+  2439PERFORM 85030-UBICA-EXT
+  2440WHEN OTHER
+  2441MOVE 1 TO SW-ID-BDIIVIDE
+  2442     END-EVALUATE.
+  2443
+  2444 80300-ASIGNAR-TIPO-ID.FAC0002
+  2445*================================================================
+  2446*80300-ASIGNAR-TIPO-ID.FAC0002
+  2447*ASIGNACION DEL TIPO DE IDENTIFICACION. PARAMETRO DE ENTRADAFAC0002
+  2448*SW-ASGTIPID-BDIVIIDE = 1; RETORNA TIPID-VAL-BDIIVIDE
+  2449*================================================================
+  2450    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE TIP-IDE-BDIIVIDEFAC0002
+  2451    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"FAC0002
+  2452IF (NUM-IDE-BDIIVIDE-R >= 1 ANDFAC0002
+  2453NUM-IDE-BDIIVIDE-R  <= 99999999) ORFAC0002
+  2454(NUM-IDE-BDIIVIDE-R >= 1000000000 ANDFAC0002
+  2455NUM-IDE-BDIIVIDE-R  <  8000000000)FAC0003
+  2456MOVE 1 TO TIP-IDE-BDIIVIDEFAC0002
+  2457ELSEFAC0002
+  2458IF (NUM-IDE-BDIIVIDE-R >= 800000000 ANDFAC0002
+  2459NUM-IDE-BDIIVIDE-R  <= 999999999) ORFAC0005
+  2460(NUM-IDE-BDIIVIDE-R >= 8000000000 ANDFAC0003
+  2461NUM-IDE-BDIIVIDE-R  <= 9999999999)FAC0005
+  2462MOVE 2 TO TIP-IDE-BDIIVIDEFAC0002
+  2463*IF NUM-IDE-BDIIVIDE-R >= 8000000000FAC0004
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  45
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2464*MOVE NUM-IDE-BDIIVIDE-R TO NUM-ID-W11-BDIIVIDEFAC0004
+  2465*MOVE NUM-ID-W10-BDIIVIDE TO NUM-IDE-BDIIVIDE-RFAC0004
+  2466*END-IFFAC0004
+  2467ELSEFAC0002
+  2468IF (NUM-IDE-BDIIVIDE-R >= 600000000 ANDFAC0002
+  2469NUM-IDE-BDIIVIDE-R  <  800000000) ORFAC0005
+  2470(NUM-IDE-BDIIVIDE-R >= 6000000000 ANDFAC0002
+  2471NUM-IDE-BDIIVIDE-R  <  8000000000)FAC0005
+  2472MOVE 3 TO TIP-IDE-BDIIVIDEFAC0002
+  2473ELSE MOVE 4 TO TIP-IDE-BDIIVIDEFAC0002/  2474END-IF.FAC0002
+  2475
+  2476 80400-VALIDAR-TIPO-ID.FAC0002
+  2477*================================================================
+  2478*80400-VALIDAR-TIPO-ID.FAC0002
+  2479*VALIDACION DEL TIPO DE IDENTIFICACION DE ACUERDO AL RANGOFAC0002
+  2480*CONTENIDO EN EL NUMERO DE IDENTIFICACION. SE PREGUNTA AL REVES.  FAC0002
+  2481*PARAMETRO DE ENTRADA SW-VALTIPID-BDIVIIDE = 1;FAC0002
+  2482*RETORNA SW-TID-BDIIVIDE = 1 SI ESTA ERRADO.FAC0002
+  2483*================================================================
+  2484    INITIALIZE PARAMETROS-SALIDA-BDIIVIDEFAC0002
+/  3126* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  3127** CORRESPONDE AL RANGO.
+  3128******************************************************************
+  3129* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+  3130* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  3131* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  3132** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  3133******************************************************************
+  3134* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN
+  3135* OCT.19/2005 * RUTINA VALIDAR-TIPO-ID PARA NITS QUE SON NUIPS
+  3136* FAC006C     *
+  3137******************************************************************
+  3138* C.VELASCO   * SE VUELVE A LA VERSION ANTES DE MODIFICAR LOS
+  3139* JUL.12/2012 * RANGOS DE IDENTIFICACIONES,  LOS AJUSTES DE LA
+  3140* CAV0008     * VERSION 07, IMPACTA APERTURAS Y PROCESOS ESPEC.
+  3141******************************************************************
+  3142 80100-VALIDAR-IDENTIFICACION.
+  3143*===================================*
+  3144*80100-VALIDAR-IDENTIFICACION.
+  3145* Valida el numero de identificacion contra las bases de datos
+  3146* de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+  3147* y verifica la coincidencia del nombre reportado
+  3148*===================================*
+  3149    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM
+*  12-S****************************************(  41)**
+**    Operand PARAMETROS-SALIDA-BDIIVIDE is not declared
+  3150NOMBRES-AUX-W-BDIIVIDE
+  3151    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+*  12-S***************************(  56)**
+**    Operand NUM-IDE-BDIIVIDE is not declared
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  57
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  3152    IF SW-VERIFNOM-BDIIVIDE NOT NUMERICFAC0002
+*  12-S**************************(  56)**
+**    Operand SW-VERIFNOM-BDIIVIDE is not declared
+  3153MOVE ZEROS TO SW-VERIFNOM-BDIIVIDEFAC0002
+*  12-S****************************************(  57)**
+**    Operand SW-VERIFNOM-BDIIVIDE is not declared
+  3154    END-IFFAC0002
+* 564-S*********(  57)**
+**    A scope-delimiter did not have a matching verb and was discarded.
+  3155    IF SW-ASGTIPID-BDIIVIDE NOT NUMERICFAC0002
+*  12-S**************************(  57)**
+**    Operand SW-ASGTIPID-BDIIVIDE is not declared
+  3156MOVE ZEROS TO SW-ASGTIPID-BDIIVIDEFAC0002
+*  12-S****************************************(  57)**
+**    Operand SW-ASGTIPID-BDIIVIDE is not declared
+  3157    END-IFFAC0002
+* 564-S*********(  57)**?  2463*IF NUM-IDE-BDIIVIDE-R >= 8000000000FAC0004
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  45
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2464*MOVE NUM-IDE-BDIIVIDE-R TO NUM-ID-W11-BDIIVIDEFAC0004
+  2465*MOVE NUM-ID-W10-BDIIVIDE TO NUM-IDE-BDIIVIDE-RFAC0004
+  2466*END-IFFAC0004
+  2467ELSEFAC0002
+  2468IF (NUM-IDE-BDIIVIDE-R >= 600000000 ANDFAC0002
+  2469NUM-IDE-BDIIVIDE-R  <  800000000) ORFAC0005
+  2470(NUM-IDE-BDIIVIDE-R >= 6000000000 ANDFAC0002
+  2471NUM-IDE-BDIIVIDE-R  <  8000000000)FAC0005
+  2472MOVE 3 TO TIP-IDE-BDIIVIDEFAC0002
+  2473ELSE MOVE 4 TO TIP-IDE-BDIIVIDEFAC0002
+  2474END-IF.FAC0002
+  2475
+  2476 80400-VALIDAR-TIPO-ID.FAC0002
+  2477*================================================================
+  2478*80400-VALIDAR-TIPO-ID.FAC0002
+  2479*VALIDACION DEL TIPO DE IDENTIFICACION DE ACUERDO AL RANGOFAC0002
+  2480*CONTENIDO EN EL NUMERO DE IDENTIFICACION. SE PREGUNTA AL REVES.  FAC0002
+  2481*PARAMETRO DE ENTRADA SW-VALTIPID-BDIVIIDE = 1;FAC0002
+  2482*RETORNA SW-TID-BDIIVIDE = 1 SI ESTA ERRADO.FAC0002
+  2483*================================================================
+  2484    INITIALIZE PARAMETROS-SALIDA-BDIIVIDEFAC0002
+  2485    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"FAC0002
+  2486    EVALUATE TIP-IDE-BDIIVIDEFAC0002
+  2487WHEN 1FAC0002
+  2488IF NUM-IDE-BDIIVIDE-R > 9999999999FAC0002
+  2489MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+  2490END-IFFAC0002
+  2491WHEN 2FAC0002
+  2492IF NUM-IDE-BDIIVIDE-R >  9999999999 ORFAC006C
+  2493(NUM-IDE-BDIIVIDE-R <= 800000000 AND >= 600000000)FAC0005
+  2494MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+  2495END-IFFAC0002
+  2496WHEN 3FAC0002
+  2497IF NUM-IDE-BDIIVIDE-R > 800000000 OR < 600000000FAC0005
+  2498MOVE 1 TO SW-TID-BDIIVIDEFAC0002
+  2499END-IFFAC0002
+  2500    END-EVALUATE.FAC0002
+  2501
+  2502 80500-ELIMINAR-DIGITO-CHEQUEO.FAC0004
+  2503*================================================================
+  2504*80500-ELIMINAR-DIGITO-CHEQUEO.FAC0004
+  2505*Elimina el digito de chequeo y cambia el tipo de identificacion
+  2506*de acuerdo a los rangos para tipo id = 2 y 3
+  2507*================================================================
+  2508IF (NUM-IDE-BDIIVIDE-R >= 600000000 ANDFAC0004
+  2509NUM-IDE-BDIIVIDE-R  <  800000000) ORFAC0005  2416ELSE IF SW-TID-BDIIVIDE = 1FAC0002
+  2417MOVE 1 TO SW-ID-BDIIVIDEFAC0002
+  2418END-IFFAC0002
+  2419END-IFFAC0002
+  2420    ELSE MOVE 1 TO SW-ID-BDIIVIDE
+  2421    END-IF.
+  2422
+  2423 80200-VALIDAR-ID.
+  2424*===================================*
+  2425*80200-VALIDAR-ID.
+  2426*Validacion del numero de identificacion
+  2427*con las BASES DE DATOS DE LA REGISTRADURIA, DAS, DIAN:
+  2428*BDIAREGI, BDIADAS, BDIADIAN respectivamente
+  2429*Dependiendo del tipo de identificacion
+  2430*===================================*
+  2431     EVALUATE TIP-IDE-BDIIVIDE
+  2432WHEN 1
+  2433PERFORM 85010-UBICA-CEDULA
+  2434WHEN 2
+  2435PERFORM 85020-UBICA-NIT
+  2436WHEN 3
+  2437PERFORM 85020-UBICA-NIT
+  2438WHEN 4
+  2439PERFORM 85030-UBICA-EXT
+  2440WHEN OTHER
+  2441MOVE 1 TO SW-ID-BDIIVIDE
+  2442     END-EVALUATE.
+  2443
+  2444 80300-ASIGNAR-TIPO-ID.FAC0002
+  2445*================================================================
+  2446*80300-ASIGNAR-TIPO-ID.FAC0002
+  2447*ASIGNACION DEL TIPO DE IDENTIFICACION. PARAMETRO DE ENTRADAFAC0002
+  2448*SW-ASGTIPID-BDIVIIDE = 1; RETORNA TIPID-VAL-BDIIVIDE
+  2449*================================================================
+  2450    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE TIP-IDE-BDIIVIDEFAC0002
+  2451    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"FAC0002
+  2452IF (NUM-IDE-BDIIVIDE-R >= 1 ANDFAC0002
+  2453NUM-IDE-BDIIVIDE-R  <= 99999999) ORFAC0002
+  2454(NUM-IDE-BDIIVIDE-R >= 1000000000 ANDFAC0002
+  2455NUM-IDE-BDIIVIDE-R  <  8000000000)FAC0003
+  2456MOVE 1 TO TIP-IDE-BDIIVIDEFAC0002
+  2457ELSEFAC0002
+  2458IF (NUM-IDE-BDIIVIDE-R >= 800000000 ANDFAC0002
+  2459NUM-IDE-BDIIVIDE-R  <= 999999999) ORFAC0005
+  2460(NUM-IDE-BDIIVIDE-R >= 8000000000 ANDFAC0003
+  2461NUM-IDE-BDIIVIDE-R  <= 9999999999)FAC0005
+  2462MOVE 2 TO TIP-IDE-BDIIVIDEFAC0002
+  2463*IF NUM-IDE-BDIIVIDE-R >= 8000000000FAC0004
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  45^  2371MOVE ZEROS TO SW-VERIFNOM-BDIIVIDEFAC0002
+  2372    END-IFFAC0002
+  2373    IF SW-ASGTIPID-BDIIVIDE NOT NUMERICFAC0002
+  2374MOVE ZEROS TO SW-ASGTIPID-BDIIVIDEFAC0002
+  2375    END-IFFAC0002
+  2376    IF SW-VALTIPID-BDIIVIDE NOT NUMERICFAC0002
+  2377MOVE ZEROS TO SW-VALTIPID-BDIIVIDEFAC0002
+  2378    END-IFFAC0002
+  2379    IF SW-DIGCHEQUEO-BDIIVIDE NOT NUMERICFAC0003
+  2380MOVE ZEROS TO SW-DIGCHEQUEO-BDIIVIDEFAC0003
+  2381    END-IFFAC0003
+  2382    IF NUM-IDE-BDIIVIDE IS NUMERIC AND NUM-IDE-BDIIVIDE <> ZEROS
+  2383IF SW-ASGTIPID-BDIIVIDE = 1FAC0002
+  2384PERFORM 80300-ASIGNAR-TIPO-IDFAC0002
+  2385END-IFFAC0002
+  2386IF SW-VALTIPID-BDIIVIDE = 1FAC0002
+  2387PERFORM 80400-VALIDAR-TIPO-IDFAC0002
+  2388END-IFFAC0002
+  2389IF SW-DIGCHEQUEO-BDIIVIDE = 1FAC0004
+  2390PERFORM 80500-ELIMINAR-DIGITO-CHEQUEOFAC0004
+  2391END-IFFAC0004
+  2392IF SW-VALTIPID-BDIIVIDE = 0 ORFAC0004
+  2393(SW-VALTIPID-BDIIVIDE = 1 AND SW-TID-BDIIVIDE = 0)FAC0002
+  2394PERFORM 80200-VALIDAR-ID
+  2395INITIALIZE NOM-VAL-BDIIVIDE
+  2396MOVE NOM-LEIDO-BDIIVIDE TO NOM-VAL-BDIIVIDE
+  2397IF SW-VERIFNOM-BDIIVIDE = 1
+  2398MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOM
+  2399MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOM
+  2400MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOM
+  2401IF SW-ID-BDIIVIDE = 0
+  2402IF NUM-BLOQUES-BDIIVIDE NUMERIC AND
+  2403NUM-BLOQUES-BDIIVIDE <> ZEROS
+  2404MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
+  2405ELSE IF TIP-ID-INPUT-VALNOM = 1
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  44
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2406MOVE 2 TO BLOQUES-INPUT-VALNOM
+  2407ELSE MOVE 1 TO BLOQUES-INPUT-VALNOM
+  2408END-IF
+  2409END-IF
+  2410PERFORM 10000-MATCH-NOMBRES-VALNOM
+  2411IF MATCH-OK-OUT-VALNOM = 0
+  2412MOVE 1 TO SW-NOMBRES-BDIIVIDE
+  2413END-IF
+  2414END-IF
+  2415END-IF
+  2416ELSE IF SW-TID-BDIIVIDE = 1FAC0002
+  2417MOVE 1 TO SW-ID-BDIIVIDEFAC0002    2326
+* 2327     copy BDIIVIDE.PROC.
+  2328*BDIIVIDE.PROC.v.03.0008
+  2329******************************************************************
+  2330*RUTINA DE VALIDACION DE IDENTIFICACIONES
+  2331******************************************************************
+  2332* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+  2333* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+  2334** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+  2335** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+  2336* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+  2337******************************************************************
+  2338* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+  2339* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+  2340* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+  2341******************************************************************
+  2342* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+  2343* AGO.11/2004 * DIGITO DE CHEQUEO.
+  2344* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  2345** CORRESPONDE AL RANGO.
+  2346******************************************************************
+  2347* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  43
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2348* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  2349* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  2350** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  2351******************************************************************
+  2352* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN
+  2353* OCT.19/2005 * RUTINA VALIDAR-TIPO-ID PARA NITS QUE SON NUIPS
+  2354* FAC006C     *
+  2355******************************************************************
+  2356* C.VELASCO   * SE VUELVE A LA VERSION ANTES DE MODIFICAR LOS
+  2357* JUL.12/2012 * RANGOS DE IDENTIFICACIONES,  LOS AJUSTES DE LA
+  2358* CAV0008     * VERSION 07, IMPACTA APERTURAS Y PROCESOS ESPEC.
+  2359******************************************************************
+  2360 80100-VALIDAR-IDENTIFICACION.
+  2361*===================================*
+  2362*80100-VALIDAR-IDENTIFICACION.
+  2363* Valida el numero de identificacion contra las bases de datos
+  2364* de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+  2365* y verifica la coincidencia del nombre reportado
+  2366*===================================*
+  2367    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM
+  2368NOMBRES-AUX-W-BDIIVIDE
+  2369    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
+  2370    IF SW-VERIFNOM-BDIIVIDE NOT NUMERICFAC0002
+  2371MOVE ZEROS TO SW-VERIFNOM-BDIIVIDEFAC0002
+  2372    END-IFFAC0002    2281when "00"
+  2282if FUENTE-BDIIALE = P-cod-suscriptor
+  2283*es un alerta de JURAD
+  2284delete BDIIALE
+  2285if EST-BDIIALE = "00"
+  2286add 1 to N-ale-borradas
+  2287else
+  2288*error en la eliminacion
+  2289display "Error al eliminar un registro de "
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  42
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/ICFILE.WS)
+  2290"BDIIALE vaciando los datos"
+  2291display "Clave: " LLAVE-BDIIALE
+  2292display "Reg borrados: " N-ale-borradas
+  2293perform 9000-CANCELAR-PROGRAMA
+  2294end-if
+  2295end-if
+  2296when "10"
+  2297*fin de archivo: sale normalmente
+  2298continue
+  2299when other
+  2300*lectura anormal: cancelacion del programa
+  2301display "Error en lectura del archivo de alertas "
+  2302"online"
+  2303display "File status: " EST-BDIIALE
+  2304perform 9000-CANCELAR-PROGRAMA *> no retorna
+  2305end-evaluate
+  2306     end-perform.
+  2307     display "Termino la eliminacion total de JURAD"
+  2308     display "Reg borrados: " N-ale-borradas.
+  2309
+  2310
+  2311 7000-RUTINA-FINAL.
+  2312******************************************************************
+  2313* Registra hora de finalizacion
+  2314     accept W-hora-fin from time.
+  2315*    leer JURAD a ver si hay registros despues del "T"
+  2316
+  2317
+  2318 9000-CANCELAR-PROGRAMA.
+  2319******************************************************************
+  2320* Procedimiento standard de cancelacion de programa batch
+  2321******************************************************************
+  2322* TODO: hay un standard para comunicar una cancelacion de proceso?
+  2323     display "Proceso cancelado"
+  2324     goback.
+  2325
+  2326
+* 2327     copy BDIIVIDE.PROC.* 2copy 
+/BDIIVIDE.PROC  2328*BDIIVIDE.PROC.v.03.0008
+/  3088     if reg-input(1:80) not = reg-input-anterior
+  3089add 1 to E-cont-regs-con-error
+  3090display reg-input(1:80)
+  3091move reg-input(1:80) to reg-input-anterior
+  3092     end-if
+  3093
+  3094*    contabiliza el error en la tabla de errores
+  3095     set Ex to 1
+  3096     search E-error varying Ex
+  3097     at end
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  56
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/VALNOM.PRO
+  3098display "--- falla en la tabla de errores ---" cod-error
+  3099     when E-codigo(Ex) = "00"
+  3100add 1 to E-contador(Ex)
+  3101display "--- error tipo exotico: " cod-error
+  3102     when E-codigo(Ex) = cod-error
+  3103add 1 to E-contador(Ex)
+  3104display "Error " cod-error " " E-descripcion(Ex)
+  3105     end-search
+  3106
+  3107     exit program.
+  3108
+* 3109     copy BDIIVIDE.PROC.
+  3110*BDIIVIDE.PROC.v.03.0008
+  3111******************************************************************
+  3112*RUTINA DE VALIDACION DE IDENTIFICACIONES
+  3113******************************************************************
+  3114* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+  3115* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+  3116** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+  3117** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+  3118* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+  3119******************************************************************
+  3120* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+  3121* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+  3122* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+  3123******************************************************************
+  3124* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+  3125* AGO.11/2004 * DIGITO DE CHEQUEO.
+  3126* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  3127** CORRESPONDE AL RANGO.
+  3128******************************************************************
+  3129* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+  3130* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  3131* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  3132** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  3133******************************************************************
+  3134* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN?  2305end-evaluate
+  2306     end-perform.
+  2307     display "Termino la eliminacion total de JURAD"
+  2308     display "Reg borrados: " N-ale-borradas.
+  2309
+  2310
+  2311 7000-RUTINA-FINAL.
+  2312******************************************************************
+  2313* Registra hora de finalizacion
+  2314     accept W-hora-fin from time.
+  2315*    leer JURAD a ver si hay registros despues del "T"
+  2316
+  2317
+  2318 9000-CANCELAR-PROGRAMA.
+  2319******************************************************************
+  2320* Procedimiento standard de cancelacion de programa batch
+  2321******************************************************************
+  2322* TODO: hay un standard para comunicar una cancelacion de proceso?
+  2323     display "Proceso cancelado"
+  2324     goback.
+  2325
+  2326
+* 2327     copy BDIIVIDE.PROC.
+  2328*BDIIVIDE.PROC.v.03.0008
+  2329******************************************************************
+  2330*RUTINA DE VALIDACION DE IDENTIFICACIONES
+  2331******************************************************************
+  2332* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+  2333* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+  2334** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+  2335** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+  2336* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+  2337******************************************************************
+  2338* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+  2339* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+  2340* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+  2341******************************************************************
+  2342* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+  2343* AGO.11/2004 * DIGITO DE CHEQUEO.
+  2344* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  2345** CORRESPONDE AL RANGO.
+  2346******************************************************************
+  2347* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  43
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2348* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  2349* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  2350** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  2351******************************************************************/  3088     if reg-input(1:80) not = reg-input-anterior
+  3089add 1 to E-cont-regs-con-error
+  3090display reg-input(1:80)
+  3091move reg-input(1:80) to reg-input-anterior
+  3092     end-if
+  3093
+  3094*    contabiliza el error en la tabla de errores
+  3095     set Ex to 1
+  3096     search E-error varying Ex
+  3097     at end
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  56
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/VALNOM.PRO
+  3098display "--- falla en la tabla de errores ---" cod-error
+  3099     when E-codigo(Ex) = "00"
+  3100add 1 to E-contador(Ex)
+  3101display "--- error tipo exotico: " cod-error
+  3102     when E-codigo(Ex) = cod-error
+  3103add 1 to E-contador(Ex)
+  3104display "Error " cod-error " " E-descripcion(Ex)
+  3105     end-search
+  3106
+  3107     exit program.
+  3108
+* 3109     copy BDIIVIDE.PROC.
+  3110*BDIIVIDE.PROC.v.03.0008
+  3111******************************************************************
+  3112*RUTINA DE VALIDACION DE IDENTIFICACIONES
+  3113******************************************************************
+  3114* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+  3115* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+  3116** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+  3117** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+  3118* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+  3119******************************************************************
+  3120* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+  3121* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+  3122* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+  3123******************************************************************
+  3124* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+  3125* AGO.11/2004 * DIGITO DE CHEQUEO.
+  3126* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  3127** CORRESPONDE AL RANGO.
+  3128******************************************************************
+  3129* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+  3130* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  3131* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  3132** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  3133******************************************************************
+  3134* F.CUADROS   * NUIP04: INCLUSION DE RANGO PARA TIPO ID. 2 EN//Address search hit BOTTOM without matching pattern??  2305end-evaluate
+  2306     end-perform.
+  2307     display "Termino la eliminacion total de JURAD"
+  2308     display "Reg borrados: " N-ale-borradas.
+  2309
+  2310
+  2311 7000-RUTINA-FINAL.
+  2312******************************************************************
+  2313* Registra hora de finalizacion
+  2314     accept W-hora-fin from time.
+  2315*    leer JURAD a ver si hay registros despues del "T"
+  2316
+  2317
+  2318 9000-CANCELAR-PROGRAMA.
+  2319******************************************************************
+  2320* Procedimiento standard de cancelacion de programa batch
+  2321******************************************************************
+  2322* TODO: hay un standard para comunicar una cancelacion de proceso?
+  2323     display "Proceso cancelado"
+  2324     goback.
+  2325
+  2326
+* 2327     copy BDIIVIDE.PROC.
+  2328*BDIIVIDE.PROC.v.03.0008
+  2329******************************************************************
+  2330*RUTINA DE VALIDACION DE IDENTIFICACIONES
+  2331******************************************************************
+  2332* F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR EL TIPO DE
+  2333* JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS
+  2334** NUIP01 * RUTINA 80300-ASIGNAR-TIPO-ID
+  2335** INCLUSION DE PARAMETRO PARA VALIDAR EL TIPO-ID
+  2336* FAC0002     * NUIP01 * RUTINA 80400-VALIDAR-TIPO-ID.
+  2337******************************************************************
+  2338* F.CUADROS   * RELLENAR DE CEROS EL NUMERO DE IDENTIFICAICON
+  2339* JUL.16/2004 * CUANDO SE LE QUITA EL DIGITO DE CHEQUEO
+  2340* FAC0003     * NUIP02 * VALIDACION DE IDENTIFICACION SI TIPO-ID 2
+  2341******************************************************************
+  2342* F.CUADROS   * NUIP03: INCLUSION DE RUTINA PARA ELIMINAR EL
+  2343* AGO.11/2004 * DIGITO DE CHEQUEO.
+  2344* FAC0004     * CAMBIO DE TIPO ID = 2 POR 3 SI EL NIT NO
+  2345** CORRESPONDE AL RANGO.
+  2346******************************************************************
+  2347* F.CUADROS   * RANGO5: DEFINICION DE NUEVOS RANGOS PARA TIPO ID 3:
+^L^M* Micro Focus Server ExpressV5.1 revision 000 15-May-14 17:16 Page  43
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/BDIIVIDE.P
+  2348* OCT.22/2004 * ENTRE 700.000.001 Y 799.999.999 (OTROS DOCUMENTOS)
+  2349* FAC0005     * DEFINICION DE NUEVOS RANGOS PARA TIPO ID 2:
+  2350** ENTRE 900.000.000 Y 999.999.999 (MUISCA)
+  2351******************************************************************:q/d/iccol/desarrollo $vi CARGAJUR.cbl
+"CARGAJUR.cbl" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CARGAJUR.cbl" [New file]:q/d/iccol/desarrollo $^D

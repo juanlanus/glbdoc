@@ -661,28 +661,6 @@ c     *   02 ANO-ANT-TITLE-BDSCOREHIS  pic 9(04) value 2013.
 c     *   02 filler                    pic X(01) value "-".
 c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
 
-       01 LINEA1-AUX.
-      * TIENE [&&&&&] DEMANDAS CERRADAS Y [&&&&&] ABIERTAS
-          02 filler    pic X(29)
-                       value "DEMANDAS JUDICIALES VIGENTES:".
-          02 NUM-VIG-1 pic 9(05) value 0.
-          02 filler    pic X(08) value " ULTIMA:".
-          02 FEC-VIG-1 pic 9(08) value 0.
-       01 LINEA2-AUX.
-          02 filler    pic X(31)
-                       value "DEMANDAS JUDICIALES TERMINADAS:".
-          02 NUM-TER-2 pic 9(05) value 0.
-          02 filler    pic X(14) value spaces.
-       01 VARIABLES-GENERALES.
-          03 real                       pic 9      value 0.
-          03 FIN-ENTRADA                pic 9      value 0.
-          03 FECHA-PROCESO              pic 9(8)   value 0.
-          03 FECHA-VENCIMIENTO          pic 9(8)   value 0.
-          03 DIAS-DESDE-1600            pic 9(8)   value 0.
-       01 INF-DATAHOST-AUX.
-          02 NUM-DEMA-VIG-AUX           pic 9(5).
-          02 NUM-DEMA-TER-AUX           pic 9(5).
-          02 FEC-DEMA-VIG-AUX           pic 9(8).
        01 VARIABLES-INPUT.
           03 TIPO-IDE-INP               pic 9.
           03 NUM-IDE-INP                pic 9(11).
@@ -798,6 +776,7 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
        01 LA-lineas-alerta.
       *    Los modelos a continuacion deberan obtenerse de un 
       *    archivo, como BDIIALE-ALERTAS
+           03 LAend                     pic 999 comp value 0.
            03 LA-modelos.
       *         12345678901234567890123456789012345678901234567890
                05 pic x(50) value
@@ -808,8 +787,7 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                "TIENE &&& EMBARGOS CANCELADOS Y &&& VIGENTES      ".
                05 pic x(50) value
                "EL EMBARGO MAS RECIENTE SE INSTAURO EL [&&&&&&&&] ".
-               05 pic x(50) value high-values. *< end marker
-           03 LAend                     pic 999 comp value 0.
+               05 pic x(50) value high-values. *> end marker
            03 LA-modelos2               redefines LA-modelos.
                05 LA-modelo             pic x(50) occurs 5 
                                         indexed LAm.
@@ -832,10 +810,12 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                05 LA-linea2             pic x(50).
       *    Los valores a insertar en una linea
            03 LA-valores.
-               LA-valor                 pic x(50) 
+               05 LA-valor              pic x(50) 
                                         occurs 10 indexed LAv.
       *    Datos para editar valores a insertar
            03 LA-num                    pic -(11)0.
+           03 LA-numX                   redefines LA-num
+                                        pic x(12).
            03 LA-descarte               pic x(50).
 
 
@@ -914,12 +894,12 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       ******************************************************************
       * Control de rangos de valores de las fechas del input
        01 VALIDACIONES-FECHAS.
-          02 ANO-VAL-X                   pic 9(04).
-             88 ANO-VAL  value 1900 thru 2050.
-          02 MES-VAL-X                   pic 9(02).
-             88 MES-VAL  value 01   thru 12.
-          02 DIA-VAL-X                   pic 9(02).
-             88 DIA-VAL  value 01   thru 31.
+           02 ANO-VAL-X                 pic 9(04).
+              88 ANO-VAL                value 1900 thru 2050.
+           02 MES-VAL-X                 pic 9(02).
+              88 MES-VAL                value 01   thru 12.
+           02 DIA-VAL-X                 pic 9(02).
+              88 DIA-VAL                value 01   thru 31.
 
       /*****************************************************************
       ******************************************************************
@@ -1120,7 +1100,7 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                call "PONERR" using "16" JURAD-reg E-errores
                display "Tipo ide cambiado de " JURAD-id-tipo " a " 
                TIP-IDE-BDIIVIDE " num ide: " JURAD-id-numero
-           enf-if
+           end-if
       *    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existe
            if SW-ID-BDIIVIDE = 1
                call "PONERR" using "14" JURAD-reg E-errores
@@ -1297,7 +1277,10 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       ******************************************************************
       * Inserta un registro nuevo en BDIIALE
       ******************************************************************
-           write BDIIALE-reg
+           if not PROCESO-REAL
+               exit paragraph
+           end-if
+           write REG-BDIIALE
            evaluate EST-BDIIALE
            when "00"
                add 1 to N-ale-insertadas
@@ -1314,7 +1297,10 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       ******************************************************************
       * Regraba un registro modificado en BDIIALE
       ******************************************************************
-           rewrite BDIIALE-reg
+           if not PROCESO-REAL
+               exit paragraph
+           end-if
+           rewrite REG-BDIIALE
            evaluate EST-BDIIALE
            when "00"
                add 1 to N-ale-modificadas
@@ -1331,6 +1317,9 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       ******************************************************************
       * Elimina un registro de BDIIALE
       ******************************************************************
+           if not PROCESO-REAL
+               exit paragraph
+           end-if
            delete BDIIALE
            evaluate EST-BDIIALE
            when "00"
@@ -1364,22 +1353,25 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                set LAx to 1
                move high-values to LA-valores
                move JURAD-demandas-vigentes to LA-num
-               unstring LA-num into LA-descarte LA-valor(1)
-               delimited by all spaces
+      * >>>> esto está anulado x que no se cómo hacer para que lo compile
+      *        unstring LA-numX into LA-descarte LA-valor(1)
+      *        delimited by all space
+               move LA-numx(9:12) to LA-valor(1)
                move JURAD-demandas-terminadas to LA-num
-               unstring LA-num into LA-descarte LA-valor(2)
-               delimited by all spaces
-               string LA-parte(LAx, 1) LA-valor(1)
-               string LA-parte(LAx, 2) LA-valor(2)
-               string LA-parte(LAx, 3) LA-valor(3)
-               string LA-parte(LAx, 4) LA-valor(4)
-               string LA-parte(LAx, 5) LA-valor(5)
-               string LA-parte(LAx, 6) LA-valor(6)
-               string LA-parte(LAx, 7) LA-valor(7)
-               string LA-parte(LAx, 8) LA-valor(8)
-               string LA-parte(LAx, 9) LA-valor(9)
-               string LA-parte(LAx, 10) LA-valor(10)
-               delimited by high-value
+      * >>>> esto está anulado x que no se cómo hacer para que lo compile
+      *        unstring LA-numX into LA-descarte LA-valor(2)
+      *        delimited by all space
+               move LA-numx(9:12) to LA-valor(2)
+
+      * >>>> esto está anulado x que no se cómo hacer para que lo compile
+      * >>>> da error en el end-if
+      *        string LA-parte(LAx, 1) LA-valor(1)
+      *        LA-parte(LAx, 2) LA-valor(2) LA-parte(LAx, 3) LA-valor(3)
+      *        LA-parte(LAx, 4) LA-valor(4) LA-parte(LAx, 5) LA-valor(5)
+      *        LA-parte(LAx, 6) LA-valor(6) LA-parte(LAx, 7) LA-valor(7)
+      *        LA-parte(LAx, 8) LA-valor(8) LA-parte(LAx, 9) LA-valor(9)
+      *        LA-parte(LAx, 10) LA-valor(10)
+      *        delimited by high-value
            end-if.
 
 
@@ -1402,25 +1394,24 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       * Obtiene informacion sobre la corrida de la linea de comando: el
       * nombre del archivo de entrada (que contiene el tipo de proceso)
            accept P-command-line from COMMAND-LINE
-           display "command line: " P-command-line
+           display "Parametros: " P-command-line
            unstring P-command-line delimited by all " " into
            P-file-name P-proceso-real
       * TODO: controlar los componentes del filename
            evaluate P-tipo-proceso
            when "01" *> 01 Envio Original - Carga TOTAL 1a vez
-               perform 1000-CARGA-TOTAL
+               display "01 Envio Original - Carga TOTAL 1a vez"
            when "02" *> 02 Archivo Semanal - Carga PARCIAL
-               perform 1000-ACTUALIZACION
+               display "02 Archivo Semanal - Carga PARCIAL"
            when "03" *> 03 Archivo Mensual - Carga PARCIAL
-               perform 1000-ACTUALIZACION
+               display "03 Archivo Mensual - Carga PARCIAL"
            when "04" *> 04 Refresque Total - Carga TOTAL
-               perform 1000-CARGA-TOTAL
-      *    valor invalido
+               display "04 Refresque Total - Carga TOTAL"
            when other
-      * TODO: hay un standard para comunicar una cancelacion de proceso?
+      *       valor invalido
                display "El tipo de proceso " P-tipo-proceso
                " es invalido (debe ser 01 02 03 o 04)"
-               perform 9000-CANCELAR-PROGRAMA *> no retorna
+               perform 9000-CANCELAR-PROGRAMA
            end-evaluate.
 
       * Edita la fecha de proceso DDMMAA del parametro en formato
@@ -1480,24 +1471,28 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
                perform 1001-ELIMINAR-TODO
            end-if.
 
+       1000-NOT-USED.
+      * >>>> esto da un error de compilación que no puedo resolver
+      * >>>> por ahora está anulado
+      ******************************************************************
       * Carga de los templates para armar el texto de alertas
       * TODO: por ahora los templates son literales
            set LAx to 0
            move high-values to LA-templates
-           perform varying LAm frm 1 by 1 
+           perform varying LAm from 1 by 1 
            until LA-modelo(LAm) = high-values
                set LAx up by 1
       *        separa las partes de la linea
-               unstring LA-modelo(LAm) into LA-parte(LAx, 1)
-               LA-parte(LAx, 2) LA-parte(LAx, 3) LA-parte(LAx, 4)
-               LA-parte(LAx, n) LA-parte(LAx, 6) LA-parte(LAx, 7)
-               LA-parte(LAx, 8) LA-parte(LAx, 9) LA-parte(LAx, 10)
-               delimited by all "&"
+      *        unstring LA-modelo(LAm) into LA-parte(LAx, 1)
+      *        LA-parte(LAx, 2) LA-parte(LAx, 3) LA-parte(LAx, 4)
+      *        LA-parte(LAx, 5) LA-parte(LAx, 6) LA-parte(LAx, 7)
+      *        LA-parte(LAx, 8) LA-parte(LAx, 9) LA-parte(LAx, 10)
+      *        delimited by all "&"
       *        prepara para omitir los espacios al final de c/parte
                perform varying LAy from 1 by 1 until LAy > 10
-                   inspect PA-parte(LAx, LAy) replacing trailing
+                   inspect LA-parte(LAx, LAy) replacing trailing
                    spaces by high-values
-                   inspect PA-parte(LAx, LAy) replacing first
+                   inspect LA-parte(LAx, LAy) replacing first
                    high-value by space
                end-perform
            end-perform.
@@ -1646,13 +1641,14 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
 
            exit program.
 
+
        end program PONERR.
 
        end program ACTALEJUR.
 
       ******************************************************************
-      * De aquí para abajo se va a eliminar, son recortes del programa
-      * ejemplo (rescatar los COPYs)
+      * De aquí para abajo se puede eliminar, son recortes del programa
+      * ejemplo
       ******************************************************************
       ******************************************************************
       ******************************************************************
@@ -1675,7 +1671,6 @@ c     *   02 ANO-ACT-TITLE-BDSCOREHIS  pic 9(04) value 2014.
       *    display "  DEMANDADOS NO VALIDOS     = " CONT-REGISTROS-ERR
       *    display "=================================================".
 
-           copy BDIIVIDE.PROC.
 c     *BDIIVIDE.PROC.v.03.0006
 c     ******************************************************************
 c     * Rutina de validacion de identificaciones
@@ -1949,7 +1944,6 @@ c     *    end-if.
 
 
 
-                   copy VALNOM.PROC.
 c     *VALNOM-PROC.v.0005
 c     ******************************************************************
 c     * RUTINA CREADA PARA HACER LA VALIDACION DE NOMBRES CONTRA LOS
