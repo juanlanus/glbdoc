@@ -1,0 +1,2133 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.16 15:29:37 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May 16 13:21:03 2014 from 172.16.10.54
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo $fu
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $fu. visetfg     cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $ls $TEMPORALES/9999*                                     /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo $ls $TEMPORALES/9999*              /d/iccol/desarrollo $ls 9999*            mv 9999991000905140101.txt $TEMPORALES/d/iccol/desarrollo $mv 9999991000905140101 _ERRORES.txt $TEMPORALES/d/iccol/desarrollo $rm 9999991000905140101 _ERRORES.txt            /d/iccol/desarrollo $vi 9999991000905140101 _ERRORES.txt/d/iccol/desarrollo $ls 9999*                          /d/iccol/desarrollo $echo $TEMPORALESx CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo $des-c-v CARGAJUR                  /d/iccol/desarrollo $vi CARGAJUR.CBL 
+"CARGAJUR.CBL" 1230 lines, 52130 characters $SET LIST SETTINGIDENTIFICATION DIVISION.
+PROGRAM-ID.    ACTALEJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. microfocus.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+select JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************"CARGAJUR.CBL" 1230 lines, 52130 characters/write
+read BDIIALE
+evaluate EST-BDIIALEwhen "00"
+continue
+when "20" thru "29"
+continue
+when other
+display "Error al leer BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEdisplay "Ultimo registro procesado: "display JURAD-reg-anteriorperform 9000-CANCELAR-PROGRAMAend-evaluate.4333-GRABAR-BDIIALE.
+******************************************************************
+* Inserta un registro nuevo en BDIIALE
+******************************************************************if not PROCESO-REAL
+exit paragraphend-if
+write REG-BDIIALEevaluate EST-BDIIALEwhen "00"
+add 1 to N-ale-insertadaswhen other
+display "Error al grabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEdisplay "Registro BDIIALE: "display REG-BDIIALEperform 9000-CANCELAR-PROGRAMAend-evaluate.4333-REGRABAR-BDIIALE.
+******************************************************************
+* Regraba un registro modificado en BDIIALE
+******************************************************************if not PROCESO-REAL
+exit paragraphend-if
+rewrite REG-BDIIALEevaluate EST-BDIIALEwhen "00"
+add 1 to N-ale-modificadaswhen other
+display "Error al regrabar BDIIALE fs: " EST-BDIIALE/WRITE//exit paragraphend-if
+delete BDIIALEevaluate EST-BDIIALEwhen "00"
+add 1 to N-ale-eliminadaswhen other
+display "Error al regrabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEdisplay "Registro BDIIALE: "display REG-BDIIALEperform 9000-CANCELAR-PROGRAMAend-evaluate.4900-GRABAR-ERROR.
+******************************************************************
+* El registro de JURAD tiene error: se graba en el archivo ERRS
+* con indicacion del error detectado
+******************************************************************move JURAD-reg to ERRS-reg
+*    lista de los codigos de los errores del registromove E-errores-reg to ERRS-causa-rechazowrite ERRS-regevaluate ERRS-fs
+when "00"
+continue
+when other
+display "Error al grabar el archivo de errores "display "Nombre del archivo: " ERRS-file-namedisplay "File status: " ERRS-fsperform 9000-CANCELAR-PROGRAMAgobackend-evaluate.4320-ARMAR-TEXTO-ALERTA.
+****************************************************************
+* Hace el reemplazo de los valores adecuados en los templates
+* de las linea de alerta que corresponde
+****************************************************************
+*    segun se trate de demandas o embargosif JURAD-demandas-vigentes not = 0or JURAD-demandas-terminadas not = 0set LAx to 1
+move high-values to LA-valoresmove JURAD-demandas-vigentes to LA-num
+* >>>> esto esta anulado x que no se como hacer para que lo compile
+*unstring LA-numX into LA-descarte LA-valor(1)/Address search hit BOTTOM without matching pattern
+
+
+
+
+
+
+
+
+
+$SET LIST SETTINGIDENTIFICATION DIVISION.
+PROGRAM-ID.    ACTALEJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. microfocus.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+select JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************/-grabar-error88 ANO-VALvalue 1900 thru 2050.02 MES-VAL-Xpic 9(02).88 MES-VALvalue 01   thru 12.02 DIA-VAL-Xpic 9(02).88 DIA-VALvalue 01   thru 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.
+*    0000-PROGRAMA-PRINCIPAL
+*    4000-PROCESAR-REGISTRO
+*    4000-PROCESAR-REGISTRO-2
+*    4100-VALIDACION-FORMAL
+*    4200-VALIDACION-SEMANTICA
+*    4300-MODIFICAR-BDIIALE
+*    4300-MODIFICAR-BDIIALE-DATOS
+*    4300-MODIFICAR-BDIIALE-I
+*    4300-MODIFICAR-BDIIALE-M
+*    4300-MODIFICAR-BDIIALE-E
+*    4333-LEER-BDIIALE-RANDOM
+*    4333-GRABAR-BDIIALE
+*    4333-REGRABAR-BDIIALE
+*    4333-ELIMINAR-BDIIALE
+*    4900-GRABAR-ERROR
+*    4320-ARMAR-TEXTO-ALERTA
+*    1000-RUTINA-INICIAL
+*    1001-ELIMINAR-TODO
+*    7000-RUTINA-FINAL
+*    9000-CANCELAR-PROGRAMA0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosperform 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesperform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"
+*    cierra archivos y produce el reporte finalperform 7000-RUTINA-FINALgoback.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroread JURAD/
+*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-procesoexit paragraphend-if
+
+add 1 to N-reg-leidos*    validacion formal de los datosperform 4100-VALIDACION-FORMALif E-hay-error = "SI"exit paragraphend-if*    si la validacion formal dio OK se hace validacion semanticaperform 4200-VALIDACION-SEMANTICAif E-hay-error = "SI"exit paragraphend-if*    actualizacion de BDIIALE o grabacion en arch ERRS de defectosif E-hay-error = "SI"perform 4900-GRABAR-ERRORadd 1 to N-reg-con-errorelse
+perform 4300-MODIFICAR-BDIIALEadd 1 to N-reg-OKend-if.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}if JURAD-id-tipo not = "1" and "2" and "3" and "4"call "PONERR" using "02" JURAD-reg E-erroresend-if
+*    Numero de identificacionif JURAD-id-numeroX is not numericcall "PONERR" using "03" JURAD-reg E-erroresend-if
+if JURAD-id-numero not > 0call "PONERR" using "04" JURAD-reg E-erroresend-if
+*    si el movimiento es una eliminacion los datos subsiguientes
+*    no se controlan0if JURAD-tipo-novedad = "E"
+exit paragraph
+end-if
+*    Nombres y Apellidos
+if JURAD-nombre = spaces
+call "PONERR" using "05" JURAD-reg E-errores
+end-if
+*    Numero de demandas vigentes
+if JURAD-demandas-vigentes is not numeric
+call "PONERR" using "06" JURAD-reg E-errores
+end-if
+*    Numero de demandas terminadas
+if JURAD-demandas-terminadas is not numeric
+call "PONERR" using "07" JURAD-reg E-errores
+end-if
+*    Fecha ultima demanda vigente YYMMDD
+if JURAD-demandas-fecha-ultima is not numeric
+call "PONERR" using "08" JURAD-reg E-errores
+end-if
+move JURAD-demandas-fecha-ultima to VALIDACIONES-FECHAS
+if not ANO-VAL or not MES-VAL or not DIA-VAL
+call "PONERR" using "09" JURAD-reg E-errores
+end-if
+*    Numero de embargos vigentesend-if*    Numero de embargos vigentesif JURAD-embargos-vigentes not numericcall "PONERR" using "10" JURAD-reg E-erroresend-if
+*    Numero de embargos terminadosif JURAD-embargos-terminados not numericcall "PONERR" using "11" JURAD-reg E-erroresend-if
+*    Fecha ultimo embargo vigente YYMMDDif JURAD-embargos-fecha-ultimo is not numericcall "PONERR" using "12" JURAD-reg E-erroresend-if
+move JURAD-embargos-fecha-ultimo to VALIDACIONES-FECHASif not ANO-VAL or not MES-VAL or not DIA-VALcall "PONERR" using "13" JURAD-reg E-erroresend-if.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* Validacion del numero de identificacion y de su relacion con
+* el nombre
+****************************************************************move JURAD-id-tipo to TIP-IDE-BDIIVIDEmove JURAD-id-numero to NUM-IDE-BDIIVIDE-Rmove JURAD-nombre to NOMBRE-BDIIVIDEmove 1 to SW-VERIFNOM-BDIIVIDEmove 0 to SW-DIGCHEQUEO-BDIIVIDE SW-ASGTIPID-BDIIVIDEperform 80100-VALIDAR-IDENTIFICACION
+*    a ver si la validacion cambio el tipo de ideif JURAD-id-tipo not = TIP-IDE-BDIIVIDEcall "PONERR" using "16" JURAD-reg E-erroresdisplay "Tipo ide cambiado de " JURAD-id-tipo " a "TIP-IDE-BDIIVIDE " num ide: " JURAD-id-numeroend-if
+*    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existeif SW-ID-BDIIVIDE = 1call "PONERR" using "14" JURAD-reg E-erroreselse
+*existe id, a ver si el nombre coincideif SW-NOMBRES-BDIIVIDE = 1    *> nombre no coincidecall "PONERR" using "15" JURAD-reg E-erroresdisplay "novedad:  " JURAD-nombredisplay "registro: " NOM-LEIDO-BDIIVIDEend-if
+end-if.add 1 to N-reg-con-errorelse
+perform 4300-MODIFICAR-BDIIALEadd 1 to N-reg-OKend-if.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}if JURAD-id-tipo not = "1" and "2" and "3" and "4"call "PONERR" using "02" JURAD-reg E-erroresend-if
+*    Numero de identificacionif JURAD-id-numeroX is not numericcall "PONERR" using "03" JURAD-reg E-erroresend-if
+if JURAD-id-numero not > 0call "PONERR" using "04" JURAD-reg E-erroresend-if
+*    si el movimiento es una eliminacion los datos subsiguientes
+*    no se controlanif JURAD-tipo-novedad = "E"exit paragraphend-if
+*    Nombres y Apellidosif JURAD-nombre = spacescall "PONERR" using "05" JURAD-reg E-erroresend-if
+*    Numero de demandas vigentesif JURAD-demandas-vigentes is not numericcall "PONERR" using "06" JURAD-reg E-erroresend-if
+*    Numero de demandas terminadasif JURAD-demandas-terminadas is not numericcall "PONERR" using "07" JURAD-reg E-erroresend-if
+*    Fecha ultima demanda vigente YYMMDDif JURAD-demandas-fecha-ultima is not numericcall "PONERR" using "08" JURAD-reg E-erroresend-if
+move JURAD-demandas-fecha-ultima to VALIDACIONES-FECHASif not ANO-VAL or not MES-VAL or not DIA-VALcall "PONERR" using "09" JURAD-reg E-erroresend-if
+*    Numero de embargos vigenteswhen other*error de lectura: cancelacion del procesodisplay "Error en lectura del archivo JURAD "display "Nombre del archivo: " P-file-namedisplay "File status: " JURAD-fsdisplay "Ultimo registro leido: " N-reg-leidosdisplay JURAD-reg-anteriorperform 9000-CANCELAR-PROGRAMAend-evaluate.4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************move "NO" to E-hay-error*    validacion del tipo de movimientoif JURAD-tipo-novedad not = "I" and "M" and "E" and "T"call "PONERR" using "01" JURAD-reg E-erroresend-if*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-procesoexit paragraphend-if
+
+add 1 to N-reg-leidos*    validacion formal de los datosperform 4100-VALIDACION-FORMALif E-hay-error = "SI"exit paragraphend-if*    si la validacion formal dio OK se hace validacion semanticaperform 4200-VALIDACION-SEMANTICAif E-hay-error = "SI"exit paragraphend-if*    actualizacion de BDIIALE o grabacion en arch ERRS de defectosif E-hay-error = "SI"perform 4900-GRABAR-ERRORadd 1 to N-reg-con-errorelse*    4300-MODIFICAR-BDIIALE-M*    4300-MODIFICAR-BDIIALE-E
+*    4333-LEER-BDIIALE-RANDOM
+*    4333-GRABAR-BDIIALE
+*    4333-REGRABAR-BDIIALE
+*    4333-ELIMINAR-BDIIALE
+*    4900-GRABAR-ERROR
+*    4320-ARMAR-TEXTO-ALERTA
+*    1000-RUTINA-INICIAL
+*    1001-ELIMINAR-TODO
+*    7000-RUTINA-FINAL
+*    9000-CANCELAR-PROGRAMA0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosperform 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesperform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"
+*    cierra archivos y produce el reporte finalperform 7000-RUTINA-FINALgoback.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroread JURAD
+evaluate JURAD-fswhen "00"
+*controla el reg y lo aplica si es OKperform 4000-PROCESAR-REGISTRO-2move JURAD-reg to JURAD-reg-anteriorwhen "10"
+*fin del archivo de input:
+*esto es un error, no se encontro el registro "T" antes
+*de que se terminara el archivodisplay "Falta el reg de totales del archivo JURAD "display "Nombre del archivo: " P-file-namedisplay "File status: " JURAD-fsdisplay "Ultimo registro leido: " N-reg-leidosdisplay JURAD-reg-anteriorperform 9000-CANCELAR-PROGRAMAwhen other
+*error de lectura: cancelacion del proceso
+4000-PROCESAR-REGISTRO.****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroread JURAD
+evaluate JURAD-fswhen "00"
+*controla el reg y lo aplica si es OKperform 4000-PROCESAR-REGISTRO-2move JURAD-reg to JURAD-reg-anteriorwhen "10"
+*fin del archivo de input:
+*esto es un error, no se encontro el registro "T" antes
+*de que se terminara el archivodisplay "Falta el reg de totales del archivo JURAD "display "Nombre del archivo: " P-file-namedisplay "File status: " JURAD-fsdisplay "Ultimo registro leido: " N-reg-leidosdisplay JURAD-reg-anteriorperform 9000-CANCELAR-PROGRAMAwhen other
+*error de lectura: cancelacion del procesodisplay "Error en lectura del archivo JURAD "display "Nombre del archivo: " P-file-namedisplay "File status: " JURAD-fsdisplay "Ultimo registro leido: " N-reg-leidosdisplay JURAD-reg-anteriorperform 9000-CANCELAR-PROGRAMAend-evaluate.4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************move "NO" to E-hay-error*    validacion del tipo de movimientoif JURAD-tipo-novedad not = "I" and "M" and "E" and "T"call "PONERR" using "01" JURAD-reg E-erroresend-if*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-proceso
+
+/registro-2/4000-PROCESAR-REGISTRO-2.****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************move "NO" to E-hay-error*    validacion del tipo de movimientoif JURAD-tipo-novedad not = "I" and "M" and "E" and "T"call "PONERR" using "01" JURAD-reg E-erroresend-if*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-procesoexit paragraphend-if
+
+add 1 to N-reg-leidos*    validacion formal de los datosperform 4100-VALIDACION-FORMALif E-hay-error = "SI"exit paragraphend-if*    si la validacion formal dio OK se hace validacion semanticaperform 4200-VALIDACION-SEMANTICAif E-hay-error = "SI"exit paragraphend-if*    actualizacion de BDIIALE o grabacion en arch ERRS de defectosif E-hay-error = "SI"perform 4900-GRABAR-ERRORadd 1 to N-reg-con-errorelse
+perform 4300-MODIFICAR-BDIIALEadd 1 to N-reg-OKend-if.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}
+    
+
+if JURAD-id-tipo not = "1" and "2" and "3" and "4"call "PONERR" using "02" JURAD-reg E-erroresend-if
+*    Numero de identificacionif JURAD-id-numeroX is not numericcall "PONERR" using "03" JURAD-reg E-erroresend-if
+if JURAD-id-numero not > 0call "PONERR" using "04" JURAD-reg E-erroresend-if
+*    si el movimiento es una eliminacion los datos subsiguientes
+*    no se controlanif JURAD-tipo-novedad = "E"exit paragraphend-if
+*    Nombres y Apellidosif JURAD-nombre = spacescall "PONERR" using "05" JURAD-reg E-erroresend-if
+*    Numero de demandas vigentesif JURAD-demandas-vigentes is not numericcall "PONERR" using "06" JURAD-reg E-erroresend-if
+*    Numero de demandas terminadasif JURAD-demandas-terminadas is not numericcall "PONERR" using "07" JURAD-reg E-erroresend-if
+*    Fecha ultima demanda vigente YYMMDDif JURAD-demandas-fecha-ultima is not numericcall "PONERR" using "08" JURAD-reg E-erroresend-if
+move JURAD-demandas-fecha-ultima to VALIDACIONES-FECHASif not ANO-VAL or not MES-VAL or not DIA-VALcall "PONERR" using "09" JURAD-reg E-erroresend-if
+*    Numero de embargos vigentesif JURAD-embargos-vigentes not numericcall "PONERR" using "10" JURAD-reg E-erroresend-if
+*    Numero de embargos terminadosif JURAD-embargos-terminados not numeric
+41 lines deletedAPPEND MODE       4000-PROCESAR-REGISTRO-2.
+APPEND MODE
+      ****************************************************************
+APPEND MODE
+
+      * Controla los datos de un registro de JURAD y si es OK lo usa
+APPEND MODE
+
+
+      * para actualizar el archivo de alertas en linea
+APPEND MODE      * La informacion esta leida en JURAD-reg
+APPEND MODE      ****************************************************************
+APPEND MODE           move "NO" to E-hay-error
+APPEND MODE
+APPEND MODE      *    validacion del tipo de movimiento
+APPEND MODE           if JURAD-tipo-novedad not = "I" and "M" and "E" and "T" 
+APPEND MODE               call "PONERR" using "01" JURAD-reg E-errores
+APPEND MODE           end-if
+APPEND MODE
+APPEND MODE      *    si es el registro "T" hay que senialar el fin de proceso
+APPEND MODE           if JURAD-tipo-novedad = "T" 
+APPEND MODE               move "SI" to IND-fin-proceso
+APPEND MODE               exit paragraph
+APPEND MODE           end-if
+APPEND MODE
+APPEND MODE           add 1 to N-reg-leidos
+APPEND MODE
+APPEND MODE      *    validacion formal de los datos
+APPEND MODE           perform 4100-VALIDACION-FORMAL
+APPEND MODE           if E-hay-error = "SI"
+APPEND MODE               perform 4900-GRABAR-ERROR
+APPEND MODE               exit paragraph
+APPEND MODE           end-if
+APPEND MODE
+APPEND MODE      *    si la validacion formal dio OK se hace validacion semantica
+APPEND MODE           perform 4200-VALIDACION-SEMANTICA
+APPEND MODE           if E-hay-error = "SI"
+APPEND MODE               perform 4900-GRABAR-ERROR
+APPEND MODE               exit paragraph
+APPEND MODE           end-if
+APPEND MODE
+APPEND MODE      *    intento de actualizacion de BDIIALE
+APPEND MODE           perform 4300-MODIFICAR-BDIIALE
+APPEND MODE           add 1 to N-reg-OK.
+APPEND MODE:w"CARGAJUR.CBL" 1227 lines, 51998 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $vi CARGAJUR.CBLfu             . visetfg     cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $ls $TEMPORALES/9999*                                     /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo $ls $TEMPORALES/9999*              /d/iccol/desarrollo $ls 9999*            mv 9999991000905140101.txt $TEMPORALES/d/iccol/desarrollo $mv 9999991000905140101 _ERRORES.txt $TEMPORALES/d/iccol/desarrollo $rm 9999991000905140101 _ERRORES.txt            /d/iccol/desarrollo $vi 9999991000905140101 _ERRORES.txt/d/iccol/desarrollo $ls 9999*                          /d/iccol/desarrollo $echo $TEMPORALESx CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo $des-c-v CARGAJUR                  /d/iccol/desarrollo $
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+* Total Messages:     0
+* Data:       23880     Code:       23627
+* Micro Focus Server Express V5.1.00 Code Generator
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - verbose
+* Accepted - anim
+* Accepted - PIC
+* Generating CARGAJUR
+* Data:     23616  Code:     45172  Literals:      2016  Dynamic:   1425408
+
+>>> DATACREDITO: TERMINO OK COMPILACION DE CARGAJUR.CBL
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $des-c-v CARGAJURvi CARGAJUR.CBL fu             . visetfg     cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $ls $TEMPORALES/9999*                                     /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO
+Parametros: 9999991000905140101.txt NO                                                      
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:38:03
+Fin de Programa:     2014/05/16 13:38:04
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO/d/iccol/desarrollo $des-c-v CARGAJUR                     /d/iccol/desarrollo $vi CARGAJUR.CBL fu             . visetfg     cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $99991000905140101 _ERRORES.txt                           <
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  001001201304050090572013
+I100000262135LIBARDO ANTONIO GARZON TORRE                 015020201302060220452012
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 002044201305060330202000
+I100001327130GONZALO PATInO MORENO                        003006201301060440761998
+I100002859753ERNESTO RICO                                 005067201304060220672010
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 006045201104060330332011
+I100003044362MANUEL CASTRO MUnETON                        0070rt201101060530012013
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 009057201304110455003010
+I200811046741SALUD AXIAL LTDA                             044076199840690340021999
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 022067201004350330022013
+I200860024151COMPUTEC SA                                  033033201114060450012011
+I200860034313BANCO DAVIVIENDA SA                          053300001304060110232011
+I200890300546COLGATE PALMOLIVE COMPAIA                    232200001105060330432013
+I300600003115xxxxxx                                       015054201401060040032012
+I400000266423SIMONE MARTINEZ                              033002201312060070rt2011
+I400000244359PATRICIO ALEJANDRO HERRERA C                 045001201104020080452013
+I400000163598xxxxxx                                       033043201310100220452012
+/d/iccol/desarrollo $fg
+vi CARGAJUR.CBL
+4000-PROCESAR-REGISTRO-2.****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************move "NO" to E-hay-error*    validacion del tipo de movimientoif JURAD-tipo-novedad not = "I" and "M" and "E" and "T"call "PONERR" using "01" JURAD-reg E-erroresend-if*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-procesoexit paragraphend-if
+
+add 1 to N-reg-leidos*    validacion formal de los datosperform 4100-VALIDACION-FORMALif E-hay-error = "SI"perform 4900-GRABAR-ERRORexit paragraphend-if*    si la validacion formal dio OK se hace validacion semanticaperform 4200-VALIDACION-SEMANTICAif E-hay-error = "SI"perform 4900-GRABAR-ERRORexit paragraphend-if*    intento de actualizacion de BDIIALEperform 4300-MODIFICAR-BDIIALEadd 1 to N-reg-OK.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}if JURAD-id-tipo not = "1" and "2" and "3" and "4"call "PONERR" using "02" JURAD-reg E-erroresend-if$SET LIST SETTINGIDENTIFICATION DIVISION.
+PROGRAM-ID.    ACTALEJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. microfocus.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+select JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************/errs////* Registro de totales de control T*    Tipo de Novedad = "T"03 JURADT-tipo-novedadpic x.03pic x.
+*    Cantidad de registros03 JURADT-registrospic 9(11).03pic x.
+*    Total numero de demandas vigentes03 JURADT-demandas-vigentes  pic 9(7).03pic x.
+*    Total numero de demandas terminadas03 JURADT-demandas-terminadas pic 9(7).03pic x.
+*    Total numero de embargos vigentes03 JURADT-embargos-vigentes  pic 9(7).03pic x.
+*    Total numero de embargos terminados03 JURADT-embargos-terminados pic 9(7).03pic x(41).******************************************************************
+* Archivo de salida con los registros defectuosos del arch JURAD
+******************************************************************
+FD ERRS.
+01  ERRS-reg.
+*    Tipo de Novedad {I, M, E, T} Inser/Modif/Elim/Totales03 ERRS-tipo-novedadpic x.
+*    Tipo de identificacion Numero {1, 2, 3, 4}03 ERRS-id-tipopic x.
+*    Numero de identificacion03 ERRS-id-numeropic x(11).
+*    Nombres y Apellidos03 ERRS-nombrepic x(45).
+*    Numero de demandas vigentes03 ERRS-demandas-vigentes    pic 999.
+*    Numero de demandas terminadas03 ERRS-demandas-terminadas  pic 999.
+*    Fecha ultima demanda vigente YYMMDD03 ERRS-demandas-fecha-ultima pic x(6).
+*    Numero de embargos vigentes03 ERRS-embargos-vigentes    pic 999.
+*    Numero de embargos terminados03 ERRS-embargos-terminados  pic 999.
+*    Fecha ultimo embargo vigente YYMMDD03 ERRS-embargos-fecha-ultimo pic x(6).
+*    Causa del rechazo03 ERRS-causa-rechazopic x(100).******************************************************************/6)REPLACE 1 CHAR8/8
+
+
+
+
+/4900-grab88 ANO-VALvalue 1900 thru 2050.02 MES-VAL-Xpic 9(02).88 MES-VALvalue 01   thru 12.02 DIA-VAL-Xpic 9(02).88 DIA-VALvalue 01   thru 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.
+*    0000-PROGRAMA-PRINCIPAL
+*    4000-PROCESAR-REGISTRO
+*    4000-PROCESAR-REGISTRO-2
+*    4100-VALIDACION-FORMAL
+*    4200-VALIDACION-SEMANTICA
+*    4300-MODIFICAR-BDIIALE
+*    4300-MODIFICAR-BDIIALE-DATOS
+*    4300-MODIFICAR-BDIIALE-I
+*    4300-MODIFICAR-BDIIALE-M
+*    4300-MODIFICAR-BDIIALE-E
+*    4333-LEER-BDIIALE-RANDOM
+*    4333-GRABAR-BDIIALE
+*    4333-REGRABAR-BDIIALE
+*    4333-ELIMINAR-BDIIALE
+*    4900-GRABAR-ERROR
+*    4320-ARMAR-TEXTO-ALERTA
+*    1000-RUTINA-INICIAL
+*    1001-ELIMINAR-TODO
+*    7000-RUTINA-FINAL
+*    9000-CANCELAR-PROGRAMA0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosperform 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesperform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"
+*    cierra archivos y produce el reporte finalperform 7000-RUTINA-FINALgoback.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroread JURAD/***************************************************************** Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************move "NO" to E-hay-error*    validacion del tipo de movimientoif JURAD-tipo-novedad not = "I" and "M" and "E" and "T"call "PONERR" using "01" JURAD-reg E-erroresend-if*    si es el registro "T" hay que senialar el fin de procesoif JURAD-tipo-novedad = "T"move "SI" to IND-fin-procesoexit paragraphend-if
+
+add 1 to N-reg-leidos*    validacion formal de los datosperform 4100-VALIDACION-FORMALif E-hay-error = "SI"perform 4900-GRABAR-ERRORexit paragraphend-if*    si la validacion formal dio OK se hace validacion semanticaperform 4200-VALIDACION-SEMANTICAif E-hay-error = "SI"perform 4900-GRABAR-ERRORexit paragraphend-if*    intento de actualizacion de BDIIALEperform 4300-MODIFICAR-BDIIALEadd 1 to N-reg-OK.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}if JURAD-id-tipo not = "1" and "2" and "3" and "4"call "PONERR" using "02" JURAD-reg E-erroresend-if
+*    Numero de identificacion//end-evaluate.4333-ELIMINAR-BDIIALE.
+******************************************************************
+* Elimina un registro de BDIIALE
+******************************************************************if not PROCESO-REAL
+exit paragraphend-if
+delete BDIIALEevaluate EST-BDIIALEwhen "00"
+add 1 to N-ale-eliminadaswhen other
+display "Error al regrabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEdisplay "Registro BDIIALE: "display REG-BDIIALEperform 9000-CANCELAR-PROGRAMAend-evaluate.4900-GRABAR-ERROR.
+******************************************************************
+* El registro de JURAD tiene error: se graba en el archivo ERRS
+* con indicacion del error detectado
+******************************************************************move JURAD-reg to ERRS-reg
+*    lista de los codigos de los errores del registromove E-errores-reg to ERRS-causa-rechazowrite ERRS-regevaluate ERRS-fswhen "00"
+continue
+when other
+display "Error al grabar el archivo de errores "display "Nombre del archivo: " ERRS-file-namedisplay "File status: " ERRS-fsperform 9000-CANCELAR-PROGRAMAgoback
+end-evaluate.4320-ARMAR-TEXTO-ALERTA.
+****************************************************************
+* Hace el reemplazo de los valores adecuados en los templates
+* de las linea de alerta que corresponde
+****************************************************************
+
+
+
+
+     
+OPEN MODEAPPEND MODE           move E-errores-reg to ERRS-causa-rechazo:w"CARGAJUR.CBL" 1228 lines, 52050 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $fgcat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO                    /d/iccol/desarrollo $des-c-v CARGAJUR                     /d/iccol/desarrollo $
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+* Total Messages:     0
+* Data:       23880     Code:       23639
+* Micro Focus Server Express V5.1.00 Code Generator
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - verbose
+* Accepted - anim
+* Accepted - PIC
+* Generating CARGAJUR
+* Data:     23616  Code:     45204  Literals:      2016  Dynamic:   1425408
+
+>>> DATACREDITO: TERMINO OK COMPILACION DE CARGAJUR.CBL
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $des-c-v CARGAJURfg              cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO                    /d/iccol/desarrollo $
+Parametros: 9999991000905140101.txt NO                                                      
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:47:30
+Fin de Programa:     2014/05/16 13:47:30
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO/d/iccol/desarrollo $des-c-v CARGAJUR                     /d/iccol/desarrollo $fg              cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+I300600003115xxxxxx                                       0150542014010600400320120406
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+I400000163598xxxxxx                                       0330432013101002204520120406
+/d/iccol/desarrollo $fg
+vi CARGAJUR.CBL
+end-evaluate.4333-ELIMINAR-BDIIALE.
+******************************************************************
+* Elimina un registro de BDIIALE
+******************************************************************if not PROCESO-REAL
+exit paragraphend-if
+delete BDIIALEevaluate EST-BDIIALEwhen "00"
+add 1 to N-ale-eliminadaswhen other
+display "Error al regrabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEdisplay "Registro BDIIALE: "display REG-BDIIALEperform 9000-CANCELAR-PROGRAMAend-evaluate.4900-GRABAR-ERROR.
+******************************************************************
+* El registro de JURAD tiene error: se graba en el archivo ERRS
+* con indicacion del error detectado
+******************************************************************move JURAD-reg to ERRS-regmove E-errores-reg to ERRS-causa-rechazo
+*    lista de los codigos de los errores del registromove E-errores-reg to ERRS-causa-rechazowrite ERRS-regevaluate ERRS-fswhen "00"
+continue
+when other
+display "Error al grabar el archivo de errores "display "Nombre del archivo: " ERRS-file-namedisplay "File status: " ERRS-fsperform 9000-CANCELAR-PROGRAMAgoback
+end-evaluate.4320-ARMAR-TEXTO-ALERTA.
+****************************************************************
+* Hace el reemplazo de los valores adecuados en los templates
+* de las linea de alerta que corresponde
+OPEN MODE           display "Erroeres del reg: " E-errores-reg* de las linea de alerta que corresponde****************************************************************
+display "Errores del reg: " E-errores-reg
+when E-codigo(Ex) = "00"add 1 to E-contador(Ex)display "--- error tipo exotico: " cod-errorwhen E-codigo(Ex) = cod-erroradd 1 to E-contador(Ex)display "Error " cod-error " " E-descripcion(Ex)end-search*    agrega a la lista de errores del registroif errIndex < 99
+move cod-error to E-errores-reg(errIndex:2)add 3 to errindexend-if
+
+exit program.end program PONERR.end program ACTALEJUR.******************************************************************
+******************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~05 E-descripcionpic x(59).******************************************************************PROCEDURE DIVISION using cod-error reg-input E-errores.
+00.
+*    marca al reg actual como erroneomove "SI" to E-hay-error*    cuenta y muestra el registro de inputif reg-input(1:86) not = reg-input-anterioradd 1 to E-cont-regs-con-errordisplay " "
+display reg-input(1:86)move reg-input(1:86) to reg-input-anteriormove spaces to E-errores-regend-if*    contabiliza el error en la tabla de erroresset Ex to 1
+search E-error varying Exat end
+display "--- falla en la tabla de errores ---" cod-errorwhen E-codigo(Ex) = "00"add 1 to E-contador(Ex)display "--- error tipo exotico: " cod-errorwhen E-codigo(Ex) = cod-erroradd 1 to E-contador(Ex)display "Error " cod-error " " E-descripcion(Ex)end-search*    agrega a la lista de errores del registroif errIndex < 99
+move cod-error to E-errores-reg(errIndex:2)add 3 to errindexend-if
+
+exit program.end program PONERR.end program ACTALEJUR.******************************************************************
+******************************************************************
+
+~
+~
+
+    
+
+
+    
+
+
+
+
+     
+    
+
+
+
+OPEN MODEmove 1 to errindex    move 1 to errindex        move 1 to errindex    move 1 to errindex    move 1 to errindexmINSERT MODE   :set etet: No such option - 'set all' gives all option values:set expandtabsexpandtabs: No such option - 'set all' gives all option values   $CHANGE MODE        $        $    REPLACE 1 CHAR2:w"CARGAJUR.CBL" 1229 lines, 52085 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $fgcat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO                    /d/iccol/desarrollo $des-c-v CARGAJUR                     /d/iccol/desarrollo $
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+* Total Messages:     0
+* Data:       23880     Code:       23663
+* Micro Focus Server Express V5.1.00 Code Generator
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - verbose
+* Accepted - anim
+* Accepted - PIC
+* Generating CARGAJUR
+* Data:     23616  Code:     45236  Literals:      2032  Dynamic:   1425408
+
+>>> DATACREDITO: TERMINO OK COMPILACION DE CARGAJUR.CBL
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $des-c-v CARGAJURfg              cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO                    /d/iccol/desarrollo $
+Parametros: 9999991000905140101.txt NO                                                      
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Errores del reg:  07                                                                                                 
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+Errores del reg:  15                                                                                                 
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+Errores del reg:  11                                                                                                 
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+Errores del reg:  15                                                                                                 
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:54:43
+Fin de Programa:     2014/05/16 13:54:43
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO/d/iccol/desarrollo $des-c-v CARGAJUR                     /d/iccol/desarrollo $fg              cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411 14
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406 14
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406 14
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069 13
+I100002859753ERNESTO RICO                                 0050672013040602206720100435 13
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406 13
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406 07
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806 13
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101 09
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206 09
+I200860024151COMPUTEC SA                                  0330332011140604500120110402 09
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411 09
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010 09
+I300600003115xxxxxx                                       0150542014010600400320120406 15
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106 11
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111 14
+I400000163598xxxxxx                                       0330432013101002204520120406 15
+/d/iccol/desarrollo $18k   
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $cat /d/iccol/desarrollo/temporales/9999991000905140101 _E>/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt NO                    /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt   SI
+Parametros: 9999991000905140101.txt SI                                                      
+CARGAJUR   Carga de archivo JURAD - proceso REAL
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Errores del reg:  07                                                                                                 
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+Errores del reg:  15                                                                                                 
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+Errores del reg:  11                                                                                                 
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+Errores del reg:  15                                                                                                 
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+      20 Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:57:56
+Fin de Programa:     2014/05/16 13:57:56
+
+/d/iccol/desarrollo $^[  /d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt SI/d/iccol/desarrollo $
+Parametros: 9999991000905140101.txt SI                                                      
+CARGAJUR   Carga de archivo JURAD - proceso REAL
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J001    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000040000320201204
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J002    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000110004320204404
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Errores del reg:  07                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J001    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 000080004520201301
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J002    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 002320000220201105
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J001    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000220004520201204
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J002    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J001    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000330002020200004
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J002    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000150005420201401
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J001    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000110004320204404
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J002    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000120003220201004
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J001    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000450000020201008
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J002    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000020004420201305
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J001    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J002    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000030000620201301
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+Errores del reg:  15                                                                                                 
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J001    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000340000220199901
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J002    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000050006720201304
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J001    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000120003220201004
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J002    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000060004520201104
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+Errores del reg:  11                                                                                                 
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J001    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000110002320201104
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J002    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000090005720201304
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+Errores del reg:  15                                                                                                 
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+      20 Alertas modificadas
+         Alertas eliminadas
+      20 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:59:43
+Fin de Programa:     2014/05/16 13:59:43
+
+/d/iccol/desarrollo $export      echo $PS1
+/d/iccol/desarrollo $
+/d/iccol/desarrollo $export PS1="$ "
+$ ^[  $ export PS1="$ "$ export PS1="\$ "`$ "p$ "d$ "$ " w$ "d$ "`$ " $ " >\` > "
+`pwd` > ^[  `pwd` > export PS1="\`pwd\` > "`pwd` > export PS1="`pwd\` > " `pwd` > " 
+/d/iccol/desarrollo/fuentes > echo $PS1
+/d/iccol/desarrollo/fuentes >
+/d/iccol/desarrollo/fuentes > ^[  /d/iccol/desarrollo/fuentes > echo $PS1export PS1="`pwd` > "export PS1="`{`pwd` > "{`pwd`} > "
+{/d/iccol/desarrollo/fuentes} > export PS1='${PWD}>'
+/d/iccol/desarrollo/fuentes>echo $PS1
+${PWD}>
+/d/iccol/desarrollo/fuentes>vi ~/viset
+"/d/iccol/desarrollo/viset" 27 lines, 986 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesioon
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if [ `echo $0` != "-ksh" ]
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  PS1="$PWD $" export PS1
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/viset" 27 lines, 986 characters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+
+
+
+OPEN MODE  export PS1='${PWD}>'
+  ~"/d/iccol/desarrollo/viset" 27 lines, 983 characters /d/iccol/desarrollo/fuentes>
+/d/iccol/desarrollo/fuentes>fg
+vi CARGAJUR.CBL
+05 E-descripcionpic x(59).******************************************************************PROCEDURE DIVISION using cod-error reg-input E-errores.
+00.
+*    marca al reg actual como erroneomove "SI" to E-hay-error*    cuenta y muestra el registro de inputif reg-input(1:86) not = reg-input-anterioradd 1 to E-cont-regs-con-errordisplay " "
+display reg-input(1:86)move reg-input(1:86) to reg-input-anteriormove spaces to E-errores-regmove 2 to errindexend-if*    contabiliza el error en la tabla de erroresset Ex to 1
+search E-error varying Exat end
+display "--- falla en la tabla de errores ---" cod-errorwhen E-codigo(Ex) = "00"add 1 to E-contador(Ex)display "--- error tipo exotico: " cod-errorwhen E-codigo(Ex) = cod-erroradd 1 to E-contador(Ex)display "Error " cod-error " " E-descripcion(Ex)end-search*    agrega a la lista de errores del registroif errIndex < 99
+move cod-error to E-errores-reg(errIndex:2)add 3 to errindexend-if
+
+exit program.end program PONERR.end program ACTALEJUR.******************************************************************
+******************************************************************
+
+~/\a/\A/"[abcde-z]*"Address search hit BOTTOM without matching pattern/Address search hit BOTTOM without matching pattern$SET LIST SETTINGIDENTIFICATION DIVISION.
+PROGRAM-ID.    ACTALEJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. microfocus.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+select JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************/*    Tipo de identificacion Numero {1, 2, 3, 4}03 JURAD-id-tipopic x.
+*    Numero de identificacion03 JURAD-id-numeroXpic x(11).03 JURAD-id-numeroredefines JURAD-id-numeroX
+pic 9(11).
+*    Nombres y Apellidos03 JURAD-nombrepic x(45).
+*    Numero de demandas vigentes03 JURAD-demandas-vigentes   pic 999.
+*    Numero de demandas terminadas03 JURAD-demandas-terminadas pic 999.
+*    Fecha ultima demanda vigente YYYYMMDD03 JURAD-demandas-fecha-ultima pic x(8).
+*    Numero de embargos vigentes03 JURAD-embargos-vigentes   pic 999.
+*    Numero de embargos terminados03 JURAD-embargos-terminados pic 999.
+*    Fecha ultimo embargo vigente YYYYMMDD03 JURAD-embargos-fecha-ultimo pic x(8).01  JURADT-reg.
+* Registro de totales de control T
+*    Tipo de Novedad = "T"03 JURADT-tipo-novedadpic x.03pic x.
+*    Cantidad de registros03 JURADT-registrospic 9(11).03pic x.
+*    Total numero de demandas vigentes03 JURADT-demandas-vigentes  pic 9(7).03pic x.
+*    Total numero de demandas terminadas03 JURADT-demandas-terminadas pic 9(7).03pic x.
+*    Total numero de embargos vigentes03 JURADT-embargos-vigentes  pic 9(7).03pic x.
+*    Total numero de embargos terminados03 JURADT-embargos-terminados pic 9(7).03pic x(41).******************************************************************
+* Archivo de salida con los registros defectuosos del arch JURAD
+******************************************************************
+FD ERRS.
+01  ERRS-reg.
+*    Tipo de Novedad {I, M, E, T} Inser/Modif/Elim/Totales03 ERRS-tipo-novedadpic x.:set noic/
+4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* Parte de la carga de datos en el registro BDIIALE y grabacion
+* del mismo que es comun a demandas y embargos
+* El dato LLASEC-BDIIALE ya tiene "J001" o "J002"
+******************************************************************
+*    completa la clave e intenta leer la alerta, si se leyo OK
+*    el file status de BDIIALE queda con "00"perform 4333-LEER-BDIIALE-RANDOM*    procesa segun el tipo de novedad I M Eevaluate JURAD-tipo-novedadwhen "I"
+add 1 to N-reg-tipo-I-OKperform 4300-MODIFICAR-BDIIALE-Iwhen "M"
+add 1 to N-reg-tipo-M-OKperform 4300-MODIFICAR-BDIIALE-Mwhen "E"
+add 1 to N-reg-tipo-E-OKperform 4300-MODIFICAR-BDIIALE-Ewhen other
+*esto es "imposible" por control de consistencia anteriordisplay "error de logica: tipo-novedad="JURAD-tipo-novedad " reg n\202°: " N-reg-leidosdisplay "Registro de JURAD: " display JURAD-regperform 9000-CANCELAR-PROGRAMAend-evaluate.4300-MODIFICAR-BDIIALE-I.
+******************************************************************
+* Insercion de una alerta nueva
+* Si ya existia muestra un mensaje y continua
+******************************************************************
+*    si el registro existia es un errorif EST-BDIIALE = "00"display "Insercion de alerta nueva que ya existe "" key: " LLAVE-BDIIALEdisplay "Registro de input: "display JURAD-regdisplay "Datos en la alerta: " INF-DATAHOST-BDIIALEadd 1 to N-ale-ya-existeend-if*    completa los datos del registroinitialize ENCABEZADO-BDIIALEmove P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE/read BDIIALE next recordevaluate EST-BDIIALEwhen "00"
+if FUENTE-BDIIALE = P-cod-suscriptor
+*es un alerta de JURAD
+delete BDIIALE
+if EST-BDIIALE = "00"
+add 1 to N-ale-borradaselse
+*error en la eliminacion
+display "Error al eliminar un registro de ""BDIIALE vaciando los datos"
+display "Clave: " LLAVE-BDIIALEdisplay "Reg borrados: " N-ale-borradasperform 9000-CANCELAR-PROGRAMAend-if
+end-if
+when "10"
+*fin de archivo: sale normalmentecontinue
+when other
+*lectura anormal: cancelacion del programadisplay "Error en lectura del archivo de alertas ""online"
+display "File status: " EST-BDIIALEperform 9000-CANCELAR-PROGRAMA *> no retornaend-evaluateend-perform.
+display "Termino la eliminacion total de JURAD"display "Reg borrados: " N-ale-borradas.7000-RUTINA-FINAL.
+******************************************************************
+* Registra hora de finalizacionaccept W-hora-fin from time* Leer JURAD a ver si hay registros despues del "T"* Close todos los archivosclose JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.* Emision de contadores de registrosdisplay " "
+display "Totales de registros:"move N-reg-leidos to N-editdisplay N-edit "Registros IME en el archivo de entrada"move N-reg-OK to N-editdisplay N-edit "Registros procesados sin error"/Address search hit BOTTOM without matching pattern?
+4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* Parte de la carga de datos en el registro BDIIALE y grabacion
+* del mismo que es comun a demandas y embargos
+* El dato LLASEC-BDIIALE ya tiene "J001" o "J002"
+******************************************************************
+*    completa la clave e intenta leer la alerta, si se leyo OK
+*    el file status de BDIIALE queda con "00"perform 4333-LEER-BDIIALE-RANDOM*    procesa segun el tipo de novedad I M Eevaluate JURAD-tipo-novedadwhen "I"
+add 1 to N-reg-tipo-I-OKperform 4300-MODIFICAR-BDIIALE-Iwhen "M"
+add 1 to N-reg-tipo-M-OKperform 4300-MODIFICAR-BDIIALE-Mwhen "E"
+add 1 to N-reg-tipo-E-OKperform 4300-MODIFICAR-BDIIALE-Ewhen other
+*esto es "imposible" por control de consistencia anteriordisplay "error de logica: tipo-novedad="JURAD-tipo-novedad " reg n\202°: " N-reg-leidosdisplay "Registro de JURAD: " display JURAD-regperform 9000-CANCELAR-PROGRAMAend-evaluate.4300-MODIFICAR-BDIIALE-I.
+******************************************************************
+* Insercion de una alerta nueva
+* Si ya existia muestra un mensaje y continua
+******************************************************************
+*    si el registro existia es un errorif EST-BDIIALE = "00"display "Insercion de alerta nueva que ya existe "" key: " LLAVE-BDIIALEdisplay "Registro de input: "display JURAD-regdisplay "Datos en la alerta: " INF-DATAHOST-BDIIALEadd 1 to N-ale-ya-existeend-if*    completa los datos del registroinitialize ENCABEZADO-BDIIALEmove P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE/[^"]*"///^[^"]*"//////:%s//\U&215 substitutions *    marca al reg actual como erroneoMOVE "SI" to E-hay-error*    cuenta y muestra el registro de inputif reg-input(1:86) not = reg-input-anterioradd 1 to E-cont-regs-con-errorDISPLAY " "
+display reg-input(1:86)move reg-input(1:86) to reg-input-anteriormove spaces to E-errores-regmove 2 to errindexend-if*    contabiliza el error en la tabla de erroresset Ex to 1
+search E-error varying Exat end
+DISPLAY "--- falla en la tabla de errores ---" cod-errorWHEN E-CODIGO(EX) = "00"add 1 to E-contador(Ex)DISPLAY "--- error tipo exotico: " cod-errorwhen E-codigo(Ex) = cod-erroradd 1 to E-contador(Ex)DISPLAY "Error " cod-error " " E-descripcion(Ex)end-search*    agrega a la lista de errores del registroif errIndex < 99
+move cod-error to E-errores-reg(errIndex:2)add 3 to errindexend-if
+
+exit program.end program PONERR.end program ACTALEJUR.******************************************************************
+******************************************************************
+
+~
+~
+~
+~
+~
+~
+~/"[^"]*$:%s//\U&215 substitutions TO E-HAY-ERRORCOD-ERRORCOD-ERRORDESCRIPCION(EX:g/^       /s/^[^"]*$/\U&IF REG-INPUTNOT = REG-INPUT-ANTERIORADD 1 TO E-CONT-REGS-CON-ERRORDISPLAY REG-INPUTMOVE REG-INPUTTO REG-INPUT-ANTERIORMOVE SPACES TO E-ERRORES-REGMOVE 2 TO ERRINDEXEND-IFSET EX TO
+SEARCH E-ERROR VARYING EXAT END
+
+
+ADD 1 TO E-CONTADOR(EXWHEN E-CODIGO(EX) = COD-ERRORADD 1 TO E-CONTADOR(EXEND-SEARCHIF ERRINDEX
+MOVE COD-ERROR TO E-ERRORES-REG(ERRINDEXADD 3 TO ERRINDEXEND-IF
+
+EXIT PROGRAMEND PROGRAMEND PROGRAM$SET LIST SETTINGIDENTIFICATION DIVISION.
+PROGRAM-ID.    ACTALEJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************
+******************************************************************
+******************************************************************
+DATA DIVISION.
+FILE SECTION.******************************************************************
+* Archivo de entrada con los datos de demandas y embargos de JURAD
+******************************************************************
+FD JURAD.
+01  JURAD-REG.
+* Registros de movimientos I, M, E
+*    Tipo de Novedad {I, M, E} Inser/Modif/Elim03 JURAD-TIPO-NOVEDADPIC X.
+*    Tipo de identificacion Numero {1, 2, 3, 4}03 JURAD-ID-TIPOPIC X.
+*    Numero de identificacion03 JURAD-ID-NUMEROXPIC X(11).03 JURAD-ID-NUMEROREDEFINES JURAD-ID-NUMEROX
+PIC 9(11).
+*    Nombres y Apellidos03 JURAD-NOMBREPIC X(45).
+*    Numero de demandas vigentes03 JURAD-DEMANDAS-VIGENTES   PIC 999.
+*    Numero de demandas terminadas03 JURAD-DEMANDAS-TERMINADAS PIC 999.
+*    Fecha ultima demanda vigente YYYYMMDD03 JURAD-DEMANDAS-FECHA-ULTIMA PIC X(8).
+*    Numero de embargos vigentes03 JURAD-EMBARGOS-VIGENTES   PIC 999.
+*    Numero de embargos terminados03 JURAD-EMBARGOS-TERMINADOS PIC 999.
+*    Fecha ultimo embargo vigente YYYYMMDD03 JURAD-EMBARGOS-FECHA-ULTIMO PIC X(8).01  JURADT-REG.
+* Registro de totales de control T
+*    TIPO DE NOVEDAD = "T"03 JURADT-TIPO-NOVEDADPIC X.03PIC X.
+*    Cantidad de registros03 JURADT-REGISTROSPIC 9(11).03PIC X.
+*    Total numero de demandas vigentes03 JURADT-DEMANDAS-VIGENTES  PIC 9(7).03PIC X.
+*    Total numero de demandas terminadas03 JURADT-DEMANDAS-TERMINADAS PIC 9(7).03PIC X.03 JURADT-DEMANDAS-TERMINADAS PIC 9(7).03PIC X.
+*    Total numero de embargos vigentes03 JURADT-EMBARGOS-VIGENTES  PIC 9(7).03PIC X.
+*    Total numero de embargos terminados03 JURADT-EMBARGOS-TERMINADOS PIC 9(7).03PIC X(41).******************************************************************
+* Archivo de salida con los registros defectuosos del arch JURAD
+******************************************************************
+FD ERRS.
+01  ERRS-REG.
+*    Tipo de Novedad {I, M, E, T} Inser/Modif/Elim/Totales03 ERRS-TIPO-NOVEDADPIC X.
+*    Tipo de identificacion Numero {1, 2, 3, 4}03 ERRS-ID-TIPOPIC X.
+*    Numero de identificacion03 ERRS-ID-NUMEROPIC X(11).
+*    Nombres y Apellidos03 ERRS-NOMBREPIC X(45).
+*    Numero de demandas vigentes03 ERRS-DEMANDAS-VIGENTES    PIC 999.
+*    Numero de demandas terminadas03 ERRS-DEMANDAS-TERMINADAS  PIC 999.
+*    Fecha ultima demanda vigente YYMMDD03 ERRS-DEMANDAS-FECHA-ULTIMA PIC X(8).
+*    Numero de embargos vigentes03 ERRS-EMBARGOS-VIGENTES    PIC 999.
+*    Numero de embargos terminados03 ERRS-EMBARGOS-TERMINADOS  PIC 999.
+*    Fecha ultimo embargo vigente YYMMDD03 ERRS-EMBARGOS-FECHA-ULTIMO PIC X(8).
+*    Causa del rechazo03 ERRS-CAUSA-RECHAZOPIC X(100).******************************************************************
+* Contiene los ids y nombres de personas
+******************************************************************
+COPY BDIIREGI.FD.******************************************************************
+* Maestro de personas juridicas nacionales y extranjeras reportada
+* por la DIAN
+******************************************************************
+COPY BDIIDIAN.FD.******************************************************************
+******************************************************************
+* Archivo maestro de cedulas de extranjeria suministrado por DAS
+******************************************************************
+COPY BDIIDAS.FD.******************************************************************
+* Maestro de alertas reportadas por suscriptores
+******************************************************************
+COPY BDIIALE.FD.******************************************************************
+WORKING-STORAGE SECTION.
+******************************************************************
+* Nombre del programa
+01  PGMPIC X(10) VALUE "CARGAJUR".******************************************************************
+* Variables para rutina de validacion de identificaciones
+******************************************************************
+COPY BDIIVIDE.WS.******************************************************************
+* Variables relacionadas con las alertas del sistema
+******************************************************************
+COPY BDIIALE.WS.******************************************************************
+* Datos para las rutinas de validacion de nombres de VALNOM.PROC
+******************************************************************
+COPY VALNOM.WS.*****************************************************************
+* Direcciones de los archivos en el file system
+*****************************************************************
+COPY ICFILE.WS.******************************************************************
+* Indica que se termino el proceso, por agotamiento del archivo
+* de entrada (normal) o alguna otra condicion (error)
+01  IND-FIN-PROCESOPIC XX VALUE "NO".* Copia del ultimo reg de input, para mensajes (Ult reg: ...)
+01  JURAD-REG-ANTERIORPIC X(100) VALUE "(vacio)".
+01  JURAD-FSPIC XX VALUE SPACES.01  ERRS-FSPIC XX VALUE SPACES.* Datos de demandas o embargos que van en el registro BDIIALE
+* Datos de demandas o embargos que van en el registro BDIIALE
+01 D-DATAHOST.
+05 D-VIGENTESPIC 9(5).05 D-TERMINADOSPIC 9(5).05 D-FECHA-ULTIMAPIC X(8).
+******************************************************************
+* Parametros iniciales, de la linea de comando
+* La linea de comando que contiene los parametros
+01 P-COMMAND-LINEPIC X(80) VALUE SPACES.
+01 P-PARAMETROS.
+*    PROCESO REAL: CONTIENE "SI" PARA ACTIVAR
+* TODO: FIJO EN "NO" PARA PRUEBAS03 P-PROCESO-REALPIC XX VALUE "NO".88 PROCESO-REALVALUE "SI".*    Nombre del archivo de entrada JJJJJJaaaDDMMAAbbXX.txt03 P-FILE-NAMEPIC X(80) VALUE SPACES.03 P-FILE-NAME-RREDEFINES P-FILE-NAME.
+*JJJJJJ = Codigo de suscriptor JURAD en Experian05 P-COD-SUSCRIPTORPIC 9(6).
+*AAA = CODIFICACION DEL PRODUCTO ("100")05 P-PRODUCTOPIC XXX.
+*DDMMAA = Fecha de proceso05 P-FECHA-PROCESOPIC X(6).
+*bb =  01 a CI
+05 P-CI-BIPIC XX.
+*XX = Tipo de proceso
+*01 Envio Original - Carga TOTAL - primera vez
+*02 Archivo Semanal - Carga PARCIAL
+*03 Archivo Mensual - Carga PARCIAL
+*04 Refresque Total - Carga TOTAL05 P-TIPO-PROCESOPIC XX.
+*EXTENSION DEL ARCHIVO ".txt"05 P-EXTENSIONPIC X(4).05PIC X(57).03 P-FILE-PATHPIC X(80) VALUE SPACES.
+* Nombre del archivo de errores JJJJJJaaaDDMMAAbbXX_ERRORES.txt03 ERRS-FILE-NAMEPIC X(80) VALUE SPACES.* Fecha de proceso editada YYYYMMDD
+01 P-FECHA-PROCESO-YYYYMMDDPIC X(8).
+* Fecha de proceso + 50 años
+01 P-FECHA-PROCESO-50.03  P-FECHA-PROCESO-50YYYY   PIC 9999.03PIC X(4).
+******************************************************************
+* Datos para el reporte final
+01 W-TIEMPO.* Datos para el reporte final01 W-TIEMPO.
+03 W-HORA-INICIOPIC 9(8).03 W-HORA-FINPIC 9(8).
+01 N-EDITPIC Z(8)B.
+01 N-CONTADORES.
+*    Registros en el archivo de entrada03 N-REG-LEIDOSPIC 9(8) VALUE ZERO.
+*    Registros procesados sin error03 N-REG-OKPIC 9(8) VALUE ZERO.
+*    Registros con error03 N-REG-CON-ERRORPIC 9(8) VALUE ZERO.*    Cantidades de registros por tipo de novedad03 N-REG-TIPO-I-OKPIC 9(8) VALUE ZERO.03 N-REG-TIPO-M-OKPIC 9(8) VALUE ZERO.03 N-REG-TIPO-E-OKPIC 9(8) VALUE ZERO.03 N-REG-TIPO-I-ERRPIC 9(8) VALUE ZERO.03 N-REG-TIPO-M-ERRPIC 9(8) VALUE ZERO.03 N-REG-TIPO-E-ERRPIC 9(8) VALUE ZERO.*    Alertas borradas previo al refresque total03 N-ALE-BORRADASPIC 9(8) VALUE ZERO.
+*    Alertas insertadas03 N-ALE-INSERTADASPIC 9(8) VALUE ZERO.
+*    Alertas modificadas03 N-ALE-MODIFICADASPIC 9(8) VALUE ZERO.
+*    Alertas eliminadas03 N-ALE-ELIMINADASPIC 9(8) VALUE ZERO.
+*    Insercion de alerta existente03 N-ALE-YA-EXISTEPIC 9(8) VALUE ZERO.
+*    Modificacion o eliminacion de alerta inexistente03 N-ALE-NO-EXISTEPIC 9(8) VALUE ZERO.******************************************************************
+* Armado de las lineas de alerta
+01 LA-LINEAS-ALERTA.
+*    Los modelos a continuacion deberan obtenerse de un
+*    archivo, como BDIIALE-ALERTAS03 LAENDPIC 999 COMP VALUE 0.03 LA-MODELOS.
+*1234567890123456789012345678901234567890123456789005 PIC X(50) VALUE"TIENE &&& DEMANDAS CERRADAS Y &&& ABIERTAS".05 PIC X(50) VALUE"LA ABIERTA MAS RECIENTE SE INSTAURO EL [&&&&&&&&]".05 PIC X(50) VALUE"TIENE &&& EMBARGOS CANCELADOS Y &&& VIGENTES".05 PIC X(50) VALUE"TIENE &&& EMBARGOS CANCELADOS Y &&& VIGENTES".05 PIC X(50) VALUE"EL EMBARGO MAS RECIENTE SE INSTAURO EL [&&&&&&&&] ".05 PIC X(50) VALUE HIGH-VALUES. *> END MARKER03 LA-MODELOS2REDEFINES LA-MODELOS.05 LA-MODELOPIC X(50) OCCURS 5
+INDEXED LAM.
+*    Funcionamiento de los templates.
+*    Hay dos templates por de alerta, uno por linea.
+*    Cada template consiste en hasta 10 frases fijas con
+*    ampersands (&) donde se van a reemplazar los valores.
+*    Por ejemplo:
+*    TIENE &&& DEMANDAS CERRADAS Y &&& ABIERTAS
+*    tiene 3 frases fijas y 2 reemplazos.
+*    La cantidad de ampersands es irrelevante, pero parece
+*    conveniente que informe sobre el tamanio del contenido.03 LA-TEMPLATES.
+05 LA-TEMPLATEOCCURS 4 INDEXED LAX.07 LA-PARTEPIC X(50)
+OCCURS 10 INDEXED LAY.
+*    Las dos lineas armadas03 LA-LINEAS.
+05 LA-LINEA1PIC X(50).05 LA-LINEA2PIC X(50).
+*    Los valores a insertar en una linea03 LA-VALORES.
+05 LA-VALORPIC X(50)
+OCCURS 10 INDEXED LAV.
+*    Datos para editar valores a insertar03 LA-NUMPIC -(11)0.03 LA-NUMXREDEFINES LA-NUM
+PIC X(12).03 LA-DESCARTEPIC X(50).******************************************************************
+* Errores de consistencia del input
+* Cada error tiene un codigo de 2 digitos, un espacio, contador
+* de ocurrencias de 7 digitos, un espacio, y descripcion de 59
+01 E-ERRORES.
+*    indica si el registro actual tiene error03 E-HAY-ERRORPIC XX VALUE "NO".
+*    errores del registro actual03 E-ERRORES-REGPIC X(100) VALUE SPACES.
+*    contador de registros con error03 E-CONT-REGS-CON-ERROR     PIC 9(8) VALUE ZERO.
+*    tabla de errores03 PIC X(11) VALUE "01 0000000 ".03 PIC X(59) VALUE03 PIC X(11) VALUE "01 0000000 ".03 PIC X(59) VALUE"Tipo de movimiento invalido, debe ser I M E T".03 PIC X(11) VALUE "02 0000000 ".03 PIC X(59) VALUE"Tipo de identificacion invalido, debe ser 1 2 3 4".03 PIC X(11) VALUE "03 0000000 ".03 PIC X(59) VALUE"Numero de identificacion invalido, debe ser numerico".03 PIC X(11) VALUE "04 0000000 ".03 PIC X(59) VALUE"Tipo de identificacion debe ser mayor que cero".03 PIC X(11) VALUE "05 0000000 ".03 PIC X(59) VALUE"Falta el nombre o denominacion".03 PIC X(11) VALUE "06 0000000 ".03 PIC X(59) VALUE"Numero de demandas vigentes: debe ser numerico".03 PIC X(11) VALUE "07 0000000 ".03 PIC X(59) VALUE"Numero de demandas terminadas: debe ser numerico".03 PIC X(11) VALUE "08 0000000 ".03 PIC X(59) VALUE"Fecha ultima demanda vigente YYYYMMDD: debe ser numerica".03 PIC X(11) VALUE "09 0000000 ".03 PIC X(59) VALUE"Fecha ultima demanda vigente YYYYMMDD: fuera de rango".03 PIC X(11) VALUE "10 0000000 ".03 PIC X(59) VALUE"Numero de embargos vigentes: debe ser numerico".03 PIC X(11) VALUE "11 0000000 ".03 PIC X(59) VALUE"Numero de embargos terminados: debe ser numerico".03 PIC X(11) VALUE "12 0000000 ".03 PIC X(59) VALUE"Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica".03 PIC X(11) VALUE "13 0000000 ".03 PIC X(59) VALUE"Fecha ultimo embargo vigente YYYYMMDD: fuera de rango".03 PIC X(11) VALUE "14 0000000 ".03 PIC X(59) VALUE"El numero de id no se encuentra en el archivo maestro".03 PIC X(11) VALUE "15 0000000 ".03 PIC X(59) VALUE"El nombre en el input no coincide con el registrado".03 PIC X(11) VALUE "16 0000000 ".03 PIC X(59) VALUE"Numero de id fuera del rango del tipo de id informado".
+*----------------- insertar nuevos items aqui -------------------"Numero de id fuera del rango del tipo de id informado".*----------------- insertar nuevos items aqui -------------------03 PIC X(11) VALUE "00 0000000 ".03 PIC X(59) VALUE "--- fin de la lista (cod 00) ---".03PIC X(3500). *> LOS 50 ITEMS
+01 E-ERRORES-2REDEFINES E-ERRORES.03PIC XX.03PIC X(100).03PIC 9(8).03 E-ERROROCCURS 50 INDEXED EX.05 E-CODIGOPIC XX.05PIC X.05 E-CONTADORPIC 9(7).05PIC X.05 E-DESCRIPCIONPIC X(59).
+01 E-EDITPIC Z(8)B.******************************************************************
+* Control de rangos de valores de las fechas del input
+01 VALIDACIONES-FECHAS.02 ANO-VAL-XPIC 9(04).88 ANO-VALVALUE 1900 THRU 2050.02 MES-VAL-XPIC 9(02).88 MES-VALVALUE 01   THRU 12.02 DIA-VAL-XPIC 9(02).88 DIA-VALVALUE 01   THRU 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.
+*    0000-PROGRAMA-PRINCIPAL
+*    4000-PROCESAR-REGISTRO
+*    4000-PROCESAR-REGISTRO-2
+*    4100-VALIDACION-FORMAL
+*    4200-VALIDACION-SEMANTICA
+*    4300-MODIFICAR-BDIIALE
+*    4300-MODIFICAR-BDIIALE-DATOS
+*    4300-MODIFICAR-BDIIALE-I
+*    4300-MODIFICAR-BDIIALE-M
+*    4300-MODIFICAR-BDIIALE-E
+*    4333-LEER-BDIIALE-RANDOM
+*    4333-GRABAR-BDIIALE
+*    4333-REGRABAR-BDIIALE
+*    4333-ELIMINAR-BDIIALE
+*    4900-GRABAR-ERROR
+*    4320-ARMAR-TEXTO-ALERTA
+*    1000-RUTINA-INICIAL
+*    1001-ELIMINAR-TODO
+*    7000-RUTINA-FINAL*    1001-ELIMINAR-TODO*    7000-RUTINA-FINAL
+*    9000-CANCELAR-PROGRAMA0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    ENCONTRAR EL REGISTRO "T" DE TOTALESPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*controla el reg y lo aplica si es OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORWHEN "10"
+*fin del archivo de input:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*de que se terminara el archivoDISPLAY "Falta el reg de totales del archivo JURAD "DISPLAY "Nombre del archivo: " P-FILE-NAMEDISPLAY "File status: " JURAD-FSDISPLAY "Ultimo registro leido: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*error de lectura: cancelacion del procesoDISPLAY "Error en lectura del archivo JURAD "DISPLAY "Nombre del archivo: " P-FILE-NAMEDISPLAY "File status: " JURAD-FSDISPLAY "Ultimo registro leido: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.
+
+4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    validacion del tipo de movimientoIF JURAD-TIPO-NOVEDAD NOT = "I" and "M" and "E" and "T"CALL "PONERR" using "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SENIALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    validacion formal de los datosPERFORM 4100-VALIDACION-FORMALIF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERROREXIT PARAGRAPHEND-IF*    si la validacion formal dio OK se hace validacion semanticaPERFORM 4200-VALIDACION-SEMANTICAIF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERROREXIT PARAGRAPHEND-IF*    intento de actualizacion de BDIIALEPERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OK.4100-VALIDACION-FORMAL.
+******************************************************************
+* Validacion formal de los datos del input
+******************************************************************
+*    Tipo de identificacion Numero {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" and "2" and "3" and "4"*    Tipo de identificacion Numero {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" and "2" and "3" and "4"CALL "PONERR" using "02" JURAD-REG E-ERRORESEND-IF
+*    Numero de identificacionIF JURAD-ID-NUMEROX IS NOT NUMERICCALL "PONERR" using "03" JURAD-REG E-ERRORESEND-IF
+IF JURAD-ID-NUMERO NOT > 0CALL "PONERR" using "04" JURAD-REG E-ERRORESEND-IF
+*    si el movimiento es una eliminacion los datos subsiguientes
+*    no se controlanIF JURAD-TIPO-NOVEDAD = "E"EXIT PARAGRAPHEND-IF
+*    Nombres y ApellidosIF JURAD-NOMBRE = SPACESCALL "PONERR" using "05" JURAD-REG E-ERRORESEND-IF
+*    Numero de demandas vigentesIF JURAD-DEMANDAS-VIGENTES IS NOT NUMERICCALL "PONERR" using "06" JURAD-REG E-ERRORESEND-IF
+*    Numero de demandas terminadasIF JURAD-DEMANDAS-TERMINADAS IS NOT NUMERICCALL "PONERR" using "07" JURAD-REG E-ERRORESEND-IF
+*    Fecha ultima demanda vigente YYMMDDIF JURAD-DEMANDAS-FECHA-ULTIMA IS NOT NUMERICCALL "PONERR" using "08" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-DEMANDAS-FECHA-ULTIMA TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" using "09" JURAD-REG E-ERRORESEND-IF
+*    Numero de embargos vigentesIF JURAD-EMBARGOS-VIGENTES NOT NUMERICCALL "PONERR" using "10" JURAD-REG E-ERRORESEND-IF
+*    Numero de embargos terminadosIF JURAD-EMBARGOS-TERMINADOS NOT NUMERICCALL "PONERR" using "11" JURAD-REG E-ERRORESEND-IF
+*    Fecha ultimo embargo vigente YYMMDDIF JURAD-EMBARGOS-FECHA-ULTIMO IS NOT NUMERICCALL "PONERR" using "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHAS/andAANNDD/AANNDD/AANNDDUUSSIINNGG
+
+     
+    /usingUUSSIINNGG/REPLACE MODEUSING/USING/USING/USING/USING/USING/USINGUSINGG "10/USING/USINGCALL "PONERR" USING "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" using "13" JURAD-REG E-ERRORESEND-IF.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* Validacion del numero de identificacion y de su relacion con
+* el nombre
+****************************************************************MOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE-RMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDEMOVE 1 TO SW-VERIFNOM-BDIIVIDEMOVE 0 TO SW-DIGCHEQUEO-BDIIVIDE SW-ASGTIPID-BDIIVIDEPERFORM 80100-VALIDAR-IDENTIFICACION
+*    a ver si la validacion cambio el tipo de ideIF JURAD-ID-TIPO NOT = TIP-IDE-BDIIVIDECALL "PONERR" using "16" JURAD-REG E-ERRORESDISPLAY "Tipo ide cambiado de " JURAD-id-tipo " a "TIP-IDE-BDIIVIDE " num ide: " JURAD-ID-NUMEROEND-IF
+*    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existeIF SW-ID-BDIIVIDE = 1CALL "PONERR" using "14" JURAD-REG E-ERRORESELSE
+*existe id, a ver si el nombre coincideIF SW-NOMBRES-BDIIVIDE = 1    *> NOMBRE NO COINCIDECALL "PONERR" using "15" JURAD-REG E-ERRORESDISPLAY "novedad:  " JURAD-NOMBREDISPLAY "registro: " NOM-LEIDO-BDIIVIDEEND-IF
+END-IF.4300-MODIFICAR-BDIIALE.
+******************************************************************
+* Se impacta el archivo BDIIALE con una o dos inserciones,
+* modificaciones o eliminaciones segun haya o no demandas y
+* embargos
+******************************************************************INITIALIZE REG-BDIIALE*    si hay demandasIF JURAD-DEMANDAS-VIGENTES > ZEROOR JURAD-DEMANDAS-TERMINADAS > ZERO/USING/USING/USING/USINGIF JURAD-DEMANDAS-VIGENTES > ZEROOR JURAD-DEMANDAS-TERMINADAS > ZEROMOVE "J001" TO LLASEC-BDIIALE
+*arma datos de demandasMOVE JURAD-DEMANDAS-VIGENTES TO D-VIGENTESMOVE JURAD-DEMANDAS-TERMINADAS TO D-TERMINADOSSTRING "20" JURAD-DEMANDAS-FECHA-ULTIMADELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.*    si hay embargosIF JURAD-EMBARGOS-VIGENTES > ZEROOR JURAD-EMBARGOS-TERMINADOS > ZEROMOVE "J002" TO LLASEC-BDIIALE
+*arma datos de embargosMOVE JURAD-EMBARGOS-VIGENTES TO D-VIGENTESMOVE JURAD-EMBARGOS-TERMINADOS TO D-TERMINADOSSTRING "20" JURAD-EMBARGOS-FECHA-ULTIMODELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* Parte de la carga de datos en el registro BDIIALE y grabacion
+* del mismo que es comun a demandas y embargos
+* EL DATO LLASEC-BDIIALE YA TIENE "J001" o "J002"
+******************************************************************
+*    completa la clave e intenta leer la alerta, si se leyo OK
+*    EL FILE STATUS DE BDIIALE QUEDA CON "00"PERFORM 4333-LEER-BDIIALE-RANDOM*    procesa segun el tipo de novedad I M EEVALUATE JURAD-TIPO-NOVEDADWHEN "I"
+ADD 1 TO N-REG-TIPO-I-OKPERFORM 4300-MODIFICAR-BDIIALE-IWHEN "M"
+ADD 1 TO N-REG-TIPO-M-OKPERFORM 4300-MODIFICAR-BDIIALE-MWHEN "E"
+ADD 1 TO N-REG-TIPO-E-OKPERFORM 4300-MODIFICAR-BDIIALE-EWHEN OTHER
+*ESTO ES "imposible" POR CONTROL DE CONSISTENCIA ANTERIORDISPLAY "error de logica: tipo-novedad="
+4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* Parte de la carga de datos en el registro BDIIALE y grabacion
+* del mismo que es comun a demandas y embargos
+* EL DATO LLASEC-BDIIALE YA TIENE "J001" o "J002"
+******************************************************************
+*    completa la clave e intenta leer la alerta, si se leyo OK
+*    EL FILE STATUS DE BDIIALE QUEDA CON "00"PERFORM 4333-LEER-BDIIALE-RANDOM*    procesa segun el tipo de novedad I M EEVALUATE JURAD-TIPO-NOVEDADWHEN "I"
+ADD 1 TO N-REG-TIPO-I-OKPERFORM 4300-MODIFICAR-BDIIALE-IWHEN "M"
+ADD 1 TO N-REG-TIPO-M-OKPERFORM 4300-MODIFICAR-BDIIALE-MWHEN "E"
+ADD 1 TO N-REG-TIPO-E-OKPERFORM 4300-MODIFICAR-BDIIALE-EWHEN OTHER
+*ESTO ES "imposible" POR CONTROL DE CONSISTENCIA ANTERIORDISPLAY "error de logica: tipo-novedad="JURAD-TIPO-NOVEDAD " reg n\202°: " N-REG-LEIDOSDISPLAY "Registro de JURAD: " DISPLAY JURAD-REGPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4300-MODIFICAR-BDIIALE-I.
+******************************************************************
+* Insercion de una alerta nueva
+* Si ya existia muestra un mensaje y continua
+******************************************************************
+*    si el registro existia es un errorIF EST-BDIIALE = "00"DISPLAY "Insercion de alerta nueva que ya existe "" key: " LLAVE-BDIIALEDISPLAY "Registro de input: "DISPLAY JURAD-REGDISPLAY "Datos en la alerta: " INF-DATAHOST-BDIIALEADD 1 TO N-ALE-YA-EXISTEEND-IF*    completa los datos del registroINITIALIZE ENCABEZADO-BDIIALEMOVE P-FECHA-PROCESO-YYYYMMDD TO FEC-NOV-BDIIALE
+JURAD-TIPO-NOVEDAD " reg n\20MOVE P-FECHA-PROCESO-YYYYMMDD TO FEC-NOV-BDIIALEFEC-REP-BDIIALEMOVE P-FECHA-PROCESO-50 TO FEC-VEN-BDIIALEMOVE 0 TO BLOQUEO-BDIIALEMOVE D-DATAHOST TO INF-DATAHOST-BDIIALEPERFORM 4320-ARMAR-TEXTO-ALERTAIF EST-BDIIALE = "00"PERFORM 4333-REGRABAR-BDIIALEELSE
+PERFORM 4333-GRABAR-BDIIALEEND-IF.4300-MODIFICAR-BDIIALE-M.
+******************************************************************
+* Modificacion de una alerta existente
+* Si no existia muestra un mensaje y continua
+******************************************************************
+*    si el registro no existia es un errorIF EST-BDIIALE NOT = "00"DISPLAY "Modificacion de alerta inexistente "" key: " LLAVE-BDIIALEDISPLAY "Registro de input: "DISPLAY JURAD-REGDISPLAY "Datos en la alerta: " INF-DATAHOST-BDIIALEADD 1 TO N-ALE-NO-EXISTEEND-IF
+*    reemplaza la fecha de reporte y los valoresMOVE P-FECHA-PROCESO-YYYYMMDD TO FEC-REP-BDIIALEMOVE D-DATAHOST TO INF-DATAHOST-BDIIALEPERFORM 4320-ARMAR-TEXTO-ALERTAIF EST-BDIIALE = "00"PERFORM 4333-REGRABAR-BDIIALEELSE
+PERFORM 4333-GRABAR-BDIIALEEND-IF.4300-MODIFICAR-BDIIALE-E.
+******************************************************************
+* Eliminacion de una alerta
+* Si no existia muestra un mensaje y continua
+******************************************************************
+*    elimina el registroIF EST-BDIIALE = "00"PERFORM 4333-ELIMINAR-BDIIALEELSE
+DISPLAY "Eliminacion de alerta inexistente "" key: " LLAVE-BDIIALE4300-MODIFICAR-BDIIALE-E.******************************************************************
+* Eliminacion de una alerta
+* Si no existia muestra un mensaje y continua
+******************************************************************
+*    elimina el registroIF EST-BDIIALE = "00"PERFORM 4333-ELIMINAR-BDIIALEELSE
+DISPLAY "Eliminacion de alerta inexistente "" key: " LLAVE-BDIIALEDISPLAY "Registro de input: "DISPLAY JURAD-REGADD 1 TO N-ALE-NO-EXISTEEND-IF.4333-LEER-BDIIALE-RANDOM.
+******************************************************************
+* Arma clave exacta y lee un registro de BDIIALE
+* Usa los datos del reg input, excepto LLASEC que esta precargado
+* CUANDO PUDO LEER OK EL FILE STATUS EST-BDIIALE QUEDA CON "00"
+******************************************************************MOVE JURAD-ID-TIPO TO TIP-IDE-BDIIALEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIALEMOVE P-COD-SUSCRIPTOR TO FUENTE-BDIIALEMOVE 000 TO COD-ALERTA-BDIIALEREAD BDIIALE
+EVALUATE EST-BDIIALEWHEN "00"
+CONTINUE
+WHEN "20" thru "29"
+CONTINUE
+WHEN OTHER
+DISPLAY "Error al leer BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEDISPLAY "Ultimo registro procesado: "DISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-GRABAR-BDIIALE.
+******************************************************************
+* Inserta un registro nuevo en BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPH"CARGAJUR.CBL" [Modified] line 721 of 1229 --58%-- EXIT PARAGRAPHEND-IF
+WRITE REG-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-INSERTADASWHEN OTHER
+DISPLAY "Error al grabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEDISPLAY "Registro BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-REGRABAR-BDIIALE.
+******************************************************************
+* Regraba un registro modificado en BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+REWRITE REG-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-MODIFICADASWHEN OTHER
+DISPLAY "Error al regrabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALEDISPLAY "Registro BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-ELIMINAR-BDIIALE.
+******************************************************************
+* Elimina un registro de BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+DELETE BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-ELIMINADASWHEN OTHER
+DISPLAY "Error al regrabar BDIIALE fs: " EST-BDIIALE" key: " LLAVE-BDIIALE/".*".*"*   - apertura de todos los demas archivos*   - eliminacion de datos existentes si es refresque completo
+******************************************************************
+* Registra hora de inicioACCEPT W-HORA-INICIO FROM TIME* Obtiene informacion sobre la corrida de la linea de comando: el
+* nombre del archivo de entrada (que contiene el tipo de proceso),
+* el indicador de proceso real o en falso (default)ACCEPT P-COMMAND-LINE FROM COMMAND-LINEDISPLAY "Parametros: " P-COMMAND-LINEUNSTRING P-COMMAND-LINE DELIMITED BY ALL " " INTOP-FILE-NAME P-PROCESO-REAL* El programa se anuncia en la consola
+* TODO: se usa un anuncio mas vistosoIF PROCESO-REAL
+DISPLAY PGM " Carga de archivo JURAD - proceso REAL"ELSE
+DISPLAY PGM " Carga de archivo JURAD - proceso en falso"END-IF* El indicador de proceso real debe ser SI|si|NO|noIF P-PROCESO-REAL NOT = "SI" and "NO"DISPLAY "El indicador de proceso real es invalido"DISPLAY "debe ser SI o NO"PERFORM 9000-CANCELAR-PROGRAMAEND-IF* TODO: controlar los componentes del filenameEVALUATE P-TIPO-PROCESOWHEN "01"
+DISPLAY "01 Envio Original - Carga TOTAL 1a vez"WHEN "02"
+DISPLAY "02 Archivo Semanal - Carga PARCIAL"WHEN "03"
+DISPLAY "03 Archivo Mensual - Carga PARCIAL"WHEN "04"
+DISPLAY "04 Refresque Total - Carga TOTAL"WHEN OTHER
+*valor invalido
+DISPLAY "El tipo de proceso " P-TIPO-PROCESO" es invalido (debe ser 01 02 03 o 04)"PERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.* Edita la fecha de proceso DDMMAA del parametro en formato
+* YYYYMMDD
+STRING "20" P-FECHA-PROCESO(5:6) P-FECHA-PROCESO(3:4)"SI" AANNDD/P-FECHA-PROCESO(1:2) DELIMITED SIZEINTO P-FECHA-PROCESO-YYYYMMDDDISPLAY "Fecha de proceso: " P-FECHA-PROCESO-YYYYMMDD* Calcula una fecha 50 anios posterior a la de procesoMOVE P-FECHA-PROCESO-YYYYMMDD TO P-FECHA-PROCESO-50ADD 50 TO P-FECHA-PROCESO-50YYYY* Apertura del archivo de entradaSTRING "$TEMPORALES/" P-FILE-NAME INTO P-FILE-PATHOPEN INPUT JURADEVALUATE JURAD-FS
+WHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "Error en open del archivo JURAD "DISPLAY "Path del archivo: " P-FILE-PATHDISPLAY "File status: " JURAD-FSPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAGOBACKEND-EVALUATE.* Apertura del archivo de erroresSTRING "$TEMPORALES/" P-file-name(1:19) "_ERRORES.txt"INTO ERRS-FILE-NAMEOPEN OUTPUT ERRSEVALUATE ERRS-FS
+WHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "Error en open del archivo de errores "DISPLAY "Nombre del archivo: " ERRS-FILE-NAMEDISPLAY "File status: " ERRS-FSPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAGOBACKEND-EVALUATE.* Apertura de los archivos maestros
+* TODO: falta capturar el status de estas operaciones?OPEN INPUT BDIIREGIOPEN INPUT BDIIDIANOPEN INPUT BDIIDAS.* Apertura del archivo de alertas en lineaIF PROCESO-REAL
+OPEN I-O BDIIALEELSE
+OPEN INPUT BDIIALEEND-IF.P-FFIILLEE--NNAAMMEE/*    marca al reg actual como erroneoMOVE "SI" TO E-HAY-ERROR*    cuenta y muestra el registro de inputIF REG-INPUT(1:86) NOT = REG-INPUT-ANTERIORADD 1 TO E-CONT-REGS-CON-ERRORDISPLAY " "
+DISPLAY REG-INPUT(1:86)MOVE REG-INPUT(1:86) TO REG-INPUT-ANTERIORMOVE SPACES TO E-ERRORES-REGMOVE 2 TO ERRINDEXEND-IF*    contabiliza el error en la tabla de erroresSET EX TO 1
+SEARCH E-ERROR VARYING EXAT END
+DISPLAY "--- falla en la tabla de errores ---" COD-ERRORWHEN E-CODIGO(EX) = "00"ADD 1 TO E-CONTADOR(EX)DISPLAY "--- error tipo exotico: " COD-ERRORWHEN E-CODIGO(EX) = COD-ERRORADD 1 TO E-CONTADOR(EX)DISPLAY "Error " cod-error " " E-DESCRIPCION(EX)END-SEARCH*    agrega a la lista de errores del registroIF ERRINDEX < 99
+MOVE COD-ERROR TO E-ERRORES-REG(ERRINDEX:2)ADD 3 TO ERRINDEXEND-IF
+
+EXIT PROGRAM.END PROGRAM PONERR.END PROGRAM ACTALEJUR.******************************************************************
+******************************************************************
+
+~
+~
+~
+~
+~
+~
+~" CCOODD--EERRRROORR/Address search hit BOTTOM without matching pattern:w"CARGAJUR.CBL" 1229 lines, 52083 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>fgvi ~/visetecho $PS1 export PS1='${PWD}>'export PS1="{`pwd`} > "echo $PS1              export PS1="`pwd` > "export PS1="\`pwd\` > "export PS1="$ "        echo $PS1      x CARGAJUR 9999991000905140101.txt SI/d/iccol/desarrollo/fuentes>x CARGAJUR 9999991000905140101.txt SI/d/iccol/desarrollo/fuentes>cat /d/iccol/desarrollo/temporales/99999910009051>/d/iccol/desarrollo/fuentes>x CARGAJUR 9999991000905140101.txt NO             /d/iccol/desarrollo/fuentes>des-c-v CARGAJUR                     /d/iccol/desarrollo/fuentes>
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+* Total Messages:     0
+* Data:       23880     Code:       23661
+* Micro Focus Server Express V5.1.00 Code Generator
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - verbose
+* Accepted - anim
+* Accepted - PIC
+* Generating CARGAJUR
+* Data:     23616  Code:     45236  Literals:      2032  Dynamic:   1425408
+
+>>> DATACREDITO: TERMINO OK COMPILACION DE CARGAJUR.CBL
+
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>des-c-v CARGAJURfg              vi ~/visetecho $PS1 export PS1='${PWD}>'export PS1="{`pwd`} > "echo $PS1              export PS1="`pwd` > "export PS1="\`pwd\` > "export PS1="$ "        echo $PS1      x CARGAJUR 9999991000905140101.txt SI/d/iccol/desarrollo/fuentes>
+Parametros: 9999991000905140101.txt SI                                                      
+CARGAJUR   Carga de archivo JURAD - proceso REAL
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J001    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000040000320201204
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J002    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000110004320204404
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Errores del reg:  07                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J001    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 000080004520201301
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J002    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 002320000220201105
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J001    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000220004520201204
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J002    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J001    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000330002020200004
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J002    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000150005420201401
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J001    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000110004320204404
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J002    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000120003220201004
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J001    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000450000020201008
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J002    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000020004420201305
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J001    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J002    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000030000620201301
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+Errores del reg:  15                                                                                                 
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J001    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000340000220199901
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J002    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000050006720201304
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J001    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000120003220201004
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J002    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000060004520201104
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+Errores del reg:  11                                                                                                 
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J001    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000110002320201104
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J002    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000090005720201304
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+Errores del reg:  15                                                                                                 
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+      20 Alertas modificadas
+         Alertas eliminadas
+      20 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 14:26:24
+Fin de Programa:     2014/05/16 14:26:24
+
+/d/iccol/desarrollo/fuentes>
+/d/iccol/desarrollo/fuentes>
+shell will timeout in 60 seconds due to inactivity
+ksh[2]: timed out waiting for input
+You have running jobs

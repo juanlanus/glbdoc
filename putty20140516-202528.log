@@ -1,0 +1,834 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.16 20:25:28 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May 16 18:11:42 2014 from 172.16.10.81
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>fu
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>fu. viset x CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo/fuentes>
+Parametros: 9999991000905140101.txt                                                         
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I10000014912                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000026213                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000095821                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000132713                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000224978                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000285975                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000286576                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000304436                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000329538                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I10000344886                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20080000219                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20080017800                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20081104674                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20083006792                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20086001381                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20086002415                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20086003431                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20089030054                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20089093426                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I20089010748                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I30060000311                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I30061100044                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I40000016359                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I40000026642                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I40000024435                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I40000013671                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+I40000016359                                                                          
+Error 03 Numero de identificacion invalido, debe ser numerico       
+Error 05 Falta el nombre o denominacion                             
+Error 06 Numero de demandas vigentes: debe ser numerico             
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Error 08 Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Error 10 Numero de embargos vigentes: debe ser numerico             
+Error 11 Numero de embargos terminados: debe ser numerico           
+Error 12 Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  03 05 06 07 08 09 10 11 12 13                                                                      
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+         Registros procesados sin error
+      27 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+      27 03-Numero de identificacion invalido, debe ser numerico       
+      27 05-Falta el nombre o denominacion                             
+      27 06-Numero de demandas vigentes: debe ser numerico             
+      27 07-Numero de demandas terminadas: debe ser numerico           
+      27 08-Fecha ultima demanda vigente YYYYMMDD: debe ser numerica   
+      27 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+      27 10-Numero de embargos vigentes: debe ser numerico             
+      27 11-Numero de embargos terminados: debe ser numerico           
+      27 12-Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica   
+      27 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+
+real    0m0.59s
+user    0m0.01s
+sys     0m0.02s
+
+Inicio de Programa:  2014/05/16 18:27:29
+Fin de Programa:     2014/05/16 18:27:29
+
+/d/iccol/desarrollo/fuentes>view $TEMPORALES/CARGAJUR 9999991000905140101.txt
+2 files to edit
+"/d/iccol/desarrollo/temporales/CARGAJUR" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/temporales/CARGAJUR" [New file]:q1 more file to edit:q/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>clsview $TEMPORALES/CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo/fuentes>view $TEMPORALES/9999991000905140101.txt         
+"/d/iccol/desarrollo/temporales/9999991000905140101.txt" [Read only] [Incomplete last line] 28 lines, 363 characters[Hit return to continue] I10000014912
+I10000026213
+I10000095821
+I10000132713
+I10000224978
+I10000285975
+I10000286576
+I10000304436
+I10000329538
+I10000344886
+I20080000219
+I20080017800
+I20081104674
+I20083006792
+I20086001381
+I20086002415
+I20086003431
+I20089030054
+I20089093426
+I20089010748
+I30060000311
+I30061100044
+I40000016359
+I40000026642
+I40000024435
+I40000013671
+I40000016359
+T 0000000002
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~28 lines yanked
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+28 lines deletedNo lines in bufferAPPEND MODEI100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+
+
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+
+
+
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+I300600003115xxxxxx                                       0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+I400000163598xxxxxx                                       0330432013101002204520120406
+T 00000000027                                             772774        787861
+~:w"/d/iccol/desarrollo/temporales/9999991000905140101.txt" File is read only:w!"/d/iccol/desarrollo/temporales/9999991000905140101.txt" 28 lines, 2428 characters :q/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>cls      27 Registros con error         Registros procesados sin error/d/iccol/desarrollo/fuentes>sh-CARGAJUR                            /d/iccol/desarrollo/fuentes>view $TEMPORALES/9999991000905140101.txt/d/iccol/desarrollo/fuentes>cls                                     /d/iccol/desarrollo/fuentes>view $TEMPORALES/CARGAJUR 9999991000905140101.txt/d/iccol/desarrollo/fuentes> x CARGAJUR 9999991000905140101.txt              /d/iccol/desarrollo/fuentes>
+Parametros: 9999991000905140101.txt                                                         
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+ 
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J001    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000040000320201204
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J002    
+Registro de input: 
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+Datos en la alerta: 000110004320204404
+ 
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+ 
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico           
+Errores del reg:  07                                                                                                 
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J001    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 000080004520201301
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J002    
+Registro de input: 
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+Datos en la alerta: 002320000220201105
+ 
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+Errores del reg:  13                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J001    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000220004520201204
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J002    
+Registro de input: 
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J001    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000330002020200004
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J002    
+Registro de input: 
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Datos en la alerta: 000150005420201401
+ 
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J001    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000110004320204404
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J002    
+Registro de input: 
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+Datos en la alerta: 000120003220201004
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+ 
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+Errores del reg:  09                                                                                                 
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J001    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000450000020201008
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J002    
+Registro de input: 
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+Datos en la alerta: 000020004420201305
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J001    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000340004520201204
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J002    
+Registro de input: 
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Datos en la alerta: 000030000620201301
+ 
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: FERNANDEZ PENA JULIO ANTONIO                                     
+Errores del reg:  15                                                                                                 
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J001    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000340000220199901
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J002    
+Registro de input: 
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+Datos en la alerta: 000050006720201304
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J001    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000120003220201004
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J002    
+Registro de input: 
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+Datos en la alerta: 000060004520201104
+ 
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico           
+Errores del reg:  11                                                                                                 
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro      
+Errores del reg:  14                                                                                                 
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J001    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000110002320201104
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J002    
+Registro de input: 
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+Datos en la alerta: 000090005720201304
+ 
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado        
+novedad:  xxxxxx                                       
+registro: KARAN  ABBOUD NAJAH                                              
+Errores del reg:  15                                                                                                 
+ 
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+      20 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+ 
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       4 14-El numero de id no se encuentra en el archivo maestro      
+       2 15-El nombre en el input no coincide con el registrado        
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 18:32:55
+Fin de Programa:     2014/05/16 18:32:55
+
+/d/iccol/desarrollo/fuentes>
+/d/iccol/desarrollo/fuentes>Totales de registros:
+      27 Registros IME en el archivo de entrada
+ksh: Totales:  not found
+/d/iccol/desarrollo/fuentes>/d/iccol/desarrollo/fuentes>      27 Registros IME en el archivo de entrada
+ksh: 27:  not found
+/d/iccol/desarrollo/fuentes>      10 Registros procesados sin error
+      17 Registros con error
+ksh: 10:  not found
+/d/iccol/desarrollo/fuentes>/d/iccol/desarrollo/fuentes>      17 Registros con error
+ksh: 17:  not found
+/d/iccol/desarrollo/fuentes>         Alertas borradas previo al refresque total
+         Alertas insertadas
+ksh: Alertas:  not found
+/d/iccol/desarrollo/fuentes>/d/iccol/desarrollo/fuentes>         Alertas insertadas
+ksh: Alertas:  not found
+/d/iccol/desarrollo/fuentes>         Alertas modificadas
+         Alertas eliminadas
+      20 Insercion de alerta existente
+ksh: Alertas:  not found
+/d/iccol/desarrollo/fuentes>/d/iccol/desarrollo/fuentes>         Alertas eliminadas
+ksh: Alertas:  not found
+/d/iccol/desarrollo/fuentes>/d/iccol/desarrollo/fuentes>      20 Insercion de alerta existente
+ksh: 20:  not found
+/d/iccol/desarrollo/fuentes>         Modif o elim de alerta inexistente
+ksh: Modif:  not found
+/d/iccol/desarrollo/fuentes>^D

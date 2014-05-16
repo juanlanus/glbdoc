@@ -1,0 +1,204 @@
+. viset
+vi CARGAJUR.CBL
+des-c-v CARGAJUR
+cat CARGAJUR.CBL.err
+vi 9999991000905140101.txt
+locale
+x CARGAJUR 9999991000905140101.txt NO
+
+/d/iccol/desarrollo/temporales/9999991000905140101_ERRORES.txt
+/d/iccol/desarrollo/temporales/9999991000905140101.txt
+
+
+ARCHIVO DE DATOS DE PRUEBA:
+/d/iccol/desarrollo $cat 9999991000905140101.txt
+                                                          ...+++_--_____...+++_--_____
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320440406
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA                            0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+I200830067928C I GLOMA S A                                0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+I300600003115xxxxxx                                       0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322010040600604520110406
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO                            0110232011041100905720130411
+I400000163598xxxxxx                                       0330432013101002204520120406
+T 00000000027                                             772774        787861
+
+
+
+ARCHIVO DE DATOS DE ERRORES:
+/d/iccol/desarrollo $99991000905140101_ERRORES.txt
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411 14
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406 14
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406 14
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069 13
+I100002859753ERNESTO RICO                                 0050672013040602206720100435 13
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406 13
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406 07
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806 13
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101 09
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206 09
+I200860024151COMPUTEC SA                                  0330332011140604500120110402 09
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411 09
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010 09
+I300600003115xxxxxx                                       0150542014010600400320120406 15
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106 11
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111 14
+I400000163598xxxxxx                                       0330432013101002204520120406 15
+
+
+LOG DEL PROGRAMA EN LA CONSOLA - prueba 1 primera vez:
+/d/iccol/desarrollo $x CARGAJUR 9999991000905140101.txt SI
+Parametros: 9999991000905140101.txt SI
+CARGAJUR   Carga de archivo JURAD - proceso REAL
+01 Envio Original - Carga TOTAL 1a vez
+Fecha de proceso: 20140101
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro
+Errores del reg:  14                                                                                      
+
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro
+Errores del reg:  14                                                                                      
+
+I100000958212LUIS GUILLERMO AVENDAnO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro
+Errores del reg:  14                                                                                      
+
+I100001327130GONZALO PATInO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+Errores del reg:  13                                                                                      
+
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+Errores del reg:  13                                                                                      
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+Errores del reg:  13                                                                                      
+
+I100003044362MANUEL CASTRO MUnETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico
+Errores del reg:  07                                                                                      
+
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+Errores del reg:  13                                                                                      
+
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+Errores del reg:  09                                                                                      
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+Errores del reg:  09                                                                                      
+
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+Errores del reg:  09                                                                                      
+
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+Errores del reg:  09                                                                                      
+
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+Errores del reg:  09                                                                                      
+
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: FERNANDEZ PENA JULIO ANTONIO
+Errores del reg:  15                                                                                      
+
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico
+Errores del reg:  11                                                                                      
+
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro
+Errores del reg:  14                                                                                      
+
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: KARAN  ABBOUD NAJAH
+Errores del reg:  15                                                                                      
+
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+      20 Alertas insertadas                                 <<<<<<<<<<<<<<
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+       1 11-Numero de embargos terminados: debe ser numerico
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+       4 14-El numero de id no se encuentra en el archivo maestro
+       2 15-El nombre en el input no coincide con el registrado
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:57:56
+Fin de Programa:     2014/05/16 13:57:56
+
+/d/iccol/desarrollo $
+
+LOG DEL PROGRAMA EN LA CONSOLA - prueba 2 con los registros ya grabados:
+Esta vez siguiente detecta las alertas existentes.
+
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+      20 Alertas modificadas                                <<<<<<<<<<<<<<
+         Alertas eliminadas
+      20 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+       1 11-Numero de embargos terminados: debe ser numerico
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+       4 14-El numero de id no se encuentra en el archivo maestro
+       2 15-El nombre en el input no coincide con el registrado
+
+real    0m0.03s
+user    0m0.01s
+sys     0m0.01s
+
+Inicio de Programa:  2014/05/16 13:59:43
+Fin de Programa:     2014/05/16 13:59:43
+
+/d/iccol/desarrollo $
