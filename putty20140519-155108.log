@@ -1,0 +1,355 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.19 15:51:08 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Mon May 19 13:34:33 2014 from 172.16.10.5
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>tty
+/dev/pts/33
+/d/iccol/desarrollo>echo "qqq" > /dev/pts/33
+qqq
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>echo "qqq" > /dev/pts/33/d/iccol/desarrollo>ls -lrt sh-Corp*        /d/iccol/desarrollo>ma              tty. visetls -lrt TERA*tail         des-c-v COLASCOHQsh-Corpbanca-Leasingdes-c-v COLASCOPR.CBL/d/iccol/desarrollo>fu                   /d/iccol/desarrollo>ls -lrt *des*ma           cp TERAPR.CBL COLASCOPR.CBL/d/iccol/desarrollo>wc -l corpbanca*           /d/iccol/desarrollo>cp TERAHQ.CBL COLASCOHQ.CBL/d/iccol/desarrollo>cp TERAHQ.CBL COLASCOPR.CBL/d/iccol/desarrollo>ls -lrt TERAHQ*            /d/iccol/desarrollo>. sh-camamb prunovedat/d/iccol/desarrollo>tail                  /d/iccol/desarrollo>grep TERAHQ *CBLtail            . sh-camamb prunovedat/d/iccol/desarrollo>ls -lrt TERAHQ*       /d/iccol/desarrollo>cp TERAHQ.CBL COLASCOPR.CBL/d/iccol/desarrollo>cp TERAHQ.CBL COLASCOHQ.CBL/d/iccol/desarrollo>wc -l corpbanca*           /d/iccol/desarrollo>cp TERAPR.CBL COLASCOPR.CBL/d/iccol/desarrollo>ma                         /d/iccol/desarrollo>ls -lrt *des*fu           des-c-v COLASCOPR.CBL/d/iccol/desarrollo>sh-Corpbanca-Leasing /d/iccol/desarrollo>des-c-v COLASCOHQ   tail             ls -lrt TERA*. viset      tty    ma ls -lrt sh-Corp*echo "qqq" > /dev/pts/33/d/iccol/desarrollo>sh-Corpbanca-Leasing    /d/iccol/desarrollo>                    
+/d/iccol/desarrollo>vi sh-CARGAJUR
+"sh-CARGAJUR" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-CARGAJUR" [New file]:q/d/iccol/desarrollo>vu   i /d/iccol/desarrollo/macros/sh-CARGAJUR
+"/d/iccol/desarrollo/macros/sh-CARGAJUR" 227 lines, 8380 characters #sh-CARGAJUR.v.01.0001
+#**********************************************************
+#ENTIDAD:DATACREDITO*
+#SHELL-ID:     sh-CARGAJUR*
+#DATE-WRITTEN: MAY/2014*
+#AUTHOR:GLOBANT*
+#******************************************************************
+#| CQnnnn - CARGA DE ARCHIVO EXTERNO*
+# 16-may-2014|*
+# Globant.   |*
+#|*
+#******************************************************************
+#
+#*========================================================*
+#*DEFINICION DE VARIABLES*
+#*========================================================*
+#
+GetFechaSistema()
+{
+#*-----------------------------------------------------------------------------*
+# ACTUALIZA FECHA ACTUAL DEL SISTEMA
+#*-----------------------------------------------------------------------------*
+    P_SERVER_DEV="172.24.6.154"
+    HoraHoy=`date '+%H:%M'`
+    FECHOY_A4MMDD=`date '+%Y%m%d'`
+    FECHOY_ANOMES=`date '+%Y%m%d' | cut -c 1-6`
+    P_FCORTE=$FECHOY_ANOMES
+    P_MAQUINA=`who am i | cut -c 39-50`
+    echo "MAQUINA: " $P_MAQUINA
+    echo "+-------------------------------------------------------------+"
+    echo "|     Fecha de Ejecucion    :" $FECHOY_A4MMDD
+    echo "|     Hora de Ejecucion     :" $HoraHoy
+    echo "|-------------------------------------------------------------+"
+}
+
+GetProceso()
+{
+#*-----------------------------------------------------------------------------*
+# PREGUNTA SI EL PROCESO SE REALIZA
+#
+#*-----------------------------------------------------------------------------*
+    P_FCORTE=$FECHOY_ANOMES
+    P_PROCESO="#";
+    while [ $P_PROCESO != "S" ] && [ $P_PROCESO != "N" ] ; doecho
+echo "*--------------------------------------------------------*"echo "     **  DEFINICION DE LA BASE DATOS PARA PROCESO **     "echo "*--------------------------------------------------------*"echo "<S>   Proceso Real"echo "<N>   Proceso En Falso"echo "*--------------------------------------------------------*"echo "Digite opcion  (S/N)   ---> \c"read P_PROCESOif [ -z "$P_PROCESO" ] ; then"/d/iccol/desarrollo/macros/sh-CARGAJUR" 227 lines, 8380 characters
+P_PROCESO="N"P_PROCESO="N"else
+ if [ $P_PROCESO == "S" ] || [ $P_PROCESO == "s" ] ; thenP_PROCESO="S"else
+if [ $P_PROCESO == "N" ] || [ $P_PROCESO == "n" ] ; thenP_PROCESO="N"
+else
+echo "\n\t*ERRROR* OPCION NO VALIDA! <ENTER>\c"GetEnter
+fi
+fi
+fi
+    done
+}
+
+GetPeriodoSanata()
+{
+#*-----------------------------------------------------------------------------*
+# PREGUNTAR POR EL PERIODO DEL SANATA Y EFECTUAR EL CAMBIO
+#*-----------------------------------------------------------------------------*
+    echo "     Digite Fecha de la Base de Datos (AAAAMMDD) a Procesar  ---> \c"
+    read FECHIS_ANOMESDIA
+    longitud=`echo $FECHIS_ANOMESDIA | tr -d '[:alpha:]' | awk '{printf("%d\n", length($0))}'`
+    if [ $longitud -ne 8 ] && [ $longitud -ne 0 ] ; thenecho "\t *ERROR*  Periodo Historico NO válida. La Fecha debe ser (AAAAMMDD) -Proceso cancelado-"
+GetEnter
+exit
+    else
+if [ $longitud -eq 0 ] ; thenP_FCORTE=$FECHOY_ANOMESFECHIS_ANOMESDIA=`echo $FECHOY_ANOMES`
+else
+ cd $DATOS
+FECHIS_ANOMES=`echo $FECHIS_ANOMESDIA | cut -c 1-6`sanata=`grep $FECHIS_ANOMES ICSANATA.DAT | cut -f2 -d"/"|cut -f3 -d"_"`cd $TEMPORALES
+echo "Sanata para Fecha " $FECHIS_ANOMESDIA "  es " $sanataif test -z "$sanata" ; thenP_FCORTE=$FECHOY_ANOMESecho "\n !!!! *ERROR*  sanata de $FECHIS_ANOMESDIA NO Existe !!! \n "echo "**** PROCESO CANCELADO **** "GetEnter
+exit
+else
+ P_FCORTE=$FECHIS_ANOMESCambiarSanatafi
+fi
+    fi
+}
+
+CambiarSanata()
+{
+#*-----------------------------------------------------------------------------*
+# VERIFICAR Y CAMBIAR AL SANATA CORRESPONDIENTE# VERIFICAR Y CAMBIAR AL SANATA CORRESPONDIENTE
+#*-----------------------------------------------------------------------------*
+   if [ $FECHOY_ANOMES -ne $FECHIS_ANOMES ] ; then
+echo "\n\tSe Procesa con fecha $FECHIS_ANOMESDIA \n". /san_ata_$sanata/$FECHIS_ANOMES/sh-$FECHIS_ANOMESecho $DATABASEP_FCORTE=$FECHIS_ANOMES
+   else
+   P_FCORTE=$FECHOY_ANOMES
+   fi
+}
+
+
+#* PARAMETROS:
+fechab=0;
+codsus=0;
+nomsus={};
+opcion="A";
+vector=48;
+numeroreg=0;
+cadena01={};
+cadena02={};
+cadena03={};
+cadena04={};
+cadena05={};
+cadena06={};
+cadena07={};
+cadena08={};
+cadena09={};
+cadena10={};
+cadena11={};
+#*========================================================*
+#*PROCESO*
+#*========================================================*
+#*FASE 1: PIDE PARAMETROS*
+#*========================================================*
+#*-----------------------------------------------------------------------------*
+#MENU PRINCIPAL DE EJECUCION
+#*-----------------------------------------------------------------------------*
+clear
+GetFechaSistema
+GetProceso
+
+loop=0
+while [ $loop != 1 ]
+ do
+echo "     Digite Codigo Suscriptor  ---> \c"
+  read codsus
+  if [ $codsus -eq 999999 ]
+   then
+loop=1
+  else
+cd $DATABASE
+   nomsus=`grep ^"$codsus" ICBSUS | cut -c9-48`
+   echo "Codigo suscriptor: " $codsus  "   Suscriptor: " $nomsus
+if test -z "$nomsus"      if test -z "$nomsus"then
+echo "suscriptor errado"
+   else
+echo "si correcto digite ENTER, si va a modificar digite N  ---> \c"read loopdif test -z "$loopd"
+then
+loop=1fi
+fi
+fi
+done
+echo "     Digite nombre del archivo     ---> \c"
+read archivo
+cd $TEMPORALES
+if test -s $archivo
+then
+echo
+echo "Procesando archivo-----> "$archivo
+else
+echo "!!!...Archivo $archivo  no existe proceso termina ....!!!"
+   echo
+echo "(ENTER) Continuar !!!  "
+   read xxx
+   exit
+fi
+echo
+echo "+-------------------------------------------------------------+"
+echo "+-------------------------------------------------------------+"
+echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
+fechab=$P_FCORTE
+echo "+-------------------------------------------------------------+"
+numeroreg=`wc -l < $archivo`
+echo
+echo "+-------------------------------------------------------------+"
+echo "| Registros iniciales archivo de entrada : " $numeroreg
+echo "+-------------------------------------------------------------+"
+cadena00=$archivo.orig
+cp $archivo $cadena00
+echo
+#echo "+-------------------------------------------------------------+"
+#echo "|SEGUNDA FASE: PROCESO|"
+#echo "+-------------------------------------------------------------+"
+#*========================================================*
+#*  EXECUTE PROGRAM: icestdatVEC-NORMAL*
+#*========================================================*
+#
+echo
+echo "+------------------------------------------------------+"
+echo "|  Programa CARGAJUR|"
+echo "||"
+echo "|  Procesando archivo --> "  $archivo
+echo "+------------------------------------------------------+"
+nohup x CARGAJUR $archivo $P_PROCESO $codsus >| $archivo.log 2>| $archivo.log   
+echo "+-------------------------------------------------------------+"echo "+-------------------------------------------------------------+"
+echo "|     *********  RESULTADOS DEL PROCESO**********|"
+echo "||"
+ls -lrt $archivo* >> $archivo.log
+tail -20 $archivo.log
+echo "+-------------------------------------------------------------+"
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:q/d/iccol/desarrollo>^D

@@ -1,6 +1,6 @@
       $SET LIST SETTING 
        IDENTIFICATION DIVISION.
-       PROGRAM-ID.    ACTALEJUR.
+       PROGRAM-ID.    CARGAJUR2.
       ******************************************************************
       * Actualizacion del archivo de alertas con los datos provistos
       * por Jurad
@@ -197,8 +197,7 @@
       * La linea de comando que contiene los parametros
        01 P-command-line                pic x(80) value spaces.
        01 P-parametros.
-      *    Proceso real: contiene "S" para activar 
-      * TODO: fijo en "NO" para pruebas
+      *    Proceso real: contiene "S" para activar, "N" por defecto
            03 P-proceso-real            pic xx value "N".
            88 PROCESO-REAL              value "S".
 
@@ -255,6 +254,7 @@
            03 N-reg-tipo-E-err          pic 9(8) value zero.
 
       *    Alertas borradas previo al refresque total
+           03 N-ale-leidas              pic 9(8) value zero.
            03 N-ale-borradas            pic 9(8) value zero.
       *    Alertas insertadas
            03 N-ale-insertadas          pic 9(8) value zero.
@@ -698,6 +698,8 @@
            else
                perform 4333-GRABAR-BDIIALE
            end-if.
+           display "4300-MODIFICAR-BDIIALE-I k:" LLAVE-BDIIALE
+           " fs:" EST-BDIIALE.
 
 
        4300-MODIFICAR-BDIIALE-M.
@@ -723,6 +725,8 @@
            else
                perform 4333-GRABAR-BDIIALE
            end-if.
+           display "4300-MODIFICAR-BDIIALE-M k:" LLAVE-BDIIALE
+           " fs:" EST-BDIIALE.
 
 
        4300-MODIFICAR-BDIIALE-E.
@@ -740,6 +744,8 @@
                display JURAD-reg
                add 1 to N-ale-no-existe
            end-if.
+           display "4300-MODIFICAR-BDIIALE-E k:" LLAVE-BDIIALE
+           " fs:" EST-BDIIALE.
 
 
        4333-LEER-BDIIALE-RANDOM.
@@ -752,12 +758,13 @@
            move JURAD-id-numero to NUM-IDE-BDIIALE
            move P-cod-suscriptor to FUENTE-BDIIALE
            move 000 to COD-ALERTA-BDIIALE
+      *    LLASEC-BDIIALE fué previamente cargado con J001 o J002
 
            read BDIIALE
            evaluate EST-BDIIALE
            when "00"
                continue
-           when "20" thru "29"
+           when "23"
                continue
            when other
                display "Error al leer BDIIALE fs: " EST-BDIIALE
@@ -766,6 +773,8 @@
                display JURAD-reg-anterior
                perform 9000-CANCELAR-PROGRAMA
            end-evaluate.
+           display "4333-LEER-BDIIALE-RANDOM k:" LLAVE-BDIIALE
+           " fs:" EST-BDIIALE.
 
 
        4333-GRABAR-BDIIALE.
@@ -833,38 +842,57 @@
       * de control, y debería ser el ultimo del archivo
       ******************************************************************
       * Control de los totales calculados contra los esperados
+           move "NO" to E-hay-error
       *    cantidad de registros I M E
-           if JURADT-registros not numeric
+           if function numval(JURADT-registros) = N-reg-leidos
+               continue
+           else
                display " "
-               display JURADT-reg
-               display "Reg T - total de registros no numerico"
-               perform 9000-CANCELAR-PROGRAMA
-           end-if
-           if JURADT-registros not = N-reg-leidos
-               display "No coincide cantidad de registros- esperados"
-               JURADT-registros " leidos: " N-reg-leidos
+               display "No coincide la cantidad de registros:"
+               JURADT-registros " con los leidos:" N-reg-leidos
+               move "SI" to E-hay-error
            end-if
 
-           03 N-demandas-vigentes       pic 9(5).
-           03 N-demandas-terminadas     pic 9(5).
-           03 N-embargos-vigentes       pic 9(5).
-           03 N-embargos-terminados     pic 9(5).
-
-           if JURADT-demandas-vigentes not numeric
+      *    Sumas de cantidades de demandas y embargos
+           if function numval(JURADT-demandas-terminadas)
+           = N-demandas-terminadas
+               continue
+           else
                display " "
-               display JURADT-reg
-               display "Reg T - total demandas vigentes no numerico"
-               perform 9000-CANCELAR-PROGRAMA
+               display "No coincide total de demandas terminadas:"
+               JURADT-demandas-terminadas " con el calculado:"
+               N-demandas-terminadas
+               move "SI" to E-hay-error
            end-if
 
-      *    Total numero de demandas terminadas
-           03 JURADT-demandas-terminadas pic 9(7).
-           03                           pic x.
-      *    Total numero de embargos vigentes
-           03 JURADT-embargos-vigentes  pic 9(7).
-           03                           pic x.
-      *    Total numero de embargos terminados
-           03 JURADT-embargos-terminados pic 9(7).
+           if function numval(JURADT-embargos-vigentes)
+           = N-embargos-vigentes
+               continue
+           else
+               display " "
+               display "No coincide total de embargos vigentes:"
+               JURADT-embargos-vigentes " con el calculado:"
+               N-embargos-vigentes
+               move "SI" to E-hay-error
+           end-if
+
+           if function numval(JURADT-embargos-terminados)
+           = N-embargos-terminados
+               continue
+           else
+               display " "
+               display "No coincide total de embargos terminados:"
+               JURADT-embargos-terminados " con el calculado:"
+               N-embargos-terminados
+               move "SI" to E-hay-error
+           end-if.
+
+      *    si hubo cualquier cosa se invalida el proceso
+           if E-hay-error = "SI"
+               display "Error en registro T de totales de control"
+               display "Nombre del archivo: " ERRS-file-name
+               perform 9000-CANCELAR-PROGRAMA
+           end-if.
 
 
        4900-GRABAR-ERROR.
@@ -943,7 +971,7 @@
            P-file-name P-proceso-real
 
       * El programa se anuncia en la consola
-      * TODO: se usa un anuncio mas vistoso
+      * TODO: se usa un anuncio mas vistoso?
            if PROCESO-REAL
                display pgm " Carga de archivo JURAD - proceso REAL"
            else
@@ -1060,7 +1088,6 @@
            end-perform.
 
 
-
        1001-ELIMINAR-TODO.
       ******************************************************************
       * Elimina los registros de alertas existentes en el archivo de
@@ -1073,9 +1100,17 @@
            move P-cod-suscriptor to FUENTE-BDIIALE
            move zeros to COD-ALERTA-BDIIALE
            move low-values to LLASEC-BDIIALE
-           start BDIIALE key > LLAVE-BDIIALE invalid key
+           start BDIIALE key > LLAVE-BDIIALE
+           display "Start BDIIALE k:" LLAVE-BDIIALE
+           evaluate EST-BDIIALE
+           when "00"
+      *        posicionado
+               display "Va a comenzar la eliminación"
+           when other
       *        no hay registros
+               display "No hay registros a eliminar fs:" EST-BDIIALE
                exit paragraph
+           end-evaluate.
 
       *    lee secuencialmente y elimina los registros de JURAD
       *    hasta el fin del archivo
@@ -1083,10 +1118,13 @@
                read BDIIALE next record
                evaluate EST-BDIIALE
                when "00"
+      *            display "BDIIALE leido fs:" EST-BDIIALE
+      *            " k:" LLAVE-BDIIALE
                    if FUENTE-BDIIALE = P-cod-suscriptor
       *                es un alerta de JURAD
                        delete BDIIALE
                        if EST-BDIIALE = "00"
+                           display "BDIIALE eliminado k:" LLAVE-BDIIALE
                            add 1 to N-ale-borradas
                        else
       *                    error en la eliminacion
@@ -1099,7 +1137,8 @@
                    end-if
                when "10"
       *            fin de archivo: sale normalmente
-                   continue
+                   display "Fin de los registros a eliminar - leídos:"
+                   N-ale-leidas
                when other
       *            lectura anormal: cancelacion del programa
                    display "Error en lectura del archivo de alertas "
@@ -1109,7 +1148,7 @@
                end-evaluate
            end-perform.
            display "Termino la eliminacion total de JURAD"
-           display "Reg borrados: " N-ale-borradas. 
+           display "Reg borrados: " N-ale-borradas.
 
 
        7000-RUTINA-FINAL.
@@ -1268,98 +1307,8 @@
 
        end program PONERR.
 
-       end program ACTALEJUR.
+       end program CARGAJUR2.
 
       ******************************************************************
       ******************************************************************
-
-ABANDONADO: 
-      /
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. CHECKTOTAL.
-      ******************************************************************
-      * Rutina de conveniencia para controlar la coincidencia de los
-      * totales de control y denunciar las diferencias
-      * Recibe la descripcion del par de totales a controlar, el total
-      * informado, y el total calculado.
-      * Compara los dos valores, y si no coinciden muestra un mensaje
-      * y retorna una senial. 
-      ******************************************************************
-       ENVIRONMENT DIVISION.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-      ******************************************************************
-      * Edicion de los totales
-       01  T-infoX                      pic x(12).
-       01  T-info                       redefines T-infoX
-                                        pic 9(12).
-       01  T-calcX                      pic x(12).
-       01  T-calc                       redefines T-calcX
-                                        pic 9(12).
-      * Edicion del texto
-       01  T-nombre                     pic x(100).
-       01  T-mensaje                    pic x(100).
-      ******************************************************************
-
-       LINKAGE SECTION.
-      ******************************************************************
-      * Nombre del total
-       01 TOTAL-nombre                  pic x(100).
-       01 TOTAL-nombre-L                pic S9(9) comp-5.
-      ******************************************************************
-      * Totales informado y calculado
-       01 TOTAL-informado               pic x(12).
-       01 TOTAL-informado-L             pic S9(9) comp-5.
-       01 TOTAL-calculado               pic 9(8).
-      ******************************************************************
-      * call CHECKTOTAL using "Cant de registros" JURADT-registros
-      * length of JURADT-registros N-registros-leidos
-      ******************************************************************
-
-       PROCEDURE DIVISION using 
-           delimited TOTAL-nombre 
-           TOTAL-informado by value TOTAL-informado-L
-           TOTAL-calculado.
-       00.
-      *    long del texto
-           inspect TOTAL-nombre-L
-      *    total informado
-           if TOTAL-informado-L > 12 stop run.
-           move zeros to T-info
-           move TOTAL-informado(1:TOTAL-informado-L) 
-           to T-infox(12 - TOTAL-informado-L:TOTAL-informado-L)
-           if T-info not numeric
-               string T-nombre delimited by low-value " no numerico"
-               delimited size into T-mensaje
-               display T-mensaje
-           end-if
-      *    total calculado - no se controla
-           move zeros to T-calc
-           move TOTAL-calculado(1:TOTAL-calculado-L) 
-           to T-calcx(12 - TOTAL-calculado-L:TOTAL-calculado-L)
-      *    control
-           if T-calc = T-info 
-               goback returning 0
-           else
-               display T-nombre
-               display "Calculado:" T-calc "   Informado:" T-info
-               goback returning 1
-           end-if.
-
-
-           
-      *    descripcion (nombre del total)
-           if TOTAL-nombre-L > 100 
-               move 100 to TOTAL-nombre-L
-           end-if
-           move TOTAL-nombre(1:TOTAL-nombre-L) to T-nombre
-           inspect T-nombre replacing trailing spaces by low-values
-           inspect T-nombre replacing first low-value by space
-
-
-
-           exit program.
-
-
-       end program CHECKTOTAL.
 

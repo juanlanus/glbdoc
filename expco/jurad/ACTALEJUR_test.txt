@@ -1,10 +1,11 @@
 . viset
 vi CARGAJUR.CBL
-des-c-v CARGAJUR
-cat CARGAJUR.CBL.err
+des-c-v CARGAJUR2
+cat CARGAJUR2.CBL.err
 vi 9999991000905140101.txt
 locale
-x CARGAJUR 9999991000905140101.txt NO
+x CARGAJUR 9999991000905140101.txt N
+x CARGAJUR2 9999991000905140101.txt N
 
 /d/iccol/desarrollo/temporales/9999991000905140101_ERRORES.txt
 /d/iccol/desarrollo/temporales/9999991000905140101.txt
@@ -202,3 +203,194 @@ Inicio de Programa:  2014/05/16 13:59:43
 Fin de Programa:     2014/05/16 13:59:43
 
 /d/iccol/desarrollo $
+
+
+>view /d/iccol/desarrollo/database/BDIIALE
+101151942261000001000J001    2015121220171212201512120          000020000420140516
+101144151703000001000J001    2015121220171212201512120          000020000420140516
+200828002423000001000J001    2015121220171212201512120          000020000420140516
+200829000905000001000J001    2015121220171212201512120          000020000420140516
+400000379769000001000J001    2015121220171212201512120          000020000420140516
+400000397507000001000J001    2015121220171212201512120          000020000420140516
+
+
+/d/iccol/desarrollo/fuentes>grep J00[12] /d/iccol/desarrollo/database/BDIIALE
+101151942261000001000J001    2015121220171212201512120          000020000420140516                        
+101144151703000001000J001    2015121220171212201512120          000020000420140516                        
+200828002423000001000J001    2015121220171212201512120          000020000420140516                        
+200829000905000001000J001    2015121220171212201512120          000020000420140516                        
+400000379769000001000J001    2015121220171212201512120          000020000420140516                        
+400000397507000001000J001    2015121220171212201512120          000020000420140516                        
+
+/d/iccol/desarrollo/fuentes>ls -l /d/iccol/desarrollo/database/BDIIALE*
+-rw-rw-r--   1 icgasd   icdatacr 11908542 May 19 07:48 /d/iccol/desarrollo/database/BDIIALE
+-rw-rw-r--   1 icgjcd   icdatacr    4575 Apr 14 16:16 /d/iccol/desarrollo/database/BDIIALE_20140414
+-rw-rw-r--   1 icgasd   icdatacr 11874321 May  2 10:39 /d/iccol/desarrollo/database/BDIIALE_20140502
+-rw-rw-r--   1 icdgd    icdatacr 11907444 May 12 17:23 /d/iccol/desarrollo/database/BDIIALE_ORI
+-rw-rw-r--   1 icdgd    icdatacr 3424256 May 12 17:23 /d/iccol/desarrollo/database/BDIIALE_ORI.idx
+-rw-rw-r--   1 icrmbd   icdatacr     187 Apr 29 18:08 /d/iccol/desarrollo/database/BDIIALE-ALEGRU
+-rw-rw-r--   1 icrmbd   icdatacr    3045 May 19 11:58 /d/iccol/desarrollo/database/BDIIALE-ALERTAS
+-rw-rw-r--   1 icrmbd   icdatacr     140 Apr 30 12:43 /d/iccol/desarrollo/database/BDIIALE-GRUPOS
+-rw-rw-r--   1 icrmbd   icdatacr    1228 Apr 30 13:05 /d/iccol/desarrollo/database/BDIIALE-LOG-20140430
+-rw-rw-r--   1 icrmbd   icdatacr     390 May  6 14:35 /d/iccol/desarrollo/database/BDIIALE-LOG-20140506
+-rw-rw-r--   1 icvhfd   icdatacr      38 May  8 13:49 /d/iccol/desarrollo/database/BDIIALE-LOG-20140508
+-rw-rw-r--   1 icrmbd   icdatacr      65 May 15 07:42 /d/iccol/desarrollo/database/BDIIALE-LOG-20140515
+-rw-rw-r--   1 icrmbd   icdatacr    4575 May  8 10:49 /d/iccol/desarrollo/database/BDIIALE-NEW
+-rw-rw-r--   1 icrmbd   icdatacr    3072 May  8 10:49 /d/iccol/desarrollo/database/BDIIALE-NEW.idx
+-rw-rw-r--   1 icrmbd   icdatacr 3424256 May 19 07:48 /d/iccol/desarrollo/database/BDIIALE.idx
+-rw-rw-r--   1 icrmbd   icdatacr 8035857 May  8 10:47 /d/iccol/desarrollo/database/BDIIALEDB2.20140508.coe
+
+
+/d/iccol/desarrollo/fuentes>x CARGAJUR2 9999991000905140104.txt S
+Parametros: 9999991000905140104.txt S
+CARGAJUR   Carga de archivo JURAD - proceso REAL
+04 Refresque Total - Carga TOTAL
+Fecha de proceso: 20140104
+Eliminando toda la informacion con fuente JURAD
+Start BDIIALE k:000000000000999999000
+Va a comenzar la eliminación
+BDIIALE eliminado k:100002249789999999000J001
+BDIIALE eliminado k:100002249789999999000J002
+BDIIALE eliminado k:100003295380999999000J001
+BDIIALE eliminado k:100003295380999999000J002
+BDIIALE eliminado k:200800002194999999000J001
+BDIIALE eliminado k:200800002194999999000J002
+BDIIALE eliminado k:200800178009999999000J001
+BDIIALE eliminado k:200800178009999999000J002
+BDIIALE eliminado k:200830067928999999000J001
+BDIIALE eliminado k:200830067928999999000J002
+BDIIALE eliminado k:200890107487999999000J001
+BDIIALE eliminado k:200890107487999999000J002
+BDIIALE eliminado k:200890934264999999000J001
+BDIIALE eliminado k:200890934264999999000J002
+BDIIALE eliminado k:300611000446999999000J001
+BDIIALE eliminado k:300611000446999999000J002
+BDIIALE eliminado k:400000136711999999000J001
+BDIIALE eliminado k:400000136711999999000J002
+BDIIALE eliminado k:400000163597999999000J001
+BDIIALE eliminado k:400000163597999999000J002
+Fin de los registros a eliminar - leídos:00000000
+Termino la eliminacion total de JURAD
+Reg borrados: 00000020
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro
+
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro
+
+I100001327130GONZALO PATIÑO MORENO                        0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4333-LEER-BDIIALE-RANDOM k:100002249789999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:100002249789999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:100002249789999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:100002249789999999000J002     fs:00
+
+I100002859753ERNESTO RICO                                 0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+
+I100003044362MANUEL CASTRO MUÑETON                        0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico
+4333-LEER-BDIIALE-RANDOM k:100003295380999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:100003295380999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:100003295380999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:100003295380999999000J002     fs:00
+
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4333-LEER-BDIIALE-RANDOM k:200800002194999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:200800002194999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:200800002194999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:200800002194999999000J002     fs:00
+4333-LEER-BDIIALE-RANDOM k:200800178009999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:200800178009999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:200800178009999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:200800178009999999000J002     fs:00
+
+I200811046741SALUD AXIAL LTDA                             0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4333-LEER-BDIIALE-RANDOM k:200830067928999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:200830067928999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:200830067928999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:200830067928999999000J002     fs:00
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I200860024151COMPUTEC SA                                  0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I200860034313BANCO DAVIVIENDA SA                          0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4333-LEER-BDIIALE-RANDOM k:200890934264999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:200890934264999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:200890934264999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:200890934264999999000J002     fs:00
+4333-LEER-BDIIALE-RANDOM k:200890107487999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:200890107487999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:200890107487999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:200890107487999999000J002     fs:00
+
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: FERNANDEZ PENA JULIO ANTONIO
+4333-LEER-BDIIALE-RANDOM k:300611000446999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:300611000446999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:300611000446999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:300611000446999999000J002     fs:00
+4333-LEER-BDIIALE-RANDOM k:400000163597999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:400000163597999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:400000163597999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:400000163597999999000J002     fs:00
+
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico
+
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro
+4333-LEER-BDIIALE-RANDOM k:400000136711999999000J001     fs:23
+4300-MODIFICAR-BDIIALE-I k:400000136711999999000J001     fs:00
+4333-LEER-BDIIALE-RANDOM k:400000136711999999000J002     fs:23
+4300-MODIFICAR-BDIIALE-I k:400000136711999999000J002     fs:00
+
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: KARAN  ABBOUD NAJAH
+
+Totales de registros:
+      27 Registros IME en el archivo de entrada
+      10 Registros procesados sin error
+      17 Registros con error
+      20 Alertas borradas previo al refresque total
+      20 Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+         Insercion de alerta existente
+         Modif o elim de alerta inexistente
+
+Totales por tipo de error detectado:
+       1 07-Numero de demandas terminadas: debe ser numerico
+       5 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+       1 11-Numero de embargos terminados: debe ser numerico
+       4 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+       4 14-El numero de id no se encuentra en el archivo maestro
+       2 15-El nombre en el input no coincide con el registrado
+
+real    0m1.02s
+user    0m0.50s
+sys     0m0.51s
+
+Inicio de Programa:  2014/05/19 18:31:52
+Fin de Programa:     2014/05/19 18:31:53
+

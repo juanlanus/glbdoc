@@ -1,0 +1,335 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.19 13:00:28 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icdgd
+Using keyboard-interactive authentication.
+Password: 
+Last login: Mon May 19 10:30:07 2014 from 172.16.10.5
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icdgd@codes /d/iccol/desarrollo
+$ man msg
+Reformatting page.  Please Wait... done
+
+Headers                                              msg.h(3HEAD)
+
+NAME
+     msg.h, msg - message queue structures
+
+SYNOPSIS
+     #include <sys/msg.h>
+
+DESCRIPTION
+     The <sys/msg.h> header  defines  the  following  data  types
+     through typedef:
+
+     msgqnum_t       used for the number of messages in the  mes-
+                     sage queue
+
+     msglen_t        used for the number of bytes allowed in  the
+                     message queue
+
+     These types are unsigned integer  types  that  are  able  to
+     store values at least as large as a type unsigned short.
+
+     The <sys/msg.h> header defines the following constant  as  a
+     message operation flag:
+
+     MSG_NOERROR     no error if big message
+
+     The msqid_ds structure contains the following members:
+
+     struct ipc_perm    msg_perm      Operation permission structure.
+     msgqnum_t          msg_qnum      Number of messages currently on queue.
+     msglen_t           msg_qbytes    Maximum number of bytes allowed on queue.
+     pid_t              msg_lspid     Process ID of last msgsnd(2).
+     pid_t              msg_lrpid     Process ID of last msgrcv(2).
+     time_t             msg_stime     Time of last msgsnd().
+     time_t             msg_rtime     Time of last msgrcv().
+     time_t             msg_ctime     Time of last change.
+
+     The pid_t, time_t, key_t,  size_t,  and  ssize_t  types  are
+     defined as described in <sys/types.h>. See types(3HEAD).
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+SunOS 5.10          Last change: 10 Sep 2004                    1
+
+Headers                                              msg.h(3HEAD)
+--More--(74%)icdgd@codes /d/iccol/desarrollo
+$ write icdgd Hola Pedro, soy Juan y ya me pu^?^?^?           pude conectarme
+Usage: write user_name [terminal]
+icdgd@codes /d/iccol/desarrollo
+$ who
+icjdld     pts/38       May 16 11:37    (10.98.2.123)
+icjdld     pts/37       May 13 08:54    (10.98.2.123)
+ichdd      pts/35       May 19 10:08    (172.16.10.1)
+icjcad     pts/15       May 19 10:34    (10.98.2.128)
+icrmbd     pts/36       May  9 07:45    (10.98.2.10)
+icimsd     pts/40       May 15 10:12    (10.98.2.71)
+icrmbd     pts/41       May 16 17:07    (10.98.2.10)
+icgjcd     pts/2        May 15 10:26    (10.98.2.220)
+icjdld     pts/3        May 12 14:48    (10.98.2.123)
+icdgd      pts/6        May 19 09:33    (172.16.10.126)
+icrmbd     pts/7        May 19 09:41    (10.98.2.127)
+icjcld     pts/9        May 15 15:37    (10.98.2.188)
+icrmbd     pts/13       May 19 10:28    (10.98.2.10)
+icrmbd     pts/5        May 16 16:22    (10.98.2.10)
+iclagd     pts/53       May 19 10:13    (172.16.10.2)
+ichdd      pts/52       May 19 10:10    (172.16.10.1)
+iclagd     pts/54       May 19 10:14    (172.16.10.2)
+icjdld     pts/8        May 19 09:43    (10.98.2.123)
+iccavd     pts/44       May 19 09:49    (10.98.2.125)
+icrmbd     pts/55       May 19 10:31    (10.98.2.10)
+icfacd     pts/4        May 13 16:24    (10.98.2.108)
+icrmbd     pts/62       May 19 09:48    (10.98.2.127)
+icimsd     pts/18       May 16 11:56    (10.98.2.122)
+icimsd     pts/19       May 16 12:19    (10.98.2.122)
+iccavd     pts/58       May 19 09:49    (10.98.2.125)
+icimsd     pts/60       May 16 12:20    (10.98.2.122)
+icdgd      pts/33       May 19 11:00    (172.16.10.7)
+icvhfd     pts/14       May 19 10:33    (10.98.2.120)
+icehad     pts/59       May 19 08:45    (10.98.2.124)
+icdgd@codes /d/iccol/desarrollo
+$ write icdgd "pts/33" hola!
+Usage: write user_name [terminal]
+icdgd@codes /d/iccol/desarrollo
+$ write icdgd "Hola Pedro, soy Juan y ya pude conectarme"
+Terminal name too long.
+icdgd@codes /d/iccol/desarrollo
+$ man write
+Reformatting page.  Please Wait... done
+
+User Commands                                            write(1)
+
+NAME
+     write - write to another user
+
+SYNOPSIS
+     write user [terminal]
+
+DESCRIPTION
+     The write utility reads lines from the user's standard input
+     and  writes them to the terminal of another user. When first
+     invoked, it writes the message:
+
+     Message from sender-login-id (sending-terminal) [date]...
+
+     to user. When it has successfully completed the  connection,
+     the sender's terminal will be alerted twice to indicate that
+     what  the  sender  is  typing  is  being  written   to   the
+     recipient's terminal.
+
+     If the recipient wants to reply, this can be accomplished by
+     typing
+
+     write sender-login-id [sending-terminal]
+
+     upon receipt of the initial  message.  Whenever  a  line  of
+     input as delimited by a NL, EOF, or EOL special character is
+     accumulated while in canonical input mode,  the  accumulated
+     data  will  be written on the other user's terminal. Charac-
+     ters are processed as follows:
+
+       +o  Typing the alert character will write the alert charac-
+          ter to the recipient's terminal.
+
+       +o  Typing the erase and kill characters  will  affect  the
+          sender's  terminal  in  the  manner  described  by  the
+          termios(3C) interface.
+
+       +o  Typing the interrupt  or  end-of-file  characters  will
+          cause  write  to write an appropriate message (EOT\n in
+          the "C" locale) to the recipient's terminal and exit.
+
+       +o  Typing characters from LC_CTYPE  classifications  print
+          or  space will cause those characters to be sent to the
+          recipient's terminal.
+
+       +o  When and only  when  the  stty  iexten  local  mode  is
+--More--(26%)          enabled,  additional  special  control  characters  and
+          multi-byte or single-byte characters are  processed  as
+          printable    characters   if   their   wide   character
+          equivalents are printable.
+
+       +o  Typing other non-printable characters will  cause  them
+          to  be  written to the recipient's terminal as follows:
+
+SunOS 5.10           Last change: 3 Nov 2000                    1
+
+User Commands                                            write(1)
+
+          control characters will appear as a `^' followed by the
+          appropriate  ASCII  character,  and characters with the
+          high-order bit set will appear in "meta" notation.  For
+          example,  `\003'  is  displayed  as  `^C' and `\372' as
+          `M-z'.
+
+     To write to a user who is logged in more than once, the ter-
+     minal  argument  can  be  used to indicate which terminal to
+     write to. Otherwise, the recipient's terminal is  the  first
+     writable  instance  of the user found in /usr/adm/utmpx, and
+     the following informational message will be written  to  the
+     sender's  standard  output,  indicating  which  terminal was
+     chosen:
+
+     user is logged on more than one place.
+     You are connected to terminal.
+     Other locations are:terminal
+
+     Permission to be a recipient  of  a  write  message  can  be
+     denied  or  granted  by  use of the mesg utility. However, a
+     user's privilege may further constrain the domain of  acces-
+     sibility  of  other users' terminals. The write utility will
+     fail when the user lacks the appropriate privileges to  per-
+     form the requested action.
+
+     If the character ! is found at  the  beginning  of  a  line,
+     write  calls  the shell to execute the rest of the line as a
+     command.
+
+     write runs setgid() (see setuid(2)) to the group ID tty,  in
+     order to have write permissions on other user's terminals.
+
+     The following protocol is suggested for  using  write:  when
+     you first write to another user, wait for them to write back
+     before starting to send. Each person should  end  a  message
+     with  a  distinctive  signal  (that is, (o) for ``over'') so
+--More--(59%)     that the other person knows when to reply. The  signal  (oo)
+     (for  ``over and out'') is suggested when conversation is to
+     be terminated.
+
+OPERANDS
+     The following operands are supported:
+
+     user            User (login) name of the person to whom  the
+                     message  will  be written. This operand must
+                     be of the form returned by the who(1)  util-
+                     ity.
+
+SunOS 5.10           Last change: 3 Nov 2000                    2
+
+User Commands                                            write(1)
+
+     terminal        Terminal identification in the  same  format
+                     provided by the who utility.
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that affect the execution of write: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0        Successful completion.
+
+     >0       The  addressed  user  is  not  logged  on  or   the
+              addressed user denies permission.
+
+FILES
+     /var/adm/utmpx          user and accounting information  for
+                             write
+
+     /usr/bin/sh             Bourne shell executable file
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | CSI                         | enabled                     |
+--More--(84%)    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     mail(1), mesg(1), pr(1), sh(1), talk(1), who(1), setuid (2),
+     termios(3C), attributes(5), environ(5), standards(5)
+
+SunOS 5.10           Last change: 3 Nov 2000                    3
+
+User Commands                                            write(1)
+
+DIAGNOSTICS
+     user is not logged on
+
+         The person you are trying to write to is not logged on.
+
+     Permission denied
+
+         The person you are trying to write to denies  that  per-
+         mission (with mesg).
+
+     Warning: cannot respond, set mesg -y
+
+         Your terminal is set to mesg n and the recipient  cannot
+         respond to you.
+
+     Can no longer write to user
+
+         The recipient has denied permission (mesg n)  after  you
+         had started writing.
+
+SunOS 5.10           Last change: 3 Nov 2000                    4
+
+icdgd@codes /d/iccol/desarrollo
+$  q^?   
+icdgd@codes /d/iccol/desarrollo
+$ write icdgd pts/33 "hola!"
+Usage: write user_name [terminal]
+icdgd@codes /d/iccol/desarrollo
+$ write [pts/33] "hola"
+hola permission denied
+icdgd@codes /d/iccol/desarrollo
+$ write "pts/33" hola
+hola permission denied
+icdgd@codes /d/iccol/desarrollo
+$ ^D
