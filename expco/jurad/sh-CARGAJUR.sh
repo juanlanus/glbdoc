@@ -1,24 +1,28 @@
-#sh-CARGAJUR.v.01.0001
+#sh-CARGAJUR.v.01.0001 grabado /d/iccol/desarrollo/macros/sh-CARGAJUR
 #**********************************************************
 #ENTIDAD:      DATACREDITO                                *
 #SHELL-ID:     sh-CARGAJUR                                *
 #DATE-WRITTEN: MAY/2014                                   *
 #AUTHOR:       GLOBANT                                    *
 #******************************************************************
-#            | CQnnnn - CARGA DE ARCHIVO EXTERNO                  *
-# 16-may-2014|                                                    *
+# 16-may-2014| CQnnnn - CARGA DE ARCHIVO EXTERNO                  *
 # Globant.   |                                                    *
-#            |                                                    *
 #******************************************************************
 #
 #*========================================================*
-#*                DEFINICION DE VARIABLES                 *
+#*          DEFINICION DE VARIABLES Y FUNCIONES
 #*========================================================*
-#
+raya="---------------------------------------------------"
+codsus="000001"
+P_REAL_FALSO="1"
+P_PROCESO="#";
+P_NombreArchivo=""
+
+
 GetFechaSistema()
 {
 #*-----------------------------------------------------------------------------*
-# ACTUALIZA FECHA ACTUAL DEL SISTEMA
+# Arma y muestra la fecha del sistema y la máquina
 #*-----------------------------------------------------------------------------*
     P_SERVER_DEV="172.24.6.154"
     HoraHoy=`date '+%H:%M'`
@@ -26,201 +30,209 @@ GetFechaSistema()
     FECHOY_ANOMES=`date '+%Y%m%d' | cut -c 1-6`
     P_FCORTE=$FECHOY_ANOMES
     P_MAQUINA=`who am i | cut -c 39-50`
-    echo "MAQUINA: " $P_MAQUINA
-    echo "+-------------------------------------------------------------+"
-    echo "|     Fecha de Ejecucion    :      " $FECHOY_A4MMDD
-    echo "|     Hora de Ejecucion     :      " $HoraHoy
-    echo "|-------------------------------------------------------------+"
+    P_FCORTE=$FECHOY_ANOMES
+    echo $raya
+    echo " "
+    echo "                D A T A C R E D I T O"
+    echo " "
+    echo "              Cargue de archivo de JURAD"
+    echo " "
+    echo "Fecha:" $FECHOY_A4MMDD $HoraHoy " en" $P_MAQUINA
+    echo " "
 }
 
-GetProceso()
+GetRealOFalso()
 {
 #*-----------------------------------------------------------------------------*
-# PREGUNTA SI EL PROCESO SE REALIZA
-#
+# Averigua si el tipo de proceso es REAL o EN FALSO
 #*-----------------------------------------------------------------------------*
-    P_FCORTE=$FECHOY_ANOMES
-    P_PROCESO="#";
-    while [ $P_PROCESO != "S" ] && [ $P_PROCESO != "N" ] ; do
-          echo
-          echo "*--------------------------------------------------------*"
-          echo "     **  DEFINICION DE LA BASE DATOS PARA PROCESO **     "
-          echo "*--------------------------------------------------------*"
-          echo "           <S>   Proceso Real                   "
-          echo "           <N>   Proceso En Falso               "
-          echo "*--------------------------------------------------------*"
-          echo "       Digite opcion  (S/N)   ---> \c"
-          read P_PROCESO
-
-          if [ -z "$P_PROCESO" ] ; then
-              P_PROCESO="N"
-          else
-               if [ $P_PROCESO == "S" ] || [ $P_PROCESO == "s" ] ; then
-                   P_PROCESO="S"
-               else
-                   if [ $P_PROCESO == "N" ] || [ $P_PROCESO == "n" ] ; then
-                       P_PROCESO="N"
-                   else
-                       echo "\n\t*ERRROR* OPCION NO VALIDA! <ENTER>\c"
-                       GetEnter
-                   fi
-               fi
-          fi
+    echo
+    echo $raya
+    echo "              PROCESO REAL O EN FALSO"
+    echo $raya
+    P_REAL_FALSO="#";
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#             ---------------------------------------------------
+        echo " "
+        echo "        1) Proceso en falso"
+        echo " "
+        echo "        2) Proceso real"
+        echo " "
+        echo "        3) Salir"
+        echo " "
+        echo "             opción (123)   ---> \c"
+        read P_REAL_FALSO
+        if [ $P_REAL_FALSO != "1" ] && [ $P_REAL_FALSO != "2" ] && [ $P_REAL_FALSO != "3" ]
+        then
+            echo "\n\tlas opciones válidas son 1, 2 o 3"
+        else
+            endLoop=1
+        fi
     done
 }
 
-GetPeriodoSanata()
+GetTipoDeProceso()
 {
 #*-----------------------------------------------------------------------------*
-# PREGUNTAR POR EL PERIODO DEL SANATA Y EFECTUAR EL CAMBIO
+# Averigua el tipo de proceso: carga inicial, actualización, refresque total ...
 #*-----------------------------------------------------------------------------*
-    echo "     Digite Fecha de la Base de Datos (AAAAMMDD) a Procesar  ---> \c"
-    read FECHIS_ANOMESDIA
-    longitud=`echo $FECHIS_ANOMESDIA | tr -d '[:alpha:]' | awk '{printf("%d\n", length($0))}'`
-    if [ $longitud -ne 8 ] && [ $longitud -ne 0 ] ; then
-          echo "\t *ERROR*  Periodo Historico NO válida. La Fecha debe ser (AAAAMMDD) -Proceso cancelado-"
-          GetEnter
-          exit
-    else
-        if [ $longitud -eq 0 ] ; then
-             P_FCORTE=$FECHOY_ANOMES
-             FECHIS_ANOMESDIA=`echo $FECHOY_ANOMES`
+    echo
+    echo $raya
+    echo "                  TIPO DE PROCESO"
+    echo $raya
+    endLoop=0
+    P_PROCESO="##"
+    while [ $endLoop == 0 ]
+    do
+#             ---------------------------------------------------
+        echo " "
+        echo "      01) Envio Original  - Carga TOTAL 1a vez"
+        echo " "
+        echo "      02) Archivo Semanal - Carga PARCIAL"
+        echo " "
+        echo "      03) Archivo Mensual - Carga PARCIAL"
+        echo " "
+        echo "      04) Refresque Total - Carga TOTAL"
+        echo " "
+        echo "      00) Salir"
+        echo " "
+        echo "           opción (01 02 03 04 00)   ---> \c"
+        read P_PROCESO
+        if [ -z "$P_PROCESO" ]
+        then
+            echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
         else
-             cd $DATOS
-             FECHIS_ANOMES=`echo $FECHIS_ANOMESDIA | cut -c 1-6`
-             sanata=`grep $FECHIS_ANOMES ICSANATA.DAT | cut -f2 -d"/"|cut -f3 -d"_"`
-             cd $TEMPORALES
-             echo "Sanata para Fecha " $FECHIS_ANOMESDIA "  es " $sanata
-             if test -z "$sanata" ; then
-                  P_FCORTE=$FECHOY_ANOMES
-                  echo "\n !!!! *ERROR*  sanata de $FECHIS_ANOMESDIA NO Existe !!! \n "
-                  echo "                   **** PROCESO CANCELADO **** "
-                  GetEnter
-                  exit
-             else
-                  P_FCORTE=$FECHIS_ANOMES
-                  CambiarSanata
-             fi
-         fi
-    fi
+            if [ $P_PROCESO != "01" ] && [ $P_PROCESO != "02" ] && [ $P_PROCESO != "03" ] && [ $P_PROCESO != "04" ] && [ $P_PROCESO != "00" ] 
+            then
+                echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
+            else
+                endLoop=1
+            fi
+        fi
+    done
 }
 
-CambiarSanata()
+GetNombreDelArchivo()
 {
 #*-----------------------------------------------------------------------------*
-# VERIFICAR Y CAMBIAR AL SANATA CORRESPONDIENTE
+# Averigua el nombre del archivo
 #*-----------------------------------------------------------------------------*
-   if [ $FECHOY_ANOMES -ne $FECHIS_ANOMES ] ; then
-         echo "\n\tSe Procesa con fecha $FECHIS_ANOMESDIA \n"
-          . /san_ata_$sanata/$FECHIS_ANOMES/sh-$FECHIS_ANOMES
-          echo $DATABASE
-          P_FCORTE=$FECHIS_ANOMES
-   else
-          P_FCORTE=$FECHOY_ANOMES
-   fi
+    echo
+    echo $raya
+    echo "                NOMBRE DEL ARCHIVO"
+    echo $raya
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#             ---------------------------------------------------
+        echo " "
+        echo " Ingrese el nombre del archivo o enter para salir:"
+        echo "      "$codsus"100ddmmaa01"$P_PROCESO".txt"
+#                   JJJJJJaaaDDMMAAbbXX.txt
+        echo " ---> \c"
+        read P_NombreArchivo
+        if [ -z "$P_NombreArchivo" -o "$P_NombreArchivo" == "" ]
+        then
+            endLoop=1
+        else
+            if [ ! -s $TEMPORALES"/"$P_NombreArchivo ]
+            then
+                echo "no se encuentra el archivo " $P_NombreArchivo
+            else
+#               el tipo de proceso 01/02/03/04 debe coincidir con el que
+#               está en el nombre del arch
+#               separa los dos caractares justo antes de la extensión ".txt"
+                auxTxt=`echo $P_NombreArchivo | sed 's/.*\\(..\\)\\.txt/\\1/'`
+#               echo $auxTxt " debería ser " $P_PROCESO
+                if [ $P_PROCESO == $auxTxt ]
+                then
+#                   el código de suscriptor al principio del nombre del
+#                   archivo debe ser el de JURAD
+                    auxTxt=`echo $P_NombreArchivo | sed 's/\\(......\\).*/\\1/'`
+#                   echo $auxTxt " debería ser " $codsus
+                    if [ $codsus == $auxTxt ]
+                    then
+                        endLoop=1
+                    else
+                        echo "El código de suscriptor en el nombre del archivo no coincide"
+                    fi
+                else
+                    echo "El nombre del archivo no condice con el tipo de proceso" $P_PROCESO
+                fi
+            fi
+        fi
+    done
 }
 
 
-#* PARAMETROS:
-fechab=0;
-codsus=0;
-nomsus={};
-opcion="A";
-vector=48;
-numeroreg=0;
-cadena01={};
-cadena02={};
-cadena03={};
-cadena04={};
-cadena05={};
-cadena06={};
-cadena07={};
-cadena08={};
-cadena09={};
-cadena10={};
-cadena11={};
 #*========================================================*
 #*                    PROCESO                             *
 #*========================================================*
 #*              FASE 1: PIDE PARAMETROS                   *
 #*========================================================*
-#*-----------------------------------------------------------------------------*
-#                   MENU PRINCIPAL DE EJECUCION
-#*-----------------------------------------------------------------------------*
+echo "........................................."
 clear
 GetFechaSistema
-GetProceso
-
-loop=0
-while [ $loop != 1 ]
- do
-  echo "     Digite Codigo Suscriptor  ---> \c"
-  read codsus
-  if [ $codsus -eq 999999 ]
-   then
-    loop=1
-  else
-   cd $DATABASE
-   nomsus=`grep ^"$codsus" ICBSUS | cut -c9-48`
-   echo "Codigo suscriptor: " $codsus  "   Suscriptor: " $nomsus
-   if test -z "$nomsus"
-    then
-     echo "suscriptor errado"
-   else
-     echo "si correcto digite ENTER, si va a modificar digite N  ---> \c"
-     read loopd
-     if test -z "$loopd"
-      then
-       loop=1
-     fi
-   fi
-  fi
-done
-echo "     Digite nombre del archivo     ---> \c"
-read archivo
-cd $TEMPORALES
-if test -s $archivo
+GetRealOFalso
+if [ $P_REAL_FALSO -eq 3 ]
 then
-   echo
-   echo "Procesando archivo-----> "$archivo
-else
-   echo "!!!...Archivo $archivo  no existe proceso termina ....!!!"
-   echo
-   echo "        (ENTER) Continuar !!!  "
-   read xxx
-   exit
+    exit
 fi
-echo
-echo "+-------------------------------------------------------------+"
-echo "+-------------------------------------------------------------+"
-echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
-fechab=$P_FCORTE
-echo "+-------------------------------------------------------------+"
-numeroreg=`wc -l < $archivo`
-echo
-echo "+-------------------------------------------------------------+"
-echo "| Registros iniciales archivo de entrada : " $numeroreg
-echo "+-------------------------------------------------------------+"
-cadena00=$archivo.orig
-cp $archivo $cadena00
-echo
+GetTipoDeProceso
+if [ $P_PROCESO -eq 00 ]
+then
+    exit
+fi
+GetNombreDelArchivo
+if [ -z "$P_NombreArchivo" ]
+then
+    exit
+fi
+
+# echo (esto no está refactoreado)
+# echo "+-------------------------------------------------------------+"
+# echo "+-------------------------------------------------------------+"
+# echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
+# fechab=$P_FCORTE
+# echo "+-------------------------------------------------------------+"
+# numeroreg=`wc -l < $P_NombreArchivo archivo`
+# echo
+# echo "+-------------------------------------------------------------+"
+# echo "| Registros iniciales archivo de entrada : " $numeroreg
+# echo "+-------------------------------------------------------------+"
+# cadena00=$archivo.orig
+# cp $P_NombreArchivo $cadena00
 #echo "+-------------------------------------------------------------+"
 #echo "|                 SEGUNDA FASE: PROCESO                       |"
 #echo "+-------------------------------------------------------------+"
-#*========================================================*
-#*  EXECUTE PROGRAM: icestdatVEC-NORMAL                   *
-#*========================================================*
-#
-echo
-echo "+------------------------------------------------------+"
-echo "|  Programa CARGAJUR                                   |"
-echo "|                                                      |"
-echo "|  Procesando archivo --> "  $archivo
-echo "+------------------------------------------------------+"
-echo "+-------------------------------------------------------------+"
-echo "|     *********  RESULTADOS DEL PROCESO       **********      |"
-echo "|                                                             |"
-ls -lrt $archivo* >> $archivo.log
-tail -20 $archivo.log
-echo "+-------------------------------------------------------------+"
+    echo " "
+    echo $raya
+    echo " "
+    banner CARGAJUR
+    echo " "
+    echo $raya
+    echo " Procesando $P_NombreArchivo "
+#   echo "real:" $P_REAL_FALSO " tipo de proceso:" $P_PROCESO
+    nohup x CARGAJUR $P_NombreArchivo $P_REAL_FALSO >| $TEMPORALES/$P_NombreArchivo.log 2>| $TEMPORALES/$P_NombreArchivo.log
+    echo $raya
+    echo "             RESULTADOS DEL PROCESO"
+    echo " "
+    cat $TEMPORALES/$P_NombreArchivo.log
+    echo " "
+    cd $TEMPORALES
+    echo "Archivos en \$TEMPORALES:"
+    ls -lrt $P_NombreArchivo* >> $P_NombreArchivo.log
+    ls -lrt $P_NombreArchivo*
+    cd - > /dev/null
+    echo $raya
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
 

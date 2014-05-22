@@ -1,4 +1,4 @@
-      $SET LIST SETTING 
+      $SET LIST SETTING
        IDENTIFICATION DIVISION.
        PROGRAM-ID.    CARGAJUR2.
       ******************************************************************
@@ -36,7 +36,7 @@
       ******************************************************************
       ******************************************************************
            copy BDIIDIAN.FS.
- 
+
       ******************************************************************
       ******************************************************************
            copy BDIIDAS.FS.
@@ -278,7 +278,7 @@
       ******************************************************************
       * Armado de las lineas de alerta
        01 LA-lineas-alerta.
-      *    Los modelos a continuacion deberan obtenerse de un 
+      *    Los modelos a continuacion deberan obtenerse de un
       *    archivo, como BDIIALE-ALERTAS
            03 LAend                     pic 999 comp value 0.
            03 LA-modelos.
@@ -293,15 +293,15 @@
                "EL EMBARGO MAS RECIENTE SE INSTAURO EL [&&&&&&&&] ".
                05 pic x(50) value high-values. *> end marker
            03 LA-modelos2               redefines LA-modelos.
-               05 LA-modelo             pic x(50) occurs 5 
+               05 LA-modelo             pic x(50) occurs 5
                                         indexed LAm.
       *    Funcionamiento de los templates.
       *    Hay dos templates por de alerta, uno por linea.
       *    Cada template consiste en hasta 10 frases fijas con
       *    ampersands (&) donde se van a reemplazar los valores.
-      *    Por ejemplo: 
+      *    Por ejemplo:
       *    TIENE &&& DEMANDAS CERRADAS Y &&& ABIERTAS
-      *    tiene 3 frases fijas y 2 reemplazos. 
+      *    tiene 3 frases fijas y 2 reemplazos.
       *    La cantidad de ampersands es irrelevante, pero parece
       *    conveniente que informe sobre el tamanio del contenido.
            03 LA-templates.
@@ -314,7 +314,7 @@
                05 LA-linea2             pic x(50).
       *    Los valores a insertar en una linea
            03 LA-valores.
-               05 LA-valor              pic x(50) 
+               05 LA-valor              pic x(50)
                                         occurs 10 indexed LAv.
       *    Datos para editar valores a insertar
            03 LA-num                    pic -(11)0.
@@ -487,12 +487,12 @@
            move "NO" to E-hay-error
 
       *    validacion del tipo de movimiento
-           if JURAD-tipo-novedad not = "I" and "M" and "E" and "T" 
+           if JURAD-tipo-novedad not = "I" and "M" and "E" and "T"
                call "PONERR" using "01" JURAD-reg E-errores
            end-if
 
       *    si es el registro "T" hay que senialar el fin de proceso
-           if JURAD-tipo-novedad = "T" 
+           if JURAD-tipo-novedad = "T"
                move "SI" to IND-fin-proceso
                perform 4800-PROCESO-REG-T
                exit paragraph
@@ -592,7 +592,7 @@
       *    a ver si la validacion cambio el tipo de ide
            if JURAD-id-tipo not = TIP-IDE-BDIIVIDE
                call "PONERR" using "16" JURAD-reg E-errores
-               display "Tipo ide cambiado de " JURAD-id-tipo " a " 
+               display "Tipo ide cambiado de " JURAD-id-tipo " a "
                TIP-IDE-BDIIVIDE " num ide: " JURAD-id-numero
            end-if
       *    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existe
@@ -610,34 +610,34 @@
 
        4300-MODIFICAR-BDIIALE.
       ******************************************************************
-      * Se impacta el archivo BDIIALE con una o dos inserciones, 
-      * modificaciones o eliminaciones segun haya o no demandas y 
+      * Se impacta el archivo BDIIALE con una o dos inserciones,
+      * modificaciones o eliminaciones segun haya o no demandas y
       * embargos
       ******************************************************************
            initialize REG-BDIIALE
 
       *    si hay demandas
            if JURAD-demandas-vigentes > zero
-           or JURAD-demandas-terminadas > zero 
+           or JURAD-demandas-terminadas > zero
                move "J001" to LLASEC-BDIIALE
       *        arma datos de demandas
                move JURAD-demandas-vigentes to D-vigentes
                move JURAD-demandas-terminadas to D-terminados
-               string "20" JURAD-demandas-fecha-ultima 
+               string "20" JURAD-demandas-fecha-ultima
                delimited size into D-fecha-ultima
-               perform 4300-MODIFICAR-BDIIALE-DATOS 
+               perform 4300-MODIFICAR-BDIIALE-DATOS
            end-if.
 
       *    si hay embargos
            if JURAD-embargos-vigentes > zero
-           or JURAD-embargos-terminados > zero 
+           or JURAD-embargos-terminados > zero
                move "J002" to LLASEC-BDIIALE
       *        arma datos de embargos
                move JURAD-embargos-vigentes to D-vigentes
                move JURAD-embargos-terminados to D-terminados
                string "20" JURAD-embargos-fecha-ultimo
                delimited size into D-fecha-ultima
-               perform 4300-MODIFICAR-BDIIALE-DATOS 
+               perform 4300-MODIFICAR-BDIIALE-DATOS
            end-if.
 
 
@@ -690,7 +690,7 @@
       *    completa los datos del registro
            initialize ENCABEZADO-BDIIALE
            move P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE
-           FEC-REP-BDIIALE 
+           FEC-REP-BDIIALE
            move P-fecha-proceso-50 to FEC-VEN-BDIIALE
            move 0 to BLOQUEO-BDIIALE
            move D-datahost to INF-DATAHOST-BDIIALE
@@ -719,7 +719,7 @@
                add 1 to N-ale-no-existe
            end-if
       *    reemplaza la fecha de reporte y los valores
-           move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE 
+           move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE
            move D-datahost to INF-DATAHOST-BDIIALE
            perform 4320-ARMAR-TEXTO-ALERTA
            if EST-BDIIALE = "00"
@@ -917,7 +917,7 @@
                    perform 9000-CANCELAR-PROGRAMA
                    goback
            end-evaluate.
- 
+
 
        4320-ARMAR-TEXTO-ALERTA.
       ****************************************************************
@@ -925,7 +925,7 @@
       * de las linea de alerta que corresponde
       ****************************************************************
       *    segun se trate de demandas o embargos
-           if JURAD-demandas-vigentes not = 0 
+           if JURAD-demandas-vigentes not = 0
            or JURAD-demandas-terminadas not = 0
                set LAx to 1
                move high-values to LA-valores
@@ -1005,9 +1005,9 @@
            end-evaluate.
 
       * Edita la fecha de proceso DDMMAA del parametro en formato
-      * YYYYMMDD 
+      * YYYYMMDD
            string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)
-           P-fecha-proceso(1:2) delimited size 
+           P-fecha-proceso(1:2) delimited size
            into P-fecha-proceso-YYYYMMDD
            display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD
 
@@ -1071,7 +1071,7 @@
       * TODO: por ahora los templates son literales
            set LAx to 0
            move high-values to LA-templates
-           perform varying LAm from 1 by 1 
+           perform varying LAm from 1 by 1
            until LA-modelo(LAm) = high-values
                set LAx up by 1
       *        separa las partes de la linea
@@ -1162,18 +1162,17 @@
 
       * Close todos los archivos
            close JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.
-      
+
       * Emision de contadores de registros
            display " "
            display "Totales de registros:"
            display " "
-           compute N-editp100 = 100.0 * E-cont-regs-con-error
+           compute N-editp100 rounded = 100.0 * E-cont-regs-con-error
            / N-reg-leidos
-           display N-editp100 "% de registros inconsistentes" 
-           display " "
-           move N-reg-leidos to N-edit 
+           display N-editp100 "% de registros inconsistentes"
+           move N-reg-leidos to N-edit
            display N-edit "Registros IME en el archivo de entrada"
-           move N-reg-OK to N-edit 
+           move N-reg-OK to N-edit
            display N-edit "Registros procesados sin error"
 
       * >>>> not OK: suma para J001 y tambien J002, hay que cambiar la
@@ -1186,19 +1185,19 @@
       *    display N-edit "Registros tipo E aceptados"
 
            move E-cont-regs-con-error to N-reg-con-error
-           move N-reg-con-error to N-edit 
+           move N-reg-con-error to N-edit
            display N-edit "Registros con error"
-           move N-ale-borradas to N-edit 
+           move N-ale-borradas to N-edit
            display N-edit "Alertas borradas previo al refresque total"
-           move N-ale-insertadas to N-edit 
+           move N-ale-insertadas to N-edit
            display N-edit "Alertas insertadas"
-           move N-ale-modificadas to N-edit 
+           move N-ale-modificadas to N-edit
            display N-edit "Alertas modificadas"
-           move N-ale-eliminadas to N-edit 
+           move N-ale-eliminadas to N-edit
            display N-edit "Alertas eliminadas"
-           move N-ale-ya-existe to N-edit 
+           move N-ale-ya-existe to N-edit
            display N-edit "Insercion de alerta existente"
-           move N-ale-no-existe to N-edit 
+           move N-ale-no-existe to N-edit
            display N-edit "Modif o elim de alerta inexistente".
 
       * Emision del reporte de errores
@@ -1206,7 +1205,7 @@
            display "Totales por tipo de error detectado:"
            perform varying Ex from 1 by 1 until Ex > 50
            or E-codigo(Ex) = "00"
-               if E-contador(Ex) not = 0 
+               if E-contador(Ex) not = 0
                    move E-contador(ex) to E-edit
                    display E-edit E-codigo(Ex) "-" E-descripcion(Ex)
                end-if
