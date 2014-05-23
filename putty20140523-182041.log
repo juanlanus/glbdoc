@@ -1,0 +1,2697 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.23 18:20:41 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjluc d
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May 23 15:05:18 2014 from 172.16.10.82
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>cat ~/.profile
+:
+#       @(#) profile 25.1 92/03/15 
+#   
+#       Perfil usuarios de DESARROLLO 
+#
+# Evitar redirecciones accidentales a los archivos:
+set -o noclobber
+set -o vi
+terminal=`tty | cut -c6-8`
+if [ "$terminal" = "pts" ]
+then
+   stty erase ^H
+fi
+export JH=/usr/j2se
+PATH=$PATH:/usr/bin:~/macros:~/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:$JH/bin:/usr/openwin/bin:.
+CLASSPATH=$JH/jre/lib/dt.jar:$JH/jre/lib/rt.jar:$HOME/java/server:.
+COBJVM=sun_142
+export PATH CLASSPATH COBJVM
+
+if [ -z "$LOGNAME" ]; then
+        LOGNAME=`logname`               # name of user who logged in
+        export LOGNAME
+fi
+
+HISTFILE=~/.history.$LOGNAME
+export HISTFILE 
+
+HISTSIZE=400
+export HISTSIZE
+
+VISUAL=vi
+export VISUAL
+
+MBOX=~/mbox.$LOGNAME
+export MBOX
+
+MAIL=/usr/mail/$LOGNAME                 # mailbox location
+export MAIL
+
+if [ -z "$PWD" ]; then
+        PWD=$HOME                       # assumes initial cwd is HOME
+        export PWD
+fi
+
+if [ -f $HOME/.kshrc -a -r $HOME/.kshrc ]; then
+        ENV=$HOME/.aliases               # set ENV if there is an rc file
+        export ENV
+fi
+
+# ATENCION: umask modificado para permitir acceso a TODOS LOS DEL GRUPO:
+umask 0002
+
+# eval `tset -m ansi:ansi -m :\?${TERM:-ansi} -r -s -Q`
+TERM=vt100;export TERM
+
+# If job control is enabled, set the suspend character to ^Z (control-z):
+case $- in
+*m*)    stty susp '^z'
+        ;;
+esac
+
+maquina=`uname -n`; export maquina
+bold=`tput bold`; export bold
+rev=`tput rev`; export rev
+normal=`tput sgr0`; export normal
+PS1='$LOGNAME@${rev}$maquina${normal} $PWD
+$ '
+export PS1
+# Estas 2 lineas son para el time out del usuario
+TMOUT=1800
+export TMOUT
+host_name=`hostname`
+
+# The following three lines have been added by UDB DB2.
+if [ -f /d/iccol/db2/db2inst1/sqllib/db2profile ]; then
+    . /d/iccol/db2/db2inst1/sqllib/db2profile
+    echo $INSTANCIA
+fi
+
+# Se valida el tipo Grupo Secundario asignado para crear las.
+# Variables de ambiente para trabajar Microfocus.
+GRUPOS=`groups $logname`; export GRUPOS
+des=`echo $GRUPOS | grep descob | wc -l`
+run=`echo $GRUPOS | grep runcob | wc -l`
+con=`echo $GRUPOS | grep concob | wc -l`
+export des run con
+
+if [ $des != 0 -a $run = 0 -a $con = 0 ]
+then
+    COBDIR=/opt/mfocus/des/cobol
+    LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+    PATH=/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:$PATH
+    CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:$CLASSPATH
+    MF="Compilacion"; export MF
+else
+    if [ $des = 0 -a $run != 0 -a $con = 0 ]
+    then
+       COBDIR=/opt/mfocus/asp/cobol
+       LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/asp/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+       PATH=/opt/mfocus/asp/cobol/lib:/opt/mfocus/asp/cobol/bin:$PATH
+       CLASSPATH=/opt/mfocus/asp/cobol/lib/mfcobol.jar:$CLASSPATH
+       MF="Ejecucion "; export MF
+    else
+        if [ $des = 0 -a $run = 0 -a $con != 0 ]
+        then
+           COBDIR=/opt/mfocus/con/cobol
+           LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/con/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+           PATH=/opt/mfocus/con/cobol/lib:/opt/mfocus/con/cobol/bin:$PATH
+           CLASSPATH=/opt/mfocus/icven/con/cobol/lib/mfcobol.jar:$CLASSPATH
+           MF="Contingencia"; export MF
+        else
+            if [ $des = 0 -a $run = 0 -a $con = 0 ]
+            then
+                trap "" 2
+                MF="Sin Grupo Definido"; export MF
+                clear
+                banner `uname -n`  $MF
+                sleep 10
+                exit
+            else
+                trap "" 2
+                MF="Revise su configuracion"; export MF
+                clear
+                banner `uname -n`  $MF
+                sleep 10
+                exit
+            fi
+        fi
+    fi
+fi
+
+#ASLMFRETRY=99,30
+COBCPY=/opt/mfocus/des/cobol/cpylib:$HOME/copys/pais:$HOME/copys
+#COBSW=-F
+COBSW=""
+COBMODE=32
+COBIDY=$HOME/animator
+#COBOPT="-C sourceasm -C cobidy -C SSRANGE=1 -C listpath=$HOME/animator" se cambia por consenso ver mail feb23-12
+#COBOPT="-C sourceasm -C cobidy -C listpath=$HOME/animator"
+COBOPT=""
+DATOS=$HOME/datos
+TEMPORALES=$HOME/temporales
+TERMINALES=$HOME/terminales
+LISTADOS=$HOME/listados
+TRABAJO=$HOME/trabajo
+DATABASE=$HOME/database
+BDU=$HOME/database
+ICREGIS=$HOME/icregis
+DBSUPER=/d/iccol/icsuper/DESARROLLO/DATABASE
+COBPATH=$HOME/objetos
+FACTURACION=/d/iccol/desarrollo/temporales/facturacion
+ACTUALIZACION=/d/iccol/desarrollo/actualizacion/actualizacion
+VALIDACION=/d/iccol/desarrollo/actualizacion/validacion
+CALIFICACION=/d/iccol/desarrollo/actualizacion/calificacion
+MAESTROS_ACT=/d/iccol/desarrollo/actualizacion/maestros-act
+MAESTROS_VAL=/d/iccol/desarrollo/actualizacion/validacion/maestros-val
+COPYS=/d/iccol/desarrollo/copys
+FUENTES=/d/iccol/desarrollo/fuentes
+OBJETOS=/d/iccol/desarrollo/objetos
+LOGDIR=$HOME/database/logs
+DIRECCIONES=$HOME/direcciones
+ICDB_AUX=/d/iccol/icdb_aux
+UTILES=/d/iccol/desarrollo/utiles
+AUDITOR=/d/iccol/desarrollo/auditor
+ICBAK=/d/iccol/icbak
+ACTREG=/d/iccol/actreg
+CAL_ENT=$HOME/trabajo/calidad/entrada
+CAL_SAL=$HOME/trabajo/calidad/salida
+PRESP_ENT=/$HOME/especiales/entrada
+PRESP_SAL=/$HOME/especiales/salida
+BD_SSO=$HOME/BD_SSO.cfg
+BD_NOVEDAT=$HOME/BD_NOVEDAT.cfg
+BD_EXTRACUPOS=$TEMPORALES/BD_EXTRACUPOS.cfg
+VALORES=/despeciales/valores
+SCORES=/d/iccol/desarrollo/database
+FRABDUACT=/d/iccol/desarrollo/actualizacion/actualizacion/fraude
+FRABDUVAL=/d/iccol/desarrollo/actualizacion/validacion/fraude
+SORTSPACE=128M
+SORTCOMPRESS=5
+
+dd_REG01="$HOME/database/REG01"
+dd_REG02="$HOME/database/REG02"
+dd_REG03="$HOME/database/REG03"
+dd_REG04="$HOME/database/REG04"
+dd_ICDIAN="$HOME/database/ICDIAN"
+dd_ICDAS="$HOME/database/ICDAS"
+dd_CEDULAS="$HOME/temporales/CEDULAS"
+dd_ERROR_ICBNAP="$HOME/temporales/ERROR_ICBNAP"
+EXTFH=$HOME/extfh.cfg ; export EXTFH
+COBCONFIG=$HOME/cobconfig ; export COBCONFIG
+export COBDIR COBCPY LD_LIBRARY_PATH LOGDIR ICREGIS COBSW COBMODE FACTURACION
+export COBIDY COBOPT ASLMFRETRY CLASSPATH
+export BDU DATOS TEMPORALES LISTADOS DATABASE COBPATH TERMINALES DBSUPER TRABAJO
+export dd_REG01 dd_REG02 dd_REG03 dd_REG04 dd_ICDIAN dd_CEDULAS dd_ERROR_ICBNAP dd_ICDAS
+export ACTUALIZACION VALIDACION CALIFICACION MAESTROS_ACT MAESTROS_VAL COPYS FUENTES OBJETOS DIRECCIONES ICDB_AUX UTILES AUDITOR ICBAK ACTREG CAL_ENT CAL_SAL PRESP_ENT PRESP_SAL BD_SSO BD_NOVEDAT BD_EXTRACUPOS VALORES SCORES FRABDUACT FRABDUVAL SORTSPACE SORTCOMPRESS
+
+CVSROOT=":pserver:$LOGNAME@localhost:/usr/local/cvsroot" 
+export CVSROOT
+
+DB2INSTANCE=db2inst1
+DB2_EXTRACUPOS=$HOME/DB2_EXTRACUPOS.cfg
+DB2_NOVEDAT=$HOME/DB2_NOVEDAT.cfg
+DB2_DATACIU2=$HOME/DB2_DATACIU2.cfg
+DB2_SSO=$HOME/DB2_SSO.cfg
+DB2_ADMSSO=$HOME/DB2_ADMSSO.cfg
+DB2_LISEXC=$HOME/DB2_LISEXC.cfg
+HCOBND=$HOME/binds
+export DB2INSTANCE DB2_EXTRACUPOS DB2_NOVEDAT DB2_DATACIU2 DB2_SSO HCOBND DB2_ADMSSO DB2_LISEXC
+
+FECHA_AMNI=20090111
+export FECHA_AMNI
+
+# Lineas agregadas para hacer bind despues de la compilacion de programas
+# 28-Jun-2007
+if [ -f /export/home/db2inst1/sqllib/db2profile ]; then
+    . /export/home/db2inst1/sqllib/db2profile
+fi
+
+TTY=`tty`
+export TTY
+
+# Variable de ambiente para que tome el archivo de configuracion para el
+# maestro de cartera.
+
+# modificacion para ICCLIAR:
+ARCHTEMP=$HOME/archtemp; export ARCHTEMP
+SERV_CCI="DES"; export SERV_CCI
+NUM_EJEC="006"; export NUM_EJEC
+
+#Se configura ambiente para ejecutar jar con java 5 HLGS Abril-28-2010
+JAVA_HOME_5=/usr/jdk/latest
+JH_5=/usr/jdk/latest
+path_text=`echo $PATH | sed -e "s/:\/usr\/j2se\/bin/:\/usr\/jdk\/latest\/bin/g"`
+export PATH JAVA_HOME_5 JH_5 path_text
+
+
+# /usr/bin/prwarn               # issue a warning if password due to expire
+# modificacion para Incluir ejecucion de java en Cobol Mar-03-2009 HLGS
+. $COBDIR/bin/cobsje -v -J $JH
+JAR=$HOME/jars
+MACROS=$HOME/macros
+export JAR MACROS
+
+# CQ-INPRO00008005 ene-26-2012  Se deshabilitaron CQ8068
+
+clear
+banner `uname -n` Colombia $MF Sun_v.240
+
+# Agregadas el 02-Agosto-2013 en la instalacion del WrapPack8
+COLUMNS=80; export COLUMNS
+TERM=vt220; export TERM
+
+
+MFPLI_PRODUCT_DIR=/opt/mfocus/des/cobol ; export MFPLI_PRODUCT_DIR
+/d/iccol/desarrollo>echo $LOGNAME
+icjlud
+/d/iccol/desarrollo>view $HISTFILE
+"/d/iccol/desarrollo/.history.icjlud" [Read only] 89 lines, 3326 characters (69 null) \201^A    if [ $# -ne 3 ]; thenreturn 0
+    fi
+var=$1#The enviornment variable to be processed
+    addrm_str=$2  #The new path to be used
+    action=$3     #Action: a -> add, r -> remove
+    if [ "X${action?}" != "Xa" -a "X${action?}" != "Xr" ]; then
+return 0  # return without doing anything
+    fi
+awkval='$1 != "'${addrm_str?}'"{print $0}'
+    newval=`eval /usr/bin/echo \\${$var:-""} | /usr/bin/awk '{for (i=1; i<= NF; ++i) \if( $i != VAR && length($i) > 0 ) print $i":"}' FS=":" VAR=${addrm_str?}`
+    newval=`/usr/bin/echo ${newval?} | /usr/bin/sed 's/\: /\:/g'`
+    if [ "X${action?}" = "Xa" ]; then
+newval=${newval?}"${addrm_str?}"
+    else
+newval=`/usr/bin/echo ${newval?} | /usr/bin/sed 's/:$//'`
+    fi
+eval $var=\"${newval?}\"
+    unset var addrm_str awkval newval
+}
+\202^B\201. viset
+find ~ -name ICMCRECOPY.DAT -print
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+fc -e "${VISUAL:-${EDITOR:-vi}}" 3
+\201view /d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+who am i
+find ~ -name "ICMCRECOPY*" -print
+find ~ -name "ICMCRE*" -print
+view /d/iccol/desarrollo/copys/ICMCREH.FD
+view /d/iccol/desarrollo/copys/ICMCREH.FS
+find ~ -name "ICMCRE*" -print
+view /d/iccol/desarrollo/fuentes/ICMCRE.DEF
+find ~ -name "ICMCRE*" -print
+find ~ -name "sh-PE-F*" -print
+view /d/iccol/desarrollo/macros/sh-PE-Falabella-semestral
+\202^Oclear
+cat /d/iccol/desarrollo/macros/sh-PE-Ripley
+fg
+vi #sh-PE-Falabella-semestral.V.1.0001.
+clear
+if [ $# -ne 3 ]; then
+return 0
+    fi
+var=$1#The enviornment variable to be processed
+    addrm_str=$2  #The new path to be used
+    action=$3     #Action: a -> add, r -> remove
+    if [ "X${action?}" != "Xa" -a "X${action?}" != "Xr" ]; then
+return 0  # return without doing anything\20"/d/iccol/desarrollo/.history.icjlud" [Read only] 89 lines, 3326 characters (69 null)\20
+    return 0fi
+var=$1#The enviornment variable to be processed
+    addrm_str=$2  #The new path to be used
+    action=$3     #Action: a -> add, r -> remove
+    if [ "X${action?}" != "Xa" -a "X${action?}" != "Xr" ]; then
+return 0  # return without doing anything
+    fi
+awkval='$1 != "'${addrm_str?}'"{print $0}'
+    newval=`eval /usr/bin/echo \\${$var:-""} | /usr/bin/awk '{for (i=1; i<= NF; ++i) \if( $i != VAR && length($i) > 0 ) print $i":"}' FS=":" VAR=${addrm_str?}`
+    newval=`/usr/bin/echo ${newval?} | /usr/bin/sed 's/\: /\:/g'`
+    if [ "X${action?}" = "Xa" ]; then
+newval=${newval?}"${addrm_str?}"
+    else
+newval=`/usr/bin/echo ${newval?} | /usr/bin/sed 's/:$//'`
+    fi
+eval $var=\"${newval?}\"
+    unset var addrm_str awkval newval
+}
+\202^W\201. viset
+cat ~/.profile
+echo $LOGNAME
+view $HISTFILE
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/.history.icjlud" [Read only] [Not edited] line 89 of 89 --100%-- :q/d/iccol/desarrollo>^[  /d/iccol/desarrollo>view $HISTFILEecho $LOGNAME cat ~/.profile
+:
+#       @(#) profile 25.1 92/03/15 
+#   
+#       Perfil usuarios de DESARROLLO 
+#
+# Evitar redirecciones accidentales a los archivos:
+set -o noclobber
+set -o vi
+terminal=`tty | cut -c6-8`
+if [ "$terminal" = "pts" ]
+then
+   stty erase ^H
+fi
+export JH=/usr/j2se
+PATH=$PATH:/usr/bin:~/macros:~/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:$JH/bin:/usr/openwin/bin:.
+CLASSPATH=$JH/jre/lib/dt.jar:$JH/jre/lib/rt.jar:$HOME/java/server:.
+COBJVM=sun_142
+export PATH CLASSPATH COBJVM
+
+if [ -z "$LOGNAME" ]; then
+        LOGNAME=`logname`               # name of user who logged in
+        export LOGNAME
+fi
+
+HISTFILE=~/.history.$LOGNAME
+export HISTFILE 
+
+HISTSIZE=400
+export HISTSIZE
+
+VISUAL=vi
+export VISUAL
+
+MBOX=~/mbox.$LOGNAME
+export MBOX
+
+MAIL=/usr/mail/$LOGNAME                 # mailbox location
+export MAIL
+
+if [ -z "$PWD" ]; then
+        PWD=$HOME                       # assumes initial cwd is HOME
+        export PWD
+fi
+
+if [ -f $HOME/.kshrc -a -r $HOME/.kshrc ]; then
+        ENV=$HOME/.aliases               # set ENV if there is an rc file
+        export ENV
+fi
+
+# ATENCION: umask modificado para permitir acceso a TODOS LOS DEL GRUPO:
+umask 0002
+
+# eval `tset -m ansi:ansi -m :\?${TERM:-ansi} -r -s -Q`
+TERM=vt100;export TERM
+
+# If job control is enabled, set the suspend character to ^Z (control-z):
+case $- in
+*m*)    stty susp '^z'
+        ;;
+esac
+
+maquina=`uname -n`; export maquina
+bold=`tput bold`; export bold
+rev=`tput rev`; export rev
+normal=`tput sgr0`; export normal
+PS1='$LOGNAME@${rev}$maquina${normal} $PWD
+$ '
+export PS1
+# Estas 2 lineas son para el time out del usuario
+TMOUT=1800
+export TMOUT
+host_name=`hostname`
+
+# The following three lines have been added by UDB DB2.
+if [ -f /d/iccol/db2/db2inst1/sqllib/db2profile ]; then
+    . /d/iccol/db2/db2inst1/sqllib/db2profile
+    echo $INSTANCIA
+fi
+
+# Se valida el tipo Grupo Secundario asignado para crear las.
+# Variables de ambiente para trabajar Microfocus.
+GRUPOS=`groups $logname`; export GRUPOS
+des=`echo $GRUPOS | grep descob | wc -l`
+run=`echo $GRUPOS | grep runcob | wc -l`
+con=`echo $GRUPOS | grep concob | wc -l`
+export des run con
+
+if [ $des != 0 -a $run = 0 -a $con = 0 ]
+then
+    COBDIR=/opt/mfocus/des/cobol
+    LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+    PATH=/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:$PATH
+    CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:$CLASSPATH
+    MF="Compilacion"; export MF
+else
+    if [ $des = 0 -a $run != 0 -a $con = 0 ]
+    then
+       COBDIR=/opt/mfocus/asp/cobol
+       LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/asp/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+       PATH=/opt/mfocus/asp/cobol/lib:/opt/mfocus/asp/cobol/bin:$PATH
+       CLASSPATH=/opt/mfocus/asp/cobol/lib/mfcobol.jar:$CLASSPATH
+       MF="Ejecucion "; export MF
+    else
+        if [ $des = 0 -a $run = 0 -a $con != 0 ]
+        then
+           COBDIR=/opt/mfocus/con/cobol
+           LD_LIBRARY_PATH=$JH/jre/lib/sparc:/opt/mfocus/con/cobol/lib:/opt/IBM/db2/V9.7/lib:$LD_LIBRARY_PATH
+           PATH=/opt/mfocus/con/cobol/lib:/opt/mfocus/con/cobol/bin:$PATH
+           CLASSPATH=/opt/mfocus/icven/con/cobol/lib/mfcobol.jar:$CLASSPATH
+           MF="Contingencia"; export MF
+        else
+            if [ $des = 0 -a $run = 0 -a $con = 0 ]
+            then
+                trap "" 2
+                MF="Sin Grupo Definido"; export MF
+                clear
+                banner `uname -n`  $MF
+                sleep 10
+                exit
+            else
+                trap "" 2
+                MF="Revise su configuracion"; export MF
+                clear
+                banner `uname -n`  $MF
+                sleep 10
+                exit
+            fi
+        fi
+    fi
+fi
+
+#ASLMFRETRY=99,30
+COBCPY=/opt/mfocus/des/cobol/cpylib:$HOME/copys/pais:$HOME/copys
+#COBSW=-F
+COBSW=""
+COBMODE=32
+COBIDY=$HOME/animator
+#COBOPT="-C sourceasm -C cobidy -C SSRANGE=1 -C listpath=$HOME/animator" se cambia por consenso ver mail feb23-12
+#COBOPT="-C sourceasm -C cobidy -C listpath=$HOME/animator"
+COBOPT=""
+DATOS=$HOME/datos
+TEMPORALES=$HOME/temporales
+TERMINALES=$HOME/terminales
+LISTADOS=$HOME/listados
+TRABAJO=$HOME/trabajo
+DATABASE=$HOME/database
+BDU=$HOME/database
+ICREGIS=$HOME/icregis
+DBSUPER=/d/iccol/icsuper/DESARROLLO/DATABASE
+COBPATH=$HOME/objetos
+FACTURACION=/d/iccol/desarrollo/temporales/facturacion
+ACTUALIZACION=/d/iccol/desarrollo/actualizacion/actualizacion
+VALIDACION=/d/iccol/desarrollo/actualizacion/validacion
+CALIFICACION=/d/iccol/desarrollo/actualizacion/calificacion
+MAESTROS_ACT=/d/iccol/desarrollo/actualizacion/maestros-act
+MAESTROS_VAL=/d/iccol/desarrollo/actualizacion/validacion/maestros-val
+COPYS=/d/iccol/desarrollo/copys
+FUENTES=/d/iccol/desarrollo/fuentes
+OBJETOS=/d/iccol/desarrollo/objetos
+LOGDIR=$HOME/database/logs
+DIRECCIONES=$HOME/direcciones
+ICDB_AUX=/d/iccol/icdb_aux
+UTILES=/d/iccol/desarrollo/utiles
+AUDITOR=/d/iccol/desarrollo/auditor
+ICBAK=/d/iccol/icbak
+ACTREG=/d/iccol/actreg
+CAL_ENT=$HOME/trabajo/calidad/entrada
+CAL_SAL=$HOME/trabajo/calidad/salida
+PRESP_ENT=/$HOME/especiales/entrada
+PRESP_SAL=/$HOME/especiales/salida
+BD_SSO=$HOME/BD_SSO.cfg
+BD_NOVEDAT=$HOME/BD_NOVEDAT.cfg
+BD_EXTRACUPOS=$TEMPORALES/BD_EXTRACUPOS.cfg
+VALORES=/despeciales/valores
+SCORES=/d/iccol/desarrollo/database
+FRABDUACT=/d/iccol/desarrollo/actualizacion/actualizacion/fraude
+FRABDUVAL=/d/iccol/desarrollo/actualizacion/validacion/fraude
+SORTSPACE=128M
+SORTCOMPRESS=5
+
+dd_REG01="$HOME/database/REG01"
+dd_REG02="$HOME/database/REG02"
+dd_REG03="$HOME/database/REG03"
+dd_REG04="$HOME/database/REG04"
+dd_ICDIAN="$HOME/database/ICDIAN"
+dd_ICDAS="$HOME/database/ICDAS"
+dd_CEDULAS="$HOME/temporales/CEDULAS"
+dd_ERROR_ICBNAP="$HOME/temporales/ERROR_ICBNAP"
+EXTFH=$HOME/extfh.cfg ; export EXTFH
+COBCONFIG=$HOME/cobconfig ; export COBCONFIG
+export COBDIR COBCPY LD_LIBRARY_PATH LOGDIR ICREGIS COBSW COBMODE FACTURACION
+export COBIDY COBOPT ASLMFRETRY CLASSPATH
+export BDU DATOS TEMPORALES LISTADOS DATABASE COBPATH TERMINALES DBSUPER TRABAJO
+export dd_REG01 dd_REG02 dd_REG03 dd_REG04 dd_ICDIAN dd_CEDULAS dd_ERROR_ICBNAP dd_ICDAS
+export ACTUALIZACION VALIDACION CALIFICACION MAESTROS_ACT MAESTROS_VAL COPYS FUENTES OBJETOS DIRECCIONES ICDB_AUX UTILES AUDITOR ICBAK ACTREG CAL_ENT CAL_SAL PRESP_ENT PRESP_SAL BD_SSO BD_NOVEDAT BD_EXTRACUPOS VALORES SCORES FRABDUACT FRABDUVAL SORTSPACE SORTCOMPRESS
+
+CVSROOT=":pserver:$LOGNAME@localhost:/usr/local/cvsroot" 
+export CVSROOT
+
+DB2INSTANCE=db2inst1
+DB2_EXTRACUPOS=$HOME/DB2_EXTRACUPOS.cfg
+DB2_NOVEDAT=$HOME/DB2_NOVEDAT.cfg
+DB2_DATACIU2=$HOME/DB2_DATACIU2.cfg
+DB2_SSO=$HOME/DB2_SSO.cfg
+DB2_ADMSSO=$HOME/DB2_ADMSSO.cfg
+DB2_LISEXC=$HOME/DB2_LISEXC.cfg
+HCOBND=$HOME/binds
+export DB2INSTANCE DB2_EXTRACUPOS DB2_NOVEDAT DB2_DATACIU2 DB2_SSO HCOBND DB2_ADMSSO DB2_LISEXC
+
+FECHA_AMNI=20090111
+export FECHA_AMNI
+
+# Lineas agregadas para hacer bind despues de la compilacion de programas
+# 28-Jun-2007
+if [ -f /export/home/db2inst1/sqllib/db2profile ]; then
+    . /export/home/db2inst1/sqllib/db2profile
+fi
+
+TTY=`tty`
+export TTY
+
+# Variable de ambiente para que tome el archivo de configuracion para el
+# maestro de cartera.
+
+# modificacion para ICCLIAR:
+ARCHTEMP=$HOME/archtemp; export ARCHTEMP
+SERV_CCI="DES"; export SERV_CCI
+NUM_EJEC="006"; export NUM_EJEC
+
+#Se configura ambiente para ejecutar jar con java 5 HLGS Abril-28-2010
+JAVA_HOME_5=/usr/jdk/latest
+JH_5=/usr/jdk/latest
+path_text=`echo $PATH | sed -e "s/:\/usr\/j2se\/bin/:\/usr\/jdk\/latest\/bin/g"`
+export PATH JAVA_HOME_5 JH_5 path_text
+
+
+# /usr/bin/prwarn               # issue a warning if password due to expire
+# modificacion para Incluir ejecucion de java en Cobol Mar-03-2009 HLGS
+. $COBDIR/bin/cobsje -v -J $JH
+JAR=$HOME/jars
+MACROS=$HOME/macros
+export JAR MACROS
+
+# CQ-INPRO00008005 ene-26-2012  Se deshabilitaron CQ8068
+
+clear
+banner `uname -n` Colombia $MF Sun_v.240
+
+# Agregadas el 02-Agosto-2013 en la instalacion del WrapPack8
+COLUMNS=80; export COLUMNS
+TERM=vt220; export TERM
+
+
+MFPLI_PRODUCT_DIR=/opt/mfocus/des/cobol ; export MFPLI_PRODUCT_DIR
+/d/iccol/desarrollo>clear
+/d/iccol/desarrollo>da
+/d/iccol/desarrollo/datos>cd^?^?      echo $DATOS
+/d/iccol/desarrollo/datos
+/d/iccol/desarrollo/datos>ls -la | less
+total 3824496
+drwxrwxr-x   4 iccavd   icdatacr   11264 May 23 16:25 .
+drwxrwxr-x  43 icgjcd   icdatacr   53248 May 23 16:13 ..
+-rw-rw-r--   1 iclagd   icdatacr    1188 Mar  3 20:03 APECON201309
+-rw-rw-r--   1 iclagd   icdatacr     500 Mar  3 20:03 APECON201309.log
+-rw-rw-r--   1 iclagd   icdatacr    1221 Mar  3 17:48 APECON201401
+-rw-rw-r--   1 iclagd   icdatacr     500 Mar  3 17:48 APECON201401.log
+-rw-rw-r--   1 icjamd   icdatacr  216918 May 21 23:58 ARCH-NODESEADOS-BCSC
+-rw-rw-r--   1 icgavd   icdatacr 4630366 Mar 21 17:32 ARCH-NODESEADOS-BCSC.DAT
+-rw-rw-r--   1 icjamd   icdatacr  279552 May 21 23:58 ARCH-NODESEADOS-BCSC.idx
+-rw-rw-r--   1 icgavd   icdatacr  673090 Mar 21 17:32 ARCH-NODESEADOS-GYF.DAT
+-rw-rw-r--   1 icgavd   icdatacr  195584 Mar 21 17:32 ARCH-NODESEADOS-GYF.DAT.idx
+-rw-rw-r--   1 icgavd   icdatacr 23777070 Mar 21 17:33 ARCHIVO_CALIF_BCOBOG.DAT
+-rw-rw-r--   1 icgavd   icdatacr 26190848 Mar 21 17:33 ARCHIVO_CALIF_BCOBOG.DAT.idx
+-rw-rw-r--   1 icjcld   icdatacr 599798544 May 23 05:14 BASEDANE.DAT
+-rw-rw-r--   1 icjcld   icdatacr 661849088 May 23 05:14 BASEDANE.DAT.idx
+-rw-r--r--   1 icehad   icdatacr     544 Mar 14 17:04 BatchHCPlus.cfg
+-rw-rw-r--   1 icjdld   icdatacr     405 Feb 13 14:42 BDALOSSO20140213
+-rw-rw-r--   1 icjdld   icdatacr     243 Feb 14 09:47 BDALOSSO20140214
+-rw-rw-r--   1 icjdld   icdatacr     324 Feb 17 10:31 BDALOSSO20140217
+-rw-rw-r--   1 icjcad   icdatacr      81 Feb 21 15:22 BDALOSSO20140221
+-rw-rw-r--   1 icfgcd   icdatacr     486 Mar 10 11:10 BDALOSSO20140310
+-rw-rw-r--   1 icvhfd   icdatacr      81 Mar 14 17:13 BDALOSSO20140314
+-rw-rw-r--   1 icjdld   icdatacr      81 Mar 18 15:32 BDALOSSO20140318
+-rw-rw-r--   1 icfgcd   icdatacr     324 Mar 21 15:26 BDALOSSO20140321
+-rw-rw-r--   1 icfgcd   icdatacr      81 Apr 14 09:41 BDALOSSO20140414
+-rw-rw-r--   1 icgasd   icdatacr     162 May 19 16:46 BDALOSSO20140519
+-rw-rw-r--   1 icgasd   icdatacr     162 May 20 15:29 BDALOSSO20140520
+-rw-rw-r--   1 icgasd   icdatacr     162 May 22 15:28 BDALOSSO20140522
+-rw-rw-r--   1 iccavd   icdatacr    1887 Feb 26 11:37 BDIEAPER.TEM
+drwxrwxr-x   2 icgjcd   icdatacr    4096 Mar 14 10:57 binds
+-rw-rw-r--   1 icehad   icdatacr       0 May  5 14:29 CARAC-IDE-PREC
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 12:09 CARAC-IDE-PREC-ant
+-rw-rw-r--   1 icehad   icdatacr 8977937 Mar  7 09:57 CARAC-IDE-PREC.20140307.core
+-rw-rw-r--   1 icehad   icdatacr    3072 May  5 14:29 CARAC-IDE-PREC.idx
+-rw-rw-r--   1 icjjmd   icdatacr    3072 May  5 12:09 CARAC-IDE-PREC.idx-ant
+-rw-rw-r--   1 icjcld   icdatacr     253 May  9 13:04 CartaNavTEL.par
+-rw-rw-r--   1 icjcld   icdatacr     253 May  9 14:21 CartaNavTEL00000000000.par
+-rw-rw-r--   1 icjcld   icdatacr     251 May 23 07:00 CartaNavTEL99999999999.par
+-rw-rw-r--   1 icjdld   icdatacr     696 Mar 25 16:58 ccierr.log
+-rw-r--r--   1 icimsd   icdatacr  417718 Mar 25 10:14 CEDULAS-DA
+-rw-rw-r--   1 iclagd   icdatacr   13000 Mar  7 07:02 cedulas-pva
+-rw-rw-r--   1 iclagd   icdatacr   13000 Mar  5 19:16 CEDULAS-PVA
+-rw-rw-r--   1 iclagd   icdatacr  438000 Mar 16 21:52 cedulas-pva-GLBLS-2
+-rw-rw-r--   1 icgavd   icdatacr  140765 Mar 21 16:53 CITICLIFERIA
+-rw-rw-r--   1 icgavd   icdatacr 51188340 Mar 21 16:53 CITICLIFERIA.DAT
+-rw-rw-r--   1 icgavd   icdatacr 17262592 Mar 21 16:53 CITICLIFERIA.DAT.idx
+-rw-rw-r--   1 icgavd   icdatacr   52224 Mar 21 16:53 CITICLIFERIA.idx
+-rw-rw-r--   1 icjdld   icdatacr    2503 Apr 30 09:30 citidat.prn
+:-rw-rw-r--   1 icjdld   icdatacr 35306695 Feb 11 12:25 citidat.prn_2014-04-30
+-rw-rw-r--   1 icjdld   icdatacr 36734192 May  5 17:01 citidat.prn.DAT
+-rw-rw-r--   1 icjdld   icdatacr 36544086 Apr  4 09:16 citidat.prn.DAT_2014-04-30
+-rw-rw-r--   1 icjdld   icdatacr 12991215 Feb 11 12:25 citidat.prn.DAT.20110607
+-rw-rw-r--   1 icjdld   icdatacr 16406528 May  5 17:01 citidat.prn.DAT.idx
+-rw-rw-r--   1 iclagd   icdatacr     105 Mar 13 08:44 citval01.val-201403130844
+-rw-rw-r--   1 iclagd   icdatacr     105 Mar 13 08:46 citval01.val-201403130846
+-rw-rw-r--   1 iccavd   icdatacr      13 May  6 09:00 CLA-NO-BLOQ
+-rw-rw-r--   1 icehad   icdatacr  101352 May 23 15:59 CLAVE.LOG
+-rw-rw-r--   1 icehad   icdatacr    7168 May 23 15:59 CLAVE.LOG.idx
+-rw-rw-r--   1 icjdld   icdatacr      26 Apr 10 09:43 cliente_antiguo
+-rw-rw-r--   1 icjdld   icdatacr      26 May 12 17:09 cliente_antiguo.DAT
+-rw-rw-r--   1 icjdld   icdatacr   46592 May  5 11:35 cliente_antiguo.DAT-DEMO
+-rw-rw-r--   1 icjdld   icdatacr   61440 May  5 11:35 cliente_antiguo.DAT-DEMO.idx
+-rw-rw-r--   1 icjdld   icdatacr    3072 May 12 17:09 cliente_antiguo.DAT.idx
+-rw-r--r--   1 icjdld   icdatacr 8417864 Mar 19 17:59 Clientes_no_vinculables.prn
+-rw-r--r--   1 icjdld   icdatacr 9937920 Mar 19 17:59 Clientes_no_vinculables.prn.idx
+-rw-rw-r--   1 iclagd   icdatacr       0 May  6 21:23 cmnesp01.apr
+-rw-rw-r--   1 iclagd   icdatacr       0 May  6 21:23 cmnesp01.est
+-rw-rw-r--   1 iclagd   icdatacr    1589 May  9 07:55 cmnesp01.log2
+-rw-rw-r--   1 iclagd   icdatacr       0 May  6 21:23 cmnesp01.rec
+-rw-rw-r--   1 iclagd   icdatacr       0 May  6 21:23 cmnesp01.sin
+-rw-rw-r--   1 iclagd   icdatacr      41 Mar 13 10:04 colesp01.apr.icdcona-201403131004
+-rw-rw-r--   1 icgavd   icdatacr 13734611 Mar 21 17:33 COLPATRIA_RETENCIONES_CUPO.DAT
+-rw-rw-r--   1 icgavd   icdatacr 9869312 Mar 21 17:33 COLPATRIA_RETENCIONES_CUPO.DAT.idx
+-rw-rw-r--   1 iclagd   icdatacr     120 Mar 13 08:36 colval01.val-201403130836
+-rw-rw-r--   1 iclagd   icdatacr     120 Mar 13 08:48 colval01.val-201403130848
+-rw-rw-r--   1 iclagd   icdatacr     120 Mar 13 08:56 colval01.val-201403130856
+-rw-rw-r--   1 iclagd   icdatacr     120 Mar 13 08:58 colval01.val-201403130858
+-rw-rw-r--   1 iclagd   icdatacr    2153 Apr  4 09:07 colval01.val-201404040907
+-rw-rw-r--   1 iclagd   icdatacr    2153 Apr  4 09:13 colval02.val-201404040913
+-rw-rw-r--   1 iclagd   icdatacr    2153 Apr  4 09:17 colval03.val-201404040917
+-rw-rw-r--   1 iclagd   icdatacr      23 Mar  8 11:22 confina.cons-201403081122
+-rw-rw-r--   1 iclagd   icdatacr   72515 Apr  8 10:40 CONSULTSB
+-rw-rw-r--   1 iclagd   icdatacr   79872 Mar  3 20:03 CONSULTSB.idx
+-rw-rw-r--   1 1395     icdatacr     164 May 12 11:34 corpbancalsg.dat
+-rw-rw-r--   1 icjcld   icdatacr     131 May  5 05:40 corpbrentabiz.dat
+-rw-rw-r--   1 iclagd   icdatacr   13884 Mar 27 18:20 CQ17723
+-rw-rw-r--   1 icgavd   icdatacr 1593864 Mar 21 17:34 CREDITITULOS.DAT
+-rw-rw-r--   1 icgavd   icdatacr 1046528 Mar 21 17:34 CREDITITULOS.DAT.idx
+-rw-rw-r--   1 icjdld   icdatacr       9 May  7 08:36 CTRL-sh-citibank-prescree
+-rwxrwxr-x   1 icbuild  icprodd     6585 Apr  7 15:50 datos1_BF
+-rw-r--r--   1 icimsd   icdatacr     280 May 21 10:51 Dav_Cuentas
+-rw-rw-r--   1 iclagd   icdatacr     279 May 23 08:39 Dav_Cuentas.DAT
+-rw-rw-r--   1 iclagd   icdatacr    3072 May 23 08:39 Dav_Cuentas.DAT.idx
+-rw-rw-r--   1 icgavd   icdatacr     192 Mar 21 17:35 Dav_cuota_x_mill.DAT
+-rw-rw-r--   1 icgavd   icdatacr  141258 Mar 21 17:35 Dav_empleados.DAT
+-rw-rw-r--   1 icgavd   icdatacr  193536 Mar 21 17:35 Dav_empleados.DAT.idx
+-rw-rw-r--   1 icgavd   icdatacr    4800 Mar 21 17:36 Dav_List_Ing.DAT
+:-rw-rw-r--   1 icgavd   icdatacr    7168 Mar 21 17:36 Dav_List_Ing.DAT.idx
+-rw-r--r--   1 icjdld   icdatacr  909909 Feb 12 17:37 Dav_No_Deseados.DAT
+-rw-r--r--   1 icjdld   icdatacr 1160192 Feb 12 17:37 Dav_No_Deseados.DAT.idx
+-rw-rw-r--   1 icgavd   icdatacr     165 Mar 21 17:35 Dav_Param_Caract.DAT
+-rw-r--r--   1 icjdld   icdatacr      54 Mar 18 16:05 Dav_Programas
+-rw-r--r--   1 icjdld   icdatacr  623790 Feb 12 17:37 Dav_Sup_empleados.DAT
+-rw-r--r--   1 icjdld   icdatacr  383322 Feb 12 17:37 Dav_Sup_empleados.DAT-20070507
+-rw-r--r--   1 icjdld   icdatacr  112640 Feb 12 17:37 Dav_Sup_empleados.DAT-20070507.idx
+-rw-r--r--   1 icjdld   icdatacr  387556 Feb 12 17:37 Dav_Sup_empleados.DAT-20070605
+-rw-r--r--   1 icjdld   icdatacr  114688 Feb 12 17:37 Dav_Sup_empleados.DAT-20070605.idx
+-rw-r--r--   1 icjdld   icdatacr  390572 Feb 12 17:37 Dav_Sup_empleados.DAT-20070706
+-rw-r--r--   1 icjdld   icdatacr  114688 Feb 12 17:37 Dav_Sup_empleados.DAT-20070706.idx
+-rw-r--r--   1 icjdld   icdatacr  398750 Feb 12 17:37 Dav_Sup_empleados.DAT-20080730
+-rw-r--r--   1 icjdld   icdatacr  117760 Feb 12 17:37 Dav_Sup_empleados.DAT-20080730.idx
+-rw-r--r--   1 icjdld   icdatacr  354844 Feb 12 17:37 Dav_Sup_empleados.DAT.20070220
+-rw-r--r--   1 icjdld   icdatacr  534354 Feb 12 17:37 Dav_Sup_empleados.DAT.20110505
+-rw-r--r--   1 icjdld   icdatacr  576520 Feb 12 17:37 Dav_Sup_empleados.DAT.20110712
+-rw-r--r--   1 icjdld   icdatacr  583480 Feb 12 17:37 Dav_Sup_empleados.DAT.20110715
+-rw-r--r--   1 icjdld   icdatacr  582668 Feb 12 17:37 Dav_Sup_empleados.DAT.20110816
+-rw-r--r--   1 icjdld   icdatacr  181248 Feb 12 17:37 Dav_Sup_empleados.DAT.idx
+-rw-r--r--   1 icjdld   icdatacr  105472 Feb 12 17:37 Dav_Sup_empleados.DAT.idx.20070220
+-rw-r--r--   1 icjdld   icdatacr  156672 Feb 12 17:37 Dav_Sup_empleados.DAT.idx.20110505
+-rw-r--r--   1 icjdld   icdatacr  167936 Feb 12 17:37 Dav_Sup_empleados.DAT.idx.20110712
+-rw-r--r--   1 icjdld   icdatacr  169984 Feb 12 17:37 Dav_Sup_empleados.DAT.idx.20110715
+-rw-r--r--   1 icjdld   icdatacr  169984 Feb 12 17:37 Dav_Sup_empleados.DAT.idx.20110816
+-rw-r--r--   1 icjdld   icdatacr  626548 Feb 12 17:38 Dav_VIP.DAT
+-rw-r--r--   1 icjdld   icdatacr  800768 Feb 12 17:38 Dav_VIP.DAT.idx
+drwxrwxr-x   2 iccavd   icdatacr     512 May 20 11:35 documentacion
+-rw-rw-r--   1 icgavd   icdatacr      16 Mar  6 14:26 ENTIDIGI.DAT
+-rw-rw-r--   1 icgavd   icdatacr      16 Mar  6 14:26 ENTIDIGICIFTAR.DAT
+-rw-rw-r--   1 icjdld   icdatacr     538 Apr 30 16:40 Estrategias.DAT
+-rw-rw-r--   1 icjdld   icdatacr     496 Apr 29 16:33 Estrategias.DAT-DEMO-2014-04-30
+-rw-rw-r--   1 icjdld   icdatacr     457 Feb 12 17:43 Estrategias.DAT-DESA-2014-02-12
+-rw-rw-r--   1 icjdld   icdatacr     538 Apr 30 16:40 Estrategias.DAT-DESA-2014-04-30
+-rw-rw-r--   1 icgavd   icdatacr 117042176 Mar 21 17:34 ETB_VARIABLES_PROPIAS.DAT
+-rw-rw-r--   1 icgavd   icdatacr 30217216 Mar 21 17:34 ETB_VARIABLES_PROPIAS.DAT.idx
+-rw-rw-r--   1 icjjmd   icdatacr     777 May 21 10:04 FACRPTD
+-rw-rw-r--   1 icjjmd   icdatacr    3072 May 21 10:04 FACRPTD.idx
+-rw-rw-r--   1 icrmbd   icdatacr 174861120 May 21 16:55 FACUCMB
+-rw-rw-r--   1 icrmbd   icdatacr 1610752 May 21 16:55 FACUCMB.idx
+-rw-rw-r--   1 icjjmd   icdatacr      12 May 21 10:05 FACUCMB.PARM
+-rw-rw-r--   1 icfacd   icdatacr     390 Feb 20 18:47 FALINCOG.DAT
+-rw-rw-r--   1 icfacd   icdatacr    3072 Feb 20 18:47 FALINCOG.DAT.idx
+-rw-r--r--   1 icimsd   icdatacr   35308 May 19 16:43 FNAUVRTASA
+-rw-rw-r--   1 icimsd   icdatacr   34047 May 19 16:50 FNAUVRTASA.DAT
+-rw-r--r--   1 icimsd   icdatacr   31590 Mar 20 16:12 FNAUVRTASA.DAT-2014-03-20
+-rw-r--r--   1 icimsd   icdatacr   32427 Apr 24 16:16 FNAUVRTASA.DAT-2014-04-24
+-rw-rw-r--   1 icimsd   icdatacr   33237 May 19 16:42 FNAUVRTASA.DAT-20140519
+-rw-rw-r--   1 icimsd   icdatacr   35308 May 19 16:48 FNAUVRTASA.DAT-imsg
+:-rw-rw-r--   1 icimsd   icdatacr   19456 May 19 16:50 FNAUVRTASA.DAT.idx
+-rw-r--r--   1 icimsd   icdatacr   17408 Mar 20 16:12 FNAUVRTASA.DAT.idx-2014-03-20
+-rw-r--r--   1 icimsd   icdatacr   18432 Apr 24 16:16 FNAUVRTASA.DAT.idx-2014-04-24
+-rw-rw-r--   1 icimsd   icdatacr   18432 May 19 16:42 FNAUVRTASA.DAT.idx-20140519
+-rw-rw-r--   1 icimsd   icdatacr   19480 May 19 16:48 FNAUVRTASA.DAT.idx-imsg
+-rw-r--r--   1 icimsd   icdatacr   18455 Apr 24 16:47 FNAUVRTASA.DAT.idxppp
+-rw-rw-r--   1 1395     icdatacr    8383 Mar 10 10:08 HORIZONTE201403
+-rw-rw-r--   1 1395     icdatacr   14336 Mar 10 10:08 HORIZONTE201403.idx
+-rw-rw-r--   1 icehad   icdatacr  213004 May 23 15:59 ICBCLA.LOG
+-rw-rw-r--   1 icehad   icdatacr    7168 May 23 15:59 ICBCLA.LOG.idx
+-rw-rw-r--   1 icjdld   icdatacr    5734 May 23 11:01 ICBSUS.LOG
+-rw-rw-r--   1 icjdld   icdatacr    3072 May 23 11:01 ICBSUS.LOG.idx
+-rw-rw-r--   1 1395     icdatacr     738 Apr  4 09:53 ICDCONA.DAT
+-rw-rw-r--   1 icjdld   icdatacr    1022 Apr  9 09:54 ICGD12V55.aif
+-rw-rw-r--   1 icimsd   icdatacr    2216 May 19 16:58 ICGKAR.aif
+-rw-rw-r--   1 icjdld   icdatacr    1288 Mar 12 17:07 ICGS65V10.aif
+-rw-rw-r--   1 icfgcd   icdatacr       0 Apr 30 17:23 ICJSUS.PRN
+-rw-r--r--   1 icjdld   icdatacr     494 Feb 11 10:31 ICSALMIN.DAT
+-rw-r--r--   1 1395     icdatacr    5257 Feb 17 13:22 ICSANATA.DAT
+-r--r--r--   1 icimsd   icdatacr  420000 Mar 21 11:57 ID-PC-30000
+-rw-rw-r--   1 icjdld   icdatacr      39 Mar  5 10:58 ides-dario.log
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:33 INFALER01.TXT
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:32 INFALER01.TXT-ant
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:33 INFALER02
+-rw-rw-r--   1 icjjmd   icdatacr    3072 May  5 16:33 INFALER02.idx
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:06 INFALER04.TXT
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:04 INFALER04.TXT-ant
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:06 INFALER05
+-rw-rw-r--   1 icjjmd   icdatacr       0 May  5 16:04 INFALER05-ant
+-rw-rw-r--   1 icjjmd   icdatacr    3072 May  5 16:06 INFALER05.idx
+-rw-rw-r--   1 icjjmd   icdatacr    3072 May  5 16:04 INFALER05.idx-ant
+-rw-rw-r--   1 icgavd   icdatacr    1517 Mar  6 14:25 LINEAS-DCRE-HSBC.DAT
+-rw-rw-r--   1 icgavd   icdatacr    1834 Mar  6 14:26 LINEAS-DCRE.DAT
+-rw-rw-r--   1 icgavd   icdatacr    1330 Mar  6 14:25 LINEAS-DCRETAR.DAT
+-rw-rw-r--   1 icjdld   icdatacr     766 May  8 10:52 ListaLogs.DAT
+-rw-rw-r--   1 icjdld   icdatacr     634 Apr 23 16:00 ListaLogs.DAT_DLM
+-rw-rw-r--   1 icjdld   icdatacr     634 Apr 29 16:17 ListaLogs.DAT-DESA_2014-05-08
+-rw-rw-r--   1 1395     icdatacr     458 Mar  4 17:15 ListAperAcier0.par
+-rw-rw-r--   1 1395     icdatacr     466 Feb 11 10:47 ListAperAcier860024151.par
+-rw-rw-r--   1 1395     icdatacr      50 Feb 19 11:42 ListSubscrib010008.par
+-rw-rw-r--   1 icimsd   icdatacr     785 Mar  4 13:18 ListVentaCruzada.par
+-rw-rw-r--   1 icimsd   icdatacr     793 Mar 26 09:39 ListVentaCruzada860051135.par
+-rw-rw-r--   1 icimsd   icdatacr     785 Mar  4 13:21 ListVentaCruzada900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     785 May 19 17:04 ListVentaCruzada999999999.par
+-rw-rw-r--   1 1395     icdatacr   20020 Apr 21 15:20 LOGPESVNO.DAT
+-rw-rw-r--   1 1395     icdatacr   17408 Apr 21 15:20 LOGPESVNO.DAT.idx
+-rw-rw-r--   1 1395     icdatacr       0 Feb 27 08:14 LOGPESVNO.LOG
+-rw-rw-r--   1 1395     icdatacr    4096 Feb 27 08:14 LOGPESVNO.LOG.idx
+-rw-r--r--   1 icvhfd   icdatacr      99 Mar 14 18:09 MEDIO_OCCI.DAT
+:-rw-rw-r--   1 1395     icdatacr     126 Feb 19 11:42 MonitorGrp010008.par
+-rw-rw-r--   1 icjcld   icdatacr      54 Feb 16 13:09 MonitorOpc230001.par
+-rw-rw-r--   1 icjcld   icdatacr      54 Feb 16 11:59 MonitorOpc4444.par
+-rw-rw-r--   1 1395     icdatacr      54 Apr  2 14:04 MonitorOpc980001.par
+-rw-rw-r--   1 icrmbd   icdatacr     411 Mar 18 10:18 NHDCESTADI14
+-rw-rw-r--   1 icrmbd   icdatacr    3072 Mar 18 10:18 NHDCESTADI14.idx
+-rw-rw-r--   1 icrmbd   icdatacr       0 Mar 17 09:00 NHDCPARCLI
+-rw-rw-r--   1 icrmbd   icdatacr    3072 Mar 17 09:00 NHDCPARCLI.idx
+-rw-rw-r--   1 icrmbd   icdatacr    1166 Mar 18 10:17 NHDCPARICBUP
+-rw-rw-r--   1 icrmbd   icdatacr   19001 Mar 18 10:18 NHDCPARITCO
+-rw-rw-r--   1 icrmbd   icdatacr    1980 Mar 18 10:18 NHDCPARTCO
+-rw-rw-r--   1 icrmbd   icdatacr    3072 Mar 18 10:18 NHDCPARTCO.idx
+-rw-r--r--   1 icfacd   icdatacr     947 May  5 15:20 nits-datahost.dat
+-rw-r--r--   1 icjdld   icdatacr 15840929 Mar 21 11:00 no_vinculables_colp-comcel.prn
+-rw-r--r--   1 icjdld   icdatacr 20134912 Mar 21 11:00 no_vinculables_colp-comcel.prn.idx
+-rw-------   1 icjdld   icdatacr     886 Mar  5 10:58 nohup.out
+-rw-rw-r--   1 icjcld   icdatacr 2724942 May 23 06:54 NRESUMENTEL.DAT
+-rw-rw-r--   1 icjcld   icdatacr 1363098 May 23 04:52 NRESUMENTEL.DAT.10
+-rw-rw-r--   1 icjcld   icdatacr  294912 May 23 06:54 NRESUMENTEL.DAT.idx
+-rw-rw-r--   1 icjcld   icdatacr  125952 May 23 04:52 NRESUMENTEL.DAT.idx.10
+-rw-rw-r--   1 icgavd   icdatacr    3192 Mar  6 14:25 OFICINAS-010.DAT
+-rwxrwxr-x   1 iccavd   icdatacr   11780 Apr 28 16:47 OFICINAS-023.DAT
+-rw-rw-r--   1 icgavd   icdatacr   11605 Mar  6 14:25 OFICINAS-023.DAT-20140306
+-rwxrwxr-x   1 icjjmd   icdatacr   11647 Apr  9 11:32 OFICINAS-023.DAT-20140409
+-rwxrwxr-x   1 icjjmd   icdatacr   11780 Apr 28 08:37 OFICINAS-023.DAT-20140428
+-rw-rw-r--   1 iclagd   icdatacr    1883 Apr  4 08:39 p15805-bbog.val-201404040839
+-rw-rw-r--   1 iclagd   icdatacr    1883 Apr  4 09:53 p15805-cons.val-201404040953
+-rw-r--r--   1 icfacd   icdatacr     149 May  5 10:14 PAR-NUE-SUS.DAT
+-rw-r--r--   1 icfacd   icdatacr     144 Feb 13 16:37 PAR-VISOR
+-rw-rw-r--   1 icjdld   icdatacr      14 Feb 13 17:02 PARAM-ICGCIT.DAT
+-rw-rw-r--   1 icjdld   icdatacr    1232 May 12 17:09 PARAM-ICGD12.DAT
+-rw-r--r--   1 icjdld   icdatacr     630 Feb 12 14:44 PARAM-ICGD12.DAT_2013-07-25
+-rw-rw-r--   1 icjjpd   icdatacr     675 Feb 18 09:11 PARAM-ICGD12.DAT_DESA_2014-04-08
+-rw-rw-r--   1 icjdld   icdatacr    1148 Apr  8 15:23 PARAM-ICGD12.DAT_DESA_2014-04-10
+-rw-rw-r--   1 icjdld   icdatacr     546 Mar 28 11:38 PARAM-ICGD12.DAT_PROD_2014-04-08
+-rw-r--r--   1 icjdld   icdatacr     546 Feb 12 14:44 PARAM-ICGD12.DAT-20100317
+-rw-r--r--   1 icjdld   icdatacr     546 Feb 12 14:44 PARAM-ICGD12.DAT-20111031
+-rw-r--r--   1 icjdld   icdatacr     616 Feb 12 14:44 PARAM-ICGD12.DAT-2012-08-06
+-rw-r--r--   1 icjdld   icdatacr      16 Feb 12 14:44 PARAM-ICGD12BF.DAT
+-rw-r--r--   1 icjdld   icdatacr     645 Feb 12 14:44 PARAM-ICGD12VPROD-2012-11-08.DAT
+-rw-r--r--   1 icjdld   icdatacr     448 Feb 13 17:02 PARAM-ICGD21.DAT
+-rw-r--r--   1 icjdld   icdatacr     570 Feb 13 17:02 PARAM-ICGD22.DAT
+-rw-r--r--   1 icjdld   icdatacr     285 Feb 13 17:02 PARAM-ICGD25.DAT
+-rw-rw-r--   1 icjdld   icdatacr      98 Feb 13 17:02 PARAM-ICGD34.DAT
+-rw-rw-r--   1 icjdld   icdatacr      71 Feb 13 17:02 PARAM-ICGD35.DAT
+-rw-rw-r--   1 icjdld   icdatacr      45 Feb 13 17:02 PARAM-ICGD37.DAT
+-rw-r--r--   1 icjdld   icdatacr     643 Feb 12 14:44 PARAM-ICGD40-8293.DAT
+-rw-r--r--   1 icjdld   icdatacr    4368 Mar 17 12:56 PARAM-ICGD40.DAT
+-rw-r--r--   1 icjdld   icdatacr    4368 Mar  7 18:16 PARAM-ICGD40.DAT_DESA_2014-03-17
+:-rw-rw-r--   1 icjdld   icdatacr     798 Feb 28 09:59 PARAM-ICGD40.DAT_PROD_2014-02-28
+-rw-r--r--   1 icjdld   icdatacr     463 Feb 12 14:44 PARAM-ICGD40VPROC-2012-11-01.DAT
+-rw-rw-r--   1 icjdld   icdatacr      98 Feb 13 17:02 PARAM-ICGD42.DAT
+-rw-rw-r--   1 icjdld   icdatacr    1008 Feb 13 17:02 PARAM-ICGD43.DAT
+-rw-rw-r--   1 icjdld   icdatacr     111 Feb 13 17:02 PARAM-ICGD44.DAT
+-rw-rw-r--   1 icjdld   icdatacr     433 Feb 13 17:02 PARAM-ICGD46.DAT
+-rw-rw-r--   1 icjdld   icdatacr     612 Mar 19 17:18 PARAM-ICGD47.DAT
+-rw-rw-r--   1 icjdld   icdatacr     612 Mar 19 17:18 PARAM-ICGD47.DAT_2014-03-20
+-rw-r--r--   1 icjdld   icdatacr     915 Feb 13 17:02 PARAM-ICGD49.DAT
+-rw-rw-r--   1 icjdld   icdatacr     462 Feb 13 17:02 PARAM-ICGD50.DAT
+-rw-rw-r--   1 icjdld   icdatacr      30 Feb 13 17:02 PARAM-ICGD57.DAT
+-rw-r--r--   1 icjdld   icdatacr     195 Feb 13 17:02 PARAM-ICGD60.DAT
+-rw-rw-r--   1 icimsd   icdatacr    1218 Feb 13 17:02 PARAM-ICGD61.DAT
+-rw-rw-r--   1 icjdld   icdatacr     111 Feb 13 17:02 PARAM-ICGD62.DAT
+-rw-rw-r--   1 icjdld   icdatacr      12 Feb 13 17:02 PARAM-ICGD64.DAT
+-rw-r--r--   1 icjdld   icdatacr     308 Feb 13 17:02 PARAM-ICGD65.DAT
+-rw-rw-r--   1 icjdld   icdatacr     570 Feb 13 17:02 PARAM-ICGD71.DAT
+-rw-rw-r--   1 icjdld   icdatacr      50 Feb 13 17:02 PARAM-ICGD73.DAT
+-rw-rw-r--   1 icjdld   icdatacr      96 Feb 13 17:02 PARAM-ICGD75.DAT
+-rw-rw-r--   1 icjdld   icdatacr     476 Feb 13 17:02 PARAM-ICGD78.DAT
+-rw-rw-r--   1 icjdld   icdatacr     308 Feb 13 17:02 PARAM-ICGD81.DAT
+-rw-rw-r--   1 icjdld   icdatacr      80 Feb 13 17:02 PARAM-ICGD84.DAT
+-rw-rw-r--   1 icjdld   icdatacr     574 Feb 13 17:02 PARAM-ICGD85.DAT
+-rw-rw-r--   1 icjdld   icdatacr     306 Feb 13 17:02 PARAM-ICGS06.DAT
+-rw-r--r--   1 icjdld   icdatacr      70 Feb 12 14:44 PARAM-ICGS07.DAT
+-rw-r--r--   1 icjdld   icdatacr      14 Feb 12 14:44 PARAM-ICGS10.DAT
+-rw-rw-r--   1 icjdld   icdatacr      15 Feb 13 17:02 PARAM-ICGS36.DAT
+-rw-rw-r--   1 icjdld   icdatacr      10 Feb 13 17:02 PARAM-ICGS37.DAT
+-rw-rw-r--   1 icjdld   icdatacr      14 Feb 13 17:02 PARAM-ICGS42.DAT
+-rw-rw-r--   1 icjdld   icdatacr     782 Mar 12 15:42 PARAM-ICGS65.DAT
+-rw-rw-r--   1 icllsd   icdatacr     782 Mar 12 09:56 PARAM-ICGS65.DAT_BK12032014
+-rw-rw-r--   1 icjdld   icdatacr     828 Mar 12 09:57 PARAM-ICGS65.DAT_PROD_2014-03-12
+-rw-r--r--   1 icjdld   icdatacr      96 Feb 12 14:44 PARAM-ICGS67.DAT
+-rw-rw-r--   1 icfacd   icdatacr    3332 Mar 12 17:03 PARAM2-ICGS65.DAT
+-rw-rw-r--   1 icllsd   icdatacr    3332 Mar 12 09:57 PARAM2-ICGS65.DAT_BK12032014
+-rw-rw-r--   1 icjdld   icdatacr    3332 Mar 12 09:58 PARAM2-ICGS65.DAT_PROD_2014-03-12
+-rw-rw-r--   1 iclagd   icdatacr    6863 Mar  3 19:55 parchivos.log
+-rw-rw-r--   1 iclagd   icdatacr    3401 Feb 28 10:04 parchivos.log-err
+-rw-rw-r--   1 icrmbd   icdatacr       0 Feb 11 15:56 PARCLI
+-rw-rw-r--   1 icrmbd   icdatacr    3072 Feb 11 15:56 PARCLI.idx
+-rw-rw-r--   1 iccavd   icdatacr       0 May 23 16:01 PARCON
+-rw-rw-r--   1 iccavd   icdatacr       0 May 23 16:02 PARCON-ini
+-rw-rw-r--   1 iccavd   icdatacr    3072 May 23 16:01 PARCON.idx
+-rw-rw-r--   1 iccavd   icdatacr    3072 May 23 16:02 PARCON.idx-ini
+-rw-rw-r--   1 icrmbd   icdatacr    2520 May 23 16:03 PARESTA14
+-rw-rw-r--   1 icrmbd   icdatacr    3072 May 23 16:03 PARESTA14.idx
+-rw-rw-r--   1 icrmbd   icdatacr    5391 May 23 16:02 PARICBUP-999
+-rw-rw-r--   1 icrmbd   icdatacr   22011 May 23 16:03 PARITCO
+-rw-rw-r--   1 icrmbd   icdatacr    3072 May 23 16:03 PARITCO.idx
+:-rw-rw-r--   1 icrmbd   icdatacr     475 May 23 16:03 PARSESIO
+-rw-rw-r--   1 icrmbd   icdatacr    3072 May 23 16:03 PARSESIO.idx
+-rw-rw-r--   1 iccavd   icdatacr    4884 May 23 16:03 PARTCO-1
+-rw-rw-r--   1 icrmbd   icdatacr   36696 May 19 11:01 PARTCO-ant
+-rw-rw-r--   1 iccavd   icdatacr    3072 May 23 16:03 PARTCO.idx-1
+-rw-rw-r--   1 icrmbd   icdatacr    8192 May 19 11:01 PARTCO.idx-ant
+-rw-rw-r--   1 icimsd   icdatacr     291 Apr 28 13:32 PE-Rentabilizacion-.par
+-rw-rw-r--   1 icimsd   icdatacr     280 Apr 28 13:57 PE-Rentabilizacion-860007738.par
+-rw-rw-r--   1 iclagd   icdatacr     282 Apr  1 17:05 PE-Rentabilizacion-860034313.par
+-rw-rw-r--   1 icimsd   icdatacr     189 Apr 28 12:11 PE-Rentabilizacion-ss.par
+-rw-rw-r--   1 iclagd   icdatacr     936 Mar 24 09:33 porvenir
+-rw-rw-r--   1 iclagd   icdatacr     858 Mar 20 21:08 PORVENIR-CIUDS
+-rw-rw-r--   1 iclagd   icdatacr      83 Mar 26 18:06 PORVENIR.SAL7
+-rw-rw-r--   1 iclagd   icdatacr    3072 Mar 26 18:06 PORVENIR.SAL7.idx
+-rw-rw-r--   1 iclagd   icdatacr    1717 Mar 26 17:36 PORVENIR201402
+-rw-rw-r--   1 iclagd   icdatacr    5120 Mar 26 17:36 PORVENIR201402.idx
+-rw-rw-r--   1 iclagd   icdatacr     101 Mar 26 18:06 PORVENIR201403
+-rw-rw-r--   1 iclagd   icdatacr    3072 Mar 26 18:06 PORVENIR201403.idx
+-rw-r--r--   1 icvhfd   icdatacr    6286 Mar 14 18:09 PRODU_OCCI.DAT
+-rw-rw-r--   1 iclagd   icdatacr     105 Mar 13 08:42 prubcobta.val-201403130842
+-rw-rw-r--   1 icdgd    icdatacr      14 May 19 16:04 prueba.parm
+-rw-rw-r--   1 iclagd   icdatacr     105 Mar 13 09:51 pruhuellasj.val-201403130951
+-rw-rw-r--   1 iccavd   icdatacr       0 Apr 30 16:28 RAS-SAL.20140430
+-rw-rw-r--   1 icjcld   icdatacr     174 May 22 10:02 ReconocerSARLAFT980001.par
+-rw-r--r--   1 1395     icdatacr      24 Feb 12 21:45 REGPESVNO.VALI
+-rw-rw-r--   1 icgavd   icdatacr  364329 Mar 21 17:36 Renaware_VIP.DAT
+-rw-rw-r--   1 icgavd   icdatacr  290816 Mar 21 17:36 Renaware_VIP.DAT.idx
+-rw-rw-r--   1 iccavd   icdatacr     206 Feb 11 16:15 SCOREPJ.DAT
+-rw-rw-r--   1 icfacd   icdatacr     191 Feb 11 11:39 SCOREPJ.DAT-ANT
+-rw-rw-r--   1 icrmbd   icdatacr     206 Feb 11 16:09 SCOREPJ.DAT.NEW
+-rw-rw-r--   1 icjdld   icdatacr     228 Mar  3 10:07 SERF-CED-CONS
+-rw-rw-r--   1 icjdld   icdatacr    3072 Mar  3 10:07 SERF-CED-CONS.idx
+-rw-rw-r--   1 icjdld   icdatacr     285 Feb 28 15:36 SERF-CED-CONX
+-rw-rw-r--   1 icjdld   icdatacr    3072 Feb 28 15:36 SERF-CED-CONX.idx
+-rw-r--r--   1 icimsd   icdatacr  147940 Feb 18 18:37 SERF-TPLATA-CONS.DAT
+-rw-r--r--   1 icimsd   icdatacr  191488 Feb 18 18:37 SERF-TPLATA-CONS.DAT.idx
+-rw-rw-r--   1 1395     icdatacr     140 Mar  4 17:16 shaperturasacierta0.par
+-rw-rw-r--   1 1395     icdatacr     140 Feb 11 10:47 shaperturasacierta860024151.par
+-rw-r--r--   1 icjdld   icdatacr      44 Mar 18 16:05 Sus_Programas
+-rw-rw-r--   1 icgavd   icdatacr     208 Mar 21 16:54 TABFACTOR-CITI.DAT
+-rw-rw-r--   1 icgavd   icdatacr    1296 Mar 21 16:25 TABSUSCR-CITI.DAT
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 18:59 Total00800153993_201310.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 20:48 Total00800153993_201311.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 16:50 Total00800153993_201312.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 19:29 Total00830037330_201310.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 21:19 Total00830037330_201311.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 17:20 Total00830037330_201312.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 19:58 Total00830114921_201310.log
+-rw-rw-r--   1 icjcld   icdatacr     439 May 15 21:49 Total00830114921_201311.log
+:-rw-rw-r--   1 icjcld   icdatacr     439 May 15 17:49 Total00830114921_201312.log
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar  4 13:18 VentaCruzada.par
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar 26 09:39 VentaCruzada860051135.par
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar  4 13:21 VentaCruzada900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     166 May 19 17:04 VentaCruzada999999999.par
+-rw-rw-r--   1 icgavd   icdatacr  148148 Mar 21 17:36 Vetados_Fact.DAT
+-rw-rw-r--   1 icgavd   icdatacr  191488 Mar 21 17:36 Vetados_Fact.DAT.idx
+-rw-rw-r--   1 icimsd   icdatacr     789 Mar 17 02:06 VisorCompartidos.par
+-rw-rw-r--   1 icjamd   icdatacr     789 Mar 31 14:57 VisorCompartidos172.24.2.83.par
+-rw-rw-r--   1 icimsd   icdatacr     783 Apr  9 09:09 VisorCompartidos860002964.par
+-rw-rw-r--   1 icimsd   icdatacr     782 Mar 28 16:41 VisorCompartidos900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     789 Mar 17 02:06 VisorCompartidos99999999999.par
+-rw-rw-r--   1 iccavd   icdatacr       0 Apr 30 16:28 WEB-RAS.LOG.20140430
+-rw-rw-r--   1 iccavd   icdatacr       0 May  6 14:21 WEB-RAS.LOG.20140506
+-rw-rw-r--   1 iccavd   icdatacr       0 Apr 30 16:28 WEB-SAL.20140430
+-rw-rw-r--   1 iccavd   icdatacr       0 May  6 14:21 WEB-SAL.20140506
+-rw-rw-r--   1 iclagd   icdatacr      28 May 16 20:01 xxyy.log
+(END) /d/iccol/desarrollo/datos>vi *  ew *.par
+30 files to edit
+"CartaNavTEL.par" [Read only] 15 lines, 253 characters 001=201312
+002=00000000000
+003=Total
+004=00800153993
+005=00830037330
+006=00830114921
+007=00000000000
+008=00000000000
+009=00000000000
+010=00000000000
+011=00000000000
+012=00000000000
+013=visor-201312-201312.SLD1PN2
+014=visor-201312-201312.SLD1PJ2
+015=MES
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CartaNavTEL.par" [Read only] 15 lines, 253 characters:n"CartaNavTEL00000000000.par" [Read only] 15 lines, 253 characters 001=201312
+002=00000000000
+003=Total
+004=00800153993
+005=00830037330
+006=00830114921
+007=00000000000
+008=00000000000
+009=00000000000
+010=00000000000
+011=00000000000
+012=00000000000
+013=visor-201312-201312.SLD1PN2
+014=visor-201312-201312.SLD1PJ2
+015=MES
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CartaNavTEL00000000000.par" [Read only] 15 lines, 253 characters:map q :n^^M:n"CartaNavTEL99999999999.par" [Read only] 15 lines, 251 characters 001=201312
+002=99999999999
+003=NAT
+004=00800153993
+005=00830037330
+006=00830114921
+007=00000000000
+008=00000000000
+009=00000000000
+010=00000000000
+011=00000000000
+012=00000000000
+013=visor-201312-201312.SLD1PN2
+014=visor-201312-201312.SLD1PJ2
+015=MES
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CartaNavTEL99999999999.par" [Read only] 15 lines, 251 characters:n"ListAperAcier0.par" [Read only] 66 lines, 458 characters 001=0
+002=0
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+011=0
+012=0
+013=0
+014=0
+015=0
+016=0
+017=0
+018=0
+019=0
+020=0
+100=0
+101=20
+102=21
+103=40
+104=41
+105=60
+106=61
+107=80
+108=81
+109=999
+200=150
+201=427
+202=428
+203=589
+204=590
+205=654
+206=655
+207=693
+208=694
+209=727
+210=728
+211=750
+212=751
+213=766
+214=767
+215=781
+216=782
+217=798
+218=799"ListAperAcier0.par" [Read only] 66 lines, 458 characters:n"ListAperAcier860024151.par" [Read only] 66 lines, 466 characters 001=860024151
+002=0
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+011=0
+012=0
+013=0
+014=0
+015=0
+016=0
+017=0
+018=0
+019=0
+020=0
+100=0
+101=20
+102=21
+103=40
+104=41
+105=60
+106=61
+107=80
+108=81
+109=999
+200=150
+201=427
+202=428
+203=589
+204=590
+205=654
+206=655
+207=693
+208=694
+209=727
+210=728
+211=750
+212=751
+213=766
+214=767
+215=781
+216=782
+217=798
+218=799"ListAperAcier860024151.par" [Read only] 66 lines, 466 characters:n"ListSubscrib010008.par" [Read only] 10 lines, 50 characters 001=
+002=
+003=
+004=
+005=
+006=
+007=
+008=
+009=
+010=
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"ListSubscrib010008.par" [Read only] 10 lines, 50 characters:n"ListVentaCruzada.par" [Read only] 57 lines, 785 characters 000=No
+001=860051135
+002=0
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+100=Default
+101=0000000
+102=2500000
+103=2500001
+104=5000000
+105=5000001
+106=99999999
+200=Default
+201=600
+202=700
+203=701
+204=850
+205=851
+206=950
+300=Default
+301=01.TDC
+302=02.TDC CAB
+303=03.TDC ROT
+304=04.TDC HIP
+305=05.TDC OTRO
+306=06.TDC CAB ROT
+307=07.TDC CAB HIP
+308=08.TDC CAB OTRO
+309=09.TDC ROT HIP
+310=10.TDC ROT OTRO
+311=11.TDC HIP OTRO
+312=12.TDC CAB ROT HIP
+313=13.TDC CAB ROT OTRO
+314=14.TDC CAB HIP OTRO
+315=15.TDC ROT HIP OTRO
+316=16.TDC CAB ROT HIP OTRO
+317=17.CAB
+318=18.CAB ROT
+319=19.CAB HIP
+320=20.CAB OTRO
+321=21.CAB ROT HIP
+322=22.CAB ROT OTRO
+323=23.CAB HIP OTRO"ListVentaCruzada.par" [Read only] 57 lines, 785 characters:n"ListVentaCruzada860051135.par" [Read only] 57 lines, 793 characters 000=Si
+001=860051135
+002=860002964
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+100=Default
+101=0000000
+102=2500000
+103=2500001
+104=5000000
+105=5000001
+106=99999999
+200=Default
+201=600
+202=700
+203=701
+204=850
+205=851
+206=950
+300=Default
+301=01.TDC
+302=02.TDC CAB
+303=03.TDC ROT
+304=04.TDC HIP
+305=05.TDC OTRO
+306=06.TDC CAB ROT
+307=07.TDC CAB HIP
+308=08.TDC CAB OTRO
+309=09.TDC ROT HIP
+310=10.TDC ROT OTRO
+311=11.TDC HIP OTRO
+312=12.TDC CAB ROT HIP
+313=13.TDC CAB ROT OTRO
+314=14.TDC CAB HIP OTRO
+315=15.TDC ROT HIP OTRO
+316=16.TDC CAB ROT HIP OTRO
+317=17.CAB
+318=18.CAB ROT
+319=19.CAB HIP
+320=20.CAB OTRO
+321=21.CAB ROT HIP
+322=22.CAB ROT OTRO
+323=23.CAB HIP OTRO"ListVentaCruzada860051135.par" [Read only] 57 lines, 793 characters:n"ListVentaCruzada900047981.par" [Read only] 57 lines, 785 characters 000=No
+001=900047981
+002=0
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+100=Default
+101=0000000
+102=2500000
+103=2500001
+104=5000000
+105=5000001
+106=99999999
+200=Default
+201=600
+202=700
+203=701
+204=850
+205=851
+206=950
+300=Default
+301=01.TDC
+302=02.TDC CAB
+303=03.TDC ROT
+304=04.TDC HIP
+305=05.TDC OTRO
+306=06.TDC CAB ROT
+307=07.TDC CAB HIP
+308=08.TDC CAB OTRO
+309=09.TDC ROT HIP
+310=10.TDC ROT OTRO
+311=11.TDC HIP OTRO
+312=12.TDC CAB ROT HIP
+313=13.TDC CAB ROT OTRO
+314=14.TDC CAB HIP OTRO
+315=15.TDC ROT HIP OTRO
+316=16.TDC CAB ROT HIP OTRO
+317=17.CAB
+318=18.CAB ROT
+319=19.CAB HIP
+320=20.CAB OTRO
+321=21.CAB ROT HIP
+322=22.CAB ROT OTRO
+323=23.CAB HIP OTRO"ListVentaCruzada900047981.par" [Read only] 57 lines, 785 characters:n"ListVentaCruzada999999999.par" [Read only] 57 lines, 785 characters 000=No
+001=999999999
+002=0
+003=0
+004=0
+005=0
+006=0
+007=0
+008=0
+009=0
+010=0
+100=Default
+101=0000000
+102=2500000
+103=2500001
+104=5000000
+105=5000001
+106=99999999
+200=Default
+201=600
+202=700
+203=701
+204=850
+205=851
+206=950
+300=Default
+301=01.TDC
+302=02.TDC CAB
+303=03.TDC ROT
+304=04.TDC HIP
+305=05.TDC OTRO
+306=06.TDC CAB ROT
+307=07.TDC CAB HIP
+308=08.TDC CAB OTRO
+309=09.TDC ROT HIP
+310=10.TDC ROT OTRO
+311=11.TDC HIP OTRO
+312=12.TDC CAB ROT HIP
+313=13.TDC CAB ROT OTRO
+314=14.TDC CAB HIP OTRO
+315=15.TDC ROT HIP OTRO
+316=16.TDC CAB ROT HIP OTRO
+317=17.CAB
+318=18.CAB ROT
+319=19.CAB HIP
+320=20.CAB OTRO
+321=21.CAB ROT HIP
+322=22.CAB ROT OTRO
+323=23.CAB HIP OTRO"ListVentaCruzada999999999.par" [Read only] 57 lines, 785 characters:n"MonitorGrp010008.par" [Read only] 21 lines, 126 characters 001=2
+002=I
+003=0
+004=1
+005=1
+006=A
+007=1
+008=1
+009=1
+010=N
+011=S
+012=S
+013=S
+014=S
+015=S
+016=S
+017=S
+018=S
+019=S
+020=S
+021=S
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"MonitorGrp010008.par" [Read only] 21 lines, 126 characters:n"MonitorOpc230001.par" [Read only] 9 lines, 54 characters 001=2
+002=I
+003=0
+004=1
+005=1
+006=A
+007=2
+008=1
+009=1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"MonitorOpc230001.par" [Read only] 9 lines, 54 characters:n"MonitorOpc4444.par" [Read only] 9 lines, 54 characters 001=2
+002=I
+003=0
+004=1
+005=1
+006=A
+007=2
+008=1
+009=1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"MonitorOpc4444.par" [Read only] 9 lines, 54 characters:n"MonitorOpc980001.par" [Read only] 9 lines, 54 characters 001=2
+002=I
+003=0
+004=1
+005=1
+006=A
+007=2
+008=1
+009=1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"MonitorOpc980001.par" [Read only] 9 lines, 54 characters:n"PE-Rentabilizacion-.par" [Read only] 37 lines, 291 characters 001=S
+002=Suscriptor
+003=I
+004=Base DataCredito
+005=S
+006=Si Acepta
+007=600
+008=
+009=
+010=0
+011=Mora de 0
+012=0
+013=Mora de 0
+014=0
+015=Mora de 0
+016=0
+017=Mora de 0
+018=A
+019=0
+020=0
+021=1
+022=50
+023=3
+024=29-35
+025=3
+026=0
+027=0
+028=0
+029=0
+030=0
+031=0
+032=0
+033=0
+034=0
+035=0
+036=0
+037=0
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"PE-Rentabilizacion-.par" [Read only] 37 lines, 291 characters:n"PE-Rentabilizacion-860007738.par" [Read only] 37 lines, 280 characters 001=N
+002=NIT
+003=C
+004=Base Cliente
+005=S
+006=Si Acepta
+007=600
+008=
+009=
+010=0
+011=Mora de 0
+012=0
+013=Mora de 0
+014=0
+015=Mora de 0
+016=0
+017=Mora de 0
+018=A
+019=0
+020=0
+021=1
+022=50
+023=3
+024=29-35
+025=0
+026=0
+027=0
+028=0
+029=0
+030=0
+031=0
+032=0
+033=0
+034=0
+035=0
+036=0
+037=0
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"PE-Rentabilizacion-860007738.par" [Read only] 37 lines, 280 characters:n"PE-Rentabilizacion-860034313.par" [Read only] 37 lines, 282 characters 001=N
+002=NIT
+003=C
+004=Base Cliente
+005=N
+006=No Acepta
+007=680
+008=
+009=
+010=2
+011=Mora de 60
+012=2
+013=Mora de 60
+014=2
+015=Mora de 60
+016=2
+017=Mora de 60
+018=A
+019=0
+020=0
+021=3
+022=20
+023=7
+024=66+
+025=3
+026=0
+027=0
+028=0
+029=0
+030=0
+031=0
+032=3
+033=1
+034=0
+035=0
+036=0
+037=0
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"PE-Rentabilizacion-860034313.par" [Read only] 37 lines, 282 characters:n"PE-Rentabilizacion-ss.par" [Read only] 37 lines, 189 characters 001=N
+002=NIT
+003=
+004=
+005=
+006=
+007=
+008=
+009=
+010=
+011=
+012=
+013=
+014=
+015=
+016=
+017=
+018=
+019=
+020=
+021=
+022=
+023=
+024=
+025=
+026=
+027=
+028=
+029=
+030=
+031=
+032=
+033=
+034=
+035=
+036=
+037=
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"PE-Rentabilizacion-ss.par" [Read only] 37 lines, 189 characters:n"ReconocerSARLAFT980001.par" [Read only] 16 lines, 174 characters 001=230003
+002=E
+003=SUS
+004=2
+005=500000
+006=1000000
+007=2000000
+008=4000000
+009=6000000
+010=8000000
+011=8000001
+012=1000000
+013=2000000
+014=4000000
+015=5000000
+016=5000001
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"ReconocerSARLAFT980001.par" [Read only] 16 lines, 174 characters:n"shaperturasacierta0.par" [Read only] 22 lines, 140 characters 001=1
+002=C
+003=860024151
+004=1
+005=1
+006=A
+007=2
+008=1
+009=1
+010=N
+011=S
+012=S
+013=S
+014=S
+015=S
+016=S
+017=S
+018=S
+019=S
+020=S
+021=S
+022=N
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"shaperturasacierta0.par" [Read only] 22 lines, 140 characters:n"shaperturasacierta860024151.par" [Read only] 22 lines, 140 characters 001=1
+002=C
+003=860024151
+004=1
+005=1
+006=A
+007=2
+008=1
+009=1
+010=S
+011=S
+012=S
+013=S
+014=S
+015=S
+016=S
+017=S
+018=S
+019=S
+020=S
+021=S
+022=N
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"shaperturasacierta860024151.par" [Read only] 22 lines, 140 characters:n"VentaCruzada.par" [Read only] 17 lines, 166 characters 001=N
+002=NIT
+003=860051135
+004=Base Cliente
+005=C
+006=Activo
+007=A
+008=600
+009=1300000
+010=No
+011=Default
+012=S
+013=S
+014=S
+015=S
+016=07-14-17-18-20-48-49
+017=50000
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"VentaCruzada.par" [Read only] 17 lines, 166 characters:n"VentaCruzada860051135.par" [Read only] 17 lines, 166 characters 001=N
+002=NIT
+003=860051135
+004=Base Cliente
+005=C
+006=Activo
+007=A
+008=600
+009=1300000
+010=Si
+011=Default
+012=S
+013=S
+014=S
+015=S
+016=07-14-17-18-20-48-49
+017=65000
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"VentaCruzada860051135.par" [Read only] 17 lines, 166 characters:n"VentaCruzada900047981.par" [Read only] 17 lines, 166 characters 001=N
+002=NIT
+003=900047981
+004=Base Cliente
+005=C
+006=Activo
+007=A
+008=600
+009=1300000
+010=No
+011=Default
+012=S
+013=S
+014=S
+015=S
+016=07-14-17-18-20-48-49
+017=50000
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"VentaCruzada900047981.par" [Read only] 17 lines, 166 characters:n"VentaCruzada999999999.par" [Read only] 17 lines, 166 characters 001=N
+002=NIT
+003=999999999
+004=Base Cliente
+005=C
+006=Activo
+007=A
+008=600
+009=1300000
+010=No
+011=Default
+012=S
+013=S
+014=S
+015=S
+016=07-14-17-18-20-48-49
+017=50000
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"VentaCruzada999999999.par" [Read only] 17 lines, 166 characters:n"VisorCompartidos.par" [Read only] 80 lines, 789 characters 001=99999999999
+002=Base DataCredito
+003=100000
+004=I
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000"VisorCompartidos.par" [Read only] 80 lines, 789 characters:n"VisorCompartidos172.24.2.83.par" [Read only] 80 lines, 789 characters 001=99999999999
+002=Base DataCredito
+003=100000
+004=I
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000"VisorCompartidos172.24.2.83.par" [Read only] 80 lines, 789 characters:n"VisorCompartidos860002964.par" [Read only] 80 lines, 783 characters 001=860002964
+002=Base Cliente
+003=100000
+004=C
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000"VisorCompartidos860002964.par" [Read only] 80 lines, 783 characters:n"VisorCompartidos900047981.par" [Read only] 80 lines, 782 characters 001=900047981
+002=Base Cliente
+003=50000
+004=C
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000"VisorCompartidos900047981.par" [Read only] 80 lines, 782 characters:argsCartaNavTEL.par CartaNavTEL00000000000.par CartaNavTEL99999999999.par ListAperAcier0.par ListAperAcier860024151.par ListSubscrib010008.par ListVentaCruzada.par ListVentaCruzada860051135.par ListVentaCruzada90004
+7981.par ListVentaCruzada999999999.par MonitorGrp010008.par MonitorOpc230001.par MonitorOpc4444.par Monito
+rOpc980001.par PE-Rentabilizacion-.par PE-Rentabilizacion-860007738.par PE-Rentabilizacion-860034313.par P
+E-Rentabilizacion-ss.par ReconocerSARLAFT980001.par shaperturasacierta0.par shaperturasacierta860024151.pa
+r VentaCruzada.par VentaCruzada860051135.par VentaCruzada900047981.par VentaCruzada999999999.par VisorComp
+artidos.par VisorCompartidos172.24.2.83.par VisorCompartidos860002964.par [VisorCompartidos900047981.par]VisorCompartidos99999999999.par[Hit return to continue] 001=900047981
+002=Base Cliente
+003=50000
+004=C
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000:nargsnargs: Not an editor command:n"VisorCompartidos99999999999.par" [Read only] 80 lines, 789 characters 001=99999999999
+002=Base DataCredito
+003=100000
+004=I
+100=Default
+101=1
+102=6
+103=7
+104=12
+105=13
+106=36
+107=37
+108=48
+109=49
+110=999
+200=Default
+201=0000000
+202=1500000
+203=1500001
+204=3000000
+205=3000001
+206=5000000
+207=5000001
+208=7000000
+209=7000001
+210=10000000
+211=10000001
+212=15000000
+213=15000001
+214=999999999
+300=Default
+301=000000
+302=200000
+303=200001
+304=400000
+305=400001
+306=600000
+307=600001
+308=800000
+309=800001
+310=1000000
+311=1000001
+312=2000000
+313=2000001
+314=3000000
+315=3000001
+316=5000000
+317=5000001
+318=10000000"VisorCompartidos99999999999.par" [Read only] 80 lines, 789 characters:nNo more files to edit:nNo more files to edit:nNo more files to edit:q/d/iccol/desarrollo/datos>l *.par
+-rw-rw-r--   1 icjcld   icdatacr     253 May  9 13:04 CartaNavTEL.par
+-rw-rw-r--   1 icjcld   icdatacr     253 May  9 14:21 CartaNavTEL00000000000.par
+-rw-rw-r--   1 icjcld   icdatacr     251 May 23 07:00 CartaNavTEL99999999999.par
+-rw-rw-r--   1 1395     icdatacr     458 Mar  4 17:15 ListAperAcier0.par
+-rw-rw-r--   1 1395     icdatacr     466 Feb 11 10:47 ListAperAcier860024151.par
+-rw-rw-r--   1 1395     icdatacr      50 Feb 19 11:42 ListSubscrib010008.par
+-rw-rw-r--   1 icimsd   icdatacr     785 Mar  4 13:18 ListVentaCruzada.par
+-rw-rw-r--   1 icimsd   icdatacr     793 Mar 26 09:39 ListVentaCruzada860051135.par
+-rw-rw-r--   1 icimsd   icdatacr     785 Mar  4 13:21 ListVentaCruzada900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     785 May 19 17:04 ListVentaCruzada999999999.par
+-rw-rw-r--   1 1395     icdatacr     126 Feb 19 11:42 MonitorGrp010008.par
+-rw-rw-r--   1 icjcld   icdatacr      54 Feb 16 13:09 MonitorOpc230001.par
+-rw-rw-r--   1 icjcld   icdatacr      54 Feb 16 11:59 MonitorOpc4444.par
+-rw-rw-r--   1 1395     icdatacr      54 Apr  2 14:04 MonitorOpc980001.par
+-rw-rw-r--   1 icimsd   icdatacr     291 Apr 28 13:32 PE-Rentabilizacion-.par
+-rw-rw-r--   1 icimsd   icdatacr     280 Apr 28 13:57 PE-Rentabilizacion-860007738.par
+-rw-rw-r--   1 iclagd   icdatacr     282 Apr  1 17:05 PE-Rentabilizacion-860034313.par
+-rw-rw-r--   1 icimsd   icdatacr     189 Apr 28 12:11 PE-Rentabilizacion-ss.par
+-rw-rw-r--   1 icjcld   icdatacr     174 May 22 10:02 ReconocerSARLAFT980001.par
+-rw-rw-r--   1 1395     icdatacr     140 Mar  4 17:16 shaperturasacierta0.par
+-rw-rw-r--   1 1395     icdatacr     140 Feb 11 10:47 shaperturasacierta860024151.par
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar  4 13:18 VentaCruzada.par
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar 26 09:39 VentaCruzada860051135.par
+-rw-rw-r--   1 icimsd   icdatacr     166 Mar  4 13:21 VentaCruzada900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     166 May 19 17:04 VentaCruzada999999999.par
+-rw-rw-r--   1 icimsd   icdatacr     789 Mar 17 02:06 VisorCompartidos.par
+-rw-rw-r--   1 icjamd   icdatacr     789 Mar 31 14:57 VisorCompartidos172.24.2.83.par
+-rw-rw-r--   1 icimsd   icdatacr     783 Apr  9 09:09 VisorCompartidos860002964.par
+-rw-rw-r--   1 icimsd   icdatacr     782 Mar 28 16:41 VisorCompartidos900047981.par
+-rw-rw-r--   1 icimsd   icdatacr     789 Mar 17 02:06 VisorCompartidos99999999999.par
+/d/iccol/desarrollo/datos> ^?^?    view .p^?^?      ~/.profile
+"/d/iccol/desarrollo/.profile" [Read only] 254 lines, 7985 characters :
+#   @(#) profile 25.1 92/03/15
+#
+#   Perfil usuarios de DESARROLLO
+#
+# Evitar redirecciones accidentales a los archivos:
+set -o noclobber
+set -o vi
+terminal=`tty | cut -c6-8`
+if [ "$terminal" = "pts" ]
+then
+stty erase ^H
+fi
+export JH=/usr/j2se
+PATH=$PATH:/usr/bin:~/macros:~/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/
+latest/bin:/usr/local/bin:$JH/bin:/usr/openwin/bin:.
+CLASSPATH=$JH/jre/lib/dt.jar:$JH/jre/lib/rt.jar:$HOME/java/server:.
+COBJVM=sun_142
+export PATH CLASSPATH COBJVM
+
+if [ -z "$LOGNAME" ]; then
+    LOGNAME=`logname`# name of user who logged in
+    export LOGNAME
+fi
+
+HISTFILE=~/.history.$LOGNAME
+export HISTFILE
+
+HISTSIZE=400
+export HISTSIZE
+
+VISUAL=vi
+export VISUAL
+
+MBOX=~/mbox.$LOGNAME
+export MBOX
+
+MAIL=/usr/mail/$LOGNAME# mailbox location
+export MAIL
+
+if [ -z "$PWD" ]; then
+    PWD=$HOME# assumes initial cwd is HOME
+    export PWD
+fi
+
+if [ -f $HOME/.kshrc -a -r $HOME/.kshrc ]; then
+    ENV=$HOME/.aliases# set ENV if there is an rc file
+    export ENV
+fi"/d/iccol/desarrollo/.profile" [Read only] 254 lines, 7985 characters:q/d/iccol/desarrollo/datos>sty^?   ty erase ^?
+/d/iccol/desarrollo/datos>lkfjgñlsdfg      ^H       vi ~/viset
+"/d/iccol/desarrollo/viset" 28 lines, 1057 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesión
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia, y
+#si alguien sabe cómo escribirlas correctamente se aceptan aportes
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if [ `echo $0` != "-ksh" ]
+then
+banner "falta el ."
+else
+echo viset running
+  # establece opciones de vi
+  EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ |
+map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+  export EXINIT
+  # setea el ambiente de desarrollo
+  . sh-camamb prunovedat
+  # Achica el prompt a solo el directorio actual (OK mientras no cambio
+  # de máquina o de usuario):
+  export PS1='${PWD}>'
+fi
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/viset" 28 lines, 1057 characters
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+OPEN MODE  exit
+OPEN MODEfi
+OPEN MODE
+~echo viset running
+  # establece opciones de vi
+EXINIT="set ignorecase nowrapscan showmode showmatch tabstop=4 shiftwidth=4 | map ^? ^H | map ^[[4~ $ | ma
+p ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+# setea el ambiente de desarrollo
+. sh-camamb prunovedat
+# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario):
+export PS1='${PWD}>'9 lines <<ed~
+  
+
+~
+OPEN MODE# cambia la tecla de retroceso
+OPEN MODEstty erase ^?
+
+
+EXINIT="set igINSERT MODEa
+au
+mt
+ o
+|i
+ n
+$d
+ e
+~n
+4t
+[ 
+[ "/d/iccol/desarrollo/viset" 31 lines, 1098 characters /d/iccol/desarrollo/datos>^D

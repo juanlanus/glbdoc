@@ -1,0 +1,1319 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.23 18:51:44 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May 23 16:20:36 2014 from 172.16.10.82
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ lkjñdflkg^?^?^?
+ksh: lkjñdflkg^?^?^?:  not found
+icjlud@codes /d/iccol/desarrollo
+$ .viset
+ksh: .viset:  not found
+icjlud@codes /d/iccol/desarrollo
+$ ñdlkfa{sdlñfks^?^?^?
+ksh: ñdlkfa{sdlñfks^?^?^?:  not found
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>lkjdlñfkgdg           
+/d/iccol/desarrollo>clear
+/d/iccol/desarrollo>
+/d/iccol/desarrollo>
+/d/iccol/desarrollo>echo "$(tput cub1)"
+
+/d/iccol/desarrollo>export BB="$(tput cub1)"
+/d/iccol/desarrollo>4cho $BB
+ksh: 4cho:  not found
+/d/iccol/desarrollo>echo $BB
+
+/d/iccol/desarrollo>ev nv | grep BB
+BB=
+/d/iccol/desarrollo>mn an tput
+Reformatting page.  Please Wait... done
+
+User Commands                                             tput(1)
+
+NAME
+     tput - initialize a terminal or query terminfo database
+
+SYNOPSIS
+     tput [-T type] capname [parm...]
+
+     tput -S <<
+
+DESCRIPTION
+     The tput utility uses the  terminfo  database  to  make  the
+     values  of  terminal-dependent  capabilities and information
+     available to the shell (see sh(1)); to clear, initialize  or
+     reset  the  terminal;  or  to  return  the  long name of the
+     requested terminal type. tput outputs a string if the  capa-
+     bility  attribute (capname) is of type string, or an integer
+     if the attribute is of type integer. If the attribute is  of
+     type  boolean,  tput simply sets the exit status (0 for TRUE
+     if the terminal has the capability, 1 for FALSE if  it  does
+     not),  and produces no output. Before using a value returned
+     on standard output, the user should  test  the  exit  status
+     ($?, see sh(1)) to be sure it is 0. See the EXIT STATUS sec-
+     tion.
+
+OPTIONS
+     The following options are supported:
+
+     -Ttype          Indicates the  type  of  terminal.  Normally
+                     this  option  is  unnecessary,  because  the
+                     default is taken from the environment  vari-
+                     able  TERM.  If  -T  is  specified, then the
+                     shell variables LINES and  COLUMNS  and  the
+                     layer size will not be referenced.
+
+     -S              Allows more than one capability per  invoca-
+                     tion  of  tput.  The  capabilities  must  be
+                     passed  to  tput  from  the  standard  input
+                     instead  of  from  the command line (see the
+                     example in the EXAMPLES section).  Only  one
+                     capname  is  allowed per line. The -S option
+                     changes the meaning of the 0 and  1  boolean
+                     and  string  exit statuses (see the EXAMPLES
+                     section).
+
+OPERANDS
+     The following operands are supported:
+--More--(16%)
+     capname         Indicates the capability attribute from  the
+                     terminfo  database.  See  terminfo(4)  for a
+
+SunOS 5.10           Last change: 1 Feb 1995                    1
+
+User Commands                                             tput(1)
+
+                     complete list of capabilities and  the  cap-
+                     name associated with each.
+
+                     The following strings will be  supported  as
+                     operands  by  the  implementation in the "C"
+                     locale:
+
+                     clear           Display   the   clear-screen
+                                     sequence.
+
+                     init            If the terminfo database  is
+                                     present and an entry for the
+                                     user's terminal exists  (see
+                                     -Ttype,  above), the follow-
+                                     ing will occur:
+
+                                         1.  if   present,    the
+                                             terminal's initiali-
+                                             zation strings  will
+                                             be output (is1, is2,
+                                             is3, if, iprog),
+
+                                         2.  any   delays    (for
+                                             instance,   newline)
+                                             specified   in   the
+                                             entry will be set in
+                                             the tty driver,
+
+                                         3.  tabs expansion  will
+                                             be  turned on or off
+                                             according   to   the
+                                             specification in the
+                                             entry, and
+
+                                         4.  if  tabs   are   not
+                                             expanded,   standard
+                                             tabs  will  be   set
+                                             (every 8 spaces). If
+                                             an  entry  does  not
+                                             contain the informa-
+--More--(33%)                                             tion needed for  any
+                                             of  the  four  above
+                                             activities,     that
+                                             activity        will
+                                             silently be skipped.
+
+SunOS 5.10           Last change: 1 Feb 1995                    2
+
+User Commands                                             tput(1)
+
+                     reset           Instead of putting out  ini-
+                                     tialization   strings,   the
+                                     terminal's   reset   strings
+                                     will  be  output  if present
+                                     (rs1, rs2, rs3, rf). If  the
+                                     reset    strings   are   not
+                                     present, but  initialization
+                                     strings are, the initializa-
+                                     tion strings will be output.
+                                     Otherwise, reset acts ident-
+                                     ically to init.
+
+                     longname        If the terminfo database  is
+                                     present and an entry for the
+                                     user's terminal exists  (see
+                                     -Ttype above), then the long
+                                     name of the terminal will be
+                                     put  out.  The  long name is
+                                     the last name in  the  first
+                                     line   of   the   terminal's
+                                     description in the  terminfo
+                                     database (see term(5)).
+
+     parm            If the attribute  is  a  string  that  takes
+                     parameters,   the   argument  parm  will  be
+                     instantiated into the string. An all numeric
+                     argument  will be passed to the attribute as
+                     a number.
+
+EXAMPLES
+     Example 1: Initializing the terminal according to TERM
+
+     This example initializes the terminal according to the  type
+     of  terminal  in the environment variable TERM. This command
+     should be included in everyone's .profile after the environ-
+     ment  variable TERM has been exported, as illustrated on the
+     profile(4) manual page.
+
+--More--(52%)     example% tput init
+
+     Example 2: Resetting a terminal
+
+     This example resets an AT&T 5620  terminal,  overriding  the
+     type of terminal in the environment variable TERM:
+
+SunOS 5.10           Last change: 1 Feb 1995                    3
+
+User Commands                                             tput(1)
+
+     example% tput -T5620 reset
+
+     Example 3: Moving the cursor
+
+     The following example sends the sequence to move the  cursor
+     to  row  0,  column  0 (the upper left corner of the screen,
+     usually known as the "home" cursor position).
+
+     example% tput cup 0 0
+
+     This next example sends the sequence to move the  cursor  to
+     row 23, column 4.
+
+     example% tput cup 23 4
+
+     Example 4: Echoing the clear-screen sequence
+
+     This example echos the clear-screen sequence for the current
+     terminal.
+
+     example% tput clear
+
+     Example 5: Printing the number of columns
+
+     This command prints the number of columns  for  the  current
+     terminal.
+
+     example% tput cols
+
+     The following command prints the number of columns  for  the
+     450 terminal.
+
+     example% tput -T450 cols
+
+     Example 6: Setting shell variables
+
+     This example sets the shell variables bold, to begin  stand-
+--More--(62%)     out  mode  sequence,  and  offbold,  to  end  standout  mode
+     sequence, for the current terminal. This might  be  followed
+     by a prompt:
+
+     echo "${bold}Please type in your name: ${offbold}\c"
+     example% bold='tput smso'
+     example% offbold='tput rmso'
+
+     Example 7: Setting the exit status
+
+     This example sets the exit status to indicate if the current
+     terminal is a hardcopy terminal.
+
+     example% tput hc
+
+SunOS 5.10           Last change: 1 Feb 1995                    4
+
+User Commands                                             tput(1)
+
+     Example 8: Printing the long name from terminfo
+
+     This command prints the long name from the terminfo database
+     for  the type of terminal specified in the environment vari-
+     able TERM.
+
+     example% tput longname
+
+     Example 9: Processing several capabilities with one  invoca-
+     tion
+
+     This example shows tput processing several  capabilities  in
+     one  invocation.  This  example clears the screen, moves the
+     cursor to position 10, 10 and turns on bold  (extra  bright)
+     mode. The list is terminated by an exclamation mark (!) on a
+     line by itself.
+
+     example% tput -S <<!
+     > clear
+     > cup 10 10
+     > bold
+     > !
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect the execution of tput: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     TERM     Determine the terminal type. If  this  variable  is
+--More--(73%)              unset  or  null, and if the -T option is not speci-
+              fied, an unspecified default terminal type will  be
+              used.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0
+                +o  If capname is of type boolean and  -S  is  not
+                   specified, indicates TRUE.
+
+                +o  If capname is of type string  and  -S  is  not
+                   specified,  indicates  capname  is defined for
+                   this terminal type.
+
+                +o  If capname is of type boolean or string and -S
+                   is  specified,  indicates  that all lines were
+                   successful.
+
+                +o  capname is of type integer.
+
+SunOS 5.10           Last change: 1 Feb 1995                    5
+
+User Commands                                             tput(1)
+
+                +o  The requested string was written successfully.
+
+     1
+                +o  If capname is of type boolean and  -S  is  not
+                   specified, indicates FALSE.
+
+                +o  If capname is of type string  and  -S  is  not
+                   specified,   indicates  that  capname  is  not
+                   defined for this terminal type.
+
+     2        Usage error.
+
+     3        No information is  available  about  the  specified
+              terminal type.
+
+     4        The specified operand is invalid.
+
+     >4       An error occurred.
+
+     -1       capname is a numeric variable that is not specified
+              in  the terminfo database. For instance, tput -T450
+              lines and tput -T2621 xmc.
+
+--More--(86%)FILES
+     /usr/include/curses.h           curses(3CURSES) header
+
+     /usr/include/term.h             terminfo header
+
+     /usr/lib/tabset/*               Tab settings for some termi-
+                                     nals,  in a format appropri-
+                                     ate to be output to the ter-
+                                     minal (escape sequences that
+
+SunOS 5.10           Last change: 1 Feb 1995                    6
+
+User Commands                                             tput(1)
+
+                                     set margins and  tabs).  For
+                                     more  information,  see  the
+                                     "Tabs  and   Initialization"
+                                     section of terminfo(4)
+
+     /usr/share/lib/terminfo/?/*     compiled  terminal  descrip-
+                                     tion database
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     clear(1), sh(1),  stty(1),  tabs(1),  curses(3CURSES),  pro-
+     file(4),   terminfo(4),   attributes(5),  environ(5),  stan-
+     dards(5), term(5)
+
+SunOS 5.10           Last change: 1 Feb 1995                    7
+
+/d/iccol/desarrollo>b 
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>man tput
+Reformatting page.  Please Wait... done
+
+User Commands                                             tput(1)
+
+NAME
+     tput - initialize a terminal or query terminfo database
+
+SYNOPSIS
+     tput [-T type] capname [parm...]
+
+     tput -S <<
+
+DESCRIPTION
+     The tput utility uses the  terminfo  database  to  make  the
+     values  of  terminal-dependent  capabilities and information
+     available to the shell (see sh(1)); to clear, initialize  or
+     reset  the  terminal;  or  to  return  the  long name of the
+     requested terminal type. tput outputs a string if the  capa-
+     bility  attribute (capname) is of type string, or an integer
+     if the attribute is of type integer. If the attribute is  of
+     type  boolean,  tput simply sets the exit status (0 for TRUE
+     if the terminal has the capability, 1 for FALSE if  it  does
+     not),  and produces no output. Before using a value returned
+     on standard output, the user should  test  the  exit  status
+     ($?, see sh(1)) to be sure it is 0. See the EXIT STATUS sec-
+     tion.
+
+OPTIONS
+     The following options are supported:
+
+     -Ttype          Indicates the  type  of  terminal.  Normally
+                     this  option  is  unnecessary,  because  the
+                     default is taken from the environment  vari-
+                     able  TERM.  If  -T  is  specified, then the
+                     shell variables LINES and  COLUMNS  and  the
+                     layer size will not be referenced.
+
+     -S              Allows more than one capability per  invoca-
+                     tion  of  tput.  The  capabilities  must  be
+                     passed  to  tput  from  the  standard  input
+                     instead  of  from  the command line (see the
+                     example in the EXAMPLES section).  Only  one
+                     capname  is  allowed per line. The -S option
+                     changes the meaning of the 0 and  1  boolean
+                     and  string  exit statuses (see the EXAMPLES
+                     section).
+
+OPERANDS
+     The following operands are supported:
+--More--(16%)
+     capname         Indicates the capability attribute from  the
+                     terminfo  database.  See  terminfo(4)  for a
+
+SunOS 5.10           Last change: 1 Feb 1995                    1
+
+User Commands                                             tput(1)
+
+                     complete list of capabilities and  the  cap-
+                     name associated with each.
+
+                     The following strings will be  supported  as
+                     operands  by  the  implementation in the "C"
+                     locale:
+
+                     clear           Display   the   clear-screen
+                                     sequence.
+
+                     init            If the terminfo database  is
+                                     present and an entry for the
+                                     user's terminal exists  (see
+                                     -Ttype,  above), the follow-
+                                     ing will occur:
+
+                                         1.  if   present,    the
+                                             terminal's initiali-
+                                             zation strings  will
+                                             be output (is1, is2,
+                                             is3, if, iprog),
+
+                                         2.  any   delays    (for
+                                             instance,   newline)
+                                             specified   in   the
+                                             entry will be set in
+                                             the tty driver,
+
+                                         3.  tabs expansion  will
+                                             be  turned on or off
+                                             according   to   the
+                                             specification in the
+                                             entry, and
+
+                                         4.  if  tabs   are   not
+                                             expanded,   standard
+                                             tabs  will  be   set
+                                             (every 8 spaces). If
+                                             an  entry  does  not
+                                             contain the informa-
+--More--(33%)                                             tion needed for  any
+                                             of  the  four  above
+                                             activities,     that
+                                             activity        will
+                                             silently be skipped.
+
+SunOS 5.10           Last change: 1 Feb 1995                    2
+
+User Commands                                             tput(1)
+
+                     reset           Instead of putting out  ini-
+                                     tialization   strings,   the
+                                     terminal's   reset   strings
+                                     will  be  output  if present
+                                     (rs1, rs2, rs3, rf). If  the
+                                     reset    strings   are   not
+                                     present, but  initialization
+                                     strings are, the initializa-
+                                     tion strings will be output.
+                                     Otherwise, reset acts ident-
+                                     ically to init.
+
+                     longname        If the terminfo database  is
+                                     present and an entry for the
+                                     user's terminal exists  (see
+                                     -Ttype above), then the long
+                                     name of the terminal will be
+                                     put  out.  The  long name is
+                                     the last name in  the  first
+                                     line   of   the   terminal's
+                                     description in the  terminfo
+                                     database (see term(5)).
+
+     parm            If the attribute  is  a  string  that  takes
+                     parameters,   the   argument  parm  will  be
+                     instantiated into the string. An all numeric
+                     argument  will be passed to the attribute as
+                     a number.
+
+EXAMPLES
+     Example 1: Initializing the terminal according to TERM
+
+     This example initializes the terminal according to the  type
+     of  terminal  in the environment variable TERM. This command
+     should be included in everyone's .profile after the environ-
+     ment  variable TERM has been exported, as illustrated on the
+     profile(4) manual page.
+
+--More--(52%)     example% tput init
+
+     Example 2: Resetting a terminal
+
+     This example resets an AT&T 5620  terminal,  overriding  the
+     type of terminal in the environment variable TERM:
+
+SunOS 5.10           Last change: 1 Feb 1995                    3
+
+User Commands                                             tput(1)
+
+     example% tput -T5620 reset
+
+     Example 3: Moving the cursor
+
+     The following example sends the sequence to move the  cursor
+     to  row  0,  column  0 (the upper left corner of the screen,
+     usually known as the "home" cursor position).
+
+     example% tput cup 0 0
+
+     This next example sends the sequence to move the  cursor  to
+     row 23, column 4.
+
+     example% tput cup 23 4
+
+     Example 4: Echoing the clear-screen sequence
+
+     This example echos the clear-screen sequence for the current
+     terminal.
+
+     example% tput clear
+
+     Example 5: Printing the number of columns
+
+     This command prints the number of columns  for  the  current
+     terminal.
+
+     example% tput cols
+
+     The following command prints the number of columns  for  the
+     450 terminal.
+
+     example% tput -T450 cols
+
+     Example 6: Setting shell variables
+
+     This example sets the shell variables bold, to begin  stand-
+--More--(62%)     out  mode  sequence,  and  offbold,  to  end  standout  mode
+     sequence, for the current terminal. This might  be  followed
+     by a prompt:
+
+     echo "${bold}Please type in your name: ${offbold}\c"
+     example% bold='tput smso'
+     example% offbold='tput rmso'
+
+     Example 7: Setting the exit status
+
+     This example sets the exit status to indicate if the current
+     terminal is a hardcopy terminal.
+
+     example% tput hc
+
+SunOS 5.10           Last change: 1 Feb 1995                    4
+
+User Commands                                             tput(1)
+
+     Example 8: Printing the long name from terminfo
+
+     This command prints the long name from the terminfo database
+     for  the type of terminal specified in the environment vari-
+     able TERM.
+
+     example% tput longname
+
+     Example 9: Processing several capabilities with one  invoca-
+     tion
+
+     This example shows tput processing several  capabilities  in
+     one  invocation.  This  example clears the screen, moves the
+     cursor to position 10, 10 and turns on bold  (extra  bright)
+     mode. The list is terminated by an exclamation mark (!) on a
+     line by itself.
+
+     example% tput -S <<!
+     > clear
+     > cup 10 10
+     > bold
+     > !
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect the execution of tput: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     TERM     Determine the terminal type. If  this  variable  is
+--More--(73%)              unset  or  null, and if the -T option is not speci-
+              fied, an unspecified default terminal type will  be
+              used.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0
+                +o  If capname is of type boolean and  -S  is  not
+                   specified, indicates TRUE.
+
+                +o  If capname is of type string  and  -S  is  not
+                   specified,  indicates  capname  is defined for
+                   this terminal type.
+
+                +o  If capname is of type boolean or string and -S
+                   is  specified,  indicates  that all lines were
+                   successful.
+
+                +o  capname is of type integer.
+
+SunOS 5.10           Last change: 1 Feb 1995                    5
+
+User Commands                                             tput(1)
+
+                +o  The requested string was written successfully.
+
+     1
+                +o  If capname is of type boolean and  -S  is  not
+                   specified, indicates FALSE.
+
+                +o  If capname is of type string  and  -S  is  not
+                   specified,   indicates  that  capname  is  not
+                   defined for this terminal type.
+
+     2        Usage error.
+
+     3        No information is  available  about  the  specified
+              terminal type.
+
+     4        The specified operand is invalid.
+
+     >4       An error occurred.
+
+     -1       capname is a numeric variable that is not specified
+              in  the terminfo database. For instance, tput -T450
+              lines and tput -T2621 xmc.
+
+--More--(86%)FILES
+     /usr/include/curses.h           curses(3CURSES) header
+
+     /usr/include/term.h             terminfo header
+
+     /usr/lib/tabset/*               Tab settings for some termi-
+                                     nals,  in a format appropri-
+                                     ate to be output to the ter-
+                                     minal (escape sequences that
+
+SunOS 5.10           Last change: 1 Feb 1995                    6
+
+User Commands                                             tput(1)
+
+                                     set margins and  tabs).  For
+                                     more  information,  see  the
+                                     "Tabs  and   Initialization"
+                                     section of terminfo(4)
+
+     /usr/share/lib/terminfo/?/*     compiled  terminal  descrip-
+                                     tion database
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     clear(1), sh(1),  stty(1),  tabs(1),  curses(3CURSES),  pro-
+     file(4),   terminfo(4),   attributes(5),  environ(5),  stan-
+     dards(5), term(5)
+
+SunOS 5.10           Last change: 1 Feb 1995                    7
+
+/d/iccol/desarrollo>tput clear
+/d/iccol/desarrollo>BACK="$(tput cub1)"
+/d/iccol/desarrollo>export BACK
+/d/iccol/desarrollo>echo "enter x:y"back"      $BACK^[[D  /d/iccol/desarrollo>echo "enter x:y$BACK  
+> ^C
+/d/iccol/desarrollo>echo "enter x:y$BACK
+> "
+enter x:y
+
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>echo "enter x:y$BACK^J"/d/iccol/desarrollo>echo "enter x:y$BACK^J"  
+enter x:y
+/d/iccol/desarrollo>vi shtest
+"shtest" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"shtest" [New file]
+OPEN MODE
+
+~APPEND MODEecho wot:yINSERT MODE""wot:yAPPEND MODE$BACK\c"
+
+read wot
+
+
+if [ -z wot ]
+
+
+
+then
+    wot="y"
+    APPEND MODEfi
+echo wot:w
+^X:w"shtest" [New file] 8 lines, 72 characters [1] + Stopped (SIGTSTP)        vi shtest
+/d/iccol/desarrollo>chmod +x shtest
+/d/iccol/desarrollo>shtest
+wot:y
+wot:w
+/d/iccol/desarrollo>fg
+vi shtest
+echo "wot:y$BACK\c"
+read wot
+if [ -z wot ]
+then
+wot="y"
+fi
+echo wot:w
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~echo wotINSERT MODE%$INSERT MODE"wot:":w"shtest" 8 lines, 77 characters $CHANGE MODEhtest
+$wotCHANGE MODE"$wo
+~:w"shtest" 8 lines, 77 characters [1] + Stopped (SIGTSTP)        vi shtest
+/d/iccol/desarrollo>shtest
+wot:y
+wot:
+/d/iccol/desarrollo>fg
+vi shtest
+echo "wot:y$BACK\c"
+read wot
+if [ -z wot ]
+then
+wot="y"
+fi
+echo "wot:"$wot
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~OPEN MODEwot="":w"shtest" 9 lines, 84 characters OPEN MODEBACK="$(tput cub1)"
+
+OPEN MODE
+export BACK"shtest" [Modified] line 2 of 11 --18%-- 
+:w"shtest" 11 lines, 116 characters 
+[1] + Stopped (SIGTSTP)        vi shtest
+/d/iccol/desarrollo>da
+/d/iccol/desarrollo/datos>l *.part m
+-rw-rw-r--   1 icdgd    icdatacr      14 May 19 16:04 prueba.parm
+/d/iccol/desarrollo/datos>cat ptueba.parm
+cat: cannot open ptueba.parm
+/d/iccol/desarrollo/datos>^[  /d/iccol/desarrollo/datos>cat ptueba.parmcart ptueba.parmt prr
+I;1;20120220;
+/d/iccol/desarrollo/datos>man cut
+Reformatting page.  Please Wait... done
+
+User Commands                                              cut(1)
+
+NAME
+     cut - cut out selected fields of each line of a file
+
+SYNOPSIS
+     cut -b list [-n] [file...]
+
+     cut -c list [file...]
+
+     cut -f list [-d delim] [-s] [file...]
+
+DESCRIPTION
+     Use the cut utility to cut  out  columns  from  a  table  or
+     fields  from  each line of a file; in data base parlance, it
+     implements the projection  of  a  relation.  The  fields  as
+     specified  by  list  can be fixed length, that is, character
+     positions as on a punched card (-c option) or the length can
+     vary  from line to line and be marked with a field delimiter
+     character like <TAB> (-f option).  cut  can  be  used  as  a
+     filter.
+
+     Either the -b, -c, or -f option must be specified.
+
+     Use grep(1) to make horizontal ``cuts'' (by context) through
+     a  file, or paste(1) to put files together column-wise (that
+     is, horizontally). To reorder columns in a  table,  use  cut
+     and paste.
+
+OPTIONS
+     The following options are supported:
+
+     list            A   comma-separated   or    blank-character-
+                     separated  list of integer field numbers (in
+                     increasing order), with optional - to  indi-
+                     cate  ranges  (for  instance,  1,4,7; 1-3,8;
+                     -5,10 (short for 1-5,10); or 3-  (short  for
+                     third through last field)).
+
+     -b list         The list following -b specifies  byte  posi-
+                     tions  (for  instance, -b1-72 would pass the
+                     first 72 bytes of each line). When -b and -n
+                     are  used together, list is adjusted so that
+                     no multi-byte character is split.
+
+     -c list         The list following  -c  specifies  character
+                     positions  (for  instance, -c1-72 would pass
+--More--(29%)                     the first 72 characters of each line).
+
+SunOS 5.10          Last change: 29 Apr 1999                    1
+
+User Commands                                              cut(1)
+
+     -d delim        The character following -d is the field del-
+                     imiter  (-f  option  only).  Default is tab.
+                     Space or other characters with special mean-
+                     ing  to  the shell must be quoted. delim can
+                     be a multi-byte character.
+
+     -f list         The list following -f is a  list  of  fields
+                     assumed  to  be  separated  in the file by a
+                     delimiter character (see -d ); for instance,
+                     -f1,7  copies  the  first  and seventh field
+                     only. Lines with no field delimiters will be
+                     passed through intact (useful for table sub-
+                     headings), unless -s is specified.
+
+     -n              Do not split characters. When -b list and -n
+                     are  used together, list is adjusted so that
+                     no multi-byte character is split.
+
+     -s              Suppresses lines with no  delimiter  charac-
+                     ters in case of -f option. Unless specified,
+                     lines with  no  delimiters  will  be  passed
+                     through untouched.
+
+OPERANDS
+     The following operands are supported:
+
+     file            A path name of an input  file.  If  no  file
+                     operands are specified, or if a file operand
+                     is -, the standard input will be used.
+
+USAGE
+     See largefile(5) for the description of the behavior of  cut
+     when  encountering files greater than or equal to 2 Gbyte (2
+    **31 bytes).
+
+EXAMPLES
+     Example 1: Mapping user IDs
+
+     A mapping of user IDs to names follows:
+
+     example% cut -d: -f1,5 /etc/passwd
+
+--More--(59%)SunOS 5.10          Last change: 29 Apr 1999                    2
+
+User Commands                                              cut(1)
+
+     Example 2: Setting current login name
+
+     To set name to current login name:
+
+     example$ name=`who am i | cut -f1 -d' '`
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect  the execution of cut: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0        All input files were output successfully.
+
+     >0       An error occurred.
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | CSI                         | Enabled                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     grep(1), paste(1), attributes(5), environ(5),  largefile(5),
+     standards(5)
+
+DIAGNOSTICS
+     cut: -n may only be used with -b
+
+     cut: -d may only be used with -f
+
+     cut: -s may only be used with -f
+
+SunOS 5.10          Last change: 29 Apr 1999                    3
+--More--(83%)
+...back 1 page
+
+                     ters in case of -f option. Unless specified,
+                     lines with  no  delimiters  will  be  passed
+                     through untouched.
+
+OPERANDS
+     The following operands are supported:
+
+     file            A path name of an input  file.  If  no  file
+                     operands are specified, or if a file operand
+                     is -, the standard input will be used.
+
+USAGE
+     See largefile(5) for the description of the behavior of  cut
+     when  encountering files greater than or equal to 2 Gbyte (2
+    **31 bytes).
+
+EXAMPLES
+     Example 1: Mapping user IDs
+
+     A mapping of user IDs to names follows:
+
+     example% cut -d: -f1,5 /etc/passwd
+
+SunOS 5.10          Last change: 29 Apr 1999                    2
+
+User Commands                                              cut(1)
+
+     Example 2: Setting current login name
+
+     To set name to current login name:
+
+     example$ name=`who am i | cut -f1 -d' '`
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect  the execution of cut: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0        All input files were output successfully.
+
+     >0       An error occurred.
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+--More--(69%)
+...back 1 page
+
+User Commands                                              cut(1)
+
+     -d delim        The character following -d is the field del-
+                     imiter  (-f  option  only).  Default is tab.
+                     Space or other characters with special mean-
+                     ing  to  the shell must be quoted. delim can
+                     be a multi-byte character.
+
+     -f list         The list following -f is a  list  of  fields
+                     assumed  to  be  separated  in the file by a
+                     delimiter character (see -d ); for instance,
+                     -f1,7  copies  the  first  and seventh field
+                     only. Lines with no field delimiters will be
+                     passed through intact (useful for table sub-
+                     headings), unless -s is specified.
+
+     -n              Do not split characters. When -b list and -n
+                     are  used together, list is adjusted so that
+                     no multi-byte character is split.
+
+     -s              Suppresses lines with no  delimiter  charac-
+                     ters in case of -f option. Unless specified,
+                     lines with  no  delimiters  will  be  passed
+                     through untouched.
+
+OPERANDS
+     The following operands are supported:
+
+     file            A path name of an input  file.  If  no  file
+                     operands are specified, or if a file operand
+                     is -, the standard input will be used.
+
+USAGE
+     See largefile(5) for the description of the behavior of  cut
+     when  encountering files greater than or equal to 2 Gbyte (2
+    **31 bytes).
+
+EXAMPLES
+     Example 1: Mapping user IDs
+
+     A mapping of user IDs to names follows:
+
+     example% cut -d: -f1,5 /etc/passwd
+
+SunOS 5.10          Last change: 29 Apr 1999                    2
+
+User Commands                                              cut(1)
+
+     Example 2: Setting current login name
+--More--(62%)
+     To set name to current login name:
+
+     example$ name=`who am i | cut -f1 -d' '`
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect  the execution of cut: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0        All input files were output successfully.
+
+     >0       An error occurred.
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | CSI                         | Enabled                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     grep(1), paste(1), attributes(5), environ(5),  largefile(5),
+     standards(5)
+
+DIAGNOSTICS
+     cut: -n may only be used with -b
+
+     cut: -d may only be used with -f
+
+     cut: -s may only be used with -f
+
+SunOS 5.10          Last change: 29 Apr 1999                    3
+
+User Commands                                              cut(1)
+
+     cut: cannot open <file>                 Either  file  cannot
+                                             be  read or does not
+--More--(86%)                                             exist.  If  multiple
+                                             files  are  present,
+                                             processing   contin-
+                                             ues.
+
+     cut: no delimiter specified             Missing delim on  -d
+                                             option.
+
+     cut: invalid delimiter
+
+     cut: no list specified                  Missing list on  -b,
+                                             -c, or -f option.
+
+     cut: invalid range specifier
+
+     cut: too many ranges specified
+
+     cut: range must be increasing
+
+     cut: invalid character in range
+
+     cut: internal error processing input
+
+     cut: invalid multibyte character
+
+     cut: unable to allocate enough memory
+
+SunOS 5.10          Last change: 29 Apr 1999                    4
+
+/d/iccol/desarrollo/datos>^DYou have stopped jobs
+/d/iccol/desarrollo/datos>fg
+vi shtest
+BACK="$(tput cub1)"
+export BACK
+wot=""
+echo "wot:y$BACK\c"
+read wot
+if [ -z wot ]
+then
+wot="y"
+fi
+echo "wot:"$wot
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+:q/d/iccol/desarrollo/datos>^[  /d/iccol/desarrollo/datos>fgman cutcat prueba.parmcat ptueba.parml *.parm       da      fgshtest
+ksh: shtest:  not found
+/d/iccol/desarrollo/datos>^D

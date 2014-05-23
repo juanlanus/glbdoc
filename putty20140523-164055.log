@@ -1,0 +1,1303 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.23 16:40:55 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri May 23 14:28:14 2014 from 172.16.10.82
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>find ~ -name ICMCRECOPY.DAT -print
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT^[  /d/iccol/desarrollo>/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+"/tmp/sh218.2" 1 line, 46 characters /d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/tmp/sh218.2" 1 line, 46 charactersINSERT MODEview "/tmp/sh218.2" 1 line, 51 characters view /d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+"/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT" [Read only] 10000 lines, 450000 characters C05004810000000000105081206110300860002964FC
+C05023210000000000105080307020700890903938FP
+C22021310000000000122080612101000811031696RP
+C05000510000000000213081202029300860007335FC
+A44025210000000000244200114049900800221624RP
+A44025210000000000244200114079300800221624RP
+C05004810000000000305081103110000860002964FC
+C02004710000000000502060983096300860034313FP
+C02004710000000000602061185028100860034313FP
+C02004710000000000702050996058400860034313FP
+C02004710000000000702050996058400860034313FP
+C02004710000000000702050100099600860034313FP
+C05023210000000000805080312011200890903938FP
+A22001610000000000822470701069500800161035RP
+C02004710000000000902050697098600860034313FP
+C02004710000000000902051097098600860034313FP
+C02001210000000001102050504069400890903937FP
+C02001210000000001102050504129800890903937FP
+C02001210000000001102050504060200890903937FP
+C02002110000000001102051209040500860007660FP
+A02002110000000001102130114040500860007660FP
+C02002110000000001102050910040500860007660FP
+C02992110000000001102050110040500860007660FP
+A02992110000000001102010114040500860007660FP
+C02992110000000001102051111040500860007660FP
+C02992110000000001102050910040500860007660FP
+C05001210000000001105080700079700890903937FC
+C05001210000000001105080700079700890903937FC
+A05002110000000001105010114010800860007660FP
+A05002110000000001105171113050500860007660FP
+C23000110000000001123081003119400830037330SP
+C02004710000000001302061283107400860034313FP
+C02006310000000001302050609119700890200756FP
+C05000510000000001305080300039700860007335FC
+C05023210000000001305080312021200890903938FP
+C05023210000000001305080513041300890903938FP
+C23000410000000001323080505079700800153993SP
+C24013210000000001324080704110100805006014SP
+C06037210000000001406080508020700800234520CP
+C02004710000000001902050891016300860034313FP
+C02002010000000002102070399108600860002964FP
+C02002010000000002102050599108600860002964FP
+C02004610000000002102051098089200860051135FP
+C02004610000000002102061096089200860051135FP
+C02004610000000002102071100089200860051135FP
+C02004610000000002102061096089200860051135FP
+C02004610000000002102051199089200860051135FP
+C05004610000000002105080389038900860051135FP
+C23000410000000002123080801059600800153993SP"/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT" [Read only] 10000 lines, 450000 characters line 1 of 10000 --0%-- :v/^CA/C02004710000000849302041210107600860034313FP
+C02004710000000849302050497107600860034313FP
+C13000810000000849313080300128400860034594FP
+C02004710000000849902050896128400860034313FP
+C02023310000000849902050404058600890903938FP
+C05000510000000850805080689068900860007335FP
+C05000510000000850805080993089100860007335FP
+C05000510000000850905080391038800860007335FP
+C05000510000000850905080993089100860007335FP
+C05000510000000850905080996099300860007335FP
+C05000510000000850905080699069600860007335FP
+C05000510000000850905080300109700860007335FC
+C02004710000000851002050683076300860034313FP
+C02001210000000855102050504080200890903937FP
+C02002010000000855102050503078900860002964FP
+C02004610000000855102060310089200860051135FP
+C02004610000000855102050795089200860051135FP
+C02004710000000855102050503036400860034313FP
+C02004710000000855102050399036400860034313FP
+C02004710000000855102050800039900860034313FP
+C02004710000000855102060906039900860034313FP
+C02004710000000855102071202109000860034313FP
+C02004710000000855102060508109000860034313FP
+C02004710000000855102050903089800860034313FP
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT" [Read only] line 10000 of 10000 --100%-- C05004810000000000105081206110300860002964FC
+C05023210000000000105080307020700890903938FP
+C22021310000000000122080612101000811031696RP
+C05000510000000000213081202029300860007335FC
+A44025210000000000244200114049900800221624RP
+A44025210000000000244200114079300800221624RP
+C05004810000000000305081103110000860002964FC
+C02004710000000000502060983096300860034313FP
+C02004710000000000602061185028100860034313FP
+C02004710000000000702050996058400860034313FP
+C02004710000000000702050996058400860034313FP
+C02004710000000000702050100099600860034313FP
+C05023210000000000805080312011200890903938FP
+A22001610000000000822470701069500800161035RP
+C02004710000000000902050697098600860034313FP
+C02004710000000000902051097098600860034313FP
+C02001210000000001102050504069400890903937FP
+C02001210000000001102050504129800890903937FP
+C02001210000000001102050504060200890903937FP
+C02002110000000001102051209040500860007660FP
+A02002110000000001102130114040500860007660FP
+C02002110000000001102050910040500860007660FP
+C02992110000000001102050110040500860007660FP
+A02992110000000001102010114040500860007660FP
+C02992110000000001102051111040500860007660FP
+C02992110000000001102050910040500860007660FP
+C05001210000000001105080700079700890903937FC
+C05001210000000001105080700079700890903937FC
+A05002110000000001105010114010800860007660FP
+A05002110000000001105171113050500860007660FP
+C23000110000000001123081003119400830037330SP
+C02004710000000001302061283107400860034313FP
+C02006310000000001302050609119700890200756FP
+C05000510000000001305080300039700860007335FC
+C05023210000000001305080312021200890903938FP
+C05023210000000001305080513041300890903938FP
+C23000410000000001323080505079700800153993SP
+C24013210000000001324080704110100805006014SP
+C06037210000000001406080508020700800234520CP
+C02004710000000001902050891016300860034313FP
+C02002010000000002102070399108600860002964FP
+C02002010000000002102050599108600860002964FP
+C02004610000000002102051098089200860051135FP
+C02004610000000002102061096089200860051135FP
+C02004610000000002102071100089200860051135FP
+C02004610000000002102061096089200860051135FP
+C02004610000000002102051199089200860051135FP
+C05004610000000002105080389038900860051135FP
+C23000410000000002123080801059600800153993SP:v/^A/dA23000410000000820523010114060600800153993SP
+A05991410000000821005010114051300860007738FP
+A02002010000000821902011213017500860002964FP
+A02002010000000821902011213030200860002964FP
+A02004710000000821902130114060300860034313FP
+A23000110000000821923130214110800830037330SP
+A23002610000000821923010114100800830114921SP
+A02000510000000823802010114047700890300279FP
+A02001110000000823802010114111000900047981FP
+A02021510000000823802010114030900860032330FP
+A02990510000000823802011213040400890300279FP
+A23000110000000823823010114120400830037330SP
+A23000410000000823823010114051000800153993SP
+A06039610000000824206200114109800830012027CC
+A02002010000000824502011213079900860002964FP
+A02001210000000826302010114020800890903937FP
+A02001210000000826302010114040600890903937FP
+A02004710000000826302010114047600860034313FP
+A23000410000000828623471006060400800153993SP
+A06992010000000831706011213041300830102897CP
+A44025210000000833944200114109000800221624RP
+A23000110000000834823200114120500830037330SP
+A44027310000000846944200114079400830012027RP
+A02004710000000849302010114107600860034313FP
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+8485 fewer linesA44025210000000000244200114049900800221624RP
+A44025210000000000244200114079300800221624RP
+A22001610000000000822470701069500800161035RP
+A02002110000000001102130114040500860007660FP
+A02992110000000001102010114040500860007660FP
+A05002110000000001105010114010800860007660FP
+A05002110000000001105171113050500860007660FP
+A05026010000000005405450709040600860035827FP
+A05976010000000005405450709050600860035827FP
+A02002010000000006302450304047000860002964FP
+A24002310000000007124010114041000830053800SP
+A24013210000000007224451212120500805006014SP
+A23000410000000012323470310080900800153993SP
+A02002010000000013002011213010900860002964FP
+A02002010000000013002011213071100860002964FP
+A02002010000000013002011213011000860002964FP
+A02004710000000013002010114026300860034313FP
+A02004710000000013002010114030200860034313FP
+A02004710000000013002010114109500860034313FP
+A23000410000000013023010114041100800153993SP
+A24013210000000013024130114090900805006014SP
+A24013210000000013024010114051100805006014SP
+A02000510000000013702010114018000890300279FP
+A02990510000000013702011213090300890300279FP
+A24013210000000013724010114020700805006014SP
+A02002010000000014202011213097000860002964FP
+A02004710000000014202010114109400860034313FP
+A02023310000000014202010114057100890903938FP
+A02023410000000014202010114090200890903938FP
+A23000410000000014223010114020300800153993SP
+A02023310000000020302011213069900890903938FP
+A02004710000000020602130114050300860034313FP
+A06036810000000020606011213031300900295528CP
+A23000410000000020623010114031000800153993SP
+A02004710000000020702010114036600860034313FP
+A24013210000000020724010114090500805006014SP
+A02002010000000023002011213087100860002964FP
+A02023210000000024202010114017700890903938FP
+A02004710000000024702010114090200860034313FP
+A23000110000000025723010114061000830037330SP
+A23000110000000025723010114040500830037330SP
+A02002010000000026602011213098600860002964FP
+A02002010000000026602011213111000860002964FP
+A02004710000000026602010114070200860034313FP
+A23000410000000026623010114060500800153993SP
+A02990810000000027102450505079400860034594FP
+A02002010000000027202450710087000860002964FP
+A02002010000000027202450710070200860002964FP
+A02990810000000027202451108120600860034594FP"/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT" [Read only] [Modified] line 1 of 1515 --0%-- :gv/^.......[14]/d"/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT" [Read only] [Modified] line 1 of 1515 --0%-- :v/^.......[14]/d/
+/
+
+/
+
+
+//:v/P$/dA03010210000000812603010114091200890300279FP
+A03010210000000812603010114021300890300279FP
+A03010210000000812603010114041300890300279FP
+A03010210000000812603010114081300890300279FP
+A03010210000000812603010114011400890300279FP
+A24013210000000812624010114101200805006014SP
+A24013210000000814224450600029900805006014SP
+A23000410000000815023470405080400800153993SP
+A05991410000000817705010114011400860007738FP
+A23000410000000819023010114031300800153993SP
+A23000410000000820523010114060600800153993SP
+A05991410000000821005010114051300860007738FP
+A02002010000000821902011213017500860002964FP
+A02002010000000821902011213030200860002964FP
+A02004710000000821902130114060300860034313FP
+A23000110000000821923130214110800830037330SP
+A23002610000000821923010114100800830114921SP
+A02000510000000823802010114047700890300279FP
+A02001110000000823802010114111000900047981FP
+A02021510000000823802010114030900860032330FP
+A02990510000000823802011213040400890300279FP
+A23000110000000823823010114120400830037330SP
+A23000410000000823823010114051000800153993SP
+A02002010000000824502011213079900860002964FP
+A02001210000000826302010114020800890903937FP
+A02001210000000826302010114040600890903937FP
+A02004710000000826302010114047600860034313FP
+A23000410000000828623471006060400800153993SP
+A06992010000000831706011213041300830102897CP
+A44025210000000833944200114109000800221624RP
+A23000110000000834823200114120500830037330SP
+A44027310000000846944200114079400830012027RP
+A02004710000000849302010114107600860034313FP
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+50 fewer lines:q!/d/iccol/desarrollo>who am i
+icjlud     pts/15       May 23 14:40    (172.16.10.82)
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>who am iview /d/iccol/desarrollo/temporales/ICMCRECOPY.DAT/d/iccol/desarrollo>/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT     /d/iccol/desarrollo>find ~ -name ICMCRECOPY.DAT -print           /d/iccol/desarrollo>find ~ -name ICMCRECOPY.DAT  -print    * -print" -print"ICMCRECOPY*" -print
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/temporales/ICMCRECOPY.TEST
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+/d/iccol/desarrollo/macros/ICMCRECOPY.log
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>find ~ -name "ICMCRECOPY*" -print/d/iccol/desarrollo>find ~ -name "ICMCRE*" -print    
+/d/iccol/desarrollo/fuentes/ICMCRE.DEF
+/d/iccol/desarrollo/fuentes/ICMCREBANK.201012.log
+/d/iccol/desarrollo/fuentes/ICMCRENV.CBL
+/d/iccol/desarrollo/fuentes/ICMCRENVHF.CBL
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.gz
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.idx.gz
+/d/iccol/desarrollo/fuentes/ICMCRE.CRUZAR
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/temporales/ICMCRECOPY.TEST
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+/d/iccol/desarrollo/macros/ICMCREBANK.201010.log
+/d/iccol/desarrollo/macros/ICMCRECOPY.log
+/d/iccol/desarrollo/copys/ICMCREH.FD
+/d/iccol/desarrollo/copys/ICMCREH.FS
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+/d/iccol/desarrollo/database/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE01
+/d/iccol/desarrollo/database/prunovedat/ICMCRE
+/d/iccol/desarrollo/database/prunovedat/ICMCRE01
+/d/iccol/desarrollo/database/ICMCRE01
+/d/iccol/desarrollo/ICMCREBANK.201301.log
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>view /d/iccol/desarrollo/copys/ICMCREH.FD
+"/d/iccol/desarrollo/copys/ICMCREH.FD" [Read only] 126 lines, 7947 characters * ICMCREH-FD.v.01.0001* MAESTRO OBLIGACIONES DE CARTERA Y TARJETAS DE CREDITO REPORTADAS
+* POR LOS DIFERENTES SUSCRIPTORES PASADAS AL ARCHIVO HISTORICO
+*----------------------------------------------------------------*
+REMARK******************************************************************
+FD  MAESTRO-ICMCREH.
+01  COMPLETO-ICMCREH.03  LLAVE-MAES-ICMCREH.05  LLAVE-MAES-ICMCREH-PRI.07  TIPO-ID-ICMCREHPIC 9.07  NUM-ID-ICMCREHPIC 9(11).05  LLAVE-MAES-ICMCREH-ALT.07  COD-SUS-ICMCREHPIC 9(6).07  COD-CTA-ICMCREHPIC 99.07  NUM-CTA-ICMCREHPIC X(18).07  NUM-CTA-VEN16-ICMCREH REDEFINESNUM-CTA-ICMCREH.
+09  NUM-CTA-VEN-ICMCREH   PIC 9(16).09  GARANTE-VEN-ICMCREH   PIC 99.03  IND-BLOQUEO-ICMCREHPIC 9     COMP-3.03  FECHA-APERT-ICMCREHPIC 9(4)  COMP-3.03  FECHA-VENC-ICMCREHPIC 9(4)  COMP-3.03  CUANTIA-ICMCREHPIC 9(5)  COMP-3.03  CALIFIC-ICMCREHPIC 9     COMP-3.03  TIP-CALIFIC-ICMCREHPIC 9     COMP-3.03  NOV-REPORT-ICMCREHPIC 99    COMP-3.03  FEC-NOVEDAD-ICMCREHPIC 9(4)  COMP-3.03  NUM-MORAS30-ICMCREHPIC 99    COMP-3.03  ESTADO-MES-ICMCREHPIC 9(12) COMP-3.03  VECTOR-HIS-1-ICMCREHPIC 9(12) COMP-3     *> AÑO 1REDEFINESESTADO-MES-ICMCREH.03  MORA-MAXIMA-ICMCREHPIC 9     COMP-3.03  ADJETIVO1-ICMCREHPIC 9     COMP-3.03  FEC-MEN-ADJ-ICMCREHPIC 9(4)  COMP-3.03  ADJETIVO2-ICMCREHPIC 9     COMP-3.03  FEC-MAY-ADJ-ICMCREHPIC 9(4)  COMP-3.03  ADJETIVO3-ICMCREHPIC 9     COMP-3.03  ART15-ICMCREHPIC 9     COMP-3.03  IND-MODIFICACION-ICMCREHPIC 9     COMP-3REDEFINESART15-ICMCREH.03  RECLAMO-ICMCREHPIC 9(5)  COMP-3.03  RECLAMO-ICMCREH-RRREDEFINES RECLAMO-ICMCREH
+PIC 9(3).03  RECLAMO-ICMCREH-RREDEFINES RECLAMO-ICMCREH.05 IND-RECLAMO-ICMCREHPIC 9(01).05 REG-LOCK-ICMCREHPIC 9(01).05 FILLER-RECLAMO-ICMCREHPIC 9(01).05 TARJ-ESTADO-PLAST-ICMCREHPIC 9(1)  REDEFINESFILLER-RECLAMO-ICMCREH."/d/iccol/desarrollo/copys/ICMCREH.FD" [Read only] 126 lines, 7947 characters05 TARJ-ESTADO-PLAST-ICMCREHPIC 9(1)  REDEFINESFILLER-RECLAMO-ICMCREH.05 REAL-TERMINO-CONTRATO-ICMCREH  PIC 9(1)  *> 1-DEFINIDOREDEFINES FILLER-RECLAMO-ICMCREH.*> 2-INDEF05 IND-SUBSIDIO-HIPOTEC-ICMCREH   PIC 9(1)  *> 0-NOREDEFINES FILLER-RECLAMO-ICMCREH.*> 1-SI03  IND-BLOQUEO-R-ICMCREHPIC 9     COMP-3.03  CALIFIC-R-ICMCREHPIC 9     COMP-3.03  TIP-CALIFIC-R-ICMCREHPIC 9     COMP-3.03  IND-MAPA-BITS-VLR-ICMCREH REDEFINESTIP-CALIFIC-R-ICMCREHPIC 9     COMP-3.03  NOV-REPORT-R-ICMCREHPIC 99    COMP-3.03  FEC-NOVEDAD-R-ICMCREHPIC 9(4)  COMP-3.03  NUM-MORAS30-R-ICMCREHPIC 99    COMP-3.03  MAPA-BITS-VLR-ICMCREH     REDEFINESNUM-MORAS30-R-ICMCREHPIC X(02).03  ESTADO-MES-R-ICMCREHPIC 9(12) COMP-3.03  VECTOR-HIS-3-ICMCREHPIC 9(12) COMP-3     *> AÑO 3REDEFINESESTADO-MES-R-ICMCREH.03  MORA-MAXIMA-R-ICMCREHPIC 9     COMP-3.03  VALOR-INICIAL-ICMCREHPIC 9(7)  COMP-3.03  NUEVOS-CAMPOS-HISTORIA-CREDITO.
+REMARK* CAMPOS DE FECHAS QUE EXISTIAN PERO AHORA SON COMPLETAS05  FECHA-APERTURA-ICMCREHPIC 9(8)  COMP-3.05  FECHA-VENCIMIENTO-ICMCREHPIC 9(8)  COMP-3.05  FECHA-ADJETIVO1-ICMCREHPIC 9(8)  COMP-3.05  FECHA-ADJETIVO2-ICMCREHPIC 9(8)  COMP-3.05  FECHA-ADJETIVO3-ICMCREHPIC 9(8)  COMP-3.
+REMARK* DEFINICIONES DE NUEVOS CAMPOS05  ESTADO-OBLIG-ICMCREHPIC 9(2)  COMP-3.05  FECHA-ESTADO-OBLIG-ICMCREH    PIC 9(8)  COMP-3.05  FECHA-ESTADO-ORIGEN-ICMCREH   PIC 9(8)  COMP-3.05  FECHA-LIMITE-PAGO-ICMCREH     PIC 9(8)  COMP-3.05  TARJ-FEC-ESTADO-PLAST-ICMCREH PIC 9(8)  COMP-3.05  REAL-FEC-CLAUS-PERM-ICMCREH   PIC 9(8)  COMP-3REDEFINES TARJ-FEC-ESTADO-PLAST-ICMCREH.05  FEC-SUBSIDIO-HIPOTEC-ICMCREH  PIC 9(8)  COMP-3REDEFINES TARJ-FEC-ESTADO-PLAST-ICMCREH.05  TARJ-CLASE-ICMCREHPIC 9(1)  COMP-3.05  TARJ-FRANQUICIA-ICMCREHPIC 9(1)  COMP-3.05  PROBAB-INCUMP-ICMCREHPIC 9(3)  COMP-3.05  RAZON-BLOQUEO-ICMCREHPIC X(1).
+REMARK* CONTINUAN LOS CAMPOS QUE YA EXISTIAN ANTES03  VALOR-SALDO-DEUDAM-ICMCREHPIC 9(7)  COMP-3.03  VALOR-DISPONIBLEM-ICMCREHPIC 9(7)  COMP-3.03  VALOR-SALDO-MORAM-ICMCREHPIC 9(7)  COMP-3.03  CALIFICACIONM-ICMCREHPIC 9     COMP-3.03  TIPO-MONEDA-ICMCREHPIC 9     COMP-3.03  TIPO-OBLIGACION-ICMCREHPIC 9     COMP-3.03  TIPO-MONEDA-ICMCREHPIC 9     COMP-3.03  TIPO-OBLIGACION-ICMCREHPIC 9     COMP-3.03  TIPO-GARANTIA-ICMCREHPIC 9     COMP-3.03  CUOTAS-CANCELADAS-ICMCREHPIC 9(3)  COMP-3.03  FECHA-DE-PAGO-ICMCREHPIC 9(8)  COMP-3.03  TOTAL-CUOTAS-ICMCREHPIC 9(3)  COMP-3.03  CUOTAS-EN-MORA-ICMCREHPIC 9(3)  COMP-3.03  SITUACION-ICMCREHPIC X.03  FECHA-ACT-END-ICMCREHPIC 9(6)  COMP-3.03  CAMPOS-NUEVOS-NHC-ICMCREH REDEFINESFECHA-ACT-END-ICMCREH.05  ESTADO-ORIGEN-ICMCREHPIC 9(1)  COMP-3.05  CAMPOS-TARJETA-ICMCREH.07 TARJ-MARCA-PRIV-ICMCREH    PIC 9(3)  COMP-3.07 REAL-CLAUS-PERM-ICMCREH    PIC 9(3)  COMP-3REDEFINES TARJ-MARCA-PRIV-ICMCREH. *> MESES CLAUSULA05 SITUACION-TITULAR-ICMCREHPIC 9(1)  COMP-3.*> EJ.LIQ03  CONSECUTIVO-ICMCREHPIC 99    COMP-3.03  FECHA-MORA-MAXIMA-ICMCREHPIC 9(6)  COMP-3.03  FECHA-ACTUALIZ-VALOR-ICMCREHPIC 9(6)  COMP-3.03  FECHA-SITUACION-ICMCREHPIC 9(6)  COMP-3.03  VECTOR-2-ICMCREHPIC 9(12) COMP-3.03  VECTOR-HIS-2-ICMCREHPIC 9(12) COMP-3REDEFINESVECTOR-2-ICMCREH.     *> AÑO 203  PERIODICIDAD-PAGO-ICMCREHPIC 9     COMP-3.03  GARANTE-ICMCREHPIC 9(2)  COMP-3.03  FORMA-PAGO-TOTAL-ICMCREHPIC 9     COMP-3.03  MOROSIDAD-ICMCREHPIC 9(3)  COMP-3.03  NOV-REPORT2-ICMCREHPIC 9(2).03  VECTOR-2-R-ICMCREHPIC 9(12) COMP-3.03  VECTOR-HIS-4-ICMCREHPIC 9(12) COMP-3    *> AÑO 4REDEFINESVECTOR-2-R-ICMCREH.
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/copys/ICMCREH.FD" [Read only] line 95 of 126 --75%-- :q/d/iccol/desarrollo>^[  /d/iccol/desarrollo>view /d/iccol/desarrollo/copys/ICMCREH.FD/d/iccol/desarrollo>view /d/iccol/desarrollo/copys/ICMCREH.FS
+"/d/iccol/desarrollo/copys/ICMCREH.FS" [Read only] 12 lines, 572 characters * ICMCREH.FS.v.01.001* MAESTRO DE OBLIGACIONES DE CARTERA Y TARJETA DE CREDITO REPORTADAS
+* POR LOS DIFERENTES SUSCRIPTORES PASADAS AL ARCHIVO HISTORICO
+$SET IDXFORMAT"8"SELECT MAESTRO-ICMCREH
+ASSIGN TO DISK MAES-ICMCREH-TITLEORGANIZATION IS INDEXEDACCESS MODE  IS DYNAMICRECORD KEY   IS LLAVE-MAES-ICMCREH
+*ALTERNATE RECORD KEY IS LLAVE-MAES-ICMCREH-ALTLOCK MODE    IS MANUAL WITH LOCK ON RECORD.
+$SET IDXFORMAT"0"
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/d/iccol/desarrollo/copys/ICMCREH.FS" [Read only] 12 lines, 572 characters:q/d/iccol/desarrollo>^[  /d/iccol/desarrollo>view /d/iccol/desarrollo/copys/ICMCREH.FS/d/iccol/desarrollo>view /d/iccol/desarrollo/copys/ICMCREH.FD/d/iccol/desarrollo>find ~ -name "ICMCRE*" -print            /d/iccol/desarrollo>
+/d/iccol/desarrollo/fuentes/ICMCRE.DEF
+/d/iccol/desarrollo/fuentes/ICMCREBANK.201012.log
+/d/iccol/desarrollo/fuentes/ICMCRENV.CBL
+/d/iccol/desarrollo/fuentes/ICMCRENVHF.CBL
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.gz
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.idx.gz
+/d/iccol/desarrollo/fuentes/ICMCRE.CRUZAR
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/temporales/ICMCRECOPY.TEST
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+/d/iccol/desarrollo/macros/ICMCREBANK.201010.log
+/d/iccol/desarrollo/macros/ICMCRECOPY.log
+/d/iccol/desarrollo/copys/ICMCREH.FD
+/d/iccol/desarrollo/copys/ICMCREH.FS
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+/d/iccol/desarrollo/database/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE01
+/d/iccol/desarrollo/database/prunovedat/ICMCRE
+/d/iccol/desarrollo/database/prunovedat/ICMCRE01
+/d/iccol/desarrollo/database/ICMCRE01
+/d/iccol/desarrollo/ICMCREBANK.201301.log
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>view /d/iccol/desarrollo/fuentes/ICMCRE.DEF
+"/d/iccol/desarrollo/fuentes/ICMCRE.DEF" [Read only] 86 lines, 6548 characters ************************************************************************
+* DEFINICION DE LAYOUT
+* TABLA:   ICMCRE
+* FORMATO: TIPO-8
+************************************************************************
+*NAMETYPEVALID
+*FIELDSIZEFUNCTION
+*/CONVERT
+************************************************************************
+DEFINE
+  TIPO_ID_ABD07(CHAR(1))DIGITO
+, NUM_ID_ABD07(CHAR((11))NUMERICO
+, COD_SUS_ABD07(CHAR((6))NUMERICO
+, COD_CTA_ABD07(CHAR(2))NUMERICO
+, NUM_CTA_ABD07(CHAR(18))--------
+, IND_BLOQUEO_ABD07(DECIMAL(1,0))     --------
+, FECHA_APERT_ABD07(DECIMAL(4,0))     MMAA
+, FECHA_VENC_ABD07(DECIMAL(4,0))     MMAA
+, CUANTIA_ABD07(DECIMAL(5,0))     --------
+, CALIFIC_ABD07(DECIMAL(1,0))     --------
+, TIP_CALIFIC_ABD07(DECIMAL(1,0))     --------
+, NOV_REPORT_ABD07(DECIMAL(2,0))     --------
+, FEC_NOVEDAD_ABD07(DECIMAL(4,0))     MMAA
+, NUM_MORAS30_ABD07(DECIMAL(2,0))     --------
+, VECTOR_HIS_1_ABD07(DECIMAL(12,0))    --------, MORA_MAXIMA_ABD07(DECIMAL(1,0))     --------
+, ADJETIVO1_ABD07(DECIMAL(1,0))     --------
+, FEC_MEN_ADJ_ABD07(DECIMAL(4,0))     MMAA
+, ADJETIVO2_ABD07(DECIMAL(1,0))     --------
+, FEC_MAY_ADJ_ABD07(DECIMAL(4,0))     MMAA
+, ADJETIVO3_ABD07(DECIMAL(1,0))     --------
+, IND_MODIFICACION_ABD07(DECIMAL(1,0))     --------
+, IND_RECLAMO_ABD07(CHAR(1))--------
+, REG_LOCK_ABD07(CHAR(1))--------
+, IND_SUBSIDIO_HIPOTEC_ABD07(CHAR(1))--------
+, TIPO_GAR_DETALLE_ABD07(CHAR(1))--------
+, CALIFIC_R_ABD07(DECIMAL(1,0))     --------
+, IND_MAPA_BITS_VLR_ABD07(DECIMAL(1,0))     --------
+, NOV_REPORT_R_ABD07(DECIMAL(2,0))     --------
+, FEC_NOVEDAD_R_ABD07(DECIMAL(4,0))     MMAA
+, MAPA_BITS_VLR_ABD07(DECIMAL(2,0))     --------, VECTOR_HIS_3_ABD07(DECIMAL(12,0))    --------
+, MORA_MAXIMA_R_ABD07(DECIMAL(1,0))     --------
+, VALOR_INICIAL_ABD07(DECIMAL(7,0))     --------
+, FECHA_APERTURA_ABD07(DECIMAL(8,0))     AAAAMMDD
+, FECHA_VENCIMIENTO_ABD07(DECIMAL(8,0))     AAAAMMDD
+, FECHA_ADJETIVO1_ABD07(DECIMAL(8,0))     AAAAMMDD"/d/iccol/desarrollo/fuentes/ICMCRE.DEF" [Read only] 86 lines, 6548 characters, TIPO_GARANTIA_ABD07(DECIMAL(1,0))     --------, CUOTAS_CANCELADAS_ABD07(DECIMAL(3,0))     --------
+, FECHA_DE_PAGO_ABD07(DECIMAL(8,0))     DDMMAAAA
+, TOTAL_CUOTAS_ABD07(DECIMAL(3,0))     --------
+, CUOTAS_EN_MORA_ABD07(DECIMAL(3,0))     --------
+, SITUACION_ABD07(CHAR(1))--------, ESTADO_ORIGEN_ABD07(DECIMAL(1,0))     --------
+, REAL_CLAUS_PERM_ABD07(DECIMAL(3,0))     --------, SITUACION_TITULAR_ABD07(DECIMAL(1,0))     --------
+, CONSECUTIVO_ABD07(DECIMAL(2,0))     --------
+, FECHA_MORA_MAXIMA_ABD07(DECIMAL(6,0))     MMAAAA
+, FECHA_ACTUALIZ_VALOR_ABD07(DECIMAL(6,0))     MMAAAA
+, FECHA_SITUACION_ABD07(DECIMAL(6,0))     MMAAAA
+, VECTOR_HIS_2_ABD07(DECIMAL(12,0))    --------
+, PERIODICIDAD_PAGO_ABD07(DECIMAL(1,0))     --------
+, GARANTE_ABD07(DECIMAL(2,0))     --------
+, FORMA_PAGO_TOTAL_ABD07(DECIMAL(1,0))     --------
+, MOROSIDAD_ABD07(DECIMAL(3,0))     --------
+, NOV_REPORT2_ABD07(CHAR(2))--------
+, VECTOR_HIS_4_ABD07(DECIMAL(12,0))    --------
+SHOW;
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~************************************************************************
+* DEFINICION DE LAYOUT
+* TABLA:   ICMCRE
+* FORMATO: TIPO-8
+************************************************************************
+*NAMETYPEVALID
+*FIELDSIZEFUNCTION
+*/CONVERT
+************************************************************************
+DEFINE
+  TIPO_ID_ABD07(CHAR(1))DIGITO
+, NUM_ID_ABD07(CHAR((11))NUMERICO
+, COD_SUS_ABD07(CHAR((6))NUMERICO
+, COD_CTA_ABD07(CHAR(2))NUMERICO
+, NUM_CTA_ABD07(CHAR(18))--------
+, IND_BLOQUEO_ABD07(DECIMAL(1,0))     --------
+, FECHA_APERT_ABD07(DECIMAL(4,0))     MMAA
+, FECHA_VENC_ABD07(DECIMAL(4,0))     MMAA
+, CUANTIA_ABD07(DECIMAL(5,0))     --------
+, CALIFIC_ABD07(DECIMAL(1,0))     --------
+, TIP_CALIFIC_ABD07(DECIMAL(1,0))     --------
+, NOV_REPORT_ABD07(DECIMAL(2,0))     --------
+, FEC_NOVEDAD_ABD07(DECIMAL(4,0))     MMAA
+, NUM_MORAS30_ABD07(DECIMAL(2,0))     --------
+, VECTOR_HIS_1_ABD07(DECIMAL(12,0))    --------, MORA_MAXIMA_ABD07(DECIMAL(1,0))     --------
+, ADJETIVO1_ABD07(DECIMAL(1,0))     --------
+, FEC_MEN_ADJ_ABD07(DECIMAL(4,0))     MMAA
+, ADJETIVO2_ABD07(DECIMAL(1,0))     --------
+, FEC_MAY_ADJ_ABD07(DECIMAL(4,0))     MMAA
+, ADJETIVO3_ABD07(DECIMAL(1,0))     --------
+, IND_MODIFICACION_ABD07(DECIMAL(1,0))     --------
+, IND_RECLAMO_ABD07(CHAR(1))--------
+, REG_LOCK_ABD07(CHAR(1))--------
+, IND_SUBSIDIO_HIPOTEC_ABD07(CHAR(1))--------
+, TIPO_GAR_DETALLE_ABD07(CHAR(1))--------
+, CALIFIC_R_ABD07(DECIMAL(1,0))     --------
+, IND_MAPA_BITS_VLR_ABD07(DECIMAL(1,0))     --------
+, NOV_REPORT_R_ABD07(DECIMAL(2,0))     --------
+, FEC_NOVEDAD_R_ABD07(DECIMAL(4,0))     MMAA
+, MAPA_BITS_VLR_ABD07(DECIMAL(2,0))     --------, VECTOR_HIS_3_ABD07(DECIMAL(12,0))    --------
+, MORA_MAXIMA_R_ABD07(DECIMAL(1,0))     --------
+, VALOR_INICIAL_ABD07(DECIMAL(7,0))     --------
+, FECHA_APERTURA_ABD07(DECIMAL(8,0))     AAAAMMDD
+, FECHA_VENCIMIENTO_ABD07(DECIMAL(8,0))     AAAAMMDD
+, FECHA_ADJETIVO1_ABD07(DECIMAL(8,0))     AAAAMMDD:q/d/iccol/desarrollo>^[  /d/iccol/desarrollo>view /d/iccol/desarrollo/fuentes/ICMCRE.DEF/d/iccol/desarrollo>find ~ -name "ICMCRE*" -print              /d/iccol/desarrollo>
+/d/iccol/desarrollo/fuentes/ICMCRE.DEF
+/d/iccol/desarrollo/fuentes/ICMCREBANK.201012.log
+/d/iccol/desarrollo/fuentes/ICMCRENV.CBL
+/d/iccol/desarrollo/fuentes/ICMCRENVHF.CBL
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.gz
+/d/iccol/desarrollo/fuentes/ley/especiales/old/ICMCREHIS.idx.gz
+/d/iccol/desarrollo/fuentes/ICMCRE.CRUZAR
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/temporales/ICMCRECOPY.TEST
+/d/iccol/desarrollo/temporales/ICMCRECOPY.DAT
+/d/iccol/desarrollo/macros/ICMCREBANK.201010.log
+/d/iccol/desarrollo/macros/ICMCRECOPY.log
+/d/iccol/desarrollo/copys/ICMCREH.FD
+/d/iccol/desarrollo/copys/ICMCREH.FS
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+/d/iccol/desarrollo/database/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE
+/d/iccol/desarrollo/database/desnovedat/ICMCRE01
+/d/iccol/desarrollo/database/prunovedat/ICMCRE
+/d/iccol/desarrollo/database/prunovedat/ICMCRE01
+/d/iccol/desarrollo/database/ICMCRE01
+/d/iccol/desarrollo/ICMCREBANK.201301.log
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>find ~ -name "ICMCRE*" -print/d/iccol/desarrollo>find ~ -name "*" -print      s*" -printh*" -print-*" -printP*" -printE*" -print-*" -printF*" -print
+find: cannot read dir /d/iccol/desarrollo/fuentes/especiales/darlas: Permission denied
+/d/iccol/desarrollo/macros/sh-PE-Falabella-semestral
+find: cannot read dir /d/iccol/desarrollo/stt: Permission denied
+find: cannot read dir /d/iccol/desarrollo/sf/.sunw: Permission denied
+find: cannot read dir /d/iccol/desarrollo/.ssh: Permission denied
+/d/iccol/desarrollo>view /d/iccol/desarrollo/macros/sh-PE-Falabella-semestral
+"/d/iccol/desarrollo/macros/sh-PE-Falabella-semestral" [Read only] 434 lines, 14113 characters #sh-PE-Falabella-semestral.V.1.0001.
+#**********************************************************
+#SHELL-ID:     sh-PE-Falabella-semestral
+#DATE-WRITTEN: 2012/11/08*
+#LAST UPDATE:  2012/11/08
+#AUTHOR:DIRECCION PROCESOS ESPECIALES*
+#**********************************************************
+#**********************************************************
+
+#***********************************************************************
+#mostrar_parametros.*
+#   Lee y muetra los parametros de ventacruzada para un suscriptor     *
+#***********************************************************************
+mostrar_parametros() {
+  perams=`cat $cadena01.parm`
+  base=`echo $perams  | cut -d ";" -f1`
+  entfmt=`echo $perams  | cut -d ";" -f2`
+  fecha=`echo $perams  | cut -d ";" -f3`
+  echo "+-----------------------------------------------------------+"
+  echo "| *** PARAMETROS PROCESO PE FALABELLA SEMESTRAL ***|"
+  echo "|Base (I=interna, E=externa)     :  " $base
+  echo "|Formato(1=1-11,2=1-11-45):  " $entfmt
+  echo "|Fecha de Proceso:  " $fecha
+  echo "+-----------------------------------------------------------+"
+  echo "Si desea modificar algun parametro digite S ---> \c"
+  read modpard
+  if test -z "$modpard"
+   then
+modpar="N"
+  else
+if [ $modpard == "s" ] || [ $modpard == "S" ]; then
+modpar="S"
+    else
+modpar="N"
+    fi
+  fi
+if [ $modpar == "S" ] || [ $modpar == "s" ]; thenmodificar_parametros
+  fi
+}
+
+#***********************************************************************
+#pedir_parametros*
+#   Pide parametros y arma el archivo PEfalsemestral
+#***********************************************************************
+pedir_parametros() {
+  regp=""
+  echo "+--------------------------------------------------+"
+  echo "| La base de entrada puede ser:|""/d/iccol/desarrollo/macros/sh-PE-Falabella-semestral" [Read only] 434 lines, 14113 characters#s:file sh-PE-Ripley sh-PE-Ripley"sh-PE-Ripley" [Read only] [Not edited] line 1 of 434 --0%-- #s:w!^?^?#s"sh-PE-Ripley" [Read only] [Not edited] line 1 of 434 --0%-- #s:file /d/iccol/desarrollo/macros/sh-PE-Ripley"/d/iccol/desarrollo/macros/sh-PE-Ripley" [Read only] [Not edited] line 1 of 434 --0%-- #s#s:w!"/d/iccol/desarrollo/macros/sh-PE-Ripley" [New file] 434 lines, 14113 characters #sRead only] line 1 of 434 --0%-- #s:q/d/iccol/desarrollo>vi    clear 
+/d/iccol/desarrollo>cat /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Falabella-semestral.V.1.0001.
+#**********************************************************
+#SHELL-ID:     sh-PE-Falabella-semestral
+#DATE-WRITTEN: 2012/11/08                                 *
+#LAST UPDATE:  2012/11/08
+#AUTHOR:       DIRECCION PROCESOS ESPECIALES              *
+#**********************************************************
+#**********************************************************
+
+#***********************************************************************
+#mostrar_parametros.                                                   *
+#   Lee y muetra los parametros de ventacruzada para un suscriptor     *
+#***********************************************************************
+mostrar_parametros() {
+  perams=`cat $cadena01.parm`
+  base=`echo $perams  | cut -d ";" -f1`
+  entfmt=`echo $perams  | cut -d ";" -f2`
+  fecha=`echo $perams  | cut -d ";" -f3`
+  echo "+-----------------------------------------------------------+"
+  echo "| *** PARAMETROS PROCESO PE FALABELLA SEMESTRAL ***         |"
+  echo "|       Base (I=interna, E=externa)     :  " $base     
+  echo "|       Formato(1=1-11,2=1-11-45)       :  " $entfmt
+  echo "|       Fecha de Proceso                :  " $fecha 
+  echo "+-----------------------------------------------------------+"
+  echo "Si desea modificar algun parametro digite S ---> \c"
+  read modpard
+  if test -z "$modpard"
+   then
+    modpar="N"
+  else
+    if [ $modpard == "s" ] || [ $modpard == "S" ]; then
+       modpar="S"
+    else
+       modpar="N"
+    fi
+  fi
+  if [ $modpar == "S" ] || [ $modpar == "s" ]; then
+     modificar_parametros
+  fi
+}
+
+#***********************************************************************
+#pedir_parametros                                                  *
+#   Pide parametros y arma el archivo PEfalsemestral    
+#***********************************************************************
+pedir_parametros() {
+  regp=""
+  echo "+--------------------------------------------------+"
+  echo "| La base de entrada puede ser:                    |"
+  echo "|         Interna Datacredito (I)                  |"
+  echo "|         o Externa           (E)                  |"
+  echo "Digite tipo de base (I o E)   ---> \c"
+  read base
+  if test -z "$base"
+   then
+    base="I"
+  else
+   if [ $base = "E" ] || [ $base = "e" ]; then
+      base="E"
+   else
+      base="I"
+   fi
+  fi
+  reg=$regp$base";"
+  regp=$reg
+#
+  echo "+--------------------------------------------------+"
+  if [ $base = "E" ]; then
+   echo "+--------------------------------------------------+"
+   echo "|El archivo de entrada puede tener formato:        |"
+   echo "|   1 - 11          (Digitar : 1)                  |"
+   echo "|   1 - 11 - 45     (Digitar : 2)                  |"
+   echo "Digite formato del archivo  ---> \c"
+   read entfmt      
+   if test -z "$entfmt"
+    then
+     entfmt=1
+   else
+    if [ $entfmt -gt 2 ]; then
+     entfmt=2
+    else
+      if [ $entfmt -lt 1 ]; then
+       entfmt=1
+      fi
+    fi
+   fi
+  else
+   entfmt=1
+  fi
+  reg=$regp$entfmt";"
+  regp=$reg
+  echo "+--------------------------------------------------+"
+  echo "Si fecha de proceso no es la actual, digite fecha (AAAAMMDD) ---> \c"
+  read fechad
+  if test -z "$fechad"
+   then fecha=$fechah
+  else
+   if [ $fechah -gt $fechad ] || [ $fechah -eq $fechad ]; then
+    fecha=$fechad
+   else
+    echo "fecha digitada es invalida ... se asume fecha de hoy "
+    fecha=$fechah
+   fi
+  fi
+  reg=$regp$fecha";"
+  regp=$reg
+
+  fecha6=`echo $fecha  | cut -c1-6`
+  echo $reg >| $cadena01.parm
+  echo "Se grabo el registro de parametros"
+  echo $fecha
+  mostrar_parametros
+#
+}
+
+#***********************************************************************
+#modificar_parametros                                                  *
+#   Pide los parametros a modificar y graba el archivo ventacr$codsus  *
+#***********************************************************************
+modificar_parametros() {
+  echo "Modificar parametros"
+  regp=""
+  echo "+--------------------------------------------------+"
+  echo "| La base de entrada puede ser:                    |"
+  echo "|         Interna Datacredito (I)                  |"
+  echo "|         o Externa           (E)                  |"
+  echo "Digite tipo de base (I o E)   ---> \c"
+  read based
+  if test -z "$based"
+   then
+    reg=$regp$base";"
+    regp=$reg
+  else
+   if [ $based = "E" ] || [ $based = "e" ]; then
+      based="E"
+   else
+      based="I"
+   fi
+   reg=$regp$based";"
+   regp=$reg
+   base=$based
+  fi
+#
+  echo "+--------------------------------------------------+"
+  if [ $base = "E" ]; then
+   echo "+--------------------------------------------------+"
+   echo "|El archivo de entrada puede tener formato:        |"
+   echo "|   1 - 11          (Digitar : 1)                  |"
+   echo "|   1 - 11 - 45     (Digitar : 2)                  |"
+   echo "Digite formato del archivo  ---> \c"
+   read entfmtd     
+   if test -z "$entfmtd"
+    then
+     reg=$regp$entfmt";"
+     regp=$reg
+   else
+    if [ $entfmtd -gt 3 ]; then
+     entfmtd=3
+    else
+      if [ $entfmtd -lt 1 ]; then
+       entfmtd=1
+      fi
+    fi
+    reg=$regp$entfmtd";"
+    regp=$reg
+    entfmt=$entfmtd
+   fi
+  else
+   entfmt=1
+   reg=$regp$entfmt";"
+   regp=$reg
+  fi
+  echo "+--------------------------------------------------+"
+  echo "Si va a modificar fecha de proceso digite fecha (AAAAMMDD) ---> \c"
+  read fechad
+  if test -z "$fechad"
+   then
+     reg=$regp$fecha";"
+     regp=$reg
+  else
+   if [ $fechah -gt $fechad ]; then
+    fecha=$fechad
+   else
+    fecha=$fechah
+   fi
+   reg=$regp$fecha";"
+   regp=$reg
+  fi
+  fecha6=`echo $fecha  | cut -c1-6`
+
+  echo $reg >| $cadena01.parm
+  echo "Se modifico el registro de parametros"
+  mostrar_parametros
+#
+}
+
+#***********************************************************************
+#ejecutar_extraccion                                                   *
+# extrae registros por suscriptor del archivo ICMCRECOPY.DAT           *
+#***********************************************************************
+ejecutar_extraccion() {
+  P_SERVER_DEV="172.24.6.154"
+  P_MAQUINA=`who am i | cut -c 39-50`
+  echo "MAQUINA: " $P_MAQUINA
+  if [ $P_MAQUINA == $P_SERVER_DEV ] ; then
+       echo "MAQUINA DE DESARROLLO" $P_MAQUINA
+       cd /despeciales
+  else
+       echo "MAQUINA DE PRODUCCION : " $P_MAQUINA
+       cd $ESPECIALES/ctlc
+  fi
+  grep "^A......[14].*"$nitsus".P$" ICMCRECOPY.DAT | cut -c8-19 | sort -u >| $cadena01                                       
+  numeroreg1=`wc -l < $cadena01`
+  mv $cadena01 $TEMPORALES/$cadena01
+  entfmt=1
+  cd $TEMPORALES
+#
+}
+ 
+#PROGRAMA PRINCIPAL
+nitsus=900047981
+#Fecha de ejecución
+fechah=`date '+%Y%m%d'`
+fechah6=`echo $fechah  | cut -c1-6`
+#
+#*========================================================*
+#*                    PROCESO                             *
+#*========================================================*
+echo "+--------------------------------------------------+"
+echo "| **      PROCESO FALABELLA SEMESTRAL       **     |"
+echo "+--------------------------------------------------+"
+echo
+echo "Digite nombre del archivo  ---> \c"
+read cadena01
+cadena00=$cadena01.prn
+cadena02=$cadena01.val
+cadena03=$cadena01.inc
+cadena04=$cadena01.txt
+cadena05=$cadena01.DATINF
+cadena06=$cadena01.ESTADI
+cadena07=$cadena01.QUANTO 
+echo
+#cd $DATOS     
+#if test -s $cadena01.parm
+# then
+#  mostrar_parametros
+#else
+  pedir_parametros
+#fi
+#Fecha de Proceso
+echo "Fechas: " $fechah6 " - " $fecha6
+if [ $fechah6 -gt $fecha6 ]; then
+#busca san_ata para la fecha historica
+  cd $DATOS
+  sanata=`grep $fecha6 ICSANATA.DAT | cut -c17-17`
+  echo "sanata para fecha " $fecha6 "  es " $sanata
+  if test -z "$sanata"
+   then
+   echo " !!!!   error buscando sanata para $fecha6 !!!  "
+   echo "Digite san_ata para fecha historica $fecha6  ---> \c"
+   read sanata
+  fi
+fi
+cadena12=$cadena01.icgs65          
+cadena08=$cadena12.OK
+cadena09="LOG-ICGS65-"$fecha
+cadena10="LOG-ICGS65-PRB-"$fecha
+cadena13=$cadena01.par             
+echo "Sigue el proceso .... "
+if [ $base = "I" ]; then
+  echo "Ejecutando extraccion   ...  "
+  ejecutar_extraccion
+fi
+cd $TEMPORALES
+if test -s $cadena01.log
+ then
+  rm $cadena01.log
+fi
+if [ $entfmt -eq 1 ]
+ then
+   if test -s $cadena00      
+    then
+     rm $cadena00
+   fi
+   numero00=`wc -l < $cadena01`
+   echo "+-------------------------------------------------------------+"
+   echo "|           Registros a Procesar  --->  " $numero00
+   echo "+-------------------------------------------------------+"
+   nohup x CTL100 $cadena01 >| $cadena01.log
+   echo "+-------------------------------------------------------+"
+   echo
+   tail -10 $cadena01.log
+   entfmt=2
+fi
+echo
+if [ $entfmt -eq 2 ]; then
+   if test -s $cadena02      
+    then
+     rm $cadena02
+   fi
+   if test -s $cadena03      
+    then
+     rm $cadena03
+   fi
+ echo "+--------------------------------------------------+"
+ echo "|   Ejecucion Programa PESVNO => " $cadena00
+ echo "+--------------------------------------------------+"
+#
+ nohup x PESVNO $cadena00 $cadena02 $cadena03 10 2 >| $cadena01.log
+ numero01=`wc -l < $cadena02`
+ numero02=`wc -l < $cadena03`
+ echo
+ head -10 $cadena01.log
+ echo
+ echo "+-------------------------------------------------------------+"
+ echo "|       ********** RESULTADOS DE VALIDACION *************     |"
+ echo "|                                                             |"
+ echo "|           Registros Validos    --->  " $numero01
+ echo "|           Registros Invalidos  --->  " $numero02
+ echo "+-------------------------------------------------------------+"
+fi
+if test -s $cadena02
+then
+   echo
+   echo "Procesando archivo-----> "$cadena02
+else
+   echo "!!!...Archivo $cadena02 no existe proceso termina ....!!!"
+   echo
+   exit
+fi
+#
+#CAMBIO DE SANATA SI SE REQUIERE
+if [ $fechah6 -gt $fecha6 ]; then
+ hist=/san_ata_$sanata/$fecha/extfh.cfg
+ dbhist=/san_ata_$sanata/$fecha/icdb
+ export EXTFH=$hist
+ export DATABASE=$dbhist
+ echo $EXTFH
+ echo $DATABASE
+fi
+#
+echo
+mv $cadena02  $cadena04
+#
+#*=======================================================*
+#*  EXECUTE PROGRAM: icestd81                            *
+#*=======================================================*
+#
+echo "+----------------------------------------------+"
+echo "|  Programa icestd81  DATAINFORME              |"
+echo "|                                              |"
+echo "|  Procesando archivo --> "  $cadena04
+echo "+----------------------------------------------+"
+echo
+echo
+nohup x icestd81 $cadena04 $cadena03 >> $cadena01.log 2>> $cadena01.log
+tail -15 $cadena01.log
+#
+# ICGS65
+clave="12345678901"
+nawk -v codcla=$clave '{ printf("%s%s\n", codcla, $1) } ' $cadena04 >| $cadena12
+echo $cadena12 >| $cadena13
+nohup x ICGS65 BATCH $fecha < $cadena13
+x ic-inp-out-sco $cadena12
+cadena14=$cadena12.TODO 
+nawk '{ printf("%s%s%s%s%s%s%s%s%s\n",substr($0,1,1),";",substr($0,2,11),";",substr($0,13,15),";",substr($0,35,1),";",substr($0,36,50))}' $cadena12.TODO|sed -e "s/ 00000000/\;0000\;0000\;/g" >| $cadena12.ICGS65  
+#*========================================================*
+#*       PARAMETROS CALCULO DE SCORE                      *
+#*========================================================*
+formato="VAL"
+scoring=62
+#*========================================================*
+echo "+------------------------------------------------------+"
+echo "|  Ejecucion Programa      SCOTBATCH                   |"
+echo "+------------------------------------------------------+"
+echo "|  SCORE => QUANTO                                     |"
+echo "+------------------------------------------------------+"
+echo
+nohup x SCOTBATCH $fecha6 $scoring $formato $cadena04 >> $cadena01.log 2>>$cadena01.log 
+tail -12 $cadena01.log 
+echo
+archivo=$cadena01.vec
+cut -c1-12 $cadena04 >| $archivo
+codsus=999999
+opcion="A"
+vector=48
+echo "+-------------------------------------------------------+"
+echo "| Ejecucion Programa  icestdatVEC-NORMAL-TOT => "           
+echo "+-------------------------------------------------------+"
+nohup x icestdatVEC-NORMAL-FAL $archivo $fecha6 $codsus $opcion $vector >> $cadena01.log  
+echo
+tail -12 $cadena01.log      
+cadena11=$archivo.$fecha6.VEC-TOT
+numero11=`wc -l < $cadena11`
+echo
+#datainforme
+echo "+----------------------------------------------------------+"
+echo "|       ***  Archivos resultados Datainforme  ***          |"
+echo "+----------------------------------------------------------+"
+echo "|                                                          |"
+echo "| Archivo Informes     => " $cadena05
+echo "|                                                          |"
+echo "| Archivo Estadisticas => " $cadena06
+echo "+----------------------------------------------------------+"
+#ICGS65
+echo "+-------------------------------------------------------------+"
+echo "|       ***  Archivos resultados ICGS65       ***          |"
+echo "+----------------------------------------------------------+"
+echo "| Archivo de salida del proceso:  " $cadena08
+echo "| Archivo de salida del proceso:  " $cadena09
+echo "| Archivo de salida del proceso:  " $cadena10
+echo "| Archivo de salida del proceso:  " $cadena12.TODO
+echo "| Archivo de salida del proceso:  " $cadena12.ICGS65
+echo "+-------------------------------------------------------------+"
+#QUANTO      
+numero07=`wc -l < $cadena07`
+numero03=`wc -l < $cadena03`
+echo "+-------------------------------------------------------------+"
+echo "|       ***  Archivos resultados QUANTO       ***          |"
+echo "+----------------------------------------------------------+"
+echo "| Archivo de salida del proceso:  " $cadena07
+echo "| Archivo de inconsistencias   :  " $cadena03
+echo "+-------------------------------------------------------------+"
+#VEC-NORMAL 
+echo
+echo "+-------------------------------------------------------------+"
+echo "|     *********  RESULTADOS DEL PROCESO VECTOR *********      |"
+echo "|                                                             |"
+echo "|  Archivo De salida        : " $cadena11    " Regs.:" $numero11
+echo "+-------------------------------------------------------------+"
+echo "        (ENTER) Continuar !!!  "
+read xxx
+exit
+
+/d/iccol/desarrollo>fg
+ksh: fg: no such job
+/d/iccol/desarrollo>vi #sh-PE-Falabella-semestral.V.1.0001.
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~INPUT MODEHELL-ID:     sh-PE-Falabella-semestral
+
+#DATE-WRITTEN: 2012/11/08                                 *
+
+
+#LAST UPDATE:  2012/11/08
+
+
+
+#AUTHOR:       DIRECCION PROCESOS ESPECIALES              *
+#**********************************************************
+#**********************************************************
+
+#***********************************************************************
+#mostrar_parametros.                                                   *
+#   Lee y muetra los parametros de ventacruzada para un suscriptor     *
+#***********************************************************************
+mostrar_parametros() {
+  perams=`cat $cadena01.parm`
+  base=`echo $perams  | cut -d ";" -f1`
+  entfmt=`echo $perams  | cut -d ";" -f2`
+  fecha=`echo $perams  | cut -d ";" -f3`
+  echo "+-----------------------------------------------------------+"
+  echo "| *** PARAMETROS PROCESO PE FALABELLA SEMESTRAL ***         |"
+  echo "|       Base (I=interna, E=externa)     :  " $base
+  echo "|       Formato(1=1-11,2=1-11-45)       :  " $entfmt
+  echo "|       Fecha de Proceso                :  " $fecha
+  echo "+-----------------------------------------------------------+"
+  echo "Si desea modificar algun parametro digite S ---> \c"
+  read modpard
+  if test -z "$modpard"
+   then
+    modpar="N"
+  else
+    if [ $modpard == "s" ] || [ $modpard == "S" ]; then
+       modpar="S"
+    else
+       modpar="N"
+    fi
+  fi
+  if [ $modpar == "S" ] || [ $modpar == "s" ]; then
+     modificar_parametros
+  fi
+}
+
+#***********************************************************************
+#pedir_parametros                                                  *
+#   Pide parametros y arma el archivo PEfalsemestral
+#***********************************************************************
+pedir_parametros() {
+  regp=""
+  echo "+--------------------------------------------------+"
+  echo "| La base de entrada puede ser:                    |"
+  echo "|         Interna /d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>^C
+/d/iccol/desarrollo>clear
+/d/iccol/desarrollo>^D

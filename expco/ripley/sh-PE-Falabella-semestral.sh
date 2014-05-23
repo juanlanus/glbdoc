@@ -18,9 +18,9 @@ mostrar_parametros() {
   fecha=`echo $perams  | cut -d ";" -f3`
   echo "+-----------------------------------------------------------+"
   echo "| *** PARAMETROS PROCESO PE FALABELLA SEMESTRAL ***         |"
-  echo "|       Base (I=interna, E=externa)     :  " $base     
+  echo "|       Base (I=interna, E=externa)     :  " $base
   echo "|       Formato(1=1-11,2=1-11-45)       :  " $entfmt
-  echo "|       Fecha de Proceso                :  " $fecha 
+  echo "|       Fecha de Proceso                :  " $fecha
   echo "+-----------------------------------------------------------+"
   echo "Si desea modificar algun parametro digite S ---> \c"
   read modpard
@@ -41,7 +41,7 @@ mostrar_parametros() {
 
 #***********************************************************************
 #pedir_parametros                                                  *
-#   Pide parametros y arma el archivo PEfalsemestral    
+#   Pide parametros y arma el archivo PEfalsemestral
 #***********************************************************************
 pedir_parametros() {
   regp=""
@@ -71,7 +71,7 @@ pedir_parametros() {
    echo "|   1 - 11          (Digitar : 1)                  |"
    echo "|   1 - 11 - 45     (Digitar : 2)                  |"
    echo "Digite formato del archivo  ---> \c"
-   read entfmt      
+   read entfmt
    if test -z "$entfmt"
     then
      entfmt=1
@@ -148,7 +148,7 @@ modificar_parametros() {
    echo "|   1 - 11          (Digitar : 1)                  |"
    echo "|   1 - 11 - 45     (Digitar : 2)                  |"
    echo "Digite formato del archivo  ---> \c"
-   read entfmtd     
+   read entfmtd
    if test -z "$entfmtd"
     then
      reg=$regp$entfmt";"
@@ -209,14 +209,14 @@ ejecutar_extraccion() {
        echo "MAQUINA DE PRODUCCION : " $P_MAQUINA
        cd $ESPECIALES/ctlc
   fi
-  grep "^A......[14].*"$nitsus".P$" ICMCRECOPY.DAT | cut -c8-19 | sort -u >| $cadena01                                       
+  grep "^A......[14].*"$nitsus".P$" ICMCRECOPY.DAT | cut -c8-19 | sort -u >| $cadena01
   numeroreg1=`wc -l < $cadena01`
   mv $cadena01 $TEMPORALES/$cadena01
   entfmt=1
   cd $TEMPORALES
 #
 }
- 
+
 #PROGRAMA PRINCIPAL
 nitsus=900047981
 #Fecha de ejecución
@@ -238,9 +238,9 @@ cadena03=$cadena01.inc
 cadena04=$cadena01.txt
 cadena05=$cadena01.DATINF
 cadena06=$cadena01.ESTADI
-cadena07=$cadena01.QUANTO 
+cadena07=$cadena01.QUANTO
 echo
-#cd $DATOS     
+#cd $DATOS
 #if test -s $cadena01.parm
 # then
 #  mostrar_parametros
@@ -261,11 +261,11 @@ if [ $fechah6 -gt $fecha6 ]; then
    read sanata
   fi
 fi
-cadena12=$cadena01.icgs65          
+cadena12=$cadena01.icgs65
 cadena08=$cadena12.OK
 cadena09="LOG-ICGS65-"$fecha
 cadena10="LOG-ICGS65-PRB-"$fecha
-cadena13=$cadena01.par             
+cadena13=$cadena01.par
 echo "Sigue el proceso .... "
 if [ $base = "I" ]; then
   echo "Ejecutando extraccion   ...  "
@@ -278,7 +278,7 @@ if test -s $cadena01.log
 fi
 if [ $entfmt -eq 1 ]
  then
-   if test -s $cadena00      
+   if test -s $cadena00
     then
      rm $cadena00
    fi
@@ -294,11 +294,11 @@ if [ $entfmt -eq 1 ]
 fi
 echo
 if [ $entfmt -eq 2 ]; then
-   if test -s $cadena02      
+   if test -s $cadena02
     then
      rm $cadena02
    fi
-   if test -s $cadena03      
+   if test -s $cadena03
     then
      rm $cadena03
    fi
@@ -362,8 +362,8 @@ nawk -v codcla=$clave '{ printf("%s%s\n", codcla, $1) } ' $cadena04 >| $cadena12
 echo $cadena12 >| $cadena13
 nohup x ICGS65 BATCH $fecha < $cadena13
 x ic-inp-out-sco $cadena12
-cadena14=$cadena12.TODO 
-nawk '{ printf("%s%s%s%s%s%s%s%s%s\n",substr($0,1,1),";",substr($0,2,11),";",substr($0,13,15),";",substr($0,35,1),";",substr($0,36,50))}' $cadena12.TODO|sed -e "s/ 00000000/\;0000\;0000\;/g" >| $cadena12.ICGS65  
+cadena14=$cadena12.TODO
+nawk '{ printf("%s%s%s%s%s%s%s%s%s\n",substr($0,1,1),";",substr($0,2,11),";",substr($0,13,15),";",substr($0,35,1),";",substr($0,36,50))}' $cadena12.TODO|sed -e "s/ 00000000/\;0000\;0000\;/g" >| $cadena12.ICGS65
 #*========================================================*
 #*       PARAMETROS CALCULO DE SCORE                      *
 #*========================================================*
@@ -376,8 +376,8 @@ echo "+------------------------------------------------------+"
 echo "|  SCORE => QUANTO                                     |"
 echo "+------------------------------------------------------+"
 echo
-nohup x SCOTBATCH $fecha6 $scoring $formato $cadena04 >> $cadena01.log 2>>$cadena01.log 
-tail -12 $cadena01.log 
+nohup x SCOTBATCH $fecha6 $scoring $formato $cadena04 >> $cadena01.log 2>>$cadena01.log
+tail -12 $cadena01.log
 echo
 archivo=$cadena01.vec
 cut -c1-12 $cadena04 >| $archivo
@@ -385,11 +385,11 @@ codsus=999999
 opcion="A"
 vector=48
 echo "+-------------------------------------------------------+"
-echo "| Ejecucion Programa  icestdatVEC-NORMAL-TOT => "           
+echo "| Ejecucion Programa  icestdatVEC-NORMAL-TOT => "
 echo "+-------------------------------------------------------+"
-nohup x icestdatVEC-NORMAL-FAL $archivo $fecha6 $codsus $opcion $vector >> $cadena01.log  
+nohup x icestdatVEC-NORMAL-FAL $archivo $fecha6 $codsus $opcion $vector >> $cadena01.log
 echo
-tail -12 $cadena01.log      
+tail -12 $cadena01.log
 cadena11=$archivo.$fecha6.VEC-TOT
 numero11=`wc -l < $cadena11`
 echo
@@ -412,7 +412,7 @@ echo "| Archivo de salida del proceso:  " $cadena10
 echo "| Archivo de salida del proceso:  " $cadena12.TODO
 echo "| Archivo de salida del proceso:  " $cadena12.ICGS65
 echo "+-------------------------------------------------------------+"
-#QUANTO      
+#QUANTO
 numero07=`wc -l < $cadena07`
 numero03=`wc -l < $cadena03`
 echo "+-------------------------------------------------------------+"
@@ -421,7 +421,7 @@ echo "+----------------------------------------------------------+"
 echo "| Archivo de salida del proceso:  " $cadena07
 echo "| Archivo de inconsistencias   :  " $cadena03
 echo "+-------------------------------------------------------------+"
-#VEC-NORMAL 
+#VEC-NORMAL
 echo
 echo "+-------------------------------------------------------------+"
 echo "|     *********  RESULTADOS DEL PROCESO VECTOR *********      |"
