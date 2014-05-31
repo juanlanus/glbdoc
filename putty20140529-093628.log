@@ -1,0 +1,4350 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.29 09:36:28 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed May 28 18:48:12 2014 from 172.16.10.101
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>ma. visetfg     vi sh-PE-Ripley.parm
+"sh-PE-Ripley.parm" 1 line, 1 character 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley.parm" 1 line, 1 character:q/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>vi sh-PE-Ripley.parmvi sh-PE-Ripley.par     
+"sh-PE-Ripley" 420 lines, 13991 characters # /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="0"
+    NITSuscriptor=900047981
+    codSuscriptor=999999
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#si BASE="C": archivo y estructura ("0": 1-11 o "1": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="1"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha de proceso
+FECHA_PROC=" "
+
+readFECHA_PROC() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA DE PROCESO"
+echo $raya"sh-PE-Ripley" 420 lines, 13991 characters# /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="0"
+    NITSuscriptor=900047981
+    codSuscriptor=999999
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#si BASE="C": archivo y estructura ("0": 1-11 o "1": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="1"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha de proceso
+FECHA_PROC=" "
+
+readFECHA_PROC() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA DE PROCESO"
+echo $raya[1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>print -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX";tput sgr0;tput cub 7;read w
+kjfdhgkfdjgXXXXXXXsdfsdf
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>print -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX">/d/iccol/desarrollo/macros>vi sh-PE-Ripley                                    /d/iccol/desarrollo/macros>sh-PE-Ripley   
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=A<
+FECHA_PROC=<
+C;1;1;;; allParms=A;
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+# /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="0"
+    NITSuscriptor=900047981
+    codSuscriptor=999999
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#si BASE="C": archivo y estructura ("0": 1-11 o "1": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="1"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha de proceso
+FECHA_PROC=" "
+
+readFECHA_PROC() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA DE PROCESO"
+echo $raya
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+# $$$$ MUST check for empties and use defaults
+    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"$ID_EXTRACT";
+    allParms=$AllParms"$TIPO_PROC";"$FFECHA_PROC
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+
+OPEN MODE    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"
+OPEN MODE    allParms=$AllParms$ID_EXTRACT";"$TIPO_PROC";"$FFECHA_PROC
+OPEN MODE#*******************************************************************************   allParms=$AllParms$ID_EXTRACT";"$TIPO_PROC";"$FFECHA_PROC
+allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"$ID_EXTRACT";
+#*******************************************************************************
+#MAIN:w"sh-PE-Ripley" 420 lines, 13991 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=A<
+FECHA_PROC=<
+;A;
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyfg          sh-PE-Ripleyprint -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX">/d/iccol/desarrollo/macros>vi sh-PE-Ripley                                    /d/iccol/desarrollo/macros>vi sh-PE-Ripley.parm
+"sh-PE-Ripley.parm" 1 line, 1 character 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley.parm" 1 line, 1 character:q/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+# $$$$ MUST check for empties and use defaults
+    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"
+    allParms=$AllParms$ID_EXTRACT";"$TIPO_PROC";"$FFECHA_PROC
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAINREPLACE 1 CHARa:w"sh-PE-Ripley" 420 lines, 13991 characters :w"sh-PE-Ripley" 420 lines, 13991 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgvi sh-PE-Ripley.parmsh-PE-Ripley        
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;;;H;
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyfg          vi sh-PE-Ripley.parm
+"sh-PE-Ripley.parm" 1 line, 1 character 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley.parm" 1 line, 1 character:q/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>vi sh-PE-Ripley.parm
+"/tmp/sh11116.2" 1 line, 21 characters vi sh-PE-Ripley.parm
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"/tmp/sh11116.2" 1 line, 21 characters
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+No lines in buffer"/tmp/sh11116.2" 0 lines, 0 characters /d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+# $$$$ MUST check for empties and use defaults
+    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"
+    allParms=$allParms$ID_EXTRACT";"$TIPO_PROC";"$FFECHA_PROC
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+    echo "/FECHA_PROC??:w"sh-PE-Ripley" 420 lines, 13990 characters :w"sh-PE-Ripley" 420 lines, 13990 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros> sh-PE-Ripley.parmkk       
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;;;H;20140101
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros> sh-PE-Ripleyfg           vi sh-PE-Ripley.parm
+"sh-PE-Ripley.parm" 1 line, 1 character 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley.parm" 1 line, 1 character:q/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+# $$$$ MUST check for empties and use defaults
+    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"
+    allParms=$allParms$ID_EXTRACT";"$TIPO_PROC";"$FECHA_PROC
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN[1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>echo 1.parm
+1.parm
+/d/iccol/desarrollo/macros>vi    cat 1.parm
+cat: cannot open 1.parm
+/d/iccol/desarrollo/macros>pwd
+/d/iccol/desarrollo/macros
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+# $$$$ MUST check for empties and use defaults
+    allParms=$BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"
+    allParms=$allParms$ID_EXTRACT";"$TIPO_PROC";"$FECHA_PROC
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+
+
+
+
+!pwd/d/iccol/desarrollo/macros
+    
+#*******************************************************************************
+#*******************************************************************************OPEN MODE    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+OPEN MODE    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+OPEN MODE    allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+OPEN MODE#*******************************************************************************        allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}        allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"       allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"    #MAIN:w"sh-PE-Ripley" 420 lines, 14006 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgpwdcat 1.parmecho 1.parmfg         vi sh-PE-Ripley.parm sh-PE-Ripley       sh-PE-Ripley 
+sh-PE-Ripley[344]: syntax error at line 408 : `"' unmatched
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms"$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+
+    :w"sh-PE-Ripley" 420 lines, 14005 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;N/A;N/A;H;20140101
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyfg          sh-PE-Ripleyfg          pwdcat 1.parmecho 1.parmcat 1.parm 
+cat: cannot open 1.parm
+/d/iccol/desarrollo/macros>kkk^[  /d/iccol/desarrollo/macros>kkkcat 1.parmsh-PE-Ripleyfg          sh-PE-Ripleyfg          pwdcat 1.parmecho 1.parmfg         vi sh-PE-Ripley.parm sh-PE-Ripley.parm  c sh-PE-Ripley.parma sh-PE-Ripley.parmt sh-PE-Ripley.parm
+
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+    
+    echo $AllParms >| $0.parm# para pruebasecho $CHANGE MODE"file:" # para pruebasm   mAPPEND MODE " in:" $(pwd):w"sh-PE-Ripley" 421 lines, 14041 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgcat sh-PE-Ripley.parmcat 1.parm           cat sh-PE-Ripley.parmcat 1.parm           sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;N/A;N/A;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyfg          cat sh-PE-Ripley.parm
+
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo "file:" $0.parm " in:" $(pwd)
+    echo $AllParms >| $0.parm# para pruebas
+    echo $AllParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+    /allaa/aa:set noic/allParms////////Address search hit BOTTOM without matching pattern?Address search hit TOP without matching pattern
+    :w"sh-PE-Ripley" 421 lines, 14041 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgcat sh-PE-Ripley.parmsh-PE-Ripley         
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=<
+ID_EXTRACT=<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;N/A;N/A;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyfg          cat sh-PE-Ripley.parm
+C;1;1;N/A;N/A;H;20140101
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>cat sh-PE-Ripley.parmsh-PE-Ripley         
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N/A;N/A;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:^C
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo "file:" $0.parm " in:" $(pwd)
+    echo $allParms >| $0.parm# para pruebas
+    echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN[1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>echo 1.parm
+1.parm
+/d/iccol/desarrollo/macros>cat 1.parm
+cat: cannot open 1.parm
+/d/iccol/desarrollo/macros>cat .parm
+C;1;1;N/A;N/A;H;20140101
+/d/iccol/desarrollo/macros>rm .parm
+/d/iccol/desarrollo/macros>H fg
+vi sh-PE-Ripley
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo "file:" $0.parm " in:" $(pwd)
+    echo $allParms >| $0.parm# para pruebas
+    echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN/=`=$CHANGE MODE=$(/=$=$(/=$=$(/=$=$(/=$=$(/=$=$(/=$=$(/=$=$(/#*******************************************************************************
+#*******************************************************************************
+#Fecha de ejecución
+fechaHastaYYYYMMDD=`date '+%Y%m%d'`/`REPLACE 1 CHAR)/)/)/)/)/)/)/)/
+/)
+?$
+CHANGE MODE$(
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')fechaHastaYYYYMM=`echo $fechaHastaYYYYMMDD  | cut -c1-6`clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~/$$(/REPLACE 1 CHAR)/Address search hit BOTTOM without matching pattern?Address search hit TOP without matching pattern/Address search hit BOTTOM without matching pattern:w"sh-PE-Ripley" 421 lines, 14051 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgrm .parmcat .parmcat 1.parmecho 1.parmfg         sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N/A;N/A;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:c
+ 
+                COD SUSCRIPTOR PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el COD SUSCRIPTOR para extracción,
+      enter para cancelar
+ 
+            COD SUSCRIPTOR:123123
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+I;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>clear
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>clearsh-PE-Ripleycsh-PE-Ripleyash-PE-Ripleytsh-PE-Ripley sh-PE-Ripley
+# /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:       Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="0"
+    NITSuscriptor=900047981
+    codSuscriptor=999999
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#       si BASE="C": archivo y estructura ("0": 1-11 o "1": 1-11-45)
+        NOM_ARCHIVO=" "
+        TIPO_ARCHIVO="1"
+#       si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+        TIPO_EXTRACT="N"
+#           si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACT
+            ID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#       Si TIPO_PROC="H": la fecha de proceso
+        FECHA_PROC=" "
+
+readFECHA_PROC() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                          FECHA DE PROCESO"
+        echo $raya
+        echo "      Ingrese fecha de proceso,"
+        echo "      enter para cancelar"
+        echo " "
+        echo "            FECHA de PROCESO AAAAMMDD:\c"
+        read FECHA_PROCnew
+        if [ -z $FECHA_PROCnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        # debe ser solo números
+        if [[ "$FECHA_PROCnew" != +([0-9]) ]] 
+        then
+            echo "la fecha solamente puede contener dígitos"
+            tput bel
+            [ $doCuu == "1" ] && tput cuu 8 
+        else
+                        # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+                        # [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+                        if [[ "$FECHA_PROCnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
+                        then
+                                echo "la fecha es inválida, anterior a 2000 o posterior a 2029"
+                                tput bel
+                                [ $doCuu == "1" ] &&  tput cuu 8
+                        else
+                                # debe ser menor que la fecha actual
+                                if [ $FECHA_PROCnew -ge $fechaHastaYYYYMMDD ]
+                                then
+                                        echo "la fecha de proceso histórico debe ser anterior a la actual"
+                                        tput bel
+                                        [ $doCuu == "1" ] &&  tput cuu 8
+                                else
+                                        # todo bien
+                                        FECHA_PROC=$FECHA_PROCnew
+                                        loopEnd="1"
+                                fi
+                        fi
+                fi
+        done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                          TIPO DE PROCESO"
+        echo $raya
+        echo "      A) Proceso actual"
+        echo "      H) Proceso histórico"
+        echo "      enter para cancelar"
+        echo " "
+        echo "            TIPO de PROCESO:\c"
+        read TIPO_PROCnew
+        if [ -z $TIPO_PROCnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        [ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
+        [ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
+        if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
+        then
+            TIPO_PROC=$TIPO_PROCnew
+            loopEnd="1"
+        else
+            tput bel
+            [ $doCuu == "1" ] &&  tput cuu 8
+        fi
+    done
+}
+
+readTIPO_EXTRACT() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                         TIPO DE EXTRACCIÓN"
+        echo $raya
+        echo "      N) Por NIT"
+        echo "      C) Por codigo de suscriptor"
+        echo "      enter para cancelar"
+        echo " "
+        echo "            TIPO de EXTRACCIÓN:\c"
+        read TIPO_EXTRACTnew
+        if [ -z $TIPO_EXTRACTnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        [ $TIPO_EXTRACTnew == "c" ] && TIPO_EXTRACTnew="C"
+        [ $TIPO_EXTRACTnew == "n" ] && TIPO_EXTRACTnew="N"
+        if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
+        then
+            TIPO_EXTRACT=$TIPO_EXTRACTnew
+            loopEnd="1"
+        else
+            tput bel
+            [ $doCuu == "1" ] &&  tput cuu 8
+        fi
+    done
+}
+
+readTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "0"=1-11  "1"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                    ESTRUCTURA DEL ARCHIVO BASE"
+        echo $raya
+        echo "      0) 1-11"
+        echo "      1) 1-11-45"
+        echo "      enter para cancelar"
+        echo " "
+        echo "            ESTRUCTURA:\c"
+        read TIPO_ARCHIVOnew
+        if [ -z $TIPO_ARCHIVOnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        if [ $TIPO_ARCHIVOnew == "0" ] || [ $TIPO_ARCHIVOnew == "1" ]
+        then
+            TIPO_ARCHIVO=$TIPO_ARCHIVOnew
+            loopEnd="1"
+        else
+            printf "\7"
+            [ $doCuu == "1" ] &&  tput cuu 8
+        fi
+    done
+}
+
+readNOM_ARCHIVO() {
+#*******************************************************************************
+# Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                       NOMBRE DEL ARCHIVO BASE"
+        echo $raya
+        echo "      Ingrese el nombre del archivo base,"
+        echo "      enter para cancelar"
+        echo " "
+                tput el
+        echo "            ARCHIVO:\c"
+        read NOM_ARCHIVOnew
+        tput el
+        if [ -z $NOM_ARCHIVOnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        if [ -d $NOM_ARCHIVOnew ]
+        then
+            echo $NOM_ARCHIVOnew" es un nombre de directorio"
+            tput bel
+            [ $doCuu == "1" ] &&  tput cuu 8
+        else
+            if [ ! -f $NOM_ARCHIVOnew ]
+            then
+                echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"
+                tput bel
+                                [ $doCuu == "1" ] &&  tput cuu 8
+            else
+                NOM_ARCHIVO=$NOM_ARCHIVOnew
+                loopEnd="1"
+            fi
+        fi
+    done
+}
+
+readBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                       ORIGEN DE LA BASE"
+        echo $raya
+        echo "      I) Interna"
+        echo "      C) Provista por el Cliente"
+        echo "      enter para cancelar"
+        echo " "
+        echo "            BASE:\c"
+        read BASEnew
+        if [ -z $BASEnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        [ $BASEnew == "c" ] && BASEnew="C"
+        [ $BASEnew == "i" ] && BASEnew="I"
+        if [ $BASEnew == "C" ] || [ $BASEnew == "I" ]
+        then
+            BASE=$BASEnew
+            loopEnd="1"
+        else
+            tput bel
+            [ $doCuu == "1" ] &&  tput cuu 8
+        fi
+    done
+}
+
+readID_EXTRACT() {
+#*******************************************************************************
+# Lee el criterio para extracción base interna: un NIT o un cod de suscriptor
+#*******************************************************************************
+#   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTOR
+    if [ $TIPO_EXTRACT == "N" ]
+    then
+        criterioExtraccion="        NIT"
+        inputLen=11
+    else
+        criterioExtraccion="COD SUSCRIPTOR"
+        inputLen=6
+    fi
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+        echo " "
+#             ......................................................................
+        echo "                $criterioExtraccion PARA LA EXTRACCIÓN"
+        echo $raya
+
+        echo "      Ingrese el "$criterioExtraccion" para extracción,"
+        echo "      enter para cancelar"
+        echo " "
+        tput el                     # borra caracteres sobrantes
+        echo "            $criterioExtraccion:\c"
+        read ID_EXTRACTnew
+        tput el                     # borra mensaje de error
+        if [ -z $ID_EXTRACTnew ]
+        then
+            loopEnd="1"
+            exit
+        fi
+        # debe ser solo números
+        if [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] 
+        then
+            echo "el dato ingresado debe ser numérico"
+            tput bel
+            [ $doCuu == "1" ] &&  tput cuu 8
+        else
+                        # control de longitud (11 o 6)
+                        if [ ${#ID_EXTRACTnew} -ne inputLen ]
+                        then
+                                echo "longitud incorrecta del dato"
+                                tput bel
+                                [ $doCuu == "1" ] &&  tput cuu 8
+                        else
+                                ID_EXTRACT=$ID_EXTRACTnew
+                                loopEnd="1"
+                        fi
+                fi
+    done
+}
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=$(cat $0.parm)
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=$(echo "$params" | cut -d ";" -f1)
+    NOM_ARCHIVO=$(echo "$params" | cut -d ";" -f2)
+    TIPO_ARCHIVO=$(echo "$params" | cut -d ";" -f3)
+    TIPO_EXTRACT=$(echo "$params" | cut -d ";" -f4)
+    ID_EXTRACT=$(echo "$params" | cut -d ";" -f5)
+    TIPO_PROC=$(echo "$params" | cut -d ";" -f6)
+    FECHA_PROC=$(echo "$params" | cut -d ";" -f7)
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+        allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+        allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+        allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+        echo $allParms
+        echo "file:" $0.parm " in:" $(pwd)
+        echo $allParms >| $0.parm                       # para pruebas
+        echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#                                     MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)
+
+    clear
+    echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+        readNOM_ARCHIVO
+        readTIPO_ARCHIVO
+    else
+        readTIPO_EXTRACT
+        readID_EXTRACT
+    fi
+    readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+        readFECHA_PROC
+    fi
+
+    paramsPrint
+    paramsPut
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+/d/iccol/desarrollo/macros>print -n "qqq"
+qqq/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>print -n "qqq"Print -n "qqq"RINt -n "qqq"; print "www"
+ksh: PRINt:  not found
+www
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>PRINt -n "qqq"; print "www"pRINt -n "qqq"; print "www"rinT                      
+ksh: prinT:  not found
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>prinTPRINt -n "qqq"; print "www"pRINt -n "qqq"; print "www"rin
+qqqwww
+/d/iccol/desarrollo/macros>tput hpa 55
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>tput hpa 55tput hpa 55; print "www"
+www
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>tput hpa 55; print "www"ptput hpa 55; print "www"rtput hpa 55; print "www"itput hpa 55; print "www"ntput hpa 55; print "www"ttput hpa 55; print "www" tput hpa 55; print "www""tput hpa 55; print "www"qtput hpa 55; print "www"qtput hpa 55; print "www"qtput hpa 55; print "www""tput hpa 55; print "www";tput hpa 55; print "www"
+qqq
+www
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>print "qqq";tput hpa 55; print "www"/d/iccol/desarrollo/macros>print -"qqq";tput hpa 55; print "www"n"qqq";tput hpa 55; print "www" "qqq";tput hpa 55; print "www" "qqq";tput hpa 55; print -n "www"
+qqqwww/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>print -n "qqq";tput hpa 55; print -n "www"/d/iccol/desarrollo/macros>print -n "qqq";tput ; print -n "www"      h; print -n "www"t; print -n "www"
+qqqwww/d/iccol/desarrollo/macros>print -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX";tput sgr0;tput cub 7;read wprint -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX";tput sgr0;tput cub 7;read w
+kjfdhgkfdjgXXXXXXXsdfgsdfgsdfgdf
+ksh: -n: is not an identifier
+XXXXXXXsdfgsdfgd
+/d/iccol/desarrollo/macros>print -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX";tput sgr0;tput cub 7;read w
+kjfdhgkfdjgXXXXXXXsdfgsdgsdfgd
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+
+
+
+    
+
+OPEN MODE    print $raya
+OPEN MODE    print paramsDisplay
+OPEN MODE    print $raya
+OPEN MODE~    print $raya    
+print paramsDisplayprint paramsDisplay    
+print $rayaprint $rayaprint $raya    PP    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=$(cat $0.parm)
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=$(echo "$params" | cut -d ";" -f1)
+    NOM_ARCHIVO=$(echo "$params" | cut -d ";" -f2)
+    TIPO_ARCHIVO=$(echo "$params" | cut -d ";" -f3)
+    TIPO_EXTRACT=$(echo "$params" | cut -d ";" -f4)
+    ID_EXTRACT=$(echo "$params" | cut -d ";" -f5)
+    TIPO_PROC=$(echo "$params" | cut -d ";" -f6)
+    FECHA_PROC=$(echo "$params" | cut -d ";" -f7)
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+    allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+    allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo "file:" $0.parm " in:" $(pwd)
+    echo $allParms >| $0.parm# para pruebas
+    echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)    
+
+
+
+OPEN MODE:set noaiAPPEND MODE
+APPEND MODEparamsDisplay() {
+APPEND MODE#*******************************************************************************
+APPEND MODE# Hace un listado de los parámetros calidad presentación
+APPEND MODE#*******************************************************************************
+
+
+
+
+
+APPEND MODE    print "PARÁMETROS del PROCESO"
+
+
+
+
+APPEND MODE    print -n "Base="$BASE"          "
+
+
+
+APPEND MODE    if [ $BASE == "C" ]
+APPEND MODE    then
+
+APPEND MODE        print "provista por el cliente"
+
+APPEND MODE        print "    "$NOM_ARCHIVO
+
+APPEND MODE        print -n "    "$TIPO_ARCHIVO"      "
+
+APPEND MODE        [ $TIPO_ARCHIVO == "0" ] && "1-11"
+
+APPEND MODE        [ $TIPO_ARCHIVO == "1" ] && "1-11-45"
+
+APPEND MODE    else
+
+APPEND MODE        print "extraída de datos internos"
+
+APPEND MODE        print -n "    "$TIPO_EXTRACT
+
+APPEND MODE        [ $TIPO_EXTRACT == "N" ] && print "por NIT "$ID_EXTRACT
+
+APPEND MODE        [ $TIPO_EXTRACT == "C" ] && print "por cod suscriptor "$ID_EXTRACT
+
+APPEND MODE    fi
+
+APPEND MODE    print -n "Tipo de proceso: "$TIPO_PROC
+
+APPEND MODE    if [ $TIPO_PROC == "H" ]
+
+APPEND MODE    then
+
+APPEND MODE        print "histórico desde: "$FECHA_PROC
+
+APPEND MODE    else
+
+APPEND MODE        print " actual"
+
+APPEND MODE    fi
+
+APPEND MODE}
+
+APPEND MODE
+
+
+
+
+
+
+#*******************************************************************************
+
+
+#*******************************************************************************
+
+
+
+:w"sh-PE-Ripley" 452 lines, 15052 characters 
+
+
+
+[1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgprint -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX">/d/iccol/desarrollo/macros>print -n "kjfdhgkfdjg";tput rev;print -n "XXXXXXX"/d/iccol/desarrollo/macros>print -n "qqq";tput ht; print -n "www"             /d/iccol/desarrollo/macros>print -n "qqq";tput hpa 55; print -n "www"/d/iccol/desarrollo/macros>print "qqq";tput hpa 55; print "www"      /d/iccol/desarrollo/macros>tput hpa 55; print "www"            /d/iccol/desarrollo/macros>tput hpa 55             print -n "qqq"; print "www"prinT                      PRINt -n "qqq"; print "www"print -n "qqq"             cat sh-PE-Ripleyclear           cat sh-PE-Ripleysh-PE-Ripley    
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+paramsDisplay
+sh-PE-Ripley[436]: Print:  not found
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    echo "file:" $0.parm " in:" $(pwd)echo $allParms >| $0.parm# para pruebas
+    echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    print "PARÁMETROS del PROCESO"
+    print -n "Base="$BASE""
+    if [ $BASE == "C" ]
+    then
+print "provista por el cliente"
+print "    "$NOM_ARCHIVO
+print -n "    "$TIPO_ARCHIVO""
+[ $TIPO_ARCHIVO == "0" ] && "1-11"
+[ $TIPO_ARCHIVO == "1" ] && "1-11-45"
+    else
+print "extraída de datos internos"
+print -n "    "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print "por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print "por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print "histórico desde: "$FECHA_PROC
+    else
+print " actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    print paramsDisplay
+    Print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~pp:w"sh-PE-Ripley" 452 lines, 15052 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+paramsDisplay
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    print paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~:w"sh-PE-Ripley" 452 lines, 15046 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+Base=C          provista por el cliente
+    1
+    1      sh-PE-Ripley[12]: 1-11-45:  not found
+Tipo de proceso: Hhistórico desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~    echo "TIPO_PROC="$TIPO_PROC"<"echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    print "PARÁMETROS del PROCESO"
+    print -n "Base="$BASE""
+    if [ $BASE == "C" ]
+    then
+print "provista por el cliente"
+print "    "$NOM_ARCHIVO
+print -n "    "$TIPO_ARCHIVO""
+[ $TIPO_ARCHIVO == "0" ] && "1-11"
+[ $TIPO_ARCHIVO == "1" ] && "1-11-45"
+    else
+print "extraída de datos internos"
+print -n "    "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print "por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print "por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print "histórico desde: "$FECHA_PROC
+    else
+print " actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************    echo "ID_EXTRACT="$ID_EXTRACT"<"    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"    echo "BASE="$BASE"<"#*******************************************************************************OPEN MODE    in="    "
+    
+print -n INSERT MODE INSERT MODE$i"APPEND MODE # indent
+
+$CHANGE MODE: ""$BASE"$CHANGE MODE$s
+OPEN MODE    s="  "   # separación
+l PRO
+
+
+
+
+    
+
+    $s
+"    $CHANGE MODE$i$iiAPPEND MODEiiINSERT MODE"Archivo: "
+"    $CHANGE MODE$i$iiINSERT MODE"Tipo de archivo: "
+"0INSERT MODE$s
+$s
+    
+    $s
+print -n "    $CHANGE MODE$i$iiINSERT MODE"Tipo de extracción: "
+ INSERT MODE$s
+$s
+Tip$CHANGE MODECriterio
+
+
+
+-n INSERT MODE$i
+    
+
+    INSERT MODE$s
+
+    $soAPPEND MODE,:w"sh-PE-Ripley" 454 lines, 15146 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+Base: Cprovista por el cliente
+Archivo: 1
+Tipo de archivo: 1sh-PE-Ripley[14]: 1-11-45:  not found
+Tipo de proceso: Hhistórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i="    " # indent
+    s="  "   # separación
+    print "PARÁMETROS del PROCESO"
+    print -n $i"Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print $s"provista por el cliente"
+print $i$i"Archivo: "$NOM_ARCHIVO
+print -n $i$i"Tipo de archivo: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && $s"1-11"
+[ $TIPO_ARCHIVO == "1" ] && $s"1-11-45"
+    else
+print $s"extraída de datos internos"
+print -n $i$i"Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print $s"por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print $s"por cod suscriptor "$ID_EXTRACT
+    fi
+print -n $i"Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print $s"histórico, desde: "$FECHA_PROC
+    else
+print $s" actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)
+    
+
+
+
+
+
+
+
+
+
+
+
+    i=REPLACE 1 CHAR''    '
+    s=''  'REPLACE 1 CHAR'
+"APPEND MODE $s"+"$i"+"$s$s"*"REPLACE 1 CHAR+INSERT MODEprint 
+print $CHANGE MODEEstructura :w"sh-PE-Ripley" 454 lines, 15171 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO + + +
+Base: Cprovista por el cliente
+Archivo: 1
+Estructura: 11-11-45
+Tipo de proceso: Hhistórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    print "PARÁMETROS del PROCESO" $s"+"$i"+"$s$s"+"
+    print -n $i"Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print $s"provista por el cliente"
+print $i$i"Archivo: "$NOM_ARCHIVO
+print -n $i$i"Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print $s"1-11"
+[ $TIPO_ARCHIVO == "1" ] && print $s"1-11-45"
+    else
+print $s"extraída de datos internos"
+print -n $i$i"Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print $s"por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print $s"por cod suscriptor "$ID_EXTRACT
+    fi
+print -n $i"Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print $s"histórico, desde: "$FECHA_PROC
+    else
+print $s" actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)
+
+
+    
+
+prin$CHANGE MODEecho:w"sh-PE-Ripley" 454 lines, 15170 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO + + +
+Base: Cprovista por el cliente
+Archivo: 1
+Estructura: 11-11-45
+Tipo de proceso: Hhistórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO" $s"+"$i"+"$s$s"+"
+    print -n $i"Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print $s"provista por el cliente"
+print $i$i"Archivo: "$NOM_ARCHIVO
+print -n $i$i"Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print $s"1-11"
+[ $TIPO_ARCHIVO == "1" ] && print $s"1-11-45"
+    else
+print $s"extraída de datos internos"
+print -n $i$i"Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print $s"por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print $s"por cod suscriptor "$ID_EXTRACT
+    fi
+print -n $i"Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print $s"histórico, desde: "$FECHA_PROC
+    else
+print $s" actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)oINSERT MODE""$s+$i+$s$s":w"sh-PE-Ripley" 454 lines, 15166 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+1 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO   +    +    +
+Base: Cprovista por el cliente
+Archivo: 1
+Estructura: 11-11-45
+Tipo de proceso: Hhistórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO" "$s+$i+$s$s+"
+    print -n $i"Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print $s"provista por el cliente"
+print $i$i"Archivo: "$NOM_ARCHIVO
+print -n $i$i"Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print $s"1-11"
+[ $TIPO_ARCHIVO == "1" ] && print $s"1-11-45"
+    else
+print $s"extraída de datos internos"
+print -n $i$i"Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print $s"por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print $s"por cod suscriptor "$ID_EXTRACT
+    fi
+print -n $i"Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print $s"histórico, desde: "$FECHA_PROC
+    else
+print $s" actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)
+    -n $i"
+
+
+ ""$s
+i"
+-n ""$i$i
+O == "0" ] && $s"1"
+""$s"
+"
+"N"
+""$s
+    
+-n ""$i
+    
+
+    ""$s
+    
+    ""$s:w"sh-PE-Ripley" 454 lines, 15152 characters print "$sactual"fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************print "$sactual"fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit"sh-PE-Ripley" [Modified] line 396 of 454 --87%-- :w"sh-PE-Ripley" 454 lines, 15151 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+: C por el cliente
+    : 1
+    : 1
+ de proceso: Hórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+print "$sactual"fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit    allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"allParms=$allParms$TIPO_PROC";"${FECHA_PROC:-"N/A"}
+    echo $allParms
+    echo "file:" $0.parm " in:" $(pwd)
+    echo $allParms >| $0.parm# para pruebas
+    echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO"
+    print -n "$iBase: "$BASE
+    if [ $BASE == "C" ]
+    then
+print "$sprovista por el cliente"
+print "$i$iArchivo: "$NOM_ARCHIVO
+print -n "$i$iEstructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print "$s1-11"
+[ $TIPO_ARCHIVO == "1" ] && print "$s1-11-45"
+    else
+print "$sextraída de datos internos"
+print -n "$i$iCriterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print "$spor NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print "$spor cod suscriptor "$ID_EXTRACT
+    fi
+print -n "$iTipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print "$shistórico, desde: "$FECHA_PROC
+    else
+print "$sactual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+#Fecha de ejecución
+fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)
+/print/prin$CHANGE MODEprint -/prin$print -//prin$print -/prin$print -/prin$print -//prin$print -/prin$print -//prin$print -/prin$print -:w"sh-PE-Ripley" 454 lines, 15169 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+: C por el cliente
+    : 1
+    : 1-11-45
+ de proceso: Hórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO"
+    print -n "$iBase: "$BASE
+    if [ $BASE == "C" ]
+    then
+print - "$sprovista por el cliente"
+print - "$i$iArchivo: "$NOM_ARCHIVO
+print -n "$i$iEstructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print - "$s1-11"
+[ $TIPO_ARCHIVO == "1" ] && print - "$s1-11-45"
+    else
+print - "$sextraída de datos internos"
+print -n "$i$iCriterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print - "$spor NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print - "$spor cod suscriptor "$ID_EXTRACT
+    fi
+print -n "$iTipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print - "$shistórico, desde: "$FECHA_PROC
+    else
+print - "$sactual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)/\$s$$CHANGE MODE${s}/$$${s}/$$${s}/$$${s}/$$${s}/$$${s}/$$${s}/$$${s}/\$i$$CHANGE MODE${i}/$$${i}/$$${i}/$$${i}/$$${i}/$$${i}/$$${i}/$$${i}/Address search hit BOTTOM without matching pattern:w"sh-PE-Ripley" 454 lines, 15201 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123123<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123123;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+    Base: C  provista por el cliente
+        Archivo: 1
+        Estructura: 1  1-11-45
+    Tipo de proceso: H  histórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123123;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el  NIT para extracción,
+      enter para cancelar
+ 
+                    NIT:12345678901
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678901<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+I;1;1;N;12345678901;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+    Base: I  extraída de datos internos
+        Criterio de extracción: N  por NIT 12345678901
+    Tipo de proceso: H  histórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;12345678901;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:c
+ 
+                COD SUSCRIPTOR PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el COD SUSCRIPTOR para extracción,
+      enter para cancelar
+ 
+            COD SUSCRIPTOR:123456
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123456<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+I;1;1;C;123456;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+    Base: I  extraída de datos internos
+        Criterio de extracción: C  por cod suscriptor 123456
+    Tipo de proceso: A  actual
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO"
+    print -n "${i}Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print - "${s}provista por el cliente"
+print - "${i}${i}Archivo: "$NOM_ARCHIVO
+print -n "${i}${i}Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print - "${s}1-11"
+[ $TIPO_ARCHIVO == "1" ] && print - "${s}1-11-45"
+    else
+print - "${s}extraída de datos internos"
+print -n "${i}${i}Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print - "${s}por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print - "${s}por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "${i}Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print - "${s}histórico, desde: "$FECHA_PROC
+    else
+print - "${s}actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)${i}
+}
+
+
+
+
+
+    
+
+"APPEND MODE; 
+    echo "PARÁMETROS del PROCESO"echo "P$CHANGE MODErueba cusror" $(tput hpa 44) "+" "" $(tput hpa 44) "+"   $(tput hpa 44) "+" REPLACE MODE22rs:w"sh-PE-Ripley" 455 lines, 15254 characters     [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>echo "Prueba cursor" $(tput hpa 44) "+"  $(tput hpa 22) "+"
+Prueba cursor + +
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo "Prueba cursor" $(tput hpa 44) "+"  $(tput hp>/d/iccol/desarrollo/macros>fg                                                 /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;C;123456;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123456<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;C;123456;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+Prueba cursor + +
+    Base: C  provista por el cliente
+    Archivo: 1
+    Estructura: 1  1-11-45
+    Tipo de proceso: A  actual
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+#*******************************************************************************echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+paramsDisplay() {
+#*******************************************************************************
+# Hace un listado de los parámetros calidad presentación
+#*******************************************************************************
+    i='    ' # indent
+    s='  '   # separación
+    echo "PARÁMETROS del PROCESO"
+    echo "Prueba cursor" $(tput hpa 44) "+"  $(tput hpa 22) "+"
+    print -n "${i}Base: "$BASE
+    if [ $BASE == "C" ]
+    then
+print - "${s}provista por el cliente"
+print - "${i}Archivo: "$NOM_ARCHIVO
+print -n "${i}Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print - "${s}1-11"
+[ $TIPO_ARCHIVO == "1" ] && print - "${s}1-11-45"
+    else
+print - "${s}extraída de datos internos"
+print -n "${i}Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print - "${s}por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print - "${s}por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "${i}Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print - "${s}histórico, desde: "$FECHA_PROC
+    else
+print - "${s}actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)    print -n "${i}Base: "$BASEif [ $BASE == "C" ]
+    then
+print - "${s}provista por el cliente"
+print - "${i}Archivo: "$NOM_ARCHIVO
+print -n "${i}Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print - "${s}1-11"
+[ $TIPO_ARCHIVO == "1" ] && print - "${s}1-11-45"
+    else
+print - "${s}extraída de datos internos"
+print -n "${i}Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print - "${s}por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print - "${s}por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "${i}Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print - "${s}histórico, desde: "$FECHA_PROC
+    else
+print - "${s}actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi    print -n "${i}Base: "$BASEif [ $BASE == "C" ]
+    then
+print - "${s}provista por el cliente"
+print - "${i}Archivo: "$NOM_ARCHIVO
+print -n "${i}Estructura: "$TIPO_ARCHIVO
+[ $TIPO_ARCHIVO == "0" ] && print - "${s}1-11"
+[ $TIPO_ARCHIVO == "1" ] && print - "${s}1-11-45"
+    else
+print - "${s}extraída de datos internos"
+print -n "${i}Criterio de extracción: "$TIPO_EXTRACT
+[ $TIPO_EXTRACT == "N" ] && print - "${s}por NIT "$ID_EXTRACT
+[ $TIPO_EXTRACT == "C" ] && print - "${s}por cod suscriptor "$ID_EXTRACT
+    fi
+print -n "${i}Tipo de proceso: "$TIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+print - "${s}histórico, desde: "$FECHA_PROC
+    else
+print - "${s}actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT    echo "PARÁMETROS del PROCESO"    s='  '   # separación    i='    ' # indent#*******************************************************************************# Hace un listado de los parámetros calidad presentación#*******************************************************************************paramsDisplay() {}    echo "FECHA_PROC="$FECHA_PROC"<"    echo "TIPO_PROC="$TIPO_PROC"<"    echo "ID_EXTRACT="$ID_EXTRACT"<"    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<""sh-PE-Ripley" [Modified] line 377 of 454 --83%-- :w"sh-PE-Ripley" 454 lines, 15189 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123456;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=C<
+ID_EXTRACT=123456<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;C;123456;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+    Base: C  provista por el cliente
+    Archivo: 1
+    Estructura: 1  1-11-45
+    Tipo de proceso: H  histórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;C;123456;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el  NIT para extracción,
+      enter para cancelar
+ 
+                    NIT:12345678901
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678901<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+I;1;1;N;12345678901;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+
+PARÁMETROS del PROCESO
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 12345678901
+    Tipo de proceso: H  histórico, desde: 20140101
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>tput home
+/d/iccol/desarrollo/macros>tput ht
+/d/iccol/desarrollo/macros>clear
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+
+/d/iccol/desarrollo/macros>/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+
+/d/iccol/desarrollo/macros>/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>tput ich 44;print - "+"
++
+/d/iccol/desarrollo/macros>print -n "aaa";tput smso;print -n "AAA";tput rmso;print -n "bbb"
+aaaAAAbbb/d/iccol/desarrollo/macros>^[[A  /d/iccol/desarrollo/macros>print -n "aaa";tput smso;print -n "AAA";tput rmso;>/d/iccol/desarrollo/macros>print -n "aaa";tput smso;print -n "AAA";tput /d/iccol/desarrollo/macros>-n "AAA";tput rmso;print -n "bbb"                 <- "bbb" 
+aaaAAAbbb
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>print -n "aaa";tput smso;print -n "AAA";tput rmso;>/d/iccol/desarrollo/macros>
+aaaAAAbbb
+/d/iccol/desarrollo/macros>w=$(tput smso);W=$(tput rmso)
+/d/iccol/desarrollo/macros>print -n "aaa"$w "AAA" $W "bbb"
+aaa AAA  bbb/d/iccol/desarrollo/macros>
+shell will timeout in 60 seconds due to inactivity
+
+/d/iccol/desarrollo/macros>
+shell will timeout in 60 seconds due to inactivity
+ksh[2]: timed out waiting for input
+You have running jobs

@@ -1,0 +1,2330 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.29 14:49:30 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu May 29 11:22:41 2014 from 172.16.10.111
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>
+/d/iccol/desarrollo>
+/d/iccol/desarrollo>uname -r
+5.10
+/d/iccol/desarrollo>uname --help
+uname: illegal option -- help
+usage:  uname [-snrvmapiX]
+        uname [-S system_name]
+/d/iccol/desarrollo>man uname
+Reformatting page.  Please Wait... done
+
+User Commands                                            uname(1)
+
+NAME
+     uname - print name of current system
+
+SYNOPSIS
+     uname [-aimnprsvX]
+
+     uname [-S system_name]
+
+DESCRIPTION
+     The uname utility prints information about the current  sys-
+     tem on the standard output. When options are specified, sym-
+     bols representing one or more system characteristics will be
+     written to the standard output. If no options are specified,
+     uname  prints  the  current  operating  system's  name.  The
+     options  print  selected  information  returned by uname(2),
+     sysinfo(2), or both.
+
+OPTIONS
+     The following options are supported:
+
+     -a              Prints basic information currently available
+                     from the system.
+
+     -i              Prints the name of the platform.
+
+     -m              Prints the machine  hardware  name  (class).
+                     Use of this option is discouraged. Use uname
+                     -p instead. See NOTES section below.
+
+     -n              Prints the nodename  (the  nodename  is  the
+                     name  by which the system is known to a com-
+                     munications network).
+
+     -p              Prints the current host's ISA  or  processor
+                     type.
+
+     -r              Prints the operating system release level.
+
+     -s              Prints the name  of  the  operating  system.
+                     This is the default.
+
+SunOS 5.10          Last change: 17 Sep 2003                    1
+
+User Commands                                            uname(1)
+
+--More--(21%)     -S system_name  The nodename may be changed by specifying  a
+                     system  name argument. The system name argu-
+                     ment is restricted to  SYS_NMLN  characters.
+                     SYS_NMLN is an implementation specific value
+                     defined in <sys/utsname.h>. Only the  super-
+                     user is allowed this capability. This change
+                     does not persist across reboots of the  sys-
+                     tem. Use sys-unconfig(1M) to change a host's
+                     name permanently.
+
+     -v              Prints the operating system version.
+
+     -X              Prints  expanded  system  information,   one
+                     information element per line, as expected by
+                     SCO   UNIX.   The   displayed    information
+                     includes:
+
+                       +o  system name,  node,  release,  version,
+                          machine, and number of CPUs.
+
+                       +o  BusType,  Serial,  and  Users  (set  to
+                          "unknown" in Solaris)
+
+                       +o  OEM# and  Origin#  (set  to  0  and  1,
+                          respectively)
+
+EXAMPLES
+     Example 1: Printing the OS name and release level
+
+     The following command:
+
+     example% uname -sr
+
+     prints  the  operating  system  name  and   release   level,
+     separated by one <SPACE> character.
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that affect the execution of uname: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, and NLSPATH.
+
+     SYSV3    This variable  is  used  to  override  the  default
+              behavior  of  uname.  This  is necessary to make it
+              possible for some INTERACTIVE UNIX Systems and  SCO
+              UNIX  programs  and  scripts to work properly. Many
+
+SunOS 5.10          Last change: 17 Sep 2003                    2
+
+--More--(47%)User Commands                                            uname(1)
+
+              scripts use uname to determine the  SYSV3  type  or
+              the  version of the OS to ensure software is compa-
+              tible with that  OS.  Setting  SYSV3  to  an  empty
+              string  will make uname print the following default
+              values:
+
+              nodename nodename 3.2 2 i386
+
+              The individual elements  that  uname  displays  can
+              also  be modified by setting SYSV3 in the following
+              format:
+
+              os,sysname,node,rel,ver,mach
+
+              os              Operating system (IUS or SCO).
+
+              sysname         System name.
+
+              node            Nodename as  displayed  by  the  -n
+                              option.
+
+              rel             Release level as displayed  by  the
+                              -r option.
+
+              ver             Version number as displayed by  the
+                              -v option.
+
+              mach            Machine name  as  displayed  by  -m
+                              option.
+
+              Do not put spaces between the elements.  If an ele-
+              ment  is  omitted, the current system value will be
+              used.
+
+EXIT STATUS
+
+SunOS 5.10          Last change: 17 Sep 2003                    3
+
+User Commands                                            uname(1)
+
+     The following exit values are returned:
+
+     0        Successful completion.
+
+     >0       An error occurred.
+
+--More--(69%)ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SEE ALSO
+     arch(1), isalist(1), sys-unconfig(1M), sysinfo(2), uname(2),
+     nodename(4), attributes(5), environ(5), standards(5)
+
+NOTES
+     Independent software vendors (ISVs) and others who  need  to
+     determine  detailed characteristics of the platform on which
+     their software is either being installed or executed  should
+     use the uname command.
+
+     To determine the operating system name  and  release  level,
+     use  uname  -sr.  To  determine  only  the  operating system
+     release level, use uname -r. Notice  that  operating  system
+     release  levels are not guaranteed to be in x.y format (such
+     as 5.3, 5.4, 5.5, and so forth); future releases could be in
+     the  x.y.z  format  (such  as  5.3.1,  5.3.2,  5.4.1, and so
+     forth).
+
+     In SunOS 4.x releases, the arch(1) command was often used to
+     obtain  information  similar  to  that obtained by using the
+     uname command. The arch(1) command output "sun4"  was  often
+     incorrectly interpreted to signify a SunOS SPARC system.  If
+     hardware platform information is desired, use uname -sp.
+
+     The arch -k and uname -m commands return equivalent  values;
+     however,  the use of either of these commands by third party
+     programs is discouraged, as is the use of the  arch  command
+     in  general.  To  determine  the  machine's  Instruction Set
+     Architecture (ISA or processor type), use uname with the  -p
+
+SunOS 5.10          Last change: 17 Sep 2003                    4
+
+User Commands                                            uname(1)
+
+     option.
+
+--More--(98%)/d/iccol/desarrollo>unasme     me -aimnprsvX-aimnprsvX          
+SunOS codes 5.10 Generic_148888-05 sun4u sparc SUNW,SPARC-EnterpriseSystem = SunOS
+Node = codes
+Release = 5.10
+KernelID = Generic_148888-05
+Machine = sun4u
+BusType = <unknown>
+Serial = <unknown>
+Users = <unknown>
+OEM# = 0
+Origin# = 1
+NumCPU = 4
+
+/d/iccol/desarrollo>unam e  e -a
+SunOS codes 5.10 Generic_148888-05 sun4u sparc SUNW,SPARC-Enterprise
+/d/iccol/desarrollo>sleep 1;print "qqq"
+qqq
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>sleep 1;print "qqq"sleep 2
+qqq
+/d/iccol/desarrollo>fg
+ksh: fg: no such job
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>fgsleep 2;print "qqq"sleep 1;print "qqq"uname -a           uname -aimnprsvXman uname       uname --helpuname -r    . viset uname  fg   sh-PE-Ripleyvsh-PE-Ripleyish-PE-Ripley sh-PE-Ripley
+"sh-PE-Ripley" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley" [New file]:q/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>mavi sh-PE-Ripley
+"sh-PE-Ripley" 456 lines, 15243 characters # /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="0"
+    NITSuscriptor=900047981
+    codSuscriptor=999999
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   BASE: "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#   BASE="C"=> leer archivo y estructura ("0": 1-11 o "1": 1-11-45)
+    NOM_ARCHIVO=" "
+    TIPO_ARCHIVO="1"
+#   BASE="I"=> leer tipo de extracción y número (NIT o cod subs)
+#   "N": extracción x NIT  "C": por cod suscriptor
+    TIPO_EXTRACT="N"
+#   si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACT
+    ID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#   TIPO_PROC="H"=> leer la fecha de proceso
+    FECHA_PROC=" "
+
+readFECHA_PROC() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA DE PROCESO""sh-PE-Ripley" 456 lines, 15243 characters
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+    paramsGet
+    readBASE
+    if [ $BASE == "C" ]
+    then
+readNOM_ARCHIVO
+readTIPO_ARCHIVO
+    else
+readTIPO_EXTRACT
+readID_EXTRACT
+    fi
+readTIPO_PROC
+    if [ $TIPO_PROC == "H" ]
+    then
+readFECHA_PROC
+    fi
+
+paramsPrint
+    paramsPut
+    print $raya
+    paramsDisplay
+    print $raya
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+22 lines deleted
+Nothing in register +
+
+OPEN MODE
+#*******************************************************************************
+OPEN MODE
+
+# Lectura de parámetros en la terminal
+OPEN MODE
+
+
+#   carga los valores del archivo .parm
+OPEN MODE    paramsGet
+OPEN MODE#   lee el set de parámetros hasta que sea OK
+OPEN MODE    parmsOK="0"
+OPEN MODE    while [ $parmsOK == "0" ]
+OPEN MODE    do
+OPEN MODE        readBASE
+OPEN MODE        if [ $BASE == "C" ]
+OPEN MODE        then
+OPEN MODE            readNOM_ARCHIVO
+OPEN MODE            readTIPO_ARCHIVO
+OPEN MODE        else
+OPEN MODE            readTIPO_EXTRACT
+OPEN MODE            readID_EXT
+RACT
+OPEN MODE        fi
+OPEN MODE  
+      readTIPO_PROC    readTIPO_PROC
+OPEN MODE        if [ $TIPO_PROC == "H" ]if [ $TIPO_PROC == "H" ]
+OPEN MODE        thenthen
+OPEN MODE            readFECHA_PROCreadFECHA_PROC
+OPEN MODE        fifi
+OPEN MODE
+OPEN MODE        paramsPrint # $$$$ DEBUGparamsPrint # $$$$ DEBUG
+OPEN MODE
+        sleep 2sleep 2
+OPEN MODE        # guarda en archivo .parm# guarda en archivo .parm
+OPEN MODE        paramsPutparamsPut
+OPEN MODE        clearclear
+OPEN MODE
+        echo $rayaecho $raya
+OPEN MODE
+        # banner
+
+
+
+
+
+ "PE Ripley"# banner "
+PE Ripley"
+
+
+
+
+OPEN MODE        
+
+
+echo "$ASCIIBanner"ec
+ho "$ASCIIBanner"
+
+@
+@
+OPEN MODE@
+        print $raya 
+ 
+   print $raya
+@
+@
+@
+OPEN MODE@        print paramsDisplay 
+ 
+ print paramsDisplay
+@
+@
+@
+OPEN MODE@        print $raya 
+ 
+ print $raya
+@
+@
+@
+OPEN MODE@        # pregunta al ope si está satisfecho 
+ 
+ # pregunta al ope si está satisfecho
+@
+@
+@
+OPEN MODE@        continuar="?" 
+ 
+ continuar="?"
+@
+@
+@
+OPEN MODE@        while [ continuar == "?" ] 
+ 
+ while [ continuar == "?" ]
+@
+@
+@
+OPEN MODE@        do 
+ 
+ do
+@
+@
+@
+OPEN MODE@            print - " " 
+ 
+ print - " "
+@
+@
+@
+OPEN MODE@            print - " " 
+ 
+ print - " "
+@
+@
+@
+OPEN MODE@            print - " " 
+ 
+ print - " "
+@
+@
+@
+OPEN MODE@            pr
+int - "Ingrese 1 para cambiar los parámetros, enter para continuar" 
+ 
+ print 
+- "Ingrese 1 para cambiar los parámetros, enter para continuar"
+@
+@
+@
+OPEN MODE@  
+          read continuar 
+ 
+ 
+   read continuar
+@
+@
+@
+@
+OPEN MODE@            if [ -z continuar ] 
+ 
+ 
+ if [ -z continuar ]
+@
+@
+@
+@
+OPEN MODE@            then 
+ 
+ 
+ then
+@
+@
+@
+@
+OPEN MODE@                parmsOK="1" 
+ 
+ 
+ parmsOK="1"
+@
+@
+@
+@
+OPEN MODE@                continuar="listo" 
+ 
+ 
+ continuar="listo"
+@
+@
+@
+@
+OPEN MODE@            else 
+ 
+ 
+ else
+@
+@
+@
+@
+OPEN MODE@                if [ $contin
+uar == "1" ] 
+ 
+ 
+ if [ $continuar ==
+ "1" ]
+@
+@
+@
+@
+OPEN MODE@            
+    then 
+ 
+ 
+ th
+en
+@
+@
+@
+@
+OPEN MODE@
+                    : 
+ 
+ 
+ 
+:
+@
+@
+@
+@
+@
+OPEN MODE@                fi 
+ 
+ 
+ 
+ fi
+@
+@
+@
+@
+@
+OPEN MODE@            fi 
+ 
+ 
+ 
+ fi
+@
+@
+@
+@
+@
+OPEN MODE@        done 
+ 
+ 
+ 
+ done
+@
+@
+@
+@
+@
+OPEN MODE@    done 
+ 
+ 
+ 
+ done
+@
+@
+@
+@
+@
+OPEN MODE@
+ 
+ 
+ 
+     then
+print - "${s}histórico, desde: "$FECHA_PROC
+    else
+print - "${s}actual"
+    fi
+}
+
+
+#*******************************************************************************
+#*******************************************************************************
+#MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha de ejecución
+    fechaHastaYYYYMMDD=$(date '+%Y%m%d')
+    fechaHastaYYYYMM=$(echo $fechaHastaYYYYMMDD  | cut -c1-6)clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+56 fewer lines/No previous regular expression
+OPEN MODEai~:set noai
+OPEN MODE#*******************************************************************************
+OPEN MODE# Lectura de parámetros en la terminal
+OPEN MODE#   carga los valores del archivo .parm
+OPEN MODE    paramsGet
+OPEN MODE#   lee el set de parámetros hasta que sea OK
+OPEN MODE    parmsOK="0"
+OPEN MODE    while [ $parmsOK == "0" ]
+OPEN MODE    do
+OPEN MODE        readBASE
+OPEN MODE        if [ $BASE == "C" ]
+OPEN MODE        then
+OPEN MODE            readNOM_ARCHIVO
+OPEN MODE            readTIPO_ARCHIVO
+OPEN MODE        else
+OPEN MODE            readTIPO_EXTRACT
+OPEN MODE            readID_EXTRACT
+OPEN MODE        fi
+OPEN MODE        readTIPO_PROC
+OPEN MODE        if [ $TIPO_PROC == "H" ]
+OPEN MODE        then
+
+
+
+
+
+OPEN MODE            readFECHA_PROC
+
+
+
+
+OPEN MODE        fi
+
+
+
+OPEN MODE
+
+
+OPEN MODE        paramsPrint # $$$$ DEBUG
+
+OPEN MODE        sleep 2
+
+OPEN MODE        # guarda en archivo .parm
+
+OPEN MODE        paramsPut
+
+OPEN MODE        clear
+
+OPEN MODE        echo $raya
+
+OPEN MODE        # banner "PE Ripley"
+
+OPEN MODE        echo "$ASCIIBanner"
+
+OPEN MODE        print $raya
+
+OPEN MODE        print paramsDisplay
+
+OPEN MODE        print $raya
+
+OPEN MODE        # pregunta al ope si está satisfecho
+
+OPEN MODE        continuar="?"
+
+OPEN MODE        while [ continuar == "?" ]
+
+OPEN MODE        do
+
+OPEN MODE            print - " "
+
+OPEN MODE            print - " "
+
+OPEN MODE            print - " "
+
+OPEN MODE            print - "Ingrese 1 para cambiar los parámetros, enter para continuar"
+
+OPEN MODE            read continuar
+
+OPEN MODE            if [ -z continuar ]
+
+OPEN MODE            then
+
+OPEN MODE                parmsOK="1"
+
+OPEN MODE                continuar="listo"
+
+OPEN MODE            else
+
+OPEN MODE                if [ $continuar == "1" ]
+
+OPEN MODE                then
+
+OPEN MODE                    :
+
+OPEN MODE                fi
+
+OPEN MODE            fi
+
+OPEN MODE        done
+
+OPEN MODE    done
+
+OPEN MODE
+
+#*******************************************************************************
+
+# DEBUG: termina acá
+
+
+echo " "
+if [ $BASE == "C" ]readBASE    do    while [ $parmsOK == "0" ]    parmsOK="0"#   lee el set de parámetros hasta que sea OK    paramsGet#   carga los valores del archivo .parm# Lectura de parámetros en la terminal#*******************************************************************************#*******************************************************************************if [ $continuar == "1" ]    echo $raya
+
+
+
+
+    
+
+    
+
+
+    
+EAPPEND MODE                         # I interna, C cliente
+
+VOAPPEND MODE                 # 0 1-11, 1 1-11-45
+TAPPEND MODE         # N NIT, C cod subs
+
+CAPPEND MODE                # A actual, H históricoTAPPEND MODE            # NIT o cos subs
+
+
+
+CAPPEND MODE           # fecha desde
+
+OAPPEND MODE          # nombre del archivo base:w"sh-PE-Ripley" 489 lines, 16413 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>vi sh-PE-Ripleysh-PE-Ripley   
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;12345678909;H;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:h
+ 
+                          FECHA DE PROCESO
+----------------------------------------------------------------------
+      Ingrese fecha de proceso,
+      enter para cancelar
+ 
+            FECHA de PROCESO AAAAMMDD:20140101
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=H<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;H;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+paramsDisplay
+
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+paramsDisplay
+
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+/d/iccol/desarrollo/macros>g fg
+vi sh-PE-Ripley
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+#   carga los valores del archivo .parm
+    paramsGet
+#   lee el set de parámetros hasta que sea OK
+    parmsOK="0"
+    while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+print paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="?"
+while [ continuar == "?" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar"read continuarif [ -z continuar ]then
+parmsOK="1"
+continuar="listo"elseif [ $continuar == "1" ]then:fifidone/?REPLACE 1 CHAR_//_/Address search hit BOTTOM without matching pattern:w"sh-PE-Ripley" 489 lines, 16413 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N;12345678909;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+paramsDisplay
+
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    parmsOK="0"while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+print paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar"read continuarif [ -z continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+:w"sh-PE-Ripley" 489 lines, 16407 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N;12345678909;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+PARÁMETROS del PROCESO
+    Fecha: 20140529
+    Base: C  provista por el cliente
+    Archivo: 1
+    Estructura: 1  1-11-45
+    Tipo de proceso: A  actual
+
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    parmsOK="0"while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar"read continuarif [ -z continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+
+
+
+[ INSERT MODE$/continuar//////
+INSERT MODE$:w"sh-PE-Ripley" 489 lines, 16409 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N;12345678909;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+PARÁMETROS del PROCESO
+    Fecha: 20140529
+    Base: C  provista por el cliente
+    Archivo: 1
+    Estructura: 1  1-11-45
+    Tipo de proceso: A  actual
+
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar
+
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+/d/iccol/desarrollo/macros>^[k  /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  C;1;1;N;12345678909;A;20140101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:c
+ 
+                       NOMBRE DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      Ingrese el nombre del archivo base,
+      enter para cancelar
+ 
+            ARCHIVO:1
+ 
+                    ESTRUCTURA DEL ARCHIVO BASE
+----------------------------------------------------------------------
+      0) 1-11
+      1) 1-11-45
+      enter para cancelar
+ 
+            ESTRUCTURA:1
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=C<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=12345678909<
+TIPO_PROC=A<
+FECHA_PROC=20140101<
+C;1;1;N;12345678909;A;20140101
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+
+PARÁMETROS del PROCESO
+    Fecha: 20140529
+    Base: C  provista por el cliente
+    Archivo: 1
+    Estructura: 1  1-11-45
+    Tipo de proceso: A  actual
+
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar
+1
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    parmsOK="0"while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+doneINSERT MODE\c:INSERT MODE:#   lee el set de parámetros hasta que sea OK    paramsGet#   carga los valores del archivo .parm# Lectura de parámetros en la terminal#*******************************************************************************read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+    clear
+echo $raya
+    echo "$ASCIIBanner"
+#   banner "PE Ripley"
+    echo $raya
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+#   carga los valores del archivo .parm
+    paramsGet
+#   lee el set de parámetros hasta que sea OK
+    parmsOK="0"
+    while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then:
+
+
+
+    
+
+        parmsOK="0"while [ $parmsOK == "0" ]
+    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit#   lee el set de parámetros hasta que sea OK    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~    do
+  readBASE# I interna, C cliente
+if [ $BASE == "C" ]
+then
+readNOM_ARCHIVO# nombre del archivo basereadTIPO_ARCHIVO# 0 1-11, 1 1-11-45
+else
+readTIPO_EXTRACT# N NIT, C cod subsreadID_EXTRACT# NIT o cos subs
+fi
+readTIPO_PROC# A actual, H histórico
+if [ $TIPO_PROC == "H" ]
+then
+readFECHA_PROC# fecha desde
+fi
+
+paramsPrint # $$$$ DEBUG
+sleep 2
+# guarda en archivo .parm
+paramsPut
+clear
+echo $raya
+# banner "PE Ripley"
+echo "$ASCIIBanner"
+print $raya
+paramsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+print $rayaparamsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~print $rayaparamsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~print $rayaparamsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~[1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+print $rayaparamsDisplay
+print $raya
+# pregunta al ope si está satisfecho
+continuar="_"
+while [ $continuar == "_" ]
+do
+  print - " "
+print - " "
+print - " "
+print - "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"read continuarif [ -z $continuar ]then
+parmsOK="1"
+continuar="listo"else
+if [ $continuar == "1" ]then
+:
+fi
+fi
+done
+    done
+
+#*******************************************************************************
+    # DEBUG: termina acá
+    echo " "
+    echo "HASTA ACÁ LLEGAMOS POR AHORA"
+    exit
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+# de aquí para abajo, falta integrar (parte inexplorada)
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley" [Modified] line 449 of 489 --91%-- :w"sh-PE-Ripley" 489 lines, 16412 characters [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>$(grep $FECHA_PROC $DATOS/ICSANATA.DAT | cut -c17-17)
+^C
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>$(grep $FECHA _PROC $DATOS/ICSANATA.DAT | cut -c17->/d/iccol/desarrollo/macros>(grep $FECHA _PROC $DATOS/ICSANATA.DAT | cut -c17-1/d/iccol/desarrollo/macros>grep $FECHA _PROC $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep $ $DATOS/ICSANATA.DAT | cut -c17-17)          /d/iccol/desarrollo/macros>grep $ $DATOS/ICSANATA.DAT | cut -c17-17) /d/iccol/desarrollo/macros>grep 2 $DATOS/ICSANATA.DAT | cut -c17-17)/d/iccol/desarrollo/macros>grep 20 $DATOS/ICSANATA.DAT | cut -c17-17)/d/iccol/desarrollo/macros>grep 201 $DATOS/ICSANATA.DAT | cut -c17-17)0 $DATOS/ICSANATA.DAT | cut -c17-17)0 $DATOS/ICSANATA.DAT | cut -c17-17)1 $DATOS/ICSANATA.DAT | cut -c17-17)1 $DATOS/ICSANATA.DAT | cut -c17-17 
+6
+/d/iccol/desarrollo/macros>  ^[  /d/iccol/desarrollo/macros>  grep 201001 $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep 2014405
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>grep 201405 $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep 201404
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>grep 201404 $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep 201403
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>grep 201403 $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep 201401
+1
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>grep 201401 $DATOS/ICSANATA.DAT | cut -c17-17/d/iccol/desarrollo/macros>grep 201402
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>who am i
+icjlud     pts/13       May 29 12:49    (172.16.10.17)
+/d/iccol/desarrollo/macros>who
+icjjmd     pts/16       May 27 15:47    (10.98.2.175)
+icimsd     pts/37       May 27 09:35    (10.98.2.122)
+icjcld     pts/35       May 22 16:41    (10.98.2.188)
+icjdld     pts/15       May 27 08:55    (10.98.2.123)
+icimsd     pts/40       May 15 10:12    (10.98.2.71)
+icjdld     pts/1        May 23 15:52    (10.98.2.123)
+icjjmd     pts/2        May 27 11:22    (10.98.2.175)
+icjlud     pts/13       May 29 12:49    (172.16.10.17)
+iccavd     pts/48       May 29 13:29    (10.98.2.125)
+icjdld     pts/50       May 26 12:15    (10.98.2.123)
+icrmbd     pts/53       May 29 07:41    (10.98.2.10)
+icfacd     pts/45       May 22 19:08    (10.98.2.108)
+icfard     pts/54       May 26 14:07    (10.98.2.121)
+icdgd      pts/64       May 29 14:09    (172.16.10.23)
+icfard     pts/55       May 22 09:04    (10.98.2.121)
+icjjmd     pts/61       May 27 15:53    (10.98.2.175)
+icfard     pts/18       May 20 16:56    (10.98.2.121)
+icimsd     pts/19       May 26 14:55    (10.98.2.122)
+icfard     pts/60       May 26 14:09    (10.98.2.121)
+icdgd      pts/33       May 29 14:37    (172.16.10.24)
+iccavd     pts/23       May 29 13:43    (10.98.2.125)
+icehad     pts/22       May 28 09:15    (10.98.2.124)
+icimsd     pts/24       May 29 09:58    (10.98.2.122)
+icehad     pts/59       May 19 08:45    (10.98.2.124)
+icjjmd     pts/25       May 27 16:28    (10.98.2.175)
+icehad     pts/26       May 27 10:53    (10.98.2.124)
+icdgd      pts/27       May 29 14:20    (172.16.10.23)
+icjjmd     pts/28       May 29 09:17    (10.98.2.175)
+icimsd     pts/29       May 27 17:30    (10.98.2.122)
+icgjcd     pts/30       May 27 11:38    (10.98.2.220)
+iclagd     pts/66       May 29 14:46    (172.16.10.25)
+icfard     pts/67       May 27 17:20    (10.98.2.121)
+icrmbd     pts/21       May 29 10:59    (10.98.2.10)
+icrmbd     pts/57       May 29 07:42    (10.98.2.10)
+icjjmd     pts/63       May 27 16:58    (10.98.2.175)
+/d/iccol/desarrollo/macros>who     man whoo 
+Reformatting page.  Please Wait... done
+
+User Commands                                              who(1)
+
+NAME
+     who - who is on the system
+
+SYNOPSIS
+     /usr/bin/who [-abdHlmpqrstTu] [file]
+
+     /usr/bin/who -q [-n x] [file]
+
+     /usr/bin/who am i
+
+     /usr/bin/who am I
+
+     /usr/xpg4/bin/who [-abdHlmpqrtTu] [file]
+
+     /usr/xpg4/bin/who -q [-n x] [file]
+
+     /usr/xpg4/bin/who -s [-bdHlmpqrtu] [file]
+
+     /usr/xpg4/bin/who am i
+
+     /usr/xpg4/bin/who am I
+
+DESCRIPTION
+     The who utility can list the  user's  name,  terminal  line,
+     login  time,  elapsed  time  since  activity occurred on the
+     line, and the process-ID of the command interpreter  (shell)
+     for   each   current  UNIX  system  user.  It  examines  the
+     /var/adm/utmpx file to obtain its information.  If  file  is
+     given, that file (which must be in utmpx(4) format) is exam-
+     ined. Usually, file will be /var/adm/wtmpx, which contains a
+     history of all the logins since the file was last created.
+
+     The general format for output is:
+
+     name [state] line time [idle] [pid] [comment] [exit]
+
+     where:
+
+     name            User's login name
+
+     state           Capability of writing to the terminal
+
+     line            Name of the line found in /dev
+
+     time            Time since user's login
+--More--(15%)
+SunOS 5.10           Last change: 3 Nov 2000                    1
+
+User Commands                                              who(1)
+
+     idle            Time elapsed since the user's last activity
+
+     pid             User's process id
+
+     comment         Comment line in inittab(4)
+
+     exit            Exit status for dead processes
+
+OPTIONS
+     The following options are supported:
+
+     -a       Processes /var/adm/utmpx or the named file with -b,
+              -d, -l, -p, -r, -t, -T, and -u options turned on.
+
+     -b       Indicates the time and date of the last reboot.
+
+     -d       Displays all processes that have  expired  and  not
+              been  respawned by init. The exit field appears for
+              dead processes and  contains  the  termination  and
+              exit  values  (as  returned  by wait(3UCB)), of the
+              dead process. This can be useful in determining why
+              a process terminated.
+
+     -H       Outputs column headings above the regular output.
+
+     -l       Lists only those lines on which the system is wait-
+              ing  for  someone to login. The name field is LOGIN
+              in such cases. Other fields are  the  same  as  for
+              user  entries  except that the state field does not
+              exist.
+
+     -m       Outputs only information about the  current  termi-
+              nal.
+
+SunOS 5.10           Last change: 3 Nov 2000                    2
+
+User Commands                                              who(1)
+
+     -n x     Takes a numeric argument, x,  which  specifies  the
+              number  of  users to display per line. x must be at
+              least 1. The -n option can only be used with -q.
+
+     -p       Lists any other process that  is  currently  active
+--More--(35%)              and  has  been previously spawned by init. The name
+              field is the name of the program executed  by  init
+              as  found  in  /sbin/inittab.  The state, line, and
+              idle fields have  no  meaning.  The  comment  field
+              shows  the  id field of the line from /sbin/inittab
+              that spawned this process. See inittab(4).
+
+     -q       (Quick who) Displays only the names and the  number
+              of  users  currently logged on. When this option is
+              used, all other options are ignored.
+
+     -r       Indicates the current run-level of  the  init  pro-
+              cess.
+
+     -s       (Default) Lists  only  the  name,  line,  and  time
+              fields.
+
+  /usr/bin/who
+     -T       Same as the -s option, except that the state  idle,
+              pid, and comment, fields are also written. state is
+              one of the following characters:
+
+              +        The terminal allows write access to  other
+                       users.
+
+              -        The terminal denies write access to  other
+                       users.
+
+              ?        The terminal write-access state cannot  be
+                       determined.
+
+SunOS 5.10           Last change: 3 Nov 2000                    3
+
+User Commands                                              who(1)
+
+  /usr/xpg4/bin/who
+     -T       Same as the -s option, except that the state  field
+              is  also  written.  state  is one of the characters
+              listed  under  the  /usr/bin/who  version  of  this
+              option.  If the -u option is used with -T, the idle
+              time is added to the end of the previous format.
+
+     -t       Indicates the  last  change  to  the  system  clock
+              (using  the  date  utility) by root. See su(1M) and
+              date(1).
+
+     -u       Lists only those users who are currently logged in.
+              The  name is the user's login name. The line is the
+--More--(58%)              name of the line as found in  the  directory  /dev.
+              The  time  is the time that the user logged in. The
+              idle  column  contains  the  number  of  hours  and
+              minutes  since  activity last occurred on that par-
+              ticular line. A dot (.) indicates that the terminal
+              has  seen activity in the last minute and is there-
+              fore ``current.'' If more  than  twenty-four  hours
+              have  elapsed  or  the line has not been used since
+              boot time, the entry is marked old. This  field  is
+              useful when trying to determine whether a person is
+              working at the terminal or  not.  The  pid  is  the
+              process-ID  of the user's shell. The comment is the
+              comment field associated with this line as found in
+              /sbin/inittab  (see  inittab(4)).  This can contain
+              information about where the  terminal  is  located,
+              the telephone number of the dataset, type of termi-
+              nal if hard-wired, and so forth.
+
+OPERANDS
+     The following operands are supported:
+
+     am i     In the "C" locale, limits the output to  describing
+     am I     the invoking user, equivalent to the -m option. The
+              am and i or I must be separate arguments.
+
+     file     Specifies a path name of a file to  substitute  for
+              the  database  of  logged-on users that who uses by
+              default.
+
+SunOS 5.10           Last change: 3 Nov 2000                    4
+
+User Commands                                              who(1)
+
+ENVIRONMENT VARIABLES
+     See environ(5) for descriptions of the following environment
+     variables  that  affect  the execution of who: LANG, LC_ALL,
+     LC_CTYPE, LC_MESSAGES, LC_TIME, and NLSPATH.
+
+EXIT STATUS
+     The following exit values are returned:
+
+     0        Successful completion.
+
+     >0       An error occurred.
+
+FILES
+     /sbin/inittab           Script for init
+
+--More--(80%)     /var/adm/utmpx          Current user and accounting informa-
+                             tion
+
+     /var/adm/wtmpx          Historic user and accounting  infor-
+                             mation
+
+ATTRIBUTES
+     See attributes(5) for descriptions of the  following  attri-
+     butes:
+
+  /usr/bin/who
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWcsu                     |
+    |_____________________________|_____________________________|
+
+  /usr/xpg4/bin/who
+     ____________________________________________________________
+    |       ATTRIBUTE TYPE        |       ATTRIBUTE VALUE       |
+    |_____________________________|_____________________________|
+    | Availability                | SUNWxcu4                    |
+    |_____________________________|_____________________________|
+    | Interface Stability         | Standard                    |
+    |_____________________________|_____________________________|
+
+SunOS 5.10           Last change: 3 Nov 2000                    5
+
+User Commands                                              who(1)
+
+SEE ALSO
+     date(1), login(1), mesg(1),  init(1M),  su(1M),  wait(3UCB),
+     inittab(4),   utmpx(4),   attributes(5),  environ(5),  stan-
+     dards(5)
+
+NOTES
+     Superuser: After a shutdown to the  single-user  state,  who
+     returns  a  prompt. Since /var/adm/utmpx is updated at login
+     time and there is no login in single-user state, who  cannot
+     report accurately on this state. The command, who am i, how-
+     ever, returns the correct information.
+
+SunOS 5.10           Last change: 3 Nov 2000                    6
+
+/d/iccol/desarrollo/macros>who am I
+icjlud     pts/13       May 29 12:49    (172.16.10.17)
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>who am Iwho am i
+icjlud     pts/13       May 29 12:49    (172.16.10.17)
+/d/iccol/desarrollo/macros>who -d
+root       pts/16       May  7 17:33    (zone:global)
+sh              .       May  7 16:41
+LOGIN      console      May  7 16:41    (:0)
+sh              .       May  7 16:41
+icrmbd     pts/38       May 27 11:21
+icehad     pts/34       May 22 17:49
+iccavd     pts/36       May 28 12:07
+iccavd     pts/41       May 29 12:12
+iclagd     pts/3        May 28 11:37
+icgasd     pts/6        May 27 17:33
+icimsd     pts/39       May  8 10:24
+icjjmd     pts/7        May 26 08:41
+iclagd     pts/9        May 27 17:57
+iccavd     pts/10       May 27 17:53
+icjjmd     pts/11       May 28 10:06
+icvhfd     pts/5        May 26 16:46
+icjlud     pts/42       May 29 12:27
+icdgd      pts/47       May 27 15:26
+icimsd     pts/49       May 13 15:01
+iccavd     pts/52       May 26 18:17
+icdgd      pts/8        May 27 16:48
+iccavd     pts/51       May 28 15:06
+icimsd     pts/12       May 15 17:33
+icdgd      pts/64       May 29 14:50
+iclagd     pts/44       May 20 19:12
+ichdd      pts/56       May 21 18:16
+icgasd     pts/4        May 29 12:12
+icfgcd     pts/62       May 27 17:26
+icgasd     pts/20       May 29 12:19
+icdgd      pts/58       May 20 14:39
+icdgd      pts/17       May 29 14:13
+iccavd     pts/14       May 28 12:07
+.rlogin    /dev/pts/45  May 18 00:10
+icgjcd     pts/32       May 26 16:34
+icdgd      pts/65       May 27 18:18
+iccavd     pts/31       May 29 10:01
+iclagd     pts/69       May 19 17:56
+icgasd     pts/71       May 19 17:15
+iclagd     pts/73       May 19 17:55
+iclagd     pts/74       May 19 17:57
+icjjmd     pts/43       May 28 15:21
+icgjcd     pts/68       May 27 17:55
+/d/iccol/desarrollo/macros>${who am i | cut -c 39-50 }
+ksh: ${who am i | cut -c 39-50 }: bad substitution
+/d/iccol/desarrollo/macros>ech  o ${who am i | cut -c 39-50 }
+ksh: ${who am i | cut -c 39-50 }: bad substitution
+/d/iccol/desarrollo/macros>who am i 
+icjlud     pts/13       May 29 12:49    (172.16.10.17)
+/d/iccol/desarrollo/macros>^[[A  /d/iccol/desarrollo/macros>who am iwho am i | cut -c 39-50
+172.16.10.17
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>who am i | cut -c 39-50who am i | cut -c 39-539-50 
+172.16.10.17
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>who am i | cut -c39-50who am i | cut -c 39-50who am i               echo ${who am i | cut -c 39-50 }/d/iccol/desarrollo/macros>
+ksh: ${who am i | cut -c 39-50 }: bad substitution
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo ${who am i | cut -c 39-50 }/d/iccol/desarrollo/macros>echo ${who am i | cut -c39-50 } 
+ksh: ${who am i | cut -c39-50 }: bad substitution
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo ${who am i | cut -c39-50 }/d/iccol/desarrollo/macros>echo $                               echo ${who am i | cut -c39-50 }/d/iccol/desarrollo/macros>echo who am i | cut -c39-50 }  `who am i | cut -c39-50 }fwho am i | cut -c39-50 }}who am i | cut -c39-50 }who am i | cut -c39-50 } who am i | cut -c39-50 } `who am i | cut -c39-50 `
+172.16.10.17
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo `who am i | cut -c39-50 `/d/iccol/desarrollo/macros>echo ${who am i | cut -c39-50 }/d/iccol/desarrollo/macros>echo $((who am i | cut -c39-50 )
+172.16.10.17
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+shell will timeout in 60 seconds due to inactivity
+ksh[2]: timed out waiting for input
+You have running jobs

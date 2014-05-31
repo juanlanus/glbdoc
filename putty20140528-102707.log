@@ -1,0 +1,395 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.05.28 10:27:07 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjluc d
+Using keyboard-interactive authentication.
+Password: 
+Last login: Tue May 27 11:33:19 2014 from 172.16.10.33
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>ma. visettput belcat sh-PE-Ripleyfg              sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      C) Provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCCIÓN:c
+BASE=I<
+NOM_ARCHIVO=<
+TIPO_ARCHIVO=<
+TIPO_EXTRACT=C<
+ID_EXTRACT=<
+TIPO_PROC=<
+FECHA_PROC=<
+sh-PE-Ripley[4]: @:  not found
+I;;;C;;;
+sh-PE-Ripley[6]: FECHA_PROC:  not found
+ 
+HASTA ACÁ LLEGAMOS POR AHORA
+(pero estamos avanzando más rápido)
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripleyma          sh-PE-Ripleyvsh-PE-Ripleyish-PE-Ripley sh-PE-Ripley
+"sh-PE-Ripley" 274 lines, 9009 characters # /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    NITSuscriptor=900047981
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Valores iniciales de los parámetros
+#   "I": la lista de IDs es interna  "C": provista x cliente
+    BASE="C"
+#si BASE="C": archivo y estructura ("0": 1-11 o "1": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="1"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha de proceso
+FECHA_PROC=" "
+
+readTIPO_EXTRACT() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE EXTRACCIÓN"
+echo $raya
+echo "N) Por NIT"
+echo "C) Por codigo de suscriptor""sh-PE-Ripley" 274 lines, 9009 characters
+
+echo "N) Por NIT"echo "C) Por codigo de suscriptor"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de EXTRACCCIÓN:\c"
+read TIPO_EXTRACTnew
+if [ -z $TIPO_EXTRACTnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ $TIPO_EXTRACTnew == "c" ]
+then
+TIPO_EXTRACTnew="C"
+fi
+if [ $TIPO_EXTRACTnew == "n" ]
+then
+TIPO_EXTRACTnew="N"
+fi
+if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
+then
+TIPO_EXTRACT=$TIPO_EXTRACTnewloopEnd="1"
+else
+printf "\7"
+tput cuu 8
+fi
+    done
+}
+
+readTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "0"=1-11  "1"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ESTRUCTURA DEL ARCHIVO BASE"
+echo $raya
+echo "0) 1-11"
+echo "1) 1-11-45"
+echo "enter para cancelar"
+echo " "
+echo "ESTRUCTURA:\c"
+read TIPO_ARCHIVOnew
+if [ -z $TIPO_ARCHIVOnew ]
+thenif [ -z $TIPO_ARCHIVOnew ]then
+loopEnd="1"
+exit
+fi
+if [ $TIPO_ARCHIVOnew == "0" ] || [ $TIPO_ARCHIVOnew == "1" ]
+then
+TIPO_ARCHIVO=$TIPO_ARCHIVOnewloopEnd="1"
+else
+printf "\7"
+tput cuu 8
+fi
+    done
+}
+
+readNOM_ARCHIVO() {
+#*******************************************************************************
+# Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "NOMBRE DEL ARCHIVO BASE"
+echo $raya
+echo "Ingrese el nombre del archivo base,"
+echo "enter para cancelar"
+echo " "
+tput el
+echo "ARCHIVO:\c"
+read NOM_ARCHIVOnew
+tput el
+if [ -z $NOM_ARCHIVOnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ -d $NOM_ARCHIVOnew ]
+then
+echo $NOM_ARCHIVOnew" es un nombre de directorio"printf "\7"
+tput cuu 8
+else
+if [ ! -f $NOM_ARCHIVOnew ]then
+echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"printf "\7"echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"printf "\7"
+tput cuu 8else
+NOM_ARCHIVO=$NOM_ARCHIVOnewloopEnd="1"fi
+fi
+    done
+}
+
+readBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ORIGEN DE LA BASE"
+echo $raya
+echo "I) Interna"
+echo "C) Provista por el Cliente"
+echo "enter para cancelar"
+echo " "
+echo "BASE:\c"
+read BASEnew
+if [ -z $BASEnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ $BASEnew == "c" ]
+then
+BASEnew="C"
+fi
+if [ $BASEnew == "i" ]
+then
+BASEnew="I"
+fi
+if [ $BASEnew == "C" ] || [ $BASEnew == "I" ]
+then
+BASE=$BASEnew
+loopEnd="1"
+else
+printf "\7"
+tput cuu 8
+fitput cuu 8fi
+    done
+}
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+@
+   echo $BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"$ID_EXTRACT";"$TIPO_PROC";"$F
+    FECHA_PROC >| $0.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************tput cuu 8fi
+    done
+}
+
+paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=`cat $0.parm`
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=`echo "$params" | cut -d ";" -f1`
+    NOM_ARCHIVO=`echo "$params" | cut -d ";" -f2`
+    TIPO_ARCHIVO=`echo "$params" | cut -d ";" -f3`
+    TIPO_EXTRACT=`echo "$params" | cut -d ";" -f4`
+    ID_EXTRACT=`echo "$params" | cut -d ";" -f5`
+    TIPO_PROC=`echo "$params" | cut -d ";" -f6`
+    FECHA_PROC=`echo "$params" | cut -d ";" -f7`
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+@
+   echo $BASE";"$NOM_ARCHIVO";"$TIPO_ARCHIVO";"$TIPO_EXTRACT";"$ID_EXTRACT";"$TIPO_PROC";"$F
+    FECHA_PROC >| $0.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_PROC="$FECHA_PROC"<"
+}
+
+
+#*******************************************************************************
+#*******************************************************************************"sh-PE-Ripley" line 189 of 274 --68%-- [1] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>w=2www"     "www"
+/d/iccol/desarrollo/macros>echo $w.qqq
+www.qqq
+/d/iccol/desarrollo/macros>echo ${w}.qqq
+www.qqq
+/d/iccol/desarrollo/macros>unset w
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>unset wecho ${w}.qqq
+.qqq
+/d/iccol/desarrollo/macros>echo =`date '+%Y%m%d'`
+=20140528
+/d/iccol/desarrollo/macros>fechah=`date '+%Y%m%d'`
+/d/iccol/desarrollo/macros>fechah6=`echo $fechah  | cut -c1-6`
+/d/iccol/desarrollo/macros>echo $fechah6
+201405
+/d/iccol/desarrollo/macros>echo $S SHELL # muestra
+/bin/ksh
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo $SHELL # muestraecho $SHELL # muestra $SHELL
+/bin/ksh
+/d/iccol/desarrollo/macros>
+shell will timeout in 60 seconds due to inactivity
+ksh: timed out waiting for input
+You have running jobs
