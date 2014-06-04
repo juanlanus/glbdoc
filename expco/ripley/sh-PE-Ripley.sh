@@ -1,3 +1,4 @@
+/d/iccol/desarrollo/macros>cat sh-PE-Ripley
 # /d/iccol/desarrollo/macros/sh-PE-Ripley
 #sh-PE-Ripley.V.1.0001
 #*******************************************************************************
@@ -7,9 +8,10 @@
 #AUTHOR:       Globant - JL
 #*******************************************************************************
 # Definición de constantes
-    doCuu="1"                        # reposicionar el cursor luego de un error
-    NOHUP=""                   # contiene "nohup" en producción
-    cancelado="0"                    # las funciones ponen "1" para cancelar todo
+        debug=0                                                 # cero para producción, 1 para test
+    doCuu="1"                       # reposicionar el cursor luego de un error
+    NOHUP=""                   # contiene "nohup" en producción, null para test
+    cancelado="0"                   # las funciones ponen "1" para cancelar todo
     P_SERVER_DEV="codes"            # hostname de la máquina de develop
     raya="----------------------------------------------------------------------"
     ASCIIBanner="
@@ -43,7 +45,7 @@ readBASE() {
 # Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
@@ -51,26 +53,31 @@ readBASE() {
         echo $raya
         echo "      I) Interna"
         echo "      E) Externa, provista por el Cliente"
-        echo "      enter para cancelar"
+        echo "      enter="$BASE
         echo " "
-        echo "            BASE:\c"
+        rotulo="            BASE:"
+        echo "$rotulo"$BASE
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read BASEnew
-        if [ -z $BASEnew ]
+        if [[ -z $BASEnew ]]
         then
-            loopEnd="1"
-            exit
-        fi
-        [ $BASEnew == "e" ] && BASEnew="E"
-        [ $BASEnew == "i" ] && BASEnew="I"
-        if [ $BASEnew == "E" ] || [ $BASEnew == "I" ]
-        then
-            BASE=$BASEnew
+                        # aceptó el valor actual
             loopEnd="1"
         else
-            tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
-        fi
-    done
+                        # convierte a mayúsculas
+                        [ $BASEnew = "e" ] && BASEnew="E"
+                        [ $BASEnew = "i" ] && BASEnew="I"
+                        if [[ $BASEnew = "E" ]] || [[ $BASEnew = "I" ]]
+                        then
+                                BASE=$BASEnew
+                                loopEnd="1"
+                        else
+                                tput bel
+                                [ $doCuu = "1" ] &&  tput cuu 8
+                        fi
+                fi
+        done
 }
 
 readNOM_ARCHIVO() {
@@ -78,40 +85,40 @@ readNOM_ARCHIVO() {
 # Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
         echo "                       NOMBRE DEL ARCHIVO BASE"
         echo $raya
         echo "      Ingrese el nombre del archivo base,"
-        echo "      enter para cancelar"
+        echo "      enter="$NOM_ARCHIVO
         echo " "
                 tput el
-        echo "            ARCHIVO:\c"
+        rotulo="            ARCHIVO:"
+        echo "$rotulo"   # no muestra el nombre del archivo $NOM_ARCHIVO
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read NOM_ARCHIVOnew
         tput el
-        if [ -z $NOM_ARCHIVOnew ]
+        if [[ -z $NOM_ARCHIVOnew ]]
         then
+                        # aceptó el valor ofecido
             loopEnd="1"
-            exit
-        fi
-        if [ -d $NOM_ARCHIVOnew ]
+        elif [[ -d $TEMPORALES/$NOM_ARCHIVOnew ]]
         then
             echo $NOM_ARCHIVOnew" es un nombre de directorio"
             tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
-        else
-            if [ ! -f $NOM_ARCHIVOnew ]
-            then
-                echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"
-                tput bel
-                                [ $doCuu == "1" ] &&  tput cuu 8
-            else
-                NOM_ARCHIVO=$NOM_ARCHIVOnew
-                loopEnd="1"
-            fi
-        fi
+            [[ $doCuu = "1" ]] &&  tput cuu 8
+        elif [[ ! -f $TEMPORALES/$NOM_ARCHIVOnew ]]
+                then
+                        echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"
+                        tput bel
+                        [[ $doCuu = "1" ]] &&  tput cuu 8
+                else
+                        NOM_ARCHIVO=$NOM_ARCHIVOnew
+                        loopEnd="1"
+                fi
     done
 }
 
@@ -120,7 +127,7 @@ readTIPO_ARCHIVO() {
 # Lee el tipo de archivo "1"=1-11  "2"=1-11-45
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
@@ -128,22 +135,24 @@ readTIPO_ARCHIVO() {
         echo $raya
         echo "      1) 1-11"
         echo "      2) 1-11-45"
-        echo "      enter para cancelar"
+        echo "      enter="$TIPO_ARCHIVO
         echo " "
-        echo "            ESTRUCTURA:\c"
+        rotulo="            ESTRUCTURA:"
+        echo "$rotulo"$TIPO_ARCHIVO
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read TIPO_ARCHIVOnew
-        if [ -z $TIPO_ARCHIVOnew ]
+        if [[ -z $TIPO_ARCHIVOnew ]]
         then
+                        # aceptó el valor actual
             loopEnd="1"
-            exit
-        fi
-        if [ $TIPO_ARCHIVOnew == "1" ] || [ $TIPO_ARCHIVOnew == "2" ]
+        elif [[ $TIPO_ARCHIVOnew = "1" ]] || [[ $TIPO_ARCHIVOnew = "2" ]]
         then
             TIPO_ARCHIVO=$TIPO_ARCHIVOnew
             loopEnd="1"
         else
             tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
+            [[ $doCuu = "1" ]] &&  tput cuu 8
         fi
     done
 }
@@ -153,7 +162,7 @@ readTIPO_EXTRACT() {
 # Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
@@ -161,26 +170,29 @@ readTIPO_EXTRACT() {
         echo $raya
         echo "      N) Por NIT"
         echo "      C) Por codigo de suscriptor"
-        echo "      enter para cancelar"
+        echo "      enter="$TIPO_EXTRACT
         echo " "
-        echo "            TIPO de EXTRACCIÓN:\c"
+        rotulo="            TIPO de EXTRACCIÓN:"
+        echo "$rotulo"$TIPO_EXTRACT
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read TIPO_EXTRACTnew
-        if [ -z $TIPO_EXTRACTnew ]
+        if [[ -z $TIPO_EXTRACTnew ]]
         then
-            loopEnd="1"
-            exit
-        fi
-        [ $TIPO_EXTRACTnew == "c" ] && TIPO_EXTRACTnew="C"
-        [ $TIPO_EXTRACTnew == "n" ] && TIPO_EXTRACTnew="N"
-        if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
-        then
-            TIPO_EXTRACT=$TIPO_EXTRACTnew
             loopEnd="1"
         else
-            tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
-        fi
-    done
+                        [ $TIPO_EXTRACTnew = "c" ] && TIPO_EXTRACTnew="C"
+                        [ $TIPO_EXTRACTnew = "n" ] && TIPO_EXTRACTnew="N"
+                        if [[ $TIPO_EXTRACTnew = "N" ]] || [[ $TIPO_EXTRACTnew = "C" ]]
+                        then
+                                TIPO_EXTRACT=$TIPO_EXTRACTnew
+                                loopEnd="1"
+                        else
+                                tput bel
+                                [ $doCuu = "1" ] &&  tput cuu 8
+                        fi
+                fi
+        done
 }
 
 readID_EXTRACT() {
@@ -188,52 +200,49 @@ readID_EXTRACT() {
 # Lee el criterio para extracción base interna: un NIT o un cod de suscriptor
 #*******************************************************************************
 #   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTOR
-    if [ $TIPO_EXTRACT == "N" ]
+    if [[ $TIPO_EXTRACT = "N" ]]
     then
         criterioExtraccion="        NIT"
-        inputLen=11
+        inputLen=9
     else
         criterioExtraccion="COD SUSCRIPTOR"
         inputLen=6
     fi
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
         echo "                $criterioExtraccion PARA LA EXTRACCIÓN"
         echo $raya
 
-        echo "      Ingrese el "$criterioExtraccion" para extracción ($inputLen dígitos),"
-        echo "      enter para cancelar"
+        echo "      Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+        echo "      enter="$ID_EXTRACT
         echo " "
-        tput el                     # borra caracteres sobrantes
-        echo "            $criterioExtraccion:\c"
+        tput el # borra caracteres sobrantes
+        rotulo="            $criterioExtraccion:"
+        echo "$rotulo"$ID_EXTRACT
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read ID_EXTRACTnew
-        tput el                     # borra mensaje de error
-        if [ -z $ID_EXTRACTnew ]
+        tput el # borra mensaje de error
+        if [[ -z $ID_EXTRACTnew ]] # acepta el valor actual
         then
             loopEnd="1"
-            exit
-        fi
-        # debe ser solo números
-        if [[ "$ID_EXTRACTnew" !=  +([0-9]) ]]
+        elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
         then
             echo "el dato ingresado debe ser numérico"
             tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
-        else
-            # control de longitud (11 o 6)
-            if [ ${#ID_EXTRACTnew} -ne inputLen ]
-            then
-                echo "longitud incorrecta (debe ser "$inputlen" dígitos)"
-                tput bel
-                [ $doCuu == "1" ] &&  tput cuu 8
-            else
-                ID_EXTRACT=$ID_EXTRACTnew
-                loopEnd="1"
-            fi
-        fi
+            [[ $doCuu = "1" ]] &&  tput cuu 8
+                elif [[ ${#ID_EXTRACTnew} -ne inputLen ]] # control de longitud (9 o 6)
+                then
+                        echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'
+                        tput bel
+                        [ $doCuu = "1" ] &&  tput cuu 8
+                else # todo OK
+                        ID_EXTRACT=$ID_EXTRACTnew
+                        loopEnd="1"
+                fi
     done
 }
 
@@ -242,7 +251,7 @@ readTIPO_PROC() {
 # Tipo de proceso, "A" por Actual, "H" por Histórico
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
@@ -250,79 +259,83 @@ readTIPO_PROC() {
         echo $raya
         echo "      A) Proceso actual"
         echo "      H) Proceso histórico"
-        echo "      enter para cancelar"
+        echo "      enter="$TIPO_PROC
         echo " "
-        echo "            TIPO de PROCESO:\c"
+        rotulo="            TIPO de PROCESO:"
+        echo "$rotulo"$TIPO_PROC
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read TIPO_PROCnew
-        if [ -z $TIPO_PROCnew ]
+        if [[ -z $TIPO_PROCnew ]]
         then
-            loopEnd="1"
-            exit
-        fi
-        [ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
-        [ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
-        if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
-        then
-            TIPO_PROC=$TIPO_PROCnew
+                        # aceptó el valor por defecto
             loopEnd="1"
         else
-            tput bel
-            [ $doCuu == "1" ] &&  tput cuu 8
-        fi
-    done
-}
+                        # traduce minúsculas
+                        [ $TIPO_PROCnew = "a" ] && TIPO_PROCnew="A"
+                        [ $TIPO_PROCnew = "h" ] && TIPO_PROCnew="H"
+                        if [[ $TIPO_PROCnew = "H" ]] || [[ $TIPO_PROCnew = "A" ]]
+                        then
+                                TIPO_PROC=$TIPO_PROCnew
+                                loopEnd="1"
+                        else
+                                tput bel
+                                [ $doCuu = "1" ] &&  tput cuu 8
+                        fi
+                fi
+        done
+        }
 
 readFECHA_INICIO() {
 #*******************************************************************************
 # Fecha de proceso, cuando tipo de extracción es "H"
 #*******************************************************************************
     loopEnd="0"
-    while [ $loopEnd == "0" ]
+    while [[ $loopEnd = "0" ]]
     do
         echo " "
 #             ......................................................................
         echo "                  FECHA INICIAL DE PROCESO HISTÓRICO"
         echo $raya
         echo "      Ingrese fecha inicial de proceso,"
-        echo "      enter para cancelar"
+        echo "      enter="$FECHA_INICIO
         echo " "
-        echo "            FECHA INICIO de PROCESO AAAAMMDD:\c"
+        rotulo="            FECHA INICIO de PROCESO AAAAMMDD:"
+        echo "$rotulo"          # no muestra la fecha: $FECHA_INICIO
+                tput cuu 1 # vuelve a la línea anterior
+        echo "$rotulo\c"
         read FECHA_INICIOnew
-        if [ -z $FECHA_INICIOnew ]
+        if [[ -z $FECHA_INICIOnew ]]
         then
+                        # aceptó el valor actual
             loopEnd="1"
-            exit
-        fi
-        # debe ser solo números
-        if [[ "$FECHA_INICIOnew" != +([0-9]) ]]
+        elif [[ "$FECHA_INICIOnew" != +([0-9]) ]] # debe ser solo números
         then
             echo "la fecha solamente puede contener dígitos"
             tput bel
-            [ $doCuu == "1" ] && tput cuu 8
-    else
-            # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
-            # [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
-            if [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
-            then
-                echo "la fecha es inválida, anterior a 2000 o posterior a 2029"
-                tput bel
-                [ $doCuu == "1" ] &&  tput cuu 8
-            else
-                # debe ser menor que la fecha actual (mes o año)
-                FECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)
-                FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)
-                if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]
+            [[ $doCuu = "1" ]] && tput cuu 8
+                elif [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
+                # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+                # [[ "20141229" = +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
                 then
-                    echo "la fecha desde debe ser anterior a la actual"
-                    tput bel
-                    [ $doCuu == "1" ] &&  tput cuu 8
+                        echo "la fecha es inválida, anterior a 2000 o posterior a 2029"
+                        tput bel
+                        [ $doCuu = "1" ] &&  tput cuu 8
                 else
-                    # todo bien
-                    FECHA_INICIO=$FECHA_INICIOnew
-                    FECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMM
-                    loopEnd="1"
-                fi
-            fi
+                        # debe ser anterior al mes actual
+                        FECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)
+                        FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)
+                        if [[ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]]
+                        then
+                                echo "la fecha desde debe ser anterior a la actual"
+                                tput bel
+                                [ $doCuu = "1" ] &&  tput cuu 8
+                        else
+                                # todo bien
+                                FECHA_INICIO=$FECHA_INICIOnew
+                                FECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMM
+                                loopEnd="1"
+                        fi
         fi
     done
 }
@@ -335,7 +348,7 @@ paramsGet() {
 # Lee los parámetros de la corrida anterior
 #*******************************************************************************
 #   asegura que exista el arch de parámetros general
-    [ ! -f $0.parm ] && touch $0.parm
+    [[ ! -f $0.parm ]] && touch $0.parm
 #   lee los parámetros
     params=$(cat $0.parm)
     echo '>>>> params: ' "$params"
@@ -353,9 +366,9 @@ paramsPut() {
 #*******************************************************************************
 # Guarda los parámetros de la corrida en el archivo .parm
 #*******************************************************************************
-        allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
-        allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
-        allParms=$allParms$TIPO_PROC";"${FECHA_INICIO:-"N/A"}
+        allParms=$BASE";"${NOM_ARCHIVO:-" "}";"${TIPO_ARCHIVO:-" "}";"
+        allParms=$allParms${TIPO_EXTRACT:-" "}";"${ID_EXTRACT:-" "}";"
+        allParms=$allParms$TIPO_PROC";"${FECHA_INICIO:-" "}
         echo $allParms
         echo "file:" $0.parm " in:" $(pwd)
         echo $allParms >| $0.parm                       # para pruebas
@@ -392,20 +405,20 @@ paramsDisplay() {
     echo "${i}Fecha="$FECHA_PROC
     echo "${i}Archivo: "$NOM_ARCHIVO
     print -n "${i}Base: "$BASE
-    if [ $BASE == "E" ]
+    if [[ $BASE = "E" ]]
     then
         echo "${s}provista por el cliente"
         print -n "${i}Estructura: "$TIPO_ARCHIVO
-        [ $TIPO_ARCHIVO == "1" ] && echo "${s}1-11"
-        [ $TIPO_ARCHIVO == "2" ] && echo "${s}1-11-45"
+        [[ $TIPO_ARCHIVO = "1" ]] && echo "${s}1-11"
+        [[ $TIPO_ARCHIVO = "2" ]] && echo "${s}1-11-45"
     else
         echo "${s}extraída de datos internos"
         print -n "${i}Criterio de extracción: "$TIPO_EXTRACT
-        [ $TIPO_EXTRACT == "N" ] && echo "${s}por NIT "$ID_EXTRACT
-        [ $TIPO_EXTRACT == "C" ] && echo "${s}por cod suscriptor "$ID_EXTRACT
+        [[ $TIPO_EXTRACT = "N" ]] && echo "${s}por NIT "$ID_EXTRACT
+        [[ $TIPO_EXTRACT = "C" ]] && echo "${s}por cod suscriptor "$ID_EXTRACT
     fi
     print -n "${i}Tipo de proceso: "$TIPO_PROC
-    if [ $TIPO_PROC == "H" ]
+    if [[ $TIPO_PROC = "H" ]]
     then
         echo "${s}histórico, desde: "$FECHA_INICIO
     else
@@ -417,26 +430,38 @@ ejecutar_extraccion() {
 #***********************************************************************
 # Extrae registros por suscriptor del archivo ICMCRECOPY.DAT en el prn
 #***********************************************************************
-    # el directorio del archivo cambia según el ambiente
+    # el directorio del archivo maestro cambia según el ambiente
     P_MAQUINA=$(hostname)
-    if [ $P_MAQUINA == $P_SERVER_DEV ]
+    if [[ $P_MAQUINA = $P_SERVER_DEV ]]
     then
         echo "Máquina de desarrollo:" $P_MAQUINA
         ICMCRECOPY='/despeciales/ICMCRECOPY.DAT'
+        ICMCRECOPY='/dicregis/pva/temporales/ICMCRECOPY.DAT'
     else
         # echo "Máquina de producción:" $P_MAQUINA
         ICMCRECOPY='$ESPECIALES/ctlc/ICMCRECOPY.DAT'
     fi
     # extrae tipo y número de id por NIT del suscriptor, elimina repeticiones
-    # $$$$ NIT para pruebas: 00900047981
-    echo "el archivo de salida es "$archivo_prn " el input es "$ICMCRECOPY
-    grepRegex="^A......[14].*"$ID_EXTRACT".P$"
-    # echo "regex:"$grepRegex
-    [ -s $archivo_prn ] && rm $archivo_prn
-    grep "^A......[14].*"$ID_EXTRACT".P$" $ICMCRECOPY | cut -c8-19 | sort -u >| $archivo_prn
+    [[ -s $archivo_prn ]] && rm $archivo_prn
+    echo "El archivo de salida es $archivo_prn"
+    echo "El archivo de input es "$ICMCRECOPY
+        if [[ TIPO_EXTRAC = "N" ]]
+        then # extracción por NIT
+                grepRegex="^.........*"$ID_EXTRACT"..$"
+      # grepRegex="^A......[14].*"$ID_EXTRACT".P$"
+        else # extracción por cod suscriptor
+                grepRegex="^."$ID_EXTRACT"..*..$"
+      # grepRegex="^A"$ID_EXTRACT"[14].*.P$"
+        fi
+        # $$$$ DEBUG: regex que extrae TODOS los registros
+    [[ $debug = 1 ]] && grepRegex='.*'
+    echo grep "$grepRegex" $ICMCRECOPY \| cut -c8-19 \| sort -u
+    grep "$grepRegex" $ICMCRECOPY | cut -c8-19 | sort -u >| $archivo_prn
     # cuenta los registros extraídos
     cantRegsExtraidos=$(wc -l < $archivo_prn)
     echo "Registros extraídos: "$cantRegsExtraidos
+    if [[ $cantRegsExtraidos -eq 0 ]] && cancelado="1"
+
     TIPO_ARCHIVO="1"  # es un archivo 1-11
 }
 
@@ -446,59 +471,45 @@ ejecutar_validacion() {
 # Valida los registtros del archivo .prn y graba archivos .val y .inc
 #*******************************************************************************
     echo "Input PESVNO: "$archivo_prn
-    # si el input tiene estructura 1-11 le antepone el REGPESVNO.VALI
-    if [ $TIPO_ARCHIVO == "1" ]     # el input tiene estructura 1-11
+    # si el input tiene estructura 1-11 le antepone el REGPESVNO.VALI grabando
+        # un archivo ...VALI.prn con el registro de control adelante
+    if [[ $TIPO_ARCHIVO = "1" ]]
     then
-        PESVNO_INPUT="archivo_prn_VALI"
-        cat $DATOS/REGPESVNO.VALI $archivo_prn >| archivo_prn_VALI
-    else
+        PESVNO_INPUT=${archivo}"VALI.prn"
+        cat $DATOS/REGPESVNO.VALI $archivo_prn >| $PESVNO_INPUT
+        else
         PESVNO_INPUT=$archivo_prn
     fi
 
-    print - PESVNO $PESVNO_INPUT $archivo_val $archivo_inc 10 2
+    echo PESVNO $PESVNO_INPUT $archivo_val $archivo_inc 10 2
     $NOHUP x PESVNO $PESVNO_INPUT $archivo_val $archivo_inc 10 2 >| $archivo.log
-    [ -s archivo_prn_VALI ] && rm archivo_prn_VALI
     cantDeRegistrosTotal=$(wc -l < $archivo_prn)
     cantDeRegistrosVal=$(wc -l < $archivo_val)
     cantDeRegistrosInc=$(wc -l < $archivo_inc)
     echo "PESVNO - registros válidos:" $cantDeRegistrosVal " inconsistentes:" $cantDeRegistrosInc " total:" $cantDeRegistrosTotal
-    head -10 $archivo.log
-    if [ $cantDeRegistrosTotal -ne $(expr $cantDeRegistrosVal + $cantDeRegistrosInc) ]
+    tail -20 $archivo.log
+    if [[ $cantDeRegistrosTotal -ne $(expr $cantDeRegistrosVal + $cantDeRegistrosInc ) ]]
     then
         echo " "
         echo $raya
         echo "Las cantidades de registros no cuadran: proceso cancelado"
         echo $raya
-        cancelado="1"
+        # cancelado="1"
     fi
 }
 
+leerParametros() {
 #*******************************************************************************
+# Interacción con el operador para cargar/editar el set de parámetros
 #*******************************************************************************
-#                                     MAIN
-#*******************************************************************************
-#*******************************************************************************
-    #Fecha y hora de ejecución
-    horaInicio=$(date '+%H:%M:%S')
-    FECHA_PROC=$(date '+%Y%m%d')
-    FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)
-
-    clear
-    echo $raya
-#   banner "PE Ripley"
-    echo "$ASCIIBanner"
-    echo $raya
-
-#*******************************************************************************
-# Lectura de parámetros en la terminal
 #   carga los valores del archivo .parm
     paramsGet
-#   lee el set de parámetros hasta que sea OK
+    # lee el set de parámetros hasta la satisfacción del ope
     parmsOK="0"
-    while [ $parmsOK == "0" ]
+    while [[ $parmsOK = "0" ]]
     do
         readBASE                     # I interna, C cliente
-        if [ $BASE == "E" ]
+        if [[ $BASE = "E" ]]
         then
             readNOM_ARCHIVO          # nombre del archivo base
             readTIPO_ARCHIVO         # 0 1-11, 1 1-11-45
@@ -507,7 +518,7 @@ ejecutar_validacion() {
             readID_EXTRACT           # NIT o cos subs
         fi
         readTIPO_PROC                # A actual, H histórico
-        if [ $TIPO_PROC == "H" ]
+        if [[ $TIPO_PROC = "H" ]]
         then
             readFECHA_INICIO           # fecha desde
         else
@@ -527,39 +538,69 @@ ejecutar_validacion() {
         echo $raya
         # pregunta al ope si está satisfecho
         continuar="_"
-        while [ $continuar == "_" ]
+        while [[ $continuar = "_" ]]
         do
             echo " "
             echo " "
             echo " "
             echo "Ingrese 1 para cambiar los parámetros, enter para continuar:\c"
             read continuar
-            if [ -z $continuar ]
+            if [[ -z $continuar ]]
             then
                 parmsOK="1"
                 continuar="listo"
             else
-                if [ $continuar == "1" ]
+                if [[ $continuar = "1" ]]
                 then
                     :
                 fi
             fi
         done
     done
+}
+
+
+
+
+#*******************************************************************************
+#*******************************************************************************
+#                                     MAIN
+#*******************************************************************************
+#*******************************************************************************
+    #Fecha y hora de ejecución
+    horaInicio=$(date '+%H:%M:%S')
+    FECHA_PROC=$(date '+%Y%m%d')
+    FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)
+
+    clear
+    echo $raya
+#   banner "PE Ripley"
+    echo "$ASCIIBanner"
+    echo $raya
+    [[ $debug -eq 1 ]] && echo "DEBUG"
+
+#*******************************************************************************
+# Lectura de parámetros en la terminal
+#*******************************************************************************
+        leerParametros
 
 #*******************************************************************************
 # Nombres de los archivos, SANATA
 #*******************************************************************************
     # la variable archivo es el nombre de la base, interna o del cliente,
     # y se usa para armar todos los demás nombres de archivos del proceso
-    if [ $BASE == "E" ]
+    if [[ $BASE = "E" ]]
     then
-        # el nombre del archivo provisto, existente
-        archivo=$NOM_ARCHIVO
+        # el nombre del archivo, sin extensión,  de la base externa
+        archivo=$( echo $NOM_ARCHIVO | sed "s/\..*//" )
+                # if [[ $NOM_ARCHIVO != $archivo ]]
+                # then
+                #       mv $NOM_ARCHIVO $archivo
+                # fi
     else
         # un nombre armado con "PERipley" y la fecha del día
         # $$$$ no será posible ejecutar dos procesos en el mismo día
-        # $$$$ se puede agregar un $$ al file name ...
+        # $$$$ se puede agregar un $$ al file name, o la hora
         # $$$$ se puede controlar si ya existe un archivo de hoy ...
         archivo="PERipley"$FECHA_PROC
         NOM_ARCHIVO=$archivo
@@ -568,34 +609,22 @@ ejecutar_validacion() {
     archivo_prn=$archivo.prn
     archivo_val=$archivo.val
     archivo_inc=$archivo.inc
-    archivo_txt=$archivo.txt
-    archivo_DATINF=$archivo.DATINF
-    archivo_ESTADI=$archivo.ESTADI
-    archivo_QUANTO=$archivo.QUANTO
-    archivo_icgs65=$archivo.icgs65
-    archivo_OK=$cadena12.OK
-    archivo_LOG_ICGS65_fecha="LOG-ICGS65-"$fecha
-    archivo_LOG_ICG65_PRB_fecha="LOG-ICGS65-PRB-"$fecha
-    archivo_par=$archivo.par
 
 #*******************************************************************************
 # Proceso histórico: ubica la SANATA que corresponde a la fecha inicial
 # de proceso FECHA_INICIO
-# Ejemplos de variables exportadas:
-# DATABASE=/san_ata_1/200212/icdb
-# DATABASE=/san_ata_2/200412/icdb
-# DATABASE=/san_ata_3/200512/icdb
-# EXTFH=/san_ata_2/200505/extfh.cfg
-# EXTFH=/san_ata_2/200504/extfh.cfg
-# EXTFH=/san_ata_3/200603/extfh.cfg
-# EXTFH=/san_ata_3/200601/extfh.cfg
+#    Ejemplos de variables exportadas:
+#    DATABASE=/san_ata_2/200412/icdb
+#    DATABASE=/san_ata_3/200512/icdb
+#    EXTFH=/san_ata_3/200603/extfh.cfg
+#    EXTFH=/san_ata_3/200601/extfh.cfg
 #*******************************************************************************
-    if [ $TIPO_PROC == "H" ]
+    if [[ $TIPO_PROC = "H" ]]
     then
         FECHA_INICIO_YYYYMM=$(echo $FECHA_INICIO | cut -c1-6 )
         sanata=$(grep $FECHA_INICIO_YYYYMM $DATOS/ICSANATA.DAT | cut -c17-17)
         echo "sanata para fecha" $FECHA_INICIO_YYYYMM "es" $sanata
-        if [ -z "$sanata" ]
+        if [[ -z "$sanata" ]]
         then
             echo " "
             echo "No se encontró sanata para la fecha $FECHA_INICIO_YYYYMM"
@@ -611,31 +640,45 @@ ejecutar_validacion() {
 
 #*******************************************************************************
 # Extracción
+# Produce el archivo prn
 #*******************************************************************************
     cd $TEMPORALES
-    if [ $BASE = "I" ]
+    if [[ $BASE = "I" ]]
     then
         echo $raya
-        echo "EXTRACCIÓN:" $TIPO_EXTRACT " " $ID_EXTRACT
+        echo "EXTRACCIÓN: $TIPO_EXTRACT $ID_EXTRACT"
+                # echo "\n$raya\nEXTRACCIÓN: $TIPO_EXTRACT $ID_EXTRACT\n\n" >> $archivo_log
         ejecutar_extraccion
         echo "Finalizada la extracción"
-    fi
-
-    [ -s $archivo.log ] && rm $archivo.log
+                # cancela si no extrajo nada
+                #if [[ cancelado = "1" ]]
+                #then
+                #       echo "Extracción produjo cero registros - cancelando"
+                #       exit
+                #fi
+        else
+                # copia la base externa como .prn (a menos que ya tenga ese nombre)
+                if [[ $NOM_ARCHIVO != $archivo_prn ]]
+                then
+                        cp $NOM_ARCHIVO $archivo_prn
+                fi
+        fi
 
 #*******************************************************************************
 # PESVNO: validación de IDs
 # Valida los registros del archivo .prn y graba archivos .val y .inc
 #*******************************************************************************
-    [ -s $archivo_val ] && rm $archivo_val
-    [ -s $archivo_inc ] && rm $archivo_inc
     echo $raya
     echo "PESVNO: validación de IDs"
+        sleep 1
+        # echo "\n$raya\nPESVNO:\n\n" >> $archivo_log
+    [[ -s $archivo_val ]] && rm $archivo_val
+    [[ -s $archivo_inc ]] && rm $archivo_inc
     ejecutar_validacion
-    [ $cancelado == "1" ] && exit
+    [[ $cancelado = "1" ]] && exit
 
     # control: si no hay un archivo .val se cancela el proceso
-    if [ ! -s $archivo_val ]
+    if [[ ! -s $archivo_val ]]
     then
         echo "No hay un archivo de registros validados - PROCESO CANCELADO"
         exit
@@ -647,32 +690,32 @@ ejecutar_validacion() {
 #*******************************************************************************
     echo $raya
     echo "SCOTBATCH: cálculo de scores"
+        echo " "
+        sleep 1
+        # echo "\n$raya\nSCOTBATCH:\n\n" >> $archivo_log
+        # parámetros para el programa:
     formato="VAL"
-    SCO41="041"
-    SCO45="045"
-    SCO47="047"
-    SCO48="048"
-    SCO49="049"
-    SCO62="062"
-    SCO67="067"
-    SCO95="095"
-    SCO99="099"
-    scoring="$SCO41$SCO45$SCO47$SCO48$SCO49$SCO62$SCO67$SCO95$SCO99"
+    scoring="067"    # ACIERTA+
 
     echo SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val
-    $NOHUP x SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val >> $archivo_log
-    # DEBUG: show output >> $archivo.log 2>>$archivo.log
+    $NOHUP x SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val >> $archivo.log 2>>$archivo.log
+        tail -25 $archivo.log
 
 #*******************************************************************************
 # Ejecución del programa iceprerip01
+#*******************************************************************************
+    echo $raya
+    echo "ICEPRERIP01: datos para Ripley"
+        echo " "
 # Los parámetros son:
 #    archivo de entrada de validados
 #    archivo de entrada de inconsistencias
 #    estructura del archivo ????
 #    tipo de proceso ????
 #    fecha del periodo
-#*******************************************************************************
-     $NOHUP x iceprerip01-test $archivo_val $archivo_inc 2 A $FECHA_PROC >> $archivo_log
+        sleep 1
+    $NOHUP x iceprerip01 $archivo_val $archivo_inc 2 A $FECHA_PROC >> $archivo.log 2>>$archivo.log
+        tail -20 $archivo.log
 
 #*******************************************************************************
 # Nombres de los archivos
@@ -681,7 +724,8 @@ ejecutar_validacion() {
     echo $raya
     echo "ARCHIVOS:"
     echo " "
-    ls $TEMPORALES/$archivo*
+        # echo "\n$raya\nICEPRERIP01:\n\n" >> $archivo_log
+    ls -l *$archivo*
     echo " "
 
 #*******************************************************************************
@@ -691,7 +735,7 @@ ejecutar_validacion() {
     echo " "
     echo $raya
     echo "fin del proceso "$0
-    echo "Iniciado: "$horaInicio " finalizado: "$horaFin
+    echo "Iniciado: "$horaInicio  "finalizado: "$horaFin
     echo $raya
     exit
 
@@ -716,3 +760,5 @@ ejecutar_validacion() {
 #*******************************************************************************
 #*******************************************************************************
 #*******************************************************************************
+/d/iccol/desarrollo/macros>
+

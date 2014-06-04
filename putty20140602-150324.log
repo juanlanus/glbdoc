@@ -1,0 +1,269 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.02 15:03:24 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Mon Jun  2 09:30:19 2014 from 172.16.10.101
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>vi viset
+"viset" 31 lines, 1102 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesión
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia, y
+#si alguien sabe cómo escribirlas correctamente se aceptan aportes
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if [ `echo $0` != "-ksh" ]
+then
+banner "falta el ."
+  exit
+fi
+echo viset running
+# cambia la tecla de retroceso
+stty erase ^?
+
+# establece opciones de vi
+EXINIT="set ignorecase nowrapscan showmode noshowmatch tabstop=4 shiftwidth=4 noautoindent | map ^? ^H | m
+ap ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+# setea el ambiente de desarrollo
+. sh-camamb prunovedat
+# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario):
+export PS1='${PWD}>'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 31 lines, 1102 characters/noautoa
+p ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "p
+ ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "autoindent$CHANGE MODE
+| map ^? ^H | map ^[[4~ $ | map ^[[1~ 06~ ^F^F | map ^[[5~ ^B^B "# not worlking: 
+"viset" 32 lines, 1115 characters /d/iccol/desarrollo>^[  /d/iccol/desarrollo>vi viset. viset 
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>fg  ^[  /d/iccol/desarrollo/macros>ma. visetvi viset. viset fg      tput setab 0# lkjdfhgklsdjfghlksdfjghsdklfjghsdfkljgh/d/iccol/desarrollo/macros> tput setab 4                            /d/iccol/desarrollo/macros> tput setab 0tput sgr0    tput dim # ñlkfjsglñdkjgñsldkjgslñjawoiugf aoweriu voir gfw>/d/iccol/desarrollo/macros>tput bold                                          /d/iccol/desarrollo/macros>sh-PE-Ripleysh-PR-Ripleyfc -l       sh-PR-Ripleyvsh-PR-Ripleyish-PR-Ripley sh-PR-Ripley
+Extra characters at end of "#" command
+Error detected in .exrc.[Hit return to continue]
+
+"sh-PR-Ripley" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PR-Ripley" [New file]:q/d/iccol/desarrollo/macros>vi viset
+Extra characters at end of "#" command
+Error detected in .exrc.[Hit return to continue]
+:q
+"viset" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" [New file]:q/d/iccol/desarrollo/macros>cd
+/d/iccol/desarrollo>vi viset
+Extra characters at end of "#" command
+Error detected in .exrc.[Hit return to continue]
+
+"viset" 32 lines, 1115 characters # Archivo por juan.lanus@globant.com
+# instrucciones:
+#  1- ejecutar al inicio de la sesión con "punto", asi:
+#     . viset
+#  2- efectos:
+#     -establece la variable de entorno EXINIT (solamente mientras dure la sesión
+#con algunas opciones de conveniencia para el editor vi
+#     -algunas de las opciones, (casi) todas las "map", no funcionan todavia, y
+#si alguien sabe cómo escribirlas correctamente se aceptan aportes
+#     -ejecuta el comando sh-cambamb prunovedat
+#     -escribe "viset running"
+#
+
+# si falta el "." al comienzo del comando escribe un banner y termina
+if [ `echo $0` != "-ksh" ]
+then
+banner "falta el ."
+  exit
+fi
+echo viset running
+# cambia la tecla de retroceso
+stty erase ^?
+
+# establece opciones de vi
+EXINIT="set ignorecase nowrapscan showmode noshowmatch tabstop=4 shiftwidth=4 autoindent
+# not working: | map ^? ^H | map ^[[4~ $ | map ^[[1~ 0 | map ^[[6~ ^F^F | map ^[[5~ ^B^B "
+export EXINIT
+# setea el ambiente de desarrollo
+. sh-camamb prunovedat
+# Achica el prompt a solo el directorio actual (OK mientras no cambio
+# de máquina o de usuario):
+export PS1='${PWD}>'
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"viset" 32 lines, 1115 characters
+
+tAPPEND MODE ""viset" 32 lines, 1117 characters /d/iccol/desarrollo>^D

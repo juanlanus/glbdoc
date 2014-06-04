@@ -1,0 +1,3724 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.02 11:30:25 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Sat May 31 13:42:15 2014 from 172.16.10.96
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>. visetcat sh-PE-Ripleyclear                fc
+8
+^Z. viset
+viset running
+ERROR:  Directorio (/d/iccol/desarrollo/database/prunovedat/prunovedat) para nuevo ambiente no existe
+[1] + Stopped (SIGTSTP)        fc
+/d/iccol/desarrollo>fg
+fc
+^C
+?
+^D/d/iccol/desarrollo>jobs
+/d/iccol/desarrollo>man fc
+Reformatting page.  Please Wait... done
+
+User Commands                                          history(1)
+
+NAME
+     history, fc - process command history list
+
+SYNOPSIS
+     /usr/bin/fc [-r] [-e editor] [ first [last]]
+
+     /usr/bin/fc -l [-nr] [ first [last]]
+
+     /usr/bin/fc -s [ old = new] [first]
+
+  csh
+     history [-hr] [n]
+
+  ksh
+     fc -e - [ old = new] [command]
+
+     fc -s [ old = new] [command]
+
+     fc [-e ename] [-nlr] [ first [last]]
+
+DESCRIPTION
+  /usr/bin/fc
+     The fc utility lists or edits and reexecutes, commands  pre-
+     viously entered to an interactive sh.
+
+     The command history list references commands by number.  The
+     first  number in the list is selected arbitrarily. The rela-
+     tionship of a number to its command will not  change  except
+     when  the user logs in and no other process is accessing the
+     list, at which time the system may reset  the  numbering  to
+     start the oldest retained command at another number (usually
+     1). When the number reaches the value in HISTSIZE  or  32767
+     (whichever  is  greater),  the  shell  may wrap the numbers,
+     starting the next command with a lower number  (usually  1).
+     However,  despite this optional wrapping of numbers, fc will
+     maintain the time-ordering sequence  of  the  commands.  For
+     example,  if four commands in sequence are given the numbers
+     32 766, 32 767, 1 (wrapped), and 2  as  they  are  executed,
+     command 32 767 is considered the command previous to 1, even
+     though its number is higher.
+
+     When commands are edited (when the -l option is  not  speci-
+     fied), the resulting lines will be entered at the end of the
+     history list and then reexecuted by sh. The fc command  that
+     caused  the  editing  will  not  be entered into the history
+--More--(6%)/d/iccol/desarrollo>fc -l
+390     Is
+391     sh-PE-Ripley
+392     fg
+393     sh-PE-Ripley
+394     cp sh-PE-Ripley sh-PE-Ripley-BUP2
+395     fg
+396     sh-PE-Ripley
+397     fg
+398     clear
+399     cat sh-PE-Ripley
+400     . viset
+401     . viset
+402     fg
+403     jobs
+404     man fc
+405     fc -l
+/d/iccol/desarrollo>fc 391
+13
+^Zsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;N/A;N/A;N;00900047981;A;20140531
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+[1] + Stopped (SIGTSTP)        fc 391
+/d/iccol/desarrollo>^[[A  /d/iccol/desarrollo>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;N/A;N/A;N;00900047981;A;20140531
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>sh-PE-Ripleyvsh-PE-Ripleyish-PE-Ripley sh-PE-Ripley
+"sh-PE-Ripley" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-PE-Ripley" [New file]:q/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>mavi sh-PE-Ripley
+"sh-PE-Ripley" 718 lines, 25965 characters # /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="1"# reposicionar el cursor luego de un error
+    NOHUP=""# contiene "nohup" en producción
+    cancelado="0"# las funciones ponen "1" para cancelar todo
+    P_SERVER_DEV="codes"# hostname de la máquina de develop
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Parámetros y sus valores iniciales
+    FECHA_PROC=$(date '+%Y%m%d')
+#   "I": la lista de IDs es interna  "E": provista x cliente
+    BASE="E"
+#si BASE="E": archivo y estructura ("1": 1-11 o "2": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="2"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha inicio de proceso histórico
+FECHA_INICIO=" "
+
+readBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................"sh-PE-Ripley" 718 lines, 25965 characters/ingrese el.*para extra}
+
+readID_EXTRACT() {
+#*******************************************************************************
+# Lee el criterio para extracción base interna: un NIT o un cod de suscriptor
+#*******************************************************************************
+#   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTOR
+    if [ $TIPO_EXTRACT == "N" ]
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el "$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter para cancelar"
+echo " "
+tput el# borra caracteres sobrantes
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el# borra mensaje de error
+if [ -z $ID_EXTRACTnew ]
+then
+loopEnd="1"
+exit
+fi
+# debe ser solo números
+if [[ "$ID_EXTRACTnew" !=  +([0-9]) ]]
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+# control de longitud (11 o 6)if [ ${#ID_EXTRACTnew} -ne inputLen ]then
+echo "longitud incorrecta (debe ser "$inputlen" dígitos)"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else el
+$CHANGE MODE="$ID_ECTRACTnewREPLACE 1 CHARX$ID_EXTRACTnew
+OPEN MODE    p ID_EXTRACTnewwAPPEND MODE=$$ID_EXTRACTnewTRACT
+
+
+
+
+OPEN MODE    ID_EXTRACTnew=$ID_EXTRACT    ID_EXTRACTnew=$ID_EXTRACT    ID_EXTRACTnew=$ID_EXTRACTtput bel[ $doCuu == "1" ] &&  tput cuu 8elseID_EXTRACT=$ID_EXTRACTnewloopEnd="1"fifidone}
+readTIPO_PROC() {
+    ID_EXTRACT=$ID_EXTRACTnewID_EXTRACT=$ID_EXTRACTnew:w"sh-PE-Ripley" 719 lines, 26007 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>vi sh-PE-Ripleyma             vi sh-PE-Ripleysh-PE-Ripley   
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;00900047981;H;20120101
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=00900047981
+ 
+                    NIT:
+el dato ingresado debe ser numérico
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=<
+TIPO_PROC=A<
+FECHA_INICIO=20140602<
+I;1;1;N;N/A;A;20140602
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+PARÁMETROS del PROCESO
+    Fecha=20140602
+    Archivo: 1
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 
+    Tipo de proceso: A  actual
+----------------------------------------------------------------------
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar:^C
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    ID_EXTRACTnew=$ID_EXTRACT
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACTnew
+echo " "
+tput el# borra caracteres sobrantes
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el# borra mensaje de error
+if [ -z $ID_EXTRACTnew ]
+then
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+# debe ser solo números
+if [[ "$ID_EXTRACTnew" !=  +([0-9]) ]]
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+# control de longitud (11 o 6)if [ ${#ID_EXTRACTnew} -ne inputLen ]then
+echo "longitud incorrecta (debe ser "$inputlen" dígitos)"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"fi
+fi
+    done
+}
+
+
+
+readTIPO_PROC() {
+   
+
+    #*******************************************************************************OPEN MODE            # acepta el valor actualACTINSERT MODEel#*******************************************************************************# Tipo de proceso, "A" por Actual, "H" por Histórico
+# debe ser solo números    # debe ser solo números# Tipo de proceso, "A" por Actual, "H" por Histórico
+# debe ser solo números
+
+
+
+els$CHANGE MODEeligf
+ # Tipo de proceso, "A" por Actual, "H" por Histórico
+
+# control de longitud (11 o 6)    # control de longitud (11 o 6)[# Tipo de proceso, "A" por Actual, "H" por HistóricoINSERT MODEelelif [ ${#ID_EXTRACTnew} -ne inputLen ]
+then
+# control de longitud (11 o 6)echo "longitud incorrecta (debe ser "$inputlen" dígitos)"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    fi11 lines <<ed
+
+    
+
+
+
+
+    
+
+
+#*******************************************************************************
+    
+
+    ]APPEND MODE           # a   cept   a el    val   or a   ctua   l
+actual   
+
+   loopEnd="0"
+
+
+    ]APPEND MODE  # debe ser solo números
+
+   while [ $loopEnd == "0" ]f[
+ -z ] 
+
+
+
+
+
+
+
+ ]APPEND MODE  # control de longitud (11 o 6)
+
+   do
+
+
+elseAPPEND MODE # todo OKel 
+
+echo "$criterioExtraccion:\c""$ID_EXTRACT
+
+
+
+:INSERT MODE"wP:$ID_EXTRACT\c"
+OPEN MODE        tput cuu 11APPEND MODE " vuelve a la línea anterior:w"sh-PE-Ripley" 714 lines, 25887 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+sh-PE-Ripley[186]: syntax error at line 226 : `(' unexpected
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+echo "$criterioExtraccion:$ID_EXTRACT\c"
+tput cuu 1 " vuelve a la línea anterior
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo "longitud incorrecta (debe ser "$inputlen" dígitos)"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"echo REPLACE 1 CHAR'''':w"sh-PE-Ripley" 714 lines, 25887 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+sh-PE-Ripley[186]: syntax error at line 247 : `)' unexpected
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+echo "$criterioExtraccion:$ID_EXTRACT\c"
+tput cuu 1 " vuelve a la línea anterior
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"while [ $loopEnd == "0" ]
+do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+
+REPLACE 1 CHAR## 
+:w"sh-PE-Ripley" 714 lines, 25887 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>k^[  /d/iccol/desarrollo/macros>kfgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;N/A;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=N/A
+ 
+                    NIT:N/A                    NIT:
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:^C
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    loopEnd="0"while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+echo "$criterioExtraccion:$ID_EXTRACT\c"
+tput cuu 1 # vuelve a la línea anterior
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual":w"sh-PE-Ripley" 714 lines, 25885 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;N/A;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=N/A
+ 
+                    NIT:N/A
+                    NIT:00900047981
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=00900047981<
+TIPO_PROC=A<
+FECHA_INICIO=20140602<
+I;1;1;N;00900047981;A;20140602
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+PARÁMETROS del PROCESO
+    Fecha=20140602
+    Archivo: 1
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 00900047981
+    Tipo de proceso: A  actual
+----------------------------------------------------------------------
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar:
+----------------------------------------------------------------------
+EXTRACCIÓN: N   00900047981
+Máquina de desarrollo: codes
+el archivo de salida es PERipley20140602.prn  el input es /despeciales/ICMCRECOPY.DAT
+Registros extraídos:  765
+Finalizada la extracción
+----------------------------------------------------------------------
+PESVNO: validación de IDs
+Input PESVNO: PERipley20140602.prn
+PESVNO archivo_prn_VALI PERipley20140602.val PERipley20140602.inc 10 2
+
+real    0m0.28s
+user    0m0.05s
+sys     0m0.05s
+PESVNO - registros válidos: 742  inconsistentes: 23  total: 765
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+766
+ARCHIVO: archivo_prn_VALI              
+Registro  control==> 000001 (VALIDAR=NO)
+Registros Tipo 5           ==> 000742
+Registros Tipo 6           ==> 000000
+Registros Tipo 7           ==> 000023
+Registros Tipo 5 repetidos ==> 000000
+----------------------------------------------------------------------
+SCOTBATCH: cálculo de scores
+SCOTBATCH 201406 041045047048049062067095099 VAL PERipley20140602.val
+EJECUCION DE PROG CON AMNISTIA INICIADO EN 200901
+EJECUCION DE PROG CON AMNISTIA CON RUTINA  1
+PARA APLICACION DE ARTICULO 13 SE TOMA COMO FECHA DEL DIA 20140602
+  *-----------------------------------------*
+  |     Parametros  scoring batch           |
+  *-----------------------------------------*
+                                             
+Programa: SCOTBATCH         Version:Nov/2012 
+                                             
+SCORE SERIE+ RECIBIDO :041 POS: 001
+SCORE SERIE+ RECIBIDO :045 POS: 002
+SCORE SERIE+ RECIBIDO :047 POS: 003
+SCORE SERIE+ RECIBIDO :048 POS: 004
+SCORE SERIE+ RECIBIDO :049 POS: 005
+SCORE SERIE+ RECIBIDO :062 POS: 006
+SCORE SERIE+ RECIBIDO :067 POS: 007
+SCORE SERIE+ RECIBIDO :095 POS: 008
+SCORE SERIE+ RECIBIDO :099 POS: 009
+Fecha de calculo: 201406
+    W-TIPO-SCORE: 041045047048049062067095099
+  W-TIPO-ARCHIVO: VAL
+         Archivo: PERipley20140602.val                                                            
+  W-ARCHIVO-MANT:                     
+        Reinicio: SI
+                                             
+FECHA SISTEMA : 20140602
+FECHA RECOGIDA BD(YYYYMM) : 201406
+Tipo score: ACIE-A-DHVT
+Tipo score: ACIE-A-DCOO
+Tipo score: ACIE-A-DFGE
+Tipo score: ACIE-A-DTRO
+Tipo score: ACIERTA-A  
+Tipo score: QUANTO     
+Tipo score: ACIERTA+   
+Tipo score: ACIE-A-DINT
+Tipo score: CARACTERISTICAS
+                                             
+Score formato validado   
+                                             
+NO HAY DONDE REINICIAR,SE COMIENZA 
+DESDE EL PRINCIPIO (VACIO)         
+===== CONTADORES FINALES    ====
+Clientes con ACIA-DHVT mayor a ceros: 0000742
+Clientes con ACIA-DCOO mayor a ceros: 0000742
+Clientes con ACIA-DFGE mayor a ceros: 0000742
+Clientes con ACIA-DTRO mayor a ceros: 0000742
+Clientes con ACIERTA-A mayor a ceros: 0000742
+Clientes con QUANTO    mayor a ceros: 0000742
+Clientes con ACIERTA+  mayor a ceros: 0000742
+Clientes con ACIA-DINT mayor a ceros: 0000742
+Clientes con CARACAT   mayor a ceros: 0000742
+================================
+SE LEYERON EN TOTAL: 0000742
+
+real    0m13.92s
+user    0m10.40s
+sys     0m0.85s
+
+Inicio de Programa:  2014/06/02 10:02:26
+Fin de Programa:     2014/06/02 10:02:40
+
+       
+ ** Datacredito*   MAYOR INFORMACION RIPLEY  **
+       
+iceprerip01.cbl    VERSION:MAY/2014 
+       
+       
+W-PARAMETROS = PERipley20140602.val PERipley20140602.inc 2 A 20140602     
+ARCH-ENTRADA = PERipley20140602.val           
+ARCH-INCONC = PERipley20140602.inc           
+       
+REG. LEIDOS   => 00000742
+REG. GRABADOS => 00000742
+       
+                
++---------------------------------------------------+
+|      *** RESULTADOS DEL INFORME       ***         |
++----------------------------------+----------------+
+|     DETALLE CALIFICACION         | CALF |  # REG. |
++----------------------------------+------+---------+
+| - Registros con informacion      | O.K  |        0
+| - Registros sin informacion      | SIN  |      742
+| - Registros inconsistencias      | INC  |       23
++----------------------------------+------+---------+
+| - Total Registro procesados             |      742
++----------------------------------+------+---------+
+
+real    0m0.13s
+user    0m0.06s
+sys     0m0.04s
+
+Inicio de Programa:  2014/06/02 10:02:40
+Fin de Programa:     2014/06/02 10:02:40
+
+----------------------------------------------------------------------
+ARCHIVOS:
+ 
+/d/iccol/desarrollo/temporales/PERipley20140602.AADCOO
+/d/iccol/desarrollo/temporales/PERipley20140602.AADFGE
+/d/iccol/desarrollo/temporales/PERipley20140602.AADHVT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADINT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADTRO
+/d/iccol/desarrollo/temporales/PERipley20140602.ACIEAA
+/d/iccol/desarrollo/temporales/PERipley20140602.CARACT
+/d/iccol/desarrollo/temporales/PERipley20140602.DATINF
+/d/iccol/desarrollo/temporales/PERipley20140602.ESTADI
+/d/iccol/desarrollo/temporales/PERipley20140602.inc
+/d/iccol/desarrollo/temporales/PERipley20140602.log
+/d/iccol/desarrollo/temporales/PERipley20140602.PREDHD
+/d/iccol/desarrollo/temporales/PERipley20140602.prn
+/d/iccol/desarrollo/temporales/PERipley20140602.QUANTO
+/d/iccol/desarrollo/temporales/PERipley20140602.ULTIMO
+/d/iccol/desarrollo/temporales/PERipley20140602.val
+/d/iccol/desarrollo/temporales/PERipley20140602.vre
+ 
+ 
+----------------------------------------------------------------------
+fin del proceso sh-PE-Ripley
+Iniciado: 10:01:44  finalizado: 10:02:40
+----------------------------------------------------------------------
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>sh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;00900047981;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=00900047981
+ 
+                    NIT:00900047981
+                    NIT:
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=00900047981<
+TIPO_PROC=A<
+FECHA_INICIO=20140602<
+I;1;1;N;00900047981;A;20140602
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+PARÁMETROS del PROCESO
+    Fecha=20140602
+    Archivo: 1
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 00900047981
+    Tipo de proceso: A  actual
+----------------------------------------------------------------------
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar:
+----------------------------------------------------------------------
+EXTRACCIÓN: N   00900047981
+Máquina de desarrollo: codes
+el archivo de salida es PERipley20140602.prn  el input es /despeciales/ICMCRECOPY.DAT
+Registros extraídos:  765
+Finalizada la extracción
+----------------------------------------------------------------------
+PESVNO: validación de IDs
+Input PESVNO: PERipley20140602.prn
+PESVNO archivo_prn_VALI PERipley20140602.val PERipley20140602.inc 10 2
+
+real    0m0.13s
+user    0m0.05s
+sys     0m0.05s
+PESVNO - registros válidos: 742  inconsistentes: 23  total: 765
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+766
+ARCHIVO: archivo_prn_VALI              
+Registro  control==> 000001 (VALIDAR=NO)
+Registros Tipo 5           ==> 000742
+Registros Tipo 6           ==> 000000
+Registros Tipo 7           ==> 000023
+Registros Tipo 5 repetidos ==> 000000
+----------------------------------------------------------------------
+SCOTBATCH: cálculo de scores
+SCOTBATCH 201406 041045047048049062067095099 VAL PERipley20140602.val
+EJECUCION DE PROG CON AMNISTIA INICIADO EN 200901
+EJECUCION DE PROG CON AMNISTIA CON RUTINA  1
+PARA APLICACION DE ARTICULO 13 SE TOMA COMO FECHA DEL DIA 20140602
+  *-----------------------------------------*
+  |     Parametros  scoring batch           |
+  *-----------------------------------------*
+                                             
+Programa: SCOTBATCH         Version:Nov/2012 
+                                             
+SCORE SERIE+ RECIBIDO :041 POS: 001
+SCORE SERIE+ RECIBIDO :045 POS: 002
+SCORE SERIE+ RECIBIDO :047 POS: 003
+SCORE SERIE+ RECIBIDO :048 POS: 004
+SCORE SERIE+ RECIBIDO :049 POS: 005
+SCORE SERIE+ RECIBIDO :062 POS: 006
+SCORE SERIE+ RECIBIDO :067 POS: 007
+SCORE SERIE+ RECIBIDO :095 POS: 008
+SCORE SERIE+ RECIBIDO :099 POS: 009
+Fecha de calculo: 201406
+    W-TIPO-SCORE: 041045047048049062067095099
+  W-TIPO-ARCHIVO: VAL
+         Archivo: PERipley20140602.val                                                            
+  W-ARCHIVO-MANT:                     
+        Reinicio: SI
+                                             
+FECHA SISTEMA : 20140602
+FECHA RECOGIDA BD(YYYYMM) : 201406
+Tipo score: ACIE-A-DHVT
+Tipo score: ACIE-A-DCOO
+Tipo score: ACIE-A-DFGE
+Tipo score: ACIE-A-DTRO
+Tipo score: ACIERTA-A  
+Tipo score: QUANTO     
+Tipo score: ACIERTA+   
+Tipo score: ACIE-A-DINT
+Tipo score: CARACTERISTICAS
+                                             
+Score formato validado   
+                                             
+YA HABIA TERMINADO OK EL PROGRAMA
+NO HAY DONDE REINICIAR,SE COMIENZA 
+DESDE EL PRINCIPIO (CEROS)         
+===== CONTADORES FINALES    ====
+Clientes con ACIA-DHVT mayor a ceros: 0000742
+Clientes con ACIA-DCOO mayor a ceros: 0000742
+Clientes con ACIA-DFGE mayor a ceros: 0000742
+Clientes con ACIA-DTRO mayor a ceros: 0000742
+Clientes con ACIERTA-A mayor a ceros: 0000742
+Clientes con QUANTO    mayor a ceros: 0000742
+Clientes con ACIERTA+  mayor a ceros: 0000742
+Clientes con ACIA-DINT mayor a ceros: 0000742
+Clientes con CARACAT   mayor a ceros: 0000742
+================================
+SE LEYERON EN TOTAL: 0000742
+
+real    0m11.13s
+user    0m10.39s
+sys     0m0.72s
+
+Inicio de Programa:  2014/06/02 10:03:12
+Fin de Programa:     2014/06/02 10:03:23
+
+       
+ ** Datacredito*   MAYOR INFORMACION RIPLEY  **
+       
+iceprerip01.cbl    VERSION:MAY/2014 
+       
+       
+W-PARAMETROS = PERipley20140602.val PERipley20140602.inc 2 A 20140602     
+ARCH-ENTRADA = PERipley20140602.val           
+ARCH-INCONC = PERipley20140602.inc           
+       
+REG. LEIDOS   => 00000742
+REG. GRABADOS => 00000742
+       
+                
++---------------------------------------------------+
+|      *** RESULTADOS DEL INFORME       ***         |
++----------------------------------+----------------+
+|     DETALLE CALIFICACION         | CALF |  # REG. |
++----------------------------------+------+---------+
+| - Registros con informacion      | O.K  |        0
+| - Registros sin informacion      | SIN  |      742
+| - Registros inconsistencias      | INC  |       23
++----------------------------------+------+---------+
+| - Total Registro procesados             |      742
++----------------------------------+------+---------+
+
+real    0m0.12s
+user    0m0.06s
+sys     0m0.04s
+
+Inicio de Programa:  2014/06/02 10:03:23
+Fin de Programa:     2014/06/02 10:03:23
+
+----------------------------------------------------------------------
+ARCHIVOS:
+ 
+/d/iccol/desarrollo/temporales/PERipley20140602.AADCOO
+/d/iccol/desarrollo/temporales/PERipley20140602.AADFGE
+/d/iccol/desarrollo/temporales/PERipley20140602.AADHVT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADINT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADTRO
+/d/iccol/desarrollo/temporales/PERipley20140602.ACIEAA
+/d/iccol/desarrollo/temporales/PERipley20140602.CARACT
+/d/iccol/desarrollo/temporales/PERipley20140602.DATINF
+/d/iccol/desarrollo/temporales/PERipley20140602.ESTADI
+/d/iccol/desarrollo/temporales/PERipley20140602.inc
+/d/iccol/desarrollo/temporales/PERipley20140602.log
+/d/iccol/desarrollo/temporales/PERipley20140602.PREDHD
+/d/iccol/desarrollo/temporales/PERipley20140602.prn
+/d/iccol/desarrollo/temporales/PERipley20140602.QUANTO
+/d/iccol/desarrollo/temporales/PERipley20140602.ULTIMO
+/d/iccol/desarrollo/temporales/PERipley20140602.val
+/d/iccol/desarrollo/temporales/PERipley20140602.vre
+ 
+ 
+----------------------------------------------------------------------
+fin del proceso sh-PE-Ripley
+Iniciado: 10:02:53  finalizado: 10:03:23
+----------------------------------------------------------------------
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    loopEnd="0"while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+echo "$criterioExtraccion:$ID_EXTRACT"
+tput cuu 1 # vuelve a la línea anterior
+echo "$criterioExtraccion:\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+echo "$criterioExtraccion:$ID_EXTRACT"echo$CHANGE MODErotulo=:$CHANGE MODE"
+echo $CHANGE MODE$rotulo$ID_EXTRACT"
+
+echo $$rotulo\c"oAPPEND MODE":w"sh-PE-Ripley" 715 lines, 25884 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+sh-PE-Ripley[186]: syntax error at line 248 : `)' unexpected
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    loopEnd="0"while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+rotulo="$criterioExtraccion:"
+echo $rotulo$ID_EXTRACT"
+tput cuu 1 # vuelve a la línea anterior
+echo $rotulo"\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $rayaecho "A) Proceso actual"
+:w"sh-PE-Ripley" 715 lines, 25883 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;00900047981;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=00900047981
+ 
+NIT:00900047981
+NIT:
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:a
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=00900047981<
+TIPO_PROC=A<
+FECHA_INICIO=20140602<
+I;1;1;N;00900047981;A;20140602
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+PARÁMETROS del PROCESO
+    Fecha=20140602
+    Archivo: 1
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 00900047981
+    Tipo de proceso: A  actual
+----------------------------------------------------------------------
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar:^C
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    while [ $loopEnd == "0" ]do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+rotulo="$criterioExtraccion:"
+echo $rotulo$ID_EXTRACT
+tput cuu 1 # vuelve a la línea anterior
+echo $rotulo"\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"/\$rotuloINSERT MODE""$"/":w"sh-PE-Ripley" 715 lines, 25885 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>^[k  /d/iccol/desarrollo/macros>fgsh-PE-Ripley
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;00900047981;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter para cancelar
+ 
+            BASE:i
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter para cancelar
+ 
+            TIPO de EXTRACCIÓN:n
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=00900047981
+ 
+                    NIT:00900047981
+                    NIT:
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter para cancelar
+ 
+            TIPO de PROCESO:^C
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+    while [ $loopEnd == "0" ]do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+rotulo="$criterioExtraccion:"
+echo "$rotulo"$ID_EXTRACT
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+echo "H) Proceso histórico"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de PROCESO:\c"
+read TIPO_PROCnew
+if [ -z $TIPO_PROCnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
+[ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
+if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
+then
+TIPO_PROC=$TIPO_PROCnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de PROCESO:\c"echo$CHANGE MODErotulo=""
+echo "$CHANGE MODE$rotulo\c"echo "$rotulo\c"#   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTORif [ $TIPO_EXTRACT == "N" ]
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+rotulo="$criterioExtraccion:"
+echo "$rotulo"$ID_EXTRACT
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+echo "H) Proceso histórico"
+echo "enter para cancelar"
+echo " "
+rotulo="TIPO de PROCESO:"
+echo "$rotulo\c"
+echo "$rotulo\c"
+read TIPO_PROCnew
+if [ -z $TIPO_PROCnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
+[ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
+if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
+then
+TIPO_PROC=$TIPO_PROCnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"tput cuu 1 # vuelve a la línea anterior"APPEND MODE$TIPO_PROC"$TIPO_PROCter$CHANGE MODE=""$TIPO_PROC
+
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"
+echo "enter para cancelar"
+echo " "
+echo "FECHA INICIO de PROCESO AAAAMMDD:\c"
+read FECHA_INICIOnew
+if [ -z $FECHA_INICIOnew ]
+then
+loopEnd="1"
+exit
+fi
+# debe ser solo números
+if [[ "$FECHA_INICIOnew" != +([0-9]) ]]
+then
+echo "la fecha solamente puede contener dígitos"tput bel
+[ $doCuu == "1" ] && tput cuu 8
+    else
+    # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"if [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]then
+echo "la fecha es inválida, anterior a 2000 o posterior a 2029"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# debe ser menor que la fecha actual (mes o año)FECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]then
+echo "la fecha desde debe ser anterior a la actual"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# todo bien
+FECHA_INICIO=$FECHA_INICIOnewFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMMloopEnd="1"/ para$CHANGE MODE="$FECHA_INICIO=""$FECHA_INICIO
+
+
+
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+echo "H) Proceso histórico"
+echo "enter="$TIPO_PROC
+echo " "
+rotulo="TIPO de PROCESO:"
+echo "$rotulo"$TIPO_PROC
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read TIPO_PROCnew
+if [ -z $TIPO_PROCnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
+[ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
+if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
+then
+TIPO_PROC=$TIPO_PROCnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readFECHA_INICIO() {
+#*******************************************************************************
+
+
+    # Fecha de proceso, cuando tipo de extracción es "H"f$CHANGE MODEeliffif$CHANGE MODEelse
+    [ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"
+    [ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"
+    if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]
+    then
+    TIPO_PROC=$TIPO_PROCnew    loopEnd="1"
+    else
+    tput bel
+    [ $doCuu == "1" ] &&  tput cuu 8
+    fi
+        done
+    }
+
+
+
+
+12 lines >>ed   
+fifi
+    done
+     OPEN MODE            # aceptó el valor por defecto
+
+    OPEN MODE                # traduce minúsculas
+readFECHA_INICIO() {
+2 lines <<ed
+#*******************************************************************************readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"
+echo "enter="$FECHA_INICIO
+echo " "
+echo "FECHA INICIO de PROCESO AAAAMMDD:\c"
+read FECHA_INICIOnew
+if [ -z $FECHA_INICIOnew ]
+then
+loopEnd="1"
+exit
+fi
+# debe ser solo números
+if [[ "$FECHA_INICIOnew" != +([0-9]) ]]
+then
+echo "la fecha solamente puede contener dígitos"tput bel
+[ $doCuu == "1" ] && tput cuu 8
+    else
+    # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"if [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]then
+echo "la fecha es inválida, anterior a 2000 o posterior a 2029"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# debe ser menor que la fecha actual (mes o año)FECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]then
+echo "la fecha desde debe ser anterior a la actual"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# todo bien
+FECHA_INICIO=$FECHA_INICIOnewFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMMloopEnd="1"
+echo "FECHA INICIO de PROCESO AAAAMMDD:\c"REPLACE 1 CHARoo
+OPEN MODE=FECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMM
+=FECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMMloopEnd="1"echo "FECHA INICIO de PROCESO AAAAMMDD:\c"echo$CHANGE MODErotulo=:"
+echo "$CHANGE MODE$rotulo\c"
+echo "$rotulo\c""APPEND MODE$FECHA_INICIOOc
+tput cuu 1 # vuelve a la línea anteriorFECHA_INICIO=$FECHA_INICIOnew:set aiOPEN MODE# aceptó el valor actual
+FECHA_INICIO=$FECHA_INICIOnew
+]APPEND MODE  # debe ser solo númerosFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMMINSERT MODEel
+
+    
+
+
+    
+loopEnd="1"fifi# rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+if [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
+then
+echo "la fecha es inválida, anterior a 2000 o posterior a 2029"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+# debe ser menor que la fecha actual (mes o año)FECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]then
+echo "la fecha desde debe ser anterior a la actual"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# todo bien
+FECHA_INICIO=$FECHA_INICIOnewFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMMloopEnd="1"fi
+fi
+23 lines <<ed        fi
+    done
+# rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"INSERT MODEel
+    # rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+    # [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+
+# rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+
+
+    
+
+
+fi
+done
+}
+
+
+
+    # debe ser $CHANGE MODEanterior al mes actual
+
+
+}paramsGet() {
+#*******************************************************************************
+# Lee los parámetros de la corrida anterior
+#*******************************************************************************
+#   asegura que exista el arch de parámetros general
+    [ ! -f $0.parm ] && touch $0.parm
+#   lee los parámetros
+    params=$(cat $0.parm)
+    echo '>>>> params: ' "$params"
+#   separa los parámetros según su posición
+    BASE=$(echo "$params" | cut -d ";" -f1)
+    NOM_ARCHIVO=$(echo "$params" | cut -d ";" -f2)
+    TIPO_ARCHIVO=$(echo "$params" | cut -d ";" -f3)
+    TIPO_EXTRACT=$(echo "$params" | cut -d ";" -f4)
+    ID_EXTRACT=$(echo "$params" | cut -d ";" -f5)
+    TIPO_PROC=$(echo "$params" | cut -d ";" -f6)
+    FECHA_INICIO=$(echo "$params" | cut -d ";" -f7)
+}
+
+paramsPut() {
+#*******************************************************************************
+# Guarda los parámetros de la corrida en el archivo .parm
+#*******************************************************************************
+allParms=$BASE";"${NOM_ARCHIVO:-"N/A"}";"${TIPO_ARCHIVO:-"N/A"}";"
+allParms=$allParms${TIPO_EXTRACT:-"N/A"}";"${ID_EXTRACT:-"N/A"}";"
+allParms=$allParms$TIPO_PROC";"${FECHA_INICIO:-"N/A"}
+echo $allParms
+echo "file:" $0.parm " in:" $(pwd)
+echo $allParms >| $0.parm# para pruebas
+echo $allParms >| $archivo.parm
+}
+
+paramsPrint() {
+#*******************************************************************************
+# Muestra todos los parámetros, para pruebas
+#*******************************************************************************
+    echo "BASE="$BASE"<"
+    echo "NOM_ARCHIVO="$NOM_ARCHIVO"<"
+    echo "TIPO_ARCHIVO="$TIPO_ARCHIVO"<"
+    echo "TIPO_EXTRACT="$TIPO_EXTRACT"<"
+    echo "ID_EXTRACT="$ID_EXTRACT"<"
+    echo "TIPO_PROC="$TIPO_PROC"<"
+    echo "FECHA_INICIO="$FECHA_INICIO"<"
+}# /d/iccol/desarrollo/macros/sh-PE-Ripley
+#sh-PE-Ripley.V.1.0001
+#*******************************************************************************
+#SHELL-ID:     sh-PE-Ripley
+#DATE-WRITTEN: 2014/05/23
+#LAST-UPDATE:  2014/05/23
+#AUTHOR:Globant - JL
+#*******************************************************************************
+# Definición de constantes
+    doCuu="1"# reposicionar el cursor luego de un error
+    NOHUP=""# contiene "nohup" en producción
+    cancelado="0"# las funciones ponen "1" para cancelar todo
+    P_SERVER_DEV="codes"# hostname de la máquina de develop
+    raya="----------------------------------------------------------------------"
+    ASCIIBanner="
+######  #######    ######
+#     # ##     # # #####  ####### #   #
+#     # ##     # # #    # ### #
+######  ###########  # #    # ######    #
+###   #   # #####  ###
+###    #  # ####
+########    #     # # ####### ######   #
+"
+
+# Parámetros y sus valores iniciales
+    FECHA_PROC=$(date '+%Y%m%d')
+#   "I": la lista de IDs es interna  "E": provista x cliente
+    BASE="E"
+#si BASE="E": archivo y estructura ("1": 1-11 o "2": 1-11-45)
+NOM_ARCHIVO=" "
+TIPO_ARCHIVO="2"
+#si BASE="I": "N": extracción x NIT  "C": por cod suscriptor
+TIPO_EXTRACT="N"
+#si TIPO_EXTRACT="C": NIT (9) o Cod Suscriptor (6), según TIPO_EXTRACTID_EXTRACT=" "
+#   Tipo de proceso "A": actual  "H": histórico
+    TIPO_PROC="A"
+#Si TIPO_PROC="H": la fecha inicio de proceso histórico
+FECHA_INICIO=" "
+
+readBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#....................................................................../^readreadBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ORIGEN DE LA BASE"
+echo $raya
+echo "I) Interna"
+echo "E) Externa, provista por el Cliente"
+echo "enter para cancelar"
+echo " "
+echo "BASE:\c"
+read BASEnew
+if [ -z $BASEnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $BASEnew == "e" ] && BASEnew="E"
+[ $BASEnew == "i" ] && BASEnew="I"
+if [ $BASEnew == "E" ] || [ $BASEnew == "I" ]
+then
+BASE=$BASEnew
+loopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readNOM_ARCHIVO() {
+#*******************************************************************************
+# Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "NOMBRE DEL ARCHIVO BASE"
+echo $raya
+echo "Ingrese el nombre del archivo base,"
+echo "enter para cancelar"
+echo " "echo "enter para cancelar"echo " "
+tput el
+echo "ARCHIVO:\c"
+read NOM_ARCHIVOnew
+tput el
+if [ -z $NOM_ARCHIVOnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ -d $NOM_ARCHIVOnew ]
+then
+echo $NOM_ARCHIVOnew" es un nombre de directorio"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+if [ ! -f $NOM_ARCHIVOnew ]then
+echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+NOM_ARCHIVO=$NOM_ARCHIVOnewloopEnd="1"fi
+fi
+    done
+}
+
+readTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "1"=1-11  "2"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ESTRUCTURA DEL ARCHIVO BASE"
+echo $raya
+echo "1) 1-11"
+echo "2) 1-11-45"
+echo "enter para cancelar"
+echo " "
+echo "ESTRUCTURA:\c"
+read TIPO_ARCHIVOnew
+if [ -z $TIPO_ARCHIVOnew ]
+thenif [ -z $TIPO_ARCHIVOnew ]then
+loopEnd="1"
+exit
+fi
+if [ $TIPO_ARCHIVOnew == "1" ] || [ $TIPO_ARCHIVOnew == "2" ]
+then
+TIPO_ARCHIVO=$TIPO_ARCHIVOnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readTIPO_EXTRACT() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE EXTRACCIÓN"
+echo $raya
+echo "N) Por NIT"
+echo "C) Por codigo de suscriptor"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de EXTRACCIÓN:\c"
+read TIPO_EXTRACTnew
+if [ -z $TIPO_EXTRACTnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $TIPO_EXTRACTnew == "c" ] && TIPO_EXTRACTnew="C"
+[ $TIPO_EXTRACTnew == "n" ] && TIPO_EXTRACTnew="N"
+if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
+then
+TIPO_EXTRACT=$TIPO_EXTRACTnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    doneecho "enter para cancelar"echo " "
+tput el
+echo "ARCHIVO:\c"
+read NOM_ARCHIVOnew
+tput el
+if [ -z $NOM_ARCHIVOnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ -d $NOM_ARCHIVOnew ]
+then
+echo $NOM_ARCHIVOnew" es un nombre de directorio"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+if [ ! -f $NOM_ARCHIVOnew ]then
+echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+NOM_ARCHIVO=$NOM_ARCHIVOnewloopEnd="1"fi
+fi
+    done
+}
+
+readTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "1"=1-11  "2"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ESTRUCTURA DEL ARCHIVO BASE"
+echo $raya
+echo "1) 1-11"
+echo "2) 1-11-45"
+echo "enter para cancelar"
+echo " "
+echo "ESTRUCTURA:\c"
+read TIPO_ARCHIVOnew
+if [ -z $TIPO_ARCHIVOnew ]
+thenreadBASE() {
+#*******************************************************************************
+# Lee el valor de BASE hasta que es OK {I|C} o el ope cancela
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ORIGEN DE LA BASE"
+echo $raya
+echo "I) Interna"
+echo "E) Externa, provista por el Cliente"
+echo "enter para cancelar"
+echo " "
+echo "BASE:\c"
+read BASEnew
+if [ -z $BASEnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $BASEnew == "e" ] && BASEnew="E"
+[ $BASEnew == "i" ] && BASEnew="I"
+if [ $BASEnew == "E" ] || [ $BASEnew == "I" ]
+then
+BASE=$BASEnew
+loopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readNOM_ARCHIVO() {
+#*******************************************************************************
+# Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "NOMBRE DEL ARCHIVO BASE"
+echo $raya
+echo "Ingrese el nombre del archivo base,"
+echo "enter para cancelar"
+echo " "
+
+
+
+    
+
+
+    
+
+
+
+
+
+$CHANGE MODE="$BASE
+
+
+echo "BASE:\c"echo$CHANGE MODErotulo=
+echo "$CHANGE MODE$rotulo\c"
+echo "$rotulo\c"tput cuu 1 # vuelve a la línea anterior
+"APPEND MODE$BSASE
+
+
+
+
+
+    OPEN MODE# aceptó el valor actual
+echo $rayaf$CHANGE MODEelse
+    [ $BASEnew == "e" ] && BASEnew="E"
+    [ $BASEnew == "i" ] && BASEnew="I"
+    if [ $BASEnew == "E" ] || [ $BASEnew == "I" ]
+    then
+    BASE=$BASEnew    loopEnd="1"
+    else
+    tput bel
+    [ $doCuu == "1" ] &&  tput cuu 8
+    fi
+        done
+    }12 lines >>edOPEN MODE# convierta a mayúcsculasREPLACE 1 CHARe
+
+
+
+
+    
+
+
+    
+
+
+fifi
+    done
+
+}
+
+readNOM_ARCHIVO() {
+#*******************************************************************************
+# Lee el nombre del archivo de entrada y verifica que exista en $TEMPORALES
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "NOMBRE DEL ARCHIVO BASE"
+echo $raya
+echo "Ingrese el nombre del archivo base,"
+echo "enter para cancelar"
+echo " "
+tput el
+echo "ARCHIVO:\c"
+read NOM_ARCHIVOnew
+tput el
+if [ -z $NOM_ARCHIVOnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ -d $NOM_ARCHIVOnew ]
+then
+echo $NOM_ARCHIVOnew" es un nombre de directorio"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+if [ ! -f $NOM_ARCHIVOnew ]then
+echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+NOM_ARCHIVO=$NOM_ARCHIVOnewloopEnd="1"fi
+fi
+    done
+}
+
+readTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "1"=1-11  "2"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    doecho $CHANGE MODEr APPEND MODE$CHANGE MODE="$NOM_ARCHIVO
+
+tput eltput el
+echo "ARCHIVO:\c"echo$CHANGE MODErotulo=
+echo "$CHANGE MODE$rotulo\c"
+echo "$rotulo\c""APPEND MODE$NOM_ARCHIVO
+tput cuu 1 # vuelve a la línea anteriorloopEnd="0"f$CHANGE MODEelsewhile [ $loopEnd == "0" ]INSERT MODEel
+
+    
+
+
+ell if [ ! -f $NOM_ARCHIVOnew ]
+do
+  then
+echo "El archivo "$NOM_ARCHIVOnew" no se encuentra"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+NOM_ARCHIVO=$NOM_ARCHIVOnewloopEnd="1"
+fi
+    fi9 lines <<ed
+    
+
+           echo " "OPEN MODE# aceptó el valor ofecidoreadTIPO_ARCHIVO() {
+#*******************************************************************************
+# Lee el tipo de archivo "1"=1-11  "2"=1-11-45
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "ESTRUCTURA DEL ARCHIVO BASE"
+echo $raya
+echo "1) 1-11"
+echo "2) 1-11-45"
+echo "enter para cancelar"
+echo " "
+echo "ESTRUCTURA:\c"
+read TIPO_ARCHIVOnew
+if [ -z $TIPO_ARCHIVOnew ]
+then
+loopEnd="1"
+exit
+fi
+if [ $TIPO_ARCHIVOnew == "1" ] || [ $TIPO_ARCHIVOnew == "2" ]
+then
+TIPO_ARCHIVO=$TIPO_ARCHIVOnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readTIPO_EXTRACT() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE EXTRACCIÓN"
+echo $raya
+echo "N) Por NIT"
+echo "C) Por codigo de suscriptor"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de EXTRACCIÓN:\c"
+echo r$CHANGE MODE="$TIPO_ARCHIVO
+
+
+echo "ESTRUCTURA:\c"REPLACE 1 CHARoo
+OPEN MODE=echo " "echo "TIPO de EXTRACCIÓN:\c"echo "ESTRUCTURA:\c"echo echo$CHANGE MODErotulo=
+echo "$CHANGE MODE$rotulo\c"
+echo "$rotulo\c"tput cuu 1 # vuelve a la línea anterior"APPEND MODE$TIPO_ARCHIVOecho "enter para cancelar"OPEN MODE# aceptó el valor actual
+echo "enter para cancelar"INSERT MODEelreadTIPO_EXTRACT() {
+#*******************************************************************************
+# Tipo de extracción, cuando BASE="I": "N" por NIT  "C" por cod suscriptor
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE EXTRACCIÓN"
+echo $raya
+echo "N) Por NIT"
+echo "C) Por codigo de suscriptor"
+echo "enter para cancelar"
+echo " "
+echo "TIPO de EXTRACCIÓN:\c"
+read TIPO_EXTRACTnew
+if [ -z $TIPO_EXTRACTnew ]
+then
+loopEnd="1"
+exit
+fi
+[ $TIPO_EXTRACTnew == "c" ] && TIPO_EXTRACTnew="C"
+[ $TIPO_EXTRACTnew == "n" ] && TIPO_EXTRACTnew="N"
+if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
+then
+TIPO_EXTRACT=$TIPO_EXTRACTnewloopEnd="1"
+else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+fi
+    done
+}
+
+readID_EXTRACT() {
+#*******************************************************************************
+# Lee el criterio para extracción base interna: un NIT o un cod de suscriptor
+#*******************************************************************************
+#   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTOR
+    if [ $TIPO_EXTRACT == "N" ]
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+echo r$CHANGE MODE="$TIPO_EXTRACT
+
+
+echo "TIPO de EXTRACCIÓN:\c"echo$CHANGE MODErotulo=
+echo "$CHANGE MODE$rotulo\c"
+echo "$rotulo\c""APPEND MODE$TIPO_EXTRACT
+tput cuu 1 # vuelve a la línea anterior
+
+
+
+
+    
+inputLen=6f$CHANGE MODEelse
+    [ $TIPO_EXTRACTnew == "c" ] && TIPO_EXTRACTnew="C"
+    [ $TIPO_EXTRACTnew == "n" ] && TIPO_EXTRACTnew="N"
+    if [ $TIPO_EXTRACTnew == "N" ] || [ $TIPO_EXTRACTnew == "C" ]
+    then
+    TIPO_EXTRACT=$TIPO_EXTRACTnew    loopEnd="1"
+    else
+    tput bel
+    [ $doCuu == "1" ] &&  tput cuu 8
+    fi
+        done11 lines >>ed
+
+
+
+    
+
+
+    
+
+
+fifi
+    done
+
+
+
+readID_EXTRACT() {
+#*******************************************************************************
+# Lee el criterio para extracción base interna: un NIT o un cod de suscriptor
+#*******************************************************************************
+#   según TIPO_EXTRAC se lee un NIT o un COD SUSCRIPTOR
+    if [ $TIPO_EXTRACT == "N" ]
+    then
+criterioExtraccion="NIT"
+inputLen=11
+    else
+criterioExtraccion="COD SUSCRIPTOR"
+inputLen=6
+    fi
+loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "$criterioExtraccion PARA LA EXTRACCIÓN"
+echo $rayaecho "Ingrese el"$criterioExtraccion" para extracción ($inputLen dígitos),"
+echo "enter="$ID_EXTRACT
+echo " "
+tput el # borra caracteres sobrantes
+rotulo="$criterioExtraccion:"
+echo "$rotulo"$ID_EXTRACT
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read ID_EXTRACTnew
+tput el # borra mensaje de error
+if [ -z $ID_EXTRACTnew ] # acepta el valor actual
+then
+loopEnd="1"
+elif [[ "$ID_EXTRACTnew" !=  +([0-9]) ]] # debe ser solo números
+then
+echo "el dato ingresado debe ser numérico"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+elif [ ${#ID_EXTRACTnew} -ne inputLen ] # control de longitud (11 o 6)
+then
+echo 'longitud incorrecta (debe ser '$inputlen' dígitos)'tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else # todo OK
+ID_EXTRACT=$ID_EXTRACTnewloopEnd="1"
+fi
+    done
+}
+
+readTIPO_PROC() {
+#*******************************************************************************
+# Tipo de proceso, "A" por Actual, "H" por Histórico
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "TIPO DE PROCESO"
+echo $raya
+echo "A) Proceso actual"
+echo "H) Proceso histórico"
+echo "enter="$TIPO_PROC
+echo " "
+rotulo="TIPO de PROCESO:"
+echo "$rotulo"$TIPO_PROC
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read TIPO_PROCnew
+if [ -z $TIPO_PROCnew ]
+then
+# aceptó el valor por defectoloopEnd="1"
+else
+# traduce minúsculas[ $TIPO_PROCnew == "a" ] && TIPO_PROCnew="A"[ $TIPO_PROCnew == "h" ] && TIPO_PROCnew="H"if [ $TIPO_PROCnew == "H" ] || [ $TIPO_PROCnew == "A" ]then
+TIPO_PROC=$TIPO_PROCnewloopEnd="1"else
+tput bel
+[ $doCuu == "1" ] &&  tput cuu 8fi
+fi
+    done
+}
+
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"
+echo "enter="$FECHA_INICIO
+echo " "
+rotulo="FECHA INICIO de PROCESO AAAAMMDD:"
+echo "$rotulo"$FECHA_INICIO
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read FECHA_INICIOnew
+if [ -z $FECHA_INICIOnew ]
+then
+# aceptó el valor actualloopEnd="1"
+elif [[ "$FECHA_INICIOnew" != +([0-9]) ]] # debe ser solo números
+then
+echo "la fecha solamente puede contener dígitos"tput bel
+[ $doCuu == "1" ] && tput cuu 8
+elif [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
+# rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+then
+echo "la fecha es inválida, anterior a 2000 o posterior a 2029"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+# debe ser anterior al mes actualFECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]then
+echo "la fecha desde debe ser anterior a la actual"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# todo bien
+FECHA_INICIO=$FECHA_INICIOnewFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMM:w"sh-PE-Ripley" 729 lines, 25887 characters [2] + Stopped (SIGTSTP)        vi sh-PE-Ripley
+/d/iccol/desarrollo/macros>e echo "${bold}Name: ${offbold}^[  /d/iccol/desarrollo/macros>echo "${bold}Name: ${offbold}}       $}(}t}p}u}t} }b}o}l}d})}$(tput bold)}Name: ${$(tput bold)})}Name: ${$(tput obold)}fbold)}fbold)}/d/iccol/desarrollo/macros>echo  "E${$(tput bold)}Name: ${$(tput offbold)}/d/iccol/desarrollo/macros>echo "En${$(tput bold)}Name: ${$(tput offbold)}/d/iccol/desarrollo/macros>echo "Ent${$(tput bold)}Name: ${$(tput offbold)}/d/iccol/desarrollo/macros>echo "Ente${$(tput bold)}Name: ${$(tput offbold)}/d/iccol/desarrollo/macros>echo "Enter${$(tput bold)}Name: ${$(tput offbold)}/d/iccol/desarrollo/macros>echo "Enter ${$(tput bold)}Name: ${$(tput offbold)>v${$(tput bold)}Name: ${$(tput offbolda${$(tput bold)}Name: ${$(tput offboll${$(tput bold)}Name: ${$(tput offbou${$(tput bold)}Name: ${$(tput offbe${$(tput bold)}Name: ${$(tput off ${$(tput bold)}Name: ${$(tput ofo${$(tput bold)}Name: ${$(tput of${$(tput bold)}Name: ${$(tput  ${$(tput bold)}Name: ${$(tput
+> "
+ksh: "Enter value of ${$(tput bold)}Name: ${$(tput offbold)}^J": bad substitution
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo "Enter value of ${$(tput bold)}Name: ${$(tput>/d/iccol/desarrollo/macros>echo "Enter value of "${$(tput bold)}Name: ${$(tpuame: ${$(tput offbold)}^J"                        <}^"  
+> "
+ksh: "Enter value of "${$(tput bold)}Name:: bad substitution
+/d/iccol/desarrollo/macros>bold=`tput bold`
+/d/iccol/desarrollo/macros>offbold=`tput rmso`
+/d/iccol/desarrollo/macros>echo "${bold}Name: ${offbold} \c"
+Name:  /d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>echo $offbold
+
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>echo $offboldecho "${bold}Name: ${offbold} \c"/d/iccol/desarrollo/macros>offbold=`tput rmso`              /d/iccol/desarrollo/macros>offbold=`tput `    s`g`r`0`
+/d/iccol/desarrollo/macros>tput sgr0
+/d/iccol/desarrollo/macros>tput bold
+/d/iccol/desarrollo/macros>tput offbold
+tput: unknown terminfo capability 'offbold'
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>tput offboldtput bold   tput sgr0
+/d/iccol/desarrollo/macros>man terminfo
+Reformatting page.  Please Wait... done
+
+File Formats                                          terminfo(4)
+
+NAME
+     terminfo - terminal and printer capability database
+
+SYNOPSIS
+     /usr/share/lib/terminfo/?/*
+
+DESCRIPTION
+     The terminfo database describes the capabilities of  devices
+     such  as  terminals  and  printers. Devices are described in
+     terminfo source files by specifying a set  of  capabilities,
+     by  quantifying certain aspects of the device, and by speci-
+     fying character sequences that  affect  particular  results.
+     This  database is often used by screen oriented applications
+     such as vi and curses-based programs, as  well  as  by  some
+     system  commands such as ls and more. This usage allows them
+     to work with a variety of devices  without  changes  to  the
+     programs.
+
+     terminfo descriptions are located in the  directory  pointed
+     to    by   the   environment   variable   TERMINFO   or   in
+     /usr/share/lib/terminfo. terminfo descriptions are generated
+     by tic(1M).
+
+     terminfo source files consist of one or more device descrip-
+     tions.  Each  description consists of a header (beginning in
+     column 1) and one or more lines that list the  features  for
+     that particular device. Every line in a terminfo source file
+     must end in a comma (,). Every line  in  a  terminfo  source
+     file  except  the  header  must be indented with one or more
+     white spaces (either spaces or tabs).
+
+     Entries in terminfo source files  consist  of  a  number  of
+     comma-separated  fields.  White  space  after  each comma is
+     ignored.  Embedded  commas  must  be  escaped  by  using   a
+     backslash. Each device entry has the following format:
+
+       alias1 | alias2 | ... | aliasn | fullname,
+                capability1, capability2,
+                .
+                .
+                .
+                capabilityn,
+
+     The first line, commonly referred to  as  the  header  line,
+     must  begin  in  column  one  and  must contain at least two
+--More--(1%)
+SunOS 5.10           Last change: 9 Jul 1996                    1
+
+File Formats                                          terminfo(4)
+
+     aliases separated by vertical bars. The last  field  in  the
+     header  line must be the  long name of the device and it may
+     contain any string. Alias names must be unique in  the  ter-
+     minfo  database  and they must conform to system file naming
+     conventions. See tic(1M). They cannot, for example,  contain
+     white space or slashes.
+
+     Every device must be assigned a name, such as "vt100".  Dev-
+     ice  names (except the long name) should be chosen using the
+     following conventions. The name should not  contain  hyphens
+     because  hyphens  are  reserved for use when adding suffixes
+     that indicate special modes.
+
+     These special modes may be modes that the  hardware  can  be
+     in,  or user preferences. To assign a special mode to a par-
+     ticular device, append a suffix consisting of a  hyphen  and
+     an  indicator  of  the mode to the device name. For example,
+     the -w suffix means "wide mode". When specified,  it  allows
+     for  a  width  of  132  columns  instead  of the standard 80
+     columns. Therefore, if you want to use a "vt100" device  set
+     to  wide  mode, name the device "vt100-w". Use the following
+     suffixes where possible.
+
+          Suffix    Meaning                                Example
+          -w        Wide mode (more than 80 columns)       5410-w
+          -am       With auto. margins (usually default)   vt100-am
+          -nam      Without automatic margins              vt100-nam
+          -n        Number of lines on the screen          2300-40
+          -na       No arrow keys (leave them in local)    c100-na
+          -np       Number of pages of memory              c100-4p
+          -rv       Reverse video                          4415-rv
+
+     The terminfo reference manual page is organized in two  sec-
+     tions:
+
+         o    PART 1: DEVICE CAPABILITIES
+
+         o    PART 2: PRINTER CAPABILITIES
+
+  PART 1: DEVICE CAPABILITIES
+     Capabilities in terminfo are of three types:  Boolean  capa-
+     bilities  (which  show  that a device has or does not have a
+     particular feature), numeric  capabilities  (which  quantify
+--More--(2%)     particular  features  of  a device), and string capabilities
+     (which provide sequences that can be used to perform partic-
+     ular operations on devices).
+
+SunOS 5.10           Last change: 9 Jul 1996                    2
+
+File Formats                                          terminfo(4)
+
+     In the following table, a Variable is the name by which a  C
+     programmer  accesses a capability (at the terminfo level). A
+     Capname is the short name for a capability specified in  the
+     terminfo  source  file.  It is used by a person updating the
+     source file and by the tput command. A  Termcap  Code  is  a
+     two-letter sequence that corresponds to the termcap capabil-
+     ity name. (Note that termcap is no longer supported.)
+
+     Capability names have no real length limit, but an  informal
+     limit  of  five  characters  has  been  adopted to keep them
+     short. Whenever possible, capability names are chosen to  be
+     the  same  as  or  similar  to  those  specified by the ANSI
+     X3.64-1979 standard. Semantics are also  intended  to  match
+     those of the ANSI standard.
+
+     All string capabilities listed below may have padding speci-
+     fied,  with  the  exception  of  those used for input. Input
+     capabilities, listed under the Strings section in  the  fol-
+     lowing tables, have names beginning with key_. The #i symbol
+     in the description field of the following tables  refers  to
+     the ith parameter.
+
+  Booleans
+       ________________________________________________________________
+                                 Cap-   Termcap
+       Variable                  name   Code     Description
+       ________________________________________________________________
+
+       auto_left_margin          bw     bw       cub1 wraps from column 0 to
+                                                 last column
+       auto_right_margin         am     am       Terminal has automatic margins
+       back_color_erase          bce    be       Screen erased with background
+                                                 color
+       can_change                ccc    cc       Terminal can re-define existing
+                                                 color
+       ceol_standout_glitch      xhp    xs       Standout not erased by
+                                                 overwriting (hp)
+       col_addr_glitch           xhpa   YA       Only positive motion
+                                                 for hpa/mhpa caps
+       cpi_changes_res           cpix   YF       Changing character pitch
+--More--(4%)                                                 changes resolution
+       cr_cancels_micro_mode     crxm   YB       Using cr turns off micro mode
+       dest_tabs_magic_smso      xt     xt       Destructive tabs, magic
+                                                 smso char (t1061)
+       eat_newline_glitch        xenl   xn       Newline ignored after
+                                                 80 columns (Concept)
+       erase_overstrike          eo     eo       Can erase overstrikes with a
+                                                 blank
+       generic_type              gn     gn       Generic line type
+                                                 (for example, dialup, switch)
+
+SunOS 5.10           Last change: 9 Jul 1996                    3
+
+File Formats                                          terminfo(4)
+
+       hard_copy                 hc     hc       Hardcopy terminal
+       hard_cursor               chts   HC       Cursor is hard to see
+       has_meta_key              km     km       Has a meta key (shift,
+                                                 sets parity bit)
+       has_print_wheel           daisy  YC       Printer needs operator
+                                                 to change character set
+       has_status_line           hs     hs       Has extra "status line"
+       hue_lightness_saturation  hls    hl       Terminal uses only HLS
+                                                 color notation (Tektronix)
+       insert_null_glitch        in     in       Insert mode distinguishes nulls
+       lpi_changes_res           lpix   YG       Changing line pitch
+                                                 changes resolution
+       memory_above              da     da       Display may be retained
+                                                 above the screen
+       memory_below              db     db       Display may be retained
+                                                 below the screen
+       move_insert_mode          mir    mi       Safe to move while in insert
+                                                 mode
+       move_standout_mode        msgr   ms       Safe to move in standout modes
+       needs_xon_xoff            nxon   nx       Padding won't work,
+                                                 xon/xoff required
+       no_esc_ctlc               xsb    xb       Beehive (f1=escape, f2=ctrl C)
+       no_pad_char               npc    NP       Pad character doesn't exist
+       non_dest_scroll_region    ndscr  ND       Scrolling region
+                                                 is nondestructive
+       non_rev_rmcup             nrrmc  NR       smcup does not reverse rmcup
+       over_strike               os     os       Terminal overstrikes
+                                                 on hard-copy terminal
+       prtr_silent               mc5i   5i       Printer won't echo on screen
+       row_addr_glitch           xvpa   YD       Only positive motion
+                                                 for vpa/mvpa caps
+       semi_auto_right_margin    sam    YE       Printing in last column causes
+                                                 cr
+--More--(6%)       status_line_esc_ok        eslok  es       Escape can be used on
+                                                 the status line
+       tilde_glitch              hz     hz       Hazeltine; can't print tilde (~
+)
+       transparent_underline     ul     ul       Underline character overstrikes
+       xon_xoff                  xon    xo       Terminal uses xon/xoff
+                                                 handshaking
+
+  Numbers
+       ________________________________________________________________
+                             Cap-    Termcap
+       Variable              name    Code     Description
+       ________________________________________________________________
+
+       bit_image_entwining   bitwin  Yo       Number of passes for each
+                                              bit-map row
+       bit_image_type        bitype  Yp       Type of bit image device
+       buffer_capacity       bufsz   Ya       Number of bytes buffered
+
+SunOS 5.10           Last change: 9 Jul 1996                    4
+
+File Formats                                          terminfo(4)
+
+                                              before printing
+       buttons               btns    BT       Number of buttons on the mouse
+       columns               cols    co       Number of columns in a line
+       dot_horz_spacing      spinh   Yc       Spacing of dots horizontally
+                                              in dots per inch
+       dot_vert_spacing      spinv   Yb       Spacing of pins vertically
+                                              in pins per inch
+       init_tabs             it      it       Tabs initially every # spaces
+       label_height          lh      lh       Number of rows in each label
+       label_width           lw      lw       Number of columns in each label
+       lines                 lines   li       Number of lines on a screen or
+                                              a page
+       lines_of_memory       lm      lm       Lines of memory if > lines;
+                                              0 means varies
+       max_attributes        ma      ma       Maximum combined video attributes
+                                              terminal can display
+       magic_cookie_glitch   xmc     sg       Number of blank characters
+                                              left by smso or rmso
+       max_colors            colors  Co       Maximum number of colors
+                                              on the screen
+       max_micro_address     maddr   Yd       Maximum value in
+                                              micro_..._address
+       max_micro_jump        mjump   Ye       Maximum value in parm_..._micro
+       max_pairs             pairs   pa       Maximum number of
+                                              color-pairs on the screen
+--More--(8%)       maximum_windows       Wnum    MW       Maximum number of definable window
+s
+       micro_char_size       mcs     Yf       Character step size when
+                                              in micro mode
+       micro_line_size       mls     Yg       Line step size when in micro mode
+       no_color_video        ncv     NC       Video attributes that
+                                              can't be used with colors
+       num_labels            nlab    Nl       Number of labels on screen
+       number_of_pins        npins   Yh       Number of pins in print-head
+       output_res_char       orc     Yi       Horizontal resolution in
+                                              units per character
+       output_res_line       orl     Yj       Vertical resolution in units per
+                                              line
+       output_res_horz_inch  orhi    Yk       Horizontal resolution in
+                                              units per inch
+       output_res_vert_inch  orvi    Yl       Vertical resolution in
+                                              units per inch
+       padding_baud_rate     pb      pb       Lowest baud rate
+       print_rate            cps     Ym       Print rate in characters per secon
+d
+                                              where padding needed
+       virtual_terminal      vt      vt       Virtual terminal number (system)
+       wide_char_size        widcs   Yn       Character step size when
+                                              in double wide mode
+       width_status_line     wsl     ws       Number of columns in status line
+
+SunOS 5.10           Last change: 9 Jul 1996                    5
+
+File Formats                                          terminfo(4)
+
+  Strings
+       ________________________________________________________________
+                                  Cap-   Termcap
+       Variable                   name   Code     Description
+       ________________________________________________________________
+
+       acs_chars                  acsc   ac       Graphic charset pairs aAbBcC
+       alt_scancode_esc           scesa  S8       Alternate escape for
+                                                  scancode emulation
+                                                  (default is for vt100)
+       back_tab                   cbt    bt       Back tab
+       bell                       bel    bl       Audible signal (bell)
+       bit_image_carriage_return  bicr   Yv       Move to beginning of
+                                                  same row (use tparm)
+       bit_image_newline          binel  Zz       Move to next row of
+                                                  the bit image (use tparm)
+       bit_image_repeat           birep  Zy       Repeat bit-image cell
+                                                  #1 #2 times (use tparm)
+--More--(10%)       carriage_return            cr     cr       Carriage return
+       change_char_pitch          cpi    ZA       Change number of
+                                                  characters per inch
+       change_line_pitch          lpi    ZB       Change number of lines per inc
+h
+       change_res_horz            chr    ZC       Change horizontal resolution
+       change_res_vert            cvr    ZD       Change vertical resolution
+       change_scroll_region       csr    cs       Change to lines #1
+                                                  through #2 (vt100)
+       char_padding               rmp    rP       Like ip but when in replace
+                                                  mode
+       char_set_names             csnm   Zy       List of character set names
+       clear_all_tabs             tbc    ct       Clear all tab stops
+       clear_margins              mgc    MC       Clear all margins
+                                                  (top, bottom, and sides)
+       clear_screen               clear  cl       Clear screen and home cursor
+       clr_bol                    el1    cb       Clear to beginning of
+                                                  line, inclusive
+       clr_eol                    el     ce       Clear to end of line
+       clr_eos                    ed     cd       Clear to end of display
+       code_set_init              csin   ci       Init sequence
+                                                  for multiple codesets
+       color_names                colornm  Yw     Give name for color #1
+       column_address             hpa    ch       Horizontal position
+       command_character          cmdch  CC       Terminal settable cmd
+                                                  character in prototype
+       create_window              cwin   CW       Define win #1 to go
+                                                  from #2,#3to #4,#5
+       cursor_address             cup    cm       Move to row #1 col #2
+       cursor_down                cud1   do       Down one line
+       cursor_home                home   ho       Home cursor (if no cup)
+       cursor_invisible           civis  vi       Make cursor invisible
+       cursor_left                cub1   le       Move left one space.
+       cursor_mem_address         mrcup  CM       Memory relative cursor
+                                                  addressing
+
+SunOS 5.10           Last change: 9 Jul 1996                    6
+
+File Formats                                          terminfo(4)
+
+       cursor_normal              cnorm  ve       Make cursor appear
+                                                  normal (undo vs/vi)
+       cursor_right               cuf1   nd       Non-destructive space
+                                                  (cursor or carriage right)
+       cursor_to_ll               ll     ll       Last line, first
+                                                  column (if no cup)
+       cursor_up                  cuu1   up       Upline (cursor up)
+       cursor_visible             cvvis  vs       Make cursor very visible
+--More--(12%)       define_bit_image_region    defbi  Yx       Define rectangular bit-
+                                                  image region (use tparm)
+       define_char                defc   ZE       Define a character in
+                                                  a character set
+       delete_character           dch1   dc       Delete character
+       delete_line                dl1    dl       Delete line
+       device_type                devt   dv       Indicate language/
+                                                  codeset support
+       dial_phone                 dial   DI       Dial phone number #1
+       dis_status_line            dsl    ds       Disable status line
+       display_clock              dclk   DK       Display time-of-day clock
+       display_pc_char            dispc  S1       Display PC character
+       down_half_line             hd     hd       Half-line down (forward
+                                                  1/2 linefeed)
+       ena_acs                    enacs  eA       Enable alternate character set
+       end_bit_image_region       endbi  Yy       End a bit-image region
+                                                  (use tparm)
+       enter_alt_charset_mode     smacs  as       Start alternate character set
+       enter_am_mode              smam   SA       Turn on automatic margins
+       enter_blink_mode           blink  mb       Turn on blinking
+       enter_bold_mode            bold   md       Turn on bold (extra
+                                                  bright) mode
+       enter_ca_mode              smcup  ti       String to begin programs
+                                                  that use cup
+       enter_delete_mode          smdc   dm       Delete mode (enter)
+       enter_dim_mode             dim    mh       Turn on half-bright mode
+       enter_doublewide_mode      swidm  ZF       Enable double wide printing
+       enter_draft_quality        sdrfq  ZG       Set draft quality print mode
+       enter_insert_mode          smir   im       Insert mode (enter)
+       enter_italics_mode         sitm   ZH       Enable italics
+       enter_leftward_mode        slm    ZI       Enable leftward carriage
+                                                  motion
+       enter_micro_mode           smicm  ZJ       Enable micro motion
+                                                  capabilities
+       enter_near_letter_quality  snlq   ZK       Set near-letter quality print
+       enter_normal_quality       snrmq  ZL       Set normal quality
+       enter_pc_charset_mode      smpch  S2       Enter PC character display mod
+e
+       enter_protected_mode       prot   mp       Turn on protected mode
+       enter_reverse_mode         rev    mr       Turn on reverse video mode
+       enter_scancode_mode        smsc   S4       Enter PC scancode mode
+       enter_scancode_mode        smsc   S4       Enter PC scancode mode
+       enter_secure_mode          invis  mk       Turn on blank mode
+                                                  (characters invisible)
+       enter_shadow_mode          sshm   ZM       Enable shadow printing
+
+SunOS 5.10           Last change: 9 Jul 1996                    7
+
+--More--(14%)File Formats                                          terminfo(4)
+
+       enter_standout_mode        smso   so       Begin standout mode
+       enter_subscript_mode       ssubm  ZN       Enable subscript printing
+       enter_superscript_mode     ssupm  ZO       Enable superscript printing
+       enter_underline_mode       smul   us       Start underscore mode
+       enter_upward_mode          sum    ZP       Enable upward carriage motion
+                                                  mode
+       enter_xon_mode             smxon  SX       Turn on xon/xoff handshaking
+       erase_chars                ech    ec       Erase #1 characters
+       exit_alt_charset_mode      rmacs  ae       End alternate character set
+       exit_am_mode               rmam   RA       Turn off automatic margins
+       exit_attribute_mode        sgr0   me       Turn off all attributes
+       exit_ca_mode               rmcup  te       String to end programs
+                                                  that use cup
+       exit_delete_mode           rmdc   ed       End delete mode
+       exit_doublewide_mode       rwidm  ZQ       Disable double wide printing
+       exit_insert_mode           rmir   ei       End insert mode
+       exit_italics_mode          ritm   ZR       Disable italics
+       exit_leftward_mode         rlm    ZS       Enable rightward (normal)
+                                                  carriage motion
+       exit_micro_mode            rmicm  ZT       Disable micro motion
+                                                  capabilities
+       exit_pc_charset_mode       rmpch  S3       Disable PC character
+                                                  display mode
+       exit_scancode_mode         rmsc   S5       Disable PC scancode mode
+       exit_shadow_mode           rshm   ZU       Disable shadow printing
+       exit_standout_mode         rmso   se       End standout mode
+       exit_subscript_mode        rsubm  ZV       Disable subscript printing
+       exit_superscript_mode      rsupm  ZW       Disable superscript printing
+       exit_underline_mode        rmul   ue       End underscore mode
+       exit_upward_mode           rum    ZX       Enable downward (normal)
+                                                  carriage motion
+       exit_xon_mode              rmxon  RX       Turn off xon/xoff handshaking
+       fixed_pause                pause  PA       Pause for 2-3 seconds
+       flash_hook                 hook   fh       Flash the switch hook
+       flash_screen               flash  vb       Visible bell (may
+                                                  not move cursor)
+       form_feed                  ff     ff       Hardcopy terminal page eject
+       from_status_line           fsl    fs       Return from status line
+       get_mouse                  getm   Gm       Curses should get button event
+s
+       goto_window                wingo  WG       Go to window #1
+       hangup                     hup    HU       Hang-up phone
+       init_1string               is1    i1       Terminal or printer
+                                                  initialization string
+       init_2string               is2    is       Terminal or printer
+                                                  initialization string
+--More--(16%)       init_3string               is3    i3       Terminal or printer
+                                                  initialization string
+       init_file                  if     if       Name of initialization file
+       init_prog                  iprog  iP       Path name of program
+                                                  for initialization
+       initialize_color           initc  Ic       Initialize the
+                                                  definition of color
+
+SunOS 5.10           Last change: 9 Jul 1996                    8
+
+File Formats                                          terminfo(4)
+
+       initialize_pair            initp  Ip       Initialize color-pair
+       insert_character           ich1   ic       Insert character
+       insert_line                il1    al       Add new blank line
+       insert_padding             ip     ip       Insert pad after
+                                                  character inserted
+
+  key_Strings
+     The ``key_'' strings are sent by specific keys. The ``key_''
+     descriptions  include  the macro, defined in <curses.h>, for
+     the code returned by the curses routine getch when  the  key
+     is pressed (see curs_getch(3CURSES)).
+
+       ________________________________________________________________
+                               Cap-    Termcap
+       Variable                name    Code     Description
+       ________________________________________________________________
+
+       key_a1                  ka1     K1       KEY_A1, upper left of keypad
+       key_a3                  ka3     K3       KEY_A3, upper right of keypad
+       key_b2                  kb2     K2       KEY_B2, center of keypad
+       key_backspace           kbs     kb       KEY_BACKSPACE, sent by
+                                                backspace key
+       key_beg                 kbeg    @1       KEY_BEG, sent by beg(inning) key
+       key_btab                kcbt    kB       KEY_BTAB, sent by back-tab key
+       key_c1                  kc1     K4       KEY_C1, lower left of keypad
+       key_c3                  kc3     K5       KEY_C3, lower right of keypad
+       key_cancel              kcan    @2       KEY_CANCEL, sent by cancel key
+       key_catab               ktbc    ka       KEY_CATAB, sent by
+                                                clear-all-tabs key
+       key_clear               kclr    kC       KEY_CLEAR, sent by
+                                                clear-screen or erase key
+       key_close               kclo    @3       KEY_CLOSE, sent by close key
+       key_command             kcmd    @4       KEY_COMMAND, sent by
+                                                cmd (command) key
+       key_copy                kcpy    @5       KEY_COPY, sent by copy key
+       key_create              kcrt    @6       KEY_CREATE, sent by create key
+--More--(18%)       key_ctab                kctab   kt       KEY_CTAB, sent by clear-tab key
+       key_dc                  kdch1   kD       KEY_DC, sent by delete-character
+                                                key
+       key_dl                  kdl1    kL       KEY_DL, sent by delete-line key
+       key_down                kcud1   kd       KEY_DOWN, sent by terminal
+                                                down-arrow key
+       key_eic                 krmir   kM       KEY_EIC, sent by rmir or smir in
+                                                insert mode
+       key_end                 kend    @7       KEY_END, sent by end key
+       key_enter               kent    @8       KEY_ENTER, sent by enter/send
+                                                key
+       key_eol                 kel     kE       KEY_EOL, sent by
+                                                clear-to-end-of-line key
+       key_eos                 ked     kS       KEY_EOS, sent by
+
+SunOS 5.10           Last change: 9 Jul 1996                    9
+
+File Formats                                          terminfo(4)
+
+                                                clear-to-end-of-screen key
+       key_exit                kext    @9       KEY_EXIT, sent by exit key
+       key_f0                  kf0     k0       KEY_F(0), sent by function key f
+0
+       key_f1                  kf1     k1       KEY_F(1), sent by function key f
+1
+       key_f2                  kf2     k2       KEY_F(2), sent by function key f
+2
+       key_f3                  kf3     k3       KEY_F(3), sent by function key f
+3
+       key_fB                  kf4     k4       KEY_F(4), sent by function key f
+B
+       key_f5                  kf5     k5       KEY_F(5), sent by function key f
+5
+       key_f6                  kf6     k6       KEY_F(6), sent by function key f
+6
+       key_f7                  kf7     k7       KEY_F(7), sent by function key f
+7
+       key_f8                  kf8     k8       KEY_F(8), sent by function key f
+8
+       key_f9                  kf9     k9       KEY_F(9), sent by function key f
+9
+
+       key_f10                 kf10    k;       KEY_F(10), sent by function key
+                                                f10
+       key_f11                 kf11    F1       KEY_F(11), sent by function key
+                                                f11
+       key_f12                 kf12    F2       KEY_F(12), sent by function key
+                                                f12
+--More--(19%)       key_f13                 kf13    F3       KEY_F(13), sent by function key
+                                                f13
+       key_f14                 kf14    F4       KEY_F(14), sent by function key
+                                                f14
+       key_f15                 kf15    F5       KEY_F(15), sent by function key
+                                                f15
+       key_f16                 kf16    F6       KEY_F(16), sent by function key
+                                                f16
+       key_f17                 kf17    F7       KEY_F(17), sent by function key
+                                                f17
+       key_f18                 kf18    F8       KEY_F(18), sent by function key
+                                                f18
+       key_f19                 kf19    F9       KEY_F(19), sent by function key
+                                                f19
+       key_f20                 kf20    FA       KEY_F(20), sent by function key
+                                                f20
+       key_f21                 kf21    FB       KEY_F(21), sent by function key
+                                                f21
+       key_f22                 kf22    FC       KEY_F(22), sent by function key
+                                                f22
+       key_f23                 kf23    FD       KEY_F(23), sent by function key
+                                                f23
+       key_f24                 kf24    FE       KEY_F(24), sent by function key
+                                                f24
+       key_f25                 kf25    FF       KEY_F(25), sent by function key
+                                                f25
+       key_f26                 kf26    FG       KEY_F(26), sent by function key
+                                                f26
+       key_f27                 kf27    FH       KEY_F(27), sent by function key
+                                                f27
+       key_f28                 kf28    FI       KEY_F(28), sent by function key
+                                                f28
+       key_f29                 kf29    FJ       KEY_F(29), sent by function key
+
+SunOS 5.10           Last change: 9 Jul 1996                   10
+
+File Formats                                          terminfo(4)
+
+                                                f29
+       key_f30                 kf30    FK       KEY_F(30), sent by function key
+                                                f30
+       key_f31                 kf31    FL       KEY_F(31), sent by function key
+                                                f31
+       key_f32                 kf32    FM       KEY_F(32), sent by function key
+                                                f32
+       key_f33                 kf33    FN       KEY_F(13), sent by function key
+                                                f13
+       key_f34                 kf34    FO       KEY_F(34), sent by function key
+--More--(21%)                                                f34
+       key_f35                 kf35    FP       KEY_F(35), sent by function key
+                                                f35
+       key_f36                 kf36    FQ       KEY_F(36), sent by function key
+                                                f36
+       key_f37                 kf37    FR       KEY_F(37), sent by function key
+                                                f37
+       key_f38                 kf38    FS       KEY_F(38), sent by function key
+                                                f38
+       key_f39                 kf39    FT       KEY_F(39), sent by function key
+                                                f39
+       key_fB0                 kf40    FU       KEY_F(40), sent by function key
+                                                fB0
+       key_fB1                 kf41    FV       KEY_F(41), sent by function key
+                                                fB1
+       key_fB2                 kf42    FW       KEY_F(42), sent by function key
+                                                fB2
+       key_fB3                 kf43    FX       KEY_F(43), sent by function key
+                                                fB3
+       key_fB4                 kf44    FY       KEY_F(44), sent by function key
+                                                fB4
+       key_fB5                 kf45    FZ       KEY_F(45), sent by function key
+                                                fB5
+       key_fB6                 kf46    Fa       KEY_F(46), sent by function key
+                                                fB6
+       key_fB7                 kf47    Fb       KEY_F(47), sent by function key
+                                                fB7
+       key_fB8                 kf48    Fc       KEY_F(48), sent by function key
+                                                fB8
+       key_fB9                 kf49    Fd       KEY_F(49), sent by function key
+                                                fB9
+       key_f50                 kf50    Fe       KEY_F(50), sent by function key
+                                                f50
+       key_f51                 kf51    Ff       KEY_F(51), sent by function key
+                                                f51
+       key_f52                 kf52    Fg       KEY_F(52), sent by function key
+                                                f52
+       key_f53                 kf53    Fh       KEY_F(53), sent by function key
+                                                f53
+       key_f54                 kf54    Fi       KEY_F(54), sent by function key
+                                                f54
+       key_f55                 kf55    Fj       KEY_F(55), sent by function key
+
+SunOS 5.10           Last change: 9 Jul 1996                   11
+
+File Formats                                          terminfo(4)
+
+                                                f55
+--More--(23%)/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>man terminfo            cd /usr/share/lib/terminfo
+/usr/share/lib/terminfo>ls -la
+total 116
+drwxr-xr-x  44 root     bin         1024 Sep 29  2010 .
+drwxr-xr-x  28 root     sys         1024 Apr  4  2013 ..
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 1
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 2
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 3
+drwxr-xr-x   2 root     bin         2048 Sep 29  2010 4
+drwxr-xr-x   2 root     bin         1536 Sep 29  2010 5
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 6
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 7
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 8
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 9
+drwxr-xr-x   2 root     bin         5632 Sep 29  2010 a
+drwxr-xr-x   2 root     bin         2048 Sep 29  2010 A
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 b
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 B
+drwxr-xr-x   2 root     bin         2048 Sep 29  2010 c
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 d
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 e
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 f
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 g
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 G
+drwxr-xr-x   2 root     bin         2048 Sep 29  2010 h
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 H
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 i
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 j
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 k
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 l
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 m
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 M
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 n
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 o
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 p
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 P
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 q
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 r
+drwxr-xr-x   2 root     bin         1024 Sep 29  2010 s
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 S
+drwxr-xr-x   2 root     bin         3072 Sep 29  2010 t
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 u
+drwxr-xr-x   2 root     bin         1536 Sep 29  2010 v
+drwxr-xr-x   2 root     bin         2048 Sep 29  2010 w
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 x
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 y
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 z
+/usr/share/lib/terminfo>ls -la b
+total 100
+drwxr-xr-x   2 root     bin          512 Sep 29  2010 .
+drwxr-xr-x  44 root     bin         1024 Sep 29  2010 ..
+-rw-r--r--   3 root     bin         1044 Jan 21  2005 bantam
+-rw-r--r--   1 root     bin          992 Jan 21  2005 bc
+-rw-r--r--   5 root     bin         2205 Jan 21  2005 bct500
+-rw-r--r--   4 root     bin         1570 Jan 21  2005 bct510a
+-rw-r--r--   4 root     bin         1725 Jan 21  2005 bct510d
+-rw-r--r--   1 root     bin         1228 Jan 21  2005 beacon
+-rw-r--r--   1 root     bin         1389 Jan 21  2005 beacon-s
+-rw-r--r--   2 root     bin          977 Jan 21  2005 beehive4
+-rw-r--r--   2 root     bin         1020 Jan 21  2005 beehiveIIIm
+-rw-r--r--   1 root     bin         1100 Jan 21  2005 bg1.25
+-rw-r--r--   1 root     bin         1157 Jan 21  2005 bg1.25nv
+-rw-r--r--   1 root     bin         1160 Jan 21  2005 bg1.25rv
+-rw-r--r--   1 root     bin         1140 Jan 21  2005 bg2.0
+-rw-r--r--   1 root     bin         1179 Jan 21  2005 bg2.0nv
+-rw-r--r--   1 root     bin         1180 Jan 21  2005 bg2.0rv
+-rw-r--r--   2 root     bin         1151 Jan 21  2005 bg3.10
+-rw-r--r--   2 root     bin         1191 Jan 21  2005 bg3.10nv
+-rw-r--r--   2 root     bin         1192 Jan 21  2005 bg3.10rv
+-rw-r--r--   2 root     bin         1151 Jan 21  2005 bgn
+-rw-r--r--   2 root     bin         1191 Jan 21  2005 bgnv
+-rw-r--r--   2 root     bin         1192 Jan 21  2005 bgrv
+-rw-r--r--   2 root     bin         1020 Jan 21  2005 bh3m
+-rw-r--r--   2 root     bin          977 Jan 21  2005 bh4
+-rw-r--r--   1 root     bin         1151 Jan 21  2005 bitgraph
+-rw-r--r--   2 root     bin         1152 Jan 21  2005 blit
+-rw-r--r--   2 root     bin         1020 Jan 21  2005 blitlayer
+-rw-r--r--   1 root     bin          936 Jan 21  2005 bussiplexer
+/usr/share/lib/terminfo>grep . bold *
+grep: can't open bold
+2:2626-12x40uW  2626-12-suX2626-12uR2626u\      2624b-10puZ2624bu\      2624a-10puZ2624auZ2624-4pu\2624-10puZ2624u]2623au]2623u^2622au^2622u_2621wlu`2621p-aua2621Pua2621pub2621ntuc2621nlu#2621k45ud2621b-pue
+2:2621b-kx-puf2621b-kxug2621bui2621Aui2621aui2621-wluj2621-ntuk2621-nlul2621-flum2621-bauh2621-aun2621-48ui2621uñ2500uo2397auo2397v¤2350-x40v¥2350t¨2300-x40t§023004:4415-rv-nlt]4415-rvt^4415-nlt_4415t`4410v1-wta4410v1tb4410-wtc4410-nsltd4410-nfkte4410tj43t4205vÈ42-nlvÉ42t4115t4114t4113t4112-ndt4112-dt4112-5t4112t4109t4107t4105-30t4105v¿4080t4027cut4027-ext
+4:4027-17-wst4027-17t4027t4025ext4025cut4025-ext      4025-17wst
+4:4025-17-wst4025-17t4025t4024tz4023t4015-smt4015t4014-smt4014t4013t4012vX4000awtcuD400v 40-80-8v¡40-80-6v¢40-132-8v£40-132-6tkì405:5630DMD-24vZ5630DMDvY5630-24vZ5630uí5620-34uî5620-24tP5620t¹5520tØ5430-24tÙ5430-22tÚ5430tQ   5425-w-fktR5425-wtS     5425-nl-wtT5425-nltU5425-fktV5425tW5420+nltX5420-w-rv-nltY      5420-w-rvtZ     5420-w-nlt[5420-wt\
+5:5420-rv-nlt]5420-rvt^5420-nlv5420_2-wv5420_2t_5420v5418-wv5418t`5410v1-wta5410v1tb5410-wtc5410-nsltd5410-nfkte5410w       53x0+highv5320v5310vO513bctvO513-pagevO513vA510DvA510dvB510AvB510au:5051tØ505-24tÙ505-22tÚ505vD45006:620-103k-wv]620-103kv^620v_615mt-wv`615mt-103k-wva
+6:615mt-103kvb615mtw615CMT-98k-ww615cmt-98k-ww    
+6:615CMT-98kw   
+6:615cmt-98kw
+6:615-103k-wva615-103kvb615vc610bct-wvd610bct-103k-wve610bct-103kvf610bctvc610-wvd
+6:610-103k-wve610-103kvf610vg
+6:605V2bct-wvh605V2bctvg605V2-wvh605V2vi605bct-wvj605bctvi605-wvj6057:730MTGr-24vS730MTGrvQ
+7:730MTG-41rvT  730MTG-41vU     730MTG-24vV730MTGt*7300vT730-41vU730-24vV730vX705cvjd705a:avt-w-s-rvvIavt-w-svH
+a:avt-w-rv-svJavt-w-rv-nsvHavt-w-rvvKavt-w-nsvIavt-wvLavt-s-rvv    avt-svHavt-rv-wvLavt-rv-svM       avt-rv-nsvLavt-rvvNavt-nsv      avtvOattis513-pfkvP
+a:attgenericvQ
+a:att730r-41vR
+a:att730r-24vSatt730rvT att730-41vU     att730-24vVatt730vXatt705cvY    att630-24vZatt630v[att620-wv\att620-103k-wv]att620-103kv^att620v_att615-wv`att615-103k-wvaatt615-103kvbatt615vcatt610-wvdatt610-103k-wveatt610-103kvfatt610vg
+a:att605V2-wvhatt605V2viatt605-wvjatt605vk        att593ibmvlatt593hpvm    att593epsvnatt583ibm-80vo       att583ibmvpatt583eps-hi-80vqatt583eps-hivratt583eps-80vs        att583epsvtatt583+basicvu       att581ibmvvatt581eps-hivw       att581epsvx     att580ibmvyatt580eps-hivz       att580epsv{att573v|att572v}     att571ibmv~     att571epsv      att570ibmv      att570epsuí
+a:att5620-34uî
+a:att5620-24tPatt5620tQatt5425-w-fktR   att5425-wtSatt5425-nl-wtT
+a:att5425-nltVatt5425tW
+a:att5420+nltXatt5420-w-rv-ntYatt5420-w-rvtZatt5420-w-nlt[      att5420-wt\att5420-rv-nlt]
+a:att5420-rvt^
+a:att5420-nlvatt5420_2-wv       att5420_2t_att5420v     att5418-wvatt5418t`att5410v1-wta        att5410v1tb     att5410-wtcatt5410-nsltdatt5410-nfkteatt5410vatt5320vatt5310vOatt513-pagevOatt513vAatt510dvBatt510avDatt500v
+a:att495qumev   att495ibmvatt495hpvatt479vatt478v
+a:att477qumev
+a:att477ibmgv
+a:att477ibmcvatt477+basic2vatt477+basic1v  att477-hiv
+a:att477-5x6v
+a:att477-470v
+a:att477-455vatt477vatt476vatt475vatt474vatt473vatt471vatt470vtt458vtt457vatt455vatt4426tQatt4425-w-fktR       att4425-wtSatt4425-nl-wtT
+a:att4425-nlvÄajtU
+a:att4425-fktVatt4425tg att4424-1thatt4424vatt442v      att4418-wvatt4418tW
+a:att4415+nltXatt4415-w-rv-ntYatt4415-w-rvtZatt4415-w-nlt[      att4415-wt\att4415-rv-nlt]
+a:att4415-rvt^
+a:att4415-nlt_att4415t`att4410v1-wta    att4410v1tb     att4410-wtcatt4410-nsltdatt4410-nfkteatt4410v 
+a:att40-80-8v¡
+a:att40-80-6v¢att40-132-8v£att40-132-6v¤att2350-x40v¥att2350t¨att2300-x40t§att2300v¦at386-mv©at386tûarpanetvª   apple-v80v«apple-sorocvªapplev¬ ansi+tabsv­
+a:ansi+sgrulv®
+a:ansi+sgrsov¯ansi+sgrdimv°ansi+sgrboldv±ansi+sgrv²ansi+repv³ansi+rcav´ansi+ppvµansi+local1v¶
+a:ansi+localv·ansi+inittabsv¸ ansi+idl1v¹ansi+idlvºansi+idcv»
+a:ansi+erasevÆaedv¼ansi+cupv½ansi+arrowsv¾ansiv¿annarborvÀ
+a:ampex175-bvÁampex175uöampexvÂ
+a:ambassadorvÂambasvÃ   altoheathvÃaltoh19vÃ
+a:alto-heathvÃalto-h19vÄaj832vÄaj830vÅagilesvÅagilevÆaed512vÇadm5vÈadm42-nlvÉadm42vÊ      adm3aplusvÊadm3a+vËadm3avÌadm36vÍadm31vÎadm3vÏadm21vÐadm2vÑadm1avÑadm1vÒaddrinfovÓact5svÓact5-suact5uact4vÔaaadbvÕaaa60vÖaaa59v×aaa48vØaaa40vÙaaa36vÚaaa30vÛaaa29vÜaaa28vÝaaa26vÞaaa24vßaaa22vàaaa20váaaa18vâaaa+unkvãaaa+rvväaaa+decvâaaa-unkvåaaa-s-rv-ctxtvæaaa-s-rvvç
+a:aaa-s-ctxtvèaaa-své
+a:aaa-rv-unkvêaaa-rv-ctxtvëaaa-rvvìaaa-dbvíaaa-ctxtvîaaa-60-s-rvdecvîaaa-60-s-rv-devïaaa-60-s-rvvðaaa-60-svñ      aaa-60-rvvòaaa-60vóaaa-59vô     aaa-48-rvvõaaa-48vö     aaa-40-rvv÷aaa-40vø     aaa-36-rvvùaaa-36våaaa-30-srvctxtvåaaa-30-s-rv-ctvæaaa-30-s-rvvçaaa-30-s-ctxtvèaaa-30-svêaaa-30-rv-ctxtvë        aaa-30-rvvíaaa-30-ctxtvÂaaa-30vúaaa-29-rv-ctxtvû        aaa-29-rvvü     aaa-29-npvýaaa-29-ctxtvþaaa-29vÿaaa-28waaa-26w  aaa-24-rvwaaa-24waaa-22waaa-20w aaa-18-rvwaaa-18vÂaaav¿aawa980wa615CMT-98k-ww  a615CMT-98kw
+A:ATT605V2-wvhATT605V2viATT605-wvjATT605uí
+A:ATT5620-34uî
+A:ATT5620-24tPATT5620tQATT5425-w-fktR   ATT5425-wtSATT5425-nl-wtT 
+A:ATT5425-nltVATT5425tW
+A:ATT5420+nltXATT5420-w-rv-ntYATT5420-w-rvtZATT5420-w-nlt[      ATT5420-wt\ATT5420-rv-nlt]
+A:ATT5420-rvt^
+A:ATT5420-nlvATT5420_2-wv       ATT5420_2t_ATT5420v     ATT5418-wvATT5418t`ATT5410v1-wta        ATT5410v1tb     ATT5410-wtcATT5410-nsltdATT5410-nfkteATT5410vOATT513vDATT500tfATT4426tQATT4425-w-fktR   ATT4425-wtT
+A:ATT4425-nltSATT4425-nl-wtVATT4425tg   ATT4424-1thATT4424v     ATT4418-wvATT4418tW
+A:ATT4415+nltXATT4415-w-rv-ntYATT4415-w-rvtZATT4415-w-nlt[      ATT4415-wt\ATT4415-rv-nlt]
+A:ATT4415-rvt^
+A:ATT4415-nlt_ATT4415t`ATT4410v1-wta    ATT4410v1tcATT4410-nsltdATT4410-nfkteATT4410v¤ATT2350-x40v¥ATT2350t¨ATT2300-x40t§ATT2300v¦AT386-Mv§AT386-DOS-Mv¨        AT386-DOSv©AT386wA615CMT-98k-ww  A615CMT-98kw
+c:conceptavtv
+c:concept108vconcept100-rvv
+c:concept100v   concept-avtvconceptvcompucoloriivcompucolor2v   colorscantçcoherentv     citoh+lowvcitoh+basicvcitohv
+c:chromaticsvcg7900vcdi1203vcdiv        cdc456tstvcdc456vcdctcbunixuÊcbblittcb-unixu"carlockvca22851v   c5vc108+acsv
+:c108-w-acsv   c108-w-8pvc108-wvc108-rv-na-acsvc108-rv-na-8pv
+c:c108-rv-navc108-rv-8p-acsv
+c:c108-rv-8pv c108-rv-4p-acsv
+c:c108-rv-4pvc108-rvv!c108-na-acsv
+c:c108-na-8pvc108-navc108-8p-rv-nav
+c:c108-8p-nav"c108-8p-acsvc108-8pv#c108-8v$c108-4p-acsvc108-4pv%c108-4vc108vc104v&c100sv'c100rvsv(c100rvppv)c100rvnav*
+c:c100rv4pppv+
+c:c100rv4pnav,c100rv4pv-c100rvv.c1004pv/
+c:c100-rv-ppv0
+c:c100-rv-nav$c100-rv-4p-ppv0c100-rv-4p-nav
+c:c100-rv-4pvc100-rvvc100-4ptõc100-1pv¤c100d:dialogue80uödialogueu÷      diablo-m8uødiablouùdg6053uùdguúdeltauå  decwriteruûdec+lowuü    dec+basicuúdd5000tkdataspeed40uì        datapointuñdatamedia2500uýdatakituþdatagraphixuÿdaisy+lowresvdaisy+basicvdaisyuód800uöd80vd200uþd132vdd100e:ep2500+lowußep2500+highuàep2500+coloruáep2500+basicuâenvision230uâenv230u§demotsf:fviewpointuÅ
+f:freedom200uÆ
+f:freedom110uÇ
+f:freedom100uÈ
+f:freedom-rvuÇfreedomtæfoxuÉfortuneuÊfixtermuËfalco-tsl-1spuËfalco-ptqfalcouÌf200vi-wuÍf200viuÎf200-wuÅf200uÏf1720auÏf1720uÐf110-wuÑf110-14wuÒf110-14uÆf110uÈf100-rvuÇXf100g:guru-nctxtuuru-lpu
+g:guru-76-wmu
+g:guru-76-lpu guru-76u¡ guru-44-su¢guru-44u     guru-33-su
+g:guru-33-rvuguru-33u£guru-24uguruu¤gt42u¥gt40uFgt100auFgt100u¦gsiu§gs6300tØ    gs5430-24tÚgs5430tÙ     gs5430-22tìgigiG:Gepson+lowu¸Gepson+basicu¹Gep2500+lowuºGep2500+highu»Gep2500+coloru¼Gep2500+basicu½$Gdec+lowu¾
+G:Gdec+basicu¿Gdaisy+lowresuÀGdaisy+basicuÁ
+G:Gcitoh+lowuÂ¨Gcitoh+basich:hplaserjetuIhplaser+highuJhplaser+basicuHhplaseruLhp7550uMhp45uNhp2648auNhp2648uMhp2645uOhp2644auOhp2640buPhp2640auQhp262xuRhp2626puRhp2626auS
+h:hp2626-x40uThp2626-suU    hp2626-nsuVhp2626-12x40uWhp2626-12-suX  hp2626-12uRhp2626uY     hp2624b-puYhp2624b-4p-puZ
+h:hp2624b-4pu[hp2624b-10p-pu\hp2624b-10puZhp2624bu\hp2624a-10puZhp2624au\
+h:hp2624-10puZhp2624u]hp2623au]hp2623u^hp2622au^hp2622u_hp2621wlu`       hp2621p-auahp2621pubhp2621ntuchp2621nlu#  hp2621k45ud     hp2621b-puehp2621b-kx-puf
+h:hp2621b-kxughp2621buh hp2621a-auihp2621Auihp2621aui   hp2621-wluj     hp2621-ntuk     hp2621-nlu#
+h:hp2621-k45uzhpul      hp2621-flum     hp2621-bauhhp2621-aun    hp2621-48uihp2621uohp2397auohp2397uphp2382auphp2382uqhp150urhp110us
+h:hp+printerut  hp+pfk+cruuhp+pfk+arrowsuv hp+pfk-cruw     hp+labelsuxhp+coloruy    hp+arrowsuzhewlettpackarduzhewlett-packaru{
+h:heathkit-as½heathkitu{
+PuTTYh:heath-ansis½heath-19s½heathu|hds7-wu}hds7u~hds24-wuhds24uhds200uhds17-wuhds17uhds-wtÑh89uh2000uh19uuh19bsuh19buh19Auh19auh19-uuh19-smuluh19-bss½h19-bu{h19-as½h19uh1552-rvuh1552uh1520uh1510tuh1510uh1500uh1420u`h1000i:intertube2u(      intertubeu(intertecu-
+i:infotonKASu.infotonu/ibmxlagm+basicu0ibmxl+low+5x6u1ibmxl+low+1x1u2ibmxl+high+1x1u3ibmxl+basicu4ibmxl-80u5ibmxl-1x1-hi80u6ibmxl-1x1-hiu7ibmxl-1x1-80u8       ibmxl-1x1u9ibmxluCibmtÞibmproprinteru:ibmpctÞibmgraphicsu;ibmg+lowu<
+i:ibmg+basicu=ibmcolor-1x1u>ibmcoloru?ibmc+low+5x6u@ibmc+low+1x1uA
+i:ibmc+coloruB
+PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYi:ibmc+basicu:ibm5051uCibm3101tibm-system1u:ibm-pcuDi400uCi3101uEi279uF¤i100m:mime-adm3aumime-3axumime-3au
+m:microterm5u   microtermumicrokitumicrobeeumicrobumemhpumegatekudl110um8ttm100ttm-100n:netty-Tabstþnettytú       netronicstûnett¹nectÿncr7901u   ncr7900ivuncr7900i-nauncr7900iu
+n:ncr7900-nauÀncr7900p:proprintertß     plugboardtàplasmatápe7000mtâpe7000ctãpe6312tãpe6300täpe6100täpe550tãpe1251tåpe1200tæpe1100tçpcz19t*pc7300tè
+p:pc6300plustépc52tpc-venixtçpc-coherenttêpctß
+p:patchboardtßDpatchP:PC6300PLUSr:regent40-stÌregent40tÍregent25tÊ        regent200tÎregent20tÏ    regent100tÐregenttÑreachtÒraytermtÓramteks:sys75-103kt£sys75t¤synertekt¥swtpt¦switcht§sv80t¨sv40t©
+s:superbraintªsuperbeet«sunet¬sun2t¬sun1t­sun-s-et®sun-st«sun-nict¯sun-nat­sun-e-st«sun-et°      sun-colort±sun-cmdt²sun-48t³sun-34t´sun-24tµsun-17t¶sun-12t¬sunt·sun-1t¸sprint11t¹
+s:spinwritertºsoroct»sol2t¼sol1t¼solt½smartvidt¾
+s:smarterm-st¾smartermt¿simtermtÀsexidytÁscrhptÂ
+s:screwpointtÃ  scanset-ntÄscansettÄsc415tÄsc410tªsbitÅsbgtÆsb3tÆsb2tÅsb1tÅsbtÇs1500S:SYS75-103kt£¬SYS75t:tvi950rv4pt3
+t:tvi950rv2pt4tvi950rvt5tvi950nst6tvi950bt7tvi9504pt8tvi9502pt9tvi950-rv-4pt:tvi950-rv-2pt; tvi950-rvt<     tvi950-nst=tvi950-bt>    tvi950-apt?     tvi950-4pt@     tvi950-2ptAtvi950tBtvi925tCtvi920ctCtvi920btDtvi9202ptE  tvi920-2ptFtvi920tGtvi914tHtvi912cctItvi912ctItvi912btJtvi9122ptE tvi912-2ptFtvi912tKtvi910+tLtvi910tMtvi803tNtvi2ptEtvi-2ptItvitOttywilliamstPttydmdtPtty5620tQtty5425-w-fktR    tty5425-wtStty5425-nl-wtT
+t:tty5425-nltU
+t:tty5425-fktVtty5425tW
+t:tty5420+nltXtty5420-w-rv-ntYtty5420-w-rvtZtty5420-w-nltnttyt[ tty5420-wt\tty5420-rv-nlt]
+t:tty5420-rvt^
+t:tty5420-nlt_tty5420t`tty5410v1-wta    tty5410v1tb     tty5410-wtctty5410-nsltdtty5410-nfktetty5410tftty4426tg tty4424-1thtty4424titty4420tjtty43tktty40tltty37tmtty35tntty33tots100-sptp
+t:ts100-ctxttots100tqts1tqts-1trtrsIItrtrs80IItstrs80-16txtitt      trs80-100tutrs80-1tutrs80trtrs2tstrs16tttrs100tutrs-80tttrs-100tvtn300tvtn1200twti800txti745tyti735tyti733tyti700tztextvterminet300tvterminet1200tvterminett{teraktAtelevideo950t|teletect}teleray3700t~telerayttek4205ttek4115t tek4112-dt      tek4112-5ttek4112ttekttek4109ttek4107t
+t:tek4105-30ttek4105ttek4027t
+t:tek4025-exttek4025-17-wst
+t:tek4025-17ttek4025ttek4024tztek4023t
+t:tek4015-smttek4015t
+t:tek4014-smttek4014ttek4013ttek4012ttec500ttec400ttecttab132-w-rvttab132-wt     tab132-rvttab132ttabtt88-nrtt88tt500t3800t}t3700sÀt16tt1061ft~t1061t~Ôt10v:vt100-w-amtvt100-wtvt100-top-stvt100-s-toptvt100-s-bottvt100-stvt100-nptvt100-nav-wt          vt100-navtvt100-nam-wt
+v:vc404-s-nat vc404-st!vc404-nat"vc404t#vc403at#vc303-at$vc303t$vc203t$vc103t%vanillatv90t&`v5410w:wyse99gt-wsÐwyse99gt-vbsÑwyse99gt-25-wsÒwyse99gt-25sÓwyse99gtsÔwyse925sÕ
+w:wyse85-wvbsÖwyse85-ws× wyse85-vbsØwyse85sÙ
+w:wyse75-wvbsÚwyse75-wsÛ wyse75-vbsÜ     wyse75-mcsÝwyse75sÞ
+w:wyse60-wvbsßwyse60-wsà wyse60-vbsáwyse60-43-wsâ        wyse60-43sãwyse60-42-wsä        wyse60-42så wyse60-25-wsæ       wyse60-25sçwyse60sè
+w:wyse50-wvbséwyse50-wsê wyse50-vbsëwyse50sì
+w:wyse30p-vbsí
+w:wyse30p-mcsîwyse30psï wyse30-vbsð     wyse30-mcsñwyse30sò
+w:wyse-vp-nksówyse-vpsèwyse-50-wvbsé    wyse-50-wsê
+w:wyse-50-vbsëwyse-50sÎ
+w:wy99gt-wvbsÎwy99gt-w-vbsÏwy99gt-wsÐ    wy99gt-vbsô     wy99gt-2psÑwy99gt-25-wsÒ        wy99gt-25sÓwy99gtsÔwy925sÕwy85-wvbsÖwy85-ws×wy85-vbsØwy85sÙwy75-wvbsÚwy75-wsÛwy75-vbsÜwy75-mcsÝwy75sÞwy60-wvbsÞ    wy60-w-vbsßwy60-wsàwy60-vbsá    wy60-43-wsâwy60-43sã    wy60-42-wsäwy60-42sõwy60-2pså   wy60-25-wsæwy60-25sçwy60sò      wy50vp-nksówy50vpsèwy50-wvbséwy50-wsêwy50-vbsëwy50sìwy30p-vbsíwy30p-mcsîwy30psïwy30-vbsðwy30-mcsñwy30sè    wy-50-wvbséwy-50-wsêwy-50-vbsëwy-50PuTTYPu/usr/share/lib/terminfo>PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPu^C
+/usr/share/lib/terminfo>cd
+/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>fc -l
+431     offbold=`tput rmso`
+432     echo "${bold}Name: ${offbold} \c"
+433     echo $offbold
+434     offbold=`tput sgr0`
+435     tput sgr0
+436     tput bold
+437     tput offbold
+438     tput sgr0
+439     man terminfo
+440     cd /usr/share/lib/terminfo
+441     ls -la
+442     ls -la b
+443     grep . bold *
+444     cd
+445     ma
+446     fc -l
+/d/iccol/desarrollo/macros>sh-PR-Ripley
+ksh: sh-PR-Ripley:  not found
+/d/iccol/desarrollo/macros>ek^[  /d/iccol/desarrollo/macros>eksh-PR-Ripleysh-PE
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+>>>> params:  I;1;1;N;00900047981;A;20140602
+ 
+                       ORIGEN DE LA BASE
+----------------------------------------------------------------------
+      I) Interna
+      E) Externa, provista por el Cliente
+      enter=I
+ 
+            BASE:I
+            BASE:
+ 
+                         TIPO DE EXTRACCIÓN
+----------------------------------------------------------------------
+      N) Por NIT
+      C) Por codigo de suscriptor
+      enter=N
+ 
+            TIPO de EXTRACCIÓN:N
+            TIPO de EXTRACCIÓN:
+ 
+                        NIT PARA LA EXTRACCIÓN
+----------------------------------------------------------------------
+      Ingrese el NIT para extracción (11 dígitos),
+      enter=00900047981
+ 
+                    NIT:00900047981
+                    NIT:
+ 
+                          TIPO DE PROCESO
+----------------------------------------------------------------------
+      A) Proceso actual
+      H) Proceso histórico
+      enter=A
+ 
+            TIPO de PROCESO:A
+            TIPO de PROCESO:
+BASE=I<
+NOM_ARCHIVO=1<
+TIPO_ARCHIVO=1<
+TIPO_EXTRACT=N<
+ID_EXTRACT=00900047981<
+TIPO_PROC=A<
+FECHA_INICIO=20140602<
+I;1;1;N;00900047981;A;20140602
+file: sh-PE-Ripley.parm  in: /d/iccol/desarrollo/macros
+----------------------------------------------------------------------
+
+        ######  #######    ######
+        #     # #          #     # # #####  #      ###### #   #
+        #     # #          #     # # #    # #      #       # #
+        ######  #####      ######  # #    # #      #####    #
+        #       #          #   #   # #####  #      #        #
+        #       #          #    #  # #      #      #        #
+        #       #######    #     # # #      ###### ######   #
+
+----------------------------------------------------------------------
+PARÁMETROS del PROCESO
+    Fecha=20140602
+    Archivo: 1
+    Base: I  extraída de datos internos
+    Criterio de extracción: N  por NIT 00900047981
+    Tipo de proceso: A  actual
+----------------------------------------------------------------------
+ 
+ 
+ 
+Ingrese 1 para cambiar los parámetros, enter para continuar:
+----------------------------------------------------------------------
+EXTRACCIÓN: N   00900047981
+Máquina de desarrollo: codes
+el archivo de salida es PERipley20140602.prn  el input es /despeciales/ICMCRECOPY.DAT
+Registros extraídos:  765
+Finalizada la extracción
+----------------------------------------------------------------------
+PESVNO: validación de IDs
+Input PESVNO: PERipley20140602.prn
+PESVNO archivo_prn_VALI PERipley20140602.val PERipley20140602.inc 10 2
+
+real    0m0.13s
+user    0m0.05s
+sys     0m0.05s
+PESVNO - registros válidos: 742  inconsistentes: 23  total: 765
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+766
+ARCHIVO: archivo_prn_VALI              
+Registro  control==> 000001 (VALIDAR=NO)
+Registros Tipo 5           ==> 000742
+Registros Tipo 6           ==> 000000
+Registros Tipo 7           ==> 000023
+Registros Tipo 5 repetidos ==> 000000
+----------------------------------------------------------------------
+SCOTBATCH: cálculo de scores
+SCOTBATCH 201406 041045047048049062067095099 VAL PERipley20140602.val
+EJECUCION DE PROG CON AMNISTIA INICIADO EN 200901
+EJECUCION DE PROG CON AMNISTIA CON RUTINA  1
+PARA APLICACION DE ARTICULO 13 SE TOMA COMO FECHA DEL DIA 20140602
+  *-----------------------------------------*
+  |     Parametros  scoring batch           |
+  *-----------------------------------------*
+                                             
+Programa: SCOTBATCH         Version:Nov/2012 
+                                             
+SCORE SERIE+ RECIBIDO :041 POS: 001
+SCORE SERIE+ RECIBIDO :045 POS: 002
+SCORE SERIE+ RECIBIDO :047 POS: 003
+SCORE SERIE+ RECIBIDO :048 POS: 004
+SCORE SERIE+ RECIBIDO :049 POS: 005
+SCORE SERIE+ RECIBIDO :062 POS: 006
+SCORE SERIE+ RECIBIDO :067 POS: 007
+SCORE SERIE+ RECIBIDO :095 POS: 008
+SCORE SERIE+ RECIBIDO :099 POS: 009
+Fecha de calculo: 201406
+    W-TIPO-SCORE: 041045047048049062067095099
+  W-TIPO-ARCHIVO: VAL
+         Archivo: PERipley20140602.val                                                            
+  W-ARCHIVO-MANT:                     
+        Reinicio: SI
+                                             
+FECHA SISTEMA : 20140602
+FECHA RECOGIDA BD(YYYYMM) : 201406
+Tipo score: ACIE-A-DHVT
+Tipo score: ACIE-A-DCOO
+Tipo score: ACIE-A-DFGE
+Tipo score: ACIE-A-DTRO
+Tipo score: ACIERTA-A  
+Tipo score: QUANTO     
+Tipo score: ACIERTA+   
+Tipo score: ACIE-A-DINT
+Tipo score: CARACTERISTICAS
+                                             
+Score formato validado   
+                                             
+YA HABIA TERMINADO OK EL PROGRAMA
+NO HAY DONDE REINICIAR,SE COMIENZA 
+DESDE EL PRINCIPIO (CEROS)         
+===== CONTADORES FINALES    ====
+Clientes con ACIA-DHVT mayor a ceros: 0000742
+Clientes con ACIA-DCOO mayor a ceros: 0000742
+Clientes con ACIA-DFGE mayor a ceros: 0000742
+Clientes con ACIA-DTRO mayor a ceros: 0000742
+Clientes con ACIERTA-A mayor a ceros: 0000742
+Clientes con QUANTO    mayor a ceros: 0000742
+Clientes con ACIERTA+  mayor a ceros: 0000742
+Clientes con ACIA-DINT mayor a ceros: 0000742
+Clientes con CARACAT   mayor a ceros: 0000742
+================================
+SE LEYERON EN TOTAL: 0000742
+
+real    0m11.13s
+user    0m10.39s
+sys     0m0.73s
+
+Inicio de Programa:  2014/06/02 10:59:50
+Fin de Programa:     2014/06/02 11:00:01
+
+       
+ ** Datacredito*   MAYOR INFORMACION RIPLEY  **
+       
+iceprerip01.cbl    VERSION:MAY/2014 
+       
+       
+W-PARAMETROS = PERipley20140602.val PERipley20140602.inc 2 A 20140602     
+ARCH-ENTRADA = PERipley20140602.val           
+ARCH-INCONC = PERipley20140602.inc           
+       
+REG. LEIDOS   => 00000742
+REG. GRABADOS => 00000742
+       
+                
++---------------------------------------------------+
+|      *** RESULTADOS DEL INFORME       ***         |
++----------------------------------+----------------+
+|     DETALLE CALIFICACION         | CALF |  # REG. |
++----------------------------------+------+---------+
+| - Registros con informacion      | O.K  |        0
+| - Registros sin informacion      | SIN  |      742
+| - Registros inconsistencias      | INC  |       23
++----------------------------------+------+---------+
+| - Total Registro procesados             |      742
++----------------------------------+------+---------+
+
+real    0m0.13s
+user    0m0.06s
+sys     0m0.04s
+
+Inicio de Programa:  2014/06/02 11:00:01
+Fin de Programa:     2014/06/02 11:00:01
+
+----------------------------------------------------------------------
+ARCHIVOS:
+ 
+/d/iccol/desarrollo/temporales/PERipley20140602.AADCOO
+/d/iccol/desarrollo/temporales/PERipley20140602.AADFGE
+/d/iccol/desarrollo/temporales/PERipley20140602.AADHVT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADINT
+/d/iccol/desarrollo/temporales/PERipley20140602.AADTRO
+/d/iccol/desarrollo/temporales/PERipley20140602.ACIEAA
+/d/iccol/desarrollo/temporales/PERipley20140602.CARACT
+/d/iccol/desarrollo/temporales/PERipley20140602.DATINF
+/d/iccol/desarrollo/temporales/PERipley20140602.ESTADI
+/d/iccol/desarrollo/temporales/PERipley20140602.inc
+/d/iccol/desarrollo/temporales/PERipley20140602.log
+/d/iccol/desarrollo/temporales/PERipley20140602.PREDHD
+/d/iccol/desarrollo/temporales/PERipley20140602.prn
+/d/iccol/desarrollo/temporales/PERipley20140602.QUANTO
+/d/iccol/desarrollo/temporales/PERipley20140602.ULTIMO
+/d/iccol/desarrollo/temporales/PERipley20140602.val
+/d/iccol/desarrollo/temporales/PERipley20140602.vre
+ 
+ 
+----------------------------------------------------------------------
+fin del proceso sh-PE-Ripley
+Iniciado: 10:59:28  finalizado: 11:00:01
+----------------------------------------------------------------------
+/d/iccol/desarrollo/macros>tput bold
+/d/iccol/desarrollo/macros># ñlkfjsglñdkjgñsldkjgslñjawoiugf aoweriu voir gfwer
+/d/iccol/desarrollo/macros>tput dim
+/d/iccol/desarrollo/macros>tput sgr0
+/d/iccol/desarrollo/macros> tput setab 0
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros> tput setab 0 tput setab 4
+/d/iccol/desarrollo/macros># lkjdfhgklsdjfghlksdfjghsdklfjghsdfkljgh
+/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros># lkjdfhgklsdjfghlksdfjghsdklfjghsdfkljgh/d/iccol/desarrollo/macros> tput setab 4                            /d/iccol/desarrollo/macros> tput setab 0
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>
+/d/iccol/desarrollo/macros>fg
+vi sh-PE-Ripley
+
+readFECHA_INICIO() {
+#*******************************************************************************
+# Fecha de proceso, cuando tipo de extracción es "H"
+#*******************************************************************************
+    loopEnd="0"
+    while [ $loopEnd == "0" ]
+    do
+  echo " "
+#......................................................................
+echo "FECHA INICIAL DE PROCESO HISTÓRICO"
+echo $raya
+echo "Ingrese fecha inicial de proceso,"
+echo "enter="$FECHA_INICIO
+echo " "
+rotulo="FECHA INICIO de PROCESO AAAAMMDD:"
+echo "$rotulo"$FECHA_INICIO
+tput cuu 1 # vuelve a la línea anterior
+echo "$rotulo\c"
+read FECHA_INICIOnew
+if [ -z $FECHA_INICIOnew ]
+then
+# aceptó el valor actualloopEnd="1"
+elif [[ "$FECHA_INICIOnew" != +([0-9]) ]] # debe ser solo números
+then
+echo "la fecha solamente puede contener dígitos"tput bel
+[ $doCuu == "1" ] && tput cuu 8
+elif [[ "$FECHA_INICIOnew" != +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]]
+# rango de año de 2000 hasta 2029, mes 01 a 12 y día 00 a 31
+# [[ "20141229" == +(20[012][0-9](0[0-9]|1[12])([012][0-9]|3[01])) ]] && echo "ok"
+then
+echo "la fecha es inválida, anterior a 2000 o posterior a 2029"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8
+else
+# debe ser anterior al mes actualFECHA_INICIOnewYYYYMM=$(echo $FECHA_INICIOnew  | cut -c1-6)FECHA_PROC_YYYYMM=$(echo $FECHA_PROC  | cut -c1-6)if [ $FECHA_INICIOnewYYYYMM -ge $FECHA_PROC_YYYYMM ]then
+echo "la fecha desde debe ser anterior a la actual"tput bel
+[ $doCuu == "1" ] &&  tput cuu 8else
+# todo bien
+FECHA_INICIO=$FECHA_INICIOnewFECHA_INICIO_YYYYMM=$FECHA_INICIOnewYYYYMM/scotbatch    fi
+
+[ -s $archivo.log ] && rm $archivo.log
+
+#*******************************************************************************
+# PESVNO: validación de IDs
+# Valida los registros del archivo .prn y graba archivos .val y .inc
+#*******************************************************************************
+    [ -s $archivo_val ] && rm $archivo_val
+    [ -s $archivo_inc ] && rm $archivo_inc
+    echo $raya
+    echo "PESVNO: validación de IDs"
+    ejecutar_validacion
+    [ $cancelado == "1" ] && exit# control: si no hay un archivo .val se cancela el proceso
+    if [ ! -s $archivo_val ]
+    then
+echo "No hay un archivo de registros validados - PROCESO CANCELADO"
+exit
+    fi
+
+#*******************************************************************************
+# SCOTBATCH: cálculo de scores
+# ...
+#*******************************************************************************
+    echo $raya
+    echo "SCOTBATCH: cálculo de scores"
+    formato="VAL"
+    SCO41="041"
+    SCO45="045"
+    SCO47="047"
+    SCO48="048"
+    SCO49="049"
+    SCO62="062"
+    SCO67="067"
+    SCO95="095"
+    SCO99="099"
+    scoring="$SCO41$SCO45$SCO47$SCO48$SCO49$SCO62$SCO67$SCO95$SCO99"echo SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val
+    $NOHUP x SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val >> $archivo_log
+    # DEBUG: show output >> $archivo.log 2>>$archivo.log
+
+#*******************************************************************************
+# Ejecución del programa iceprerip01
+# Los parámetros son:
+#    archivo de entrada de validados
+#    archivo de entrada de inconsistencias# SCOTBATCH: cálculo de scores
+# ...
+#*******************************************************************************
+    echo $raya
+    echo "SCOTBATCH: cálculo de scores"
+    formato="VAL"
+    SCO41="041"
+    SCO45="045"
+    SCO47="047"
+    SCO48="048"
+    SCO49="049"
+    SCO62="062"
+    SCO67="067"
+    SCO95="095"
+    SCO99="099"
+    scoring="$SCO41$SCO45$SCO47$SCO48$SCO49$SCO62$SCO67$SCO95$SCO99"echo SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val
+    $NOHUP x SCOTBATCH $FECHA_PROC_YYYYMM $scoring $formato $archivo_val >> $archivo_log
+    # DEBUG: show output >> $archivo.log 2>>$archivo.log
+
+#*******************************************************************************
+# Ejecución del programa iceprerip01
+# Los parámetros son:
+#    archivo de entrada de validados
+#    archivo de entrada de inconsistencias
+#    estructura del archivo ????
+#    tipo de proceso ????
+#    fecha del periodo
+#*******************************************************************************$NOHUP x iceprerip01-test $archivo_val $archivo_inc 2 A $FECHA_PROC >> $archivo_log
+
+#*******************************************************************************
+# Nombres de los archivos
+#*******************************************************************************
+    # muestra los nombres de los archivos del proceso
+    echo $raya
+    echo "ARCHIVOS:"
+    echo " "
+    ls $TEMPORALES/$archivo*
+    echo " "
+
+#*******************************************************************************
+# Finalmente
+#*******************************************************************************
+    horaFin=$(date '+%H:%M:%S')
+    echo " "
+    echo $raya
+    echo "fin del proceso "$0
