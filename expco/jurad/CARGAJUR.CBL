@@ -383,6 +383,12 @@
            03 pic x(11) value "16 0000000 ".
            03 pic x(59) value
            "Numero de id fuera del rango del tipo de id informado".
+           03 pic x(11) value "17 0000000 ".
+           03 pic x(59) value
+           "Modificación de alerta inexistente". 
+           03 pic x(11) value "18 0000000 ".
+           03 pic x(59) value
+           "Eliminación de alerta inexistente". 
       *----------------- insertar nuevos items aqui -------------------
            03 pic x(11) value "00 0000000 ".
            03 pic x(59) value "--- fin de la lista (cod 00) ---".
@@ -491,7 +497,7 @@
                call "PONERR" using "01" JURAD-reg E-errores
            end-if
 
-      *    si es el registro "T" hay que senialar el fin de proceso
+      *    si es el registro "T" hay que señalar el fin de proceso
            if JURAD-tipo-novedad = "T"
                move "SI" to IND-fin-proceso
                perform 4800-PROCESO-REG-T
@@ -717,6 +723,7 @@
                display JURAD-reg
                display "Datos en la alerta: " INF-DATAHOST-BDIIALE
                add 1 to N-ale-no-existe
+               call "PONERR" using "17" JURAD-reg E-errores
            end-if
       *    reemplaza la fecha de reporte y los valores
            move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE
@@ -745,6 +752,7 @@
                display "Registro de input: "
                display JURAD-reg
                add 1 to N-ale-no-existe
+               call "PONERR" using "18" JURAD-reg E-errores
            end-if.
       *    display "4300-MODIFICAR-BDIIALE-E k:" LLAVE-BDIIALE
       *    " fs:" EST-BDIIALE.
@@ -1163,15 +1171,22 @@
       * Close todos los archivos
            close JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.
 
+           display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD
       * Emision de contadores de registros
            display " "
            display "Totales de registros:"
            display " "
+      *    porcentaje registros procesados OK
+           compute N-editp100 rounded = 100.0 * N-reg-OK / N-reg-leidos
+           display N-editp100 "% de registros correctos"
+      *    porcentaje registros inconsistentes
            compute N-editp100 rounded = 100.0 * E-cont-regs-con-error
            / N-reg-leidos
            display N-editp100 "% de registros inconsistentes"
+      *    cantidad de registros leídos (excluído el registro "T")
            move N-reg-leidos to N-edit
            display N-edit "Registros IME en el archivo de entrada"
+      *    cantidad de registros procesados sin error
            move N-reg-OK to N-edit
            display N-edit "Registros procesados sin error"
 
@@ -1184,11 +1199,16 @@
       *    move N-reg-tipo-E-OK to N-edit
       *    display N-edit "Registros tipo E aceptados"
 
+      *    cantidad de registros con error
            move E-cont-regs-con-error to N-reg-con-error
            move N-reg-con-error to N-edit
            display N-edit "Registros con error"
-           move N-ale-borradas to N-edit
-           display N-edit "Alertas borradas previo al refresque total"
+      *    cantidades de alertas afectadas
+           if P-tipo-proceso = "04"
+               move N-ale-borradas to N-edit
+               display N-edit
+               "Alertas borradas previo al refresque total"
+           end-if
            move N-ale-insertadas to N-edit
            display N-edit "Alertas insertadas"
            move N-ale-modificadas to N-edit

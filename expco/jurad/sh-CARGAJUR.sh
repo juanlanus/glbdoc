@@ -13,6 +13,7 @@
 #*          DEFINICION DE VARIABLES Y FUNCIONES
 #*========================================================*
 raya="---------------------------------------------------"
+NOHUP="nohup"
 codsus="000001"
 P_REAL_FALSO="1"
 P_PROCESO="#";
@@ -104,7 +105,7 @@ GetTipoDeProceso()
         then
             echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
         else
-            if [ $P_PROCESO != "01" ] && [ $P_PROCESO != "02" ] && [ $P_PROCESO != "03" ] && [ $P_PROCESO != "04" ] && [ $P_PROCESO != "00" ] 
+            if [ $P_PROCESO != "01" ] && [ $P_PROCESO != "02" ] && [ $P_PROCESO != "03" ] && [ $P_PROCESO != "04" ] && [ $P_PROCESO != "00" ]
             then
                 echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
             else
@@ -166,6 +167,35 @@ GetNombreDelArchivo()
     done
 }
 
+ejecutar_validacion() {
+#*******************************************************************************
+# PESVNO: validación de IDs
+# Valida los registros del archivo .prn y graba archivos .val y .inc, el listado
+# en un archivo -log
+# Los nombres de los archivos están en los parámetros 1 a 4
+#*******************************************************************************
+ echo ">>>>>>>>>>>> ejecutando validación"
+    archivo_prn=$1
+    archivo_val=$2
+    archivo_inc=$3
+    archivo_log=$4
+    echo PESVNO $archivo_prn $archivo_val $archivo_inc 10 2
+    $NOHUP x PESVNO $PESVNO_INPUT $archivo_val $archivo_inc 10 2 >| $archivo_log
+    cantDeRegistrosTotal=$(wc -l < $archivo_prn)
+    cantDeRegistrosVal=$(wc -l < $archivo_val)
+    cantDeRegistrosInc=$(wc -l < $archivo_inc)
+    echo "PESVNO - registros válidos:" $cantDeRegistrosVal " inconsistentes:" $cantDeRegistrosInc " total:" $cantDeRegistrosTotal
+    tail -20 $archivo.log
+    if [[ $cantDeRegistrosTotal -ne $(expr $cantDeRegistrosVal + $cantDeRegistrosInc ) ]]
+    then
+        echo " "
+        echo $raya
+        echo "Las cantidades de registros no cuadran: proceso cancelado"
+        echo $raya
+        # cancelado="1"
+    fi
+}
+
 
 #*========================================================*
 #*                    PROCESO                             *
@@ -191,37 +221,47 @@ then
     exit
 fi
 
-# echo (esto no está refactoreado)
-# echo "+-------------------------------------------------------------+"
-# echo "+-------------------------------------------------------------+"
-# echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
-# fechab=$P_FCORTE
-# echo "+-------------------------------------------------------------+"
-# numeroreg=`wc -l < $P_NombreArchivo archivo`
-# echo
-# echo "+-------------------------------------------------------------+"
-# echo "| Registros iniciales archivo de entrada : " $numeroreg
-# echo "+-------------------------------------------------------------+"
-# cadena00=$archivo.orig
-# cp $P_NombreArchivo $cadena00
-#echo "+-------------------------------------------------------------+"
-#echo "|                 SEGUNDA FASE: PROCESO                       |"
-#echo "+-------------------------------------------------------------+"
+#*******************************************************************************
+# Banner de inicio
+#*******************************************************************************
     echo " "
     echo $raya
     echo " "
     banner CARGAJUR
     echo " "
+    cd $TEMPORALES
+#*******************************************************************************
+# Validación de IDs con PESVNO
+#*******************************************************************************
     echo $raya
+    echo "VALIDACIÓN DE IDs"
+    echo $raya
+    echo " "
+    # arma el archivo .prn con los tipo y números de id, sin el registro "T"
+    PVNO_prn="PVNO$$.prn"
+    grep -v "^T" $P_NombreArchivo | cut -c2-13  >| PVNO_prn
+    PVNO_val="PVNO$$.val"
+    PVNO_inc="PVNO$$.inc"
+    PVNO_log="PVNO$$.log"
+    ejecutar_validacion( PVNO_prn PVNO_val PVNO_inc PVNO_log )
+    # muestra el log del step y lo agrega al del proceso
+    cat $PVNO_log
+    cat $PVNO_log >> $P_NombreArchivo.log
+    echo " "
+
+#*******************************************************************************
+    echo $raya
+    echo "CARGAJUR Carga de los datos de JURAD en BDIIALE"
+    echo $raya
+    echo " "
     echo " Procesando $P_NombreArchivo "
-#   echo "real:" $P_REAL_FALSO " tipo de proceso:" $P_PROCESO
-    nohup x CARGAJUR $P_NombreArchivo $P_REAL_FALSO >| $TEMPORALES/$P_NombreArchivo.log 2>| $TEMPORALES/$P_NombreArchivo.log
+    echo "real:" $P_REAL_FALSO " tipo de proceso:" $P_PROCESO
+    $NOHUP x CARGAJUR $P_NombreArchivo $P_REAL_FALSO >| $P_NombreArchivo.log 2>| $TEMPORALES/$P_NombreArchivo.log
     echo $raya
     echo "             RESULTADOS DEL PROCESO"
     echo " "
-    cat $TEMPORALES/$P_NombreArchivo.log
+    cat $P_NombreArchivo.log
     echo " "
-    cd $TEMPORALES
     echo "Archivos en \$TEMPORALES:"
     ls -lrt $P_NombreArchivo* >> $P_NombreArchivo.log
     ls -lrt $P_NombreArchivo*
@@ -235,4 +275,5 @@ fi
     echo " "
     echo " "
     echo " "
+
 
