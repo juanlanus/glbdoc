@@ -460,7 +460,7 @@ ejecutar_extraccion() {
     # cuenta los registros extraídos
     cantRegsExtraidos=$(wc -l < $archivo_prn)
     echo "Registros extraídos: "$cantRegsExtraidos
-    if [[ $cantRegsExtraidos -eq 0 ]] && cancelado="1"
+    [[ $cantRegsExtraidos -eq 0 ]] && cancelado="1"
 
     TIPO_ARCHIVO="1"  # es un archivo 1-11
 }

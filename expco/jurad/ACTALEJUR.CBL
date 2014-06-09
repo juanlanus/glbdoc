@@ -1,9 +1,9 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID.    ACTALEJUR.
-REMARK*******************************************************************
-REMARK*   PROGRAMA QUE ACTUALIZA EL ARCHIVO DE ALERTAS CON LA INFORMACION
-REMARK*   ENTREGADA POR JURISCOOP 
-REMARK*******************************************************************
+      *******************************************************************
+      *   PROGRAMA QUE ACTUALIZA EL ARCHIVO DE ALERTAS CON LA INFORMACION
+      *   ENTREGADA POR JURISCOOP 
+      *******************************************************************
        AUTHOR.        DATACREDITO.
        DATE-WRITTEN.
        DATE-COMPILED.
@@ -99,12 +99,13 @@ OJO    01 LINEA2-AUX.
           03 FEC-DEMA-VIG-INP-X          PIC X(08).
        01 M-ERRORES.
           03 V-ERR OCCURS 50 TIMES   PIC 9(1).
+
        PROCEDURE DIVISION.
        0000-PROGRAMA-PRINCIPAL.
       ******************************************************************
-REMARK*    PROGRAMA QUE EXTRAE INFORMACION DEL ARCHIVO DE LA REGIS
-REMARK*    EJECUCION : X RMBREGIS 10 1                                  
-REMARK*     MAXIMO HUECO DE 10,MINIMO DE UNO (DEFAULT SI NO SE DA NADA)
+      *    PROGRAMA QUE EXTRAE INFORMACION DEL ARCHIVO DE LA REGIS
+      *    EJECUCION : X RMBREGIS 10 1                                  
+      *     MAXIMO HUECO DE 10,MINIMO DE UNO (DEFAULT SI NO SE DA NADA)
       ******************************************************************
            ACCEPT LINEA FROM COMMAND-LINE.
            UNSTRING LINEA   DELIMITED BY ALL " " INTO
@@ -162,9 +163,10 @@ REMARK*     MAXIMO HUECO DE 10,MINIMO DE UNO (DEFAULT SI NO SE DA NADA)
            ELSE
               DISPLAY "YA EXISTE LA ALERTA"
            END-IF.
+
        1000-PROCESAR-DEMANDAS.   
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            PERFORM 2000-ABRIR-ARCHIVOS.
            READ ENTRADA AT END MOVE 1 TO FIN-ENTRADA.
            PERFORM UNTIL FIN-ENTRADA = 1
@@ -174,17 +176,19 @@ REMARK****************************************************************
              END-READ
            END-PERFORM.
            PERFORM 6000-SACAR-RESUMEN.
+
        2000-ABRIR-ARCHIVOS.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            OPEN INPUT BDIIREGI.
            OPEN INPUT BDIIDIAN.
            OPEN INPUT BDIIDAS.
            OPEN INPUT ENTRADA.
            OPEN OUTPUT SALIDA.
+
        4000-PROCESAR-ENTRADA.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            STRING REG-ENTRADA DELIMITED BY "                  "
                   ";"
            INTO REG-ENTRADA.
@@ -218,9 +222,10 @@ REMARK****************************************************************
               PERFORM 4400-GRABAR-REGISTROS-ERR
               ADD 1 TO CONT-REGISTROS-ERR
            END-IF.
+
        4100-VALIDACIONES-BASICAS.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            INSPECT TIPO-IDE-INP-X     REPLACING ALL " " BY "0"
            INSPECT NUM-IDE-INP-X      REPLACING ALL " " BY "0"
            INSPECT NUM-DEMA-VIG-INP-X REPLACING ALL " " BY "0"
@@ -269,9 +274,10 @@ REMARK****************************************************************
            IF NUM-DEMA-TER-INP = ZEROS AND NUM-DEMA-VIG-INP = ZEROS
               MOVE 1 TO V-ERR(22)
            END-IF.
+
        4200-VALIDACION-OFICIALES.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE TIPO-IDE-INP    TO TIP-IDE-BDIIVIDE.
            MOVE NUM-IDE-INP     TO NUM-IDE-BDIIVIDE.
            MOVE SPACES TO NOMBRE-BDIIVIDE.
@@ -289,47 +295,50 @@ OJO        IF SW-ID-BDIIVIDE = 0    *> EXISTE LA CEDULA
                  MOVE 1 TO V-ERR(31)
               END-IF
            END-IF.
+
        4300-MODIFICAR-BDIIALE.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE TIPO-IDE-INP    TO TIP-IDE-BDIIALE.   
            MOVE NUM-IDE-INP     TO NUM-IDE-BDIIALE.   
            MOVE 000001          TO FUENTE-BDIIALE
            MOVE 001             TO COD-ALERTA-BDIIALE
            MOVE "a"             TO LLASEC-BDIIALE.
            MOVE 1 TO HAY-BDIIALE.
-           READ BDIIALE
-                INVALID KEY 
-                  MOVE 0 TO HAY-BDIIALE
+           READ BDIIALE INVALID KEY 
+               MOVE 0 TO HAY-BDIIALE
            END-READ.
            PERFORM 4310-CALCULAR-FECHAS.
            PERFORM 4320-ARMAR-TEXTO-ALERTA.
            IF HAY-BDIIALE = 0
-              PERFORM 4330-CREAR-BDIIALE
+               PERFORM 4330-CREAR-BDIIALE
            ELSE
-              PERFORM 4340-ACTUALIZAR-BDIIALE
+               PERFORM 4340-ACTUALIZAR-BDIIALE
            END-IF.
+
        4310-CALCULAR-FECHAS.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE FUNCTION CURRENT-DATE (1:8) TO FECHA-PROCESO 
            MOVE FUNCTION INTEGER-OF-DATE (FECHA-PROCESO)     
-                                            TO DIAS-DESDE-1600                        
-OJO        ADD  360                         TO DIAS-DESDE-1600                
+                                            TO DIAS-DESDE-1600
+OJO        ADD  360                         TO DIAS-DESDE-1600
            MOVE FUNCTION DATE-OF-INTEGER (DIAS-DESDE-1600)      
                                             TO FECHA-VENCIMIENTO.
+
        4320-ARMAR-TEXTO-ALERTA.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE NUM-DEMA-VIG-INP            TO NUM-DEMA-VIG-AUX
                                                NUM-VIG-1
            MOVE NUM-DEMA-TER-INP            TO NUM-DEMA-TER-AUX
                                                NUM-TER-2
            MOVE FEC-DEMA-VIG-INP            TO FEC-DEMA-VIG-AUX
                                                FEC-VIG-1.
+
        4330-CREAR-BDIIALE.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE FECHA-PROCESO              TO FEC-NOV-BDIIALE
                                               FEC-REP-BDIIALE.
            MOVE FECHA-VENCIMIENTO          TO FEC-VEN-BDIIALE.
@@ -348,36 +357,38 @@ REMARK****************************************************************
            ELSE
               ADD 1 TO CONT-WRITE-OK   
            END-IF.
+
        4340-ACTUALIZAR-BDIIALE.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE FECHA-PROCESO              TO FEC-NOV-BDIIALE.
            MOVE FECHA-VENCIMIENTO          TO FEC-VEN-BDIIALE.
            MOVE INF-DATAHOST-AUX           TO INF-DATAHOST-BDIIALE.
            MOVE LINEA1-AUX                 TO LINEA1-BDIIALE
            MOVE LINEA2-AUX                 TO LINEA2-BDIIALE.
            IF REAL = 1
-              REWRITE REG-BDIIALE
-                 INVALID KEY
-                   ADD 1 TO CONT-REWRITE-ERR
-                 NOT INVALID KEY
-                   ADD 1 TO CONT-REWRITE-OK   
+              REWRITE REG-BDIIALE INVALID KEY
+                  ADD 1 TO CONT-REWRITE-ERR
+              NOT INVALID KEY
+                  ADD 1 TO CONT-REWRITE-OK   
               END-REWRITE
            ELSE
               ADD 1 TO CONT-REWRITE-OK   
            END-IF.
+
        4400-GRABAR-REGISTROS-ERR.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
            MOVE M-ERRORES   TO ERRORES-SALIDA.   
            MOVE ";"         TO FILLER-SALIDA. 
            MOVE REG-ENTRADA TO REGISTRO-SALIDA.
            WRITE REG-SALIDA.
+
        6000-SACAR-RESUMEN.
-REMARK****************************************************************
-REMARK****************************************************************
+      ****************************************************************
+      ****************************************************************
           DISPLAY "==============[ RESUMEN DEL PROCESO ]============"
-          DISPLAY "TIPO DE PROCESO             = "   COMANDO(1:10)
+          DISPLAY "TIPO DE PROCESO             = " COMANDO(1:10)
           DISPLAY "DEMANDADOS LEIDOS           = " CONT-LEIDOS  
           DISPLAY "  DEMANDADOS VALIDOS        = " CONT-REGISTROS-OK 
           DISPLAY "    DEMANDADOS CREADOS      = " CONT-WRITE-OK   
@@ -386,5 +397,6 @@ REMARK****************************************************************
           DISPLAY "    DEMANDADOS ERR ACTUALIZ = " CONT-REWRITE-ERR 
           DISPLAY "  DEMANDADOS NO VALIDOS     = " CONT-REGISTROS-ERR 
           DISPLAY "=================================================".
+
        COPY BDIIVIDE.PROC.
        COPY VALNOM.PROC. 

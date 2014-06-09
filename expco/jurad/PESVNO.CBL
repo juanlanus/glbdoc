@@ -5,8 +5,8 @@
        AUTHOR. DATACREDITO.
        DATE-WRITTEN. MAYO/2001.
        DATE-COMPILED.
-      ******************************************************************
-      * PROGRAMA PARA VALIDACION DE CEDULAS, NITS Y CEDULAS DE         *
+      *****************************************************************
+      * PROGRAMA PARA VALIDACION DE CEDULAS, NITS Y CEDULAS DE        *
       * EXTRANJERIA.
       *
       * Programa: PESVNOCSV.CBL   BASE ==> $DATABASE/BDACSV
@@ -181,7 +181,8 @@ PAM372     03 FILLER6                   PIC X VALUE ";".
 PAM372     03 FILLER7                   PIC X VALUE ";".
            03 VIG-INC                   PIC X(02).
 PAM372     03 FILLER8                   PIC X VALUE ";".
-           03 CODERR-INC                PIC 9(02).
+      *    siempre se le asigna el mismo valos que a CODIGO-ERROR
+           03 CODERR-INC                PIC 99.
 PAM372     03 FILLER9                   PIC X VALUE ";".
            03 FILLER-2-INC              PIC X(60).
 
@@ -196,7 +197,7 @@ CQ6271 COPY LOGPESVNO.WS.
              05 W-LINEAS-NOM-ENT        PIC X(30) VALUE SPACES.
              05 FILLER                  PIC X(30)
              VALUE " | awk '{ print ($1) }'".
-          03 FILLER                     PIC X(01) VALUE LOW-VALUE.
+          03 FILLER                     PIC X VALUE LOW-VALUE.
        01 W-COMANDO-SORT.
           03 FILLER                     PIC X(13) VALUE "sort -u ".
           03 ENTRADA-SORT.
@@ -206,89 +207,151 @@ CQ6271 COPY LOGPESVNO.WS.
           03 SALIDA-SORT.
              05 FILLER                  PIC X(12) VALUE "$TEMPORALES/".
              05 W-SORT-NOM-SAL          PIC X(30) VALUE SPACES.
-          03 FILLER                     PIC X(01) VALUE LOW-VALUE.
+          03 FILLER                     PIC X VALUE LOW-VALUE.
       *--------------------------------------------------------------*
        01  W-ENTRADA.
-           03 W-ENT-DIRECTORIO      PIC X(12) VALUE "$TEMPORALES/".
-           03 W-ENT-NOMBRE          PIC X(30) VALUE SPACES.
+           03 W-ENT-DIRECTORIO          PIC X(12) VALUE "$TEMPORALES/".
+           03 W-ENT-NOMBRE              PIC X(30) VALUE SPACES.
        01  W-VALIDAS.
-           03 W-VAL-DIRECTORIO      PIC X(12) VALUE "$TEMPORALES/".
-           03 W-VAL-NOMBRE          PIC X(30) VALUE SPACES.
+           03 W-VAL-DIRECTORIO          PIC X(12) VALUE "$TEMPORALES/".
+           03 W-VAL-NOMBRE              PIC X(30) VALUE SPACES.
        01  W-INVALIDAS.
-           03 W-INVAL-DIRECTORIO    PIC X(12) VALUE "$TEMPORALES/".
-           03 W-INVAL-NOMBRE        PIC X(30) VALUE SPACES.
+           03 W-INVAL-DIRECTORIO        PIC X(12) VALUE "$TEMPORALES/".
+           03 W-INVAL-NOMBRE            PIC X(30) VALUE SPACES.
 PJV011 01  W-VALIDAS-REP.
-PJV011     03 W-VAL-DIRECTORIO      PIC X(12) VALUE "$TEMPORALES/".
-PJV011     03 W-VAL-NOMBRE-REP      PIC X(30) VALUE SPACES.
+PJV011     03 W-VAL-DIRECTORIO          PIC X(12) VALUE "$TEMPORALES/".
+PJV011     03 W-VAL-NOMBRE-REP          PIC X(30) VALUE SPACES.
 
+      * Datos para detectar IDs repetidos: se guarda el último grabado
 PJV011 01  W-KEYVAL-GRA.
-PJV011     03 TIP-KEYVAL            PIC 9(01) VALUE ZEROS.
-PJV011     03 NUM-KEYVAL            PIC 9(11) VALUE ZEROS.
-PJV011     03 SN-VALREP             PIC X(01) VALUE SPACES.
+PJV011     03 TIP-KEYVAL                PIC 9 VALUE ZEROS.
+PJV011     03 NUM-KEYVAL                PIC 9(11) VALUE ZEROS.
+PJV011     03 SN-VALREP                 PIC X VALUE SPACES.
 
-       01  W-PARAMETROS             PIC X(94) VALUE SPACES.
-       01  W-TARIFA                 PIC 9(04) VALUE ZEROS.
-       01  W-BLOQUES                PIC 9(01) VALUE ZEROS.
-       01  SW-BDIIALE               PIC 9(01) VALUE ZEROS.
-       01  W-DERECHOS               PIC 9     VALUE ZEROS.
-       01  OPEN-DIR                 PIC 9     VALUE ZEROS.
-       01  FIN-ENTRADA              PIC 9     VALUE 0.
-       01  FINS                     PIC 9     VALUE 0.
-       01  LLAVE7                   PIC 9(8)  VALUE ZEROS.
-       01  LLAVE7-R  REDEFINES LLAVE7.
-           03 LLAVE7-1D             PIC 9.
-           03 LLAVE7-FILLER         PIC 9(7).
-       01  TOPE-INI-LLAVE7          PIC 9(8)  VALUE 20000000.
+      * Parámetros de la línea de comando
+       01  W-PARAMETROS                 PIC X(94) VALUE SPACES.
+      *    tarifa para facturación (de la línea de comando)
+       01  W-TARIFA                     PIC 9(04) VALUE ZEROS.
+      *    cant de bloques del texto del nombre (de la línea de comando)
+       01  W-BLOQUES                    PIC 9 VALUE ZERO.
+       01  SW-BDIIALE                   PIC 9 VALUE ZERO.
+       01  W-DERECHOS                   PIC 9 VALUE ZERO.
+       01  OPEN-DIR                     PIC 9 VALUE ZERO.
+       01  FIN-ENTRADA                  PIC 9 VALUE 0.
+       01  FINS                         PIC 9 VALUE 0.
+       01  LLAVE7                       PIC 9(8) VALUE ZERO.
+       01  LLAVE7-R                     REDEFINES LLAVE7.
+           03 LLAVE7-1D                 PIC 9.
+           03 LLAVE7-FILLER             PIC 9(7).
+       01  TOPE-INI-LLAVE7              PIC 9(8) VALUE 20000000.
        01  FECHA-PROC.
            03 ANO-HOY.
-              05 SIG-PROC           PIC X(2).
-              05 ANO-PROC           PIC X(2).
-           03 MES-PROC              PIC X(2).
-           03 DIA-PROC              PIC X(2).
-       01  FECHA-PROC-R  REDEFINES FECHA-PROC
-                                    PIC X(8).
+              05 SIG-PROC               PIC X(2).
+              05 ANO-PROC               PIC X(2).
+           03 MES-PROC                  PIC X(2).
+           03 DIA-PROC                  PIC X(2).
+       01  FECHA-PROC-R                 REDEFINES FECHA-PROC
+                                        PIC X(8).
        01  FECHA-AUX.
-           03 DIA-AUX                   PIC 9(2).
-           03 MES-AUX                   PIC 9(2).
-           03 ANO-AUX                   PIC 9(2).
-       01  FECHA-AUX-R  REDEFINES FECHA-AUX
+           03 DIA-AUX                   PIC 99.
+           03 MES-AUX                   PIC 99.
+           03 ANO-AUX                   PIC 99.
+       01  FECHA-AUX-R                  REDEFINES FECHA-AUX
                                         PIC 9(6).
        01  TIEMPO-SIS.
-           03 HORA-SIS                  PIC 9(02).
-           03 MIN-SIS                   PIC 9(02).
-           03 FILLER                    PIC 9(04).
+           03 HORA-SIS                  PIC 99.
+           03 MIN-SIS                   PIC 99.
+           03 FILLER                    PIC 99.
        01  TIEMPO-SIS-R  REDEFINES TIEMPO-SIS
                                         PIC 9(08).
        01  TIEMPO-W                     PIC 9(8).
        01  W-CONTADORES.
-           03  W-CONT-TIPO-5            PIC 9(06) VALUE ZEROS.
-           03  W-CONT-TIPO-6            PIC 9(06) VALUE ZEROS.
-           03  W-CONT-TIPO-7            PIC 9(06) VALUE ZEROS.
-CQ6271     03  W-CONT-TIPO-5-PJ         PIC 9(06) VALUE ZEROS.
-PJV011     03  W-CONT-TIPO-5-REP        PIC 9(06) VALUE ZEROS.
+           03  W-CONT-TIPO-5            PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-6            PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-7            PIC 9(6) VALUE ZEROS.
+CQ6271     03  W-CONT-TIPO-5-PJ         PIC 9(6) VALUE ZEROS.
+PJV011     03  W-CONT-TIPO-5-REP        PIC 9(6) VALUE ZEROS.
       *
-       01  SUSCRIPTOR-AUX               PIC 9(06).
-       01  REG-LEIDOS                   PIC 9(07) VALUE ZEROS.
-R7094B 01  CONT-FALLECIDOS              PIC 9(07) VALUE ZEROS.
-       01  REG-CORRECTOS                PIC 9(07) VALUE ZEROS.
-PJV011 01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
-       01  NO-COINCIDE-DIAN             PIC 9(07) VALUE ZEROS.
-       01  NO-COINCIDE-REGIS            PIC 9(07) VALUE ZEROS.
-       01  NO-EXISTE-DIAN               PIC 9(07) VALUE ZEROS.
-       01  NO-EXISTE-REGIS              PIC 9(07) VALUE ZEROS.
-       01  SI-EXISTE-CSV                PIC 9(07) VALUE ZEROS.
-       01  TIPO-ID-INVALIDO             PIC 9(07) VALUE ZEROS.
+       01  SUSCRIPTOR-AUX               PIC 9(6).
+       01  REG-LEIDOS                   PIC 9(7) VALUE ZEROS.
+R7094B 01  CONT-FALLECIDOS              PIC 9(7) VALUE ZEROS.
+       01  REG-CORRECTOS                PIC 9(7) VALUE ZEROS.
+PJV011 01  REG-CORRECTOS-R              PIC 9(7) VALUE ZEROS.
+       01  NO-COINCIDE-DIAN             PIC 9(7) VALUE ZEROS.
+       01  NO-COINCIDE-REGIS            PIC 9(7) VALUE ZEROS.
+      * contador de registros con error 03 - 
+       01  NO-EXISTE-DIAN               PIC 9(7) VALUE ZEROS.
+       01  NO-EXISTE-REGIS              PIC 9(7) VALUE ZEROS.
+      * (no se usa)
+       01  SI-EXISTE-CSV                PIC 9(7) VALUE ZEROS.
+      * contador de registros con error 05 - tipo id inválido
+       01  TIPO-ID-INVALIDO             PIC 9(7) VALUE ZEROS.
        01  NIT-BUENO                    PIC 9.
        01  NUM-ID-W                     PIC 9(11).
       *-----------------------------------------------------------------
        COPY  ICFILE.WS.
        COPY  BDIIALE.WS.
        COPY  DEPTOS.WS.
-       COPY  BDIIVIDE.WS.
+      ******************************************************************
+      *COPY  BDIIVIDE.WS.
+      *BDIIVIDE.WS.v03.0003.
+      * Variables para rutina 80100-VALIDAR-IDENTIFICACION de validación
+      * de identificaciones
+      *----------------------------------------------------------------*
+      * F.CUADROS   * INCLUSION DE PARAMETRO PARA ASIGNAR TIPO DE
+      * JUN.17/2004 * IDENTIFICACION DE ACUERDO A RANGOS PERMITIDOS.
+      * FAC0002     * NUIP01 * ESTO SI NO VIENE CORRECTO EL TIPO-ID.
+      *----------------------------------------------------------------*
+      * F.CUADROS   * INCLUSION DE VALIDACION PARA TIPO-ID. = 2 y
+      * JUL.19/2004 * QUITAR EL DIGITO DE CHEQUEO SI ES EL CASO.
+      * FAC0003     *
+      *----------------------------------------------------------------*
+       01  NUM-ID-W-BDIIVIDE.
+NUIP02     03 NUM-ID-W11-BDIIVIDE       PIC 9(11) VALUE ZEROS.
+NUIP02     03 NUM-ID-W11-R-BDIIVIDE     REDEFINES NUM-ID-W11-BDIIVIDE.
+NUIP02         05 NUM-ID-W10-BDIIVIDE   PIC 9(10).
+NUIP02         05 RESTO-NUM-ID-BDIIVIDE PIC 9.
+       01  NOMBRES-AUX-W-BDIIVIDE.
+           03 PRIMER-APELLIDO-BDIIVIDE  PIC X(15) VALUE SPACES.
+           03 SEGUNDO-APELLIDO-BDIIVIDE PIC X(15) VALUE SPACES.
+           03 PRIMER-NOMBRE-BDIIVIDE    PIC X(15) VALUE SPACES.
+           03 SEGUNDO-NOMBRE-BDIIVIDE   PIC X(15) VALUE SPACES.
+           03 NOM-LEIDO-BDIIVIDE        PIC X(65) VALUE SPACES.
+
+NUIP01 01 PARAMETROS-ENTRADA-BDIIVIDE   PIC X(100) VALUE SPACES.
+       01 PARAMETROS-ENTRADA-R-BDIIVIDE REDEFINES
+                                        PARAMETROS-ENTRADA-BDIIVIDE.
+           03 TIP-IDE-BDIIVIDE          PIC X.
+           03 NUM-IDE-BDIIVIDE          PIC X(11) JUSTIFIED RIGHT.
+NUIP01     03 NUM-IDE-BDIIVIDE-R        REDEFINES NUM-IDE-BDIIVIDE
+NUIP01                                  PIC 9(11).
+           03 NOMBRE-BDIIVIDE           PIC X(65).
+           03 SW-VERIFNOM-BDIIVIDE      PIC 9.
+           03 NUM-BLOQUES-BDIIVIDE      PIC 9.
+NUIP01     03 SW-VALTIPID-BDIIVIDE      PIC 9.
+NUIP01     03 SW-ASGTIPID-BDIIVIDE      PIC 9.
+NUIP02     03 SW-DIGCHEQUEO-BDIIVIDE    PIC 9.
+NUIP02     03 FILLER-BDIIVIDE           PIC X(18).
+
+       01 PARAMETROS-SALIDA-BDIIVIDE.
+      *    nombre validado
+           03 NOM-VAL-BDIIVIDE          PIC X(65) VALUE SPACES.
+      *    1 = error en número de id
+           03 SW-ID-BDIIVIDE            PIC 9 VALUE 0.
+      *    1 = error en el nombre
+           03 SW-NOMBRES-BDIIVIDE       PIC 9 VALUE 0.
+      *    1 = error en tipo de id
+NUIP01     03 SW-TID-BDIIVIDE           PIC 9 VALUE 0.
+      ******************************************************************
+
+
        COPY  BDLDIR.WS.
        COPY  LEEMAESTROS.WS.
       *-----------------------------------------------------------------
-      * 05=tipo id no 1|2|3|4
+      * Los significados de los cod de error son dudosos:
+      * CODIGO-ERROR: 00=OK  03=NIT no figura 
+      * 04=cédula no figura en base alterna
+      * 01=nombre no coincide  05=tipo id no 1|2|3|4
        01  CODIGO-ERROR                 PIC 9(02) VALUE ZERO.
        01  PRIMER-APELLIDO              PIC X(16) VALUE SPACES.
        01  SEGUNDO-APELLIDO             PIC X(16) VALUE SPACES.
@@ -315,14 +378,14 @@ PJV011 01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
            03 JJ                        PIC 9(02) VALUE ZERO.
       *-----------------------------------------------------------------
        01  W-VARIABLES.
-           03 W-ANO-ACTUAL                PIC 9(04) VALUE ZEROS.
-           03 W-EDAD-CEDULA               PIC 9(03) VALUE ZEROS.
-           03 W-FEC-EXPE                  PIC 9(08) VALUE ZEROS.
-           03 W-FEC-EXPE-R REDEFINES W-FEC-EXPE.
-              05 W-ANO-EXPE               PIC 9(04).
-              05 W-MES-EXPE               PIC 9(02).
-              05 W-DIA-EXPE               PIC 9(02).
-           03 WS-EDAD                     PIC 9(03).
+           03 W-ANO-ACTUAL              PIC 9(04) VALUE ZEROS.
+           03 W-EDAD-CEDULA             PIC 9(03) VALUE ZEROS.
+           03 W-FEC-EXPE                PIC 9(08) VALUE ZEROS.
+           03 W-FEC-EXPE-R              REDEFINES W-FEC-EXPE.
+              05 W-ANO-EXPE             PIC 9(04).
+              05 W-MES-EXPE             PIC 9(02).
+              05 W-DIA-EXPE             PIC 9(02).
+           03 WS-EDAD                   PIC 9(03).
       *-----------------------------------------------------------------
        01  VEC-MAESTRO.
            03 LETRA-MAESTRO             PIC X  OCCURS 65 TIMES.
@@ -342,86 +405,86 @@ PJV011 01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
            03 LIM-INF-UNO               PIC 99  OCCURS 44 TIMES.
            03 LIM-SUP-UNO               PIC 99  OCCURS 44 TIMES.
        01  TITULO-1.
-           03 FILLER                   PIC X(55) VALUE SPACES.
-           03 FILLER                   PIC X(21) VALUE
+           03 FILLER                    PIC X(55) VALUE SPACES.
+           03 FILLER                    PIC X(21) VALUE
              "D A T A C R E D I T O".
-           03 FILLER                   PIC X(33) VALUE SPACES.
-           03 DIA-T1                   PIC X(02).
-           03 FILLER                   PIC X     VALUE "/".
-           03 MES-T1                   PIC X(02).
-           03 FILLER                   PIC X     VALUE "/".
-           03 SIG-T1                   PIC X(02).
-           03 ANO-T1                   PIC X(02).
-           03 FILLER                   PIC X(13) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE SPACES.
+           03 DIA-T1                    PIC X(02).
+           03 FILLER                    PIC X     VALUE "/".
+           03 MES-T1                    PIC X(02).
+           03 FILLER                    PIC X     VALUE "/".
+           03 SIG-T1                    PIC X(02).
+           03 ANO-T1                    PIC X(02).
+           03 FILLER                    PIC X(13) VALUE SPACES.
        01  TITULO-2.
-           03 FILLER                   PIC X(10) VALUE " PESVNOCSV".
-           03 FILLER                   PIC X(41) VALUE SPACES.
-           03 FILLER                   PIC X(37) VALUE
+           03 FILLER                    PIC X(10) VALUE " PESVNOCSV".
+           03 FILLER                    PIC X(41) VALUE SPACES.
+           03 FILLER                    PIC X(37) VALUE
              "ESTADISTICAS DE VALIDACION DE CEDULAS".
-           03 FILLER                   PIC X(24) VALUE SPACES.
-           03 HORA-T2                  PIC 9(02).
-           03 FILLER                   PIC X     VALUE ":".
-           03 MIN-T2                   PIC 9(02).
-           03 FILLER                   PIC X(06) VALUE SPACES.
-           03 FILLER                   PIC X(06) VALUE "SUSC: ".
-           03 SUSCRIPTOR-T2            PIC 9(06).
-       01  RAYAS                       PIC X(132) VALUE ALL "-".
+           03 FILLER                    PIC X(24) VALUE SPACES.
+           03 HORA-T2                   PIC 9(02).
+           03 FILLER                    PIC X     VALUE ":".
+           03 MIN-T2                    PIC 9(02).
+           03 FILLER                    PIC X(06) VALUE SPACES.
+           03 FILLER                    PIC X(06) VALUE "SUSC: ".
+           03 SUSCRIPTOR-T2             PIC 9(06).
+       01  RAYAS                        PIC X(132) VALUE ALL "-".
        01  LINEA-1.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(32) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(32) VALUE
              "REGISTROS LEIDOS:               ".
-           03 REG-LEIDOS-L1            PIC ZZ,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 REG-LEIDOS-L1             PIC ZZ,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-2.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "REGISTROS CORRECTOS:             ".
-           03 REG-CORRECTOS-L2         PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 REG-CORRECTOS-L2          PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-3.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "NO COINCIDEN CON DIAN O DAS:     ".
-           03 NO-COINCIDE-DIAN-L3      PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 NO-COINCIDE-DIAN-L3       PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-4.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "NO COINCIDEN CON REGISTARDURIA:  ".
-           03 NO-COINCIDE-REGIS-L4     PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 NO-COINCIDE-REGIS-L4      PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-5.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "NO EXISTEN EN DIAN O DAS:        ".
-           03 NO-EXISTE-DIAN-L5        PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 NO-EXISTE-DIAN-L5         PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-6.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "NO EXISTEN EN REGISTRADURIA:     ".
-           03 NO-EXISTE-REGIS-L6       PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
+           03 NO-EXISTE-REGIS-L6        PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
        01  LINEA-7.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-           03 FILLER                   PIC X(33) VALUE
+           03 FILLER                    PIC X(45) VALUE SPACES.
+           03 FILLER                    PIC X(33) VALUE
              "TIPO IDENTIFICACION INVALIDO:    ".
-           03 TIPO-ID-INVALIDO-L7      PIC Z,ZZZ,ZZ9.
-           03 FILLER                   PIC X(45) VALUE SPACES.
-       01  FECHA-2000                  PIC 9(8).
+           03 TIPO-ID-INVALIDO-L7       PIC Z,ZZZ,ZZ9.
+           03 FILLER                    PIC X(45) VALUE SPACES.
+       01  FECHA-2000                   PIC 9(8).
        01  FECHA-2000-R  REDEFINES FECHA-2000.
-           03 ANO-2000-R               PIC 9(4).
-           03 MES-2000-R               PIC 9(2).
-           03 DIA-2000-R               PIC 9(2).
+           03 ANO-2000-R                PIC 9(4).
+           03 MES-2000-R                PIC 9(2).
+           03 DIA-2000-R                PIC 9(2).
       *-----------------------------------------------------------------
-       01  HACER-MATCH                 PIC  9(01).
-       01  CADENA-ENTRA                PIC  X(60).
-       01  CADENA-SALE                 PIC  X(60).
-       01  IND-ALFABETICO              PIC  X(01).
-           88 SI-ALFABETICO            VALUE " " "A" "B" "C" "D" "E" 
-                                       "F" "G" "H" "I" "J" "K" "L" "M"
-                                       "N" "/" "O" "P" "Q" "R" "S" "T"
-                                       "U" "V" "W" "X" "Y" "Z" "".
+       01  HACER-MATCH                  PIC  9.
+       01  CADENA-ENTRA                 PIC  X(60).
+       01  CADENA-SALE                  PIC  X(60).
+       01  IND-ALFABETICO               PIC  X(01).
+           88 SI-ALFABETICO             VALUE " " "A" "B" "C" "D" "E" 
+                                        "F" "G" "H" "I" "J" "K" "L" "M"
+                                        "N" "/" "O" "P" "Q" "R" "S" "T"
+                                        "U" "V" "W" "X" "Y" "Z" "".
 
            Este COPY no estaba: VALNOM.WS
 ******* VALNOM-WS.v.0002
@@ -432,51 +495,51 @@ REMARK* GJC0002    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
 REMARK* G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
 REMARK* MARZO/2003 *
 REMARK*************************************************************************
-        01 VARIABLES-VALNOM.
+       01 VARIABLES-VALNOM.
            03 VECTOR-INPUT-VALNOM.
-             04 VM-INPUT-VALNOM     OCCURS 20 TIMES .
-                05 VMM-INPUT-VALNOM OCCURS 15 TIMES PIC X.
+               04 VM-INPUT-VALNOM       OCCURS 20 TIMES.
+                   05 VMM-INPUT-VALNOM  OCCURS 15 TIMES PIC X.
            03 VECTOR-OK-VALNOM.
-             04 VM-OK-VALNOM         OCCURS 20 TIMES.
-                05 VMM-OK-VALNOM    OCCURS 15 TIMES PIC X.
-           03 BLOQOK-AUX-VALNOM           PIC 9(2).
+               04 VM-OK-VALNOM          OCCURS 20 TIMES.
+                   05 VMM-OK-VALNOM     OCCURS 15 TIMES PIC X.
+           03 BLOQOK-AUX-VALNOM         PIC 9(2).
            03 CADENA-VALNOM.
-              04 FILLER                   PIC X(2) VALUE "A ".
-              04 NOMBRE-AUX-VALNOM        PIC X(65).
-              04 FILLER REDEFINES NOMBRE-AUX-VALNOM.
-                 05 VNOM-AUX-VALNOM OCCURS 65 TIMES PIC X.
-           03 BASURA-VALNOM               PIC X(10).
-           03 BLOQUES-INPUT-VALNOM        PIC 9(2).
-           03 NOMBRE-INPUT-VALNOM         PIC X(65).
+               04 FILLER                PIC X(2) VALUE "A ".
+               04 NOMBRE-AUX-VALNOM     PIC X(65).
+               04 FILLER REDEFINES NOMBRE-AUX-VALNOM.
+                   05 VNOM-AUX-VALNOM OCCURS 65 TIMES PIC X.
+           03 BASURA-VALNOM             PIC X(10).
+           03 BLOQUES-INPUT-VALNOM      PIC 9(2).
+           03 NOMBRE-INPUT-VALNOM       PIC X(65).
            03 FILLER REDEFINES NOMBRE-INPUT-VALNOM.
-              05 V-NOMBRE-VALNOM          PIC X OCCURS 65 TIMES.
-           03 NOMBOK-INPUT-VALNOM         PIC X(65).
+               05 V-NOMBRE-VALNOM       PIC X OCCURS 65 TIMES.
+           03 NOMBOK-INPUT-VALNOM       PIC X(65).
            03 FILLER REDEFINES NOMBOK-INPUT-VALNOM.
-              05 V-NOMBOK-VALNOM          PIC X OCCURS 65 TIMES.
-           03 TIP-ID-INPUT-VALNOM         PIC 9(02).
-           03 MATCH-OK-OUT-VALNOM         PIC 9(01).
-           03 A-VALNOM                    PIC 9(05).
-VALMEJ     03 I-VALNOM                    PIC 9(05).                    GJC0002
-VALMEJ     03 J-VALNOM                    PIC 9(05).                    GJC0002
-VALMEJ     03 K-VALNOM                    PIC 9(05).                    GJC0002
-VALMEJ     03 L-VALNOM                    PIC 9(05).                    GJC0002
-VALMEJ     03 M-VALNOM                    PIC 9(05).                    GJC0002
-           03 INI-VALNOM                  PIC 9(02).
-           03 LON-VALNOM                  PIC 9(02).
-           03 LETRAS-OK-VALNOM            PIC 9(02).
-           03 LETRAS-OK2-VALNOM           PIC 9(02).
-           03 TOTLET-OK-VALNOM            PIC 9(02).
-           03 TOTLET-INP-VALNOM           PIC 9(02).
-           03 PEDAZO-VALNOM               PIC X(15).
-           03 POR-TOT-VALNOM              PIC 9(05).
-           03 POR-INP-VALNOM              PIC 9(05).
-           03 APROX-TOT-VALNOM            PIC 9(05).
-           03 APROX-INP-VALNOM            PIC 9(05).
-VALMEJ     03 VECTORES-VALNOM.                                          GJC0002
-VALMEJ        04 FILLER                   OCCURS 256 TIMES.             GJC0002
-VALMEJ           05 CONT-LET-INPUT-VALNOM PIC 9(2).                     GJC0002
-VALMEJ           05 CONT-LET-OK-VALNOM    PIC 9(2).                     GJC0002
-VALMEJ     03 VAL-APELLIDO-VALNOM         PIC 9.                        GJC0002
+               05 V-NOMBOK-VALNOM       PIC X OCCURS 65 TIMES.
+           03 TIP-ID-INPUT-VALNOM       PIC 99.
+           03 MATCH-OK-OUT-VALNOM       PIC 9.
+           03 A-VALNOM                  PIC 9(5).
+VALMEJ     03 I-VALNOM                  PIC 9(5).                       
+VALMEJ     03 J-VALNOM                  PIC 9(5).                       
+VALMEJ     03 K-VALNOM                  PIC 9(5).                       
+VALMEJ     03 L-VALNOM                  PIC 9(5).                       
+VALMEJ     03 M-VALNOM                  PIC 9(5).                       
+           03 INI-VALNOM                PIC 99.
+           03 LON-VALNOM                PIC 99.
+           03 LETRAS-OK-VALNOM          PIC 99.
+           03 LETRAS-OK2-VALNOM         PIC 99.
+           03 TOTLET-OK-VALNOM          PIC 99.
+           03 TOTLET-INP-VALNOM         PIC 99.
+           03 PEDAZO-VALNOM             PIC X(15).
+           03 POR-TOT-VALNOM            PIC 9(5).
+           03 POR-INP-VALNOM            PIC 9(5).
+           03 APROX-TOT-VALNOM          PIC 9(5).
+           03 APROX-INP-VALNOM          PIC 9(5).
+VALMEJ     03 VECTORES-VALNOM.                                          
+VALMEJ         04 FILLER                OCCURS 256 TIMES.               
+VALMEJ             05 CONT-LET-INPUT-VALNOM PIC 9(2).                   
+VALMEJ             05 CONT-LET-OK-VALNOM PIC 9(2).                      
+VALMEJ     03 VAL-APELLIDO-VALNOM       PIC 9.                          
 
 
 
@@ -497,401 +560,299 @@ CQ6271 COPY LOGPESVNO.LKG.
       ******************************************************************
        100-PROGRAMA-PRINCIPAL.
            PERFORM 150-ABRIR-ARCHIVOS
-           READ ENTRADA
-                AT END
-                      MOVE 1 TO FIN-ENTRADA
-                NOT AT END
-                      INSPECT NUMID-X-E REPLACING ALL " " BY "0"
-                      INSPECT TIPOID-X-E REPLACING ALL "0" BY "1"
-           END-READ
-R7094A     IF NOMBRE-E = "VALIDAR=NO" AND FIN-ENTRADA = 0
-R7094A        MOVE 0 TO W-BLOQUES
-R7094A        DISPLAY "Registro  control==> 000001 (VALIDAR=NO)"
-R7094A        MOVE 0 TO W-BLOQUES
-R7094A        READ ENTRADA
-R7094A          AT END
-R7094A                MOVE 1 TO FIN-ENTRADA
-R7094A          NOT AT END
-R7094A                INSPECT NUMID-X-E REPLACING ALL " " BY "0"
-R7094A                INSPECT TIPOID-X-E REPLACING ALL "0" BY "1"
-R7094A        END-READ
-R7094A     ELSE
-R7094A        DISPLAY "Registro  control==> 000000 (VALIDAR=NO)"
-R7094A     END-IF.
-           CLOSE CLAVE ABD14.
 
+      *    Fecha de proceso: es la del sistema
            MOVE FUNCTION CURRENT-DATE TO FECHA-PROC-R
            MOVE DIA-PROC TO DIA-AUX
            MOVE MES-PROC TO MES-AUX
            MOVE ANO-PROC TO ANO-AUX
-           MOVE ANO-HOY  TO W-ANO-ACTUAL
+           MOVE ANO-HOY TO W-ANO-ACTUAL
 
+      *    Proceso principal: control de cada uno de los regs del input
            PERFORM 400-VALIDAR UNTIL FIN-ENTRADA = 1.
 
-           IF W-CONT-TIPO-5 >  ZEROS  OR
-              W-CONT-TIPO-6 >  ZEROS  OR
-              W-CONT-TIPO-7 >  ZEROS
-            DISPLAY "Registros Tipo 5           ==> " W-CONT-TIPO-5
-            DISPLAY "Registros Tipo 6           ==> " W-CONT-TIPO-6
-            DISPLAY "Registros Tipo 7           ==> " W-CONT-TIPO-7
-PJV011      DISPLAY "Registros Tipo 5 repetidos ==> " W-CONT-TIPO-5-REP
-      *        DISPLAY "*-----------------------------------*"
-      *        DISPLAY "Registros validados en BDACSV:" SI-EXISTE-CSV
-      *        DISPLAY "*------------------------------------*"
+      *    Totales finales
+           IF W-CONT-TIPO-5 > 0 or W-CONT-TIPO-6 > 0
+           or W-CONT-TIPO-7 > 0
+               DISPLAY "Registros Tipo 5           ==> " W-CONT-TIPO-5
+               DISPLAY "Registros Tipo 6           ==> " W-CONT-TIPO-6
+               DISPLAY "Registros Tipo 7           ==> " W-CONT-TIPO-7
+PJV011       DISPLAY "Registros Tipo 5 repetidos ==> " W-CONT-TIPO-5-REP
            END-IF
+      *    y terminación
            PERFORM 900-CERRAR-ARCHIVOS
-CQ6271     MOVE "V"               TO TIPPRO-LOGPESVNO-WK
-CQ6271     MOVE "PESVNO"          TO PROGRAM-LOGPESVNO-WK
+CQ6271     MOVE "V" TO TIPPRO-LOGPESVNO-WK
+CQ6271     MOVE "PESVNO" TO PROGRAM-LOGPESVNO-WK
 CQ6271     PERFORM 1000-UPDATE-LOGPESVNO
            STOP RUN.
 
 
-      ******************************************************************
-      *150-ABRIR-ARCHIVOS.
-      *SE ABRE CADA UNO DE LOS ARCHIVOS QUE REQUIERE EL PROGRAMA PARA SU
-      *EJECUCION: ICDIAN,CEDULAS,REG01, REG02,ICDAS,ICBTCO,ICBCLA,ICBCIU
-      *ICT40D.DAT,DCVAL,DCINIC,ICMUNI,ICI40N.PRN
-      *PREPARA EL LA LLAVE DEL ARCHIVO ICBTCO PARA IDENTIFICAR CON QUE
-      *LLAVE MAYOR QUE 20000000 INICIA LA ESCRITURA DEL MISMO
-      ******************************************************************
-       150-ABRIR-ARCHIVOS.
-           OPEN INPUT BDIIREGI.
-      *    DISPLAY "*-------------------------------------------------*"
-      *    DISPLAY "|  PROCESO VALIDACION USANDO CUENTAS SIN VALIDAR  |"
-      *    DISPLAY "*-------------------------------------------------*"
-           DISPLAY "!!........EL ORDEN DE LOS PARAMETROS ES ........!!"
-MODBD2     DISPLAY "!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!"
-           ACCEPT W-PARAMETROS   FROM COMMAND-LINE
-           UNSTRING W-PARAMETROS DELIMITED BY SPACES INTO
-                                                     W-ENT-NOMBRE,
-                                                     W-VAL-NOMBRE,
-                                                     W-INVAL-NOMBRE,
-                                                     W-TARIFA,
-                                                     W-BLOQUES,
-                                                     W-DERECHOS
-           END-UNSTRING
-           IF W-TARIFA       = ZEROS  OR
-              W-ENT-NOMBRE   = SPACES OR
-              W-VAL-NOMBRE   = SPACES OR
-              W-INVAL-NOMBRE = SPACES OR
-R7094A*       (W-BLOQUES < 0 OR > 4)
-R7094A         W-BLOQUES > 4
-                 DISPLAY "!!!!!!    FALTA ALGUN PARAMETRO  !!!!!!! "
-                 STOP RUN
-           END-IF
-R7094A     IF W-BLOQUES = 0
-R7094A        DISPLAY "!!..EJECUCION SIN VALIDAR NOMBRES       .....!!"
-R7094A     END-IF
-
-PJV011     INITIALIZE W-VAL-NOMBRE-REP
-PJV011     STRING W-VAL-NOMBRE DELIMITED BY "."
-PJV011     ".vre" DELIMITED BY SIZE INTO W-VAL-NOMBRE-REP
-PJV011     END-STRING
-
-           MOVE W-ENT-NOMBRE TO W-SORT-NOM-ENT
-
-           MOVE W-ENT-NOMBRE TO W-SORT-NOM-ENT W-SORT-NOM-SAL
-           W-LINEAS-NOM-ENT
-      *    DISPLAY "============================================"
-           DISPLAY "REGISTROS RECIBIDOS ORIGINALMENTE:"
-           CALL "SYSTEM" USING W-COMANDO-LINEAS
-      *    DISPLAY " "
-           DISPLAY "ARCHIVO: " W-LINEAS-NOM-ENT
-      *    DISPLAY " "
-           CALL "SYSTEM" USING W-COMANDO-SORT
-           IF RETURN-CODE <> 0
-              DISPLAY "ERROR ORDENANDO UNICOS " W-ENT-NOMBRE
-              STOP RUN
-           END-IF
-           OPEN INPUT  ENTRADA
-                       BDIIDIAN
-                       BDIIDAS
-                       BDIIALE
-                       MUNICIPIOS
-                       CLAVE
-                       ABD14
-XXXXXX     OPEN INPUT  SECUENCIAL
-           OPEN OUTPUT VALIDAS
-                       INCONS
-PJV011                 VALIDAS-REP
-           MOVE 29999999 TO LLAVE-SEC
-           START SECUENCIAL KEY < LLAVE-SEC INVALID KEY
-                 DISPLAY " ERROR EN START DE ICBTCO  " LLAVE-SEC
-                 MOVE 1 TO FINS
-           END-START
-           IF FINS = 1
-              MOVE TOPE-INI-LLAVE7 TO LLAVE7
-           ELSE
-              READ SECUENCIAL PREVIOUS AT END
-                   DISPLAY " ERROR LEYENDO REGISTRO PREVIO DE ICBTCO  "
-                           LLAVE-SEC
-                   MOVE 1 TO FINS
-              END-READ
-              IF FINS = 1
-                 MOVE TOPE-INI-LLAVE7 TO LLAVE7
-              ELSE
-                 MOVE LLAVE-SEC TO LLAVE7
-                 IF LLAVE7-1D NOT = 2
-                    MOVE 2     TO LLAVE7-1D
-                    MOVE ZEROS TO LLAVE7-FILLER
-                 END-IF
-              END-IF
-           END-IF.
-
-      ******************************************************************
-      *400-VALIDAR
-      * DEPENDIENDO DEL TIPO DE IDENTIFICACION LEIDO EN EL ARCHIVO DE EN
-      * TRADA LLAMA A LA CORRESPONDIENTE RUTINA DE VALIDACION (CEDULA,
-      * NIT O DAS)
-      * ACUMULA EN CONTADORES DEPENDIENDO DEL RESULTADO DE LA VALIDACION
-      * LEE SECUENCIALMENTE EL ARCHIVO DE ENTRADA
-      ******************************************************************
        400-VALIDAR.
-           ADD  1 TO REG-LEIDOS.
+      ******************************************************************
+      * Dependiendo del tipo de identificación leido en el archivo de 
+      * entrada llama a la correspondiente rutina de validación (CEDULA,
+      * NIT O DAS)
+      * Acumula en contadores dependiendo del resultado de la validación
+      * Lee secuencialmente el archivo de entrada
+      ******************************************************************
+           ADD 1 TO REG-LEIDOS
            MOVE 0 TO SW-ERROR CODIGO-ERROR CODERR-INC
            INITIALIZE REG-INCONS REG-VALIDAS
-           MOVE ";" TO FILLER1 FILLER2 FILLER3 FILLER4 FILLER5
-                       FILLER6 FILLER7 FILLER8 FILLER9
-           MOVE FILLER-2-E TO FILLER-2-VAL
-           MOVE FILLER-2-E TO FILLER-2-INC
+           MOVE ";" TO FILLER1 FILLER2 FILLER3 FILLER4 FILLER5 FILLER6
+           FILLER7 FILLER8 FILLER9
+           MOVE FILLER-2-E TO FILLER-2-VAL FILLER-2-INC
            IF TIPOID-E < 1 OR > 4
+      *        cod err 05: tipo id no es 1|2|3|4
                MOVE 05 TO CODIGO-ERROR CODERR-INC
-               MOVE 1  TO SW-ERROR
+               MOVE 1 TO SW-ERROR
                PERFORM 512-CREE-REGISTRO
                WRITE REG-INCONS
-               ADD  1  TO TIPO-ID-INVALIDO
+               ADD 1 TO TIPO-ID-INVALIDO
            ELSE
-               MOVE  TIPOID-E  TO  TIP-IDE-BDIIVIDE
-               MOVE  NUMID-E   TO  NUM-IDE-BDIIVIDE
-                                  NUM-ID-W
-               MOVE  NOMBRE-E  TO  NOMBRE-BDIIVIDE
-R7094A*        MOVE    1       TO  SW-VERIFNOM-BDIIVIDE
-R7094A*                           SW-DIGCHEQUEO-BDIIVIDE
-R7094A         IF W-BLOQUES > 0
-R7094A            MOVE    1       TO  SW-VERIFNOM-BDIIVIDE
-R7094A         END-IF
-R7094D         IF TIPOID-E = 2 OR 3
-R7094D             MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE
-R7094D         END-IF
-               MOVE  W-BLOQUES TO  NUM-BLOQUES-BDIIVIDE
-      *        Valida el numero de identificacion contra las bases de
-      *        datos de validacion de informacion BDIIDIAN, BDIIDAS,
-      *        BDIIREGI y verifica la coincidencia del nombre reportado
-               PERFORM 80100-VALIDAR-IDENTIFICACION
-               MOVE  TIP-IDE-BDIIVIDE TO TIPOID-E
-               MOVE  NUM-IDE-BDIIVIDE TO NUMID-E
-               INITIALIZE REG-VALIDAS REG-INCONS
-REQ596         MOVE FILLER-2-E TO FILLER-2-VAL
-REQ596         MOVE FILLER-2-E TO FILLER-2-INC
-               MOVE ";" TO FILLER1 FILLER2 FILLER3 FILLER4 FILLER5
-                        FILLER6 FILLER7 FILLER8 FILLER9
-               IF SW-ID-BDIIVIDE = 1
-                   IF TIPOID-E <> 1
-CSVCEX                 MOVE  ZEROS TO HACER-MATCH
-MODCED                 MOVE 0 TO IDE-TIPO-BDAMATCH
-CSVCEX                 PERFORM  513-VALIDA-EN-CSV
-CSVCEX                 IF IDE-TIPO-BDAMATCH  =  0
-CSVCEX                     MOVE 03 TO CODIGO-ERROR CODERR-INC
-CSVCEX                     MOVE 1 TO SW-ERROR
-CSVCEX                     PERFORM 512-CREE-REGISTRO
-CSVCEX                     WRITE REG-INCONS
-CSVCEX                     ADD 1 TO NO-EXISTE-DIAN
-CSVCEX                 END-IF
-                   ELSE
-                       MOVE  ZEROS TO  HACER-MATCH
-MODCED                 MOVE 0 TO IDE-TIPO-BDAMATCH
-                       PERFORM 513-VALIDA-EN-CSV
-                       IF IDE-TIPO-BDAMATCH = 0
-                           MOVE 04 TO CODIGO-ERROR CODERR-INC
-                           MOVE TIPOID-E TO TIP-INC
-                           ADD  1  TO NO-EXISTE-REGIS
-                           MOVE 1  TO SW-ERROR
-                           PERFORM 510-ESCRIBIR-INCONS
-                       END-IF
-                   END-IF
-               ELSE
-                   IF SW-NOMBRES-BDIIVIDE = 1
-                       IF TIPOID-E <> 1
-                           MOVE 01 TO CODIGO-ERROR CODERR-INC
-                           MOVE  1 TO SW-ERROR
-                           PERFORM 512-CREE-REGISTRO
-                           WRITE REG-INCONS
-                           ADD 1 TO NO-COINCIDE-DIAN
-                           IF TIPOID-E = 4
-                               MOVE NACIO-BDIIDAS TO MUN-EXP-INC
-                           END-IF
-                       ELSE
-                           PERFORM 810-BUSCAR-MUNICIPIO
-                           MOVE TIPOID-E TO TIP-VAL TIP-INC
-                           MOVE NUMID-E  TO CED-VAL CED-INC
-                           MOVE FECHA-EXP-BDIIREGI TO FECHA-2000
-                           IF ANO-2000-R > 51
-                               ADD 1900 TO ANO-2000-R
-                           ELSE
-                               ADD 2000 TO ANO-2000-R
-                           END-IF
-                           MOVE IND-SEXO-BDIIREGI TO GENERO-VAL
-                           PERFORM 505-RANGO-EDADES
-                           MOVE FECHA-2000 TO FEC-EXP-VAL
-                                          FEC-EXP-INC
-                           IF ESTADO-VIG-BDIIREGI = 12 OR = 27
-                               MOVE "00"        TO VIG-VAL VIG-INC
-                           ELSE
-                               MOVE ESTADO-VIG-BDIIREGI TO VIG-VAL
-                                                        VIG-INC
-                           END-IF
-                           MOVE   02 TO CODIGO-ERROR CODERR-INC
-                           MOVE 1 TO SW-ERROR
-                           PERFORM 510-ESCRIBIR-INCONS
-                           ADD 1 TO NO-COINCIDE-REGIS
-                       END-IF
-                   ELSE
-R7094C*                IF W-BLOQUES > 1 OR TIPOID-E <> 1
-R7094C*                    MOVE NOM-VAL-BDIIVIDE         TO NOM-VAL
-R7094C*                ELSE
-R7094C*                    MOVE PRIMER-APELLIDO-BDIIVIDE TO NOM-VAL
-R7094C*                END-IF
-R7094C                 MOVE NOM-VAL-BDIIVIDE         TO NOM-VAL
-                       INITIALIZE LLAVE-BDIIALE
-                       MOVE  TIPOID-E TO TIP-IDE-BDIIALE
-                       MOVE  NUMID-E  TO NUM-IDE-BDIIALE
-                       MOVE  990003   TO FUENTE-BDIIALE
-                       START BDIIALE KEY NOT < LLAVE-BDIIALE
-                       INVALID KEY
-                           MOVE 1 TO SW-BDIIALE
-                       NOT INVALID KEY
-                           MOVE 0 TO SW-BDIIALE
-                           READ BDIIALE NEXT RECORD
-                           AT END
-                               MOVE 1 TO SW-BDIIALE
-                           END-READ
-                       END-START
-                       PERFORM UNTIL SW-BDIIALE = 1
-                       or TIPOID-E <> TIP-IDE-BDIIALE
-                       or NUMID-E <> NUM-IDE-BDIIALE
-                           IF FUENTE-BDIIALE = 990003 AND
-                                FEC-NOV-BDIIALE <= FECHA-PROC-R AND
-                                FEC-VEN-BDIIALE >= FECHA-PROC-R AND
-                                BLOQUEO-BDIIALE = 0
-                                MOVE 1 TO SW-BDIIALE
-                           END-IF
-                           IF SW-BDIIALE = 0
-                               READ BDIIALE NEXT RECORD
-                                 AT END MOVE 1 TO SW-BDIIALE
-                               END-READ
-                           END-IF
-                       END-PERFORM
-                       IF TIPOID-E = 1
-                           IF ESTADO-VIG-BDIIREGI = 12
-                           AND W-DERECHOS = 1
-                               MOVE 07 TO CODIGO-ERROR CODERR-INC
-                               MOVE 1 TO SW-ERROR
-                               MOVE "00" TO VIG-INC
-                               PERFORM 510-ESCRIBIR-INCONS
-                           ELSE
-                               IF ESTADO-VIG-BDIIREGI = 21
-                                   MOVE  06  TO CODIGO-ERROR CODERR-INC
-                                   MOVE   1  TO SW-ERROR
-                                   MOVE "21" TO VIG-INC
-                                   PERFORM 510-ESCRIBIR-INCONS
-                                   ADD   1   TO NO-COINCIDE-REGIS
-R7094B                             ADD   1   TO CONT-FALLECIDOS
-                               ELSE
-                                   PERFORM 810-BUSCAR-MUNICIPIO
-                                   MOVE TIPOID-E TO TIP-VAL TIP-INC
-                                   MOVE NUMID-E  TO CED-VAL CED-INC
-                                   MOVE FECHA-EXP-BDIIREGI TO FECHA-2000
-                                   IF ANO-2000-R > 51
-                                       ADD 1900 TO ANO-2000-R
-                                   ELSE
-                                       ADD 2000 TO ANO-2000-R
-                                   END-IF
-                                   MOVE FECHA-2000 TO FEC-EXP-VAL
-                                                      FEC-EXP-INC
-                                   IF ESTADO-VIG-BDIIREGI = 12 OR = 27
-                                       MOVE "00" TO VIG-VAL VIG-INC
-                                   ELSE
-                                       MOVE ESTADO-VIG-BDIIREGI TO VIG-VAL
-                                                               VIG-INC
-                                   END-IF
-                                   MOVE IND-SEXO-BDIIREGI TO GENERO-VAL
-                                   PERFORM 505-RANGO-EDADES
-PAM460*                            IF ORIGEN-VAL = SPACES
-PAM460*                                MOVE   "O"      TO ORIGEN-VAL
-PAM460*                            END-IF
-PJV011                             PERFORM 301-GRABA-LOS-VALIDOS
-                               END-IF
-                           END-IF
-                       ELSE
-                           IF TIPOID-E = 4
-                               MOVE NACIO-BDIIDAS TO MUN-EXP-VAL
-                               MOVE ZEROS TO VIG-VAL
-                           END-IF
-                           MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
-                           MOVE TIPOID-E TO TIP-VAL TIP-INC
-                           MOVE NUMID-E TO CED-VAL CED-INC
-PAM460*                    IF ORIGEN-VAL = SPACES
-PAM460*                        MOVE "O" TO ORIGEN-VAL
-PAM460*                    END-IF
-PJV011                     PERFORM 301-GRABA-LOS-VALIDOS
-                       END-IF
-                   END-IF
-               END-IF
-           END-IF
+      *        tipo id OK
+               MOVE TIPOID-E TO TIP-IDE-BDIIVIDE
+               perform 400-validar2
+           end-if.
+
+      *    Conteo de los registros por "tipo", dependiendo del código
+      *    de error:
+      *    tipo 5: sin error
+      *    tipo 6: 01 02 06 07
+      *    tipo 7: 03 04 05
            IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07
-               ADD  1 TO W-CONT-TIPO-6
+               ADD 1 TO W-CONT-TIPO-6
            ELSE
                IF CODIGO-ERROR = 03 OR 04 OR 05
-                   ADD 1  TO W-CONT-TIPO-7
+                   ADD 1 TO W-CONT-TIPO-7
                ELSE
+      *            registros correctos, repetidos o no
 PJV011             IF SN-VALREP = "S"
-PJV011                 ADD 1  TO W-CONT-TIPO-5-REP
+PJV011                 ADD 1 TO W-CONT-TIPO-5-REP
 PJV011             ELSE
-                       ADD 1  TO W-CONT-TIPO-5
+                       ADD 1 TO W-CONT-TIPO-5
 PJV011             END-IF
+      *            si es una empresa
 CQ6271             IF TIPOID-E = 2 OR 3
 CQ6271                 ADD 1 TO W-CONT-TIPO-5-PJ
 CQ6271             END-IF
                END-IF
            END-IF
-           READ ENTRADA
-           AT END
+      *    Registro siguiente del input
+           READ ENTRADA AT END
                MOVE 1 TO FIN-ENTRADA
            NOT AT END
-               INSPECT  NUMID-X-E REPLACING ALL " " BY "0"
+               INSPECT NUMID-X-E REPLACING ALL " " BY "0"
                INSPECT TIPOID-X-E REPLACING ALL "0" BY "1"
            END-READ.
 
+       400-validar2.
+      ******************************************************************
+      * Más validación: el tipo de id es OK, ahora se valida el número
+      * y el nombre
+      ******************************************************************
+           MOVE NUMID-E TO NUM-IDE-BDIIVIDE NUM-ID-W
+           MOVE NOMBRE-E TO NOMBRE-BDIIVIDE
+R7094A     IF W-BLOQUES > 0
+R7094A         MOVE 1 TO SW-VERIFNOM-BDIIVIDE
+R7094A     END-IF
+R7094D     IF TIPOID-E = 2 OR 3
+R7094D         MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE
+R7094D     END-IF
+           MOVE W-BLOQUES TO NUM-BLOQUES-BDIIVIDE
+
+      *    Valida el numero de identificación contra las bases de
+      *    datos de validación de información BDIIDIAN, BDIIDAS,
+      *    BDIIREGI y verifica la coincidencia del nombre reportado
+      *    Retorna SW-ID-BDIIVIDE=1 si hay error
+           PERFORM 80100-VALIDAR-IDENTIFICACION
+           MOVE TIP-IDE-BDIIVIDE TO TIPOID-E
+           MOVE NUM-IDE-BDIIVIDE TO NUMID-E
+           INITIALIZE REG-VALIDAS REG-INCONS
+REQ596     MOVE FILLER-2-E TO FILLER-2-VAL FILLER-2-INC
+           MOVE ";" TO FILLER1 FILLER2 FILLER3 FILLER4 FILLER5
+           FILLER6 FILLER7 FILLER8 FILLER9
+           IF SW-ID-BDIIVIDE = 1
+      *        es un id inválido
+               IF TIPOID-E <> 1
+      *            no es una cédula
+CSVCEX             MOVE 0 TO HACER-MATCH
+MODCED             MOVE 0 TO IDE-TIPO-BDAMATCH
+CSVCEX             PERFORM 513-VALIDA-EN-CSV
+CSVCEX             IF IDE-TIPO-BDAMATCH  = 0
+CSVCEX                 MOVE 03 TO CODIGO-ERROR CODERR-INC
+CSVCEX                 MOVE 1 TO SW-ERROR
+CSVCEX                 PERFORM 512-CREE-REGISTRO
+CSVCEX                 WRITE REG-INCONS
+CSVCEX                 ADD 1 TO NO-EXISTE-DIAN
+CSVCEX             END-IF
+               ELSE
+      *            es una cédula
+                   MOVE ZEROS TO HACER-MATCH
+MODCED             MOVE 0 TO IDE-TIPO-BDAMATCH
+      *            Valida si la identificación está en la base de datos
+      *            alterna
+>>>>>>             PERFORM 513-VALIDA-EN-CSV                            >>>>>>
+                   IF IDE-TIPO-BDAMATCH = 0
+                       MOVE 04 TO CODIGO-ERROR CODERR-INC
+                       MOVE TIPOID-E TO TIP-INC
+                       ADD 1 TO NO-EXISTE-REGIS
+                       MOVE 1 TO SW-ERROR
+                       PERFORM 510-ESCRIBIR-INCONS
+                   END-IF
+               END-IF
+           ELSE
+      *        el id fué encontrado, el nombre no coincide
+               IF SW-NOMBRES-BDIIVIDE = 1
+                   IF TIPOID-E <> 1
+      *                no es una cédula
+                       MOVE 01 TO CODIGO-ERROR CODERR-INC
+                       MOVE 1 TO SW-ERROR
+                       PERFORM 512-CREE-REGISTRO
+                       WRITE REG-INCONS
+                       ADD 1 TO NO-COINCIDE-DIAN
+                       IF TIPOID-E = 4
+                           MOVE NACIO-BDIIDAS TO MUN-EXP-INC
+                       END-IF
+                   ELSE
+      *                es una cédula, nombre no coincide
+                       PERFORM 810-BUSCAR-MUNICIPIO
+                       MOVE TIPOID-E TO TIP-VAL TIP-INC
+                       MOVE NUMID-E TO CED-VAL CED-INC
+                       MOVE FECHA-EXP-BDIIREGI TO FECHA-2000
+                       IF ANO-2000-R > 51
+                           ADD 1900 TO ANO-2000-R
+                       ELSE
+                           ADD 2000 TO ANO-2000-R
+                       END-IF
+                       MOVE IND-SEXO-BDIIREGI TO GENERO-VAL
+                       PERFORM 505-RANGO-EDADES
+                       MOVE FECHA-2000 TO FEC-EXP-VAL FEC-EXP-INC
+                       IF ESTADO-VIG-BDIIREGI = 12 OR = 27
+                           MOVE "00" TO VIG-VAL VIG-INC
+                       ELSE
+                           MOVE ESTADO-VIG-BDIIREGI TO VIG-VAL VIG-INC
+                       END-IF
+                       MOVE 02 TO CODIGO-ERROR CODERR-INC
+                       MOVE 1 TO SW-ERROR
+                       PERFORM 510-ESCRIBIR-INCONS
+                       ADD 1 TO NO-COINCIDE-REGIS
+                   END-IF
+               ELSE
+R7094C             MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
+                   INITIALIZE LLAVE-BDIIALE
+                   MOVE TIPOID-E TO TIP-IDE-BDIIALE
+                   MOVE NUMID-E TO NUM-IDE-BDIIALE
+                   MOVE 990003 TO FUENTE-BDIIALE
+                   START BDIIALE KEY NOT < LLAVE-BDIIALE INVALID KEY
+                       MOVE 1 TO SW-BDIIALE
+                   NOT INVALID KEY
+                       MOVE 0 TO SW-BDIIALE
+                       READ BDIIALE NEXT RECORD
+                       AT END
+                           MOVE 1 TO SW-BDIIALE
+                       END-READ
+                   END-START
+                   PERFORM UNTIL SW-BDIIALE = 1
+                   or TIPOID-E <> TIP-IDE-BDIIALE
+                   or NUMID-E <> NUM-IDE-BDIIALE
+                       IF FUENTE-BDIIALE = 990003 AND
+                            FEC-NOV-BDIIALE <= FECHA-PROC-R AND
+                            FEC-VEN-BDIIALE >= FECHA-PROC-R AND
+                            BLOQUEO-BDIIALE = 0
+                            MOVE 1 TO SW-BDIIALE
+                       END-IF
+                       IF SW-BDIIALE = 0
+                           READ BDIIALE NEXT RECORD AT END
+                               MOVE 1 TO SW-BDIIALE
+                           END-READ
+                       END-IF
+                   END-PERFORM
+                   IF TIPOID-E = 1
+                       IF ESTADO-VIG-BDIIREGI = 12
+                       AND W-DERECHOS = 1
+                           MOVE 07 TO CODIGO-ERROR CODERR-INC
+                           MOVE 1 TO SW-ERROR
+                           MOVE "00" TO VIG-INC
+                           PERFORM 510-ESCRIBIR-INCONS
+                       ELSE
+                           IF ESTADO-VIG-BDIIREGI = 21
+                               MOVE 06 TO CODIGO-ERROR CODERR-INC
+                               MOVE 1 TO SW-ERROR
+                               MOVE "21" TO VIG-INC
+                               PERFORM 510-ESCRIBIR-INCONS
+                               ADD 1 TO NO-COINCIDE-REGIS
+R7094B                         ADD 1 TO CONT-FALLECIDOS
+                           ELSE
+                               PERFORM 810-BUSCAR-MUNICIPIO
+                               MOVE TIPOID-E TO TIP-VAL TIP-INC
+                               MOVE NUMID-E  TO CED-VAL CED-INC
+                               MOVE FECHA-EXP-BDIIREGI TO FECHA-2000
+                               IF ANO-2000-R > 51
+                                   ADD 1900 TO ANO-2000-R
+                               ELSE
+                                   ADD 2000 TO ANO-2000-R
+                               END-IF
+                               MOVE FECHA-2000 TO FEC-EXP-VAL
+                                                  FEC-EXP-INC
+                               IF ESTADO-VIG-BDIIREGI = 12 OR = 27
+                                   MOVE "00" TO VIG-VAL VIG-INC
+                               ELSE
+                                   MOVE ESTADO-VIG-BDIIREGI TO VIG-VAL
+                                                           VIG-INC
+                               END-IF
+                               MOVE IND-SEXO-BDIIREGI TO GENERO-VAL
+                               PERFORM 505-RANGO-EDADES
+PJV011                         PERFORM 301-GRABA-LOS-VALIDOS
+                           END-IF
+                       END-IF
+                   ELSE
+                       IF TIPOID-E = 4
+                           MOVE NACIO-BDIIDAS TO MUN-EXP-VAL
+                           MOVE ZEROS TO VIG-VAL
+                       END-IF
+                       MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
+                       MOVE TIPOID-E TO TIP-VAL TIP-INC
+                       MOVE NUMID-E TO CED-VAL CED-INC
+PJV011                 PERFORM 301-GRABA-LOS-VALIDOS
+                   END-IF
+               END-IF
+           END-IF.
+
+
+PJV011 301-GRABA-LOS-VALIDOS.
+      ******************************************************************
+      * Graba un "válido"
+      ******************************************************************
+PJV011     MOVE "N" TO SN-VALREP
+PJV011     IF TIP-KEYVAL = TIPOID-E and NUM-KEYVAL = NUMID-E
+PJV011         MOVE "S" TO SN-VALREP
+PJV011         PERFORM 300-GRABA-VALREP
+PJV011     ELSE
+PJV011         WRITE REG-VALIDAS
+PJV011         MOVE TIP-VAL TO TIP-KEYVAL
+PJV011         MOVE CED-VAL TO NUM-KEYVAL
+PJV011         ADD 1 TO REG-CORRECTOS
+PJV011     END-IF.
+
 PJV011 300-GRABA-VALREP.
+      ******************************************************************
+      * Graba un "válido - repetido"
+      ******************************************************************
 PJV011     INITIALIZE REG-VALIDAS-REP
 PJV011     WRITE REG-VALIDAS-REP FROM REG-VALIDAS
 PJV011     MOVE TIP-VAL TO TIP-KEYVAL
 PJV011     MOVE CED-VAL TO NUM-KEYVAL
 PJV011     ADD 1 TO REG-CORRECTOS-R.
 
-PJV011 301-GRABA-LOS-VALIDOS.
-PJV011     MOVE "N" TO SN-VALREP
-PJV011     IF TIP-KEYVAL = TIPOID-E AND
-PJV011        NUM-KEYVAL = NUMID-E
-PJV011        MOVE "S" TO SN-VALREP
-PJV011        PERFORM 300-GRABA-VALREP
-PJV011     ELSE
-PJV011        WRITE REG-VALIDAS
-PJV011        MOVE TIP-VAL TO TIP-KEYVAL
-PJV011        MOVE CED-VAL TO NUM-KEYVAL
-PJV011        ADD 1 TO REG-CORRECTOS
-PJV011     END-IF.
-
 
        505-RANGO-EDADES.
-      *--------------------------------------------------*
-      *505-RANGO-EDADES.
+      ******************************************************************
       *  RANGO MUJERES: 20'000.001 A 70'000.000
       *  RANGO HOMBRES:          1 A 20'000.000
       *        MAYOR  : > 70'000.000 < 1000'000.000 (NUIPS)
-      *--------------------------------------------------*
+      ******************************************************************
            MOVE FEC-EXP-VAL TO W-FEC-EXPE
-           MOVE ZEROS       TO W-EDAD-CEDULA
+           MOVE ZEROS TO W-EDAD-CEDULA
            IF W-ANO-EXPE >= 1975
                COMPUTE W-EDAD-CEDULA =
                ((W-ANO-ACTUAL - W-ANO-EXPE) + 18)
@@ -919,12 +880,12 @@ PJV011     END-IF.
            WHEN ANY
                MOVE " N/A " TO EDAD-RANGO
            END-EVALUATE.
+
+       510-ESCRIBIR-INCONS.
       ****************************************************************
-      *510-ESCRIBIR-INCONS.
       * BUSCA ERROR
       * CREAR REGISTRO EN EL ARCHIVO DE INCONSISTENCIAS
       ****************************************************************
-       510-ESCRIBIR-INCONS.
            IF CODIGO-ERROR = 02 AND SW-ERROR = 1
                MOVE TIPOID-E TO TIP-INC
            end-if
@@ -933,10 +894,10 @@ PJV011     END-IF.
                WRITE REG-INCONS
            end-if.
 
+       512-CREE-REGISTRO.
       **************************************************************
       * ARMA EL REGISTRO DE INCONSISTENCIAS DEL ARCHIVO DCINC
       **************************************************************
-       512-CREE-REGISTRO.
            MOVE TIPOID-E TO TIP-INC
            MOVE NUMID-E  TO CED-INC
            MOVE NOMBRE-E TO NOM1-INC
@@ -948,11 +909,11 @@ PJV011     END-IF.
                MOVE FILLER-2-E TO FILLER-2-INC
            END-IF.
 
+       513-VALIDA-EN-CSV.
       **************************************************************
       * Valida si la identificacion esta en la base de datos
       * alterna
       **************************************************************
-       513-VALIDA-EN-CSV.
 REQ550*    hace validación del tipo de identificacion
 REQ550     MOVE TIPOID-E TO TIP-IDE-BDIIVIDE
 REQ550     MOVE NUMID-E TO NUM-IDE-BDIIVIDE
@@ -967,13 +928,21 @@ REQ550     IF SW-TID-BDIIVIDE = 0 *> el test fué OK
                        OPEN INPUT SUSCRIPTOR
                        OPEN INPUT MAESTRO-CREDIT
                        OPEN INPUT MAESTRO-CHECK
+      *                Se carga en memoria la tabla para estandarizacion
+      *                de direcciones
                        PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
                        MOVE 1 TO OPEN-DIR
                    END-IF
                    MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH
                    MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+      *            Se recorre toda la estructura bdacsv para la
+      *            identificación buscada.
+      *            En caso de hallar registros se procede a realizar el
+      *            match (BDAMATCH.PROC + .WS ~ 1000 + 200 líneas)
                    PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+      *            se usa en LEEMAESTROS.WS / LEEMAESTROS.PROC
                    MOVE 1 TO HACERMATCH-LEEMSTRS
+      *            se usa en LEEMAESTROS.WS / LEEMAESTROS.PROC
 REQ609             IF IDE-TIPO-BDAMATCH = 1
 REQ609                 IF TIPOID-E = 1 OR 4
 REQ609                     INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL
@@ -1014,28 +983,26 @@ PJV011                 ADD 1 TO SI-EXISTE-CSV
 
        9800-FILTRAR-ALFABETICO.
       ******************************************************************
-      *9800-FILTRAR-ALFABETICO.                                        *
-      *    SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA*
+      * Se eliminan caracteres no alfabéticos a la cadena de entrada
       ******************************************************************
            MOVE FUNCTION UPPER-CASE (CADENA-ENTRA) TO CADENA-ENTRA
            INITIALIZE CADENA-SALE
            MOVE 1 TO J
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 60
-              MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICO
-              IF SI-ALFABETICO
-                 MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)
-                 ADD 1 TO J
-              END-IF
+               MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICO
+               IF SI-ALFABETICO
+                   MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)
+                   ADD 1 TO J
+               END-IF
            END-PERFORM.
-      ******************************************************************
 
-      *800-GRABAR-SECUENCIAL.
+       800-GRABAR-SECUENCIAL.
+      ******************************************************************
       * SE ARMA Y GRABA REGISTRO EN EL ARCHIVO ICBTCO, INDICANDO EN EL
       * NUMERO DE TERMINAL, LA TARIFA UTILIZADA Y EN EL NUMERO DE IDEN-
       * TIFICACION LA CANTIDAD DE VALIDACIONES REALIZADAS. SE GRABA UN
       * REGISTRO POR CADA TIPO DE RESULTADO DE LA VALIDACION
       ******************************************************************
-       800-GRABAR-SECUENCIAL.
            INITIALIZE REG-SEC
            MOVE SUSCRIPTOR-AUX    TO COD-SUSCRIP-SEC
            MOVE FECHA-AUX-R       TO FEC-CONSUL-SEC
@@ -1071,28 +1038,26 @@ PJV011                 ADD 1 TO SI-EXISTE-CSV
               MOVE W-CONT-TIPO-7  TO NUM-ID-SEC
               MOVE 7  TO TIP-CON-SEC
            END-IF.
-      *****************************************************************
-      *810-BUSCAR-MUNICIPIO.
-      * OBTIENE EL NOMBRE DEL MUNICIPIO Y EL DEPARTAMENTO AL QUE PERTE-
-      * NECE CON EL FIN DE ALIMENTAR EL ARCHIVO DE VALIDAS
-      *****************************************************************
+
        810-BUSCAR-MUNICIPIO.
+      *****************************************************************
+      * Obtiene el nombre del municipio y el departamento al que 
+      * pertenece con el fin de alimentar el archivo de válidas
+      *****************************************************************
            MOVE DEP-EXP-BDIIREGI TO CODIGO-DEP
            MOVE MUNIC-EXP-BDIIREGI TO CODIGO-MUNI
            READ MUNICIPIOS INVALID KEY
                MOVE SPACES TO NOMBRE-MUNI
-               MOVE 71     TO CODIGO-DEP
+               MOVE 71 TO CODIGO-DEP
            END-READ
-           MOVE NOMBRE-MUNI           TO MUN-EXP-VAL MUN-EXP-INC
+           MOVE NOMBRE-MUNI TO MUN-EXP-VAL MUN-EXP-INC
            MOVE T-NOM-DEP(CODIGO-DEP) TO DEP-EXP-VAL DEP-EXP-INC.
-      *
 
-      ******************************************************************
-      *900-CERRAR-ARCHIVOS.
-      * CIERRA CADA UNO DE LOS ARCHIVO UTILIZADOS EN EL PROGRMA QUE AUN
-      * ESTAN ABIERTOS
-      *****************************************************************
        900-CERRAR-ARCHIVOS.
+      ******************************************************************
+      * Cierra cada uno de los archivo utilizados en el progrma que aún
+      * están abiertos
+      *****************************************************************
            DISPLAY "REGISTROS LEIDOS                :" REG-LEIDOS
            DISPLAY "REGISTROS CORRECTOS             :" REG-CORRECTOS
 PJV011     DISPLAY "REGISTROS CORRECTOS REPETIDOS   :" REG-CORRECTOS-R
@@ -1146,12 +1111,13 @@ PJV011           VALIDAS-REP
       * JUL.12/2012 * RANGOS DE IDENTIFICACIONES,  LOS AJUSTES DE LA
       * CAV0008     * VERSION 07, IMPACTA APERTURAS Y PROCESOS ESPEC.
       ******************************************************************
+
        80100-VALIDAR-IDENTIFICACION.
-      *===================================*
-      * Valida el numero de identificacion contra las bases de datos
-      * de validacion de informacion BDIIDIAN, BDIIDAS, BDIIREGI
+      ******************************************************************
+      * Valida el numero dentificación contra las bases de datos
+      * de validación de información BDIIDIAN, BDIIDAS, BDIIREGI
       * y verifica la coincidencia del nombre reportado
-      *===================================*
+      ******************************************************************
            INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOM
            NOMBRES-AUX-W-BDIIVIDE
            INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
@@ -1179,7 +1145,9 @@ NUIP01     IF SW-ASGTIPID-BDIIVIDE = 1
 NUIP01         PERFORM 80300-ASIGNAR-TIPO-ID
 NUIP01     END-IF
 NUIP01     IF SW-VALTIPID-BDIIVIDE = 1
-      *        valida el tipo de ID SW-TID-BDIIVIDE = 1 si no es OK
+      *        valida si el número de id NUM-IDE-BDIIVIDE está dentro 
+      *        del rango que le corresponde según su tipo de ID, retorna
+      *        SW-TID-BDIIVIDE = 1 si no es OK
 NUIP01         PERFORM 80400-VALIDAR-TIPO-ID
 NUIP01     END-IF
 NUIP03     IF SW-DIGCHEQUEO-BDIIVIDE = 1
@@ -1187,17 +1155,21 @@ NUIP03         PERFORM 80500-ELIMINAR-DIGITO-CHEQUEO
 NUIP03     END-IF
 NUIP01     IF SW-VALTIPID-BDIIVIDE = 0
 NUIP01     or (SW-VALTIPID-BDIIVIDE = 1 AND SW-TID-BDIIVIDE = 0)
-      *        Validacion del numero de identificacion
+      *        Validación del número de identificación
       *        con las bases de datos de la REGISTRADURIA, DAS, DIAN
-      *        dependiendo del tipo de identificación
+      *        dependiendo del tipo de identificación, y obtención
+      *        del nombre si el ID se encuentra, SW-ID-BDIIVIDE = 1
+      *        si no se encuentra
                PERFORM 80200-VALIDAR-ID
                INITIALIZE NOM-VAL-BDIIVIDE
                MOVE NOM-LEIDO-BDIIVIDE TO NOM-VAL-BDIIVIDE
+      *        Si se debe verificar el nombre
                IF SW-VERIFNOM-BDIIVIDE = 1
                    MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOM
                    MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOM
                    MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOM
                    IF SW-ID-BDIIVIDE = 0
+      *                es un ID validado
                        IF NUM-BLOQUES-BDIIVIDE NUMERIC
                        and NUM-BLOQUES-BDIIVIDE <> ZEROS
                            MOVE NUM-BLOQUES-BDIIVIDE
@@ -1209,7 +1181,7 @@ NUIP01     or (SW-VALTIPID-BDIIVIDE = 1 AND SW-TID-BDIIVIDE = 0)
                                MOVE 1 TO BLOQUES-INPUT-VALNOM
                            END-IF
                        END-IF
-      *                Determinar si el nombre de la persona consultada
+      *                Determina si el nombre de la persona consultada
       *                hace con el nombre enviado en la consulta
                        PERFORM 10000-MATCH-NOMBRES-VALNOM
                        IF MATCH-OK-OUT-VALNOM = 0
@@ -1219,6 +1191,7 @@ NUIP01     or (SW-VALTIPID-BDIIVIDE = 1 AND SW-TID-BDIIVIDE = 0)
                END-IF
 NUIP01     ELSE
 NUIP01         IF SW-TID-BDIIVIDE = 1
+      *            el tipo de ID tiene error
 NUIP01             MOVE 1 TO SW-ID-BDIIVIDE
 NUIP01         END-IF
            END-IF.
@@ -1234,13 +1207,19 @@ NUIP01         END-IF
       *        busca ID en REGIS, arma nombre leído
                PERFORM 85010-UBICA-CEDULA
            WHEN 2
+      *        ubica NIT en archivo de la DIAN, BDIIDIAN y carga el
+      *        nombre en NOM-LEIDO-BDIIVIDE
                PERFORM 85020-UBICA-NIT
            WHEN 3
-      *        ubica NIT en archivo de la DIAN, BDIIDIAN
+      *        ubica NIT en archivo de la DIAN, BDIIDIAN y carga el
+      *        nombre en NOM-LEIDO-BDIIVIDE
                PERFORM 85020-UBICA-NIT
            WHEN 4
+      *        Ubica cedula de extranjeria en archivo del DAS y también
+      *        obtiene el nombre
                PERFORM 85030-UBICA-EXT
            WHEN OTHER
+      *        ID inválido
                MOVE 1 TO SW-ID-BDIIVIDE
            END-EVALUATE.
 
@@ -1252,30 +1231,29 @@ NUPI01* RETORNA TIPID-VAL-BDIIVIDE
       *================================================================
 NUIP01    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE TIP-IDE-BDIIVIDE
 NUIP01    INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
-NUIP01      IF (NUM-IDE-BDIIVIDE-R >= 1 AND <= 99999999)
-NUIP01      OR (NUM-IDE-BDIIVIDE-R >= 1000000000 AND < 8000000000)
-NUIP01         MOVE 1 TO TIP-IDE-BDIIVIDE
-NUIP01      ELSE
-NUIP01        IF (NUM-IDE-BDIIVIDE-R >= 800000000 AND <= 999999999)
-NUIP02        OR (NUM-IDE-BDIIVIDE-R >= 8000000000 AND <= 9999999999)
-NUIP01           MOVE 2 TO TIP-IDE-BDIIVIDE
+NUIP01        IF NUM-IDE-BDIIVIDE-R >= 1 AND <= 99999999
+NUIP01        OR NUM-IDE-BDIIVIDE-R >= 1000000000 AND < 8000000000
+NUIP01            MOVE 1 TO TIP-IDE-BDIIVIDE
 NUIP01        ELSE
-NUIP01          IF (NUM-IDE-BDIIVIDE-R >= 600000000 AND < 800000000)
-NUIP01          OR (NUM-IDE-BDIIVIDE-R >= 6000000000 AND < 8000000000)
-NUIP01             MOVE 3 TO TIP-IDE-BDIIVIDE
-NUIP01          ELSE
-                   MOVE 4 TO TIP-IDE-BDIIVIDE
-                end-if
-              end-if
-NUIP01      END-IF.
+NUIP01            IF NUM-IDE-BDIIVIDE-R >= 800000000 AND <= 999999999
+NUIP02            OR NUM-IDE-BDIIVIDE-R >= 8000000000 AND <= 9999999999
+NUIP01                MOVE 2 TO TIP-IDE-BDIIVIDE
+NUIP01            ELSE
+NUIP01                IF NUM-IDE-BDIIVIDE-R >= 600000000 AND < 800000000
+NUIP01              OR NUM-IDE-BDIIVIDE-R >= 6000000000 AND < 8000000000
+NUIP01                    MOVE 3 TO TIP-IDE-BDIIVIDE
+NUIP01                ELSE
+                          MOVE 4 TO TIP-IDE-BDIIVIDE
+                      end-if
+                  end-if
+NUIP01        END-IF.
 
 NUIP01 80400-VALIDAR-TIPO-ID.
       *================================================================
-NUIP01*80400-VALIDAR-TIPO-ID.
-NUIP01* VALIDACION DEL TIPO DE IDENTIFICACION DE ACUERDO AL RANGO
-NUIP01* CONTENIDO EN EL NUMERO DE IDENTIFICACION. SE PREGUNTA AL REVES.
-NUIP01* PARAMETRO DE ENTRADA SW-VALTIPID-BDIVIIDE = 1;
-NUIP01* RETORNA SW-TID-BDIIVIDE = 1 SI ESTA ERRADO.
+NUIP01* Validacion del tipo de identificacion de acuerdo al rango
+NUIP01* contenido en el numero de identificacion. Se pregunta al reves.
+NUIP01* Parametro de entrada SW-VALTIPID-BDIVIIDE = 1;
+NUIP01* Retorna SW-TID-BDIIVIDE = 1 si esta errado.
       *================================================================
 NUIP01     INITIALIZE PARAMETROS-SALIDA-BDIIVIDE
 NUIP01     INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0"
@@ -1297,7 +1275,6 @@ NUIP01     END-EVALUATE.
 
 NUIP03 80500-ELIMINAR-DIGITO-CHEQUEO.
       *================================================================
-NUIP03*80500-ELIMINAR-DIGITO-CHEQUEO.
       * Elimina el digito de chequeo y cambia el tipo de identificacion
       * de acuerdo a los rangos para tipo id = 2 y 3
       *================================================================
@@ -1324,60 +1301,64 @@ NUIP03      INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0".
       * Ubica la identificacion dada la llave en BDIIREGI
       * Arma el nombre completo en una sola variable
       *================================================================
+      *    Arma clave y lee REGISTRADURIA
            MOVE NUM-IDE-BDIIVIDE TO CEDULA-BDIIREGI
            MOVE TIP-IDE-BDIIVIDE TO TIPO-ID-BDIIREGI
            READ BDIIREGI INVALID KEY
                MOVE 1 TO SW-ID-BDIIVIDE
            END-READ
+      *    Se encuentra en REGISTRADURIA: arma el nombre leído en
+      *    NOM-LEIDO-BDIIVIDE
            IF SW-ID-BDIIVIDE = 0
-              MOVE APELLIDO1-BDIIREGI TO PRIMER-APELLIDO-BDIIVIDE
-              MOVE APELLIDO2-BDIIREGI TO SEGUNDO-APELLIDO-BDIIVIDE
-              MOVE DES-NOMBRE2-BDIIREGI TO SEGUNDO-NOMBRE-BDIIVIDE
-              MOVE DES-NOMBRE1-BDIIREGI TO PRIMER-NOMBRE-BDIIVIDE
-              IF ESTADO-CIVIL-BDIIREGI = 0
-                  STRING
+               MOVE APELLIDO1-BDIIREGI TO PRIMER-APELLIDO-BDIIVIDE
+               MOVE APELLIDO2-BDIIREGI TO SEGUNDO-APELLIDO-BDIIVIDE
+               MOVE DES-NOMBRE2-BDIIREGI TO SEGUNDO-NOMBRE-BDIIVIDE
+               MOVE DES-NOMBRE1-BDIIREGI TO PRIMER-NOMBRE-BDIIVIDE
+               IF ESTADO-CIVIL-BDIIREGI = 0
+                   STRING
                    SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
                    "*" DELIMITED BY SIZE ,
-                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",
+                   PRIMER-NOMBRE-BDIIVIDE DELIMITED BY "  ",
                    "*" DELIMITED BY SIZE ,
-                   SEGUNDO-NOMBRE-BDIIVIDE   DELIMITED BY SIZE,
+                   SEGUNDO-NOMBRE-BDIIVIDE DELIMITED BY SIZE,
                    ";" DELIMITED BY SIZE ,
                    INTO NOM-LEIDO-BDIIVIDE
                END-IF
                IF ESTADO-CIVIL-BDIIREGI = 1
                    STRING
                    "DE" DELIMITED BY SIZE,
-                   "*"  DELIMITED BY SIZE,
+                   "*" DELIMITED BY SIZE,
                    SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
-                   "*"  DELIMITED BY SIZE,
-                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",
-                   "*"  DELIMITED BY SIZE,
-                   SEGUNDO-NOMBRE-BDIIVIDE   DELIMITED BY SIZE,
-                   ";"  DELIMITED BY SIZE,
+                   "*" DELIMITED BY SIZE,
+                   PRIMER-NOMBRE-BDIIVIDE DELIMITED BY "  ",
+                   "*" DELIMITED BY SIZE,
+                   SEGUNDO-NOMBRE-BDIIVIDE DELIMITED BY SIZE,
+                   ";" DELIMITED BY SIZE,
                    INTO NOM-LEIDO-BDIIVIDE
                END-IF
                IF ESTADO-CIVIL-BDIIREGI = 2
-                  STRING
+                   STRING
                    "VDA DE" DELIMITED BY SIZE,
-                   "*"      DELIMITED BY SIZE,
+                   "*" DELIMITED BY SIZE,
                    SEGUNDO-APELLIDO-BDIIVIDE DELIMITED BY "  ",
-                   "*"      DELIMITED BY SIZE,
-                   PRIMER-NOMBRE-BDIIVIDE    DELIMITED BY "  ",
-                   "*"      DELIMITED BY SIZE,
+                   "*" DELIMITED BY SIZE,
+                   PRIMER-NOMBRE-BDIIVIDE DELIMITED BY "  ",
+                   "*" DELIMITED BY SIZE,
                    SEGUNDO-NOMBRE-BDIIVIDE DELIMITED BY SIZE,
-                   ";"      DELIMITED BY SIZE,
+                   ";" DELIMITED BY SIZE,
                    INTO NOM-LEIDO-BDIIVIDE
                END-IF
                STRING PRIMER-APELLIDO-BDIIVIDE DELIMITED BY "  ",
-                  "*"             DELIMITED BY SIZE,
-                  NOM-LEIDO-BDIIVIDE     DELIMITED BY SIZE, "*",
-                                DELIMITED BY SIZE,
-                  INTO NOM-VAL-BDIIVIDE
+               "*" DELIMITED BY SIZE,
+               NOM-LEIDO-BDIIVIDE DELIMITED BY SIZE, "*",
+               DELIMITED BY SIZE,
+               INTO NOM-VAL-BDIIVIDE
 
                INSPECT NOM-VAL-BDIIVIDE REPLACING ALL "*" BY " "
                INSPECT NOM-VAL-BDIIVIDE REPLACING ALL ";" BY " "
                INITIALIZE NOM-LEIDO-BDIIVIDE
-               MOVE NOM-VAL-BDIIVIDE TO NOM-LEIDO-BDIIVIDE.
+               MOVE NOM-VAL-BDIIVIDE TO NOM-LEIDO-BDIIVIDE
+           end-if.
 
        85020-UBICA-NIT.
       *================================================================
@@ -1411,105 +1392,107 @@ NUIP03      INSPECT NUM-IDE-BDIIVIDE REPLACING ALL " " BY "0".
 CQ6271     COPY LOGPESVNO.PROC.
 
 
-REMARK*VALNOM-PROC.v.0005
-REMARK******************************************************************
-REMARK* RUTINA CREADA PARA HACER LA VALIDACION DE NOMBRES CONTRA LOS
-REMARK* ARCHIVOS DE LA REGISTRADURIA, DIAN Y DAS, DEPENDIENDO DEL TIPO
-REMARK* DE IDENTIFICACION RECIBIDA.
-REMARK*    PARAMETROS
-REMARK*        BLOQUES-INPUT-VALNOM - NUMERO DE BLOQUES A VALIDAR
-REMARK*        NOMBRE-INPUT-VALNOM  - NOMBRE A VALIDAR
-REMARK*        NOMBOK-INPUT-VALNOM  - NOMBRE CORRECTO CON EL QUE SE
-REMARK*                               DEBE COMPARAR NOMBRE-INPUT-VALNOM
-REMARK*        TIP-ID-INPUT-VALNOM  - TIPO DE IDENTIFICACION A VALIDAR
-REMARK*    SALIDAS:
-REMARK*        MATCH-OK-OUT-VALNOM  - 0-NO HUBO       1-HUBO
-REMARK*******************************************************************
-REMARK* RMB0002   * VAL001: SE MEJORA LA VALIDACION DE NOMBRES EN PERSONAS
-REMARK* R.MARTINEZ* JURIDICAS
-REMARK* DIC.2002  *
-REMARK*******************************************************************
-REMARK* GJC0003    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
-REMARK* G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
-REMARK* MARZO/2003 * PARA CEDULAS, EL COMODIN QUE USUALMENTE CORRESPONDE A LA N
-REMARK*            * SOLO SE COMPARA CONTRA N O CONTRA BLANCOS
-REMARK*************************************************************************
-REMARK* GJC0004    * VALME1 :CON EL FIN DE AFINAR AUN MAS EL PROCESO DE VALIDA-
-REMARK* R.MARTINEZ * CION DE NOMBRES, EN EL MATCH A PROXIMADO DE PERSONAS NATU-
-REMARK* G.JIMENEZ  * RALES SE CAMBIA EL CALCULO FINAL PARA DETERMINAR SI UN BLO-
-REMARK* MARZO/2003 * QUE ES O NO VALIDO. PARA QUE UN NOMBRE QUE VENGA NUMERICO
-REMARK*            * NO SE CONVIERTA EN COMODIN, EN LAS SUSTITUCIONES POR *
-REMARK*            * SE VALIDA QUE EL CONTENIDO NO SEA NUMERICO.
-REMARK*************************************************************************
-REMARK* GJC0005    * VLNM01: LOS PROGRAMAS ABORTAN CUANDO ALGUNO DE LOS
-REMARK* G.JIMENEZ  *         PARAMETROS DE UN SUBSTRING QUEDA EN 0 O EN
-REMARK* NOV/2005   *         UN NUMERO MENOR QUE 0. EJ: NOMBRE(I:J) DONDE I O
-REMARK*            *         J ES 0.
-REMARK*************************************************************************
+      *VALNOM-PROC.v.0005
+      ******************************************************************
+      * RUTINA CREADA PARA HACER LA VALIDACION DE NOMBRES CONTRA LOS
+      * ARCHIVOS DE LA REGISTRADURIA, DIAN Y DAS, DEPENDIENDO DEL TIPO
+      * DE IDENTIFICACION RECIBIDA.
+      *    PARAMETROS
+      *        BLOQUES-INPUT-VALNOM - NUMERO DE BLOQUES A VALIDAR
+      *        NOMBRE-INPUT-VALNOM  - NOMBRE A VALIDAR
+      *        NOMBOK-INPUT-VALNOM  - NOMBRE CORRECTO CON EL QUE SE
+      *                               DEBE COMPARAR NOMBRE-INPUT-VALNOM
+      *        TIP-ID-INPUT-VALNOM  - TIPO DE IDENTIFICACION A VALIDAR
+      *    SALIDAS:
+      *        MATCH-OK-OUT-VALNOM  - 0-NO HUBO       1-HUBO
+      *******************************************************************
+      * RMB0002   * VAL001: SE MEJORA LA VALIDACION DE NOMBRES EN PERSONAS
+      * R.MARTINEZ* JURIDICAS
+      * DIC.2002  *
+      *******************************************************************
+      * GJC0003    * VALMEJ :SE CREAN ANUEVOS CAMPOS PARA MEJORAR LA VALIDACION
+      * G.JIMENEZ  * DE NIT. PARA MEJORA TAMBIEN SE AMPLIA TAMANO DE VARIABLES
+      * MARZO/2003 * PARA CEDULAS, EL COMODIN QUE USUALMENTE CORRESPONDE A LA N
+      *            * SOLO SE COMPARA CONTRA N O CONTRA BLANCOS
+      *************************************************************************
+      * GJC0004    * VALME1 :CON EL FIN DE AFINAR AUN MAS EL PROCESO DE VALIDA-
+      * R.MARTINEZ * CION DE NOMBRES, EN EL MATCH A PROXIMADO DE PERSONAS NATU-
+      * G.JIMENEZ  * RALES SE CAMBIA EL CALCULO FINAL PARA DETERMINAR SI UN BLO-
+      * MARZO/2003 * QUE ES O NO VALIDO. PARA QUE UN NOMBRE QUE VENGA NUMERICO
+      *            * NO SE CONVIERTA EN COMODIN, EN LAS SUSTITUCIONES POR *
+      *            * SE VALIDA QUE EL CONTENIDO NO SEA NUMERICO.
+      *************************************************************************
+      * GJC0005    * VLNM01: LOS PROGRAMAS ABORTAN CUANDO ALGUNO DE LOS
+      * G.JIMENEZ  *         PARAMETROS DE UN SUBSTRING QUEDA EN 0 O EN
+      * NOV/2005   *         UN NUMERO MENOR QUE 0. EJ: NOMBRE(I:J) DONDE I O
+      *            *         J ES 0.
+      *************************************************************************
+
        10000-MATCH-NOMBRES-VALNOM.
-REMARK******************************************************************
-REMARK*10000-MATCH-NOMBRE-VALNOM.
-REMARK* SE BUSCA DETERMINAR SI EL NOMBRE DE LA PERSONA CONSULTADA HACE
-REMARK*       CON EL NOMBRE ENVIADO EN LA CONSULTA.
-REMARK******************************************************************
-           MOVE 0 TO MATCH-OK-OUT-VALNOM.
-           MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
-           IF TIP-ID-INPUT-VALNOM  = 2
+      ******************************************************************
+      * Se busca determinar si el nombre de la persona consultada hace
+      * con el nombre enviado en la consulta.
+      ******************************************************************
+           MOVE 0 TO MATCH-OK-OUT-VALNOM
+           MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM
+      *    caso nombres de empresas
+           IF TIP-ID-INPUT-VALNOM = 2
+      *        normalización del nombre de empresa
                INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
-VAL001           " S.A. " BY "      ",                                  RMB0002
-VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002
-VAL001           " LIMITADA " BY "          ",                          RMB0002
-VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002
-VAL001           " INVERSIONES " BY "             ",                    RMB0002
-VAL001           " EMPRESA " BY "         ",                            RMB0002
-VAL001           " CORPORACION " BY "             ",                    RMB0002
-VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002
-VAL001           " S " BY "   ", " A " BY "   "                         RMB0002
-VALMEJ           " Y " BY "   "                                         GJC0003
-VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
-VAL001           " S.A. " BY "      ",                                  RMB0002
-VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002
-VAL001           " LIMITADA " BY "          ",                          RMB0002
-VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002
-VAL001           " INVERSIONES " BY "             ",                    RMB0002
-VAL001           " EMPRESA " BY "         ",                            RMB0002
-VAL001           " CORPORACION " BY "             ",                    RMB0002
-VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002
-VAL001           " S " BY "   ", " A " BY "   "                         RMB0002
-VALMEJ           " Y " BY "   "                                         GJC0003
-VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003
-VALMEJ                "." BY " ","-" BY " ",                            GJC0003
-VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003
-VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003
-VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  GJC0003
-VALMEJ                "." BY " ","-" BY " ",                            GJC0003
-VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003
-VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003
+VAL001           " S.A. " BY "      ",                                  
+VAL001           "." BY " ", " LTDA " BY "      ",                      
+VAL001           " LIMITADA " BY "          ",                          
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      
+VAL001           " INVERSIONES " BY "             ",                    
+VAL001           " EMPRESA " BY "         ",                            
+VAL001           " CORPORACION " BY "             ",                    
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+VAL001           " S " BY "   ", " A " BY "   "                         
+VALMEJ           " Y " BY "   "                                         
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  
+VAL001           " S.A. " BY "      ",                                  
+VAL001           "." BY " ", " LTDA " BY "      ",                      
+VAL001           " LIMITADA " BY "          ",                          
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      
+VAL001           " INVERSIONES " BY "             ",                    
+VAL001           " EMPRESA " BY "         ",                            
+VAL001           " CORPORACION " BY "             ",                    
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+VAL001           " S " BY "   ", " A " BY "   "                         
+VALMEJ           " Y " BY "   "                                         
+VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  
+VALMEJ                "." BY " ","-" BY " ",                            
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  
+VALMEJ         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  
+VALMEJ                "." BY " ","-" BY " ",                            
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  
                MOVE NOMBRE-AUX-VALNOM TO NOMBRE-INPUT-VALNOM
            ELSE
-              INSPECT CADENA-VALNOM    REPLACING ALL
+      *        normalización del nombre de persona
+              INSPECT CADENA-VALNOM REPLACING ALL
 VALME1                 "." BY " ","-" BY " ", "," BY " ",
                       "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
                       "Y" BY "G","H" BY "G","I" BY "G",
                       " DE " BY "    "," LA " BY "    ",
                       " DEL " BY "     "
-VAL001        INSPECT CADENA-VALNOM    REPLACING ALL                    RMB0002
+VAL001        INSPECT CADENA-VALNOM REPLACING ALL                    
 VALME1                 "." BY " ","-" BY " ", "," BY " ",
-VAL001                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      RMB0002
-VAL001                "Y" BY "G","H" BY "G","I" BY "G",                 RMB0002
-VAL001                " DE " BY "    "," LA " BY "    ",                RMB0002
-VAL001                " DEL " BY "     "                                RMB0002
-                      PERFORM VARYING I-VALNOM FROM 1 BY 1
-                              UNTIL I-VALNOM >= 66
-                        IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
-VALME1                      AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
-                           MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
-                        END-IF
-                      END-PERFORM
+VAL001                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      
+VAL001                "Y" BY "G","H" BY "G","I" BY "G",                 
+VAL001                " DE " BY "    "," LA " BY "    ",                
+VAL001                " DEL " BY "     "                                
+              PERFORM VARYING I-VALNOM FROM 1 BY 1 UNTIL I-VALNOM >= 66
+                  IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
+VALME1            AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
+                      MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+                  END-IF
+              END-PERFORM
            END-IF.
            MOVE SPACES TO VECTOR-INPUT-VALNOM.
-           UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO
-                        BASURA-VALNOM
+           UNSTRING CADENA-VALNOM DELIMITED BY ALL " " INTO
+            BASURA-VALNOM
             VM-INPUT-VALNOM(1) VM-INPUT-VALNOM(2) VM-INPUT-VALNOM(3)
             VM-INPUT-VALNOM(4) VM-INPUT-VALNOM(5)
             VM-INPUT-VALNOM(6) VM-INPUT-VALNOM(7) VM-INPUT-VALNOM(8)
@@ -1521,51 +1504,50 @@ VALME1                      AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
             VM-INPUT-VALNOM(19)
             VM-INPUT-VALNOM(20)
       ******************PREPARA EL NOMBRE CORRECTO DEL ARCHIVO *********
-           MOVE NOMBOK-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.
-           IF TIP-ID-INPUT-VALNOM  NOT = 2
+           MOVE NOMBOK-INPUT-VALNOM TO NOMBRE-AUX-VALNOM
+           IF TIP-ID-INPUT-VALNOM NOT = 2
               INSPECT NOMBRE-AUX-VALNOM REPLACING ALL
 VALME1                 "." BY " ","-" BY " ","," BY " ",
                       "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",
                       "Y" BY "G","H" BY "G","I" BY "G"
-                      PERFORM VARYING I-VALNOM FROM 1 BY 1
-                              UNTIL I-VALNOM >= 66
-                        IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
-VALME1                      AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
-                           MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
-                        END-IF
-                      END-PERFORM
+              PERFORM VARYING I-VALNOM FROM 1 BY 1 UNTIL I-VALNOM >= 66
+                  IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETIC
+VALME1                AND VNOM-AUX-VALNOM(I-VALNOM) NOT NUMERIC
+                      MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)
+                  END-IF
+              END-PERFORM
            ELSE
-VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
-VAL001           " S.A. " BY "      ",                                  RMB0002
-VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002
-VAL001           " LIMITADA " BY "          ",                          RMB0002
-VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002
-VAL001           " INVERSIONES " BY "             ",                    RMB0002
-VAL001           " EMPRESA " BY "         ",                            RMB0002
-VAL001           " CORPORACION " BY "             ",                    RMB0002
-VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002
-VAL001           " S " BY "   ", " A " BY "   "                         RMB0002
-VALMEJ           " Y " BY "   "                                         GJC0003
-VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  RMB0002
-VAL001           " S.A. " BY "      ",                                  RMB0002
-VAL001           "." BY " ", " LTDA " BY "      ",                      RMB0002
-VAL001           " LIMITADA " BY "          ",                          RMB0002
-VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      RMB0002
-VAL001           " INVERSIONES " BY "             ",                    RMB0002
-VAL001           " EMPRESA " BY "         ",                            RMB0002
-VAL001           " CORPORACION " BY "             ",                    RMB0002
-VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",RMB0002
-VAL001           " S " BY "   ", " A " BY "   "                         RMB0002
-VALMEJ           " Y " BY "   "                                         GJC0003
-VALMEJ        INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                   GJC0003
-VALMEJ                "." BY " ","-" BY " ",                            GJC0003
-VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      GJC0003
-VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  GJC0003
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  
+VAL001           " S.A. " BY "      ",                                  
+VAL001           "." BY " ", " LTDA " BY "      ",                      
+VAL001           " LIMITADA " BY "          ",                          
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      
+VAL001           " INVERSIONES " BY "             ",                    
+VAL001           " EMPRESA " BY "         ",                            
+VAL001           " CORPORACION " BY "             ",                    
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+VAL001           " S " BY "   ", " A " BY "   "                         
+VALMEJ           " Y " BY "   "                                         
+VAL001         INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                  
+VAL001           " S.A. " BY "      ",                                  
+VAL001           "." BY " ", " LTDA " BY "      ",                      
+VAL001           " LIMITADA " BY "          ",                          
+VAL001           " CIA " BY "     ", " COMPA/IA " BY "          ",      
+VAL001           " INVERSIONES " BY "             ",                    
+VAL001           " EMPRESA " BY "         ",                            
+VAL001           " CORPORACION " BY "             ",                    
+VAL001           " DE " BY "    ", " LA " BY "    ", " DEL " BY "     ",
+VAL001           " S " BY "   ", " A " BY "   "                         
+VALMEJ           " Y " BY "   "                                         
+VALMEJ        INSPECT NOMBRE-AUX-VALNOM REPLACING ALL                   
+VALMEJ                "." BY " ","-" BY " ",                            
+VALMEJ                "C" BY "S","Z" BY "S","J" BY "G","V" BY "B",      
+VALMEJ                "Y" BY "G","H" BY "G","I" BY "G"                  
                MOVE NOMBRE-AUX-VALNOM TO NOMBOK-INPUT-VALNOM
            END-IF.
            MOVE SPACES TO VECTOR-OK-VALNOM.
-           UNSTRING CADENA-VALNOM      DELIMITED BY ALL " " INTO
-                        BASURA-VALNOM
+           UNSTRING CADENA-VALNOM DELIMITED BY ALL " " INTO
+            BASURA-VALNOM
             VM-OK-VALNOM(1) VM-OK-VALNOM(2) VM-OK-VALNOM(3)
             VM-OK-VALNOM(4) VM-OK-VALNOM(5)
             VM-OK-VALNOM(6) VM-OK-VALNOM(7) VM-OK-VALNOM(8)
@@ -1595,7 +1577,7 @@ REMARK***********HACE LA VALIDACION BLOQUE A BLOQUE********************
                           FOR CHARACTERS BEFORE INITIAL "N"
                   END-IF
                   IF M-VALNOM > 0 AND < 15 AND I-VALNOM < 20
-VLNM01               AND (14 - M-VALNOM > 0)                            GJC0005
+VLNM01               AND (14 - M-VALNOM > 0)                            
                      COMPUTE INI-VALNOM = M-VALNOM + 2
                      COMPUTE LON-VALNOM = 14 - M-VALNOM
                      MOVE VM-OK-VALNOM(J-VALNOM) TO PEDAZO-VALNOM
@@ -1631,13 +1613,13 @@ VLNM01               AND (14 - M-VALNOM > 0)                            GJC0005
                  MOVE 1 TO MATCH-OK-OUT-VALNOM
               END-IF
            END-IF.
-REMARK**********************************************************************
-REMARK*10100-MATCH-APROXIMADO.
-REMARK*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOS
-REMARK*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CON
-REMARK*     LOS TIPOS DE IDENTIFICACION 1, 3 Y 4.
-REMARK**********************************************************************
+
        10100-MATCH-APROXIMADO.
+      ******************************************************************
+      * En esta rutina se validan los bloques que no pasaron completos
+      * con una aproximación. Esta rutina funciona correctamente con
+      * los tipos de identificación 1, 3 y 4.
+      ******************************************************************
            IF BLOQOK-AUX-VALNOM > 0
               MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOM
            ELSE
@@ -1651,13 +1633,13 @@ REMARK**********************************************************************
                MOVE 1 TO K-VALNOM
                MOVE 1 TO L-VALNOM
                IF VM-INPUT-VALNOM(I-VALNOM) NOT = SPACES AND
-                  VM-OK-VALNOM   (J-VALNOM) NOT = SPACES
+                  VM-OK-VALNOM (J-VALNOM) NOT = SPACES
                   PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
                     IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
-                       VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)
-VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003
-VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003
-VALMEJ                      OR = "N"))                                  GJC0003
+                       VMM-OK-VALNOM (J-VALNOM,K-VALNOM)
+VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    
+VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   
+VALMEJ                      OR = "N"))                                  
                        IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACES
                           ADD 1 TO LETRAS-OK-VALNOM
                           ADD 1 TO K-VALNOM
@@ -1679,10 +1661,10 @@ VALMEJ                      OR = "N"))                                  GJC0003
                   MOVE 1 TO L-VALNOM
                   PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15
                     IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =
-                       VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)
-VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003
-VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003
-VALMEJ                      OR = "N"))                                  GJC0003
+                       VMM-OK-VALNOM (J-VALNOM,K-VALNOM)
+VALMEJ                 OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    
+VALMEJ                 AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   
+VALMEJ                      OR = "N"))                                  
                        IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT = SPACES
                           ADD 1 TO LETRAS-OK2-VALNOM
                           ADD 1 TO K-VALNOM
@@ -1705,58 +1687,50 @@ VALMEJ                      OR = "N"))                                  GJC0003
                   MOVE LETRAS-OK2-VALNOM TO LETRAS-OK-VALNOM
                END-IF
                IF LETRAS-OK-VALNOM > 0
-                  MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOM
-                  INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYING
+                   MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOM
+                   INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYING
                           TOTLET-INP-VALNOM
                           FOR CHARACTERS BEFORE INITIAL " "
-                  INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYING
+                   INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYING
                           TOTLET-OK-VALNOM
                           FOR CHARACTERS BEFORE INITIAL " "
-                  MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOM
-                  IF TOTLET-OK-VALNOM >= 3
-                     COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /
+                   MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOM
+                   IF TOTLET-OK-VALNOM >= 3
+                       COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /
                                              TOTLET-OK-VALNOM
-                  END-IF
-                  IF TOTLET-INP-VALNOM >= 3
-                     COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /
+                   END-IF
+                   IF TOTLET-INP-VALNOM >= 3
+                       COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /
                                              TOTLET-INP-VALNOM
-                  END-IF
-                  IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOM
-                     COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /
+                   END-IF
+                   IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOM
+                       COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /
                                        TOTLET-OK-VALNOM
-                  ELSE
-                     COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /
+                   ELSE
+                       COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /
                                        TOTLET-INP-VALNOM
-                  END-IF
-VALME1            IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=
-VALME1                                  APROX-TOT-VALNOM) AND
-VALME1                 A-VALNOM >= 63
-VALME1****   display "%TOT=",POR-TOT-VALNOM, " %INP=", POR-INP-VALNOM,
-VALME1****           "A-VALNOM=", A-VALNOM
-VALME1*****       IF (POR-TOT-VALNOM >= APROX-TOT-VALNOM AND
-VALME1*****           POR-INP-VALNOM >= APROX-INP-VALNOM ) OR
-VALME1*****          ((POR-TOT-VALNOM >= APROX-TOT-VALNOM OR
-VALME1*****            POR-INP-VALNOM >= APROX-INP-VALNOM ) AND
-VALME1*****            A-VALNOM >= 70)
-                     ADD 1 TO BLOQOK-AUX-VALNOM
-                     MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
-                                 VM-INPUT-VALNOM(I-VALNOM)
-                  END-IF
+                   END-IF
+VALME1             IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=
+VALME1             APROX-TOT-VALNOM) AND A-VALNOM >= 63
+                       ADD 1 TO BLOQOK-AUX-VALNOM
+                       MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)
+                       VM-INPUT-VALNOM(I-VALNOM)
+                   END-IF
                END-IF
                ADD 1 TO J-VALNOM
              END-PERFORM
              ADD 1 TO I-VALNOM
            END-PERFORM.
-REMARK**********************************************************************
+REMARK******************************************************************
 REMARK*10100-MATCH-APROX-EMPRESAS
 REMARK*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOS
 REMARK*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CON
 REMARK*     LOS TIPOS DE IDENTIFICACION 2.
-REMARK**********************************************************************
+REMARK******************************************************************
        10100-MATCH-APROX-EMPRESAS.
          MOVE ZEROS TO TOTLET-INP-VALNOM
          MOVE ZEROS TO LETRAS-OK2-VALNOM
-VALMEJ    MOVE ZEROS TO A-VALNOM                                        GJC0003
+VALMEJ    MOVE ZEROS TO A-VALNOM                                        
          MOVE 1 TO K-VALNOM
          PERFORM UNTIL K-VALNOM > 65
            MOVE K-VALNOM  TO I-VALNOM
@@ -1795,39 +1769,157 @@ VALMEJ    MOVE ZEROS TO A-VALNOM                                        GJC0003
          IF A-VALNOM >= 75
              ADD 1 TO BLOQOK-AUX-VALNOM
          END-IF.
-VALMEJ    MOVE 0 TO K-VALNOM                                            GJC0003
-VALMEJ   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOM                    GJC0003
-VALMEJ      INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOM                GJC0003
-VALMEJ      PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    GJC0003
-VALMEJ               IF V-NOMBRE-VALNOM(J-VALNOM) <> " "                GJC0003
-VALMEJ                 MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     GJC0003
-VALMEJ                   TO I-VALNOM                                    GJC0003
-VALMEJ                 ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)         GJC0003
-VALMEJ              END-IF                                              GJC0003
-VALMEJ               IF V-NOMBOK-VALNOM(J-VALNOM) <> " "                GJC0003
-VALMEJ                 MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     GJC0003
-VALMEJ                    TO I-VALNOM                                   GJC0003
-VALMEJ                 ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)            GJC0003
-VALMEJ              END-IF                                              GJC0003
-VALMEJ      END-PERFORM                                                 GJC0003
-VALMEJ      MOVE 0 TO I-VALNOM                                          GJC0003
-VALMEJ       PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  GJC0003
-VALMEJ         IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0                     GJC0003
-VALMEJ            ADD 1 TO I-VALNOM                                     GJC0003
-VALMEJ            IF CONT-LET-OK-VALNOM(J-VALNOM) <                     GJC0003
-VALMEJ               CONT-LET-INPUT-VALNOM(J-VALNOM)                    GJC0003
-VALMEJ               COMPUTE L-VALNOM = L-VALNOM + 100                  GJC0003
-VALMEJ            ELSE                                                  GJC0003
-VALMEJ               COMPUTE L-VALNOM = L-VALNOM +                      GJC0003
-VALMEJ                                  (CONT-LET-INPUT-VALNOM(J-VALNOM)GJC0003
-VALMEJ                           *  100 /CONT-LET-OK-VALNOM(J-VALNOM))  GJC0003
-VALMEJ            END-IF                                                GJC0003
-VALMEJ         END-IF                                                   GJC0003
-VALMEJ      END-PERFORM                                                 GJC0003
-VALMEJ      COMPUTE K-VALNOM = L-VALNOM/I-VALNOM                        GJC0003
-VALMEJ       IF (A-VALNOM >= 40 AND K-VALNOM > 80) OR                   GJC0003
-VALMEJ         ((A-VALNOM >= 35 AND A-VALNOM < 40) AND K-VALNOM > 85) ORGJC0003
-VALMEJ         ((A-VALNOM >= 25 AND A-VALNOM < 35) AND K-VALNOM = 100)  GJC0003
-VALMEJ         ADD 1 TO BLOQOK-AUX-VALNOM                               GJC0003
-VALMEJ       END-IF                                                     GJC0003
-VALMEJ   END-IF.                                                        GJC0003
+VALMEJ    MOVE 0 TO K-VALNOM                                            
+VALMEJ   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOM                    
+VALMEJ      INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOM                
+VALMEJ      PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    
+VALMEJ               IF V-NOMBRE-VALNOM(J-VALNOM) <> " "                
+VALMEJ                 MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     
+VALMEJ                   TO I-VALNOM                                    
+VALMEJ                 ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)         
+VALMEJ              END-IF                                              
+VALMEJ               IF V-NOMBOK-VALNOM(J-VALNOM) <> " "                
+VALMEJ                 MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     
+VALMEJ                    TO I-VALNOM                                   
+VALMEJ                 ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)            
+VALMEJ              END-IF                                              
+VALMEJ      END-PERFORM                                                 
+VALMEJ      MOVE 0 TO I-VALNOM                                          
+VALMEJ       PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  
+VALMEJ         IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0                     
+VALMEJ            ADD 1 TO I-VALNOM                                     
+VALMEJ            IF CONT-LET-OK-VALNOM(J-VALNOM) <                     
+VALMEJ               CONT-LET-INPUT-VALNOM(J-VALNOM)                    
+VALMEJ               COMPUTE L-VALNOM = L-VALNOM + 100                  
+VALMEJ            ELSE                                                  
+VALMEJ               COMPUTE L-VALNOM = L-VALNOM +                      
+VALMEJ               (CONT-LET-INPUT-VALNOM(J-VALNOM)
+VALMEJ               *  100 / CONT-LET-OK-VALNOM(J-VALNOM))  
+VALMEJ            END-IF                                                
+VALMEJ         END-IF                                                   
+VALMEJ       END-PERFORM                                             
+VALMEJ       COMPUTE K-VALNOM = L-VALNOM/I-VALNOM                     
+VALMEJ       IF (A-VALNOM >= 40 AND K-VALNOM > 80) OR                   
+VALMEJ         ((A-VALNOM >= 35 AND A-VALNOM < 40) AND K-VALNOM > 85) OR
+VALMEJ         ((A-VALNOM >= 25 AND A-VALNOM < 35) AND K-VALNOM = 100)  
+VALMEJ         ADD 1 TO BLOQOK-AUX-VALNOM                               
+VALMEJ       END-IF                                                     
+VALMEJ     END-IF.                                                     
+
+
+       150-ABRIR-ARCHIVOS.
+      ******************************************************************
+      * SE ABRE CADA UNO DE LOS ARCHIVOS QUE USA EL PROGRAMA PARA SU
+      * EJECUCION:ICDIAN,CEDULAS,REG01, REG02,ICDAS,ICBTCO,ICBCLA,ICBCIU
+      * ICT40D.DAT,DCVAL,DCINIC,ICMUNI,ICI40N.PRN
+      * PREPARA EL LA LLAVE DEL ARCHIVO ICBTCO PARA IDENTIFICAR CON QUE
+      * LLAVE MAYOR QUE 20000000 INICIA LA ESCRITURA DEL MISMO
+      ******************************************************************
+           OPEN INPUT BDIIREGI.
+      *    DISPLAY "*-------------------------------------------------*"
+      *    DISPLAY "|  PROCESO VALIDACION USANDO CUENTAS SIN VALIDAR  |"
+      *    DISPLAY "*-------------------------------------------------*"
+           DISPLAY "!!........EL ORDEN DE LOS PARAMETROS ES ........!!"
+MODBD2     DISPLAY "!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!"
+           ACCEPT W-PARAMETROS   FROM COMMAND-LINE
+           UNSTRING W-PARAMETROS DELIMITED BY SPACES INTO
+                                                     W-ENT-NOMBRE,
+                                                     W-VAL-NOMBRE,
+                                                     W-INVAL-NOMBRE,
+                                                     W-TARIFA,
+                                                     W-BLOQUES,
+                                                     W-DERECHOS
+           END-UNSTRING
+      *    controla cant de parámetros por valor, debería usar el COUNT
+      *    de UNSTRING
+           IF W-TARIFA = ZEROS
+           or W-ENT-NOMBRE = SPACES
+           or W-VAL-NOMBRE = SPACES
+           or W-INVAL-NOMBRE = SPACES
+R7094A     or W-BLOQUES > 4
+               DISPLAY "!!!!!!    FALTA ALGUN PARAMETRO  !!!!!!! "
+               STOP RUN
+           END-IF
+R7094A     IF W-BLOQUES = 0
+R7094A         DISPLAY "!!..EJECUCION SIN VALIDAR NOMBRES       .....!!"
+R7094A     END-IF
+
+PJV011     INITIALIZE W-VAL-NOMBRE-REP
+PJV011     STRING W-VAL-NOMBRE DELIMITED BY "."
+PJV011     ".vre" DELIMITED BY SIZE INTO W-VAL-NOMBRE-REP
+PJV011     END-STRING
+
+           MOVE W-ENT-NOMBRE TO W-SORT-NOM-ENT
+
+           MOVE W-ENT-NOMBRE TO W-SORT-NOM-ENT W-SORT-NOM-SAL
+           W-LINEAS-NOM-ENT
+      *    DISPLAY "============================================"
+           DISPLAY "REGISTROS RECIBIDOS ORIGINALMENTE:"
+           CALL "SYSTEM" USING W-COMANDO-LINEAS
+      *    DISPLAY " "
+           DISPLAY "ARCHIVO: " W-LINEAS-NOM-ENT
+      *    DISPLAY " "
+           CALL "SYSTEM" USING W-COMANDO-SORT
+           IF RETURN-CODE <> 0
+              DISPLAY "ERROR ORDENANDO UNICOS " W-ENT-NOMBRE
+              STOP RUN
+           END-IF
+           OPEN INPUT  ENTRADA
+                       BDIIDIAN
+                       BDIIDAS
+                       BDIIALE
+                       MUNICIPIOS
+                       CLAVE
+                       ABD14
+XXXXXX     OPEN INPUT  SECUENCIAL
+           OPEN OUTPUT VALIDAS
+                       INCONS
+PJV011                 VALIDAS-REP
+           MOVE 29999999 TO LLAVE-SEC
+           START SECUENCIAL KEY < LLAVE-SEC INVALID KEY
+               DISPLAY " ERROR EN START DE ICBTCO  " LLAVE-SEC
+               MOVE 1 TO FINS
+           END-START
+           IF FINS = 1
+               MOVE TOPE-INI-LLAVE7 TO LLAVE7
+           ELSE
+              READ SECUENCIAL PREVIOUS AT END
+                  DISPLAY " ERROR LEYENDO REGISTRO PREVIO DE ICBTCO  "
+                  LLAVE-SEC
+                  MOVE 1 TO FINS
+              END-READ
+              IF FINS = 1
+                  MOVE TOPE-INI-LLAVE7 TO LLAVE7
+              ELSE
+                  MOVE LLAVE-SEC TO LLAVE7
+                  IF LLAVE7-1D NOT = 2
+                      MOVE 2     TO LLAVE7-1D
+                      MOVE ZEROS TO LLAVE7-FILLER
+                  END-IF
+               END-IF
+           END-IF.
+
+           READ ENTRADA AT END
+               MOVE 1 TO FIN-ENTRADA
+           NOT AT END
+               INSPECT NUMID-X-E REPLACING ALL " " BY "0"
+               INSPECT TIPOID-X-E REPLACING ALL "0" BY "1"
+           END-READ.
+      *    Proceso de la "línea de comando" para omitir la validación
+      *    de los nombres cuando el archivo es 1-11
+R7094A     IF NOMBRE-E = "VALIDAR=NO" AND FIN-ENTRADA = 0
+R7094A        MOVE 0 TO W-BLOQUES
+R7094A        DISPLAY "Registro  control==> 000001 (VALIDAR=NO)"
+R7094A        MOVE 0 TO W-BLOQUES
+R7094A        READ ENTRADA AT END
+R7094A            MOVE 1 TO FIN-ENTRADA 
+R7094A        NOT AT END
+R7094A            INSPECT NUMID-X-E REPLACING ALL " " BY "0"
+R7094A            INSPECT TIPOID-X-E REPLACING ALL "0" BY "1"
+R7094A        END-READ
+R7094A     ELSE
+      *        $$$$ Ambiguo: no es el reg de control y/o no es EOF
+R7094A         DISPLAY "Registro  control==> 000000 (VALIDAR=NO)"
+R7094A     END-IF.
+      *    $$$$ no está opened ...
+           CLOSE CLAVE ABD14.

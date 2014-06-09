@@ -1,0 +1,1376 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.06 12:56:46 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri Jun  6 09:38:22 2014 from 172.16.10.44
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>ma
+/d/iccol/desarrollo/macros>te
+/d/iccol/desarrollo/temporales>ls PER*
+PERipley20140603.DATINF   PERipley20140603.val      PERipley20140604.PREDHD
+PERipley20140603.ESTADI   PERipley20140603.vre      PERipley20140604.prn
+PERipley20140603.inc      PERipley20140603VALI.prn  PERipley20140604.ULTIMO
+PERipley20140603.log      PERipley20140604.DATINF   PERipley20140604.val
+PERipley20140603.PREDHD   PERipley20140604.ESTADI   PERipley20140604.vre
+PERipley20140603.prn      PERipley20140604.inc      PERipley20140604VALI.prn
+PERipley20140603.ULTIMO   PERipley20140604.log
+/d/iccol/desarrollo/temporales>ma
+/d/iccol/desarrollo/macros>vi h sh_CARGAJUR
+"sh_CARGAJUR" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh_CARGAJUR" [New file]:q/d/iccol/desarrollo/macros>^[  /d/iccol/desarrollo/macros>vi sh _CARGAJURv sh _CARGAJURi sh _CARGAJURri sh _CARGAJUR-i sh _CARGAJURui sh _CARGAJURi sh _CARGAJUR               /d/iccol/desarrollo/macros>vi sh-
+"sh-CARGAJUR" 238 lines, 8099 characters #sh-CARGAJUR.v.01.0001 grabado como /d/iccol/desarrollo/macros/sh-CARGAJUR
+#**********************************************************
+#ENTIDAD:DATACREDITO*
+#SHELL-ID:     sh-CARGAJUR*
+#DATE-WRITTEN: MAY/2014*
+#AUTHOR:GLOBANT*
+#******************************************************************
+# 16-may-2014| CQnnnn - CARGA DE ARCHIVO EXTERNO*
+# Globant.   |*
+#******************************************************************
+#
+#*========================================================*
+#*DEFINICION DE VARIABLES Y FUNCIONES
+#*========================================================*
+raya="---------------------------------------------------"
+codsus="000001"
+P_REAL_FALSO="1"
+P_PROCESO="#";
+P_NombreArchivo=""
+
+
+GetFechaSistema()
+{
+#*-----------------------------------------------------------------------------*
+# Arma y muestra la fecha del sistema y la máquina
+#*-----------------------------------------------------------------------------*
+    P_SERVER_DEV="172.24.6.154"
+    HoraHoy=`date '+%H:%M'`
+    FECHOY_A4MMDD=`date '+%Y%m%d'`
+    FECHOY_ANOMES=`date '+%Y%m%d' | cut -c 1-6`
+    P_FCORTE=$FECHOY_ANOMES
+    P_MAQUINA=`who am i | cut -c 39-50`
+    P_FCORTE=$FECHOY_ANOMES
+    echo $raya
+    echo " "
+    echo "D A T A C R E D I T O"
+    echo " "
+    echo "Cargue de archivo de JURAD"
+    echo " "
+    echo "Fecha:" $FECHOY_A4MMDD $HoraHoy " en" $P_MAQUINA
+    echo " "
+}
+
+GetRealOFalso()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua si el tipo de proceso es REAL o EN FALSO
+#*-----------------------------------------------------------------------------*
+    echo"sh-CARGAJUR" 238 lines, 8099 characters/oesvnoAddress search hit BOTTOM without matching pattern#*-----------------------------------------------------------------------------*echo
+echo $raya
+    echo "PROCESO REAL O EN FALSO"
+    echo $raya
+    P_REAL_FALSO="#";
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo "1) Proceso en falso"
+echo " "
+echo "2) Proceso real"
+echo " "
+echo "3) Salir"
+echo " "
+echo "opción (123)   ---> \c"
+read P_REAL_FALSO
+if [ $P_REAL_FALSO != "1" ] && [ $P_REAL_FALSO != "2" ] && [ $P_REAL_FALSO != "3" ]
+then
+echo "\n\tlas opciones válidas son 1, 2 o 3"
+else
+endLoop=1
+fi
+    done
+}
+
+GetTipoDeProceso()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua el tipo de proceso: carga inicial, actualización, refresque total ...
+#*-----------------------------------------------------------------------------*
+    echo
+echo $raya
+    echo "TIPO DE PROCESO"
+    echo $raya
+    endLoop=0
+    P_PROCESO="##"
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo "01) Envio Original  - Carga TOTAL 1a vez"
+echo " "
+echo "02) Archivo Semanal - Carga PARCIAL"
+echo " "
+echo "03) Archivo Mensual - Carga PARCIAL"
+echo " "echo "03) Archivo Mensual - Carga PARCIAL"echo " "
+echo "04) Refresque Total - Carga TOTAL"
+echo " "
+echo "00) Salir"
+echo " "
+echo "opción (01 02 03 04 00)   ---> \c"
+read P_PROCESO
+if [ -z "$P_PROCESO" ]
+then
+echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
+else
+if [ $P_PROCESO != "01" ] && [ $P_PROCESO != "02" ] && [ $P_PROCESO != "03" ] && [ $P_PROCESO
+!= "04" ] && [ $P_PROCESO != "00" ]then
+echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"else
+endLoop=1
+fi
+fi
+    done
+}
+
+GetNombreDelArchivo()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua el nombre del archivo
+#*-----------------------------------------------------------------------------*
+    echo
+echo $raya
+    echo "NOMBRE DEL ARCHIVO"
+    echo $raya
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo " Ingrese el nombre del archivo o enter para salir:"
+echo ""$codsus"100ddmmaa01"$P_PROCESO".txt"
+#JJJJJJaaaDDMMAAbbXX.txt
+echo " ---> \c"
+read P_NombreArchivo
+if [ -z "$P_NombreArchivo" -o "$P_NombreArchivo" == "" ]
+then
+endLoop=1
+else
+if [ ! -s $TEMPORALES"/"$P_NombreArchivo ]then
+echo "no se encuentra el archivo " $P_NombreArchivothen
+echo "no se encuentra el archivo " $P_NombreArchivoelse
+#el tipo de proceso 01/02/03/04 debe coincidir con el que
+#está en el nombre del arch
+#separa los dos caractares justo antes de la extensión ".txt"auxTxt=`echo $P_NombreArchivo | sed 's/.*\\(..\\)\\.txt/\\1/'`
+#echo $auxTxt " debería ser " $P_PROCESOif [ $P_PROCESO == $auxTxt ]then
+#el código de suscriptor al principio del nombre del
+#archivo debe ser el de JURADauxTxt=`echo $P_NombreArchivo | sed 's/\\(......\\).*/\\1/'`
+#echo $auxTxt " debería ser " $codsusif [ $codsus == $auxTxt ]then
+endLoop=1
+else
+echo "El código de suscriptor en el nombre del archivo no coincide"fi
+else
+echo "El nombre del archivo no condice con el tipo de proceso" $P_PROCESOfi
+fi
+fi
+    done
+}
+
+
+#*========================================================*
+#*PROCESO*
+#*========================================================*
+#*FASE 1: PIDE PARAMETROS*
+#*========================================================*
+echo "........................................."
+clear
+GetFechaSistema
+GetRealOFalso
+if [ $P_REAL_FALSO -eq 3 ]
+then
+exit
+fi
+GetTipoDeProceso
+if [ $P_PROCESO -eq 00 ]
+then
+exit
+fi
+GetNombreDelArchivo
+if [ -z "$P_NombreArchivo" ]GetNombreDelArchivo
+if [ -z "$P_NombreArchivo" ]
+then
+exit
+fi
+
+# echo (esto no está refactoreado)
+# echo "+-------------------------------------------------------------+"
+# echo "+-------------------------------------------------------------+"
+# echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
+# fechab=$P_FCORTE
+# echo "+-------------------------------------------------------------+"
+# numeroreg=`wc -l < $P_NombreArchivo archivo`
+# echo
+# echo "+-------------------------------------------------------------+"
+# echo "| Registros iniciales archivo de entrada : " $numeroreg
+# echo "+-------------------------------------------------------------+"
+# cadena00=$archivo.orig
+# cp $P_NombreArchivo $cadena00
+#echo "+-------------------------------------------------------------+"
+#echo "|SEGUNDA FASE: PROCESO|"
+#echo "+-------------------------------------------------------------+"
+    echo " "
+    echo $raya
+    echo " "
+    banner CARGAJUR
+    echo " "
+    echo $raya
+    echo " Procesando $P_NombreArchivo "
+    echo "real:" $P_REAL_FALSO " tipo de proceso:" $P_PROCESO
+    nohup x CARGAJUR $P_NombreArchivo $P_REAL_FALSO >| $TEMPORALES/$P_NombreArchivo.log 2>| $TEMPORALES/$P
+_NombreArchivo.log
+    echo $raya
+    echo "RESULTADOS DEL PROCESO"
+    echo " "
+    cat $TEMPORALES/$P_NombreArchivo.log
+    echo " "
+    cd $TEMPORALES
+    echo "Archivos en \$TEMPORALES:"
+    ls -lrt $P_NombreArchivo* >> $P_NombreArchivo.log
+    ls -lrt $P_NombreArchivo*
+    cd - > /dev/null
+    echo $raya
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "    echo " "echo " "
+    echo " "
+    echo " "
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~GetNombreDelArchivo
+if [ -z "$P_NombreArchivo" ]
+then
+exit
+fi
+
+# echo (esto no está refactoreado)
+# echo "+-------------------------------------------------------------+"
+# echo "+-------------------------------------------------------------+"
+# echo "     Fecha base (AAAAMM)     -----> ($P_FCORTE) "
+# fechab=$P_FCORTE
+# echo "+-------------------------------------------------------------+"
+# numeroreg=`wc -l < $P_NombreArchivo archivo`
+# echo
+# echo "+-------------------------------------------------------------+"
+# echo "| Registros iniciales archivo de entrada : " $numeroreg
+# echo "+-------------------------------------------------------------+"
+# cadena00=$archivo.orig
+# cp $P_NombreArchivo $cadena00
+#echo "+-------------------------------------------------------------+"
+#echo "|SEGUNDA FASE: PROCESO|"
+#echo "+-------------------------------------------------------------+"
+    echo " "
+    echo $raya
+    echo " "
+    banner CARGAJUR
+    echo " "
+    echo $raya
+    echo " Procesando $P_NombreArchivo "
+    echo "real:" $P_REAL_FALSO " tipo de proceso:" $P_PROCESO
+    nohup x CARGAJUR $P_NombreArchivo $P_REAL_FALSO >| $TEMPORALES/$P_NombreArchivo.log 2>| $TEMPORALES/$P
+_NombreArchivo.log
+    echo $raya
+    echo "RESULTADOS DEL PROCESO"
+    echo " "
+    cat $TEMPORALES/$P_NombreArchivo.log
+    echo " "
+    cd $TEMPORALES
+    echo "Archivos en \$TEMPORALES:"
+    ls -lrt $P_NombreArchivo* >> $P_NombreArchivo.log
+    ls -lrt $P_NombreArchivo*
+    cd - > /dev/null
+    echo $raya
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "    
+:q/d/iccol/desarrollo/macros>le   s PES*    PR ER*
+PER*: No such file or directory
+/d/iccol/desarrollo/macros>cd  te
+/d/iccol/desarrollo/temporales>ls CARGAJ*
+CARGAJ*: No such file or directory
+/d/iccol/desarrollo/temporales>typeset
+export ICREGIS
+export FECHA_AMNI
+export LC_MONETARY
+export DB2_ADMSSO
+export JH
+export LC_TIME
+export COBDB2
+export DB2_LISEXC
+export DATOS
+export VISUAL
+export VALORES
+export DBSUPER
+export SSH_TTY
+export ARCHTEMP
+export CAL_ENT
+export PATH
+export normal
+export COBIDY
+export JAVA_HOME_5
+function ERRNO
+export DB2_CONSUMIDOR
+export COLUMNS
+export TEMPORALES
+export NUM_EJEC
+export dd_ERROR_ICBNAP
+integer OPTIND
+function LINENO
+export DIRECCIONES
+export EXINIT
+export MAESTROS_ACT
+export HISTFILE
+export CLASSPATH
+export COBPATH
+export LOGNAME
+export PRESP_ENT
+export FRABDUACT
+export SORTCOMPRESS
+export SORTSPACE
+export LISTADOS
+export SCORES
+export AUDITOR
+export MAIL
+function SECONDS
+integer PPID
+export COBSW
+export MACROS
+export COBCPY
+export COBDIR
+export PS1
+export dd_ICDAS
+export COBOPT
+export AMBIENTE
+export FUENTES
+PS3
+export DATABASE
+export maquina
+export ASLMFRETRY
+PS2
+export DB2_EXTRACUPOS
+export MF
+export ACTREG
+export TERMINALES
+export DB2_NOVEDAT
+export DB2_MOVILES
+export USER
+export FACTURACION
+export dd_CEDULAS
+export rev
+export des
+export LC_MESSAGES
+export HCOBND
+export MFPLI_PRODUCT_DIR
+export LC_CTYPE
+export JAR
+export PRESP_SAL
+export ICDB_AUX
+export con
+function RANDOM
+export CVSROOT
+export COBJVM
+export MBOX
+export SHELL
+export ICBAK
+export dd_ICDIAN
+export CALIFICACION
+export EXTFH
+export JAVA_HOME
+export BD_EXTRACUPOS
+export HISTSIZE
+export LOGDIR
+export run
+export integer TMOUT
+export LOGS
+export DB2_DATACIU2
+export BD_NOVEDAT
+export path_text
+export HOME
+export LC_COLLATE
+export _
+export FRABDUVAL
+export dd_REG02
+export COPYS
+export dd_REG03
+export LC_NUMERIC
+export dd_REG01
+export DB2INSTANCE
+export BDU
+export DB2_SSO
+export MAESTROS_VAL
+export SSH_CONNECTION
+export SSH_CLIENT
+FCEDIT
+export dd_REG04
+export TERM
+export LD_LIBRARY_PATH
+export COBMODE
+export TTY
+export THREADS_FLAG
+export UTILES
+export PWD
+export SERV_CCI
+export OBJETOS
+export bold
+export TZ
+export VALIDACION
+export ENV
+export CAL_SAL
+export COBCONFIG
+export GRUPOS
+export BD_SSO
+export ACTUALIZACION
+export TRABAJO
+export JH_5
+integer MAILCHECK
+/d/iccol/desarrollo/temporales>ls 999*
+9999991000905140101.txt
+/d/iccol/desarrollo/temporales>na="9999991000905140101"
+/d/iccol/desarrollo/temporales>exho $na
+ksh: exho:  not found
+/d/iccol/desarrollo/temporales>echo $na
+9999991000905140101
+/d/iccol/desarrollo/temporales>grep -v "^T" $na.txt | cut -c2-13  >| $na.prn
+/d/iccol/desarrollo/temporales>fi $na.prn
+ksh: syntax error: `fi' unexpected
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>fi $na.prnvi $na.prn
+"9999991000905140101.prn" 27 lines, 351 characters 100000149123
+100000262135
+100000958212
+100001327130
+100002249789
+100002859753
+100002865767
+100003044362
+100003295380
+100003448867
+200800002194
+200800178009
+200811046741
+200830067928
+200860013816
+200860024151
+200860034313
+200890300546
+200890934264
+200890107487
+300600003115
+300611000446
+400000163597
+400000266423
+400000244359
+400000136711
+400000163598
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"9999991000905140101.prn" 27 lines, 351 characters:w"9999991000905140101.prn" 27 lines, 351 characters :wq/d/iccol/desarrollo/temporales>x PESVNO $na.prn $na.val $na.inc 10 2
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+27
+ARCHIVO: 9999991000905140101.prn       
+Registro  control==> 000000 (VALIDAR=NO)
+Registros Tipo 5           ==> 000000
+Registros Tipo 6           ==> 000022
+Registros Tipo 7           ==> 000005
+Registros Tipo 5 repetidos ==> 000000
+REGISTROS LEIDOS                :0000027
+REGISTROS CORRECTOS             :0000000
+REGISTROS CORRECTOS REPETIDOS   :0000000
+REGISTROS NO COINCIDEN BDIIREGI :0000006
+  REGISTROS DE FALLECIDOS         :0000000
+REGISTROS NO COINCIDEN BDIIDIAN :0000016
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+TIPO IDENTIFICACION INVALIDO    :0000000
+===================================
+ACTUALIZANDO REGIS PARA FACTURACION
+===================================
+FECHA : 20140606
+HORA  : 1106
+===================================
+ABRIENDO ARCHIVO :$DATOS/LOGPESVNO.DAT                  - 00
+RESULTADO OPERACION :$DATOS/LOGPESVNO.DAT                  - 00
+Graba Tipo 5    ==> 000000000000
+Graba Tipo 6    ==> 000000000022
+Graba Tipo 7    ==> 000000000005
+Graba Tipo 5 PJ ==> 000000000000
+TRANSAC-STATUS-WK: OK
+
+real    0m0.12s
+user    0m0.02s
+sys     0m0.02s
+
+Inicio de Programa:  2014/06/06 11:06:16
+Fin de Programa:     2014/06/06 11:06:16
+
+/d/iccol/desarrollo/temporales>echo $na
+9999991000905140101
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>echo $nax PESVNO $na.prn $na.val $na.inc 10 2/d/iccol/desarrollo/temporales>vi $na.prn                           /d/iccol/desarrollo/temporales>fi $na.prngrep -v "^T" $na.txt | cut -c2-13  >| $na.prn/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>^[[1~  /d/iccol/desarrollo/temporales>echo $nax PESVNO $na.prn $na.val $na.inc 10 2/d/iccol/desarrollo/temporales>vi $na.prn                           /d/iccol/desarrollo/temporales>fi $na.prngrep -v "^T" $na.txt | cut -c2-13  >| $na.prn/d/iccol/desarrollo/temporales>echo $na                                     /d/iccol/desarrollo/temporales>exho $nana="9999991000905140101"                        vi $na.inc
+"9999991000905140101.inc" 27 lines, 4158 characters 1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+@"9999991000905140101.inc" 27 lines, 4158 characters1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+@1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~1;00000149123;           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"9999991000905140101.inc" [Modified] line 27 of 27 --100%--                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1;00000149123;;;00000000;;;
+  ;04;
+1;00000262135;;;00000000;;;
+  ;04;
+1;00000958212;;;00000000;;;
+  ;04;
+1;00001327130;;;00000000;;;
+  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA     ;
+21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR ;
+00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR ;
+00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR ;
+21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;
+00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA  ;
+21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;
+  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;
+  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;
+  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;
+  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;
+  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;
+  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;
+  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A. ;00000000;;;
+  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;
+  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;
+  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;
+  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;
+  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;
+  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;
+  ;01;
+@1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA     ;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA  ;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A. ;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:q!/d/iccol/desarrollo/temporales>vi 4na.txt       $na.txt
+"9999991000905140101.txt" 28 lines, 2436 characters I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+I100002859753ERNESTO RICO0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+I200830067928C I GLOMA S A0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+I200860024151COMPUTEC SA0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAÑIA2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+I300600003115xxxxxx0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+I400000163598xxxxxx0330432013101002204520120406
+T 00000000027772774787861
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"9999991000905140101.txt" 28 lines, 2436 characters28 lines yanked:q/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>jobs
+/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>jobsvi $na.txtvi $na.inc
+"9999991000905140101.inc" 27 lines, 4158 characters 1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;
+   ;00000000;;;  ;04;
+1;00000958212;;
+   ;00000000;;;  ;04;
+1;00001327130;;
+   ;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN
+   ;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO
+   ;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO
+   ;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL
+   ;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY
+   ;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS
+   ;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.
+   ;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL
+   ;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA
+   ;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A
+   ;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES
+   ;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.
+   ;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.
+   ;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.
+   ;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA
+   ;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA
+   ;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO
+   ;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO
+   ;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO
+   ;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL
+   ;00000000;;;  ;01;
+@"9999991000905140101.inc" 27 lines, 4158 characters1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;
+;;  ;04;
+1;00000958212;;;00000000;
+;;  ;04;
+1;00001327130;;;00000000;
+;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (
+GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D
+.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D
+.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT
+;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVIC
+ENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA
+;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;
+;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;
+;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;
+;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;
+;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;
+;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;
+;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;
+;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;
+;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;
+;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;
+;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;
+;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;
+;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;
+;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;
+;;  ;01;
+@1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLI
+MA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUND
+INAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUND
+INAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUND
+INAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META
+;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTI
+OQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+@1;00000149123;;;00000000;;;  ;0
+4;
+1;00000262135;;;00000000;;;  ;0
+4;
+1;00000958212;;;00000000;;;  ;0
+4;
+1;00001327130;;;00000000;;;  ;0
+4;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;0
+2;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;0
+2;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;0
+2;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;0
+2;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;0
+2;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;0
+2;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;0
+1;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;0
+1;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;0
+1;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;0
+1;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;0
+1;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;0
+1;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;0
+1;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;0
+1;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;0
+1;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;0
+1;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;0
+1;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;0
+1;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;0
+1;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;0
+1;
+@1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2;
+:q/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>vi $na.incjobs      vi $na.incvi $na.   txt
+"9999991000905140101.txt" 28 lines, 2436 characters I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+I100002859753ERNESTO RICO0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+I200830067928C I GLOMA S A0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+I200860024151COMPUTEC SA0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAÑIA2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+I300600003115xxxxxx0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+I400000163598xxxxxx0330432013101002204520120406
+T 00000000027772774787861
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"9999991000905140101.txt" 28 lines, 2436 characters:q/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>^D

@@ -1,6 +1,6 @@
       $SET LIST SETTING
        IDENTIFICATION DIVISION.
-       PROGRAM-ID.    CARGAJUR2.
+       PROGRAM-ID.    CARGAJUR.
       ******************************************************************
       * Actualizacion del archivo de alertas con los datos provistos
       * por Jurad
@@ -88,6 +88,7 @@
       *    Cantidad de registros
            03 JURADT-registros          pic 9(11).
            03                           pic x.
+      * $$$$ El formato a continuación no está confirmedo, no se usa
       *    Total numero de demandas vigentes
            03 JURADT-demandas-vigentes  pic 9(7).
            03                           pic x.
@@ -127,7 +128,7 @@
       *    Fecha ultimo embargo vigente YYMMDD
            03 ERRS-embargos-fecha-ultimo pic x(8).
       *    Causa del rechazo
-           03 ERRS-causa-rechazo        pic x(300).
+           03 ERRS-causa-rechazo        pic x(61).
 
       ******************************************************************
       * Contiene los ids y nombres de personas
@@ -162,7 +163,7 @@
        copy BDIIVIDE.WS.
 
       ******************************************************************
-      * Variables relacionadas con las alertas del sistema
+      * Variables relacionadas con la la base BDIIALE de alertas online
       ******************************************************************
        copy BDIIALE.WS.
 
@@ -198,7 +199,7 @@
        01 P-command-line                pic x(80) value spaces.
        01 P-parametros.
       *    Proceso real: contiene "1" para activar, "2" por defecto
-           03 P-proceso-real            pic xx value "2".
+           03 P-proceso-real            pic x value "2".
            88 PROCESO-REAL              value "1".
 
       *    Nombre del archivo de entrada JJJJJJaaaDDMMAAbbXX.txt
@@ -270,10 +271,10 @@
            03 N-ale-no-existe           pic 9(8) value zero.
 
       *    Sumas de cantidades de demandas y embargos
-           03 N-demandas-vigentes       pic 9(5).
-           03 N-demandas-terminadas     pic 9(5).
-           03 N-embargos-vigentes       pic 9(5).
-           03 N-embargos-terminados     pic 9(5).
+           03 N-demandas-vigentes       pic 9(7).
+           03 N-demandas-terminadas     pic 9(7).
+           03 N-embargos-vigentes       pic 9(7).
+           03 N-embargos-terminados     pic 9(7).
 
       ******************************************************************
       * Armado de las lineas de alerta
@@ -385,10 +386,10 @@
            "Numero de id fuera del rango del tipo de id informado".
            03 pic x(11) value "17 0000000 ".
            03 pic x(59) value
-           "Modificación de alerta inexistente". 
+           "Modificación de alerta inexistente".
            03 pic x(11) value "18 0000000 ".
            03 pic x(59) value
-           "Eliminación de alerta inexistente". 
+           "Eliminación de alerta inexistente".
       *----------------- insertar nuevos items aqui -------------------
            03 pic x(11) value "00 0000000 ".
            03 pic x(59) value "--- fin de la lista (cod 00) ---".
@@ -415,29 +416,52 @@
            02 DIA-VAL-X                 pic 9(02).
               88 DIA-VAL                value 01   thru 31.
 
+      ******************************************************************
+      * IDs inconsistentes
+      * Es la lista de todos los IDs del archivo de inconsistentes
+      * producido por el PESVNO, junto con el cod de error.
+      * Los errores 03, 04 y 05 producen cuentas "tipo 7".
+       01  IDINC.
+      *    cantidad de IDs
+           03 IDINCn                    pic 9(7) comp-4.
+           03 IDINCmax                  pic 9(7) comp-4 value 500000.
+      *    código de error del registro actual, o 00 si no figura
+           03 IDINC-coderr-reg          pic 99 valus 00.
+      *    la lista de IDs
+           03 IDINC-item                occurs 500000 indexed IDINCx.
+               05 IDINC-id.
+                   07 IDINC-id-tipo     pic X.
+                   07 IDINC-id-numero   pic X(11).
+               05 IDINC-coderr          pic 99.
+
+
       /*****************************************************************
       ******************************************************************
        PROCEDURE DIVISION.
-      *    0000-PROGRAMA-PRINCIPAL
-      *    4000-PROCESAR-REGISTRO
-      *    4000-PROCESAR-REGISTRO-2
-      *    4100-VALIDACION-FORMAL
-      *    4200-VALIDACION-SEMANTICA
-      *    4300-MODIFICAR-BDIIALE
-      *    4300-MODIFICAR-BDIIALE-DATOS
-      *    4300-MODIFICAR-BDIIALE-I
-      *    4300-MODIFICAR-BDIIALE-M
-      *    4300-MODIFICAR-BDIIALE-E
-      *    4333-LEER-BDIIALE-RANDOM
-      *    4333-GRABAR-BDIIALE
-      *    4333-REGRABAR-BDIIALE
-      *    4333-ELIMINAR-BDIIALE
-      *    4900-GRABAR-ERROR
-      *    4320-ARMAR-TEXTO-ALERTA
-      *    1000-RUTINA-INICIAL
-      *    1001-ELIMINAR-TODO
-      *    7000-RUTINA-FINAL
-      *    9000-CANCELAR-PROGRAMA
+
+      * 0000-PROGRAMA-PRINCIPAL
+      * 4000-PROCESAR-REGISTRO
+      * 4000-PROCESAR-REGISTRO-2
+      * 4100-VALIDACION-FORMAL
+      * 4200-VALIDACION-SEMANTICA
+      * 4300-MODIFICAR-BDIIALE
+      * 4300-MODIFICAR-BDIIALE-DATOS
+      * 4300-MODIFICAR-BDIIALE-I
+      * 4300-MODIFICAR-BDIIALE-M
+      * 4300-MODIFICAR-BDIIALE-E
+      * 4333-LEER-BDIIALE-RANDOM
+      * 4333-GRABAR-BDIIALE
+      * 4333-REGRABAR-BDIIALE
+      * 4333-ELIMINAR-BDIIALE
+      * 4800-PROCESO-REG-T
+      * 4900-GRABAR-ERROR
+      * 4320-ARMAR-TEXTO-ALERTA
+      * 1000-RUTINA-INICIAL
+      * 1022-CARGAR-INCONSISTENTES
+      * 1000-NOT-USED
+      * 1001-ELIMINAR-TODO
+      * 7000-RUTINA-FINAL
+      * 9000-CANCELAR-PROGRAMA
 
 
        0000-PROGRAMA-PRINCIPAL.
@@ -505,6 +529,16 @@
            end-if
 
            add 1 to N-reg-leidos
+
+      *    busca el ID en la lista de IDs con error
+           set IDINCx to 1
+           search IDINC-item
+           when IDINCx > IDINCn
+               move zero to IDINC-coderr-reg
+           when IDINC-id-tipo(IDINCx) = JURAD-id-tipo 
+           and IDINC-id-numero(IDINCx) = JURAD-id-numero 
+               move 00 to IDINC-coderr-reg
+           end-search
 
       *    validacion formal de los datos
            perform 4100-VALIDACION-FORMAL
@@ -968,6 +1002,7 @@
       *   - apertura del archivo de entrada
       *   - apertura de todos los demas archivos
       *   - eliminacion de datos existentes si es refresque completo
+      *   - carga en memoria de los IDs de inconsistentes
       ******************************************************************
       * Registra hora de inicio
            accept W-hora-inicio from time
@@ -1071,7 +1106,15 @@
                perform 1001-ELIMINAR-TODO
            end-if.
 
+
        1000-NOT-USED.
+      ******************************************************************
+      * Aunque tengo instrucciones de dejar los textos de alertas en
+      * blanco, me parece que se deberían cargar, aunque sea de manera
+      * precaria, por si justo cae una consulta para uno de los IDs
+      * involucrados. La persona que consulta va a ver <spaces>, hasta
+      * que se ejecute el programa que genera los textos.
+      ******************************************************************
       * >>>> esto da un error de compilacion que no puedo resolver
       * >>>> por ahora esta anulado
       ******************************************************************

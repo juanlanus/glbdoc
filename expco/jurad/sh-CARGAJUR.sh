@@ -180,7 +180,8 @@ ejecutar_validacion() {
     archivo_inc=$3
     archivo_log=$4
     echo PESVNO $archivo_prn $archivo_val $archivo_inc 10 2
-    $NOHUP x PESVNO $PESVNO_INPUT $archivo_val $archivo_inc 10 2 >| $archivo_log
+    $NOHUP x PESVNO $archivo_prn $archivo_val $archivo_inc 10 2 >| $archivo_log
+#   x PESVNO $na.prn $na.val $na.inc 10 2
     cantDeRegistrosTotal=$(wc -l < $archivo_prn)
     cantDeRegistrosVal=$(wc -l < $archivo_val)
     cantDeRegistrosInc=$(wc -l < $archivo_inc)
@@ -239,11 +240,12 @@ fi
     echo " "
     # arma el archivo .prn con los tipo y números de id, sin el registro "T"
     PVNO_prn="PVNO$$.prn"
-    grep -v "^T" $P_NombreArchivo | cut -c2-13  >| PVNO_prn
+    grep -v "^T" $P_NombreArchivo | cut -c2-13  >| $PVNO_prn
+#   grep -v "^T" $na.txt | cut -c2-13  >| $na.prn
     PVNO_val="PVNO$$.val"
     PVNO_inc="PVNO$$.inc"
     PVNO_log="PVNO$$.log"
-    ejecutar_validacion( PVNO_prn PVNO_val PVNO_inc PVNO_log )
+    ejecutar_validacion( $PVNO_prn $PVNO_val $PVNO_inc $PVNO_log )
     # muestra el log del step y lo agrega al del proceso
     cat $PVNO_log
     cat $PVNO_log >> $P_NombreArchivo.log

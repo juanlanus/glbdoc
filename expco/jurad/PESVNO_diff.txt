@@ -1,0 +1,33 @@
+sdiff -w 170 PESVNO.CBL PESVNOCSVPLUS.CBL >| PESVNO_diff.txt
+
+* PESVNOCSV.V.01.0011                               | * PESVNOCSVPLUS.V.01.0013
+                                                    > * PJV012     | CQ12657 - CONTROL DE ORIGEN DE VALIDACIONES    
+                                                    > * JUN-20-2013| PARA NITS - CAMBIO A PARTIR DEL PESNVO ESTANDAR
+                                                    > * PEDRO V.   |                                                
+                                                    > **************************************************************
+                                                    > * STT013     | CQ12837 - SE AGRANDA A 650 EL FILLER DE RELLENO
+                                                    > * JUL-31-2013|                                                
+                                                    > * LUIS GOMEZ |                                                
+                                                    > **************************************************************
+     03 FILLER-2-E                    PIC   X(60).  |      03 FILLER-2-E                    PIC   X(660).               
+                                                    |      03 ORIGEN-VAL                PIC X.                          
+     03 FILLER-2-VAL              PIC X(51).        |      03 FILLER-2-VAL              PIC X(650).                     
+     03 FILLER-2-VALREP           PIC X(51).        |      03 FILLER-2-VALREP           PIC X(651).                     
+                                                    |       DISPLAY "*-----------------------------------*"             
+                                                    |       DISPLAY "Registros validados en BDACSV:" SI-EXISTE-CSV      
+                                                    |       DISPLAY "*------------------------------------*"            
+                                                    |
+                                                    |
+        IF W-BLOQUES > 0                            <
+           MOVE    1       TO  SW-VERIFNOM-BDIIVIDE |         MOVE    1       TO  SW-VERIFNOM-BDIIVIDE                  
+        END-IF                                      <
+        IF TIPOID-E = 2 OR 3                        <
+           MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE         |                             SW-DIGCHEQUEO-BDIIVIDE                
+        END-IF                                      <
+                                                    |                         IF ORIGEN-VAL = SPACES                    
+                                                    |                            MOVE   "O"      TO ORIGEN-VAL          
+                                                    |                         END-IF                                    
+                                                    |                  IF ORIGEN-VAL = SPACES                           
+                                                    |                     MOVE    "O"        TO ORIGEN-VAL              
+                                                    |                  END-IF                                           
+                                                    |             MOVE "A"      TO ORIGEN-VAL                           
