@@ -199,6 +199,8 @@ OJO    01 LINEA2-AUX.
              NOMBRES-INP       
              APELLIDO-PAT-INP  
              APELLIDO-MAT-INP  
+      *      $$$$ si un dato no tiene exactamente 5 dígitos esto 
+      *      carga información errónea
              NUM-DEMA-VIG-INP-X
              NUM-DEMA-TER-INP-X
              FEC-DEMA-VIG-INP-X .
@@ -232,6 +234,8 @@ OJO    01 LINEA2-AUX.
            INSPECT NUM-DEMA-TER-INP-X REPLACING ALL " " BY "0"
            INSPECT FEC-DEMA-VIG-INP-X REPLACING ALL " " BY "0"
            MOVE ZEROS TO M-ERRORES.
+      *    $$$$ esto puede dar error: pregunta por el valor del dato
+      *    numérico antes de ver si es efectivamente numérico
            IF (TIPO-IDE-INP <> 1 AND TIPO-IDE-INP <> 4) OR
                TIPO-IDE-INP-X NOT NUMERIC
               MOVE 1 TO V-ERR(1)

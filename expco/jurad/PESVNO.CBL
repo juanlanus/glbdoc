@@ -822,6 +822,8 @@ CQ6271     PERFORM 1000-UPDATE-LOGPESVNO
            MOVE ";" TO FILLER1 FILLER2 FILLER3 FILLER4 FILLER5 FILLER6
            FILLER7 FILLER8 FILLER9
            MOVE FILLER-2-E TO FILLER-2-VAL FILLER-2-INC
+      *    validación del tipo de id
+      *    $$$$ ¿está seguro de que es numérico?
            IF TIPOID-E < 1 OR > 4
       *        cod err 05: tipo id no es 1|2|3|4
                MOVE 05 TO CODIGO-ERROR CODERR-INC
@@ -903,6 +905,7 @@ CSVCEX             IF IDE-TIPO-BDAMATCH  = 0
 CSVCEX                 MOVE 03 TO CODIGO-ERROR CODERR-INC
 CSVCEX                 MOVE 1 TO SW-ERROR
 CSVCEX                 PERFORM 512-CREE-REGISTRO
+      *                $$$$ no debería usar 510-ESCRIBIR-INCONS ?
 CSVCEX                 WRITE REG-INCONS
 CSVCEX                 ADD 1 TO NO-EXISTE-DIAN
 CSVCEX             END-IF
@@ -912,7 +915,7 @@ CSVCEX             END-IF
 MODCED             MOVE 0 TO IDE-TIPO-BDAMATCH
       *            Valida si la identificación está en la base de datos
       *            alterna
->>>>>>             PERFORM 513-VALIDA-EN-CSV
+                   PERFORM 513-VALIDA-EN-CSV
                    IF IDE-TIPO-BDAMATCH = 0
                        MOVE 04 TO CODIGO-ERROR CODERR-INC
                        MOVE TIPOID-E TO TIP-INC
@@ -922,7 +925,7 @@ MODCED             MOVE 0 TO IDE-TIPO-BDAMATCH
                    END-IF
                END-IF
            ELSE
-      *        el id fué encontrado, el nombre no coincide
+>>>>>>*        el id fué encontrado, el nombre no coincide
                IF SW-NOMBRES-BDIIVIDE = 1
                    IF TIPOID-E <> 1
       *                no es una cédula
@@ -958,7 +961,7 @@ MODCED             MOVE 0 TO IDE-TIPO-BDAMATCH
                        PERFORM 510-ESCRIBIR-INCONS
                        ADD 1 TO NO-COINCIDE-REGIS
                    END-IF
-               ELSE
+>>>>>>         ELSE
 R7094C             MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
                    INITIALIZE LLAVE-BDIIALE
                    MOVE TIPOID-E TO TIP-IDE-BDIIALE
@@ -988,7 +991,7 @@ R7094C             MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
                            END-READ
                        END-IF
                    END-PERFORM
-                   IF TIPOID-E = 1
+>>>>>>             IF TIPOID-E = 1
                        IF ESTADO-VIG-BDIIREGI = 12
                        AND W-DERECHOS = 1
                            MOVE 07 TO CODIGO-ERROR CODERR-INC
@@ -1023,7 +1026,7 @@ R7094B                         ADD 1 TO CONT-FALLECIDOS
                                END-IF
                                MOVE IND-SEXO-BDIIREGI TO GENERO-VAL
                                PERFORM 505-RANGO-EDADES
-PJV011                         PERFORM 301-GRABA-LOS-VALIDOS
+                               PERFORM 301-GRABA-LOS-VALIDOS
                            END-IF
                        END-IF
                    ELSE
@@ -1034,36 +1037,36 @@ PJV011                         PERFORM 301-GRABA-LOS-VALIDOS
                        MOVE NOM-VAL-BDIIVIDE TO NOM-VAL
                        MOVE TIPOID-E TO TIP-VAL TIP-INC
                        MOVE NUMID-E TO CED-VAL CED-INC
-PJV011                 PERFORM 301-GRABA-LOS-VALIDOS
+                       PERFORM 301-GRABA-LOS-VALIDOS
                    END-IF
                END-IF
            END-IF.
 
 
-PJV011 301-GRABA-LOS-VALIDOS.
+       301-GRABA-LOS-VALIDOS.
       ******************************************************************
       * Graba un "válido"
       ******************************************************************
-PJV011     MOVE "N" TO SN-VALREP
-PJV011     IF TIP-KEYVAL = TIPOID-E and NUM-KEYVAL = NUMID-E
-PJV011         MOVE "S" TO SN-VALREP
-PJV011         PERFORM 300-GRABA-VALREP
-PJV011     ELSE
-PJV011         WRITE REG-VALIDAS
-PJV011         MOVE TIP-VAL TO TIP-KEYVAL
-PJV011         MOVE CED-VAL TO NUM-KEYVAL
-PJV011         ADD 1 TO REG-CORRECTOS
-PJV011     END-IF.
+           MOVE "N" TO SN-VALREP
+           IF TIP-KEYVAL = TIPOID-E and NUM-KEYVAL = NUMID-E
+               MOVE "S" TO SN-VALREP
+               PERFORM 300-GRABA-VALREP
+           ELSE
+               WRITE REG-VALIDAS
+               MOVE TIP-VAL TO TIP-KEYVAL
+               MOVE CED-VAL TO NUM-KEYVAL
+               ADD 1 TO REG-CORRECTOS
+           END-IF.
 
-PJV011 300-GRABA-VALREP.
+       300-GRABA-VALREP.
       ******************************************************************
       * Graba un "válido - repetido"
       ******************************************************************
-PJV011     INITIALIZE REG-VALIDAS-REP
-PJV011     WRITE REG-VALIDAS-REP FROM REG-VALIDAS
-PJV011     MOVE TIP-VAL TO TIP-KEYVAL
-PJV011     MOVE CED-VAL TO NUM-KEYVAL
-PJV011     ADD 1 TO REG-CORRECTOS-R.
+           INITIALIZE REG-VALIDAS-REP
+           WRITE REG-VALIDAS-REP FROM REG-VALIDAS
+           MOVE TIP-VAL TO TIP-KEYVAL
+           MOVE CED-VAL TO NUM-KEYVAL
+           ADD 1 TO REG-CORRECTOS-R.
 
 
        505-RANGO-EDADES.

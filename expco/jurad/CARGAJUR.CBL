@@ -1,4 +1,4 @@
-      $SET LIST SETTING LISTWIDTH"80"
+      $SET LIST SETTING LISTWIDTH"120"
        IDENTIFICATION DIVISION.
        PROGRAM-ID.    CARGAJUR.
       ******************************************************************
@@ -12,7 +12,7 @@
        DATE-WRITTEN.
        DATE-COMPILED.
        CONFIGURATION section.
-       SOURCE-COMPUTER. microfocus.
+       SOURCE-COMPUTER. MICROFOCUS with debugging mode.
        OBJECT-COMPUTER. microfocus.
        INPUT-OUTPUT section.
        FILE-CONTROL.
@@ -39,16 +39,25 @@
 
       ******************************************************************
       ******************************************************************
-           copy BDACSV.FS.
-
-      ******************************************************************
-      ******************************************************************
            copy BDIIDAS.FS.
 
       ******************************************************************
       ******************************************************************
            copy BDIIALE.FS replacing == on record.== by == on record
               file status is EST-BDIIALE.==.
+
+      ******************************************************************
+      * Archivos de base alterna
+      ******************************************************************
+           copy BDACSV.FS.
+           copy ICBDIR.FS.
+           copy BDLCLI.FS.                         
+           COPY ICBSUS.FS.
+           COPY ICBCHK.FS.
+           COPY ICBCRE.FS.
+           COPY BDLSTDCIU.FS.
+           COPY DIREST.FS.
+           COPY BDLNEWDIRBOG.FS.
 
       ******************************************************************
       ******************************************************************
@@ -151,9 +160,17 @@
        copy BDIIDAS.FD.
 
       ******************************************************************
-      * Base alterna
+      * Archivos de base alterna
       ******************************************************************
-       COPY BDACSV.FD.
+           copy BDACSV.FD.
+           COPY ICBDIR0001.FD.
+           copy BDLCLI.FD.                         
+           COPY ICBSUS.FD.
+           COPY ICBCHK.FD.
+           COPY ICBCRE.FD.
+           COPY BDLSTDCIU.FD.
+           COPY DIREST.FD.
+           COPY BDLNEWDIRBOG.FD.
 
       ******************************************************************
       * Maestro de alertas reportadas por suscriptores
@@ -165,6 +182,68 @@
       ******************************************************************
       * Nombre del programa
        01  pgm                          pic x(10) value "CARGAJUR".
+
+
+      ******************************************************************
+      * Datos para la búsqueda en base alterna
+       01  W-DERECHOS                   PIC 9 value 0.
+       01  CODIGO-ERROR                 pic 99 value 00.
+
+       01  SW-BDIIALE                   pic 9 value 0.
+       01  HACER-MATCH                  PIC 9 value 0.
+       01  CADENA-ENTRA                 PIC X(60).
+       01  CADENA-SALE                  PIC X(60).
+       01  IND-ALFABETICO              PIC  X(01).                      
+           88 SI-ALFABETICO           VALUE " " "A" "B" "C" "D" "E" "F"
+                                            "G" "H" "I" "J" "K" "L" "M"
+                                            "N" "/" "O" "P" "Q" "R" "S"
+                                            "T" "U" "V" "W" "X" "Y" "Z"
+                                            "Ñ".
+       01  OPEN-DIR                     PIC 9 value 0.
+       01  W-BLOQUES                    PIC 9 value 2.
+
+       01  DATOS-E.
+           03 TIPOID-E                  pic 9.
+           03 NUMID-E                   pic 9(11).
+           03 NOMBRE-E                  pic x(45).
+
+       01  REG-VALIDAS.                           
+           03 TIP-VAL                   PIC 9.   
+           03 CED-VAL                   PIC 9(11).
+           03 NOM-VAL                   PIC X(45).
+           03 FEC-EXP-VAL               PIC 9(08).
+           03 MUN-EXP-VAL               PIC X(15).
+           03 DEP-EXP-VAL               PIC X(15).
+           03 VIG-VAL                   PIC X(02).
+           03 GENERO-VAL                PIC X(01).
+           03 EDAD-VAL                  PIC X(03).
+           03 EDAD-RANGO                PIC X(05).
+           03 FILLER-2-VAL              PIC X(51).
+
+       01  W-CONTADORES.
+           03  W-CONT-TIPO-5            PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-6            PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-7            PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-5-PJ         PIC 9(6) VALUE ZEROS.
+           03  W-CONT-TIPO-5-REP        PIC 9(6) VALUE ZEROS.
+
+       01  SUSCRIPTOR-AUX               PIC 9(06).            
+       01  REG-LEIDOS                   PIC 9(07) VALUE ZEROS.
+       01  CONT-FALLECIDOS              PIC 9(07) VALUE ZEROS.
+       01  REG-CORRECTOS                PIC 9(07) VALUE ZEROS.
+       01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
+       01  NO-COINCIDE-DIAN             PIC 9(07) VALUE ZEROS.
+       01  NO-COINCIDE-REGIS            PIC 9(07) VALUE ZEROS.
+       01  NO-EXISTE-DIAN               PIC 9(07) VALUE ZEROS.
+       01  NO-EXISTE-REGIS              PIC 9(07) VALUE ZEROS.
+       01  SI-EXISTE-CSV                PIC 9(07) VALUE ZEROS.
+       01  TIPO-ID-INVALIDO             PIC 9(07) VALUE ZEROS.
+       
+       01 MAS-DATOS.
+           03 I                         PIC 9(02) VALUE ZERO.
+           03 J                         PIC 9(02) VALUE ZERO.
+
+           COPY  BDLDIR.WS.
 
       ******************************************************************
       * Variables para rutina de validacion de identificaciones
@@ -425,55 +504,42 @@
            02 DIA-VAL-X                 pic 9(02).
               88 DIA-VAL                value 01   thru 31.
 
-      ******************************************************************
-      * IDs inconsistentes
-      * Es la lista de todos los IDs del archivo de inconsistentes
-      * producido por el PESVNO, junto con el cod de error.
-      * Los errores 03, 04 y 05 producen cuentas "tipo 7".
-       01  IDINC.
-      *    cantidad de IDs
-           03 IDINCn                    pic 9(7) comp-4.
-           03 IDINCmax                  pic 9(7) comp-4 value 500000.
-      *    código de error del registro actual, o 00 si no figura
-           03 IDINC-coderr-reg          pic 99 value 00.
-      *    la lista de IDs
-           03 IDINC-item                occurs 500000 indexed IDINCx.
-               05 IDINC-id.
-                   07 IDINC-id-tipo     pic X.
-                   07 IDINC-id-numero   pic X(11).
-               05 IDINC-coderr          pic 99.
-
 
       /*****************************************************************
       ******************************************************************
        PROCEDURE DIVISION.
 
-      * 0000-PROGRAMA-PRINCIPAL
-      * 4000-PROCESAR-REGISTRO
-      * 4000-PROCESAR-REGISTRO-2
-      * 4100-VALIDACION-FORMAL
-      * 4200-VALIDACION-SEMANTICA
-      * 4300-MODIFICAR-BDIIALE
-      * 4300-MODIFICAR-BDIIALE-DATOS
-      * 4300-MODIFICAR-BDIIALE-I
-      * 4300-MODIFICAR-BDIIALE-M
-      * 4300-MODIFICAR-BDIIALE-E
-      * 4333-LEER-BDIIALE-RANDOM
-      * 4333-GRABAR-BDIIALE
-      * 4333-REGRABAR-BDIIALE
-      * 4333-ELIMINAR-BDIIALE
-      * 4800-PROCESO-REG-T
-      * 4900-GRABAR-ERROR
-      * 4320-ARMAR-TEXTO-ALERTA
-      * 1000-RUTINA-INICIAL
-      * 1022-CARGAR-INCONSISTENTES
-      * 1000-NOT-USED
-      * 1001-ELIMINAR-TODO
-      * 7000-RUTINA-FINAL
-      * 9000-CANCELAR-PROGRAMA
-
-
+      *    0000-PROGRAMA-PRINCIPAL
+      *    4000-PROCESAR-REGISTRO
+      *    4000-PROCESAR-REGISTRO-2
+      *    4100-VALIDACION-FORMAL
+      *    4200-VALIDACION-SEMANTICA
+      *    4220-VALIDA-NOMBRE-NO-COINCIDE
+      *    4222-VALIDA-NOMBRE-COINCIDE
+      *    4240-CONTAR-TIPO-CUENTA
+      *    4210-VALIDACION-ID-NO-FIGURA
+      *    4300-MODIFICAR-BDIIALE
+      *    4300-MODIFICAR-BDIIALE-DATOS
+      *    4300-MODIFICAR-BDIIALE-I
+      *    4300-MODIFICAR-BDIIALE-M
+      *    4300-MODIFICAR-BDIIALE-E
+      *    4333-LEER-BDIIALE-RANDOM
+      *    4333-GRABAR-BDIIALE
+      *    4333-REGRABAR-BDIIALE
+      *    4333-ELIMINAR-BDIIALE
+      *    4800-PROCESO-REG-T
+      *    4900-GRABAR-ERROR
+      *    4320-ARMAR-TEXTO-ALERTA
+      *    1000-RUTINA-INICIAL
+      *    1000-NOT-USED
+      *    1001-ELIMINAR-TODO
+      *    7000-RUTINA-FINAL
+      *    9000-CANCELAR-PROGRAMA
+      *    9800-FILTRAR-ALFABETICO
+     
+     
        0000-PROGRAMA-PRINCIPAL.
+      D    display "0000-PROGRAMA-PRINCIPAL"
       ******************************************************************
       *    inicializa el ambiente y abre los archivos
            perform 1000-RUTINA-INICIAL
@@ -485,6 +551,7 @@
            goback.
 
        4000-PROCESAR-REGISTRO.
+      D    display "4000-PROCESAR-REGISTRO"
       ****************************************************************
       * Proceso de un registro del archivo de entrada JURAD
       * Lectura y control del file status del archivo
@@ -496,6 +563,7 @@
       *        controla el reg y lo aplica si es OK
                perform 4000-PROCESAR-REGISTRO-2
                move JURAD-reg to JURAD-reg-anterior
+               add 1 to REG-LEIDOS
            when "10"
       *        fin del archivo de input:
       *        esto es un error, no se encontro el registro "T" antes
@@ -518,6 +586,7 @@
 
 
        4000-PROCESAR-REGISTRO-2.
+      D    display "4000-PROCESAR-REGISTRO-2"
       ****************************************************************
       * Controla los datos de un registro de JURAD y si es OK lo usa
       * para actualizar el archivo de alertas en linea
@@ -539,20 +608,12 @@
 
            add 1 to N-reg-leidos
 
-      *    busca el ID en la lista de IDs con error
-           set IDINCx to 1
-           search IDINC-item
-           when IDINCx > IDINCn
-               move zero to IDINC-coderr-reg
-           when IDINC-id-tipo(IDINCx) = JURAD-id-tipo 
-           and IDINC-id-numero(IDINCx) = JURAD-id-numero 
-               move 00 to IDINC-coderr-reg
-           end-search
-
       *    validacion formal de los datos
+           move 0 to codigo-error
            perform 4100-VALIDACION-FORMAL
            if E-hay-error = "SI"
                perform 4900-GRABAR-ERROR
+*******        perform 4240-CONTAR-TIPO-CUENTA
                exit paragraph
            end-if
 
@@ -560,8 +621,11 @@
            perform 4200-VALIDACION-SEMANTICA
            if E-hay-error = "SI"
                perform 4900-GRABAR-ERROR
+               perform 4240-CONTAR-TIPO-CUENTA
                exit paragraph
            end-if
+
+           perform 4240-CONTAR-TIPO-CUENTA
 
       *    intento de actualizacion de BDIIALE
            perform 4300-MODIFICAR-BDIIALE
@@ -570,12 +634,14 @@
 
 
        4100-VALIDACION-FORMAL.
+      D    display "4100-VALIDACION-FORMAL"
       ******************************************************************
       * Validacion formal de los datos del input
       ******************************************************************
       *    Tipo de identificacion Numero {1, 2, 3, 4}
            if JURAD-id-tipo not = "1" and "2" and "3" and "4"
                call "PONERR" using "02" JURAD-reg E-errores
+               move 05 to codigo-error
            end-if
       *    Numero de identificacion
            if JURAD-id-numeroX is not numeric
@@ -628,6 +694,7 @@
 
 
        4200-VALIDACION-SEMANTICA.
+      D    display "4200-VALIDACION-SEMANTICA"
       ****************************************************************
       * Validacion del numero de identificacion y de su relacion con
       * el nombre
@@ -635,29 +702,163 @@
            move JURAD-id-tipo to TIP-IDE-BDIIVIDE
            move JURAD-id-numero to NUM-IDE-BDIIVIDE-R
            move JURAD-nombre to NOMBRE-BDIIVIDE
+
+           move JURAD-id-tipo to TIPOID-E
+           move JURAD-id-numero to NUMID-E
+           move JURAD-nombre to NOMBRE-E
+
            move 1 to SW-VERIFNOM-BDIIVIDE
            move 0 to SW-DIGCHEQUEO-BDIIVIDE SW-ASGTIPID-BDIIVIDE
+           IF TIP-IDE-BDIIVIDE = 2 OR 3
+               MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE
+           END-IF
+           MOVE 2 TO NUM-BLOQUES-BDIIVIDE
+      *    Valida el numero de identificación contra las bases de
+      *    datos BDIIDIAN, BDIIDAS, BDIIREGI y verifica la coincidencia
+      *    del nombre reportado
+      *    Retorna SW-ID-BDIIVIDE=1 si hay error
            perform 80100-VALIDAR-IDENTIFICACION
-      *    a ver si la validacion cambio el tipo de ide
-           if JURAD-id-tipo not = TIP-IDE-BDIIVIDE
-               call "PONERR" using "16" JURAD-reg E-errores
-               display "Tipo ide cambiado de " JURAD-id-tipo " a "
-               TIP-IDE-BDIIVIDE " num ide: " JURAD-id-numero
-           end-if
       *    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existe
            if SW-ID-BDIIVIDE = 1
+      *        es un id inválido
                call "PONERR" using "14" JURAD-reg E-errores
+      *        valida contra la base alterna
+               perform 4210-VALIDACION-ID-NO-FIGURA
            else
       *        existe id, a ver si el nombre coincide
                if SW-NOMBRES-BDIIVIDE = 1    *> nombre no coincide
                    call "PONERR" using "15" JURAD-reg E-errores
                    display "novedad:  " JURAD-nombre
                    display "registro: " NOM-LEIDO-BDIIVIDE
+      *            validación en base alterna
+                   perform 4220-VALIDA-NOMBRE-NO-COINCIDE
+               else
+                   perform 4222-VALIDA-NOMBRE-COINCIDE
                end-if
            end-if.
 
 
+       4220-VALIDA-NOMBRE-NO-COINCIDE.
+      D    display "4220-VALIDA-NOMBRE-NO-COINCIDE"
+      ******************************************************************
+      * Validación de IDs que figuran OK pero el nombre no coincide
+      ******************************************************************
+      *    nombre no coincide
+           IF TIP-IDE-BDIIVIDE = 1
+      *        es una cédula
+               MOVE 02 TO CODIGO-ERROR
+           ELSE
+      *        no es una cédula
+               MOVE 01 TO CODIGO-ERROR
+           END-IF.
+
+
+       4222-VALIDA-NOMBRE-COINCIDE.
+      D    display "4222-VALIDA-NOMBRE-COINCIDE"
+      ******************************************************************
+      * Validación de IDs que figuran OK pero el nombre coincide
+      ******************************************************************
+      *    nombre coincide: busca ID en BDIIALE
+           initialize LLAVE-BDIIALE
+           move TIP-IDE-BDIIVIDE to TIP-IDE-BDIIALE
+           move NUM-IDE-BDIIVIDE-R to NUM-IDE-BDIIALE
+           move 990003 to FUENTE-BDIIALE
+           start BDIIALE key not < LLAVE-BDIIALE INVALID KEY
+               move 1 TO SW-BDIIALE
+           not invalid key
+               move 0 to SW-BDIIALE
+               read BDIIALE next record
+               at end
+                   move 1 to SW-BDIIALE
+               end-read
+           end-start
+
+           perform until SW-BDIIALE = 1
+           or TIP-IDE-BDIIVIDE <> TIP-IDE-BDIIALE
+           or NUM-IDE-BDIIVIDE <> NUM-IDE-BDIIALE
+               if FUENTE-BDIIALE = 990003
+               and FEC-NOV-BDIIALE <= P-fecha-proceso-YYYYMMDD
+               and FEC-VEN-BDIIALE >= P-fecha-proceso-YYYYMMDD
+               and BLOQUEO-BDIIALE = 0
+      *             encontrado
+                    move 1 to SW-BDIIALE
+               end-if
+               if SW-BDIIALE = 0
+                   read BDIIALE next record at end
+                       move 1 to SW-BDIIALE
+                   end-read
+               end-if
+           end-perform.
+
+           if TIP-IDE-BDIIVIDE = 1
+               if ESTADO-VIG-BDIIREGI = 12 and W-DERECHOS = 1
+                   move 07 to CODIGO-ERROR
+               else
+                   if ESTADO-VIG-BDIIREGI = 21
+                       move 06 to CODIGO-ERROR
+                       add 1 to NO-COINCIDE-REGIS
+                       add 1 to CONT-FALLECIDOS
+                   end-if
+               end-if
+           end-if.
+
+
+       4240-CONTAR-TIPO-CUENTA.
+      D    display "4240-CONTAR-TIPO-CUENTA"
+      ******************************************************************
+      *    Conteo de los registros por "tipo", dependiendo del código
+      *    de error:
+      *    00=OK
+      *    01=NIT OK, nombre no coincide
+      *    02=cédula OK, nombre no coincide
+      *    03=NIT no figura
+      *    04=cédula no figura pero está en base alterna
+      *    05=tipo id no es 1|2|3|4
+      *    06=cédula ... ESTADO-VIG-BDIIREGI = 21
+      *    07=cédula ... ESTADO-VIG-BDIIREGI = 12
+      *
+      *    cuenta tipo 5: sin error
+      *    cuenta tipo 6: 01 02 06 07
+      *    cuenta tipo 7: 03 04 05
+      ******************************************************************
+           IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07
+               ADD 1 TO W-CONT-TIPO-6
+           ELSE
+               IF CODIGO-ERROR = 03 OR 04 OR 05
+                   ADD 1 TO W-CONT-TIPO-7
+               ELSE
+      *            registros correctos, repetidos o no
+                   ADD 1 TO W-CONT-TIPO-5
+      *            si es una empresa
+                   IF TIPOID-E = 2 OR 3
+                       ADD 1 TO W-CONT-TIPO-5-PJ
+                   END-IF
+               END-IF
+           END-IF.
+
+
+       4210-VALIDACION-ID-NO-FIGURA.
+      D    display "4210-VALIDACION-ID-NO-FIGURA"
+      ******************************************************************
+      * Validación de IDs que no figuran en las bases normales
+      ******************************************************************
+           MOVE 0 TO HACER-MATCH
+           MOVE 0 TO IDE-TIPO-BDAMATCH
+      *    valida si la identificación está en la base de datos alterna
+           PERFORM 513-VALIDA-EN-CSV
+           IF IDE-TIPO-BDAMATCH = 0
+               IF TIP-IDE-BDIIVIDE = 1
+      *            es una cédula
+                   MOVE 04 TO CODIGO-ERROR
+               else
+      *            no es una cédula
+                   MOVE 03 TO CODIGO-ERROR
+               END-IF
+           END-IF.
+
+
        4300-MODIFICAR-BDIIALE.
+      D    display "4300-MODIFICAR-BDIIALE"
       ******************************************************************
       * Se impacta el archivo BDIIALE con una o dos inserciones,
       * modificaciones o eliminaciones segun haya o no demandas y
@@ -692,6 +893,7 @@
 
 
        4300-MODIFICAR-BDIIALE-DATOS.
+      D    display "4300-MODIFICAR-BDIIALE-DATOS"
       ******************************************************************
       * Parte de la carga de datos en el registro BDIIALE y grabacion
       * del mismo que es comun a demandas y embargos
@@ -722,6 +924,7 @@
 
 
        4300-MODIFICAR-BDIIALE-I.
+      D    display "4300-MODIFICAR-BDIIALE-I"
       ******************************************************************
       * Insercion de una alerta nueva
       * Si ya existia muestra un mensaje y continua
@@ -754,6 +957,7 @@
 
 
        4300-MODIFICAR-BDIIALE-M.
+      D    display "4300-MODIFICAR-BDIIALE-M"
       ******************************************************************
       * Modificacion de una alerta existente
       * Si no existia muestra un mensaje y continua
@@ -782,6 +986,7 @@
 
 
        4300-MODIFICAR-BDIIALE-E.
+      D    display "4300-MODIFICAR-BDIIALE-E"
       ******************************************************************
       * Eliminacion de una alerta
       * Si no existia muestra un mensaje y continua
@@ -802,6 +1007,7 @@
 
 
        4333-LEER-BDIIALE-RANDOM.
+      D    display "4333-LEER-BDIIALE-RANDOM"
       ******************************************************************
       * Arma clave exacta y lee un registro de BDIIALE
       * Usa los datos del reg input, excepto LLASEC que esta precargado
@@ -831,6 +1037,7 @@
 
 
        4333-GRABAR-BDIIALE.
+      D    display "4333-GRABAR-BDIIALE"
       ******************************************************************
       * Inserta un registro nuevo en BDIIALE
       ******************************************************************
@@ -851,6 +1058,7 @@
 
 
        4333-REGRABAR-BDIIALE.
+      D    display "4333-REGRABAR-BDIIALE"
       ******************************************************************
       * Regraba un registro modificado en BDIIALE
       ******************************************************************
@@ -871,6 +1079,7 @@
 
 
        4333-ELIMINAR-BDIIALE.
+      D    display "4333-ELIMINAR-BDIIALE"
       ******************************************************************
       * Elimina un registro de BDIIALE
       ******************************************************************
@@ -890,6 +1099,7 @@
            end-evaluate.
 
        4800-PROCESO-REG-T.
+      D    display "4800-PROCESO-REG-T"
       ******************************************************************
       * El registro leido en el archivo JURAD es tipo "T" con totales
       * de control, y debería ser el ultimo del archivo
@@ -949,6 +1159,7 @@
 
 
        4900-GRABAR-ERROR.
+      D    display "4900-GRABAR-ERROR"
       ******************************************************************
       * El registro de JURAD tiene error: se graba en el archivo ERRS
       * con indicacion del error detectado
@@ -971,6 +1182,7 @@
 
 
        4320-ARMAR-TEXTO-ALERTA.
+      D    display "4320-ARMAR-TEXTO-ALERTA"
       ****************************************************************
       * Hace el reemplazo de los valores adecuados en los templates
       * de las linea de alerta que corresponde
@@ -1004,6 +1216,7 @@
 
 
        1000-RUTINA-INICIAL.
+      D    display "1000-RUTINA-INICIAL"
       ******************************************************************
       * Todas las operaciones que se realizan una sola vez, al comienzo
       * del programa:
@@ -1117,6 +1330,7 @@
 
 
        1000-NOT-USED.
+      D    display "1000-NOT-USED"
       ******************************************************************
       * Aunque tengo instrucciones de dejar los textos de alertas en
       * blanco, me parece que se deberían cargar, aunque sea de manera
@@ -1151,6 +1365,7 @@
 
 
        1001-ELIMINAR-TODO.
+      D    display "1001-ELIMINAR-TODO"
       ******************************************************************
       * Elimina los registros de alertas existentes en el archivo de
       * alertas en linea, previo a un refresque total
@@ -1214,6 +1429,7 @@
 
 
        7000-RUTINA-FINAL.
+      D    display "7000-RUTINA-FINAL"
       ******************************************************************
       * Registra hora de finalizacion
            accept W-hora-fin from time
@@ -1221,12 +1437,24 @@
       * Leer JURAD a ver si hay registros despues del "T"
 
       * Close todos los archivos
+      * $$$$ se agregaron varios archivos más
            close JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.
 
            display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD
       * Emision de contadores de registros
            display " "
            display "Totales de registros:"
+           display " "
+      * Totales tipo PESVNO
+           DISPLAY "REGISTROS LEIDOS                :" REG-LEIDOS
+           DISPLAY "REGISTROS CORRECTOS             :" REG-CORRECTOS
+           DISPLAY "REGISTROS CORRECTOS REPETIDOS   :" REG-CORRECTOS-R
+           DISPLAY "REGISTROS NO COINCIDEN BDIIREGI :" NO-COINCIDE-REGIS
+           DISPLAY "  REGISTROS DE FALLECIDOS         :" CONT-FALLECIDOS
+           DISPLAY "REGISTROS NO COINCIDEN BDIIDIAN :" NO-COINCIDE-DIAN
+           DISPLAY "REGISTROS NO EXISTEN   BDIIREGI :" NO-EXISTE-REGIS
+           DISPLAY "REGISTROS NO EXISTEN   BDIIDIAN :" NO-EXISTE-DIAN
+           DISPLAY "TIPO IDENTIFICACION INVALIDO    :" TIPO-ID-INVALIDO
            display " "
       *    porcentaje registros procesados OK
            compute N-editp100 rounded = 100.0 * N-reg-OK / N-reg-leidos
@@ -1285,6 +1513,7 @@
 
 
        9000-CANCELAR-PROGRAMA.
+      D    display "9000-CANCELAR-PROGRAMA"
       ******************************************************************
       * Procedimiento standard de cancelacion de programa batch
       ******************************************************************
@@ -1294,10 +1523,95 @@
            goback returning 99.
 
 
+       513-VALIDA-EN-CSV.
+      **************************************************************
+      * Valida si la identificación está en la base de datos alterna
+      **************************************************************
+      *    hace validacion de tipo de identificacion
+           MOVE TIPOID-E TO TIP-IDE-BDIIVIDE
+           MOVE NUMID-E TO NUM-IDE-BDIIVIDE
+           PERFORM 80400-VALIDAR-TIPO-ID
+           IF SW-TID-BDIIVIDE = 0
+      *        el tipo de id es OK
+               IF HACER-MATCH = ZEROS
+      *            abre archivos y carga la tabla de direcciones 
+      *            estandar, solo la primera vez
+                   IF OPEN-DIR = ZEROS
+                       OPEN INPUT MAESTRO-DIRECC
+                       OPEN INPUT BDLCLI
+                       OPEN INPUT SUSCRIPTOR
+                       OPEN INPUT MAESTRO-CREDIT
+                       OPEN INPUT MAESTRO-CHECK
+                       PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
+                       MOVE 1 TO OPEN-DIR
+                   END-IF
+      *            abre archivos y carga la tabla de direcciones 
+                   MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH
+                   MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+      *            Se recorre toda la estructura bdacsv para la identificacion
+      *            buscada. En caso de hallar registros se procede a realizar el
+      *            match
+                   PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+                   MOVE 1 TO HACERMATCH-LEEMSTRS
+                   IF IDE-TIPO-BDAMATCH = 1
+                       IF TIPOID-E = 1 OR 4
+                           INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL
+                           "," BY " ", ";" BY " "
+                       END-IF
+                       MOVE NOMBRE-E            TO NOMBRE-INPUT-VALNOM
+                       MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM
+                       MOVE TIPOID-E            TO  TIP-ID-INPUT-VALNOM
+                       MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
+                       PERFORM 10000-MATCH-NOMBRES-VALNOM
+                       IF MATCH-OK-OUT-VALNOM = 1
+                           MOVE 1 TO IDE-TIPO-BDAMATCH
+                       ELSE
+                          IF W-BLOQUES > 0
+                              MOVE 0 TO IDE-TIPO-BDAMATCH
+                          END-IF
+                       END-IF
+                   END-IF
+     
+                   IF IDE-TIPO-BDAMATCH = 1
+                       MOVE TIPOID-E TO TIP-VAL
+                       MOVE NUMID-E  TO CED-VAL
+                       MOVE NOM-OUTPUT-BDAMATCH TO CADENA-ENTRA
+                       PERFORM 9800-FILTRAR-ALFABETICO
+                       MOVE CADENA-SALE TO  NOM-VAL
+                       MOVE ZEROS  TO FEC-EXP-VAL
+                       MOVE SPACES TO MUN-EXP-VAL
+                       MOVE SPACES TO DEP-EXP-VAL
+                       MOVE SPACES TO VIG-VAL
+                       MOVE SPACES TO GENERO-VAL
+                       MOVE SPACES TO EDAD-VAL
+                       MOVE SPACES TO EDAD-RANGO
+                       ADD 1 TO SI-EXISTE-CSV
+                   END-IF
+               END-IF
+           END-IF.
+
+       9800-FILTRAR-ALFABETICO.
+      D    display "9800-FILTRAR-ALFABETICO"
+      ******************************************************************
+      * SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA
+      ******************************************************************
+           MOVE FUNCTION UPPER-CASE (CADENA-ENTRA) TO CADENA-ENTRA
+           INITIALIZE CADENA-SALE
+           MOVE 1 TO J
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 60
+              MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICO
+              IF SI-ALFABETICO
+                 MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)
+                 ADD 1 TO J
+              END-IF
+           END-PERFORM.
+      ******************************************************************
+
+
+
            copy BDIIVIDE.PROC.
-
-
-           copy LEEMAESTROS.PROC.
+           copy BDLDIR.PROC.
+           COPY LEEMAESTROS.PROC.
 
 
       /
@@ -1388,7 +1702,7 @@
 
        end program PONERR.
 
-       end program CARGAJUR2.
+       end program CARGAJUR.
 
       ******************************************************************
       ******************************************************************
