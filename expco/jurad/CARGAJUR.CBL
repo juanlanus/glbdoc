@@ -1,4 +1,4 @@
-      $SET LIST SETTING
+      $SET LIST SETTING LISTWIDTH"80"
        IDENTIFICATION DIVISION.
        PROGRAM-ID.    CARGAJUR.
       ******************************************************************
@@ -36,6 +36,10 @@
       ******************************************************************
       ******************************************************************
            copy BDIIDIAN.FS.
+
+      ******************************************************************
+      ******************************************************************
+           copy BDACSV.FS.
 
       ******************************************************************
       ******************************************************************
@@ -147,6 +151,11 @@
        copy BDIIDAS.FD.
 
       ******************************************************************
+      * Base alterna
+      ******************************************************************
+       COPY BDACSV.FD.
+
+      ******************************************************************
       * Maestro de alertas reportadas por suscriptores
       ******************************************************************
        copy BDIIALE.FD.
@@ -168,9 +177,9 @@
        copy BDIIALE.WS.
 
       ******************************************************************
-      * Datos para las rutinas de validacion de nombres de VALNOM.PROC
+      * Datos para las rutinas de validación de nombres
       ******************************************************************
-       copy VALNOM.WS.
+       copy LEEMAESTROS.WS.
 
       *****************************************************************
       * Direcciones de los archivos en el file system
@@ -426,7 +435,7 @@
            03 IDINCn                    pic 9(7) comp-4.
            03 IDINCmax                  pic 9(7) comp-4 value 500000.
       *    código de error del registro actual, o 00 si no figura
-           03 IDINC-coderr-reg          pic 99 valus 00.
+           03 IDINC-coderr-reg          pic 99 value 00.
       *    la lista de IDs
            03 IDINC-item                occurs 500000 indexed IDINCx.
                05 IDINC-id.
@@ -1288,7 +1297,7 @@
            copy BDIIVIDE.PROC.
 
 
-           copy VALNOM.PROC.
+           copy LEEMAESTROS.PROC.
 
 
       /
