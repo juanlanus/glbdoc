@@ -32373,3 +32373,4492 @@ Ddisplay "el n° de ID está dentro de su rango"D        dINSERT MODE     i  INSE
 
 
 
+
+"CARGAJUR.CBL" [Modified] line 1560 of 1716 --90%-- $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. MICROFOCUS with debugging mode.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+select JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+1716 lines deletedNo lines in bufferAPPEND MODE      $SET LIST SETTING LISTWIDTH"120"
+
+       IDENTIFICATION DIVISION.
+
+
+       PROGRAM-ID.    CARGAJUR.
+
+
+
+      ******************************************************************
+      * Actualizacion del archivo de alertas con los datos provistos
+      * por Jurad
+      * Procesa el archivo JURAD. Controla cada registro: si es OK usa
+      * los datos para actualizar BDIIALE, si tiene defecto lo graba en
+      * el archivo ERRS.
+      ******************************************************************
+       AUTHOR.        Globant JL.
+       DATE-WRITTEN.
+       DATE-COMPILED.
+       CONFIGURATION section.
+       SOURCE-COMPUTER. MICROFOCUS with debugging mode.
+       OBJECT-COMPUTER. microfocus.
+       INPUT-OUTPUT section.
+       FILE-CONTROL.
+
+      ******************************************************************
+      ******************************************************************
+       select JURAD assign to P-file-path
+           organization is line sequential
+           file status is JURAD-fs.
+
+      ******************************************************************
+      ******************************************************************
+       select ERRS assign to ERRS-file-name
+           organization is line sequential
+           file status is ERRS-fs.
+
+      ******************************************************************
+      ******************************************************************
+           copy BDIIREGI.FS.
+
+      ******************************************************************
+      ******************************************************************
+           copy BDIIDIAN.FS.
+
+      ******************************************************************
+      ******************************************************************
+           copy BDIIDAS.FS.
+
+      ******************************************************************
+      ******************************************************************
+           copy BDIIALE.FS replacing == on record.== by == on record
+              file status is EST-BDIIALE.==.
+
+
+      ******************************************************************
+
+APPEND MODE      * Archivos de base alterna
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           copy BDACSV.FS.
+
+APPEND MODE           copy ICBDIR.FS.
+
+APPEND MODE           copy BDLCLI.FS.                         
+
+APPEND MODE           COPY ICBSUS.FS.
+
+APPEND MODE           COPY ICBCHK.FS.
+
+APPEND MODE           COPY ICBCRE.FS.
+
+APPEND MODE           COPY BDLSTDCIU.FS.
+
+APPEND MODE           COPY DIREST.FS.
+
+APPEND MODE           COPY BDLNEWDIRBOG.FS.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       DATA DIVISION.
+
+APPEND MODE       FILE section.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Archivo de entrada con los datos de demandas y embargos de JURAD
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       FD JURAD.
+
+APPEND MODE       01  JURAD-reg.
+
+APPEND MODE      * Registros de movimientos I, M, E
+
+APPEND MODE      *    Tipo de Novedad {I, M, E} Inser/Modif/Elim
+
+APPEND MODE           03 JURAD-tipo-novedad        pic x.
+
+APPEND MODE      *    Tipo de identificacion Numero {1, 2, 3, 4}
+
+APPEND MODE           03 JURAD-id-tipo             pic x.
+
+APPEND MODE      *    Numero de identificacion
+
+APPEND MODE           03 JURAD-id-numeroX          pic x(11).
+
+APPEND MODE           03 JURAD-id-numero           redefines JURAD-id-numeroX
+
+APPEND MODE                                        pic 9(11).
+
+APPEND MODE      *    Nombres y Apellidos
+
+APPEND MODE           03 JURAD-nombre              pic x(45).
+
+APPEND MODE      *    Numero de demandas vigentes
+
+APPEND MODE           03 JURAD-demandas-vigentes   pic 999.
+
+APPEND MODE      *    Numero de demandas terminadas
+
+APPEND MODE           03 JURAD-demandas-terminadas pic 999.
+
+APPEND MODE      *    Fecha ultima demanda vigente YYYYMMDD
+
+APPEND MODE           03 JURAD-demandas-fecha-ultima pic x(8).
+
+APPEND MODE      *    Numero de embargos vigentes
+
+APPEND MODE           03 JURAD-embargos-vigentes   pic 999.
+
+APPEND MODE      *    Numero de embargos terminados
+
+APPEND MODE           03 JURAD-embargos-terminados pic 999.
+
+APPEND MODE      *    Fecha ultimo embargo vigente YYYYMMDD
+
+APPEND MODE           03 JURAD-embargos-fecha-ultimo pic x(8).
+
+APPEND MODE
+
+APPEND MODE       01  JURADT-reg.
+
+APPEND MODE      * Registro de totales de control T
+
+APPEND MODE      *    Tipo de Novedad = "T"
+
+APPEND MODE           03 JURADT-tipo-novedad       pic x.
+
+APPEND MODE           03                           pic x.
+
+APPEND MODE      *    Cantidad de registros
+
+APPEND MODE           03 JURADT-registros          pic 9(11).
+
+APPEND MODE           03                           pic x.
+
+APPEND MODE      * $$$$ El formato a continuación no está confirmedo, no se usa
+
+APPEND MODE      *    Total numero de demandas vigentes
+
+APPEND MODE           03 JURADT-demandas-vigentes  pic 9(7).
+
+APPEND MODE           03                           pic x.
+
+APPEND MODE      *    Total numero de demandas terminadas
+
+APPEND MODE           03 JURADT-demandas-terminadas pic 9(7).
+
+APPEND MODE           03                           pic x.
+
+APPEND MODE      *    Total numero de embargos vigentes
+
+APPEND MODE           03 JURADT-embargos-vigentes  pic 9(7).
+
+APPEND MODE           03                           pic x.
+
+APPEND MODE      *    Total numero de embargos terminados
+
+APPEND MODE           03 JURADT-embargos-terminados pic 9(7).
+
+APPEND MODE           03                           pic x(41).
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Archivo de salida con los registros defectuosos del arch JURAD
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       FD ERRS.
+
+APPEND MODE       01  ERRS-reg.
+
+APPEND MODE      *    Tipo de Novedad {I, M, E, T} Inser/Modif/Elim/Totales
+
+APPEND MODE           03 ERRS-tipo-novedad         pic x.
+
+APPEND MODE      *    Tipo de identificacion Numero {1, 2, 3, 4}
+
+APPEND MODE           03 ERRS-id-tipo              pic x.
+
+APPEND MODE      *    Numero de identificacion
+
+APPEND MODE           03 ERRS-id-numero            pic x(11).
+
+APPEND MODE      *    Nombres y Apellidos
+
+APPEND MODE           03 ERRS-nombre               pic x(45).
+
+APPEND MODE      *    Numero de demandas vigentes
+
+APPEND MODE           03 ERRS-demandas-vigentes    pic 999.
+
+APPEND MODE      *    Numero de demandas terminadas
+
+APPEND MODE           03 ERRS-demandas-terminadas  pic 999.
+
+APPEND MODE      *    Fecha ultima demanda vigente YYMMDD
+
+APPEND MODE           03 ERRS-demandas-fecha-ultima pic x(8).
+
+APPEND MODE      *    Numero de embargos vigentes
+
+APPEND MODE           03 ERRS-embargos-vigentes    pic 999.
+
+APPEND MODE      *    Numero de embargos terminados
+
+APPEND MODE           03 ERRS-embargos-terminados  pic 999.
+
+APPEND MODE      *    Fecha ultimo embargo vigente YYMMDD
+
+APPEND MODE           03 ERRS-embargos-fecha-ultimo pic x(8).
+
+APPEND MODE      *    Causa del rechazo
+
+APPEND MODE           03 ERRS-causa-rechazo        pic x(61).
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Contiene los ids y nombres de personas
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIREGI.FD.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Maestro de personas juridicas nacionales y extranjeras reportada
+
+APPEND MODE      * por la DIAN
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIDIAN.FD.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Archivo maestro de cedulas de extranjeria suministrado por DAS
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIDAS.FD.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Archivos de base alterna
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           copy BDACSV.FD.
+
+APPEND MODE           COPY ICBDIR0001.FD.
+
+APPEND MODE           copy BDLCLI.FD.                         
+
+APPEND MODE           COPY ICBSUS.FD.
+
+APPEND MODE           COPY ICBCHK.FD.
+
+APPEND MODE           COPY ICBCRE.FD.
+
+APPEND MODE           COPY BDLSTDCIU.FD.
+
+APPEND MODE           COPY DIREST.FD.
+
+APPEND MODE           COPY BDLNEWDIRBOG.FD.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Maestro de alertas reportadas por suscriptores
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIALE.FD.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       WORKING-STORAGE section.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Nombre del programa
+
+APPEND MODE       01  pgm                          pic x(10) value "CARGAJUR".
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Datos para la búsqueda en base alterna
+
+APPEND MODE       01  W-DERECHOS                   PIC 9 value 0.
+
+APPEND MODE       01  CODIGO-ERROR                 pic 99 value 00.
+
+APPEND MODE
+
+APPEND MODE       01  SW-BDIIALE                   pic 9 value 0.
+
+APPEND MODE       01  HACER-MATCH                  PIC 9 value 0.
+
+APPEND MODE       01  CADENA-ENTRA                 PIC X(60).
+
+APPEND MODE       01  CADENA-SALE                  PIC X(60).
+
+APPEND MODE       01  IND-ALFABETICO              PIC  X(01).                      
+
+APPEND MODE           88 SI-ALFABETICO           VALUE " " "A" "B" "C" "D" "E" "F"
+
+APPEND MODE                                            "G" "H" "I" "J" "K" "L" "M"
+
+APPEND MODE                                            "N" "/" "O" "P" "Q" "R" "S"
+
+APPEND MODE                                            "T" "U" "V" "W" "X" "Y" "Z"
+
+APPEND MODE                                            "Ñ".
+
+APPEND MODE       01  OPEN-DIR                     PIC 9 value 0.
+
+APPEND MODE       01  W-BLOQUES                    PIC 9 value 2.
+
+APPEND MODE
+
+APPEND MODE       01  DATOS-E.
+
+APPEND MODE           03 TIPOID-E                  pic 9.
+
+APPEND MODE           03 NUMID-E                   pic 9(11).
+
+APPEND MODE           03 NOMBRE-E                  pic x(45).
+
+APPEND MODE
+
+APPEND MODE       01  REG-VALIDAS.                           
+
+APPEND MODE           03 TIP-VAL                   PIC 9.   
+
+APPEND MODE           03 CED-VAL                   PIC 9(11).
+
+APPEND MODE           03 NOM-VAL                   PIC X(45).
+
+APPEND MODE           03 FEC-EXP-VAL               PIC 9(08).
+
+APPEND MODE           03 MUN-EXP-VAL               PIC X(15).
+
+APPEND MODE           03 DEP-EXP-VAL               PIC X(15).
+
+APPEND MODE           03 VIG-VAL                   PIC X(02).
+
+APPEND MODE           03 GENERO-VAL                PIC X(01).
+
+APPEND MODE           03 EDAD-VAL                  PIC X(03).
+
+APPEND MODE           03 EDAD-RANGO                PIC X(05).
+
+APPEND MODE           03 FILLER-2-VAL              PIC X(51).
+
+APPEND MODE
+
+APPEND MODE       01  W-CONTADORES.
+
+APPEND MODE           03  W-CONT-TIPO-5            PIC 9(6) VALUE ZEROS.
+
+APPEND MODE           03  W-CONT-TIPO-6            PIC 9(6) VALUE ZEROS.
+
+APPEND MODE           03  W-CONT-TIPO-7            PIC 9(6) VALUE ZEROS.
+
+APPEND MODE           03  W-CONT-TIPO-5-PJ         PIC 9(6) VALUE ZEROS.
+
+APPEND MODE           03  W-CONT-TIPO-5-REP        PIC 9(6) VALUE ZEROS.
+
+APPEND MODE
+
+APPEND MODE       01  SUSCRIPTOR-AUX               PIC 9(06).            
+
+APPEND MODE       01  REG-LEIDOS                   PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  CONT-FALLECIDOS              PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  REG-CORRECTOS                PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  NO-COINCIDE-DIAN             PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  NO-COINCIDE-REGIS            PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  NO-EXISTE-DIAN               PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  NO-EXISTE-REGIS              PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  SI-EXISTE-CSV                PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       01  TIPO-ID-INVALIDO             PIC 9(07) VALUE ZEROS.
+
+APPEND MODE       
+
+APPEND MODE       01 MAS-DATOS.
+
+APPEND MODE           03 I                         PIC 9(02) VALUE ZERO.
+
+APPEND MODE           03 J                         PIC 9(02) VALUE ZERO.
+
+APPEND MODE
+
+APPEND MODE           COPY  BDLDIR.WS.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Variables para rutina de validacion de identificaciones
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIVIDE.WS.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Variables relacionadas con la la base BDIIALE de alertas online
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy BDIIALE.WS.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Datos para las rutinas de validación de nombres
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       copy LEEMAESTROS.WS.
+
+APPEND MODE
+
+APPEND MODE      *****************************************************************
+
+APPEND MODE      * Direcciones de los archivos en el file system
+
+APPEND MODE      *****************************************************************
+
+APPEND MODE       copy ICFILE.WS.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Indica que se termino el proceso, por agotamiento del archivo
+
+APPEND MODE      * de entrada (normal) o alguna otra condicion (error)
+
+APPEND MODE       01  IND-fin-proceso              pic xx value "NO".
+
+APPEND MODE
+
+APPEND MODE      * Copia del ultimo reg de input, para mensajes (Ult reg: ...)
+
+APPEND MODE       01  JURAD-reg-anterior           pic x(100) value "(vacio)".
+
+APPEND MODE       01  JURAD-fs                     pic xx value spaces.
+
+APPEND MODE
+
+APPEND MODE       01  ERRS-fs                      pic xx value spaces.
+
+APPEND MODE
+
+APPEND MODE      * Datos de demandas o embargos que van en el registro BDIIALE
+
+APPEND MODE       01 D-datahost.
+
+APPEND MODE           05 D-vigentes                pic 9(5).
+
+APPEND MODE           05 D-terminados              pic 9(5).
+
+APPEND MODE           05 D-fecha-ultima            pic x(8).
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Parametros iniciales, de la linea de comando
+
+APPEND MODE      * La linea de comando que contiene los parametros
+
+APPEND MODE       01 P-command-line                pic x(80) value spaces.
+
+APPEND MODE       01 P-parametros.
+
+APPEND MODE      *    Proceso real: contiene "1" para activar, "2" por defecto
+
+APPEND MODE           03 P-proceso-real            pic x value "2".
+
+APPEND MODE           88 PROCESO-REAL              value "1".
+
+APPEND MODE
+
+APPEND MODE      *    Nombre del archivo de entrada JJJJJJaaaDDMMAAbbXX.txt
+
+APPEND MODE           03 P-file-name               pic x(80) value spaces.
+
+APPEND MODE           03 P-file-name-R             redefines P-file-name.
+
+APPEND MODE      *        JJJJJJ = Codigo de suscriptor JURAD en Experian
+
+APPEND MODE               05 P-cod-suscriptor      pic 9(6).
+
+APPEND MODE      *        aaa = Codificacion del producto ("100")
+
+APPEND MODE               05 P-producto            pic xxx.
+
+APPEND MODE      *        DDMMAA = Fecha de proceso
+
+APPEND MODE               05 P-fecha-proceso       pic x(6).
+
+APPEND MODE      *        bb =  01 a CI
+
+APPEND MODE               05 P-ci-bi               pic xx.
+
+APPEND MODE      *        XX = Tipo de proceso
+
+APPEND MODE      *        01 Envio Original - Carga TOTAL - primera vez
+
+APPEND MODE      *        02 Archivo Semanal - Carga PARCIAL
+
+APPEND MODE      *        03 Archivo Mensual - Carga PARCIAL
+
+APPEND MODE      *        04 Refresque Total - Carga TOTAL
+
+APPEND MODE               05 P-tipo-proceso        pic xx.
+
+APPEND MODE      *        extension del archivo ".txt"
+
+APPEND MODE               05 P-extension           pic x(4).
+
+APPEND MODE               05                       pic x(57).
+
+APPEND MODE           03 P-file-path               pic x(80) value spaces.
+
+APPEND MODE      * Nombre del archivo de errores JJJJJJaaaDDMMAAbbXX.errs
+
+APPEND MODE          03 ERRS-file-name             pic x(80) value spaces.
+
+APPEND MODE
+
+APPEND MODE      * Fecha de proceso editada YYYYMMDD
+
+APPEND MODE       01 P-fecha-proceso-YYYYMMDD      pic x(8).
+
+APPEND MODE      * Fecha de proceso + 50 años
+
+APPEND MODE       01 P-fecha-proceso-50.
+
+APPEND MODE           03  P-fecha-proceso-50YYYY   pic 9999.
+
+APPEND MODE           03                           pic x(4).
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Datos para el reporte final
+
+APPEND MODE       01 W-tiempo.
+
+APPEND MODE           03 W-hora-inicio             pic 9(8).
+
+APPEND MODE           03 W-hora-fin                pic 9(8).
+
+APPEND MODE       01 N-edit                        pic z(8)B.
+
+APPEND MODE       01 N-editp100                    redefines N-edit
+
+APPEND MODE                                        pic z(5)9.9B.
+
+APPEND MODE       01 N-contadores.
+
+APPEND MODE      *    Registros en el archivo de entrada
+
+APPEND MODE           03 N-reg-leidos              pic 9(8) value zero.
+
+APPEND MODE      *    Registros procesados sin error
+
+APPEND MODE           03 N-reg-OK                  pic 9(8) value zero.
+
+APPEND MODE      *    Registros con error
+
+APPEND MODE           03 N-reg-con-error           pic 9(8) value zero.
+
+APPEND MODE
+
+APPEND MODE      *    Cantidades de registros por tipo de novedad
+
+APPEND MODE           03 N-reg-tipo-I-OK           pic 9(8) value zero.
+
+APPEND MODE           03 N-reg-tipo-M-OK           pic 9(8) value zero.
+
+APPEND MODE           03 N-reg-tipo-E-OK           pic 9(8) value zero.
+
+APPEND MODE           03 N-reg-tipo-I-err          pic 9(8) value zero.
+
+APPEND MODE           03 N-reg-tipo-M-err          pic 9(8) value zero.
+
+APPEND MODE           03 N-reg-tipo-E-err          pic 9(8) value zero.
+
+APPEND MODE
+
+APPEND MODE      *    Alertas borradas previo al refresque total
+
+APPEND MODE           03 N-ale-leidas              pic 9(8) value zero.
+
+APPEND MODE           03 N-ale-borradas            pic 9(8) value zero.
+
+APPEND MODE      *    Alertas insertadas
+
+APPEND MODE           03 N-ale-insertadas          pic 9(8) value zero.
+
+APPEND MODE      *    Alertas modificadas
+
+APPEND MODE           03 N-ale-modificadas         pic 9(8) value zero.
+
+APPEND MODE      *    Alertas eliminadas
+
+APPEND MODE           03 N-ale-eliminadas          pic 9(8) value zero.
+
+APPEND MODE      *    Insercion de alerta existente
+
+APPEND MODE           03 N-ale-ya-existe           pic 9(8) value zero.
+
+APPEND MODE      *    Modificacion o eliminacion de alerta inexistente
+
+APPEND MODE           03 N-ale-no-existe           pic 9(8) value zero.
+
+APPEND MODE
+
+APPEND MODE      *    Sumas de cantidades de demandas y embargos
+
+APPEND MODE           03 N-demandas-vigentes       pic 9(7).
+
+APPEND MODE           03 N-demandas-terminadas     pic 9(7).
+
+APPEND MODE           03 N-embargos-vigentes       pic 9(7).
+
+APPEND MODE           03 N-embargos-terminados     pic 9(7).
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Armado de las lineas de alerta
+
+APPEND MODE       01 LA-lineas-alerta.
+
+APPEND MODE      *    Los modelos a continuacion deberan obtenerse de un
+
+APPEND MODE      *    archivo, como BDIIALE-ALERTAS
+
+APPEND MODE           03 LAend                     pic 999 comp value 0.
+
+APPEND MODE           03 LA-modelos.
+
+APPEND MODE      *         12345678901234567890123456789012345678901234567890
+
+APPEND MODE               05 pic x(50) value
+
+APPEND MODE               "TIENE &&& DEMANDAS CERRADAS Y &&& ABIERTAS        ".
+
+APPEND MODE               05 pic x(50) value
+
+APPEND MODE               "LA ABIERTA MAS RECIENTE SE INSTAURO EL [&&&&&&&&]".
+
+APPEND MODE               05 pic x(50) value
+
+APPEND MODE               "TIENE &&& EMBARGOS CANCELADOS Y &&& VIGENTES      ".
+
+APPEND MODE               05 pic x(50) value
+
+APPEND MODE               "EL EMBARGO MAS RECIENTE SE INSTAURO EL [&&&&&&&&] ".
+
+APPEND MODE               05 pic x(50) value high-values. *> end marker
+
+APPEND MODE           03 LA-modelos2               redefines LA-modelos.
+
+APPEND MODE               05 LA-modelo             pic x(50) occurs 5
+
+APPEND MODE                                        indexed LAm.
+
+APPEND MODE      *    Funcionamiento de los templates.
+
+APPEND MODE      *    Hay dos templates por de alerta, uno por linea.
+
+APPEND MODE      *    Cada template consiste en hasta 10 frases fijas con
+
+APPEND MODE      *    ampersands (&) donde se van a reemplazar los valores.
+
+APPEND MODE      *    Por ejemplo:
+
+APPEND MODE      *    TIENE &&& DEMANDAS CERRADAS Y &&& ABIERTAS
+
+APPEND MODE      *    tiene 3 frases fijas y 2 reemplazos.
+
+APPEND MODE      *    La cantidad de ampersands es irrelevante, pero parece
+
+APPEND MODE      *    conveniente que informe sobre el tamanio del contenido.
+
+APPEND MODE           03 LA-templates.
+
+APPEND MODE               05 LA-template           occurs 4 indexed LAx.
+
+APPEND MODE                   07 LA-parte          pic x(50)
+
+APPEND MODE                                        occurs 10 indexed LAy.
+
+APPEND MODE      *    Las dos lineas armadas
+
+APPEND MODE           03 LA-lineas.
+
+APPEND MODE               05 LA-linea1             pic x(50).
+
+APPEND MODE               05 LA-linea2             pic x(50).
+
+APPEND MODE      *    Los valores a insertar en una linea
+
+APPEND MODE           03 LA-valores.
+
+APPEND MODE               05 LA-valor              pic x(50)
+
+APPEND MODE                                        occurs 10 indexed LAv.
+
+APPEND MODE      *    Datos para editar valores a insertar
+
+APPEND MODE           03 LA-num                    pic -(11)0.
+
+APPEND MODE           03 LA-numX                   redefines LA-num
+
+APPEND MODE                                        pic x(12).
+
+APPEND MODE           03 LA-descarte               pic x(50).
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Errores de consistencia del input
+
+APPEND MODE      * Cada error tiene un codigo de 2 digitos, un espacio, contador
+
+APPEND MODE      * de ocurrencias de 7 digitos, un espacio, y descripcion de 59
+
+APPEND MODE       01 E-errores.
+
+APPEND MODE      *    indica si el registro actual tiene error
+
+APPEND MODE           03 E-hay-error               pic xx value "NO".
+
+APPEND MODE      *    errores del registro actual
+
+APPEND MODE           03 E-errores-reg             pic x(300) value spaces.
+
+APPEND MODE      *    contador de registros con error
+
+APPEND MODE           03 E-cont-regs-con-error     pic 9(8) value zero.
+
+APPEND MODE      *    tabla de errores
+
+APPEND MODE           03 pic x(11) value "01 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Tipo de movimiento invalido, debe ser I M E T".
+
+APPEND MODE           03 pic x(11) value "02 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Tipo de identificacion invalido, debe ser 1 2 3 4".
+
+APPEND MODE           03 pic x(11) value "03 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de identificacion invalido, debe ser numerico".
+
+APPEND MODE           03 pic x(11) value "04 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Tipo de identificacion debe ser mayor que cero".
+
+APPEND MODE           03 pic x(11) value "05 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Falta el nombre o denominacion".
+
+APPEND MODE           03 pic x(11) value "06 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de demandas vigentes: debe ser numerico".
+
+APPEND MODE           03 pic x(11) value "07 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de demandas terminadas: debe ser numerico".
+
+APPEND MODE           03 pic x(11) value "08 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Fecha ultima demanda vigente YYYYMMDD: debe ser numerica".
+
+APPEND MODE           03 pic x(11) value "09 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Fecha ultima demanda vigente YYYYMMDD: fuera de rango".
+
+APPEND MODE           03 pic x(11) value "10 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de embargos vigentes: debe ser numerico".
+
+APPEND MODE           03 pic x(11) value "11 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de embargos terminados: debe ser numerico".
+
+APPEND MODE           03 pic x(11) value "12 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Fecha ultimo embargo vigente YYYYMMDD: debe ser numerica".
+
+APPEND MODE           03 pic x(11) value "13 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Fecha ultimo embargo vigente YYYYMMDD: fuera de rango".
+
+APPEND MODE           03 pic x(11) value "14 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "El numero de id no se encuentra en el archivo maestro".
+
+APPEND MODE           03 pic x(11) value "15 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "El nombre en el input no coincide con el registrado".
+
+APPEND MODE           03 pic x(11) value "16 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Numero de id fuera del rango del tipo de id informado".
+
+APPEND MODE           03 pic x(11) value "17 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Modificación de alerta inexistente".
+
+APPEND MODE           03 pic x(11) value "18 0000000 ".
+
+APPEND MODE           03 pic x(59) value
+
+APPEND MODE           "Eliminación de alerta inexistente".
+
+APPEND MODE      *----------------- insertar nuevos items aqui -------------------
+
+APPEND MODE           03 pic x(11) value "00 0000000 ".
+
+APPEND MODE           03 pic x(59) value "--- fin de la lista (cod 00) ---".
+
+APPEND MODE           03                           pic x(3500). *> los 50 items
+
+APPEND MODE       01 E-errores-2                   redefines E-errores.
+
+APPEND MODE           03                           pic xx.
+
+APPEND MODE           03                           pic x(300).
+
+APPEND MODE           03                           pic 9(8).
+
+APPEND MODE           03 E-error                   occurs 50 indexed Ex.
+
+APPEND MODE               05 E-codigo              pic xx.
+
+APPEND MODE               05                       pic x.
+
+APPEND MODE               05 E-contador            pic 9(7).
+
+APPEND MODE               05                       pic x.
+
+APPEND MODE               05 E-descripcion         pic x(59).
+
+APPEND MODE       01 E-edit                        pic z(8)B.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Control de rangos de valores de las fechas del input
+
+APPEND MODE       01 VALIDACIONES-FECHAS.
+
+APPEND MODE           02 ANO-VAL-X                 pic 9(04).
+
+APPEND MODE              88 ANO-VAL                value 1900 thru 2050.
+
+APPEND MODE           02 MES-VAL-X                 pic 9(02).
+
+APPEND MODE              88 MES-VAL                value 01   thru 12.
+
+APPEND MODE           02 DIA-VAL-X                 pic 9(02).
+
+APPEND MODE              88 DIA-VAL                value 01   thru 31.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE      /*****************************************************************
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       PROCEDURE DIVISION.
+
+APPEND MODE
+
+APPEND MODE      *    0000-PROGRAMA-PRINCIPAL
+
+APPEND MODE      *    4000-PROCESAR-REGISTRO
+
+APPEND MODE      *    4000-PROCESAR-REGISTRO-2
+
+APPEND MODE      *    4100-VALIDACION-FORMAL
+
+APPEND MODE      *    4200-VALIDACION-SEMANTICA
+
+APPEND MODE      *    4220-VALIDA-NOMBRE-NO-COINCIDE
+
+APPEND MODE      *    4222-VALIDA-NOMBRE-COINCIDE
+
+APPEND MODE      *    4240-CONTAR-TIPO-CUENTA
+
+APPEND MODE      *    4210-VALIDACION-ID-NO-FIGURA
+
+APPEND MODE      *    4300-MODIFICAR-BDIIALE
+
+APPEND MODE      *    4300-MODIFICAR-BDIIALE-DATOS
+
+APPEND MODE      *    4300-MODIFICAR-BDIIALE-I
+
+APPEND MODE      *    4300-MODIFICAR-BDIIALE-M
+
+APPEND MODE      *    4300-MODIFICAR-BDIIALE-E
+
+APPEND MODE      *    4333-LEER-BDIIALE-RANDOM
+
+APPEND MODE      *    4333-GRABAR-BDIIALE
+
+APPEND MODE      *    4333-REGRABAR-BDIIALE
+
+APPEND MODE      *    4333-ELIMINAR-BDIIALE
+
+APPEND MODE      *    4800-PROCESO-REG-T
+
+APPEND MODE      *    4900-GRABAR-ERROR
+
+APPEND MODE      *    4320-ARMAR-TEXTO-ALERTA
+
+APPEND MODE      *    1000-RUTINA-INICIAL
+
+APPEND MODE      *    1000-NOT-USED
+
+APPEND MODE      *    1001-ELIMINAR-TODO
+
+APPEND MODE      *    7000-RUTINA-FINAL
+
+APPEND MODE      *    9000-CANCELAR-PROGRAMA
+
+APPEND MODE      *    9800-FILTRAR-ALFABETICO
+
+APPEND MODE     
+
+APPEND MODE     
+
+APPEND MODE       0000-PROGRAMA-PRINCIPAL.
+
+APPEND MODE      D    display "0000-PROGRAMA-PRINCIPAL"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    inicializa el ambiente y abre los archivos
+
+APPEND MODE           perform 1000-RUTINA-INICIAL
+
+APPEND MODE      *    procesa cada uno de los registros del archivo JURAD hasta
+
+APPEND MODE      *    encontrar el registro "T" de totales
+
+APPEND MODE           perform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"
+
+APPEND MODE      *    cierra archivos y produce el reporte final
+
+APPEND MODE           perform 7000-RUTINA-FINAL
+
+APPEND MODE           goback.
+
+APPEND MODE
+
+APPEND MODE       4000-PROCESAR-REGISTRO.
+
+APPEND MODE      D    display "4000-PROCESAR-REGISTRO"
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      * Proceso de un registro del archivo de entrada JURAD
+
+APPEND MODE      * Lectura y control del file status del archivo
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      *    lectura del proximo registro
+
+APPEND MODE           read JURAD
+
+APPEND MODE           evaluate JURAD-fs
+
+APPEND MODE           when "00"
+
+APPEND MODE      D        display " "
+
+APPEND MODE      D        display " "
+
+APPEND MODE      D        display JURAD-reg
+
+APPEND MODE      *        controla el reg y lo aplica si es OK
+
+APPEND MODE               perform 4000-PROCESAR-REGISTRO-2
+
+APPEND MODE               move JURAD-reg to JURAD-reg-anterior
+
+APPEND MODE               add 1 to REG-LEIDOS
+
+APPEND MODE           when "10"
+
+APPEND MODE      *        fin del archivo de input:
+
+APPEND MODE      *        esto es un error, no se encontro el registro "T" antes
+
+APPEND MODE      *        de que se terminara el archivo
+
+APPEND MODE               display "Falta el reg de totales del archivo JURAD "
+
+APPEND MODE               display "Nombre del archivo: " P-file-name
+
+APPEND MODE               display "File status: " JURAD-fs
+
+APPEND MODE               display "Ultimo registro leido: " N-reg-leidos
+
+APPEND MODE               display JURAD-reg-anterior
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           when other
+
+APPEND MODE      *        error de lectura: cancelacion del proceso
+
+APPEND MODE               display "Error en lectura del archivo JURAD "
+
+APPEND MODE               display "Nombre del archivo: " P-file-name
+
+APPEND MODE               display "File status: " JURAD-fs
+
+APPEND MODE               display "Ultimo registro leido: " N-reg-leidos
+
+APPEND MODE               display JURAD-reg-anterior
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4000-PROCESAR-REGISTRO-2.
+
+APPEND MODE      D    display "4000-PROCESAR-REGISTRO-2"
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      * Controla los datos de un registro de JURAD y si es OK lo usa
+
+APPEND MODE      * para actualizar el archivo de alertas en linea
+
+APPEND MODE      * La informacion esta leida en JURAD-reg
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE           move "NO" to E-hay-error
+
+APPEND MODE
+
+APPEND MODE      *    validacion del tipo de movimiento
+
+APPEND MODE           if JURAD-tipo-novedad not = "I" and "M" and "E" and "T"
+
+APPEND MODE               call "PONERR" using "01" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      *    si es el registro "T" hay que señalar el fin de proceso
+
+APPEND MODE           if JURAD-tipo-novedad = "T"
+
+APPEND MODE               move "SI" to IND-fin-proceso
+
+APPEND MODE               perform 4800-PROCESO-REG-T
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE           add 1 to N-reg-leidos
+
+APPEND MODE
+
+APPEND MODE      *    validacion formal de los datos
+
+APPEND MODE           move 0 to codigo-error
+
+APPEND MODE           perform 4100-VALIDACION-FORMAL
+
+APPEND MODE           if E-hay-error = "SI"
+
+APPEND MODE               perform 4900-GRABAR-ERROR
+
+APPEND MODE*******        perform 4240-CONTAR-TIPO-CUENTA
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      *    si la validacion formal dio OK se hace validacion semantica
+
+APPEND MODE           perform 4200-VALIDACION-SEMANTICA
+
+APPEND MODE           if E-hay-error = "SI"
+
+APPEND MODE               perform 4900-GRABAR-ERROR
+
+APPEND MODE               perform 4240-CONTAR-TIPO-CUENTA
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE           perform 4240-CONTAR-TIPO-CUENTA
+
+APPEND MODE
+
+APPEND MODE      *    intento de actualizacion de BDIIALE
+
+APPEND MODE           perform 4300-MODIFICAR-BDIIALE
+
+APPEND MODE           add 1 to N-reg-OK.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4100-VALIDACION-FORMAL.
+
+APPEND MODE      D    display "4100-VALIDACION-FORMAL"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Validacion formal de los datos del input
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    Tipo de identificacion Numero {1, 2, 3, 4}
+
+APPEND MODE           if JURAD-id-tipo not = "1" and "2" and "3" and "4"
+
+APPEND MODE               call "PONERR" using "02" JURAD-reg E-errores
+
+APPEND MODE               move 05 to codigo-error
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Numero de identificacion
+
+APPEND MODE           if JURAD-id-numeroX is not numeric
+
+APPEND MODE               call "PONERR" using "03" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE           if JURAD-id-numero not > 0
+
+APPEND MODE               call "PONERR" using "04" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    si el movimiento es una eliminacion los datos subsiguientes
+
+APPEND MODE      *    no se controlan
+
+APPEND MODE           if JURAD-tipo-novedad = "E"
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Nombres y Apellidos
+
+APPEND MODE           if JURAD-nombre = spaces
+
+APPEND MODE               call "PONERR" using "05" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Numero de demandas vigentes
+
+APPEND MODE           if JURAD-demandas-vigentes is not numeric
+
+APPEND MODE               call "PONERR" using "06" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Numero de demandas terminadas
+
+APPEND MODE           if JURAD-demandas-terminadas is not numeric
+
+APPEND MODE               call "PONERR" using "07" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Fecha ultima demanda vigente YYMMDD
+
+APPEND MODE           if JURAD-demandas-fecha-ultima is not numeric
+
+APPEND MODE               call "PONERR" using "08" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE           move JURAD-demandas-fecha-ultima to VALIDACIONES-FECHAS
+
+APPEND MODE           if not ANO-VAL or not MES-VAL or not DIA-VAL
+
+APPEND MODE               call "PONERR" using "09" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Numero de embargos vigentes
+
+APPEND MODE           if JURAD-embargos-vigentes not numeric
+
+APPEND MODE               call "PONERR" using "10" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Numero de embargos terminados
+
+APPEND MODE           if JURAD-embargos-terminados not numeric
+
+APPEND MODE               call "PONERR" using "11" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    Fecha ultimo embargo vigente YYMMDD
+
+APPEND MODE           if JURAD-embargos-fecha-ultimo is not numeric
+
+APPEND MODE               call "PONERR" using "12" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE           move JURAD-embargos-fecha-ultimo to VALIDACIONES-FECHAS
+
+APPEND MODE           if not ANO-VAL or not MES-VAL or not DIA-VAL
+
+APPEND MODE               call "PONERR" using "13" JURAD-reg E-errores
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4200-VALIDACION-SEMANTICA.
+
+APPEND MODE      D    display "4200-VALIDACION-SEMANTICA"
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      * Validacion del numero de identificacion y de su relacion con
+
+APPEND MODE      * el nombre
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE           move JURAD-id-tipo to TIP-IDE-BDIIVIDE
+
+APPEND MODE           move JURAD-id-numero to NUM-IDE-BDIIVIDE-R
+
+APPEND MODE           move JURAD-nombre to NOMBRE-BDIIVIDE
+
+APPEND MODE
+
+APPEND MODE           move JURAD-id-tipo to TIPOID-E
+
+APPEND MODE           move JURAD-id-numero to NUMID-E
+
+APPEND MODE           move JURAD-nombre to NOMBRE-E
+
+APPEND MODE
+
+APPEND MODE           move 1 to SW-VERIFNOM-BDIIVIDE
+
+APPEND MODE           move 0 to SW-DIGCHEQUEO-BDIIVIDE SW-ASGTIPID-BDIIVIDE
+
+APPEND MODE           IF TIP-IDE-BDIIVIDE = 2 OR 3
+
+APPEND MODE               MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE
+
+APPEND MODE           END-IF
+
+APPEND MODE           MOVE 2 TO NUM-BLOQUES-BDIIVIDE
+
+APPEND MODE      *    Valida el numero de identificación contra las bases de
+
+APPEND MODE      *    datos BDIIDIAN, BDIIDAS, BDIIREGI y verifica la coincidencia
+
+APPEND MODE      *    del nombre reportado
+
+APPEND MODE      *    Retorna SW-ID-BDIIVIDE=1 si hay error
+
+APPEND MODE           perform 80100-VALIDAR-IDENTIFICACION
+
+APPEND MODE      *    SW-ID-BDIIVIDE: 0 si existe el id, 1 si no existe
+
+APPEND MODE           if SW-ID-BDIIVIDE = 1
+
+APPEND MODE      *        es un id inválido
+
+APPEND MODE               call "PONERR" using "14" JURAD-reg E-errores
+
+APPEND MODE      *        valida contra la base alterna
+
+APPEND MODE               perform 4210-VALIDACION-ID-NO-FIGURA
+
+APPEND MODE           else
+
+APPEND MODE      *        existe id, a ver si el nombre coincide
+
+APPEND MODE               if SW-NOMBRES-BDIIVIDE = 1    *> nombre no coincide
+
+APPEND MODE                   call "PONERR" using "15" JURAD-reg E-errores
+
+APPEND MODE                   display "novedad:  " JURAD-nombre
+
+APPEND MODE                   display "registro: " NOM-LEIDO-BDIIVIDE
+
+APPEND MODE      *            validación en base alterna
+
+APPEND MODE                   perform 4220-VALIDA-NOMBRE-NO-COINCIDE
+
+APPEND MODE               else
+
+APPEND MODE                   perform 4222-VALIDA-NOMBRE-COINCIDE
+
+APPEND MODE               end-if
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4220-VALIDA-NOMBRE-NO-COINCIDE.
+
+APPEND MODE      D    display "4220-VALIDA-NOMBRE-NO-COINCIDE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Validación de IDs que figuran OK pero el nombre no coincide
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    nombre no coincide
+
+APPEND MODE           IF TIP-IDE-BDIIVIDE = 1
+
+APPEND MODE      *        es una cédula
+
+APPEND MODE               MOVE 02 TO CODIGO-ERROR
+
+APPEND MODE           ELSE
+
+APPEND MODE      *        no es una cédula
+
+APPEND MODE               MOVE 01 TO CODIGO-ERROR
+
+APPEND MODE           END-IF.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4222-VALIDA-NOMBRE-COINCIDE.
+
+APPEND MODE      D    display "4222-VALIDA-NOMBRE-COINCIDE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Validación de IDs que figuran OK pero el nombre coincide
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    nombre coincide: busca ID en BDIIALE
+
+APPEND MODE           initialize LLAVE-BDIIALE
+
+APPEND MODE           move TIP-IDE-BDIIVIDE to TIP-IDE-BDIIALE
+
+APPEND MODE           move NUM-IDE-BDIIVIDE-R to NUM-IDE-BDIIALE
+
+APPEND MODE           move 990003 to FUENTE-BDIIALE
+
+APPEND MODE           start BDIIALE key not < LLAVE-BDIIALE INVALID KEY
+
+APPEND MODE               move 1 TO SW-BDIIALE
+
+APPEND MODE           not invalid key
+
+APPEND MODE               move 0 to SW-BDIIALE
+
+APPEND MODE               read BDIIALE next record
+
+APPEND MODE               at end
+
+APPEND MODE                   move 1 to SW-BDIIALE
+
+APPEND MODE               end-read
+
+APPEND MODE           end-start
+
+APPEND MODE
+
+APPEND MODE           perform until SW-BDIIALE = 1
+
+APPEND MODE           or TIP-IDE-BDIIVIDE <> TIP-IDE-BDIIALE
+
+APPEND MODE           or NUM-IDE-BDIIVIDE <> NUM-IDE-BDIIALE
+
+APPEND MODE               if FUENTE-BDIIALE = 990003
+
+APPEND MODE               and FEC-NOV-BDIIALE <= P-fecha-proceso-YYYYMMDD
+
+APPEND MODE               and FEC-VEN-BDIIALE >= P-fecha-proceso-YYYYMMDD
+
+APPEND MODE               and BLOQUEO-BDIIALE = 0
+
+APPEND MODE      *             encontrado
+
+APPEND MODE                    move 1 to SW-BDIIALE
+
+APPEND MODE               end-if
+
+APPEND MODE               if SW-BDIIALE = 0
+
+APPEND MODE                   read BDIIALE next record at end
+
+APPEND MODE                       move 1 to SW-BDIIALE
+
+APPEND MODE                   end-read
+
+APPEND MODE               end-if
+
+APPEND MODE           end-perform.
+
+APPEND MODE
+
+APPEND MODE           if TIP-IDE-BDIIVIDE = 1
+
+APPEND MODE               if ESTADO-VIG-BDIIREGI = 12 and W-DERECHOS = 1
+
+APPEND MODE                   move 07 to CODIGO-ERROR
+
+APPEND MODE               else
+
+APPEND MODE                   if ESTADO-VIG-BDIIREGI = 21
+
+APPEND MODE                       move 06 to CODIGO-ERROR
+
+APPEND MODE                       add 1 to NO-COINCIDE-REGIS
+
+APPEND MODE                       add 1 to CONT-FALLECIDOS
+
+APPEND MODE                   end-if
+
+APPEND MODE               end-if
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4240-CONTAR-TIPO-CUENTA.
+
+APPEND MODE      D    display "4240-CONTAR-TIPO-CUENTA"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    Conteo de los registros por "tipo", dependiendo del código
+
+APPEND MODE      *    de error:
+
+APPEND MODE      *    00=OK
+
+APPEND MODE      *    01=NIT OK, nombre no coincide
+
+APPEND MODE      *    02=cédula OK, nombre no coincide
+
+APPEND MODE      *    03=NIT no figura
+
+APPEND MODE      *    04=cédula no figura pero está en base alterna
+
+APPEND MODE      *    05=tipo id no es 1|2|3|4
+
+APPEND MODE      *    06=cédula ... ESTADO-VIG-BDIIREGI = 21
+
+APPEND MODE      *    07=cédula ... ESTADO-VIG-BDIIREGI = 12
+
+APPEND MODE      *
+
+APPEND MODE      *    cuenta tipo 5: sin error
+
+APPEND MODE      *    cuenta tipo 6: 01 02 06 07
+
+APPEND MODE      *    cuenta tipo 7: 03 04 05
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07
+
+APPEND MODE               ADD 1 TO W-CONT-TIPO-6
+
+APPEND MODE           ELSE
+
+APPEND MODE               IF CODIGO-ERROR = 03 OR 04 OR 05
+
+APPEND MODE                   ADD 1 TO W-CONT-TIPO-7
+
+APPEND MODE               ELSE
+
+APPEND MODE      *            registros correctos, repetidos o no
+
+APPEND MODE                   ADD 1 TO W-CONT-TIPO-5
+
+APPEND MODE      *            si es una empresa
+
+APPEND MODE                   IF TIPOID-E = 2 OR 3
+
+APPEND MODE                       ADD 1 TO W-CONT-TIPO-5-PJ
+
+APPEND MODE                   END-IF
+
+APPEND MODE               END-IF
+
+APPEND MODE           END-IF.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4210-VALIDACION-ID-NO-FIGURA.
+
+APPEND MODE      D    display "4210-VALIDACION-ID-NO-FIGURA"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Validación de IDs que no figuran en las bases normales
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           MOVE 0 TO HACER-MATCH
+
+APPEND MODE           MOVE 0 TO IDE-TIPO-BDAMATCH
+
+APPEND MODE      *    valida si la identificación está en la base de datos alterna
+
+APPEND MODE           PERFORM 513-VALIDA-EN-CSV
+
+APPEND MODE           IF IDE-TIPO-BDAMATCH = 0
+
+APPEND MODE               IF TIP-IDE-BDIIVIDE = 1
+
+APPEND MODE      *            es una cédula
+
+APPEND MODE                   MOVE 04 TO CODIGO-ERROR
+
+APPEND MODE               else
+
+APPEND MODE      *            no es una cédula
+
+APPEND MODE                   MOVE 03 TO CODIGO-ERROR
+
+APPEND MODE               END-IF
+
+APPEND MODE           END-IF.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4300-MODIFICAR-BDIIALE.
+
+APPEND MODE      D    display "4300-MODIFICAR-BDIIALE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Se impacta el archivo BDIIALE con una o dos inserciones,
+
+APPEND MODE      * modificaciones o eliminaciones segun haya o no demandas y
+
+APPEND MODE      * embargos
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           initialize REG-BDIIALE
+
+APPEND MODE
+
+APPEND MODE      *    si hay demandas
+
+APPEND MODE           if JURAD-demandas-vigentes > zero
+
+APPEND MODE           or JURAD-demandas-terminadas > zero
+
+APPEND MODE               move "J001" to LLASEC-BDIIALE
+
+APPEND MODE      *        arma datos de demandas
+
+APPEND MODE               move JURAD-demandas-vigentes to D-vigentes
+
+APPEND MODE               move JURAD-demandas-terminadas to D-terminados
+
+APPEND MODE               string "20" JURAD-demandas-fecha-ultima
+
+APPEND MODE               delimited size into D-fecha-ultima
+
+APPEND MODE               perform 4300-MODIFICAR-BDIIALE-DATOS
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE      *    si hay embargos
+
+APPEND MODE           if JURAD-embargos-vigentes > zero
+
+APPEND MODE           or JURAD-embargos-terminados > zero
+
+APPEND MODE               move "J002" to LLASEC-BDIIALE
+
+APPEND MODE      *        arma datos de embargos
+
+APPEND MODE               move JURAD-embargos-vigentes to D-vigentes
+
+APPEND MODE               move JURAD-embargos-terminados to D-terminados
+
+APPEND MODE               string "20" JURAD-embargos-fecha-ultimo
+
+APPEND MODE               delimited size into D-fecha-ultima
+
+APPEND MODE               perform 4300-MODIFICAR-BDIIALE-DATOS
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4300-MODIFICAR-BDIIALE-DATOS.
+
+APPEND MODE      D    display "4300-MODIFICAR-BDIIALE-DATOS"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Parte de la carga de datos en el registro BDIIALE y grabacion
+
+APPEND MODE      * del mismo que es comun a demandas y embargos
+
+APPEND MODE      * El dato LLASEC-BDIIALE ya tiene "J001" o "J002"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    completa la clave e intenta leer la alerta, si se leyo OK
+
+APPEND MODE      *    el file status de BDIIALE queda con "00"
+
+APPEND MODE           perform 4333-LEER-BDIIALE-RANDOM
+
+APPEND MODE
+
+APPEND MODE      *    procesa segun el tipo de novedad I M E
+
+APPEND MODE           evaluate JURAD-tipo-novedad
+
+APPEND MODE           when "I"
+
+APPEND MODE               add 1 to N-reg-tipo-I-OK
+
+APPEND MODE               perform 4300-MODIFICAR-BDIIALE-I
+
+APPEND MODE           when "M"
+
+APPEND MODE               add 1 to N-reg-tipo-M-OK
+
+APPEND MODE               perform 4300-MODIFICAR-BDIIALE-M
+
+APPEND MODE           when "E"
+
+APPEND MODE               add 1 to N-reg-tipo-E-OK
+
+APPEND MODE               perform 4300-MODIFICAR-BDIIALE-E
+
+APPEND MODE           when other
+
+APPEND MODE      *        esto es "imposible" por control de consistencia anterior
+
+APPEND MODE               display "error de logica: tipo-novedad="
+
+APPEND MODE               JURAD-tipo-novedad " reg nÂ°: " N-reg-leidos
+
+APPEND MODE               display "Registro de JURAD: " display JURAD-reg
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4300-MODIFICAR-BDIIALE-I.
+
+APPEND MODE      D    display "4300-MODIFICAR-BDIIALE-I"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Insercion de una alerta nueva
+
+APPEND MODE      * Si ya existia muestra un mensaje y continua
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    si el registro existia es un error
+
+APPEND MODE           if EST-BDIIALE = "00"
+
+APPEND MODE               display "Insercion de alerta nueva que ya existe "
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro de input: "
+
+APPEND MODE               display JURAD-reg
+
+APPEND MODE               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
+
+APPEND MODE               add 1 to N-ale-ya-existe
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      *    completa los datos del registro
+
+APPEND MODE           initialize ENCABEZADO-BDIIALE
+
+APPEND MODE           move P-fecha-proceso-YYYYMMDD to FEC-NOV-BDIIALE
+
+APPEND MODE           FEC-REP-BDIIALE
+
+APPEND MODE           move P-fecha-proceso-50 to FEC-VEN-BDIIALE
+
+APPEND MODE           move 0 to BLOQUEO-BDIIALE
+
+APPEND MODE           move D-datahost to INF-DATAHOST-BDIIALE
+
+APPEND MODE           perform 4320-ARMAR-TEXTO-ALERTA
+
+APPEND MODE           if EST-BDIIALE = "00"
+
+APPEND MODE               perform 4333-REGRABAR-BDIIALE
+
+APPEND MODE           else
+
+APPEND MODE               perform 4333-GRABAR-BDIIALE
+
+APPEND MODE           end-if.
+
+APPEND MODE      *    display "4300-MODIFICAR-BDIIALE-I k:" LLAVE-BDIIALE
+
+APPEND MODE      *    " fs:" EST-BDIIALE.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4300-MODIFICAR-BDIIALE-M.
+
+APPEND MODE      D    display "4300-MODIFICAR-BDIIALE-M"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Modificacion de una alerta existente
+
+APPEND MODE      * Si no existia muestra un mensaje y continua
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    si el registro no existia es un error
+
+APPEND MODE           if EST-BDIIALE not = "00"
+
+APPEND MODE               display "Modificacion de alerta inexistente "
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro de input: "
+
+APPEND MODE               display JURAD-reg
+
+APPEND MODE               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
+
+APPEND MODE               add 1 to N-ale-no-existe
+
+APPEND MODE               call "PONERR" using "17" JURAD-reg E-errores
+
+APPEND MODE           end-if
+
+APPEND MODE      *    reemplaza la fecha de reporte y los valores
+
+APPEND MODE           move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE
+
+APPEND MODE           move D-datahost to INF-DATAHOST-BDIIALE
+
+APPEND MODE           perform 4320-ARMAR-TEXTO-ALERTA
+
+APPEND MODE           if EST-BDIIALE = "00"
+
+APPEND MODE               perform 4333-REGRABAR-BDIIALE
+
+APPEND MODE           else
+
+APPEND MODE               perform 4333-GRABAR-BDIIALE
+
+APPEND MODE           end-if.
+
+APPEND MODE      *    display "4300-MODIFICAR-BDIIALE-M k:" LLAVE-BDIIALE
+
+APPEND MODE      *    " fs:" EST-BDIIALE.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4300-MODIFICAR-BDIIALE-E.
+
+APPEND MODE      D    display "4300-MODIFICAR-BDIIALE-E"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Eliminacion de una alerta
+
+APPEND MODE      * Si no existia muestra un mensaje y continua
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      *    elimina el registro
+
+APPEND MODE           if EST-BDIIALE = "00"
+
+APPEND MODE               perform 4333-ELIMINAR-BDIIALE
+
+APPEND MODE           else
+
+APPEND MODE               display "Eliminacion de alerta inexistente "
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro de input: "
+
+APPEND MODE               display JURAD-reg
+
+APPEND MODE               add 1 to N-ale-no-existe
+
+APPEND MODE               call "PONERR" using "18" JURAD-reg E-errores
+
+APPEND MODE           end-if.
+
+APPEND MODE      *    display "4300-MODIFICAR-BDIIALE-E k:" LLAVE-BDIIALE
+
+APPEND MODE      *    " fs:" EST-BDIIALE.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4333-LEER-BDIIALE-RANDOM.
+
+APPEND MODE      D    display "4333-LEER-BDIIALE-RANDOM"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Arma clave exacta y lee un registro de BDIIALE
+
+APPEND MODE      * Usa los datos del reg input, excepto LLASEC que esta precargado
+
+APPEND MODE      * Cuando pudo leer OK el file status EST-BDIIALE queda con "00"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           move JURAD-id-tipo to TIP-IDE-BDIIALE
+
+APPEND MODE           move JURAD-id-numero to NUM-IDE-BDIIALE
+
+APPEND MODE           move P-cod-suscriptor to FUENTE-BDIIALE
+
+APPEND MODE           move 000 to COD-ALERTA-BDIIALE
+
+APPEND MODE      *    LLASEC-BDIIALE fué previamente cargado con J001 o J002
+
+APPEND MODE
+
+APPEND MODE           read BDIIALE
+
+APPEND MODE           evaluate EST-BDIIALE
+
+APPEND MODE           when "00"
+
+APPEND MODE               continue
+
+APPEND MODE           when "23"
+
+APPEND MODE               continue
+
+APPEND MODE           when other
+
+APPEND MODE               display "Error al leer BDIIALE fs: " EST-BDIIALE
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Ultimo registro procesado: "
+
+APPEND MODE               display JURAD-reg-anterior
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE      *    display "4333-LEER-BDIIALE-RANDOM k:" LLAVE-BDIIALE
+
+APPEND MODE      *    " fs:" EST-BDIIALE.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4333-GRABAR-BDIIALE.
+
+APPEND MODE      D    display "4333-GRABAR-BDIIALE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Inserta un registro nuevo en BDIIALE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           if not PROCESO-REAL
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE           write REG-BDIIALE
+
+APPEND MODE           evaluate EST-BDIIALE
+
+APPEND MODE           when "00"
+
+APPEND MODE               add 1 to N-ale-insertadas
+
+APPEND MODE           when other
+
+APPEND MODE               display "Error al grabar BDIIALE fs: " EST-BDIIALE
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro BDIIALE: "
+
+APPEND MODE               display REG-BDIIALE
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4333-REGRABAR-BDIIALE.
+
+APPEND MODE      D    display "4333-REGRABAR-BDIIALE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Regraba un registro modificado en BDIIALE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           if not PROCESO-REAL
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE           rewrite REG-BDIIALE
+
+APPEND MODE           evaluate EST-BDIIALE
+
+APPEND MODE           when "00"
+
+APPEND MODE               add 1 to N-ale-modificadas
+
+APPEND MODE           when other
+
+APPEND MODE               display "Error al regrabar BDIIALE fs: " EST-BDIIALE
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro BDIIALE: "
+
+APPEND MODE               display REG-BDIIALE
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4333-ELIMINAR-BDIIALE.
+
+APPEND MODE      D    display "4333-ELIMINAR-BDIIALE"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Elimina un registro de BDIIALE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           if not PROCESO-REAL
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-if
+
+APPEND MODE           delete BDIIALE
+
+APPEND MODE           evaluate EST-BDIIALE
+
+APPEND MODE           when "00"
+
+APPEND MODE               add 1 to N-ale-eliminadas
+
+APPEND MODE           when other
+
+APPEND MODE               display "Error al deletear BDIIALE fs: " EST-BDIIALE
+
+APPEND MODE               " key: " LLAVE-BDIIALE
+
+APPEND MODE               display "Registro BDIIALE: "
+
+APPEND MODE               display REG-BDIIALE
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE       4800-PROCESO-REG-T.
+
+APPEND MODE      D    display "4800-PROCESO-REG-T"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * El registro leido en el archivo JURAD es tipo "T" con totales
+
+APPEND MODE      * de control, y debería ser el ultimo del archivo
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Control de los totales calculados contra los esperados
+
+APPEND MODE           move "NO" to E-hay-error
+
+APPEND MODE      *    cantidad de registros I M E
+
+APPEND MODE           if function numval(JURADT-registros) = N-reg-leidos
+
+APPEND MODE               continue
+
+APPEND MODE           else
+
+APPEND MODE               display " "
+
+APPEND MODE               display "No coincide la cantidad de registros:"
+
+APPEND MODE               JURADT-registros " con los leidos:" N-reg-leidos
+
+APPEND MODE               move "SI" to E-hay-error
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      *    Sumas de cantidades de demandas y embargos
+
+APPEND MODE           if function numval(JURADT-demandas-terminadas)
+
+APPEND MODE           = N-demandas-terminadas
+
+APPEND MODE               continue
+
+APPEND MODE           else
+
+APPEND MODE               display " "
+
+APPEND MODE               display "No coincide total de demandas terminadas:"
+
+APPEND MODE               JURADT-demandas-terminadas " con el calculado:"
+
+APPEND MODE               N-demandas-terminadas
+
+APPEND MODE               move "SI" to E-hay-error
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE           if function numval(JURADT-embargos-vigentes)
+
+APPEND MODE           = N-embargos-vigentes
+
+APPEND MODE               continue
+
+APPEND MODE           else
+
+APPEND MODE               display " "
+
+APPEND MODE               display "No coincide total de embargos vigentes:"
+
+APPEND MODE               JURADT-embargos-vigentes " con el calculado:"
+
+APPEND MODE               N-embargos-vigentes
+
+APPEND MODE               move "SI" to E-hay-error
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE           if function numval(JURADT-embargos-terminados)
+
+APPEND MODE           = N-embargos-terminados
+
+APPEND MODE               continue
+
+APPEND MODE           else
+
+APPEND MODE               display " "
+
+APPEND MODE               display "No coincide total de embargos terminados:"
+
+APPEND MODE               JURADT-embargos-terminados " con el calculado:"
+
+APPEND MODE               N-embargos-terminados
+
+APPEND MODE               move "SI" to E-hay-error
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE      *    si hubo cualquier cosa se invalida el proceso
+
+APPEND MODE           if E-hay-error = "SI"
+
+APPEND MODE               display "Error en registro T de totales de control"
+
+APPEND MODE               display "Nombre del archivo: " ERRS-file-name
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4900-GRABAR-ERROR.
+
+APPEND MODE      D    display "4900-GRABAR-ERROR"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * El registro de JURAD tiene error: se graba en el archivo ERRS
+
+APPEND MODE      * con indicacion del error detectado
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           move JURAD-reg to ERRS-reg
+
+APPEND MODE           move E-errores-reg to ERRS-causa-rechazo
+
+APPEND MODE      *    lista de los codigos de los errores del registro
+
+APPEND MODE           move E-errores-reg to ERRS-causa-rechazo
+
+APPEND MODE           write ERRS-reg
+
+APPEND MODE           evaluate ERRS-fs
+
+APPEND MODE               when "00"
+
+APPEND MODE                   continue
+
+APPEND MODE               when other
+
+APPEND MODE                   display "Error al grabar el archivo de errores "
+
+APPEND MODE                   display "Nombre del archivo: " ERRS-file-name
+
+APPEND MODE                   display "File status: " ERRS-fs
+
+APPEND MODE                   perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE                   goback
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       4320-ARMAR-TEXTO-ALERTA.
+
+APPEND MODE      D    display "4320-ARMAR-TEXTO-ALERTA"
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      * Hace el reemplazo de los valores adecuados en los templates
+
+APPEND MODE      * de las linea de alerta que corresponde
+
+APPEND MODE      ****************************************************************
+
+APPEND MODE      *    segun se trate de demandas o embargos
+
+APPEND MODE           if JURAD-demandas-vigentes not = 0
+
+APPEND MODE           or JURAD-demandas-terminadas not = 0
+
+APPEND MODE               set LAx to 1
+
+APPEND MODE               move high-values to LA-valores
+
+APPEND MODE               move JURAD-demandas-vigentes to LA-num
+
+APPEND MODE      * >>>> esto esta anulado x que no se como hacer para que lo compile
+
+APPEND MODE      *        unstring LA-numX into LA-descarte LA-valor(1)
+
+APPEND MODE      *        delimited by all space
+
+APPEND MODE               move LA-numx(9:12) to LA-valor(1)
+
+APPEND MODE               move JURAD-demandas-terminadas to LA-num
+
+APPEND MODE      * >>>> esto esta anulado x que no se como hacer para que lo compile
+
+APPEND MODE      *        unstring LA-numX into LA-descarte LA-valor(2)
+
+APPEND MODE      *        delimited by all space
+
+APPEND MODE               move LA-numx(9:12) to LA-valor(2)
+
+APPEND MODE
+
+APPEND MODE      * >>>> esto esta anulado x que no se como hacer para que lo compile
+
+APPEND MODE      * >>>> da error en el end-if
+
+APPEND MODE      *        string LA-parte(LAx, 1) LA-valor(1)
+
+APPEND MODE      *        LA-parte(LAx, 2) LA-valor(2) LA-parte(LAx, 3) LA-valor(3)
+
+APPEND MODE      *        LA-parte(LAx, 4) LA-valor(4) LA-parte(LAx, 5) LA-valor(5)
+
+APPEND MODE      *        LA-parte(LAx, 6) LA-valor(6) LA-parte(LAx, 7) LA-valor(7)
+
+APPEND MODE      *        LA-parte(LAx, 8) LA-valor(8) LA-parte(LAx, 9) LA-valor(9)
+
+APPEND MODE      *        LA-parte(LAx, 10) LA-valor(10)
+
+APPEND MODE      *        delimited by high-value
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       1000-RUTINA-INICIAL.
+
+APPEND MODE      D    display "1000-RUTINA-INICIAL"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Todas las operaciones que se realizan una sola vez, al comienzo
+
+APPEND MODE      * del programa:
+
+APPEND MODE      *   - obtencion de los parametros
+
+APPEND MODE      *   - apertura del archivo de entrada
+
+APPEND MODE      *   - apertura de todos los demas archivos
+
+APPEND MODE      *   - eliminacion de datos existentes si es refresque completo
+
+APPEND MODE      *   - carga en memoria de los IDs de inconsistentes
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Registra hora de inicio
+
+APPEND MODE           accept W-hora-inicio from time
+
+APPEND MODE
+
+APPEND MODE      * Obtiene informacion sobre la corrida de la linea de comando: el
+
+APPEND MODE      * nombre del archivo de entrada (que contiene el tipo de proceso),
+
+APPEND MODE      * el indicador de proceso real o en falso (default)
+
+APPEND MODE           accept P-command-line from COMMAND-LINE
+
+APPEND MODE           display "Parametros: " P-command-line
+
+APPEND MODE           unstring P-command-line delimited by all " " into
+
+APPEND MODE           P-file-name P-proceso-real
+
+APPEND MODE
+
+APPEND MODE      * El programa se anuncia en la consola
+
+APPEND MODE      * TODO: se usa un anuncio mas vistoso?
+
+APPEND MODE           if PROCESO-REAL
+
+APPEND MODE               display pgm " Carga de archivo JURAD - proceso REAL"
+
+APPEND MODE           else
+
+APPEND MODE               display pgm " Carga de archivo JURAD - proceso en falso"
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      * El indicador de proceso real debe ser 1 o 2
+
+APPEND MODE           if P-proceso-real not = "1" and "2"
+
+APPEND MODE               display "El indicador de proceso real es invalido"
+
+APPEND MODE               display "debe ser 1 o 2"
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      * TODO: controlar los componentes del filename
+
+APPEND MODE           evaluate P-tipo-proceso
+
+APPEND MODE           when "01"
+
+APPEND MODE               display "01 Envio Original - Carga TOTAL 1a vez"
+
+APPEND MODE           when "02"
+
+APPEND MODE               display "02 Archivo Semanal - Carga PARCIAL"
+
+APPEND MODE           when "03"
+
+APPEND MODE               display "03 Archivo Mensual - Carga PARCIAL"
+
+APPEND MODE           when "04"
+
+APPEND MODE               display "04 Refresque Total - Carga TOTAL"
+
+APPEND MODE           when other
+
+APPEND MODE      *        valor invalido
+
+APPEND MODE               display "El tipo de proceso " P-tipo-proceso
+
+APPEND MODE               " es invalido (debe ser 01 02 03 o 04)"
+
+APPEND MODE               perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE      * Edita la fecha de proceso DDMMAA del parametro en formato
+
+APPEND MODE      * YYYYMMDD
+
+APPEND MODE           string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)
+
+APPEND MODE           P-fecha-proceso(1:2) delimited size
+
+APPEND MODE           into P-fecha-proceso-YYYYMMDD
+
+APPEND MODE           display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD
+
+APPEND MODE
+
+APPEND MODE      * Calcula una fecha 50 anios posterior a la de proceso
+
+APPEND MODE           move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-50
+
+APPEND MODE           add 50 to P-fecha-proceso-50YYYY
+
+APPEND MODE
+
+APPEND MODE      * Apertura del archivo de entrada
+
+APPEND MODE           string "$TEMPORALES/" P-file-name into P-file-path
+
+APPEND MODE           open input JURAD
+
+APPEND MODE           evaluate JURAD-fs
+
+APPEND MODE               when "00"
+
+APPEND MODE                    continue
+
+APPEND MODE               when other
+
+APPEND MODE                   display "Error en open del archivo JURAD "
+
+APPEND MODE                   display "Path del archivo: " P-file-path
+
+APPEND MODE                   display "File status: " JURAD-fs
+
+APPEND MODE                   perform 9000-CANCELAR-PROGRAMA *> no retorna
+
+APPEND MODE                   goback
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE      * Apertura del archivo de errores
+
+APPEND MODE           string "$TEMPORALES/" P-file-name(1:19) ".errs"
+
+APPEND MODE           into ERRS-file-name
+
+APPEND MODE           open output ERRS
+
+APPEND MODE           evaluate ERRS-fs
+
+APPEND MODE               when "00"
+
+APPEND MODE                    continue
+
+APPEND MODE               when other
+
+APPEND MODE                   display "Error en open del archivo de errores "
+
+APPEND MODE                   display "Nombre del archivo: " ERRS-file-name
+
+APPEND MODE                   display "File status: " ERRS-fs
+
+APPEND MODE                   perform 9000-CANCELAR-PROGRAMA *> no retorna
+
+APPEND MODE                   goback
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE      * Apertura de los archivos maestros
+
+APPEND MODE      * TODO: falta capturar el status de estas operaciones?
+
+APPEND MODE           open input BDIIREGI
+
+APPEND MODE           open input BDIIDIAN
+
+APPEND MODE           open input BDIIDAS.
+
+APPEND MODE
+
+APPEND MODE      * Apertura del archivo de alertas en linea
+
+APPEND MODE           if PROCESO-REAL
+
+APPEND MODE               open i-o BDIIALE
+
+APPEND MODE           else
+
+APPEND MODE               open input BDIIALE
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE      * Si es un refresque total (codigo 04) se eliminan los registros
+
+APPEND MODE      * de Jurad existentes
+
+APPEND MODE           if P-tipo-proceso = "04" and PROCESO-REAL
+
+APPEND MODE               perform 1001-ELIMINAR-TODO
+
+APPEND MODE           end-if.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       1000-NOT-USED.
+
+APPEND MODE      D    display "1000-NOT-USED"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Aunque tengo instrucciones de dejar los textos de alertas en
+
+APPEND MODE      * blanco, me parece que se deberían cargar, aunque sea de manera
+
+APPEND MODE      * precaria, por si justo cae una consulta para uno de los IDs
+
+APPEND MODE      * involucrados. La persona que consulta va a ver <spaces>, hasta
+
+APPEND MODE      * que se ejecute el programa que genera los textos.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * >>>> esto da un error de compilacion que no puedo resolver
+
+APPEND MODE      * >>>> por ahora esta anulado
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Carga de los templates para armar el texto de alertas
+
+APPEND MODE      * TODO: por ahora los templates son literales
+
+APPEND MODE           set LAx to 0
+
+APPEND MODE           move high-values to LA-templates
+
+APPEND MODE           perform varying LAm from 1 by 1
+
+APPEND MODE           until LA-modelo(LAm) = high-values
+
+APPEND MODE               set LAx up by 1
+
+APPEND MODE      *        separa las partes de la linea
+
+APPEND MODE      *        unstring LA-modelo(LAm) into LA-parte(LAx, 1)
+
+APPEND MODE      *        LA-parte(LAx, 2) LA-parte(LAx, 3) LA-parte(LAx, 4)
+
+APPEND MODE      *        LA-parte(LAx, 5) LA-parte(LAx, 6) LA-parte(LAx, 7)
+
+APPEND MODE      *        LA-parte(LAx, 8) LA-parte(LAx, 9) LA-parte(LAx, 10)
+
+APPEND MODE      *        delimited by all "&"
+
+APPEND MODE      *        prepara para omitir los espacios al final de c/parte
+
+APPEND MODE               perform varying LAy from 1 by 1 until LAy > 10
+
+APPEND MODE                   inspect LA-parte(LAx, LAy) replacing trailing
+
+APPEND MODE                   spaces by high-values
+
+APPEND MODE                   inspect LA-parte(LAx, LAy) replacing first
+
+APPEND MODE                   high-value by space
+
+APPEND MODE               end-perform
+
+APPEND MODE           end-perform.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       1001-ELIMINAR-TODO.
+
+APPEND MODE      D    display "1001-ELIMINAR-TODO"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Elimina los registros de alertas existentes en el archivo de
+
+APPEND MODE      * alertas en linea, previo a un refresque total
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           display "Eliminando toda la informacion con fuente JURAD"
+
+APPEND MODE      *    posiciona en el primer reg de JURAD
+
+APPEND MODE           move zero to TIP-IDE-BDIIALE
+
+APPEND MODE           move zero to NUM-IDE-BDIIALE
+
+APPEND MODE           move P-cod-suscriptor to FUENTE-BDIIALE
+
+APPEND MODE           move zeros to COD-ALERTA-BDIIALE
+
+APPEND MODE           move low-values to LLASEC-BDIIALE
+
+APPEND MODE           start BDIIALE key > LLAVE-BDIIALE
+
+APPEND MODE      *    display "Start BDIIALE k:" LLAVE-BDIIALE
+
+APPEND MODE           evaluate EST-BDIIALE
+
+APPEND MODE           when "00"
+
+APPEND MODE      *        posicionado
+
+APPEND MODE               continue
+
+APPEND MODE           when other
+
+APPEND MODE      *        no hay registros
+
+APPEND MODE               display "No hay registros a eliminar fs:" EST-BDIIALE
+
+APPEND MODE               exit paragraph
+
+APPEND MODE           end-evaluate.
+
+APPEND MODE
+
+APPEND MODE      *    lee secuencialmente y elimina los registros de JURAD
+
+APPEND MODE      *    hasta el fin del archivo
+
+APPEND MODE           perform until EST-BDIIALE not = "00"
+
+APPEND MODE               read BDIIALE next record
+
+APPEND MODE               evaluate EST-BDIIALE
+
+APPEND MODE               when "00"
+
+APPEND MODE      *            display "BDIIALE leido fs:" EST-BDIIALE
+
+APPEND MODE      *            " k:" LLAVE-BDIIALE
+
+APPEND MODE                   if FUENTE-BDIIALE = P-cod-suscriptor
+
+APPEND MODE      *                es un alerta de JURAD
+
+APPEND MODE                       delete BDIIALE
+
+APPEND MODE                       if EST-BDIIALE = "00"
+
+APPEND MODE      *                    display "BDIIALE eliminado k:" LLAVE-BDIIALE
+
+APPEND MODE                           add 1 to N-ale-borradas
+
+APPEND MODE                       else
+
+APPEND MODE      *                    error en la eliminacion
+
+APPEND MODE                           display "Error al eliminar un registro de "
+
+APPEND MODE                           "BDIIALE vaciando los datos"
+
+APPEND MODE                           display "Clave: " LLAVE-BDIIALE
+
+APPEND MODE                           display "Reg borrados: " N-ale-borradas
+
+APPEND MODE                           perform 9000-CANCELAR-PROGRAMA
+
+APPEND MODE                       end-if
+
+APPEND MODE                   end-if
+
+APPEND MODE               when "10"
+
+APPEND MODE      *            fin de archivo: sale normalmente
+
+APPEND MODE                   display "Fin de los registros a eliminar - leídos:"
+
+APPEND MODE                   N-ale-leidas
+
+APPEND MODE               when other
+
+APPEND MODE      *            lectura anormal: cancelacion del programa
+
+APPEND MODE                   display "Error en lectura del archivo de alertas "
+
+APPEND MODE                   "online"
+
+APPEND MODE                   display "File status: " EST-BDIIALE
+
+APPEND MODE                   perform 9000-CANCELAR-PROGRAMA *> no retorna
+
+APPEND MODE               end-evaluate
+
+APPEND MODE           end-perform.
+
+APPEND MODE           display "Termino la eliminacion total de JURAD"
+
+APPEND MODE           display "Reg borrados: " N-ale-borradas.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       7000-RUTINA-FINAL.
+
+APPEND MODE      D    display "7000-RUTINA-FINAL"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Registra hora de finalizacion
+
+APPEND MODE           accept W-hora-fin from time
+
+APPEND MODE
+
+APPEND MODE      * Leer JURAD a ver si hay registros despues del "T"
+
+APPEND MODE
+
+APPEND MODE      * Close todos los archivos
+
+APPEND MODE      * $$$$ se agregaron varios archivos más
+
+APPEND MODE           close JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.
+
+APPEND MODE
+
+APPEND MODE           display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD
+
+APPEND MODE      * Emision de contadores de registros
+
+APPEND MODE           display " "
+
+APPEND MODE           display "Totales de registros:"
+
+APPEND MODE           display " "
+
+APPEND MODE      * Totales tipo PESVNO
+
+APPEND MODE           DISPLAY "REGISTROS LEIDOS                :" REG-LEIDOS
+
+APPEND MODE           DISPLAY "REGISTROS CORRECTOS             :" REG-CORRECTOS
+
+APPEND MODE           DISPLAY "REGISTROS CORRECTOS REPETIDOS   :" REG-CORRECTOS-R
+
+APPEND MODE           DISPLAY "REGISTROS NO COINCIDEN BDIIREGI :" NO-COINCIDE-REGIS
+
+APPEND MODE           DISPLAY "  REGISTROS DE FALLECIDOS         :" CONT-FALLECIDOS
+
+APPEND MODE           DISPLAY "REGISTROS NO COINCIDEN BDIIDIAN :" NO-COINCIDE-DIAN
+
+APPEND MODE           DISPLAY "REGISTROS NO EXISTEN   BDIIREGI :" NO-EXISTE-REGIS
+
+APPEND MODE           DISPLAY "REGISTROS NO EXISTEN   BDIIDIAN :" NO-EXISTE-DIAN
+
+APPEND MODE           DISPLAY "TIPO IDENTIFICACION INVALIDO    :" TIPO-ID-INVALIDO
+
+APPEND MODE           display " "
+
+APPEND MODE      *    porcentaje registros procesados OK
+
+APPEND MODE           compute N-editp100 rounded = 100.0 * N-reg-OK / N-reg-leidos
+
+APPEND MODE           display N-editp100 "% de registros correctos"
+
+APPEND MODE      *    porcentaje registros inconsistentes
+
+APPEND MODE           compute N-editp100 rounded = 100.0 * E-cont-regs-con-error
+
+APPEND MODE           / N-reg-leidos
+
+APPEND MODE           display N-editp100 "% de registros inconsistentes"
+
+APPEND MODE      *    cantidad de registros leídos (excluído el registro "T")
+
+APPEND MODE           move N-reg-leidos to N-edit
+
+APPEND MODE           display N-edit "Registros IME en el archivo de entrada"
+
+APPEND MODE      *    cantidad de registros procesados sin error
+
+APPEND MODE           move N-reg-OK to N-edit
+
+APPEND MODE           display N-edit "Registros procesados sin error"
+
+APPEND MODE
+
+APPEND MODE      * >>>> not OK: suma para J001 y tambien J002, hay que cambiar la
+
+APPEND MODE      * definicion de estos contadores
+
+APPEND MODE      *    move N-reg-tipo-I-OK to N-edit
+
+APPEND MODE      *    display N-edit "Registros tipo I aceptados"
+
+APPEND MODE      *    move N-reg-tipo-M-OK to N-edit
+
+APPEND MODE      *    display N-edit "Registros tipo M aceptados"
+
+APPEND MODE      *    move N-reg-tipo-E-OK to N-edit
+
+APPEND MODE      *    display N-edit "Registros tipo E aceptados"
+
+APPEND MODE
+
+APPEND MODE      *    cantidad de registros con error
+
+APPEND MODE           move E-cont-regs-con-error to N-reg-con-error
+
+APPEND MODE           move N-reg-con-error to N-edit
+
+APPEND MODE           display N-edit "Registros con error"
+
+APPEND MODE      *    cantidades de alertas afectadas
+
+APPEND MODE           if P-tipo-proceso = "04"
+
+APPEND MODE               move N-ale-borradas to N-edit
+
+APPEND MODE               display N-edit
+
+APPEND MODE               "Alertas borradas previo al refresque total"
+
+APPEND MODE           end-if
+
+APPEND MODE           move N-ale-insertadas to N-edit
+
+APPEND MODE           display N-edit "Alertas insertadas"
+
+APPEND MODE           move N-ale-modificadas to N-edit
+
+APPEND MODE           display N-edit "Alertas modificadas"
+
+APPEND MODE           move N-ale-eliminadas to N-edit
+
+APPEND MODE           display N-edit "Alertas eliminadas"
+
+APPEND MODE           move N-ale-ya-existe to N-edit
+
+APPEND MODE           display N-edit "Insercion de alerta existente"
+
+APPEND MODE           move N-ale-no-existe to N-edit
+
+APPEND MODE           display N-edit "Modif o elim de alerta inexistente".
+
+APPEND MODE
+
+APPEND MODE      * Emision del reporte de errores
+
+APPEND MODE           display " "
+
+APPEND MODE           display "Totales por tipo de error detectado:"
+
+APPEND MODE           perform varying Ex from 1 by 1 until Ex > 50
+
+APPEND MODE           or E-codigo(Ex) = "00"
+
+APPEND MODE               if E-contador(Ex) not = 0
+
+APPEND MODE                   move E-contador(ex) to E-edit
+
+APPEND MODE                   display E-edit E-codigo(Ex) "-" E-descripcion(Ex)
+
+APPEND MODE               end-if
+
+APPEND MODE           end-perform.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       9000-CANCELAR-PROGRAMA.
+
+APPEND MODE      D    display "9000-CANCELAR-PROGRAMA"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Procedimiento standard de cancelacion de programa batch
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * TODO: hay un standard para comunicar una cancelacion de proceso?
+
+APPEND MODE           display " "
+
+APPEND MODE           display pgm " - proceso cancelado"
+
+APPEND MODE           goback returning 99.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       513-VALIDA-EN-CSV.
+
+APPEND MODE      D    display "513-VALIDA-EN-CSV"
+
+APPEND MODE      D    display "TIPOID-E:" TIPOID-E " NUMID-E:" NUMID-E 
+
+APPEND MODE      **************************************************************
+
+APPEND MODE      * Valida si la identificación está en la base de datos alterna
+
+APPEND MODE      **************************************************************
+
+APPEND MODE      *    hace validacion de tipo de identificacion
+
+APPEND MODE           MOVE TIPOID-E TO TIP-IDE-BDIIVIDE
+
+APPEND MODE           MOVE NUMID-E TO NUM-IDE-BDIIVIDE
+
+APPEND MODE      *    retorna SW-TID-BDIIVIDE=0 si el num id no está dentro
+
+APPEND MODE      *    del rango que corresponde al tipo de id
+
+APPEND MODE           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
+
+APPEND MODE           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
+
+APPEND MODE           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
+
+APPEND MODE           PERFORM 80400-VALIDAR-TIPO-ID
+
+APPEND MODE           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
+
+APPEND MODE           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
+
+APPEND MODE           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
+
+APPEND MODE           IF SW-TID-BDIIVIDE = 0
+
+APPEND MODE      *        el tipo de id es OK
+
+APPEND MODE      D        display "el n° de ID está dentro de su rango"
+
+APPEND MODE               IF HACER-MATCH = ZEROS
+
+APPEND MODE      *            abre archivos y carga la tabla de direcciones 
+
+APPEND MODE      *            estandar, solo la primera vez
+
+APPEND MODE                   IF OPEN-DIR = ZEROS
+
+APPEND MODE      D                display "carga tabla DIRESTAN"
+
+APPEND MODE                       OPEN INPUT MAESTRO-DIRECC
+
+APPEND MODE                       OPEN INPUT BDLCLI
+
+APPEND MODE                       OPEN INPUT SUSCRIPTOR
+
+APPEND MODE                       OPEN INPUT MAESTRO-CREDIT
+
+APPEND MODE                       OPEN INPUT MAESTRO-CHECK
+
+APPEND MODE                       PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
+
+APPEND MODE                       MOVE 1 TO OPEN-DIR
+
+APPEND MODE                   END-IF
+
+APPEND MODE      *            abre archivos y carga la tabla de direcciones 
+
+APPEND MODE                   MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH
+
+APPEND MODE                   MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+
+APPEND MODE      *            Se recorre toda la estructura bdacsv para la identificacion
+
+APPEND MODE      *            buscada. En caso de hallar registros se procede a realizar el
+
+APPEND MODE      *            match
+
+APPEND MODE      D            display "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+
+APPEND MODE      D            " NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+
+APPEND MODE      D            " NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+
+APPEND MODE      D            " MAX-CUENTAS-BDAMATCH:" MAX-CUENTAS
+
+APPEND MODE                   PERFORM 1000-U-RECORRER-CSV-BDAMATCH
+
+APPEND MODE      D            display "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+
+APPEND MODE      D            " NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+
+APPEND MODE      D            " NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+
+APPEND MODE      D            " MAX-CUENTAS-BDAMATCH:" MAX-CUENTAS
+
+APPEND MODE                   MOVE 1 TO HACERMATCH-LEEMSTRS
+
+APPEND MODE                   IF IDE-TIPO-BDAMATCH = 1
+
+APPEND MODE                       IF TIPOID-E = 1 OR 4
+
+APPEND MODE                           INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL
+
+APPEND MODE                           "," BY " ", ";" BY " "
+
+APPEND MODE                       END-IF
+
+APPEND MODE                       MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOM
+
+APPEND MODE                       MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM
+
+APPEND MODE                       MOVE TIPOID-E TO  TIP-ID-INPUT-VALNOM
+
+APPEND MODE                       MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
+
+APPEND MODE                       PERFORM 10000-MATCH-NOMBRES-VALNOM
+
+APPEND MODE      D                display "10000-MATCH-NOMBRES-VALNOM"
+
+APPEND MODE      D                display "MATCH-OK-OUT-VALNOM:" MATCH-OK-OUT-VALNOM
+
+APPEND MODE      D                " " NOM-OUTPUT-BDAMATCH
+
+APPEND MODE                       IF MATCH-OK-OUT-VALNOM = 1
+
+APPEND MODE                           MOVE 1 TO IDE-TIPO-BDAMATCH
+
+APPEND MODE                       ELSE
+
+APPEND MODE                          IF W-BLOQUES > 0
+
+APPEND MODE                              MOVE 0 TO IDE-TIPO-BDAMATCH
+
+APPEND MODE                          END-IF
+
+APPEND MODE                       END-IF
+
+APPEND MODE                   END-IF
+
+APPEND MODE     
+
+APPEND MODE                   IF IDE-TIPO-BDAMATCH = 1
+
+APPEND MODE                       MOVE TIPOID-E TO TIP-VAL
+
+APPEND MODE                       MOVE NUMID-E TO CED-VAL
+
+APPEND MODE                       MOVE NOM-OUTPUT-BDAMATCH TO CADENA-ENTRA
+
+APPEND MODE                       PERFORM 9800-FILTRAR-ALFABETICO
+
+APPEND MODE                       MOVE CADENA-SALE TO  NOM-VAL
+
+APPEND MODE                       MOVE ZEROS TO FEC-EXP-VAL
+
+APPEND MODE                       MOVE SPACES TO MUN-EXP-VAL
+
+APPEND MODE                       MOVE SPACES TO DEP-EXP-VAL
+
+APPEND MODE                       MOVE SPACES TO VIG-VAL
+
+APPEND MODE                       MOVE SPACES TO GENERO-VAL
+
+APPEND MODE                       MOVE SPACES TO EDAD-VAL
+
+APPEND MODE                       MOVE SPACES TO EDAD-RANGO
+
+APPEND MODE                       ADD 1 TO SI-EXISTE-CSV
+
+APPEND MODE                   END-IF
+
+APPEND MODE               END-IF
+
+APPEND MODE           END-IF.
+
+APPEND MODE
+
+APPEND MODE       9800-FILTRAR-ALFABETICO.
+
+APPEND MODE      D    display "9800-FILTRAR-ALFABETICO"
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE           MOVE FUNCTION UPPER-CASE (CADENA-ENTRA) TO CADENA-ENTRA
+
+APPEND MODE           INITIALIZE CADENA-SALE
+
+APPEND MODE           MOVE 1 TO J
+
+APPEND MODE           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 60
+
+APPEND MODE              MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICO
+
+APPEND MODE              IF SI-ALFABETICO
+
+APPEND MODE                 MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)
+
+APPEND MODE                 ADD 1 TO J
+
+APPEND MODE              END-IF
+
+APPEND MODE           END-PERFORM.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE           copy BDIIVIDE.PROC.
+
+APPEND MODE           copy BDLDIR.PROC.
+
+APPEND MODE           COPY LEEMAESTROS.PROC.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE      /
+
+APPEND MODE       IDENTIFICATION DIVISION.
+
+APPEND MODE       PROGRAM-ID. PONERR.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Rutina de conveniencia para procesar un error detectado en un
+
+APPEND MODE      * registro de input
+
+APPEND MODE      * Contabiliza el error en la tabla de errores, activa el indicador
+
+APPEND MODE      * de registro con error, muestra el mensaje en la pantalla, cuenta
+
+APPEND MODE      * el registro erroneo
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE       ENVIRONMENT DIVISION.
+
+APPEND MODE       DATA DIVISION.
+
+APPEND MODE       WORKING-STORAGE SECTION.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Registro de input (primeros 86 caracteres)
+
+APPEND MODE       01  reg-input-anterior           pic x(86) value low-values.
+
+APPEND MODE      * Posicion del proximo error en la lista de errores del reg
+
+APPEND MODE       01  errIndex                     pic 999 comp.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE
+
+APPEND MODE       LINKAGE SECTION.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Codigo del error detectado
+
+APPEND MODE       01  cod-error                    pic xx.
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Registro de input (primeros 86 caracteres)
+
+APPEND MODE       01  reg-input                    pic x(86).
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      * Tabla de errores de consistencia del input
+
+APPEND MODE       01 E-errores.
+
+APPEND MODE      *    indica si el registro actual tiene error
+
+APPEND MODE           03 E-hay-error               pic xx.
+
+APPEND MODE      *    errores del registro actual
+
+APPEND MODE           03 E-errores-reg             pic x(300).
+
+APPEND MODE      *    contador de registros con error
+
+APPEND MODE           03 E-cont-regs-con-error     pic 9(8).
+
+APPEND MODE      *    tabla de errores
+
+APPEND MODE           03 E-error                   occurs 50 indexed Ex.
+
+APPEND MODE               05 E-codigo              pic xx.
+
+APPEND MODE               05                       pic x.
+
+APPEND MODE               05 E-contador            pic 9(7).
+
+APPEND MODE               05                       pic x.
+
+APPEND MODE               05 E-descripcion         pic x(59).
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE
+
+APPEND MODE       PROCEDURE DIVISION using cod-error reg-input E-errores.
+
+APPEND MODE       00.
+
+APPEND MODE      *    marca al reg actual como erroneo
+
+APPEND MODE           move "SI" to E-hay-error
+
+APPEND MODE
+
+APPEND MODE      *    cuenta y muestra el registro de input
+
+APPEND MODE           if reg-input not = reg-input-anterior
+
+APPEND MODE               add 1 to E-cont-regs-con-error
+
+APPEND MODE               display " "
+
+APPEND MODE               display reg-input
+
+APPEND MODE               move reg-input to reg-input-anterior
+
+APPEND MODE               move spaces to E-errores-reg
+
+APPEND MODE               move 2 to errIndex
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE      *    contabiliza el error en la tabla de errores
+
+APPEND MODE           set Ex to 1
+
+APPEND MODE           search E-error varying Ex
+
+APPEND MODE           at end
+
+APPEND MODE               display "--- falla en la tabla de errores ---" cod-error
+
+APPEND MODE           when E-codigo(Ex) = "00"
+
+APPEND MODE               add 1 to E-contador(Ex)
+
+APPEND MODE               display "--- error tipo exotico: " cod-error
+
+APPEND MODE               add 1 to E-contador(Ex)
+
+APPEND MODE           when E-codigo(Ex) = cod-error
+
+APPEND MODE               add 1 to E-contador(Ex)
+
+APPEND MODE               display "Error " cod-error " " E-descripcion(Ex)
+
+APPEND MODE           end-search
+
+APPEND MODE
+
+APPEND MODE      *    agrega a la lista de errores del registro
+
+APPEND MODE           if errIndex < (300 - 59 - 3)
+
+APPEND MODE               move cod-error to E-errores-reg(errIndex:2)
+
+APPEND MODE               add 3 to errIndex
+
+APPEND MODE               move E-descripcion(Ex) to E-errores-reg(errIndex:59)
+
+APPEND MODE               add 59 to errIndex
+
+APPEND MODE           end-if
+
+APPEND MODE
+
+APPEND MODE           exit program.
+
+APPEND MODE
+
+APPEND MODE
+
+APPEND MODE       end program PONERR.
+
+APPEND MODE
+
+APPEND MODE       end program CARGAJUR.
+
+APPEND MODE
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE      ******************************************************************
+
+APPEND MODE
+
+APPEND MODE
+
+:w"CARGAJUR.CBL" 1736 lines, 74034 characters 
+[1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>fgvi qqx CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales>des-c-v CARGAJUR                          /d/iccol/desarrollo/temporales>
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+"........COMPILANDO LEEMAESTROS SIN MATCH **********
+"...... .COMPILANDO LEEMAESTROS SIN AMNISTIA *******
+* Total Messages:     3
+* Unrecoverable :     0                    Severe  :     3
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:     1429468     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO CARGAJUR.CBL.err
+
+
+/d/iccol/desarrollo/temporales>vi CARGAJUR.CBL.err
+"CARGAJUR.CBL.err" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CARGAJUR.CBL.err" [New file]:q/d/iccol/desarrollo/temporales>fu
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>fuvi CARGAJUR.CBL.errdes-c-v CARGAJUR   
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+"........COMPILANDO LEEMAESTROS SIN MATCH **********
+"...... .COMPILANDO LEEMAESTROS SIN AMNISTIA *******
+* Total Messages:     3
+* Unrecoverable :     0                    Severe  :     3
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:     1429468     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO CARGAJUR.CBL.err
+
+
+/d/iccol/desarrollo/fuentes>vi ^[  /d/iccol/desarrollo/fuentes>vi des-c-v CARGAJURfu              vi CARGAJUR.CBL.err
+"CARGAJUR.CBL.err" 11 lines, 1143 characters * Rejected - OPT
+  4270D" MAX-CUENTAS-BDAMATCH:" MAX-CUENTAS1572
+*  12-S************************************************(   0)**1573
+**    Operand MAX-CUENTAS is not declared1573
+  4275D" MAX-CUENTAS-BDAMATCH:" MAX-CUENTAS1577
+*  12-S************************************************(  75)**1578
+**    Operand MAX-CUENTAS is not declared1578
+  4288Ddisplay "MATCH-OK-OUT-VALNOM:" MATCH-OK-OUT-VALNOM1590
+*  12-S****************************************************************(  75)**1591
+**    Operand MATCH-OK-OUT-VALNO is not declared1591
+cob64: error(s) in compilation: /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"CARGAJUR.CBL.err" 11 lines, 1143 characters:q/d/iccol/desarrollo/fuentes>fg
+vi CARGAJUR.CBL
+
+PROCEDURE DIVISION using cod-error reg-input E-errores.
+00.
+*    marca al reg actual como erroneomove "SI" to E-hay-error*    cuenta y muestra el registro de inputif reg-input not = reg-input-anterioradd 1 to E-cont-regs-con-errordisplay " "
+display reg-inputmove reg-input to reg-input-anteriormove spaces to E-errores-regmove 2 to errIndexend-if*    contabiliza el error en la tabla de erroresset Ex to 1
+search E-error varying Exat end
+display "--- falla en la tabla de errores ---" cod-errorwhen E-codigo(Ex) = "00"add 1 to E-contador(Ex)display "--- error tipo exotico: " cod-erroradd 1 to E-contador(Ex)when E-codigo(Ex) = cod-erroradd 1 to E-contador(Ex)display "Error " cod-error " " E-descripcion(Ex)end-search*    agrega a la lista de errores del registroif errIndex < (300 - 59 - 3)move cod-error to E-errores-reg(errIndex:2)add 3 to errIndexmove E-descripcion(Ex) to E-errores-reg(errIndex:59)add 59 to errIndexend-if
+
+exit program.end program PONERR.end program CARGAJUR.******************************************************************
+******************************************************************
+
+Ddisplay "carga tabla DIRESTAN"OPEN INPUT MAESTRO-DIRECCOPEN INPUT BDLCLI
+OPEN INPUT SUSCRIPTOR
+OPEN INPUT MAESTRO-CREDITOPEN INPUT MAESTRO-CHECK
+PERFORM 06000-U-CARGAR-TABLA-DIRESTANMOVE 1 TO OPEN-DIREND-IF
+*abre archivos y carga la tabla de direccionesMOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCHMOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+*Se recorre toda la estructura bdacsv para la identificacion
+*buscada. En caso de hallar registros se procede a realizar el
+*match
+Ddisplay "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+D" NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+D" NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+D" MAX-CUENTAS-BDAMATCH:" MAX-CUENTASPERFORM 1000-U-RECORRER-CSV-BDAMATCH
+Ddisplay "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+D" NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+D" NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+D" MAX-CUENTAS-BDAMATCH:" MAX-CUENTASMOVE 1 TO HACERMATCH-LEEMSTRSIF IDE-TIPO-BDAMATCH = 1
+IF TIPOID-E = 1 OR 4
+INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL"," BY " ", ";" BY " "END-IF
+MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOMMOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOMMOVE TIPOID-E TO  TIP-ID-INPUT-VALNOMMOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMPERFORM 10000-MATCH-NOMBRES-VALNOM
+Ddisplay "10000-MATCH-NOMBRES-VALNOM"
+Ddisplay "MATCH-OK-OUT-VALNOM:" MATCH-OK-OUT-VALNOM
+D" " NOM-OUTPUT-BDAMATCH
+IF MATCH-OK-OUT-VALNOM = 1
+MOVE 1 TO IDE-TIPO-BDAMATCHELSE
+IF W-BLOQUES > 0
+MOVE 0 TO IDE-TIPO-BDAMATCHEND-IF
+END-IF
+END-IF
+
+IF IDE-TIPO-BDAMATCH = 1
+MOVE TIPOID-E TO TIP-VALS-BDAMATCH
+D" MAX-CUENTAS:" MAX-CUENTAS-BDAMATCH
+MOVE TIPOID-E TO TIP-VAL
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+D:w"CARGAJUR.CBL" 1736 lines, 74033 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>fgvi CARGAJUR.CBL.errdes-c-v CARGAJUR   
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+"........COMPILANDO LEEMAESTROS SIN MATCH **********
+"...... .COMPILANDO LEEMAESTROS SIN AMNISTIA *******
+* Total Messages:     0
+* Data:     1430192     Code:       92305
+* Micro Focus Server Express V5.1.00 Code Generator
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - verbose
+* Accepted - anim
+* Accepted - PIC
+* Generating CARGAJUR
+* Data:   1429432  Code:    107812  Literals:      3712  Dynamic:   2490368
+
+>>> DATACREDITO: TERMINO OK COMPILACION DE CARGAJUR.CBL
+
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>des-c-v CARGAJURfg              vi CARGAJUR.CBL.errdes-c-v CARGAJUR   fu              vi CARGAJUR.CBL.errdes-c-v CARGAJUR   fg              vi qqx CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/fuentes>
+
+real    0m0.04s
+user    0m0.01s
+sys     0m0.02s
+/d/iccol/desarrollo/fuentes>vi qq
+"qq" 562 lines, 20270 characters 0000-PROGRAMA-PRINCIPAL
+1000-RUTINA-INICIAL
+Parametros: 9999991000905140104.txt 2
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+04 Refresque Total - Carga TOTAL
+Fecha de proceso: 20140104
+4000-PROCESAR-REGISTRO
+
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000149123
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+carga tabla DIRESTAN
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:    NUM-CTAS-OUTPUT:    MAX-CUENTAS:00005
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Error 02 Tipo de identificacion invalido, debe ser 1 2 3 4
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000262135"qq" 562 lines, 20270 characters513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000262135
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000958212
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J001
+Registro de input:
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+Datos en la alerta: 000040000320201204
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J002
+Registro de input:
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+Datos en la alerta: 000110004320204404
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I100002859753ERNESTO RICO0050672013040602206720100435
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100002859753ERNESTO RICO0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000262135
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+513-VALIDA-EN-CSV
+TIPOID-E:1 NUMID-E:00000958212
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J001
+Registro de input:
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+Datos en la alerta: 000040000320201204
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100002249789999999000J002
+Registro de input:
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+Datos en la alerta: 000110004320204404
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I100002859753ERNESTO RICO0050672013040602206720100435
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100002859753ERNESTO RICO0050672013040602206720100435
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+Error 07 Numero de demandas terminadas: debe ser numerico
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J001
+Registro de input:
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+Datos en la alerta: 000080004520201301
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 100003295380999999000J002
+Registro de input:
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+Datos en la alerta: 002320000220201105
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+Error 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J001
+Registro de input:
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+Datos en la alerta: 000220004520201204
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200800002194999999000J002
+Registro de input:
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+Datos en la alerta: 000340004520201204
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J001
+Registro de input:
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+Datos en la alerta: 000330002020200004
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200800178009999999000J002
+Registro de input:
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+Datos en la alerta: 000150005420201401
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL4100-VALIDACION-FORMAL
+
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200830067928C I GLOMA S A0110432044040601203220100406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J001
+Registro de input:
+I200830067928C I GLOMA S A0110432044040601203220100406
+Datos en la alerta: 000110004320204404
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200830067928999999000J002
+Registro de input:
+I200830067928C I GLOMA S A0110432044040601203220100406
+Datos en la alerta: 000120003220201004
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200860024151COMPUTEC SA0330332011140604500120110402
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I200860024151COMPUTEC SA0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rangoI200860024151COMPUTEC SA0330332011140604500120110402
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200890300546COLGATE PALMOLIVE COMPAIA2322000011050603304320131010
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I200890300546COLGATE PALMOLIVE COMPAIA2322000011050603304320131010
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J001
+Registro de input:
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+Datos en la alerta: 000450000020201008
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200890934264999999000J002
+Registro de input:
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+Datos en la alerta: 000020004420201305
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J001
+Registro de input:
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+Datos en la alerta: 000340004520201204
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 200890107487999999000J002
+Registro de input:
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+Datos en la alerta: 000030000620201301
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I300600003115xxxxxx0150542014010600400320120406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I300600003115xxxxxx0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: FERNANDEZ PENA JULIO ANTONIO
+4220-VALIDA-NOMBRE-NO-COINCIDE
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J001
+Registro de input:
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+Datos en la alerta: 000340000220199901
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 300611000446999999000J002
+Registro de input:
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+Datos en la alerta: 000050006720201304
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J001
+Registro de input:
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+Datos en la alerta: 000120003220201004
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 400000163597999999000J002
+Registro de input:
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+Datos en la alerta: 000060004520201104
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO4000-PROCESAR-REGISTRO
+
+
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+Error 11 Numero de embargos terminados: debe ser numerico
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+513-VALIDA-EN-CSV
+TIPOID-E:4 NUMID-E:00000244359
+SALIDA-BDIIVIDE  SW-ID:1 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+SALIDA-BDIIVIDE  SW-ID:0 SW-NOMBRES:0 SW-TID:0 NOM-VAL:
+
+el n° de ID está dentro de su rango
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+BDAMATCH: IDE-TIPO:0 NUM-MUERTOS-OUTPUT:000 NUM-CTAS-OUTPUT:000 MAX-CUENTAS:00000
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+4222-VALIDA-NOMBRE-COINCIDE
+4240-CONTAR-TIPO-CUENTA
+4300-MODIFICAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J001
+Registro de input:
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+Datos en la alerta: 000110002320201104
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS4333-REGRABAR-BDIIALE
+4300-MODIFICAR-BDIIALE-DATOS
+4333-LEER-BDIIALE-RANDOM
+4300-MODIFICAR-BDIIALE-I
+Insercion de alerta nueva que ya existe  key: 400000136711999999000J002
+Registro de input:
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+Datos en la alerta: 000090005720201304
+4320-ARMAR-TEXTO-ALERTA
+4333-REGRABAR-BDIIALE
+4000-PROCESAR-REGISTRO
+
+
+I400000163598xxxxxx0330432013101002204520120406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I400000163598xxxxxx0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: KARAN  ABBOUD NAJAH
+4220-VALIDA-NOMBRE-NO-COINCIDE
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+
+T 00000000028772774787861
+4000-PROCESAR-REGISTRO-2
+4800-PROCESO-REG-T
+7000-RUTINA-FINAL
+Fecha de proceso: 20140104
+
+Totales de registros:
+
+REGISTROS LEIDOS:0000029
+REGISTROS CORRECTOS:0000000
+REGISTROS CORRECTOS REPETIDOS   :0000000
+REGISTROS NO COINCIDEN BDIIREGI :0000001
+  REGISTROS DE FALLECIDOS:0000001
+REGISTROS NO COINCIDEN BDIIDIAN :0000000
+REGISTROS NO EXISTEN   BDIIREGI :0000000
+REGISTROS NO EXISTEN   BDIIDIAN :0000000
+TIPO IDENTIFICACION INVALIDO    :000000035.7 % de registros correctos
+    64.3 % de registros inconsistentes
+28 Registros IME en el archivo de entrada
+10 Registros procesados sin error
+18 Registros con error
+Alertas borradas previo al refresque total:q/d/iccol/desarrollo/fuentes>fg
+vi CARGAJUR.CBL
+Ddisplay "carga tabla DIRESTAN"OPEN INPUT MAESTRO-DIRECCOPEN INPUT BDLCLI
+OPEN INPUT SUSCRIPTOR
+OPEN INPUT MAESTRO-CREDITOPEN INPUT MAESTRO-CHECK
+PERFORM 06000-U-CARGAR-TABLA-DIRESTANMOVE 1 TO OPEN-DIREND-IF
+*abre archivos y carga la tabla de direccionesMOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCHMOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+*Se recorre toda la estructura bdacsv para la identificacion
+*buscada. En caso de hallar registros se procede a realizar el
+*match
+Ddisplay "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+D" NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+D" NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+D" MAX-CUENTAS:" MAX-CUENTAS-BDAMATCHPERFORM 1000-U-RECORRER-CSV-BDAMATCH
+Ddisplay "BDAMATCH: IDE-TIPO:" IDE-TIPO-BDAMATCH
+D" NUM-MUERTOS-OUTPUT:" NUM-MUERTOS-OUTPUT-BDAMATCH
+D" NUM-CTAS-OUTPUT:" NUM-CTAS-OUTPUT-BDAMATCH
+D" MAX-CUENTAS:" MAX-CUENTAS-BDAMATCHMOVE 1 TO HACERMATCH-LEEMSTRSIF IDE-TIPO-BDAMATCH = 1
+IF TIPOID-E = 1 OR 4
+INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL"," BY " ", ";" BY " "END-IF
+MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOMMOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOMMOVE TIPOID-E TO  TIP-ID-INPUT-VALNOMMOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMPERFORM 10000-MATCH-NOMBRES-VALNOM
+Ddisplay "10000-MATCH-NOMBRES-VALNOM"
+Ddisplay "MATCH-OK-OUT-VALNOM:" MATCH-OK-OUT-VALNOM
+D" " NOM-OUTPUT-BDAMATCH
+IF MATCH-OK-OUT-VALNOM = 1
+MOVE 1 TO IDE-TIPO-BDAMATCHELSE
+IF W-BLOQUES > 0
+MOVE 0 TO IDE-TIPO-BDAMATCHEND-IF
+END-IF
+END-IF
+
+IF IDE-TIPO-BDAMATCH = 1
+MOVE TIPOID-E TO TIP-VAL"CARGAJUR.CBL" line 1590 of 1736 --91%-- /d/iccol/desarrollo/fuentes>^D

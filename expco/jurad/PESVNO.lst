@@ -4834,6 +4834,8 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   4787           MOVE 1 TO IDE-TIPO-BDAMATCH                                                        BDAMATCH     124
   4788        END-IF                                                                                BDAMATCH     125
   4789     END-IF.                                                                                  BDAMATCH     126
+
+
   4790 1100-MAQUILLAR-NOMBRE-MAQ.                                       RMB0004                     BDAMATCH     127
   4791     MOVE FUNCTION UPPER-CASE(NOMBRE-INPMAQ) TO NOMBRE-INPMAQ     RMB0004                     BDAMATCH     128
   4792     MOVE 0 TO I-MAQ                                              RMB0004                     BDAMATCH     129
@@ -4998,6 +5000,8 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   4951     MOVE 0              TO  MEJOR-PORTAF-BDACSV                  RMB0004                     BDAMATCH     288
   4952     MOVE 0              TO  IND-ACTUALIZ-BDACSV                  RMB0004                     BDAMATCH     289
   4953     MOVE 01             TO  FUENTE-REG-BDACSV.                   RMB0004                     BDAMATCH     290
+
+
   4954 1100-LLENAR-AUX-BDAMATCH.                                        RMB0004                     BDAMATCH     291
   4955***********************************************************************                       BDAMATCH     292
   4956*1100-LLENAR-AUX-BDAMATCH.                                                                    BDAMATCH     293
@@ -5015,6 +5019,8 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   4968     MOVE COD-CTA-BDACSV    TO COD-CTA-AUX13-BDAMATCH  .          RMB0004                     BDAMATCH     305
   4969     MOVE NUM-CTA-BDACSV    TO NUM-CTA-AUX13-BDAMATCH  .          RMB0004                     BDAMATCH     306
   4970     MOVE 0 TO FALLECIDO-BDAMATCH.                                RMB0004                     BDAMATCH     307
+
+
   4971 1100-UBICAR-CHKCRE-CSV-BDAMATCH.                                                             BDAMATCH     308
   4972***********************************************************************                       BDAMATCH     309
   4973*1100-UBICAR-CHKCRE-CSV-BDAMATCH.                                                             BDAMATCH     310
@@ -7229,6 +7235,8 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   7183           MOVE 1 TO MATCH-OK-OUT-VALNOM                                                      VALNOM       218
   7184        END-IF                                                                                VALNOM       219
   7185     END-IF.                                                                                  VALNOM       220
+
+
   7186**********************************************************************                        VALNOM       221
   7187*10100-MATCH-APROXIMADO.                                                                      VALNOM       222
   7188*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOS                          VALNOM       223

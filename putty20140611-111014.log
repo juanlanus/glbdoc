@@ -1,0 +1,2138 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.11 11:10:14 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Tue Jun 10 14:09:10 2014 from 172.16.10.59
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>echo -e "\033[35mLinux\033[00m"
+-e Linux
+/d/iccol/desarrollo>te
+/d/iccol/desarrollo/temporales>ls -l 999*
+-rw-rw-r--   1 icjlud   icdatacr    2434 Jun 10 15:21 9999991000905140101.errs
+-rw-rw-r--   1 icnagd   icdatacr    2436 Jun  9 10:11 9999991000905140101.txt
+-rw-rw-r--   1 icjlud   icdatacr    2574 Jun 10 18:34 9999991000905140104.errs
+-rw-rw-r--   1 icjlud   icdatacr    2523 Jun 10 15:26 9999991000905140104.txt
+/d/iccol/desarrollo/temporales>vi 999999ids.txt
+"999999ids.txt" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"999999ids.txt" [New file]:r 9999991000905140104.txt"9999991000905140104.txt" 29 lines, 2523 characters 
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+I100002859753ERNESTO RICO0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+I200830067928C I GLOMA S A0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+I200860024151COMPUTEC SA0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+I300600003115xxxxxx0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+I400000163598xxxxxx0330432013101002204520120406
+T 00000000028772774787861
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:%s/.//29 substitutions 100000149123JOSE MISAEL AREVALO SANCHEZ 0010012013040500905720130411
+z00000149123JOSE MISAEL AREVALO SANCHEZ 0010012013040500905720130411
+100000262135LIBARDO ANTONIO GARZON TORRE 0150202013020602204520120406
+100000958212LUIS GUILLERMO AVENDAÑO RODR 0020442013050603302020000406
+100001327130GONZALO PATIÑO MORENO 0030062013010604407619984069
+100002249789JOAQUIN VARGAS CABALLERO 0040032012040601104320440406
+100002859753ERNESTO RICO 0050672013040602206720100435
+100002865767MIGUEL ANTONIO LAVERDE NIETO 0060452011040603303320111406
+100003044362MANUEL CASTRO MUÑETON 0070rt2011010605300120130406
+100003295380HENRY REY BARBOSA 0080452013011123200220110506
+100003448867JAIRO DE JESUS HENAO VILLEGA 0090572013041104550030100806
+200800002194SERVICULTIVOS LTDA 0220452012040603404520120406
+200800178009CALZADO ORION DEL LITORAL 0330202000040601505420140106
+200811046741SALUD AXIAL LTDA 0440761998406903400219990101
+200830067928C I GLOMA S A 0110432044040601203220100406
+200860013816INSTITUTO DE SEGUROS SOCIALE 0220672010043503300220131206
+200860024151COMPUTEC SA 0330332011140604500120110402
+200860034313BANCO DAVIVIENDA SA 0533000013040601102320110411
+200890300546COLGATE PALMOLIVE COMPAIA 2322000011050603304320131010
+200890934264SUBSUELO Y GEOTECNIA LTDA 0450002010080600204420130506
+200890107487SUPERTIENDAS Y DROGUERIAS OL 0340452012040600300620130106
+300600003115xxxxxx 0150542014010600400320120406
+300611000446ANTONIO CONDOLUCI DOMINGO 0340021999010100506720130406
+400000163597MARWA MIKHAEL SKAFF DE KARAA 0120322010040600604520110406
+400000266423SIMONE MARTINEZ 033002201312060070rt20110106
+400000244359PATRICIO ALEJANDRO HERRERA C 0450012011040200804520130111
+400000136711ARIAS NILO RIESCO 0110232011041100905720130411
+400000163598xxxxxx 0330432013101002204520120406
+ 028 772774 787861  :%s/^\(............\).*/\129 substitutions 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ~"999999ids.txt" [New file] 28 lines, 364 characters /d/iccol/desarrollo/temporales>x PSCVNO 999999ids.txt 999999ids.. val 999999ids.inc 10 2 
+
+Load error : file 'PSCVNO'
+error code: 173, pc=0, call=1, seg=0
+173     Called program file not found in drive/directory 
+
+
+real    0m0.02s
+user    0m0.00s
+sys     0m0.00s
+
+Inicio de Programa:  2014/06/11 09:17:33
+Fin de Programa:     2014/06/11 09:17:33
+
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>x PSCVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>x PS                                           /d/iccol/desarrollo/temporales>x Pvi 999999ids.txtx PSCVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>x PSCVNO 999999ids.txPES
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+28
+ARCHIVO: 999999ids.txt                 
+Registro  control==> 000000 (VALIDAR=NO)
+Registros Tipo 5           ==> 000000
+Registros Tipo 6           ==> 000022
+Registros Tipo 7           ==> 000006
+Registros Tipo 5 repetidos ==> 000000
+REGISTROS LEIDOS                :0000028
+REGISTROS CORRECTOS             :0000000
+REGISTROS CORRECTOS REPETIDOS   :0000000
+REGISTROS NO COINCIDEN BDIIREGI :0000006
+  REGISTROS DE FALLECIDOS         :0000000
+REGISTROS NO COINCIDEN BDIIDIAN :0000016
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+TIPO IDENTIFICACION INVALIDO    :0000001
+===================================
+ACTUALIZANDO REGIS PARA FACTURACION
+===================================
+FECHA : 20140611
+HORA  : 0918
+===================================
+ABRIENDO ARCHIVO :$DATOS/LOGPESVNO.DAT                  - 00
+RESULTADO OPERACION :$DATOS/LOGPESVNO.DAT                  - 00
+Graba Tipo 5    ==> 000000000000
+Graba Tipo 6    ==> 000000000022
+Graba Tipo 7    ==> 000000000006
+Graba Tipo 5 PJ ==> 000000000000
+TRANSAC-STATUS-WK: OK
+
+real    0m0.16s
+user    0m0.02s
+sys     0m0.02s
+
+Inicio de Programa:  2014/06/11 09:18:17
+Fin de Programa:     2014/06/11 09:18:17
+
+/d/iccol/desarrollo/temporales>cat 999999ids.inc
+1;00000149123;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00000262135;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00000958212;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00001327130;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00002249789;                                             ;VARGAS CABALLERO JOAQUIN                     ;19580730;ARMERO (GUAYABA;TOLIMA         ;21;02;
+1;00002859753;                                             ;RICO  ERNESTO                                ;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;                                             ;LAVERDE NIETO MIGUEL ANTONIO                 ;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;                                             ;CASTRO MUÑETON MANUEL                        ;19651110;GIRARDOT       ;CUNDINAMAR     ;21;02;
+1;00003295380;                                             ;REY BARBOSA HENRY                            ;19690611;VILLAVICENCIO  ;META           ;00;02;
+1;00003448867;                                             ;HENAO VILLEGAS JAIRO DE JESUS                ;19710323;COCORNA        ;ANTIOQUIA      ;21;02;
+2;00800002194;                                             ;SERVICULTIVOS LTDA.                          ;00000000;               ;               ;  ;01;
+2;00800178009;                                             ;CALZADO ORION DEL LITORAL                    ;00000000;               ;               ;  ;01;
+2;00811046741;                                             ;SALUD AXIAL LTDA                             ;00000000;               ;               ;  ;01;
+2;00830067928;                                             ;C I GLOMA S A                                ;00000000;               ;               ;  ;01;
+2;00860013816;                                             ;INSTITUTO DE SEGUROS SOCIALES                ;00000000;               ;               ;  ;01;
+2;00860024151;                                             ;COMPUTEC S.A.                                ;00000000;               ;               ;  ;01;
+2;00860034313;                                             ;BANCO DAVIVIENDA S.A.                        ;00000000;               ;               ;  ;01;
+2;00890107487;                                             ;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.      ;00000000;               ;               ;  ;01;
+2;00890300546;                                             ;COLGATE PALMOLIVE COMPA?IA                   ;00000000;               ;               ;  ;01;
+2;00890934264;                                             ;SUBSUELO Y GEOTECNIA LTDA                    ;00000000;               ;               ;  ;01;
+3;00600003115;                                             ;FERNANDEZ PENA JULIO ANTONIO                 ;00000000;               ;               ;  ;01;
+3;00611000446;                                             ;CONDOLUCI DOMINGO ANTONIO                    ;00000000;               ;               ;  ;01;
+4;00000136711;                                             ;RIESCO ARIAS NILO                            ;00000000;               ;               ;  ;01;
+4;00000163597;                                             ;SKAFF DE KARAAN MARWA MIKHAEL                ;00000000;               ;               ;  ;01;
+4;00000163598;                                             ;KARAN  ABBOUD NAJAH                          ;00000000;               ;               ;  ;01;
+4;00000244359;                                             ;                                             ;00000000;               ;               ;  ;03;
+4;00000266423;                                             ;MARTINEZ  SIMONE                             ;00000000;               ;               ;  ;01;
+z;00000149123;                                             ;                                             ;00000000;               ;               ;  ;05;
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>cat 999999ids.inc
+1;00000149123;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00000262135;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00000958212;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00001327130;                                             ;                                             ;00000000;               ;               ;  ;04;
+1;00002249789;                                             ;VARGAS CABALLERO JOAQUIN                     ;19580730;ARMERO (GUAYABA;TOLIMA         ;21;02;
+1;00002859753;                                             ;RICO  ERNESTO                                ;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;                                             ;LAVERDE NIETO MIGUEL ANTONIO                 ;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;                                             ;CASTRO MUÑETON MANUEL                        ;19651110;GIRARDOT       ;CUNDINAMAR     ;21;02;
+1;00003295380;                                             ;REY BARBOSA HENRY                            ;19690611;VILLAVICENCIO  ;META           ;00;02;
+1;00003448867;                                             ;HENAO VILLEGAS JAIRO DE JESUS                ;19710323;COCORNA        ;ANTIOQUIA      ;21;02;
+2;00800002194;                                             ;SERVICULTIVOS LTDA.                          ;00000000;               ;               ;  ;01;
+2;00800178009;                                             ;CALZADO ORION DEL LITORAL                    ;00000000;               ;               ;  ;01;
+2;00811046741;                                             ;SALUD AXIAL LTDA                             ;00000000;               ;               ;  ;01;
+2;00830067928;                                             ;C I GLOMA S A                                ;00000000;               ;               ;  ;01;
+2;00860013816;                                             ;INSTITUTO DE SEGUROS SOCIALES                ;00000000;               ;               ;  ;01;
+2;00860024151;                                             ;COMPUTEC S.A.                                ;00000000;               ;               ;  ;01;
+2;00860034313;                                             ;BANCO DAVIVIENDA S.A.                        ;00000000;               ;               ;  ;01;
+2;00890107487;                                             ;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.      ;00000000;               ;               ;  ;01;
+2;00890300546;                                             ;COLGATE PALMOLIVE COMPA?IA                   ;00000000;               ;               ;  ;01;
+2;00890934264;                                             ;SUBSUELO Y GEOTECNIA LTDA                    ;00000000;               ;               ;  ;01;
+3;00600003115;                                             ;FERNANDEZ PENA JULIO ANTONIO                 ;00000000;               ;               ;  ;01;
+3;00611000446;                                             ;CONDOLUCI DOMINGO ANTONIO                    ;00000000;               ;               ;  ;01;
+4;00000136711;                                             ;RIESCO ARIAS NILO                            ;00000000;               ;               ;  ;01;
+4;00000163597;                                             ;SKAFF DE KARAAN MARWA MIKHAEL                ;00000000;               ;               ;  ;01;
+4;00000163598;                                             ;KARAN  ABBOUD NAJAH                          ;00000000;               ;               ;  ;01;
+4;00000244359;                                             ;                                             ;00000000;               ;               ;  ;03;
+4;00000266423;                                             ;MARTINEZ  SIMONE                             ;00000000;               ;               ;  ;01;
+z;00000149123;                                             ;                                             ;00000000;               ;               ;  ;05;
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>cat 999999ids.inc 999999ids.inc   v 999999ids.inci 999999ids.inc
+"999999ids.inc" 28 lines, 4312 characters 1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;
+;00000000;;;  ;04;
+1;00000958212;;
+;00000000;;;  ;04;
+1;00001327130;;
+;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN
+;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO
+;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO
+;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL
+;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY
+;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS
+;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.
+;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL
+;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA
+;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A
+;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES
+;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.
+;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.
+;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.
+;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA
+;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA
+;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO
+;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO
+;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO
+;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL
+;00000000;;;  ;01;
+@"999999ids.inc" 28 lines, 4312 characters1;00000149123;;;00000000;;;  ;04;
+1;00000262135;;;00000000;;;  ;04;
+1;00000958212;;;00000000;;;  ;04;
+1;00001327130;;;00000000;;;  ;04;
+1;00002249789;;VARGAS CABALLERO JOAQUIN;19580730;ARMERO (GUAYABA;TOLIMA;21;02;
+1;00002859753;;RICO  ERNESTO;19620214;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00002865767;;LAVERDE NIETO MIGUEL ANTONIO;19571129;BOGOTA D.C.    ;CUNDINAMAR     ;00;02;
+1;00003044362;;CASTRO MUÑETON MANUEL;19651110;GIRARDOT;CUNDINAMAR     ;21;02;
+1;00003295380;;REY BARBOSA HENRY;19690611;VILLAVICENCIO  ;META;00;02;
+1;00003448867;;HENAO VILLEGAS JAIRO DE JESUS;19710323;COCORNA;ANTIOQUIA;21;02;
+2;00800002194;;SERVICULTIVOS LTDA.;00000000;;;  ;01;
+2;00800178009;;CALZADO ORION DEL LITORAL;00000000;;;  ;01;
+2;00811046741;;SALUD AXIAL LTDA;00000000;;;  ;01;
+2;00830067928;;C I GLOMA S A;00000000;;;  ;01;
+2;00860013816;;INSTITUTO DE SEGUROS SOCIALES;00000000;;;  ;01;
+2;00860024151;;COMPUTEC S.A.;00000000;;;  ;01;
+2;00860034313;;BANCO DAVIVIENDA S.A.;00000000;;;  ;01;
+2;00890107487;;SUPERTIENDAS Y DROGUERIAS OLIMPICA S.A.;00000000;;;  ;01;
+2;00890300546;;COLGATE PALMOLIVE COMPA?IA;00000000;;;  ;01;
+2;00890934264;;SUBSUELO Y GEOTECNIA LTDA;00000000;;;  ;01;
+3;00600003115;;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;01;
+3;00611000446;;CONDOLUCI DOMINGO ANTONIO;00000000;;;  ;01;
+4;00000136711;;RIESCO ARIAS NILO;00000000;;;  ;01;
+4;00000163597;;SKAFF DE KARAAN MARWA MIKHAEL;00000000;;;  ;01;
+4;00000163598;;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;;;00000000;;;  ;03;
+4;00000266423;;MARTINEZ  SIMONE;00000000;;;  ;01;
+z;00000149123;;;00000000;;;  ;05;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+z;00000149123;;;00000000;;;  ;05;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~[1] + Stopped (SIGTSTP)        vi 999999ids.inc
+/d/iccol/desarrollo/temporales>^Z^H  
+/d/iccol/desarrollo/temporales>vi qq
+"qq" 533 lines, 19561 characters 0000-PROGRAMA-PRINCIPAL
+1000-RUTINA-INICIAL
+Parametros: 9999991000905140104.txt 2
+CARGAJUR   Carga de archivo JURAD - proceso en falso
+04 Refresque Total - Carga TOTAL
+Fecha de proceso: 20140104
+4000-PROCESAR-REGISTRO
+
+.............................................
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+.............................................
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Error 02 Tipo de identificacion invalido, debe ser 1 2 3 4
+4900-GRABAR-ERROR
+4000-PROCESAR-REGISTRO
+
+.............................................
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA
+
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro
+4210-VALIDACION-ID-NO-FIGURA
+4900-GRABAR-ERROR
+4240-CONTAR-TIPO-CUENTA
+4000-PROCESAR-REGISTRO
+
+.............................................
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+4000-PROCESAR-REGISTRO-2
+4100-VALIDACION-FORMAL
+4200-VALIDACION-SEMANTICA"qq" 533 lines, 19561 characters/149123////Address search hit BOTTOM without matching pattern:q/d/iccol/desarrollo/temporales>^[k  /d/iccol/desarrollo/temporales>vi qqvi 999999ids.inccat 999999ids.inccat 999999ids.incx PESVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>x PSCVNO 999999ids.txt 999999ids.val 999999ids/d/iccol/desarrollo/temporales>vi 999999ids.txt                               /d/iccol/desarrollo/temporales>ls -l 999*      te        echo -e "\033[35mLinux\033[00m". viset                        fg     . visetecho -e "\033[35mLinux\033[00m"te                             ls -l 999*
+-rw-rw-r--   1 icjlud   icdatacr    2434 Jun 10 15:21 9999991000905140101.errs
+-rw-rw-r--   1 icnagd   icdatacr    2436 Jun  9 10:11 9999991000905140101.txt
+-rw-rw-r--   1 icjlud   icdatacr    2574 Jun 10 18:34 9999991000905140104.errs
+-rw-rw-r--   1 icjlud   icdatacr    2523 Jun 10 15:26 9999991000905140104.txt
+-rw-rw-r--   1 icjlud   icdatacr    4312 Jun 11 09:18 999999ids.inc
+-rw-rw-r--   1 icjlud   icdatacr     364 Jun 11 09:18 999999ids.txt
+-rw-rw-r--   1 icjlud   icdatacr       0 Jun 11 09:18 999999ids.val
+-rw-rw-r--   1 icjlud   icdatacr       0 Jun 11 09:18 999999ids.vre
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>ls -l 999*vi qq     vi 999999ids.inccat 999999ids.inccat 999999ids.incx PESVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>x PSCVNO 999999ids.txt 999999ids.val 999999ids/d/iccol/desarrollo/temporales>vi 999999ids.txt                               /d/iccol/desarrollo/temporales>
+"999999ids.txt" 28 lines, 364 characters 100000149123
+100000262135
+100000958212
+100001327130
+100002249789
+100002859753
+100002865767
+100003044362
+100003295380
+100003448867
+200800002194
+200800178009
+200811046741
+200830067928
+200860013816
+200860024151
+200860034313
+200890107487
+200890300546
+200890934264
+300600003115
+300611000446
+400000136711
+400000163597
+400000163598
+400000244359
+400000266423
+z00000149123
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"999999ids.txt" 28 lines, 364 characters
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+28 lines deletedNo lines in buffer:r 9999991000905140104.txt"9999991000905140104.txt" 29 lines, 2523 characters 
+I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+I100002859753ERNESTO RICO0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+I200830067928C I GLOMA S A0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+I200860024151COMPUTEC SA0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+I300600003115xxxxxx0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+I400000163598xxxxxx0330432013101002204520120406
+T 00000000028772774787861
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~~:%s/.//28 substitutions 100000149123JOSE MISAEL AREVALO SANCHEZ 0010012013040500905720130411
+z00000149123JOSE MISAEL AREVALO SANCHEZ 0010012013040500905720130411
+100000262135LIBARDO ANTONIO GARZON TORRE 0150202013020602204520120406
+100000958212LUIS GUILLERMO AVENDAÑO RODR 0020442013050603302020000406
+100001327130GONZALO PATIÑO MORENO 0030062013010604407619984069
+100002249789JOAQUIN VARGAS CABALLERO 0040032012040601104320440406
+100002859753ERNESTO RICO 0050672013040602206720100435
+100002865767MIGUEL ANTONIO LAVERDE NIETO 0060452011040603303320111406
+100003044362MANUEL CASTRO MUÑETON 0070rt2011010605300120130406
+100003295380HENRY REY BARBOSA 0080452013011123200220110506
+100003448867JAIRO DE JESUS HENAO VILLEGA 0090572013041104550030100806
+200800002194SERVICULTIVOS LTDA 0220452012040603404520120406
+200800178009CALZADO ORION DEL LITORAL 0330202000040601505420140106
+200811046741SALUD AXIAL LTDA 0440761998406903400219990101
+200830067928C I GLOMA S A 0110432044040601203220100406
+200860013816INSTITUTO DE SEGUROS SOCIALE 0220672010043503300220131206
+200860024151COMPUTEC SA 0330332011140604500120110402
+200860034313BANCO DAVIVIENDA SA 0533000013040601102320110411
+200890300546COLGATE PALMOLIVE COMPAIA 2322000011050603304320131010
+200890934264SUBSUELO Y GEOTECNIA LTDA 0450002010080600204420130506
+200890107487SUPERTIENDAS Y DROGUERIAS OL 0340452012040600300620130106
+300600003115xxxxxx 0150542014010600400320120406
+300611000446ANTONIO CONDOLUCI DOMINGO 0340021999010100506720130406
+400000163597MARWA MIKHAEL SKAFF DE KARAA 0120322010040600604520110406
+400000266423SIMONE MARTINEZ 033002201312060070rt20110106
+400000244359PATRICIO ALEJANDRO HERRERA C 0450012011040200804520130111
+400000136711ARIAS NILO RIESCO 0110232011041100905720130411
+400000163598xxxxxx 0330432013101002204520120406
+
+INSERT MODEÑÑIA :%s/    *.*//28 substitutions 
+
+E
+
+
+ERO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OL
+
+RAA
+
+
+
+"999999ids.txt" 28 lines, 959 characters /d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>/ vi 999999ids.txt                /x PESVNOx PESVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>
+!!........EL ORDEN DE LOS PARAMETROS ES ........!!
+!!..ENTRADA CORRECTOS INCORRECTOS TARIFA BLOQUES.!!
+REGISTROS RECIBIDOS ORIGINALMENTE:
+28
+ARCHIVO: 999999ids.txt                 
+Registro  control==> 000000 (VALIDAR=NO)
+Registros Tipo 5           ==> 000017
+Registros Tipo 6           ==> 000005
+Registros Tipo 7           ==> 000006
+Registros Tipo 5 repetidos ==> 000000
+REGISTROS LEIDOS                :0000028
+REGISTROS CORRECTOS             :0000017
+REGISTROS CORRECTOS REPETIDOS   :0000000
+REGISTROS NO COINCIDEN BDIIREGI :0000003
+  REGISTROS DE FALLECIDOS         :0000003
+REGISTROS NO COINCIDEN BDIIDIAN :0000002
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+TIPO IDENTIFICACION INVALIDO    :0000001
+===================================
+ACTUALIZANDO REGIS PARA FACTURACION
+===================================
+FECHA : 20140611
+HORA  : 0934
+===================================
+ABRIENDO ARCHIVO :$DATOS/LOGPESVNO.DAT                  - 00
+RESULTADO OPERACION :$DATOS/LOGPESVNO.DAT                  - 00
+Graba Tipo 5    ==> 000000000017
+Graba Tipo 6    ==> 000000000005
+Graba Tipo 7    ==> 000000000006
+Graba Tipo 5 PJ ==> 000000000011
+TRANSAC-STATUS-WK: OK
+
+real    0m0.07s
+user    0m0.02s
+sys     0m0.02s
+
+Inicio de Programa:  2014/06/11 09:34:05
+Fin de Programa:     2014/06/11 09:34:05
+
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>x PESVNO 999999ids.txt 999999ids.val 999999ids>/d/iccol/desarrollo/temporales>                                               /d/iccol/desarrollo/temporales>/vi 999vi 999999ids.txt                vi 999999ids.inc                vi 999999ids.txt                vi 999999ids.inc
+"999999ids.inc" 11 lines, 1694 characters 1;00000149123;JOSE MISAEL AREVALO SANCHEZ;;00000000;;;  ;04;
+1;00000262135;LIBARDO ANTONIO GARZON TORRE;
+;00000000;;;  ;04;
+1;00000958212;LUIS GUILLERMO AVENDAÑO RODR;
+;00000000;;;  ;04;
+1;00001327130;GONZALO PATIÑO MORENO;
+;00000000;;;  ;04;
+1;00002249789;JOAQUIN VARGAS CABALLERO;VARGAS CABALLERO JOAQUIN
+;00000000;;;21;06;
+1;00003044362;MANUEL CASTRO MUÑETON;CASTRO MUÑETON MANUEL
+;00000000;;;21;06;
+1;00003448867;JAIRO DE JESUS HENAO VILLEGA;HENAO VILLEGAS JAIRO DE JESUS
+;00000000;;;21;06;
+3;00600003115;xxxxxx;FERNANDEZ PENA JULIO ANTONIO
+;00000000;;;  ;01;
+4;00000163598;xxxxxx;KARAN  ABBOUD NAJAH
+;00000000;;;  ;01;
+4;00000244359;PATRICIO ALEJANDRO HERRERA C;
+;00000000;;;  ;03;
+z;00000149123;JOSE MISAEL AREVALO SANCHEZ;
+;00000000;;;  ;05;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"999999ids.inc" 11 lines, 1694 characters1;00000149123;JOSE MISAEL AREVALO SANCHEZ;;00000000;;;  ;0
+4;
+1;00000262135;LIBARDO ANTONIO GARZON TORRE;;00000000;;;  ;0
+4;
+1;00000958212;LUIS GUILLERMO AVENDAÑO RODR;;00000000;;;  ;0
+4;
+1;00001327130;GONZALO PATIÑO MORENO;;00000000;;;  ;0
+4;
+1;00002249789;JOAQUIN VARGAS CABALLERO;VARGAS CABALLERO JOAQUIN;00000000;;;21;0
+6;
+1;00003044362;MANUEL CASTRO MUÑETON;CASTRO MUÑETON MANUEL;00000000;;;21;0
+6;
+1;00003448867;JAIRO DE JESUS HENAO VILLEGA;HENAO VILLEGAS JAIRO DE JESUS;00000000;;;21;0
+6;
+3;00600003115;xxxxxx;FERNANDEZ PENA JULIO ANTONIO;00000000;;;  ;0
+1;
+4;00000163598;xxxxxx;KARAN  ABBOUD NAJAH;00000000;;;  ;0
+1;
+4;00000244359;PATRICIO ALEJANDRO HERRERA C;;00000000;;;  ;0
+3;
+z;00000149123;JOSE MISAEL AREVALO SANCHEZ;;00000000;;;  ;0
+5;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~                 4;
+~
+4;
+~
+4;
+~
+4;
+~
+6;
+~
+6;
+~
+6;
+~
+1;
+~
+1;
+~
+3;
+~
+5;
+~;          ;        ;00000000;;;  ;0
+5; SANCHEZ 5;
+~INSERT MODE DE JESUS
+
+
+
+;00000000;
+
+
+
+
+
+
+
+
+
+;;  ;05;;  ;03;;  ;01;;  ;01;;21;06;;21;06;;21;06;;  ;04;;  ;04;;  ;04;;  ;04;1;00000149123;JOSE MISAEL AREVALO SANCHEZ  ;;00000000;;;  ;04;
+1;00000262135;LIBARDO ANTONIO GARZON TORRE ;;00000000;;;  ;04;
+1;00000958212;LUIS GUILLERMO AVENDAÑO RODR ;;00000000;;;  ;04;
+1;00001327130;GONZALO PATIÑO MORENO;;00000000;;;  ;04;
+1;00002249789;JOAQUIN VARGAS CABALLERO     ;VARGAS CABALLERO JOAQUIN     ;00000000;;;21;06;
+1;00003044362;MANUEL CASTRO MUÑETON;CASTRO MUÑETON MANUEL;00000000;;;21;06;
+1;00003448867;JAIRO DE JESUS HENAO VILLEGA ;HENAO VILLEGAS JAIRO DE JESUS;00000000;;;21;06;
+3;00600003115;xxxxxx;FERNANDEZ PENA JULIO ANTONIO ;00000000;;;  ;01;
+4;00000163598;xxxxxx;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;PATRICIO ALEJANDRO HERRERA C ;;00000000;;;  ;03;
+z;00000149123;JOSE MISAEL AREVALO SANCHEZ  ;;00000000;;;  ;05;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~1;00000149123;JOSE MISAEL AREVALO SANCHEZ  ;;00000000;;;  ;04;
+1;00000262135;LIBARDO ANTONIO GARZON TORRE ;;00000000;;;  ;04;
+1;00000958212;LUIS GUILLERMO AVENDAÑO RODR ;;00000000;;;  ;04;
+1;00001327130;GONZALO PATIÑO MORENO;;00000000;;;  ;04;
+1;00002249789;JOAQUIN VARGAS CABALLERO     ;VARGAS CABALLERO JOAQUIN     ;00000000;;;21;06;
+1;00003044362;MANUEL CASTRO MUÑETON;CASTRO MUÑETON MANUEL;00000000;;;21;06;
+1;00003448867;JAIRO DE JESUS HENAO VILLEGA ;HENAO VILLEGAS JAIRO DE JESUS;00000000;;;21;06;
+3;00600003115;xxxxxx;FERNANDEZ PENA JULIO ANTONIO ;00000000;;;  ;01;
+4;00000163598;xxxxxx;KARAN  ABBOUD NAJAH;00000000;;;  ;01;
+4;00000244359;PATRICIO ALEJANDRO HERRERA C ;;00000000;;;  ;03;
+z;00000149123;JOSE MISAEL AREVALO SANCHEZ  ;;00000000;;;  ;05;
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~:qNo write since last change (:quit! overrides)"999999ids.inc" 11 lines, 1012 characters /d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>vi 999999ids.inc                /lsls -l 999*
+-rw-rw-r--   1 icjlud   icdatacr    2434 Jun 10 15:21 9999991000905140101.errs
+-rw-rw-r--   1 icnagd   icdatacr    2436 Jun  9 10:11 9999991000905140101.txt
+-rw-rw-r--   1 icjlud   icdatacr    2574 Jun 10 18:34 9999991000905140104.errs
+-rw-rw-r--   1 icjlud   icdatacr    2523 Jun 10 15:26 9999991000905140104.txt
+-rw-rw-r--   1 icjlud   icdatacr    1012 Jun 11 09:38 999999ids.inc
+-rw-rw-r--   1 icjlud   icdatacr     959 Jun 11 09:34 999999ids.txt
+-rw-rw-r--   1 icjlud   icdatacr    1335 Jun 11 09:34 999999ids.val
+-rw-rw-r--   1 icjlud   icdatacr       0 Jun 11 09:34 999999ids.vre
+/d/iccol/desarrollo/temporales>vi 9999991000905140104.txt
+"9999991000905140104.txt" 29 lines, 2523 characters I100000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+Iz00000149123JOSE MISAEL AREVALO SANCHEZ0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO0030062013010604407619984069
+I100002249789JOAQUIN VARGAS CABALLERO0040032012040601104320440406
+I100002859753ERNESTO RICO0050672013040602206720100435
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0060452011040603303320111406
+I100003044362MANUEL CASTRO MUÑETON0070rt2011010605300120130406
+I100003295380HENRY REY BARBOSA0080452013011123200220110506
+I100003448867JAIRO DE JESUS HENAO VILLEGA0090572013041104550030100806
+I200800002194SERVICULTIVOS LTDA0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA0440761998406903400219990101
+I200830067928C I GLOMA S A0110432044040601203220100406
+I200860013816INSTITUTO DE SEGUROS SOCIALE0220672010043503300220131206
+I200860024151COMPUTEC SA0330332011140604500120110402
+I200860034313BANCO DAVIVIENDA SA0533000013040601102320110411
+I200890300546COLGATE PALMOLIVE COMPAIA2322000011050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA0450002010080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL0340452012040600300620130106
+I300600003115xxxxxx0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO0340021999010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA0120322010040600604520110406
+I400000266423SIMONE MARTINEZ033002201312060070rt20110106
+I400000244359PATRICIO ALEJANDRO HERRERA C0450012011040200804520130111
+I400000136711ARIAS NILO RIESCO0110232011041100905720130411
+I400000163598xxxxxx0330432013101002204520120406
+T 00000000028772774787861
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"9999991000905140104.txt" 29 lines, 2523 characters!sort
+I100000262135LIBARDO ANTONIO GARZON TORRE150202013020602204520120406
+958212LUIS GUILLERMO AVENDAÑO RODR02044201305060330202000
+1327130GONZALO PATIÑO MORENO       30062013010604407619984069
+2249789JOAQUIN VARGAS CABALLERO40032012040601104320440406
+859753ERNESTO RICO            50672013040602206720100435
+65767MIGUEL ANTONIO LAVERDE NIETO60452011040603303320111406
+3044362MANUEL CASTRO MUÑETON       70rt2011010605300120130
+295380HENRY REY BARBOSA    804520130111232002201105
+448867JAIRO DE JESUS HENAO VILLEGA905720130411045500301008
+I200800002194SERVICULTIVOS LTDA          2204520120406034045201204
+178009CALZADO ORION DEL LITORAL330202000040601505420140111046741SALUD AXIAL LTDA         44076199840690340021999010130067928C I GLOMA S A   11043204404060120322010040660013816INSTITUTO DE SEGUROS SOCIALE2206720100435033002201312
+24151COMPUTEC SA                 330332011140604500120110402
+34313BANCO DAVIVIENDA SA53300001304060110231190107487SUPERTIENDAS Y DROGUERIAS OL340452012040600300620130106
+
+
+I300600003115xxxxxx                      150542014010600400320120411000446ANTONIO CONDOLUCI DOMINGO34002199901010050672013
+I400000136711ARIAS NILO RIESCO        11023201104110090511163598xxxxxx         4320131010022045201204266423SIMONE MARTINEZ  33002201312060070rt20110106
+Iz49123JOSE MISAEL AREVALO SANCHEZ010012013040500905720130411:%s/^^.\(.\).*/\(.\)\(.\)\(.*\)/\1 \2 \3Substitute pattern match failed:%s/\(.\)\(.\)\(.*\)/\1 \2 \329 substitutions I 1 00000149123JOSE MISAEL AREVALO SANCHEZ  0010012013040500905720130411
+I 1 00000262135LIBARDO ANTONIO GARZON TORRE  0150202013020602204520120406
+I 1 00000958212LUIS GUILLERMO AVENDAÑO RODR  0020442013050603302020000406
+I 1 00001327130GONZALO PATIÑO MORENO  0030062013010604407619984069
+I 1 00002249789JOAQUIN VARGAS CABALLERO  0040032012040601104320440406
+I 1 00002859753ERNESTO RICO  0050672013040602206720100435
+I 1 00002865767MIGUEL ANTONIO LAVERDE NIETO  0060452011040603303320111406
+I 1 00003044362MANUEL CASTRO MUÑETON  0070rt2011010605300120130406
+I 1 00003295380HENRY REY BARBOSA  0080452013011123200220110506
+I 1 00003448867JAIRO DE JESUS HENAO VILLEGA  0090572013041104550030100806
+I 2 00800002194SERVICULTIVOS LTDA  0220452012040603404520120406
+I 2 00800178009CALZADO ORION DEL LITORAL  0330202000040601505420140106
+I 2 00811046741SALUD AXIAL LTDA  0440761998406903400219990101
+I 2 00830067928C I GLOMA S A  0110432044040601203220100406
+I 2 00860013816INSTITUTO DE SEGUROS SOCIALE  0220672010043503300220131206
+I 2 00860024151COMPUTEC SA  0330332011140604500120110402
+I 2 00860034313BANCO DAVIVIENDA SA  0533000013040601102320110411
+I 2 00890107487SUPERTIENDAS Y DROGUERIAS OL  0340452012040600300620130106
+I 2 00890300546COLGATE PALMOLIVE COMPAIA  2322000011050603304320131010
+I 2 00890934264SUBSUELO Y GEOTECNIA LTDA  0450002010080600204420130506
+I 3 00600003115xxxxxx  0150542014010600400320120406
+I 3 00611000446ANTONIO CONDOLUCI DOMINGO  0340021999010100506720130406
+I 4 00000136711ARIAS NILO RIESCO  0110232011041100905720130411
+I 4 00000163597MARWA MIKHAEL SKAFF DE KARAA  0120322010040600604520110406
+I 4 00000163598xxxxxx  0330432013101002204520120406
+I 4 00000244359PATRICIO ALEJANDRO HERRERA C  0450012011040200804520130111
+I 4 00000266423SIMONE MARTINEZ  033002201312060070rt20110106
+I z 00000149123JOSE MISAEL AREVALO SANCHEZ  0010012013040500905720130411
+T   0028  772774  787861:q!/d/iccol/desarrollo/temporales>which x
+/d/iccol/desarrollo/macros/x
+/d/iccol/desarrollo/temporales>cat /d/iccol/desarrollo/macros/x
+:
+# x.v.02.0001
+# Macro para ejecucion de programas COBOL.
+#
+
+
+#*******************
+# Manejo de senales
+#*******************
+maneja_senal() {
+   fecha=`date '+%Y/%m/%d %H:%M:%S'`
+   senal=`echo $senal | awk '{ printf("%5d", $1) }'`
+   echo "$fecha $fecha $maquina $usuario trap $senal $pid $params" >> $archivo
+}
+
+
+#******************
+# Modulo principal
+#******************
+
+trap "senal=1 ; maneja_senal" 1 
+trap "senal=2 ; maneja_senal" 2 
+trap "senal=3 ; maneja_senal" 3 
+trap "senal=4 ; maneja_senal" 4 
+trap "senal=5 ; maneja_senal" 5 
+trap "senal=6 ; maneja_senal" 6 
+trap "senal=7 ; maneja_senal" 7 
+trap "senal=8 ; maneja_senal" 8 
+trap "senal=9 ; maneja_senal" 9 
+trap "senal=10 ; maneja_senal" 10
+#trap "senal=11 ; maneja_senal" 11
+trap "senal=12 ; maneja_senal" 12
+trap "senal=13 ; maneja_senal" 13
+trap "senal=14 ; maneja_senal" 14
+trap "senal=15 ; maneja_senal" 15
+
+archivo=$TEMPORALES/.LOG-X
+usuario=$LOGNAME
+maquina=`uname -n`
+pid=`echo $$ | awk '{ printf("%5d", $1) }'`
+params=$*
+
+fecha=`date '+%Y/%m/%d %H:%M:%S'`
+echo "$fecha $maquina $usuario start "xxxx" $pid $params" >> $archivo
+fec_ini=$fecha
+
+time cobrun $*
+
+ret_code=$?
+ret_code=`echo $ret_code | awk '{ printf("%5d", $1) }'`
+
+fecha=`date '+%Y/%m/%d %H:%M:%S'`
+echo "$fecha $maquina $usuario stop $ret_code $pid $params" >> $archivo
+fec_fin=$fecha
+
+echo
+echo "Inicio de Programa: " $fec_ini
+echo "Fin de Programa:    " $fec_fin
+echo
+
+exit $ret_code
+/d/iccol/desarrollo/temporales>xdebug
+ksh: xdebug:  not found
+/d/iccol/desarrollo/temporales>fu
+/d/iccol/desarrollo/fuentes>ls -l CARGAJUR*
+-rw-rw-r--   1 icjlud   icdatacr   61357 Jun 10 11:50 CARGAJUR-OLD.CBL
+-rw-rw-r--   1 icdgd    icdatacr   74033 Jun 10 18:34 CARGAJUR.CBL
+-rw-rw-r--   1 icdgd    icdatacr   52072 May 16 17:26 CARGAJUR.CBL.old
+-rw-rw-r--   1 icjlud   icdatacr  134772 Jun 10 15:01 CARGAJUR.gnt
+-rw-rw-r--   1 icjlud   icdatacr  439808 Jun 10 15:01 CARGAJUR.idy
+-rw-rw-r--   1 icjlud   icdatacr  108544 Jun 10 15:01 CARGAJUR.int
+-rw-rw-r--   1 icjlud   icdatacr 1201632 Jun 10 15:01 CARGAJUR.lst
+-rw-rw-r--   1 icjlud   icdatacr 1005531 Jun 10 15:01 CARGAJUR.s
+/d/iccol/desarrollo/fuentes>^G  anim CARGAJUR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32383239 0000-PROGRAMA-PRINCIPAL.3240Ddisplay "0000-PROGRAMA-PRINCIPAL"3241******************************************************************3242*inicializa el ambiente y abre los archivos3243perform 1000-RUTINA-INICIAL3244*procesa cada uno de los registros del archivo JURAD hasta3245*encontrar el registro "T" de totales3246perform 4000-PROCESAR-REGISTRO until IND-fin-proceso = "SI"3247*cierra archivos y produce el reporte final3248perform 7000-RUTINA-FINAL3249goback.32503251 4000-PROCESAR-REGISTRO.3252Ddisplay "4000-PROCESAR-REGISTRO"3253****************************************************************3254* Proceso de un registro del archivo de entrada JURAD3255* Lectura y control del file status del archivo3256****************************************************************3257*lectura del proximo registro3258read JURAD3259evaluate JURAD-fs3260when "00"3261Ddisplay " "3262Ddisplay " "3263Ddisplay JURAD-reg3264*controla el reg y lo aplica si es OK3265perform 4000-PROCESAR-REGISTRO-23266move JURAD-reg to JURAD-reg-anterior3267add 1 to REG-LEIDOS3268when "10"3269*fin del archivo de input:3270*esto es un error, no se encontro el registro "T" antes3271*de que se terminara el archivo3272display "Falta el reg de totales del archivo JURAD "3273display "Nombre del archivo: " P-file-name3274display "File status: " JURAD-fs3275display "Ultimo registro leido: " N-reg-leidos3276display JURAD-reg-anterior3277perform 9000-CANCELAR-PROGRAMA3278when other3279*error de lectura: cancelacion del proceso3280display "Error en lectura del archivo JURAD "3281display "Nombre del archivo: " P-file-name3282display "File status: " JURAD-fs3283display "Ultimo registro leido: " N-reg-leidosAnimateCARGAJUR.gnt/.o/.exeLevel=**Speed=5InsCapsNumScroll                InsCapsNumScroll                F1=help F2=view F3=align F4=exchange F5=where F6=look-up  F9/F10=word-</> Escape                Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More                
+                                
+                                
+                                display "0000-PROGRAMA-PRINCIPAL"perform 1000-RUTINA-INICIALperform 1000-RUTINA-INICIAL918919 1RUTINA-INICIAL.92display "1000-RUTINA-INICIAL"92922* Todas las operaciones que se realizan una sola vez, al comienzo923* del programa:92- obtencion de los parametros92- apertura del archivo de entrada926*   - apertura de todos los demas archivos92- eliminacion de datos existentes si es refresque completo928*   - carga en memoria de los IDs de inconsistentes929******************************************************************930* Registra hora de inicio931     accept W-hora-inicio from time932933* Obtiene informacion sobre la corrida de la linea de comando: el934* nombre del archivo de entrada (que contiene el tipo de proceso),935* el indicador de proceso real o en falso (default)936     accept P-command-line from COMMAND-LINE937 display "Parametros: " P-command-line93unstring P-command-line delimited by all " " into93P-file-name P-proceso-real940941* El programa se anuncia en la consola942* TODO: se usa un anuncio mas vistoso?943 if PROCESO-REAL944 display pgm " Carga de archivo JURAD - proceso REAL"94else94display pgm " Carga de archivo JURAD - proceso en falso"94end-if948949* El indicador de proceso real debe ser 1 o 2950 if P-proceso-real not = "1" and "2"951 isplay "El indicador de proceso real es invalido"95debe ser 1 o 2"95perform 9000-CANCELAR-PROGRAMA95end-if955956* TODO: controlar los componentes del filename95evaluate P-tipo-proceso95"01"959 display "01 Envio Original - Carga TOTAL 1a vez"96when "02"9602 Archivo Semanal - Carga PARCIAL"96when "03"9603 Archivo Mensual - Carga PARCIAL"
+                                
+                                
+                                display "1000-RUTINA-INICIAL"accept W-hora-inicio from timeaccept W-hora-inicio from timeaccept P-command-line from COMMAND-LINEaccept P-command-line from COMMAND-LINEdisplay "Parametros: " P-command-line
+                                
+                                
+                                display "Parametros: " P-command-lineunstring P-command-line delimited by all " " intounstring P-command-line delimited by all " " intoif PROCESO-REALif PROCESO-REALdisplay pgm " Carga de archivo JURAD - proceso en falso"
+                                
+                                
+                                display pgm " Carga de archivo JURAD - proceso en falso"end-ifend-ifif P-proceso-real not = "1" and "2"if P-proceso-real not = "1" and "2"evaluate P-tipo-proceso                Exit from animator ?  Yes/No/Detach                Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More                evaluate P-tipo-proceso66when other67*        valor invalido68     display "El tipo de proceso " P-tipo-proceso69         " es invalido (debe ser 01 02 03 o 04)"70         perform 9000-CANCELAR-PROGRAMA71     end-evaluate.7273* Edita la fecha de proceso DDMMAA del parametro en formato74* YYYYMMDD75     string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)76     P-fecha-proceso(1:2) delimited size77     into P-fecha-proceso-YYYYMMDD78     display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD7980* Calcula una fecha 50 anios posterior a la de proceso81     move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-5082     add 50 to P-fecha-proceso-50YYYY8384* Apertura del archivo de entrada85string "$TEMPORALES/" P-file-name into P-file-path86open input JURAD87evaluate JURAD-fs88when "00"89              continue90         when other91        display "Error en open del archivo JURAD "92    display "Path del archivo: " P-file-path93    display "File status: " JURAD-fs94    perform 9000-CANCELAR-PROGRAMA *> no retorna95        goback96end-evaluate.9798* Apertura del archivo de errores99string "$TEMPORALES/" P-file-name(1:19) ".errs"4000into ERRS-file-name4001open output ERRS4002valuate ERRS-fs4003when "00"4004              continue4005    when other4006        display "Error en open del archivo de errores "4007    display "Nombre del archivo: " ERRS-file-name4008        display "File status: " ERRS-fs4009    perform 9000-CANCELAR-PROGRAMA *> no retorna4010        goback4011end-evaluate.   Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More   
+      
+      
+      display "El tipo de proceso " P-tipo-procesoperform 9000-CANCELAR-PROGRAMA0000-PROGRAMA-PRINCIPAL
+1000-RUTINA-INICIAL
+
+Parametros:
+CARGAJUR   Carga de archivo JURAD - proceso en falsoEl tipo de procesoes invalido (debe ser 01 02 03 o 04)  3966when other3967*valor invalido3968display "El tipo de proceso " P-tipo-proceso3969" es invalido (debe ser 01 02 03 o 04)"3970perform 9000-CANCELAR-PROGRAMA3971end-evaluate.39723973* Edita la fecha de proceso DDMMAA del parametro en formato3974* YYYYMMDD3975string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)3976P-fecha-proceso(1:2) delimited size3977into P-fecha-proceso-YYYYMMDD3978display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD39793980* Calcula una fecha 50 anios posterior a la de proceso3981move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-503982add 50 to P-fecha-proceso-50YYYY39833984* Apertura del archivo de entrada3985string "$TEMPORALES/" P-file-name into P-file-path3986open input JURAD3987evaluate JURAD-fs3988when "00"3989continue3990when other3991display "Error en open del archivo JURAD "3992display "Path del archivo: " P-file-path3993display "File status: " JURAD-fs3994perform 9000-CANCELAR-PROGRAMA *> no retorna3995goback3996end-evaluate.39973998* Apertura del archivo de errores3999string "$TEMPORALES/" P-file-name(1:19) ".errs"4000into ERRS-file-name4001open output ERRS4002evaluate ERRS-fs4003when "00"4004continue4005when other4006display "Error en open del archivo de errores "4007display "Nombre del archivo: " ERRS-file-name4008display "File status: " ERRS-fs4009perform 9000-CANCELAR-PROGRAMA *> no retorna4010goback4011end-evaluate.AnimateCARGAJUR.gnt/.o/.exeLevel=**Speed=5InsCapsNumScroll   F1=help F2=view F3=align F4=exchange F5=where F6=look-up  F9/F10=word-</> Escape   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads MoreQuery-data      Cursor-name Enter-name Monitor-off Hide/Org-monitorsNo such command AnimateCARGAJUR.gnt/.o/.exe      Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More   Query-data      Cursor-name Enter-name Monitor-off Hide/Org-monitorsAnimateCARGAJUR.gnt/.o/.exe      Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More      Exit from animator ?  Yes/No/Detach   Step Go Zoom Perform Reset Break Env Query Find Locate Text Do View-threads More   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Help screen for...AnimatePage 1 of 2Help0218   
+This menu allows you to control the execution of your program. Some optionschange the way the program is shown or move the cursor around the screenor program; others change the order or the speed of execution. You can display     and alter variables while the program is running, or you can execute quicklywithout displaying the source. Escape stops Go and, returns from view.
+Apart from the functions shown on each menu, there are some other generalpurpose functions which are available when using animator. The keystrokes for      these are shown below:-
+Home= HomeEnd= EndTop-of-file= Ctrl + HomeBottom-of-file   = Ctrl + End      PgUp= PgUpPgDn= PgDnUp-ten-screens = Ctrl + PgUpDown-ten-screens = Ctrl + PgDn     
+Scroll-lock= Scroll Lock
+press F1 for more help or space bar to return  3966     when other3967*valor invalido
+
+  3968         display "El tipo de proceso " P-tipo-proceso  3969         " es invalido (debe ser 01 02 03 o 04)"  3970         perform 9000-CANCELAR-PROGRAMA  3971     end-evaluate.  39723973* Edita la fecha de proceso DDMMAA del parametro en formato  3974* YYYYMMDD  3975     string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)  3976     P-fecha-proceso(1:2) delimited size3977into P-fecha-proceso-YYYYMMDD  3978display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD  3979  3980* Calcula una fecha 50 anios posterior a la de proceso  3981     move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-503982add 50 to P-fecha-proceso-50YYYY  39833984* Apertura del archivo de entrada3985string "$TEMPORALES/" P-file-name into P-file-path3986open input JURAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Help screen for...AnimatePage 1 of 2Help0218   
+This menu allows you to control the execution of your program. Some optionschange the way the program is shown or move the cursor around the screenor program; others change the order or the speed of execution. You can display     and alter variables while the program is running, or you can execute quicklywithout displaying the source. Escape stops Go and, returns from view.
+Apart from the functions shown on each menu, there are some other generalpurpose functions which are available when using animator. The keystrokes for      these are shown below:-
+Home= HomeEnd= EndTop-of-file= Ctrl + HomeBottom-of-file   = Ctrl + End      PgUp= PgUpPgDn= PgDnUp-ten-screens = Ctrl + PgUpDown-ten-screens = Ctrl + PgDn     
+Scroll-lock= Scroll Lock
+press F1 for more help or space bar to return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Help screen for...AnimatePage 2 of 2Help0218   
+F1=helpDisplay previous screen StepExecute one instruction      GoExecute slowlyF3=alignSet this line to 3ZoomExecute at full speedF4=exchangeMove to other screenPerformSet executed perform level   F5=whereFind current position   ResetReset execution position     F6=look-upSet entered line to 3   BreakSet/unset break-pointsF9=word-left   Move one word to left   EnvSet execution environment    F10=word-right Move one word to right  QueryExamines data-itemEscapeLeave Animator :-FindFind next occurrenceYes- Terminate animator andLocateLocate declaration of item   application.TxtSet screen separatorNo- Stay within animator.DoExecute typed COBOL syntax    Detach - Terminate animator leaving   View-threads  Lists all threads within     application executing.process0-9Sets default Go speed
+MoreAlternate menu to access CSI and screen scrolling functions.press F1 or space bar to return  3966     when other3967*valor invalido
+
+  3968 d"El tipo de proceso " P-tipo-proceso3969" es invalido (debe ser 01 02 03 o 04)"  3970  perform 9000-CANCELAR-PROGRAMA  3971     end-evaluate.  3972  3973* Edita la fecha de proceso DDMMAA del parametro en formato  3974* YYYYMMDD  3975     string "20" P-fecha-proceso(5:6) P-fecha-proceso(3:4)  3976P-fecha-proceso(1:2) delimited size 3977     into P-fecha-proceso-YYYYMMDD3978 display "Fecha de proceso: " P-fecha-proceso-YYYYMMDD 3979 3980* Calcula una fecha 50 anios posterior a la de proceso3981 move P-fecha-proceso-YYYYMMDD to P-fecha-proceso-503982add 50 to P-fecha-proceso-50YYYY3983  3984* Apertura del archivo de entrada3985string "$TEMPORALES/" P-file-name into P-file-path3986open input JURADperform 9000-CANCELAR-PROGRAMA42154216 9000-CANCELAR-PROGRAMA.4217Ddisplay "9000-CANCELAR-PROGRAMA"4218******************************************************************4219* Procedimiento standard de cancelacion de programa batch4220******************************************************************4221* TODO: hay un standard para comunicar una cancelacion de proceso?4222     display " "4223     display pgm " - proceso cancelado"4224goback returning 99.422542264227 513-VALIDA-EN-CSV.4228Ddisplay "513-VALIDA-EN-CSV"4229D    display "TIPOID-E:" TIPOID-E " NUMID-E:" NUMID-E4230**************************************************************4231* Valida si la identificación está en la base de datos alterna4232**************************************************************4233*    hace validacion de tipo de identificacion4234MOVE TIPOID-E TO TIP-IDE-BDIIVIDE4235MOVE NUMID-E TO NUM-IDE-BDIIVIDE4236*retorna SW-TID-BDIIVIDE=0 si el num id no está dentro4237*del rango que corresponde al tipo de id4238display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE4239" SW-NOMBRES:" SW-NOMBRES-BDIIVIDE4240" SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE4241PERFORM 80400-VALIDAR-TIPO-ID4242display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE4243" SW-NOMBRES:" SW-NOMBRES-BDIIVIDE4244" SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE4245IF SW-TID-BDIIVIDE = 04246*el tipo de id es OK4247D        display "el n° de ID está dentro de su rango"4248    IF HACER-MATCH = ZEROS249*        abre archivos y carga la tabla de direcciones250*        estandar, solo la primera vez251        IF OPEN-DIR = ZEROS252D        display "carga tabla DIRESTAN"253   OPEN INPUT MAESTRO-DIRECC254        OPEN INPUT BDLCLI255    OPEN INPUT SUSCRIPTOR256    OPEN INPUT MAESTRO-CREDIT257    OPEN INPUT MAESTRO-CHECK258    PERFORM 06000-U-CARGAR-TABLA-DIRESTAN259    MOVE 1 TO OPEN-DIR260        END-IF
+
+
+
+      
+
+
+
+      
+
+
+
+      display "9000-CANCELAR-PROGRAMA"display " "
+
+
+
+      
+
+
+
+      
+
+
+
+      display " "display pgm " - proceso cancelado"
+
+
+
+      
+
+
+
+      
+
+
+
+      display pgm " - proceso cancelado"goback returning 99.0000-PROGRAMA-PRINCIPAL
+1000-RUTINA-INICIAL
+
+Parametros:
+CARGAJUR   Carga de archivo JURAD - proceso en falsoEl tipo de proceso    es invalido (debe ser 01 02 03 o 04)9000-CANCELAR-PROGRAMA
+CARGAJUR   - proceso cancelado0000-PROGRAMA-PRINCIPAL
+1000-RUTINA-INICIAL
+
+Parametros:
+CARGAJUR   Carga de archivo JURAD - proceso en falsoEl tipo de procesoes invalido (debe ser 01 02 03 o 04)9000-CANCELAR-PROGRAMA
+CARGAJUR   - proceso cancelado/d/iccol/desarrollo/fuentes>
+/d/iccol/desarrollo/fuentes>te
+/d/iccol/desarrollo/temporales>ls adis*
+adis*: No such file or directory
+/d/iccol/desarrollo/temporales>find / -name adiskey- .map -ls
+find: cannot read dir /var/tmp/cobAAAZeayYU: Permission denied
+find: cannot read dir /var/tmp/cobAAAZDaaoc: Permission denied
+find: cannot read dir /var/tmp/cobAAATRaOY0: Permission denied
+find: cannot read dir /var/tmp/cobAAAt_aOc3: Permission denied
+find: cannot read dir /var/tmp/cobAAAQuaOrt: Permission denied
+find: cannot read dir /var/tmp/cobAAAk6aGaA: Permission denied
+find: cannot read dir /var/tmp/cobAAA9GaOKd: Permission denied
+find: cannot read dir /var/tmp/cobAAA8Uai02: Permission denied
+find: cannot read dir /var/tmp/cobAAAI4ay7O: Permission denied
+find: cannot read dir /var/spool/mqueue: Permission denied
+find: cannot read dir /var/spool/clientmqueue: Permission denied
+find: cannot read dir /var/sma_snmp: Permission denied
+find: cannot read dir /var/sadm/pkg/TSIpgxw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/TSIpgx/save: Permission denied
+find: cannot read dir /var/sadm/pkg/TSBWvplu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/TSBWvplr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzuluw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzulur/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzuluc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzulu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzsh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzoneu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzoner/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzlib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzip/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzfsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzfsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzfskr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzfsgu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzfsgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzebrau/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWzebrar/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWypu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWypr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwxst/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwxft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwsvr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwsrv/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwsrc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwslb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwrtl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwpsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwpmn/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwplt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwplr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwpl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwpft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwopt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwoft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwmod/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwman/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwkey/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwinc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwice/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwhl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwfs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwfnt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwfa/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwdxm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwdv/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwdim/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwdem/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwcsl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwcft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxwacx/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxvnc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxscreensaver-hacks/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxscreensaver-hacks-gl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-xkb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-tsol-module/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-server/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-headers/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-graphics-ddx/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-doc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-devel-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-compatlinks/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-clientlibs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-client-programs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-client-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxorg-cfg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxim/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxilvl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxilrl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxilow/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxilh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxildh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxi18n/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxge/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxcursor-themes/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxcu6/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxcu4t/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWxcu4/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwsrv/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwsr2/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwrsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwrsm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwrsd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwrsa/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwgetu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwgetr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwebminu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwebminr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbsup/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbpro/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbmc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbdoc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbdev/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbcou/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbcor/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWwbapi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvtsts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvtss/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvtsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvtsmn/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvolu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvolr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvncviewer/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvldu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvld/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWvid/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuxlcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWusbu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWusbs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWusbccid/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWusb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWus/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuprl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWupdatemgru/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWupdatemgrr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWulcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWukspfw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuksp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuium/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuiu8/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWugenu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWugen/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuedg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudfr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudaplu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudapltu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudapltr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWudaplr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWucbt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWuacm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtxfnt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtsmc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtsg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtoo/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnfd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnfc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnetr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnetd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnetc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnamr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtnamd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtltkm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtltkd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtltk/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtlsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtlsd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtls/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWTk/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtiu8/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWTiff/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWTiff-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWTiff-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWthunderbirdl10n-fr-FR/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWthunderbirdl10n-es-ES/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWthunderbird/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-xagent/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tstripe/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tsoljdsselmgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tsoljdslabel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tsoljdsdevmgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tsol-libs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-tsol-libs-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-l10n-ui-fr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtgnome-l10n-ui-es/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtftpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtftp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtexi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtecla/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtcsh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtcpd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWTcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtcatu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtcatr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWtavor/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWswupclr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWswupcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWswmt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstsfr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstsf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsn/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsthwreg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-xsltfilter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-writer/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-w4wfilter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-sunsearchtoolbar/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-ooofonts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-menuintegration/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-math/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-lngutils/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-javafilter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-impress/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-graphicfilter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-gnome-integration/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-gallery/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsrh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-fr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-fr-res/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-fr-help/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-es/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-es-res/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-es-help/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-draw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core09/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core08/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core07/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core06/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core05/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core04/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core03/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core02/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-core01/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-calc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWstaroffice-base/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsshu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsshr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsshdu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsshdr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsshcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWssad/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsra/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsprot/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWspnego/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWspl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsolnm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsneep/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsndmu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsndmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmpd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmmgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmdoc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmcmd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmbau/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmbar/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmbac/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmapi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsmagt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWslpu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWslpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsior/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfwhea/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfwdemo/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfman/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfinf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfdrr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfdr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsfdoc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWses/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWserweb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWservicetagr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWservicetagu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWseru/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWserr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsensorr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsensor/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscsip/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscsa1394/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscpu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscplp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscnsomr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscnsom/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscnprmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscnprm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscn-base/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscn-base-r/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscmhdlr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsckmu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsckmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsckm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscgui/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWscbcp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsbp2/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsasnm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsasm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsamr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsam/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsadml/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsadmi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWsacom/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWs9brandu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWs9brandr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWs8brandu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWs8brandr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrtvcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrtvcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrtvc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrsmo/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrsm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrsgk/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrsg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrpm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrpcib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWroute/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrmwbu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrmwbr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrmui/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrmodu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrge/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrealplayer/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrealplayer-l10n-fr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrealplayer-l10n-es/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrds/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrcmds/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrcmdr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrcmdc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrcapu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWrcapr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqusu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqus/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqosu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqos/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqlcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqlc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqfedu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWqfed/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWPython/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWPython-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWPython-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsutils/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpstl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsm-lpd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsm-ipp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpsdpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWproduct-registry-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWprd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpprou/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWppror/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWppro-plugin-sunos-base/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpppg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWppm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpppdu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpppdt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpppdr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpppd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostrun/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostrun-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-upgrade/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-tcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-server/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-server-data/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-pl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-libs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-jdbc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-contrib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-tcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-server/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-server-data-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-pl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-libs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-contrib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-83-client/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-tcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-server/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-server-data-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-pl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-libs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-jdbc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-docs/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-contrib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpostgr-82-client/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpoolr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpool/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpng/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpng-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpng-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmowu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmowr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmowm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmgr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmdbi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpmdbdpg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpltlk/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWplowr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWplow1/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWplow/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpl5v/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpl5u/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpl5p/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpl5m/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpkgcmdsu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpkgcmdsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpiclu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpiclr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpiclh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWphx/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpgadmin3/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpfbw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpfbcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpfb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWperl584usr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWperl584man/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWperl584core/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWperl-xml-parser/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWperl-xml-parser-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpdu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpdas/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcser/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcsclite/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcsclite-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcmem/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcmcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcmci/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpcelx/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpapi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWpamsc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWowbcp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWosdem/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopensslr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenssl-man/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenssl-libraries/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenssl-include/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenssl-commands/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopensp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopensp-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopensp-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopensp-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenjade/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenjade-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenjade-root/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWopenjade-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWolrte/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWogg-vorbis/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWogg-vorbis-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWogg-vorbis-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWodtts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWocfr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWocfh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWocfd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWocf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnxge/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWntpu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWntpr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnisu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnisr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfssu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfssr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfsskr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfscu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfscr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfsckr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfbw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfbcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnfb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWncft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWncau/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWncar/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnamow/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnamos/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWnamdt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmysqlu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmysqlt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmysqlr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmpsvplr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmpathadmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmpathadm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmpapir/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmpapi/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozspell/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozpsm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmoznss/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmoznss-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmoznspr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmoznspr-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozmail/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozjs-debugger/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozilla/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozilla-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozgm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozdom-inspector/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozchat/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmozapoc-adapter/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlibt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlibl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlibk/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlibh/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlibe/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmlib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmkcd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmipu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmipr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmibii/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmgts/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmgapp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmga/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmfrun/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmfman/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmfdev/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmddr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdbr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdbdm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdau/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmdar/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmcex/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmcdev/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmccom/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmcc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWmc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWman/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWm64xr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWm64w/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWm64cf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWm64/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlxsl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlxsl-python/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlxml/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlxml-python/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlvmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlvmg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlvma/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluzone/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluxopr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluxop/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluxl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluxd/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWluu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlur/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlucfg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlpmsg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlocaledefsrc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWloc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlocalecreator/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlocalecreator-l10n-fr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlocalecreator-l10n-es/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlldap/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWllcr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWllc/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibusbugen/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibusb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibsasl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibpopt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibpopt-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibpopt-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibmsr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibms/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibmr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibgcrypt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibgcrypt-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibexif/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibexif-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibCf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlibC/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlexpt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWless/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlcl/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWlccom/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWladm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkxmft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkxfnt/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkvm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkttf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkrbu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkrbr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkoi8f/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkmp2r/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkiu8/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkfbw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkfbr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkfbcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkfb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkey/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkdcu/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWkdcr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjxmft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjxcft/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjss/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjsnmp/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjre-config/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjre-config-plugin/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjpg/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjpg-devel/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjpg-devel-share/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjmfmp3/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjmf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjmail/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjiu8/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjib/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfcau/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfca/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfbw/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfbr/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfbcf/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjfb/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjdsver/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjdsrm/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjds-registration/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjdmk-base/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjdic/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjcom/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjavaapps/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjai/save: Permission denied
+find: cannot read dir /var/sadm/pkg/SUNWjai-imageio/save: Permission denied
+^C/d/iccol/desarrollo/temporales>^C
+/d/iccol/desarrollo/temporales>^C
+/d/iccol/desarrollo/temporales>^C
+/d/iccol/desarrollo/temporales>^C
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>find / -name adiskey.map -lsfind / -name adiskey.map -ls 2>/dev/null
+/d/iccol/desarrollo/temporales>echo $COBDIR
+/opt/mfocus/des/cobol
+/d/iccol/desarrollo/temporales>ls -l /opt/mfocus/des/cobol
+total 156
+-r--r--r--   1 root     root       10455 Jan  7  2013 ADISCTRL
+dr-xr-xr-x   2 root     root         512 Jan  7  2013 aslmf
+dr-xr-xr-x   4 root     root        6144 Jan 31 11:11 bin
+-rw-rw-r--   1 root     root          46 Mar 20 18:27 cobol.dir
+dr-xr-xr-x   2 root     root        1536 Jan  7  2013 cpylib
+dr-xr-xr-x  28 root     root         512 Jan  7  2013 demo
+drwxrwxrwx   2 root     root         512 Jan  7  2013 deploy
+dr-xr-xr-x   2 root     root        1024 Jan  7  2013 dialog
+dr-xr-xr-x   6 root     root         512 Jan  7  2013 docs
+dr-xr-xr-x   2 root     root        1536 Jan  7  2013 dynload
+dr-xr-xr-x   2 root     root         512 Jan  7  2013 dynload64
+dr-xr-xr-x   4 root     root         512 Jan  7  2013 es
+-r--r--r--   1 root     root       11949 Jan  7  2013 eslmf-mess
+dr-xr-xr-x   6 root     root        3072 Jan 22 15:18 etc
+dr-xr-xr-x   2 root     root         512 Jan  7  2013 include
+-r-xr-xr-x   1 root     root        9410 Jan  7  2013 install
+dr-xr-xr-x  11 root     root         512 Jan  7  2013 lang
+dr-xr-xr-x  10 root     root       17408 Aug  2  2013 lib
+dr-xr-xr-x   6 root     root        1024 Jan  7  2013 lmf
+dr-xr-xr-x   3 root     root         512 Jan  7  2013 snmp
+dr-xr-xr-x   8 root     root         512 Jan  7  2013 src
+dr-xr-xr-x   9 root     root         512 Jan  7  2013 terminfo
+dr-xr-xr-x   2 root     root         512 Jan  7  2013 xdb
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>ls -l /opt/mfocus/des/cobol                           /x CARx CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales> CARGAJUR 9999991000905140104.txt 2 >| qq /d/iccol/desarrollo/temporales>a CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales>an CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales>ani CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales>anim CARGAJUR 9999991000905140104.txt 2 >| qq/d/iccol/desarrollo/temporales>anim

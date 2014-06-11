@@ -184,7 +184,7 @@ PAM372     03 FILLER6                   PIC X VALUE ";".
 PAM372     03 FILLER7                   PIC X VALUE ";".
            03 VIG-INC                   PIC X(02).
 PAM372     03 FILLER8                   PIC X VALUE ";".
-      *    siempre se le asigna el mismo valos que a CODIGO-ERROR
+      *    siempre se le asigna el mismo valor que a CODIGO-ERROR
            03 CODERR-INC                PIC 99.
 PAM372     03 FILLER9                   PIC X VALUE ";".
            03 FILLER-2-INC              PIC X(60).

@@ -12,7 +12,7 @@
        DATE-WRITTEN.
        DATE-COMPILED.
        CONFIGURATION section.
-       SOURCE-COMPUTER. MICROFOCUS with debugging mode.
+       SOURCE-COMPUTER. microfocus.
        OBJECT-COMPUTER. microfocus.
        INPUT-OUTPUT section.
        FILE-CONTROL.
@@ -359,10 +359,10 @@
            03 N-ale-no-existe           pic 9(8) value zero.
 
       *    Sumas de cantidades de demandas y embargos
-           03 N-demandas-vigentes       pic 9(7).
-           03 N-demandas-terminadas     pic 9(7).
-           03 N-embargos-vigentes       pic 9(7).
-           03 N-embargos-terminados     pic 9(7).
+           03 N-demandas-vigentes       pic 9(7) value zero.
+           03 N-demandas-terminadas     pic 9(7) value zero.
+           03 N-embargos-vigentes       pic 9(7) value zero.
+           03 N-embargos-terminados     pic 9(7) value zero.
 
       ******************************************************************
       * Armado de las lineas de alerta
@@ -474,10 +474,13 @@
            "Numero de id fuera del rango del tipo de id informado".
            03 pic x(11) value "17 0000000 ".
            03 pic x(59) value
-           "Modificación de alerta inexistente".
+           "Modificación de alerta que no existe".
            03 pic x(11) value "18 0000000 ".
            03 pic x(59) value
-           "Eliminación de alerta inexistente".
+           "Eliminación de alerta que no existe".
+           03 pic x(11) value "19 0000000 ".
+           03 pic x(59) value
+           "Inserción de alerta que ya existe".
       *----------------- insertar nuevos items aqui -------------------
            03 pic x(11) value "00 0000000 ".
            03 pic x(59) value "--- fin de la lista (cod 00) ---".
@@ -529,7 +532,6 @@
       *    4333-ELIMINAR-BDIIALE
       *    4800-PROCESO-REG-T
       *    4900-GRABAR-ERROR
-      *    4320-ARMAR-TEXTO-ALERTA
       *    1000-RUTINA-INICIAL
       *    1000-NOT-USED
       *    1001-ELIMINAR-TODO
@@ -539,7 +541,6 @@
      
      
        0000-PROGRAMA-PRINCIPAL.
-      D    display "0000-PROGRAMA-PRINCIPAL"
       ******************************************************************
       *    inicializa el ambiente y abre los archivos
            perform 1000-RUTINA-INICIAL
@@ -551,7 +552,6 @@
            goback.
 
        4000-PROCESAR-REGISTRO.
-      D    display "4000-PROCESAR-REGISTRO"
       ****************************************************************
       * Proceso de un registro del archivo de entrada JURAD
       * Lectura y control del file status del archivo
@@ -586,7 +586,6 @@
 
 
        4000-PROCESAR-REGISTRO-2.
-      D    display "4000-PROCESAR-REGISTRO-2"
       ****************************************************************
       * Controla los datos de un registro de JURAD y si es OK lo usa
       * para actualizar el archivo de alertas en linea
@@ -627,14 +626,13 @@
 
            perform 4240-CONTAR-TIPO-CUENTA
 
-      *    intento de actualizacion de BDIIALE
+      *    intento de actualización de BDIIALE
            perform 4300-MODIFICAR-BDIIALE
            add 1 to N-reg-OK.
 
 
 
        4100-VALIDACION-FORMAL.
-      D    display "4100-VALIDACION-FORMAL"
       ******************************************************************
       * Validacion formal de los datos del input
       ******************************************************************
@@ -694,26 +692,26 @@
 
 
        4200-VALIDACION-SEMANTICA.
-      D    display "4200-VALIDACION-SEMANTICA"
       ****************************************************************
       * Validacion del numero de identificacion y de su relacion con
       * el nombre
       ****************************************************************
+      *    parámetros para las rutinas de validación en BDIIVIDE
            move JURAD-id-tipo to TIP-IDE-BDIIVIDE
            move JURAD-id-numero to NUM-IDE-BDIIVIDE-R
            move JURAD-nombre to NOMBRE-BDIIVIDE
-
+      *    algunas rutinas de COPYs usan estos datos
            move JURAD-id-tipo to TIPOID-E
            move JURAD-id-numero to NUMID-E
            move JURAD-nombre to NOMBRE-E
-
+      *    switches de opciones de validación
            move 1 to SW-VERIFNOM-BDIIVIDE
            move 0 to SW-DIGCHEQUEO-BDIIVIDE SW-ASGTIPID-BDIIVIDE
-           IF TIP-IDE-BDIIVIDE = 2 OR 3
-               MOVE 1 TO SW-DIGCHEQUEO-BDIIVIDE
-           END-IF
-           MOVE 2 TO NUM-BLOQUES-BDIIVIDE
-      *    Valida el numero de identificación contra las bases de
+           if TIP-IDE-BDIIVIDE = 2 or 3
+               move 1 to SW-DIGCHEQUEO-BDIIVIDE
+           end-if
+           move 2 to NUM-BLOQUES-BDIIVIDE
+      *    Valida el número de identificación contra las bases de
       *    datos BDIIDIAN, BDIIDAS, BDIIREGI y verifica la coincidencia
       *    del nombre reportado
       *    Retorna SW-ID-BDIIVIDE=1 si hay error
@@ -739,22 +737,20 @@
 
 
        4220-VALIDA-NOMBRE-NO-COINCIDE.
-      D    display "4220-VALIDA-NOMBRE-NO-COINCIDE"
       ******************************************************************
       * Validación de IDs que figuran OK pero el nombre no coincide
       ******************************************************************
       *    nombre no coincide
-           IF TIP-IDE-BDIIVIDE = 1
+           if TIP-IDE-BDIIVIDE = 1
       *        es una cédula
-               MOVE 02 TO CODIGO-ERROR
-           ELSE
+               move 02 to CODIGO-ERROR
+           else
       *        no es una cédula
-               MOVE 01 TO CODIGO-ERROR
-           END-IF.
+               move 01 to CODIGO-ERROR
+           end-if.
 
 
        4222-VALIDA-NOMBRE-COINCIDE.
-      D    display "4222-VALIDA-NOMBRE-COINCIDE"
       ******************************************************************
       * Validación de IDs que figuran OK pero el nombre coincide
       ******************************************************************
@@ -776,6 +772,7 @@
            perform until SW-BDIIALE = 1
            or TIP-IDE-BDIIVIDE <> TIP-IDE-BDIIALE
            or NUM-IDE-BDIIVIDE <> NUM-IDE-BDIIALE
+           or FUENTE-BDIIALE > 990003
                if FUENTE-BDIIALE = 990003
                and FEC-NOV-BDIIALE <= P-fecha-proceso-YYYYMMDD
                and FEC-VEN-BDIIALE >= P-fecha-proceso-YYYYMMDD
@@ -804,7 +801,6 @@
 
 
        4240-CONTAR-TIPO-CUENTA.
-      D    display "4240-CONTAR-TIPO-CUENTA"
       ******************************************************************
       *    Conteo de los registros por "tipo", dependiendo del código
       *    de error:
@@ -827,7 +823,7 @@
                IF CODIGO-ERROR = 03 OR 04 OR 05
                    ADD 1 TO W-CONT-TIPO-7
                ELSE
-      *            registros correctos, repetidos o no
+      *            es 00: registros correctos
                    ADD 1 TO W-CONT-TIPO-5
       *            si es una empresa
                    IF TIPOID-E = 2 OR 3
@@ -838,7 +834,6 @@
 
 
        4210-VALIDACION-ID-NO-FIGURA.
-      D    display "4210-VALIDACION-ID-NO-FIGURA"
       ******************************************************************
       * Validación de IDs que no figuran en las bases normales
       ******************************************************************
@@ -858,7 +853,6 @@
 
 
        4300-MODIFICAR-BDIIALE.
-      D    display "4300-MODIFICAR-BDIIALE"
       ******************************************************************
       * Se impacta el archivo BDIIALE con una o dos inserciones,
       * modificaciones o eliminaciones segun haya o no demandas y
@@ -893,7 +887,6 @@
 
 
        4300-MODIFICAR-BDIIALE-DATOS.
-      D    display "4300-MODIFICAR-BDIIALE-DATOS"
       ******************************************************************
       * Parte de la carga de datos en el registro BDIIALE y grabacion
       * del mismo que es comun a demandas y embargos
@@ -924,19 +917,15 @@
 
 
        4300-MODIFICAR-BDIIALE-I.
-      D    display "4300-MODIFICAR-BDIIALE-I"
       ******************************************************************
       * Insercion de una alerta nueva
-      * Si ya existia muestra un mensaje y continua
       ******************************************************************
       *    si el registro existia es un error
            if EST-BDIIALE = "00"
-               display "Insercion de alerta nueva que ya existe "
-               " key: " LLAVE-BDIIALE
-               display "Registro de input: "
-               display JURAD-reg
-               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
+               call "PONERR" using "19" JURAD-reg E-errores
+               display "llave: " LLAVE-BDIIALE
                add 1 to N-ale-ya-existe
+               exit paragraph
            end-if
 
       *    completa los datos del registro
@@ -946,68 +935,44 @@
            move P-fecha-proceso-50 to FEC-VEN-BDIIALE
            move 0 to BLOQUEO-BDIIALE
            move D-datahost to INF-DATAHOST-BDIIALE
-           perform 4320-ARMAR-TEXTO-ALERTA
-           if EST-BDIIALE = "00"
-               perform 4333-REGRABAR-BDIIALE
-           else
-               perform 4333-GRABAR-BDIIALE
-           end-if.
-      *    display "4300-MODIFICAR-BDIIALE-I k:" LLAVE-BDIIALE
-      *    " fs:" EST-BDIIALE.
+           move spaces to LINEAS-BDIIALE
+           perform 4333-GRABAR-BDIIALE.
 
 
        4300-MODIFICAR-BDIIALE-M.
-      D    display "4300-MODIFICAR-BDIIALE-M"
       ******************************************************************
       * Modificacion de una alerta existente
-      * Si no existia muestra un mensaje y continua
       ******************************************************************
       *    si el registro no existia es un error
            if EST-BDIIALE not = "00"
-               display "Modificacion de alerta inexistente "
-               " key: " LLAVE-BDIIALE
-               display "Registro de input: "
-               display JURAD-reg
-               display "Datos en la alerta: " INF-DATAHOST-BDIIALE
-               add 1 to N-ale-no-existe
                call "PONERR" using "17" JURAD-reg E-errores
+               "llave: " LLAVE-BDIIALE
+               add 1 to N-ale-no-existe
+               exit paragraph
            end-if
+
       *    reemplaza la fecha de reporte y los valores
            move P-fecha-proceso-YYYYMMDD to FEC-REP-BDIIALE
            move D-datahost to INF-DATAHOST-BDIIALE
-           perform 4320-ARMAR-TEXTO-ALERTA
-           if EST-BDIIALE = "00"
-               perform 4333-REGRABAR-BDIIALE
-           else
-               perform 4333-GRABAR-BDIIALE
-           end-if.
-      *    display "4300-MODIFICAR-BDIIALE-M k:" LLAVE-BDIIALE
-      *    " fs:" EST-BDIIALE.
+           move spaces to LINEAS-BDIIALE
+           perform 4333-REGRABAR-BDIIALE.
 
 
        4300-MODIFICAR-BDIIALE-E.
-      D    display "4300-MODIFICAR-BDIIALE-E"
       ******************************************************************
       * Eliminacion de una alerta
-      * Si no existia muestra un mensaje y continua
       ******************************************************************
       *    elimina el registro
            if EST-BDIIALE = "00"
                perform 4333-ELIMINAR-BDIIALE
            else
-               display "Eliminacion de alerta inexistente "
-               " key: " LLAVE-BDIIALE
-               display "Registro de input: "
-               display JURAD-reg
-               add 1 to N-ale-no-existe
                call "PONERR" using "18" JURAD-reg E-errores
+               "llave: " LLAVE-BDIIALE
+               add 1 to N-ale-no-existe
            end-if.
-      *    display "4300-MODIFICAR-BDIIALE-E k:" LLAVE-BDIIALE
-      *    " fs:" EST-BDIIALE.
 
 
        4333-LEER-BDIIALE-RANDOM.
-      D    display "4333-LEER-BDIIALE-RANDOM"
       ******************************************************************
       * Arma clave exacta y lee un registro de BDIIALE
       * Usa los datos del reg input, excepto LLASEC que esta precargado
@@ -1037,7 +1002,6 @@
 
 
        4333-GRABAR-BDIIALE.
-      D    display "4333-GRABAR-BDIIALE"
       ******************************************************************
       * Inserta un registro nuevo en BDIIALE
       ******************************************************************
@@ -1058,7 +1022,6 @@
 
 
        4333-REGRABAR-BDIIALE.
-      D    display "4333-REGRABAR-BDIIALE"
       ******************************************************************
       * Regraba un registro modificado en BDIIALE
       ******************************************************************
@@ -1079,7 +1042,6 @@
 
 
        4333-ELIMINAR-BDIIALE.
-      D    display "4333-ELIMINAR-BDIIALE"
       ******************************************************************
       * Elimina un registro de BDIIALE
       ******************************************************************
@@ -1099,7 +1061,6 @@
            end-evaluate.
 
        4800-PROCESO-REG-T.
-      D    display "4800-PROCESO-REG-T"
       ******************************************************************
       * El registro leido en el archivo JURAD es tipo "T" con totales
       * de control, y debería ser el ultimo del archivo
@@ -1116,7 +1077,23 @@
                move "SI" to E-hay-error
            end-if
 
+      *    Esta parte está anulada por falta de definición sobre el
+      *    formato del registro "T"
+           exit paragraph.
+
+       4800-PROCESO-REG-T-anulado.
       *    Sumas de cantidades de demandas y embargos
+           if function numval(JURADT-demandas-vigentes)
+           = N-demandas-vigentes
+               continue
+           else
+               display " "
+               display "No coincide total de demandas vigentes:"
+               JURADT-demandas-vigentes " con el calculado:"
+               N-demandas-vigentes
+               move "SI" to E-hay-error
+           end-if
+
            if function numval(JURADT-demandas-terminadas)
            = N-demandas-terminadas
                continue
@@ -1159,7 +1136,6 @@
 
 
        4900-GRABAR-ERROR.
-      D    display "4900-GRABAR-ERROR"
       ******************************************************************
       * El registro de JURAD tiene error: se graba en el archivo ERRS
       * con indicacion del error detectado
@@ -1181,42 +1157,7 @@
            end-evaluate.
 
 
-       4320-ARMAR-TEXTO-ALERTA.
-      D    display "4320-ARMAR-TEXTO-ALERTA"
-      ****************************************************************
-      * Hace el reemplazo de los valores adecuados en los templates
-      * de las linea de alerta que corresponde
-      ****************************************************************
-      *    segun se trate de demandas o embargos
-           if JURAD-demandas-vigentes not = 0
-           or JURAD-demandas-terminadas not = 0
-               set LAx to 1
-               move high-values to LA-valores
-               move JURAD-demandas-vigentes to LA-num
-      * >>>> esto esta anulado x que no se como hacer para que lo compile
-      *        unstring LA-numX into LA-descarte LA-valor(1)
-      *        delimited by all space
-               move LA-numx(9:12) to LA-valor(1)
-               move JURAD-demandas-terminadas to LA-num
-      * >>>> esto esta anulado x que no se como hacer para que lo compile
-      *        unstring LA-numX into LA-descarte LA-valor(2)
-      *        delimited by all space
-               move LA-numx(9:12) to LA-valor(2)
-
-      * >>>> esto esta anulado x que no se como hacer para que lo compile
-      * >>>> da error en el end-if
-      *        string LA-parte(LAx, 1) LA-valor(1)
-      *        LA-parte(LAx, 2) LA-valor(2) LA-parte(LAx, 3) LA-valor(3)
-      *        LA-parte(LAx, 4) LA-valor(4) LA-parte(LAx, 5) LA-valor(5)
-      *        LA-parte(LAx, 6) LA-valor(6) LA-parte(LAx, 7) LA-valor(7)
-      *        LA-parte(LAx, 8) LA-valor(8) LA-parte(LAx, 9) LA-valor(9)
-      *        LA-parte(LAx, 10) LA-valor(10)
-      *        delimited by high-value
-           end-if.
-
-
        1000-RUTINA-INICIAL.
-      D    display "1000-RUTINA-INICIAL"
       ******************************************************************
       * Todas las operaciones que se realizan una sola vez, al comienzo
       * del programa:
@@ -1330,7 +1271,6 @@
 
 
        1000-NOT-USED.
-      D    display "1000-NOT-USED"
       ******************************************************************
       * Aunque tengo instrucciones de dejar los textos de alertas en
       * blanco, me parece que se deberían cargar, aunque sea de manera
@@ -1365,7 +1305,6 @@
 
 
        1001-ELIMINAR-TODO.
-      D    display "1001-ELIMINAR-TODO"
       ******************************************************************
       * Elimina los registros de alertas existentes en el archivo de
       * alertas en linea, previo a un refresque total
@@ -1429,7 +1368,6 @@
 
 
        7000-RUTINA-FINAL.
-      D    display "7000-RUTINA-FINAL"
       ******************************************************************
       * Registra hora de finalizacion
            accept W-hora-fin from time
@@ -1446,15 +1384,9 @@
            display "Totales de registros:"
            display " "
       * Totales tipo PESVNO
-           DISPLAY "REGISTROS LEIDOS                :" REG-LEIDOS
-           DISPLAY "REGISTROS CORRECTOS             :" REG-CORRECTOS
-           DISPLAY "REGISTROS CORRECTOS REPETIDOS   :" REG-CORRECTOS-R
-           DISPLAY "REGISTROS NO COINCIDEN BDIIREGI :" NO-COINCIDE-REGIS
-           DISPLAY "  REGISTROS DE FALLECIDOS         :" CONT-FALLECIDOS
-           DISPLAY "REGISTROS NO COINCIDEN BDIIDIAN :" NO-COINCIDE-DIAN
-           DISPLAY "REGISTROS NO EXISTEN   BDIIREGI :" NO-EXISTE-REGIS
-           DISPLAY "REGISTROS NO EXISTEN   BDIIDIAN :" NO-EXISTE-DIAN
-           DISPLAY "TIPO IDENTIFICACION INVALIDO    :" TIPO-ID-INVALIDO
+           DISPLAY "Registros Tipo 5   ==> " W-CONT-TIPO-5
+           DISPLAY "Registros Tipo 6   ==> " W-CONT-TIPO-6
+           DISPLAY "Registros Tipo 7   ==> " W-CONT-TIPO-7
            display " "
       *    porcentaje registros procesados OK
            compute N-editp100 rounded = 100.0 * N-reg-OK / N-reg-leidos
@@ -1513,7 +1445,6 @@
 
 
        9000-CANCELAR-PROGRAMA.
-      D    display "9000-CANCELAR-PROGRAMA"
       ******************************************************************
       * Procedimiento standard de cancelacion de programa batch
       ******************************************************************
@@ -1530,7 +1461,15 @@
       *    hace validacion de tipo de identificacion
            MOVE TIPOID-E TO TIP-IDE-BDIIVIDE
            MOVE NUMID-E TO NUM-IDE-BDIIVIDE
+      *    retorna SW-TID-BDIIVIDE=0 si el num id no está dentro
+      *    del rango que corresponde al tipo de id
+           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
+           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
+           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
            PERFORM 80400-VALIDAR-TIPO-ID
+           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
+           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
+           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
            IF SW-TID-BDIIVIDE = 0
       *        el tipo de id es OK
                IF HACER-MATCH = ZEROS
@@ -1558,9 +1497,9 @@
                            INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL
                            "," BY " ", ";" BY " "
                        END-IF
-                       MOVE NOMBRE-E            TO NOMBRE-INPUT-VALNOM
+                       MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOM
                        MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM
-                       MOVE TIPOID-E            TO  TIP-ID-INPUT-VALNOM
+                       MOVE TIPOID-E TO  TIP-ID-INPUT-VALNOM
                        MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM
                        PERFORM 10000-MATCH-NOMBRES-VALNOM
                        IF MATCH-OK-OUT-VALNOM = 1
@@ -1574,11 +1513,11 @@
      
                    IF IDE-TIPO-BDAMATCH = 1
                        MOVE TIPOID-E TO TIP-VAL
-                       MOVE NUMID-E  TO CED-VAL
+                       MOVE NUMID-E TO CED-VAL
                        MOVE NOM-OUTPUT-BDAMATCH TO CADENA-ENTRA
                        PERFORM 9800-FILTRAR-ALFABETICO
                        MOVE CADENA-SALE TO  NOM-VAL
-                       MOVE ZEROS  TO FEC-EXP-VAL
+                       MOVE ZEROS TO FEC-EXP-VAL
                        MOVE SPACES TO MUN-EXP-VAL
                        MOVE SPACES TO DEP-EXP-VAL
                        MOVE SPACES TO VIG-VAL
@@ -1591,7 +1530,6 @@
            END-IF.
 
        9800-FILTRAR-ALFABETICO.
-      D    display "9800-FILTRAR-ALFABETICO"
       ******************************************************************
       * SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA
       ******************************************************************
