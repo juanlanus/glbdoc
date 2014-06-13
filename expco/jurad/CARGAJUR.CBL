@@ -51,7 +51,7 @@
       ******************************************************************
            copy BDACSV.FS.
            copy ICBDIR.FS.
-           copy BDLCLI.FS.                         
+           copy BDLCLI.FS.
            COPY ICBSUS.FS.
            COPY ICBCHK.FS.
            COPY ICBCRE.FS.
@@ -164,7 +164,7 @@
       ******************************************************************
            copy BDACSV.FD.
            COPY ICBDIR0001.FD.
-           copy BDLCLI.FD.                         
+           copy BDLCLI.FD.
            COPY ICBSUS.FD.
            COPY ICBCHK.FD.
            COPY ICBCRE.FD.
@@ -193,7 +193,7 @@
        01  HACER-MATCH                  PIC 9 value 0.
        01  CADENA-ENTRA                 PIC X(60).
        01  CADENA-SALE                  PIC X(60).
-       01  IND-ALFABETICO              PIC  X(01).                      
+       01  IND-ALFABETICO              PIC  X(01).
            88 SI-ALFABETICO           VALUE " " "A" "B" "C" "D" "E" "F"
                                             "G" "H" "I" "J" "K" "L" "M"
                                             "N" "/" "O" "P" "Q" "R" "S"
@@ -207,8 +207,8 @@
            03 NUMID-E                   pic 9(11).
            03 NOMBRE-E                  pic x(45).
 
-       01  REG-VALIDAS.                           
-           03 TIP-VAL                   PIC 9.   
+       01  REG-VALIDAS.
+           03 TIP-VAL                   PIC 9.
            03 CED-VAL                   PIC 9(11).
            03 NOM-VAL                   PIC X(45).
            03 FEC-EXP-VAL               PIC 9(08).
@@ -227,7 +227,7 @@
            03  W-CONT-TIPO-5-PJ         PIC 9(6) VALUE ZEROS.
            03  W-CONT-TIPO-5-REP        PIC 9(6) VALUE ZEROS.
 
-       01  SUSCRIPTOR-AUX               PIC 9(06).            
+       01  SUSCRIPTOR-AUX               PIC 9(06).
        01  REG-LEIDOS                   PIC 9(07) VALUE ZEROS.
        01  CONT-FALLECIDOS              PIC 9(07) VALUE ZEROS.
        01  REG-CORRECTOS                PIC 9(07) VALUE ZEROS.
@@ -238,7 +238,7 @@
        01  NO-EXISTE-REGIS              PIC 9(07) VALUE ZEROS.
        01  SI-EXISTE-CSV                PIC 9(07) VALUE ZEROS.
        01  TIPO-ID-INVALIDO             PIC 9(07) VALUE ZEROS.
-       
+
        01 MAS-DATOS.
            03 I                         PIC 9(02) VALUE ZERO.
            03 J                         PIC 9(02) VALUE ZERO.
@@ -538,8 +538,8 @@
       *    7000-RUTINA-FINAL
       *    9000-CANCELAR-PROGRAMA
       *    9800-FILTRAR-ALFABETICO
-     
-     
+
+
        0000-PROGRAMA-PRINCIPAL.
       ******************************************************************
       *    inicializa el ambiente y abre los archivos
@@ -1473,7 +1473,7 @@
            IF SW-TID-BDIIVIDE = 0
       *        el tipo de id es OK
                IF HACER-MATCH = ZEROS
-      *            abre archivos y carga la tabla de direcciones 
+      *            abre archivos y carga la tabla de direcciones
       *            estandar, solo la primera vez
                    IF OPEN-DIR = ZEROS
                        OPEN INPUT MAESTRO-DIRECC
@@ -1484,7 +1484,7 @@
                        PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
                        MOVE 1 TO OPEN-DIR
                    END-IF
-      *            abre archivos y carga la tabla de direcciones 
+      *            abre archivos y carga la tabla de direcciones
                    MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH
                    MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
       *            Se recorre toda la estructura bdacsv para la identificacion
@@ -1510,7 +1510,7 @@
                           END-IF
                        END-IF
                    END-IF
-     
+
                    IF IDE-TIPO-BDAMATCH = 1
                        MOVE TIPOID-E TO TIP-VAL
                        MOVE NUMID-E TO CED-VAL

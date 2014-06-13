@@ -1,5 +1,10 @@
+**/[._]*.s[a-w][a-z]
+**/*.swn
 **/*.swo
 **/*.swp
 **/*~
 **/node_modules
 **/*.bak
+**/*.sw?
+**/*.vim
+.netrwhist

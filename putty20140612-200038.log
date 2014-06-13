@@ -1,0 +1,2175 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.12 20:00:38 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Thu Jun 12 15:45:47 2014 from 172.16.10.26
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>rm /d/iccol/desarrollo/objetos/CARGAJUR.idy /d/iccol/desarrollo/objetos/CARGAJUR.int /d/iccol/desarrollo/objetos/CARGAJUR.lst /d/iccol/desarrollo/objetos/CARGAJUR.gnt /d/iccol/desarrollo/objetos/CARGAJUR.s /d/iccol/desarrollo/fuentes/CARGAJURZZZ.CBL /d/icco        
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>rm /d/iccol/desarrollo/objetos/CARGAJUR.idy /d/iccol/desa>/d/iccol/desarrollo>. viset                                                   /d/iccol/desarrollo>find / -name "CARGAJUR*" -ls  2> /dev/null/d/iccol/desarrollo>
+ 7608   66 -rw-rw-r--   1 icdgd    icdatacr    66870 Jun 12 17:54 /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+45006   73 -rw-rw-r--   1 icjlud   icdatacr    74096 Jun 11 18:30 /d/iccol/desarrollo/fuentes/CARGAJUR.cbl
+45055  992 -rw-rw-r--   1 icjlud   icdatacr  1006330 Jun 12 17:53 /d/iccol/desarrollo/fuentes/CARGAJUR.lst
+45056  328 -rw-rw-r--   1 icjlud   icdatacr   326144 Jun 12 17:53 /d/iccol/desarrollo/fuentes/CARGAJUR.idy
+123726  992 -rw-rw-r--   1 icjlud   icdatacr  1006327 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.lst
+123773  328 -rw-rw-r--   1 icjlud   icdatacr   326144 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.idy
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>find / -name "CARGAJUR*" -ls  2> /dev/null/d/iccol/desarrollo>
+r 7608   66 -rw-rw-r--   1 icdgd    icdatacr    66870 Jun 12 17:54 /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+45006   73 -rw-rw-r--   1 icjlud   icdatacr    74096 Jun 11 18:30 /d/iccol/desarrollo/fuentes/CARGAJUR.cbl
+45055  992 -rw-rw-r--   1 icjlud   icdatacr  1006330 Jun 12 17:53 /d/iccol/desarrollo/fuentes/CARGAJUR.lst
+45056  328 -rw-rw-r--   1 icjlud   icdatacr   326144 Jun 12 17:53 /d/iccol/desarrollo/fuentes/CARGAJUR.idy
+123726  992 -rw-rw-r--   1 icjlud   icdatacr  1006327 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.lst
+123773  328 -rw-rw-r--   1 icjlud   icdatacr   326144 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.idy
+m /d/iccol/desarrollo>rm  /d/iccol/desarrollo/fuentes/CARGAJUR.cbl /d/iccol/desarrollo/fuentes/CARGAJUR.lst /d/iccol/desarrollo/fuentes/CARGAJUR.idy /d/iccol/desarrollo/temporales/CARGAJUR.idy
+/d/iccol/desarrollo>^[  /d/iccol/desarrollo>rm  /d/iccol/desarrollo/fuentes/CARGAJUR.cbl /d/iccol/des>/d/iccol/desarrollo>find / -name "CARGAJUR*" -ls  2> /dev/null                /d/iccol/desarrollo>
+ 7608   66 -rw-rw-r--   1 icdgd    icdatacr    66870 Jun 12 17:54 /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+123726  992 -rw-rw-r--   1 icjlud   icdatacr  1006327 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.lst
+/d/iccol/desarrollo>vi  /d/iccol/desarrollo/temporales/CARGAJUR.lst
+"/d/iccol/desarrollo/temporales/CARGAJUR.lst" 8712 lines, 1006327 characters ^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page   1
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+* Options: int("CARGAJUR.int") anim csi verbose nolist sourceasm endp
+*list("CARGAJUR.lst")1$SET LIST SETTING LISTWIDTH"120"1
+* Setting: NOACCEPTREFRESH NOADV ALIGN"8" ALPHASTART"1" NOALTER NOAMODE ANIM
+*NOANIMPREP ANS85 NOAPOST NOAREACHECK ARITHMETIC"MF" ASSIGN"DYNAMIC"
+*NOASSIGN-PRINTER NOAUTOLOCK NOBELL NOBOUND NOBRIEF NOBS2000 BWZSTAR
+*NOBYTEMODEMOVE CALLFH"EXTFH" NOCALLMCS NOCALLRECOVERY CALLSORT
+*"EXTSM" CANCEL CANCELLBR NOCHANGEMESSAGE CHARSET"ASCII" CHECKDIV
+*"ANSI" NOCHECKREFMOD NOCICS CICS-CPY NOCICSOPTIMIZE NOCMPR2
+*NOCOBFSTATCONV NOCOBIDY NOCOBOL370 COBOLDIR COMP COMP-5"2" COMP-6
+*"2" NOCOMS85 CONFIRM NOCONVERTRET CONVSPACE COPYEXT",cbl,cpy"
+*NOCOPYLBR COPYLIST COPYLISTCOMMENT"1" CSI CURRENCY-SIGN"36"
+*CURRENT-DATE"MMDDYY" NODATA DATACOMPRESS"0" NODATA-CONTEXT DATE
+*DBCHECK DBCS"3" NODBCSSOSI DBSPACE DE-EDIT"2" DEFAULTBYTE"32"
+*NODEFAULTCALLS DETECTLOCK NODG DIALECT"MF" NODIRECTIVES-IN-COMMENTS
+*NODOSVS NODPCINSUBSCRIPT DYNAM NOEARLY-RELEASE ECHO NOECHOALL
+*NOEDITOR ENSUITE"0" NOENTCOBOL ERRFORMAT"1" ERRLIST"EMBED" NOERRQ
+*FASTSORT FCD3 NOFCDREG NOFDCLEAR NOFILESHARE FILETYPE"0" NOFLAG
+*NOFLAGAS NOFLAGCD NOFLAGEUC NOFLAGMIG NOFLAGQ FLAGSINEDIT NOFLAGSTD
+*NOFOLDCALLNAME NOFOLDCOPYNAME FORM"60" NOFP-ROUNDING
+*NOHOSTARITHMETIC NOHOSTCONTZERO NOHOST-NUMCOMPARE NOHOST-NUMMOVE
+*NOHOSTFD NOHOSTRW NOIBM-MS NOIBMCOMP IDXFORMAT"0" NOILGEN
+*IMPLICITSCOPE NOINDD INFORETURN"0" NOINITCALL INITPTR INT
+*"CARGAJUR.int" INTDATE"ANSI" INTLEVEL"5" IOCONV NOISO2002
+*NOIXNLSKEY NOIXNUMKEY KEEP-INT KEYCHECK KEYCOMPRESS"0" NOLIBRARIAN
+*NOLINE-COUNT LIST LISTPATH"" LISTWIDTH"120" LITVAL-SIZE"4" LOCKTYPE
+*"0" NOMAPNAME NOMAXERROR METHODDEFAULT"REFERENCE" MF"15" MFCOMMENT
+*NOMOVELENCHECK NOMS NOMVS NATIVE"ASCII" NONATIVEFLOATINGPOINT
+*NONCHAR NONEWBASENAME NONLS NSYMBOL"DBCS" NOODOOSVS NOODOSLIDE
+*NOOLDBLANKLINE NOOLDCOPY NOOLDINDEX NOOLDNEXTSENTENCE NOOLDREADINTO
+*NOOLDSTRMIX OOCTRL"-C-E-G-P+Q+R-S+W" OPTIONAL-FILE NOOS390 OSEXT""
+*NOOSVS NOOUTDD P64 NOPANVALET PERFORM-TYPE"MF" NOPREPLIST
+*NOPREPROCESS NOPRINT-EXT NOPROFILE NOPROGID-COMMENT
+*NOPROGID-INT-NAME NOPROTECT-LINKAGE PROTOTYPE"RELAXED" QUAL
+*QUALPROC NOQUERY QUOTE NORAWLIST NORDW RECMODE"F" NOREENTRANT NOREF
+*NOREFNO REMAINDER"1" REPORT-LINE"256" RESEQ NORETRYLOCK REWRITE-LS
+*NORM RTNCODE-SIZE"8" NORWHARDPAGE NOSAA SEG NOSEQCHK SEQUENTIAL
+*"RECORD" NOSERIAL SETTING"LINE" NOSHAREOUTDD NOSHOW-DIR SIGN"ASCII"
+*NOSIGNDISCARD NOSIGNFIXUP SORTTYPE"DFSORT" SOURCEFORMAT"FIXED"
+*SOURCETABSTOP"8" NOSPZERO NOSSRANGE STDERR NOSTICKY-LINKAGE
+*NOSTICKY-PERFORM SUPFF SWITCHTYPE"1" SYMBSTART"1" SYSPUNCH"132"
+*TERMPAGE TIME NOTRACE TRUNC NOTRUNCCALLNAME NOTRUNCCOPY TRUNCINC
+*"10" UNICODE"NATIVE" VERBOSE NOVSC2 WARNING"1" NOWB NOWB2 NOWB3
+*WEBSERVER"CGI" NOWRITELOCK NOWRITETHRU NOXOPEN NOXREF
+*NOZEROLENGTHFALSE NOZEROSEQ NOZWB2 IDENTIFICATION DIVISION.23 PROGRAM-ID.    CARGAJUR.3^"/d/iccol/desarrollo/temporales/CARGAJUR.lst" 8712 lines, 1006327 characters^     2 IDENTIFICATION DIVISION.23 PROGRAM-ID.    CARGAJUR.34******************************************************************45* Actualizacion del archivo de alertas con los datos provistos56* por Jurad67* Procesa el archivo JURAD. Controla cada registro: si es OK usa78* los datos para actualizar BDIIALE, si tiene defecto lo graba en89* el archivo ERRS.9
+    10******************************************************************10
+    11 AUTHOR.Globant JL.11
+    12 DATE-WRITTEN.12
+    13 DATE-COMPILED. 12-Jun-14 17:52.13
+    14 CONFIGURATION section.14
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page   2
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+    15 SOURCE-COMPUTER. microfocus.15
+    16 OBJECT-COMPUTER. microfocus.16
+    17 INPUT-OUTPUT section.17
+    18 FILE-CONTROL.18
+    1919
+    20******************************************************************20
+    21******************************************************************21
+    22 select JURAD assign to P-file-path22
+    23     organization is line sequential23
+    24     file status is JURAD-fs.24
+    2525
+    26******************************************************************26
+    27******************************************************************27
+    28 select ERRS assign to ERRS-file-name28
+    29     organization is line sequential29
+    30     file status is ERRS-fs.30
+    3131
+    32******************************************************************32
+    33******************************************************************33
+*   34     copy BDIIREGI.FS.34
+    35* BDIIREGI.v.03.0001BDIIREGI1
+    36*===============================================================BDIIREGI2
+    37* ESTRUCTURA DEL ARCHIVO ENTREGADO POR LA REGISTRADURIA NACIONALBDIIREGI3
+    38*===============================================================BDIIREGI4
+    39 $SET IDXFORMAT"8"BDIIREGI5
+    40BDIIREGI6
+    41$SET CONSTANT SW-STATUS-BDIIREGI"NO"BDIIREGI7
+    42     SELECT BDIIREGIBDIIREGI8
+    43ASSIGN TO DISK TITLE-BDIIREGIBDIIREGI9
+    44ORGANIZATION IS INDEXEDBDIIREGI10
+    45ACCESS MODE IS DYNAMICBDIIREGI11
+    46RECORD KEY IS LLAVE-BDIIREGIBDIIREGI12
+    47$IF SW-STATUS-BDIIREGI = "NO"BDIIREGI13
+    48$DISPLAY ".............COMPILANDO BDIIREGI SIN STATUS.........."BDIIREGI14    47$IF SW-STATUS-BDIIREGI = "NO"BDIIREGI1348$DISPLAY ".............COMPILANDO BDIIREGI SIN STATUS.........."BDIIREGI14
+    49$ELSEBDIIREGI15
+    50$DISPLAY ".............COMPILANDO BDIIREGI CON STATUS.........."BDIIREGI16
+    51XFILE STATUS IS COD-RETORNO-BDIIREGIBDIIREGI17
+    52$ENDBDIIREGI18
+    53LOCK MODE IS MANUAL WITH LOCK ON RECORD.BDIIREGI19
+    54BDIIREGI20
+    55$SET IDXFORMAT"0"BDIIREGI21
+    5635
+    57******************************************************************36
+    58******************************************************************37
+*   59     copy BDIIDIAN.FS.38
+    60* BDIIDIAN.v.03.0001BDIIDIAN1
+    61*==================================================================BDIIDIAN2
+    62* MAESTRO DE PERSONAS JURIDICAS NACIONALES Y EXTRANJERAS REPORTADASBDIIDIAN3
+    63* POR LA DIANBDIIDIAN4
+    64*==================================================================BDIIDIAN5
+    65$SET CONSTANT SW-STATUS-BDIIDIAN"NO"BDIIDIAN6
+    66     SELECT BDIIDIAN ASSIGN TO DISK TITLE-BDIIDIANBDIIDIAN7
+    67ORGANIZATION IS INDEXEDBDIIDIAN8
+    68ACCESS MODE  IS DYNAMICBDIIDIAN9
+    69RECORD KEY   IS LLAVE-BDIIDIANBDIIDIAN10
+    70$IF SW-STATUS-BDIIDIAN = "NO"BDIIDIAN11
+    71$DISPLAY ".............COMPILANDO BDIIDIAN SIN STATUS.........."BDIIDIAN12
+    72$ELSEBDIIDIAN13
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page   3
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/BDIIDIAN.F
+    73$DISPLAY ".............COMPILANDO BDIIDIAN CON STATUS.........."BDIIDIAN14
+    74XFILE STATUS IS COD-RETORNO-BDIIDIANBDIIDIAN15
+    75$ENDBDIIDIAN16
+    76LOCK MODE IS MANUAL WITH LOCK ON RECORD.BDIIDIAN17
+    7739
+    78******************************************************************40
+    79******************************************************************41
+*   80     copy BDIIDAS.FS.42
+    81* BDIIDAS.v.03.0001BDIIDAS1
+    82*=====================================================================BDIIDAS2
+    83* ARCHIVO MAESTRO DE CEDULAS DE EXTRANJERIA, PROPORCIONADAS POR EL DASBDIIDAS3
+    84*=====================================================================BDIIDAS4
+    85$SET CONSTANT SW-STATUS-BDIIDAS"NO"BDIIDAS5
+    86     SELECT BDIIDAS ASSIGN TO DISK TITLE-BDIIDASBDIIDAS6
+    87ORGANIZATION IS INDEXEDBDIIDAS7
+    88ACCESS MODE IS DYNAMICBDIIDAS8
+    89RECORD KEY IS LLAVE-BDIIDASBDIIDAS9
+    90$IF SW-STATUS-BDIIDAS = "NO"BDIIDAS10
+    91$DISPLAY ".............COMPILANDO BDIIDAS SIN STATUS.........."BDIIDAS11
+    92$ELSEBDIIDAS12
+    93$DISPLAY ".............COMPILANDO BDIIDAS CON STATUS.........."BDIIDAS13    92$ELSEBDIIDAS1293$DISPLAY ".............COMPILANDO BDIIDAS CON STATUS.........."BDIIDAS13
+    94XFILE STATUS IS COD-RETORNO-BDIIDASBDIIDAS14
+    95$ENDBDIIDAS15
+    96LOCK MODE IS MANUAL WITH LOCK ON RECORD.BDIIDAS16
+    9743
+    98******************************************************************44
+    99******************************************************************45
+*  100     copy BDIIALE.FS replacing == on record.== by == on record46
+*  101file status is EST-BDIIALE.==.47
+   102* BDIIALE-FS.v01.0001BDIIALE1
+   103* MAESTRO DE ALERTAS REPORTADAS POR SUSCRIPTOTRESBDIIALE2
+   104BDIIALE3
+   105$SET CONSTANT SW-STATUS-BDIIALE"NO"BDIIALE4
+   106     SELECT BDIIALEBDIIALE6
+   107ASSIGN TO DISK MAES-BDIIALE-TITLEBDIIALE7
+   108ORGANIZATION IS INDEXEDBDIIALE8
+   109ACCESS MODE IS DYNAMICBDIIALE9
+   110RECORD KEY IS LLAVE-BDIIALEBDIIALE10
+   111$IF SW-STATUS-BDIIALE = "NO"BDIIALE10
+   112$DISPLAY ".............COMPILANDO BDIIALE SIN STATUS.........."BDIIALE11
+   113$ELSEBDIIALE13
+   114$DISPLAY ".............COMPILANDO BDIIALE CON STATUS.........."BDIIALE13
+   115XFILE STATUS IS EST-BDIIALEBDIIALE14
+   116$ENDBDIIALE15
+   117LOCK MODE IS MANUAL WITH LOCKon recordBDIIALE16
+   118file status is EST-BDIIALE.BDIIALE17
+   11948
+   120******************************************************************49
+   121* Archivos de base alterna50
+   122******************************************************************51
+*  123     copy BDACSV.FS.52
+   124* BDACSV-FS.V.0001BDACSV1
+   125* ARCHIVO DE IDENTIFICACIONES NO ENCONTRADAS EN LAS BASES DEBDACSV2
+   126* DATOS OFICIALES DE REGIS, DIAN Y DASBDACSV3
+   127     SELECT BDACSVBDACSV4
+   128ASSIGN TO DISK "$DATABASE/BDACSV"BDACSV5
+   129ORGANIZATION IS INDEXEDBDACSV6
+   130ACCESS MODE IS DYNAMICBDACSV7
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page   4
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/BDACSV.FS)
+   131RECORD KEY IS LLAVE-BDACSVBDACSV8
+   132LOCK MODE IS MANUAL WITH LOCK ON RECORD.BDACSV9
+*  133     copy ICBDIR.FS.53
+   134* ICBDIR-fs.v01.002ICBDIR1
+   135* MAESTRO DE DIRECCIONES POR CADA CUENTA QUE HA SIDO REPORTADAICBDIR2
+   136* POR LOS DIFERENTES SUSCRIPTORESICBDIR3
+   137 $SET IDXFORMAT"8"ICBDIR4
+   138ICBDIR5  7858add 3 to errIndex1584
+  7859move E-descripcion(Ex) to E-errores-reg(errIndex:59)1585
+  7860add 59 to errIndex1586
+  7861     end-if1587
+  78621588
+  7863     exit program.1589
+  78641590
+  78651591
+  7866 end program PONERR.1592
+  78671593
+  7868 end program CARGAJUR.1594
+  78691595
+  7870******************************************************************1596
+  7871******************************************************************1597
+  78721598
+* Micro Focus Server ExpressV5.1 revision 000 Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+*REF GNR-015065005AF
+* Last message on page:  144
+* Total Messages:   252
+* Unrecoverable :     0Severe  :   252
+* Errors:     0Warnings:     0
+* Informational :     0Flags   :     0
+* Data:     1421908     Code:0
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~  7813     03 E-errores-regpic x(300).1539
+  7814*    contador de registros con error1540
+  7815     03 E-cont-regs-con-error     pic 9(8).1541
+  7816*    tabla de errores1542
+  7817     03 E-erroroccurs 50 indexed Ex.1543
+  781805 E-codigopic xx.1544
+  781905pic x.1545
+  782005 E-contadorpic 9(7).1546
+  782105pic x.1547
+  782205 E-descripcionpic x(59).1548
+  78231549
+  7824******************************************************************1550
+  78251551
+  7826 PROCEDURE DIVISION using cod-error reg-input E-errores.1552
+  7827 00.1553
+  7828*    marca al reg actual como erroneo1554
+  7829     move "SI" to E-hay-error1555
+  78301556
+  7831*    cuenta y muestra el registro de input1557
+  7832     if reg-input not = reg-input-anterior1558
+  7833add 1 to E-cont-regs-con-error1559
+  7834display " "1560
+  7835display reg-input1561
+  7836move reg-input to reg-input-anterior1562
+  7837move spaces to E-errores-reg1563
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 146
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/VALNOM.PRO
+  7838move 2 to errIndex1564
+  7839     end-if1565
+  78401566
+  7841*    contabiliza el error en la tabla de errores1567
+  7842     set Ex to 11568
+  7843     search E-error varying Ex1569
+  7844     at end1570
+  7845display "--- falla en la tabla de errores ---" cod-error1571
+  7846     when E-codigo(Ex) = "00"1572
+  7847add 1 to E-contador(Ex)1573
+  7848display "--- error tipo exotico: " cod-error1574
+  7849add 1 to E-contador(Ex)1575
+  7850     when E-codigo(Ex) = cod-error1576
+  7851add 1 to E-contador(Ex)1577
+  7852display "Error " cod-error " " E-descripcion(Ex)1578
+  7853     end-search1579
+  78541580
+  7855*    agrega a la lista de errores del registro1581
+  7856     if errIndex < (300 - 59 - 3)1582
+  7857move cod-error to E-errores-reg(errIndex:2)1583
+  7858add 3 to errIndex1584
+  7859move E-descripcion(Ex) to E-errores-reg(errIndex:59)1585    7774((A-VALNOM >= 25 AND A-VALNOM < 35) AND K-VALNOM = 100)  GJC0003VALNOM417
+  7775ADD 1 TO BLOQOK-AUX-VALNOMGJC0003VALNOM418
+*  12-S**********************************( 144)**420
+**    Operand BLOQOK-AUX-VALNOM is not declared420
+  7776END-IFGJC0003VALNOM419
+* 564-S************( 144)**420
+**    A scope-delimiter did not have a matching verb and was discarded.420
+  7777   END-IF.GJC0003VALNOM420
+* 564-S********( 144)**420
+**    A scope-delimiter did not have a matching verb and was discarded.420
+  77781504
+  77791505
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 145
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBLys/VALNOM.PRO
+  7780/1506
+  7781 IDENTIFICATION DIVISION.1507
+  7782 PROGRAM-ID. PONERR.1508
+  7783******************************************************************1509
+  7784* Rutina de conveniencia para procesar un error detectado en un1510
+  7785* registro de input1511
+  7786* Contabiliza el error en la tabla de errores, activa el indicador1512
+  7787* de registro con error, muestra el mensaje en la pantalla, cuenta1513
+  7788* el registro erroneo1514
+  7789******************************************************************1515
+  7790 ENVIRONMENT DIVISION.1516
+  7791 DATA DIVISION.1517
+  7792 WORKING-STORAGE SECTION.1518
+  7793******************************************************************1519
+  7794* Registro de input (primeros 86 caracteres)1520
+  7795 01  reg-input-anteriorpic x(86) value low-values.1521
+  7796* Posicion del proximo error en la lista de errores del reg1522
+  7797 01  errIndexpic 999 comp.1523
+  7798******************************************************************1524
+  77991525
+  7800 LINKAGE SECTION.1526
+  7801******************************************************************1527
+  7802* Codigo del error detectado1528
+  7803 01  cod-errorpic xx.1529
+  7804******************************************************************1530
+  7805* Registro de input (primeros 86 caracteres)1531
+  7806 01  reg-inputpic x(86).1532
+  7807******************************************************************1533
+  7808* Tabla de errores de consistencia del input1534
+  7809 01 E-errores.1535
+  7810*    indica si el registro actual tiene error1536
+  7811     03 E-hay-errorpic xx.1537
+  7812*    errores del registro actual1538
+  7813     03 E-errores-regpic x(300).1539
+  7814*    contador de registros con error1540  **    A scope-delimiter did not have a matching verb and was discarded.399
+  7756END-PERFORMGJC0003VALNOM399
+* 564-S****************( 143)**400
+**    A scope-delimiter did not have a matching verb and was discarded.400
+  7757MOVE 0 TO I-VALNOMGJC0003VALNOM400
+*  12-S***********************( 143)**401
+**    Operand I-VALNOM is not declared401
+  7758PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  GJC0003VALNOM401
+*  12-S******************************( 143)**401
+**    Operand J-VALNOM is not declared401
+  7759IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0GJC0003VALNOM402
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 144
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+*  12-S*****************************( 143)**402
+**    Operand CONT-LET-OK-VALNOM is not declared402
+  7760ADD 1 TO I-VALNOMGJC0003VALNOM403
+*  12-S****************************( 143)**404
+**    Operand I-VALNOM is not declared404
+  7761IF CONT-LET-OK-VALNOM(J-VALNOM) <GJC0003VALNOM404
+*  12-S********************************( 144)**404
+**    Operand CONT-LET-OK-VALNOM is not declared404
+  7762CONT-LET-INPUT-VALNOM(J-VALNOM)GJC0003VALNOM405
+  7763COMPUTE L-VALNOM = L-VALNOM + 100GJC0003VALNOM406
+*  12-S******************************( 144)**406
+**    Operand L-VALNOM is not declared406
+  7764ELSEGJC0003VALNOM407
+  7765COMPUTE L-VALNOM = L-VALNOM +GJC0003VALNOM408
+*  12-S******************************( 144)**408
+**    Operand L-VALNOM is not declared408
+  7766(CONT-LET-INPUT-VALNOM(J-VALNOM)GJC0003VALNOM409
+  7767*  100 /CONT-LET-OK-VALNOM(J-VALNOM))  GJC0003VALNOM410
+  7768END-IFGJC0003VALNOM411
+* 564-S*****************( 144)**412
+**    A scope-delimiter did not have a matching verb and was discarded.412
+  7769END-IFGJC0003VALNOM412
+* 564-S**************( 144)**413
+**    A scope-delimiter did not have a matching verb and was discarded.413
+  7770END-PERFORMGJC0003VALNOM413
+* 564-S****************( 144)**414
+**    A scope-delimiter did not have a matching verb and was discarded.414
+  7771COMPUTE K-VALNOM = L-VALNOM/I-VALNOMGJC0003VALNOM414
+*  12-S*********************( 144)**414
+**    Operand K-VALNOM is not declared414
+  7772IF (A-VALNOM >= 40 AND K-VALNOM > 80) ORGJC0003VALNOM415
+*  12-S******************( 144)**415
+**    Operand A-VALNOM is not declared415
+  7773((A-VALNOM >= 35 AND A-VALNOM < 40) AND K-VALNOM > 85) ORGJC0003VALNOM416
+  7774((A-VALNOM >= 25 AND A-VALNOM < 35) AND K-VALNOM = 100)  GJC0003VALNOM417
+  7775ADD 1 TO BLOQOK-AUX-VALNOMGJC0003VALNOM418    7738TOTLET-INP-VALNOM.VALNOM381
+  7739   IF A-VALNOM >= 75VALNOM382
+*  12-S*************( 142)**382
+**    Operand A-VALNOM is not declared382
+  7740ADD 1 TO BLOQOK-AUX-VALNOMVALNOM383
+*  12-S********************************( 143)**384
+**    Operand BLOQOK-AUX-VALNOM is not declared384
+  7741   END-IF.VALNOM384
+* 564-S********( 143)**384
+**    A scope-delimiter did not have a matching verb and was discarded.384
+  7742    MOVE 0 TO K-VALNOMGJC0003VALNOM385
+*  12-S*********************( 143)**386
+**    Operand K-VALNOM is not declared386
+  7743   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOMGJC0003VALNOM386
+*  12-S**********************( 143)**386
+**    Operand BLOQOK-AUX-VALNOM is not declared386
+  7744INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOMGJC0003VALNOM387
+*  12-S************************( 143)**387
+**    Operand A-VALNOM is not declared387
+  7745PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    GJC0003VALNOM388
+*  12-S*****************************( 143)**388
+**    Operand J-VALNOM is not declared388
+  7746IF V-NOMBRE-VALNOM(J-VALNOM) <> " "GJC0003VALNOM389
+*  12-S********************************( 143)**389
+**    Operand V-NOMBRE-VALNOM is not declared389
+  7747MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     GJC0003VALNOM390
+*  12-S*************************************************( 143)**390
+**    Operand V-NOMBRE-VALNOM is not declared390
+  7748TO I-VALNOMGJC0003VALNOM391
+  7749ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)GJC0003VALNOM392
+*  12-S**********************************************( 143)**392
+**    Operand CONT-LET-INPUT-VALNOM is not declared392
+  7750END-IFGJC0003VALNOM393
+* 564-S*******************( 143)**394
+**    A scope-delimiter did not have a matching verb and was discarded.394
+  7751IF V-NOMBOK-VALNOM(J-VALNOM) <> " "GJC0003VALNOM394
+*  12-S********************************( 143)**394
+**    Operand V-NOMBOK-VALNOM is not declared394
+  7752MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     GJC0003VALNOM395
+*  12-S*************************************************( 143)**395
+**    Operand V-NOMBOK-VALNOM is not declared395
+  7753TO I-VALNOMGJC0003VALNOM396
+  7754ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)GJC0003VALNOM397
+*  12-S*******************************************( 143)**397
+**    Operand CONT-LET-OK-VALNOM is not declared397
+  7755END-IFGJC0003VALNOM398
+* 564-S*******************( 143)**399
+**    A scope-delimiter did not have a matching verb and was discarded.399
+  7756END-PERFORMGJC0003VALNOM399  * 564-S*************( 142)**366
+**    A scope-delimiter did not have a matching verb and was discarded.366
+  7723     END-PERFORMVALNOM366
+* 564-S***************( 142)**367
+**    A scope-delimiter did not have a matching verb and was discarded.367
+  7724     IF LETRAS-OK-VALNOM > LETRAS-OK2-VALNOMVALNOM367
+*  12-S***********************( 142)**367
+**    Operand LETRAS-OK-VALNOM is not declared367
+  7725MOVE LETRAS-OK-VALNOM TO LETRAS-OK2-VALNOMVALNOM368
+*  12-S****************************( 142)**368
+**    Operand LETRAS-OK-VALNOM is not declared368
+  7726     END-IFVALNOM369
+* 564-S**********( 142)**370
+**    A scope-delimiter did not have a matching verb and was discarded.370
+  7727     ADD 1 TO K-VALNOMVALNOM370
+*  12-S*********************( 142)**371
+**    Operand K-VALNOM is not declared371
+  7728   END-PERFORM.VALNOM371
+* 564-S*************( 142)**371
+**    A scope-delimiter did not have a matching verb and was discarded.371
+  7729   MOVE 1 TO I-VALNOMVALNOM372
+*  12-S********************( 142)**373
+**    Operand I-VALNOM is not declared373
+  7730   PERFORM UNTIL I-VALNOM > 65VALNOM373
+*  12-S************************( 142)**373
+**    Operand I-VALNOM is not declared373
+  7731     IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES ANDVALNOM374
+*  12-S**********************( 142)**374
+**    Operand V-NOMBRE-VALNOM is not declared374
+  7732V-NOMBRE-VALNOM(I-VALNOM) <> "."VALNOM375
+  7733ADD 1 TO TOTLET-INP-VALNOMVALNOM376
+*  12-S*********************************( 142)**378
+**    Operand TOTLET-INP-VALNOM is not declared378
+  7734     END-IFVALNOM377
+* 564-S**********( 142)**378
+**    A scope-delimiter did not have a matching verb and was discarded.378
+  7735     ADD 1 TO I-VALNOMVALNOM378
+*  12-S*********************( 142)**379
+**    Operand I-VALNOM is not declared379
+  7736   END-PERFORM.VALNOM379
+* 564-S*************( 142)**379
+**    A scope-delimiter did not have a matching verb and was discarded.379
+  7737   COMPUTE A-VALNOM = LETRAS-OK2-VALNOM * 100 /VALNOM380
+*  12-S******************( 142)**380
+**    Operand A-VALNOM is not declared380
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 143
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+  7738TOTLET-INP-VALNOM.VALNOM381
+  7739   IF A-VALNOM >= 75VALNOM382  **    Operand K-VALNOM is not declared348
+  7705   PERFORM UNTIL K-VALNOM > 65VALNOM348
+*  12-S************************( 141)**348
+**    Operand K-VALNOM is not declared348
+  7706     MOVE K-VALNOM  TO I-VALNOMVALNOM349
+*  12-S*****************( 141)**349
+**    Operand K-VALNOM is not declared349
+  7707     MOVE 1TO J-VALNOMVALNOM350
+*  12-S****************************( 141)**351
+**    Operand J-VALNOM is not declared351
+  7708     MOVE ZEROS TO LETRAS-OK-VALNOMVALNOM351
+*  12-S**********************************( 141)**352
+**    Operand LETRAS-OK-VALNOM is not declared352
+  7709     PERFORM UNTIL J-VALNOM > 65 OR I-VALNOM > 65VALNOM352
+*  12-S**************************( 141)**352
+**    Operand J-VALNOM is not declared352
+  7710IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES ANDVALNOM353
+*  12-S*************************( 141)**353
+**    Operand V-NOMBRE-VALNOM is not declared353
+  7711V-NOMBRE-VALNOM(I-VALNOM) <> "."VALNOM354
+  7712IF V-NOMBRE-VALNOM(I-VALNOM) =VALNOM355
+*  12-S****************************( 141)**355
+**    Operand V-NOMBRE-VALNOM is not declared355
+  7713V-NOMBOK-VALNOM(J-VALNOM)VALNOM356
+  7714ADD 1 TO LETRAS-OK-VALNOMVALNOM357
+*  12-S**************************************( 141)**358
+**    Operand LETRAS-OK-VALNOM is not declared358
+  7715ADD 1 TO I-VALNOMVALNOM358
+*  12-S******************************( 141)**359
+**    Operand I-VALNOM is not declared359
+  7716ADD 1 TO J-VALNOMVALNOM359
+*  12-S******************************( 141)**361
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 142
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+**    Operand J-VALNOM is not declared361
+  7717ELSEVALNOM360
+  7718ADD 1 TO J-VALNOMVALNOM361
+*  12-S******************************( 141)**363
+**    Operand J-VALNOM is not declared363
+  7719END-IFVALNOM362
+* 564-S****************( 142)**363
+**    A scope-delimiter did not have a matching verb and was discarded.363
+  7720ELSEVALNOM363
+  7721ADD 1 TO I-VALNOMVALNOM364
+*  12-S***************************( 142)**366
+**    Operand I-VALNOM is not declared366
+  7722END-IFVALNOM365
+* 564-S*************( 142)**366
+**    A scope-delimiter did not have a matching verb and was discarded.366  7683*****POR-INP-VALNOM >= APROX-INP-VALNOM ) ANDVALNOM326
+  7684*****A-VALNOM >= 70)VALNOM327
+  7685ADD 1 TO BLOQOK-AUX-VALNOMVALNOM328
+*  12-S****************************************( 140)**329
+**    Operand BLOQOK-AUX-VALNOM is not declared329
+  7686MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM329
+*  12-S*****************************************( 140)**329
+**    Operand VM-OK-VALNOM is not declared329
+  7687VM-INPUT-VALNOM(I-VALNOM)VALNOM330
+  7688END-IFVALNOM331
+* 564-S*****************( 140)**332
+**    A scope-delimiter did not have a matching verb and was discarded.332
+  7689END-IFVALNOM332
+* 564-S**************( 140)**333
+**    A scope-delimiter did not have a matching verb and was discarded.333
+  7690ADD 1 TO J-VALNOMVALNOM333
+*  12-S*************************( 140)**335
+**    Operand J-VALNOM is not declared335
+  7691END-PERFORMVALNOM334
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 141
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+* 564-S*****************( 140)**335
+**    A scope-delimiter did not have a matching verb and was discarded.335
+  7692ADD 1 TO I-VALNOMVALNOM335
+*  12-S***********************( 140)**336
+**    Operand I-VALNOM is not declared336
+  7693     END-PERFORM.VALNOM336
+* 564-S***************( 141)**336
+**    A scope-delimiter did not have a matching verb and was discarded.336
+  7694**********************************************************************VALNOM337
+  7695*10100-MATCH-APROX-EMPRESASVALNOM338
+  7696*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOSVALNOM339
+  7697*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CONVALNOM340
+  7698*     LOS TIPOS DE IDENTIFICACION 2.VALNOM341
+  7699**********************************************************************VALNOM342
+  7700 10100-MATCH-APROX-EMPRESAS.VALNOM343
+  7701   MOVE ZEROS TO TOTLET-INP-VALNOMVALNOM344
+*  12-S*********************************( 141)**345
+**    Operand TOTLET-INP-VALNOM is not declared345
+  7702   MOVE ZEROS TO LETRAS-OK2-VALNOMVALNOM345
+*  12-S*********************************( 141)**346
+**    Operand LETRAS-OK2-VALNOM is not declared346
+  7703    MOVE ZEROS TO A-VALNOMGJC0003VALNOM346
+*  12-S*************************( 141)**347
+**    Operand A-VALNOM is not declared347
+  7704   MOVE 1 TO K-VALNOMVALNOM347
+*  12-S********************( 141)**348
+**    Operand K-VALNOM is not declared348
+  7705   PERFORM UNTIL K-VALNOM > 65VALNOM348    7660IF TOTLET-OK-VALNOM >= 3VALNOM303
+*  12-S******************************( 139)**303
+**    Operand TOTLET-OK-VALNOM is not declared303
+  7661COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /VALNOM304
+*  12-S************************************( 139)**304
+**    Operand POR-TOT-VALNOM is not declared304
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 140
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+  7662TOTLET-OK-VALNOMVALNOM305
+  7663END-IFVALNOM306
+* 564-S*****************( 139)**307
+**    A scope-delimiter did not have a matching verb and was discarded.307
+  7664IF TOTLET-INP-VALNOM >= 3VALNOM307
+*  12-S*******************************( 140)**307
+**    Operand TOTLET-INP-VALNOM is not declared307
+  7665COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /VALNOM308
+*  12-S************************************( 140)**308
+**    Operand POR-INP-VALNOM is not declared308
+  7666TOTLET-INP-VALNOMVALNOM309
+  7667END-IFVALNOM310
+* 564-S*****************( 140)**311
+**    A scope-delimiter did not have a matching verb and was discarded.311
+  7668IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOMVALNOM311
+*  12-S******************************( 140)**311
+**    Operand TOTLET-OK-VALNOM is not declared311
+  7669COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /VALNOM312
+*  12-S******************************( 140)**312
+**    Operand A-VALNOM is not declared312
+  7670TOTLET-OK-VALNOMVALNOM313
+  7671ELSEVALNOM314
+  7672COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /VALNOM315
+*  12-S******************************( 140)**315
+**    Operand A-VALNOM is not declared315
+  7673TOTLET-INP-VALNOMVALNOM316
+  7674END-IFVALNOM317
+* 564-S*****************( 140)**318
+**    A scope-delimiter did not have a matching verb and was discarded.318
+  7675IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=VALNOM318
+*  12-S******************************( 140)**318
+**    Operand POR-TOT-VALNOM is not declared318
+  7676APROX-TOT-VALNOM) ANDVALNOM319
+  7677A-VALNOM >= 63VALNOM320
+  7678****   display "%TOT=",POR-TOT-VALNOM, " %INP=", POR-INP-VALNOM,VALNOM321
+  7679****"A-VALNOM=", A-VALNOMVALNOM322
+  7680*****IF (POR-TOT-VALNOM >= APROX-TOT-VALNOM ANDVALNOM323
+  7681*****POR-INP-VALNOM >= APROX-INP-VALNOM ) ORVALNOM324
+  7682*****((POR-TOT-VALNOM >= APROX-TOT-VALNOM ORVALNOM325
+  7683*****POR-INP-VALNOM >= APROX-INP-VALNOM ) ANDVALNOM326
+  7684*****A-VALNOM >= 70)VALNOM327    7641VMM-OK-VALNOM(J-VALNOM,K-VALNOM + 1)VALNOM284
+  7642ADD 1 TO K-VALNOMVALNOM285
+*  12-S***************************************( 139)**287
+**    Operand K-VALNOM is not declared287
+  7643END-IFVALNOM286
+* 564-S*************************( 139)**287
+**    A scope-delimiter did not have a matching verb and was discarded.287
+  7644END-IFVALNOM287
+* 564-S**********************( 139)**288
+**    A scope-delimiter did not have a matching verb and was discarded.288
+  7645END-IFVALNOM288
+* 564-S*******************( 139)**289
+**    A scope-delimiter did not have a matching verb and was discarded.289
+  7646END-PERFORMVALNOM289
+* 564-S**********************( 139)**290
+**    A scope-delimiter did not have a matching verb and was discarded.290
+  7647END-IFVALNOM290
+* 564-S**************( 139)**291
+**    A scope-delimiter did not have a matching verb and was discarded.291
+  7648IF LETRAS-OK2-VALNOM > LETRAS-OK-VALNOMVALNOM291
+*  12-S****************************( 139)**291
+**    Operand LETRAS-OK2-VALNOM is not declared291
+  7649MOVE LETRAS-OK2-VALNOM TO LETRAS-OK-VALNOMVALNOM292
+*  12-S*********************************( 139)**292
+**    Operand LETRAS-OK2-VALNOM is not declared292
+  7650END-IFVALNOM293
+* 564-S**************( 139)**294
+**    A scope-delimiter did not have a matching verb and was discarded.294
+  7651IF LETRAS-OK-VALNOM > 0VALNOM294
+*  12-S***************************( 139)**294
+**    Operand LETRAS-OK-VALNOM is not declared294
+  7652MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOMVALNOM295
+*  12-S**************************************( 139)**296
+**    Operand TOTLET-INP-VALNOM is not declared296
+  7653INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYINGVALNOM296
+*  12-S**********************************( 139)**296
+**    Operand VM-INPUT-VALNOM is not declared296
+  7654TOTLET-INP-VALNOMVALNOM297
+  7655FOR CHARACTERS BEFORE INITIAL " "VALNOM298
+  7656INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYINGVALNOM299
+*  12-S*******************************( 139)**299
+**    Operand VM-OK-VALNOM is not declared299
+  7657TOTLET-OK-VALNOMVALNOM300
+  7658FOR CHARACTERS BEFORE INITIAL " "VALNOM301
+  7659MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOMVALNOM302
+*  12-S***********************************( 139)**303
+**    Operand POR-TOT-VALNOM is not declared303
+  7660IF TOTLET-OK-VALNOM >= 3VALNOM303
+*  12-S******************************( 139)**303  7622MOVE 1 TO K-VALNOMVALNOM265
+*  12-S*****************************( 138)**266
+**    Operand K-VALNOM is not declared266
+  7623MOVE 1 TO L-VALNOMVALNOM266
+*  12-S*****************************( 138)**267
+**    Operand L-VALNOM is not declared267
+  7624PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15VALNOM267
+*  12-S*********************************( 138)**267
+**    Operand K-VALNOM is not declared267
+  7625IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM268
+*  12-S********************************( 138)**268
+**    Operand VMM-INPUT-VALNOM is not declared268
+  7626VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)VALNOM269
+  7627OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003VALNOM270
+  7628AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003VALNOM271
+  7629OR = "N"))GJC0003VALNOM272
+  7630IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT = SPACESVALNOM273
+*  12-S********************************( 138)**273
+**    Operand VMM-OK-VALNOM is not declared273
+  7631ADD 1 TO LETRAS-OK2-VALNOMVALNOM274
+*  12-S*********************************************( 138)**275
+**    Operand LETRAS-OK2-VALNOM is not declared275
+  7632ADD 1 TO K-VALNOMVALNOM275
+*  12-S************************************( 138)**276
+**    Operand K-VALNOM is not declared276
+  7633ADD 1 TO L-VALNOMVALNOM276
+*  12-S************************************( 138)**278
+**    Operand L-VALNOM is not declared278
+  7634ELSEVALNOM277
+  7635MOVE 19 TO K-VALNOMVALNOM278
+*  12-S**************************************( 138)**280
+**    Operand K-VALNOM is not declared280
+  7636END-IFVALNOM279
+* 564-S**********************( 138)**280
+**    A scope-delimiter did not have a matching verb and was discarded.280
+  7637ELSEVALNOM280
+  7638ADD 1   TO L-VALNOMVALNOM281
+*  12-S***********************************( 138)**282
+**    Operand L-VALNOM is not declared282
+  7639IF L-VALNOM <= 15 AND K-VALNOM < 15VALNOM282
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 139
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+*  12-S***************************( 138)**282
+**    Operand L-VALNOM is not declared282
+  7640IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM283
+*  12-S**************************************( 138)**283
+**    Operand VMM-INPUT-VALNOM is not declared283
+  7641VMM-OK-VALNOM(J-VALNOM,K-VALNOM + 1)VALNOM284
+  7642ADD 1 TO K-VALNOMVALNOM285    7605IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACESVALNOM248
+*  12-S********************************( 137)**248
+**    Operand VMM-OK-VALNOM is not declared248
+  7606ADD 1 TO LETRAS-OK-VALNOMVALNOM249
+*  12-S********************************************( 137)**250
+**    Operand LETRAS-OK-VALNOM is not declared250
+  7607ADD 1 TO K-VALNOMVALNOM250
+*  12-S************************************( 137)**251
+**    Operand K-VALNOM is not declared251
+  7608ADD 1 TO L-VALNOMVALNOM251
+*  12-S************************************( 137)**253
+**    Operand L-VALNOM is not declared253
+  7609ELSEVALNOM252
+  7610MOVE 19 TO K-VALNOMVALNOM253
+*  12-S**************************************( 137)**255
+**    Operand K-VALNOM is not declared255
+  7611END-IFVALNOM254
+* 564-S**********************( 137)**255
+**    A scope-delimiter did not have a matching verb and was discarded.255
+  7612ELSEVALNOM255
+  7613ADD 1   TO K-VALNOMVALNOM256
+*  12-S***********************************( 137)**257
+**    Operand K-VALNOM is not declared257
+  7614IF K-VALNOM <= 15 AND L-VALNOM < 15VALNOM257
+*  12-S***************************( 137)**257
+**    Operand K-VALNOM is not declared257
+  7615IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM + 1) =VALNOM258
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 138
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+*  12-S**************************************( 137)**258
+**    Operand VMM-INPUT-VALNOM is not declared258
+  7616VMM-OK-VALNOM(J-VALNOM,K-VALNOM )VALNOM259
+  7617ADD 1 TO L-VALNOMVALNOM260
+*  12-S***************************************( 137)**262
+**    Operand L-VALNOM is not declared262
+  7618END-IFVALNOM261
+* 564-S*************************( 138)**262
+**    A scope-delimiter did not have a matching verb and was discarded.262
+  7619END-IFVALNOM262
+* 564-S**********************( 138)**263
+**    A scope-delimiter did not have a matching verb and was discarded.263
+  7620END-IFVALNOM263
+* 564-S*******************( 138)**264
+**    A scope-delimiter did not have a matching verb and was discarded.264
+  7621END-PERFORMVALNOM264
+* 564-S**********************( 138)**265
+**    A scope-delimiter did not have a matching verb and was discarded.265
+  7622MOVE 1 TO K-VALNOMVALNOM265
+*  12-S*****************************( 138)**266  7586MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOMVALNOM229
+*  12-S**********************************( 136)**230
+**    Operand APROX-TOT-VALNOM is not declared230
+  7587     ELSEVALNOM230
+  7588MOVE 70 TO APROX-TOT-VALNOM APROX-INP-VALNOMVALNOM231
+*  12-S**********************************( 136)**232
+**    Operand APROX-TOT-VALNOM is not declared232
+  7589     END-IFVALNOM232
+* 564-S**********( 136)**233
+**    A scope-delimiter did not have a matching verb and was discarded.233
+  7590     MOVE 1 TO I-VALNOM.VALNOM233
+*  12-S**********************( 136)**233
+**    Operand I-VALNOM is not declared233
+  7591     PERFORM UNTIL I-VALNOM > 10VALNOM234
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 137
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+*  12-S**************************( 136)**234
+**    Operand I-VALNOM is not declared234
+  7592MOVE 1 TO J-VALNOMVALNOM235
+*  12-S************************( 136)**236
+**    Operand J-VALNOM is not declared236
+  7593PERFORM UNTIL J-VALNOM > 10VALNOM236
+*  12-S****************************( 137)**236
+**    Operand J-VALNOM is not declared236
+  7594MOVE 0 TO LETRAS-OK-VALNOM LETRAS-OK2-VALNOMVALNOM237
+*  12-S**********************************( 137)**238
+**    Operand LETRAS-OK-VALNOM is not declared238
+  7595MOVE 1 TO K-VALNOMVALNOM238
+*  12-S**************************( 137)**239
+**    Operand K-VALNOM is not declared239
+  7596MOVE 1 TO L-VALNOMVALNOM239
+*  12-S**************************( 137)**240
+**    Operand L-VALNOM is not declared240
+  7597IF VM-INPUT-VALNOM(I-VALNOM) NOT = SPACES ANDVALNOM240
+*  12-S**************************( 137)**240
+**    Operand VM-INPUT-VALNOM is not declared240
+  7598VM-OK-VALNOM   (J-VALNOM) NOT = SPACESVALNOM241
+  7599PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15VALNOM242
+*  12-S*********************************( 137)**242
+**    Operand K-VALNOM is not declared242
+  7600IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM243
+*  12-S********************************( 137)**243
+**    Operand VMM-INPUT-VALNOM is not declared243
+  7601VMM-OK-VALNOM  (J-VALNOM,K-VALNOM)VALNOM244
+  7602OR ((VMM-OK-VALNOM(J-VALNOM, K-VALNOM)) = "*"    GJC0003VALNOM245
+  7603AND (VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) = " "   GJC0003VALNOM246
+  7604OR = "N"))GJC0003VALNOM247
+  7605IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACESVALNOM248
+*  12-S********************************( 137)**248* 564-S************( 135)**208
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 136
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+**    A scope-delimiter did not have a matching verb and was discarded.208
+  7565     END-PERFORM.VALNOM208
+* 564-S***************( 135)**208
+**    A scope-delimiter did not have a matching verb and was discarded.208
+  7566     IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOMVALNOM209
+*  12-S************************( 136)**209
+**    Operand BLOQOK-AUX-VALNOM is not declared209
+  7567MOVE 1 TO MATCH-OK-OUT-VALNOMVALNOM210
+*  12-S************************************( 136)**212
+**    Operand MATCH-OK-OUT-VALNOM is not declared212
+  7568     ELSEVALNOM211
+  7569IF TIP-ID-INPUT-VALNOM <> 2VALNOM212
+*  12-S*****************************( 136)**212
+**    Operand TIP-ID-INPUT-VALNOM is not declared212
+  7570PERFORM 10100-MATCH-APROXIMADOVALNOM213
+  7571ELSEVALNOM214
+* 562-S***********( 136)**215
+**    An "ELSE" phrase did not have a matching IF and was discarded.215
+  7572PERFORM 10100-MATCH-APROX-EMPRESASVALNOM215
+  7573END-IFVALNOM216
+* 564-S*************( 136)**217
+**    A scope-delimiter did not have a matching verb and was discarded.217
+  7574IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOMVALNOM217
+*  12-S***************************( 136)**217
+**    Operand BLOQOK-AUX-VALNOM is not declared217
+  7575MOVE 1 TO MATCH-OK-OUT-VALNOMVALNOM218
+*  12-S***************************************( 136)**220
+**    Operand MATCH-OK-OUT-VALNOM is not declared220
+  7576END-IFVALNOM219
+* 564-S*************( 136)**220
+**    A scope-delimiter did not have a matching verb and was discarded.220
+  7577     END-IF.VALNOM220
+* 564-S**********( 136)**220
+**    A scope-delimiter did not have a matching verb and was discarded.220
+  7578**********************************************************************VALNOM221
+  7579*10100-MATCH-APROXIMADO.VALNOM222
+  7580*     EN ESTA RUTINA SE VALIDAN LOS BLOQUES QUE NO PASARON COMPLETOSVALNOM223
+  7581*     CON UNA APROXIMACION. ESTA RUTINA FUNCIONA CORRECTAMENTE CONVALNOM224
+  7582*     LOS TIPOS DE IDENTIFICACION 1, 3 Y 4.VALNOM225
+  7583**********************************************************************VALNOM226
+  7584 10100-MATCH-APROXIMADO.VALNOM227
+  7585     IF BLOQOK-AUX-VALNOM > 0VALNOM228
+*  12-S************************( 136)**228
+**    Operand BLOQOK-AUX-VALNOM is not declared228
+  7586MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOMVALNOM229
+*  12-S**********************************( 136)**230*  12-S*******************************( 135)**188
+**    Operand VM-OK-VALNOM is not declared188
+  7546IF PEDAZO-VALNOM(INI-VALNOM:LON-VALNOM) =VALNOM189
+*  12-S******************************( 135)**189
+**    Operand PEDAZO-VALNOM is not declared189
+  7547VM-INPUT-VALNOM(I-VALNOM + 1 ) ANDVALNOM190
+  7548PEDAZO-VALNOM(1:M-VALNOM) =VALNOM191
+  7549VM-INPUT-VALNOM(I-VALNOM)VALNOM192
+  7550ADD 1 TO BLOQOK-AUX-VALNOMVALNOM193
+*  12-S*******************************************( 135)**194
+**    Operand BLOQOK-AUX-VALNOM is not declared194
+  7551MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM194
+*  12-S********************************************( 135)**194
+**    Operand VM-OK-VALNOM is not declared194
+  7552VM-INPUT-VALNOM(I-VALNOM)VALNOM195
+  7553MOVE 21 TO J-VALNOMVALNOM196
+*  12-S************************************( 135)**197
+**    Operand J-VALNOM is not declared197
+  7554ADD 1 TO I-VALNOMVALNOM197
+*  12-S**********************************( 135)**198
+**    Operand I-VALNOM is not declared198
+  7555MOVE SPACES TO VM-INPUT-VALNOM(I-VALNOM)VALNOM198
+*  12-S***********************************************( 135)**198
+**    Operand VM-INPUT-VALNOM is not declared198
+  7556END-IFVALNOM199
+* 564-S********************( 135)**200
+**    A scope-delimiter did not have a matching verb and was discarded.200
+  7557END-IFVALNOM200
+* 564-S*****************( 135)**201
+**    A scope-delimiter did not have a matching verb and was discarded.201
+  7558END-IFVALNOM201
+* 564-S**************( 135)**202
+**    A scope-delimiter did not have a matching verb and was discarded.202
+  7559ADD 1 TO J-VALNOMVALNOM202
+*  12-S*************************( 135)**204
+**    Operand J-VALNOM is not declared204
+  7560END-PERFORMVALNOM203
+* 564-S*****************( 135)**204
+**    A scope-delimiter did not have a matching verb and was discarded.204
+  7561ADD 1 TO I-VALNOMVALNOM204
+*  12-S***********************( 135)**205
+**    Operand I-VALNOM is not declared205
+  7562IF I-VALNOM = 21VALNOM205
+*  12-S*****************( 135)**205
+**    Operand I-VALNOM is not declared205
+  7563NEXT SENTENCEVALNOM206
+  7564END-IFVALNOM207
+* 564-S************( 135)**208
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 136^  7527IF VM-INPUT-VALNOM(I-VALNOM) = VM-OK-VALNOM(J-VALNOM)VALNOM170
+*  12-S**************************( 134)**170
+**    Operand VM-INPUT-VALNOM is not declared170
+  7528ADD 1 TO BLOQOK-AUX-VALNOMVALNOM171
+*  12-S*************************************( 134)**172
+**    Operand BLOQOK-AUX-VALNOM is not declared172
+  7529MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM172
+*  12-S**************************************( 134)**172
+**    Operand VM-OK-VALNOM is not declared172
+  7530VM-INPUT-VALNOM(I-VALNOM)VALNOM173
+  7531MOVE 21 TO J-VALNOMVALNOM174
+*  12-S******************************( 134)**176
+**    Operand J-VALNOM is not declared176
+  7532ELSEVALNOM175
+  7533MOVE 0 TO M-VALNOMVALNOM176
+*  12-S*****************************( 134)**177
+**    Operand M-VALNOM is not declared177
+  7534INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOMVALNOM177
+*  12-S*******************************( 134)**177
+**    Operand VM-OK-VALNOM is not declared177
+  7535FOR CHARACTERS BEFORE INITIAL "*"VALNOM178
+  7536IF M-VALNOM >= 15VALNOM179
+*  12-S**********************( 134)**179
+**    Operand M-VALNOM is not declared179
+  7537MOVE 0 TO M-VALNOMVALNOM180
+*  12-S********************************( 134)**181
+**    Operand M-VALNOM is not declared181
+  7538INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOMVALNOM181
+*  12-S**********************************( 134)**181
+**    Operand VM-OK-VALNOM is not declared181
+  7539FOR CHARACTERS BEFORE INITIAL "N"VALNOM182
+  7540END-IFVALNOM183
+* 564-S*****************( 134)**184
+**    A scope-delimiter did not have a matching verb and was discarded.184
+  7541IF M-VALNOM > 0 AND < 15 AND I-VALNOM < 20VALNOM184
+^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page 135
+* )d/iccol/desarrollo/fuentes/CARGAJUR.CBL (/d/iccol/desarrollo/copys/VALNOM.PRO
+*  12-S**********************( 134)**184
+**    Operand M-VALNOM is not declared184
+  7542AND (14 - M-VALNOM > 0)GJC0005VALNOM185
+  7543COMPUTE INI-VALNOM = M-VALNOM + 2VALNOM186
+*  12-S********************************( 134)**186
+**    Operand INI-VALNOM is not declared186
+  7544COMPUTE LON-VALNOM = 14 - M-VALNOMVALNOM187
+*  12-S********************************( 135)**187
+**    Operand LON-VALNOM is not declared187
+  7545MOVE VM-OK-VALNOM(J-VALNOM) TO PEDAZO-VALNOMVALNOM188
+*  12-S*******************************( 135)**188
+**    Operand VM-OK-VALNOM is not declared188^L^M* Micro Focus Server ExpressV5.1 revision 000 12-Jun-14 17:52 Page   1
+* /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+* Options: int("CARGAJUR.int") anim csi verbose nolist sourceasm endp
+*list("CARGAJUR.lst")1$SET LIST SETTING LISTWIDTH"120"1
+* Setting: NOACCEPTREFRESH NOADV ALIGN"8" ALPHASTART"1" NOALTER NOAMODE ANIM
+*NOANIMPREP ANS85 NOAPOST NOAREACHECK ARITHMETIC"MF" ASSIGN"DYNAMIC"
+*NOASSIGN-PRINTER NOAUTOLOCK NOBELL NOBOUND NOBRIEF NOBS2000 BWZSTAR
+*NOBYTEMODEMOVE CALLFH"EXTFH" NOCALLMCS NOCALLRECOVERY CALLSORT
+*"EXTSM" CANCEL CANCELLBR NOCHANGEMESSAGE CHARSET"ASCII" CHECKDIV
+*"ANSI" NOCHECKREFMOD NOCICS CICS-CPY NOCICSOPTIMIZE NOCMPR2
+*NOCOBFSTATCONV NOCOBIDY NOCOBOL370 COBOLDIR COMP COMP-5"2" COMP-6
+*"2" NOCOMS85 CONFIRM NOCONVERTRET CONVSPACE COPYEXT",cbl,cpy"
+*NOCOPYLBR COPYLIST COPYLISTCOMMENT"1" CSI CURRENCY-SIGN"36"
+*CURRENT-DATE"MMDDYY" NODATA DATACOMPRESS"0" NODATA-CONTEXT DATE
+*DBCHECK DBCS"3" NODBCSSOSI DBSPACE DE-EDIT"2" DEFAULTBYTE"32"
+*NODEFAULTCALLS DETECTLOCK NODG DIALECT"MF" NODIRECTIVES-IN-COMMENTS
+*NODOSVS NODPCINSUBSCRIPT DYNAM NOEARLY-RELEASE ECHO NOECHOALL
+*NOEDITOR ENSUITE"0" NOENTCOBOL ERRFORMAT"1" ERRLIST"EMBED" NOERRQ
+*FASTSORT FCD3 NOFCDREG NOFDCLEAR NOFILESHARE FILETYPE"0" NOFLAG
+*NOFLAGAS NOFLAGCD NOFLAGEUC NOFLAGMIG NOFLAGQ FLAGSINEDIT NOFLAGSTD
+*NOFOLDCALLNAME NOFOLDCOPYNAME FORM"60" NOFP-ROUNDING
+*NOHOSTARITHMETIC NOHOSTCONTZERO NOHOST-NUMCOMPARE NOHOST-NUMMOVE
+*NOHOSTFD NOHOSTRW NOIBM-MS NOIBMCOMP IDXFORMAT"0" NOILGEN
+*IMPLICITSCOPE NOINDD INFORETURN"0" NOINITCALL INITPTR INT
+*"CARGAJUR.int" INTDATE"ANSI" INTLEVEL"5" IOCONV NOISO2002
+*NOIXNLSKEY NOIXNUMKEY KEEP-INT KEYCHECK KEYCOMPRESS"0" NOLIBRARIAN
+*NOLINE-COUNT LIST LISTPATH"" LISTWIDTH"120" LITVAL-SIZE"4" LOCKTYPE
+*"0" NOMAPNAME NOMAXERROR METHODDEFAULT"REFERENCE" MF"15" MFCOMMENT
+*NOMOVELENCHECK NOMS NOMVS NATIVE"ASCII" NONATIVEFLOATINGPOINT
+*NONCHAR NONEWBASENAME NONLS NSYMBOL"DBCS" NOODOOSVS NOODOSLIDE
+*NOOLDBLANKLINE NOOLDCOPY NOOLDINDEX NOOLDNEXTSENTENCE NOOLDREADINTO
+*NOOLDSTRMIX OOCTRL"-C-E-G-P+Q+R-S+W" OPTIONAL-FILE NOOS390 OSEXT""
+*NOOSVS NOOUTDD P64 NOPANVALET PERFORM-TYPE"MF" NOPREPLIST
+*NOPREPROCESS NOPRINT-EXT NOPROFILE NOPROGID-COMMENT
+*NOPROGID-INT-NAME NOPROTECT-LINKAGE PROTOTYPE"RELAXED" QUAL
+*QUALPROC NOQUERY QUOTE NORAWLIST NORDW RECMODE"F" NOREENTRANT NOREF
+*NOREFNO REMAINDER"1" REPORT-LINE"256" RESEQ NORETRYLOCK REWRITE-LS
+*NORM RTNCODE-SIZE"8" NORWHARDPAGE NOSAA SEG NOSEQCHK SEQUENTIAL
+*"RECORD" NOSERIAL SETTING"LINE" NOSHAREOUTDD NOSHOW-DIR SIGN"ASCII"
+*NOSIGNDISCARD NOSIGNFIXUP SORTTYPE"DFSORT" SOURCEFORMAT"FIXED"
+*SOURCETABSTOP"8" NOSPZERO NOSSRANGE STDERR NOSTICKY-LINKAGE
+*NOSTICKY-PERFORM SUPFF SWITCHTYPE"1" SYMBSTART"1" SYSPUNCH"132"
+*TERMPAGE TIME NOTRACE TRUNC NOTRUNCCALLNAME NOTRUNCCOPY TRUNCINC
+*"10" UNICODE"NATIVE" VERBOSE NOVSC2 WARNING"1" NOWB NOWB2 NOWB3
+*WEBSERVER"CGI" NOWRITELOCK NOWRITETHRU NOXOPEN NOXREF
+*NOZEROLENGTHFALSE NOZEROSEQ NOZWB2 IDENTIFICATION DIVISION.23 PROGRAM-ID.    CARGAJUR.3^:q/d/iccol/desarrollo>^[  /d/iccol/desarrollo>vi  /d/iccol/desarrollo/temporales/CARGAJUR.lst/d/iccol/desarrollo>find / -name "CARGAJUR*" -ls  2> /dev/null     /d/iccol/desarrollo>
+ 7608   66 -rw-rw-r--   1 icdgd    icdatacr    66870 Jun 12 17:54 /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+123726  992 -rw-rw-r--   1 icjlud   icdatacr  1006327 Jun 12 17:52 /d/iccol/desarrollo/temporales/CARGAJUR.lst
+/d/iccol/desarrollo>rm  /d/iccol/desarrollo/temporales/CARGAJUR.lst
+/d/iccol/desarrollo>fu
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>/des-cdes-c-v ./CARGAJUR
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/./CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/./CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+* Total Messages:   356
+* Unrecoverable :     0                    Severe  :   356
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:     1414108     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO ./CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO ./CARGAJUR.CBL.err
+
+
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>des-c-v ./CARGAJURdes-c-v /CARGAJUR CARGAJUR 
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+* Total Messages:   356
+* Unrecoverable :     0                    Severe  :   356
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:     1414108     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO CARGAJUR.CBL.err
+
+
+/d/iccol/desarrollo/fuentes>vi CARGAJUR.CBL.err
+"CARGAJUR.CBL.err" 1070 lines, 125046 characters * Rejected - OPT22 ZZZelect JURAD assign to P-file-path22
+*  71-S********(   0)**22
+**    PROCEDURE DIVISION missing or unknown statement22
+    28 select ERRS assign to ERRS-file-name28
+*  82-S******(   2)**28
+**    COBOL Division or Section header encountered in incorrect order28
+    42     SELECT BDIIREGIBDIIREGI8
+*  82-S**********(   2)**8
+**    COBOL Division or Section header encountered in incorrect order8
+    66     SELECT BDIIDIAN ASSIGN TO DISK TITLE-BDIIDIANBDIIDIAN7
+*  82-S**********(   2)**7
+**    COBOL Division or Section header encountered in incorrect order7
+    86     SELECT BDIIDAS ASSIGN TO DISK TITLE-BDIIDASBDIIDAS6
+*  82-S**********(   2)**6
+**    COBOL Division or Section header encountered in incorrect order6
+   106     SELECT BDIIALEBDIIALE6
+*  82-S**********(   3)**6
+**    COBOL Division or Section header encountered in incorrect order6
+   127     SELECT BDACSVBDACSV4
+*  82-S**********(   3)**4
+**    COBOL Division or Section header encountered in incorrect order4
+   140     SELECT MAESTRO-DIRECCICBDIR7
+*  82-S**********(   4)**7
+**    COBOL Division or Section header encountered in incorrect order7
+   157    SELECT BDLCLIBDLCLI4
+*  82-S*********(   4)**4
+**    COBOL Division or Section header encountered in incorrect order4
+   166     SELECT SUSCRIPTORICBSUS3
+*  82-S**********(   4)**3
+**    COBOL Division or Section header encountered in incorrect order3
+   184     SELECT MAESTRO-CHECKICBCHK5
+*  82-S**********(   4)**5
+**    COBOL Division or Section header encountered in incorrect order5
+   197     SELECT MAESTRO-CREDITICBCRE6
+*  82-S**********(   5)**6
+**    COBOL Division or Section header encountered in incorrect order6
+   211     SELECT BDLSTDCIUBDLSTDCI5
+*  82-S**********(   5)**5
+**    COBOL Division or Section header encountered in incorrect order5
+   222     SELECT DIREST ASSIGN TO DISK TITLE-DIRESTDIREST5
+*  82-S**********(   5)**5
+**    COBOL Division or Section header encountered in incorrect order5
+   232     SELECT BDLNEWDIRBOGBDLNEWDI8
+*  82-S**********(   6)**8
+**    COBOL Division or Section header encountered in incorrect order8
+   241 DATA DIVISION.64
+*  82-S****(   6)**64
+**    COBOL Division or Section header encountered in incorrect order64"CARGAJUR.CBL.err" 1070 lines, 125046 characters:q/d/iccol/desarrollo/fuentes>fg
+ksh: fg: no such job
+/d/iccol/desarrollo/fuentes>vi CARGAJUR.CBL
+"CARGAJUR.CBL" 1598 lines, 66870 characters $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* Actualizacion del archivo de alertas con los datos provistos
+* por Jurad
+* Procesa el archivo JURAD. Controla cada registro: si es OK usa
+* los datos para actualizar BDIIALE, si tiene defecto lo graba en
+* el archivo ERRS.
+******************************************************************
+AUTHOR.Globant JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION section.
+SOURCE-COMPUTER. microfocus.
+OBJECT-COMPUTER. microfocus.
+INPUT-OUTPUT section.
+FILE-CONTROL.******************************************************************
+******************************************************************
+ZZZelect JURAD assign to P-file-pathorganization is line sequentialfile status is JURAD-fs.******************************************************************
+******************************************************************
+select ERRS assign to ERRS-file-nameorganization is line sequentialfile status is ERRS-fs.******************************************************************
+******************************************************************copy BDIIREGI.FS.******************************************************************
+******************************************************************copy BDIIDIAN.FS.******************************************************************
+******************************************************************copy BDIIDAS.FS.******************************************************************
+******************************************************************copy BDIIALE.FS replacing == on record.== by == on recordfile status is EST-BDIIALE.==.******************************************************************"CARGAJUR.CBL" 1598 lines, 66870 characters/zzzZ$CHANGE MODEsZZZZ$CHANGE MODEs:w"CARGAJUR.CBL" 1598 lines, 66868 characters [1] + Stopped (SIGTSTP)        vi CARGAJUR.CBL
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>vi CARGAJUR.CBLfg             vi CARGAJUR.CBL.errdes-c-v CARGAJUR   
+Ejecucion de la macro de compilacion cobol para desarrollo
+cob64 -C nolist -CC -KPIC -A -KPIC -N PIC -uv -g -P -C sourceasm /d/iccol/desarrollo/fuentes/CARGAJUR.CBL 
+* Micro Focus Server Express         V5.1 revision 000           Compiler
+* Copyright (C) Micro Focus IP Development Limited 1984-2012.
+* Accepted - VERBOSE
+* Accepted - NOANIM
+* Accepted - NOBOUND
+* Accepted - NOALTER
+* Accepted - COMP
+* Accepted - TRUNC
+* Accepted - int("CARGAJUR.int")
+* Accepted - anim
+* Accepted - csi
+* Accepted - verbose
+* Accepted - nolist
+* Accepted - sourceasm
+* Accepted - list("CARGAJUR.lst")
+* Compiling /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+".............COMPILANDO BDIIREGI SIN STATUS.........."
+".............COMPILANDO BDIIDIAN SIN STATUS.........."
+".............COMPILANDO BDIIDAS SIN STATUS.........."
+".............COMPILANDO BDIIALE SIN STATUS.........."
+".............COMPILANDO ICBDIR SIN STATUS.........."
+".............COMPILANDO ICBSUS SIN STATUS.........."
+".............COMPILANDO BDLDIR SIN MATCH **********
+* Total Messages:   252
+* Unrecoverable :     0                    Severe  :   252
+* Errors        :     0                    Warnings:     0
+* Informational :     0                    Flags   :     0
+* Data:     1421908     Code:           0
+
+>>> DATACREDITO: ** COMPILANDO CARGAJUR.CBL HUBO ERRORES...
+** ESTAN EN EL ARCHIVO CARGAJUR.CBL.err
+
+
+/d/iccol/desarrollo/fuentes>vi CARGAJUR.CBL.err
+"CARGAJUR.CBL.err" 758 lines, 88542 characters * Rejected - OPT
+  3577MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOM1465
+*  12-S****************************************************(   0)**1466
+**    Operand NOMBRE-INPUT-VALNOM is not declared1466
+  3578MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM1466
+*  12-S*************************************************************** (  63)**1467
+**    Operand NOMBOK-INPUT-VALNOM is not declared1467
+  3579MOVE TIPOID-E TO  TIP-ID-INPUT-VALNOM1467
+*  12-S*****************************************************(  63)**1468
+**    Operand TIP-ID-INPUT-VALNOM is not declared1468
+  3580MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM1468
+*  12-S****************************************************************(  63)**1469
+**    Operand BLOQUES-INPUT-VALNOM is not declared1469
+  3582IF MATCH-OK-OUT-VALNOM = 11470
+*  12-S**************************************(  63)**1470
+**    Operand MATCH-OK-OUT-VALNOM is not declared1470
+  3592     END-IF.1480
+* 564-S**********(  63)**1480
+**    A scope-delimiter did not have a matching verb and was discarded.1480
+  3652    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOMBDIIVIDE40
+* 301-S*********************************************************(  64)**42
+**    Unrecognized verb42
+  3683MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOMBDIIVIDE71
+*  12-S*****************************************************(  65)**72
+**    Operand TIP-ID-INPUT-VALNOM is not declared72
+  3684MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOMBDIIVIDE72
+*  12-S****************************************************(  65)**73
+**    Operand NOMBRE-INPUT-VALNOM is not declared73
+  3685MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOMBDIIVIDE73
+*  12-S*****************************************************(  65)**74
+**    Operand NOMBOK-INPUT-VALNOM is not declared74
+  3689MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMBDIIVIDE77
+*  12-S****************************************************************(  65)**78
+**    Operand BLOQUES-INPUT-VALNOM is not declared78
+  3690ELSE IF TIP-ID-INPUT-VALNOM = 1BDIIVIDE78
+*  12-S***************************************(  65)**78
+**    Operand TIP-ID-INPUT-VALNOM is not declared78
+  3691MOVE 2 TO BLOQUES-INPUT-VALNOMBDIIVIDE79
+*  12-S**************************************************(  66)**80
+**    Operand BLOQUES-INPUT-VALNOM is not declared80
+  3692ELSE MOVE 1 TO BLOQUES-INPUT-VALNOMBDIIVIDE80
+*  12-S****************************************************(  66)**82
+**    Operand BLOQUES-INPUT-VALNOM is not declared82
+  3696IF MATCH-OK-OUT-VALNOM = 0BDIIVIDE84
+*  12-S**********************************(  66)**84
+**    Operand MATCH-OK-OUT-VALNOM is not declared84
+  3701ELSE IF SW-TID-BDIIVIDE = 1FAC0002BDIIVIDE89
+* 562-S*********(  66)**89
+**    An "ELSE" phrase did not have a matching IF and was discarded.89"CARGAJUR.CBL.err" 758 lines, 88542 characters* 562-S*********(  66)**89
+**    An "ELSE" phrase did not have a matching IF and was discarded.89
+  3704END-IFFAC0002BDIIVIDE92
+* 564-S***********(  66)**93
+**    A scope-delimiter did not have a matching verb and was discarded.93
+  3706    END-IF.BDIIVIDE94
+* 564-S*********(  66)**94
+**    A scope-delimiter did not have a matching verb and was discarded.94
+  6882MOVE 0 TO MATCH-OK-OUT-VALNOMBDAMATCH     727
+*  12-S***********************************(  66)**728
+**    Operand MATCH-OK-OUT-VALNOM is not declared728
+  6885OR MATCH-OK-OUT-VALNOM = 1BDAMATCH     730
+*  12-S************************************( 121)**730
+**    Operand MATCH-OK-OUT-VALNOM is not declared730
+  6887NOMBRE-INPUT-VALNOMBDAMATCH     732
+*  12-S********************************( 121)**733
+**    Operand NOMBRE-INPUT-VALNOM is not declared733
+  6889NOMBOK-INPUT-VALNOMBDAMATCH     734
+*  12-S********************************( 121)**735
+**    Operand NOMBOK-INPUT-VALNOM is not declared735
+  6893MOVE 2 TO TIP-ID-INPUT-VALNOMRMB0004BDAMATCH     738
+*  12-S*******************************************( 121)**739
+**    Operand TIP-ID-INPUT-VALNOM is not declared739
+  6894MOVE 1 TO BLOQUES-INPUT-VALNOMRMB0004BDAMATCH     739
+*  12-S********************************************( 121)**741
+**    Operand BLOQUES-INPUT-VALNOM is not declared741
+  6896MOVE 1 TO TIP-ID-INPUT-VALNOMRMB0004BDAMATCH     741
+*  12-S*******************************************( 121)**742
+**    Operand TIP-ID-INPUT-VALNOM is not declared742
+  6897MOVE 2 TO BLOQUES-INPUT-VALNOMRMB0004BDAMATCH     742
+*  12-S********************************************( 121)**744
+**    Operand BLOQUES-INPUT-VALNOM is not declared744
+  6900MOVE 1 TO TIP-ID-INPUT-VALNOMRMB0004BDAMATCH     745
+*  12-S****************************************( 121)**746
+**    Operand TIP-ID-INPUT-VALNOM is not declared746
+  6901MOVE 2 TO BLOQUES-INPUT-VALNOMRMB0004BDAMATCH     746
+*  12-S*****************************************( 121)**748
+**    Operand BLOQUES-INPUT-VALNOM is not declared748
+  6903IF NOMBRE-INPUT-VALNOM(43:3) = ".-," ORRMB0004BDAMATCH     748
+*  12-S******************************( 121)**748
+**    Operand NOMBRE-INPUT-VALNOM is not declared748
+  6905MOVE 1 TO BLOQUES-INPUT-VALNOMRMB0004BDAMATCH     750
+*  12-S*****************************************( 121)**752
+**    Operand BLOQUES-INPUT-VALNOM is not declared752
+  6906END-IFRMB0004BDAMATCH     751
+* 564-S**************( 122)**752
+**    A scope-delimiter did not have a matching verb and was discarded.752
+  6908IF MATCH-OK-OUT-VALNOM = 1BDAMATCH     753
+*  12-S******************************( 122)**753  6908IF MATCH-OK-OUT-VALNOM = 1BDAMATCH     753
+*  12-S******************************( 122)**753
+**    Operand MATCH-OK-OUT-VALNOM is not declared753
+  6915IF BLOQUES-INPUT-VALNOM = 1   *> ES UN APELLIDORMB0004BDAMATCH     760
+*  12-S**********************************( 122)**760
+**    Operand BLOQUES-INPUT-VALNOM is not declared760
+  6917END-IFRMB0004BDAMATCH     762
+* 564-S*****************( 122)**763
+**    A scope-delimiter did not have a matching verb and was discarded.763
+  6930END-IFBDAMATCH     775
+* 564-S**************( 122)**776
+**    A scope-delimiter did not have a matching verb and was discarded.776
+  6933IF MATCH-OK-OUT-VALNOM = 0  *> NUEVO GRUPOBDAMATCH     778
+*  12-S****************************( 122)**778
+**    Operand MATCH-OK-OUT-VALNOM is not declared778
+  6952ELSE*>BDAMATCH     797
+* 562-S**********( 122)**797
+**    An "ELSE" phrase did not have a matching IF and was discarded.797
+  6955END-IFBDAMATCH     800
+* 564-S************( 123)**801
+**    A scope-delimiter did not have a matching verb and was discarded.801
+  6957     END-PERFORM.BDAMATCH     802
+* 564-S***************( 123)**802
+**    A scope-delimiter did not have a matching verb and was discarded.802
+  7399     MOVE 0 TO MATCH-OK-OUT-VALNOM.VALNOM42
+*  12-S*********************************( 123)**42
+**    Operand MATCH-OK-OUT-VALNOM is not declared42
+  7400     MOVE NOMBRE-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.VALNOM43
+*  12-S****************************( 130)**43
+**    Operand NOMBRE-INPUT-VALNOM is not declared43
+  7401     IF TIP-ID-INPUT-VALNOM  = 2VALNOM44
+*  12-S**************************( 130)**44
+**    Operand TIP-ID-INPUT-VALNOM is not declared44
+  7402INSPECT NOMBRE-AUX-VALNOM REPLACING ALLVALNOM45
+*  12-S*********************************( 130)**45
+**    Operand NOMBRE-AUX-VALNOM is not declared45
+  7413INSPECT NOMBRE-AUX-VALNOM REPLACING ALLRMB0002VALNOM56
+*  12-S*********************************( 131)**56
+**    Operand NOMBRE-AUX-VALNOM is not declared56
+  7424INSPECT NOMBRE-AUX-VALNOM REPLACING ALLGJC0003VALNOM67
+*  12-S*********************************( 131)**67
+**    Operand NOMBRE-AUX-VALNOM is not declared67
+  7428INSPECT NOMBRE-AUX-VALNOM REPLACING ALLGJC0003VALNOM71
+*  12-S*********************************( 131)**71
+**    Operand NOMBRE-AUX-VALNOM is not declared71
+  7432MOVE NOMBRE-AUX-VALNOM TO NOMBRE-INPUT-VALNOMVALNOM75
+*  12-S******************************( 131)**75
+**    Operand NOMBRE-AUX-VALNOM is not declared75
+  7434INSPECT CADENA-VALNOM    REPLACING ALLVALNOM77  **    Operand NOMBRE-AUX-VALNOM is not declared75
+  7434INSPECT CADENA-VALNOM    REPLACING ALLVALNOM77
+*  12-S****************************( 131)**77
+**    Operand CADENA-VALNOM is not declared77
+  7440INSPECT CADENA-VALNOM    REPLACING ALLRMB0002VALNOM83
+*  12-S****************************( 131)**83
+**    Operand CADENA-VALNOM is not declared83
+  7446PERFORM VARYING I-VALNOM FROM 1 BY 1VALNOM89
+*  12-S***************************************( 131)**89
+**    Operand I-VALNOM is not declared89
+  7448IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETICVALNOM91
+*  12-S***********************************( 132)**91
+**    Operand VNOM-AUX-VALNOM is not declared91
+  7450MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)VALNOM93
+*  12-S***********************************************( 132)**93
+**    Operand VNOM-AUX-VALNOM is not declared93
+  7451END-IFVALNOM94
+* 564-S***********************( 132)**95
+**    A scope-delimiter did not have a matching verb and was discarded.95
+  7452END-PERFORMVALNOM95
+* 564-S**************************( 132)**96
+**    A scope-delimiter did not have a matching verb and was discarded.96
+  7453     END-IF.VALNOM96
+* 564-S**********( 132)**96
+**    A scope-delimiter did not have a matching verb and was discarded.96
+  7454     MOVE SPACES TO VECTOR-INPUT-VALNOM.VALNOM97
+*  12-S**************************************( 132)**97
+**    Operand VECTOR-INPUT-VALNOM is not declared97
+  7455     UNSTRING CADENA-VALNOMDELIMITED BY ALL " " INTOVALNOM98
+*  12-S**************************( 132)**98
+**    Operand CADENA-VALNOM is not declared98
+  7468     MOVE NOMBOK-INPUT-VALNOM TO NOMBRE-AUX-VALNOM.VALNOM111
+*  12-S****************************( 132)**111
+**    Operand NOMBOK-INPUT-VALNOM is not declared111
+  7469     IF TIP-ID-INPUT-VALNOM  NOT = 2VALNOM112
+*  12-S**************************( 132)**112
+**    Operand TIP-ID-INPUT-VALNOM is not declared112
+  7470INSPECT NOMBRE-AUX-VALNOM REPLACING ALLVALNOM113
+*  12-S********************************( 132)**113
+**    Operand NOMBRE-AUX-VALNOM is not declared113
+  7474PERFORM VARYING I-VALNOM FROM 1 BY 1VALNOM117
+*  12-S***************************************( 132)**117
+**    Operand I-VALNOM is not declared117
+  7476IF VNOM-AUX-VALNOM(I-VALNOM) NOT ALPHABETICVALNOM119
+*  12-S***********************************( 132)**119
+**    Operand VNOM-AUX-VALNOM is not declared119
+  7478MOVE "*" TO VNOM-AUX-VALNOM(I-VALNOM)VALNOM121
+*  12-S***********************************************( 132)**121
+**    Operand VNOM-AUX-VALNOM is not declared121*  12-S***********************************************( 132)**121
+**    Operand VNOM-AUX-VALNOM is not declared121
+  7479END-IFVALNOM122
+* 564-S***********************( 133)**123
+**    A scope-delimiter did not have a matching verb and was discarded.123
+  7480END-PERFORMVALNOM123
+* 564-S**************************( 133)**124
+**    A scope-delimiter did not have a matching verb and was discarded.124
+  7482INSPECT NOMBRE-AUX-VALNOM REPLACING ALLRMB0002VALNOM125
+*  12-S*********************************( 133)**125
+**    Operand NOMBRE-AUX-VALNOM is not declared125
+  7493INSPECT NOMBRE-AUX-VALNOM REPLACING ALLRMB0002VALNOM136
+*  12-S*********************************( 133)**136
+**    Operand NOMBRE-AUX-VALNOM is not declared136
+  7504INSPECT NOMBRE-AUX-VALNOM REPLACING ALLGJC0003VALNOM147
+*  12-S********************************( 133)**147
+**    Operand NOMBRE-AUX-VALNOM is not declared147
+  7508MOVE NOMBRE-AUX-VALNOM TO NOMBOK-INPUT-VALNOMVALNOM151
+*  12-S******************************( 133)**151
+**    Operand NOMBRE-AUX-VALNOM is not declared151
+  7509     END-IF.VALNOM152
+* 564-S**********( 133)**152
+**    A scope-delimiter did not have a matching verb and was discarded.152
+  7510     MOVE SPACES TO VECTOR-OK-VALNOM.VALNOM153
+*  12-S***********************************( 133)**153
+**    Operand VECTOR-OK-VALNOM is not declared153
+  7511     UNSTRING CADENA-VALNOMDELIMITED BY ALL " " INTOVALNOM154
+*  12-S**************************( 133)**154
+**    Operand CADENA-VALNOM is not declared154
+  7522     MOVE 1 TO I-VALNOM.VALNOM165
+*  12-S**********************( 133)**165
+**    Operand I-VALNOM is not declared165
+  7523     MOVE 0 TO BLOQOK-AUX-VALNOM.VALNOM166
+*  12-S*******************************( 134)**166
+**    Operand BLOQOK-AUX-VALNOM is not declared166
+  7524     PERFORM UNTIL VM-INPUT-VALNOM(I-VALNOM) = SPACESVALNOM167
+*  12-S*********************************( 134)**167
+**    Operand VM-INPUT-VALNOM is not declared167
+  7525MOVE 1 TO J-VALNOMVALNOM168
+*  12-S************************( 134)**169
+**    Operand J-VALNOM is not declared169
+  7526PERFORM UNTIL J-VALNOM > 20VALNOM169
+*  12-S****************************( 134)**169
+**    Operand J-VALNOM is not declared169
+  7527IF VM-INPUT-VALNOM(I-VALNOM) = VM-OK-VALNOM(J-VALNOM)VALNOM170
+*  12-S**************************( 134)**170
+**    Operand VM-INPUT-VALNOM is not declared170
+  7528ADD 1 TO BLOQOK-AUX-VALNOMVALNOM171
+*  12-S*************************************( 134)**172  7528ADD 1 TO BLOQOK-AUX-VALNOMVALNOM171
+*  12-S*************************************( 134)**172
+**    Operand BLOQOK-AUX-VALNOM is not declared172
+  7529MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM172
+*  12-S**************************************( 134)**172
+**    Operand VM-OK-VALNOM is not declared172
+  7531MOVE 21 TO J-VALNOMVALNOM174
+*  12-S******************************( 134)**176
+**    Operand J-VALNOM is not declared176
+  7533MOVE 0 TO M-VALNOMVALNOM176
+*  12-S*****************************( 134)**177
+**    Operand M-VALNOM is not declared177
+  7534INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOMVALNOM177
+*  12-S*******************************( 134)**177
+**    Operand VM-OK-VALNOM is not declared177
+  7536IF M-VALNOM >= 15VALNOM179
+*  12-S**********************( 134)**179
+**    Operand M-VALNOM is not declared179
+  7537MOVE 0 TO M-VALNOMVALNOM180
+*  12-S********************************( 134)**181
+**    Operand M-VALNOM is not declared181
+  7538INSPECT VM-OK-VALNOM(J-VALNOM) TALLYING M-VALNOMVALNOM181
+*  12-S**********************************( 134)**181
+**    Operand VM-OK-VALNOM is not declared181
+  7540END-IFVALNOM183
+* 564-S*****************( 134)**184
+**    A scope-delimiter did not have a matching verb and was discarded.184
+  7541IF M-VALNOM > 0 AND < 15 AND I-VALNOM < 20VALNOM184
+*  12-S**********************( 134)**184
+**    Operand M-VALNOM is not declared184
+  7543COMPUTE INI-VALNOM = M-VALNOM + 2VALNOM186
+*  12-S********************************( 134)**186
+**    Operand INI-VALNOM is not declared186
+  7544COMPUTE LON-VALNOM = 14 - M-VALNOMVALNOM187
+*  12-S********************************( 135)**187
+**    Operand LON-VALNOM is not declared187
+  7545MOVE VM-OK-VALNOM(J-VALNOM) TO PEDAZO-VALNOMVALNOM188
+*  12-S*******************************( 135)**188
+**    Operand VM-OK-VALNOM is not declared188
+  7546IF PEDAZO-VALNOM(INI-VALNOM:LON-VALNOM) =VALNOM189
+*  12-S******************************( 135)**189
+**    Operand PEDAZO-VALNOM is not declared189
+  7550ADD 1 TO BLOQOK-AUX-VALNOMVALNOM193
+*  12-S*******************************************( 135)**194
+**    Operand BLOQOK-AUX-VALNOM is not declared194
+  7551MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM194
+*  12-S********************************************( 135)**194
+**    Operand VM-OK-VALNOM is not declared194
+  7553MOVE 21 TO J-VALNOMVALNOM196  **    Operand VM-OK-VALNOM is not declared194
+  7553MOVE 21 TO J-VALNOMVALNOM196
+*  12-S************************************( 135)**197
+**    Operand J-VALNOM is not declared197
+  7554ADD 1 TO I-VALNOMVALNOM197
+*  12-S**********************************( 135)**198
+**    Operand I-VALNOM is not declared198
+  7555MOVE SPACES TO VM-INPUT-VALNOM(I-VALNOM)VALNOM198
+*  12-S***********************************************( 135)**198
+**    Operand VM-INPUT-VALNOM is not declared198
+  7556END-IFVALNOM199
+* 564-S********************( 135)**200
+**    A scope-delimiter did not have a matching verb and was discarded.200
+  7557END-IFVALNOM200
+* 564-S*****************( 135)**201
+**    A scope-delimiter did not have a matching verb and was discarded.201
+  7558END-IFVALNOM201
+* 564-S**************( 135)**202
+**    A scope-delimiter did not have a matching verb and was discarded.202
+  7559ADD 1 TO J-VALNOMVALNOM202
+*  12-S*************************( 135)**204
+**    Operand J-VALNOM is not declared204
+  7560END-PERFORMVALNOM203
+* 564-S*****************( 135)**204
+**    A scope-delimiter did not have a matching verb and was discarded.204
+  7561ADD 1 TO I-VALNOMVALNOM204
+*  12-S***********************( 135)**205
+**    Operand I-VALNOM is not declared205
+  7562IF I-VALNOM = 21VALNOM205
+*  12-S*****************( 135)**205
+**    Operand I-VALNOM is not declared205
+  7564END-IFVALNOM207
+* 564-S************( 135)**208
+**    A scope-delimiter did not have a matching verb and was discarded.208
+  7565     END-PERFORM.VALNOM208
+* 564-S***************( 135)**208
+**    A scope-delimiter did not have a matching verb and was discarded.208
+  7566     IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOMVALNOM209
+*  12-S************************( 136)**209
+**    Operand BLOQOK-AUX-VALNOM is not declared209
+  7567MOVE 1 TO MATCH-OK-OUT-VALNOMVALNOM210
+*  12-S************************************( 136)**212
+**    Operand MATCH-OK-OUT-VALNOM is not declared212
+  7569IF TIP-ID-INPUT-VALNOM <> 2VALNOM212
+*  12-S*****************************( 136)**212
+**    Operand TIP-ID-INPUT-VALNOM is not declared212
+  7571ELSEVALNOM214
+* 562-S***********( 136)**215
+**    An "ELSE" phrase did not have a matching IF and was discarded.215* 562-S***********( 136)**215
+**    An "ELSE" phrase did not have a matching IF and was discarded.215
+  7573END-IFVALNOM216
+* 564-S*************( 136)**217
+**    A scope-delimiter did not have a matching verb and was discarded.217
+  7574IF BLOQOK-AUX-VALNOM >= BLOQUES-INPUT-VALNOMVALNOM217
+*  12-S***************************( 136)**217
+**    Operand BLOQOK-AUX-VALNOM is not declared217
+  7575MOVE 1 TO MATCH-OK-OUT-VALNOMVALNOM218
+*  12-S***************************************( 136)**220
+**    Operand MATCH-OK-OUT-VALNOM is not declared220
+  7576END-IFVALNOM219
+* 564-S*************( 136)**220
+**    A scope-delimiter did not have a matching verb and was discarded.220
+  7577     END-IF.VALNOM220
+* 564-S**********( 136)**220
+**    A scope-delimiter did not have a matching verb and was discarded.220
+  7585     IF BLOQOK-AUX-VALNOM > 0VALNOM228
+*  12-S************************( 136)**228
+**    Operand BLOQOK-AUX-VALNOM is not declared228
+  7586MOVE 65 TO APROX-TOT-VALNOM APROX-INP-VALNOMVALNOM229
+*  12-S**********************************( 136)**230
+**    Operand APROX-TOT-VALNOM is not declared230
+  7588MOVE 70 TO APROX-TOT-VALNOM APROX-INP-VALNOMVALNOM231
+*  12-S**********************************( 136)**232
+**    Operand APROX-TOT-VALNOM is not declared232
+  7589     END-IFVALNOM232
+* 564-S**********( 136)**233
+**    A scope-delimiter did not have a matching verb and was discarded.233
+  7590     MOVE 1 TO I-VALNOM.VALNOM233
+*  12-S**********************( 136)**233
+**    Operand I-VALNOM is not declared233
+  7591     PERFORM UNTIL I-VALNOM > 10VALNOM234
+*  12-S**************************( 136)**234
+**    Operand I-VALNOM is not declared234
+  7592MOVE 1 TO J-VALNOMVALNOM235
+*  12-S************************( 136)**236
+**    Operand J-VALNOM is not declared236
+  7593PERFORM UNTIL J-VALNOM > 10VALNOM236
+*  12-S****************************( 137)**236
+**    Operand J-VALNOM is not declared236
+  7594MOVE 0 TO LETRAS-OK-VALNOM LETRAS-OK2-VALNOMVALNOM237
+*  12-S**********************************( 137)**238
+**    Operand LETRAS-OK-VALNOM is not declared238
+  7595MOVE 1 TO K-VALNOMVALNOM238
+*  12-S**************************( 137)**239
+**    Operand K-VALNOM is not declared239
+  7596MOVE 1 TO L-VALNOMVALNOM239
+*  12-S**************************( 137)**240  7596MOVE 1 TO L-VALNOMVALNOM239
+*  12-S**************************( 137)**240
+**    Operand L-VALNOM is not declared240
+  7597IF VM-INPUT-VALNOM(I-VALNOM) NOT = SPACES ANDVALNOM240
+*  12-S**************************( 137)**240
+**    Operand VM-INPUT-VALNOM is not declared240
+  7599PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15VALNOM242
+*  12-S*********************************( 137)**242
+**    Operand K-VALNOM is not declared242
+  7600IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM243
+*  12-S********************************( 137)**243
+**    Operand VMM-INPUT-VALNOM is not declared243
+  7605IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT= SPACESVALNOM248
+*  12-S********************************( 137)**248
+**    Operand VMM-OK-VALNOM is not declared248
+  7606ADD 1 TO LETRAS-OK-VALNOMVALNOM249
+*  12-S********************************************( 137)**250
+**    Operand LETRAS-OK-VALNOM is not declared250
+  7607ADD 1 TO K-VALNOMVALNOM250
+*  12-S************************************( 137)**251
+**    Operand K-VALNOM is not declared251
+  7608ADD 1 TO L-VALNOMVALNOM251
+*  12-S************************************( 137)**253
+**    Operand L-VALNOM is not declared253
+  7610MOVE 19 TO K-VALNOMVALNOM253
+*  12-S**************************************( 137)**255
+**    Operand K-VALNOM is not declared255
+  7611END-IFVALNOM254
+* 564-S**********************( 137)**255
+**    A scope-delimiter did not have a matching verb and was discarded.255
+  7613ADD 1   TO K-VALNOMVALNOM256
+*  12-S***********************************( 137)**257
+**    Operand K-VALNOM is not declared257
+  7614IF K-VALNOM <= 15 AND L-VALNOM < 15VALNOM257
+*  12-S***************************( 137)**257
+**    Operand K-VALNOM is not declared257
+  7615IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM + 1) =VALNOM258
+*  12-S**************************************( 137)**258
+**    Operand VMM-INPUT-VALNOM is not declared258
+  7617ADD 1 TO L-VALNOMVALNOM260
+*  12-S***************************************( 137)**262
+**    Operand L-VALNOM is not declared262
+  7618END-IFVALNOM261
+* 564-S*************************( 138)**262
+**    A scope-delimiter did not have a matching verb and was discarded.262
+  7619END-IFVALNOM262
+* 564-S**********************( 138)**263
+**    A scope-delimiter did not have a matching verb and was discarded.263
+  7620END-IFVALNOM263  **    A scope-delimiter did not have a matching verb and was discarded.263
+  7620END-IFVALNOM263
+* 564-S*******************( 138)**264
+**    A scope-delimiter did not have a matching verb and was discarded.264
+  7621END-PERFORMVALNOM264
+* 564-S**********************( 138)**265
+**    A scope-delimiter did not have a matching verb and was discarded.265
+  7622MOVE 1 TO K-VALNOMVALNOM265
+*  12-S*****************************( 138)**266
+**    Operand K-VALNOM is not declared266
+  7623MOVE 1 TO L-VALNOMVALNOM266
+*  12-S*****************************( 138)**267
+**    Operand L-VALNOM is not declared267
+  7624PERFORM UNTIL K-VALNOM > 15 OR L-VALNOM > 15VALNOM267
+*  12-S*********************************( 138)**267
+**    Operand K-VALNOM is not declared267
+  7625IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM268
+*  12-S********************************( 138)**268
+**    Operand VMM-INPUT-VALNOM is not declared268
+  7630IF VMM-OK-VALNOM (J-VALNOM,K-VALNOM) NOT = SPACESVALNOM273
+*  12-S********************************( 138)**273
+**    Operand VMM-OK-VALNOM is not declared273
+  7631ADD 1 TO LETRAS-OK2-VALNOMVALNOM274
+*  12-S*********************************************( 138)**275
+**    Operand LETRAS-OK2-VALNOM is not declared275
+  7632ADD 1 TO K-VALNOMVALNOM275
+*  12-S************************************( 138)**276
+**    Operand K-VALNOM is not declared276
+  7633ADD 1 TO L-VALNOMVALNOM276
+*  12-S************************************( 138)**278
+**    Operand L-VALNOM is not declared278
+  7635MOVE 19 TO K-VALNOMVALNOM278
+*  12-S**************************************( 138)**280
+**    Operand K-VALNOM is not declared280
+  7636END-IFVALNOM279
+* 564-S**********************( 138)**280
+**    A scope-delimiter did not have a matching verb and was discarded.280
+  7638ADD 1   TO L-VALNOMVALNOM281
+*  12-S***********************************( 138)**282
+**    Operand L-VALNOM is not declared282
+  7639IF L-VALNOM <= 15 AND K-VALNOM < 15VALNOM282
+*  12-S***************************( 138)**282
+**    Operand L-VALNOM is not declared282
+  7640IF VMM-INPUT-VALNOM(I-VALNOM,L-VALNOM) =VALNOM283
+*  12-S**************************************( 138)**283
+**    Operand VMM-INPUT-VALNOM is not declared283
+  7642ADD 1 TO K-VALNOMVALNOM285
+*  12-S***************************************( 139)**287
+**    Operand K-VALNOM is not declared287*  12-S***************************************( 139)**287
+**    Operand K-VALNOM is not declared287
+  7643END-IFVALNOM286
+* 564-S*************************( 139)**287
+**    A scope-delimiter did not have a matching verb and was discarded.287
+  7644END-IFVALNOM287
+* 564-S**********************( 139)**288
+**    A scope-delimiter did not have a matching verb and was discarded.288
+  7645END-IFVALNOM288
+* 564-S*******************( 139)**289
+**    A scope-delimiter did not have a matching verb and was discarded.289
+  7646END-PERFORMVALNOM289
+* 564-S**********************( 139)**290
+**    A scope-delimiter did not have a matching verb and was discarded.290
+  7647END-IFVALNOM290
+* 564-S**************( 139)**291
+**    A scope-delimiter did not have a matching verb and was discarded.291
+  7648IF LETRAS-OK2-VALNOM > LETRAS-OK-VALNOMVALNOM291
+*  12-S****************************( 139)**291
+**    Operand LETRAS-OK2-VALNOM is not declared291
+  7649MOVE LETRAS-OK2-VALNOM TO LETRAS-OK-VALNOMVALNOM292
+*  12-S*********************************( 139)**292
+**    Operand LETRAS-OK2-VALNOM is not declared292
+  7650END-IFVALNOM293
+* 564-S**************( 139)**294
+**    A scope-delimiter did not have a matching verb and was discarded.294
+  7651IF LETRAS-OK-VALNOM > 0VALNOM294
+*  12-S***************************( 139)**294
+**    Operand LETRAS-OK-VALNOM is not declared294
+  7652MOVE 0 TO TOTLET-INP-VALNOM TOTLET-OK-VALNOMVALNOM295
+*  12-S**************************************( 139)**296
+**    Operand TOTLET-INP-VALNOM is not declared296
+  7653INSPECT VM-INPUT-VALNOM(I-VALNOM) TALLYINGVALNOM296
+*  12-S**********************************( 139)**296
+**    Operand VM-INPUT-VALNOM is not declared296
+  7656INSPECT VM-OK-VALNOM   (J-VALNOM) TALLYINGVALNOM299
+*  12-S*******************************( 139)**299
+**    Operand VM-OK-VALNOM is not declared299
+  7659MOVE 0 TO POR-TOT-VALNOM  POR-INP-VALNOMVALNOM302
+*  12-S***********************************( 139)**303
+**    Operand POR-TOT-VALNOM is not declared303
+  7660IF TOTLET-OK-VALNOM >= 3VALNOM303
+*  12-S******************************( 139)**303
+**    Operand TOTLET-OK-VALNOM is not declared303
+  7661COMPUTE POR-TOT-VALNOM = LETRAS-OK-VALNOM * 100 /VALNOM304
+*  12-S************************************( 139)**304
+**    Operand POR-TOT-VALNOM is not declared304
+  7663END-IFVALNOM306
+* 564-S*****************( 139)**307  7663END-IFVALNOM306
+* 564-S*****************( 139)**307
+**    A scope-delimiter did not have a matching verb and was discarded.307
+  7664IF TOTLET-INP-VALNOM >= 3VALNOM307
+*  12-S*******************************( 140)**307
+**    Operand TOTLET-INP-VALNOM is not declared307
+  7665COMPUTE POR-INP-VALNOM = LETRAS-OK-VALNOM * 100 /VALNOM308
+*  12-S************************************( 140)**308
+**    Operand POR-INP-VALNOM is not declared308
+  7667END-IFVALNOM310
+* 564-S*****************( 140)**311
+**    A scope-delimiter did not have a matching verb and was discarded.311
+  7668IF TOTLET-OK-VALNOM > TOTLET-INP-VALNOMVALNOM311
+*  12-S******************************( 140)**311
+**    Operand TOTLET-OK-VALNOM is not declared311
+  7669COMPUTE A-VALNOM = TOTLET-INP-VALNOM * 100 /VALNOM312
+*  12-S******************************( 140)**312
+**    Operand A-VALNOM is not declared312
+  7672COMPUTE A-VALNOM = TOTLET-OK-VALNOM  * 100 /VALNOM315
+*  12-S******************************( 140)**315
+**    Operand A-VALNOM is not declared315
+  7674END-IFVALNOM317
+* 564-S*****************( 140)**318
+**    A scope-delimiter did not have a matching verb and was discarded.318
+  7675IF ((POR-TOT-VALNOM + POR-INP-VALNOM)/2 >=VALNOM318
+*  12-S******************************( 140)**318
+**    Operand POR-TOT-VALNOM is not declared318
+  7685ADD 1 TO BLOQOK-AUX-VALNOMVALNOM328
+*  12-S****************************************( 140)**329
+**    Operand BLOQOK-AUX-VALNOM is not declared329
+  7686MOVE SPACES TO VM-OK-VALNOM(J-VALNOM)VALNOM329
+*  12-S*****************************************( 140)**329
+**    Operand VM-OK-VALNOM is not declared329
+  7688END-IFVALNOM331
+* 564-S*****************( 140)**332
+**    A scope-delimiter did not have a matching verb and was discarded.332
+  7689END-IFVALNOM332
+* 564-S**************( 140)**333
+**    A scope-delimiter did not have a matching verb and was discarded.333
+  7690ADD 1 TO J-VALNOMVALNOM333
+*  12-S*************************( 140)**335
+**    Operand J-VALNOM is not declared335
+  7691END-PERFORMVALNOM334
+* 564-S*****************( 140)**335
+**    A scope-delimiter did not have a matching verb and was discarded.335
+  7692ADD 1 TO I-VALNOMVALNOM335
+*  12-S***********************( 140)**336
+**    Operand I-VALNOM is not declared336
+  7693     END-PERFORM.VALNOM336  **    Operand I-VALNOM is not declared336
+  7693     END-PERFORM.VALNOM336
+* 564-S***************( 141)**336
+**    A scope-delimiter did not have a matching verb and was discarded.336
+  7701   MOVE ZEROS TO TOTLET-INP-VALNOMVALNOM344
+*  12-S*********************************( 141)**345
+**    Operand TOTLET-INP-VALNOM is not declared345
+  7702   MOVE ZEROS TO LETRAS-OK2-VALNOMVALNOM345
+*  12-S*********************************( 141)**346
+**    Operand LETRAS-OK2-VALNOM is not declared346
+  7703    MOVE ZEROS TO A-VALNOMGJC0003VALNOM346
+*  12-S*************************( 141)**347
+**    Operand A-VALNOM is not declared347
+  7704   MOVE 1 TO K-VALNOMVALNOM347
+*  12-S********************( 141)**348
+**    Operand K-VALNOM is not declared348
+  7705   PERFORM UNTIL K-VALNOM > 65VALNOM348
+*  12-S************************( 141)**348
+**    Operand K-VALNOM is not declared348
+  7706     MOVE K-VALNOM  TO I-VALNOMVALNOM349
+*  12-S*****************( 141)**349
+**    Operand K-VALNOM is not declared349
+  7707     MOVE 1TO J-VALNOMVALNOM350
+*  12-S****************************( 141)**351
+**    Operand J-VALNOM is not declared351
+  7708     MOVE ZEROS TO LETRAS-OK-VALNOMVALNOM351
+*  12-S**********************************( 141)**352
+**    Operand LETRAS-OK-VALNOM is not declared352
+  7709     PERFORM UNTIL J-VALNOM > 65 OR I-VALNOM > 65VALNOM352
+*  12-S**************************( 141)**352
+**    Operand J-VALNOM is not declared352
+  7710IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES ANDVALNOM353
+*  12-S*************************( 141)**353
+**    Operand V-NOMBRE-VALNOM is not declared353
+  7712IF V-NOMBRE-VALNOM(I-VALNOM) =VALNOM355
+*  12-S****************************( 141)**355
+**    Operand V-NOMBRE-VALNOM is not declared355
+  7714ADD 1 TO LETRAS-OK-VALNOMVALNOM357
+*  12-S**************************************( 141)**358
+**    Operand LETRAS-OK-VALNOM is not declared358
+  7715ADD 1 TO I-VALNOMVALNOM358
+*  12-S******************************( 141)**359
+**    Operand I-VALNOM is not declared359
+  7716ADD 1 TO J-VALNOMVALNOM359
+*  12-S******************************( 141)**361
+**    Operand J-VALNOM is not declared361
+  7718ADD 1 TO J-VALNOMVALNOM361
+*  12-S******************************( 141)**363
+**    Operand J-VALNOM is not declared363*  12-S******************************( 141)**363
+**    Operand J-VALNOM is not declared363
+  7719END-IFVALNOM362
+* 564-S****************( 142)**363
+**    A scope-delimiter did not have a matching verb and was discarded.363
+  7721ADD 1 TO I-VALNOMVALNOM364
+*  12-S***************************( 142)**366
+**    Operand I-VALNOM is not declared366
+  7722END-IFVALNOM365
+* 564-S*************( 142)**366
+**    A scope-delimiter did not have a matching verb and was discarded.366
+  7723     END-PERFORMVALNOM366
+* 564-S***************( 142)**367
+**    A scope-delimiter did not have a matching verb and was discarded.367
+  7724     IF LETRAS-OK-VALNOM > LETRAS-OK2-VALNOMVALNOM367
+*  12-S***********************( 142)**367
+**    Operand LETRAS-OK-VALNOM is not declared367
+  7725MOVE LETRAS-OK-VALNOM TO LETRAS-OK2-VALNOMVALNOM368
+*  12-S****************************( 142)**368
+**    Operand LETRAS-OK-VALNOM is not declared368
+  7726     END-IFVALNOM369
+* 564-S**********( 142)**370
+**    A scope-delimiter did not have a matching verb and was discarded.370
+  7727     ADD 1 TO K-VALNOMVALNOM370
+*  12-S*********************( 142)**371
+**    Operand K-VALNOM is not declared371
+  7728   END-PERFORM.VALNOM371
+* 564-S*************( 142)**371
+**    A scope-delimiter did not have a matching verb and was discarded.371
+  7729   MOVE 1 TO I-VALNOMVALNOM372
+*  12-S********************( 142)**373
+**    Operand I-VALNOM is not declared373
+  7730   PERFORM UNTIL I-VALNOM > 65VALNOM373
+*  12-S************************( 142)**373
+**    Operand I-VALNOM is not declared373
+  7731     IF V-NOMBRE-VALNOM(I-VALNOM) <> SPACES ANDVALNOM374
+*  12-S**********************( 142)**374
+**    Operand V-NOMBRE-VALNOM is not declared374
+  7733ADD 1 TO TOTLET-INP-VALNOMVALNOM376
+*  12-S*********************************( 142)**378
+**    Operand TOTLET-INP-VALNOM is not declared378
+  7734     END-IFVALNOM377
+* 564-S**********( 142)**378
+**    A scope-delimiter did not have a matching verb and was discarded.378
+  7735     ADD 1 TO I-VALNOMVALNOM378
+*  12-S*********************( 142)**379
+**    Operand I-VALNOM is not declared379
+  7736   END-PERFORM.VALNOM379
+* 564-S*************( 142)**379  7736   END-PERFORM.VALNOM379
+* 564-S*************( 142)**379
+**    A scope-delimiter did not have a matching verb and was discarded.379
+  7737   COMPUTE A-VALNOM = LETRAS-OK2-VALNOM * 100 /VALNOM380
+*  12-S******************( 142)**380
+**    Operand A-VALNOM is not declared380
+  7739   IF A-VALNOM >= 75VALNOM382
+*  12-S*************( 142)**382
+**    Operand A-VALNOM is not declared382
+  7740ADD 1 TO BLOQOK-AUX-VALNOMVALNOM383
+*  12-S********************************( 143)**384
+**    Operand BLOQOK-AUX-VALNOM is not declared384
+  7741   END-IF.VALNOM384
+* 564-S********( 143)**384
+**    A scope-delimiter did not have a matching verb and was discarded.384
+  7742    MOVE 0 TO K-VALNOMGJC0003VALNOM385
+*  12-S*********************( 143)**386
+**    Operand K-VALNOM is not declared386
+  7743   IF BLOQOK-AUX-VALNOM < BLOQUES-INPUT-VALNOMGJC0003VALNOM386
+*  12-S**********************( 143)**386
+**    Operand BLOQOK-AUX-VALNOM is not declared386
+  7744INITIALIZE A-VALNOM VECTORES-VALNOM L-VALNOMGJC0003VALNOM387
+*  12-S************************( 143)**387
+**    Operand A-VALNOM is not declared387
+  7745PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 65    GJC0003VALNOM388
+*  12-S*****************************( 143)**388
+**    Operand J-VALNOM is not declared388
+  7746IF V-NOMBRE-VALNOM(J-VALNOM) <> " "GJC0003VALNOM389
+*  12-S********************************( 143)**389
+**    Operand V-NOMBRE-VALNOM is not declared389
+  7747MOVE FUNCTION ORD(V-NOMBRE-VALNOM(J-VALNOM))     GJC0003VALNOM390
+*  12-S*************************************************( 143)**390
+**    Operand V-NOMBRE-VALNOM is not declared390
+  7749ADD 1 TO CONT-LET-INPUT-VALNOM(I-VALNOM)GJC0003VALNOM392
+*  12-S**********************************************( 143)**392
+**    Operand CONT-LET-INPUT-VALNOM is not declared392
+  7750END-IFGJC0003VALNOM393
+* 564-S*******************( 143)**394
+**    A scope-delimiter did not have a matching verb and was discarded.394
+  7751IF V-NOMBOK-VALNOM(J-VALNOM) <> " "GJC0003VALNOM394
+*  12-S********************************( 143)**394
+**    Operand V-NOMBOK-VALNOM is not declared394
+  7752MOVE FUNCTION ORD(V-NOMBOK-VALNOM(J-VALNOM))     GJC0003VALNOM395
+*  12-S*************************************************( 143)**395
+**    Operand V-NOMBOK-VALNOM is not declared395
+  7754ADD 1 TO CONT-LET-OK-VALNOM(I-VALNOM)GJC0003VALNOM397
+*  12-S*******************************************( 143)**397
+**    Operand CONT-LET-OK-VALNOM is not declared397
+  7755END-IFGJC0003VALNOM398  **    Operand CONT-LET-OK-VALNOM is not declared397
+  7755END-IFGJC0003VALNOM398
+* 564-S*******************( 143)**399
+**    A scope-delimiter did not have a matching verb and was discarded.399
+  7756END-PERFORMGJC0003VALNOM399
+* 564-S****************( 143)**400
+**    A scope-delimiter did not have a matching verb and was discarded.400
+  7757MOVE 0 TO I-VALNOMGJC0003VALNOM400
+*  12-S***********************( 143)**401
+**    Operand I-VALNOM is not declared401
+  7758PERFORM VARYING J-VALNOM FROM 1 BY 1 UNTIL J-VALNOM > 256  GJC0003VALNOM401
+*  12-S******************************( 143)**401
+**    Operand J-VALNOM is not declared401
+  7759IF CONT-LET-OK-VALNOM(J-VALNOM)  > 0GJC0003VALNOM402
+*  12-S*****************************( 143)**402
+**    Operand CONT-LET-OK-VALNOM is not declared402
+  7760ADD 1 TO I-VALNOMGJC0003VALNOM403
+*  12-S****************************( 143)**404
+**    Operand I-VALNOM is not declared404
+  7761IF CONT-LET-OK-VALNOM(J-VALNOM) <GJC0003VALNOM404
+*  12-S********************************( 144)**404
+**    Operand CONT-LET-OK-VALNOM is not declared404
+  7763COMPUTE L-VALNOM = L-VALNOM + 100GJC0003VALNOM406
+*  12-S******************************( 144)**406
+**    Operand L-VALNOM is not declared406
+  7765COMPUTE L-VALNOM = L-VALNOM +GJC0003VALNOM408
+*  12-S******************************( 144)**408
+**    Operand L-VALNOM is not declared408
+  7768END-IFGJC0003VALNOM411
+* 564-S*****************( 144)**412
+**    A scope-delimiter did not have a matching verb and was discarded.412
+  7769END-IFGJC0003VALNOM412
+* 564-S**************( 144)**413
+**    A scope-delimiter did not have a matching verb and was discarded.413
+  7770END-PERFORMGJC0003VALNOM413
+* 564-S****************( 144)**414
+**    A scope-delimiter did not have a matching verb and was discarded.414
+  7771COMPUTE K-VALNOM = L-VALNOM/I-VALNOMGJC0003VALNOM414
+*  12-S*********************( 144)**414
+**    Operand K-VALNOM is not declared414
+  7772IF (A-VALNOM >= 40 AND K-VALNOM > 80) ORGJC0003VALNOM415
+*  12-S******************( 144)**415
+**    Operand A-VALNOM is not declared415
+  7775ADD 1 TO BLOQOK-AUX-VALNOMGJC0003VALNOM418
+*  12-S**********************************( 144)**420
+**    Operand BLOQOK-AUX-VALNOM is not declared420
+  7776END-IFGJC0003VALNOM419
+* 564-S************( 144)**420
+**    A scope-delimiter did not have a matching verb and was discarded.420* 564-S************( 144)**420
+**    A scope-delimiter did not have a matching verb and was discarded.420
+  7777   END-IF.GJC0003VALNOM420
+* 564-S********( 144)**420
+**    A scope-delimiter did not have a matching verb and was discarded.420
+cob64: error(s) in compilation: /d/iccol/desarrollo/fuentes/CARGAJUR.CBL
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~* Rejected - OPT
+  3577MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOM1465
+*  12-S****************************************************(   0)**1466
+**    Operand NOMBRE-INPUT-VALNOM is not declared1466
+  3578MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM1466
+*  12-S*************************************************************** (  63)**1467
+**    Operand NOMBOK-INPUT-VALNOM is not declared1467
+  3579MOVE TIPOID-E TO  TIP-ID-INPUT-VALNOM1467
+*  12-S*****************************************************(  63)**1468
+**    Operand TIP-ID-INPUT-VALNOM is not declared1468
+  3580MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM1468
+*  12-S****************************************************************(  63)**1469
+**    Operand BLOQUES-INPUT-VALNOM is not declared1469
+  3582IF MATCH-OK-OUT-VALNOM = 11470
+*  12-S**************************************(  63)**1470
+**    Operand MATCH-OK-OUT-VALNOM is not declared1470
+  3592     END-IF.1480
+* 564-S**********(  63)**1480
+**    A scope-delimiter did not have a matching verb and was discarded.1480
+  3652    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOMBDIIVIDE40
+* 301-S*********************************************************(  64)**42
+**    Unrecognized verb42
+  3683MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOMBDIIVIDE71
+*  12-S*****************************************************(  65)**72
+**    Operand TIP-ID-INPUT-VALNOM is not declared72
+  3684MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOMBDIIVIDE72
+*  12-S****************************************************(  65)**73
+**    Operand NOMBRE-INPUT-VALNOM is not declared73
+  3685MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOMBDIIVIDE73
+*  12-S*****************************************************(  65)**74
+**    Operand NOMBOK-INPUT-VALNOM is not declared74
+  3689MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMBDIIVIDE77
+*  12-S****************************************************************(  65)**78
+**    Operand BLOQUES-INPUT-VALNOM is not declared78
+  3690ELSE IF TIP-ID-INPUT-VALNOM = 1BDIIVIDE78
+*  12-S***************************************(  65)**78
+**    Operand TIP-ID-INPUT-VALNOM is not declared78
+  3691MOVE 2 TO BLOQUES-INPUT-VALNOMBDIIVIDE79
+*  12-S**************************************************(  66)**80
+**    Operand BLOQUES-INPUT-VALNOM is not declared80
+  3692ELSE MOVE 1 TO BLOQUES-INPUT-VALNOMBDIIVIDE80
+*  12-S****************************************************(  66)**82
+**    Operand BLOQUES-INPUT-VALNOM is not declared82
+  3696IF MATCH-OK-OUT-VALNOM = 0BDIIVIDE84
+*  12-S**********************************(  66)**84
+**    Operand MATCH-OK-OUT-VALNOM is not declared84
+  3701ELSE IF SW-TID-BDIIVIDE = 1FAC0002BDIIVIDE89
+* 562-S*********(  66)**89
+**    An "ELSE" phrase did not have a matching IF and was discarded.89"CARGAJUR.CBL.err" line 1 of 758 --0%-- * Rejected - OPT
+  3577MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOM1465
+*  12-S****************************************************(   0)**1466
+**    Operand NOMBRE-INPUT-VALNOM is not declared1466
+  3578MOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOM1466
+*  12-S*************************************************************** (  63)**1467
+**    Operand NOMBOK-INPUT-VALNOM is not declared1467
+  3579MOVE TIPOID-E TO  TIP-ID-INPUT-VALNOM1467
+*  12-S*****************************************************(  63)**1468
+**    Operand TIP-ID-INPUT-VALNOM is not declared1468
+  3580MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOM1468
+*  12-S****************************************************************(  63)**1469
+**    Operand BLOQUES-INPUT-VALNOM is not declared1469
+  3582IF MATCH-OK-OUT-VALNOM = 11470
+*  12-S**************************************(  63)**1470
+**    Operand MATCH-OK-OUT-VALNOM is not declared1470
+  3592     END-IF.1480
+* 564-S**********(  63)**1480
+**    A scope-delimiter did not have a matching verb and was discarded.1480
+  3652    INITIALIZE PARAMETROS-SALIDA-BDIIVIDE VARIABLES-VALNOMBDIIVIDE40
+* 301-S*********************************************************(  64)**42
+**    Unrecognized verb42
+  3683MOVE TIP-IDE-BDIIVIDE TO TIP-ID-INPUT-VALNOMBDIIVIDE71
+*  12-S*****************************************************(  65)**72
+**    Operand TIP-ID-INPUT-VALNOM is not declared72
+  3684MOVE NOMBRE-BDIIVIDE TO NOMBRE-INPUT-VALNOMBDIIVIDE72
+*  12-S****************************************************(  65)**73
+**    Operand NOMBRE-INPUT-VALNOM is not declared73
+  3685MOVE NOM-VAL-BDIIVIDE TO NOMBOK-INPUT-VALNOMBDIIVIDE73
+*  12-S*****************************************************(  65)**74
+**    Operand NOMBOK-INPUT-VALNOM is not declared74
+  3689MOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMBDIIVIDE77
+*  12-S****************************************************************(  65)**78
+**    Operand BLOQUES-INPUT-VALNOM is not declared78
+  3690ELSE IF TIP-ID-INPUT-VALNOM = 1BDIIVIDE78
+*  12-S***************************************(  65)**78
+**    Operand TIP-ID-INPUT-VALNOM is not declared78
+  3691MOVE 2 TO BLOQUES-INPUT-VALNOMBDIIVIDE79
+*  12-S**************************************************(  66)**80
+**    Operand BLOQUES-INPUT-VALNOM is not declared80
+  3692ELSE MOVE 1 TO BLOQUES-INPUT-VALNOMBDIIVIDE80
+*  12-S****************************************************(  66)**82
+**    Operand BLOQUES-INPUT-VALNOM is not declared82
+  3696IF MATCH-OK-OUT-VALNOM = 0BDIIVIDE84
+*  12-S**********************************(  66)**84
+**    Operand MATCH-OK-OUT-VALNOM is not declared84
+  3701ELSE IF SW-TID-BDIIVIDE = 1FAC0002BDIIVIDE89
+* 562-S*********(  66)**89
+**    An "ELSE" phrase did not have a matching IF and was discarded.89
+  3704END-IFFAC0002BDIIVIDE92
+* 564-S***********(  66)**93
+**    A scope-delimiter did not have a matching verb and was discarded.93
+  3706    END-IF.BDIIVIDE94
+* 564-S*********(  66)**94
+**    A scope-delimiter did not have a matching verb and was discarded.94
