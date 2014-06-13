@@ -12,7 +12,7 @@
        DATE-WRITTEN.
        DATE-COMPILED.
        CONFIGURATION section.
-       SOURCE-COMPUTER. microfocus.
+       SOURCE-COMPUTER. microfocus. *> with debugging mode.
        OBJECT-COMPUTER. microfocus.
        INPUT-OUTPUT section.
        FILE-CONTROL.
@@ -101,7 +101,7 @@
       *    Cantidad de registros
            03 JURADT-registros          pic 9(11).
            03                           pic x.
-      * $$$$ El formato a continuación no está confirmedo, no se usa
+      * $$$$ El formato a continuación no está confirmado, no se usa
       *    Total numero de demandas vigentes
            03 JURADT-demandas-vigentes  pic 9(7).
            03                           pic x.
@@ -199,26 +199,11 @@
                                             "N" "/" "O" "P" "Q" "R" "S"
                                             "T" "U" "V" "W" "X" "Y" "Z"
                                             "Ñ".
-       01  OPEN-DIR                     PIC 9 value 0.
-       01  W-BLOQUES                    PIC 9 value 2.
 
        01  DATOS-E.
            03 TIPOID-E                  pic 9.
            03 NUMID-E                   pic 9(11).
            03 NOMBRE-E                  pic x(45).
-
-       01  REG-VALIDAS.
-           03 TIP-VAL                   PIC 9.
-           03 CED-VAL                   PIC 9(11).
-           03 NOM-VAL                   PIC X(45).
-           03 FEC-EXP-VAL               PIC 9(08).
-           03 MUN-EXP-VAL               PIC X(15).
-           03 DEP-EXP-VAL               PIC X(15).
-           03 VIG-VAL                   PIC X(02).
-           03 GENERO-VAL                PIC X(01).
-           03 EDAD-VAL                  PIC X(03).
-           03 EDAD-RANGO                PIC X(05).
-           03 FILLER-2-VAL              PIC X(51).
 
        01  W-CONTADORES.
            03  W-CONT-TIPO-5            PIC 9(6) VALUE ZEROS.
@@ -231,12 +216,13 @@
        01  REG-LEIDOS                   PIC 9(07) VALUE ZEROS.
        01  CONT-FALLECIDOS              PIC 9(07) VALUE ZEROS.
        01  REG-CORRECTOS                PIC 9(07) VALUE ZEROS.
-       01  REG-CORRECTOS-R              PIC 9(07) VALUE ZEROS.
        01  NO-COINCIDE-DIAN             PIC 9(07) VALUE ZEROS.
        01  NO-COINCIDE-REGIS            PIC 9(07) VALUE ZEROS.
        01  NO-EXISTE-DIAN               PIC 9(07) VALUE ZEROS.
        01  NO-EXISTE-REGIS              PIC 9(07) VALUE ZEROS.
        01  SI-EXISTE-CSV                PIC 9(07) VALUE ZEROS.
+       01  ESTADO21-BDIIREGI            PIC 9(07) VALUE ZEROS.
+       01  ESTADO12-BDIIREGI            PIC 9(07) VALUE ZEROS.
        01  TIPO-ID-INVALIDO             PIC 9(07) VALUE ZEROS.
 
        01 MAS-DATOS.
@@ -248,22 +234,28 @@
       ******************************************************************
       * Variables para rutina de validacion de identificaciones
       ******************************************************************
-       copy BDIIVIDE.WS.
+           copy BDIIVIDE.WS.
 
       ******************************************************************
       * Variables relacionadas con la la base BDIIALE de alertas online
       ******************************************************************
-       copy BDIIALE.WS.
+           copy BDIIALE.WS.
 
       ******************************************************************
       * Datos para las rutinas de validación de nombres
       ******************************************************************
-       copy LEEMAESTROS.WS.
+           copy VALNOM.WS.
+
 
       *****************************************************************
       * Direcciones de los archivos en el file system
       *****************************************************************
        copy ICFILE.WS.
+
+      *****************************************************************
+      * Variables validacion cuentas si validar
+      *****************************************************************
+           copy BDAMATCH.WS.
 
       ******************************************************************
       * Indica que se termino el proceso, por agotamiento del archivo
@@ -621,6 +613,7 @@
            if E-hay-error = "SI"
                perform 4900-GRABAR-ERROR
                perform 4240-CONTAR-TIPO-CUENTA
+               perform 4300-MODIFICAR-BDIIALE
                exit paragraph
            end-if
 
@@ -640,6 +633,7 @@
            if JURAD-id-tipo not = "1" and "2" and "3" and "4"
                call "PONERR" using "02" JURAD-reg E-errores
                move 05 to codigo-error
+               perform 4240-CONTAR-TIPO-CUENTA
            end-if
       *    Numero de identificacion
            if JURAD-id-numeroX is not numeric
@@ -817,20 +811,36 @@
       *    cuenta tipo 6: 01 02 06 07
       *    cuenta tipo 7: 03 04 05
       ******************************************************************
-           IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07
-               ADD 1 TO W-CONT-TIPO-6
-           ELSE
-               IF CODIGO-ERROR = 03 OR 04 OR 05
-                   ADD 1 TO W-CONT-TIPO-7
-               ELSE
+           evaluate CODIGO-ERROR
+           when 00
+                  add 1 to REG-CORRECTOS
+           when 01
+                  ADD 1 TO NO-COINCIDE-DIAN
+           when 02
+                  ADD 1 TO NO-COINCIDE-REGIS
+           when 05
+                  add 1 to TIPO-ID-INVALIDO
+           when 06
+                  ADD 1 TO ESTADO21-BDIIREGI
+           when 07
+                  ADD 1 TO ESTADO12-BDIIREGI
+           end-evaluate
+           if CODIGO-ERROR = 01 or 02 or 06 or 07
+               add 1 to W-CONT-TIPO-6
+           else
+               if CODIGO-ERROR = 03 or 04 or 05
+                   add 1 to W-CONT-TIPO-7
+      *            inserta cuenta sin validar en base alterna
+                   perform 4221-INSERT-CUENTA-SIN-VALIDAR
+               else
       *            es 00: registros correctos
-                   ADD 1 TO W-CONT-TIPO-5
+                   add 1 to W-CONT-TIPO-5
       *            si es una empresa
-                   IF TIPOID-E = 2 OR 3
-                       ADD 1 TO W-CONT-TIPO-5-PJ
-                   END-IF
-               END-IF
-           END-IF.
+                   if TIPOID-E = 2 or 3
+                       add 1 to W-CONT-TIPO-5-PJ
+                   end-if
+               end-if
+           end-if.
 
 
        4210-VALIDACION-ID-NO-FIGURA.
@@ -845,9 +855,11 @@
                IF TIP-IDE-BDIIVIDE = 1
       *            es una cédula
                    MOVE 04 TO CODIGO-ERROR
+                   ADD  1  TO NO-EXISTE-REGIS
                else
       *            no es una cédula
                    MOVE 03 TO CODIGO-ERROR
+                   ADD   1 TO  NO-EXISTE-DIAN
                END-IF
            END-IF.
 
@@ -910,7 +922,7 @@
            when other
       *        esto es "imposible" por control de consistencia anterior
                display "error de logica: tipo-novedad="
-               JURAD-tipo-novedad " reg nÂ°: " N-reg-leidos
+               JURAD-tipo-novedad " reg num: " N-reg-leidos
                display "Registro de JURAD: " display JURAD-reg
                perform 9000-CANCELAR-PROGRAMA
            end-evaluate.
@@ -1060,6 +1072,7 @@
                perform 9000-CANCELAR-PROGRAMA
            end-evaluate.
 
+
        4800-PROCESO-REG-T.
       ******************************************************************
       * El registro leido en el archivo JURAD es tipo "T" con totales
@@ -1075,13 +1088,13 @@
                display "No coincide la cantidad de registros:"
                JURADT-registros " con los leidos:" N-reg-leidos
                move "SI" to E-hay-error
-           end-if
+           end-if.
 
-      *    Esta parte está anulada por falta de definición sobre el
-      *    formato del registro "T"
-           exit paragraph.
 
        4800-PROCESO-REG-T-anulado.
+      *    Esta parte está anulada por falta de definición sobre el
+      *    formato del registro "T"
+
       *    Sumas de cantidades de demandas y embargos
            if function numval(JURADT-demandas-vigentes)
            = N-demandas-vigentes
@@ -1174,12 +1187,15 @@
       * nombre del archivo de entrada (que contiene el tipo de proceso),
       * el indicador de proceso real o en falso (default)
            accept P-command-line from COMMAND-LINE
+      *    animator de terminal no permite parametros en commandline ...
+      D    if P-command-line = spaces
+      D        display "DEBUG MODE"
+      D        move "9999991000905140104.txt 2" to P-command-line
+      D    end-iF
            display "Parametros: " P-command-line
            unstring P-command-line delimited by all " " into
            P-file-name P-proceso-real
-
       * El programa se anuncia en la consola
-      * TODO: se usa un anuncio mas vistoso?
            if PROCESO-REAL
                display pgm " Carga de archivo JURAD - proceso REAL"
            else
@@ -1192,8 +1208,8 @@
                display "debe ser 1 o 2"
                perform 9000-CANCELAR-PROGRAMA
            end-if
-
-      * TODO: controlar los componentes del filename
+                 
+      * Se controla el tipo de proceso, del filename
            evaluate P-tipo-proceso
            when "01"
                display "01 Envio Original - Carga TOTAL 1a vez"
@@ -1270,40 +1286,6 @@
            end-if.
 
 
-       1000-NOT-USED.
-      ******************************************************************
-      * Aunque tengo instrucciones de dejar los textos de alertas en
-      * blanco, me parece que se deberían cargar, aunque sea de manera
-      * precaria, por si justo cae una consulta para uno de los IDs
-      * involucrados. La persona que consulta va a ver <spaces>, hasta
-      * que se ejecute el programa que genera los textos.
-      ******************************************************************
-      * >>>> esto da un error de compilacion que no puedo resolver
-      * >>>> por ahora esta anulado
-      ******************************************************************
-      * Carga de los templates para armar el texto de alertas
-      * TODO: por ahora los templates son literales
-           set LAx to 0
-           move high-values to LA-templates
-           perform varying LAm from 1 by 1
-           until LA-modelo(LAm) = high-values
-               set LAx up by 1
-      *        separa las partes de la linea
-      *        unstring LA-modelo(LAm) into LA-parte(LAx, 1)
-      *        LA-parte(LAx, 2) LA-parte(LAx, 3) LA-parte(LAx, 4)
-      *        LA-parte(LAx, 5) LA-parte(LAx, 6) LA-parte(LAx, 7)
-      *        LA-parte(LAx, 8) LA-parte(LAx, 9) LA-parte(LAx, 10)
-      *        delimited by all "&"
-      *        prepara para omitir los espacios al final de c/parte
-               perform varying LAy from 1 by 1 until LAy > 10
-                   inspect LA-parte(LAx, LAy) replacing trailing
-                   spaces by high-values
-                   inspect LA-parte(LAx, LAy) replacing first
-                   high-value by space
-               end-perform
-           end-perform.
-
-
        1001-ELIMINAR-TODO.
       ******************************************************************
       * Elimina los registros de alertas existentes en el archivo de
@@ -1317,7 +1299,6 @@
            move zeros to COD-ALERTA-BDIIALE
            move low-values to LLASEC-BDIIALE
            start BDIIALE key > LLAVE-BDIIALE
-      *    display "Start BDIIALE k:" LLAVE-BDIIALE
            evaluate EST-BDIIALE
            when "00"
       *        posicionado
@@ -1388,33 +1369,35 @@
            DISPLAY "Registros Tipo 6   ==> " W-CONT-TIPO-6
            DISPLAY "Registros Tipo 7   ==> " W-CONT-TIPO-7
            display " "
+           DISPLAY "REGISTROS LEIDOS                :" REG-LEIDOS
+           DISPLAY "REGISTROS CORRECTOS             :" REG-CORRECTOS
+           DISPLAY "REGISTROS NO COINCIDEN BDIIREGI :" NO-COINCIDE-REGIS
+           DISPLAY "REGISTROS DE FALLECIDOS         :" CONT-FALLECIDOS
+           DISPLAY "REGISTROS NO COINCIDEN BDIIDIAN :" NO-COINCIDE-DIAN
+           DISPLAY "REGISTROS NO EXISTEN   BDIIREGI :" NO-EXISTE-REGIS
+           DISPLAY "REGISTROS NO EXISTEN   BDIIDIAN :" NO-EXISTE-DIAN
+           DISPLAY "REGISTROS ID BDIIREGI ESTADO 21 :" ESTADO21-BDIIREGI
+           DISPLAY "REGISTROS ID BDIIREGI ESTADO 12 :" ESTADO12-BDIIREGI
+           DISPLAY "TIPO IDENTIFICACION INVALIDO    :" TIPO-ID-INVALIDO
+           display " "
       *    porcentaje registros procesados OK
            compute N-editp100 rounded = 100.0 * N-reg-OK / N-reg-leidos
            display N-editp100 "% de registros correctos"
       *    porcentaje registros inconsistentes
-           compute N-editp100 rounded = 100.0 * E-cont-regs-con-error
-           / N-reg-leidos
-           display N-editp100 "% de registros inconsistentes"
+      *    compute N-editp100 rounded = 100.0 * E-cont-regs-con-error
+      *    / N-reg-leidos
+      *    display N-editp100 "% de registros inconsistentes"
       *    cantidad de registros leídos (excluído el registro "T")
-           move N-reg-leidos to N-edit
-           display N-edit "Registros IME en el archivo de entrada"
+      *    move N-reg-leidos to N-edit
+      *    display N-edit "Registros IME en el archivo de entrada"
       *    cantidad de registros procesados sin error
            move N-reg-OK to N-edit
            display N-edit "Registros procesados sin error"
 
-      * >>>> not OK: suma para J001 y tambien J002, hay que cambiar la
-      * definicion de estos contadores
-      *    move N-reg-tipo-I-OK to N-edit
-      *    display N-edit "Registros tipo I aceptados"
-      *    move N-reg-tipo-M-OK to N-edit
-      *    display N-edit "Registros tipo M aceptados"
-      *    move N-reg-tipo-E-OK to N-edit
-      *    display N-edit "Registros tipo E aceptados"
-
       *    cantidad de registros con error
-           move E-cont-regs-con-error to N-reg-con-error
-           move N-reg-con-error to N-edit
-           display N-edit "Registros con error"
+      *    move E-cont-regs-con-error to N-reg-con-error
+      *    move N-reg-con-error to N-edit
+      *    display N-edit "Registros con error"
       *    cantidades de alertas afectadas
            if P-tipo-proceso = "04"
                move N-ale-borradas to N-edit
@@ -1463,35 +1446,16 @@
            MOVE NUMID-E TO NUM-IDE-BDIIVIDE
       *    retorna SW-TID-BDIIVIDE=0 si el num id no está dentro
       *    del rango que corresponde al tipo de id
-           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
-           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
-           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
            PERFORM 80400-VALIDAR-TIPO-ID
-           display "SALIDA-BDIIVIDE " " SW-ID:" SW-ID-BDIIVIDE
-           " SW-NOMBRES:" SW-NOMBRES-BDIIVIDE
-           " SW-TID:" SW-TID-BDIIVIDE " NOM-VAL:" NOM-VAL-BDIIVIDE
            IF SW-TID-BDIIVIDE = 0
       *        el tipo de id es OK
                IF HACER-MATCH = ZEROS
-      *            abre archivos y carga la tabla de direcciones
-      *            estandar, solo la primera vez
-                   IF OPEN-DIR = ZEROS
-                       OPEN INPUT MAESTRO-DIRECC
-                       OPEN INPUT BDLCLI
-                       OPEN INPUT SUSCRIPTOR
-                       OPEN INPUT MAESTRO-CREDIT
-                       OPEN INPUT MAESTRO-CHECK
-                       PERFORM 06000-U-CARGAR-TABLA-DIRESTAN
-                       MOVE 1 TO OPEN-DIR
-                   END-IF
-      *            abre archivos y carga la tabla de direcciones
                    MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH
                    MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
-      *            Se recorre toda la estructura bdacsv para la identificacion
-      *            buscada. En caso de hallar registros se procede a realizar el
-      *            match
+      *            Se recorre toda la estructura bdacsv para la
+      *            identificacion buscada. En caso de hallar
+      *            registros se procede a realizar el match
                    PERFORM 1000-U-RECORRER-CSV-BDAMATCH
-                   MOVE 1 TO HACERMATCH-LEEMSTRS
                    IF IDE-TIPO-BDAMATCH = 1
                        IF TIPOID-E = 1 OR 4
                            INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL
@@ -1504,26 +1468,11 @@
                        PERFORM 10000-MATCH-NOMBRES-VALNOM
                        IF MATCH-OK-OUT-VALNOM = 1
                            MOVE 1 TO IDE-TIPO-BDAMATCH
-                       ELSE
-                          IF W-BLOQUES > 0
-                              MOVE 0 TO IDE-TIPO-BDAMATCH
-                          END-IF
                        END-IF
                    END-IF
 
                    IF IDE-TIPO-BDAMATCH = 1
-                       MOVE TIPOID-E TO TIP-VAL
-                       MOVE NUMID-E TO CED-VAL
-                       MOVE NOM-OUTPUT-BDAMATCH TO CADENA-ENTRA
-                       PERFORM 9800-FILTRAR-ALFABETICO
-                       MOVE CADENA-SALE TO  NOM-VAL
-                       MOVE ZEROS TO FEC-EXP-VAL
-                       MOVE SPACES TO MUN-EXP-VAL
-                       MOVE SPACES TO DEP-EXP-VAL
-                       MOVE SPACES TO VIG-VAL
-                       MOVE SPACES TO GENERO-VAL
-                       MOVE SPACES TO EDAD-VAL
-                       MOVE SPACES TO EDAD-RANGO
+      *                ADD 1 TO REG-CORRECTOS
                        ADD 1 TO SI-EXISTE-CSV
                    END-IF
                END-IF
@@ -1549,7 +1498,8 @@
 
            copy BDIIVIDE.PROC.
            copy BDLDIR.PROC.
-           COPY LEEMAESTROS.PROC.
+           COPY BDAMATCH.PROC.
+           COPY VALNOM.PROC.
 
 
       /

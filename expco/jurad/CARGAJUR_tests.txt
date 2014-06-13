@@ -1,0 +1,243 @@
+Archivo de pruebas sin registros con error:
+9999991001005140104.txt 1 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+I100000958212LUIS GUILLERMO AVENDAÑO RODR                 0020442013050603302020000406
+I100001327130GONZALO PATIÑO MORENO                        0030062013010604407620120409
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320121201
+I100002859753ERNESTO RICO                                 0050672013040602206720120430
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0060452011040603303320131206
+I100003044362MANUEL CASTRO MUÑETON                        0070002011010605300120130406
+I100003295380HENRY REY BARBOSA                            0080452013011123200220130506
+I100003448867JAIRO DE JESUS HENAO VILLEGA                 0090572013041104550020120806
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+I200811046741SALUD AXIAL LTDA                             0440762013050903400120120101
+I200830067928C I GLOMA S A                                0110432012120101203220130406
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672012040503300220131206
+I200860024151COMPUTEC SA                                  0330332013040604500120130402
+I200860034313BANCO DAVIVIENDA SA                          0533002013040601102320120411
+I200890300546COLGATE PALMOLIVE COMPAIA                    2322002012050603304320131010
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002012080600204420130506
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+I300600003115xxxxxx                                       0150542014010600400320120406
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340022012010100506720130406
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322012040600604520120406
+I400000266423SIMONE MARTINEZ                              0330022013120600700020120106
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012012040200804520130111
+I400000136711ARIAS NILO RIESCO                            0110232012041100905720130411
+I400000163598xxxxxx                                       0330432013101002204520120406
+T 00000000027                                             772774        787861
+
+
+...
+I400000163598xxxxxx                                       0330432013101002204520
+120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: KARAN  ABBOUD NAJAH
+xxxxxx                                        CODIGO-ERROR: 01
+Fecha de proceso: 20140104
+
+Totales de registros:
+
+Registros Tipo 5   ==> 000017
+Registros Tipo 6   ==> 000005
+Registros Tipo 7   ==> 000005
+
+REGISTROS LEIDOS                :0000028
+REGISTROS CORRECTOS             :0000017
+REGISTROS NO COINCIDEN BDIIREGI :0000003
+REGISTROS DE FALLECIDOS         :0000003
+REGISTROS NO COINCIDEN BDIIDIAN :0000002
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+REGISTROS ID BDIIREGI ESTADO 21 :0000003
+REGISTROS ID BDIIREGI ESTADO 12 :0000000
+TIPO IDENTIFICACION INVALIDO    :0000000
+
+    74.1 % de registros correctos
+      20 Registros procesados sin error
+      20 Alertas borradas previo al refresque total
+      54 Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+      10 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+
+Totales por tipo de error detectado:
+       5 14-El numero de id no se encuentra en el archivo maestro
+       2 15-El nombre en el input no coincide con el registrado
+      10 19-Inserción de alerta que ya existe
+
+/d/iccol/desarrollo/temporales>
+
+
+
+
+
+
+/d/iccol/desarrollo/temporales>x JURADCAR
+DEBUG MODE
+9999991001005140104.txt 2
+Parametros: 9999991001005140104.txt 2                                                    
+JURADCAR   Carga de archivo JURAD - proceso en falso
+04 Refresque Total - Carga TOTAL
+Fecha de proceso: 20140104
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0010012013040500905720130411
+Error 14 El numero de id no se encuentra en el archivo maestro
+JOSE MISAEL AREVALO SANCHEZ                   CODIGO-ERROR: 04
+
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0150202013020602204520120406
+Error 14 El numero de id no se encuentra en el archivo maestro
+LIBARDO ANTONIO GARZON TORRE                  CODIGO-ERROR: 04
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR                 0020442013050603302020000406
+Error 14 El numero de id no se encuentra en el archivo maestro
+LUIS GUILLERMO AVENDAÑO RODR                  CODIGO-ERROR: 04
+
+I100001327130GONZALO PATIÑO MORENO                        0030062013010604407620120409
+Error 14 El numero de id no se encuentra en el archivo maestro
+GONZALO PATIÑO MORENO                         CODIGO-ERROR: 04
+JOAQUIN VARGAS CABALLERO                      CODIGO-ERROR: 06
+
+I100002249789JOAQUIN VARGAS CABALLERO                     0040032012040601104320121201
+Error 19 Inserción de alerta que ya existe
+llave: 100002249789999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 100002249789999999000J002
+ERNESTO RICO                                  CODIGO-ERROR: 00
+MIGUEL ANTONIO LAVERDE NIETO                  CODIGO-ERROR: 00
+MANUEL CASTRO MUÑETON                         CODIGO-ERROR: 06
+HENRY REY BARBOSA                             CODIGO-ERROR: 00
+
+I100003295380HENRY REY BARBOSA                            0080452013011123200220130506
+Error 19 Inserción de alerta que ya existe
+llave: 100003295380999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 100003295380999999000J002
+JAIRO DE JESUS HENAO VILLEGA                  CODIGO-ERROR: 06
+SERVICULTIVOS LTDA                            CODIGO-ERROR: 00
+
+I200800002194SERVICULTIVOS LTDA                           0220452012040603404520120406
+Error 19 Inserción de alerta que ya existe
+llave: 200800002194999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 200800002194999999000J002
+CALZADO ORION DEL LITORAL                     CODIGO-ERROR: 00
+
+I200800178009CALZADO ORION DEL LITORAL                    0330202000040601505420140106
+Error 19 Inserción de alerta que ya existe
+llave: 200800178009999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 200800178009999999000J002
+SALUD AXIAL LTDA                              CODIGO-ERROR: 00
+C I GLOMA S A                                 CODIGO-ERROR: 00
+
+I200830067928C I GLOMA S A                                0110432012120101203220130406
+Error 19 Inserción de alerta que ya existe
+llave: 200830067928999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 200830067928999999000J002
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0220672012043503300220131206
+Error 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+COMPUTEC SA                                   CODIGO-ERROR: 00
+BANCO DAVIVIENDA SA                           CODIGO-ERROR: 00
+COLGATE PALMOLIVE COMPAIA                     CODIGO-ERROR: 00
+SUBSUELO Y GEOTECNIA LTDA                     CODIGO-ERROR: 00
+
+I200890934264SUBSUELO Y GEOTECNIA LTDA                    0450002012080600204420130506
+Error 19 Inserción de alerta que ya existe
+llave: 200890934264999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 200890934264999999000J002
+SUPERTIENDAS Y DROGUERIAS OL                  CODIGO-ERROR: 00
+
+I200890107487SUPERTIENDAS Y DROGUERIAS OL                 0340452012040600300620130106
+Error 19 Inserción de alerta que ya existe
+llave: 200890107487999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 200890107487999999000J002
+
+I300600003115xxxxxx                                       0150542014010600400320120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: FERNANDEZ PENA JULIO ANTONIO
+xxxxxx                                        CODIGO-ERROR: 01
+ANTONIO CONDOLUCI DOMINGO                     CODIGO-ERROR: 00
+
+I300611000446ANTONIO CONDOLUCI DOMINGO                    0340022012010100506720130406
+Error 19 Inserción de alerta que ya existe
+llave: 300611000446999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 300611000446999999000J002
+MARWA MIKHAEL SKAFF DE KARAA                  CODIGO-ERROR: 00
+
+I400000163597MARWA MIKHAEL SKAFF DE KARAA                 0120322012040600604520120406
+Error 19 Inserción de alerta que ya existe
+llave: 400000163597999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 400000163597999999000J002
+
+I400000266423SIMONE MARTINEZ                              033002201312060070rt20120106
+Error 11 Numero de embargos terminados: debe ser numerico
+
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0450012012040200804520130111
+Error 14 El numero de id no se encuentra en el archivo maestro
+PATRICIO ALEJANDRO HERRERA C                  CODIGO-ERROR: 03
+ARIAS NILO RIESCO                             CODIGO-ERROR: 00
+
+I400000136711ARIAS NILO RIESCO                            0110232012041100905720130411
+Error 19 Inserción de alerta que ya existe
+llave: 400000136711999999000J001
+Error 19 Inserción de alerta que ya existe
+llave: 400000136711999999000J002
+
+I400000163598xxxxxx                                       0330432013101002204520120406
+Error 15 El nombre en el input no coincide con el registrado
+novedad:  xxxxxx
+registro: KARAN  ABBOUD NAJAH
+xxxxxx                                        CODIGO-ERROR: 01
+Fecha de proceso: 20140104
+
+Totales de registros:
+
+Registros Tipo 5   ==> 000015
+Registros Tipo 6   ==> 000005
+Registros Tipo 7   ==> 000005
+
+REGISTROS LEIDOS                :0000028
+REGISTROS CORRECTOS             :0000015
+REGISTROS NO COINCIDEN BDIIREGI :0000003
+REGISTROS DE FALLECIDOS         :0000003
+REGISTROS NO COINCIDEN BDIIDIAN :0000002
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+REGISTROS ID BDIIREGI ESTADO 21 :0000003
+REGISTROS ID BDIIREGI ESTADO 12 :0000000
+TIPO IDENTIFICACION INVALIDO    :0000000
+
+    66.7 % de registros correctos
+      18 Registros procesados sin error
+         Alertas borradas previo al refresque total
+         Alertas insertadas
+         Alertas modificadas
+         Alertas eliminadas
+      20 Insercion de alerta existente
+         Modif o elim de alerta inexistente
+
+Totales por tipo de error detectado:
+       1 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+       1 11-Numero de embargos terminados: debe ser numerico
+       5 14-El numero de id no se encuentra en el archivo maestro
+       2 15-El nombre en el input no coincide con el registrado
+      20 19-Inserción de alerta que ya existe
+
+real    0m15.01s
+user    0m0.01s
+sys     0m0.02s
+
+Inicio de Programa:  2014/06/13 11:55:41
+Fin de Programa:     2014/06/13 11:55:56
