@@ -1,0 +1,1118 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.19 12:00:00 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Fri Jun 13 13:27:25 2014 from 172.16.10.75
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ . viset
+viset running
+/d/iccol/desarrollo>fu
+/d/iccol/desarrollo/fuentes>view CARGAJUR.CBL
+"CARGAJUR.CBL" [Read only] 1471 lines, 63538 characters $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* ACTUALIZACION DEL ARCHIVO DE ALERTAS CON LOS DATOS PROVISTOS
+* POR JURAD
+* PROCESA EL ARCHIVO JURAD. CONTROLA CADA REGISTRO: SI ES OK USA
+* LOS DATOS PARA ACTUALIZAR BDIIALE, SI TIENE DEFECTO LO GRABA EN
+* EL ARCHIVO ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS. *> WITH DEBUGGING MODE.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************"CARGAJUR.CBL" [Read only] 1471 lines, 63538 characters
+******************************************************************
+* Archivos de base alterna
+******************************************************************copy BDACSV.FS.copy ICBDIR.FS.copy BDLCLI.FS.COPY ICBSUS.FS.COPY ICBCHK.FS.COPY ICBCRE.FS.COPY BDLSTDCIU.FS.COPY DIREST.FS.COPY BDLNEWDIRBOG.FS.******************************************************************
+******************************************************************
+DATA DIVISION.
+FILE section.******************************************************************
+* Archivo de entrada con los datos de demandas y embargos de JURAD
+******************************************************************
+FD JURAD.
+01  JURAD-reg.
+* Registros de movimientos I, M, E
+*    Tipo de Novedad {I, M, E} Inser/Modif/Elim03 JURAD-TIPO-NOVEDADPIC X.
+*    Tipo de identificacion Numero {1, 2, 3, 4}03 JURAD-ID-TIPOPIC X.
+*    Numero de identificacion03 JURAD-ID-NUMEROXPIC X(11).03 JURAD-ID-NUMEROREDEFINES JURAD-ID-NUMEROX
+PIC 9(11).
+*    Nombres y Apellidos03 JURAD-NOMBREPIC X(45).
+*    Numero de demandas vigentes
+*    03 JURAD-DEMANDAS-VIGENTES     PIC 999.03 JURAD-DEMANDAS-VIGENTES     PIC 9(07).
+*    Numero de demandas terminadas
+*    03 JURAD-DEMANDAS-TERMINADAS   PIC 999.03 JURAD-DEMANDAS-TERMINADAS   PIC 9(07).
+*    Fecha ultima demanda vigente YYYYMMDD03 JURAD-DEMANDAS-FECHA-ULTIMA PIC X(8).
+*    Numero de embargos vigentes
+*    03 JURAD-EMBARGOS-VIGENTES     PIC 999.03 JURAD-EMBARGOS-VIGENTES     PIC 9(07).
+*    Numero de embargos terminados
+*    03 JURAD-EMBARGOS-TERMINADOS   PIC 999.03 JURAD-EMBARGOS-TERMINADOS   PIC 9(07).*    03 JURAD-EMBARGOS-TERMINADOS   PIC 999.03 JURAD-EMBARGOS-TERMINADOS   PIC 9(07).
+*    Fecha ultimo embargo vigente YYYYMMDD03 JURAD-EMBARGOS-FECHA-ULTIMO PIC X(08).01  JURADT-REG.
+* Registro de totales de control T
+*    Tipo de Novedad = "T"03 JURADT-TIPO-NOVEDADPIC X.03PIC X.
+*    Cantidad de registros03 JURADT-REGISTROSPIC 9(11).
+*    03PIC X.03PIC X(45).
+*    Total numero de demandas vigentes03 JURADT-DEMANDAS-VIGENTES    PIC 9(7).
+*    03PIC X.
+*    Total numero de demandas terminadas03 JURADT-DEMANDAS-TERMINADAS  PIC 9(7).
+*    03PIC X.03PIC X(08).
+*    Total numero de embargos vigentes03 JURADT-EMBARGOS-VIGENTES    PIC 9(7).
+*    03PIC X.
+*    Total numero de embargos terminados03 JURADT-EMBARGOS-TERMINADOS  PIC 9(7).03PIC X(08).******************************************************************
+* Archivo de salida con los registros defectuosos del arch JURAD
+******************************************************************
+FD ERRS.
+01  ERRS-REG.
+*    Tipo de Novedad {I, M, E, T} Inser/Modif/Elim/Totales03 ERRS-TIPO-NOVEDADPIC X.
+*    Tipo de identificacion Numero {1, 2, 3, 4}03 ERRS-ID-TIPOPIC X.
+*    Numero de identificacion03 ERRS-ID-NUMEROPIC X(11).
+*    Nombres y Apellidos03 ERRS-NOMBREPIC X(45).
+*    Numero de demandas vigentes
+*    03 ERRS-DEMANDAS-VIGENTES     PIC 999.03 ERRS-DEMANDAS-VIGENTES     PIC 9(07).
+*    Numero de demandas terminadas
+*    03 ERRS-DEMANDAS-TERMINADAS   PIC 999.03 ERRS-DEMANDAS-TERMINADAS   PIC 9(07).
+*    Fecha ultima demanda vigente YYMMDD03 ERRS-DEMANDAS-FECHA-ULTIMA PIC X(8).
+  /\<JURADT
+/IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+DELETE BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-ELIMINADASWHEN OTHER
+DISPLAY "ERROR AL DELETEAR BDIIALE FS: " EST-BDIIALE" KEY: " LLAVE-BDIIALEDISPLAY "REGISTRO BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4800-PROCESO-REG-T.
+******************************************************************
+* EL REGISTRO LEIDO EN EL ARCHIVO JURAD ES TIPO "T" CON TOTALES
+* DE CONTROL, Y DEBERÍA SER EL ULTIMO DEL ARCHIVO
+******************************************************************
+* CONTROL DE LOS TOTALES CALCULADOS CONTRA LOS ESPERADOSMOVE "NO" TO E-HAY-ERROR
+*    CANTIDAD DE REGISTROS I M EIF FUNCTION NUMVAL(JURADT-REGISTROS) = N-REG-LEIDOSCONTINUE
+ELSE
+DISPLAY " "
+DISPLAY "NO COINCIDE LA CANTIDAD DE REGISTROS:"JURADT-REGISTROS " CON LOS LEIDOS:" N-REG-LEIDOSMOVE "SI" TO E-HAY-ERROREND-IF.4900-GRABAR-ERROR.
+******************************************************************
+* EL REGISTRO DE JURAD TIENE ERROR: SE GRABA EN EL ARCHIVO ERRS
+* CON INDICACION DEL ERROR DETECTADO
+******************************************************************MOVE JURAD-REG TO ERRS-REG
+*    LISTA DE LOS CODIGOS DE LOS ERRORES DEL REGISTROMOVE E-ERRORES-REG TO ERRS-CAUSA-RECHAZOWRITE ERRS-REGEVALUATE ERRS-FS
+WHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "ERROR AL GRABAR EL ARCHIVO DE ERRORES "DISPLAY "NOMBRE DEL ARCHIVO: " ERRS-FILE-NAMEDISPLAY "FILE STATUS: " ERRS-FSPERFORM 9000-CANCELAR-PROGRAMA//Address search hit BOTTOM without matching pattern/Address search hit BOTTOM without matching pattern"CARGAJUR.CBL" [Read only] [Modified] line 1038 of 1471 --70%-- $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* ACTUALIZACION DEL ARCHIVO DE ALERTAS CON LOS DATOS PROVISTOS
+* POR JURAD
+* PROCESA EL ARCHIVO JURAD. CONTROLA CADA REGISTRO: SI ES OK USA
+* LOS DATOS PARA ACTUALIZAR BDIIALE, SI TIENE DEFECTO LO GRABA EN
+* EL ARCHIVO ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS. *> WITH DEBUGGING MODE.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************/procedure03PIC X(300).03PIC 9(8).03 E-ERROROCCURS 50 INDEXED EX.05 E-CODIGOPIC XX.05PIC X.05 E-CONTADORPIC 9(7).05PIC X.05 E-DESCRIPCIONPIC X(59).
+01 E-EDITPIC Z(8)B.******************************************************************
+* Control de rangos de valores de las fechas del input
+01 VALIDACIONES-FECHAS.02 ANO-VAL-Xpic 9(04).88 ANO-VALvalue 1900 thru 2050.02 MES-VAL-Xpic 9(02).88 MES-VALvalue 01   thru 12.02 DIA-VAL-Xpic 9(02).88 DIA-VALvalue 01   thru 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORPROCEDURE DIVISION.0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORIF JURAD-TIPO-NOVEDAD <> "T"ADD 1 TO REG-LEIDOSEND-IF
+WHEN "10"
+*FIN DEL ARCHIVO DE INPUT:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*DE QUE SE TERMINARA EL ARCHIVODISPLAY "FALTA EL REG DE TOTALES DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*ERROR DE LECTURA: CANCELACION DEL PROCESODISPLAY "ERROR EN LECTURA DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.
+
+4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    VALIDACION DEL TIPO DE MOVIMIENTOIF JURAD-TIPO-NOVEDAD NOT = "I" AND "M" AND "E" AND "T"CALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SEÑALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOPERFORM 4800-PROCESO-REG-TEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    VALIDACION FORMAL DE LOS DATOSMOVE 0 TO CODIGO-ERROR
+*
+    PERFORM 4200-VALIDACION-SEMANTICA
+*
+    PERFORM 4240-CONTAR-TIPO-CUENTA
+*
+    PERFORM 4100-VALIDACION-FORMAL
+*
+    IF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERRORELSE
+PERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OKEND-IF.4100-VALIDACION-FORMAL.
+******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF
+
+0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORIF JURAD-TIPO-NOVEDAD <> "T"ADD 1 TO REG-LEIDOSEND-IF
+WHEN "10"
+*FIN DEL ARCHIVO DE INPUT:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*DE QUE SE TERMINARA EL ARCHIVODISPLAY "FALTA EL REG DE TOTALES DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*ERROR DE LECTURA: CANCELACION DEL PROCESODISPLAY "ERROR EN LECTURA DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.
+
+
+
+4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    VALIDACION DEL TIPO DE MOVIMIENTOIF JURAD-TIPO-NOVEDAD NOT = "I" AND "M" AND "E" AND "T"CALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SEÑALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOPERFORM 4800-PROCESO-REG-TEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    VALIDACION FORMAL DE LOS DATOSMOVE 0 TO CODIGO-ERROR
+*
+    PERFORM 4200-VALIDACION-SEMANTICA
+*
+    PERFORM 4240-CONTAR-TIPO-CUENTA
+*
+    PERFORM 4100-VALIDACION-FORMAL
+*
+    IF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERRORELSE
+PERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OKEND-IF.4100-VALIDACION-FORMAL.
+******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF4100-VALIDACION-FORMAL.******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE IDENTIFICACIONIF JURAD-ID-NUMEROX IS NOT NUMERICCALL "PONERR" USING "03" JURAD-REG E-ERRORESEND-IF
+IF JURAD-ID-NUMERO NOT > 0CALL "PONERR" USING "04" JURAD-REG E-ERRORESEND-IF
+*    SI EL MOVIMIENTO ES UNA ELIMINACION LOS DATOS SUBSIGUIENTES
+*    NO SE CONTROLANIF JURAD-TIPO-NOVEDAD = "E"EXIT PARAGRAPHEND-IF
+*    NOMBRES Y APELLIDOSIF JURAD-NOMBRE = SPACESCALL "PONERR" USING "05" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS VIGENTESIF JURAD-DEMANDAS-VIGENTES IS NOT NUMERICCALL "PONERR" USING "06" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS TERMINADASIF JURAD-DEMANDAS-TERMINADAS IS NOT NUMERICCALL "PONERR" USING "07" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMA DEMANDA VIGENTE YYMMDDIF JURAD-DEMANDAS-FECHA-ULTIMA IS NOT NUMERICCALL "PONERR" USING "08" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-DEMANDAS-FECHA-ULTIMA TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "09" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS VIGENTESIF JURAD-EMBARGOS-VIGENTES NOT NUMERICCALL "PONERR" USING "10" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS TERMINADOSIF JURAD-EMBARGOS-TERMINADOS NOT NUMERICCALL "PONERR" USING "11" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMO EMBARGO VIGENTE YYMMDDEND-IF*    FECHA ULTIMO EMBARGO VIGENTE YYMMDDIF JURAD-EMBARGOS-FECHA-ULTIMO IS NOT NUMERICCALL "PONERR" USING "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "13" JURAD-REG E-ERRORESEND-IF.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  04200-VALIDACION-SEMANTICA.****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF"CARGAJUR.CBL" [Read only] [Modified] line 669 of 1471 --45%-- 
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF
+END-IF
+ELSE
+IF SW-NOMBRES-BDIIVIDE = 1IF TIPOID-E <> 1
+MOVE 01 TO CODIGO-ERROR
+ADD 1 TO NO-COINCIDE-DIANELSE
+MOVE   02 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-REGISEND-IF
+ELSE
+INITIALIZE LLAVE-BDIIALEMOVE  TIPOID-E TO TIP-IDE-BDIIALEMOVE  NUMID-E  TO NUM-IDE-BDIIALEMOVE  990003   TO FUENTE-BDIIALESTART BDIIALE KEY NOT < LLAVE-BDIIALEINVALID KEY MOVE 1 TO SW-BDIIALENOT INVALID KEY MOVE 0 TO SW-BDIIALEREAD BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALEEND-READ
+MOVE FUNCTION CURRENT-DATE TO FECHA-PROC-RPERFORM UNTIL SW-BDIIALE = 1 OR
+TIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALETIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALE
+IF FUENTE-BDIIALE = 990003 AND
+FEC-NOV-BDIIALE <= FECHA-PROC-R ANDFEC-VEN-BDIIALE >= FECHA-PROC-R ANDBLOQUEO-BDIIALE = 0
+MOVE 1 TO SW-BDIIALE
+END-IF
+IF SW-BDIIALE = 0
+READ BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALE
+END-READ
+END-IF
+END-PERFORM
+IF TIPOID-E = 1
+IF ESTADO-VIG-BDIIREGI = 12
+MOVE  07   TO  CODIGO-ERRORELSE
+IF ESTADO-VIG-BDIIREGI = 21
+MOVE  06  TO CODIGO-ERROR
+ADD   1   TO NO-COINCIDE-REGIS
+ADD   1   TO CONT-FALLECIDOSEND-IF
+END-IF
+END-IF
+END-IF
+END-IF
+END-IF.4240-CONTAR-TIPO-CUENTA.
+******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORESADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES
+*INSERTA CUENTA SIN VALIDAR EN BDIIALEPERFORM 4300-MODIFICAR-BDIIALEELSE
+*ES 00: REGISTROS CORRECTOSADD 1 TO W-CONT-TIPO-5ADD  1  TO REG-CORRECTOS
+*SI ES UNA EMPRESA
+IF TIPOID-E = 2 OR 3
+ADD 1 TO W-CONT-TIPO-5-PJEND-IF
+END-IF
+END-IF.4210-VALIDACION-ID-NO-FIGURA.
+******************************************************************
+* Validación de IDs que no figuran en las bases normales
+******************************************************************MOVE 0 TO HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCH
+*    VALIDA SI LA IDENTIFICACIÓN ESTÁ EN LA BASE DE DATOS ALTERNAPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0IF TIP-IDE-BDIIVIDE = 1
+*ES UNA CÉDULA
+MOVE 04 TO CODIGO-ERRORADD  1  TO NO-EXISTE-REGISELSE
+*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERRORADD   1 TO  NO-EXISTE-DIANEND-IF
+END-IF.4300-MODIFICAR-BDIIALE.
+******************************************************************
+* Se impacta el archivo BDIIALE con una o dos inserciones,
+* modificaciones o eliminaciones segun haya o no demandas y
+* embargos
+******************************************************************INITIALIZE REG-BDIIALE*    SI HAY DEMANDASIF JURAD-DEMANDAS-VIGENTES > ZEROOR JURAD-DEMANDAS-TERMINADAS > ZEROMOVE "J001" TO LLASEC-BDIIALE
+*ARMA DATOS DE DEMANDASMOVE JURAD-DEMANDAS-VIGENTES TO D-VIGENTESTIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALE
+IF FUENTE-BDIIALE = 990003 AND
+FEC-NOV-BDIIALE <= FECHA-PROC-R ANDFEC-VEN-BDIIALE >= FECHA-PROC-R ANDBLOQUEO-BDIIALE = 0
+MOVE 1 TO SW-BDIIALE
+END-IF
+IF SW-BDIIALE = 0
+READ BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALE
+END-READ
+END-IF
+END-PERFORM
+IF TIPOID-E = 1
+IF ESTADO-VIG-BDIIREGI = 12
+MOVE  07   TO  CODIGO-ERRORELSE
+IF ESTADO-VIG-BDIIREGI = 21
+MOVE  06  TO CODIGO-ERROR
+ADD   1   TO NO-COINCIDE-REGIS
+ADD   1   TO CONT-FALLECIDOSEND-IF
+END-IF
+END-IF
+END-IF
+END-IF
+END-IF.4240-CONTAR-TIPO-CUENTA.
+******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF
+END-IF
+ELSE
+IF SW-NOMBRES-BDIIVIDE = 1IF TIPOID-E <> 1
+MOVE 01 TO CODIGO-ERROR
+ADD 1 TO NO-COINCIDE-DIANELSE
+MOVE   02 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-REGISEND-IF
+ELSE
+INITIALIZE LLAVE-BDIIALEMOVE  TIPOID-E TO TIP-IDE-BDIIALEMOVE  NUMID-E  TO NUM-IDE-BDIIALEMOVE  990003   TO FUENTE-BDIIALESTART BDIIALE KEY NOT < LLAVE-BDIIALEINVALID KEY MOVE 1 TO SW-BDIIALENOT INVALID KEY MOVE 0 TO SW-BDIIALEREAD BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALEEND-READ
+MOVE FUNCTION CURRENT-DATE TO FECHA-PROC-RPERFORM UNTIL SW-BDIIALE = 1 OR
+TIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALETIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALE
+IF FUENTE-BDIIALE = 990003 AND
+FEC-NOV-BDIIALE <= FECHA-PROC-R ANDFEC-VEN-BDIIALE >= FECHA-PROC-R ANDBLOQUEO-BDIIALE = 0
+MOVE 1 TO SW-BDIIALE
+END-IF
+IF SW-BDIIALE = 0
+READ BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALE
+END-READ
+END-IF
+END-PERFORM
+IF TIPOID-E = 1
+IF ESTADO-VIG-BDIIREGI = 12
+MOVE  07   TO  CODIGO-ERRORELSE
+IF ESTADO-VIG-BDIIREGI = 21
+MOVE  06  TO CODIGO-ERROR
+ADD   1   TO NO-COINCIDE-REGIS
+ADD   1   TO CONT-FALLECIDOSEND-IF
+END-IF
+END-IF
+END-IF
+END-IF
+END-IF.4240-CONTAR-TIPO-CUENTA.
+******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES
+
+4240-CONTAR-TIPO-CUENTA.******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES
+*INSERTA CUENTA SIN VALIDAR EN BDIIALEPERFORM 4300-MODIFICAR-BDIIALEELSE
+*ES 00: REGISTROS CORRECTOSADD 1 TO W-CONT-TIPO-5ADD  1  TO REG-CORRECTOS
+*SI ES UNA EMPRESA
+IF TIPOID-E = 2 OR 3
+ADD 1 TO W-CONT-TIPO-5-PJEND-IF
+END-IF
+END-IF.4210-VALIDACION-ID-NO-FIGURA.
+******************************************************************
+* Validación de IDs que no figuran en las bases normales
+******************************************************************MOVE 0 TO HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCH
+*    VALIDA SI LA IDENTIFICACIÓN ESTÁ EN LA BASE DE DATOS ALTERNAPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0IF TIP-IDE-BDIIVIDE = 1
+*ES UNA CÉDULA
+MOVE 04 TO CODIGO-ERRORADD  1  TO NO-EXISTE-REGISELSE
+*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERROR/contar-tipo-cuemnta/Address search hit BOTTOM without matching pattern/Address search hit BOTTOM without matching pattern*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERRORADD   1 TO  NO-EXISTE-DIANEND-IF
+END-IF.4300-MODIFICAR-BDIIALE.
+******************************************************************
+* Se impacta el archivo BDIIALE con una o dos inserciones,
+* modificaciones o eliminaciones segun haya o no demandas y
+* embargos
+******************************************************************INITIALIZE REG-BDIIALE*    SI HAY DEMANDASIF JURAD-DEMANDAS-VIGENTES > ZEROOR JURAD-DEMANDAS-TERMINADAS > ZEROMOVE "J001" TO LLASEC-BDIIALE
+*ARMA DATOS DE DEMANDASMOVE JURAD-DEMANDAS-VIGENTES TO D-VIGENTESMOVE JURAD-DEMANDAS-TERMINADAS TO D-TERMINADOSSTRING "20" JURAD-DEMANDAS-FECHA-ULTIMADELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.*    SI HAY EMBARGOSIF JURAD-EMBARGOS-VIGENTES > ZEROOR JURAD-EMBARGOS-TERMINADOS > ZEROMOVE "J002" TO LLASEC-BDIIALE
+*ARMA DATOS DE EMBARGOSMOVE JURAD-EMBARGOS-VIGENTES TO D-VIGENTESMOVE JURAD-EMBARGOS-TERMINADOS TO D-TERMINADOSSTRING "20" JURAD-EMBARGOS-FECHA-ULTIMODELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* PARTE DE LA CARGA DE DATOS EN EL REGISTRO BDIIALE Y GRABACION
+* DEL MISMO QUE ES COMUN A DEMANDAS Y EMBARGOS
+* EL DATO LLASEC-BDIIALE YA TIENE "J001" O "J002"
+******************************************************************
+*    COMPLETA LA CLAVE E INTENTA LEER LA ALERTA, SI SE LEYO OK
+*    EL FILE STATUS DE BDIIALE QUEDA CON "00"PERFORM 4333-LEER-BDIIALE-RANDOM*    PROCESA SEGUN EL TIPO DE NOVEDAD I M E4240-CONTAR-TIPO-CUENTA.******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES
+*INSERTA CUENTA SIN VALIDAR EN BDIIALEPERFORM 4300-MODIFICAR-BDIIALEELSE
+*ES 00: REGISTROS CORRECTOSADD 1 TO W-CONT-TIPO-5ADD  1  TO REG-CORRECTOS
+*SI ES UNA EMPRESA
+IF TIPOID-E = 2 OR 3
+ADD 1 TO W-CONT-TIPO-5-PJEND-IF
+END-IF
+END-IF.4210-VALIDACION-ID-NO-FIGURA.
+******************************************************************
+* Validación de IDs que no figuran en las bases normales
+******************************************************************MOVE 0 TO HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCH
+*    VALIDA SI LA IDENTIFICACIÓN ESTÁ EN LA BASE DE DATOS ALTERNAPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0IF TIP-IDE-BDIIVIDE = 1
+*ES UNA CÉDULA
+MOVE 04 TO CODIGO-ERRORADD  1  TO NO-EXISTE-REGISELSE
+*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-DIANELSE
+MOVE   02 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-REGISEND-IF
+ELSE
+INITIALIZE LLAVE-BDIIALEMOVE  TIPOID-E TO TIP-IDE-BDIIALEMOVE  NUMID-E  TO NUM-IDE-BDIIALEMOVE  990003   TO FUENTE-BDIIALESTART BDIIALE KEY NOT < LLAVE-BDIIALEINVALID KEY MOVE 1 TO SW-BDIIALENOT INVALID KEY MOVE 0 TO SW-BDIIALEREAD BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALEEND-READ
+MOVE FUNCTION CURRENT-DATE TO FECHA-PROC-RPERFORM UNTIL SW-BDIIALE = 1 OR
+TIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALE
+IF FUENTE-BDIIALE = 990003 AND
+FEC-NOV-BDIIALE <= FECHA-PROC-R ANDFEC-VEN-BDIIALE >= FECHA-PROC-R ANDBLOQUEO-BDIIALE = 0
+MOVE 1 TO SW-BDIIALE
+END-IF
+IF SW-BDIIALE = 0
+READ BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALE
+END-READ
+END-IF
+END-PERFORM
+IF TIPOID-E = 1
+IF ESTADO-VIG-BDIIREGI = 12
+MOVE  07   TO  CODIGO-ERRORELSE
+IF ESTADO-VIG-BDIIREGI = 21
+MOVE  06  TO CODIGO-ERROR
+ADD   1   TO NO-COINCIDE-REGIS
+ADD   1   TO CONT-FALLECIDOSEND-IF
+END-IF
+END-IF
+END-IF
+END-IF
+END-IF.4240-CONTAR-TIPO-CUENTA.
+******************************************************************ADD  1  TO TIPO-ID-INVALIDOELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF
+END-IF
+ELSE
+IF SW-NOMBRES-BDIIVIDE = 1IF TIPOID-E <> 1
+MOVE 01 TO CODIGO-ERROR
+ADD 1 TO NO-COINCIDE-DIANELSEEXIT PARAGRAPHEND-IF
+*    NOMBRES Y APELLIDOSIF JURAD-NOMBRE = SPACESCALL "PONERR" USING "05" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS VIGENTESIF JURAD-DEMANDAS-VIGENTES IS NOT NUMERICCALL "PONERR" USING "06" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS TERMINADASIF JURAD-DEMANDAS-TERMINADAS IS NOT NUMERICCALL "PONERR" USING "07" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMA DEMANDA VIGENTE YYMMDDIF JURAD-DEMANDAS-FECHA-ULTIMA IS NOT NUMERICCALL "PONERR" USING "08" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-DEMANDAS-FECHA-ULTIMA TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "09" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS VIGENTESIF JURAD-EMBARGOS-VIGENTES NOT NUMERICCALL "PONERR" USING "10" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS TERMINADOSIF JURAD-EMBARGOS-TERMINADOS NOT NUMERICCALL "PONERR" USING "11" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMO EMBARGO VIGENTE YYMMDDIF JURAD-EMBARGOS-FECHA-ULTIMO IS NOT NUMERICCALL "PONERR" USING "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "13" JURAD-REG E-ERRORESEND-IF.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSECALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SEÑALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOPERFORM 4800-PROCESO-REG-TEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    VALIDACION FORMAL DE LOS DATOSMOVE 0 TO CODIGO-ERROR
+*
+    PERFORM 4200-VALIDACION-SEMANTICA
+*
+    PERFORM 4240-CONTAR-TIPO-CUENTA
+*
+    PERFORM 4100-VALIDACION-FORMAL
+*
+    IF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERRORELSE
+PERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OKEND-IF.4100-VALIDACION-FORMAL.
+******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE IDENTIFICACIONIF JURAD-ID-NUMEROX IS NOT NUMERICCALL "PONERR" USING "03" JURAD-REG E-ERRORESEND-IF
+IF JURAD-ID-NUMERO NOT > 0CALL "PONERR" USING "04" JURAD-REG E-ERRORESEND-IF
+*    SI EL MOVIMIENTO ES UNA ELIMINACION LOS DATOS SUBSIGUIENTES
+*    NO SE CONTROLANIF JURAD-TIPO-NOVEDAD = "E"EXIT PARAGRAPHEND-IF
+4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORIF JURAD-TIPO-NOVEDAD <> "T"ADD 1 TO REG-LEIDOSEND-IF
+WHEN "10"
+*FIN DEL ARCHIVO DE INPUT:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*DE QUE SE TERMINARA EL ARCHIVODISPLAY "FALTA EL REG DE TOTALES DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*ERROR DE LECTURA: CANCELACION DEL PROCESODISPLAY "ERROR EN LECTURA DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    VALIDACION DEL TIPO DE MOVIMIENTOIF JURAD-TIPO-NOVEDAD NOT = "I" AND "M" AND "E" AND "T"CALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF03 PIC X(59) VALUE"Inserción de alerta que ya existe".03 PIC X(11) VALUE "20 0000000 ".03 PIC X(59) VALUE"Tipo de Identificacion 7".
+*----------------- insertar nuevos items aqui -------------------03 PIC X(11) VALUE "00 0000000 ".03 PIC X(59) VALUE "--- FIN DE LA LISTA (COD 00) ---".03PIC X(3500). *> LOS 50 ITEMS
+01 E-ERRORES-2REDEFINES E-ERRORES.03PIC XX.03PIC X(300).03PIC 9(8).03 E-ERROROCCURS 50 INDEXED EX.05 E-CODIGOPIC XX.05PIC X.05 E-CONTADORPIC 9(7).05PIC X.05 E-DESCRIPCIONPIC X(59).
+01 E-EDITPIC Z(8)B.******************************************************************
+* Control de rangos de valores de las fechas del input
+01 VALIDACIONES-FECHAS.02 ANO-VAL-Xpic 9(04).88 ANO-VALvalue 1900 thru 2050.02 MES-VAL-Xpic 9(02).88 MES-VALvalue 01   thru 12.02 DIA-VAL-Xpic 9(02).88 DIA-VALvalue 01   thru 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORIF JURAD-TIPO-NOVEDAD <> "T"ADD 1 TO REG-LEIDOSEND-IF
+WHEN "10"
+*FIN DEL ARCHIVO DE INPUT:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*DE QUE SE TERMINARA EL ARCHIVODISPLAY "FALTA EL REG DE TOTALES DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*ERROR DE LECTURA: CANCELACION DEL PROCESODISPLAY "ERROR EN LECTURA DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4000-PROCESAR-REGISTRO-2.
+****************************************************************
+* Controla los datos de un registro de JURAD y si es OK lo usa
+* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    VALIDACION DEL TIPO DE MOVIMIENTOIF JURAD-TIPO-NOVEDAD NOT = "I" AND "M" AND "E" AND "T"CALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IFCALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SEÑALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOPERFORM 4800-PROCESO-REG-TEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    VALIDACION FORMAL DE LOS DATOSMOVE 0 TO CODIGO-ERROR
+*
+    PERFORM 4200-VALIDACION-SEMANTICA
+*
+    PERFORM 4240-CONTAR-TIPO-CUENTA
+*
+    PERFORM 4100-VALIDACION-FORMAL
+*
+    IF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERRORELSE
+PERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OKEND-IF.4100-VALIDACION-FORMAL.
+******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE IDENTIFICACIONIF JURAD-ID-NUMEROX IS NOT NUMERICCALL "PONERR" USING "03" JURAD-REG E-ERRORESEND-IF
+IF JURAD-ID-NUMERO NOT > 0CALL "PONERR" USING "04" JURAD-REG E-ERRORESEND-IF
+*    SI EL MOVIMIENTO ES UNA ELIMINACION LOS DATOS SUBSIGUIENTES
+*    NO SE CONTROLANIF JURAD-TIPO-NOVEDAD = "E"EXIT PARAGRAPHEND-IFEXIT PARAGRAPHEND-IF
+*    NOMBRES Y APELLIDOSIF JURAD-NOMBRE = SPACESCALL "PONERR" USING "05" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS VIGENTESIF JURAD-DEMANDAS-VIGENTES IS NOT NUMERICCALL "PONERR" USING "06" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE DEMANDAS TERMINADASIF JURAD-DEMANDAS-TERMINADAS IS NOT NUMERICCALL "PONERR" USING "07" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMA DEMANDA VIGENTE YYMMDDIF JURAD-DEMANDAS-FECHA-ULTIMA IS NOT NUMERICCALL "PONERR" USING "08" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-DEMANDAS-FECHA-ULTIMA TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "09" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS VIGENTESIF JURAD-EMBARGOS-VIGENTES NOT NUMERICCALL "PONERR" USING "10" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS TERMINADOSIF JURAD-EMBARGOS-TERMINADOS NOT NUMERICCALL "PONERR" USING "11" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMO EMBARGO VIGENTE YYMMDDIF JURAD-EMBARGOS-FECHA-ULTIMO IS NOT NUMERICCALL "PONERR" USING "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "13" JURAD-REG E-ERRORESEND-IF.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSEADD  1  TO TIPO-ID-INVALIDOELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF
+END-IF
+ELSE
+IF SW-NOMBRES-BDIIVIDE = 1IF TIPOID-E <> 1
+MOVE 01 TO CODIGO-ERROR
+ADD 1 TO NO-COINCIDE-DIANELSEADD 1 TO NO-COINCIDE-DIANELSE
+MOVE   02 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-REGISEND-IF
+ELSE
+INITIALIZE LLAVE-BDIIALEMOVE  TIPOID-E TO TIP-IDE-BDIIALEMOVE  NUMID-E  TO NUM-IDE-BDIIALEMOVE  990003   TO FUENTE-BDIIALESTART BDIIALE KEY NOT < LLAVE-BDIIALEINVALID KEY MOVE 1 TO SW-BDIIALENOT INVALID KEY MOVE 0 TO SW-BDIIALEREAD BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALEEND-READ
+MOVE FUNCTION CURRENT-DATE TO FECHA-PROC-RPERFORM UNTIL SW-BDIIALE = 1 OR
+TIPOID-E <> TIP-IDE-BDIIALE ORNUMID-E <> NUM-IDE-BDIIALE
+IF FUENTE-BDIIALE = 990003 AND
+FEC-NOV-BDIIALE <= FECHA-PROC-R ANDFEC-VEN-BDIIALE >= FECHA-PROC-R ANDBLOQUEO-BDIIALE = 0
+MOVE 1 TO SW-BDIIALE
+END-IF
+IF SW-BDIIALE = 0
+READ BDIIALE NEXT RECORD
+AT END MOVE 1 TO SW-BDIIALE
+END-READ
+END-IF
+END-PERFORM
+IF TIPOID-E = 1
+IF ESTADO-VIG-BDIIREGI = 12
+MOVE  07   TO  CODIGO-ERRORELSE
+IF ESTADO-VIG-BDIIREGI = 21
+MOVE  06  TO CODIGO-ERROR
+ADD   1   TO NO-COINCIDE-REGIS
+ADD   1   TO CONT-FALLECIDOSEND-IF
+END-IF
+END-IF
+END-IF
+END-IF
+END-IF.4240-CONTAR-TIPO-CUENTA.
+******************************************************************4240-CONTAR-TIPO-CUENTA.******************************************************************
+*    Conteo de los registros por "tipo", dependiendo del código
+*    de error:
+*    00=OK
+*    01=NIT OK, nombre no coincide
+*    02=cédula OK, nombre no coincide
+*    03=NIT no figura
+*    04=cédula no figura pero está en base alterna
+*    05=tipo id no es 1|2|3|4
+*    cuenta tipo 5: sin error
+*    cuenta tipo 6: 01 02 06 07
+*    cuenta tipo 7: 03 04 05
+******************************************************************IF CODIGO-ERROR = 01 OR 02 OR 06 OR 07ADD 1 TO W-CONT-TIPO-6ELSE
+IF CODIGO-ERROR = 03 OR 04 OR 05ADD 1 TO W-CONT-TIPO-7CALL "PONERR" USING "20" JURAD-REG E-ERRORES
+*INSERTA CUENTA SIN VALIDAR EN BDIIALEPERFORM 4300-MODIFICAR-BDIIALEELSE
+*ES 00: REGISTROS CORRECTOSADD 1 TO W-CONT-TIPO-5ADD  1  TO REG-CORRECTOS
+*SI ES UNA EMPRESA
+IF TIPOID-E = 2 OR 3
+ADD 1 TO W-CONT-TIPO-5-PJEND-IF
+END-IF
+END-IF.4210-VALIDACION-ID-NO-FIGURA.
+******************************************************************
+* Validación de IDs que no figuran en las bases normales
+******************************************************************MOVE 0 TO HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCH
+*    VALIDA SI LA IDENTIFICACIÓN ESTÁ EN LA BASE DE DATOS ALTERNAPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0IF TIP-IDE-BDIIVIDE = 1
+*ES UNA CÉDULA
+MOVE 04 TO CODIGO-ERRORADD  1  TO NO-EXISTE-REGISELSE
+*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERROR*NO ES UNA CÉDULA
+MOVE 03 TO CODIGO-ERRORADD   1 TO  NO-EXISTE-DIANEND-IF
+END-IF.4300-MODIFICAR-BDIIALE.
+******************************************************************
+* Se impacta el archivo BDIIALE con una o dos inserciones,
+* modificaciones o eliminaciones segun haya o no demandas y
+* embargos
+******************************************************************INITIALIZE REG-BDIIALE*    SI HAY DEMANDASIF JURAD-DEMANDAS-VIGENTES > ZEROOR JURAD-DEMANDAS-TERMINADAS > ZEROMOVE "J001" TO LLASEC-BDIIALE
+*ARMA DATOS DE DEMANDASMOVE JURAD-DEMANDAS-VIGENTES TO D-VIGENTESMOVE JURAD-DEMANDAS-TERMINADAS TO D-TERMINADOSSTRING "20" JURAD-DEMANDAS-FECHA-ULTIMADELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.*    SI HAY EMBARGOSIF JURAD-EMBARGOS-VIGENTES > ZEROOR JURAD-EMBARGOS-TERMINADOS > ZEROMOVE "J002" TO LLASEC-BDIIALE
+*ARMA DATOS DE EMBARGOSMOVE JURAD-EMBARGOS-VIGENTES TO D-VIGENTESMOVE JURAD-EMBARGOS-TERMINADOS TO D-TERMINADOSSTRING "20" JURAD-EMBARGOS-FECHA-ULTIMODELIMITED SIZE INTO D-FECHA-ULTIMAPERFORM 4300-MODIFICAR-BDIIALE-DATOSEND-IF.4300-MODIFICAR-BDIIALE-DATOS.
+******************************************************************
+* PARTE DE LA CARGA DE DATOS EN EL REGISTRO BDIIALE Y GRABACION
+* DEL MISMO QUE ES COMUN A DEMANDAS Y EMBARGOS
+* EL DATO LLASEC-BDIIALE YA TIENE "J001" O "J002"
+******************************************************************
+*    COMPLETA LA CLAVE E INTENTA LEER LA ALERTA, SI SE LEYO OK
+*    EL FILE STATUS DE BDIIALE QUEDA CON "00"PERFORM 4333-LEER-BDIIALE-RANDOM*    PROCESA SEGUN EL TIPO DE NOVEDAD I M E
+*    PROCESA SEGUN EL TIPO DE NOVEDAD I M EEVALUATE JURAD-TIPO-NOVEDADWHEN "I"
+ADD 1 TO N-REG-TIPO-I-OKPERFORM 4300-MODIFICAR-BDIIALE-IWHEN "M"
+ADD 1 TO N-REG-TIPO-M-OKPERFORM 4300-MODIFICAR-BDIIALE-MWHEN "E"
+ADD 1 TO N-REG-TIPO-E-OKPERFORM 4300-MODIFICAR-BDIIALE-EWHEN OTHER
+*ESTO ES "IMPOSIBLE" POR CONTROL DE CONSISTENCIA ANTERIORDISPLAY "ERROR DE LOGICA: TIPO-NOVEDAD="JURAD-TIPO-NOVEDAD " REG NUM: " N-REG-LEIDOSDISPLAY "REGISTRO DE JURAD: " DISPLAY JURAD-REGPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4300-MODIFICAR-BDIIALE-I.
+******************************************************************
+* INSERCION DE UNA ALERTA NUEVA
+******************************************************************
+*    SI EL REGISTRO EXISTIA ES UN ERRORIF EST-BDIIALE = "00"CALL "PONERR" USING "19" JURAD-REG E-ERRORESDISPLAY "LLAVE: " LLAVE-BDIIALEADD 1 TO N-ALE-YA-EXISTEEXIT PARAGRAPHEND-IF*    COMPLETA LOS DATOS DEL REGISTROINITIALIZE ENCABEZADO-BDIIALEMOVE P-FECHA-PROCESO-YYYYMMDD TO FEC-NOV-BDIIALEFEC-REP-BDIIALEMOVE P-FECHA-PROCESO-50 TO FEC-VEN-BDIIALEMOVE 0 TO BLOQUEO-BDIIALEMOVE D-DATAHOST TO INF-DATAHOST-BDIIALEMOVE SPACES TO LINEAS-BDIIALEPERFORM 4333-GRABAR-BDIIALE.4300-MODIFICAR-BDIIALE-M.
+******************************************************************
+* MODIFICACION DE UNA ALERTA EXISTENTE
+******************************************************************
+*    SI EL REGISTRO NO EXISTIA ES UN ERROR*******************************************************************    SI EL REGISTRO NO EXISTIA ES UN ERRORIF EST-BDIIALE NOT = "00"CALL "PONERR" USING "17" JURAD-REG E-ERRORES"LLAVE: " LLAVE-BDIIALEADD 1 TO N-ALE-NO-EXISTEEXIT PARAGRAPHEND-IF*    REEMPLAZA LA FECHA DE REPORTE Y LOS VALORESMOVE P-FECHA-PROCESO-YYYYMMDD TO FEC-REP-BDIIALEMOVE D-DATAHOST TO INF-DATAHOST-BDIIALEMOVE SPACES TO LINEAS-BDIIALEPERFORM 4333-REGRABAR-BDIIALE.4300-MODIFICAR-BDIIALE-E.
+******************************************************************
+* ELIMINACION DE UNA ALERTA
+******************************************************************
+*    ELIMINA EL REGISTROIF EST-BDIIALE = "00"PERFORM 4333-ELIMINAR-BDIIALEELSE
+CALL "PONERR" USING "18" JURAD-REG E-ERRORES"LLAVE: " LLAVE-BDIIALEADD 1 TO N-ALE-NO-EXISTEEND-IF.4333-LEER-BDIIALE-RANDOM.
+******************************************************************
+* ARMA CLAVE EXACTA Y LEE UN REGISTRO DE BDIIALE
+* USA LOS DATOS DEL REG INPUT, EXCEPTO LLASEC QUE ESTA PRECARGADO
+* CUANDO PUDO LEER OK EL FILE STATUS EST-BDIIALE QUEDA CON "00"
+******************************************************************MOVE JURAD-ID-TIPO TO TIP-IDE-BDIIALEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIALEMOVE P-COD-SUSCRIPTOR TO FUENTE-BDIIALEMOVE 000 TO COD-ALERTA-BDIIALE
+*    LLASEC-BDIIALE FUÉ PREVIAMENTE CARGADO CON J001 O J002READ BDIIALE
+EVALUATE EST-BDIIALEWHEN "00"
+CONTINUE
+WHEN "23"
+CONTINUE
+WHEN OTHERCONTINUEWHEN OTHER
+DISPLAY "ERROR AL LEER BDIIALE FS: " EST-BDIIALE" KEY: " LLAVE-BDIIALEDISPLAY "ULTIMO REGISTRO PROCESADO: "DISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-GRABAR-BDIIALE.
+******************************************************************
+* INSERTA UN REGISTRO NUEVO EN BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+WRITE REG-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-INSERTADASWHEN OTHER
+DISPLAY "ERROR AL GRABAR BDIIALE FS: " EST-BDIIALE" KEY: " LLAVE-BDIIALEDISPLAY "REGISTRO BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-REGRABAR-BDIIALE.
+******************************************************************
+* REGRABA UN REGISTRO MODIFICADO EN BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+REWRITE REG-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-MODIFICADASWHEN OTHER
+DISPLAY "ERROR AL REGRABAR BDIIALE FS: " EST-BDIIALE" KEY: " LLAVE-BDIIALEDISPLAY "REGISTRO BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4333-ELIMINAR-BDIIALE.
+4333-ELIMINAR-BDIIALE.
+******************************************************************
+* ELIMINA UN REGISTRO DE BDIIALE
+******************************************************************IF NOT PROCESO-REAL
+EXIT PARAGRAPHEND-IF
+DELETE BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+ADD 1 TO N-ALE-ELIMINADASWHEN OTHER
+DISPLAY "ERROR AL DELETEAR BDIIALE FS: " EST-BDIIALE" KEY: " LLAVE-BDIIALEDISPLAY "REGISTRO BDIIALE: "DISPLAY REG-BDIIALEPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.4800-PROCESO-REG-T.
+******************************************************************
+* EL REGISTRO LEIDO EN EL ARCHIVO JURAD ES TIPO "T" CON TOTALES
+* DE CONTROL, Y DEBERÍA SER EL ULTIMO DEL ARCHIVO
+******************************************************************
+* CONTROL DE LOS TOTALES CALCULADOS CONTRA LOS ESPERADOSMOVE "NO" TO E-HAY-ERROR
+*    CANTIDAD DE REGISTROS I M EIF FUNCTION NUMVAL(JURADT-REGISTROS) = N-REG-LEIDOSCONTINUE
+ELSE
+DISPLAY " "
+DISPLAY "NO COINCIDE LA CANTIDAD DE REGISTROS:"JURADT-REGISTROS " CON LOS LEIDOS:" N-REG-LEIDOSMOVE "SI" TO E-HAY-ERROREND-IF.4900-GRABAR-ERROR.
+******************************************************************
+* EL REGISTRO DE JURAD TIENE ERROR: SE GRABA EN EL ARCHIVO ERRS
+* CON INDICACION DEL ERROR DETECTADO
+******************************************************************MOVE JURAD-REG TO ERRS-REG
+*    LISTA DE LOS CODIGOS DE LOS ERRORES DEL REGISTROMOVE E-ERRORES-REG TO ERRS-CAUSA-RECHAZOWRITE ERRS-REGEVALUATE ERRS-FS
+WHEN "00"
+CONTINUEWHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "ERROR AL GRABAR EL ARCHIVO DE ERRORES "DISPLAY "NOMBRE DEL ARCHIVO: " ERRS-FILE-NAMEDISPLAY "FILE STATUS: " ERRS-FSPERFORM 9000-CANCELAR-PROGRAMAGOBACKEND-EVALUATE.1000-RUTINA-INICIAL.
+******************************************************************
+* Todas las operaciones que se realizan una sola vez, al comienzo
+* del programa:
+*   - obtencion de los parametros
+*   - apertura del archivo de entrada
+*   - apertura de todos los demas archivos
+*   - eliminacion de datos existentes si es refresque completo
+*   - carga en memoria de los IDs de inconsistentes
+******************************************************************
+* REGISTRA HORA DE INICIOACCEPT W-HORA-INICIO FROM TIME* OBTIENE INFORMACION SOBRE LA CORRIDA DE LA LINEA DE COMANDO: EL
+* NOMBRE DEL ARCHIVO DE ENTRADA (QUE CONTIENE EL TIPO DE PROCESO),
+* EL INDICADOR DE PROCESO REAL O EN FALSO (DEFAULT)ACCEPT P-COMMAND-LINE FROM COMMAND-LINE
+*    ANIMATOR DE TERMINAL NO PERMITE PARAMETROS EN COMMANDLINE ...DISPLAY "PARAMETROS: " P-COMMAND-LINEUNSTRING P-COMMAND-LINE DELIMITED BY ALL " " INTOP-FILE-NAME P-PROCESO-REAL* EL PROGRAMA SE ANUNCIA EN LA CONSOLAIF PROCESO-REAL
+DISPLAY PGM " CARGA DE ARCHIVO JURAD - PROCESO REAL"ELSE
+DISPLAY PGM " CARGA DE ARCHIVO JURAD - PROCESO EN FALSO"END-IF* EL INDICADOR DE PROCESO REAL DEBE SER 1 O 2IF P-PROCESO-REAL NOT = "1" AND "2"DISPLAY "EL INDICADOR DE PROCESO REAL ES INVALIDO"DISPLAY "DEBE SER 1 O 2"PERFORM 9000-CANCELAR-PROGRAMAEND-IF* CONTROL DEL TIPO DE PROCESO, DEL NOMBRE DEL ARCHIVOEVALUATE P-TIPO-PROCESO* CONTROL DEL TIPO DE PROCESO, DEL NOMBRE DEL ARCHIVOEVALUATE P-TIPO-PROCESOWHEN "01"
+DISPLAY "01 ENVIO ORIGINAL - CARGA TOTAL 1A VEZ"WHEN "02"
+DISPLAY "02 ARCHIVO SEMANAL - CARGA PARCIAL"WHEN "03"
+DISPLAY "03 ARCHIVO MENSUAL - CARGA PARCIAL"WHEN "04"
+DISPLAY "04 REFRESQUE TOTAL - CARGA TOTAL"WHEN OTHER
+*VALOR INVALIDO
+DISPLAY "EL TIPO DE PROCESO " P-TIPO-PROCESO" ES INVALIDO (DEBE SER 01 02 03 O 04)"PERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.* EDITA LA FECHA DE PROCESO DDMMAA DEL PARAMETRO EN FORMATO
+* YYYYMMDD
+STRING "20" P-FECHA-PROCESO(5:6) P-FECHA-PROCESO(3:4)P-FECHA-PROCESO(1:2) DELIMITED SIZEINTO P-FECHA-PROCESO-YYYYMMDDDISPLAY "FECHA DE PROCESO: " P-FECHA-PROCESO-YYYYMMDD* CALCULA UNA FECHA 50 ANIOS POSTERIOR A LA DE PROCESOMOVE P-FECHA-PROCESO-YYYYMMDD TO P-FECHA-PROCESO-50ADD 50 TO P-FECHA-PROCESO-50YYYY* APERTURA DEL ARCHIVO DE ENTRADASTRING "$TEMPORALES/" P-FILE-NAME INTO P-FILE-PATHOPEN INPUT JURADEVALUATE JURAD-FS
+WHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "ERROR EN OPEN DEL ARCHIVO JURAD "DISPLAY "PATH DEL ARCHIVO: " P-FILE-PATHDISPLAY "FILE STATUS: " JURAD-FSPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAGOBACKEND-EVALUATE.* APERTURA DEL ARCHIVO DE ERRORESSTRING "$TEMPORALES/" P-FILE-NAME(1:19) ".ERRS"INTO ERRS-FILE-NAMEOPEN OUTPUT ERRSEVALUATE ERRS-FS
+WHEN "00"
+CONTINUEWHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "ERROR EN OPEN DEL ARCHIVO DE ERRORES "DISPLAY "NOMBRE DEL ARCHIVO: " ERRS-FILE-NAMEDISPLAY "FILE STATUS: " ERRS-FSPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAGOBACKEND-EVALUATE.* APERTURA DE LOS ARCHIVOS MAESTROS
+* SI ALGÚN OPEN FALLA EL PROGRAMA CANCELAOPEN INPUT BDIIREGIOPEN INPUT BDIIDIANOPEN INPUT BDIIDAS.* APERTURA DEL ARCHIVO DE ALERTAS EN LINEAIF PROCESO-REAL
+OPEN I-O BDIIALEELSE
+OPEN INPUT BDIIALEEND-IF.* SI ES UN REFRESQUE TOTAL (CODIGO 04) SE ELIMINAN LOS REGISTROS
+* DE JURAD EXISTENTESIF P-TIPO-PROCESO = "04" AND PROCESO-REALPERFORM 1001-ELIMINAR-TODOEND-IF.1001-ELIMINAR-TODO.
+******************************************************************
+* ELIMINA LOS REGISTROS DE ALERTAS EXISTENTES EN EL ARCHIVO DE
+* ALERTAS EN LINEA, PREVIO A UN REFRESQUE TOTAL
+******************************************************************DISPLAY "ELIMINANDO TODA LA INFORMACION CON FUENTE JURAD"
+*    POSICIONA EN EL PRIMER REG DE JURADMOVE ZERO TO TIP-IDE-BDIIALEMOVE ZERO TO NUM-IDE-BDIIALEMOVE P-COD-SUSCRIPTOR TO FUENTE-BDIIALEMOVE ZEROS TO COD-ALERTA-BDIIALEMOVE LOW-VALUES TO LLASEC-BDIIALESTART BDIIALE KEY > LLAVE-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+*POSICIONADO
+CONTINUE
+WHEN OTHER
+*NO HAY REGISTROSWHEN OTHER*NO HAY REGISTROS
+DISPLAY "NO HAY REGISTROS A ELIMINAR FS:" EST-BDIIALEEXIT PARAGRAPHEND-EVALUATE.*    LEE SECUENCIALMENTE Y ELIMINA LOS REGISTROS DE JURAD
+*    HASTA EL FIN DEL ARCHIVOPERFORM UNTIL EST-BDIIALE NOT = "00"READ BDIIALE NEXT RECORDEVALUATE EST-BDIIALEWHEN "00"
+IF FUENTE-BDIIALE = P-COD-SUSCRIPTOR
+*ES UN ALERTA DE JURAD
+DELETE BDIIALE
+IF EST-BDIIALE = "00"
+ADD 1 TO N-ALE-BORRADASELSE
+*ERROR EN LA ELIMINACION
+DISPLAY "ERROR AL ELIMINAR UN REGISTRO DE ""BDIIALE VACIANDO LOS DATOS"
+DISPLAY "CLAVE: " LLAVE-BDIIALEDISPLAY "REG BORRADOS: " N-ALE-BORRADASPERFORM 9000-CANCELAR-PROGRAMAEND-IF
+END-IF
+WHEN "10"
+*FIN DE ARCHIVO: SALE NORMALMENTEDISPLAY "FIN DE LOS REGISTROS A ELIMINAR - LEÍDOS:"N-ALE-LEIDAS
+WHEN OTHER
+*LECTURA ANORMAL: CANCELACION DEL PROGRAMADISPLAY "ERROR EN LECTURA DEL ARCHIVO DE ALERTAS ""ONLINE"
+DISPLAY "FILE STATUS: " EST-BDIIALEPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAEND-EVALUATEEND-PERFORM.
+DISPLAY "TERMINO LA ELIMINACION TOTAL DE JURAD"DISPLAY "REG BORRADOS: " N-ALE-BORRADAS.7000-RUTINA-FINAL.
+******************************************************************
+* Registra hora de finalizacionACCEPT W-HORA-FIN FROM TIME* Leer JURAD a ver si hay registros despues del "T"WHEN "00"
+CONTINUE
+WHEN OTHER
+DISPLAY "ERROR EN OPEN DEL ARCHIVO DE ERRORES "DISPLAY "NOMBRE DEL ARCHIVO: " ERRS-FILE-NAMEDISPLAY "FILE STATUS: " ERRS-FSPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAGOBACKEND-EVALUATE.* APERTURA DE LOS ARCHIVOS MAESTROS
+* SI ALGÚN OPEN FALLA EL PROGRAMA CANCELAOPEN INPUT BDIIREGIOPEN INPUT BDIIDIANOPEN INPUT BDIIDAS.* APERTURA DEL ARCHIVO DE ALERTAS EN LINEAIF PROCESO-REAL
+OPEN I-O BDIIALEELSE
+OPEN INPUT BDIIALEEND-IF.* SI ES UN REFRESQUE TOTAL (CODIGO 04) SE ELIMINAN LOS REGISTROS
+* DE JURAD EXISTENTESIF P-TIPO-PROCESO = "04" AND PROCESO-REALPERFORM 1001-ELIMINAR-TODOEND-IF.1001-ELIMINAR-TODO.
+******************************************************************
+* ELIMINA LOS REGISTROS DE ALERTAS EXISTENTES EN EL ARCHIVO DE
+* ALERTAS EN LINEA, PREVIO A UN REFRESQUE TOTAL
+******************************************************************DISPLAY "ELIMINANDO TODA LA INFORMACION CON FUENTE JURAD"
+*    POSICIONA EN EL PRIMER REG DE JURADMOVE ZERO TO TIP-IDE-BDIIALEMOVE ZERO TO NUM-IDE-BDIIALEMOVE P-COD-SUSCRIPTOR TO FUENTE-BDIIALEMOVE ZEROS TO COD-ALERTA-BDIIALEMOVE LOW-VALUES TO LLASEC-BDIIALESTART BDIIALE KEY > LLAVE-BDIIALEEVALUATE EST-BDIIALEWHEN "00"
+*POSICIONADO
+CONTINUE
+WHEN OTHER
+*NO HAY REGISTROSWHEN OTHER*NO HAY REGISTROS
+DISPLAY "NO HAY REGISTROS A ELIMINAR FS:" EST-BDIIALEEXIT PARAGRAPHEND-EVALUATE.*    LEE SECUENCIALMENTE Y ELIMINA LOS REGISTROS DE JURAD
+*    HASTA EL FIN DEL ARCHIVOPERFORM UNTIL EST-BDIIALE NOT = "00"READ BDIIALE NEXT RECORDEVALUATE EST-BDIIALEWHEN "00"
+IF FUENTE-BDIIALE = P-COD-SUSCRIPTOR
+*ES UN ALERTA DE JURAD
+DELETE BDIIALE
+IF EST-BDIIALE = "00"
+ADD 1 TO N-ALE-BORRADASELSE
+*ERROR EN LA ELIMINACION
+DISPLAY "ERROR AL ELIMINAR UN REGISTRO DE ""BDIIALE VACIANDO LOS DATOS"
+DISPLAY "CLAVE: " LLAVE-BDIIALEDISPLAY "REG BORRADOS: " N-ALE-BORRADASPERFORM 9000-CANCELAR-PROGRAMAEND-IF
+END-IF
+WHEN "10"
+*FIN DE ARCHIVO: SALE NORMALMENTEDISPLAY "FIN DE LOS REGISTROS A ELIMINAR - LEÍDOS:"N-ALE-LEIDAS
+WHEN OTHER
+*LECTURA ANORMAL: CANCELACION DEL PROGRAMADISPLAY "ERROR EN LECTURA DEL ARCHIVO DE ALERTAS ""ONLINE"
+DISPLAY "FILE STATUS: " EST-BDIIALEPERFORM 9000-CANCELAR-PROGRAMA *> NO RETORNAEND-EVALUATEEND-PERFORM.
+DISPLAY "TERMINO LA ELIMINACION TOTAL DE JURAD"DISPLAY "REG BORRADOS: " N-ALE-BORRADAS.7000-RUTINA-FINAL.
+******************************************************************
+* Registra hora de finalizacionACCEPT W-HORA-FIN FROM TIME* Leer JURAD a ver si hay registros despues del "T"* Leer JURAD a ver si hay registros despues del "T"* Close todos los archivosCLOSE JURAD ERRS BDIIREGI BDIIDIAN BDIIDAS BDIIALE.DISPLAY "FECHA DE PROCESO: " P-FECHA-PROCESO-YYYYMMDD
+* Emision de contadores de registrosdisplay " "
+display "Totales de registros:"display " "
+* Totales tipo PESVNODISPLAY "**************************************"DISPLAY "VALIDACION REGISTROS"DISPLAY "  BDIIREGIS BDIIDIAN BDIIDAS BDACSV   "DISPLAY "**************************************DISPLAY "Registros Tipo 5   ==> " W-CONT-TIPO-5DISPLAY "Registros Tipo 6   ==> " W-CONT-TIPO-6DISPLAY "Registros Tipo 7   ==> " W-CONT-TIPO-7DISPLAY " "
+DISPLAY "REGISTROS LEIDOS:" REG-LEIDOSDISPLAY "REGISTROS CORRECTOS:" REG-CORRECTOSDISPLAY "REGISTROS CUENTAS SIN VALIDAR   :" SI-EXISTE-CSVDISPLAY "REGISTROS NO COINCIDEN BDIIREGI :" NO-COINCIDE-REGISDISPLAY "REGISTROS DE FALLECIDOS:" CONT-FALLECIDOSDISPLAY "REGISTROS NO COINCIDEN BDIIDIAN :" NO-COINCIDE-DIANDISPLAY "REGISTROS NO EXISTEN   BDIIREGI :" NO-EXISTE-REGISDISPLAY "REGISTROS NO EXISTEN   BDIIDIAN :" NO-EXISTE-DIANDISPLAY "TIPO IDENTIFICACION INVALIDO    :" TIPO-ID-INVALIDODISPLAY " "
+DISPLAY "**************************************"DISPLAY "PORCENTAJE REGISTROS"DISPLAY "PROCESADOS  OK"DISPLAY "**************************************
+*    PORCENTAJE REGISTROS PROCESADOS OKCOMPUTE N-EDITP100 ROUNDED = 100.0 * N-REG-OK / N-REG-LEIDOSDISPLAY N-EDITP100 "% DE REGISTROS CORRECTOS"MOVE N-REG-OK TO N-EDITDISPLAY N-EDIT "REGISTROS PROCESADOS SIN ERROR"IF P-TIPO-PROCESO = "04"MOVE N-ALE-BORRADAS TO N-EDITDISPLAY N-EDIT
+"ALERTAS BORRADAS PREVIO AL REFRESQUE TOTAL"END-IF
+MOVE N-ALE-INSERTADAS TO N-EDITDISPLAY N-EDIT "ALERTAS INSERTADAS"MOVE N-ALE-MODIFICADAS TO N-EDITDISPLAY N-EDIT "ALERTAS MODIFICADAS"MOVE N-ALE-ELIMINADAS TO N-EDITDISPLAY N-EDIT "ALERTAS ELIMINADAS"MOVE N-ALE-ELIMINADAS TO N-EDITDISPLAY N-EDIT "ALERTAS ELIMINADAS"MOVE N-ALE-YA-EXISTE TO N-EDITDISPLAY N-EDIT "INSERCION DE ALERTA EXISTENTE"MOVE N-ALE-NO-EXISTE TO N-EDITDISPLAY N-EDIT "MODIF O ELIM DE ALERTA INEXISTENTE".DISPLAY "**************************************"DISPLAY "REPORTE ERRORES"DISPLAY "**************************************#
+* EMISION DEL REPORTE DE ERRORESDISPLAY " "
+DISPLAY "TOTALES POR TIPO DE ERROR DETECTADO:"PERFORM VARYING EX FROM 1 BY 1 UNTIL EX > 50OR E-CODIGO(EX) = "00"IF E-CONTADOR(EX) NOT = 0MOVE E-CONTADOR(EX) TO E-EDITDISPLAY E-EDIT E-CODIGO(EX) "-" E-DESCRIPCION(EX)END-IF
+END-PERFORM.9000-CANCELAR-PROGRAMA.
+******************************************************************
+* Procedimiento standard de cancelacion de programa batch
+******************************************************************DISPLAY " "
+DISPLAY PGM " - PROCESO CANCELADO"GOBACK RETURNING 99.513-VALIDA-EN-CSV.
+**************************************************************
+* Valida si la identificación está en la base de datos alterna
+**************************************************************
+*    HACE VALIDACION DE TIPO DE IDENTIFICACIONMOVE TIPOID-E TO TIP-IDE-BDIIVIDEMOVE NUMID-E TO NUM-IDE-BDIIVIDE
+*    RETORNA SW-TID-BDIIVIDE=0 SI EL NUM ID NO ESTÁ DENTRO
+*    DEL RANGO QUE CORRESPONDE AL TIPO DE IDPERFORM 80400-VALIDAR-TIPO-IDIF SW-TID-BDIIVIDE = 0
+*EL TIPO DE ID ES OKIF HACER-MATCH = ZEROS
+MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCHMOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH
+*SE RECORRE TODA LA ESTRUCTURA BDACSV PARA LA
+*IDENTIFICACION BUSCADA. EN CASO DE HALLAR
+*REGISTROS SE PROCEDE A REALIZAR EL MATCH*IDENTIFICACION BUSCADA. EN CASO DE HALLAR*REGISTROS SE PROCEDE A REALIZAR EL MATCHPERFORM 1000-U-RECORRER-CSV-BDAMATCHIF IDE-TIPO-BDAMATCH = 1
+IF TIPOID-E = 1 OR 4
+INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL"," BY " ", ";" BY " "END-IF
+MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOMMOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOMMOVE TIPOID-E TO  TIP-ID-INPUT-VALNOMMOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMPERFORM 10000-MATCH-NOMBRES-VALNOMIF MATCH-OK-OUT-VALNOM = 1
+MOVE 1 TO IDE-TIPO-BDAMATCHEND-IF
+END-IF
+
+IF IDE-TIPO-BDAMATCH = 1
+ADD 1 TO SI-EXISTE-CSVEND-IF
+END-IF
+END-IF.9800-FILTRAR-ALFABETICO.
+******************************************************************
+* SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA
+******************************************************************MOVE FUNCTION UPPER-CASE (CADENA-ENTRA) TO CADENA-ENTRAINITIALIZE CADENA-SALEMOVE 1 TO J
+PERFORM VARYING I FROM 1 BY 1 UNTIL I > 60MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICOIF SI-ALFABETICO
+MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)ADD 1 TO J
+END-IF
+END-PERFORM.
+******************************************************************COPY BDIIVIDE.PROC.copy BDLDIR.PROC.COPY BDAMATCH.PROC.COPY VALNOM.PROC.
+/
+IDENTIFICATION DIVISION.
+PROGRAM-ID. PONERR.
+******************************************************************
+* Rutina de conveniencia para procesar un error detectado en un******************************************************************* Rutina de conveniencia para procesar un error detectado en un
+* registro de input
+* Contabiliza el error en la tabla de errores, activa el indicador
+* de registro con error, muestra el mensaje en la pantalla, cuenta
+* el registro erroneo
+******************************************************************
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+******************************************************************
+* REGISTRO DE INPUT (PRIMEROS 86 CARACTERES)
+01  REG-INPUT-ANTERIORPIC X(86) VALUE LOW-VALUES.
+* POSICION DEL PROXIMO ERROR EN LA LISTA DE ERRORES DEL REG
+01  ERRINDEXPIC 999 COMP.
+******************************************************************LINKAGE SECTION.
+******************************************************************
+* CODIGO DEL ERROR DETECTADO
+01  COD-ERRORPIC XX.
+******************************************************************
+* REGISTRO DE INPUT (PRIMEROS 86 CARACTERES)
+01  REG-INPUTPIC X(86).
+******************************************************************
+* TABLA DE ERRORES DE CONSISTENCIA DEL INPUT
+01 E-ERRORES.
+*    INDICA SI EL REGISTRO ACTUAL TIENE ERROR03 E-HAY-ERRORPIC XX.
+*    ERRORES DEL REGISTRO ACTUAL03 E-ERRORES-REGPIC X(300).
+*    CONTADOR DE REGISTROS CON ERROR03 E-CONT-REGS-CON-ERROR     PIC 9(8).
+*    TABLA DE ERRORES03 E-ERROROCCURS 50 INDEXED EX.05 E-CODIGOPIC XX.05PIC X.05 E-CONTADORPIC 9(7).05PIC X.05 E-DESCRIPCIONPIC X(59).******************************************************************PROCEDURE DIVISION USING COD-ERROR REG-INPUT E-ERRORES.
+00.
+*    MARCA AL REG ACTUAL COMO ERRONEOMOVE "SI" TO E-HAY-ERROR*    CUENTA Y MUESTRA EL REGISTRO DE INPUT CON ERROR*IDENTIFICACION BUSCADA. EN CASO DE HALLAR*REGISTROS SE PROCEDE A REALIZAR EL MATCHPERFORM 1000-U-RECORRER-CSV-BDAMATCHIF IDE-TIPO-BDAMATCH = 1
+IF TIPOID-E = 1 OR 4
+INSPECT NOM-OUTPUT-BDAMATCH REPLACING ALL"," BY " ", ";" BY " "END-IF
+MOVE NOMBRE-E TO NOMBRE-INPUT-VALNOMMOVE NOM-OUTPUT-BDAMATCH TO NOMBOK-INPUT-VALNOMMOVE TIPOID-E TO  TIP-ID-INPUT-VALNOMMOVE NUM-BLOQUES-BDIIVIDE TO BLOQUES-INPUT-VALNOMPERFORM 10000-MATCH-NOMBRES-VALNOMIF MATCH-OK-OUT-VALNOM = 1
+MOVE 1 TO IDE-TIPO-BDAMATCHEND-IF
+END-IF
+
+IF IDE-TIPO-BDAMATCH = 1
+ADD 1 TO SI-EXISTE-CSVEND-IF
+END-IF
+END-IF.9800-FILTRAR-ALFABETICO.
+******************************************************************
+* SE ELIMINAN CARACTERES NO ALFABETICOS A LA CADENA DE ENTRADA
+******************************************************************MOVE FUNCTION UPPER-CASE (CADENA-ENTRA) TO CADENA-ENTRAINITIALIZE CADENA-SALEMOVE 1 TO J
+PERFORM VARYING I FROM 1 BY 1 UNTIL I > 60MOVE CADENA-ENTRA (I:1) TO IND-ALFABETICOIF SI-ALFABETICO
+MOVE CADENA-ENTRA (I:1) TO CADENA-SALE (J:1)ADD 1 TO J
+END-IF
+END-PERFORM.
+******************************************************************COPY BDIIVIDE.PROC.copy BDLDIR.PROC.COPY BDAMATCH.PROC.COPY VALNOM.PROC.
+/
+IDENTIFICATION DIVISION.
+PROGRAM-ID. PONERR.
+******************************************************************
+* Rutina de conveniencia para procesar un error detectado en un
+:qNo write since last change (:quit! overrides)
+:q!/d/iccol/desarrollo/fuentes>^D

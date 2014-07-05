@@ -4221,7 +4221,9 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   4173     MOVE  NUMID-E   TO  NUM-IDE-BDIIVIDE                                                                  899
   4174     PERFORM 80400-VALIDAR-TIPO-ID                                                                         900
   4175     IF SW-TID-BDIIVIDE = 0                                                                                901
+      *    el tipo de id es OK
   4176     IF HACER-MATCH = ZEROS                                                                                902
+      *       es ceros: abre varios archivos la 1a vez
   4177        IF OPEN-DIR = ZEROS                                                                                903
   4178           OPEN INPUT MAESTRO-DIRECC                                                                       904
   4179           OPEN INPUT BDLCLI                                                                               905
@@ -4231,6 +4233,7 @@ cob64 -C nolist -CC -KPIC -A -KPIC -N PIC lstpath/d/iccol/desarrollo/temporales 
   4183           PERFORM 06000-U-CARGAR-TABLA-DIRESTAN                                                           909
   4184           MOVE 1 TO OPEN-DIR                                                                              910
   4185         END-IF                                                                                            911
+      *        parámetros para buscar en base alterna
   4186         MOVE TIPOID-E TO TIP-IDE-INPUT-BDAMATCH                                                           912
   4187         MOVE NUMID-E  TO NUM-IDE-INPUT-BDAMATCH                                                           913
   4188         PERFORM 1000-U-RECORRER-CSV-BDAMATCH                                                              914

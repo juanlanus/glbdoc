@@ -1,0 +1,851 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2014.06.25 17:39:36 =~=~=~=~=~=~=~=~=~=~=~=
+login as: icjlud
+Using keyboard-interactive authentication.
+Password: 
+Last login: Wed Jun 25 14:42:13 2014 from 172.16.10.68
+Sun Microsystems Inc.   SunOS 5.10      Generic January 2005
+You have new mail.
+COBJVM=sun_142
+JAVA_HOME=/usr/j2se
+LD_LIBRARY_PATH=/usr/j2se/jre/lib/sparc:/usr/j2se/jre/lib/sparc/client:/usr/j2se/jre/lib/sparc/native_threads:/usr/j2se/jre/lib/sparc:/opt/mfocus/des/cobol/lib:/opt/IBM/db2/V9.7/lib:/export/home/db2inst1/sqllib/lib64:/export/home/db2inst1/sqllib/lib32
+PATH=/usr/j2se/jre/sh:/usr/j2se/sh:/usr/j2se/bin:/usr/j2se/jre/bin:/opt/mfocus/des/cobol/lib:/opt/mfocus/des/cobol/bin:/usr/bin:/bin:/usr/bin:/d/iccol/desarrollo/macros:/d/iccol/desarrollo/utiles:/opt/bin:/usr/sbin:/usr/lib:/usr/ccs/bin:/opt/SUNWspro/bin:/usr/jdk/latest/bin:/usr/local/bin:/usr/j2se/bin:/usr/openwin/bin:.:/export/home/db2inst1/sqllib/bin:/export/home/db2inst1/sqllib/adm:/export/home/db2inst1/sqllib/misc
+CLASSPATH=/opt/mfocus/des/cobol/lib/mfcobol.jar:.:/usr/j2se/jre/lib/rt.jar:/opt/mfocus/des/cobol/lib/mfimtk.jar:/opt/mfocus/des/cobol/lib/xerces.jar:/opt/mfocus/des/cobol/lib/castor-0_9_4_1-xml.jar:/opt/mfocus/des/cobol/lib/mfcobol.jar:/usr/j2se/jre/lib/dt.jar:/usr/j2se/jre/lib/rt.jar:/d/iccol/desarrollo/java/server:/export/home/db2inst1/sqllib/java/db2java.zip:/export/home/db2inst1/sqllib/java/db2jcc.jar:/export/home/db2inst1/sqllib/java/sqlj.zip:/export/home/db2inst1/sqllib/function:/export/home/db2inst1/sqllib/java/db2jcc_license_cu.jar:.
+COBCPY=/opt/mfocus/des/cobol/cpylib:/opt/mfocus/des/cobol/cpylib:/d/iccol/desarrollo/copys/pais:/d/iccol/desarrollo/copys
+Java version = 1.4.2_19
+Java vendor = Sun Microsystems Inc.
+Java OS name = SunOS
+Java OS arch = sparc
+Java OS version = 5.10
+
+  ####    ####   #####   ######   ####
+ #    #  #    #  #    #  #       #
+ #       #    #  #    #  #####    ####
+ #       #    #  #    #  #            #
+ #    #  #    #  #    #  #       #    #
+  ####    ####   #####   ######   ####
+
+ #####
+#     #   ####   #        ####   #    #  #####      #      ##
+#        #    #  #       #    #  ##  ##  #    #     #     #  #
+#        #    #  #       #    #  # ## #  #####      #    #    #
+#        #    #  #       #    #  #    #  #    #     #    ######
+#     #  #    #  #       #    #  #    #  #    #     #    #    #
+ #####    ####   ######   ####   #    #  #####      #    #    #
+
+ #####
+#     #   ####   #    #  #####      #    #         ##     ####      #     ####
+#        #    #  ##  ##  #    #     #    #        #  #   #    #     #    #    #
+#        #    #  # ## #  #    #     #    #       #    #  #          #    #    #
+#        #    #  #    #  #####      #    #       ######  #          #    #    #
+#     #  #    #  #    #  #          #    #       #    #  #    #     #    #    #
+ #####    ####   #    #  #          #    ######  #    #   ####      #     ####
+
+ #####                                           #####  #         ###
+#     #  #    #  #    #          #    #         #     # #    #   #   #
+#        #    #  ##   #          #    #               # #    #  #     #
+ #####   #    #  # #  #          #    #          #####  #    #  #     #
+      #  #    #  #  # #          #    #   ###   #       ####### #     #
+#     #  #    #  #   ##           #  #    ###   #            #   #   #
+ #####    ####   #    # #######    ##     ###   #######      #    ###
+
+icjlud@codes /d/iccol/desarrollo
+$ .v^? ^?^?^?           viset
+viset running
+/d/iccol/desarrollo>te
+/d/iccol/desarrollo/temporales>ls -l 0000*
+-rw-rw-r--   1 icdgd    icdatacr    1910 Jun 24 17:30 0000011000905140101.ERRS
+-rw-rw-r--   1 icdgd    icdatacr    2902 Jun 24 17:23 0000011000905140101.txt
+-rw-rw-r--   1 icdgd    icdatacr    4466 Jun 24 17:30 0000011000905140101.txt.log
+/d/iccol/desarrollo/temporales>fu 
+/d/iccol/desarrollo/fuentes>vi CARGAJUR.CBL
+"CARGAJUR.CBL" 1471 lines, 63538 characters $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* ACTUALIZACION DEL ARCHIVO DE ALERTAS CON LOS DATOS PROVISTOS
+* POR JURAD
+* PROCESA EL ARCHIVO JURAD. CONTROLA CADA REGISTRO: SI ES OK USA
+* LOS DATOS PARA ACTUALIZAR BDIIALE, SI TIENE DEFECTO LO GRABA EN
+* EL ARCHIVO ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS. *> WITH DEBUGGING MODE.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************"CARGAJUR.CBL" 1471 lines, 63538 characters/01 env.o ori05 D-TERMINADOSPIC 9(5).05 D-FECHA-ULTIMAPIC X(8).
+******************************************************************
+* Parametros iniciales, de la linea de comando
+* La linea de comando que contiene los parametros
+01 P-COMMAND-LINEPIC X(80) VALUE SPACES.
+01 P-PARAMETROS.
+*    Proceso real: contiene "1" para activar, "2" por defecto03 P-PROCESO-REALPIC X VALUE "2".88 PROCESO-REALVALUE "2".*    Nombre del archivo de entrada JJJJJJaaaDDMMAAbbXX.txt03 P-FILE-NAMEPIC X(80) VALUE SPACES.03 P-FILE-NAME-RREDEFINES P-FILE-NAME.
+*JJJJJJ = Codigo de suscriptor JURAD en Experian05 P-COD-SUSCRIPTORPIC 9(6).
+*aaa = Codificacion del producto ("100")05 P-PRODUCTOPIC XXX.
+*DDMMAA = Fecha de proceso05 P-FECHA-PROCESOPIC X(6).
+*bb =  01 a CI
+05 P-CI-BIPIC XX.
+*XX = Tipo de proceso
+*01 Envio Original - Carga TOTAL - primera vez
+*02 Archivo Semanal - Carga PARCIAL
+*03 Archivo Mensual - Carga PARCIAL
+*04 Refresque Total - Carga TOTAL05 P-TIPO-PROCESOPIC XX.
+*extension del archivo ".txt"05 P-EXTENSIONPIC X(4).05PIC X(57).03 P-FILE-PATHPIC X(80) VALUE SPACES.
+* Nombre del archivo de errores JJJJJJaaaDDMMAAbbXX.errs03 ERRS-FILE-NAMEPIC X(80) VALUE SPACES.* Fecha de proceso editada YYYYMMDD
+01 P-FECHA-PROCESO-YYYYMMDDPIC X(8).
+* Fecha de proceso + 50 años
+01 P-FECHA-PROCESO-50.03  P-FECHA-PROCESO-50YYYY   PIC 9999.03PIC X(4).
+******************************************************************
+* Datos para el reporte final
+01 W-TIEMPO.
+03 W-HORA-INICIOPIC 9(8).03 W-HORA-FINPIC 9(8).
+01 N-EDITPIC Z(8)B.
+01 N-EDITP100REDEFINES N-EDIT
+PIC Z(5)9.9B./ACCEPT P-COMMAND-LINE FROM COMMAND-LINE*    ANIMATOR DE TERMINAL NO PERMITE PARAMETROS EN COMMANDLINE ...DISPLAY "PARAMETROS: " P-COMMAND-LINEUNSTRING P-COMMAND-LINE DELIMITED BY ALL " " INTOP-FILE-NAME P-PROCESO-REAL* EL PROGRAMA SE ANUNCIA EN LA CONSOLAIF PROCESO-REAL
+DISPLAY PGM " CARGA DE ARCHIVO JURAD - PROCESO REAL"ELSE
+DISPLAY PGM " CARGA DE ARCHIVO JURAD - PROCESO EN FALSO"END-IF* EL INDICADOR DE PROCESO REAL DEBE SER 1 O 2IF P-PROCESO-REAL NOT = "1" AND "2"DISPLAY "EL INDICADOR DE PROCESO REAL ES INVALIDO"DISPLAY "DEBE SER 1 O 2"PERFORM 9000-CANCELAR-PROGRAMAEND-IF* CONTROL DEL TIPO DE PROCESO, DEL NOMBRE DEL ARCHIVOEVALUATE P-TIPO-PROCESOWHEN "01"
+DISPLAY "01 ENVIO ORIGINAL - CARGA TOTAL 1A VEZ"WHEN "02"
+DISPLAY "02 ARCHIVO SEMANAL - CARGA PARCIAL"WHEN "03"
+DISPLAY "03 ARCHIVO MENSUAL - CARGA PARCIAL"WHEN "04"
+DISPLAY "04 REFRESQUE TOTAL - CARGA TOTAL"WHEN OTHER
+*VALOR INVALIDO
+DISPLAY "EL TIPO DE PROCESO " P-TIPO-PROCESO" ES INVALIDO (DEBE SER 01 02 03 O 04)"PERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.* EDITA LA FECHA DE PROCESO DDMMAA DEL PARAMETRO EN FORMATO
+* YYYYMMDD
+STRING "20" P-FECHA-PROCESO(5:6) P-FECHA-PROCESO(3:4)P-FECHA-PROCESO(1:2) DELIMITED SIZEINTO P-FECHA-PROCESO-YYYYMMDDDISPLAY "FECHA DE PROCESO: " P-FECHA-PROCESO-YYYYMMDD* CALCULA UNA FECHA 50 ANIOS POSTERIOR A LA DE PROCESOMOVE P-FECHA-PROCESO-YYYYMMDD TO P-FECHA-PROCESO-50ADD 50 TO P-FECHA-PROCESO-50YYYY* APERTURA DEL ARCHIVO DE ENTRADA* EL INDICADOR DE PROCESO REAL O EN FALSO (DEFAULT)* NOMBRE DEL ARCHIVO DE ENTRADA (QUE CONTIENE EL TIPO DE PROCESO),* OBTIENE INFORMACION SOBRE LA CORRIDA DE LA LINEA DE COMANDO: ELACCEPT W-HORA-INICIO FROM TIME* REGISTRA HORA DE INICIO*******************************************************************   - carga en memoria de los IDs de inconsistentes*   - eliminacion de datos existentes si es refresque completo"CARGAJUR.CBL" line 1081 of 1471 --73%--  :q/d/iccol/desarrollo/fuentes>te
+/d/iccol/desarrollo/temporales>ls -l 0000*
+-rw-rw-r--   1 icdgd    icdatacr    1910 Jun 24 17:30 0000011000905140101.ERRS
+-rw-rw-r--   1 icdgd    icdatacr    2902 Jun 24 17:23 0000011000905140101.txt
+-rw-rw-r--   1 icdgd    icdatacr    4466 Jun 24 17:30 0000011000905140101.txt.log
+/d/iccol/desarrollo/temporales>vi  0000011000905140101.txt.log
+"0000011000905140101.txt.log" 100 lines, 4466 characters 
+real0.1
+user0.0
+sys0.0
+
+CARGAJUR   CARGA DE ARCHIVO JURAD - PROCESO EN FALSO
+01 ENVIO ORIGINAL - CARGA TOTAL 1A VEZ
+FECHA DE PROCESO: 20140101
+
+I100000149123JOSE MISAEL AREVALO SANCHEZ0000001000000120130405000000
+ERROR 14 El numero de id no se encuentra en el archivo maestro
+ERROR 20 Tipo de Identificacion 7
+
+I100000262135LIBARDO ANTONIO GARZON TORRE0000015000002020130206000002
+ERROR 14 El numero de id no se encuentra en el archivo maestro
+ERROR 20 Tipo de Identificacion 7
+
+I100000958212LUIS GUILLERMO AVENDAÑO RODR0000002000004420130506000003
+ERROR 14 El numero de id no se encuentra en el archivo maestro
+ERROR 20 Tipo de Identificacion 7
+
+I100001327130GONZALO PATIÑO MORENO0000003000000620130106000004
+ERROR 14 El numero de id no se encuentra en el archivo maestro
+ERROR 20 Tipo de Identificacion 7
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+
+I100002859753ERNESTO RICO0000005000006720130406000002
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+
+I100002865767MIGUEL ANTONIO LAVERDE NIETO0000006000004520110406000003
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango
+
+I100003044362MANUEL CASTRO MUÑETON000000700000rt20110106000005
+ERROR 07 Numero de demandas terminadas: debe ser numerico
+
+I200811046741SALUD AXIAL LTDA0000044000007619984069000003
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I200860013816INSTITUTO DE SEGUROS SOCIALE0000022000006720100435000003
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I200860024151COMPUTEC SA0000033000003320111406000004
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango
+
+I400000266423SIMONE MARTINEZ0000033000000220131206000000
+ERROR 11 Numero de embargos terminados: debe ser numerico
+
+I400000244359PATRICIO ALEJANDRO HERRERA C0000045000000120110402000000
+ERROR 14 El numero de id no se encuentra en el archivo maestro"0000011000905140101.txt.log" 100 lines, 4466 characters:q/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>vi  0000011000905140101.txt.logls -l 0000*                    te         ls -l 0000*
+-rw-rw-r--   1 icdgd    icdatacr    1910 Jun 24 17:30 0000011000905140101.ERRS
+-rw-rw-r--   1 icdgd    icdatacr    2902 Jun 24 17:23 0000011000905140101.txt
+-rw-rw-r--   1 icdgd    icdatacr    4466 Jun 24 17:30 0000011000905140101.txt.log
+/d/iccol/desarrollo/temporales>x CARGAJUR
+PARAMETROS:                                                                                 
+CARGAJUR   CARGA DE ARCHIVO JURAD - PROCESO REAL
+EL TIPO DE PROCESO    ES INVALIDO (DEBE SER 01 02 03 O 04)
+ 
+CARGAJUR   - PROCESO CANCELADO
+
+real    0m0.03s
+user    0m0.00s
+sys     0m0.01s
+
+Inicio de Programa:  2014/06/25 16:12:14
+Fin de Programa:     2014/06/25 16:12:14
+
+/d/iccol/desarrollo/temporales>^[[A  /d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>x CARGAJURls -l 0000*x CARGAJUR x CARGAJUR 04 0000011000905140101.txt
+PARAMETROS: 04 0000011000905140101.txt                                                      
+CARGAJUR   CARGA DE ARCHIVO JURAD - PROCESO EN FALSO
+EL INDICADOR DE PROCESO REAL ES INVALIDO
+DEBE SER 1 O 2
+ 
+CARGAJUR   - PROCESO CANCELADO
+
+real    0m0.03s
+user    0m0.00s
+sys     0m0.01s
+
+Inicio de Programa:  2014/06/25 16:12:44
+Fin de Programa:     2014/06/25 16:12:44
+
+/d/iccol/desarrollo/temporales>fu
+/d/iccol/desarrollo/fuentes>ls -l *JUR*
+-rw-rw-r--   1 icrmbd   icdatacr   17397 Dec 20  2013 ACTALEJUR.CBL
+-rw-rw-r--   1 icrmbd   icdatacr   22016 Dec 20  2013 ACTALEJUR.int
+-rw-rw-r--   1 icdgd    icdatacr   63538 Jun 16 16:45 CARGAJUR.CBL
+-rw-rw-r--   1 icvhfd   icdatacr 1383756 Sep  6  2010 ICGCON-JUR.CBL
+-rw-rw-r--   1 icrmbd   icdatacr 1577399 Dec 19  2013 ICGCONJURAD.CBL
+-rw-rw-r--   1 icrmbd   icdatacr 1781276 Dec 19  2013 ICGCPLJURAD.CBL
+-rw-rw-r--   1 icehad   icdatacr 1772414 Jun  3 15:20 ICGCPLV258.CBL-JURAD
+-rw-rw-r--   1 icdgd    icdatacr   73559 Jun 13 15:02 JURADCAR.CBL
+-rw-rw-r--   1 icdgd    icdatacr   73559 Jun 13 15:09 JURADCAR1.CBL
+/d/iccol/desarrollo/fuentes>te
+/d/iccol/desarrollo/temporales>view sh-CARJ^HGAJUR        GAJUR
+"sh-CARGAJUR" [New file] 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~"sh-CARGAJUR" [New file]:q/d/iccol/desarrollo/temporales>^[  /d/iccol/desarrollo/temporales>view sh-CARGAJURview $sh-CARGAJURMsh-CARGAJURAsh-CARGAJURCsh-CARGAJUROsh-CARGAJURSsh-CARGAJUR/sh-CARGAJURsh-CARGAJUR sh-CARGAJUR sh-CARGAJUR Rsh-CARGAJUROsh-CARGAJURSsh-CARGAJUR/sh-CARGAJUR
+"/d/iccol/desarrollo/macros/sh-CARGAJUR" [Read only] 238 lines, 8099 characters #sh-CARGAJUR.v.01.0001 grabado como /d/iccol/desarrollo/macros/sh-CARGAJUR
+#**********************************************************
+#ENTIDAD:DATACREDITO*
+#SHELL-ID:     sh-CARGAJUR*
+#DATE-WRITTEN: MAY/2014*
+#AUTHOR:GLOBANT*
+#******************************************************************
+# 16-may-2014| CQnnnn - CARGA DE ARCHIVO EXTERNO*
+# Globant.   |*
+#******************************************************************
+#
+#*========================================================*
+#*DEFINICION DE VARIABLES Y FUNCIONES
+#*========================================================*
+raya="---------------------------------------------------"
+codsus="000001"
+P_REAL_FALSO="1"
+P_PROCESO="#";
+P_NombreArchivo=""
+
+
+GetFechaSistema()
+{
+#*-----------------------------------------------------------------------------*
+# Arma y muestra la fecha del sistema y la máquina
+#*-----------------------------------------------------------------------------*
+    P_SERVER_DEV="172.24.6.154"
+    HoraHoy=`date '+%H:%M'`
+    FECHOY_A4MMDD=`date '+%Y%m%d'`
+    FECHOY_ANOMES=`date '+%Y%m%d' | cut -c 1-6`
+    P_FCORTE=$FECHOY_ANOMES
+    P_MAQUINA=`who am i | cut -c 39-50`
+    P_FCORTE=$FECHOY_ANOMES
+    echo $raya
+    echo " "
+    echo "D A T A C R E D I T O"
+    echo " "
+    echo "Cargue de archivo de JURAD"
+    echo " "
+    echo "Fecha:" $FECHOY_A4MMDD $HoraHoy " en" $P_MAQUINA
+    echo " "
+}
+
+GetRealOFalso()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua si el tipo de proceso es REAL o EN FALSO
+#*-----------------------------------------------------------------------------*
+    echo"/d/iccol/desarrollo/macros/sh-CARGAJUR" [Read only] 238 lines, 8099 charactersGetRealOFalso()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua si el tipo de proceso es REAL o EN FALSO
+#*-----------------------------------------------------------------------------*
+    echo
+echo $raya
+    echo "PROCESO REAL O EN FALSO"
+    echo $raya
+    P_REAL_FALSO="#";
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo "1) Proceso en falso"
+echo " "
+echo "2) Proceso real"
+echo " "
+echo "3) Salir"
+echo " "
+echo "opción (123)   ---> \c"
+read P_REAL_FALSO
+if [ $P_REAL_FALSO != "1" ] && [ $P_REAL_FALSO != "2" ] && [ $P_REAL_FALSO != "3" ]
+then
+echo "\n\tlas opciones válidas son 1, 2 o 3"
+else
+endLoop=1
+fi
+    done
+}
+
+GetTipoDeProceso()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua el tipo de proceso: carga inicial, actualización, refresque total ...
+#*-----------------------------------------------------------------------------*
+    echo
+echo $raya
+    echo "TIPO DE PROCESO"
+    echo $raya
+    endLoop=0
+    P_PROCESO="##"
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo "01) Envio Original  - Carga TOTAL 1a vez"
+echo " ""/d/iccol/desarrollo/macros/sh-CARGAJUR" [Read only] line 44 of 238 --18%-- echo "01) Envio Original  - Carga TOTAL 1a vez"echo " "
+echo "02) Archivo Semanal - Carga PARCIAL"
+echo " "
+echo "03) Archivo Mensual - Carga PARCIAL"
+echo " "
+echo "04) Refresque Total - Carga TOTAL"
+echo " "
+echo "00) Salir"
+echo " "
+echo "opción (01 02 03 04 00)   ---> \c"
+read P_PROCESO
+if [ -z "$P_PROCESO" ]
+then
+echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"
+else
+if [ $P_PROCESO != "01" ] && [ $P_PROCESO != "02" ] && [ $P_PROCESO != "03" ] && [ $P_PROCESO
+!= "04" ] && [ $P_PROCESO != "00" ]then
+echo "\n\t ingrese una de las opciones 01 02 03 04 00\c"else
+endLoop=1
+fi
+fi
+    done
+}
+
+GetNombreDelArchivo()
+{
+#*-----------------------------------------------------------------------------*
+# Averigua el nombre del archivo
+#*-----------------------------------------------------------------------------*
+    echo
+echo $raya
+    echo "NOMBRE DEL ARCHIVO"
+    echo $raya
+    endLoop=0
+    while [ $endLoop == 0 ]
+    do
+#---------------------------------------------------
+echo " "
+echo " Ingrese el nombre del archivo o enter para salir:"
+echo ""$codsus"100ddmmaa01"$P_PROCESO".txt"
+#JJJJJJaaaDDMMAAbbXX.txt
+echo " ---> \c"
+read P_NombreArchivo
+if [ -z "$P_NombreArchivo" -o "$P_NombreArchivo" == "" ]
+then
+endLoop=1then
+endLoop=1
+else
+if [ ! -s $TEMPORALES"/"$P_NombreArchivo ]then
+echo "no se encuentra el archivo " $P_NombreArchivoelse
+#el tipo de proceso 01/02/03/04 debe coincidir con el que
+#está en el nombre del arch
+#separa los dos caractares justo antes de la extensión ".txt"auxTxt=`echo $P_NombreArchivo | sed 's/.*\\(..\\)\\.txt/\\1/'`
+#echo $auxTxt " debería ser " $P_PROCESOif [ $P_PROCESO == $auxTxt ]then
+#el código de suscriptor al principio del nombre del
+#archivo debe ser el de JURADauxTxt=`echo $P_NombreArchivo | sed 's/\\(......\\).*/\\1/'`
+#echo $auxTxt " debería ser " $codsusif [ $codsus == $auxTxt ]then
+endLoop=1
+else
+echo "El código de suscriptor en el nombre del archivo no coincide"fi
+else
+echo "El nombre del archivo no condice con el tipo de proceso" $P_PROCESOfi
+fi
+fi
+    done
+}
+
+
+#*========================================================*
+#*PROCESO*
+#*========================================================*
+#*FASE 1: PIDE PARAMETROS*
+#*========================================================*
+echo "........................................."
+clear
+GetFechaSistema
+GetRealOFalso
+if [ $P_REAL_FALSO -eq 3 ]
+then
+exit
+fi
+GetTipoDeProceso
+if [ $P_PROCESO -eq 00 ]
+then:q/d/iccol/desarrollo/temporales>sh-CARGAJUR
+.........................................
+---------------------------------------------------
+ 
+                D A T A C R E D I T O
+ 
+              Cargue de archivo de JURAD
+ 
+Fecha: 20140625 16:18  en 172.16.10.68
+ 
+
+---------------------------------------------------
+              PROCESO REAL O EN FALSO
+---------------------------------------------------
+ 
+        1) Proceso en falso
+ 
+        2) Proceso real
+ 
+        3) Salir
+ 
+             opción (123)   ---> 1
+
+---------------------------------------------------
+                  TIPO DE PROCESO
+---------------------------------------------------
+ 
+      01) Envio Original  - Carga TOTAL 1a vez
+ 
+      02) Archivo Semanal - Carga PARCIAL
+ 
+      03) Archivo Mensual - Carga PARCIAL
+ 
+      04) Refresque Total - Carga TOTAL
+ 
+      00) Salir
+ 
+           opción (01 02 03 04 00)   ---> 04
+
+---------------------------------------------------
+                NOMBRE DEL ARCHIVO
+---------------------------------------------------
+ 
+ Ingrese el nombre del archivo o enter para salir:
+      000001100ddmmaa0104.txt
+ ---> ^Z[1] + Stopped (SIGTSTP)        sh-CARGAJUR
+/d/iccol/desarrollo/temporales>ls -l 0000*
+-rw-rw-r--   1 icdgd    icdatacr    1910 Jun 24 17:30 0000011000905140101.ERRS
+-rw-rw-r--   1 icdgd    icdatacr    2902 Jun 24 17:23 0000011000905140101.txt
+-rw-rw-r--   1 icdgd    icdatacr    4466 Jun 24 17:30 0000011000905140101.txt.log
+/d/iccol/desarrollo/temporales>fg
+sh-CARGAJUR
+0000011000905140101.txt
+El nombre del archivo no condice con el tipo de proceso 04
+ 
+ Ingrese el nombre del archivo o enter para salir:
+      000001100ddmmaa0104.txt
+ ---> 
+/d/iccol/desarrollo/temporales>^[[A  /d/iccol/desarrollo/temporales>fgls -l 0000*sh-CARGAJUR
+.........................................
+---------------------------------------------------
+ 
+                D A T A C R E D I T O
+ 
+              Cargue de archivo de JURAD
+ 
+Fecha: 20140625 16:19  en 172.16.10.68
+ 
+
+---------------------------------------------------
+              PROCESO REAL O EN FALSO
+---------------------------------------------------
+ 
+        1) Proceso en falso
+ 
+        2) Proceso real
+ 
+        3) Salir
+ 
+             opción (123)   ---> 1
+
+---------------------------------------------------
+                  TIPO DE PROCESO
+---------------------------------------------------
+ 
+      01) Envio Original  - Carga TOTAL 1a vez
+ 
+      02) Archivo Semanal - Carga PARCIAL
+ 
+      03) Archivo Mensual - Carga PARCIAL
+ 
+      04) Refresque Total - Carga TOTAL
+ 
+      00) Salir
+ 
+           opción (01 02 03 04 00)   ---> 01
+
+---------------------------------------------------
+                NOMBRE DEL ARCHIVO
+---------------------------------------------------
+ 
+ Ingrese el nombre del archivo o enter para salir:
+      000001100ddmmaa0101.txt
+ ---> 0000011000905140101.txt
+ 
+---------------------------------------------------
+ 
+ #####     #    ######   #####     #          # #     # ######
+#     #   # #   #     # #     #   # #         # #     # #     #
+#        #   #  #     # #        #   #        # #     # #     #
+#       #     # ######  #  #### #     #       # #     # ######
+#       ####### #   #   #     # ####### #     # #     # #   #
+#     # #     # #    #  #     # #     # #     # #     # #    #
+ #####  #     # #     #  #####  #     #  #####   #####  #     #
+
+ 
+---------------------------------------------------
+ Procesando 0000011000905140101.txt 
+real: 1  tipo de proceso: 01
+---------------------------------------------------
+             RESULTADOS DEL PROCESO
+ 
+
+real        0.1
+user        0.0
+sys         0.0
+                                           
+CARGAJUR   CARGA DE ARCHIVO JURAD - PROCESO EN FALSO
+01 ENVIO ORIGINAL - CARGA TOTAL 1A VEZ
+FECHA DE PROCESO: 20140101
+ 
+I100000149123JOSE MISAEL AREVALO SANCHEZ                  0000001000000120130405000000
+ERROR 14 El numero de id no se encuentra en el archivo maestro      
+ERROR 20 Tipo de Identificacion 7                                   
+ 
+I100000262135LIBARDO ANTONIO GARZON TORRE                 0000015000002020130206000002
+ERROR 14 El numero de id no se encuentra en el archivo maestro      
+ERROR 20 Tipo de Identificacion 7                                   
+ 
+I100000958212LUIS GUILLERMO AVENDAÑO RODR                 0000002000004420130506000003
+ERROR 14 El numero de id no se encuentra en el archivo maestro      
+ERROR 20 Tipo de Identificacion 7                                   
+ 
+I100001327130GONZALO PATIÑO MORENO                        0000003000000620130106000004
+ERROR 14 El numero de id no se encuentra en el archivo maestro      
+ERROR 20 Tipo de Identificacion 7                                   
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002859753ERNESTO RICO                                 0000005000006720130406000002
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100002865767MIGUEL ANTONIO LAVERDE NIETO                 0000006000004520110406000003
+ERROR 13 Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+ 
+I100003044362MANUEL CASTRO MUÑETON                        000000700000rt20110106000005
+ERROR 07 Numero de demandas terminadas: debe ser numerico           
+ 
+I200811046741SALUD AXIAL LTDA                             0000044000007619984069000003
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860013816INSTITUTO DE SEGUROS SOCIALE                 0000022000006720100435000003
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I200860024151COMPUTEC SA                                  0000033000003320111406000004
+ERROR 09 Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+ 
+I400000266423SIMONE MARTINEZ                              0000033000000220131206000000
+ERROR 11 Numero de embargos terminados: debe ser numerico           
+ 
+I400000244359PATRICIO ALEJANDRO HERRERA C                 0000045000000120110402000000
+ERROR 14 El numero de id no se encuentra en el archivo maestro      
+ERROR 20 Tipo de Identificacion 7                                   
+FECHA DE PROCESO: 20140101
+ 
+Totales de registros:
+ 
+**************************************
+        VALIDACION REGISTROS          
+  BDIIREGIS BDIIDIAN BDIIDAS BDACSV   
+**************************************              
+Registros Tipo 5   ==> 000017
+Registros Tipo 6   ==> 000005
+Registros Tipo 7   ==> 000005
+ 
+REGISTROS LEIDOS                :0000027
+REGISTROS CORRECTOS             :0000017
+REGISTROS CUENTAS SIN VALIDAR   :0000000
+REGISTROS NO COINCIDEN BDIIREGI :0000003
+REGISTROS DE FALLECIDOS         :0000003
+REGISTROS NO COINCIDEN BDIIDIAN :0000002
+REGISTROS NO EXISTEN   BDIIREGI :0000004
+REGISTROS NO EXISTEN   BDIIDIAN :0000001
+TIPO IDENTIFICACION INVALIDO    :0000000
+ 
+**************************************
+        PORCENTAJE REGISTROS          
+            PROCESADOS  OK            
+**************************************              
+    55.6 % DE REGISTROS CORRECTOS
+      15 REGISTROS PROCESADOS SIN ERROR
+         ALERTAS INSERTADAS
+         ALERTAS MODIFICADAS
+         ALERTAS ELIMINADAS
+         INSERCION DE ALERTA EXISTENTE
+         MODIF O ELIM DE ALERTA INEXISTENTE
+**************************************
+            REPORTE ERRORES           
+**************************************#             
+ 
+TOTALES POR TIPO DE ERROR DETECTADO:
+       1 07-Numero de demandas terminadas: debe ser numerico           
+       3 09-Fecha ultima demanda vigente YYYYMMDD: fuera de rango      
+       1 11-Numero de embargos terminados: debe ser numerico           
+       3 13-Fecha ultimo embargo vigente YYYYMMDD: fuera de rango      
+       5 14-El numero de id no se encuentra en el archivo maestro      
+       5 20-Tipo de Identificacion 7                                   
+
+Inicio de Programa:  2014/06/25 16:19:59
+Fin de Programa:     2014/06/25 16:20:00
+
+ 
+Archivos en $TEMPORALES:
+-rw-rw-r--   1 icdgd    icdatacr    2902 Jun 24 17:23 0000011000905140101.txt
+-rw-rw-r--   1 icdgd    icdatacr    4466 Jun 25 16:20 0000011000905140101.txt.log
+---------------------------------------------------
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+/d/iccol/desarrollo/temporales>
+/d/iccol/desarrollo/temporales>fu
+/d/iccol/desarrollo/fuentes>^[  /d/iccol/desarrollo/fuentes>fush-CARGAJURfg         ls -l 0000*sh-CARGAJURview $MACROS/sh-CARGAJURview sh-CARGAJUR        te              ls -l *JUR*fu         x CARGAJUR 04 0000011000905140101.txt/d/iccol/desarrollo/fuentes>x CARGAJUR                           /d/iccol/desarrollo/fuentes>ls -l 0000*vi  0000011000905140101.txt.log/d/iccol/desarrollo/fuentes>ls -l 0000*                    /d/iccol/desarrollo/fuentes>te         vi CARGAJUR.CBLci CARGAJUR.CBLpp CARGAJUR.CBL CARGAJUR.bup.CBL
+/d/iccol/desarrollo/fuentes>vi CARGAJUR.bup.CBL
+"CARGAJUR.bup.CBL" 1471 lines, 63538 characters $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* ACTUALIZACION DEL ARCHIVO DE ALERTAS CON LOS DATOS PROVISTOS
+* POR JURAD
+* PROCESA EL ARCHIVO JURAD. CONTROLA CADA REGISTRO: SI ES OK USA
+* LOS DATOS PARA ACTUALIZAR BDIIALE, SI TIENE DEFECTO LO GRABA EN
+* EL ARCHIVO ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS. *> WITH DEBUGGING MODE.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************"CARGAJUR.bup.CBL" 1471 lines, 63538 charactersOPEN MODE0   $CHANGE MODECopia de CARGAJUR.CBL previa a las modificaciones del 2014-06-25 (eliminar sin miedo) "CARGAJUR.bup.CBL" 1472 lines, 63624 characters /d/iccol/desarrollo/fuentes>^[[A  /d/iccol/desarrollo/fuentes>vi CARGAJUR.bup.CBLvi CARGAJUR.CBL    
+"CARGAJUR.CBL" 1471 lines, 63538 characters $SET LIST SETTING LISTWIDTH"120"IDENTIFICATION DIVISION.
+PROGRAM-ID.    CARGAJUR.
+******************************************************************
+* ACTUALIZACION DEL ARCHIVO DE ALERTAS CON LOS DATOS PROVISTOS
+* POR JURAD
+* PROCESA EL ARCHIVO JURAD. CONTROLA CADA REGISTRO: SI ES OK USA
+* LOS DATOS PARA ACTUALIZAR BDIIALE, SI TIENE DEFECTO LO GRABA EN
+* EL ARCHIVO ERRS.
+******************************************************************
+AUTHOR.GLOBANT JL.
+DATE-WRITTEN.
+DATE-COMPILED.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. MICROFOCUS. *> WITH DEBUGGING MODE.
+OBJECT-COMPUTER. MICROFOCUS.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.******************************************************************
+******************************************************************
+SELECT JURAD ASSIGN TO P-FILE-PATHORGANIZATION IS LINE SEQUENTIALFILE STATUS IS JURAD-FS.******************************************************************
+******************************************************************
+SELECT ERRS ASSIGN TO ERRS-FILE-NAMEORGANIZATION IS LINE SEQUENTIALFILE STATUS IS ERRS-FS.******************************************************************
+******************************************************************COPY BDIIREGI.FS.******************************************************************
+******************************************************************COPY BDIIDIAN.FS.******************************************************************
+******************************************************************COPY BDIIDAS.FS.******************************************************************
+******************************************************************COPY BDIIALE.FS REPLACING == ON RECORD.== BY == ON RECORDFILE STATUS IS EST-BDIIALE.==.******************************************************************"CARGAJUR.CBL" 1471 lines, 63538 characters* Archivos de base alterna$SET LIST SETTING LISTWIDTH"120"/procedure03PIC X(300).03PIC 9(8).03 E-ERROROCCURS 50 INDEXED EX.05 E-CODIGOPIC XX.05PIC X.05 E-CONTADORPIC 9(7).05PIC X.05 E-DESCRIPCIONPIC X(59).
+01 E-EDITPIC Z(8)B.******************************************************************
+* Control de rangos de valores de las fechas del input
+01 VALIDACIONES-FECHAS.02 ANO-VAL-Xpic 9(04).88 ANO-VALvalue 1900 thru 2050.02 MES-VAL-Xpic 9(02).88 MES-VALvalue 01   thru 12.02 DIA-VAL-Xpic 9(02).88 DIA-VALvalue 01   thru 31./*****************************************************************
+******************************************************************
+PROCEDURE DIVISION.0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORPROCEDURE DIVISION.0000-PROGRAMA-PRINCIPAL.
+******************************************************************
+*    inicializa el ambiente y abre los archivosPERFORM 1000-RUTINA-INICIAL
+*    procesa cada uno de los registros del archivo JURAD hasta
+*    encontrar el registro "T" de totalesPERFORM 4000-PROCESAR-REGISTRO UNTIL IND-FIN-PROCESO = "SI"
+*    cierra archivos y produce el reporte finalPERFORM 7000-RUTINA-FINALGOBACK.4000-PROCESAR-REGISTRO.
+****************************************************************
+* Proceso de un registro del archivo de entrada JURAD
+* Lectura y control del file status del archivo
+****************************************************************
+*    lectura del proximo registroREAD JURAD
+EVALUATE JURAD-FSWHEN "00"
+*CONTROLA EL REG Y LO APLICA SI ES OKPERFORM 4000-PROCESAR-REGISTRO-2MOVE JURAD-REG TO JURAD-REG-ANTERIORIF JURAD-TIPO-NOVEDAD <> "T"ADD 1 TO REG-LEIDOSEND-IF
+WHEN "10"
+*FIN DEL ARCHIVO DE INPUT:
+*ESTO ES UN ERROR, NO SE ENCONTRO EL REGISTRO "T" ANTES
+*DE QUE SE TERMINARA EL ARCHIVODISPLAY "FALTA EL REG DE TOTALES DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAWHEN OTHER
+*ERROR DE LECTURA: CANCELACION DEL PROCESODISPLAY "ERROR EN LECTURA DEL ARCHIVO JURAD "DISPLAY "NOMBRE DEL ARCHIVO: " P-FILE-NAMEDISPLAY "FILE STATUS: " JURAD-FSDISPLAY "ULTIMO REGISTRO LEIDO: " N-REG-LEIDOSDISPLAY JURAD-REG-ANTERIORPERFORM 9000-CANCELAR-PROGRAMAEND-EVALUATE.PROCEDURE DIVISION.
+PROCEDURE DIVISION.
+
+
+PROCEDURE DIVISION.
+
+/validacion-senaAddress search hit BOTTOM without matching pattern
+
+/validacion-seman* Controla los datos de un registro de JURAD y si es OK lo usa* para actualizar el archivo de alertas en linea
+* La informacion esta leida en JURAD-reg
+****************************************************************MOVE "NO" TO E-HAY-ERROR*    VALIDACION DEL TIPO DE MOVIMIENTOIF JURAD-TIPO-NOVEDAD NOT = "I" AND "M" AND "E" AND "T"CALL "PONERR" USING "01" JURAD-REG E-ERRORESEND-IF*    SI ES EL REGISTRO "T" HAY QUE SEÑALAR EL FIN DE PROCESOIF JURAD-TIPO-NOVEDAD = "T"MOVE "SI" TO IND-FIN-PROCESOPERFORM 4800-PROCESO-REG-TEXIT PARAGRAPHEND-IF
+
+ADD 1 TO N-REG-LEIDOS*    VALIDACION FORMAL DE LOS DATOSMOVE 0 TO CODIGO-ERROR
+*
+    PERFORM 4200-VALIDACION-SEMANTICA
+*
+    PERFORM 4240-CONTAR-TIPO-CUENTA
+*
+    PERFORM 4100-VALIDACION-FORMAL
+*
+    IF E-HAY-ERROR = "SI"PERFORM 4900-GRABAR-ERRORELSE
+PERFORM 4300-MODIFICAR-BDIIALEADD 1 TO N-REG-OKEND-IF.4100-VALIDACION-FORMAL.
+******************************************************************
+* VALIDACION FORMAL DE LOS DATOS DEL INPUT
+******************************************************************
+*    TIPO DE IDENTIFICACION NUMERO {1, 2, 3, 4}IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"CALL "PONERR" USING "02" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE IDENTIFICACIONIF JURAD-ID-NUMEROX IS NOT NUMERICCALL "PONERR" USING "03" JURAD-REG E-ERRORESEND-IF/END-IF
+MOVE JURAD-DEMANDAS-FECHA-ULTIMA TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "09" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS VIGENTESIF JURAD-EMBARGOS-VIGENTES NOT NUMERICCALL "PONERR" USING "10" JURAD-REG E-ERRORESEND-IF
+*    NUMERO DE EMBARGOS TERMINADOSIF JURAD-EMBARGOS-TERMINADOS NOT NUMERICCALL "PONERR" USING "11" JURAD-REG E-ERRORESEND-IF
+*    FECHA ULTIMO EMBARGO VIGENTE YYMMDDIF JURAD-EMBARGOS-FECHA-ULTIMO IS NOT NUMERICCALL "PONERR" USING "12" JURAD-REG E-ERRORESEND-IF
+MOVE JURAD-EMBARGOS-FECHA-ULTIMO TO VALIDACIONES-FECHASIF NOT ANO-VAL OR NOT MES-VAL OR NOT DIA-VALCALL "PONERR" USING "13" JURAD-REG E-ERRORESEND-IF.4200-VALIDACION-SEMANTICA.
+****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTE4200-VALIDACION-SEMANTICA.****************************************************************
+* VALIDACION DEL NUMERO DE IDENTIFICACION Y DE SU RELACION CON
+* EL NOMBRE
+****************************************************************
+IF JURAD-ID-TIPO NOT = "1" AND "2" AND "3" AND "4"MOVE 05 TO CODIGO-ERRORADD  1  TO TIPO-ID-INVALIDO
+ELSE
+*    PARÁMETROS PARA LAS RUTINAS DE VALIDACIÓN EN BDIIVIDEMOVE JURAD-ID-TIPO TO TIP-IDE-BDIIVIDEMOVE JURAD-ID-NUMERO TO NUM-IDE-BDIIVIDE
+NUM-ID-WMOVE JURAD-NOMBRE TO NOMBRE-BDIIVIDE
+*    SWITCHES DE OPCIONES DE VALIDACIÓNMOVE 1 TO  SW-VERIFNOM-BDIIVIDE
+SW-DIGCHEQUEO-BDIIVIDEMOVE 2 TO NUM-BLOQUES-BDIIVIDE
+*    VALIDA EL NÚMERO DE IDENTIFICACIÓN CONTRA LAS BASES DE
+*    DATOS BDIIDIAN, BDIIDAS, BDIIREGI Y VERIFICA LA COINCIDENCIA
+*    DEL NOMBRE REPORTADO
+*    RETORNA SW-ID-BDIIVIDE=1 SI HAY ERRORPERFORM 80100-VALIDAR-IDENTIFICACIONMOVE  TIP-IDE-BDIIVIDE TO TIPOID-EMOVE  NUM-IDE-BDIIVIDE TO NUMID-E
+*    SW-ID-BDIIVIDE: 0 SI EXISTE EL ID, 1 SI NO EXISTEIF SW-ID-BDIIVIDE = 1
+*ES UN ID QUE NO EXISTE EN BDIIREGI, BDIIDAS o BDIIDIANCALL "PONERR" USING "14" JURAD-REG E-ERRORES
+*VALIDA CONTRA LA BASE ALTERNAPERFORM 4210-VALIDACION-ID-NO-FIGURAELSE
+IF SW-ID-BDIIVIDE = 1
+IF TIPOID-E <> 1
+MOVE  ZEROSTO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM  513-VALIDA-EN-CSVIF  IDE-TIPO-BDAMATCH  =  0MOVE 03TO  CODIGO-ERRORADD   1TO  NO-EXISTE-DIANEND-IF
+ELSE
+MOVE  ZEROS TO  HACER-MATCHMOVE 0 TO IDE-TIPO-BDAMATCHPERFORM 513-VALIDA-EN-CSVIF IDE-TIPO-BDAMATCH = 0
+MOVE 04 TO CODIGO-ERROR
+ADD  1  TO NO-EXISTE-REGISEND-IF
+
+     
+"CARGAJUR.CBL" line 695 of 1471 --47%-- END-IFELSEIF SW-NOMBRES-BDIIVIDE = 1IF TIPOID-E <> 1MOVE 01 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-DIANELSEMOVE   02 TO CODIGO-ERRORADD 1 TO NO-COINCIDE-REGISEND-IFELSEINITIALIZE LLAVE-BDIIALE"CARGAJUR.CBL" line 695 of 1471 --47%-- 
+
+
+
+
+
+MOVE  TIPOID-E TO TIP-IDE-BDIIALE"CARGAJUR.CBL" line 700 of 1471 --47%-- :set ro"CARGAJUR.CBL" [Read only] line 700 of 1471 --47%-- :q/d/iccol/desarrollo/fuentes>^D
